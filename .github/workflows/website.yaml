@@ -64,6 +64,7 @@ jobs:
   deploy:
     name: Build and Deploy Website
     if: github.event_name == 'push'
+    needs: ['build']
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
