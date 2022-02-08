@@ -96,8 +96,8 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.STAGING_DOCS_SITE_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "docs/public"
-          api_location: "docs/api" 
+          app_location: "site/"
+          api_location: "site/" 
           output_location: ""
           skip_app_build: true
 
