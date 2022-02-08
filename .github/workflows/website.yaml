@@ -62,14 +62,11 @@ jobs:
           path: ./docs/public/
           if-no-files-found: error
   deploy:
-    name: Build and Deploy Website
+    name: Deploy Hugo Website
     if: github.event_name == 'push'
     needs: ['build']
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: true
       - name: Download Hugo artifacts
         uses: actions/download-artifact@v2
         with:
@@ -81,3 +78,37 @@ jobs:
           app-name: radius-edge
           publish-profile: ${{ secrets.EDGE_DOCS_SITE_PUBLISHPROFILE }}
           package: site/
+
+  open_pr_site:
+    name: Open PR Staging Site
+    if: github.event_name == 'pull_request' && github.event.action != 'closed'
+    needs: ['build']
+    runs-on: self-hosted
+    steps:
+      - name: Download Hugo artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: hugo_build
+          path: site/
+      - name: Deploy staging site
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.STAGING_DOCS_SITE_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          app_location: "docs/public"
+          api_location: "docs/api" 
+          output_location: ""
+          skip_app_build: true
+
+  close_pr_site:
+    name: Close PR Staging Site
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: self-hosted
+    steps:
+      - name: Close Pull Request
+        id: closepullrequest
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.STAGING_DOCS_SITE_TOKEN }}
+          action: "close"
