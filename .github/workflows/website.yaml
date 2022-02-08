@@ -41,7 +41,7 @@ jobs:
         with:
           go-version: ${{ env.GOVER }}
       - name: Setup NPM
-        run: apt install npm
+        run: sudo apt install npm
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2.5.0
         with:
