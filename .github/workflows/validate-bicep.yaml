@@ -24,6 +24,6 @@ jobs:
         chmod +x rad-bicep
         ./rad-bicep --version
     - name: Verify bicep files
-      run: ./.github/scripts/validate-bicep.sh
+      run: sudo ./.github/scripts/validate-bicep.sh
       env: 
         BICEP_PATH: .
