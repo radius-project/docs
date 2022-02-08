@@ -41,7 +41,7 @@ category = "categories"
 [[menu.main]]
     name = "GitHub"
     weight = 40
-    url = "https://github.com/project-radius/radius"
+    url = "https://github.com/project-radius/docs"
     pre = "<i class='fab fa-github'></i>"
 [[menu.main]]
     name = "Community"
@@ -53,9 +53,9 @@ category = "categories"
 copyright = "Project Radius"
 
 # GitHub Information
-github_repo = "https://github.com/project-radius/radius"
+github_repo = "https://github.com/project-radius/docs"
 github_subdir = "docs"
-github_branch = "main"
+github_branch = "edge"
 
 # Versioning
 version_menu = "Releases"
