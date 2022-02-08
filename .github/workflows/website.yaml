@@ -59,7 +59,7 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: hugo_build
-          path: ./public/
+          path: .docs/public/
           if-no-files-found: error
   deploy:
     name: Build and Deploy Website
