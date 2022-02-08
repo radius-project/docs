@@ -10,32 +10,33 @@ This directory contains the files to generate the https://radapp.dev site. Pleas
 ## Environment setup
 
 1. Ensure pre-requisites are installed
-2. Clone this repository
-```sh
-git clone https://github.com/project-radius/radius.git
-```
+2. Clone this repository and the radius repository
+   ```sh
+   git clone https://github.com/project-radius/radius.git
+   git clone https://github.com/project-radius/docs.git
+   ```
 3. Generate CLI docs:
-```sh
-cd radius
-go run ./cmd/docgen/main.go ./docs/content/reference/cli
-```
+   ```sh
+   cd radius
+   go run ./cmd/docgen/main.go ../docs/docs/content/reference/cli
+   ```
 4. Change to docs directory:
-```sh
-cd docs
-```
+   ```sh
+   cd ../docs/docs
+   ```
 5. Update submodules:
-```sh
-git submodule update --init --recursive
-```
+   ```sh
+   git submodule update --init --recursive
+   ```
 6. Install npm packages:
-```sh
-npm install
-```
+   ```sh
+   npm install
+   ```
 
 ## Run local server
 1. Make sure you're still in the `docs` directory
 2. Run
-```sh
-hugo server
-```
+   ```sh
+   hugo server
+   ```
 3. Navigate to `http://localhost:1313/`
