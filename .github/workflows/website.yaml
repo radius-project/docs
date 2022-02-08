@@ -1,0 +1,79 @@
+name: Project Radius Website
+
+on:
+  push:
+    branches:
+      - edge
+    paths:
+      - 'docs/**'
+      - '.github/workflows/website.yaml'
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - edge
+    paths:
+      - 'docs/**'
+      - '.github/workflows/website.yaml'
+
+jobs:
+  build:
+    name: Build Hugo Website
+    if: github.event.action != 'closed'
+    runs-on: self-hosted
+    env:
+      GOVER: '^1.17'
+      TUTORIAL_PATH: './docs/content/getting-started/tutorial/'
+      CODE_ZIP_PATH: './docs/static/tutorial/'
+      HUGO_ENV: production
+    steps:
+      - name: Checkout docs repo
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Checkout radius repo
+        uses: actions/checkout@v2
+        with:
+          repository: project-radius/radius
+          path: ./radius
+      - name: Set up Go ${{ env.GOVER }}
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ env.GOVER }}
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2.5.0
+        with:
+          hugo-version: 0.74.3
+          extended: true
+      - name: Setup Docsy
+        run: cd docs && git submodule update --init --recursive && sudo npm install -D --save autoprefixer && sudo npm install -D --save postcss-cli
+      - name: Generate CLI Docs
+        run: go run ./radius/cmd/docgen/main.go ./docs/content/reference/cli
+      - name: Generate Code ZIP Packages
+        run: mkdir -p $CODE_ZIP_PATH && for tutorial in $TUTORIAL_PATH*; do if [ -d "${tutorial}/code" ]; then cp -r $tutorial/code ./$(basename $tutorial) && zip -r $CODE_ZIP_PATH$(basename $tutorial).zip ./$(basename $tutorial) ; fi; done
+      - name: Build Hugo Site
+        run: cd docs && hugo
+      - name: Upload Hugo artifacts
+        uses: actions/upload-artifact@master
+        with:
+          name: hugo_build
+          path: ./public/
+          if-no-files-found: error
+  deploy:
+    name: Build and Deploy Website
+    if: github.event_name == 'push'
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Download Hugo artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: hugo_build
+          path: site/
+      - name: Deploy to WebApp
+        uses: Azure/webapps-deploy@v2
+        with:
+          app-name: radius-edge
+          publish-profile: ${{ secrets.EDGE_DOCS_SITE_PUBLISHPROFILE }}
+          package: site/
