@@ -35,6 +35,7 @@ jobs:
         with:
           repository: project-radius/radius
           path: ./radius
+          token: ${{ secrets.GH_PAT }}
       - name: Set up Go ${{ env.GOVER }}
         uses: actions/setup-go@v2
         with:
