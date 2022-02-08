@@ -1,4 +1,4 @@
-baseURL = "https://edge.radapp.dev/"
+baseURL = "https://radapp.dev/"
 languageCode = "en-us"
 title = "Project Radius"
 theme =  "docsy"
@@ -55,7 +55,7 @@ copyright = "Project Radius"
 # GitHub Information
 github_repo = "https://github.com/project-radius/docs"
 github_subdir = "docs"
-github_branch = "edge"
+github_branch = "v0.9"
 
 # Versioning
 version_menu = "Releases"
