@@ -5,6 +5,8 @@ then
     BICEP_EXECUTABLE="$BICEP_PATH/$BICEP_EXECUTABLE"
 fi
 
+echo "Building with rad-bicep at ${BICEP_EXECUTABLE}"
+
 FILES=$(find . -type f -name "*.bicep")
 FAILURES=()
 for F in $FILES
