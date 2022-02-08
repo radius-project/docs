@@ -36,10 +36,12 @@ jobs:
           repository: project-radius/radius
           path: ./radius
           token: ${{ secrets.GH_PAT }}
-      - name: Set up Go ${{ env.GOVER }}
+      - name: Setup Go ${{ env.GOVER }}
         uses: actions/setup-go@v2
         with:
           go-version: ${{ env.GOVER }}
+      - name: Setup NPM
+        run: apt install nodejs
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2.5.0
         with:
