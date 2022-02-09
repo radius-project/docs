@@ -44,30 +44,21 @@ Secrets are used when defining a RabbitMQ connector with a container or external
 
 ## Starter
 
-You can get up and running quickly with a RabbitMQ Message Queue by using a [starter]({{< ref starter-templates >}}):
+You can get up and running quickly with a RabbitMQ Message Queue by using a [starter]({{< ref starter-templates >}}).
+
+## Container
+
+The module `'br:radius.azurecr.io/starters/rabbitmq:latest'` deploys RabbitMQ container and outputs a `rabbitmq.com.MessageQueue` resource.
+
+To use this template, reference it in Bicep as:
 
 {{< rad file="snippets/starter.bicep" embed=true >}}
 
-### Container
-
-The RabbitMQ container starter uses a [RabbitMQ container](https://hub.docker.com/_/rabbitmq/) and can run on any Radius platform.
-
-```
-br:radius.azurecr.io/starters/rabbitmq:latest
-```
-
-#### Input parameters
+### Parameters
 
 | Parameter | Description | Required | Default |
 |-----------|-------------|:--------:|---------|
 | radiusApplication | The application resource to use as the parent of the RabbitMQ Broker | Yes | - |
-| brokerName | The name for your RabbitMQ Broker container | No | `'rabbitmq-${uniqueString(resourceGroup().id, deployment().name)}'` |
-| queueName | The name of the RabbitMQ queue to create | No | `'queue'` |
+| queueName | The name of the RabbitMQ queue to create | Yes | - |
 | username | The username for your RabbitMQ Broker | No | `'guest'` |
 | password | The password for your RabbitMQ Broker | No | `newGuid()` |
-
-#### Output parameters
-
-| Parameter | Description | Type |
-|-----------|-------------|------|
-| rabbitMQ | The RabbitMQ Queue resource | `radius.dev/Application/rabbitmq.com.MessageQueue@v1alpha3` |

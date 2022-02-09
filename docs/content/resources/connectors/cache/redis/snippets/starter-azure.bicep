@@ -24,7 +24,7 @@ resource app 'radius.dev/Application@v1alpha3' = {
   }
 }
 
-module redis 'br:radius.azurecr.io/starters/redis:latest' = {
+module redis 'br:radius.azurecr.io/starters/redis-azure:latest' = {
   name: 'redis'
   params: {
     radiusApplication: app

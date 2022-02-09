@@ -6,7 +6,7 @@ resource app 'radius.dev/Application@v1alpha3' = {
   }
 }
 
-module pubsub 'br:radius.azurecr.io/starters/dapr-pubsub:latest' = {
+module pubsub 'br:radius.azurecr.io/starters/dapr-pubsub-azure-servicebus:latest' = {
   name: 'pubsub'
   params: {
     radiusApplication: app

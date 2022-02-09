@@ -49,51 +49,31 @@ Secrets must be accessed via Bicep functions to ensure they're not leaked or log
 
 You can get up and running quickly with a Mongo Database by using a [starter]({{< ref starter-templates >}}):
 
+## Container
+
+The module `'br:radius.azurecr.io/starters/mongo:latest'` deploys Mongo container and outputs a `mongo.com.MongoDatabase` resource.
+
+To use this template, reference it in Bicep as:
+
 {{< rad file="snippets/starter.bicep" embed=true >}}
 
-### Container
-
-The Mongo Database container starter uses a mongo container and can run on any Radius platform.
-
-```
-br:radius.azurecr.io/starters/mongo:latest
-```
-
-#### Input parameters
+### Parameters
 
 | Parameter | Description | Required | Default |
 |-----------|-------------|:--------:|---------|
 | radiusApplication | The application resource to use as the parent of the Mongo Database | Yes | - |
-| dbName | The name for your Mongo Database | No | `deployment().name` (module name)` |
+| dbName | The name for your Mongo Database connector | Yes | - |
 | username | The username for your Mongo Database | No | `'admin'` |
 | password | The password for your Mongo Database | No | `newGuid()` |
 
-#### Output parameters
+{{< rad file="snippets/starter-azure.bicep" embed=true >}}
 
-| Parameter | Description | Type |
-|----------|-------------|------|
-| mongoDB | The Mongo Database resource | `radius.dev/Application/mongo.com.MongoDatabase@v1alpha3` |
-
-### Microsoft Azure
-
-The Mongo Database Azure starter uses an Azure CosmosDB and can run only on Azure.
-
-```
-br:radius.azurecr.io/starters/mongo-azure:latest
-```
-
-#### Input parameters
+### Parameters
 
 | Parameter | Description | Required | Default |
 |-----------|-------------|:--------:|---------|
 | radiusApplication | The application resource to use as the parent of the Mongo Database | Yes | - |
-| dbName | The name for your Mongo Database | No | `deployment().name` (module name) |
+| dbName | The name for your Mongo Database connector | Yes | - |
 | accountName | The name for your Azure CosmosDB | No | `'cosmos-${uniqueString(resourceGroup().id, deployment().name)}'` |
 | location | The Azure region to deploy the Azure CosmosDB | No | `resourceGroup().location` |
 | dbThroughput | The throughput for your Azure CosmosDB | No | `400` |
-
-#### Output parameters
-
-| Parameter | Description | Type |
-|----------|-------------|------|
-| mongoDB | The Mongo Database resource | `radius.dev/Application/mongo.com.MongoDatabase@v1alpha3` |

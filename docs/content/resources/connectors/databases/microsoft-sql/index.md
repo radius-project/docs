@@ -44,55 +44,56 @@ Connections between resources declare environment variables inside the consuming
 
 You can get up and running quickly with a SQL Database by using a [starter]({{< ref starter-templates >}}):
 
+## Container
+
+The module `'br:radius.azurecr.io/starters/sql:latest'` deploys a SQL Server container and outputs a `microsoft.com.SQLDatabase` resource.
+
+To use this template, reference it in Bicep as:
+
 {{< rad file="snippets/starter.bicep" embed=true >}}
 
-### Container
-
-The SQL Database starter uses a SQL container and can run on any Radius platform.
-
-```
-br:radius.azurecr.io/starters/sql:latest
-```
-
-#### Input parameters
+### Parameters
 
 | Parameter | Description | Required | Default |
 |-----------|-------------|:--------:|---------|
 | radiusApplication | The application resource to use as the parent of the SQL Database | Yes | - |
 | adminPassword | The password for the SQL Server administrator | Yes | - |
+| databaseName | The name for your SQL Database. | Yes | - |
 | serverName | The name of the Azure SQL Server | No | `'sql-${uniqueString(resourceGroup().id, deployment().name)}'` |
 
-#### Output parameters
+### Outputs
+
+The output of this module is a name and ID for a `microsoft.com.SQLDatabase` resource.
 
 | Parameter | Description | Type |
 |-----------|-------------|------|
-| sqlDB | The SQL Database resource | `microsoft.com.SQLDatabase@v1alpha3` |
 | sqlUsername | The username for the SQL Server. Always 'sa'. | string |
 
-### Microsoft Azure
+## Microsoft Azure
 
-The SQL Database Azure starter uses an Azure SQL Server and can run only on Azure.
+The module `'br:radius.azurecr.io/starters/sql-azure:latest'` deploys an Azure SQL Server & Database and outputs a `microsoft.com.SQLDatabase` resource.
 
-```
-br:radius.azurecr.io/starters/sql-azure:latest
-```
+To use this template, reference it in Bicep as:
 
-#### Input parameters
+{{< rad file="snippets/starter-azure.bicep" embed=true >}}
+
+### Parameters
 
 | Parameter | Description | Required | Default |
 |-----------|-------------|:--------:|---------|
 | radiusApplication | The application resource to use as the parent of the SQL Database | Yes | - |
 | adminLogin | The username for the SQL Server administrator | Yes | - |
 | adminPassword | The password for the SQL Server administrator | Yes | - |
+| databaseName | The name for your SQL Database. | Yes | - |
 | serverName | The name of the Azure SQL Server | No | `'sql-${uniqueString(resourceGroup().id, deployment().name)}'` |
-| databaseName | The name for your SQL Database. Defaults to the module name. | No | `deployment().name` |
 | location | The Azure region to deploy the Azure SQL Server | No | `resourceGroup().location` |
 | skuName | The Azure SQL Server SKU | No | `'Standard'` |
 | skuTier | The Azure SQL Server SKU tier | No | `'Standard'` |
 
-### Output parameters
+### Outputs
 
-| Resource | Description | Type |
-|----------|-------------|------|
-| sqlDB | The SQL Database resource | `microsoft.com.SQLDatabase@v1alpha3` |
+The output of this module is a name and ID for a `microsoft.com.SQLDatabase` resource.
+
+| Parameter | Description | Type |
+|-----------|-------------|------|
 | sqlUsername | The username for the SQL Server. | string |

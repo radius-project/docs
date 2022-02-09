@@ -7,7 +7,7 @@ resource app 'radius.dev/Application@v1alpha3' = {
 
 }
 
-module mongoDB 'br:radius.azurecr.io/starters/mongo:latest' = {
+module mongoDB 'br:radius.azurecr.io/starters/mongo-azure:latest' = {
   name: 'mongoDb'
   params: {
     radiusApplication: app

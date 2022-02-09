@@ -60,51 +60,37 @@ A generic pub/sub lets you manually specify the metadata of a Dapr state store. 
 
 ## Starter
 
-You can get up and running quickly with a Dapr state store by using a [starter]({{< ref starter-templates >}}):
+You can get up and running quickly with a Dapr state store by using a [starter]({{< ref starter-templates >}}).
+
+## Container
+
+The `br:radius.azurecr.io/starters/dapr/statestore:latest` Dapr StateStore container starter uses a Redis container and can run on any Radius platform.
+
+To use this template, reference it in Bicep as:
 
 {{< rad file="snippets/starter.bicep" embed=true >}}
 
-### Container
-
-The Dapr StateStore container starter uses a Redis container and can run on any Radius platform.
-
-```
-br:radius.azurecr.io/starters/dapr/statestore:latest
-```
-
-#### Input parameters
+### Parameters
 
 | Parameter | Description | Required | Default |
 |-----------|-------------|:--------:|---------|
 | radiusApplication | The application resource to use as the parent of the PubSub Topic | Yes | - |
-| stateStoreName | The name of the State Store | No | `deployment().name` (module name) |
+| stateStoreName | The name of the State Store connector | Yes | - |
 
-#### Output parameters
+## Microsoft Azure
 
-| Parameter | Description | Type |
-|-----------|-------------|------|
-| stateStore | The StateStore resource | `radius.dev/Application/dapr.io.StateStore@v1alpha3` |
+The module `'br:radius.azurecr.io/starters/dapr-statestore-azure-tablestorage:latest'` deploys an Azure Storage Account with Tables configured as a Dapr State Store, and outputs a Dapr StateStore resource.
 
-### Microsoft Azure
+To use this template, reference it in Bicep as:
 
-The Dapr StateStore Azure starter uses Azure Table Storage and can run only on Microsoft Azure.
+{{< rad file="snippets/starter-azure.bicep" embed=true >}}
 
-```
-br:radius.azurecr.io/starters/dapr/statestore-azure-table:latest
-```
-
-### Input parameters
+### Parameters
 
 | Parameter | Description | Required | Default |
 |-----------|-------------|:--------:|---------|
 | radiusApplication | The application resource to use as the parent of the State Store | Yes | - |
-| stateStoreName | The name of the State Store | No | `depployment().name` (module name) |
+| stateStoreName | The name of the State Store connector | Yes | - |
 | storageAccountName | The name of the underlying Azure storage account | No | `'storage-${uniqueString(resourceGroup().id, deployment().name)}'` |
 | tableName | The name of the underlying Azure storage table | No | `'dapr'` |
 | location | The Azure region to deploy the Azure storage account and table | No | `resourceGroup().location` |
-
-### Output parameters
-
-| Resource | Description | Type |
-|----------|-------------|------|
-| stateStore | The StateStore resource | `radius.dev/Application/dapr.io.StateStore@v1alpha3` |
