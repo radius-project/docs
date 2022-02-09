@@ -10,7 +10,7 @@ module sqlDb 'br:radius.azurecr.io/starters/sql:latest' = {
   name: 'sqlDb'
   params: {
     radiusApplication: app
-    serverName: 'inventory'
+    databaseName: 'inventory'
     adminPassword: '***'
   }
 }
