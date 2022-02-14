@@ -26,6 +26,7 @@ _Note that you are responsible for any costs incurred in your subscription._
 1. Create a Radius environment:
 
    The following command creates an environment in interactive mode and will prompt you for input like the name of a new Resource Group and location. If no environment name is specified, it will default to the Resource Group name.
+   Note: select n for subscription and select Raidus Dev (which is 39 at the time of writing)
 
    ```sh
    rad env init azure -i
