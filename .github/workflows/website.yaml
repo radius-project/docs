@@ -132,6 +132,10 @@ jobs:
       ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
       ALGOLIA_INDEX_NAME: radapp-dev-edge
     steps:
+      - name: Checkout docs repo
+        uses: actions/checkout@v2
+        with:
+          submodules: false
       - name: Download Hugo artifacts
         uses: actions/download-artifact@v2
         with:
