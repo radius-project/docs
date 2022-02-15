@@ -122,7 +122,7 @@ jobs:
     env:
       ALGOLIA_APP_ID: O0QLQGNF38
       ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
-      ALGOLIA_INDEX_NAME: radapp-dev
+      ALGOLIA_INDEX_NAME: radapp-dev-edge
     steps:
       - name: Download Hugo artifacts
         uses: actions/download-artifact@v2
