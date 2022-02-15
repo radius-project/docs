@@ -52,6 +52,9 @@ category = "categories"
 [params]
 copyright = "Project Radius"
 
+# Algolia Search
+algolia_docsearch = true
+
 # GitHub Information
 github_repo = "https://github.com/project-radius/docs"
 github_subdir = "docs"
@@ -76,4 +79,5 @@ version_menu = "Releases"
 # UI Customization
 [params.ui]
 sidebar_menu_compact = true
+sidebar_search_disable = true
 ul_show = 2
