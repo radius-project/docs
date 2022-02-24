@@ -66,7 +66,25 @@ Now you are ready to deploy the application for the first time.
    The [`rad resource expose`]({{< ref rad_resource_expose.md >}}) command accepts the resource type, the resource name, and flags for application name and port. If you changed any of these values when deploying, update your command to match.
    {{% /alert %}}
 
-1. Visit the URL [http://localhost:3000/order](http://localhost:3000/order) in your browser. For now you should see a message like:
+{{< tabs "Radius CLI" "VSCode Extension" >}}
+
+{{% codetab %}}
+
+1. To view a representation of your application deployed you can visit your Azure resource group or the Kubernetes technology you rely on for visualizing Docker environments.
+{{% /codetab %}}
+{{% codetab %}}
+1. Open VS Code and navigate to the VS Code Radius extension explorer section.
+
+   The environment you've created should be listed in a tree view that will allow you to see
+   your dapr-tutorial application.
+
+   <img src="radius-explorer-dapr-microservices.png" width="400" alt="screenshot of the todo application with no database">
+
+   _Note: The resources shown include the resources for UI and Dapr which you will add in the next sections._
+
+{{% /codetab %}}
+
+1. Visit the [URL](http://localhost:3000/order) in your browser. For now you should see a message like:
 
    ```
    {"message":"The container is running, but Dapr has not been configured."}

@@ -11,7 +11,12 @@ In this tutorial you will be deploying an online store where you can order items
 
 <img src="./store.png" alt="A screenshot of the store application" width=500 />
 
+#### (optional) Download the source code
+
+You can download the source code [here](https://radiuspublic.blob.core.windows.net/tutorials/dapr-microservices.zip) if you want to see the complete code.
+
 ## Resources
+
 This Radius application will have three [resouces]({{< ref resources-model.md >}}):
 
 - A UI for users to place orders written with .NET Blazor (`frontend`)

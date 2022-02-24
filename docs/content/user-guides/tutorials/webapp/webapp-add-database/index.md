@@ -11,11 +11,11 @@ So far you have not yet configured a database, so the todo items you enter will 
 
 In this step you will learn how to add a database and connect to it from the application.
 
-We'll discuss template.bicep changes and then provide the full, updated file before deployment. 
+We'll discuss template.bicep changes and then provide the full, updated file before deployment.
 
 ## Add db resource
 
-A `db` database resource is used to specify a few properties about the database: 
+A `db` database resource is used to specify a few properties about the database:
 
 - **resource type:** `mongo.com.MongoDatabase` represents a MongoDB compatible database.
 - **managed:** `true` tells Radius to manage the lifetime of the component for you.
@@ -29,7 +29,7 @@ When deploying to an Azure environment, a managed [`mongo.com.MongoDatabase`]({{
 {{% /codetab %}}
 
 {{% codetab %}}
-When deploying to a Kubernetes environment, a managed [`mongo.com.MongoDatabase`]({{< ref mongodb >}}) will be bound to the [`mongo` Docker image](https://hub.docker.com/_/mongo/) running a lightweight developer configuration. 
+When deploying to a Kubernetes environment, a managed [`mongo.com.MongoDatabase`]({{< ref mongodb >}}) will be bound to the [`mongo` Docker image](https://hub.docker.com/_/mongo/) running a lightweight developer configuration.
 {{% /codetab %}}
 
 {{< /tabs >}}
@@ -38,7 +38,7 @@ When deploying to a Kubernetes environment, a managed [`mongo.com.MongoDatabase`
 
 Radius captures both logical relationships and related operational details. Examples of this include wiring up connection strings, granting permissions, or restarting components when a dependency changes.
 
-Once the database is defined as a Component, you can connect to it by referencing the `db` component from within the `todoapp` Component via the [`connections`]({{< ref connections-model >}}) section. 
+Once the database is defined as a Component, you can connect to it by referencing the `db` component from within the `todoapp` Component via the [`connections`]({{< ref connections-model >}}) section.
 
 [`connections`]({{< ref connections-model >}}) is used to configure relationships between two components. The `db` is of kind `mongo.com.MongoDatabase`, which supports the `mongodb.com/Mongo` MongoDB protocol. Configuring a dependency on this protocol is the other part of specifying a relationship. This declares the *intention* from the `todoapp` component to communicate with the `db`.
 
@@ -47,7 +47,6 @@ Here's what the `todoapp` component will look like with the `connections` sectio
 {{< rad file="snippets/app.bicep" embed=true marker="//CONTAINER" replace-key-ports="//PORTS" replace-value-ports="ports: {...}"  >}}
 
 Now that you have created a connection called `itemstore`, Radius will inject additional settings into the `todoapp` container. The container reads the database connection string from an environment variable named `CONNECTION_ITEMSTORE_CONNECTIONSTRING`:
-
 
 ```js
 if (process.env.CONNECTION_ITEMSTORE_CONNECTIONSTRING) {
@@ -58,7 +57,7 @@ if (process.env.CONNECTION_ITEMSTORE_CONNECTIONSTRING) {
 
 `CONNECTION_ITEMSTORE_CONNECTIONSTRING` is a setting injected by Radius based on the name of the connection (`itemstroe`) and it's type. See the [`connections`]({{< ref connections-model >}}) section of the documentation for more information about these features.
 
-## Update your template.bicep file 
+## Update your template.bicep file
 
 Update your `template.bicep` file to match the full application definition:
 
@@ -66,7 +65,7 @@ Update your `template.bicep` file to match the full application definition:
 
 ## Deploy application with database
 
-1. Now you are ready to re-deploy the application, including the Mongo database. Switch to the command-line and run: 
+1. Now you are ready to re-deploy the application, including the Mongo database. Switch to the command-line and run:
 
    ```sh
    rad deploy template.bicep
@@ -89,6 +88,22 @@ Update your `template.bicep` file to match the full application definition:
       HttpRoute            todo-route       SITE
    ```
 
+{{< tabs "Radius CLI" "VSCode Extension" >}}
+
+{{% codetab %}}
+
+1. To view a representation of your application deployed you can visit your Azure resource group or the Kubernetes technology you rely on for visualizing Docker environments.
+{{% /codetab %}}
+{{% codetab %}}
+1. Open VS Code and navigate to the VS Code Radius extension explorer section.
+
+   The environment you've created should be listed in a tree view that will allow you to see
+   your webapp application and its different resources.
+
+   <img src="radius-explorer-webapp-db.png" width="400" alt="screenshot of the todo application with no database">
+
+{{% /codetab %}}
+
 1. To test your `webapp` application, navigate to the public endpoint that was printed at the end of the deployment. You should see a page like:
 
    <img src="todoapp-withdb.png" width="400" alt="screenshot of the todo application with a database">
@@ -102,6 +117,7 @@ After you have deployed the application, you can validate that the data is being
 {{< tabs "Microsoft Azure" >}}
 
 {{% codetab %}}
+
 1. Open the Azure resource group where your application is deployed. The URL was output during the `rad deploy` command.
 
 1. Open the CosmosDB resource prefixed with `db-`
@@ -111,6 +127,7 @@ After you have deployed the application, you can validate that the data is being
 1. Open the Data Explorer to the `todos` collection. You can now see the entries you added in the todo app.
 
    <img src="db-entries.png" width="800px" alt="Screenshot of the db CosmosDB Data Explorer with todo items">
+
 {{% /codetab %}}
 
 {{< /tabs >}}
