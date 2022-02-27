@@ -960,19 +960,19 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
   // Infrastructure --------------------------------------------
 
   resource sqlIdentity 'microsoft.com.SQLDatabase' existing = {
-    name: 'sql-identity'
+    name: 'IdentityDb'
   }
 
   resource sqlCatalog 'microsoft.com.SQLDatabase' existing = {
-    name: 'sql-catalog'
+    name: 'CatalogDb'
   }
 
   resource sqlOrdering 'microsoft.com.SQLDatabase' existing = {
-    name: 'sql-ordering'
+    name: 'OrderingDb'
   }
 
   resource sqlWebhooks 'microsoft.com.SQLDatabase' existing = {
-    name: 'sql-webhooks'
+    name: 'WebhooksDb'
   }
 
   resource redisKeystore 'redislabs.com.RedisCache' existing = {

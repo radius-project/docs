@@ -3,7 +3,6 @@ param location string = resourceGroup().location
 param adminLogin string = 'sqladmin'
 @secure()
 param adminPassword string
-param CLUSTER_IP string
 
 resource eshop 'radius.dev/Application@v1alpha3' = {
   name: 'eshop'
@@ -215,7 +214,7 @@ module redisBasket 'br:radius.azurecr.io/starters/redis-azure:latest' = {
 module redisKeystore 'br:radius.azurecr.io/starters/redis-azure:latest' = {
   name: 'keystore-data'
   params: {
-    cacheName: 'basket-data'
+    cacheName: 'keystore-data'
     location: location
     radiusApplication: eshop
   }
@@ -229,5 +228,3 @@ module mongo 'br:radius.azurecr.io/starters/mongo-azure:latest' = {
     radiusApplication: eshop
   }
 }
-
-output CLUSTER_IP string = CLUSTER_IP
