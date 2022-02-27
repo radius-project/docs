@@ -2,7 +2,7 @@
 type: docs
 title: "Add a database to the website tutorial app"
 linkTitle: "Add a database"
-description: "Connect a MongoDB resource to the website tutorial application"
+description: "Connect a MongoDB to the website tutorial application using a connector"
 slug: "database"
 weight: 3000
 ---
@@ -11,110 +11,101 @@ So far you have not yet configured a database, so the todo items you enter will 
 
 In this step you will learn how to add a database and connect to it from the application.
 
-We'll discuss template.bicep changes and then provide the full, updated file before deployment. 
+## Connectors
 
-## Add db resource
+A [Mongo database connector]({{< ref mongodb >}}) resource provides an abstraction over the Mongo API, allowing the backing resource to be swapped out without any changes to the consuming resource and code.
 
-A `db` database resource is used to specify a few properties about the database: 
+<img src="mongo-connector.png" width=450px alt="Diagram of a mongo connector" /><br />
 
-- **resource type:** `mongo.com.MongoDatabase` represents a MongoDB compatible database.
-- **managed:** `true` tells Radius to manage the lifetime of the component for you.
+To learn more about connectors visit the [concepts docs]({{< ref connections-model >}})
 
-{{< rad file="snippets/app.bicep" embed=true marker="//MONGO" >}}
+## Add db starter
 
-{{< tabs "Microsoft Azure" Kubernetes>}}
+[Starter templates]({{< ref starter-templates >}}) are available to easily add a MongoDB connector to your application using Bicep modules. Update your Bicep file to match the following to add a Mongo database connector to your application:
 
-{{% codetab %}}
-When deploying to an Azure environment, a managed [`mongo.com.MongoDatabase`]({{< ref mongodb >}}) Component will be bound to an Azure CosmosDB API for MongoDB. By declaring your dependency on a generic *MongoDB-compatible* database, your code is more portable.
-{{% /codetab %}}
+{{< tabs "Mongo container" "Azure CosmosDB" >}}
 
-{{% codetab %}}
-When deploying to a Kubernetes environment, a managed [`mongo.com.MongoDatabase`]({{< ref mongodb >}}) will be bound to the [`mongo` Docker image](https://hub.docker.com/_/mongo/) running a lightweight developer configuration. 
-{{% /codetab %}}
+{{< codetab >}}
+{{< rad file="snippets/starter-azure.bicep" embed=true marker="//STARTER" >}}
+{{< /codetab >}}
+
+{{< codetab >}}
+This option is currently only available for Azure environments.
+
+{{< rad file="snippets/starter-azure.bicep" embed=true marker="//STARTER" >}}
+{{< /codetab >}}
 
 {{< /tabs >}}
 
-## Reference db from todoapp
+### Reference new connector
 
-Radius captures both logical relationships and related operational details. Examples of this include wiring up connection strings, granting permissions, or restarting components when a dependency changes.
+A starter deploys a MongoDB resource (container or CosmosDB), as well as a connector. Currently, the connector must be manually referenced in your application. To reference the deployed connector, use Bicep's `existing` keyword and add the following resource:
 
-Once the database is defined as a Component, you can connect to it by referencing the `db` component from within the `todoapp` Component via the [`connections`]({{< ref connections-model >}}) section. 
+{{< rad file="snippets/starter-azure.bicep" embed=true marker="//APP" replace-key-dots="//CONTAINER" replace-value-dots="..." >}}
 
-[`connections`]({{< ref connections-model >}}) is used to configure relationships between two components. The `db` is of kind `mongo.com.MongoDatabase`, which supports the `mongodb.com/Mongo` MongoDB protocol. Configuring a dependency on this protocol is the other part of specifying a relationship. This declares the *intention* from the `todoapp` component to communicate with the `db`.
+This manual step will be removed in a future release.
 
-Here's what the `todoapp` component will look like with the `connections` section added within its properties:
+### Connect to `db` from `frontend`
 
-{{< rad file="snippets/app.bicep" embed=true marker="//CONTAINER" replace-key-ports="//PORTS" replace-value-ports="ports: {...}"  >}}
+Once the connector is referenced, you can connect to it by referencing the `db` component from within the `frontend` resource the [`connections`]({{< ref connections-model >}}) section:
 
-Now that you have created a connection called `itemstore`, Radius will inject additional settings into the `todoapp` container. The container reads the database connection string from an environment variable named `CONNECTION_ITEMSTORE_CONNECTIONSTRING`:
+{{< rad file="snippets/starter-azure.bicep" embed=true marker="//CONTAINER" replace-key-dots="//IMAGE" replace-value-dots="container: {...}" >}}
 
+[Connections]({{< ref connections-model >}}) are used to configure relationships between two components. The `db` is of kind `mongo.com/MongoDB`, which supports the MongoDB protocol. This declares the *intention* from the `frontend` container to communicate with the `db` resource.
 
-```js
-if (process.env.CONNECTION_ITEMSTORE_CONNECTIONSTRING) {
-  connectionString = process.env.CONNECTION_ITEMSTORE_CONNECTIONSTRING
-  console.log("Retrieved DB connection string from environment variable")
-}
-```
+Now that you have created a connection called `itemstore`, environment variables with connection information will be injected into the `frontend` container. The container reads the database connection string from an environment variable named `CONNECTION_ITEMSTORE_CONNECTIONSTRING`.
 
-`CONNECTION_ITEMSTORE_CONNECTIONSTRING` is a setting injected by Radius based on the name of the connection (`itemstroe`) and it's type. See the [`connections`]({{< ref connections-model >}}) section of the documentation for more information about these features.
+A manual dependency from `frontend` to `dbStarter` need to be added, pending an update the the Radius app model in an upcoming release. This ensures the Mongo database starter is deployed before `frontend` is deployed.
 
-## Update your template.bicep file 
+## Update Bicep file
 
-Update your `template.bicep` file to match the full application definition:
+Make sure your Bicep file matches the following:
 
-{{< rad file="snippets/app.bicep" download=true >}}
+{{< tabs "Mongo container" "Azure CosmosDB" >}}
+
+{{< codetab >}}
+{{< rad file="snippets/app-azure.bicep" embed=true >}}
+{{< /codetab >}}
+
+{{< codetab >}}
+This option is currently only available for Azure environments.
+
+{{< rad file="snippets/app-azure.bicep" embed=true >}}
+{{< /codetab >}}
+
+{{< /tabs >}}
 
 ## Deploy application with database
 
-1. Now you are ready to re-deploy the application, including the Mongo database. Switch to the command-line and run: 
+1. In a terminal window deploy the Bicep file:
 
    ```sh
-   rad deploy template.bicep
+   rad deploy todo.bicep
    ```
 
-   This may take a few minutes because of the time required to create the database. On completion, you will see the following resources:
+   This may take a few minutes to create the database. On completion, you will see the following resources:
 
    ```sh
    Resources:
-      Application          webapp
-      Container   todoapp
-      HttpRoute            route
-      mongo.com.MongoDatabase db
+      Application              todoapp
+      Container                frontend
+      HttpRoute                frontend-route
+      mongo.com.MongoDatabase  db
    ```
 
-   Just like before, a public endpoint will be available through the gateway in the `todoRoute` resource.
+   Just like before, a public endpoint will be available through the gateway in the `frontend-route` resource.
 
    ```sh
    Public Endpoints:
-      HttpRoute            todo-route       SITE
+      HttpRoute            frontend-route       IP-ADDRESS
    ```
 
-1. To test your `webapp` application, navigate to the public endpoint that was printed at the end of the deployment. You should see a page like:
+1. To test your application, navigate to the public endpoint that was printed at the end of the deployment. You should see a page like:
 
    <img src="todoapp-withdb.png" width="400" alt="screenshot of the todo application with a database">
 
    If your page matches, then it means that the container is able to communicate with the database. Just like before, you can test the features of the todo app. Add a task or two. Now your data is being stored in an actual database.
 
-### Validate data
-
-After you have deployed the application, you can validate that the data is being stored in the database.
-
-{{< tabs "Microsoft Azure" >}}
-
-{{% codetab %}}
-1. Open the Azure resource group where your application is deployed. The URL was output during the `rad deploy` command.
-
-1. Open the CosmosDB resource prefixed with `db-`
-
-   <img src="azure-db.png" width="400px" alt="Screenshot of the db CosmosDB instance">
-
-1. Open the Data Explorer to the `todos` collection. You can now see the entries you added in the todo app.
-
-   <img src="db-entries.png" width="800px" alt="Screenshot of the db CosmosDB Data Explorer with todo items">
-{{% /codetab %}}
-
-{{< /tabs >}}
-
 ## Cleanup
 
-{{% alert title="Delete application" color="warning" %}} If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to prevent additional charges in your subscription. {{% /alert %}}
+{{% alert title="Delete application" color="warning" %}} If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to prevent additional charges in your Azure subscription. {{% /alert %}}
