@@ -29,13 +29,48 @@ In this tutorial, you will:
 ## Prerequisites
 
 - [Install Radius CLI]({{< ref install-cli.md >}})
-- [Create a Radius environment]({{< ref create-environment.md >}})
-- [(optional) Setup Visual Studio Code]({{< ref "install-cli.md#2-install-custom-vscode-extension" >}}) for syntax highlighting, completion, and linting.
+- Install CLI for target platform:
+  - [k3d CLI](https://github.com/k3d-io/k3d/releases) for local environments
+  - [az CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) for Azure environments
+  - [kubectl CLI](https://kubernetes.io/docs/tasks/tools/) for Kubernetes environments
+- [Install Visual Studio Code](https://code.visualstudio.com/) (recommended)
+  - The [Radius VSCode extension]({{< ref "install-cli.md#2-install-custom-vscode-extension" >}}) provides syntax highlighting, completion, and linting.
   - You can also complete this tutorial with any basic text editor.
 
-{{% alert title="Dapr initialization" color="warning" %}}
-If you are runnning this tutorial on Kubernetes, make sure to manually [initialize Dapr via the dapr CLI](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/#install-dapr). This behavior will be automated in an upcoming release.
-{{% /alert %}}
+### Initialize a Radius environment
+
+This tutorial can be completed on any Radius [platform]({{< ref platforms >}}). To get started, create a new environment:
+
+{{< tabs Local Kubernetes Azure >}}
+
+{{% codetab %}}
+To create a local dev environment on top of Docker, run:
+
+```sh
+rad env init dev
+```
+
+{{% /codetab %}}
+
+{{% codetab %}}
+A Kubernetes envionment can run in any Kubernetes cluster. Make sure you have set the correct default kubectl context, and then run:
+
+```sh
+rad env init kubernetes
+```
+
+{{% /codetab %}}
+
+{{% codetab %}}
+To deploy an Azure environment to your Azure subscription, run:
+
+```sh
+rad env init azure -i
+```
+
+{{% /codetab %}}
+
+{{< /tabs >}}
 
 <br />
 {{< button text="Application overview" page="dapr-microservices-overview.md" >}}

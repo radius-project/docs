@@ -1,6 +1,7 @@
 resource app 'radius.dev/Application@v1alpha3' = {
   name: 'dapr-tutorial'
 
+  //BACKEND
   resource backend 'Container' = {
     name: 'backend'
     properties: {
@@ -9,39 +10,42 @@ resource app 'radius.dev/Application@v1alpha3' = {
         ports: {
           orders: {
             containerPort: 3000
-            provides: daprBackend.id
           }
-        }
-      }
-      connections: {
-        orders: {
-          kind: 'dapr.io/StateStore'
-          source: statestore.id
         }
       }
       traits: [
         {
           kind: 'dapr.io/Sidecar@v1alpha1'
-          appPort: 3000
           appId: 'backend'
+          appPort: 3000
           provides: daprBackend.id
         }
       ]
     }
   }
+  //BACKEND
 
-  resource statestore 'dapr.io.StateStore' = {
-    name: 'statestore'
-    properties: {
-      kind: 'any'
-    }
-  }
-
+  //ROUTE
   resource daprBackend 'dapr.io.InvokeHttpRoute' = {
     name: 'dapr-backend'
     properties: {
       appId: 'backend'
     }
   }
+  //ROUTE
 
+  // Reference the Dapr state store deployed by the starter
+  resource ordersStateStore 'dapr.io.StateStore' existing = {
+    name: 'orders'
+  }
+
+}
+
+// Use a starter module to deploy an Azure storage account and configure a Dapr state store
+module stateStoreStarter 'br:radius.azurecr.io/starters/dapr-statestore-azure-tablestorage:latest' = {
+  name: 'orders-statestore-starter'
+  params: {
+    radiusApplication: app
+    stateStoreName: 'orders'
+  }
 }
