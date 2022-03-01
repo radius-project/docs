@@ -13,7 +13,7 @@ In this tutorial you will be deploying an online store where you can order items
 
 #### (optional) Download the source code
 
-You can download the source code [here](https://radiuspublic.blob.core.windows.net/tutorials/dapr-microservices.zip) if you want to see the complete code.
+You can download the source code [here](https://get.radapp.dev/tutorials/dapr-microservices.zip) if you want to see the complete code.
 
 ## Resources
 
