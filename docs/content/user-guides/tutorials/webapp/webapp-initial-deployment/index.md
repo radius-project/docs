@@ -65,23 +65,9 @@ Now you are ready to deploy the application for the first time.
       HttpRoute            todo-route        SITE
    ```
 
-{{< tabs "Radius CLI" "VSCode Extension" >}}
+3. To test your webapp application, navigate to the public endpoint that was printed at the end of the deployment.
 
-{{% codetab %}}
-3. To view a representation of your application deployed you can visit your Azure resource group or the Kubernetes technology you rely on for visualizing Docker environments.
-{{% /codetab %}}
-{{% codetab %}}
-3. Open VS Code and navigate to the VS Code Radius extension explorer section.
-
-   The environment you've created should be listed in a tree view that will allow you to see  your webapp application and its different resources.
-
-   <img src="radius-explorer-webapp.png" width="400" alt="screenshot of the todo application with no database">
-
-{{% /codetab %}}
-
-4. To test your webapp application, navigate to the public endpoint that was printed at the end of the deployment.
-   <img src="todoapp-nodb.png" width="400" alt="screenshot of the todo application with no database">
-<br>
+<img src="todoapp-nodb.png" width="400" alt="screenshot of the todo application with no database"><br>
    If the page you see matches the screenshot, that means the container is running as expected.
 
    You can play around with the application's features:
@@ -89,5 +75,19 @@ Now you are ready to deploy the application for the first time.
 - Add a todo item
 - Mark a todo item as complete
 - Delete a todo item
+
+## VS Code Tips
+
+{{% alert title="Preview" color="info" %}}
+The following tips are  a preview of how the VS Code Radius extension can be deployed improve developer workflow. As we introduce additional features to the extension we will incorporate them into this section.
+{{% /alert %}}
+
+- Open VS Code and navigate to the VS Code Radius extension explorer section.
+
+   The environment you've created should be listed in a tree view that will allow you to see  your webapp application and its different resources.
+
+   <img src="radius-explorer-webapp.png" width="400" height="auto" alt="screenshot of the todo application with no database">
+
+- Click on the `todoapp` resource node and click on the `Show Container Logs` to open up a terminal dedicated to viewing the resource logs.
 
 <br>{{< button text="Next: Add a database to the app" page="webapp-add-database.md" >}}
