@@ -32,3 +32,19 @@ The following top-level information is available in the resource:
 | `port` | The Redis port. | `4242`
 | `username` | The username for connecting to the redis cache. |
 | `password()` | The password for connecting to the redis cache. Can be used for password and can be empty. | `d2Y2ba...`
+
+## Connections
+
+[Services]({{< ref services >}}) can define [connections]({{< ref connections-model >}}) to connectors using the `connections` property. This allows the service to access properties of the connector and contributes to to visualization and health experiences.
+
+### Environment variables
+
+Connections to the Redis connector result in the following environment variables being set on your service:
+
+| Variable | Description |
+|----------|-------------|
+| `CONNECTION_<CONNECTION-NAME>-HOST` | The host name of the Redis cache. |
+| `CONNECTION_<CONNECTION-NAME>-PORT` | The port of the Redis cache. |
+| `CONNECTION_<CONNECTION-NAME>-USERNAME` | The username of the Redis cache. |
+| `CONNECTION_<CONNECTION-NAME>-PASSWORD` | The password of the Redis cache. |
+| `CONNECTION_<CONNECTION-NAME>-CONNECTION_STRING` | The connection string of the Redis cache. |
