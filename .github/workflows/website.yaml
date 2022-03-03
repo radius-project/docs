@@ -85,6 +85,10 @@ jobs:
     needs: ['build']
     runs-on: self-hosted
     steps:
+      - name: Checkout docs repo
+        uses: actions/checkout@v2
+        with:
+          submodules: false
       - name: Parse release version and set environment variables
         run: python ./.github/scripts/get_release_version.py
       - name: Download Hugo artifacts
