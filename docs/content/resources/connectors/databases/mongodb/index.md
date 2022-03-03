@@ -41,9 +41,20 @@ Begin by defining a CosmosDB with Mongo API in Bicep, either as part of the temp
 | managed | Indicates if the resource is Radius-managed. If no, a `Resource` must be specified. | `true`, `false`
 | resource | The ID of the user-managed CosmosDB with Mongo API to use for this connector. | `account::mongodb.id`
 
-
 ## Provided data
 
 | Bicep function | Description | Example |
 |----------------|-------------|---------|
 | connectionString() | Returns the connection string for the MongoDB. | `mongodb.connectionString()` |
+
+## Connections
+
+[Services]({{< ref services >}}) can define [connections]({{< ref connections-model >}}) to connectors using the `connections` property. This allows the service to access properties of the connector and contributes to to visualization and health experiences.
+
+### Environment variables
+
+Connections to the MongoDatabase connector result in the following environment variables being set on your service:
+
+| Variable | Description |
+|----------|-------------|
+| `CONNECTION_<CONNECTION-NAME>-CONNECTIONSTRING` | The connection string for the MongoDB. |
