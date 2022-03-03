@@ -6,10 +6,6 @@ description: "Learn how to use Radius with your continuous integration and deplo
 weight: 500
 ---
 
-{{% alert title="💬 Feedback" color="primary" %}}
-Let us know your feedback on deploying Radius apps in our [GitHub Discussions Issue](https://github.com/project-radius/radius/discussions/1516).
-{{% /alert %}}
-
 ## GitHub Actions
 
 The following steps will walk through how to use GitHub Actions to deploy Radius apps.
