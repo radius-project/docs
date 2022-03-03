@@ -113,7 +113,7 @@ jobs:
           source_dir: code/
           container_name: tutorials
           connection_string: ${{ secrets.RADIUSPUBLIC_BLOBSTORAGE_CONNECTIONSTRING }}
-          extra_args: '--destination-path tutorials/${{ env.REL_CHANNEL }}/ --pattern *.zip --timeout 300'
+          extra_args: '--destination-path ${{ env.REL_CHANNEL }}/ --pattern *.zip --timeout 300'
           overwrite: 'true'
 
   open_pr_site:
