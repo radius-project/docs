@@ -37,17 +37,15 @@ Radius does not have access to the username and password used to access your dat
 
 {{< rad file="snippets/unmanaged.bicep" embed=true marker="//CONTAINER" >}}
 
-## Injected values
+## Connections
 
-Connections between resources declare environment variables inside the consuming resource as a convenience for service discovery. See [connections]({{< ref "connections-model#injected-values" >}}) for details.
+[Services]({{< ref services >}}) can define [connections]({{< ref connections-model >}}) to connectors using the `connections` property. This allows the service to access properties of the connector and contributes to to visualization and health experiences.
 
-In the following example, a `todoapp` service connects to a database `db`. The connection is defined as part of `todoapp` and is named `tododb`.
+### Environment variables
 
-{{< rad file="snippets/unmanaged.bicep" embed=true marker="//CONTAINER" >}}
+Connections to the SQL connector result in the following environment variables being set on your service:
 
-This example would define the following injected environment variables for use inside `todoapp`:
-
-| Environment Variable         | Example Value                   | Description                                          |
-| ---------------------------- | ------------------------------- | ---------------------------------------------------- |
-| `CONNECTION_TODODB_SERVER`   | `myserver.database.windows.net` | The fully-qualified hostname of the database server. |
-| `CONNECTION_ORDERS_DATABASE` | `todos`                         | The name of the SQL Server database.                 |
+| Variable | Description |
+|----------|-------------|
+| `CONNECTION_<CONNECTION-NAME>-SERVER` | The fully-qualified hostname of the database server. |
+| `CONNECTION_<CONNECTION-NAME>-DATABASE` | The name of the SQL Server database. |
