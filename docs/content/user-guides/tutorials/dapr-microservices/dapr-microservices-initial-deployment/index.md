@@ -66,7 +66,7 @@ Now you are ready to deploy the application for the first time.
    The [`rad resource expose`]({{< ref rad_resource_expose.md >}}) command accepts the resource type, the resource name, and flags for application name and port. If you changed any of these values when deploying, update your command to match.
    {{% /alert %}}
 
-1. Visit the [URL](http://localhost:3000/order) in your browser. For now you should see a message like:
+1. Visit the URL http://localhost:3000/order in your browser. For now, you should see a message like:
 
    ```
    {"message":"The container is running, but Dapr has not been configured."}
