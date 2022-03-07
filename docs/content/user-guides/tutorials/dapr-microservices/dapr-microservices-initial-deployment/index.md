@@ -76,10 +76,10 @@ Now you are ready to deploy the application for the first time.
 
 1. When you are done testing press `CTRL+C` to terminate the port-forward.
 
-## VS Code Tips
+## Interact with your application using the VS Code extension
 
 {{% alert title="Preview" color="info" %}}
-The following tips are  a preview of how the VS Code Radius extension can be deployed improve developer workflow. As we introduce additional features to the extension we will incorporate them into this section.
+The following tips are a preview of how the VS Code Radius extension can be used to improve the developer workflow. As we introduce additional features to the extension, we will incorporate them into this section.
 {{% /alert %}}
 
 - Open VS Code and navigate to the VS Code Radius extension explorer section.

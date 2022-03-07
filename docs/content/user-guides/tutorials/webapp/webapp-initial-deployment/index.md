@@ -76,7 +76,7 @@ Now you are ready to deploy the application for the first time.
 - Mark a todo item as complete
 - Delete a todo item
 
-## VS Code Tips
+## Interact with your application using the VS Code extension
 
 {{% alert title="Preview" color="info" %}}
 The following tips are  a preview of how the VS Code Radius extension can be deployed improve developer workflow. As we introduce additional features to the extension we will incorporate them into this section.
