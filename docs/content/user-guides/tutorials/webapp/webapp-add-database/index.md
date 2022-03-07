@@ -88,22 +88,6 @@ Update your `template.bicep` file to match the full application definition:
       HttpRoute            todo-route       SITE
    ```
 
-{{< tabs "Radius CLI" "VSCode Extension" >}}
-
-{{% codetab %}}
-
-1. To view a representation of your application deployed you can visit your Azure resource group or the Kubernetes technology you rely on for visualizing Docker environments.
-{{% /codetab %}}
-{{% codetab %}}
-1. Open VS Code and navigate to the VS Code Radius extension explorer section.
-
-   The environment you've created should be listed in a tree view that will allow you to see
-   your webapp application and its different resources.
-
-   <img src="radius-explorer-webapp-db.png" width="400" alt="screenshot of the todo application with no database">
-
-{{% /codetab %}}
-
 1. To test your `webapp` application, navigate to the public endpoint that was printed at the end of the deployment. You should see a page like:
 
    <img src="todoapp-withdb.png" width="400" alt="screenshot of the todo application with a database">
