@@ -93,4 +93,6 @@ The following tips are  a preview of how the VS Code Radius extension can be dep
 
 - Click on the a resource node and click on the `Show Container Logs` to open up a terminal dedicated to viewing the resource logs.
 
+## Next step
+
 <br>{{< button text="Next: Add a Dapr statestore to the app" page="dapr-microservices-add-dapr.md" >}}
