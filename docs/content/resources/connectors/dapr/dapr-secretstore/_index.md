@@ -25,7 +25,7 @@ This resource will automatically create and deploy the Dapr component spec for t
 | Property | Description | Example |
 |----------|-------------|---------|
 | kind | The kind of the underlying secret store resource. See [Available Dapr components](#available-dapr-components) for more information. | `secretstores.azure.keyvault`
-| type | The Dapr component type. Used when kind is `generic`. | `state.couchbase`
+| type | The Dapr component type. Used when kind is `generic`. | `secretstores.azure.keyvault`
 | metadata | Metadata for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-secret-stores/) | `vaultName: 'test'` |
 | version | The version of the Dapr component. See [Dapr components](https://docs.dapr.io/reference/components-reference/supported-secret-stores/) for available versions. | `v1` |
 
