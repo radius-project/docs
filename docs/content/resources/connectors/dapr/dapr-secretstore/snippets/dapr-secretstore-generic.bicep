@@ -9,9 +9,9 @@ resource app 'radius.dev/Application@v1alpha3' = {
       type: 'secretstores.azure.keyvault'
       metadata: {
         vaultName: 'myvault'
-        spnTenantId: '<GUID>'
-        spnClientId: '<GUID>'
-        spnClientSecret: '*****'
+        azureTenantId: '<GUID>'
+        azureClientId: '<GUID>'
+        azureClientSecret: '*****'
       }
       version: 'v1'
     }
