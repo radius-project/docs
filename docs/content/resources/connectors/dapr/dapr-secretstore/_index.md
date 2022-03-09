@@ -3,13 +3,13 @@ type: docs
 title: "Dapr Secret Store resource"
 linkTitle: "Secret Store"
 description: "Learn how to use a Dapr Secret Store resource in Radius"
-weight: 300
+weight: 500
 slug: "secretstore"
 ---
 
 ## Overview
 
-A `dapr.io/SecretStore` resource represents a [Dapr secret store](https://docs.dapr.io/developing-applications/building-blocks/secrets/) topic.
+A `dapr.io/SecretStore` resource represents a [Dapr secret store](https://docs.dapr.io/developing-applications/building-blocks/secrets/secrets-overview/) topic.
 
 This resource will automatically create and deploy the Dapr component spec for the secret store.
 
@@ -36,8 +36,6 @@ The following resources can act as a `dapr.io.SecretStore` resource:
 | kind | Resource |
 |------|----------|
 | `generic` | Generic
-
-
 
 ### Generic
 
