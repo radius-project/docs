@@ -45,11 +45,23 @@ Secrets must be accessed via Bicep functions to ensure they're not leaked or log
 | `username()` | Returns the username for the MongoDB. | `mongodb.username()` |
 | `password()` | Returns the password for the MongoDB. | `mongodb.password()` |
 
+## Connections
+
+[Services]({{< ref services >}}) can define [connections]({{< ref connections-model >}}) to connectors using the `connections` property. This allows the service to access properties of the connector and contributes to to visualization and health experiences.
+
+### Environment variables
+
+Connections to the MongoDatabase connector result in the following environment variables being set on your service:
+
+| Variable | Description |
+|----------|-------------|
+| `CONNECTION_<CONNECTION-NAME>-CONNECTIONSTRING` | The connection string for the MongoDB. |
+
 ## Starter
 
 You can get up and running quickly with a Mongo Database by using a [starter]({{< ref starter-templates >}}):
 
-## Container
+### Container
 
 The module `'br:radius.azurecr.io/starters/mongo:latest'` deploys Mongo container and outputs a `mongo.com.MongoDatabase` resource.
 
@@ -57,7 +69,7 @@ To use this template, reference it in Bicep as:
 
 {{< rad file="snippets/starter.bicep" embed=true >}}
 
-### Parameters
+#### Parameters
 
 | Parameter | Description | Required | Default |
 |-----------|-------------|:--------:|---------|
@@ -65,6 +77,12 @@ To use this template, reference it in Bicep as:
 | dbName | The name for your Mongo Database connector | Yes | - |
 | username | The username for your Mongo Database | No | `'admin'` |
 | password | The password for your Mongo Database | No | `newGuid()` |
+
+### Azure CosmosDB
+
+The module `'br:radius.azurecr.io/starters/mongo-azure:latest'` deploys Mongo container and outputs a `mongo.com.MongoDatabase` resource.
+
+To use this template, reference it in Bicep as:
 
 {{< rad file="snippets/starter-azure.bicep" embed=true >}}
 

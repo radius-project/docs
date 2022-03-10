@@ -30,17 +30,24 @@ Secrets are used when defining a RabbitMQ connector with a container or external
 |----------|-------------|---------|
 | connectionString | The connection string to the Rabbit MQ Message Queue. Recommended to use parameters and variables to craft. | `'amqp://${username}:${password}@${rmqContainer.properties.host}:${rmqContainer.properties.port}'`
 
-## Provided data
-
-| Property | Description | Example |
-|----------|-------------|---------|
-| `queue` | The message queue to which you are connecting. | `'orders'`
-
 ### Functions
 
 | Property | Description | Example |
 |----------|-------------|---------|
 | `connectionString()` | Returns the RabbitMQ connection string used to connect to the resource. | `amqp://guest:***@rabbitmq.svc.local.cluster:5672` |
+
+## Connections
+
+[Services]({{< ref services >}}) can define [connections]({{< ref connections-model >}}) to connectors using the `connections` property. This allows the service to access properties of the connector and contributes to to visualization and health experiences.
+
+### Environment variables
+
+Connections to the RabbitMQ connector result in the following environment variables being set on your service:
+
+| Variable | Description |
+|----------|-------------|
+| `CONNECTION_<CONNECTION-NAME>-QUEUE` | The queue name. |
+| `CONNECTION_<CONNECTION-NAME>-CONNECTIONSTRING` | The connection string of the RabbitMQ. |
 
 ## Starter
 

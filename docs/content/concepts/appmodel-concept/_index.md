@@ -27,7 +27,7 @@ Project Radius provides a way for developers to translate human-understandable a
 
 ## App model language
 
-Radius uses the [Bicep language](https://github.com/azure/bicep) as its file-format and structure. Bicep is an existing Microsoft language that offers:
+Radius uses the [Bicep language]({{< ref bicep >}}) as its file-format and structure. Bicep is an existing Microsoft language that offers:
 - A high quality authoring experience with modules, loops, parametrization, and templating
 - ARM Deployment Stacks as the declarative deployment/rollback mechanism
 - Ability to punch through abstractions to platform when necessary

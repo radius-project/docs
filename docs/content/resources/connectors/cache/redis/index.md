@@ -20,7 +20,7 @@ The following top-level information is available in the resource:
 |------|:--------:|-------------|---------|
 | name | y | The name of your resource. Used to provide status and visualize the resource. | `cache`
 
-## Provided data
+### Provided data
 
 | Property | Description | Example(s) |
 |----------|-------------|------------|
@@ -29,13 +29,29 @@ The following top-level information is available in the resource:
 | `username` | The username for connecting to the redis cache. |
 | `password()` | The password for connecting to the redis cache. Can be used for password and can be empty. | `d2Y2ba...`
 
+## Connections
+
+[Services]({{< ref services >}}) can define [connections]({{< ref connections-model >}}) to connectors using the `connections` property. This allows the service to access properties of the connector and contributes to to visualization and health experiences.
+
+### Environment variables
+
+Connections to the Redis connector result in the following environment variables being set on your service:
+
+| Variable | Description |
+|----------|-------------|
+| `CONNECTION_<CONNECTION-NAME>-HOST` | The host name of the Redis cache. |
+| `CONNECTION_<CONNECTION-NAME>-PORT` | The port of the Redis cache. |
+| `CONNECTION_<CONNECTION-NAME>-USERNAME` | The username of the Redis cache. |
+| `CONNECTION_<CONNECTION-NAME>-PASSWORD` | The password of the Redis cache. |
+| `CONNECTION_<CONNECTION-NAME>-CONNECTION_STRING` | The connection string of the Redis cache. |
+
 ## Starter
 
 You can get up and running quickly with a Redis cache by using a [starter]({{< ref starter-templates >}}):
 
 {{< rad file="snippets/starter.bicep" embed=true >}}
 
-## Container
+### Container
 
 The module `'br:radius.azurecr.io/starters/redis:latest'` deploys Redis container and outputs a `redislabs.com.RedisCache` resource.
 
@@ -43,14 +59,14 @@ To use this template, reference it in Bicep as:
 
 {{< rad file="snippets/starter.bicep" embed=true >}}
 
-### Parameters
+#### Parameters
 
 | Parameter | Description | Required | Default |
 |-----------|-------------|:--------:|---------|
 | radiusApplication | The application resource to use as the parent of the RabbitMQ Broker | Yes | - |
 | cacheName | The name for your Redis Cache connector | Yes | - |
 
-## Microsoft Azure
+### Azure Cache for Redis
 
 The module `'br:radius.azurecr.io/starters/redis-azure:latest'` deploys an Azure Redis Cache and outputs a `redislabs.com.RedisCache` resource.
 
@@ -58,7 +74,7 @@ To use this template, reference it in Bicep as:
 
 {{< rad file="snippets/starter-azure.bicep" embed=true >}}
 
-### Parameters
+#### Parameters
 
 | Parameter | Description | Required | Default |
 |-----------|-------------|:--------:|---------|

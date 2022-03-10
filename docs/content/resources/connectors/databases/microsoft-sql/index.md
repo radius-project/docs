@@ -25,26 +25,20 @@ This application showcases how Radius can use a user-manged Azure SQL Database.
 
 ## Connections
 
-You can connect your [service]({{< ref services >}}) to your SQL database through the connector.
+[Services]({{< ref services >}}) can define [connections]({{< ref connections-model >}}) to connectors using the `connections` property. This allows the service to access properties of the connector and contributes to to visualization and health experiences.
 
-The username and password used to access your database are not stored as part of the connector. You should provide this via paramaters or variables when building a connection string in Bicep.
+### Environment variables
 
-{{< rad file="snippets/unmanaged.bicep" embed=true marker="//CONTAINER" >}}
-
-### Injected values
-
-Connections between resources declare environment variables inside the consuming resource as a convenience for service discovery. See [connections]({{< ref "connections-model#injected-values" >}}) for details.
-
-| Environment variable | Example | Description |
-|----------------------|---------|-------------|
-| `CONNECTION_TODODB_SERVER` | `myserver.database.windows.net` | The fully-qualified hostname of the database server.
-| `CONNECTION_ORDERS_DATABASE` | `mydb` | The name of the SQL Server database.
+| Variable | Description |
+|----------|-------------|
+| `CONNECTION_<CONNECTION-NAME>-SERVER` | The fully-qualified hostname of the database server. |
+| `CONNECTION_<CONNECTION-NAME>-DATABASE` | The name of the SQL Server database. |
 
 ## Starter
 
 You can get up and running quickly with a SQL Database by using a [starter]({{< ref starter-templates >}}):
 
-## Container
+### Container
 
 The module `'br:radius.azurecr.io/starters/sql:latest'` deploys a SQL Server container and outputs a `microsoft.com.SQLDatabase` resource.
 
@@ -52,7 +46,7 @@ To use this template, reference it in Bicep as:
 
 {{< rad file="snippets/starter.bicep" embed=true >}}
 
-### Parameters
+#### Parameters
 
 | Parameter | Description | Required | Default |
 |-----------|-------------|:--------:|---------|
@@ -61,7 +55,7 @@ To use this template, reference it in Bicep as:
 | databaseName | The name for your SQL Database. | Yes | - |
 | serverName | The name of the Azure SQL Server | No | `'sql-${uniqueString(resourceGroup().id, deployment().name)}'` |
 
-### Outputs
+#### Outputs
 
 The output of this module is a name and ID for a `microsoft.com.SQLDatabase` resource.
 
@@ -69,7 +63,7 @@ The output of this module is a name and ID for a `microsoft.com.SQLDatabase` res
 |-----------|-------------|------|
 | sqlUsername | The username for the SQL Server. Always 'sa'. | string |
 
-## Microsoft Azure
+### Azure SQL Database
 
 The module `'br:radius.azurecr.io/starters/sql-azure:latest'` deploys an Azure SQL Server & Database and outputs a `microsoft.com.SQLDatabase` resource.
 
@@ -77,7 +71,7 @@ To use this template, reference it in Bicep as:
 
 {{< rad file="snippets/starter-azure.bicep" embed=true >}}
 
-### Parameters
+#### Parameters
 
 | Parameter | Description | Required | Default |
 |-----------|-------------|:--------:|---------|
@@ -90,7 +84,7 @@ To use this template, reference it in Bicep as:
 | skuName | The Azure SQL Server SKU | No | `'Standard'` |
 | skuTier | The Azure SQL Server SKU tier | No | `'Standard'` |
 
-### Outputs
+#### Outputs
 
 The output of this module is a name and ID for a `microsoft.com.SQLDatabase` resource.
 

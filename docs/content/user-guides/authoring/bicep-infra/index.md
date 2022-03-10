@@ -16,6 +16,11 @@ The following example shows an Azure CosmosDB account and MondoDB database that 
 
 You can now use the `cosmos::db` resource in your Radius application.
 
+## Available resources
+
+- [Microsoft Azure resources]({{< ref azure-resources >}})
+- [Kubernetes resources]({{< ref kubernetes-resources >}})
+
 ## Reference an existing resource
 
 Alternately, you can [reference an existing resource](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/resource-declaration?tabs=azure-powershell#reference-existing-resources) that is deployed and managed by another process.
@@ -30,10 +35,11 @@ Here's an example of a CosmosDB account and MongoDB resource:
 
 You can now use `cosmos::db` in your Radius application, just like if you freshly deployed the resources.
 
-## Available resources
+## Reference a resource in a different Azure resource group or subscription
 
-- [Microsoft Azure resources]({{< ref azure-resources >}})
-- [Kubernetes resources]({{< ref kubernetes-resources >}})
+By default, Bicep resources are scoped to the resource group to which to are targeting for your deployment. If you want to refer to resources, either new or existing, in a different resource group or subscription, you can use the `scope` property and a module to specify the target resource group and subscription scope.
+
+For more information refer to the Bicep documentation on [scopes](https://docs.microsoft.com/azure/azure-resource-manager/bicep/deploy-to-resource-group?tabs=azure-cli#scope-to-different-resource-group).
 
 ## Next step
 
