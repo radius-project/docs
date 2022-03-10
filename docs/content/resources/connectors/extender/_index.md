@@ -15,5 +15,5 @@ An extender resource could be used to bring in a custom resource into Radius for
 
 | Property | Description | Example |
 |----------|-------------|---------|
-| <key-value pairs> | Properties of the extender | Could be any key-value pairs - fromNumber: '222-222-2222'
+| \<user-defined key-value pairs\> | User-defined properties of the extender. Can accept any key name except 'secrets'. | `fromNumber: '222-222-2222'`
 | secrets | Secrets in the form of key-value pairs
