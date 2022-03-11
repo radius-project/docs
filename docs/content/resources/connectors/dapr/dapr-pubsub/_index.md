@@ -55,6 +55,10 @@ A generic pub/sub lets you manually specify the metadata of a Dapr pub/sub broke
 
 You can get up and running quickly with a Dapr Pub/Sub topic by using a [starter]({{< ref starter-templates >}}).
 
+{{% alert title="Known issue: dependsOn" color="warning" %}}
+Any service that consumes the `existing` resource will need to manually add a `dependsOn` reference to the staarter module. This requirement will be removed in an upcoming release. See the [webapp tutorial]({{< ref webapp-add-database >}}) for an example.
+{{% /alert %}}
+
 ## Container
 
 The `br:radius.azurecr.io/starters/dapr-pubsub:latest` Dapr Pub/Sub container starter uses a Redis container and can run on any Radius platform.

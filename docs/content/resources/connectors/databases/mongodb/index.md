@@ -61,6 +61,10 @@ Connections to the MongoDatabase connector result in the following environment v
 
 You can get up and running quickly with a Mongo Database by using a [starter]({{< ref starter-templates >}}):
 
+{{% alert title="Known issue: dependsOn" color="warning" %}}
+Any service that consumes the `existing` resource will need to manually add a `dependsOn` reference to the staarter module. This requirement will be removed in an upcoming release. See the [webapp tutorial]({{< ref webapp-add-database >}}) for an example.
+{{% /alert %}}
+
 ### Container
 
 The module `'br:radius.azurecr.io/starters/mongo:latest'` deploys Mongo container and outputs a `mongo.com.MongoDatabase` resource.

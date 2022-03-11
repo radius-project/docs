@@ -59,6 +59,10 @@ To use this template, reference it in Bicep as:
 
 {{< rad file="snippets/starter.bicep" embed=true >}}
 
+{{% alert title="Known issue: dependsOn" color="warning" %}}
+Any service that consumes the `redisConnector` resource will need to manually add a `dependsOn` reference to the `redis` module. This requirement will be removed in an upcoming release. See the [webapp tutorial]({{< ref webapp-add-database >}}) for an example.
+{{% /alert %}}
+
 #### Parameters
 
 | Parameter | Description | Required | Default |
