@@ -18,7 +18,7 @@ resource app 'radius.dev/Application@v1alpha3' = {
       connections: {
         mongo: {
           kind: 'mongo.com/MongoDB'
-          source: mongoDb.outputs.mongoDB.id
+          source: mongoConnector.id
         }
       }
     }
@@ -34,11 +34,16 @@ resource app 'radius.dev/Application@v1alpha3' = {
       }
     }
   }
+
+  resource mongoConnector 'mongo.com.MongoDatabase' existing = {
+    name: 'todo-items'
+  }
 }
 
 module mongoDb 'br:radius.azurecr.io/starters/mongo:latest' = {
   name: 'mongoDb'
   params: {
     radiusApplication: app
+    dbName: 'todo-items'
   }
 }
