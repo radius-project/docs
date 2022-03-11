@@ -7,10 +7,7 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
   //REST
   //REST
 
-  resource mongo 'mongo.com.MongoDatabase' = {
+  resource mongo 'mongo.com.MongoDatabase' existing = {
     name: 'mongo'
-    properties: {
-      managed: true
-    }
   }
 }

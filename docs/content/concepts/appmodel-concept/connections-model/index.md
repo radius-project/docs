@@ -72,7 +72,7 @@ Each [Connection kind]({{< ref resources >}}) defines the RBAC roles, environmen
 
 #### Bicep example
 
-{{< rad file="snippets/direct.bicep" embed=true marker="//SAMPLE" replace-key-container="//CONTAINER" replace-value-container="container: {...}" replace-key-properties="//PROPERTIES" replace-value-properties="properties: {...}" >}}
+{{< rad file="snippets/direct.bicep" embed=true marker="//SAMPLE" replace-key-container="//CONTAINER" replace-value-container="container: {...}" >}}
 
 ### Routes
 

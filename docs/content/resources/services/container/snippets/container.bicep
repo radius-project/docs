@@ -55,23 +55,16 @@ resource app 'radius.dev/Application@v1alpha3' = {
   }
   //CONTAINER
   
-  resource myshare 'Volume' = {
+  resource myshare 'Volume' existing = {
     name: 'myshare'
-    properties:{
-      kind: 'azure.com.fileshare'
-      managed:true
-    }
   }
 
   resource http 'HttpRoute' = {
     name: 'http'
   }
 
-  resource db 'mongo.com.MongoDatabase' = {
+  resource db 'mongo.com.MongoDatabase' existing = {
     name: 'database'
-    properties: {
-      managed: true
-    }
   }
 
 }

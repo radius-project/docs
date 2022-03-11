@@ -9,12 +9,8 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
   //REST
   //REST
 
-  resource rabbitmq 'rabbitmq.com.MessageQueue' = {
+  resource rabbitmq 'rabbitmq.com.MessageQueue' existing = {
     name: 'rabbitmq'
-    properties: {
-      managed: true
-      queue: 'eshop_event_bus'
-    }
   }
 
 }

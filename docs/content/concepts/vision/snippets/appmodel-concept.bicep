@@ -22,14 +22,22 @@ resource app 'radius.dev/Application@v1alpha3' = {
         }
       }
     }
+    dependsOn: [
+      mongoDb
+    ]
   }
  
   // Define database
-  resource db 'mongo.com.MongoDatabase' = {
+  resource db 'mongo.com.MongoDatabase' existing =  {
     name: 'db'
-    properties: {
-      managed: true
-    }
+  }
+}
+
+module mongoDb 'br:radius.azurecr.io/starters/mongo:latest' = {
+  name: 'mongoDb'
+  params: {
+    radiusApplication: app
+    dbName: 'db'
   }
 }
 

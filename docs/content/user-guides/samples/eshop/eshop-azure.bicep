@@ -18,6 +18,22 @@ param adminLogin string = 'sqladmin'
 @secure()
 param adminPassword string
 
+module redisBasketModule 'br:radius.azurecr.io/starters/redis:latest' = {
+  name: 'redisBasketModule'
+  params: {
+    radiusApplication: eshop
+    cacheName: 'basket-data'
+  }
+}
+
+module redisKeystoreModule 'br:radius.azurecr.io/starters/redis:latest' = {
+  name: 'redisKeystoreModule'
+  params: {
+    radiusApplication: eshop
+    cacheName: 'keystore-data'
+  }
+}
+
 resource sql 'Microsoft.Sql/servers@2019-06-01-preview' = {
   name: serverName
   location: location
@@ -107,7 +123,7 @@ resource servicebus 'Microsoft.ServiceBus/namespaces@2021-06-01-preview' = {
       }
     }
 
-    resource catalog 'subscriptions' = {
+    resource catalogSubscription 'subscriptions' = {
       name: 'Catalog'
       properties: {
         requiresSession: false
@@ -119,7 +135,7 @@ resource servicebus 'Microsoft.ServiceBus/namespaces@2021-06-01-preview' = {
       }
     }
 
-    resource ordering 'subscriptions' = {
+    resource orderingSubscrption 'subscriptions' = {
       name: 'Ordering'
       properties: {
         requiresSession: false
@@ -179,7 +195,7 @@ resource servicebus 'Microsoft.ServiceBus/namespaces@2021-06-01-preview' = {
       }
     }
 
-    resource webhooks 'subscriptions' = {
+    resource webhooksSubscription 'subscriptions' = {
       name: 'Webhooks'
       properties: {
         requiresSession: false
@@ -199,7 +215,7 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
   name: 'eshop'
 
   // Based on https://github.com/dotnet-architecture/eShopOnContainers/tree/dev/deploy/k8s/helm/catalog-api
-  resource catalog 'Container' = {
+  resource catalogContainer 'Container' = {
     name: 'catalog-api'
     properties: {
       container: {
@@ -253,7 +269,7 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
   }
 
   // Based on https://github.com/dotnet-architecture/eShopOnContainers/tree/dev/deploy/k8s/helm/identity-api
-  resource identity 'Container' = {
+  resource identityContainer 'Container' = {
     name: 'identity-api'
     properties: {
       container: {
@@ -324,6 +340,9 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
         }
       }
     }
+    dependsOn: [
+      redisKeystoreModule
+    ]
   }
 
   resource identityHttp 'HttpRoute' = {
@@ -345,7 +364,7 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
   }
 
   // Based on https://github.com/dotnet-architecture/eShopOnContainers/tree/dev/deploy/k8s/helm/ordering-api
-  resource ordering 'Container' = {
+  resource orderingContainer 'Container' = {
     name: 'ordering-api'
     properties: {
       container: {
@@ -420,7 +439,7 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
   }
 
   // Based on https://github.com/dotnet-architecture/eShopOnContainers/tree/dev/deploy/k8s/helm/basket-api
-  resource basket 'Container' = {
+  resource basketContainer 'Container' = {
     name: 'basket-api'
     properties: {
       container: {
@@ -463,6 +482,9 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
         }
       }
     }
+    dependsOn: [
+      redisBasketModule
+    ]
   }
 
   resource basketHttp 'HttpRoute' = {
@@ -546,7 +568,7 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
   }
 
   // Based on https://github.com/dotnet-architecture/eShopOnContainers/tree/dev/deploy/k8s/helm/payment-api
-  resource payment 'Container' = {
+  resource paymentContainer 'Container' = {
     name: 'payment-api'
     properties: {
       container: {
@@ -797,6 +819,9 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
         }
       }
     }
+    dependsOn: [
+      redisKeystoreModule
+    ]
   }
 
   resource orderingsignalrhubHttp 'HttpRoute' = {
@@ -978,6 +1003,9 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
         }
       }
     }
+    dependsOn: [
+      redisKeystoreModule
+    ]
   }
 
   resource webspaHttp 'HttpRoute' = {
@@ -1052,6 +1080,9 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
         }
       }
     }
+    dependsOn: [
+      redisKeystoreModule
+    ]
   }
 
   resource webmvcHttp 'HttpRoute' = {
@@ -1145,26 +1176,11 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
     }
   }
 
-  resource redisBasket 'redislabs.com.RedisCache' = {
+  resource redisBasket 'redislabs.com.RedisCache' existing = {
     name: 'basket-data'
-    properties: {
-      managed: true
-    }
   }
 
-  resource redisKeystore 'redislabs.com.RedisCache' = {
+  resource redisKeystore 'redislabs.com.RedisCache' existing = {
     name: 'keystore-data'
-    properties: {
-      managed: true
-    }
   }
-
-  resource mongo 'mongo.com.MongoDatabase' = {
-    name: 'mongo'
-    properties: {
-      managed: true
-    }
-  }
-
 }
-

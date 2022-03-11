@@ -77,28 +77,13 @@ Here you are manually defining a Container which will provide a SQL database. Ot
 
 ### Redis caches
 
-{{< tabs "Radius-managed" "User-managed Azure" >}}
-
-{{< codetab >}}
-The redislabs.com.RedisCache Radius resource will deploy an Azure Redis Cache in Azure environments, and a Redis container in Kubernetes environments.
-
-{{% alert title="💡 Concept" color="info" %}}
-Here you are defining two Radius-managed Redis Components, where Radius manages the deployment and deletion of the resources as part of the Application.
-{{% /alert %}}
-
-{{< rad file="snippets/redis-managed.bicep" embed=true replace-key-rest="//REST" replace-value-rest="..." >}}
-{{< /codetab >}}
-{{< codetab >}}
-If you prefer to bring your own Redis Caches, you can reference existing Redis Cache resources in Bicep and provide them as a source to the Radius resources.
+You can reference existing Redis Cache resources in Bicep and provide them as a source to the Radius resources.
 
 {{% alert title="💡 Concept" color="info" %}}
 Here you are using existing resources where the resources have already been deployed to Azure. Make sure to [specify the correct scope](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-to-resource-group?tabs=azure-cli#scope-to-different-resource-group), as the default scope is the environment's resource group.
 {{% /alert %}}
 
 {{< rad file="snippets/redis-azure.bicep" embed=true replace-key-rest="//REST" replace-value-rest="..."  >}}
-{{< /codetab >}}
-
-{{< /tabs >}}
 
 ### MongoDB
 

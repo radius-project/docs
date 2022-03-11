@@ -28,13 +28,17 @@ resource app 'radius.dev/Application@v1alpha3' = {
   //CONTAINER
 
   //STATESTORE
-  resource inventory 'dapr.io.StateStore' = {
-    name: 'inventorystore'
-    properties: {
-      kind: 'state.azure.tablestorage'
-      managed: true
-    }
+  resource inventory 'dapr.io.StateStore' existing = {
+    name: 'inventory'
   }
   //STATESTORE
 }
-  
+
+
+module statestore 'br:radius.azurecr.io/starters/dapr-statestore-azure-tablestorage:latest' = {
+  name: 'statestore'
+  params: {
+    radiusApplication: app
+    stateStoreName: 'inventory'
+  }
+}  

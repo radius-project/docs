@@ -16,7 +16,7 @@ resource app 'radius.dev/Application@v1alpha3' = {
       connections: {
         inventory: {
           kind: 'dapr.io/StateStore'
-          source: inventory.id
+          source: statestoreConnector.id
         }
       }
       traits: [
@@ -28,6 +28,9 @@ resource app 'radius.dev/Application@v1alpha3' = {
         }
       ]
     }
+    dependsOn: [
+      statestore
+    ]
   }
 
   resource storefrontDapr 'dapr.io.InvokeHttpRoute' = {
@@ -70,11 +73,15 @@ resource app 'radius.dev/Application@v1alpha3' = {
     }
   }
 
-  resource inventory 'dapr.io.StateStore' = {
-    name: 'inventorystore'
-    properties: {
-      kind: 'state.azure.tablestorage'
-      managed: true
-    }
+  resource statestoreConnector 'dapr.io.StateStore' existing = {
+    name: 'inventory'
+  }
+}
+
+module statestore 'br:radius.azurecr.io/starters/dapr-statestore-azure-tablestorage:latest' = {
+  name: 'statestore'
+  params: {
+    radiusApplication: app
+    stateStoreName: 'inventory'
   }
 }

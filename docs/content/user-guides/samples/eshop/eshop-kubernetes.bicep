@@ -1009,13 +1009,6 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
     }
   }
 
-  resource mongo 'mongo.com.MongoDatabase' = {
-    name: 'mongo'
-    properties: {
-      managed: true
-    }
-  }
-
   resource rabbitmq 'rabbitmq.com.MessageQueue' = {
     name: 'rabbitmq'
     properties: {

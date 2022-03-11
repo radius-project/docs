@@ -37,7 +37,6 @@ The following resources can act as a `dapr.io.StateStore` resource:
 | kind | Resource |
 |------|----------|
 | `state.azure.tablestorage` | [Azure Table Storage](https://docs.microsoft.com/en-us/azure/storage/tables/table-storage-overview)
-| `state.redis` | Azure Cache for Redis
 | `generic` | Generic
 
 ### Azure Table Storage
@@ -45,12 +44,6 @@ The following resources can act as a `dapr.io.StateStore` resource:
 Use `kind` of `state.azure.tablestorage` to create a Dapr component spec for Azure Table Storage. Set `resource` to the Azure Storage Table Services resource.
 
 {{< rad file="snippets/dapr-statestore-tablestorage.bicep" embed=true marker="//SAMPLE" >}}
-
-### Azure Cache for Redis
-
-Use `kind` of `state.redis` to create a Dapr component spec for Azure Cache for Redis. Set `resource` to the Azure Cache for Redis resource ID.
-
-{{< rad file="snippets/dapr-statestore-redis.bicep" embed=true marker="//SAMPLE" >}}
 
 ### Generic
 

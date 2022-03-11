@@ -64,7 +64,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
   name: 'eshop'
 
   // Based on https://github.com/dotnet-architecture/eShopOnContainers/tree/dev/deploy/k8s/helm/catalog-api
-  resource catalog 'Container' = {
+  resource catalogContainer 'Container' = {
     name: 'catalog-api'
     properties: {
       container: {
@@ -213,7 +213,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
   }
 
   // Based on https://github.com/dotnet-architecture/eShopOnContainers/tree/dev/deploy/k8s/helm/ordering-api
-  resource ordering 'Container' = {
+  resource orderingContainer 'Container' = {
     name: 'ordering-api'
     properties: {
       container: {
@@ -292,7 +292,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
   }
 
   // Based on https://github.com/dotnet-architecture/eShopOnContainers/tree/dev/deploy/k8s/helm/basket-api
-  resource basket 'Container' = {
+  resource basketContainer 'Container' = {
     name: 'basket-api'
     properties: {
       container: {
@@ -367,7 +367,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
   }
 
   // Based on https://github.com/dotnet-architecture/eShopOnContainers/tree/dev/deploy/k8s/helm/webhooks-api
-  resource webhooks 'Container' = {
+  resource webhooksContainer 'Container' = {
     name: 'webhooks-api'
     properties: {
       container: {
@@ -426,7 +426,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
   }
 
   // Based on https://github.com/dotnet-architecture/eShopOnContainers/tree/dev/deploy/k8s/helm/payment-api
-  resource payment 'Container' = {
+  resource paymentContainer 'Container' = {
     name: 'payment-api'
     properties: {
       container: {

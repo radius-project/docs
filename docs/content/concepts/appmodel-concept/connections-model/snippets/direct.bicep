@@ -1,7 +1,8 @@
+  //SAMPLE
+
 resource app 'radius.dev/Application@v1alpha3' = {
   name: 'shopping-app'
 
-  //SAMPLE
   resource store 'Container' = {
     name: 'storefront'
     properties: {
@@ -13,21 +14,22 @@ resource app 'radius.dev/Application@v1alpha3' = {
       connections: {
         inventory: {
           kind: 'dapr.io/StateStore'
-          source: inventory.id
+          source: statestoreConnector.id
         }
       }
     }
   }
 
-  resource inventory 'dapr.io.StateStore' = {
-    name: 'inventorystore'
-    //PROPERTIES
-    properties: {
-      kind: 'state.azure.tablestorage'
-      managed: true
-    }
-    //PROPERTIES
+  resource statestoreConnector 'dapr.io.StateStore' existing = {
+    name: 'inventory'
   }
-  //SAMPLE
-
 }
+
+module statestore 'br:radius.azurecr.io/starters/dapr-statestore-azure-tablestorage:latest' = {
+  name: 'statestore'
+  params: {
+    radiusApplication: app
+    stateStoreName: 'inventory'
+  }
+}
+//SAMPLE

@@ -108,7 +108,7 @@ resource servicebus 'Microsoft.ServiceBus/namespaces@2021-06-01-preview' = {
       }
     }
 
-    resource catalog 'subscriptions' = {
+    resource catalogSubscription 'subscriptions' = {
       name: 'Catalog'
       properties: {
         requiresSession: false
@@ -120,7 +120,7 @@ resource servicebus 'Microsoft.ServiceBus/namespaces@2021-06-01-preview' = {
       }
     }
 
-    resource ordering 'subscriptions' = {
+    resource orderingSubscription 'subscriptions' = {
       name: 'Ordering'
       properties: {
         requiresSession: false
@@ -144,7 +144,7 @@ resource servicebus 'Microsoft.ServiceBus/namespaces@2021-06-01-preview' = {
       }
     }
 
-    resource payment 'subscriptions' = {
+    resource paymentSubscription 'subscriptions' = {
       name: 'Payment'
       properties: {
         requiresSession: false
@@ -180,7 +180,7 @@ resource servicebus 'Microsoft.ServiceBus/namespaces@2021-06-01-preview' = {
       }
     }
 
-    resource webhooks 'subscriptions' = {
+    resource webhooksSubscription 'subscriptions' = {
       name: 'Webhooks'
       properties: {
         requiresSession: false

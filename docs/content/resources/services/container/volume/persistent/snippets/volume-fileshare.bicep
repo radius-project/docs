@@ -2,12 +2,8 @@ resource app 'radius.dev/Application@v1alpha3' = {
   name: 'myapp'
 
   //SAMPLE
-  resource myshare 'Volume' = {
+  resource myshare 'Volume' existing = {
     name: 'myshare'
-    properties: {
-      kind: 'azure.com.fileshare'
-      managed: true
-    }
   }
 
   resource frontend 'Container' = {
@@ -28,4 +24,3 @@ resource app 'radius.dev/Application@v1alpha3' = {
   }
   //SAMPLE
 }
-
