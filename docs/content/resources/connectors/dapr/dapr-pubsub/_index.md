@@ -50,3 +50,44 @@ An Azure Service Bus Topic can be used as a Dapr Pub/Sub message broker. Simply 
 A generic pub/sub lets you manually specify the metadata of a Dapr pub/sub broker. When `kind` is set to `generic`, you can specify `type`, `metadata`, and `version` to create a Dapr component spec. These values must match the schema of the intended [Dapr component](https://docs.dapr.io/reference/components-reference/supported-pubsub/).
 
 {{< rad file="snippets/dapr-pubsub-kafka.bicep" embed=true marker="//SAMPLE" >}}
+
+## Starter
+
+You can get up and running quickly with a Dapr Pub/Sub topic by using a [starter]({{< ref starter-templates >}}).
+
+{{% alert title="Known issue: dependsOn" color="warning" %}}
+Any service that consumes the `existing` resource will need to manually add a `dependsOn` reference to the staarter module. This requirement will be removed in an upcoming release. See the [webapp tutorial]({{< ref webapp-add-database >}}) for an example.
+{{% /alert %}}
+
+## Container
+
+The `br:radius.azurecr.io/starters/dapr-pubsub:latest` Dapr Pub/Sub container starter uses a Redis container and can run on any Radius platform.
+
+To use this template, reference it in Bicep as:
+
+{{< rad file="snippets/starter.bicep" embed=true >}}
+
+### Parameters
+
+| Parameter | Description | Required | Default |
+|-----------|-------------|:--------:|---------|
+| radiusApplication | The application resource to use as the parent of the PubSub Topic | Yes | - |
+| pubSubName | The name of the PubSub Topic connector | Yes | - |
+
+## Microsoft Azure Service Bus
+
+The module `'br:radius.azurecr.io/starters/dapr-pubsub-azureservicebus:latest'` deploys an Azure Service Bus configured as a Dapr Pub Sub broker, and outputs a Dapr PubSub Topic resource.
+
+To use this template, reference it in Bicep as:
+
+{{< rad file="snippets/starter-azure.bicep" embed=true >}}
+
+### Parameters
+
+| Parameter | Description | Required | Default |
+|-----------|-------------|:--------:|---------|
+| radiusApplication | The application resource to use as the parent of the PubSub Topic | Yes | - |
+| pubSubName | The name of the PubSub Topic connector | Yes | - |
+| serviceBusName | The name of the underlying Azure Service Bus namespace | No | `'servicebus-${uniqueString(resourceGroup().id, deployment().name)}'` |
+| queueName | The name of the underlying Azure Service Bus queue | No | `'dapr'` |
+| location | The Azure region to deploy the Azure Service Bus | No | `resourceGroup().location` |

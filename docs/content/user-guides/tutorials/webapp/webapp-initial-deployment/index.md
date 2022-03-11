@@ -7,11 +7,11 @@ weight: 2000
 slug: "frontend"
 ---
 
-## Define a Radius app as a .bicep file
+## Define a Radius application in a .bicep file
 
-Radius uses the [Bicep language](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/bicep-overview) as its file-format and structure. In this tutorial you will define an app named `webapp` that will contain the container and database resources, all described in Bicep.
+Radius uses the [Bicep language]({{< ref bicep >}}) as its file-format and structure. In this tutorial you will define an app named `webapp` that will contain the container and MongoDB connector resources, all described in Bicep.
 
-Create a new file named `template.bicep` and paste the following:
+Create a new file named `todo.bicep` and paste the following:
 
 {{< rad file="snippets/empty-app.bicep" embed=true >}}
 
@@ -19,16 +19,18 @@ Create a new file named `template.bicep` and paste the following:
 
 Next you'll add resources for the website's frontend.
 
-Radius captures the relationships and intentions behind an application, which simplifies deployment and management. The `todoapp` and `todoRoute` resources in your template.bicep file will contain everything needed for the website frontend to run and expose a port to the internet.
+Radius captures the relationships and intentions behind an application, which simplifies deployment and management. The `frontend` and `todo-route` resources in your Bicep file will contain everything needed for the website frontend to run and expose a port to the internet.
 
-Your `todoapp`, which is a Container resource, will specify:
-- **container image:** `radiusteam/tutorial-todoapp`, a Docker image the container will run. This is where your website's front end code lives.
-- **bindings:** `http`, a Radius binding that adds the ability to listen for HTTP traffic (on port 3000 here).
+The **`frontend`** [container]({{< ref container >}}) resource specifies:
 
-Your `todoRoute`, which is a HttpRoute resource, will specify:
-- **hostname:** `*`, the hostname that the container will be exposed to the internet on. `*` means that all hostnames will be accepted.
+- `container image`: The container image to run. This is where your website's front end code lives
+- `ports`: The port to expose on the container, along with the [HTTP route]({{< ref http-route >}}) that will be used to access the container
 
-Update your template.bicep file to match the full application definition:
+The **`todo-route`** [HTTP Route]({{< ref http-route >}}) resource specifies:
+
+- `hostname`: The hostname to expose to the internet. `*` means that all hostnames will be accepted.
+
+Update your Bicep file to match the full application definition:
 
 {{< rad file="snippets/container-app.bicep" embed=true >}}
 
@@ -36,33 +38,37 @@ Update your template.bicep file to match the full application definition:
 
 Now you are ready to deploy the application for the first time.
 
-1. Make sure you have an [Radius environment initialzed]({{< ref create-environment >}}).
+1. Make sure you have an [Radius environment initialized]({{< ref create-environment >}}).
    - For Azure environments run `az login` to make sure your token is refreshed.
    - For Kubernetes environments make sure your `kubectl`  context is set to your cluster.
 
-2. Deploy to your Radius environment via the rad CLI:
+1. Deploy to your Radius environment via the rad CLI:
 
    ```sh
-   rad deploy template.bicep
+   rad deploy ./todo.bicep
    ```
 
    This will deploy the application into your environment and launch the container resource for the frontend website. You should see the following resources deployed at the end of `rad deploy`:
 
    ```sh
    Resources:
-      Application          webapp
-      Container   todoapp
-      HttpRoute            todo-route
+      Application          todoapp
+      Container            frontend
+      HttpRoute            frontend-route
    ```
 
-   Also, a public endpoint will be available to your application as we specified a gateway in the `todoRoute` resource.
+   Also, a public endpoint will be available to your application as we specified a gateway in the `frontend-route` resource.
 
    ```sh
    Public Endpoints:
-      HttpRoute            todo-route        SITE
+      HttpRoute            frontend-route      IP-ADDRESS
    ```
 
-4. To test your `webapp` application, navigate to the public endpoint that was printed at the end of the deployment.
+1. To test your application, navigate to the public endpoint that was printed at the end of the deployment.
+
+   {{% alert title="⚠️ Local environment endpoint" color="warning" %}}
+   If using a local environment, navigate to the IP address provided by `rad env status`. The address printed at deploy time currently points to the wrong endpoint.
+   {{% /alert %}}
 
    <img src="todoapp-nodb.png" width="400" alt="screenshot of the todo application with no database">
 
@@ -73,4 +79,4 @@ Now you are ready to deploy the application for the first time.
    - Mark a todo item as complete
    - Delete a todo item
 
-<br>{{< button text="Next: Add a database to the app" page="webapp-add-database.md" >}}
+<br>{{< button text="Next: Add a database to the app" page="webapp-add-database" >}}

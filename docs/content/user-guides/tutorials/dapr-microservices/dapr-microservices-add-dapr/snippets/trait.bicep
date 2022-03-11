@@ -5,9 +5,16 @@ resource app 'radius.dev/Application@v1alpha3' = {
   resource backend 'Container' = {
     name: 'backend'
     properties: {
+      //CONTAINER
       container: {
         image: 'radius.azurecr.io/daprtutorial-backend'
+        ports: {
+          orders: {
+            containerPort: 3000
+          }
+        }
       }
+      //CONTAINER
       traits: [
         {
           kind: 'dapr.io/Sidecar@v1alpha1'
