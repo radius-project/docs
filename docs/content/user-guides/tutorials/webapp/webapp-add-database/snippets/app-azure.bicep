@@ -35,7 +35,7 @@ resource app 'radius.dev/Application@v1alpha3' = {
     ]
   }
 
-  // This existing reference points to the Mongo Starter deployed by the starter
+  // This temporary existing reference points to the Mongo Starter deployed by the starter
   resource db 'mongo.com.MongoDatabase' existing = {
     name: 'db'
   }

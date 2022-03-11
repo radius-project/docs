@@ -26,7 +26,7 @@ To learn more about connectors visit the [concepts docs]({{< ref connections-mod
 {{< tabs "Mongo container" "Azure CosmosDB" >}}
 
 {{< codetab >}}
-{{< rad file="snippets/starter-azure.bicep" embed=true marker="//STARTER" >}}
+{{< rad file="snippets/starter-container.bicep" embed=true marker="//STARTER" >}}
 {{< /codetab >}}
 
 {{< codetab >}}
@@ -64,12 +64,10 @@ Make sure your Bicep file matches the following:
 {{< tabs "Mongo container" "Azure CosmosDB" >}}
 
 {{< codetab >}}
-{{< rad file="snippets/app-azure.bicep" embed=true >}}
+{{< rad file="snippets/app-container.bicep" embed=true >}}
 {{< /codetab >}}
 
 {{< codetab >}}
-This option is currently only available for Azure environments.
-
 {{< rad file="snippets/app-azure.bicep" embed=true >}}
 {{< /codetab >}}
 

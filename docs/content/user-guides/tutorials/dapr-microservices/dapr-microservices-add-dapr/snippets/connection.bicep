@@ -47,6 +47,7 @@ resource app 'radius.dev/Application@v1alpha3' = {
   //ROUTE
 
   //CONNECTOR
+  // Temporary requirement - will be removed in a future release
   resource ordersStateStore 'dapr.io.StateStore' existing = {
     name: 'orders'
   }

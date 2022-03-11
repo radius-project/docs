@@ -23,7 +23,7 @@ resource app 'radius.dev/Application@v1alpha3' = {
     ]
   }
   //CONTAINER
-
+  // Temporary workaround
   resource db 'mongo.com.MongoDatabase' existing = {
     name: 'db'
   }

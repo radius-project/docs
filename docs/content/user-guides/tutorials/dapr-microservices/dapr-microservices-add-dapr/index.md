@@ -40,8 +40,6 @@ A [Radius starter]({{{< ref starter-templates >}}) can be used to add a Dapr sta
 {{< /codetab >}}
 
 {{< codetab >}}
-This option is currently only supported for Azure environments:
-
 {{< rad file="snippets/statestore-azure.bicep" embed=true marker="//SAMPLE" replace-key-container="//BACKEND" replace-value-container="resource backend 'Container' = {...}" replace-key-route="//ROUTE" replace-value-route="resource daprBackend 'dapr.io.InvokeHttpRoute' = {...}" >}}
 {{< /codetab >}}
 

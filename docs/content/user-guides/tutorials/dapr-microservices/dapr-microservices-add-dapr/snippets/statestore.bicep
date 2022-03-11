@@ -34,7 +34,7 @@ resource app 'radius.dev/Application@v1alpha3' = {
   }
   //ROUTE
 
-  // Reference the Dapr state store deployed by the starter
+  // Reference the Dapr state store deployed by the starter - temporary workaround
   resource ordersStateStore 'dapr.io.StateStore' existing = {
     name: 'orders'
   }
