@@ -75,6 +75,10 @@ Make sure your Bicep file matches the following:
 
 ## Deploy application with database
 
+{{% alert title="Known issue: Azure deployments" color="warning" %}}
+There is a known issue where deployments to Azure will fail with a "NotFound" error for templates containing starters. This is being addressed in an upcoming release. As a workaround submit the deployment a second time. The second deployment should succeed.
+{{% /alert %}}
+
 1. In a terminal window deploy the Bicep file:
 
    ```sh

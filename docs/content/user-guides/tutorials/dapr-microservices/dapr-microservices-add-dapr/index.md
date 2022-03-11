@@ -71,6 +71,10 @@ See the [connections]({{< ref "connections-model#injected-values" >}}) page for 
 
 ## Deploy application with Dapr
 
+{{% alert title="Known issue: Azure deployments" color="warning" %}}
+There is a known issue where deployments to Azure will fail with a "NotFound" error for templates containing starters. This is being addressed in an upcoming release. As a workaround submit the deployment a second time. The second deployment should succeed.
+{{% /alert %}}
+
 1. Make sure your `dapr.bicep` file matches the full tutorial file:
 
    - Redis state store: {{< rad file="snippets/dapr.bicep" download=true >}}
