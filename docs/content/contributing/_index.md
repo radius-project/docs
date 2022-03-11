@@ -10,14 +10,6 @@ weight: 70
 
 Project Radius can be best understood as the combination of the following components:
 
-- The **`rad` CLI** for deploying and managing environments and applications. S
-- The **application model** for describing applications as a set of components, groupings, and relationships
-- The **Bicep** language and tools which includes the application model as a set of types
-- The **ARM Deployment Engine** which process the output of the Bicep compiler
-- The **Radius API** which interfaces with the ARM deployment engine and other actors to handle individual operations on the application model
-- The **Radius Control Plane** that implements operations on the application model as a sequence of resource management operations on a hosting platform
-- The **Hosting Platform** that provides the underlying capabilies used by the application model such as running containers and databases
-
 | Component | Description | Project Link  |
 |---|---|---|
 | **`rad` CLI**   | Handles deploying and managing environments and applications | https://github.com/project-radius/radius/blob/main/docs/contributing/contributing-code/contributing-code-cli/running-rad-cli.md |
