@@ -34,6 +34,9 @@ resource app 'radius.dev/Application@v1alpha3' = {
         }
       ]
     }
+    dependsOn: [
+      stateStoreStarter
+    ]
   }
 
   resource pythonapplication 'Container' = {
@@ -57,10 +60,17 @@ resource app 'radius.dev/Application@v1alpha3' = {
     }
   }
 
-  resource statestore 'dapr.io.StateStore' = {
+  resource statestore 'dapr.io.StateStore' existing = {
     name: 'statestore'
-    properties: {
-      kind: 'any'
-    }
+  }
+}
+
+
+// Use a starter module to deploy a Redis container and configure a Dapr state store
+module stateStoreStarter 'br:radius.azurecr.io/starters/dapr-statestore:latest' = {
+  name: 'statestore-starter'
+  params: {
+    radiusApplication: app
+    stateStoreName: 'statestore'
   }
 }
