@@ -11,7 +11,7 @@ So far you have not yet configured a database, so the todo items you enter will 
 
 In this step you will learn how to add a database and connect to it from the application.
 
-We'll discuss template.bicep changes and then provide the full, updated file before deployment.
+We'll discuss todo.bicep changes and then provide the full, updated file before deployment.
 
 ## Connectors
 
