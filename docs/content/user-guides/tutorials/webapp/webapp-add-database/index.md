@@ -17,8 +17,6 @@ We'll discuss template.bicep changes and then provide the full, updated file bef
 
 A [Mongo database connector]({{< ref mongodb >}}) resource provides an abstraction over the Mongo API, allowing the backing resource to be swapped out without any changes to the consuming resource and code.
 
-A `db` database resource is used to specify a few properties about the database:
-
 <img src="mongo-connector.png" width=450px alt="Diagram of a mongo connector" /><br />
 
 To learn more about connectors visit the [concepts docs]({{< ref connections-model >}})
@@ -56,7 +54,6 @@ Once the connector is referenced, you can connect to it by referencing the `db` 
 {{< rad file="snippets/starter-azure.bicep" embed=true marker="//CONTAINER" replace-key-dots="//IMAGE" replace-value-dots="container: {...}" >}}
 
 [Connections]({{< ref connections-model >}}) are used to configure relationships between two components. The `db` is of kind `mongo.com/MongoDB`, which supports the MongoDB protocol. This declares the *intention* from the `frontend` container to communicate with the `db` resource.
-
 
 Now that you have created a connection called `itemstore`, environment variables with connection information will be injected into the `frontend` container. The container reads the database connection string from an environment variable named `CONNECTION_ITEMSTORE_CONNECTIONSTRING`.
 
@@ -112,29 +109,6 @@ There is a known issue where deployments to Azure will fail with a "NotFound" er
    <img src="todoapp-withdb.png" width="400" alt="screenshot of the todo application with a database">
 
    If your page matches, then it means that the container is able to communicate with the database. Just like before, you can test the features of the todo app. Add a task or two. Now your data is being stored in an actual database.
-
-### Validate data
-
-After you have deployed the application, you can validate that the data is being stored in the database.
-
-{{< tabs "Microsoft Azure" >}}
-
-{{% codetab %}}
-
-1. Open the Azure resource group where your application is deployed. The URL was output during the `rad deploy` command.
-
-1. Open the CosmosDB resource prefixed with `db-`
-
-   <img src="azure-db.png" width="400px" alt="Screenshot of the db CosmosDB instance">
-
-1. Open the Data Explorer to the `todos` collection. You can now see the entries you added in the todo app.
-
-   <img src="db-entries.png" width="800px" alt="Screenshot of the db CosmosDB Data Explorer with todo items">
-
-{{% /codetab %}}
-
-{{< /tabs >}}
-
 
 ## Cleanup
 
