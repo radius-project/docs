@@ -1,8 +1,8 @@
 resource app 'radius.dev/Application@v1alpha3' = {
-  name: 'webapp'
+  name: 'todoapp'
 
   resource todoRoute 'HttpRoute' = {
-    name: 'todo-route'
+    name: 'frontend-route'
     properties: {
       gateway: {
         hostname: '*'
@@ -10,8 +10,8 @@ resource app 'radius.dev/Application@v1alpha3' = {
     }
   }
 
-  resource todoapplication 'Container' = {
-    name: 'todoapp'
+  resource todoFrontend 'Container' = {
+    name: 'frontend'
     properties: {
       container: {
         image: 'radius.azurecr.io/webapptutorial-todoapp'

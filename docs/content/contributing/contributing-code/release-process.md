@@ -9,10 +9,6 @@ weight: 80
 
 Our release process for Project Radius is based on git tags. Pushing a new tag with the format: `v.<major>.<minor>.<patch>` will trigger a release build.
 
-{{% alert title="🚌🚌🚌 Busfactor Warning 🚌🚌🚌" color="warning" %}}
-Currently performing a release involves our custom Bicep compiler - which is in a private fork. We'll update these instructions in the future when this moves to a shared repository.
-{{% /alert %}}
-
 ## Pre-requisites
 
 - Find the storage account on Azure under 'Radius Dev' subscription. It is called `radiuspublic`
@@ -21,7 +17,7 @@ Currently performing a release involves our custom Bicep compiler - which is in 
 
 ## Performing a release
 
-1. In the Bicep fork:
+1. In the Bicep fork: radius-compiler at the time of writing
 
    ```bash
    # replace v0.1.0 with the release version
@@ -55,11 +51,7 @@ Currently performing a release involves our custom Bicep compiler - which is in 
    ```
 3. Updating Helm chart
 
-   Each release, we need to update the verison of the helm chart to the next version. 
-   
-   In the Chart.yaml file, based on whether we are releasing a major, minor, or patch version, increase the version number accordingly. When branching for a major or minor release, we need to increment the version in the 'main' branch, while for patch changes, we updating it in the release/X branch. 
-   
-   For example, if we are releasing 0.4, we change the main branch Chart.yaml version to 0.5.0. If we are releasing a patch on 0.4, we update the Chart.yaml version in the release/0.4 to 0.4.1 (or one higher than the current patch version).
+   Helm charts udpation is automatic after v0.10.0. If the tools command mentioned in step 1 & 2 return the current version then skip the manual steps below
 
    If this process fails for whatever reason, a manual upload works well as a backup. Run the following:
    ```bash

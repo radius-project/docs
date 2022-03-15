@@ -23,17 +23,25 @@ resource app 'radius.dev/Application@v1alpha3' = {
         }
       }
     }
+    dependsOn: [
+      dbStarter
+    ]
   }
 
   resource httpRoute 'HttpRoute' = {
     name: 'http-route'
   }
 
-  resource db 'mongo.com.MongoDatabase' = {
+  resource db 'mongo.com.MongoDatabase' existing = {
     name: 'db'
-    properties: {
-      managed: true
-    }
   }
 
+}
+
+module dbStarter 'br:radius.azurecr.io/starters/mongo:latest' = {
+  name: 'db-starter'
+  params: {
+    dbName: 'db'
+    radiusApplication: app 
+  }
 }
