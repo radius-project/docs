@@ -73,10 +73,9 @@ Now you are ready to deploy the application for the first time.
 
    <img src="todoapp-nodb.png" width="400" alt="screenshot of the todo application with no database">
 
-<img src="todoapp-nodb.png" width="400" alt="screenshot of the todo application with no database"><br>
    If the page you see matches the screenshot, that means the container is running as expected.
 
-   You can play around with the application's features:
+You can play around with the application's features:
 
 - Add a todo item
 - Mark a todo item as complete
