@@ -180,7 +180,9 @@ As an example, for this specific section the complete reference to the page and 
 
 Use the `rad` shortcode to reference code snippets from a file. By convention place code snippets in a `snippets` folder.
 
+```md
 {{</* rad file="snippets/mysample.bicep" embed=true */>}}
+```
 
 {{% alert title="Warning" color="warning" %}}
 All Bicep sample code should be self-contained in separate files, not in markdown. We validate all `.bicep` files as part of the build for syntactic and semantic correctness, and so all `.bicep` sample code must be complete and correct. Use the techniques described here to highlight the parts of the sample code users should focus on.
@@ -194,7 +196,9 @@ Use the `marker` parameter to limit the embedded snipped to a portion of the sam
 
 The shortcode below and code sample:
 
+```md
 {{</* rad file="snippets/mysample.bicep" embed=true marker="//SAMPLE" */>}}
+```
 
 ```bicep
 // in snippets/mysample.bicep
@@ -231,7 +235,9 @@ Use the `replace-key-[token]` and `replace-value-[token]` parameters to limit th
 
 The shortcode below and code sample:
 
-{{</*rad file="snippets/mysample.bicep" embed=true marker="//SAMPLE" replace-key-container="//RUN" replace-value-container="container: {...}" replace-key-connections="//CONNECTIONS" replace-value-connections="connections: {...}"*/>}}
+```md
+{{</* rad file="snippets/mysample.bicep" embed=true marker="//SAMPLE" replace-key-container="//RUN" replace-value-container="container: {...}" replace-key-connections="//CONNECTIONS" replace-value-connections="connections: {...}" */>}}
+```
 
 ```bicep
 // in snippets/mysample.bicep
