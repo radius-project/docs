@@ -74,7 +74,7 @@ jobs:
       - name: Build Hugo Site
         run: |
           cd docs
-          if [ GITHUB_EVENT_NAME == 'pull_request' ]; then
+          if [ $GITHUB_EVENT_NAME == 'pull_request' ]; then
             STAGING_URL="https://${SWA_BASE}-${{github.event.number}}.azurestaticapps.net/"
             echo $STAGING_URL
           fi
