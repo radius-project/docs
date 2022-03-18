@@ -8,12 +8,14 @@ weight: 200
 
 The Project Radius docs are built on [Hugo](https://gohugo.io) with the [Docsy](https://docsy.dev) theme. GitHub Actions are used to build and deploy the docs upon each PR.
 
-## Pre-requisites
+## Building docs locally
+
+### Pre-requisites
 
 - [Hugo extended version](https://gohugo.io/getting-started/installing)
 - [Node.js](https://nodejs.org/en/)
 
-## Environment setup
+### Environment setup
 
 1. Ensure pre-requisites are installed
 2. Clone this repository and the radius repository
@@ -48,7 +50,7 @@ The Project Radius docs are built on [Hugo](https://gohugo.io) with the [Docsy](
    npm install
    ```
 
-## Run local server
+### Run local server
 
 1. Make sure you're still in the `docs` directory
 2. Run
@@ -131,7 +133,6 @@ description: "A quick overview of Dapr service invocation and how to use it to i
 ```
 
 > **Weight** determines the order of the pages in the left sidebar, with 0 being the top-most.
->
 > - Index file weights follow the parent directory's ordering.
 > - For the first page in a new directory, reset the counter and set weight to be an order of magnitude greater.
 
@@ -179,7 +180,7 @@ As an example, for this specific section the complete reference to the page and 
 
 Use the `rad` shortcode to reference code snippets from a file. By convention place code snippets in a `snippets` folder.
 
-{{</*rad file="snippets/mysample.bicep" embed=true*/>}}
+{{</* rad file="snippets/mysample.bicep" embed=true */>}}
 
 {{% alert title="Warning" color="warning" %}}
 All Bicep sample code should be self-contained in separate files, not in markdown. We validate all `.bicep` files as part of the build for syntactic and semantic correctness, and so all `.bicep` sample code must be complete and correct. Use the techniques described here to highlight the parts of the sample code users should focus on.
@@ -193,7 +194,7 @@ Use the `marker` parameter to limit the embedded snipped to a portion of the sam
 
 The shortcode below and code sample:
 
-{{</*rad file="snippets/mysample.bicep" embed=true marker="//SAMPLE"*/>}}
+{{</* rad file="snippets/mysample.bicep" embed=true marker="//SAMPLE" */>}}
 
 ```bicep
 // in snippets/mysample.bicep
@@ -422,7 +423,7 @@ Hugo can automatically embed YouTube videos using a shortcode:
 
 #### Example
 
-Given the video <https://youtu.be/dQw4w9WgXcQ>
+Given the video https://youtu.be/dQw4w9WgXcQ
 
 The shortcode would be:
 
