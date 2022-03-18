@@ -19,7 +19,7 @@ jobs:
   build:
     name: Build Hugo Website
     if: github.event.action != 'closed'
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     env:
       GOVER: '^1.17'
       TUTORIAL_PATH: './docs/content/user-guides/tutorials/'
@@ -98,7 +98,7 @@ jobs:
     name: Deploy Hugo Website
     if: github.event_name == 'push'
     needs: ['build']
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout docs repo
         uses: actions/checkout@v2
@@ -135,7 +135,7 @@ jobs:
     name: Open PR Staging Site
     if: github.event_name == 'pull_request' && github.event.action != 'closed'
     needs: ['build']
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Download Hugo artifacts
         uses: actions/download-artifact@v2
@@ -156,7 +156,7 @@ jobs:
   close_pr_site:
     name: Close PR Staging Site
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Close Pull Request
         id: closepullrequest
@@ -169,7 +169,7 @@ jobs:
     name: Index site for Algolia
     if: github.event_name == 'push'
     needs: ['build', 'deploy']
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     env:
       ALGOLIA_APP_ID: O0QLQGNF38
       ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
