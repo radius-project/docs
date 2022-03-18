@@ -25,6 +25,7 @@ jobs:
       TUTORIAL_PATH: './docs/content/user-guides/tutorials/'
       CODE_ZIP_PATH: './docs/static/tutorial/'
       HUGO_ENV: production
+      SWA_BASE: 'wonderful-plant-020417a1e'
     steps:
       - name: Checkout docs repo
         uses: actions/checkout@v2
@@ -71,7 +72,13 @@ jobs:
           path: ${{ env.CODE_ZIP_PATH }}
           if-no-files-found: error
       - name: Build Hugo Site
-        run: cd docs && hugo
+        run: |
+          cd docs
+          if [ GITHUB_EVENT_NAME == 'pull_request' ]; then
+            STAGING_URL="https://${SWA_BASE}-${{github.event.number}}.azurestaticapps.net/"
+            echo $STAGING_URL
+          fi
+          hugo ${STAGING_URL+-b "$STAGING_URL"}
       - name: Upload Hugo artifacts
         uses: actions/upload-artifact@master
         with:
