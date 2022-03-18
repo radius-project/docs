@@ -25,6 +25,7 @@ jobs:
       TUTORIAL_PATH: './docs/content/user-guides/tutorials/'
       CODE_ZIP_PATH: './docs/static/tutorial/'
       HUGO_ENV: production
+      SWA_BASE: 'wonderful-plant-020417a1e'
     steps:
       - name: Checkout docs repo
         uses: actions/checkout@v2
@@ -55,6 +56,15 @@ jobs:
           git submodule update --init --recursive
           sudo npm install -D --save autoprefixer
           sudo npm install -D --save postcss-cli
+      - name: Restore Go Modules Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('radius/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
       - name: Generate CLI Docs
         run: |
           cd radius
@@ -71,7 +81,12 @@ jobs:
           path: ${{ env.CODE_ZIP_PATH }}
           if-no-files-found: error
       - name: Build Hugo Site
-        run: cd docs && hugo
+        run: |
+          cd docs
+          if [ $GITHUB_EVENT_NAME == 'pull_request' ]; then
+            STAGING_URL="https://${SWA_BASE}-${{github.event.number}}.westus2.azurestaticapps.net/"
+          fi
+          hugo ${STAGING_URL+-b "$STAGING_URL"}
       - name: Upload Hugo artifacts
         uses: actions/upload-artifact@master
         with:
