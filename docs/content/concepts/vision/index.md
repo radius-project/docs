@@ -18,7 +18,7 @@ What's missing is a way to collapse the entire concept of an application into a 
 
 {{< card header="**Build a unified concept of your application**" >}}
 - Visualize the end-to-end app model. 
-- Invetsigate cross-app health and diagnostics, including dependencies and connections. 
+- Investigate cross-app health and diagnostics, including dependencies and connections. 
 - Identify ownership and locate artifacts per component. 
 - Support handoffs between teams as the app matures. 
 {{< /card >}}
