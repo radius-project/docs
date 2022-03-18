@@ -52,6 +52,8 @@ category = "categories"
 [params]
 copyright = "Project Radius"
 
+version = "0.10"
+
 # Algolia Search
 algolia_docsearch = true
 
