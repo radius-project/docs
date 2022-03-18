@@ -11,6 +11,8 @@ So far you have not yet configured a database, so the todo items you enter will 
 
 In this step you will learn how to add a database and connect to it from the application.
 
+We'll discuss todo.bicep changes and then provide the full, updated file before deployment.
+
 ## Connectors
 
 A [Mongo database connector]({{< ref mongodb >}}) resource provides an abstraction over the Mongo API, allowing the backing resource to be swapped out without any changes to the consuming resource and code.
