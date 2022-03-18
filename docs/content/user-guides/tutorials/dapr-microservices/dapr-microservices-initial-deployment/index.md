@@ -7,23 +7,22 @@ description: "Deploy the application backend container"
 weight: 2000
 ---
 
-## Define a Radius app as a .bicep file
+## Create a Bicep file
 
-Radius uses the [Bicep language](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/bicep-overview) as its file-format and structure. In this tutorial you will define an app named `dapr-hello` that will contain the container, statestore, and content generator resources, all described in Bicep.
+Radius uses the [Bicep language]{{< ref bicep >}}) as its file-format and structure. In this tutorial you will define an app named `dapr-tutorial` that will contain the containers, statestore, and route resources, all described in Bicep.
 
-Create a new file named `template.bicep` and paste the following:
+Create a new file named `dapr.bicep` and paste the following:
 
 {{< rad file="snippets/app.bicep" embed=true >}}
 
-## Add backend container
+## Add `backend` container
 
-Next you'll add a `backend` resource for the website's backend.
+Next you'll add a `backend` [container]({{< ref container >}}) resource for the website's backend.
 
-Radius captures the relationships and intentions behind an application, which simplifies deployment and management. The single `backend` resource in your template.bicep file will contain everything needed for the website backend to run.
+Radius captures the relationships and intentions behind an application, which simplifies deployment and management. The single `backend` resource in your Bicep file will contain everything needed for the website backend to run.
 
 Your `backend` resource, which has resource type Container, will specify:
 
-- **kind:** `Container`, a generic container.
 - **container image:** `radius.azurecr.io/daprtutorial-backend`, a Docker image the container will run. This is where your application's backend code lives.
 - **ports**: orders will be received on port 3000.
 
@@ -66,7 +65,7 @@ Now you are ready to deploy the application for the first time.
    The [`rad resource expose`]({{< ref rad_resource_expose.md >}}) command accepts the resource type, the resource name, and flags for application name and port. If you changed any of these values when deploying, update your command to match.
    {{% /alert %}}
 
-1. Visit the URL [http://localhost:3000/order](http://localhost:3000/order) in your browser. For now you should see a message like:
+1. Visit the URL http://localhost:3000/order in your browser. For now, you should see a message like:
 
    ```
    {"message":"The container is running, but Dapr has not been configured."}
@@ -76,4 +75,23 @@ Now you are ready to deploy the application for the first time.
 
 1. When you are done testing press `CTRL+C` to terminate the port-forward.
 
-<br>{{< button text="Next: Add a Dapr statestore to the app" page="dapr-microservices-add-dapr.md" >}}
+## Interact with your application using the VS Code extension
+
+{{% alert title="Preview" color="info" %}}
+The following tips are a preview of how the VS Code Radius extension can be used to improve the developer workflow. As we introduce additional features to the extension, we will incorporate them into this section.
+{{% /alert %}}
+
+- Open VS Code and navigate to the VS Code Radius extension explorer section.
+
+   The environment you've created should be listed in a tree view that will allow you to see
+   your dapr-tutorial application.
+
+   <img src="radius-explorer-dapr-microservices.png" width="400" alt="screenshot of the todo application with no database">
+
+   _Note: The resources shown include the resources for UI and Dapr which you will add in the next sections._
+
+- Click on the a resource node and click on the `Show Container Logs` to open up a terminal dedicated to viewing the resource logs.
+
+## Next step
+
+<br>{{< button text="Next: Add a Dapr to the app" page="dapr-microservices-add-dapr" >}}

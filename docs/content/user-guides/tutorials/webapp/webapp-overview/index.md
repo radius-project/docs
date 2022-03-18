@@ -7,57 +7,44 @@ weight: 1000
 slug: "overview"
 ---
 
-You will be deploying a *To-Do List* website. It will have two Radius *components*:
+You will be deploying an application, `todoapp`, with the following resources:
 
-1. **todoapp**: A containerized to-do application written in Node.JS
-2. **db**: A MongoDB database to save to-do items in
+1. [`frontend`](#frontend-container): A containerized to-do list frontend written in Node.JS
+1. [`frontend-route`](#frontend-route-http-route): An [HTTP Route]({{< ref http-route >}}) that exposes the frontend container to the internet
+1. [`db`](#db-connector): A [MongoDB connector]({{< ref mongodb >}}) to save to-do items in. Can be backed by either:
+   - A MongoDB container
+   - An Azure CosmosDB w/ Mongo API
 
-<img src="todoapp-diagram.png" width=400 alt="Simple app diagram">
+<img src="todoapp-diagram.png" width=700 alt="Simple app diagram">
 
-## Website frontend
+## Resources
 
-The example website (`todoapp`) is a containerized single-page-application (SPA) with a Node.JS backend. The SPA sends HTTP requests to the Node.JS backend to read and store *todo* items.
+### `frontend` container
 
-The website listens on port 3000 for HTTP requests. 
+The example website is a single-page-application (SPA) with a Node.JS backend running in a [container]({{< ref container >}}). The SPA sends HTTP requests to the Node.JS backend to read and store todo items.
 
-The website uses the MongoDB protocol to read and store data in a database. The website reads the environment variable `CONNECTION_ITEMSTORE_CONNECTIONSTRING` to discover the database connection string.
+The website listens on port 3000 for HTTP requests.
+
+The website uses the MongoDB protocol to read and store data in a database. The website reads the environment variable `CONNECTION_ITEMSTORE_CONNECTIONSTRING` to discover the database connection string. If the connection string is not set the website will store the todo items in memory and not persist them.
 
 #### (optional) Download the source code
 
-You can download the source code [here](/tutorial/webapp.zip) if you want to see how the frontend is built.
+You can download the source code [here](https://get.radapp.dev/tutorials/edge/webapp.zip) if you want to see how the complete code.
 
-## Database
+### `frontend-route` HTTP route
 
-The database (`db`) is a [MongoDB database]({{< ref mongodb >}}).
+In order for users to connect to `frontend` over the internet, an [HTTP Route]({{< ref http-route >}}) is used to define communication to the container, and the public gateway to configure.
 
-In Kubernetes environments Radius uses the `mongodb` container image to run the database. In Azure environments Radius uses an Azure Cosmos DB with Mongo API.
+### `db` connector
+
+The database is provided by a [MongoDB connector]({{< ref mongodb >}}). You can choose between a MongoDB container or an Azure CosmosDB w/ Mongo API to back the connector.
 
 ## The Radius mindset
 
-The diagrams shown so far document the communication flows, but a Radius application also describes additional details. 
+In this tutorial you will build out this app using the Radius application model. As you progress, keep in mind the following benefits that it provides:
 
-A Radius application includes 
+- Both infrastructure (`db`) and services (`frontend`) are modeled as part of the application within the same template
+- Relationships between resources are fully specified with protocols and other strongly-typed information
+- Connectors provide abstraction and portability across local and cloud environments
 
-- The logical relationships of an application 
-- The operational details associated with those relationships 
-
-Here is an updated diagram that shows what the Radius application captures:
-
-<img src="todoapp-appdiagram.png" width=800 alt="App diagram with descriptions of all the details and relationships."><br />
-
-### Benefits
-
-- Support for data components (`db`) are part of the application
-- Relationships between components are fully specified with protocols and other strongly-typed information
-
-In addition to this high level information, the Radius model also uses typical details like:
-
-- Container images
-- Listening ports
-- Configuration like connection strings
-
-Keep the diagram in mind as you proceed through the following steps. Your Radius application will aim to match it. 
-
-
-<br>{{< button text="Next: Deploy the website frontend" page="webapp-initial-deployment.md" >}}
-
+<br>{{< button text="Next: Deploy the website frontend" page="webapp-initial-deployment" >}}

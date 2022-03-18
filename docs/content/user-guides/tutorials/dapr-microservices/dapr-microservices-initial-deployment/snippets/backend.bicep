@@ -6,6 +6,11 @@ resource app 'radius.dev/Application@v1alpha3' = {
     properties: {
       container: {
         image: 'radius.azurecr.io/daprtutorial-backend'
+        ports: {
+          orders:  {
+            containerPort: 3000
+          }
+        }
       }
     }
   }

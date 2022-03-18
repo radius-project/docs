@@ -9,20 +9,21 @@ weight: 4000
 
 To complete the application, you'll add another component for the frontend user interface.
 
-Again, we'll discuss changes to template.bicep and then provide the full, updated file before deployment.
+Again, we'll discuss changes to your Bicep file and then provide the full, updated file before deployment.
 
-## Add frontend component
+## Add `frontend` container and HTTP route
 
-Another container component is used to specify a few properties about the order generator:
+Another container resource is used to specify a few properties about the order generator:
 
-- **resource type**: `Container` indicates you are using a generic container.
 - **container image**: `radius.azurecr.io/daprtutorial-frontend` is a Docker image the container will run.
 - **connections**: `daprBackend.id` declares the intention for `frontend` to communicate with `backend` through the `daprBackend` Dapr HTTP Route.
 - **traits**: `dapr.io/Sidecar` configures Dapr on the container.
 
-{{< rad file="snippets/app.bicep" marker="//FRONTEND" embed=true >}}
+Additionally, an [HTTP Route]({{< ref http-route>}}) is configured to expose the `frontend` container on a public endpoint.
 
-As before with connections, the `frontend` component is using an environment variable to get information about the the `backend`'s route. This avoids hardcoding:
+{{< rad file="snippets/frontend.bicep" marker="//FRONTEND" embed=true >}}
+
+As before with connections, the `frontend` component is using an environment variable to get information about the the `backend` Dapr route. This avoids hardcoding.
 
 ```C#
 var appId = Environment.GetEnvironmentVariable("CONNECTION_BACKEND_APPID");
@@ -31,36 +32,34 @@ services.AddSingleton<HttpClient>(DaprClient.CreateInvokeHttpClient(appId));
   
 ## Deploy application
 
-1. Make sure your `template.bicep` file matches the full tutorial file:
+1. Make sure your Bicep file matches the full tutorial file:
 
-   {{< rad file="snippets/app.bicep" download=true >}}
+   - Redis state store: {{< rad file="../code/dapr.bicep" download=true >}}
+   - Azure table storage state store: {{< rad file="../code/dapr-azure.bicep" download=true >}}
 
 1. Switch to the command line and run:
 
    ```sh
-   rad deploy template.bicep
+   rad deploy dapr.bicep
    ```
 
    Now that we added a 'HttpRoute', a public endpoint will be available to your application.
 
    ```sh
    Public Endpoints:
-      HttpRoute            frontend-route           SITE
+      HttpRoute            frontend-route           IP-ADDRESS
    ```
 
    Navigate to the endpoint to view the application:
 
    <img src="frontend.png" alt="Screenshot of frontend application" width=500 >
 
-
-1. Open the [Azure Portal](https://portal.azure.com) and navigate to the resource group for your environment. Open the storage account and navigate to Azure Storage Explorer to see the state items you just persisted:
-
-   <img src="storage-explorer.png" alt="Screenshot of Azure Storage Explorer" width=1000 >
-
 You have completed this tutorial!
 
-{{% alert title="Cleanup" color="warning" %}}
-If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to **prevent additional charges in your subscription**.
+## Cleanup
+
+{{% alert title="Delete your environment" color="warning" %}}
+If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to **prevent additional charges in your Azure subscription**.
 {{% /alert %}}
 
 ## Next steps

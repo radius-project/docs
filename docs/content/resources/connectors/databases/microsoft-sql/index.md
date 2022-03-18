@@ -8,46 +8,90 @@ weight: 100
 
 This application showcases how Radius can use a user-manged Azure SQL Database. 
 
+## Supported resources
 
-## Platform resources
+- [Azure SQL Container](https://hub.docker.com/_/microsoft-mssql-server)
+- [Azure SQL](https://docs.microsoft.com/en-us/azure/azure-sql/)
 
-| Platform                             | Resource                                                       |
-| ------------------------------------ | -------------------------------------------------------------- |
-| [Microsoft Azure]({{< ref azure>}})  | [Azure SQL](https://docs.microsoft.com/en-us/azure/azure-sql/) |
-| [Kubernetes]({{< ref kubernetes >}}) | Not compatible                                                 |
-
-## Configuration
-
-| Property | Description                                                                         | Example(s)         |
-| -------- | ----------------------------------------------------------------------------------- | ------------------ |
-| managed  | Indicates if the resource is Radius-managed. If no, a `Resource` must be specified. | `false`            |
-| resource | The ID of the user-managed SQL Database to use for this resource.                  | `server::sqldb.id` |
-
-## Resource lifecycle
-
-This sample uses Bicep parameters to pass the resource ID of the database as well as the username and password.
-
-{{< rad file="snippets/unmanaged.bicep" embed=true marker="//PARAMETERS" >}}
-
-Pass the ID of the database into the connector:
+## Resource format
 
 {{< rad file="snippets/unmanaged.bicep" embed=true marker="//DATABASE" >}}
 
-Radius does not have access to the username and password used to access your database. You should provide this when building a connection string in Bicep.
+| Property | Description | Example |
+|----------|-------------|---------|
+| resource | The ID of the Azure SQL Database to use for this resource. | `server::sqldb.id` |
+| server | The name of the server. | `myserver` |
+| database | The fully qualified domain name of the SQL database. | `myserver.database.com` |
 
-{{< rad file="snippets/unmanaged.bicep" embed=true marker="//CONTAINER" >}}
+## Connections
 
-## Injected values
+[Services]({{< ref services >}}) can define [connections]({{< ref connections-model >}}) to connectors using the `connections` property. This allows the service to access properties of the connector and contributes to to visualization and health experiences.
 
-Connections between resources declare environment variables inside the consuming resource as a convenience for service discovery. See [connections]({{< ref "connections-model#injected-values" >}}) for details.
+### Environment variables
 
-In the following example, a `todoapp` service connects to a database `db`. The connection is defined as part of `todoapp` and is named `tododb`.
+| Variable | Description |
+|----------|-------------|
+| `CONNECTION_<CONNECTION-NAME>-SERVER` | The fully-qualified hostname of the database server. |
+| `CONNECTION_<CONNECTION-NAME>-DATABASE` | The name of the SQL Server database. |
 
-{{< rad file="snippets/unmanaged.bicep" embed=true marker="//CONTAINER" >}}
+## Starter
 
-This example would define the following injected environment variables for use inside `todoapp`:
+You can get up and running quickly with a SQL Database by using a [starter]({{< ref starter-templates >}}):
 
-| Environment Variable         | Example Value                   | Description                                          |
-| ---------------------------- | ------------------------------- | ---------------------------------------------------- |
-| `CONNECTION_TODODB_SERVER`   | `myserver.database.windows.net` | The fully-qualified hostname of the database server. |
-| `CONNECTION_ORDERS_DATABASE` | `todos`                         | The name of the SQL Server database.                 |
+{{% alert title="Known issue: dependsOn" color="warning" %}}
+Any service that consumes the `existing` resource will need to manually add a `dependsOn` reference to the staarter module. This requirement will be removed in an upcoming release. See the [webapp tutorial]({{< ref webapp-add-database >}}) for an example.
+{{% /alert %}}
+
+### Container
+
+The module `'br:radius.azurecr.io/starters/sql:latest'` deploys a SQL Server container and outputs a `microsoft.com.SQLDatabase` resource.
+
+To use this template, reference it in Bicep as:
+
+{{< rad file="snippets/starter.bicep" embed=true >}}
+
+#### Parameters
+
+| Parameter | Description | Required | Default |
+|-----------|-------------|:--------:|---------|
+| radiusApplication | The application resource to use as the parent of the SQL Database | Yes | - |
+| adminPassword | The password for the SQL Server administrator | Yes | - |
+| databaseName | The name for your SQL Database. | Yes | - |
+| serverName | The name of the Azure SQL Server | No | `'sql-${uniqueString(resourceGroup().id, deployment().name)}'` |
+
+#### Outputs
+
+The output of this module is a name and ID for a `microsoft.com.SQLDatabase` resource.
+
+| Parameter | Description | Type |
+|-----------|-------------|------|
+| sqlUsername | The username for the SQL Server. Always 'sa'. | string |
+
+### Azure SQL Database
+
+The module `'br:radius.azurecr.io/starters/sql-azure:latest'` deploys an Azure SQL Server & Database and outputs a `microsoft.com.SQLDatabase` resource.
+
+To use this template, reference it in Bicep as:
+
+{{< rad file="snippets/starter-azure.bicep" embed=true >}}
+
+#### Parameters
+
+| Parameter | Description | Required | Default |
+|-----------|-------------|:--------:|---------|
+| radiusApplication | The application resource to use as the parent of the SQL Database | Yes | - |
+| adminLogin | The username for the SQL Server administrator | Yes | - |
+| adminPassword | The password for the SQL Server administrator | Yes | - |
+| databaseName | The name for your SQL Database. | Yes | - |
+| serverName | The name of the Azure SQL Server | No | `'sql-${uniqueString(resourceGroup().id, deployment().name)}'` |
+| location | The Azure region to deploy the Azure SQL Server | No | `resourceGroup().location` |
+| skuName | The Azure SQL Server SKU | No | `'Standard'` |
+| skuTier | The Azure SQL Server SKU tier | No | `'Standard'` |
+
+#### Outputs
+
+The output of this module is a name and ID for a `microsoft.com.SQLDatabase` resource.
+
+| Parameter | Description | Type |
+|-----------|-------------|------|
+| sqlUsername | The username for the SQL Server. | string |

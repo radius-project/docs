@@ -9,83 +9,86 @@ weight: 3000
 
 Currently, the data you send to `backend` will be stored in memory inside the application. If the website restarts then all of your data will be lost!
 
-In this step you will learn how to add a database and connect to it from the application with Dapr.
+In this step you will learn how to add a state store database and connect to it from the application with Dapr.
 
 ## Add a Dapr trait
 
-A [`dapr.io/Sidecar` trait]({{< ref dapr-trait >}}) on the `backend` component can be used to describe the Dapr configuration:
+A [`dapr.io/Sidecar` trait]({{< ref dapr-trait >}}) on the `backend` resource can be used to describe the Dapr configuration:
 
-{{< rad file="snippets/trait.bicep" embed=true marker="//SAMPLE" >}}
+{{< rad file="snippets/trait.bicep" embed=true marker="//SAMPLE" replace-key-container="//CONTAINER" replace-value-container="container: {...}" >}}
 
 The `traits` section is used to configure cross-cutting behaviors of components. Since Dapr is not part of the standard definition of a container, it can be added via a trait. Traits have a `kind` so that they can be strongly typed.
 
-## Add a Dapr Invoke Route
+## Add `dapr-backend` Dapr Invoke Route
 
-Here you are describing how the `backend` Component will provide the `InvokeHttpRoute` for other Components to consume.
+In order for other services to invoke `backend` through Dapr service invocation, a [Dapr Route]({{< ref dapr-http >}}) is required.
 
-Add a [`dapr.io.InvokeHttpRoute`]({{< ref dapr >}}) resource to the app, and specify that the `backend` Component will provide the Route as part of the `dapr` port.
+Add a [`dapr.io.InvokeHttpRoute`]({{< ref dapr-http >}}) resource to the app, and specify that the `backend` resource will provide the Route as part of the `dapr` port:
 
-{{< rad file="snippets/invoke.bicep" embed=true marker="//SAMPLE" replace-key-bindings="//BINDINGS" replace-value-bindings="bindings: {...}" >}}
+{{< rad file="snippets/invoke.bicep" embed=true marker="//SAMPLE" replace-key-container="//CONTAINER" replace-value-container="container: {...}" >}}
 
-## Add statestore component
+## Add `orders` statestore
 
 Now that the backend is configured with Dapr, we need to define a state store to save information about orders.
 
-A [`statestore` component]({{< ref dapr-statestore >}}) is used to specify a few properties about the state store:
+A [Radius starter]({{{< ref starter-templates >}}) can be used to add a Dapr state store, backed by a Redis container, to your application. You can choose between a Redis container or Azure Table Storage
 
-- **resource type**: `'dapr.io/StateStoreComponent'` represents a resource that Dapr uses to communicate with a database.
-- **kind**: `'any'` tells Radius to pick the best available statestore for the platform. For Azure this is Table Storage and for Kubernetes this is a Redis container.
-- **managed**: `true` tells Radius to manage the lifetime of the component for you.
+{{< tabs "Redis Container" "Azure Table Storage" >}}
 
-{{< rad file="snippets/app.bicep" embed=true marker="//STATESTORE" >}}
+{{< codetab >}}
+{{< rad file="snippets/statestore.bicep" embed=true marker="//SAMPLE" replace-key-container="//BACKEND" replace-value-container="resource backend 'Container' = {...}" replace-key-route="//ROUTE" replace-value-route="resource daprBackend 'dapr.io.InvokeHttpRoute' = {...}" >}}
+{{< /codetab >}}
 
-{{% alert title="💡 Resource lifecycle and configuration" color="primary" %}}
-With this simple component definition, Radius handles both creation of the Azure Storage resource itself and configuration of Dapr details like connection strings, simplifying the developer workflow.
-{{% /alert %}}
+{{< codetab >}}
+{{< rad file="snippets/statestore-azure.bicep" embed=true marker="//SAMPLE" replace-key-container="//BACKEND" replace-value-container="resource backend 'Container' = {...}" replace-key-route="//ROUTE" replace-value-route="resource daprBackend 'dapr.io.InvokeHttpRoute' = {...}" >}}
+{{< /codetab >}}
 
-## Reference statestore from backend
+{{< /tabs >}}
+
+## Reference statestore from `backend`
 
 Radius captures both logical relationships and related operational details. Examples of this include: wiring up connection strings, granting permissions, or restarting components when a dependency changes.
 
-The [`connections` section]({{< ref "connections-model" >}}) is used to configure relationships between a component and bindings provided by other components.
+The [`connections` property]({{< ref "connections-model" >}}) is used to configure relationships between from a service to another resource.
 
-Once the state store is defined as a component, you can connect to it by referencing the `statestore` component from the `backend` component via the [`connections` section]({{< ref "connections-model" >}}). This declares the _intention_ from the `backend` component to communicate with the `statestore` component using `dapr.io/StateStore` as the protocol.
+Add a [`connection`]({{< ref "connections-model" >}}) from `backend` to the `orders` state store. This declares the _intention_ from the `backend` component to communicate with the `statestore` component using `dapr.io/StateStore` as the protocol.
 
-{{< rad file="snippets/app.bicep" embed=true >}}
+Additionally, add a `dependsOn` reference to the starter. This is a tempoarary requirement and will be removed in a future release.
 
-### Injected settings from connections
+{{< rad file="snippets/connection.bicep" embed=true replace-key-container="//CONTAINER" replace-value-container="container: {...}" replace-key-traits="//TRAITS" replace-value-traits="traits: [...]" replace-key-route="//ROUTE" replace-value-route="resource daprBackend 'dapr.io.InvokeHttpRoute' = {...}" replace-key-connector="//CONNECTOR" replace-value-connector="resource ordersStateStore 'dapr.io.StateStore' existing = {...}" replace-key-starter="//STARTER" replace-value-starter="module stateStoreStarter 'br:radius.azurecr.io/starters/dapr-statestore:latest' = {...}" >}}
+
+#### Injected settings from connections
 
 Adding a connection to the state store also [configures environment variables]({{< ref "dapr-statestore#provided-data" >}}) inside the the `statestore` component.
 
-Because the connection is called `orders` inside `backend`, Radius will inject information related to the state store using environment variables like `CONNECTION_ORDERS_STATESTORENAME`. The application code inside `backend` uses this environment variable to access the state store name and avoid hardcoding.
+With the connection name of `statestore` and a statestore name of `orders`, Project Radius will inject information related to the state store using the environment variable `CONNECTION_STATESTORE_ORDERS`. The application code inside `backend` uses this environment variable to access the state store name and avoid hardcoding.
 
 ```js
-const stateStoreName = process.env.CONNECTION_ORDERS_STATESTORENAME;
+const stateStoreName = process.env.CONNECTION_STATESTORE_ORDERS;
 ```
 
 See the [connections]({{< ref "connections-model#injected-values" >}}) page for more information about this feature.
 
 ## Deploy application with Dapr
 
-{{% alert title="Make sure Dapr is initialized" color="warning" %}}
-For Kubernetes environments, make sure to [initialize Dapr](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/) on your cluster so your application can leverage the Dapr control-plane and sidecar.
-
-For Azure environments, Dapr is managed for you and you do not need to manually initialize it.
+{{% alert title="Known issue: Azure deployments" color="warning" %}}
+There is a known issue where deployments to Azure will fail with a "NotFound" error for templates containing starters. This is being addressed in an upcoming release. As a workaround submit the deployment a second time. The second deployment should succeed.
 {{% /alert %}}
 
-1. Make sure your `template.bicep` file matches the full tutorial file:
+1. Make sure your `dapr.bicep` file matches the full tutorial file:
 
-   {{< rad file="snippets/app.bicep" download=true >}}
+   - Redis state store: {{< rad file="snippets/dapr.bicep" download=true >}}
+   - Azure storage state store: {{< rad file="snippets/dapr-azure.bicep" download=true >}}
 
 1. Now you are ready to re-deploy the application, including the Dapr state store. Switch to the command-line and run:
 
    ```sh
-   rad deploy template.bicep
+   rad deploy dapr.bicep
    ```
 
-   In case you are using an Azure backed Radius environment this operation may take a few minutes (while a Azure Storage Account is created).
+   If you are using the Azzure storage Dapr state store starter, this may take a couple minutes as the storage account is deployed.
 
-1. You can confirm that the new `statestore` component was deployed by running:
+1. You can confirm all the resources were deployed by running:
 
    ```sh
    rad resource list --application dapr-tutorial
@@ -95,7 +98,7 @@ For Azure environments, Dapr is managed for you and you do not need to manually 
 
    ```sh
     RESOURCE      TYPE                         PROVISIONING_STATE  HEALTH_STATE
-    statestore    dapr.io.StateStore           Provisioned         Healthy
+    orders        dapr.io.StateStore           Provisioned         Healthy
     backend       Container                    Provisioned         Healthy
    ```
 
