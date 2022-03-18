@@ -4,16 +4,16 @@ title: "Contributing to Project Radius"
 linkTitle: "Contributing"
 description: "Guides and requirements for contributing to Project Radius"
 weight: 70
+no_list: true
 ---
 
-## Contributing Links
+We welcome contributions to the Project Radius! Check  out  the following table to learn where and how you can contribute:
 
-Project Radius can be best understood as the combination of the following components:
-
-| Component | Description | Project Link  |
-|---|---|---|
-| **`rad` CLI**   | Handles deploying and managing environments and applications | https://github.com/project-radius/radius/blob/main/docs/contributing/contributing-code/contributing-code-cli/running-rad-cli.md |
-| **Bicep**  | Language and tools which includes the application model as a set of types | https://github.com/project-radius/bicep/blob/radius-compiler/CONTRIBUTING.md, will eventually be merged with https://github.com/azure/bicep |
-| **ARM Deployment Engine**  | Process the output of the Bicep compiler and deploys resources. | https://github.com/project-radius/deployment-engine/blob/main/CONTRIBUTING.md |
-| **Radius Control Plane**  | Implements operations on the application model as a sequence of resource management operations | https://github.com/project-radius/radius/tree/main/docs/contributing/contributing-code |
-| **Templates**  | Deployable starter templates for getting up and running with Radius | https://github.com/project-radius/templates |
+| Component | Description | Contribution guides |
+|-----------|-------------|---------------------|
+| **`rad` CLI** | Deploys and manages Radius resources | [project-radius/radius](https://github.com/project-radius/radius/blob/main/docs/contributing/contributing-code/contributing-code-cli/running-rad-cli.md) |
+| **Bicep** | Language and tools which includes the application model as a set of types. Will eventually be merged with https://github.com/azure/bicep | [project-radius/bicep](https://github.com/project-radius/bicep/blob/radius-compiler/CONTRIBUTING.md) |
+| **ARM Deployment Engine** | Processes the output of the Bicep compiler and deploys resources. | [project-radius/deployment-engine](https://github.com/project-radius/deployment-engine/blob/main/CONTRIBUTING.md) |
+| **Radius Control Plane** | Implements operations on the application model as a sequence of resource management operations | [project-radius/radius](https://github.com/project-radius/radius/tree/main/docs/contributing/contributing-code) |
+| **Templates** | Deployable starter templates for getting up and running with Radius | [project-radius/templates](https://github.com/project-radius/templates) |
+| **Docs** | Documentation for Project Radius | [Contributing to docs]({{< ref contributing-docs >}}) |
