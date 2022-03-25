@@ -50,7 +50,7 @@ If you choose a container registry provided by a cloud provider (other than Dock
    ```sh
    helm repo add radius https://radius.azurecr.io/helm/v1/repo
    helm repo update
-   helm upgrade radius radius/radius --install --create-namespace --namespace radius-system --version $CHART_VERSION   --set tag=$IMAGE_TAG --wait --timeout 15m0s
+   helm upgrade radius radius/radius --install --create-namespace --namespace radius-system --version {{< param chart_version >}} --wait --timeout 15m0s
    ```
    {{% /codetab %}}
 
