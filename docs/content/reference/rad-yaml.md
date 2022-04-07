@@ -41,8 +41,7 @@ Build defines a list of builds to run prior to a deployment. However, note that 
 | Platform | Description | Example |
 |----------|-------------|---------|
 | Local | The container registry is overridden with the local registry that Radius creates for you. | `radius-dev-registry` |
-| Microsoft Azure | Your build should contain the name of the container registry that correlates to your Azure resource group. For more information visit the [Radius Azure Platform]({{< ref azure.md >}}) page.  | `<YOUR AZURE ACCOUNT>.azurecr.io/go-service` |
-| Kubernetes | The container registry must be configured for your Kubernetes cluster, and you are in charge of setting up those configurations. | `<YOUR CONTAINER REGISTRY>/go-service` |
+| Microsoft Azure/Kubernetes | Your build should contain the name of the container registry that correlates to your Azure resource group or Kubernetes cluster. | `<YOUR CONTAINER REGISTRY>/go-service` |
 
 #### Docker
 

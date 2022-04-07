@@ -13,7 +13,7 @@ As part of a Radius deployment, the container images are built and provided to t
 
 Open [`rad.yaml`]({{< ref rad-yaml >}}) to see where the containers are built:
 
-{{< tabs "Local Environment" "Azure Environment" "Kubernetes Environment)" >}}
+{{< tabs "Local Environment" "Azure/Kubernetes Environment" >}}
 
 {{% codetab %}}
 
@@ -52,7 +52,7 @@ stages:
 {{% /codetab %}}
 
 {{% codetab %}}
-For Azure environments, make sure that the `image` value is corresponding to the container registry that is registered with the Azure resource group you're connected to.
+For other environments, make sure that the `image` value is corresponding to the container registry that is registered with either the Azure resource group you're connected to or your Kubernetes cluster.
 
 ```yaml
 name: store
@@ -69,61 +69,24 @@ stages:
     go_service_build:
       docker:
         context: go-service
-        # Azure Container Registry
-        image: MYREGISTRY.azurecr.io/go-service
+        # Container Registry
+        image: <MYREGISTRY>/go-service
     node_service_build:
       docker:
         context: node-service
-        # Azure Container Registry
-        image: MYREGISTRY.azurecr.io/node-service
+        # Container Registry
+        image: <MYREGISTRY>/node-service
     python_service_build:
       docker:
         context: python-service
-        # Azure Container Registry
-        image: MYREGISTRY.azurecr.io/python
-  ...
-```
-
-{{% /codetab %}}
-
-{{% codetab %}}
-
-For Kubernetes environments, you can use any container registry that is configured for your cluster. You just have to make sure that your Kubernetes cluster has access to it.
-
-```yaml
-name: store
-stages:
-- name: infra
-  bicep:
-    template: iac/infra.bicep
-  profiles:
-    dev:
-      bicep:
-        template: iac/infra.dev.bicep
-- name: app
-  build:
-    go_service_build:
-      docker:
-        context: go-service
-        # Kubernetes Container Registry
-        image: MYREGISTRY/go-service
-    node_service_build:
-      docker:
-        context: node-service
-        # Kubernetes Container Registry
-        image: MYREGISTRY/node-service
-    python_service_build:
-      docker:
-        context: python-service
-        # Kubernetes Container Registry
-        image: MYREGISTRY/python
+        # Container Registry
+        image: <MYREGISTRY>/python
   ...
 ```
 
 {{% /codetab %}}
 
 {{< /tabs >}}
-
 
 Within `app.bicep`, object parameters with the same name as the build steps are available to use with the container image imformation from the above step:
 
