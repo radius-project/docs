@@ -13,6 +13,12 @@ resource app 'radius.dev/Application@v1alpha3' = {
           }
         }
       }
+      connections: {
+        orders: {
+          kind: 'dapr.io/StateStore'
+          source: ordersStateStore.id
+        }
+      }
       traits: [
         {
           kind: 'dapr.io/Sidecar@v1alpha1'
