@@ -61,10 +61,10 @@ Additionally, add a `dependsOn` reference to the starter. This is a tempoarary r
 
 Adding a connection to the state store also [configures environment variables]({{< ref "dapr-statestore#provided-data" >}}) inside the the `statestore` component.
 
-With the connection name of `statestore` and a statestore name of `orders`, Project Radius will inject information related to the state store using the environment variable `CONNECTION_STATESTORE_ORDERS`. The application code inside `backend` uses this environment variable to access the state store name and avoid hardcoding.
+With the connection name of `statestore` and a statestore name of `orders`, Project Radius will inject information related to the state store using the environment variable `CONNECTION_ORDERS_STATESTORENAME`. The application code inside `backend` uses this environment variable to access the state store name and avoid hardcoding.
 
 ```js
-const stateStoreName = process.env.CONNECTION_STATESTORE_ORDERS;
+const stateStoreName = process.env.CONNECTION_ORDERS_STATESTORENAME;
 ```
 
 See the [connections]({{< ref "connections-model#injected-values" >}}) page for more information about this feature.
