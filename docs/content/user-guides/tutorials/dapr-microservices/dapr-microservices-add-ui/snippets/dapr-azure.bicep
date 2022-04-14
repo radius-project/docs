@@ -48,7 +48,7 @@ resource app 'radius.dev/Application@v1alpha3' = {
 }
 
 // Use a starter module to deploy a Redis container and configure a Dapr state store
-module stateStoreStarter 'br:radius.azurecr.io/starters/dapr-statestore:latest' = {
+module stateStoreStarter 'br:radius.azurecr.io/starters/dapr-statestore-azure-tablestorage:latest' = {
   name: 'orders-statestore-starter'
   params: {
     radiusApplication: app
