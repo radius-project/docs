@@ -36,6 +36,8 @@ Bicep defines a Bicep file and optional parameters to deploy to a Radius environ
 
 ### Build
 
+Build defines a list of builds to run prior to a deployment.
+
 #### Docker
 
 Docker defines a Docker build to run prior to a deployment.
