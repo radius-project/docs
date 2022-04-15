@@ -17,7 +17,7 @@ resource app 'radius.dev/Application@v1alpha3' = {
       connections: {
         statestore: {
           kind: 'dapr.io/StateStore'
-          source: daprBackend.id
+          source: ordersStateStore.id
         }
       }
       //TRAITS

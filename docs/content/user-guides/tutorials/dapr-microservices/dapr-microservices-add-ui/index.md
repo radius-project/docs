@@ -34,8 +34,8 @@ services.AddSingleton<HttpClient>(DaprClient.CreateInvokeHttpClient(appId));
 
 1. Make sure your Bicep file matches the full tutorial file:
 
-   - Redis state store: {{< rad file="../code/dapr.bicep" download=true >}}
-   - Azure table storage state store: {{< rad file="../code/dapr-azure.bicep" download=true >}}
+   - Redis state store: {{< rad file="./snippets/dapr.bicep" download=true >}}
+   - Azure table storage state store: {{< rad file="./snippets/dapr-azure.bicep" download=true >}}
 
 1. Switch to the command line and run:
 
