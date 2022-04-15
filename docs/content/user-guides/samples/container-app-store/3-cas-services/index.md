@@ -13,80 +13,30 @@ As part of a Radius deployment, the container images are built and provided to t
 
 Open [`rad.yaml`]({{< ref rad-yaml >}}) to see where the containers are built:
 
-{{< tabs "Local Environment" "Azure/Kubernetes Environment" >}}
-
-{{% codetab %}}
-
-For local environments, the `Build` section of your `rad.yaml` does not need to point to any specific image, Radius automatically overwrites whatever your input is to the container registry created when your local environment is initialized.
+{{% alert title="Local container registry" color="info" %}}
+When deployed, the Docker images are built and pushed to the registries specified within `build.docker.image`. When running locally with [`rad app run`]({{< ref rad_application_run >}}), the containers are instead built and pushed to the [local container registry]({{< ref "local#local-container-registry" >}}).
+{{% /alert %}}
 
 ```yaml
 name: store
 stages:
-- name: infra
-  bicep:
-    template: iac/infra.bicep
-  profiles:
-    dev:
-      bicep:
-        template: iac/infra.dev.bicep
+...
 - name: app
   build:
     go_service_build:
       docker:
         context: go-service
-        # Ignored
-        image: MYREGISTRY/go-service
+        image: MYREGISTRY/go-service # Overriden to local container registry when run locally
     node_service_build:
       docker:
         context: node-service
-        # Ignored
-        image: MYREGISTRY/node-service
+        image: MYREGISTRY/node-service # Overriden to local container registry when run locally
     python_service_build:
       docker:
         context: python-service
-        # Ignored
-        image: MYREGISTRY/python
+        image: MYREGISTRY/python # Overriden to local container registry when run locally
   ...
 ```
-
-{{% /codetab %}}
-
-{{% codetab %}}
-For other environments, make sure that the `image` value is corresponding to the container registry that is registered with either the Azure resource group you're connected to or your Kubernetes cluster.
-
-```yaml
-name: store
-stages:
-- name: infra
-  bicep:
-    template: iac/infra.bicep
-  profiles:
-    dev:
-      bicep:
-        template: iac/infra.dev.bicep
-- name: app
-  build:
-    go_service_build:
-      docker:
-        context: go-service
-        # Container Registry
-        image: <MYREGISTRY>/go-service
-    node_service_build:
-      docker:
-        context: node-service
-        # Container Registry
-        image: <MYREGISTRY>/node-service
-    python_service_build:
-      docker:
-        context: python-service
-        # Container Registry
-        image: <MYREGISTRY>/python
-  ...
-```
-
-{{% /codetab %}}
-
-{{< /tabs >}}
 
 Within `app.bicep`, object parameters with the same name as the build steps are available to use with the container image imformation from the above step:
 

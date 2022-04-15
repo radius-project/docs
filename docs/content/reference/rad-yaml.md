@@ -36,13 +36,6 @@ Bicep defines a Bicep file and optional parameters to deploy to a Radius environ
 
 ### Build
 
-Build defines a list of builds to run prior to a deployment. However, note that there are different behaviors for each type of Radius environments.
-
-| Platform | Description | Example |
-|----------|-------------|---------|
-| Local | The container registry is overridden with the local registry that Radius creates for you. | `radius-dev-registry` |
-| Microsoft Azure/Kubernetes | Your build should contain the name of the container registry that correlates to your Azure resource group or Kubernetes cluster. | `<YOUR CONTAINER REGISTRY>/go-service` |
-
 #### Docker
 
 Docker defines a Docker build to run prior to a deployment.
@@ -50,7 +43,7 @@ Docker defines a Docker build to run prior to a deployment.
 | Property | Description | Example |
 |----------|-------------|---------|
 | context | The directory to run the Docker build in. | `serviceA` |
-| image | The name of the Docker image to build. | `myregistry/myimage` |
+| image | The name/tag of the Docker image to build and push at deploy time. When running locally with [`rad app run`]({{< ref rad_application_run >}}) this value is overriden to use the [local registry]({{< ref "local#local-container-registry" >}}). | `myregistry/myimage` |
 | dockerfile | The name of the Dockerfile to use. | `Dockerfile` |
 
 ### Profiles

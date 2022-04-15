@@ -3,7 +3,7 @@ type: docs
 title: "Container App Store Microservice sample"
 linkTitle: "Container App Store"
 description: "Learn how to model and deploy multiple microservices with Radius and Dapr"
-weight: 300
+weight: 400
 ---
 
 {{% alert title="Preview" color="warning" %}}
