@@ -13,30 +13,28 @@ As part of a Radius deployment, the container images are built and provided to t
 
 Open [`rad.yaml`]({{< ref rad-yaml >}}) to see where the containers are built:
 
+{{% alert title="Local container registry" color="info" %}}
+When deployed, the Docker images are built and pushed to the registries specified within `build.docker.image`. When running locally with [`rad app run`]({{< ref rad_application_run >}}), the containers are instead built and pushed to the [local container registry]({{< ref "local#local-container-registry" >}}).
+{{% /alert %}}
+
 ```yaml
 name: store
 stages:
-- name: infra
-  bicep:
-    template: iac/infra.bicep
-  profiles:
-    dev:
-      bicep:
-        template: iac/infra.dev.bicep
+...
 - name: app
   build:
     go_service_build:
       docker:
         context: go-service
-        image: MYREGISTRY/go-service
+        image: MYREGISTRY/go-service # Overriden to local container registry when run locally
     node_service_build:
       docker:
         context: node-service
-        image: MYREGISTRY/node-service
+        image: MYREGISTRY/node-service # Overriden to local container registry when run locally
     python_service_build:
       docker:
         context: python-service
-        image: MYREGISTRY/python
+        image: MYREGISTRY/python # Overriden to local container registry when run locally
   ...
 ```
 

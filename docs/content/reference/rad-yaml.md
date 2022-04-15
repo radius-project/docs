@@ -45,7 +45,7 @@ Docker defines a Docker build to run prior to a deployment.
 | Property | Description | Example |
 |----------|-------------|---------|
 | context | The directory to run the Docker build in. | `serviceA` |
-| image | The name of the Docker image to build. | `myregistry/myimage` |
+| image | The name/tag of the Docker image to build and push at deploy time. When running locally with [`rad app run`]({{< ref rad_application_run >}}) this value is overriden to use the [local registry]({{< ref "local#local-container-registry" >}}). | `myregistry/myimage` |
 | dockerfile | The name of the Dockerfile to use. | `Dockerfile` |
 
 ### Profiles
