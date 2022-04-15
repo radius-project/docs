@@ -33,13 +33,28 @@ If you choose a container registry provided by a cloud provider (other than Dock
 
 ### Initialize an environment
 
-1. Initialize a Radius environment interactively:
+1. Initialize a Radius environment:
 
+   {{< tabs "rad CLI" "Helm" >}}
+
+   {{% codetab %}}
+   Use the [`rad env init kubernetes` command]({{< ref rad_env_init_Kubernetes >}}) to initialize a new environment into your current kubectl context.
    ```bash
    rad env init kubernetes -i
    ```
 
    Follow the prompts, specifying the namespace which applications will be deployed into.
+   {{% /codetab %}}
+
+   {{% codetab %}}
+   ```sh
+   helm repo add radius https://radius.azurecr.io/helm/v1/repo
+   helm repo update
+   helm upgrade radius radius/radius --install --create-namespace --namespace radius-system --version {{< param chart_version >}} --wait --timeout 15m0s
+   ```
+   {{% /codetab %}}
+
+   {{< /tabs >}}
 
    {{% alert title="💡 About namespaces" color="success" %}}
    When Radius initializes a Kubernetes environment, it will deploy the system resources into the `radius-system` namespace. These aren't part your application. The namespace specified in interactive mode will be used for future deployments by default.
