@@ -960,27 +960,27 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
   // Infrastructure --------------------------------------------
 
   resource sqlIdentity 'microsoft.com.SQLDatabase' existing = {
-    name: 'IdentityDb'
+    name: 'identitydb'
   }
 
   resource sqlCatalog 'microsoft.com.SQLDatabase' existing = {
-    name: 'CatalogDb'
+    name: 'catalogdb'
   }
 
   resource sqlOrdering 'microsoft.com.SQLDatabase' existing = {
-    name: 'OrderingDb'
+    name: 'orderingdb'
   }
 
   resource sqlWebhooks 'microsoft.com.SQLDatabase' existing = {
-    name: 'WebhooksDb'
+    name: 'webhooksdb'
   }
 
   resource redisKeystore 'redislabs.com.RedisCache' existing = {
-    name: 'redis-keystore'
+    name: 'keystore-data'
   }
 
   resource redisBasket 'redislabs.com.RedisCache' existing = {
-    name: 'redis-basket'
+    name: 'basket-data'
   }
 
   resource mongo 'mongo.com.MongoDatabase' existing = {
@@ -988,6 +988,6 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
   }
 
   resource rabbitmq 'rabbitmq.com.MessageQueue' existing = {
-    name: 'rabbitmq'
+    name: 'eshop_event_bus'
   }
 }

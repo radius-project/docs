@@ -78,7 +78,7 @@ module redisBasket 'br:radius.azurecr.io/starters/redis:latest' = {
 module redisKeystore 'br:radius.azurecr.io/starters/redis:latest' = {
   name: 'keystore-data'
   params: {
-    cacheName: 'basket-data'
+    cacheName: 'keystore-data'
     radiusApplication: eshop
   }
 }
