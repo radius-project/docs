@@ -36,7 +36,7 @@ jobs:
         with:
           repository: project-radius/radius
           path: ./radius
-          token: ${{ secrets.GH_PAT }}
+          token: ${{ secrets.GH_RAD_CI_BOT_PAT }}
       - name: Setup Go ${{ env.GOVER }}
         uses: actions/setup-go@v2
         with:
@@ -171,7 +171,7 @@ jobs:
     needs: ['build', 'deploy']
     runs-on: ubuntu-latest
     env:
-      ALGOLIA_APP_ID: O0QLQGNF38
+      ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_API_APPID }}
       ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
       ALGOLIA_INDEX_NAME: radapp-dev
     steps:
