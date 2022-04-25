@@ -1,15 +1,6 @@
 resource app 'radius.dev/Application@v1alpha3' = {
   name: 'todoapp'
 
-  resource todoRoute 'HttpRoute' = {
-    name: 'frontend-route'
-    properties: {
-      gateway: {
-        hostname: '*'
-      }
-    }
-  }
-
   resource todoFrontend 'Container' = {
     name: 'frontend'
     properties: {
@@ -35,14 +26,29 @@ resource app 'radius.dev/Application@v1alpha3' = {
     ]
   }
 
+  resource todoGateway 'Gateway' = {
+    name: 'frontend-gateway'
+    properties: {
+      routes: [
+        {
+          path: '/'
+          destination: todoRoute.id
+        }
+      ]
+    }
+  }
+
+  resource todoRoute 'HttpRoute' = {
+    name: 'frontend-route'
+  }
+
   // This temporary existing reference points to the Mongo Starter deployed by the starter
   resource db 'mongo.com.MongoDatabase' existing = {
     name: 'db'
   }
-
 }
 
-// This module deploys an Azure CosmosDB w/ Mongo API
+// This module deploys an MongoDB
 module dbStarter 'br:radius.azurecr.io/starters/mongo:latest' = {
   name: 'db-starter'
   params: {

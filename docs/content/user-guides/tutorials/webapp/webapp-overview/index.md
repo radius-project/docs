@@ -10,8 +10,9 @@ slug: "overview"
 You will be deploying an application, `todoapp`, with the following resources:
 
 1. [`frontend`](#frontend-container): A containerized to-do list frontend written in Node.JS
-1. [`frontend-route`](#frontend-route-http-route): An [HTTP Route]({{< ref http-route >}}) that exposes the frontend container to the internet
-1. [`db`](#db-connector): A [MongoDB connector]({{< ref mongodb >}}) to save to-do items in. Can be backed by either:
+2. [`frontend-gateway`](#gateway-gateway): A [Gateway]({{< ref gateway >}}) that exposes the application to the internet
+3. [`frontend-route`](#todoroute-httproute): An [HttpRoute]({{< ref httproute >}}) that declares the connection to the frontend container
+4. [`db`](#db-connector): A [MongoDB connector]({{< ref mongodb >}}) to save to-do items in. Can be backed by either:
    - A MongoDB container
    - An Azure CosmosDB w/ Mongo API
 
@@ -31,11 +32,15 @@ The website uses the MongoDB protocol to read and store data in a database. The 
 
 You can download the source code [here](https://get.radapp.dev/tutorials/edge/webapp.zip) if you want to see how the complete code.
 
-### `frontend-route` HTTP route
+### `frontend-gateway` Gateway
 
-In order for users to connect to `frontend` over the internet, an [HTTP Route]({{< ref http-route >}}) is used to define communication to the container, and the public gateway to configure.
+In order for users to connect to `todoapp` over the internet, a [Gateway]({{< ref gateway >}}) is used to define the appropriate route paths.
 
-### `db` connector
+### `frontend-route` HttpRoute
+
+An [HttpRoute]({{< ref httproute >}}) is used to define communication to the container app `frontend`.
+
+### `db` Connector
 
 The database is provided by a [MongoDB connector]({{< ref mongodb >}}). You can choose between a MongoDB container or an Azure CosmosDB w/ Mongo API to back the connector.
 

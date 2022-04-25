@@ -48,11 +48,11 @@ The Catalog API service offers two ports: http and grpc. Other services can acce
 
 The Catalog service can connect to other Radius resources via the `connections` section. For Azure this will be SQL (platform-specific resources like Service Bus don't yet support connections). For Kubernetes this will be RabbitMQ and the sqlRoute.
 
-## HTTP Route
+## HttpRoute
 
 Other services will communicate with the catalog service via HTTP.
 
-An [HttpRouteComponent]({{< ref http-route >}}) resource allows other resources to connect to the `eshop` resource:
+An [HttpRoute]({{< ref httproute >}}) resource allows other resources to connect to the `eshop` resource:
 
 {{< rad file="snippets/catalog.bicep" embed=true marker="//ROUTE" replace-key-provides="//PROVIDES" replace-value-provides="provides: catalogHttp.id" >}}
 
@@ -65,7 +65,7 @@ http: {
 }
 ```
 
-While catalog is not exposed to the internet, you can optionally add a `gateway` property to the HttpRoute to expose it to the internet. Other services in eShop use gateways.
+While catalog is not exposed to the internet, you can optionally add a [Gateway]({{< ref gateway >}}) to expose it to the internet. Other services in eShop use `Gateways`.
 
 ## Next steps
 

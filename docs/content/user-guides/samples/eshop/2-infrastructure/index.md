@@ -67,7 +67,7 @@ Update your eshop.bicep file with:
 </ul>
 
 {{% alert title="💡 Concept" color="info" %}}
-Here you are manually defining a Container which will provide a SQL database. Other services can communicate with this server through the `sqlRoute` [HttpRoute]({{< ref http-route >}}).
+Here you are manually defining a Container which will provide a SQL database. Other services can communicate with this server through the `sqlRoute` [HttpRoute]({{< ref httproute >}}).
 {{% /alert %}}
 
 {{< rad file="snippets/sql-containers.bicep" embed=true marker="//SQL" >}}

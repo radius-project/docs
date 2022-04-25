@@ -31,27 +31,34 @@ resource app 'radius.dev/Application@v1alpha3' = {
   //GOAPP
 
   //ROUTE
-  resource go_app_route 'dapr.io.InvokeHttpRoute' = {
-    name: 'go-app'
+  resource node_app_gateway 'Gateway' = {
+    name: 'node-app-gateway'
     properties: {
-      appId: 'go-app'
+      routes: [
+        {
+          path: '/'
+          destination: node_app_route.id
+        }
+      ]
     }
   }
 
   resource node_app_route 'HttpRoute' = {
-    name: 'node-app'
-    properties: {
-      gateway: {
-        hostname: '*'
-      }
-    }
+    name: 'node-app-route'
   }
   //ROUTE
+
   //DAPR
   resource python_app_route 'dapr.io.InvokeHttpRoute' = {
     name: 'python-app'
     properties: {
       appId: 'python-app'
+    }
+  }
+  resource go_app_route 'dapr.io.InvokeHttpRoute' = {
+    name: 'go-app'
+    properties: {
+      appId: 'go-app'
     }
   }
   //DAPR

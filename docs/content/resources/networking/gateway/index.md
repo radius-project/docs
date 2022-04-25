@@ -10,7 +10,15 @@ weight: 200
 
 `Gateway` defines how requests are routed to different resources, and also provides the ability to expose traffic to the internet. Conceptually, gateways allow you to have a single point of entry for  traffic in your application, whether it be internal or external traffic.
 
-`Gateway` in Radius are split into two main pieces; the `Gateway` resource itself, which defines which port and protocol to listen on, and Route(s) which define the rules for routing traffic to different resources.
+A `Gateway` in Radius is split into two main pieces: the `Gateway` resource itself, which defines which routes to direct traffic to, and `Route`(s) which define the rules for routing traffic to different resources.
+
+## Hostname Generation
+
+Since the gateway is the 'entry point' of the application, you can provide hostname information to manage how you and your users access your application. This is managed within the [properties.hostname](#hostname) field in the Gateway spec. There are three options for defining hostnames:
+
+1. Omit the `hostname` property, and Radius will generate the hostname for you: `gatewayname.appname.PUBLIC_HOSTNAME_OR_IP.nip.io`.
+2. Declare `hostname.prefix`, and Radius will generate the hostname based on your chosen prefix: `prefix.appname.PUBLIC_HOSTNAME_OR_IP.nip.io`.
+3. Declare `hostname.fullyQualifiedHostname`, and Radius will use your fully-qualified domain name as the hostname: `myapp.mydomain.com`. Note that for this to work, you must map the public IP of the platform your app is running on to the chosen hostname. If you provide this property as well as `prefix`, this property will take precedence.
 
 ## Resource format
 
@@ -28,14 +36,27 @@ The following top-level information is available:
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| listeners | y | The bindings that your gateway should listen to. |  [See below](#listeners)
-
-#### Listeners
-
-You can define multiple listeners, each with a different port and protocol.
+| hostname | n | The hostname information for this gateway.  |  [See below](#hostname)
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| port | y | The port to listen on. | `80`
-| protocol | y | The protocol to use for traffic on this binding. | `'HTTP'`
+| routes | y | The routes attached to this gateway.  |  [See below](#routes)
 
+#### Routes
+
+You can define a list of routes, each representing a connection to a service.
+Routes can only be publicly accessible when declared in this list.
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| path | y | The path to match the incoming request path on. | `'/service'`
+| destination | y | The HttpRoute to route to. | `route.id`
+
+#### Hostname
+
+You can define hostname information, which will determine how to access your application.
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| prefix | n | Specify a prefix for the generated hostname. | `'prefix'`
+| fullyQualifieHostname | n | specify a fully-qualified domain name. | `'myapp.mydomain.com'`
