@@ -59,7 +59,8 @@ Learn more in the [extension documents]({{< ref vscode >}}).
    You can also import this extension on the [command-line](https://code.visualstudio.com/docs/editor/extension-gallery#_install-from-a-vsix) with:
 
    ```bash
-   curl https://radiuspublic.blob.core.windows.net/tools/vscode/edge/rad-vscode-bicep.vsix --output rad-vscode-bicep.vsix
+   curl https://radiuspublic.blob.core.windows.net/tools/vscode/stable/rad-vscode-bicep.vsix --output rad-vscode-bicep.vsix
+   curl https://radiuspublic.blob.core.windows.net/tools/vscode/stable/rad-vscode.vsix --output rad-vscode.vsix
    code --install-extension rad-vscode-bicep.vsix
    code --install-extension rad-vscode.vsix
    ```
