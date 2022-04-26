@@ -28,9 +28,6 @@ resource app 'radius.dev/Application@v1alpha3' = {
         }
       ]
     }
-    dependsOn: [
-      stateStoreStarter
-    ]
   }
   //BACKEND
 

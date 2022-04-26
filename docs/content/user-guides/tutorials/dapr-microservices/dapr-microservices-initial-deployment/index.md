@@ -26,7 +26,7 @@ Your `backend` resource, which has resource type Container, will specify:
 - **container image:** `radius.azurecr.io/daprtutorial-backend`, a Docker image the container will run. This is where your application's backend code lives.
 - **ports**: orders will be received on port 3000.
 
-Update your template.bicep file to match the full application definition:
+Update your dapr.bicep file to match the full application definition:
 
 {{< rad file="snippets/backend.bicep" embed=true >}}
 
@@ -37,7 +37,7 @@ Now you are ready to deploy the application for the first time.
 1. Deploy to your Radius environment via the rad CLI:
 
    ```sh
-   rad deploy template.bicep
+   rad deploy dapr.bicep
    ```
 
    This will deploy the application into your environment and launch the container resource for the backend website.

@@ -3,14 +3,14 @@ name: Project Radius Website
 on:
   push:
     branches:
-      - edge
+      - v0.11
     paths:
       - 'docs/**'
       - '.github/workflows/website.yaml'
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
-      - edge
+      - v0.11
     paths:
       - 'docs/**'
       - '.github/workflows/website.yaml'
@@ -36,7 +36,7 @@ jobs:
         with:
           repository: project-radius/radius
           path: ./radius
-          token: ${{ secrets.GH_PAT }}
+          token: ${{ secrets.GH_RAD_CI_BOT_PAT }}
       - name: Setup Go ${{ env.GOVER }}
         uses: actions/setup-go@v2
         with:
@@ -114,8 +114,8 @@ jobs:
       - name: Deploy to WebApp
         uses: Azure/webapps-deploy@v2
         with:
-          app-name: radius-edge
-          publish-profile: ${{ secrets.EDGE_DOCS_SITE_PUBLISHPROFILE }}
+          app-name: radius
+          publish-profile: ${{ secrets.DOCS_SITE_PUBLISHPROFILE }}
           package: site/
       - name: Download code artifacts
         uses: actions/download-artifact@v2
@@ -171,9 +171,9 @@ jobs:
     needs: ['build', 'deploy']
     runs-on: ubuntu-latest
     env:
-      ALGOLIA_APP_ID: O0QLQGNF38
+      ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_API_APPID }}
       ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
-      ALGOLIA_INDEX_NAME: radapp-dev-edge
+      ALGOLIA_INDEX_NAME: radapp-dev
     steps:
       - name: Checkout docs repo
         uses: actions/checkout@v2
