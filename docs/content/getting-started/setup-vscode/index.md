@@ -40,15 +40,19 @@ Learn more in the [extension documents]({{< ref vscode >}}).
 
 ### Install Bicep and Radius extension
 
+  {{% alert title="Bicep extension" color="info" %}}
+ Disable the official Bicep extension if you have it installed. Do not install it if prompted, our custom extension needs to be responsible for handling `.bicep` files and you cannot have both extensions enabled at once.
+   {{% /alert %}}
+   {{< tabs UI Terminal >}}
+
+   {{% codetab %}}
+
 1. Download the latest [Bicep extension](https://get.radapp.dev/tools/vscode/stable/rad-vscode-bicep.vsix)
 
 1. Download the latest [Radius extension](https://get.radapp.dev/tools/vscode/stable/rad-vscode.vsix)
 
 1. Install both `.vsix` files:
 
-   {{< tabs UI Terminal >}}
-
-   {{% codetab %}}
    In VSCode, manually install the extension using the *Install from VSIX* command in the Extensions view command drop-down.
 
    <img src="./vsix-install.png" alt="Screenshot of installing a vsix extension" width=400>
@@ -66,12 +70,9 @@ Learn more in the [extension documents]({{< ref vscode >}}).
    ```
 
    {{% /codetab %}}
-
    {{< /tabs >}}
 
-1. Disable the official Bicep extension if you have it installed. Do not install it if prompted, our custom extension needs to be responsible for handling `.bicep` files and you cannot have both extensions enabled at once.
-
-1. If running on Windows Subsystem for Linux (WSL), make sure to install the extension in WSL as well:
+   If running on Windows Subsystem for Linux (WSL), make sure to install the extension in WSL as well
 
    <img src="./wsl-extension.png" alt="Screenshot of installing a vsix extension in WSL" width=400>
 
