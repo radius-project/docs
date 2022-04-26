@@ -59,4 +59,4 @@ You can define hostname information, which will determine how to access your app
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | prefix | n | Specify a prefix for the generated hostname. | `'prefix'`
-| fullyQualifieHostname | n | specify a fully-qualified domain name. | `'myapp.mydomain.com'`
+| fullyQualifiedHostname | n | specify a fully-qualified domain name. | `'myapp.mydomain.com'`
