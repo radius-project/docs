@@ -1,0 +1,140 @@
+---
+type: docs
+title: "Install Radius"
+linkTitle: "Install Radius"
+description: "Overview of stuff that gets installed as part of Radius"
+weight: 200
+---
+
+TODO: describe our helm chart structure and which pieces are versioned separately/together. 
+
+
+## Install Radius CLI
+
+Pre-requisites:
+- [Az CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) (version 2.25.0 or later)
+
+
+{{< tabs Windows MacOS "Linux/WSL" "Cloud Shell" Binaries >}}
+
+{{% codetab %}}
+
+#### PowerShell
+
+To install the latest stable version
+
+```powershell
+iwr -useb "https://get.radapp.dev/tools/rad/install.ps1" | iex
+```
+
+To install the latest unstable version
+
+```powershell
+$script=iwr -useb  https://radiuspublic.blob.core.windows.net/tools/rad/install.ps1; $block=[ScriptBlock]::Create($script); invoke-command -ScriptBlock $block -ArgumentList edge
+```
+
+To install a specific version
+
+```powershell
+$script=iwr -useb  https://get.radapp.dev/tools/rad/install.ps1; $block=[ScriptBlock]::Create($script); invoke-command -ScriptBlock $block -ArgumentList <Version>
+```
+
+{{% /codetab %}}
+{{% codetab %}}
+
+To install the latest stable version
+
+```bash
+curl -fsSL "https://get.radapp.dev/tools/rad/install.sh" | /bin/bash
+```
+
+To install the latest unstable version
+
+```bash
+curl -fsSL "https://radiuspublic.blob.core.windows.net/tools/rad/install.sh" | /bin/bash -s edge
+```
+
+To install a specific version
+
+```bash
+curl -fsSL "https://get.radapp.dev/tools/rad/install.sh" | /bin/bash -s <Version>
+```
+
+{{% /codetab %}}
+
+{{% codetab %}}
+
+To install the latest stable version
+
+```bash
+wget -q "https://get.radapp.dev/tools/rad/install.sh" -O - | /bin/bash
+```
+
+To install the latest unstable version
+
+```bash
+wget -q "https://radiuspublic.blob.core.windows.net/tools/rad/install.sh" -O - | /bin/bash -s edge
+```
+
+To install a specific version
+
+```bash
+wget -q "https://get.radapp.dev/tools/rad/install.sh" -O - | /bin/bash -s <Version>
+```
+
+{{% /codetab %}}
+
+{{% codetab %}}
+
+[Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/overview) is an interactive, authenticated, browser-accessible shell for managing Azure resources.
+
+Azure Cloud Shell for bash doesn't have a sudo command, so users are unable to install Radius to the default `/usr/local/bin` installation path. To install the rad CLI to the home directory, run the following commands:
+
+```bash
+export RADIUS_INSTALL_DIR=./
+wget -q "https://get.radapp.dev/tools/rad/install.sh" -O - | /bin/bash
+```
+
+You can now run the rad CLI with `./rad`.
+
+PowerShell for Cloud Shell is currently not supported.
+
+{{% /codetab %}}
+
+{{% codetab %}}
+
+### Install the latest stable version
+
+1. Download the `rad` CLI from one of these URLs:
+
+   - MacOS: https://get.radapp.dev/tools/rad/0.6/macos-x64/rad
+   - Linux: https://get.radapp.dev/tools/rad/0.6/linux-x64/rad
+   - Windows: https://get.radapp.dev/tools/rad/0.6/windows-x64/rad.exe
+
+1. Ensure the user has permission to execute the binary and place it somewhere on your PATH so it can be invoked easily.
+
+### Install the latest unstable version
+
+1. Download the `rad` CLI from one of these URLs:
+
+   - MacOS: https://radiuspublic.blob.core.windows.net/tools/rad/edge/macos-x64/rad
+   - Linux: https://radiuspublic.blob.core.windows.net/tools/rad/edge/linux-x64/rad
+   - Windows: https://radiuspublic.blob.core.windows.net/tools/rad/edge/windows-x64/rad.exe
+
+1. Ensure the user has permission to execute the binary and place it somewhere on your PATH so it can be invoked easily.
+
+### Install a specific version
+
+1. Download the `rad` CLI from one of these URLs (replace `<version>` with your desired version):
+
+   - MacOS: https://get.radapp.dev/tools/rad/<version\>/macos-x64/rad
+   - Linux: https://get.radapp.dev/tools/rad/<version\>/linux-x64/rad
+   - Windows: https://get.radapp.dev/tools/rad/<version\>/windows-x64/rad.exe
+
+2. Ensure the user has permission to execute the binary and place it somewhere on your PATH so it can be invoked easily.
+
+{{% /codetab %}}
+
+{{< /tabs >}}
+
+Verify the rad CLI is installed correctly by running `rad`. 

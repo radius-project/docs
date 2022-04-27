@@ -10,7 +10,7 @@ weight: 1
 
 {{< cardpane >}}
 {{< card header="**App-centric**" >}}
-Developers [describe their application]({{< ref appmodel-concept >}}) services and relationships, rather than just a list of infrastructure.
+Developers [describe their application]({{< ref application-concept >}}) services and relationships, rather than just a list of infrastructure.
 
 <img src="app-diagram.png" alt="Screenshot of a Radius applications diagram" style="width:100%" >
 {{< /card >}}
@@ -19,10 +19,10 @@ Radius applications and tooling are agnostic of platform, services, and infrastr
 <table style="max-width:600px;margin-top:10%">
   <tr>
     <td style="width:50%;text-align:center">
-      <a href="{{< ref azure >}}"><img src="platforms/azure-logo.png" alt="Azure logo" style="width:80%"></a>
+      <a href="{{< ref deploy-to-azure >}}"><img src="platforms/azure-logo.png" alt="Azure logo" style="width:80%"></a>
     </td>
     <td style="width:50%;text-align:center">
-      <a href="{{< ref kubernetes >}}"><img src="platforms/kubernetes-logo.svg" alt="Kubernetes logo" style="width:80%"></a>
+      <a href="{{< ref deploy-to-kubernetes >}}"><img src="platforms/kubernetes-logo.svg" alt="Kubernetes logo" style="width:80%"></a>
     </td>
   </tr>
 </table>
@@ -34,7 +34,7 @@ Radius extends strong existing tools to further streamline the app developer exp
 <table style="max-width:600px">
   <tr>
     <td style="width:50%;text-align:center">
-      <a href="{{< ref setup-vscode >}}"><img src="vscode-logo.png" alt="Visual Studio Code logo" style="width:80%"></a>
+      <a href="{{< ref getting-started >}}"><img src="vscode-logo.png" alt="Visual Studio Code logo" style="width:80%"></a>
     </td>
     <td style="width:50%;text-align:center">
       <a href="{{< ref bicep >}}" target="_blank"><img src="bicep-logo.png" alt="Bicep logo" style="width:70%"></a>
@@ -60,4 +60,4 @@ Developers can offload the complexity of wiring-up applications and let Radius e
 {{< /card >}}
 {{< /cardpane >}}
 
-{{< button text="Get started with Radius 🚀" page="install-cli.md" color="success" size="btn-lg" >}}
+{{< button text="Get started with Radius 🚀" page="getting-started" color="success" size="btn-lg" >}}
