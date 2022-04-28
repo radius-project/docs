@@ -33,7 +33,7 @@ _Note that you are responsible for any costs incurred in your subscription._
 
    **This will prompt you for several inputs and then create assets in your subscription (~5-10 mins).**
 
-   For more info about what's being created as part of an environment, see [Azure environments]({{< ref azure>}}).
+   For more info about what's being created as part of an environment, and troubleshooting steps, see [Azure environments]({{< ref azure>}}).
 
 1. Verify creation of your new environment:
 
