@@ -76,6 +76,15 @@ Use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}):
 rad env delete -e azure --yes
 ```
 
+## Troubleshooting
+
+### Manually leanup old/incomplete deployments
+
+If your environment initialization does not complete or `rad env delete` does not work, follow these steps:
+
+1. Delete the Azure resource group that contains the AKS cluster and managed identities
+1. Open `~/.rad/config.yaml` and remove the YAML entry for the environment and the entry for the default environment, if set
+
 ## Related links
 
 - [Radius tutorials]({{< ref tutorials >}})
