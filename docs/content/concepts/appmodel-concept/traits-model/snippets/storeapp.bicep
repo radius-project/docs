@@ -42,9 +42,7 @@ resource app 'radius.dev/Application@v1alpha3' = {
   resource storefrontHttp 'HttpRoute' = {
     name: 'storefront-http'
     properties: {
-      gateway: {
-        hostname: 'example.com'
-      }
+      port: 80
     }
   }
 

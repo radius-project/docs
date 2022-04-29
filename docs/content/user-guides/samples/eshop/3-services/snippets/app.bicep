@@ -93,13 +93,13 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           XamarinCallback: ''
           EnableDevspaces: ENABLEDEVSPACES
           ConnectionString: 'Server=tcp:${sqlIdentity.properties.server},1433;Initial Catalog=${sqlIdentity.properties.database};User Id=${adminLogin};Password=${adminPassword}'
-          MvcClient: '${CLUSTERDNS}${webmvcHttp.properties.gateway.rules.webmvc.path.value}'
+          MvcClient: webmvcHttp.properties.url
           SpaClient: CLUSTERDNS
-          BasketApiClient: '${CLUSTERDNS}${basketHttp.properties.gateway.rules.basket.path.value}'
-          OrderingApiClient: '${CLUSTERDNS}${orderingHttp.properties.gateway.rules.ordering.path.value}'
-          WebShoppingAggClient: '${CLUSTERDNS}${webshoppingaggHttp.properties.gateway.rules.webshoppingagg.path.value}'
-          WebhooksApiClient: '${CLUSTERDNS}${webhooksHttp.properties.gateway.rules.webhooks.path.value}'
-          WebhooksWebClient: '${CLUSTERDNS}${webhooksclientHttp.properties.gateway.rules.webhooks.path.value}'
+          BasketApiClient: basketHttp.properties.url
+          OrderingApiClient: orderingHttp.properties.url
+          WebShoppingAggClient: webshoppingaggHttp.properties.url
+          WebhooksApiClient: webhooksHttp.properties.url
+          WebhooksWebClient: webhooksclientHttp.properties.url
         }
         ports: {
           http: {
@@ -180,7 +180,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           ConnectionString: 'Server=tcp:${sqlOrdering.properties.server},1433;Initial Catalog=${sqlOrdering.properties.database};User Id=${adminLogin};Password=${adminPassword}'
           EventBusConnection: tempRabbitmqConnectionString
           identityUrl: identityHttp.properties.url
-          IdentityUrlExternal: '${CLUSTERDNS}${identityHttp.properties.gateway.rules.identity.path.value}'
+          IdentityUrlExternal: '${CLUSTERDNS}/identity-api'
         }
         ports: {
           http: {
@@ -244,7 +244,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           ConnectionString: '${redisBasket.properties.host}:${redisBasket.properties.port}'
           EventBusConnection: tempRabbitmqConnectionString
           identityUrl: identityHttp.properties.url
-          IdentityUrlExternal: '${CLUSTERDNS}${identityHttp.properties.gateway.rules.identity.path.value}'
+          IdentityUrlExternal: '${CLUSTERDNS}/identity-api'
         }
         ports: {
           http: {
@@ -304,7 +304,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           ConnectionString: 'Server=tcp:${sqlWebhooks.properties.server},1433;Initial Catalog=${sqlWebhooks.properties.database};User Id=${adminLogin};Password=${adminPassword}'
           EventBusConnection: tempRabbitmqConnectionString
           identityUrl: identityHttp.properties.url
-          IdentityUrlExternal: '${CLUSTERDNS}${identityHttp.properties.gateway.rules.identity.path.value}'
+          IdentityUrlExternal: '${CLUSTERDNS}/identity-api'
         }
         ports: {
           http: {
@@ -450,7 +450,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           IdentityUrlHC: '${identityHttp.properties.url}/hc'
           BasketUrlHC: '${basketHttp.properties.url}/hc'
           PaymentUrlHC: '${paymentHttp.properties.url}/hc'
-          IdentityUrlExternal: '${CLUSTERDNS}${identityHttp.properties.gateway.rules.identity.path.value}'
+          IdentityUrlExternal: '${CLUSTERDNS}/identity-api'
         }
         ports: {
           http: {
@@ -546,7 +546,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           EventBusConnection: tempRabbitmqConnectionString
           SignalrStoreConnectionString: '${redisKeystore.properties.host}'
           identityUrl: identityHttp.properties.url
-          IdentityUrlExternal: '${CLUSTERDNS}${identityHttp.properties.gateway.rules.identity.path.value}'
+          IdentityUrlExternal: '${CLUSTERDNS}/identity-api'
         }
         ports: {
           http: {
@@ -603,10 +603,10 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           ASPNETCORE_URLS: 'http://0.0.0.0:80'
           PATH_BASE: '/webhooks-web'
           Token: 'WebHooks-Demo-Web'
-          CallBackUrl: '${CLUSTERDNS}${webhooksclientHttp.properties.gateway.rules.webhooks.path.value}'
+          CallBackUrl: '${CLUSTERDNS}/webhooks-web'
           SelfUrl: webhooksclientHttp.properties.url
           WebhooksUrl: webhooksHttp.properties.url
-          IdentityUrl: '${CLUSTERDNS}${identityHttp.properties.gateway.rules.identity.path.value}'
+          IdentityUrl: identityHttp.properties.url
         }
         ports: {
           http: {
@@ -705,9 +705,9 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           IsClusterEnv: 'True'
           CallBackUrl: '${CLUSTERDNS}/'
           DPConnectionString: '${redisKeystore.properties.host}'
-          IdentityUrl: '${CLUSTERDNS}${identityHttp.properties.gateway.rules.identity.path.value}'
+          IdentityUrl: identityHttp.properties.url
           IdentityUrlHC: '${identityHttp.properties.url}/hc'
-          PurchaseUrl: '${CLUSTERDNS}${webshoppingapigwHttp.properties.gateway.rules.webshoppingapigw.path.value}'
+          PurchaseUrl: webshoppingapigwHttp.properties.url
           SignalrHubUrl: orderingsignalrhubHttp.properties.url
         }
         ports: {
@@ -766,7 +766,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           UseLoadTest: 'False'
           OrchestratorType: OCHESTRATOR_TYPE
           IsClusterEnv: 'True'
-          ExternalPurchaseUrl: '${CLUSTERDNS}${webshoppingapigwHttp.properties.gateway.rules.webshoppingapigw.path.value}'
+          ExternalPurchaseUrl: '${CLUSTERDNS}/webshoppingapigw'
           CallBackUrl: 'http://${CLUSTER_IP}.nip.io/webmvc'
           IdentityUrl: 'http://${CLUSTER_IP}.nip.io/identity-api'
           IdentityUrlHC: '${identityHttp.properties.url}/hc'
