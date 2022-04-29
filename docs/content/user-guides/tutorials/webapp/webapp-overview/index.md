@@ -10,9 +10,9 @@ slug: "overview"
 You will be deploying an application, `todoapp`, with the following resources:
 
 1. [`frontend`](#frontend-container): A containerized to-do list frontend written in Node.JS
-2. [`frontend-gateway`](#gateway-gateway): A [Gateway]({{< ref gateway >}}) that exposes the application to the internet
-3. [`frontend-route`](#todoroute-httproute): An [HttpRoute]({{< ref httproute >}}) that declares the connection to the frontend container
-4. [`db`](#db-connector): A [MongoDB connector]({{< ref mongodb >}}) to save to-do items in. Can be backed by either:
+1. [`frontend-route`](#todoroute-httproute): An [HttpRoute]({{< ref httproute >}}) that declares the connection to the frontend container
+1. [`gateway`](#gateway-gateway): A [Gateway]({{< ref gateway >}}) that exposes the application to the internet
+1. [`db`](#db-connector): A [MongoDB connector]({{< ref mongodb >}}) to save to-do items in. Can be backed by either:
    - A MongoDB container
    - An Azure CosmosDB w/ Mongo API
 
@@ -32,13 +32,13 @@ The website uses the MongoDB protocol to read and store data in a database. The 
 
 You can view and download the source code in the [samples repo](https://github.com/project-radius/samples). For access fill out [this form](https://aka.ms/ProjectRadius/GitHubAccess).
 
-### `frontend-gateway` Gateway
-
-In order for users to connect to `todoapp` over the internet, a [Gateway]({{< ref gateway >}}) is used to define the appropriate route paths.
-
 ### `frontend-route` HttpRoute
 
 An [HttpRoute]({{< ref httproute >}}) is used to define communication to the container app `frontend`.
+
+### `gateway` Gateway
+
+In order for users to connect to `todoapp` over the internet, a [Gateway]({{< ref gateway >}}) is used to define the appropriate route paths.
 
 ### `db` Connector
 

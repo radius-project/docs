@@ -26,7 +26,7 @@ The **`frontend`** [container]({{< ref container >}}) resource specifies:
 - `container image`: The container image to run. This is where your website's front end code lives
 - `ports`: The port to expose on the container, along with the [HttpRoute]({{< ref httproute >}}) that will be used to access the container
 
-The **`frontend-gateway`** [Gateway]({{< ref gateway >}}) resource specifies:
+The **`gateway`** [Gateway]({{< ref gateway >}}) resource specifies:
 
 - `routes`: The routes handled by this gateway. Here, we specify that `'/'` should map to `frontend-route`, which is provided by the 'frontend' container.
 

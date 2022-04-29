@@ -26,8 +26,12 @@ resource app 'radius.dev/Application@v1alpha3' = {
     ]
   }
 
+  resource todoRoute 'HttpRoute' = {
+    name: 'frontend-route'
+  }
+
   resource todoGateway 'Gateway' = {
-    name: 'frontend-gateway'
+    name: 'gateway'
     properties: {
       routes: [
         {
@@ -36,10 +40,6 @@ resource app 'radius.dev/Application@v1alpha3' = {
         }
       ]
     }
-  }
-
-  resource todoRoute 'HttpRoute' = {
-    name: 'frontend-route'
   }
 
   // This temporary existing reference points to the Mongo Starter deployed by the starter
