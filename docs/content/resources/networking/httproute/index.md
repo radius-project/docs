@@ -2,7 +2,7 @@
 type: docs
 title: "HttpRoute"
 linkTitle: "HttpRoute"
-description: "Learn how to define HTTP communication with an HttpRoute"
+description: "Route HTTP traffic between services using HTTP routes"
 weight: 100
 ---
 
@@ -10,11 +10,9 @@ weight: 100
 
 An `HttpRoute` resource defines HTTP communication between two [services]({{< ref services >}}).
 
-To provide external access to the route, a [gateway]({{< ref gateway >}}) must also be present.
+To provide external access to the route, a [gateway]({{< ref gateway >}}) must also be configured.
 
-## Route format
-
-An HttpRoute is defined as a resource within your application, defined at the same level as the services providing and consuming the HTTP communication.
+## Resource format
 
 {{< rad file="snippets/httproute.bicep" embed=true marker="//HTTPROUTE" >}}
 

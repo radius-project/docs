@@ -6,8 +6,12 @@ resource app 'radius.dev/Application@v1alpha3' = {
     name: 'gateway'
     properties: {
       hostname: {
-        prefix: 'hostname'
-        // Or
+        // Ommiting hostname properties results in gatewayname.appname.PUBLIC_HOSTNAME_OR_IP.nip.io
+        
+        // Results in prefix.appname.PUBLIC_HOSTNAME_OR_IP.nip.io
+        prefix: 'prefix'
+
+        // Alternately you can specify your own hostname that you've configured externally
         fullyQualifiedHostname: 'hostname.radapp.dev'
       }
       routes: [
