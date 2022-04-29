@@ -173,7 +173,7 @@ jobs:
     env:
       ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_API_APPID }}
       ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
-      ALGOLIA_INDEX_NAME: radapp-dev
+      ALGOLIA_INDEX_NAME: radapp-dev-edge
     steps:
       - name: Checkout docs repo
         uses: actions/checkout@v2
