@@ -11,7 +11,7 @@ To complete the application, you'll add another component for the frontend user 
 
 Again, we'll discuss changes to your Bicep file and then provide the full, updated file before deployment.
 
-## Add `frontend` container and HTTP route
+## Add `frontend` container and `frontend-route` HttpRoute
 
 Another container resource is used to specify a few properties about the order generator:
 
@@ -19,7 +19,7 @@ Another container resource is used to specify a few properties about the order g
 - **connections**: `daprBackend.id` declares the intention for `frontend` to communicate with `backend` through the `daprBackend` Dapr HTTP Route.
 - **traits**: `dapr.io/Sidecar` configures Dapr on the container.
 
-Additionally, an [HTTP Route]({{< ref http-route>}}) is configured to expose the `frontend` container on a public endpoint.
+Additionally, a [Gateway]({{< ref gateway >}}) and an [HttpRoute]({{< ref httproute >}}) are configured to expose the `frontend` container on a public endpoint.
 
 {{< rad file="snippets/frontend.bicep" marker="//FRONTEND" embed=true >}}
 
@@ -43,11 +43,11 @@ services.AddSingleton<HttpClient>(DaprClient.CreateInvokeHttpClient(appId));
    rad deploy dapr.bicep
    ```
 
-   Now that we added a 'HttpRoute', a public endpoint will be available to your application.
+   Now that we added a `Gateway` and an `HttpRoute`, a public endpoint will be available to your application.
 
    ```sh
    Public Endpoints:
-      HttpRoute            frontend-route           IP-ADDRESS
+      Gateway            frontend-gateway           IP-ADDRESS
    ```
 
    Navigate to the endpoint to view the application:

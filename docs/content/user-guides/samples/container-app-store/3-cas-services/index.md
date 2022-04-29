@@ -64,17 +64,17 @@ The Container App Store services are modeled as Radius [container resources]({{<
 
 Note the [`dapr.io/Sidecar` trait]({{< ref dapr-trait >}}) to add Dapr to each service.
 
-## HTTP Routes
+## HTTP Route + Gateway
 
 Each service will communicate with each other via HTTP.
 
-An [Http Route]({{< ref http-route >}}) resource allows services to communicate with eachother. Gateways can also be added to expose the service over the internet.
+An [HttpRoute]({{< ref httproute >}}) resource allows services to communicate with eachother. A [Gateway]({{< ref gateway >}}) resource can be added to let your services be accessible to the internet via a DNS name and paths.
 
 {{< rad file="snippets/app.bicep" embed=true marker="//ROUTE">}}
 
-## Dapr HTTP Routes
+## Dapr Invoke Routes
 
-The Python service allows other services to invoke it using Dapr Service Invocation, using a [Dapr Invoke Route]({{< ref dapr-http >}}):
+The Python and Go services allow other services to invoke them using Dapr Service Invocation, using a [Dapr Invoke Route]({{< ref dapr-http >}}):
 
 {{< rad file="snippets/app.bicep" embed=true marker="//DAPR" >}}
 

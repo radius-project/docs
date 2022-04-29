@@ -3,13 +3,20 @@ resource app 'radius.dev/Application@v1alpha3' = {
   name: 'dapr-tutorial'
 
   //FRONTEND
+  resource frontendGateway 'Gateway' = {
+    name: 'gateway'
+    properties: {
+      routes: [
+        {
+          path: '/'
+          destination: frontendRoute.id
+        }
+      ]
+    }
+  }
+  
   resource frontendRoute 'HttpRoute' = {
     name: 'frontend-route'
-    properties: {
-      gateway: {
-        hostname: '*'
-      }
-    }
   }
   
   resource frontend 'Container' = {

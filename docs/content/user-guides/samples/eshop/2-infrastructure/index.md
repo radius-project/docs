@@ -22,7 +22,6 @@ Begin by modeling all of your application's infrastructure. This example uses [s
 All of the infrastructure services can be deployed as containers and routes:
 <br /><br />
 {{< rad file="snippets/infra.bicep" embed=true download=true >}}
-
 {{< /codetab >}}
 
 {{< codetab >}}
