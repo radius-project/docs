@@ -1,9 +1,9 @@
 ---
 type: docs
 title: "eShop on containers sample"
-linkTitle: "eShop (preview)"
+linkTitle: "eShop"
 description: "Learn how to model and deploy a production-level application with Radius"
-weight: 300
+weight: 100
 ---
 
 {{% alert title="Preview" color="info" %}}

@@ -1,3 +1,5 @@
+param fileshare resource 'Microsoft.Storage/storageAccounts/fileServices/shares@2021-06-01'
+
 resource app 'radius.dev/Application@v1alpha3' = {
   name: 'myapp'
 
@@ -6,7 +8,7 @@ resource app 'radius.dev/Application@v1alpha3' = {
     name: 'myshare'
     properties: {
       kind: 'azure.com.fileshare'
-      managed: true
+      resource: fileshare.id
     }
   }
 

@@ -1,3 +1,6 @@
+param fileShare resource 'Microsoft.Storage/storageAccounts/fileServices/shares@2021-06-01'
+param mongoDB resource 'Microsoft.DocumentDB/databaseAccounts/mongodbDatabases@2021-07-01-preview'
+
 resource app 'radius.dev/Application@v1alpha3' = {
   name: 'myapp'
 
@@ -59,7 +62,7 @@ resource app 'radius.dev/Application@v1alpha3' = {
     name: 'myshare'
     properties:{
       kind: 'azure.com.fileshare'
-      managed:true
+      resource: fileShare.id
     }
   }
 
@@ -70,7 +73,7 @@ resource app 'radius.dev/Application@v1alpha3' = {
   resource db 'mongo.com.MongoDatabase' = {
     name: 'database'
     properties: {
-      managed: true
+      resource: mongoDB.id
     }
   }
 
