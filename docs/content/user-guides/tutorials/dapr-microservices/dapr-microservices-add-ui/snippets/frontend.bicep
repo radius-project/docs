@@ -4,7 +4,7 @@ resource app 'radius.dev/Application@v1alpha3' = {
 
   //FRONTEND
   resource frontendGateway 'Gateway' = {
-    name: 'frontend-gateway'
+    name: 'gateway'
     properties: {
       routes: [
         {
@@ -14,7 +14,7 @@ resource app 'radius.dev/Application@v1alpha3' = {
       ]
     }
   }
-
+  
   resource frontendRoute 'HttpRoute' = {
     name: 'frontend-route'
   }
