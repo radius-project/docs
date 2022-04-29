@@ -7,20 +7,6 @@ param adminPassword string
 resource eshop 'radius.dev/Application@v1alpha3' = {
   name: 'eshop'
 
-  // Gateway --------------------------------------------
-
-  resource gateway 'Gateway' = {
-    name: 'gateway'
-    properties: {
-      listeners: {
-        http: {
-          protocol: 'HTTP'
-          port: 80
-        }
-      }
-    }
-  }
-
 }
 
 // Infrastructure

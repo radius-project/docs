@@ -36,10 +36,17 @@ resource app 'radius.dev/Application@v1alpha3' existing = {
 
   resource node_app_route 'HttpRoute' = {
     name: 'node-app'
+  }
+
+  resource gateway 'Gateway' = {
+    name: 'gateway'
     properties: {
-      gateway: {
-        hostname: '*'
-      }
+      routes: [
+        {
+          path: '/'
+          destination: node_app_route.id
+        }
+      ]
     }
   }
 
