@@ -13,7 +13,7 @@ In this tutorial you will be deploying an online store where you can order items
 
 #### (optional) Download the source code
 
-You can download the source code [here](https://get.radapp.dev/tutorials/edge/dapr-microservices.zip) if you want to see the complete code.
+You can view and download the source code in the [samples repo](https://github.com/project-radius/samples). For access fill out [this form](https://aka.ms/ProjectRadius/GitHubAccess).
 
 ## Resources
 

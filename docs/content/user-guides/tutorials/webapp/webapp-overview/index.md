@@ -29,7 +29,7 @@ The website uses the MongoDB protocol to read and store data in a database. The 
 
 #### (optional) Download the source code
 
-You can download the source code [here](https://get.radapp.dev/tutorials/edge/webapp.zip) if you want to see how the complete code.
+You can view and download the source code in the [samples repo](https://github.com/project-radius/samples). For access fill out [this form](https://aka.ms/ProjectRadius/GitHubAccess).
 
 ### `frontend-route` HTTP route
 
