@@ -1,3 +1,5 @@
+param storage resource 'Microsoft.Storage/storageAccounts@2021-06-01'
+
 resource app 'radius.dev/Application@v1alpha3' = {
   name: 'shopping-app'
 
@@ -74,7 +76,7 @@ resource app 'radius.dev/Application@v1alpha3' = {
     name: 'inventorystore'
     properties: {
       kind: 'state.azure.tablestorage'
-      managed: true
+      resource: storage.id
     }
   }
 }

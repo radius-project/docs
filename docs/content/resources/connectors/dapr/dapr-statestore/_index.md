@@ -46,12 +46,6 @@ Use `kind` of `state.azure.tablestorage` to create a Dapr component spec for Azu
 
 {{< rad file="snippets/dapr-statestore-tablestorage.bicep" embed=true marker="//SAMPLE" >}}
 
-### Azure Cache for Redis
-
-Use `kind` of `state.redis` to create a Dapr component spec for Azure Cache for Redis. Set `resource` to the Azure Cache for Redis resource ID.
-
-{{< rad file="snippets/dapr-statestore-redis.bicep" embed=true marker="//SAMPLE" >}}
-
 ### Generic
 
 A generic pub/sub lets you manually specify the metadata of a Dapr state store. When `kind` is set to `generic`, you can specify `type`, `metadata`, and `version` to create a Dapr component spec. These values must match the schema of the intended [Dapr component](https://docs.dapr.io/reference/components-reference/supported-state-stores/).
