@@ -3,18 +3,64 @@ param CLUSTER_IP string
 param OCHESTRATOR_TYPE string = 'K8S'
 param APPLICATION_INSIGHTS_KEY string = ''
 param AZURESTORAGEENABLED string = 'False'
-param AZURESERVICEBUSENABLED string = 'False'
+param AZURESERVICEBUSENABLED string = 'True'
 param ENABLEDEVSPACES string = 'False'
 param TAG string = 'linux-dev'
 
 var CLUSTERDNS = 'http://${CLUSTER_IP}.nip.io'
 var PICBASEURL = '${CLUSTERDNS}/webshoppingapigw/c/api/v1/catalog/items/[0]/pic'
 
-param adminLogin string = 'SA'
+param adminLogin string = 'sqladmin'
 @secure()
 param adminPassword string
 
-resource eshop 'radius.dev/Application@v1alpha3' = {
+resource servicebus 'Microsoft.ServiceBus/namespaces@2021-06-01-preview' existing = {
+  name: 'eshop${uniqueString(resourceGroup().id)}'
+
+  resource topic 'topics' existing = {
+    name: 'eshop_event_bus'
+
+    resource rootRule 'authorizationRules' existing = {
+      name: 'Root'
+    }
+
+    resource basket 'subscriptions' existing = {
+      name: 'Basket'
+    }
+
+    resource catalog 'subscriptions' existing = {
+      name: 'Catalog'
+    }
+
+    resource ordering 'subscriptions' existing = {
+      name: 'Ordering'
+    }
+
+    resource graceperiod 'subscriptions' existing = {
+      name: 'GracePeriod'
+    }
+
+    resource payment 'subscriptions' existing = {
+      name: 'Payment'
+    }
+
+    resource backgroundTasks 'subscriptions' existing = {
+      name: 'backgroundtasks'
+    }
+
+    resource OrderingSignalrHub 'subscriptions' existing = {
+      name: 'Ordering.signalrhub'
+    }
+
+    resource webhooks 'subscriptions' existing = {
+      name: 'Webhooks'
+    }
+
+  }
+
+}
+
+resource eshop 'radius.dev/Application@v1alpha3' existing = {
   name: 'eshop'
 
   // Based on https://github.com/dotnet-architecture/eShopOnContainers/tree/dev/deploy/k8s/helm/catalog-api
@@ -34,8 +80,8 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
           AzureStorageEnabled: AZURESTORAGEENABLED
           ApplicationInsights__InstrumentationKey: APPLICATION_INSIGHTS_KEY
           AzureServiceBusEnabled: AZURESERVICEBUSENABLED
-          ConnectionString: 'Server=${sqlRoute.properties.host};Initial Catalog=CatalogDb;User Id=${adminLogin};Password=${adminPassword};'
-          EventBusConnection: 'eshop-rabbitmq'
+          ConnectionString: 'Server=tcp:${sqlCatalog.properties.server},1433;Initial Catalog=${sqlCatalog.properties.database};User Id=${adminLogin};Password=${adminPassword};'
+          EventBusConnection: listKeys(servicebus::topic::rootRule.id, servicebus::topic::rootRule.apiVersion).primaryConnectionString
         }
         ports: {
           http: {
@@ -44,18 +90,17 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
           }
           grpc: {
             containerPort: 81
-            provides: catalogGrpc.id
           }
         }
       }
       connections: {
         sql: {
-          kind: 'Http'
-          source: sqlRoute.id
+          kind: 'microsoft.com/SQL'
+          source: sqlCatalog.id
         }
         servicebus: {
-          kind: 'rabbitmq.com/MessageQueue'
-          source: rabbitmq.id
+          kind: 'azure'
+          source: servicebus.id
         }
       }
     }
@@ -85,20 +130,20 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
           PATH_BASE: '/identity-api'
           ASPNETCORE_ENVIRONMENT: 'Development'
           ASPNETCORE_URLS: 'http://0.0.0.0:80'
-          OrchestratorType: 'K8S'
-          IsClusterEnv: 'True' 
-          DPConnectionString: '${redisKeystore.properties.host}'
+          OrchestratorType: OCHESTRATOR_TYPE
+          IsClusterEnv: 'True'
+          DPConnectionString: '${redisKeystore.properties.host}:${redisKeystore.properties.port},password=${redisKeystore.password()},ssl=True,abortConnect=False'
           ApplicationInsights__InstrumentationKey: APPLICATION_INSIGHTS_KEY
           XamarinCallback: ''
           EnableDevspaces: ENABLEDEVSPACES
-          ConnectionString: 'Server=${sqlRoute.properties.host};Initial Catalog=IdentityDb;User Id=${adminLogin};Password=${adminPassword};'
-          MvcClient: '${CLUSTERDNS}${webmvcHttp.properties.gateway.rules.webmvc.path.value}'
+          ConnectionString: 'Server=tcp:${sqlIdentity.properties.server},1433;Initial Catalog=${sqlIdentity.properties.database};User Id=${adminLogin};Password=${adminPassword};Encrypt=true'
+          MvcClient: 'http://${CLUSTERDNS}${webmvcHttp.properties.gateway.rules.webmvc.path.value}'
           SpaClient: CLUSTERDNS
-          BasketApiClient: '${CLUSTERDNS}${basketHttp.properties.gateway.rules.basket.path.value}'
-          OrderingApiClient: '${CLUSTERDNS}${orderingHttp.properties.gateway.rules.ordering.path.value}'
-          WebShoppingAggClient: '${CLUSTERDNS}${webshoppingaggHttp.properties.gateway.rules.webshoppingagg.path.value}'
-          WebhooksApiClient: '${CLUSTERDNS}${webhooksHttp.properties.gateway.rules.webhooks.path.value}'
-          WebhooksWebClient: '${CLUSTERDNS}${webhooksclientHttp.properties.gateway.rules.webhooks.path.value}'
+          BasketApiClient: 'http://${CLUSTERDNS}${basketHttp.properties.gateway.rules.basket.path.value}'
+          OrderingApiClient: 'http://${CLUSTERDNS}${orderingHttp.properties.gateway.rules.ordering.path.value}'
+          WebShoppingAggClient: 'http://${CLUSTERDNS}${webshoppingaggHttp.properties.gateway.rules.webshoppingagg.path.value}'
+          WebhooksApiClient: 'http://${CLUSTERDNS}${webhooksHttp.properties.gateway.rules.webhooks.path.value}'
+          WebhooksWebClient: 'http://${CLUSTERDNS}${webhooksclientHttp.properties.gateway.rules.webhooks.path.value}'
         }
         ports: {
           http: {
@@ -114,8 +159,8 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
           source: redisKeystore.id
         }
         sql: {
-          kind: 'Http'
-          source: sqlRoute.id
+          kind: 'microsoft.com/SQL'
+          source: sqlIdentity.id
         }
         webmvc: {
           kind: 'Http'
@@ -141,7 +186,7 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
           kind: 'Http'
           source: webhooksHttp.id
         }
-        webhoolsclient: {
+        webhooksclient: {
           kind: 'Http'
           source: webhooksclientHttp.id
         }
@@ -177,7 +222,7 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
           ASPNETCORE_ENVIRONMENT: 'Development'
           ASPNETCORE_URLS: 'http://0.0.0.0:80'
           UseCustomizationData: 'False'
-          AzureServiceBusEnabled: AZURESERVICEBUSENABLED
+          AzureServiceBusEnabled: 'True'
           CheckUpdateTime: '30000'
           ApplicationInsights__InstrumentationKey: APPLICATION_INSIGHTS_KEY
           OrchestratorType: OCHESTRATOR_TYPE
@@ -187,8 +232,8 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
           PATH_BASE: '/ordering-api'
           GRPC_PORT: '81'
           PORT: '80'
-          ConnectionString: 'Server=${sqlRoute.properties.host};Initial Catalog=OrderingDb;User Id=${adminLogin};Password=${adminPassword};'
-          EventBusConnection: 'eshop-rabbitmq'
+          ConnectionString: 'Server=tcp:${sqlOrdering.properties.server},1433;Initial Catalog=${sqlOrdering.properties.database};User Id=${adminLogin};Password=${adminPassword};Encrypt=true'
+          EventBusConnection: listKeys(servicebus::topic::rootRule.id, servicebus::topic::rootRule.apiVersion).primaryConnectionString
           identityUrl: identityHttp.properties.url
           IdentityUrlExternal: '${CLUSTERDNS}${identityHttp.properties.gateway.rules.identity.path.value}'
         }
@@ -206,16 +251,16 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
       traits: []
       connections: {
         sql: {
-          kind: 'Http'
-          source: sqlRoute.id
-        }
-        servicebus: {
-          kind: 'rabbitmq.com/MessageQueue'
-          source: rabbitmq.id
+          kind: 'microsoft.com/SQL'
+          source: sqlOrdering.id
         }
         identity: {
           kind: 'Http'
           source: identityHttp.id
+        }
+        servicebus: {
+          kind: 'azure'
+          source: servicebus.id
         }
       }
     }
@@ -251,19 +296,19 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
     name: 'basket-api'
     properties: {
       container: {
-        image: 'eshop/basket.api:${TAG}'
+        image: 'radius.azurecr.io/eshop-basket:linux-latest'
         env: {
           ASPNETCORE_ENVIRONMENT: 'Development'
           ASPNETCORE_URLS: 'http://0.0.0.0:80'
           ApplicationInsights__InstrumentationKey: APPLICATION_INSIGHTS_KEY
           UseLoadTest: 'False'
           PATH_BASE: '/basket-api'
-          OrchestratorType: 'K8S'
+          OrchestratorType: OCHESTRATOR_TYPE
           PORT: '80'
           GRPC_PORT: '81'
           AzureServiceBusEnabled: AZURESERVICEBUSENABLED
-          ConnectionString: '${redisBasket.properties.host}:${redisBasket.properties.port}'
-          EventBusConnection: 'eshop-rabbitmq'
+          ConnectionString: '${redisBasket.properties.host}:${redisBasket.properties.port},password=${redisBasket.password()},ssl=True,abortConnect=False,sslprotocols=tls12'
+          EventBusConnection: listKeys(servicebus::topic::rootRule.id, servicebus::topic::rootRule.apiVersion).primaryConnectionString
           identityUrl: identityHttp.properties.url
           IdentityUrlExternal: '${CLUSTERDNS}${identityHttp.properties.gateway.rules.identity.path.value}'
         }
@@ -284,13 +329,13 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
           kind: 'redislabs.com/Redis'
           source: redisBasket.id
         }
-        servicebus: {
-          kind: 'rabbitmq.com/MessageQueue'
-          source: rabbitmq.id
-        }
         identity: {
           kind: 'Http'
           source: identityHttp.id
+        }
+        servicebus: {
+          kind: 'azure'
+          source: servicebus.id
         }
       }
     }
@@ -326,15 +371,14 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
     name: 'webhooks-api'
     properties: {
       container: {
-        image: 'eshop/webhooks.api:linux-dev'
+        image: 'eshop/webhooks.api:${TAG}'
         env: {
-          PATH_BASE: '/webhooks-api'
           ASPNETCORE_ENVIRONMENT: 'Development'
           ASPNETCORE_URLS: 'http://0.0.0.0:80'
           OrchestratorType: OCHESTRATOR_TYPE
           AzureServiceBusEnabled: AZURESERVICEBUSENABLED
-          ConnectionString: 'Server=${sqlRoute.properties.host};Initial Catalog=WebhookDb;User Id=${adminLogin};Password=${adminPassword};'
-          EventBusConnection: 'eshop-rabbitmq'
+          ConnectionString: 'Server=tcp:${sqlWebhooks.properties.server},1433;Initial Catalog=${sqlWebhooks.properties.database};User Id=${adminLogin};Password=${adminPassword};Encrypt=true'
+          EventBusConnection: listKeys(servicebus::topic::rootRule.id, servicebus::topic::rootRule.apiVersion).primaryConnectionString
           identityUrl: identityHttp.properties.url
           IdentityUrlExternal: '${CLUSTERDNS}${identityHttp.properties.gateway.rules.identity.path.value}'
         }
@@ -348,16 +392,16 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
       traits: []
       connections: {
         sql: {
-          kind: 'Http'
-          source: sqlRoute.id
-        }
-        servicebus: {
-          kind: 'rabbitmq.com/MessageQueue'
-          source: rabbitmq.id
+          kind: 'microsoft.com/SQL'
+          source: sqlWebhooks.id
         }
         identity: {
           kind: 'Http'
           source: identityHttp.id
+        }
+        servicebus: {
+          kind: 'azure'
+          source: servicebus.id
         }
       }
     }
@@ -386,14 +430,16 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
     name: 'payment-api'
     properties: {
       container: {
-        image: 'eshop/payment.api:linux-dev'
+        image: 'eshop/payment.api:${TAG}'
         env: {
+          ASPNETCORE_ENVIRONMENT: 'Development'
+          ASPNETCORE_URLS: 'http://0.0.0.0:80'
           ApplicationInsights__InstrumentationKey: APPLICATION_INSIGHTS_KEY
           'Serilog__MinimumLevel__Override__payment-api.IntegrationEvents.EventHandling': 'Verbose'
           'Serilog__MinimumLevel__Override__Microsoft.eShopOnContainers.BuildingBlocks.EventBusRabbitMQ': 'Verbose'
           OrchestratorType: OCHESTRATOR_TYPE
           AzureServiceBusEnabled: AZURESERVICEBUSENABLED
-          EventBusConnection: 'eshop-rabbitmq'
+          EventBusConnection: listKeys(servicebus::topic::rootRule.id, servicebus::topic::rootRule.apiVersion).primaryConnectionString
         }
         ports: {
           http: {
@@ -405,8 +451,8 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
       traits: []
       connections: {
         servicebus: {
-          kind: 'rabbitmq.com/MessageQueue'
-          source: rabbitmq.id
+          kind: 'azure'
+          source: servicebus.id
         }
       }
     }
@@ -424,10 +470,11 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
     name: 'ordering-backgroundtasks'
     properties: {
       container: {
-        image: 'eshop/ordering.backgroundtasks:linux-dev'
+        image: 'eshop/ordering.backgroundtasks:${TAG}'
         env: {
           ASPNETCORE_ENVIRONMENT: 'Development'
           ASPNETCORE_URLS: 'http://0.0.0.0:80'
+          PATH_BASE: '/ordering-backgroundtasks'
           UseCustomizationData: 'False'
           CheckUpdateTime: '30000'
           GracePeriodTime: '1'
@@ -436,8 +483,8 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
           'Serilog__MinimumLevel__Override__Microsoft.eShopOnContainers.BuildingBlocks.EventBusRabbitMQ': 'Verbose'
           OrchestratorType: OCHESTRATOR_TYPE
           AzureServiceBusEnabled: AZURESERVICEBUSENABLED
-          ConnectionString: 'Server=${sqlRoute.properties.host};Initial Catalog=OrderingDb;User Id=${adminLogin};Password=${adminPassword};'
-          EventBusConnection: 'eshop-rabbitmq'
+          ConnectionString: 'Server=tcp:${sqlOrdering.properties.server},1433;Initial Catalog=${sqlOrdering.properties.database};User Id=${adminLogin};Password=${adminPassword};Encrypt=true'
+          EventBusConnection: listKeys(servicebus::topic::rootRule.id, servicebus::topic::rootRule.apiVersion).primaryConnectionString
         }
         ports: {
           http: {
@@ -449,12 +496,12 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
       traits: []
       connections: {
         sql: {
-          kind: 'Http'
-          source: sqlRoute.id
+          kind: 'microsoft.com/SQL'
+          source: sqlOrdering.id
         }
         servicebus: {
-          kind: 'rabbitmq.com/MessageQueue'
-          source: rabbitmq.id
+          kind: 'azure'
+          source: servicebus.id
         }
       }
     }
@@ -480,7 +527,6 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
           PATH_BASE: '/webshoppingagg'
           ASPNETCORE_URLS: 'http://0.0.0.0:80'
           OrchestratorType: OCHESTRATOR_TYPE
-          IsClusterEnv: 'True'
           urls__basket: basketHttp.properties.url
           urls__catalog: catalogHttp.properties.url
           urls__orders: orderingHttp.properties.url
@@ -504,10 +550,6 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
       }
       traits: []
       connections: {
-        servicebus: {
-          kind: 'rabbitmq.com/MessageQueue'
-          source: rabbitmq.id
-        }
         identity: {
           kind: 'Http'
           source: identityHttp.id
@@ -601,16 +643,16 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
       container: {
         image: 'eshop/ordering.signalrhub:${TAG}'
         env: {
-          PATH_BASE: '/payment-api'
           ASPNETCORE_ENVIRONMENT: 'Development'
           ASPNETCORE_URLS: 'http://0.0.0.0:80'
+          PATH_BASE: '/ordering-signalrhub'
           ApplicationInsights__InstrumentationKey: APPLICATION_INSIGHTS_KEY
-          OrchestratorType:  OCHESTRATOR_TYPE
+          OrchestratorType: OCHESTRATOR_TYPE
           IsClusterEnv: 'True'
           AzureServiceBusEnabled: AZURESERVICEBUSENABLED
-          EventBusConnection: 'eshop-rabbitmq'
-          SignalrStoreConnectionString: '${redisKeystore.properties.host}'
-          identityUrl: identityHttp.properties.url
+          EventBusConnection: listKeys(servicebus::topic::rootRule.id, servicebus::topic::rootRule.apiVersion).primaryConnectionString
+          SignalrStoreConnectionString: '${redisKeystore.properties.host}:${redisKeystore.properties.port},password=${redisKeystore.password()},ssl=True,abortConnect=False'
+          IdentityUrl: identityHttp.properties.url
           IdentityUrlExternal: '${CLUSTERDNS}${identityHttp.properties.gateway.rules.identity.path.value}'
         }
         ports: {
@@ -625,10 +667,6 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
         redis: {
           kind: 'redislabs.com/Redis'
           source: redisKeystore.id
-        }
-        servicebus: {
-          kind: 'rabbitmq.com/MessageQueue'
-          source: rabbitmq.id
         }
         identity: {
           kind: 'Http'
@@ -646,6 +684,10 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
           kind: 'Http'
           source: basketHttp.id
         }
+        servicebus: {
+          kind: 'azure'
+          source: servicebus.id
+        }
       }
     }
   }
@@ -662,7 +704,7 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
     name: 'webhooks-client'
     properties: {
       container: {
-        image: 'eshop/webhooks.client:linux-dev'
+        image: 'eshop/webhooks.client:${TAG}'
         env: {
           ASPNETCORE_ENVIRONMENT: 'Production'
           ASPNETCORE_URLS: 'http://0.0.0.0:80'
@@ -672,7 +714,6 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
           SelfUrl: webhooksclientHttp.properties.url
           WebhooksUrl: webhooksHttp.properties.url
           IdentityUrl: '${CLUSTERDNS}${identityHttp.properties.gateway.rules.identity.path.value}'
-
         }
         ports: {
           http: {
@@ -724,6 +765,7 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
         env: {
           ASPNETCORE_ENVIRONMENT: 'Development'
           ASPNETCORE_URLS: 'http://0.0.0.0:80'
+          PATH_BASE: '/webstatus'
           HealthChecksUI__HealthChecks__0__Name: 'WebMVC HTTP Check'
           HealthChecksUI__HealthChecks__0__Uri: '${webmvcHttp.properties.url}/hc'
           HealthChecksUI__HealthChecks__1__Name: 'WebSPA HTTP Check'
@@ -792,7 +834,7 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
           OrchestratorType: OCHESTRATOR_TYPE
           IsClusterEnv: 'True'
           CallBackUrl: '${CLUSTERDNS}/'
-          DPConnectionString: '${redisKeystore.properties.host}'
+          DPConnectionString: '${redisKeystore.properties.host}:${redisKeystore.properties.port},password=${redisKeystore.password()},ssl=True,abortConnect=False'
           IdentityUrl: '${CLUSTERDNS}${identityHttp.properties.gateway.rules.identity.path.value}'
           IdentityUrlHC: '${identityHttp.properties.url}/hc'
           PurchaseUrl: '${CLUSTERDNS}${webshoppingapigwHttp.properties.gateway.rules.webshoppingapigw.path.value}'
@@ -860,16 +902,16 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
           ASPNETCORE_URLS: 'http://0.0.0.0:80'
           PATH_BASE: '/webmvc'
           UseCustomizationData: 'False'
-          DPConnectionString: '${redisKeystore.properties.host}'
           ApplicationInsights__InstrumentationKey: APPLICATION_INSIGHTS_KEY
           UseLoadTest: 'False'
+          DPConnectionString: '${redisKeystore.properties.host}:${redisKeystore.properties.port},password=${redisKeystore.password()},ssl=True,abortConnect=False'
           OrchestratorType: OCHESTRATOR_TYPE
           IsClusterEnv: 'True'
-          ExternalPurchaseUrl: '${CLUSTERDNS}${webshoppingapigwHttp.properties.gateway.rules.webshoppingapigw.path.value}'
-          CallBackUrl: 'http://${CLUSTER_IP}.nip.io/webmvc'
-          IdentityUrl: 'http://${CLUSTER_IP}.nip.io/identity-api'
+          CallBackUrl: '${CLUSTERDNS}${webmvcHttp.properties.gateway.rules.webmvc.path.value}'
+          IdentityUrl: '${CLUSTERDNS}${identityHttp.properties.gateway.rules.identity.path.value}'
           IdentityUrlHC: '${identityHttp.properties.url}/hc'
           PurchaseUrl: webshoppingapigwHttp.properties.url
+          ExternalPurchaseUrl: '${CLUSTERDNS}${webshoppingapigwHttp.properties.gateway.rules.webshoppingapigw.path.value}'
           SignalrHubUrl: orderingsignalrhubHttp.properties.url
         }
         ports: {
@@ -923,20 +965,6 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
     }
   }
 
-    // Gateway --------------------------------------------
-
-    resource gateway 'Gateway' = {
-      name: 'gateway'
-      properties: {
-        listeners: {
-          http: {
-            protocol: 'HTTP'
-            port: 80
-          }
-        }
-      }
-    }
-
   // Logging --------------------------------------------
 
   resource seq 'Container' = {
@@ -966,62 +994,39 @@ resource eshop 'radius.dev/Application@v1alpha3' = {
     }
   }
 
+  // Gateway --------------------------------------------
+
+  resource gateway 'Gateway' existing = {
+    name: 'gateway'
+  }
+
   // Infrastructure --------------------------------------------
 
-  resource sqlServer 'Container' = {
-    name: 'sql-server'
-    properties: {
-      container: {
-        image: 'mcr.microsoft.com/mssql/server:2019-latest'
-        env: {
-          ACCEPT_EULA: 'Y'
-          MSSQL_PID: 'Developer'
-          MSSQL_SA_PASSWORD: adminPassword
-        }
-        ports: {
-          sql: {
-            containerPort: 1433
-            provides: sqlRoute.id
-          }
-        }
-      }
-    }
+  resource sqlIdentity 'microsoft.com.SQLDatabase' existing = {
+    name: 'IdentityDb'
   }
 
-  resource sqlRoute 'HttpRoute' = {
-    name: 'sql-route'
-    properties: {
-      port: 1433
-    }
+  resource sqlCatalog 'microsoft.com.SQLDatabase' existing = {
+    name: 'CatalogDb'
   }
 
-  resource redisKeystore 'redislabs.com.RedisCache' = {
-    name: 'redis-keystore'
-    properties: {
-      managed: true
-    }
+  resource sqlOrdering 'microsoft.com.SQLDatabase' existing = {
+    name: 'OrderingDb'
   }
 
-  resource redisBasket 'redislabs.com.RedisCache' = {
-    name: 'redis-basket'
-    properties: {
-      managed: true
-    }
+  resource sqlWebhooks 'microsoft.com.SQLDatabase' existing = {
+    name: 'WebhooksDb'
   }
 
-  resource mongo 'mongo.com.MongoDatabase' = {
+  resource redisBasket 'redislabs.com.RedisCache' existing = {
+    name: 'basket-data'
+  }
+
+  resource redisKeystore 'redislabs.com.RedisCache' existing = {
+    name: 'keystore-data'
+  }
+
+  resource mongo 'mongo.com.MongoDatabase' existing = {
     name: 'mongo'
-    properties: {
-      managed: true
-    }
   }
-
-  resource rabbitmq 'rabbitmq.com.MessageQueue' = {
-    name: 'rabbitmq'
-    properties: {
-      managed: true
-      queue: 'eshop_event_bus'
-    }
-  }
-  
 }

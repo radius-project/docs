@@ -8,31 +8,21 @@ weight: 20
 
 ## Azure environments
 
-An Azure Radius environment consists of various resources that together act as the private resource provider (control plane) and the application hosting environment to which you deploy Radius applications (runtime):
+An Azure environment consists of a Resource Group with Azure Kubernetes Service (AKS) cluster running the Radius control-plane. Applications deployed to Azure enviornments will run [Containers]({{< ref container >}}) on the AKS cluster, and deploy and Azure resources to the Resource Group.
 
-<img src="./azure-overview.png" width=900 alt="Overview of an Azure Radius environment">
-
-{{% alert title="⚠ Caution" color="warning" %}}
-While this page describes the current implementation of Azure Radius environments, this is subject to change as the project matures and as Radius moves toward the goal of a fully hosted, multi-tenant, service.
-
-- For now we use AKS as the runtime/data-plane when running with Azure.
-- For now you will see all of the environment's control plane resources in your subscription and resource group
+{{% alert title="Temporary implementation" color="warning" %}}
+Azure environments today are temporary pending the release of the Radius Azure resource provider. Stay tuned for updates.
 {{% /alert %}}
 
-When a new Azure Radius environment is created, the following resources are created across two resource groups. If you supply the resource group name `my-environment` then Radius' implementation details will be placed in a resource group called `RE-my-environment`. As a user of Radius, you do not need to interact with the `RE-my-environment` group. 
+<img src="./azure-env-overview.png" alt="Diagram of a Radius Azure envioronment and its resources" width="300px">
+
+### Resources
 
 | Resource | Description |
 |----------|-------------|
-|**Applications (Resource Group: my-environment)**
-| [Your Application Resources] | When applications are deployed, any additional resources are deployed into the resource group.
-|**Runtime (Resource Group: RE-my-environment)**
-| Azure Kubernetes Service | Runtime into which containers and workloads are deployed. Note that an additional managed Resource Group, prefixed with "MC-", is also deployed to host the AKS cluster resources.
-|**Control plane (Resource Group: RE-my-environment)**
-| Azure CosmosDB account | All of the server-side tracking of what your application definition is and what resources Radius is managing.
-| Deployment script | Script used during the deployment of the Radius control plane.
-| Managed Identity | Identity used by the deployment script when the rad CLI deploys the environment for the first time
-| App Service | Radius private resource provider (control plane)
-| App Service plan | Underlying plan for the private RP app service
+| Azure Kubernetes Service (AKS) cluster | Runtime into which containers and workloads are deployed. Also hosts the Radius control-plane. Note that an additional managed Resource Group, prefixed with `MC-`, is also deployed to host the AKS cluster resources.
+| Managed Identities | Identities uses by the Radius control-plane to deploy the Azure resources in your application templates.
+| [Your Application resources] | When applications are deployed, any additional resources are deployed into the resource group.
 
 ## Managing environments
 
@@ -61,7 +51,7 @@ While Radius environments are optimized for cost, any costs incurred by the depl
 
    This step may take up to 10 minutes to deploy.
 
-   {{% alert title="💡 using a private container registry" color="success" %}}
+   {{% alert title="💡 Using a private container registry" color="success" %}}
    To use a private container registry, you can specify the registry name as part of the `rad env init azure` command. The registry must be part of the same subscription as the environment being created.
 
    ```bash
@@ -72,21 +62,11 @@ While Radius environments are optimized for cost, any costs incurred by the depl
 
 1. Verify deployment
 
-   To verify the environment deployment succeeded, navigate to your subscription at https://portal.azure.com. You should see a new Resource Group with the name you entered during the previous step.
-
-   <img src="./azure-rgs.png" width=200 alt="New resource groups that were created">
-
-   The Resource Group with the name you entered will be empty when first created.
-
-   <img src="./azure-app-resources.png" width=500 alt="New resource group that was created">
-
-   You will also be able to find the Radius Control Plane Resource Group (your group name prefixed with `RE-`) containing the [environment resources](#azure-environments):
-
-   <img src="./azure-control-plane-resources.png" width=500 alt="New control plane resource group that was created">
+   To verify the environment deployment succeeded, navigate to your subscription at https://portal.azure.com. You should see a new Resource Group with the name you entered during the previous step. It will contain the resources listed above.
 
 ### Connect to an existing environment
 
-If you wish to attach to an existing environment instead of deploying a new one, simply specify the name, subscription, and resource group of an existing Radius environment when using the above steps for `rad env init azure`. The rad CLI will append the config for the existing environment to your local config file.
+If you wish to attach to an existing environment instead of deploying a new one, simply specify the name, subscription, and resource group of an existing Radius environment when using the above steps for `rad env init azure -i`. The rad CLI will append the config for the existing environment to your local config file.
 
 ### Delete an environment
 
@@ -95,6 +75,15 @@ Use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}):
 ```bash
 rad env delete -e azure --yes
 ```
+
+## Troubleshooting
+
+### Manually leanup old/incomplete deployments
+
+If your environment initialization does not complete or `rad env delete` does not work, follow these steps:
+
+1. Delete the Azure resource group that contains the AKS cluster and managed identities
+1. Open `~/.rad/config.yaml` and remove the YAML entry for the environment and the entry for the default environment, if set
 
 ## Related links
 

@@ -161,7 +161,7 @@ resource servicebus 'Microsoft.ServiceBus/namespaces@2021-06-01-preview' = {
 module sqlIdentity 'br:radius.azurecr.io/starters/sql-azure:latest' = {
   name: 'sql-identity'
   params: {
-    adminLogin: adminLogin
+    adminUsername: adminLogin
     adminPassword: adminPassword
     databaseName: 'IdentityDb'
     location: location
@@ -172,7 +172,7 @@ module sqlIdentity 'br:radius.azurecr.io/starters/sql-azure:latest' = {
 module sqlCatalog 'br:radius.azurecr.io/starters/sql-azure:latest' = {
   name: 'sql-catalog'
   params: {
-    adminLogin: adminLogin
+    adminUsername: adminLogin
     adminPassword: adminPassword
     databaseName: 'CatalogDb'
     location: location
@@ -183,7 +183,7 @@ module sqlCatalog 'br:radius.azurecr.io/starters/sql-azure:latest' = {
 module sqlOrdering 'br:radius.azurecr.io/starters/sql-azure:latest' = {
   name: 'sql-ordering'
   params: {
-    adminLogin: adminLogin
+    adminUsername: adminLogin
     adminPassword: adminPassword
     databaseName: 'OrderingDb'
     location: location
@@ -194,7 +194,7 @@ module sqlOrdering 'br:radius.azurecr.io/starters/sql-azure:latest' = {
 module sqlWebhooks 'br:radius.azurecr.io/starters/sql-azure:latest' = {
   name: 'sql-webhooks'
   params: {
-    adminLogin: adminLogin
+    adminUsername: adminLogin
     adminPassword: adminPassword
     databaseName: 'WebhooksDb'
     location: location
