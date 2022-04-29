@@ -40,14 +40,14 @@ resource app 'radius.dev/Application@v1alpha3' = {
   }
   //ROUTE
 
-  // Reference the Dapr state store deployed by the starter - temporary workaround
+  // Reference the Dapr state store deployed by the starter
   resource ordersStateStore 'dapr.io.StateStore' existing = {
     name: 'orders'
   }
 
 }
 
-// Use a starter module to deploy an Azure storage account and configure a Dapr state store
+// Use a starter module to deploy a Redis container and configure a Dapr state store
 module stateStoreStarter 'br:radius.azurecr.io/starters/dapr-statestore-azure-tablestorage:latest' = {
   name: 'orders-statestore-starter'
   params: {

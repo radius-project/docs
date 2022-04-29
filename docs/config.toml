@@ -52,6 +52,9 @@ category = "categories"
 [params]
 copyright = "Project Radius"
 
+version = "edge"
+chart_version = "0.10.0"
+
 # Algolia Search
 algolia_docsearch = true
 
