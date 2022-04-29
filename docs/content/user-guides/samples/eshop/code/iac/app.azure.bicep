@@ -1,4 +1,3 @@
-param ESHOP_EXTERNAL_DNS_NAME_OR_IP string = '*'
 param CLUSTER_IP string
 param OCHESTRATOR_TYPE string = 'K8S'
 param APPLICATION_INSIGHTS_KEY string = ''
