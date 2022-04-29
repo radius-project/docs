@@ -8,9 +8,18 @@ resource myapp 'radius.dev/Application@v1alpha3' existing = {
     name: 'frontend-http'
     properties: {
       port: 80
-      gateway: {
-        hostname: '*'
-      }
+    }
+  }
+
+  resource gateway 'Gateway' = {
+    name: 'gateway'
+    properties: {
+      routes: [
+        {
+          path: '/'
+          destination: frontendHttp.id
+        }
+      ]
     }
   }
 
