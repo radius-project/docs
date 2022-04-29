@@ -48,6 +48,18 @@ resource app 'radius.dev/Application@v1alpha3' = {
     }
   }
 
+  resource gateway 'Gateway' = {
+    name: 'gateway'
+    properties: {
+      routes: [
+        {
+          path: '/'
+          destination: storefrontHttp.id
+        }
+      ]
+    }
+  }
+
   resource cart 'Container' = {
     name: 'cart-api'
     properties: {

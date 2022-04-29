@@ -155,17 +155,6 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
     name: 'identity-http'
     properties: {
       port: 5105
-      gateway: {
-        source: gateway.id
-        hostname: ESHOP_EXTERNAL_DNS_NAME_OR_IP
-        rules: {
-          identity: {
-            path: {
-              value: '/identity-api'
-            }
-          }
-        }
-      }
     }
   }
 
@@ -227,17 +216,6 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
     name: 'ordering-http'
     properties: {
       port: 5102
-      gateway: {
-        source: gateway.id
-        hostname: ESHOP_EXTERNAL_DNS_NAME_OR_IP
-        rules: {
-          ordering: {
-            path: {
-              value: '/ordering-api'
-            }
-          }
-        }
-      }
     }
   }
 
@@ -302,17 +280,6 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
     name: 'basket-http'
     properties: {
       port: 5103
-      gateway: {
-        source: gateway.id
-        hostname: ESHOP_EXTERNAL_DNS_NAME_OR_IP
-        rules: {
-          basket: {
-            path: {
-              value: '/basket-api'
-            }
-          }
-        }
-      }
     }
   }
 
@@ -369,17 +336,6 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
     name: 'webhooks-http'
     properties: {
       port: 5113
-      gateway: {
-        source: gateway.id
-        hostname: ESHOP_EXTERNAL_DNS_NAME_OR_IP
-        rules: {
-          webhooks: {
-            path: {
-              value: '/webhooks-api'
-            }
-          }
-        }
-      }
     }
   }
 
@@ -534,17 +490,6 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
     name: 'webshoppingagg-http'
     properties: {
       port: 5121
-      gateway: {
-        source: gateway.id
-        hostname: ESHOP_EXTERNAL_DNS_NAME_OR_IP
-        rules: {
-          webshoppingagg: {
-            path: {
-              value: '/webshoppingagg'
-            }
-          }
-        }
-      }
     }
   }
 
@@ -575,17 +520,6 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
     name: 'webshoppingapigw-http'
     properties: {
       port: 5202
-      gateway: {
-        source: gateway.id
-        hostname: ESHOP_EXTERNAL_DNS_NAME_OR_IP
-        rules: {
-          webshoppingapigw: {
-            path: {
-              value: '/webshoppingapigw'
-            }
-          }
-        }
-      }
     }
   }
 
@@ -700,17 +634,6 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
     name: 'webhooksclient-http'
     properties: {
       port: 5114
-      gateway: {
-        source: gateway.id
-        hostname: ESHOP_EXTERNAL_DNS_NAME_OR_IP
-        rules: {
-          webhooks: {
-            path: {
-              value: '/webhooks-web'
-            }
-          }
-        }
-      }
     }
   }
 
@@ -764,17 +687,6 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
     name: 'webstatus-http'
     properties: {
       port: 8107
-      gateway: {
-        source: gateway.id
-        hostname: ESHOP_EXTERNAL_DNS_NAME_OR_IP
-        rules: {
-          webstatus: {
-            path: {
-              value: '/webstatus'
-            }
-          }
-        }
-      }
     }
   }
 
@@ -836,17 +748,6 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
     name: 'webspa-http'
     properties: {
       port: 5104
-      gateway: {
-        source: gateway.id
-        hostname: ESHOP_EXTERNAL_DNS_NAME_OR_IP
-        rules: {
-          webspa: {
-            path: {
-              value: '/'
-            }
-          }
-        }
-      }
     }
   }
 
@@ -910,17 +811,6 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
     name: 'webmvc-http'
     properties: {
       port: 5100
-      gateway: {
-        source: gateway.id
-        hostname: ESHOP_EXTERNAL_DNS_NAME_OR_IP
-        rules: {
-          webmvc: {
-            path: {
-              value: '/webmvc'
-            }
-          }
-        }
-      }
     }
   }
 
@@ -955,8 +845,55 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
 
   // Gateway --------------------------------------------
 
-  resource gateway 'Gateway' existing = {
+  resource gateway 'Gateway' = {
     name: 'gateway'
+    properties: {
+      hostname: {
+        fullyQualifiedHostname: CLUSTERDNS
+      }
+      routes: [
+        {
+          path: '/'
+          destination: webspaHttp.id
+        }
+        {
+          path: '/webshoppingagg'
+          destination: webshoppingaggHttp.id
+        }
+        {
+          path: '/webstatus'
+          destination: webstatusHttp.id
+        }
+        {
+          path: '/webhooks-web'
+          destination: webhooksclientHttp.id
+        }
+        {
+          path: '/webshoppingapigw'
+          destination: webshoppingapigwHttp.id
+        }
+        {
+          path: '/webmvc'
+          destination: webmvcHttp.id
+        }
+        {
+          path: '/webhooks-api'
+          destination: webhooksHttp.id
+        }
+        {
+          path: '/basket-api'
+          desination: basketHttp.id
+        }
+        {
+          path: '/ordering-api'
+          destination: orderingHttp.id
+        }
+        {
+          path: '/identity-api'
+          destination: identityHttp.id
+        }
+      ]
+    }
   }
 
   // Infrastructure --------------------------------------------
