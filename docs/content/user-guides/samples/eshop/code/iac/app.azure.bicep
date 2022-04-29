@@ -23,39 +23,6 @@ resource servicebus 'Microsoft.ServiceBus/namespaces@2021-06-01-preview' existin
     resource rootRule 'authorizationRules' existing = {
       name: 'Root'
     }
-
-    resource basket 'subscriptions' existing = {
-      name: 'Basket'
-    }
-
-    resource catalog 'subscriptions' existing = {
-      name: 'Catalog'
-    }
-
-    resource ordering 'subscriptions' existing = {
-      name: 'Ordering'
-    }
-
-    resource graceperiod 'subscriptions' existing = {
-      name: 'GracePeriod'
-    }
-
-    resource payment 'subscriptions' existing = {
-      name: 'Payment'
-    }
-
-    resource backgroundTasks 'subscriptions' existing = {
-      name: 'backgroundtasks'
-    }
-
-    resource OrderingSignalrHub 'subscriptions' existing = {
-      name: 'Ordering.signalrhub'
-    }
-
-    resource webhooks 'subscriptions' existing = {
-      name: 'Webhooks'
-    }
-
   }
 
 }

@@ -1,4 +1,4 @@
-name: store
+name: eshop
 stages:
 - name: infra
   bicep:
