@@ -1,9 +1,30 @@
-param AZURESERVICEBUSENABLED string = 'True'
+// Parameters --------------------------------------------
+param location string = resourceGroup().location
+param adminLogin string = 'sqladmin'
+@secure()
+param adminPassword string
 
-//REST
-//REST
+resource eshop 'radius.dev/Application@v1alpha3' = {
+  name: 'eshop'
 
-// Azure Bicep resources ----------------------------------------------------
+  // Gateway --------------------------------------------
+
+  resource gateway 'Gateway' = {
+    name: 'gateway'
+    properties: {
+      listeners: {
+        http: {
+          protocol: 'HTTP'
+          port: 80
+        }
+      }
+    }
+  }
+
+}
+
+// Infrastructure
+
 resource servicebus 'Microsoft.ServiceBus/namespaces@2021-06-01-preview' = {
   name: 'eshop${uniqueString(resourceGroup().id)}'
   location: resourceGroup().location
@@ -134,8 +155,76 @@ resource servicebus 'Microsoft.ServiceBus/namespaces@2021-06-01-preview' = {
   }
 
 }
-//ESHOP
-resource app 'radius.dev/Application@v1alpha3' = {
-  name: AZURESERVICEBUSENABLED
+
+// Starters ---------------------------------------------------------
+
+module sqlIdentity 'br:radius.azurecr.io/starters/sql-azure:latest' = {
+  name: 'sql-identity'
+  params: {
+    adminUsername: adminLogin
+    adminPassword: adminPassword
+    databaseName: 'IdentityDb'
+    location: location
+    radiusApplication: eshop
+  }
 }
-//ESHOP
+
+module sqlCatalog 'br:radius.azurecr.io/starters/sql-azure:latest' = {
+  name: 'sql-catalog'
+  params: {
+    adminUsername: adminLogin
+    adminPassword: adminPassword
+    databaseName: 'CatalogDb'
+    location: location
+    radiusApplication: eshop
+  }
+}
+
+module sqlOrdering 'br:radius.azurecr.io/starters/sql-azure:latest' = {
+  name: 'sql-ordering'
+  params: {
+    adminUsername: adminLogin
+    adminPassword: adminPassword
+    databaseName: 'OrderingDb'
+    location: location
+    radiusApplication: eshop
+  }
+}
+
+module sqlWebhooks 'br:radius.azurecr.io/starters/sql-azure:latest' = {
+  name: 'sql-webhooks'
+  params: {
+    adminUsername: adminLogin
+    adminPassword: adminPassword
+    databaseName: 'WebhooksDb'
+    location: location
+    radiusApplication: eshop
+  }
+}
+
+module redisBasket 'br:radius.azurecr.io/starters/redis-azure:latest' = {
+  name: 'basket-data'
+  params: {
+    cacheName: 'basket-data'
+    location: location
+    radiusApplication: eshop
+  }
+}
+
+module redisKeystore 'br:radius.azurecr.io/starters/redis-azure:latest' = {
+  name: 'keystore-data'
+  params: {
+    cacheName: 'keystore-data'
+    location: location
+    radiusApplication: eshop
+  }
+}
+
+module mongo 'br:radius.azurecr.io/starters/mongo-azure:latest' = {
+  name: 'mongo'
+  params: {
+    dbName: 'mongo'
+    location: location
+    radiusApplication: eshop
+  }
+}

@@ -10,6 +10,8 @@ param TAG string = 'linux-dev'
 var CLUSTERDNS = 'http://${CLUSTER_IP}.nip.io'
 var PICBASEURL = '${CLUSTERDNS}/webshoppingapigw/c/api/v1/catalog/items/[0]/pic'
 
+var tempRabbitmqConnectionString = 'eshop-starter-rabbitmq-route-${uniqueString('eshop_event_bus')}'
+
 param adminLogin string = 'SA'
 @secure()
 param adminPassword string
@@ -35,7 +37,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           ApplicationInsights__InstrumentationKey: APPLICATION_INSIGHTS_KEY
           AzureServiceBusEnabled: AZURESERVICEBUSENABLED
           ConnectionString: 'Server=tcp:${sqlCatalog.properties.server},1433;Initial Catalog=${sqlCatalog.properties.database};User Id=${adminLogin};Password=${adminPassword};'
-          EventBusConnection: 'eshop-rabbitmq'
+          EventBusConnection: tempRabbitmqConnectionString
         }
         ports: {
           http: {
@@ -91,7 +93,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           ApplicationInsights__InstrumentationKey: APPLICATION_INSIGHTS_KEY
           XamarinCallback: ''
           EnableDevspaces: ENABLEDEVSPACES
-          ConnectionString: 'Server=tcp:${sqlIdentity.properties.server},1433;Initial Catalog=${sqlIdentity.properties.database};User Id=${adminLogin};Password=${adminPassword};Encrypt=true'
+          ConnectionString: 'Server=tcp:${sqlIdentity.properties.server},1433;Initial Catalog=${sqlIdentity.properties.database};User Id=${adminLogin};Password=${adminPassword}'
           MvcClient: '${CLUSTERDNS}${webmvcHttp.properties.gateway.rules.webmvc.path.value}'
           SpaClient: CLUSTERDNS
           BasketApiClient: '${CLUSTERDNS}${basketHttp.properties.gateway.rules.basket.path.value}'
@@ -187,8 +189,8 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           PATH_BASE: '/ordering-api'
           GRPC_PORT: '81'
           PORT: '80'
-          ConnectionString: 'Server=tcp:${sqlOrdering.properties.server},1433;Initial Catalog=${sqlOrdering.properties.database};User Id=${adminLogin};Password=${adminPassword};Encrypt=true'
-          EventBusConnection: 'eshop-rabbitmq'
+          ConnectionString: 'Server=tcp:${sqlOrdering.properties.server},1433;Initial Catalog=${sqlOrdering.properties.database};User Id=${adminLogin};Password=${adminPassword}'
+          EventBusConnection: tempRabbitmqConnectionString
           identityUrl: identityHttp.properties.url
           IdentityUrlExternal: '${CLUSTERDNS}${identityHttp.properties.gateway.rules.identity.path.value}'
         }
@@ -263,7 +265,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           GRPC_PORT: '81'
           AzureServiceBusEnabled: AZURESERVICEBUSENABLED
           ConnectionString: '${redisBasket.properties.host}:${redisBasket.properties.port}'
-          EventBusConnection: 'eshop-rabbitmq'
+          EventBusConnection: tempRabbitmqConnectionString
           identityUrl: identityHttp.properties.url
           IdentityUrlExternal: '${CLUSTERDNS}${identityHttp.properties.gateway.rules.identity.path.value}'
         }
@@ -333,8 +335,8 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           ASPNETCORE_URLS: 'http://0.0.0.0:80'
           OrchestratorType: OCHESTRATOR_TYPE
           AzureServiceBusEnabled: AZURESERVICEBUSENABLED
-          ConnectionString: 'Server=tcp:${sqlWebhooks.properties.server},1433;Initial Catalog=${sqlWebhooks.properties.database};User Id=${adminLogin};Password=${adminPassword};Encrypt=true'
-          EventBusConnection: 'eshop-rabbitmq'
+          ConnectionString: 'Server=tcp:${sqlWebhooks.properties.server},1433;Initial Catalog=${sqlWebhooks.properties.database};User Id=${adminLogin};Password=${adminPassword}'
+          EventBusConnection: tempRabbitmqConnectionString
           identityUrl: identityHttp.properties.url
           IdentityUrlExternal: '${CLUSTERDNS}${identityHttp.properties.gateway.rules.identity.path.value}'
         }
@@ -393,7 +395,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           'Serilog__MinimumLevel__Override__Microsoft.eShopOnContainers.BuildingBlocks.EventBusRabbitMQ': 'Verbose'
           OrchestratorType: OCHESTRATOR_TYPE
           AzureServiceBusEnabled: AZURESERVICEBUSENABLED
-          EventBusConnection: 'eshop-rabbitmq'
+          EventBusConnection: tempRabbitmqConnectionString
         }
         ports: {
           http: {
@@ -436,8 +438,8 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           'Serilog__MinimumLevel__Override__Microsoft.eShopOnContainers.BuildingBlocks.EventBusRabbitMQ': 'Verbose'
           OrchestratorType: OCHESTRATOR_TYPE
           AzureServiceBusEnabled: AZURESERVICEBUSENABLED
-          ConnectionString: 'Server=tcp:${sqlOrdering.properties.server},1433;Initial Catalog=${sqlOrdering.properties.database};User Id=${adminLogin};Password=${adminPassword};Encrypt=true'
-          EventBusConnection: 'eshop-rabbitmq'
+          ConnectionString: 'Server=tcp:${sqlOrdering.properties.server},1433;Initial Catalog=${sqlOrdering.properties.database};User Id=${adminLogin};Password=${adminPassword}'
+          EventBusConnection: tempRabbitmqConnectionString
         }
         ports: {
           http: {
@@ -608,7 +610,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           OrchestratorType: OCHESTRATOR_TYPE
           IsClusterEnv: 'True'
           AzureServiceBusEnabled: AZURESERVICEBUSENABLED
-          EventBusConnection: 'eshop-rabbitmq'
+          EventBusConnection: tempRabbitmqConnectionString
           SignalrStoreConnectionString: '${redisKeystore.properties.host}'
           identityUrl: identityHttp.properties.url
           IdentityUrlExternal: '${CLUSTERDNS}${identityHttp.properties.gateway.rules.identity.path.value}'
@@ -960,27 +962,27 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
   // Infrastructure --------------------------------------------
 
   resource sqlIdentity 'microsoft.com.SQLDatabase' existing = {
-    name: 'IdentityDb'
+    name: 'identitydb'
   }
 
   resource sqlCatalog 'microsoft.com.SQLDatabase' existing = {
-    name: 'CatalogDb'
+    name: 'catalogdb'
   }
 
   resource sqlOrdering 'microsoft.com.SQLDatabase' existing = {
-    name: 'OrderingDb'
+    name: 'orderingdb'
   }
 
   resource sqlWebhooks 'microsoft.com.SQLDatabase' existing = {
-    name: 'WebhooksDb'
+    name: 'webhooksdb'
   }
 
   resource redisKeystore 'redislabs.com.RedisCache' existing = {
-    name: 'redis-keystore'
+    name: 'keystore-data'
   }
 
   resource redisBasket 'redislabs.com.RedisCache' existing = {
-    name: 'redis-basket'
+    name: 'basket-data'
   }
 
   resource mongo 'mongo.com.MongoDatabase' existing = {
@@ -988,6 +990,6 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
   }
 
   resource rabbitmq 'rabbitmq.com.MessageQueue' existing = {
-    name: 'rabbitmq'
+    name: 'eshop_event_bus'
   }
 }

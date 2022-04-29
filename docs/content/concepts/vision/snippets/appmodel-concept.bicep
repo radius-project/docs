@@ -1,3 +1,5 @@
+param cosmosDatabase resource 'Microsoft.DocumentDB/databaseAccounts/mongodbDatabases@2021-06-15'
+
 // Define app 
 resource app 'radius.dev/Application@v1alpha3' = {
   name: 'webapp'
@@ -28,7 +30,7 @@ resource app 'radius.dev/Application@v1alpha3' = {
   resource db 'mongo.com.MongoDatabase' = {
     name: 'db'
     properties: {
-      managed: true
+      resource: cosmosDatabase.id 
     }
   }
 }
