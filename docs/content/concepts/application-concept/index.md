@@ -1,10 +1,7 @@
----
-type: docs
-title: "Radius applications"
-linkTitle: "Applications"
-description: "Learn about the top-level Radius Application resource."
-weight: 200
----
+
+
+<!-- TODO retire this page. move this topic's fresh content to either Concepts.Overview or Concepts.Architecture. -->
+
 
 ## Definition
 
@@ -26,7 +23,7 @@ It's up to the user to define what they consider part of the app. Users can incl
 
 In some cases, an Ops team may create a Radius environment and prepare it with portable Radius [Connector]({{< ref connectors >}}) resources that a separate Dev team can connect to from their `resource app`. 
 
-Learn more about how to author applications in the [Add Resources guide]({{< ref add-resources >}}). 
+Learn more about how to author applications: [Concepts for Authoring Apps]({{< ref authoring-concepts >}}). 
 
 <!-- TODO: high-level overview of managing an app -->
 

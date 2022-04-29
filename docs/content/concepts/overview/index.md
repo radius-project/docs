@@ -70,8 +70,8 @@ Project Radius aims to support all hosting platform types - from hyperscale clou
 Our current focus is on delivering robust support for the following platforms:
 
 - [Local development]({{< ref local-dev >}}) as part of a developer inner-loop
-- [Microsoft Azure]({{< ref deploy-to-azure>}}) as a managed-application serverless PaaS
-- [Kubernetes]({{< ref deploy-to-kubernetes >}}) in all flavors and form-factors
+- [Microsoft Azure]({{< ref azure-environments>}}) as a managed-application serverless PaaS
+- [Kubernetes]({{< ref kubernetes-environments >}}) in all flavors and form-factors
 
 
 

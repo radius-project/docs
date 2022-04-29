@@ -189,5 +189,4 @@ The next time you run `rad application deploy`, the `tutorial_build` step will b
 ## Additional resources
 
 - [rad.yaml reference]({{< ref rad-yaml >}})
-- [rad CLI overview]({{< ref rad-cli-cheatsheet >}})
 - [rad CLI reference]({{< ref cli >}})

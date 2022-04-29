@@ -1,10 +1,3 @@
----
-type: docs
-title: "Radius resources"
-linkTitle: "Resources"
-description: "Learn how to model your Application's pieces with Radius resources"
-weight: 200
----
 
 Resources describe the code, data, and infrastructure pieces of an application.
 
