@@ -2,7 +2,7 @@
 type: docs
 title: "App concept"
 linkTitle: "App concept"
-description: "Learn about the Radius Application concept."
+description: "Learn about the Radius Application concept"
 weight: 100
 ---
 <!-- TODO retire this page. move this topic's fresh content to either Concepts.Overview or Concepts.Architecture. -->

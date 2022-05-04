@@ -2,7 +2,7 @@
 type: docs
 title: "Resources concept"
 linkTitle: "Resources concept"
-description: "Learn about the Radius Resources concept."
+description: "Learn about the Radius Resources concept"
 weight: 400
 ---
 <!-- TODO retire this page. move this topic's fresh content to either Concepts.Overview or Concepts.Architecture. -->

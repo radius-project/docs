@@ -2,7 +2,7 @@
 type: docs
 title: "e Code-to-cloud"
 linkTitle: "Code-to-cloud"
-description: "Learn about moving apps seamlessly from local environments to the cloud."
+description: "Learn about moving apps seamlessly from local environments to the cloud"
 weight: 300
 ---
 

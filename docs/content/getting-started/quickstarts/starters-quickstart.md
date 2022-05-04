@@ -2,7 +2,7 @@
 type: docs
 title: "Quickstart: Radius Starters"
 linkTitle: "Radius Starters"
-description: "Learn about quickly authoring new apps by leveraging Radius Starters." 
+description: "Learn about quickly authoring new apps by leveraging Radius Starters" 
 weight: 300
 ---
 

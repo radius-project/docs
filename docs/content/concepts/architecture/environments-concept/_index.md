@@ -2,7 +2,7 @@
 type: docs
 title: "Environments concept"
 linkTitle: "Environments concept"
-description: "Learn about the Radius Environments concept."
+description: "Learn about the Radius Environments concept"
 weight: 300
 ---
 <!-- TODO retire this page. move this topic's fresh content to either Concepts.Overview or Concepts.Architecture. -->

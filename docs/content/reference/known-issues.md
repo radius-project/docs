@@ -2,7 +2,7 @@
 type: docs
 title: "Known issues with the latest Radius release"
 linkTitle: "Known issues"
-description: "Learn where there are known issues with the latest Radius release and how to workaround them."
+description: "Learn where there are known issues with the latest Radius release and how to workaround them"
 weight: 998
 ---
 

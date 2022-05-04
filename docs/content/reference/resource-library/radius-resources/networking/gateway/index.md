@@ -2,7 +2,7 @@
 type: docs
 title: "Gateway"
 linkTitle: "Gateway"
-description: "Learn how to route requests to different resources."
+description: "Learn how to route requests to different resources"
 weight: 200
 ---
 

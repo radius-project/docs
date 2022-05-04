@@ -2,7 +2,7 @@
 type: docs
 title: "Create shareable template modules"
 linkTitle: "Bicep templates"
-description: "Learn how to author and publish templates for your resources and application."
+description: "Learn how to author and publish templates for your resources and application"
 weight: 100
 ---
 

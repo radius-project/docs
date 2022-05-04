@@ -2,7 +2,7 @@
 type: docs
 title: "Website + database tutorial"
 linkTitle: "Website + database"
-description: "Learn Project Radius by authoring templates and deploying a website with a database."
+description: "Learn Project Radius by authoring templates and deploying a website with a database"
 weight: 100
 no_list: true
 ---

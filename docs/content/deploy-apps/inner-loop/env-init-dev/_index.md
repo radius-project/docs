@@ -2,7 +2,7 @@
 type: docs
 title: "Dev environments"
 linkTitle: "Dev environments"
-description: "Learn about deploying Radius local dev environmnents."
+description: "Learn about deploying Radius local dev environmnents"
 weight: 100
 ---
 

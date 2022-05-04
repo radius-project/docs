@@ -2,7 +2,7 @@
 type: docs
 title: "Radius Quickstarts"
 linkTitle: "Radius Quickstarts"
-description: "Learn about Radius topics via quickstart guides, complete with code samples."
+description: "Learn about Radius topics via quickstart guides, complete with code samples"
 weight: 300
 ---
 

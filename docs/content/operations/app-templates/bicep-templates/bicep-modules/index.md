@@ -2,7 +2,7 @@
 type: docs
 title: "Separate your application resources into Bicep modules"
 linkTitle: "Break into modules"
-description: "Learn how to grow a single-file Radius application into a multi-file, large scale application with Bicep modules."
+description: "Learn how to grow a single-file Radius application into a multi-file, large scale application with Bicep modules"
 weight: 200
 ---
 

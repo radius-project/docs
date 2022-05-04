@@ -2,7 +2,7 @@
 type: docs
 title: "Model your application infrastructure"
 linkTitle: "Model infrastucture"
-description: "Learn how to model your infrastucture in the Bicep language."
+description: "Learn how to model your infrastucture in the Bicep language"
 weight: 200
 ---
 

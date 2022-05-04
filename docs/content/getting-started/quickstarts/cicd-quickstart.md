@@ -2,7 +2,7 @@
 type: docs
 title: "Quickstart: CI/CD integration"
 linkTitle: "CI/CD integration"
-description: "Learn about adding your Radius apps to your deployment pipelines." 
+description: "Learn about adding your Radius apps to your deployment pipelines" 
 weight: 500
 ---
 

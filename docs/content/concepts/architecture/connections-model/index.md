@@ -2,7 +2,7 @@
 type: docs
 title: "Connections concept"
 linkTitle: "Connections concept"
-description: "Learn about the Radius Connections concept."
+description: "Learn about the Radius Connections concept"
 weight: 200
 ---
 <!-- TODO retire this page. move this topic's fresh content to either Concepts.Overview or Concepts.Architecture. -->

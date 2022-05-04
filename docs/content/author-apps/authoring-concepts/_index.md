@@ -2,7 +2,7 @@
 type: docs
 title: "Concepts for Authoring Apps"
 linkTitle: "Concepts"
-description: "Learn the basics of authoring Radius Applications."
+description: "Learn the basics of authoring Radius Applications"
 weight: 100
 ---
 

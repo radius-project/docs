@@ -2,7 +2,7 @@
 type: docs
 title: "Dapr in Radius Apps"
 linkTitle: "Dapr in Radius Apps"
-description: "Learn how to add Dapr traits and connectors to your application."
+description: "Learn how to add Dapr traits and connectors to your application"
 weight: 100
 ---
 
