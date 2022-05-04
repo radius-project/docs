@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "resource library"
-linkTitle: "resource library"
-description: "Learn about adding resources"
+title: "Resource library"
+linkTitle: "Resource library"
+description: "Specs for resources supported in Radius apps"
 weight: 300
 ---
 

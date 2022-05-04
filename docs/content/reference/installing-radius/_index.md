@@ -6,7 +6,7 @@ description: "Overview of stuff that gets installed as part of Radius"
 weight: 900
 ---
 
-TODO: describe our helm chart structure and which pieces are versioned separately/together. 
+<!-- TODO: describe our helm chart structure and which pieces are versioned separately/together.  -->
 
 
 ## Install Radius CLI

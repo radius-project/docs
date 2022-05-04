@@ -178,5 +178,5 @@ Optionally install the Radius VSCode extensions for syntax highlighting, auto-co
    <img src="./wsl-extension.png" alt="Screenshot of installing a vsix extension in WSL" width=400>
 
 
-TODO: add table of samples and tutorials 
-(maybe a table like on this page https://docs.dapr.io/getting-started/quickstarts/ ? )
+<!-- TODO: add table of samples and tutorials 
+(maybe a table like on this page https://docs.dapr.io/getting-started/quickstarts/ ? ) -->

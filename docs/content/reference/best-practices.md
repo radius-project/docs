@@ -1,10 +1,15 @@
 ---
 type: docs
-title: "Frequently asked questions"
-linkTitle: "FAQ"
-description: "Commonly asked questions and answers about Project Radius"
+title: "Best practices"
+linkTitle: "Best practices"
+description: "Commonly asked questions about best practices"
 weight: 999
 ---
+
+<!-- TODO: this page needs an overhaul. transition it from our old FAQ page to Best practices. 
+also see - https://github.com/project-radius/docs/issues/93
+-->
+
 
 ## Appllications
 

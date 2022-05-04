@@ -6,6 +6,8 @@ description: "Learn how to deploy Radius applications in multiple stages with th
 weight: 300
 ---
 
+<!-- TODO: retire (delete) this page. Need to map out new content around rad.yaml, though. -->
+
 Radius has built-in support for multi-stage application deployments. Configure stages, profiles, and parameters to control the deployment process of your application.
 
 ## Initialize a new application

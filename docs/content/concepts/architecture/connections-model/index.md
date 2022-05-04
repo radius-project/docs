@@ -1,8 +1,13 @@
-
-Once you define your Application and the Components inside of it, you can define the Connections between them. Connections are defined as:
-
+---
+type: docs
+title: "Connections concept"
+linkTitle: "Connections concept"
+description: "Learn about the Radius Connections concept."
+weight: 200
+---
 <!-- TODO retire this page. move this topic's fresh content to either Concepts.Overview or Concepts.Architecture. -->
 
+Once you define your Application and the Components inside of it, you can define the Connections between them. Connections are defined as:
 
 {{% alert title="📄 Connections" color="primary" %}}
 A **logical** unit of communication between Components.
@@ -87,7 +92,3 @@ Often, platforms will have resources that are not portable across Radius platfor
 An Azure resource that does not bind to a [Radius portable component type]({{< ref radius-resources >}}) can be defined outside the `radius.dev/Application` resource and added as a connection. To define a connection to an Azure resource the `kind` field should be set to `azure`, and RBAC can be configured by specifying role name or ID in the `roles` field.
 
 {{< rad file="snippets/azure-connection.bicep" embed=true marker="//SAMPLE" >}}
-
-## Next step
-
-{{< button text="Traits" page="traits-model.md" >}}

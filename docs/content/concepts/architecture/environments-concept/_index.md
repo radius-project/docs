@@ -1,9 +1,13 @@
-
-
-Environments are the combination of two things:
-
+---
+type: docs
+title: "Environments concept"
+linkTitle: "Environments concept"
+description: "Learn about the Radius Environments concept."
+weight: 300
+---
 <!-- TODO retire this page. move this topic's fresh content to either Concepts.Overview or Concepts.Architecture. -->
 
+Environments are the combination of two things:
 
 - A **control-plane** which communicates with the rad CLI
 - A **runtime** to which applications are deployed

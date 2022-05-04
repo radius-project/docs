@@ -6,7 +6,7 @@ description: How Project Radius fits into the app development landscape and the 
 weight: 100
 ---
 
-## Cloud-native apps are too difficult today. 
+## Building cloud-native apps is too difficult today. 
 
 App developers don't have a way to view and manage apps holistically. Instead, they're drowning in lists of disjointed resources and connector information, Helm charts to pass around parameter values, and bash scripts to contain the logic needed to deploy the app. Plus, the range of infrastructure types (cloud, on-premises, serverless) can double or triple the work as teams figure out how to move apps between platforms. 
 

@@ -11,9 +11,7 @@ weight: 999
 
 With a Radius local environment you can run your applications on your machine without the need for an Azure subscription or remote Kubernetes cluster. This makes it easy to develop applications and try them out without waiting for a full deployment to the cloud.
 
-Try one out as part of the [local dev guide]({{< ref run-locally >}}):
-
-{{< button text="💻 Local dev guide" page="run-locally" color="success" newtab="true" >}}
+<!-- TODO: add link to local dev quickstart -->
 
 ## Features
 
