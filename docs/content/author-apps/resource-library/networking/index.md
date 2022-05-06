@@ -12,7 +12,7 @@ An `HttpRoute` resources defines HTTP communication between two [services]({{< r
 
 A gateway can optionally be added for external users to access the Route.
 
-{{< button page="http-route" text="Learn more" >}}
+{{< button page="httproute" text="Learn more" >}}
 
 ## Gateways
 

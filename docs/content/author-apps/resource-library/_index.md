@@ -4,6 +4,7 @@ title: "Add resources to your Radius application"
 linkTitle: "Resources"
 description: "Specs for resources supported in Radius apps"
 weight: 200
+no_list: true
 ---
 
 <!-- TODO: pull all the How To notes out of this folder. Only ref stuff. Move content around authoring apps to the AuthoringApps.Concepts page -->
