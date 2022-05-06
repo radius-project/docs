@@ -28,10 +28,17 @@ resource app 'radius.dev/Application@v1alpha3' = {
   // Remove the 'gateway' section to use as an internal route.
   resource web 'HttpRoute' = {
     name: 'web'
+  }
+
+  resource gateway 'Gateway' = {
+    name: 'gateway'
     properties: {
-      gateway: {
-        hostname: '*'
-      }
+      routes: [
+        {
+          path: '/'
+          destination: web.id
+        }
+      ]
     }
   }
 

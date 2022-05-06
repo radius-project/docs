@@ -21,7 +21,6 @@ resource app 'radius.dev/Application@v1alpha3' = {
     name: 'myshare'
     properties:{
       kind: 'azure.com.keyvault'
-      managed:false
       resource: key_vault.id
       secrets: {
         mysecret: {

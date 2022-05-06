@@ -94,14 +94,15 @@ There is a known issue where deployments to Azure will fail with a "NotFound" er
       Application              todoapp
       Container                frontend
       HttpRoute                frontend-route
+      Gateway                  frontend-gateway
       mongo.com.MongoDatabase  db
    ```
 
-   Just like before, a public endpoint will be available through the gateway in the `frontend-route` resource.
+   Just like before, a public endpoint will be available through the gateway.
 
    ```sh
    Public Endpoints:
-      HttpRoute            frontend-route       IP-ADDRESS
+      Gateway            frontend-gateway       IP-ADDRESS
    ```
 
 1. To test your application, navigate to the public endpoint that was printed at the end of the deployment. You should see a page like:

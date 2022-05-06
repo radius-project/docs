@@ -7,25 +7,36 @@ description: "Learn how to deploy thr eShop application to a Radius environment"
 weight: 400
 ---
 
-## Download eShop
+## Download eShop templates
 
-Download the eShop template for your desired environment:
+Download the templates from the previous [infrastructure]({{< ref 2-infrastructure >}}) and [services]({{< ref 3-services >}}) steps.
 
-{{< tabs Azure Kubernetes >}}
-{{% codetab %}}
-This template uses Azure SQL, Azure Redis Cache, Azure Service Bus, and Azure CosmosDB w/ Mongo API:
-{{< rad file="../eshop-azure.bicep" download=true >}}
-{{% /codetab %}}
-{{% codetab %}}
-This template uses containerized versions of SQL, Redis, RabbitMQ, and MongoDB:
-{{< rad file="../eshop-kubernetes.bicep" download=true >}}
-{{% /codetab %}}
-{{% /tabs %}}
+### Setup `rad.yaml` file
+
+A [`rad.yaml`]({{< ref rad-yaml >}}) file describes how to deploy an application with the [`rad app deploy`]({< ref rad_appliaction_deploy >}) command. Copy and paste the following contents into a file named `rad.yaml`:
+
+```yaml
+name: store
+stages:
+- name: infra
+  bicep:
+    template: infra.bicep
+  profiles:
+    azure:
+      bicep:
+        template: infra.azure.bicep
+- name: app
+  bicep:
+    template: app.bicep
+  profiles:
+    azure:
+      bicep:
+        template: app.azure.bicep
+```
 
 ## Initialize environment
 
 Visit the [getting started guide]({{< ref getting-started >}}) to deploy or connect to a Radius environment running the latest release.
-
 
 ### Get cluster IP
 
@@ -36,7 +47,7 @@ Radius gateways are still in development, and will get more features in upcoming
 {{< tabs Azure Kubernetes >}}
 {{% codetab %}}
 
-1. Navigate to the RE-[ENV-NAME] resource group that was initialized for your environment.
+1. Navigate to the resource group that was initialized for your environment.
 1. Select the Kubernetes Service cluster and navigate to the "Services and ingresses" blade.
 1. Note the IP address of the External IP of your LoadBalancer service.
 {{% /codetab %}}
@@ -48,17 +59,17 @@ Radius gateways are still in development, and will get more features in upcoming
 
 ## Deploy application
 
-Using the [`rad deploy`]({{< ref rad_deploy >}}) command, deploy the eShop application to your environment:
+Using the [`rad app deploy`]({{< ref rad_application_deploy >}}) command, deploy the eShop application to your environment:
 
-{{< tabs Azure Kubernetes >}}
+{{< tabs Containerized Azure >}}
 {{% codetab %}}
 ```sh
-$ rad deploy eshop-azure.bicep -p adminPassword=CHOOSE-A-PASSWORD -p CLUSTER_IP=ip-address-you-retrieved
+$ rad app deploy -p adminPassword=CHOOSE-A-PASSWORD -p CLUSTER_IP=ip-address-you-retrieved
 ```
 {{% /codetab %}}
 {{% codetab %}}
 ```sh
-$ rad deploy eshop-kubernetes.bicep -p adminPassword=CHOOSE-A-PASSWORD -p CLUSTER_IP=ip-address-you-retrieved
+$ rad app deploy --profile azure -p adminPassword=CHOOSE-A-PASSWORD -p CLUSTER_IP=ip-address-you-retrieved
 ```
 {{% /codetab %}}
 {{% /tabs %}}

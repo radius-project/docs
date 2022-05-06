@@ -1,15 +1,6 @@
 resource app 'radius.dev/Application@v1alpha3' = {
   name: 'todoapp'
 
-  resource todoRoute 'HttpRoute' = {
-    name: 'frontend-route'
-    properties: {
-      gateway: {
-        hostname: '*'
-      }
-    }
-  }
-
   resource todoFrontend 'Container' = {
     name: 'frontend'
     properties: {
@@ -22,6 +13,22 @@ resource app 'radius.dev/Application@v1alpha3' = {
           }
         }
       }
+    }
+  }
+
+  resource todoRoute 'HttpRoute' = {
+    name: 'frontend-route'
+  }
+
+  resource todoGateway 'Gateway' = {
+    name: 'gateway'
+    properties: {
+      routes: [
+        {
+          path: '/'
+          destination: todoRoute.id
+        }
+      ]
     }
   }
   

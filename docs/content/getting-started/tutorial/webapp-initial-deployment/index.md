@@ -9,7 +9,7 @@ slug: "frontend"
 
 ## Define a Radius application in a .bicep file
 
-Radius uses the [Bicep language]({{< ref bicep >}}) as its file-format and structure. In this tutorial you will define an app named `webapp` that will contain the container and MongoDB connector resources, all described in Bicep.
+Radius uses the [Bicep language]({{< ref bicep >}}) as its file-format and structure. In this tutorial you will define an app named `todoapp` that will contain the container and MongoDB connector resources, all described in Bicep.
 
 Create a new file named `todo.bicep` and paste the following:
 
@@ -19,16 +19,16 @@ Create a new file named `todo.bicep` and paste the following:
 
 Next you'll add resources for the website's frontend.
 
-Radius captures the relationships and intentions behind an application, which simplifies deployment and management. The `frontend` and `todo-route` resources in your Bicep file will contain everything needed for the website frontend to run and expose a port to the internet.
+Radius captures the relationships and intentions behind an application, which simplifies deployment and management. The `frontend` and `frontend-route` resources in your Bicep file will contain everything needed for the website frontend to run and expose a port to the internet.
 
 The **`frontend`** [container]({{< ref container >}}) resource specifies:
 
 - `container image`: The container image to run. This is where your website's front end code lives
-- `ports`: The port to expose on the container, along with the [HTTP route]({{< ref http-route >}}) that will be used to access the container
+- `ports`: The port to expose on the container, along with the [HttpRoute]({{< ref httproute >}}) that will be used to access the container
 
-The **`todo-route`** [HTTP Route]({{< ref http-route >}}) resource specifies:
+The **`gateway`** [Gateway]({{< ref gateway >}}) resource specifies:
 
-- `hostname`: The hostname to expose to the internet. `*` means that all hostnames will be accepted.
+- `routes`: The routes handled by this gateway. Here, we specify that `'/'` should map to `frontend-route`, which is provided by the 'frontend' container.
 
 Update your Bicep file to match the full application definition:
 
@@ -43,7 +43,7 @@ Now you are ready to deploy the application for the first time.
    - For Kubernetes environments make sure your `kubectl`  context is set to your cluster.
    - For local Kubernetes environments make sure Docker is running.
 
-1. Deploy to your Radius environment via the rad CLI:
+2. Deploy to your Radius environment via the rad CLI:
 
    ```sh
    rad deploy ./todo.bicep
@@ -56,16 +56,17 @@ Now you are ready to deploy the application for the first time.
       Application          todoapp
       Container            frontend
       HttpRoute            frontend-route
+      Gateway              frontend-gateway
    ```
 
-   Also, a public endpoint will be available to your application as we specified a gateway in the `frontend-route` resource.
+   Also, a public endpoint will be available to your application as we specified a [Gateway]({{< ref gateway >}}).
 
    ```sh
    Public Endpoints:
-      HttpRoute            frontend-route      IP-ADDRESS
+      Gateway           frontend-gateway      IP-ADDRESS
    ```
 
-1. To test your application, navigate to the public endpoint that was printed at the end of the deployment.
+3. To test your application, navigate to the public endpoint that was printed at the end of the deployment.
 
    {{% alert title="⚠️ Local environment endpoint" color="warning" %}}
    If using a local environment, navigate to the IP address provided by `rad env status`. The address printed at deploy time currently points to the wrong endpoint.
