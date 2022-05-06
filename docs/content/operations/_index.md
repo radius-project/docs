@@ -2,9 +2,6 @@
 type: docs
 title: "Operations"
 linkTitle: "Operations"
-description: "Learn about operating Radius apps"
-weight: 40
+description: "Learn about operating Radius environments and apps"
+weight: 60
 ---
-
-> 👷‍♂️ Under construction 🚧 <br>
-This page is still under construction. Please come back soon.

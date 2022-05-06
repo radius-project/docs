@@ -6,19 +6,13 @@ description: "How to run a Radius application locally"
 weight: 300
 ---
 
-<!-- rad app run -->
-
-> 👷‍♂️ Under construction 🚧 <br>
-This page is still under construction. Please come back soon.
-
-
 This guide will get you up and running with a local Radius environment and sample application.
 
 ## Pre-requisites
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 - [k3d](https://k3d.io/)
-- [rad CLI]({{< ref "installing-radius#install-radius-cli" >}})
+- [rad CLI]({{< ref "getting-started#install-radius-cli" >}})
 
 ## Initialize a local environment
 

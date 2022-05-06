@@ -6,5 +6,4 @@ description: "Learn about the Project Radius mission, core concepts, and frequen
 weight: 10
 ---
 
-> 👷‍♂️ Under construction 🚧 <br>
-This page is still under construction. Please come back soon.
+Welcome to Project Radius! To learn about the core concepts of Project Radius, check out one of the links below:

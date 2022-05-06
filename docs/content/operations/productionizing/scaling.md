@@ -4,6 +4,8 @@ title: "Scaling apps"
 linkTitle: "Scaling apps"
 description: "Learn methods for setting up manual and automated scaling for Radius apps"
 weight: 300
+toc_hide: true
+hide_summary: true
 ---
 
 > 👷‍♂️ Under construction 🚧 <br>

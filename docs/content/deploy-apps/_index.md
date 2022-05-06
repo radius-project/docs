@@ -1,10 +1,7 @@
 ---
 type: docs
 title: "Deploy apps"
-linkTitle: "Deploy apps"
+linkTitle: "Run & deploy apps"
 description: "Learn about deploying Radius Applications"
-weight: 40
+weight: 50
 ---
-
-> 👷‍♂️ Under construction 🚧 <br>
-This page is still under construction. Please come back soon.

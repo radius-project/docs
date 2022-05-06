@@ -1,15 +1,12 @@
 ---
 type: docs
-title: "Monitoring Apps"
-linkTitle: "Monitoring Apps"
+title: "Monitoring applications"
+linkTitle: "Monitoring apps"
 description: "Learn about tools for monitoring Radius apps"
-weight: 200
+weight: 300
 ---
 
 <!-- tabs for each way to monitor the app: 
 - Portal
 - VSCode
 - dashboard (coming later) -->
-
-> 👷‍♂️ Under construction 🚧 <br>
-This page is still under construction. Please come back soon.

@@ -4,6 +4,8 @@ title: "Quickstart: CI/CD integration"
 linkTitle: "CI/CD integration"
 description: "Learn about adding your Radius apps to your deployment pipelines" 
 weight: 500
+toc_hide: true
+hide_summary: true
 ---
 
 > 👷‍♂️ Under construction 🚧 <br>

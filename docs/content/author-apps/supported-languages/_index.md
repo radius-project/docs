@@ -1,12 +1,15 @@
 ---
 type: docs
 title: "Supported languages"
-linkTitle: "Supported languages"
+linkTitle: "Languages"
 description: "Learn how to model apps using various IaC tools"
-weight: 200
+weight: 100
 ---
 
-This section contains info about supported languages and IaC guides. 
+Project Radius supports a variety of infrastructure-as-code (IaC) languages.
 
-> 👷‍♂️ Under construction 🚧 <br>
-This page is still under construction. Please come back soon.
+{{% alert title="Other languages" color="info" %}}
+In preview Project Radius supports Bicep. YAML and Terraform are on the roadmap, check back soon for updates!
+{{% /alert %}}
+
+## Languages

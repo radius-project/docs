@@ -3,20 +3,27 @@ type: docs
 title: "Getting started"
 linkTitle: "Getting started"
 description: "How to get up and running with Project Radius tooling in just a few minutes"
-weight: 10
+weight: 20
 no_list: true
 ---
 
 
-## Install CLI
+## Install `rad` CLI
+
+The `rad` CLI manages your applications, resources, and environments. Begin by installing it on your machine:
 
 {{< tabs Windows MacOS "Linux/WSL" "Cloud Shell" Binaries >}}
 
 {{% codetab %}}
-(PowerShell)
 
 ```powershell
 iwr -useb "https://get.radapp.dev/tools/rad/install.ps1" | iex
+```
+
+To install the latest edge version:
+
+```powershell
+$script=iwr -useb  https://radiuspublic.blob.core.windows.net/tools/rad/install.ps1; $block=[ScriptBlock]::Create($script); invoke-command -ScriptBlock $block -ArgumentList edge
 ```
 {{% /codetab %}}
 
@@ -24,11 +31,23 @@ iwr -useb "https://get.radapp.dev/tools/rad/install.ps1" | iex
 ```bash
 curl -fsSL "https://get.radapp.dev/tools/rad/install.sh" | /bin/bash
 ```
+
+To install the latest edge version:
+
+```bash
+curl -fsSL "https://radiuspublic.blob.core.windows.net/tools/rad/install.sh" | /bin/bash -s edge
+```
 {{% /codetab %}}
 
 {{% codetab %}}
 ```bash
 wget -q "https://get.radapp.dev/tools/rad/install.sh" -O - | /bin/bash
+```
+
+To install the latest edge version:
+
+```bash
+wget -q "https://radiuspublic.blob.core.windows.net/tools/rad/install.sh" -O - | /bin/bash -s edge
 ```
 {{% /codetab %}}
 
@@ -50,28 +69,62 @@ PowerShell for Cloud Shell is currently not supported.
 {{% codetab %}}
 1. Download the `rad` CLI from one of these URLs:
 
-   - MacOS: https://get.radapp.dev/tools/rad/0.6/macos-x64/rad
-   - Linux: https://get.radapp.dev/tools/rad/0.6/linux-x64/rad
-   - Windows: https://get.radapp.dev/tools/rad/0.6/windows-x64/rad.exe
+   - MacOS: https://get.radapp.dev/tools/rad/edge/macos-x64/rad
+   - Linux: https://get.radapp.dev/tools/rad/edge/linux-x64/rad
+   - Windows: https://get.radapp.dev/tools/rad/edge/windows-x64/rad.exe
 
 1. Ensure the user has permission to execute the binary and place it somewhere on your PATH so it can be invoked easily.
+
+### Edge releases
+
+- MacOS: https://radiuspublic.blob.core.windows.net/tools/rad/edge/macos-x64/rad
+- Linux: https://radiuspublic.blob.core.windows.net/tools/rad/edge/linux-x64/rad
+- Windows: https://radiuspublic.blob.core.windows.net/tools/rad/edge/windows-x64/rad.exe
+
 {{% /codetab %}}
 
 {{< /tabs >}}
 
 Verify the rad CLI is installed correctly by running `rad`. 
 
-
 ## Create a Radius environment
 
-{{< tabs "Azure" "Kubernetes" >}}
+A Radius environment is where you will deploy your applications. Easily deploy a new environment with the [`rad env init`]({{< ref rad_env_init >}}) command:
+
+{{< tabs "Local" "Kubernetes" "Microsoft Azure" >}}
 
 {{% codetab %}}
+A local environment runs on your local machine, and makes it easy to run and deploy applications quickly.
 
-Pre-requisites:
+### Pre-requisites
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop)
+- [k3d](https://k3d.io/#installation)
+
+```bash
+rad env init dev -i
+```
+
+{{% /codetab %}}
+
+{{% codetab %}}
+### Pre-requisites
+
+- Kubernetes cluster configured as the default `kubectl` context (verify with `kubectl config current-context`)
+
+
+```sh
+rad env init kubernetes
+```
+{{% /codetab %}}
+{{% codetab %}}
+### Pre-requisites
+
 - [Az CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) (version 2.25.0 or later)
 
 _Note that you are responsible for any costs incurred in your subscription._
+
+### Steps
 
 1. Use the `az` CLI to authenticate with Azure your Azure account:
 
@@ -79,74 +132,46 @@ _Note that you are responsible for any costs incurred in your subscription._
    az login
    ```
 
-1. To create a Radius environment, run the following in your terminal, then follow the on-screen instructions.
+1. Create a new Azure environment:
 
    ```sh
    rad env init azure -i
    ```
 
-   **This will prompt you for several inputs and then create assets in your subscription (~5-10 mins).**
-
-   For more info about what's being created as part of an environment, see [Azure environments]({{< ref azure-environments>}}).
-
-1. Verify creation of your new environment:
-
-   ```sh
-   rad env list
-   ```
-
-{{% /codetab %}}
-
-{{% codetab %}}
-Pre-requisites:
-- You have a Kubernetes cluster configured with a local `kubectl` context set as the default. (You can verify with `kubectl config current-context`.)
-
-1. Create a Radius environment in the default Kubernetes namespace:
-
-   ```sh
-   rad env init kubernetes
-   ```
-
-   For more info about what's being created as part of an environment, see [Kubernetes environments]({{< ref kubernetes-environments >}}).
-
-1. Verify creation of your new environment:
-
-   ```sh
-   rad env list
-   ```
+   _This will prompt you for several inputs and then create assets in your subscription (~5-10 mins)._
 {{% /codetab %}}
 
 {{< /tabs >}}
 
+## Install VS Code extension (optional)
 
+Optionally install the Radius [Visual Studio Code](https://code.visualstudio.com/) extensions for syntax highlighting, auto-completion, and linting.
 
-
-## Deploy an app 
-TODO: Copy some repo and ..... to get started with the quickest possible. 
-
-Btw, other ways to get started:
-- quickstarts
-- sample apps
-- your own apps via (authoring link)
-
-
-## Btw, do you use VSCode? 
-If so, we have great tooling for you! 
-
-Pre-requisites:
-- [Visual Studio Code](https://code.visualstudio.com/)
-
-### Setup  VSCode
-Optionally install the Radius VSCode extensions for syntax highlighting, auto-completion, and linting. Not required to build apps with Radius. 
-
-
+{{% alert title="Note" color="primary" %}}
+While Project Radius is in preview two separate extensions are required, one for Bicep highlighting and one for interacting with Radius applications. In a future release, these will be combined into a single extension.
+{{% /alert %}}
 
 1. Download the latest extensions
 
-  ```bash
+   {{< tabs Links Terminal >}}
+
+   {{% codetab %}}
+   {{< button link="https://radiuspublic.blob.core.windows.net/tools/vscode/stable/rad-vscode-bicep.vsix" text="Download Bicep extension" >}}
+
+   {{< button link="https://radiuspublic.blob.core.windows.net/tools/vscode/stable/rad-vscode.vsix" text="Download Radius extension" >}}
+
+   {{% /codetab %}}
+
+   {{% codetab %}}
+
+   ```bash
    curl https://radiuspublic.blob.core.windows.net/tools/vscode/stable/rad-vscode-bicep.vsix --output rad-vscode-bicep.vsix
    curl https://radiuspublic.blob.core.windows.net/tools/vscode/stable/rad-vscode.vsix --output rad-vscode.vsix
    ```
+
+   {{% /codetab %}}
+
+   {{< /tabs >}}
 
 2. Install the `.vsix` files:
 
