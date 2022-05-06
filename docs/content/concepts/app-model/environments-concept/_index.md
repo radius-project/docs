@@ -23,7 +23,3 @@ For example, in [Microsoft Azure]({{< ref azure-environments >}}) the Radius con
 The Radius runtime is where Radius applications are deployed. It contains the container runtimes, database accounts, and other infrastructure into which Radius components and managed resources are deployed.
 
 For example, in [Microsoft Azure]({{< ref azure-environments>}}) the Radius runtime is a Resource Group containing an Azure Kubernetes Service (AKS) cluster for running container components and other resources deployed as part of a Radius application.
-
-## Supported platforms
-
-TODO 
