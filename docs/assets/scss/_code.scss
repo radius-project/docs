@@ -10,11 +10,11 @@
     /* right-align */
     display: block;
     margin-left: auto;
-    margin-right: 0;
+    margin-right: 10px;
 
     margin-bottom: -2px;
     padding: 3px 8px;
-    font-size: 0.8em;
+    font-size: 0.7em;
 }
 
 .copy-code-button:hover {
@@ -54,6 +54,7 @@
         pre {
             margin: 0;
             padding: 1rem;
+            border-radius: 10px;
         }
     }
 
