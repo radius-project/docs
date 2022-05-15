@@ -76,4 +76,4 @@ In the below example, a Radius resource of type `radius.dev/Application@v1alpha3
 
 Next, we'll use the Bicep language to model your application's infrastructure:
 
-{{< button page="author-infrastructure" text="Model your infrastructure in Bicep" >}}
+{{< button page="bicep-infrastructure" text="Model your infrastructure in Bicep" >}}
