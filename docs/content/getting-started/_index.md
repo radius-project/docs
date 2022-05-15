@@ -7,7 +7,6 @@ weight: 20
 no_list: true
 ---
 
-
 ## Install `rad` CLI
 
 The `rad` CLI manages your applications, resources, and environments. Begin by installing it on your machine:
@@ -20,11 +19,13 @@ The `rad` CLI manages your applications, resources, and environments. Begin by i
 iwr -useb "https://get.radapp.dev/tools/rad/install.ps1" | iex
 ```
 
+{{< edge >}}
 To install the latest edge version:
 
 ```powershell
 $script=iwr -useb  https://radiuspublic.blob.core.windows.net/tools/rad/install.ps1; $block=[ScriptBlock]::Create($script); invoke-command -ScriptBlock $block -ArgumentList edge
 ```
+{{< /edge >}}
 {{% /codetab %}}
 
 {{% codetab %}}
@@ -32,11 +33,13 @@ $script=iwr -useb  https://radiuspublic.blob.core.windows.net/tools/rad/install.
 curl -fsSL "https://get.radapp.dev/tools/rad/install.sh" | /bin/bash
 ```
 
+{{< edge >}}
 To install the latest edge version:
 
 ```bash
 curl -fsSL "https://radiuspublic.blob.core.windows.net/tools/rad/install.sh" | /bin/bash -s edge
 ```
+{{< /edge >}}
 {{% /codetab %}}
 
 {{% codetab %}}
@@ -44,11 +47,13 @@ curl -fsSL "https://radiuspublic.blob.core.windows.net/tools/rad/install.sh" | /
 wget -q "https://get.radapp.dev/tools/rad/install.sh" -O - | /bin/bash
 ```
 
+{{< edge >}}
 To install the latest edge version:
 
 ```bash
 wget -q "https://radiuspublic.blob.core.windows.net/tools/rad/install.sh" -O - | /bin/bash -s edge
 ```
+{{< /edge >}}
 {{% /codetab %}}
 
 {{% codetab %}}
@@ -75,12 +80,13 @@ PowerShell for Cloud Shell is currently not supported.
 
 1. Ensure the user has permission to execute the binary and place it somewhere on your PATH so it can be invoked easily.
 
+{{< edge >}}
 ### Edge releases
 
 - MacOS: https://radiuspublic.blob.core.windows.net/tools/rad/edge/macos-x64/rad
 - Linux: https://radiuspublic.blob.core.windows.net/tools/rad/edge/linux-x64/rad
 - Windows: https://radiuspublic.blob.core.windows.net/tools/rad/edge/windows-x64/rad.exe
-
+{{< /edge >}}
 {{% /codetab %}}
 
 {{< /tabs >}}
