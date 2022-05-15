@@ -3,7 +3,7 @@ type: docs
 title: "Microsoft Azure Radius environments"
 linkTitle: "Microsoft Azure"
 description: "Information on Radius environments hosted on Microsoft Azure"
-weight: 20
+weight: 300
 ---
 
 ## Azure environments

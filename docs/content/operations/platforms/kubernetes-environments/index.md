@@ -3,7 +3,7 @@ type: docs
 title: "Kubernetes Radius environments"
 linkTitle: "Kubernetes"
 description: "Information on Radius environments hosted on Kubernetes"
-weight: 30
+weight: 200
 ---
 
 ## Kubernetes environments
