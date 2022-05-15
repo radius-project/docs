@@ -1,18 +1,25 @@
 ---
 type: docs
-title: "Networking resources for Radius applications"
+title: "Networking resources"
 linkTitle: "Networking"
 description: "Learn how to add networking to your Radius application"
 weight: 300
 ---
 
+Radius networking resources allow you to model:
+
+- Communication between a user and a service
+- Communication between services
+
 ## HTTP Routes
 
-An `HttpRoute` resources defines HTTP communication between two [services]({{< ref services >}}).
+An `HttpRoute` resources defines HTTP communication between two [services]({{< ref services >}}). They can be used to define both one-way communication, as well as cycles of communication between services.
+
+<img src="networking-cycles.png" style="width:400px" alt="Diagram of Radius service-to-service networking with cycles" /><br />
+
+Refer to the [HTTP Route schema]({{< ref httproute >}}) for more information on how to model HTTP routes.
 
 A gateway can optionally be added for external users to access the Route.
-
-{{< button page="httproute" text="Learn more" >}}
 
 ## Gateways
 
@@ -20,4 +27,16 @@ A gateway can optionally be added for external users to access the Route.
 
 `Gateway` in Radius are split into two main pieces; the `Gateway` resource itself, which defines which port and protocol to listen on, and Route(s) which define the rules for routing traffic to different resources.
 
-{{< button page="gateway" text="Learn more" >}}
+<img src="networking-gateways.png" style="width:400px" alt="Diagram of Radius gateways" /><br />
+
+Refer to the [Gateway schema]({{< ref gateway >}}) for more information on how to model gateways.
+
+## Example
+
+{{< tabs Bicep >}}
+
+{{% codetab %}}
+{{< rad file="snippets/networking.bicep" embed=true >}}
+{{% /codetab %}}
+
+{{< /tabs >}}
