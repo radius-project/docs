@@ -19,10 +19,10 @@ Radius applications and tooling are agnostic of platform, services, and infrastr
 <table style="max-width:600px;margin-top:10%">
   <tr>
     <td style="width:50%;text-align:center">
-      <a href="{{< ref azure-environments >}}"><img src="platforms/azure-logo.png" alt="Azure logo" style="width:80%"></a>
+      <a href="{{< ref azure-environments >}}"><img src="operations/platforms/azure-logo.png" alt="Azure logo" style="width:80%"></a>
     </td>
     <td style="width:50%;text-align:center">
-      <a href="{{< ref kubernetes-environments >}}"><img src="platforms/kubernetes-logo.svg" alt="Kubernetes logo" style="width:80%"></a>
+      <a href="{{< ref kubernetes-environments >}}"><img src="operations/platforms/kubernetes-logo.svg" alt="Kubernetes logo" style="width:80%"></a>
     </td>
   </tr>
 </table>
