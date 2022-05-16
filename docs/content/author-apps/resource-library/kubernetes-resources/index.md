@@ -1,18 +1,12 @@
 ---
 type: docs
-title: "Add Kubernetes resources to your Radius application"
+title: "Kubernetes resources"
 linkTitle: "Kubernetes"
 description: "Learn how to model and deploy Kubernetes resources as part of your application"
 weight: 400
 ---
 
-Radius applications are able to connect to and leverage Kubernetes resources with Bicep. Simply model your Kubernetes resources in Bicep and reference their properties in Radius.
-
-You can import the Kubernetes types with:
-
-```bicep
-import kubernetes from kubernetes
-```
+Radius applications are able to connect to and leverage Kubernetes resources.
 
 ## Resource library
 
@@ -20,10 +14,12 @@ Visit [GitHub](https://github.com/Azure/bicep-types-k8s/blob/main/generated/inde
 
 {{< button text="Kubernetes resource library" link="https://github.com/Azure/bicep-types-k8s/blob/main/generated/index.md" >}}
 
-## Connections
+## Example
 
-Radius resources currently can reference Kubernetes resources directly without a connection. Connection support is coming soon.
+{{< tabs Bicep >}}
 
-### Example
-
+{{% codetab %}}
 {{< rad file="snippets/kubernetes-connection.bicep" embed=true >}}
+{{% /codetab %}}
+
+{{< /tabs >}}

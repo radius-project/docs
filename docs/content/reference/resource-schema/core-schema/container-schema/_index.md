@@ -97,7 +97,7 @@ For an `exec` probe, a command is run within the container. A return code of 0 i
 
 ### Connections
 
-Connections define how a container connects to [other resources]({{< ref resource-schemas >}}).
+Connections define how a container connects to [other resources]({{< ref resource-schema >}}).
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|

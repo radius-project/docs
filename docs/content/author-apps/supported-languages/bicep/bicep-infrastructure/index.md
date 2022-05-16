@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Model your application infrastructure"
-linkTitle: "Model infrastucture"
+title: "Model your application infrastructure in Bicep"
+linkTitle: "Infrastructure"
 description: "Learn how to model your infrastucture in the Bicep language"
 weight: 300
 ---
@@ -45,4 +45,4 @@ For more information refer to the Bicep documentation on [scopes](https://docs.m
 
 Now that you have modeled your infrasturcture in Bicep, you can add your Radius application and services:
 
-{{< button page="author-application" text="Model your application and services" >}}
+{{< button page="bicep-application" text="Model your application and services" >}}

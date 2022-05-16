@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Add cross-platform connectors to your Radius application"
+title: "Radius Connectors"
 linkTitle: "Connectors"
-description: "Reference the schemas of the Radius connector resources"
+description: "Add cross-platform connectors to your Radius application with Connectors"
 weight: 300
 ---
 
