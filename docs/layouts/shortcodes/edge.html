@@ -1,0 +1,8 @@
+{{ $version := $.Page.Site.Params.version }}
+{{ $content := .Inner }}
+
+{{ if eq $version "edge" }}
+{{ $content }}
+{{ else }}
+To try out an unstable release visit the [edge docs](https://edge.radapp.dev).
+{{ end }}
