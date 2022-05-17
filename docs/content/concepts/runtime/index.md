@@ -23,7 +23,7 @@ The Project Radius runtime is a set of services that accepts a Radius applicatio
 
 ### Universal control plane
 
-The universal control plane (UCP) provides the front-door endpoint, authentication, authorization, and other central capabilities for a self-hosted Radius environment. When deploying to a Radius environment using a deployment JSON file (Bicep) or through sinbgle imperative commands (CLI, Terraform), UCP handles the request and sends it to the appropriate plane and resource provider.
+The universal control plane (UCP) provides the front-door endpoint, authentication, authorization, and other central capabilities for a self-hosted Radius environment. When deploying to a Radius environment using a deployment JSON file (Bicep) or through single imperative commands (CLI, Terraform), UCP handles the request and sends it to the appropriate plane.
 
 Learn more about the deployment flows:
 
@@ -80,7 +80,7 @@ Backing resources may be created deleted by the Radius RP for some resources. Fo
 
 ### Deployment engine
 
-The DE service is used when Bicep or ARM JSON is used to deploy Radius applications. It builds the dependency graph of resources and orchestrates the CRUDL requests to the respective resource providers.
+The DE service is used when Bicep or ARM JSON is used to deploy Radius applications. It parses and builds the dependency graph of resources and orchestrates the CRUDL requests to the respective resource providers.
 
 For imperative commands (CLI, Terraform), the DE is bypassed and the client (CLI, Terraform) acts as the DE.
 
