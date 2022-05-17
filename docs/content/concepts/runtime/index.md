@@ -1,24 +1,25 @@
 ---
 type: docs
-title: Project Radius runtime services
-linkTitle: Runtime
-description: Learn how the Project Radius runtime services deploy and run your applications
+title: Project Radius control-plane services
+linkTitle: Control-plane
+description: Learn how the Project Radius control-plane services deploy and manage your applications
 weight: 300
 ---
 
 ## Overview
 
-The Project Radius runtime is a set of services that accepts a Radius application definition and deploys it to the target [platform and runtime]({{< ref platforms >}}).
+The Project Radius control-plane is a set of services that accepts a Radius application definition and deploys it to the target [platform and runtime]({{< ref platforms >}}).
 
-<img src="runtime-services.png" alt="Diagram of the Project Radius runtime services" width="700" />
+<img src="controlplane-services.png" alt="Diagram of the Project Radius control-plane services" width="700" />
 
 ## Services
 
 | Service | Description | Self-hosted | Microsoft Azure |
 |---------|-------------|-------------|-----------------|
-| **Universal control plane (UCP)/<br />Azure Resource Manager (ARM)** | The "front door" to the runtime services. Provides authentication, authorization, routing, and other central capabilities. | Self-hosted UCP service | Azure Resource Manager (ARM) |
+| **Universal control plane (UCP)/<br />Azure Resource Manager (ARM)** | The "front door" to the control-plane services. Provides authentication, authorization, routing, and other central capabilities. | Self-hosted UCP service | Azure Resource Manager (ARM) |
 | **Radius resource provider (RP)** | Manages Radius applications and app-model resources. | Self-hosted RP service | Central `Applications.*` Azure resource provider |
 | **Deployment engine (DE)** | Orchestrates UCP and ARM deployments when Bicep or ARM JSON is used to deploy. | Self-hosted DE service | Azure Resource Manager (ARM) |
+
 ### Universal control plane
 
 The universal control plane (UCP) provides the front-door endpoint, authentication, authorization, and other central capabilities for a self-hosted Radius environment. When deploying to a Radius environment using a deployment JSON file (Bicep) or through single imperative commands (CLI, Terraform), UCP handles the request and sends it to the appropriate plane.
