@@ -166,6 +166,10 @@ While Project Radius is in preview two separate extensions are required, one for
 
    {{< button link="https://radiuspublic.blob.core.windows.net/tools/vscode/stable/rad-vscode.vsix" text="Download Radius extension" >}}
 
+   {{< button link="https://radiuspublic.blob.core.windows.net/tools/vscode/edge/rad-vscode-bicep.vsix" text="Download Bicep extension (edge)" >}}
+
+   {{< button link="https://radiuspublic.blob.core.windows.net/tools/vscode/edge/rad-vscode.vsix" text="Download Radius extension (edge)" >}}
+
    {{% /codetab %}}
 
    {{% codetab %}}
