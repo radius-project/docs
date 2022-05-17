@@ -198,6 +198,8 @@ While Project Radius is in preview two separate extensions are required, one for
    code --install-extension rad-vscode.vsix
    ```
 
+   If you're on macOS, make sure to [setup the `code` alias](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line).
+
    {{% /codetab %}}
 
    {{< /tabs >}}
