@@ -86,7 +86,7 @@ There is a known issue where deployments to Azure will fail with a "NotFound" er
    rad deploy dapr.bicep
    ```
 
-   If you are using the Azzure storage Dapr state store starter, this may take a couple minutes as the storage account is deployed.
+   If you are using the Azure storage Dapr state store starter, this may take a couple minutes as the storage account is deployed.
 
 1. You can confirm all the resources were deployed by running:
 
