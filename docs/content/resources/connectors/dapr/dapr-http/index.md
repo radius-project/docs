@@ -9,7 +9,7 @@ slug: "http"
 
 ## Overview
 
-`dapr.io.InvokeHttpRoute` defines Dapr communication through the HTTP API between two or more [servicesservices]({{< ref container >}}).
+`dapr.io.InvokeHttpRoute` defines Dapr communication through the HTTP API between two or more [services]({{< ref container >}}).
 
 ## Route format
 
