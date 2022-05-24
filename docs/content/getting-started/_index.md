@@ -184,7 +184,7 @@ While Project Radius is in preview two separate extensions are required, one for
 
    {{< /tabs >}}
 
-2. Install the `.vsix` files:
+1. Install the `.vsix` files:
 
    {{< tabs UI Terminal >}}
 
@@ -214,7 +214,6 @@ While Project Radius is in preview two separate extensions are required, one for
 1. If running on Windows Subsystem for Linux (WSL), make sure to install the extension in WSL as well:
 
    <img src="./wsl-extension.png" alt="Screenshot of installing a vsix extension in WSL" width=400>
-
 
 <!-- TODO: add table of samples and tutorials 
 (maybe a table like on this page https://docs.dapr.io/getting-started/quickstarts/ ? ) -->
