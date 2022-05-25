@@ -2,12 +2,18 @@
 type: docs
 title: "Getting started"
 linkTitle: "Getting started"
-description: "How to get up and running with Project Radius tooling in just a few minutes"
+description: "How to get up and running with Project Radius"
 weight: 20
 no_list: true
 ---
 
-## Install `rad` CLI
+## Setting up Radius
+
+You can try Radius online without installing anything on your computer by using our GitHub Codespace.
+
+{{< button text="Radius Samples with GitHub Codespace" link="https://github.com/project-radius/samples" >}}
+
+### Install `rad` CLI
 
 The `rad` CLI manages your applications, resources, and environments. Begin by installing it on your machine:
 
@@ -25,10 +31,12 @@ To install the latest edge version:
 ```powershell
 $script=iwr -useb  https://radiuspublic.blob.core.windows.net/tools/rad/install.ps1; $block=[ScriptBlock]::Create($script); invoke-command -ScriptBlock $block -ArgumentList edge
 ```
+
 {{< /edge >}}
 {{% /codetab %}}
 
 {{% codetab %}}
+
 ```bash
 curl -fsSL "https://get.radapp.dev/tools/rad/install.sh" | /bin/bash
 ```
@@ -39,10 +47,12 @@ To install the latest edge version:
 ```bash
 curl -fsSL "https://radiuspublic.blob.core.windows.net/tools/rad/install.sh" | /bin/bash -s edge
 ```
+
 {{< /edge >}}
 {{% /codetab %}}
 
 {{% codetab %}}
+
 ```bash
 wget -q "https://get.radapp.dev/tools/rad/install.sh" -O - | /bin/bash
 ```
@@ -53,6 +63,7 @@ To install the latest edge version:
 ```bash
 wget -q "https://radiuspublic.blob.core.windows.net/tools/rad/install.sh" -O - | /bin/bash -s edge
 ```
+
 {{< /edge >}}
 {{% /codetab %}}
 
@@ -72,30 +83,32 @@ PowerShell for Cloud Shell is currently not supported.
 {{% /codetab %}}
 
 {{% codetab %}}
+
 1. Download the `rad` CLI from one of these URLs:
 
-   - MacOS: https://get.radapp.dev/tools/rad/edge/macos-x64/rad
-   - Linux: https://get.radapp.dev/tools/rad/edge/linux-x64/rad
-   - Windows: https://get.radapp.dev/tools/rad/edge/windows-x64/rad.exe
+   - MacOS: <https://get.radapp.dev/tools/rad/edge/macos-x64/rad>
+   - Linux: <https://get.radapp.dev/tools/rad/edge/linux-x64/rad>
+   - Windows: <https://get.radapp.dev/tools/rad/edge/windows-x64/rad.exe>
 
 1. Ensure the user has permission to execute the binary and place it somewhere on your PATH so it can be invoked easily.
 
 {{< edge >}}
+
 ### Edge releases
 
-- MacOS: https://radiuspublic.blob.core.windows.net/tools/rad/edge/macos-x64/rad
-- Linux: https://radiuspublic.blob.core.windows.net/tools/rad/edge/linux-x64/rad
-- Windows: https://radiuspublic.blob.core.windows.net/tools/rad/edge/windows-x64/rad.exe
+- MacOS: <https://radiuspublic.blob.core.windows.net/tools/rad/edge/macos-x64/rad>
+- Linux: <https://radiuspublic.blob.core.windows.net/tools/rad/edge/linux-x64/rad>
+- Windows: <https://radiuspublic.blob.core.windows.net/tools/rad/edge/windows-x64/rad.exe>
 {{< /edge >}}
 {{% /codetab %}}
 
 {{< /tabs >}}
 
-Verify the rad CLI is installed correctly by running `rad`. 
+Verify the rad CLI is installed correctly by running `rad`.
 
 ## Create a Radius environment
 
-A Radius environment is where you will deploy your applications. Easily deploy a new environment with the [`rad env init`]({{< ref rad_env_init >}}) command:
+A Radius environment is where you will deploy your applications. Easily deploy a new environment with the [`rad env init`] command:
 
 {{< tabs "Local" "Kubernetes" "Microsoft Azure" >}}
 
@@ -114,16 +127,18 @@ rad env init dev -i
 {{% /codetab %}}
 
 {{% codetab %}}
+
 ### Pre-requisites
 
 - Kubernetes cluster configured as the default `kubectl` context (verify with `kubectl config current-context`)
 
-
 ```sh
 rad env init kubernetes
 ```
+
 {{% /codetab %}}
 {{% codetab %}}
+
 ### Pre-requisites
 
 - [Az CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) (version 2.25.0 or later)
@@ -189,7 +204,7 @@ While Project Radius is in preview two separate extensions are required, one for
    {{< tabs UI Terminal >}}
 
    {{% codetab %}}
-   In VSCode, manually install the extension using the *Install from VSIX* command in the Extensions view command drop-down.
+   In VSCode, manually install the extension using the _Install from VSIX_ command in the Extensions view command drop-down.
 
    <img src="./vsix-install.png" alt="Screenshot of installing a vsix extension" width=400>
 
@@ -217,3 +232,28 @@ While Project Radius is in preview two separate extensions are required, one for
 
 <!-- TODO: add table of samples and tutorials 
 (maybe a table like on this page https://docs.dapr.io/getting-started/quickstarts/ ? ) -->
+
+## Next steps
+
+{{< cardpane >}}
+{{< card header="**Tutorials**" link="{{< ref application-concept >}}" >}}
+Hit the ground running with our Radius tutorial, complete with code samples aimed to get you started quickly with Radius
+
+[Visit Here]({{< ref tutorial >}})
+
+{{< /card >}}
+{{< card header="**Quickstart Guides**" >}}
+Learn about Project Radius topics via quickstart guides, complete with code samples.
+
+[Visit Here]({{< ref quickstarts >}})
+
+{{< /card >}}
+
+{{< card header="**Reference Apps**" >}}
+See how full applications are modeled in Project Radius.
+
+[Visit Here]({{< ref reference-apps >}})
+
+{{< /card >}}
+
+{{< /cardpane >}}
