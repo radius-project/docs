@@ -78,7 +78,7 @@ rad env delete -e azure --yes
 
 ## Troubleshooting
 
-### Manually leanup old/incomplete deployments
+### Manually cleanup old/incomplete deployments
 
 If your environment initialization does not complete or `rad env delete` does not work, follow these steps:
 
