@@ -10,7 +10,7 @@ weight: 1
 
 {{< cardpane >}}
 {{< card header="**App-centric**" >}}
-Developers [describe their application]({{< ref application-concept >}}) services and relationships, rather than just a list of infrastructure.
+Teams [describe their application]({{< ref application-concept >}}) services and relationships, rather than just a list of infrastructure.
 
 <img src="app-diagram.png" alt="Screenshot of a Radius applications diagram" style="width:100%" >
 {{< /card >}}
@@ -43,7 +43,7 @@ Radius extends strong existing tools to further streamline the app developer exp
 </table>
 {{< /card >}}
 {{< card header="**Intelligent**" >}}
-Developers can offload the complexity of wiring-up applications and let Radius employ best-practices.
+Teams can offload the complexity of wiring-up applications and let Radius employ best-practices.
 <table style="max-width:600px;margin-top:5%">
   <tr>
     <td style="width:25%;text-align:center">
