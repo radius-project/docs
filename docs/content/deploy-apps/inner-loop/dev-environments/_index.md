@@ -10,8 +10,6 @@ weight: 100
 
 With a Radius local environment you can run your applications on your machine without the need for an Azure subscription or remote Kubernetes cluster. This makes it easy to develop applications and try them out without waiting for a full deployment to the cloud.
 
-<!-- TODO: add link to local dev quickstart -->
-
 ## Features
 
 ### Managed cluster runtime
@@ -28,7 +26,11 @@ One of the slowest parts of working with containers can be waiting for container
 
 When you run an application locally the logs of your services are output to the terminal.
 
-## Initialize a local environment
+### Deploy Azure resources
+
+If you configure the optional [Azure provider]({{< ref providers >}}) you can include Azure resources in your application, which will be deployed to the subscription and resource group you specify. This allows you to run your services locally while connnecting to cloud resources.
+
+## Try a local environment
 
 ### Prerequisites
 
@@ -56,9 +58,9 @@ rad app run
 
 ## Example
 
-Check out the [Container Apps Store sample]({{< ref container-app-store >}}) to try out a local dev experience.
+Check out the [Container Apps Store reference app]({{< ref container-app-store >}}) to try out a local dev experience.
 
-{{< button text="Sample: Container Apps Store" page="container-app-store" color="success" newtab="true" >}}
+{{< button text="Container Apps Store" page="container-app-store" color="success" newtab="true" >}}
 
 ## Learn more
 
