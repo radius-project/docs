@@ -22,7 +22,7 @@ When initializing a new Radius environment you can optionally configure a cloud 
 
 ### Azure provider
 
-The Azure provider allows you to deploy and connect to Azure resources from a self-hosted Radius environment. This is useful for [running your services locally]({{< ref inner-loop >}}) or deploying to a [Kubernetes environment]({{< ref kubernetes-environments >}}) while leveraging to Azure resources.
+The Azure provider allows you to deploy and connect to Azure resources from a self-hosted Radius environment. This is useful for [running your services locally]({{< ref inner-loop >}}) or deploying to a [Kubernetes environment]({{< ref kubernetes-environments >}}) while also leveraging Azure resources.
 
 #### Prerequisites
 
