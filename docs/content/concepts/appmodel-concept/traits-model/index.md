@@ -14,7 +14,7 @@ Traits are still being designed and implemented by the Radius team. Stay tuned f
 
 For a production application you will face additional challenges that go above and beyond just describing the application functionally:
 
-- You might need spread manifests across different code repositories
+- You might need to spread manifests across different code repositories
 - You might need to configure per-deployment or per-environment behaviors
 
 Radius defines a secondary concept called a **Trait** to add additional flexibility to your Components. For example, a concern like the *number of replicas to create* is usually orthogonal to the requirements and intentions of the application code.
