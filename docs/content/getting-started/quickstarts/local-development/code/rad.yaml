@@ -1,0 +1,12 @@
+# This file describes the stages of deployment for the application
+# Read more at https://radapp.dev
+name: code
+stages:
+- name: app
+  bicep:
+    template: iac/app.bicep
+  build:
+    node_build:
+      docker:
+        context: src
+        image: myregistry/node-service
