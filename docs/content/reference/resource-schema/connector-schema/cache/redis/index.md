@@ -47,7 +47,7 @@ Connections to the Redis connector result in the following environment variables
 
 ## Starter
 
-You can get up and running quickly with a Redis cache by using a [starter]({{< ref starter-templates >}}):
+You can get up and running quickly with a Redis cache by using a starter:
 
 {{< rad file="snippets/starter.bicep" embed=true >}}
 

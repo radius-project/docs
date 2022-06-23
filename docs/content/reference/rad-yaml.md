@@ -20,7 +20,7 @@ Stages define an ordered set of steps to take in the deployment of an applicatio
 | Property | Description | Example |
 |----------|-------------|---------|
 | name | The name of the stage. | `infra` |
-| bicep | Details on a [Bicep template](#bicep-templates) to be deployed. | See [Bicep](#bicep) |
+| bicep | Details on a Bicep template to be deployed. | See [Bicep](#bicep) |
 | build | Details on a build to run prior to a deployment. | See [Build](#build) |
 | profiles | A list of profiles that can be specified for this stage. | See [Profiles](#profiles) |
 

@@ -7,7 +7,7 @@ description: "Learn how to model the eShop infrastructure in Bicep"
 weight: 200
 ---
 
-Begin by modeling all of your application's infrastructure. This example uses [starters]({{< ref starter-templates >}}) to easily deploy [connector resources]({{< ref connectors >}}) for:
+Begin by modeling all of your application's infrastructure. This example uses Radius starters to easily deploy [connector resources]({{< ref connectors >}}) for:
 
 - SQL databases
 - Redis caches
