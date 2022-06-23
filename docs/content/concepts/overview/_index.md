@@ -67,13 +67,7 @@ Project Radius aims to support all hosting platform types - from hyperscale clou
 {{< imgproc platform-goals Fit "700x500" >}}
 {{< /imgproc >}}
 
-Our current focus is on delivering robust support for the following platforms:
-
-- [Local development]({{< ref dev-environments >}}) as part of a developer inner-loop
-- [Microsoft Azure]({{< ref azure-environments>}}) as a managed-application serverless PaaS
-- [Kubernetes]({{< ref kubernetes-environments >}}) in all flavors and form-factors
-
-
+Our current focus is on delivering robust support for Azure, Kubernetes, and AWS. 
 
 <!-- TODO - incorporate the below text pasted from the old App model index page  -->
 Project Radius provides a descriptive framework for cloud native applications and their requirements. 

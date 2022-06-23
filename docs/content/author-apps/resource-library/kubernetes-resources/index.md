@@ -5,6 +5,7 @@ linkTitle: "Kubernetes"
 description: "Learn how to model and deploy Kubernetes resources as part of your application"
 weight: 400
 ---
+<!-- TODO: this page needs some love -->
 
 Radius applications are able to connect to and leverage Kubernetes resources.
 

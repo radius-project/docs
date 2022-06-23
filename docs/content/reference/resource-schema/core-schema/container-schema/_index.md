@@ -10,12 +10,7 @@ weight: 300
 
 ## Platform resources
 
-Containers are hosted by the following runtimes on each platform:
-
-| Platform | Resource |
-|----------|----------|
-| [Microsoft Azure]({{< ref azure-environments>}}) | Kubernetes Deployment on AKS |
-| [Kubernetes]({{< ref kubernetes-environments >}}) | Kubernetes Deployment |
+Containers are hosted by the Kubernetes as the container runtime today, regardless of which platform the application is deployed into. We plan to support additional container runtimes in the future. 
 
 ## Resource format
 
