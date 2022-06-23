@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "Code-to-cloud"
-linkTitle: "Code-to-cloud"
+title: "Local-to-cloud"
+linkTitle: "Local-to-cloud"
 description: "Learn about moving apps seamlessly from local environments to the cloud"
-weight: 200
+weight: 800
 ---
 
 <!-- TODO: topics for this page: lightweight env overview, rad app deploy, lightweight info about how to add portability if needed.  -->
