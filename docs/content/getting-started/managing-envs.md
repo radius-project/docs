@@ -1,16 +1,10 @@
 ---
 type: docs
-title: "Kubernetes Radius environments"
-linkTitle: "Kubernetes"
-description: "Information on Radius environments hosted on Kubernetes"
-weight: 200
+title: "Managing Radius Kubernetes environments"
+linkTitle: "Managing Envs"
+description: "How to manage Radius Kubernetes environments"
+weight: 100
 ---
-
-## Kubernetes environments
-
-A Kubernetes Radius environment allows you to deploy Radius applications to a Kubernetes cluster.
-<!-- markdownlint-disable MD033 -->
-<img src="./kubernetes-overview.png" alt="Overview diagram of Radius on Kubernetes" width=1000>
 
 ## Managing environments
 
@@ -71,9 +65,17 @@ If you choose a container registry provided by a cloud provider (other than Dock
    The output should look like this:
 
    ```bash
-   NAME                                         READY   STATUS    RESTARTS   AGE
-   haproxy-ingress-6f94f4bd85-497pc             1/1     Running   0          29s
-   radius-controller-manager-77bc56f9d4-2jg7s   2/2     Running   0          38s
+   NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+   ucp                       1/1     1            1           53s
+   appcore-rp                1/1     1            1           53s
+   bicep-deployment-engine   1/1     1            1           53s
+   bicep-de                  1/1     1            1           53s
+   contour-contour           1/1     1            1           46s
+   dapr-dashboard            1/1     1            1           35s
+   radius-rp                 1/1     1            1           53s
+   dapr-sidecar-injector     1/1     1            1           35s
+   dapr-sentry               1/1     1            1           35s
+   dapr-operator             1/1     1            1           35s
    ```
 
    An ingress controller is automatically deployed to the `radius-system` namespace for you to manage gateways. In the future you will be able to deploy your own ingress controller. Check back for updates.

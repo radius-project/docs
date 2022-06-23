@@ -14,6 +14,7 @@ Create a new Azure environment, specifying your subscription and resource group:
 ```sh
 rad env init azure -i
 ```
+<!-- TODO: update to 'rad env init kubernetes' in this whole sample app -->
 
 ## Deploy application to Azure
 

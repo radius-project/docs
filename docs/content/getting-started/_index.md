@@ -97,23 +97,6 @@ Verify the rad CLI is installed correctly by running `rad`.
 
 A Radius environment is where you will deploy your applications. Easily deploy a new environment with the [`rad env init`]({{< ref rad_env_init >}}) command:
 
-{{< tabs "Local" "Kubernetes" "Microsoft Azure" >}}
-
-{{% codetab %}}
-A local environment runs on your local machine, and makes it easy to run and deploy applications quickly.
-
-### Pre-requisites
-
-- [Docker Desktop](https://www.docker.com/products/docker-desktop)
-- [k3d](https://k3d.io/#installation)
-
-```bash
-rad env init dev -i
-```
-
-{{% /codetab %}}
-
-{{% codetab %}}
 ### Pre-requisites
 
 - Kubernetes cluster configured as the default `kubectl` context (verify with `kubectl config current-context`)
@@ -122,32 +105,6 @@ rad env init dev -i
 ```sh
 rad env init kubernetes
 ```
-{{% /codetab %}}
-{{% codetab %}}
-### Pre-requisites
-
-- [Az CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) (version 2.25.0 or later)
-
-_Note that you are responsible for any costs incurred in your subscription._
-
-### Steps
-
-1. Use the `az` CLI to authenticate with Azure your Azure account:
-
-   ```sh
-   az login
-   ```
-
-1. Create a new Azure environment:
-
-   ```sh
-   rad env init azure -i
-   ```
-
-   _This will prompt you for several inputs and then create assets in your subscription (~5-10 mins)._
-{{% /codetab %}}
-
-{{< /tabs >}}
 
 ## Install VS Code extension (optional)
 
