@@ -14,9 +14,13 @@ Because environment definitions can be codified, central teams can define enviro
 <img src="env-template-example.png" alt="Diagram of example contents for an environment template. It contains dependencies like Dapr, recipes for infrastructure, security configuration, diagnostics and logging, and compute runtime." width="200" />
 
 ## Configuring environments
-### 1. Define the environment 
-Environments, like applications, are defined via Infrastructure-as-Code languages. 
-For the list of supported languages, see [Languages]({{< ref supported-languages >}}). 
+There are three main steps to configure a Radius environment, and by completing these steps a user will have successfully initialized an environment.
+
+### 1. Optionally define the environment specs
+Environments, like applications, are defined via Infrastructure-as-Code languages. You may choose to describe your environment's requirements and contents in an IaC file. If you don't define environment specs, an empty environment will be created. You can install additional services there later if needed. 
+- For the list of supported IaC languages, see [Languages]({{< ref supported-languages >}}). 
+- For example environment definitions, see [link coming soon in other PR]
+<!-- TODO add that link ^  -->
 
 ### 2. Create a Kubernetes cluster
 Flavor and specs of your choosing (e.g. [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster), [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/), [K3s](https://k3s.io))
@@ -35,6 +39,10 @@ This command will:
 
 Each AKS or EKS cluster requires 1 Radius control plane, but it may contain multiple Radius environmnents if desired. 
 
+To verify that your environment initialized correctly, you should see it listed in the output of
+```bash
+rad env list
+```
 
 ## Using environments
 ### Environment as a resource instance

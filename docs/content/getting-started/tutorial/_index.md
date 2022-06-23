@@ -37,8 +37,14 @@ In this tutorial, you will:
 
 ### Initialize a Radius environment
 
-A Radius Kubernetes envionment can run in a Kubernetes cluster running on any platform. Make sure you have set the correct default kubectl context, and then run:
+A Radius Kubernetes envionment can run in a Kubernetes cluster running on any platform. 
 
+You can view the current context for kubectl by running
+```bash
+kubectl config current-context
+```
+
+Then run the following command to initialize a Radius Kubernetes environment:
 ```sh
 rad env init kubernetes
 ```
