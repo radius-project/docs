@@ -3,7 +3,7 @@ type: docs
 title: "Deploy Radius apps with CI/CD pipelines"
 linkTitle: "CI/CD pipelines"
 description: "Learn how to use Radius with your continuous integration and deployment (CI/CD)"
-weight: 100
+weight: 500
 ---
 
 ## GitHub Actions

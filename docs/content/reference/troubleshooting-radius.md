@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Troubleshooting issues and common problems"
-linkTitle: "Troubleshooting Radius"
+title: "Troubleshoot issues and common problems"
+linkTitle: "Troubleshoot Radius"
 description: "Common issues users may have with Project Radius and how to address them"
 weight: 900
 ---

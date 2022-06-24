@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Environment templates"
-linkTitle: "Env templates"
+linkTitle: "Environment templates"
 description: "Learn about creating templates for Radius environments"
 weight: 100
 ---

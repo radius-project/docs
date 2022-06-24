@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "Monitoring applications"
-linkTitle: "Monitoring apps"
+title: "Application Health"
+linkTitle: "Application Health"
 description: "Learn about tools for monitoring Radius apps"
-weight: 300
+weight: 400
 ---
 
 <!-- tabs for each way to monitor the app: 
