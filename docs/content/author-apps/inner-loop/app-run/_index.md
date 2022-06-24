@@ -49,8 +49,6 @@ Initializing Application myapp...
 Have a RAD time 😎
 ```
 
-For more information on this app refer to the [multi-stage deployments guide]({{< ref multi-stage-deployments >}}).
-
 ## Run your application
 
 Run your app locally with the [`rad app run` command]({{< ref rad_application_run >}}):
