@@ -11,7 +11,7 @@ weight: 300
 
 As part of a Radius deployment, the container images are built and provided to the application as parameters.
 
-Open [`rad.yaml`]({{< ref rad-yaml >}}) to see where the containers are built:
+Open rad.yaml to see where the containers are built:
 
 {{% alert title="Local container registry" color="info" %}}
 When deployed, the Docker images are built and pushed to the registries specified within `build.docker.image`. When running locally with [`rad app run`]({{< ref rad_application_run >}}), the containers are instead built and pushed to the [local container registry]({{< ref "dev-environments#local-container-registry" >}}).
