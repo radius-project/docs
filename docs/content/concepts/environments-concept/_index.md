@@ -7,21 +7,18 @@ weight: 300
 ---
 
 ## Introduction
-Radius environments can be thought of as a prepared landing zone for applications. Creating and configuring an environment results in a prepared pool of compute, networking, and dependency resources like databases. Then, a Radius application can be deployed into the environment, "binding" the app to the infrastructure. 
+Radius environments can be thought of as a prepared landing zone for applications. Creating and configuring an environment results in a prepared pool of compute, networking, and dependency resources like databases. Then, a Radius application can be deployed into the environment, "binding" the app to the infrastructure. Leverage organizational best practices. 
 
 Environment resources can be leveraged in two key ways:
 - to define configuration for operational concerns
-- to group the application and the resources shared - and draw lines between applications that shouldn't interact 
+- [will reword] to group the application and the resources shared - and build walls between applications that shouldn't interact 
 
 For example, an org might choose to setup separate Radius environments for staging and production. 
 When appropriate, mulitple applications can be deployed into the same environment. 
 
-## Environment templates
-Because environment definitions can be codified, central teams can define environment templates that let their dev teams hydrate fully-functioning environments in a self-service way - while following organization best practices like security confiugration. 
+## Concerns that environments manage
+[summary sentence]
 
-<img src="env-template-example.png" alt="Diagram of example contents for an environment template. It contains dependencies like Dapr, recipes for infrastructure, security configuration, diagnostics and logging, and compute runtime." width="200" />
-
-### What kinds of problems can environment templates solve?
 #### Network configuration
 Cloud providers such as Azure and AWS contain infrastructure services that simplify for users the configurations of virtual network, subnets, network security groups and user defined routes. AWS uses services such as Amazon Virtual Private Cloud and Azure uses Azure Virtual Network.
 #### Secret management
@@ -33,14 +30,23 @@ Teams often use diagnostic settings through leveraging services like Azure Monit
 #### Identity Policies
 Cloud providers such as Azure allow users to manage identities which provide credentials to access/limit user interactions with other services. If a user sets up a CosmoDB and assigns a managed identity for access today, they encounter that there are many different types of permissions that can be assigned such as the ability to read metadata, execute queries and add new data.
 
+
+Because environment definitions can be codified, central teams can define environment templates that let their dev teams hydrate fully-functioning environments in a self-service way - while following organization best practices like security configuration. 
+
+<img src="env-template-example.png" alt="Diagram of example contents for an environment template. It contains dependencies like Dapr, recipes for infrastructure, security configuration, diagnostics and logging, and compute runtime." width="200" />
+
+
 ## Handoffs between teams
+A full stack dev might write the code, write the app defintion, and create the environment. But we allow separation of concerns.... 
+[more introductory sentences about why we do things this way]
+
 An example workflow might look like
 - IT Pro defines the Radius environment specs in a template 
 - IT Pro creates a Radius environment based on the template
   - The environment contains recipes for supporting infrastructure the devs might need, like for a Redis cache
-- Developer defines a Radius application by writing an app.bicep file
-  - The app references the Recipe for a Redis cache 
-- Developer deploys the app to Azure 
+- Developer authors a Radius application template
+  - The template includes a Redis cache resource
+- Developer deploys the app template to Radius 
   - Radius uses the Redis cache Recipe to deploy an Azure Cache for Redis instance on behalf of the user
   - Radius binds that new cache instance to the environment 
   - Radius wires up the connection to the new cache instance, automatically configuring security best practices, injecting ENV variables, etc.
@@ -48,14 +54,14 @@ An example workflow might look like
   - Radius configures diagnostics and monitoring, including App Insights and Azure Monitor based on env config
   - Radius sets up access to a private container registry as defined in env config
 
-When the dev user deploys their application, these org-level concerns are automatically wired up based on the environment. Developers don't have to think about credentials, or where logs go, or how networking is configured - which enables devs to focus on their applications instead. 
+When the developer deploys their application, these org-level concerns are automatically wired up based on the environment. Developers don't have to think about credentials, or where logs go, or how networking is configured - which enables devs to focus on their applications instead. [rephrase to pull back to the new intro paragraph about why]
 
 <!-- (TODO - will convert this list ^ to a diagram by v0.12) -->
 
-## Configuring environments
-There are three main steps to configure a Radius environment, and by completing these steps a user will have successfully initialized an environment.
+## Creating an environment
+There are three steps to configure a Radius environment, and by completing these steps a user will have successfully initialized an environment.
 
-### 1. Optionally define the environment specs
+### 1. Define the environment specs
 Environments, like applications, are defined via Infrastructure-as-Code languages. You may choose to describe your environment's requirements and contents in an IaC file. If you don't define environment specs, an empty environment will be created. You can install additional services there later if needed. 
 - For the list of supported IaC languages, see [Languages]({{< ref supported-languages >}}). 
 - For example environment definitions, see [link coming soon in other PR]
@@ -64,11 +70,12 @@ Environments, like applications, are defined via Infrastructure-as-Code language
 ### 2. Create a Kubernetes cluster
 Flavor and specs of your choosing (e.g. [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster), [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/), [K3s](https://k3s.io))
 
-### 3. Run `rad env init kubernetes`
+### 3. Run initialization command [reword]
+`rad env init kubernetes`
 Radius currently supports Kubernetes as the container runtime. We plan to support additional container runtimes in the future. 
 
 This command will:
-- If needed, install a Radius control plane
+- If a Radius control plane is not already installed, install it
     - Install Radius control plane services via a set of Helm charts 
 - Create a new environment 
     - Create a namespace to hold the environment resource 
@@ -82,3 +89,7 @@ To verify that your environment initialized correctly, you should see it listed 
 ```bash
 rad env list
 ```
+
+## Maintaining an environment 
+
+env model makes it easier to make updates and to identify envs that need updates 
