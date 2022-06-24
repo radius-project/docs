@@ -8,7 +8,7 @@ weight: 300
 
 ## Overview
 
-The Project Radius control-plane is a set of services that accepts a Radius application definition and deploys it to the target [platform and runtime]({{< ref platforms >}}).
+The Project Radius control-plane is a set of services that accepts a Radius application definition and deploys it to the target platform.
 
 <img src="controlplane-services.png" alt="Diagram of the Project Radius control-plane services" width="700" />
 

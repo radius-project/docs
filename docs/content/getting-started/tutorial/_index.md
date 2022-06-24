@@ -37,37 +37,16 @@ In this tutorial, you will:
 
 ### Initialize a Radius environment
 
-This tutorial can be completed on any platform Radius supports. To get started, create a new environment:
+A Radius Kubernetes envionment can run in a Kubernetes cluster running on any platform. 
 
-{{< tabs Local Kubernetes Azure >}}
-
-{{% codetab %}}
-To create a local dev environment on top of Docker, run:
-
-```sh
-rad env init dev
+You can view the current context for kubectl by running
+```bash
+kubectl config current-context
 ```
 
-{{% /codetab %}}
-
-{{% codetab %}}
-A Kubernetes envionment can run in any Kubernetes cluster. Make sure you have set the correct default kubectl context, and then run:
-
+Then run the following command to initialize a Radius Kubernetes environment:
 ```sh
 rad env init kubernetes
 ```
-
-{{% /codetab %}}
-
-{{% codetab %}}
-To deploy an Azure environment to your Azure subscription, run:
-
-```sh
-rad env init azure -i
-```
-
-{{% /codetab %}}
-
-{{< /tabs >}}
 
 <br>{{< button text="Next: application overview" page="webapp-overview.md" >}}
