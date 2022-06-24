@@ -9,3 +9,5 @@ weight: 200
 {{% alert title="Preview" color="warning" %}}
 The following sample is a preview Container App Store Microservice sample. As we introduce additional features to Radius we will incorporate them into this sample.
 {{% /alert %}}
+
+<!-- TODO remove all references to multi-stage or rad.yaml and only use `rad deploy` instead -->
