@@ -53,7 +53,7 @@ A generic pub/sub lets you manually specify the metadata of a Dapr pub/sub broke
 
 ## Starter
 
-You can get up and running quickly with a Dapr Pub/Sub topic by using a [starter]({{< ref starter-templates >}}).
+You can get up and running quickly with a Dapr Pub/Sub topic by using a starter:
 
 {{% alert title="Known issue: dependsOn" color="warning" %}}
 Any service that consumes the `existing` resource will need to manually add a `dependsOn` reference to the starter module. This requirement will be removed in an upcoming release. See the [webapp tutorial]({{< ref webapp-add-database >}}) for an example.

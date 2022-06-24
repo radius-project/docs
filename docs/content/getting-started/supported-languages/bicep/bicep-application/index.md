@@ -48,7 +48,5 @@ Relationships between Radius services and other resources can be defined through
 
 ## Next steps
 
-Now that you have defined your infrastructure, application, services, and connections you can:
-
-- Deploy your application to a Radius-enabled platform ---- TODO: via... 
-- [Break it up into modules so separate teams can work on different parts of the application]({{< ref templates >}})
+Now that you have defined your infrastructure, application, services, and connections you can deploy your application to a Radius-enabled platform.   
+<!-- ---- TODO: via...  -->

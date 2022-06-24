@@ -31,7 +31,7 @@ Add a [`dapr.io.InvokeHttpRoute`]({{< ref dapr-http >}}) resource to the app, an
 
 Now that the backend is configured with Dapr, we need to define a state store to save information about orders.
 
-A [Radius starter]({{{< ref starter-templates >}}) can be used to add a Dapr state store, backed by a Redis container, to your application. You can choose between a Redis container or Azure Table Storage
+A Radius starter can be used to add a Dapr state store, backed by a Redis container, to your application. You can choose between a Redis container or Azure Table Storage
 
 {{< tabs "Redis Container" "Azure Table Storage" >}}
 
