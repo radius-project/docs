@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Operations"
-linkTitle: "Operations"
+title: "Administrator Guides"
+linkTitle: "Administrator Guides"
 description: "Learn about operating Radius environments and apps"
-weight: 60
+weight: 30
 ---

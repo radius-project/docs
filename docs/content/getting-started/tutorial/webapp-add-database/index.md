@@ -23,7 +23,7 @@ To learn more about connectors visit the [concepts docs]({{< ref connections-mod
 
 ## Add db starter
 
-[Starter templates]({{< ref starter-templates >}}) are available to easily add a MongoDB connector to your application using Bicep modules. Update your Bicep file to match the following to add a Mongo database connector to your application:
+Starters are available to easily add a MongoDB connector to your application using Bicep modules. Update your Bicep file to match the following to add a Mongo database connector to your application:
 
 {{< tabs "Mongo container" "Azure CosmosDB" >}}
 

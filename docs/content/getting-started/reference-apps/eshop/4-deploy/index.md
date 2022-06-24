@@ -13,7 +13,7 @@ Download the templates from the previous [infrastructure]({{< ref 2-infrastructu
 
 ### Setup `rad.yaml` file
 
-A [`rad.yaml`]({{< ref rad-yaml >}}) file describes how to deploy an application with the [`rad app deploy`]({< ref rad_appliaction_deploy >}) command. Copy and paste the following contents into a file named `rad.yaml`:
+A rad.yaml file describes how to deploy an application with the [`rad app deploy`]({< ref rad_appliaction_deploy >}) command. Copy and paste the following contents into a file named `rad.yaml`:
 
 ```yaml
 name: store

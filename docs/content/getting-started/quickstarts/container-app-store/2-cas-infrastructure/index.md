@@ -20,7 +20,7 @@ This directory contains the following files:
 - **iac/app.bicep** - The application Bicep definition
 - **iac/infra.azure.bicep** - The Dapr statestore definition for Azure
 - **iac/infra.dev.bicep** - The Dapr statestore definition for local environments
-- **rad.yaml** - The [application configuration]({{< ref rad-yaml >}})
+- **rad.yaml** - The [application configuration]
 - **go-service/** - The go microservice source code
 - **node-service/** - The node microservice source code
 - **python-service/** - The python microservice source code
@@ -53,7 +53,7 @@ Within `infra.dev.bicep` and `infra.bicep` you will find the following resources
 
 ## rad.yaml stages and profiles
 
-A [rad.yaml]({{< ref rad-yaml >}}) file allow users to define stages and profiles of deployment.
+A rad.yaml file allow users to define stages and profiles of deployment.
 
 This sample contains `infra` and `app` stages, along with a `dev` profile. The `dev` profile tells Radius to substitute `infra.bicep` for `infra.dev.bicep`:
 
