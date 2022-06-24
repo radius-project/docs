@@ -1,11 +1,3 @@
----
-type: docs
-title: "Connections concept"
-linkTitle: "Connections"
-description: "Learn about the Radius Connections concept"
-weight: 200
----
-<!-- TODO retire this page. move this topic's fresh content to either Concepts.Overview or Concepts.Architecture. -->
 
 Once you define your Application and the Components inside of it, you can define the Connections between them. Connections are defined as:
 

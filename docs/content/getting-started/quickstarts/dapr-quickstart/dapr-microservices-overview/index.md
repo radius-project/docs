@@ -17,7 +17,7 @@ You can view and download the source code in the [samples repo](https://github.c
 
 ## Resources
 
-This Radius application will have three [resouces]({{< ref resources-model.md >}}):
+This Radius application will have three [resouces]({{< ref app-model-overview >}}):
 
 - A UI for users to place orders written with .NET Blazor (`frontend`)
 - A backend order processing microservice written in Node.JS (`backend`)

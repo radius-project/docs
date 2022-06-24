@@ -13,7 +13,7 @@ no_list: true
 Applications are made up of resources. Resources can be abstract and deployable to multiple Radius platforms (*eg. Container, MongoDB, etc*), or they can be platform specific and deployable to a single platform (*Azure CosmosDB, Kubernetes DaemonSet, etc*).
 
 {{% alert title="Learn about the Radius app model" color="primary" %}}
-To learn more about the Radius application model an how to define resources and relationships visit the [Radius concepts]({{< ref application-concept >}}).
+To learn more about the Radius application model an how to define resources and relationships visit the [Radius concepts]({{< ref defining-an-app >}}).
 {{% /alert %}}
 
 ## Resource types
