@@ -9,9 +9,38 @@ weight: 300
 ## Introduction
 Radius environments can be thought of as a prepared landing zone for applications. Creating and configuring an environment results in a prepared pool of compute, networking, and dependency resources like databases. Then, a Radius application can be deployed into the environment, "binding" the app to the infrastructure. 
 
+A
+
+## Environment templates
 Because environment definitions can be codified, central teams can define environment templates that let their dev teams hydrate fully-functioning environments in a self-service way - while following organization best practices like security confiugration. 
 
 <img src="env-template-example.png" alt="Diagram of example contents for an environment template. It contains dependencies like Dapr, recipes for infrastructure, security configuration, diagnostics and logging, and compute runtime." width="200" />
+
+### What kinds of problems can environment templates solve?
+#### Network configuration
+Cloud providers such as Azure and AWS contain infrastructure services that simplify for users the configurations of virtual network, subnets, network security groups and user defined routes. AWS uses services such as Amazon Virtual Private Cloud and Azure uses Azure Virtual Network.
+#### Secret management
+Teams looking to use cloud services must deal with setting configurations for identity-based access control, setting algorithms for encryption, storing keys and secrets in managed key vault services and rotate keys and other secrets frequently to keep up with security requirements including but not limited to expiring certificates, leaked credentials and dealing with downtime.
+#### Dependencies/Storage
+Teams must often deal with managing the configurations of their storage services. There could be times were the settings applied to a CosmosDB for example could change rendering a need to update the infrastructure settings.
+#### Diagnostics
+Teams often use diagnostic settings through leveraging services like Azure Monitor. If a customer uses CosmoDB they have various available ways to choose from to connect to Azure Monitor and have various log settings ranging from retention policy to specific grouping types.
+#### Identity Policies
+Cloud providers such as Azure allow users to manage identities which provide credentials to access/limit user interactions with other services. If a user sets up a CosmoDB and assigns a managed identity for access today, they encounter that there are many different types of permissions that can be assigned such as the ability to read metadata, execute queries and add new data.
+
+## Handoffs between teams
+An example workflow might look like
+- IT Pro defines the Radius environment specs in a template 
+- IT Pro creates a Radius environment based on the template
+  - The environment contains recipes for supporting infrastructure the devs might need, like for a Redis cache
+- Developer defines a Radius application by writing an app.bicep file
+  - The app references the Recipe for a Redis cache 
+- Developer deploys the app to Azure 
+  - Radius uses the Redis cache Recipe to deploy an Azure Cache for Redis instance on behalf of the user
+  - Radius binds that new cache instance to the environment 
+  - Radius wires up the connection to the new cache instance, automatically configuring security best practices, injecting ENV variables, etc.
+
+<!-- (TODO - will convert this list ^ to a diagram by v0.12) -->
 
 ## Configuring environments
 There are three main steps to configure a Radius environment, and by completing these steps a user will have successfully initialized an environment.
@@ -43,29 +72,3 @@ To verify that your environment initialized correctly, you should see it listed 
 ```bash
 rad env list
 ```
-
-## Using environments
-### Environment as a resource instance
-An environment is more than just an address of where to put the application. 
-
-**Each environment has its own credentials**  
-Developers don't need a full set of infrastructure permissions in order to spin up the infrastructure they need. For example. A developer may need a storage account to be created as part of their app. Previously, they could either requst the database via ticketing system and lengthy approval process or they needed credentials to be able to deploy that resource type themselves. Now, Radius offers a way for central teams to empower dev teams to run quickly, knowing sufficient guardrails are in place.
-
-Infra teams can build up definitions ("recipes") for how various resource types should be deployed. When a dev user consumes them, the environment's credentials can be used to execute the deployment, so individual dev users don't need elevated permissions to obtain their supporting infrastructure. 
-
---- simple version of Jason's Kendrick v Kanye flowchart ---
-
-**Environments are stateful**  
-TODO fill this in
-
-**other?**
-
-### Environment as local workspace 
-After initializing a new Radius environment, you will see:  
-"Successfully wrote configuration to .../config.yaml"
-
-The environment context is stored locally in a config file to simplify environment consumption. 
-
-Like a Kubernetes cluster config, a user has an active Radius environment that is used by default as the target for their app deployments.   
-
-Additionally, the config file stores environment names for easily switching between environments. 
