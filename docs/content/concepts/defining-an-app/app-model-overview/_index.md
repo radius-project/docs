@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Radius application model"
-linkTitle: "App model"
+linkTitle: "App model overview"
 description: "Learn how to model your applications with the Radius application model"
 weight: 200
 ---
@@ -53,144 +53,62 @@ In your app's Bicep file, a resource captures:
 | **Routes** | What capabilities do I provide for others? | Offer an HTTP endpoint on `/home`
 | **Traits** | What operational behaviors do I offer and interact with? | Need a Dapr sidecar (`dapr.io.App`)
 
-### Examples
+### Example application 
 
-#### Example 1 
-```bash
-import applications 
+- participating resources are not nested inside app resource
+- some resources require app id to be specified 
+- some resources require env id to be specified 
+- all resources require location to be specified 
+
+```sh
+# Note: name used to import Radius types is a branding point. Alternative is `import applications`.
+import radius as radius 
  
-resource app 'Applications.Core/applications' = { 
-  name: 'cool-app' 
-  properties: { 
-    environment: applications.environmentId() 
-  } 
-} 
- 
-resource container 'Applications.Core/containers' = { 
-  name: 'cool-backend' 
-  properties: { 
-    application: app.id 
-    ... 
-  } 
-} 
- 
-resource container 'Microsoft.Apps/functions' = { 
-  name: 'cool-function' 
-  properties: { 
-    application: app.id 
-    ... 
-  } 
-} 
-```
-
-#### Example 2
-```bash
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
-  name: 'azure-connection-database-service'
-}
-
-resource store 'Container' = {
-  name: 'db-service'
-  properties: {
-    environment: applications.environmentId() 
-    application: app.id
-    container: {
-      image: magpieimage
-    }
-    connections: {
-      databaseresource: {
-        kind:'azure'
-        source: databaseAccount.id
-        roles: [
-          'Cosmos DB Account Reader Role'
-          '230815da-be43-4aae-9cb4-875f7bd000aa'
-        ]
-      }
-    }
-  }
-}
-
-
-resource databaseAccount 'Microsoft.DocumentDB/databaseAccounts@2020-04-01' = {
-  name: 'dbacc-${guid(resourceGroup().name)}'
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = { 
+  name: 'my-app' 
   location: resourceGroup().location
-  kind: 'MongoDB'
-  properties: {
-    environment: applications.environmentId() 
-    application: app.id
-    consistencyPolicy: {
-      defaultConsistencyLevel: 'Session'
-    }
-    locations: [
-      {
-        locationName: resourceGroup().location
-        failoverPriority: 0
-        isZoneRedundant: false
+  properties: { 
+    environment: radius.environmentId() 
+  } 
+} 
+
+# Radius container resource, application property required, can inherit environment property
+resource container 'Applications.Core/containers@2022-03-15-privatepreview' = { 
+  name: 'my-backend' 
+  location: resourceGroup().location
+  properties: { 
+    application: app.id 
+    connections: {
+      mongo: {
+        source: mongo.id
       }
-    ]
-    databaseAccountOfferType: 'Standard'
+    }
+    ... 
+  } 
+} 
+
+# Radius connector resource, application and environment properties required 
+resource mongo 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
+  name: 'my-mongo'
+  location: resourceGroup().location
+  properties: {
+    environment: radius.environmentId() 
+    ...
   }
 }
+
+# Azure resource, no application property needed
+resource database 'Microsoft.DocumentDB/databaseAccounts@2020-04-01' = {
+  name: 'my-db' 
+  location: 'westus2'
+} 
+
+# fyi, Kubernetes resources are extensible resources, not Radius or Azure resources. 
+# They do not require location, app id, or env id. 
+# Radius resources can depend on the outputs of these resources, but we don't have 
+# connections to Kubernetes resources today. 
 ```
 
-#### Example 3
-  ```bash
-  resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
-    name: 'azure-resources-dapr-pubsub-generic'
-    properties: { 
-      environment: applications.environmentId() 
-    } 
-  } 
-
-  resource publisher 'Container' = {
-    name: 'publisher'
-    properties: {
-      environment: applications.environmentId() 
-      application: app.id
-      connections: {
-        daprpubsub: {
-          kind: 'dapr.io/PubSubTopic'
-          source: pubsub.id
-        }
-      }
-      container: {
-        image: magpieimage
-      }
-    }
-  }
-  
-  resource pubsub 'dapr.io.PubSubTopic@v1alpha3' = {
-    name: 'pubsub'
-    properties: {
-      environment: applications.environmentId() 
-      application: app.id
-      kind: 'generic'
-      type: 'pubsub.kafka'
-      metadata: {
-        brokers: 'dapr-kafka.kafka.svc.cluster.local:9092'
-        authRequired: false
-      }
-      version: 'v1'
-    }
-  }
-```
-
-
-The following examples shows two Resources, one representing a [Container]({{< ref container >}}) and the other describing a [Dapr State Store](https://docs.dapr.io/developing-applications/building-blocks/state-management/state-management-overview/).
-
-#### Container
-
-{{< rad file="snippets/app.bicep" embed=true marker="//CONTAINER" >}}
-
-#### Dapr State Store
-
-{{< rad file="snippets/app.bicep" embed=true marker="//STATESTORE" >}}
-
-Other resources, like the `storefront` container above, can now connect to this Dapr State Store and save/get state items.
-
-## Services 
-
-A dev team's app code will likely center around core runnable resources, which we call services. Running code can be modeled with services like a container or an App Service. [Learn more]({{< ref services >}})
 
 ## Connecting to resources 
 
