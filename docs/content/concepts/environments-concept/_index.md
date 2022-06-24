@@ -9,7 +9,12 @@ weight: 300
 ## Introduction
 Radius environments can be thought of as a prepared landing zone for applications. Creating and configuring an environment results in a prepared pool of compute, networking, and dependency resources like databases. Then, a Radius application can be deployed into the environment, "binding" the app to the infrastructure. 
 
-A
+Environment resources can be leveraged in two key ways:
+- to define configuration for operational concerns
+- to group the application and the resources shared - and draw lines between applications that shouldn't interact 
+
+For example, an org might choose to setup separate Radius environments for staging and production. 
+When appropriate, mulitple applications can be deployed into the same environment. 
 
 ## Environment templates
 Because environment definitions can be codified, central teams can define environment templates that let their dev teams hydrate fully-functioning environments in a self-service way - while following organization best practices like security confiugration. 
@@ -39,6 +44,11 @@ An example workflow might look like
   - Radius uses the Redis cache Recipe to deploy an Azure Cache for Redis instance on behalf of the user
   - Radius binds that new cache instance to the environment 
   - Radius wires up the connection to the new cache instance, automatically configuring security best practices, injecting ENV variables, etc.
+  - Radius creates a vnet for the kubernetes cluster and redis cache based on env config
+  - Radius configures diagnostics and monitoring, including App Insights and Azure Monitor based on env config
+  - Radius sets up access to a private container registry as defined in env config
+
+When the dev user deploys their application, these org-level concerns are automatically wired up based on the environment. Developers don't have to think about credentials, or where logs go, or how networking is configured - which enables devs to focus on their applications instead. 
 
 <!-- (TODO - will convert this list ^ to a diagram by v0.12) -->
 
