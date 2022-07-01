@@ -3,8 +3,10 @@ type: docs
 title: "Extender resource"
 linkTitle: "Extender"
 description: "Learn how to use Extender resource in Radius"
-weight: 999
+weight: 100
 slug: "extender"
+toc_hide: true
+hide_summary: true
 ---
 
 ## Overview

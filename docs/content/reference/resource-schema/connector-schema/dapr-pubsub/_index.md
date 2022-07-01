@@ -1,9 +1,8 @@
 ---
 type: docs
 title: "Dapr Pub/Sub resource"
-linkTitle: "Pub/Sub Topic"
+linkTitle: "Dapr Pub/Sub"
 description: "Learn how to use Dapr Pub/Sub resources in Radius"
-weight: 300
 slug: "pubsub"
 ---
 

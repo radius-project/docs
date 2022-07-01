@@ -43,4 +43,4 @@ Model your building blocks as resources:
 
 ## Resource schema
 
-Refer to the [schema reference docs]({{< ref dapr-schema >}}) for more information on how to model Dapr resources.
+Refer to the [connector reference docs]({{< ref connector-schema >}}) for more information on how to model Dapr resources via Radius connectors.

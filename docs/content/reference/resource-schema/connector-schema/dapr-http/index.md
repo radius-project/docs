@@ -3,7 +3,6 @@ type: docs
 title: "Dapr Service Invocation HTTP Route"
 linkTitle: "Invoke Route"
 description: "Learn how to use Dapr's HTTP API in Radius"
-weight: 150
 slug: "http"
 ---
 

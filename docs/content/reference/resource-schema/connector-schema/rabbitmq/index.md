@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "RabbitMQ message broker connector"
-linkTitle: "RabbitMQ"
+linkTitle: "RabbitMQ message broker"
 description: "Learn how to use a RabbitMQ connector in your application"
 ---
 

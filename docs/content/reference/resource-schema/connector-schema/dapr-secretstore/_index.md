@@ -1,10 +1,11 @@
 ---
 type: docs
 title: "Dapr Secret Store resource"
-linkTitle: "Secret Store"
+linkTitle: "Dapr Secret Store"
 description: "Learn how to use a Dapr Secret Store resource in Radius"
-weight: 500
 slug: "secretstore"
+toc_hide: true
+hide_summary: true
 ---
 
 ## Overview

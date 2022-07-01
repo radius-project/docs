@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "MongoDB database connector"
-linkTitle: "MongoDB"
+linkTitle: "MongoDB database"
 description: "Learn how to use a MongoDB connector in your application"
 ---
 

@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Redis cache connector"
-linkTitle: "Redis"
+linkTitle: "Redis cache"
 description: "Learn how to use a Redis connector in your application"
 ---
 

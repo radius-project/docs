@@ -1,9 +1,8 @@
 ---
 type: docs
 title: "Dapr State Store resource"
-linkTitle: "State Store"
+linkTitle: "Dapr State Store"
 description: "Learn how to use a Dapr State Store resource in Radius"
-weight: 300
 slug: "statestore"
 ---
 
