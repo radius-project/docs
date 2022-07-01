@@ -100,4 +100,4 @@ Connections define how a container connects to [other resources]({{< ref resourc
 | kind | y | The type of resource you are connecting to. | `mongo.com/MongoDB`
 | source | y | The id of the connector or resource the container is connecting to. | `db.id`
 
-## Sub-types
+## Properties
