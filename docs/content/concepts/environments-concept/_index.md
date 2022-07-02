@@ -32,7 +32,7 @@ Teams must often deal with managing the configurations of their storage services
 Teams often use diagnostic settings through leveraging services like Azure Monitor. If a customer uses CosmoDB they have various available ways to choose from to connect to Azure Monitor and have various log settings ranging from retention policy to specific grouping types.
 
 #### Identity Policies
-Cloud providers such as Azure allow users to manage identities which provide credentials to access/limit user interactions with other services. If a user sets up a CosmoDB and assigns a managed identity for access today, they encounter that there are many different types of permissions that can be assigned such as the ability to read metadata, execute queries and add new data.
+Cloud providers such as Azure allow users to manage identities which provide credentials to access/limit user interactions with other services. If a user sets up a CosmoDB and assigns a managed identity for access today, there are many different types of permissions that can be assigned such as the ability to read metadata, execute queries and add new data.
 
 <img src="env-template-example.png" alt="Diagram of example contents for an environment template. It contains dependencies like Dapr, templates for infrastructure, security configuration, diagnostics and logging, and compute runtime." width="200" />
 
