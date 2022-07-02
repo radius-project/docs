@@ -23,7 +23,7 @@ Today, in a DevOps model, every developer might need to understand every nuance 
 Cloud providers such as Azure and AWS contain infrastructure services that simplify for users the configurations of virtual network, subnets, network security groups and user defined routes. AWS uses services such as Amazon Virtual Private Cloud and Azure uses Azure Virtual Network.
 
 #### Secret management
-Teams looking to use cloud services must deal with setting configurations for identity-based access control, setting algorithms for encryption, storing keys and secrets in managed key vault services and rotate keys and other secrets frequently to keep up with security requirements including but not limited to expiring certificates, leaked credentials and dealing with downtime.
+Teams looking to use cloud services must deal with setting configurations for identity-based access control, setting algorithms for encryption, and storing keys and secrets in managed key vault services. They must rotate keys and other secrets frequently to keep up with security requirements including but not limited to expiring certificates, leaked credentials and dealing with downtime.
 
 #### Dependencies/Storage
 Teams must often deal with managing the configurations of their storage services. There could be times where the settings applied to a CosmosDB for example could change rendering a need to update the infrastructure settings.
