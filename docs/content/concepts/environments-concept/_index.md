@@ -51,7 +51,7 @@ For example, a workflow where developers build on templates created by administr
   - Radius uses the pre-built Redis cache definition to deploy an Azure Cache for Redis instance on behalf of the user
   - Radius binds that new cache instance to the environment 
   - Radius wires up the connection to the new cache instance, automatically configuring security best practices, injecting ENV variables, etc.
-  - Radius creates a vnet for the kubernetes cluster and redis cache based on env config
+  - Radius creates a VNet for the Kubernetes cluster and Redis cache based on env config
   - Radius configures diagnostics and monitoring, including App Insights and Azure Monitor based on env config
   - Radius sets up access to a private container registry as defined in env config
 
