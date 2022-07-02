@@ -5,6 +5,14 @@ linkTitle: "HTTP Route"
 description: "Learn how to define HTTP communication with an HTTP Route"
 weight: 400
 ---
+## Overview
+
+An `HttpRoute` resources defines HTTP communication between two services. They can be used to define both one-way communication, as well as cycles of communication between services.
+
+<img src="networking-cycles.png" style="width:400px" alt="Diagram of Radius service-to-service networking with cycles" /><br />
+
+A gateway can optionally be added for external users to access the Route.
+
 
 ## Resource format
 
@@ -33,7 +41,7 @@ The following data is available for use from the consuming service:
 
 | Service | Azure | Kubernetes |
 |-----------|:-----:|:----------:|
-| [`Container`]({{< ref container >}}) | ✅ | ✅ |
+| [`Container`]({{< ref container-schema >}}) | ✅ | ✅ |
 
 ## Example
 
@@ -41,7 +49,7 @@ The following example shows two containers, one providing an HttpRoute and the o
 
 ### Providing container
 
-Once an HttpRoute is defined, you can provide it from a [container]({{< ref container >}}) by using the `provides` property:
+Once an HttpRoute is defined, you can provide it from a [container]({{< ref container-schema >}}) by using the `provides` property:
 
 {{< rad file="snippets/httproute.bicep" embed=true marker="//BACKEND" >}}
 

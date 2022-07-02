@@ -21,7 +21,7 @@ Next you'll add resources for the website's frontend.
 
 Radius captures the relationships and intentions behind an application, which simplifies deployment and management. The `frontend` and `frontend-route` resources in your Bicep file will contain everything needed for the website frontend to run and expose a port to the internet.
 
-The **`frontend`** [container]({{< ref container >}}) resource specifies:
+The **`frontend`** [container]({{< ref container-schema >}}) resource specifies:
 
 - `container image`: The container image to run. This is where your website's front end code lives
 - `ports`: The port to expose on the container, along with the [HttpRoute]({{< ref httproute >}}) that will be used to access the container

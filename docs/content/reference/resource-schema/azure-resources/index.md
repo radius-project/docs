@@ -19,7 +19,7 @@ Visit [the Microsoft docs](https://docs.microsoft.com/azure/templates/) to refer
 {{< tabs Bicep >}}
 
 {{% codetab %}}
-In the following example, a [Container]({{< ref container >}}) is connecting to an Azure Cache for Redis resource. The Container is assigned the `Redis Cache Contributor` role:
+In the following example, a [Container]({{< ref container-schema >}}) is connecting to an Azure Cache for Redis resource. The Container is assigned the `Redis Cache Contributor` role:
 
 {{< rad file="snippets/azure-connection.bicep" embed=true >}}
 {{% /codetab %}}

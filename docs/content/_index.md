@@ -45,7 +45,7 @@ Teams can offload the complexity of wiring-up applications and let Radius employ
       <a href="{{< ref connections-model >}}"><img src="connect-logo.svg" alt="Connections logo" style="width:40%"></a>
     </td>
     <td style="width:25%;text-align:center">
-      <a href="{{< ref networking >}}"><img src="network-logo.svg" alt="Networking logo" style="width:40%"></a>
+      <a href="{{< ref core-schema >}}"><img src="network-logo.svg" alt="Networking logo" style="width:40%"></a>
     </td>
     <td style="width:25%;text-align:center">
       <a href="{{< ref dapr >}}"><img src="dapr-logo.svg" alt="Dapr logo" style="width:40%"></a>

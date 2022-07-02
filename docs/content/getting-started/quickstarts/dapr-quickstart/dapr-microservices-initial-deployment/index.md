@@ -17,7 +17,7 @@ Create a new file named `dapr.bicep` and paste the following:
 
 ## Add `backend` container
 
-Next you'll add a `backend` [container]({{< ref container >}}) resource for the website's backend.
+Next you'll add a `backend` [container]({{< ref container-schema >}}) resource for the website's backend.
 
 Radius captures the relationships and intentions behind an application, which simplifies deployment and management. The single `backend` resource in your Bicep file will contain everything needed for the website backend to run.
 

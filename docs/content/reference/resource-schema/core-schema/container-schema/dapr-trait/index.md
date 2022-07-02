@@ -13,7 +13,7 @@ The `dapr.io/Sidecar` trait adds and configures a Dapr sidecar to your applicati
 
 ## Trait format
 
-In this example, a [container]({{< ref container >}}) adds a Dapr trait to add a Dapr sidecar:
+In this example, a [container]({{< ref container-schema >}}) adds a Dapr trait to add a Dapr sidecar:
 
 {{< rad file="snippets/dapr.bicep" embed=true marker="//SAMPLE" replace-key-run="//CONTAINER" replace-value-run="container: {...}" >}}
 
@@ -29,4 +29,4 @@ In this example, a [container]({{< ref container >}}) adds a Dapr trait to add a
 
 | Service | Azure | Kubernetes |
 |-----------|:-----:|:----------:|
-| [`Container`]({{< ref container >}}) | ✅ | ✅ |
+| [`Container`]({{< ref container-schema >}}) | ✅ | ✅ |

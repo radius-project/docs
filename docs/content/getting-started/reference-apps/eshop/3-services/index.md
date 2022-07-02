@@ -7,7 +7,7 @@ description: "Learn how to model the eShop services in Radius"
 weight: 300
 ---
 
-Next, you can model the eShop services through [containers]({{< ref container >}}), [HTTP Routes]({{< ref httproute >}}), and [Gateways]({{< ref gateway >}}).
+Next, you can model the eShop services through [containers]({{< ref container-schema >}}), [HTTP Routes]({{< ref httproute >}}), and [Gateways]({{< ref gateway >}}).
 
 Depending on if you chose RabbitMQ or Azure Service Bus for the message bus, eShop can be modeled as:
 

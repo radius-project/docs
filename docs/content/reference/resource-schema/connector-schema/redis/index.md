@@ -5,7 +5,7 @@ linkTitle: "Redis cache"
 description: "Learn how to use a Redis connector in your application"
 ---
 
-The `redislabs.com/Redis` connector is a [portable connector]({{< ref connectors >}}) which can be deployed to any platform Radius supports.
+The `redislabs.com/Redis` connector is a [portable connector]({{< ref connectors-model >}}) which can be deployed to any platform Radius supports.
 
 ## Supported resources
 
@@ -31,7 +31,7 @@ The following top-level information is available in the resource:
 
 ## Connections
 
-[Services]({{< ref services >}}) can define [connections]({{< ref connections-model >}}) to connectors using the `connections` property. This allows the service to access properties of the connector and contributes to to visualization and health experiences.
+[Services]({{< ref container-schema >}}) can define [connections]({{< ref connections-model >}}) to connectors using the `connections` property. This allows the service to access properties of the connector and contributes to to visualization and health experiences.
 
 ### Environment variables
 

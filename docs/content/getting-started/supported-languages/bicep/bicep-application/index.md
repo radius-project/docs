@@ -18,7 +18,7 @@ Create a new Bicep resource that represents your [application]({{< ref defining-
 
 If your application needs to be portable across platforms, you can use connectors to add an abstraction layer for each resource. Connectors present common values like `host`, `port` and `connectionString` that Service resources (like containers) can use to connect to the related API or service. The underlying infrastructure type can then be swapped out.
 
-{{< button text="Connectors library" page="connectors" >}}
+{{< button text="Connectors library" page="connector-schema" >}}
 
 For example, the [mongo.com.mongoDatabase]({{< ref mongodb >}}) connector allows either an Azure CosmosDB and a MongoDB container to bind to it.
 
@@ -28,11 +28,11 @@ A MongoDB connector can be modeled as:
 
 ## Add services
 
-Now that you have an application resource defined you can add [services]({{< ref services >}}) to it.
+Now that you have an application resource defined you can add [services]({{< ref container-schema >}}) to it.
 
-{{< button text="Service library" page="services" >}}
+{{< button text="Container schema" page="container-schema" >}}
 
-For example, you can add a [container]({{< ref container >}}):
+For example, you can add a [container]({{< ref container-schema >}}):
 
 {{< rad file="snippets/service.bicep" embed=true >}}
 

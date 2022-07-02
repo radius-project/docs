@@ -5,7 +5,7 @@ linkTitle: "MongoDB database"
 description: "Learn how to use a MongoDB connector in your application"
 ---
 
-The `mongodb.com/MongoDatabase` connector is a [portable connector]({{< ref connectors >}}) which can be deployed to any platform Radius supports.
+The `mongodb.com/MongoDatabase` connector is a [portable connector]({{< ref connectors-model >}}) which can be deployed to any platform Radius supports.
 
 ## Supported resources
 
@@ -47,7 +47,7 @@ Secrets must be accessed via Bicep functions to ensure they're not leaked or log
 
 ## Connections
 
-[Services]({{< ref services >}}) can define [connections]({{< ref connections-model >}}) to connectors using the `connections` property. This allows the service to access properties of the connector and contributes to to visualization and health experiences.
+[Services]({{< ref container-schema >}}) can define [connections]({{< ref connections-model >}}) to connectors using the `connections` property. This allows the service to access properties of the connector and contributes to to visualization and health experiences.
 
 ### Environment variables
 

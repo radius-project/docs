@@ -25,13 +25,18 @@ Currently, this example app is an empty shell and has no child resources defined
 
 It's up to the user to define what they consider part of the app. Users can include both services (containers) and infrastructure resources (databases, caches, etc.). 
 
-In some cases, an Ops team may create a Radius environment and prepare it with portable Radius [Connector]({{< ref connectors >}}) resources that a separate Dev team can connect to from their `resource app`. 
+In some cases, an Ops team may create a Radius environment and prepare it with portable Radius [Connector]({{< ref connectors-model >}}) resources that a separate Dev team can connect to from their `resource app`. 
 
 Learn more about how to author applications in the [Authoring guide]({{< ref author-apps >}}). 
 
 <!-- TODO: high-level overview of managing an app -->
 
+<!-- fyi - old notes pulled out of retired pages. for when this page gets cleaned up. -->
+A Radius container represents a container workload within your application.
 
+Radius networking resources allow you to model:
+- Communication between a user and a service
+- Communication between services
 
 
 
@@ -116,17 +121,18 @@ There are several ways a service resource (like a container) can connect to othe
 
 {{< cardpane >}}
 
+<!-- todo: this cardpane needs a refresh for v0.12 -->
 {{< card header="**Direct Connection**" >}}
-[<img src="direct-icon.png" alt="Connectors" style="width:325px"/>]({{< ref connectors >}})
+[<img src="direct-icon.png" alt="Connectors" style="width:325px"/>]({{< ref connectors-model >}})
 Connect directly to Kubernetes({{< ref kubernetes-resources >}}) and Azure ({{< ref azure-resources >}}) resources. 
 
-[Learn more]({{< ref connectors >}})
+[Learn more]({{< ref connectors-model >}})
 {{< /card >}}
 
 {{< card header="**Connectors**" >}}
-[<img src="connectors.png" alt="Connectors" style="width:325px"/>]({{< ref connectors >}})
+[<img src="connectors.png" alt="Connectors" style="width:325px"/>]({{< ref app-model-overview >}})
 Add portability to your application through platform-agnostic resources.
-[Learn more]({{< ref connectors >}})
+[Learn more]({{< ref app-model-overview  >}})
 {{< /card >}}
 
 {{< card header="**Custom/3rd Party**" >}}

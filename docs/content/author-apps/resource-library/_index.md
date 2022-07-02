@@ -20,22 +20,22 @@ To learn more about the Radius application model an how to define resources and 
 
 {{< cardpane >}}
 {{< card header="**Services**" >}}
-[<img src="services.png" alt="Services" style="width:300px"/>]({{< ref services >}})
+[<img src="services.png" alt="Services" style="width:300px"/>]({{< ref container-schema >}})
 
 Model your running code with services.<br /><br />
-[Learn more]({{< ref services >}})
+[Learn more]({{< ref container-schema >}})
 {{< /card >}}
 {{< card header="**Networking**" >}}
-[<img src="networking.png" alt="Networking" style="width:350px"/>]({{< ref networking >}})
+[<img src="networking.png" alt="Networking" style="width:350px"/>]({{< ref core-schema >}})
 
 Define your network relationships & requirements.<br /><br />
-[Learn more]({{< ref networking >}})
+[Learn more]({{< ref core-schema >}})
 {{< /card >}}
 {{< card header="**Connectors**" >}}
-[<img src="connectors.png" alt="Connectors" style="width:325px"/>]({{< ref connectors >}})
+[<img src="connectors.png" alt="Connectors" style="width:325px"/>]({{< ref connector-schema >}})
 
 Add portability to your application with connectors.<br /><br />
-[Learn more]({{< ref connectors >}})
+[Learn more]({{< ref connector-schema >}})
 {{< /card >}}
 {{< /cardpane >}}
 {{< cardpane >}}

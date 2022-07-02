@@ -44,7 +44,7 @@ Within `app.bicep`, object parameters with the same name as the build steps are 
 
 ## Services
 
-The Container App Store services are modeled as Radius [container resources]({{< ref container >}}):
+The Container App Store services are modeled as Radius [container resources]({{< ref container-schema >}}):
 
 {{< tabs "Store API (node-app)" "Order Service (python-app)" "Inventory Service (go-app)" >}}
 

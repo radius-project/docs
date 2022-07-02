@@ -22,7 +22,7 @@ You will be deploying an application, `todoapp`, with the following resources:
 
 ### `frontend` container
 
-The example website is a single-page-application (SPA) with a Node.JS backend running in a [container]({{< ref container >}}). The SPA sends HTTP requests to the Node.JS backend to read and store todo items.
+The example website is a single-page-application (SPA) with a Node.JS backend running in a [container]({{< ref container-schema >}}). The SPA sends HTTP requests to the Node.JS backend to read and store todo items.
 
 The website listens on port 3000 for HTTP requests.
 

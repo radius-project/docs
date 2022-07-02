@@ -43,7 +43,7 @@ The ports offered by the container are  defined in the `ports` section.
 | name | y | A name key for the port. | `http`
 | containerPort | y | The port the container exposes | `80`
 | protocol | n | The protocol the container exposes | `'TCP'`
-| provides | n | The id of the [Route]({{< ref networking >}}) the container provides. | `http.id`
+| provides | n | The id of the [Route]({{< ref httproute >}}) the container provides. | `http.id`
 
 ### Volumes
 

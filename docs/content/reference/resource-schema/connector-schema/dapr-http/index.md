@@ -8,7 +8,7 @@ slug: "http"
 
 ## Overview
 
-`dapr.io.InvokeHttpRoute` defines Dapr communication through the HTTP API between two or more [services]({{< ref container >}}).
+`dapr.io.InvokeHttpRoute` defines Dapr communication through the HTTP API between two or more [containers]({{< ref container-schema >}}).
 
 ## Route format
 
@@ -30,7 +30,7 @@ The following data is available for use from the consuming resource:
 
 ### Providing
 
-Once a Dapr service invocation Route is defined, you can provide it from a [container]({{< ref container >}}) by using the `provides` property:
+Once a Dapr service invocation Route is defined, you can provide it from a [container]({{< ref container-schema >}}) by using the `provides` property:
 
 {{< rad file="snippets/http.bicep" embed=true marker="//BACKEND" >}}
 {{< rad file="snippets/http.bicep" embed=true marker="//ROUTE" >}}
