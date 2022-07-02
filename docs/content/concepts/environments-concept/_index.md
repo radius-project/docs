@@ -26,7 +26,7 @@ Cloud providers such as Azure and AWS contain infrastructure services that simpl
 Teams looking to use cloud services must deal with setting configurations for identity-based access control, setting algorithms for encryption, storing keys and secrets in managed key vault services and rotate keys and other secrets frequently to keep up with security requirements including but not limited to expiring certificates, leaked credentials and dealing with downtime.
 
 #### Dependencies/Storage
-Teams must often deal with managing the configurations of their storage services. There could be times were the settings applied to a CosmosDB for example could change rendering a need to update the infrastructure settings.
+Teams must often deal with managing the configurations of their storage services. There could be times where the settings applied to a CosmosDB for example could change rendering a need to update the infrastructure settings.
 
 #### Diagnostics
 Teams often use diagnostic settings through leveraging services like Azure Monitor. If a customer uses CosmoDB they have various available ways to choose from to connect to Azure Monitor and have various log settings ranging from retention policy to specific grouping types.
