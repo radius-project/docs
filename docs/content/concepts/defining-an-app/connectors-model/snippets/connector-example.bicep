@@ -52,6 +52,14 @@ resource account 'Microsoft.DocumentDB/databaseAccounts@2020-04-01' = {
     consistencyPolicy: {
       defaultConsistencyLevel: 'Session'
     }
+    locations: [
+      {
+        locationName: location
+        failoverPriority: 0
+        isZoneRedundant: false
+      }
+    ]
+    databaseAccountOfferType: 'Standard'
   }
 
 
@@ -60,6 +68,9 @@ resource account 'Microsoft.DocumentDB/databaseAccounts@2020-04-01' = {
     properties: {
       resource: {
         id: 'mydb'
+      }
+      options: { 
+        throughput: 400
       }
     }
   }
