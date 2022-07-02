@@ -10,7 +10,7 @@ weight: 1
 
 {{< cardpane >}}
 {{< card header="**App-centric**" >}}
-Teams [describe their application]({{< ref defining-an-app >}}) services and relationships, rather than just a list of infrastructure.
+Teams [describe their application]({{< ref app-model-overview >}}) services and relationships, rather than just a list of infrastructure.
 
 <img src="app-diagram.png" alt="Screenshot of a Radius applications diagram" style="width:100%" >
 {{< /card >}}

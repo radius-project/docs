@@ -3,7 +3,7 @@ type: docs
 title: "Managing Radius Kubernetes environments"
 linkTitle: "Managing Envs"
 description: "How to manage Radius Kubernetes environments"
-weight: 100
+weight: 900
 ---
 
 ## Managing environments

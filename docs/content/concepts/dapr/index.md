@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Dapr resources"
-linkTitle: "Dapr"
+linkTitle: "Dapr integration"
 description: "Learn how to model and deploy Dapr resources as part of your application"
 weight: 600
 ---
