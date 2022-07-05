@@ -24,7 +24,7 @@ In this example, a team wants to use a Mongodb Database on Azure (`underlyingdb`
 
 Then, in the app definition, a developer defines a Mongo connector (`dbconnector`) that references the storage resource (`underlyingdb`). 
 
-{{< rad file="snippets/connector-example.bicep" embed=true marker="//CONNECTOR" >}}
+{{< rad file="snippets/corerp-connector-example.bicep" embed=true marker="//CONNECTOR" >}}
 
 The developer can bind to that resource without any configuration or knowledge of the underlying resource.  
 
