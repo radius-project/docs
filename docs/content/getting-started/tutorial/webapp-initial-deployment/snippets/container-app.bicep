@@ -1,35 +1,52 @@
-resource app 'radius.dev/Application@v1alpha3' = {
-  name: 'todoapp'
+import radius as radius
 
-  resource todoFrontend 'Container' = {
-    name: 'frontend'
-    properties: {
-      container: {
-        image: 'radius.azurecr.io/webapptutorial-todoapp'
-        ports: {
-          web: {
-            containerPort: 3000
-            provides: todoRoute.id
-          }
+param environment string
+
+param location string = 'global'
+
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+  name: 'todoapp'
+  location: location
+  properties: {
+    environment: environment
+  }
+}
+
+resource todoFrontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'frontend'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'radius.azurecr.io/webapptutorial-todoapp'
+      ports: {
+        web: {
+          containerPort: 3000
+          provides: todoRoute.id
         }
       }
     }
   }
+}
 
-  resource todoRoute 'HttpRoute' = {
-    name: 'frontend-route'
+resource todoRoute 'Applications.Core/httproutes@2022-03-15-privatepreview' = {
+  name: 'frontend-route'
+  location: location
+  properties: {
+    application: app.id
   }
+}
 
-  resource todoGateway 'Gateway' = {
-    name: 'gateway'
-    properties: {
-      routes: [
-        {
-          path: '/'
-          destination: todoRoute.id
-        }
-      ]
-    }
+resource todoGateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
+  name: 'gateway'
+  location: location
+  properties: {
+    application: app.id
+    routes: [
+      {
+        path: '/'
+        destination: todoRoute.id
+      }
+    ]
   }
-  
 }
