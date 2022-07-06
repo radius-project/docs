@@ -18,7 +18,7 @@ For example, when a user specifies a MongoDB connector, that connector could bin
 
 In this example, a team wants to use a Mongodb Database on Azure (`underlyingdb`) to fulfill their app's Mongo storage requirement:
 
-{{< rad file="snippets/connector-example.bicep" embed=true marker="//RESOURCE" >}}
+{{< rad file="snippets/corerp-connector-example.bicep" embed=true marker="//RESOURCE" >}}
 
 <h4>Connector</h4>
 
@@ -33,7 +33,7 @@ The developer can bind to that resource without any configuration or knowledge o
 
 Finally, the developer's container resource (`frontend`) connects to the Mongo connector (`dbconnector`) via the "connections" property:
 
-{{< rad file="snippets/connector-example.bicep" embed=true marker="//CONTAINER" >}}
+{{< rad file="snippets/corerp-connector-example.bicep" embed=true marker="//CONTAINER" >}}
 
 ## Connector categories
 
