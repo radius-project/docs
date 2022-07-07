@@ -1,3 +1,12 @@
+---
+type: docs
+title: "Connections"
+linkTitle: "Connections"
+description: "Learn how Radius Connections make it simple to wire resources together"
+weight: 300
+---
+
+
 
 Once you define your Application and the Components inside of it, you can define the Connections between them. Connections are defined as:
 

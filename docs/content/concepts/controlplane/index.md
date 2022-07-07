@@ -1,9 +1,9 @@
 ---
 type: docs
-title: Project Radius control-plane services
-linkTitle: Control-plane
+title: Deploy your applications
+linkTitle: Deploying Apps
 description: Learn how the Project Radius control-plane services deploy and manage your applications
-weight: 300
+weight: 500
 ---
 
 ## Overview

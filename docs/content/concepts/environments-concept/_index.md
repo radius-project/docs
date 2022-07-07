@@ -3,7 +3,7 @@ type: docs
 title: "Environments concept"
 linkTitle: "Environments"
 description: "Learn about Radius Environments"
-weight: 300
+weight: 400
 ---
 
 ## Introduction

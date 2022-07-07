@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Radius application model"
-linkTitle: "App model overview"
-description: "Learn how to model your applications with the Radius application model"
+title: "Define your apps in Radius"
+linkTitle: "Defining apps"
+description: "Learn how to model your applications in Radius"
 weight: 200
 ---
 
