@@ -27,7 +27,7 @@ What's missing is a way to collapse the entire concept of an application into a 
 {{< /card >}}
 
 {{< card header="**Drastically reduce infra ops time**" >}}
-- Iterate quickly in a local dev environment, then scale that same app up in Azure or Kubernetes.
+- Iterate quickly in a local dev environment, then scale that same app.
 - Stamp out versions of the app to the edge, to multiple geos, or even to multiple clouds. 
 - Follow best practices to be naturally secure by default, even with many teams working together. 
 - Easily layer IT policies across an app (access, backup, ...).
@@ -70,7 +70,7 @@ Project Radius aims to support all hosting platform types - from hyperscale clou
 {{< imgproc platform-goals Fit "700x500" >}}
 {{< /imgproc >}}
 
-Our current focus is on delivering robust support for Azure, Kubernetes, and AWS. 
+Our current focus is on delivering robust support for Azure, AWS, and Kubernetes. 
 
 <!-- TODO - incorporate the below text pasted from the old App model index page  -->
 Project Radius provides a descriptive framework for cloud native applications and their requirements. 
