@@ -9,28 +9,32 @@ no_list: true
 
 ## Overview
 
-This tutorial will teach you how to deploy a website as a Radius application from first principles. You will learn:  
+This tutorial will teach you how to deploy a website as a Radius application from first principles. You will take away two things
+- Enough knowledge to map your own application in Radius 
+- Radius features that will help you quickly iterate in local dev and port applications to cloud/edge
 
-- The concepts of the Radius application model
-- The basic syntax of the Bicep language
-
-No prior knowledge of Radius or Bicep is needed.
-
-### Tutorial steps
+## Tutorial steps
 
 In this tutorial, you will:
 
-1. Review and understand the Radius website application
-1. Deploy the website frontend in a container
-1. Connect a MongoDB resource to your website application
+- Define an application definition via Radius application model
+- Run the application locally
+- Add connector resources for portability
+- Set up the environment 
+- Deploy the application
+- View the application
 
 ## Prerequisites
 
 - [Install Radius CLI]({{< ref "getting-started#install-radius-cli" >}})
-- Install CLI for target platform:
-  - [k3d CLI](https://github.com/k3d-io/k3d/releases) for local environments
-  - [az CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) for Azure environments
-  - [kubectl CLI](https://kubernetes.io/docs/tasks/tools/) for Kubernetes environments
+- Setup a Kubernetes cluster. Could be any of the following
+  - [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster)
+    - Note that [AKS-managed AAD](https://docs.microsoft.com/en-us/azure/aks/managed-aad) is not supported currently
+  - [Kubernetes in Docker Desktop](https://www.docker.com/blog/docker-windows-desktop-now-kubernetes/), however it does take up quite a bit of memory on your machine, so use with caution.
+  - [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
+  - [K3s](https://k3s.io), a lightweight single-binary certified Kubernetes distribution from Rancher.
+- Install CLI for target cloud providers
+  - [az CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) as the tutorial sample connects to an Azure resource
 - [Install Visual Studio Code](https://code.visualstudio.com/) (recommended)
   - The [Radius VSCode extension]({{< ref "getting-started#setup-vscode" >}}) provides syntax highlighting, completion, and linting.
   - You can also complete this tutorial with any basic text editor.
