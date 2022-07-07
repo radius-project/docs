@@ -55,6 +55,7 @@ In your app's Bicep file, a resource captures:
 
 ### Example application 
 
+Notes to this review group:
 - participating resources are not nested inside app resource
 - some resources require app id to be specified 
 - some resources require env id to be specified 
@@ -88,25 +89,43 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {�
 } 
 
 # Radius connector resource, application and environment properties required 
+# Includes reference to resource the connector should talk to.
 resource mongo 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
   name: 'my-mongo'
   location: resourceGroup().location
   properties: {
     environment: radius.environmentId() 
+    application: app.id 
+    resource: database
     ...
   }
 }
 
-# Azure resource, no application property needed
+# Azure resource, no env or app property needed
 resource database 'Microsoft.DocumentDB/databaseAccounts@2020-04-01' = {
   name: 'my-db' 
   location: 'westus2'
 } 
+```
 
-# fyi, Kubernetes resources are extensible resources, not Radius or Azure resources. 
+### Kubernetes resource example
+
+```bash
+# fyi, Kubernetes resources use Bicep extensibilty and are neither Radius or Azure resources. 
 # They do not require location, app id, or env id. 
-# Radius resources can depend on the outputs of these resources, but we don't have 
-# connections to Kubernetes resources today. 
+# Kubernetes resources are referenced by their name, not an ARM
+
+  resource redis 'redislabs.com.RedisCache@v1alpha3' = {
+    name: toLower(cacheName)
+    properties: {
+      host: redisRoute.properties.host
+      port: redisRoute.properties.port
+      secrets: {
+        connectionString: '${redisRoute.properties.host}:${redisRoute.properties.port},password=${password},ssl=True,abortConnect=False'
+        password: password
+      }
+    }
+  } 
 ```
 
 
