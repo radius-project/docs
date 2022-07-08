@@ -2,7 +2,7 @@ import radius as radius
 
 param environment string
 
-param location string = 'global'
+param location string = resourceGroup().location
 
 param username string = 'admin'
 

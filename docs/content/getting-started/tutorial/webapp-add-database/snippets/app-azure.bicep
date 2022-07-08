@@ -2,9 +2,7 @@ import radius as radius
 
 param environment string
 
-param location string = 'global'
-
-param RGLocation string = resourceGroup().location
+param location string = resourceGroup().location
 
 param accountName string = 'todoapp-cosmos-${uniqueString(resourceGroup().id)}'
 
@@ -73,7 +71,7 @@ resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = 
 
 resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2021-04-15' = {
   name: toLower(accountName)
-  location: RGLocation
+  location: location
   kind: 'MongoDB'
   properties: {
     databaseAccountOfferType: 'Standard'
@@ -82,7 +80,7 @@ resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2021-04-15' = {
     }
     locations: [
       {
-        locationName: RGLocation
+        locationName: location
       }
     ]
   }
