@@ -4,6 +4,8 @@ param environment string
 
 param location string = 'global'
 
+param RGLocation string = resourceGroup().location
+
 param accountName string = 'todoapp-cosmos-${uniqueString(resourceGroup().id)}'
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
@@ -71,7 +73,7 @@ resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = 
 
 resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2021-04-15' = {
   name: toLower(accountName)
-  location: location
+  location: RGLocation
   kind: 'MongoDB'
   properties: {
     databaseAccountOfferType: 'Standard'
@@ -80,7 +82,7 @@ resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2021-04-15' = {
     }
     locations: [
       {
-        locationName: location
+        locationName: RGLocation
       }
     ]
   }
