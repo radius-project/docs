@@ -1,6 +1,6 @@
 import radius as radius
 
-param environment string
+param environmentId string
 
 param location string = resourceGroup().location
 
@@ -10,7 +10,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'todoapp'
   location: location
   properties: {
-    environment: environment
+    environment: environmentId
   }
 }
 
@@ -64,7 +64,7 @@ resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = 
   name: 'db'
   location: location
   properties: {
-    environment: environment
+    environment: environmentId
     resource: cosmosAccount::cosmosDb.id
   }
 }
