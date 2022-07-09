@@ -1,59 +1,101 @@
-resource app 'radius.dev/Application@v1alpha3' = {
+import radius as radius
+
+param environmentId string
+
+param location string = resourceGroup().location
+
+param accountName string = 'todoapp-cosmos-${uniqueString(resourceGroup().id)}'
+
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'todoapp'
-
-  resource todoFrontend 'Container' = {
-    name: 'frontend'
-    properties: {
-      container: {
-        image: 'radius.azurecr.io/webapptutorial-todoapp'
-        ports: {
-          web: {
-            containerPort: 3000
-            provides: todoRoute.id
-          }
-        }
-      }
-      connections: {
-        itemstore: {
-          kind: 'mongo.com/MongoDB'
-          source: db.id
-        }
-      }
-    }
-    // This manual dependency is currently required, will be removed in a future release
-    dependsOn: [
-      dbStarter
-    ]
+  location: location
+  properties: {
+    environment: environmentId
   }
-
-  resource todoRoute 'HttpRoute' = {
-    name: 'frontend-route'
-  }
-
-  resource todoGateway 'Gateway' = {
-    name: 'gateway'
-    properties: {
-      routes: [
-        {
-          path: '/'
-          destination: todoRoute.id
-        }
-      ]
-    }
-  }
-
-  // This temporary existing reference points to the Mongo Starter deployed by the starter
-  resource db 'mongo.com.MongoDatabase' existing = {
-    name: 'db'
-  }
-
 }
 
-// This module deploys an Azure CosmosDB w/ Mongo API
-module dbStarter 'br:radius.azurecr.io/starters/mongo-azure:latest' = {
-  name: 'db-starter'
-  params: {
-    dbName: 'db'
-    radiusApplication: app
+resource todoFrontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'frontend'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'radius.azurecr.io/webapptutorial-todoapp'
+      ports: {
+        web: {
+          containerPort: 3000
+          provides: todoRoute.id
+        }
+      }
+    }
+    connections: {
+      mongodb: {
+        source: db.id
+      }
+    }
   }
+}
+
+resource todoRoute 'Applications.Core/httproutes@2022-03-15-privatepreview' = {
+  name: 'frontend-route'
+  location: location
+
+  properties: {
+    application: app.id
+  }
+}
+
+resource todoGateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
+  name: 'gateway'
+  location: location
+
+  properties: {
+    application: app.id
+    routes: [
+      {
+        path: '/'
+        destination: todoRoute.id
+      }
+    ]
+  }
+}
+
+resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
+  name: 'db'
+  location: location
+  properties: {
+    environment: environmentId
+    resource: cosmosAccount::cosmosDb.id
+  }
+}
+
+resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2021-04-15' = {
+  name: toLower(accountName)
+  location: location
+  kind: 'MongoDB'
+  properties: {
+    databaseAccountOfferType: 'Standard'
+    consistencyPolicy: {
+      defaultConsistencyLevel: 'Session'
+    }
+    locations: [
+      {
+        locationName: location
+      }
+    ]
+  }
+  
+
+  resource cosmosDb 'mongodbDatabases' = {
+    name: 'db'
+    properties: {
+      resource: {
+        id: 'db'
+      }
+      options: {
+        throughput: 400
+      }
+    }
+  }
+
 }
