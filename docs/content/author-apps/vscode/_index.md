@@ -3,7 +3,7 @@ type: docs
 title: "Visual Studio Code extension"
 linkTitle: "Visual Studio Code"
 description: "Overview of the Project Radius Visual Studio Code extension"
-weight: 200
+weight: 300
 ---
 
 Developers can use the *preview* Radius Visual Studio Code extension which offers a variety of features to help manage Radius applications across cloud and edge.
