@@ -1,32 +1,46 @@
-resource app 'radius.dev/Application@v1alpha3' = {
-  name: 'myapp'
+import radius as radius
 
-  resource frontend 'Container' = {
-    name: 'frontend'
-    properties: {
-      container: {
-        image: 'registry/container:tag'
-        volumes: {
-          myPersistentVolume: {
-            kind: 'persistent'
-            mountPath: '/tmpfs'
-            source: myshare.id
-            rbac: 'read'
-          }
+param location string = resourceGroup().location
+param environment string
+
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+  name: 'myapp'
+  location: location
+  properties: {
+    environment: environment
+  }
+}
+
+resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'frontend'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'registry/container:tag'
+      volumes: {
+        myPersistentVolume: {
+          kind: 'persistent'
+          mountPath: '/tmpfs'
+          source: myshare.id
+          rbac: 'read'
         }
       }
     }
   }
-  resource myshare 'Volume' = {
-    name: 'myshare'
-    properties:{
-      kind: 'azure.com.keyvault'
-      resource: key_vault.id
-      secrets: {
-        mysecret: {
-          name: 'mysecret'
-          encoding: 'utf-8'
-        }
+}
+
+resource myshare 'Applications.Core/volumes@2022-03-15-privatepreview' = {
+  name: 'myshare'
+  location: location
+  properties:{
+    application: app.id
+    kind: 'azure.com.keyvault'
+    resource: key_vault.id
+    secrets: {
+      mysecret: {
+        name: 'mysecret'
+        encoding: 'utf-8'
       }
     }
   }

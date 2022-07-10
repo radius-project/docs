@@ -1,21 +1,32 @@
+import radius as radius
+
+param location string = resourceGroup().location
+param environment string
+
 resource app 'radius.dev/Application@v1alpha3' = {
   name: 'azure-storage-app'
+  location: location
+  properties: {
+    environment: environment
+  }
+}
 
-  resource store 'Container' = {
-    name: 'storage-service'
-    properties: {
-      container: {
-        image: 'registry/container:tag'
-      }
-      connections: {
-        storageresource: {
-          kind:'azure'
-          source: storageAccount.id
-          roles: [
-            'Reader and Data Access'
-            'Storage Blob Data Contributor'
-          ]
-        }
+resource store 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'storage-service'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'registry/container:tag'
+    }
+    connections: {
+      storageresource: {
+        kind:'azure'
+        source: storageAccount.id
+        roles: [
+          'Reader and Data Access'
+          'Storage Blob Data Contributor'
+        ]
       }
     }
   }

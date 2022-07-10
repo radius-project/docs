@@ -1,24 +1,34 @@
-resource app 'radius.dev/Application@v1alpha3' = {
+import radius as radius
+
+param location string = resourceGroup().location
+param environment string
+
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
-
-  //SAMPLE
-  resource frontend 'Container' = {
-    name: 'frontend'
-    properties: {
-      //CONTAINER
-      container: {
-        image: 'registry/container:tag'
-      }
-      //CONTAINER
-      traits: [
-        {
-          kind: 'dapr.io/Sidecar@v1alpha1'
-          appId: 'frontend'
-          appPort: 3000
-        }
-      ]
-    }
+  location: location
+  properties: {
+    environment: environment
   }
-  //SAMPLE
-
 }
+
+//SAMPLE
+resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'frontend'
+  location: location
+  properties: {
+    application: app.id
+    //CONTAINER
+    container: {
+      image: 'registry/container:tag'
+    }
+    //CONTAINER
+    traits: [
+      {
+        kind: 'dapr.io/Sidecar@v1alpha1'
+        appId: 'frontend'
+        appPort: 3000
+      }
+    ]
+  }
+}
+//SAMPLE

@@ -1,4 +1,4 @@
-import kubernetes from kubernetes
+import kubernetes as kubernetes
 
 resource pod 'kubernetes.core/Pod@v1' = {
   metadata: {

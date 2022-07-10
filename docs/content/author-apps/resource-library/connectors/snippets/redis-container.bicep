@@ -1,5 +1,9 @@
 //RESOURCE
-import kubernetes from kubernetes
+import kubernetes as kubernetes
+import radius as radius
+
+param location string = resourceGroup().location
+param environment string
 
 resource redisPod 'kubernetes.core/Pod@v1' = {
   metadata: {
@@ -22,36 +26,38 @@ resource redisPod 'kubernetes.core/Pod@v1' = {
 
 resource app 'radius.dev/Application@v1alpha3' existing = {
   name: 'myapp'
-
-  //CONNECTOR
-  resource redis 'redislabs.com.RedisCache' = {
-    name: 'myredis-connector'
-    properties: {
-      host: redisPod.spec.hostname
-      port: redisPod.spec.containers[0].ports[0].containerPort
-      secrets: {
-        connectionString: '${redisPod.spec.hostname}.svc.cluster.local:${redisPod.spec.containers[0].ports[0].containerPort}'
-        password: ''
-      }
-    }
-  }
-  //CONNECTOR
-
-  //CONTAINER
-  resource container 'Container' = {
-    name: 'mycontainer'
-    properties: {
-      container: {
-        image: 'myrepo/myimage'
-      }
-      connections: {
-        inventory: {
-          kind: 'redislabs.com/Redis'
-          source: redis.id
-        }
-      }
-    }
-  }
-  //CONTAINER
-
 }
+
+//CONNECTOR
+resource redis 'Applications.Connector/redisCache@2022-03-15-privatepreview' = {
+  name: 'myredis-connector'
+  location: location
+  properties: {
+    application: app.id
+    host: redisPod.spec.hostname
+    port: redisPod.spec.containers[0].ports[0].containerPort
+    secrets: {
+      connectionString: '${redisPod.spec.hostname}.svc.cluster.local:${redisPod.spec.containers[0].ports[0].containerPort}'
+      password: ''
+    }
+  }
+}
+//CONNECTOR
+//CONTAINER
+resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'mycontainer'
+  location: location
+  properties: {
+    environment: environment
+    container: {
+      image: 'myrepo/myimage'
+    }
+    connections: {
+      inventory: {
+        kind: 'redislabs.com/Redis'
+        source: redis.id
+      }
+    }
+  }
+}
+//CONTAINER

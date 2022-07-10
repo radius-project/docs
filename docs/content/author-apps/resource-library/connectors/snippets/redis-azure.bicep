@@ -1,3 +1,7 @@
+import radius as radius
+
+param location string = resourceGroup().location
+
 //RESOURCE
 resource azureRedis 'Microsoft.Cache/Redis@2019-07-01' = {
   name: 'myredis'
@@ -12,33 +16,35 @@ resource azureRedis 'Microsoft.Cache/Redis@2019-07-01' = {
 }
 //RESOURCE
 
-resource app 'radius.dev/Application@v1alpha3' existing = {
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' existing = {
   name: 'myapp'
-
-  //CONNECTOR
-  resource redis 'redislabs.com.RedisCache' = {
-    name: 'myredis-connector'
-    properties: {
-      resource: azureRedis.id
-    }
-  }
-  //CONNECTOR
-
-  //CONTAINER
-  resource container 'Container' = {
-    name: 'mycontainer'
-    properties: {
-      container: {
-        image: 'myrepo/myimage'
-      }
-      connections: {
-        inventory: {
-          kind: 'redislabs.com/Redis'
-          source: redis.id
-        }
-      }
-    }
-  }
-  //CONTAINER
-
 }
+
+//CONNECTOR
+resource redis 'Applications.Connector/redisCache@2022-03-15-privatepreview' = {
+  name: 'myredis-connector'
+  location: location
+  properties: {
+    application: app.id
+    resource: azureRedis.id
+  }
+}
+//CONNECTOR
+//CONTAINER
+resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'mycontainer'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'myrepo/myimage'
+    }
+    connections: {
+      inventory: {
+        kind: 'redislabs.com/Redis'
+        source: redis.id
+      }
+    }
+  }
+}
+//CONTAINER

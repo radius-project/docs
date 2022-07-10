@@ -1,4 +1,8 @@
-import kubernetes from kubernetes
+import kubernetes as kubernetes
+import radius as radius
+
+param location string = resourceGroup().location
+param environment string
 
 resource secret 'kubernetes.core/Secret@v1' = {
   metadata: {
@@ -11,15 +15,21 @@ resource secret 'kubernetes.core/Secret@v1' = {
 
 resource app 'radius.dev/Application@v1alpha3' = {
   name: 'myapp'
+  location: location
+  properties: {
+    environment: environment
+  }
+}
 
-  resource container 'Container' = {
-    name: 'mycontainer'
-    properties: {
-      container: {
-        image: 'myimage'
-        env: {
-          SECRET: secret.data['key']
-        }
+resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'mycontainer'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'myimage'
+      env: {
+        SECRET: secret.data['key']
       }
     }
   }
