@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "Managing Radius Kubernetes environments"
-linkTitle: "Managing Envs"
+title: "Manage Radius Kubernetes environments"
+linkTitle: "Manage environments"
 description: "How to manage Radius Kubernetes environments"
-weight: 100
+weight: 900
 ---
 
-## Managing environments
+## Manage environments
 
 These steps will walk through how to deploy, manage, and delete environments in a Kubernetes cluster.
 

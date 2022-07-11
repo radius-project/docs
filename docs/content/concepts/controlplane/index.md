@@ -3,7 +3,7 @@ type: docs
 title: Project Radius control-plane services
 linkTitle: Control-plane
 description: Learn how the Project Radius control-plane services deploy and manage your applications
-weight: 300
+weight: 400
 ---
 
 ## Overview
