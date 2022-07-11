@@ -41,7 +41,7 @@ resource todoapplication 'Applications.Core/containers@2022-03-15-privatepreview
 resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
   name: 'db'
   properties: {
-    application: app.id
+    environment: environment
     resource: cosmosDatabase.id 
   }
 }

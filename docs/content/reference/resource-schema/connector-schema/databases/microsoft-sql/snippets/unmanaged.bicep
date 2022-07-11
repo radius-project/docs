@@ -24,7 +24,7 @@ resource db 'Applications.Connector/microsoftSqlDatabases@2022-03-15-privateprev
   name: 'db'
   location: location
   properties: {
-    application: app.id
+    environment: environment
     resource: sqldb
   }
 }

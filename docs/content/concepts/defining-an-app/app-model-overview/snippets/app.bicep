@@ -44,7 +44,7 @@ resource inventory 'Applications.Connector/daprStateStores@2022-03-15-privatepre
   name: 'inventorystore'
   location: location
   properties: {
-    application: app.id
+    environment: environment
     kind: 'state.azure.tablestorage'
     resource: storage.id
   }

@@ -93,7 +93,7 @@ resource daprBackend 'Applications.Connector/daprInvokeHttpRoutes@2022-03-15-pri
   name: 'dapr-backend'
   location: location
   properties: {
-    application: app.id
+    environment: environment
     appId: 'backend'
   }
 }
@@ -123,7 +123,7 @@ resource stateStore 'Applications.Connector/daprStateStores@2022-03-15-privatepr
   name: 'orders'
   location: location
   properties: {
-    application: app.id
+    environment: environment
     kind: 'generic'
     type: 'state.azure.tablestorage'
     version: 'v1'

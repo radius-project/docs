@@ -71,7 +71,7 @@ resource rabbitmq 'Applications.Connector/rabbitmqMessageQueues@2022-03-15-priva
   name: 'rabbitmq'
   location: location
   properties: {
-    application: app.id
+    environment: environment
     queue: 'radius-queue'
     secrets: {
       connectionString: 'amqp://${username}:${password}@${rmqContainer.properties.host}:${rmqContainer.properties.port}'

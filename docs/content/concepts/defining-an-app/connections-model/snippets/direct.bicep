@@ -13,7 +13,7 @@ resource app 'radius.dev/Application@v1alpha3' = {
 }
 
 //SAMPLE
-resource store 'Container' = {
+resource store 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'storefront'
   location: location
   properties: {
@@ -37,7 +37,7 @@ resource inventory 'Applications.Connector/daprStateStores@2022-03-15-privatepre
   location: location
   //PROPERTIES
   properties: {
-    application: app.id
+    environment: environment
     kind: 'state.azure.tablestorage'
     resource: storage.id
   }

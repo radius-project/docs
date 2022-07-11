@@ -68,7 +68,7 @@ resource python_app_route 'Applications.Connector/daprInvokeHttpRoutes@2022-03-1
   name: 'python-app'
   location: location
   properties: {
-    application: app.id
+    environment: environment
     appId: 'python-app'
   }
 }
@@ -76,7 +76,7 @@ resource go_app_route 'Applications.Connector/daprInvokeHttpRoutes@2022-03-15-pr
   name: 'go-app'
   location: location
   properties: {
-    application: app.id
+    environment: environment
     appId: 'go-app'
   }
 }

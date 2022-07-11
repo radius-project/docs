@@ -1,6 +1,7 @@
 import radius as radius
 
 param location string = resourceGroup().location
+param environment string
 
 //RESOURCE
 resource azureRedis 'Microsoft.Cache/Redis@2019-07-01' = {
@@ -25,7 +26,7 @@ resource redis 'Applications.Connector/redisCache@2022-03-15-privatepreview' = {
   name: 'myredis-connector'
   location: location
   properties: {
-    application: app.id
+    environment: environment
     resource: azureRedis.id
   }
 }

@@ -11,7 +11,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   }
 }
 
-resource serviceA 'Container' = {
+resource serviceA 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'service-a'
   location: location
   properties: {
@@ -38,7 +38,7 @@ resource serviceA 'Container' = {
   }
 }
 
-resource routeAWeb 'HttpRoute' = {
+resource routeAWeb 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
   name: 'route-a-web'
   location: location
   properties: {
@@ -46,7 +46,7 @@ resource routeAWeb 'HttpRoute' = {
   }
 }
 
-resource routeAApi 'HttpRoute' = {
+resource routeAApi 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
   name: 'route-a-api'
   location: location
   properties: {
@@ -54,7 +54,7 @@ resource routeAApi 'HttpRoute' = {
   }
 }
 
-resource serviceB 'Container' = {
+resource serviceB 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'service-b'
   location: location
   properties: {
@@ -77,7 +77,7 @@ resource serviceB 'Container' = {
   }
 }
 
-resource routeB 'HttpRoute' = {
+resource routeB 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
   name: 'route-b'
   location: location
   properties: {
@@ -85,7 +85,7 @@ resource routeB 'HttpRoute' = {
   }
 }
 
-resource internetGateway 'Gateway' = {
+resource internetGateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
   name: 'internet-gateway'
   location: location
   properties: {

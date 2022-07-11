@@ -91,7 +91,7 @@ resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = 
   name: 'database'
   location: location
   properties: {
-    application: app.id
+    environment: environment
     resource: mongoDB.id
   }
 }

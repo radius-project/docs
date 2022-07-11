@@ -15,7 +15,7 @@ resource secretstore 'Applications.Connector/daprSecretStores@2022-03-15-private
   name: 'secretstore-generic'
   location: location
   properties: {
-    application: app.id
+    environment: environment
     kind: 'generic'
     type: 'secretstores.azure.keyvault'
     metadata: {

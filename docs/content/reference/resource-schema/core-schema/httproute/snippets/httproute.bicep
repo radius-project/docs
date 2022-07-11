@@ -22,7 +22,7 @@ resource httproute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
 //HTTPROUTE
 
 //FRONTEND
-resource frontend 'Applications.Core/conatiners@2022-03-15-privatepreview' = {
+resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'frontend'
   location: location
   properties: {

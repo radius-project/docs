@@ -37,7 +37,7 @@ resource backendDapr 'Applications.Connector/daprInvokeHttpRoutes@2022-03-15-pri
   name: 'dapr-backend'
   location: location
   properties: {
-    application: app.id
+    environment: environment
     appId: 'backend'
   }
 }

@@ -42,7 +42,7 @@ resource daprBackend 'Applications.Connector/daprInvokeHttpRoutes@2022-03-15-pri
   name: 'dapr-backend'
   location: location
   properties: {
-    application: app.id
+    environment: environment
     appId: 'backend'
   }
 }
@@ -65,7 +65,7 @@ resource redisContainer 'Applications.Core/containers@2022-03-15-privatepreview'
   }
 }
 
-resource redisRoute 'Applications.Core/htpRoutes@2022-03-15-privatepreview' = {
+resource redisRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
   name: 'redis-route'
   location: location
   properties: {
@@ -78,7 +78,7 @@ resource stateStore 'Applications.Connector/daprStateStores@2022-03-15-privatepr
   name: 'orders'
   location: location
   properties: {
-    application: app.id
+    environment: environment
     kind: 'generic'
     type: 'state.redis'
     version: 'v1'
