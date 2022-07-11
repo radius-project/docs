@@ -10,7 +10,7 @@ Now that your infrastructure is modeled in Bicep, you can model your app's servi
 
 ## Create a new Radius application
 
-Create a new Bicep resource that represents your [application]({{< ref defining-an-app >}}). This is the parent resource which will contain all of your services and relationships:
+Create a new Bicep resource that represents your [application]({{< ref appmodel-concept >}}). This is the parent resource which will contain all of your services and relationships:
 
 {{< rad file="snippets/blank.bicep" embed=true >}}
 
@@ -38,7 +38,7 @@ For example, you can add a [container]({{< ref container >}}):
 
 ## Connect to infrastructure
 
-Relationships between Radius services and other resources can be defined through [connections]({{< ref connections-model >}}). Connections allow you to configure:
+Relationships between Radius services and other resources can be defined through [connections]({{< ref appmodel-concept >}}). Connections allow you to configure:
 
 - Environment variables with resource properties and connection information
 - Managed identities and role based acces control (where applicable)

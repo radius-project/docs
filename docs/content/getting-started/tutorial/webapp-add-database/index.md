@@ -19,7 +19,7 @@ A [Mongo database connector]({{< ref mongodb >}}) resource provides an abstracti
 
 <img src="mongo-connector.png" width=450px alt="Diagram of a mongo connector" /><br />
 
-To learn more about connectors visit the [concepts docs]({{< ref connections-model >}})
+To learn more about connectors visit the [concepts docs]({{< ref appmodel-concept >}})
 
 ## Add db starter
 
@@ -49,11 +49,11 @@ This manual step will be removed in a future release.
 
 ### Connect to `db` from `frontend`
 
-Once the connector is referenced, you can connect to it by referencing the `db` component from within the `frontend` resource the [`connections`]({{< ref connections-model >}}) section:
+Once the connector is referenced, you can connect to it by referencing the `db` component from within the `frontend` resource the [`connections`]({{< ref appmodel-concept >}}) section:
 
 {{< rad file="snippets/starter-azure.bicep" embed=true marker="//CONTAINER" replace-key-dots="//IMAGE" replace-value-dots="container: {...}" >}}
 
-[Connections]({{< ref connections-model >}}) are used to configure relationships between two components. The `db` is of kind `mongo.com/MongoDB`, which supports the MongoDB protocol. This declares the *intention* from the `frontend` container to communicate with the `db` resource.
+[Connections]({{< ref appmodel-concept >}}) are used to configure relationships between two components. The `db` is of kind `mongo.com/MongoDB`, which supports the MongoDB protocol. This declares the *intention* from the `frontend` container to communicate with the `db` resource.
 
 Now that you have created a connection called `itemstore`, environment variables with connection information will be injected into the `frontend` container. The container reads the database connection string from an environment variable named `CONNECTION_ITEMSTORE_CONNECTIONSTRING`.
 
