@@ -72,6 +72,7 @@ resource pubsub 'Applications.Connector/daprPubSubTopics@2022-03-15-privateprevi
   location: location
   properties: {
     environment: environment
+    application: app.id
     kind: 'pubsub.azure.servicebus'
     resource: namespace::topic.id
   }

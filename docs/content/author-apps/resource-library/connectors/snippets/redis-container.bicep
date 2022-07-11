@@ -34,6 +34,7 @@ resource redis 'Applications.Connector/redisCache@2022-03-15-privatepreview' = {
   location: location
   properties: {
     environment: environment
+    application: app.id
     host: redisPod.spec.hostname
     port: redisPod.spec.containers[0].ports[0].containerPort
     secrets: {

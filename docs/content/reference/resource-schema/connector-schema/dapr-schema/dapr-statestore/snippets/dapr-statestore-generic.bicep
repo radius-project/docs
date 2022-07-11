@@ -16,6 +16,7 @@ resource statestore 'Applications.Connector/daprStateStores@2022-03-15-privatepr
   location: location
   properties: {
     environment: environment
+    application: app.id
     kind: 'generic'
     type: 'state.couchbase'
     metadata: {

@@ -59,7 +59,7 @@ resource node_app_route 'Applications.Core/httpRoutes@2022-03-15-privatepreview'
   name: 'node-app-route'
   location: location
   properties: {
-    environment: environment
+    application: app.id
   }
 }
 //ROUTE
@@ -69,6 +69,7 @@ resource python_app_route 'Applications.Connector/daprInvokeHttpRoutes@2022-03-1
   location: location
   properties: {
     environment: environment
+    application: app.id
     appId: 'python-app'
   }
 }
@@ -77,6 +78,7 @@ resource go_app_route 'Applications.Connector/daprInvokeHttpRoutes@2022-03-15-pr
   location: location
   properties: {
     environment: environment
+    application: app.id
     appId: 'go-app'
   }
 }

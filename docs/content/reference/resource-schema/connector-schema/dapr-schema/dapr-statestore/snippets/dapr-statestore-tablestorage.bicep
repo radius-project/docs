@@ -40,6 +40,7 @@ resource statestore 'Applications.Connector/daprStateStores@2022-03-15-privatepr
   location: location
   properties: {
     environment: environment
+    application: app.id
     kind: 'state.azure.tablestorage'
     resource: storageAccount::tablestorage.id
   }

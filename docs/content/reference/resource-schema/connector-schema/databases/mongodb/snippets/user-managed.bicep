@@ -50,6 +50,7 @@ resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = 
   location: location
   properties: {
     environment: environment
+    application: app.id
     resource: account::mongodb.id
   }
 }

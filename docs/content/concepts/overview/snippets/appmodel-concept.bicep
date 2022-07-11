@@ -42,6 +42,7 @@ resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = 
   name: 'db'
   properties: {
     environment: environment
+    application: app.id
     resource: cosmosDatabase.id 
   }
 }
