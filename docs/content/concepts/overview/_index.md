@@ -10,13 +10,13 @@ weight: 100
 
 App teams today struggle to model and deploy their applicatations. Complex architectures, cross-platform portability requirements, and org-level best-practices all make it difficult to not only model and deploy, but also maintain and troubleshoot large applications.
 
-Dockerfiles, Kubernetes CRDs, Helm charts, and infrastructure-as-code templates are all employed, with scripts to glue them all together. Plus, the range of infrastructure types (cloud, on-premises, serverless) can double or triple the work as teams figure out how to move apps between platforms.
+Apps today are modeled and deployed with Dockerfiles, Kubernetes CRDs, Helm charts, and infrastructure-as-code templates, with scripts to glue it all together. Plus, the range of infrastructure types (cloud, on-premises, serverless) can double or triple the work as teams figure out how to move apps between platforms.
 
 <img alt="Diagram showing all of the technologies needed to model an application today" src="cloud-apps-today.png" width="600px" />
 
 Once deployed, teams don't have a way to view and manage apps holistically. Instead, they're drowning in lists of disjointed resources.
 
-<img alt="Diagram showing long list of infrastructure" src="ui-mockup-list.png" width="800px" />
+<img alt="Diagram showing long list of infrastructure" src="ui-mockup-list.png" width="800px" /><br />
 
 What's missing is a way to collapse the entire concept of an application into a single entity so it can be deployed, managed, and scaled easily.
 
@@ -24,7 +24,7 @@ What's missing is a way to collapse the entire concept of an application into a 
 
 ### Build a unified concept of your application
 
-At the heart of Project Radius is a new **application resource**, with an accompanying set of resources and abstractions to describe your app's requirements and capabilities.
+At the heart of Project Radius is a new **application resource**, with an accompanying set of resources and abstractions to describe your app's requirements and capabilities. These resources form the [Radius app model]({{< ref appmodel-concept >}}).
 
 <img alt="Diagram showing modeling an app with Project Radius" src="cloud-apps-radius.png" width="600px" />
 
@@ -35,15 +35,13 @@ These new resources form the **Radius app model**, which allow you to:
 - Identify ownership and locate artifacts
 - Support handoffs between teams as the app matures
 
-The result is no longer just a flat list of resources - it's a fully fledged diagram of how the pieces relate to each other.
+The result is no longer just a flat list of resources - it's a fully fledged diagram of how the pieces relate to each other:
 
 <img alt="Diagram showing Radius application in the Azure portal" src="ui-mockup-basic.png" width="700px" /><br />
 
-{{< button text="Learn more about the app model" page="appmodel-concept" >}}
-
 ### Drastically reduce infra ops time
 
-App environments act as a landing zone for applications. They are the place where you can deploy, manage, and scale your apps.
+[App environments]({{< ref environments-concept >}}) act as a landing zone for applications. They are the place where you can deploy, manage, and scale your apps.
 
 <img alt="Diagram showing Radius environments" src="environments.png" width="600px" />
 
@@ -53,8 +51,6 @@ Environments allow you to:
 - Stamp out versions of the app to the edge, to multiple geos, or even to multiple clouds
 - Follow best practices to be naturally secure by default, even with many teams working together
 - Easily layer IT policies across an app (access, backup, ...)
-
-{{< button text="Learn more about environments" page="environments-concept" >}}
 
 ### Model applications as code
 
@@ -83,10 +79,8 @@ Project Radius aims to support all hosting platform types - from hyperscale clou
 
 Our current focus is on delivering robust support for self-hosted environments on Kubernetes. Fully-managed environments on Azure will be supported in the future.
 
-{{< button text="Learn more about environments" page="environments-concept" >}}
-
 ## Next step
 
 Now that you have an overview of Project Radius, learn more about the Radius app model:
 
-{{< button text="Learn more about the app model" page="appmodel-concept" size="btn-lg" color="success" >}}
+{{< button text="Learn about the app model" page="appmodel-concept" size="btn-lg" color="success" >}}

@@ -18,11 +18,11 @@ These diagrams often include:
 1. Services that run application code, such as containers.
 1. Relationships between resources, like protocols, settings, and permissions
 
-Project Radius provides a way for developers to translate human-understandable application diagrams into human-understandable application code. 
+The Radius app model provides a way for developers to translate human-understandable application diagrams into human-understandable application code. 
 
 ## Defining an Application
 
-The Radius Application contains everything on an app diagram. That includes all the compute, data, and infrastructure.
+The Radius application contains everything on an app diagram. That includes all the compute, data, and infrastructure.
 
 {{% alert title="📄 Application" color="primary" %}}
 The largest circle you can draw around your resources where names have meaning.
@@ -46,7 +46,7 @@ Currently, this example app is an empty shell and has no child resources defined
 
 <img alt="Diagram of available Radius resources" src="resources.png" width="500px" /><br />
 
-Each node of an architecture diagram would map to one resource. Together, an application's resources capture all of the important behaviors and requirements needed for a runtime to host that app.
+Each node of an architecture diagram maps to one resource. Together, an application's resources capture all of the important behaviors and requirements needed for a runtime to host that app.
 
 Updating our IaC file, this would look like:
 
@@ -70,7 +70,7 @@ The use cases for connections are flexible, and include features like:
 
 - Configuring role based access control (RBAC) between resources
 - Passing resource information like connection strings, credentials, etc. to the consumer of a resource
-- Configuring security policies between resources and runtimes (i.e. Dapr scoping)
+- Configuring security policies between resources and runtimes
 
 ### Injected values
 
@@ -79,7 +79,7 @@ Declaring a connection between two resources also injects information in the for
 These environment variables follow a naming convention that makes their use predictable. The naming pattern includes the connection name, which is part of the consuming component. This way the code that needs to read the values gets to define how they are named.
 
 {{% alert title="💡 Key concept" color="info" %}}
-Each kind of connection defines values that are useful for communication. These could be URIs, connection strings, access keys, or anything that application code needs to successfully communicate.
+Each kind of connection defines values that are useful for communication. These could be URIs, connection strings, access keys, or anything that application code needs to successfully communicate. Refer to each resource's reference documentation for more information.
 {{% /alert %}} 
 
 The names and semantic meaning of the values available are defined by the connection kind.
@@ -100,4 +100,4 @@ Adding connections to the above IaC file, it becomes:
 
 Now that you have an understanding of the Radius app model, learn more about how Radius makes it easy to add portability to your application:
 
-{{< button text="Learn about portability" page="portability" >}}
+{{< button text="Learn about portability" page="portability" size="btn-lg" color="success" >}}

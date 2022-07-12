@@ -14,7 +14,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'my-backend'
   location: location
-  properties: { 
+  properties: {
     application: app.id
     container: {
       image: 'myimage'
@@ -22,10 +22,6 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
   }
 }
 
-resource account 'Microsoft.DocumentDB/databaseAccounts@2020-04-01' existing = {
-  name: 'my-account'
-
-  resource db 'mongodbDatabases'  existing = {
-    name: 'my-db'
-  }
+resource blobContainer 'Microsoft.Storage/storageAccounts/blobServices/containers@2021-06-01' = {
+  name: 'mystorage/default/mycontainer'
 }
