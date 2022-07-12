@@ -26,42 +26,6 @@ Take the output of the above command and paste it into a [GitHub secret](https:/
 
 Next, create a new file named `deploy-radius.yml` under `.github/workflows/` and paste the following:
 
-#### Microsoft Azure
-
-```yml
-name: Deploy Radius app
-on:
-  push:
-    branches:
-      - main
-env:
-  RADIUS_INSTALL_DIR: ./
-  SUBSCRIPTION_ID: paste-subscription-id-here
-  RESOURCE_GROUP: paste-resource-group-name-here
-  LOCATION: westus2
-
-jobs:
-  deploy:
-    name: Deploy app
-    runs-on: ubuntu-latest
-    steps:
-    - name: Check out repo
-      uses: actions/checkout@v2
-    - name: az Login
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-    - name: Download rad CLI and rad-bicep
-      run: |
-        wget -q "https://get.radapp.dev/tools/rad/install.sh" -O - | /bin/bash
-        ./rad bicep download
-        ./rad --version
-    - name: Initialize Radius environment
-      run: ./rad env init azure -s ${SUBSCRIPTION_ID} -g ${RESOURCE_GROUP} -l ${LOCATION}
-    - name: Deploy app
-      run: ./rad deploy ./iac/app.bicep
-```
-
 #### Kubernetes
 
 This example uses an Azure Kubernetes Service cluster, but any Kubernetes cluster context will work.
