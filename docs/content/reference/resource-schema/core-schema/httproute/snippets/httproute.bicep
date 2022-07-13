@@ -35,7 +35,6 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
     }
     connections: {
       http: {
-        kind: 'Http'
         source: httproute.id
       }
     }

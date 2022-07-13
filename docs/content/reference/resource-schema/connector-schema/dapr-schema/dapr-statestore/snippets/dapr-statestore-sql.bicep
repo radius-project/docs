@@ -21,7 +21,6 @@ resource myapp 'Applications.Core/containers@2022-03-15-privatepreview' = {
     }
     connections: {
       pubsub: {
-        kind: 'dapr.io/StateStore'
         source: statestore.id
       }
     }

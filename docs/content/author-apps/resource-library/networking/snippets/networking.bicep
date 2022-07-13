@@ -31,7 +31,6 @@ resource serviceA 'Applications.Core/containers@2022-03-15-privatepreview' = {
     }
     connections: {
       serviceB: {
-        kind: 'Http'
         source: routeB.id
       }
     }
@@ -70,7 +69,6 @@ resource serviceB 'Applications.Core/containers@2022-03-15-privatepreview' = {
     }
     connections: {
       serviceA: {
-        kind: 'Http'
         source: routeAApi.id
       }
     }

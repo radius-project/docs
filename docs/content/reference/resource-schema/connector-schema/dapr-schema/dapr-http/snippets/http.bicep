@@ -58,7 +58,6 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
     }
     connections: {
       orders: {
-        kind: 'dapr.io/InvokeHttp'
         source: backendDapr.id
       }
     }

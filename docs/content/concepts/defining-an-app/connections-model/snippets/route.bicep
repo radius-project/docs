@@ -24,7 +24,6 @@ resource fe 'Applications.Core/containers@2022-03-15-privatepreview' = {
     //CONTAINER
     connections: {
       orders:{
-        kind: 'Http'
         source: orderRoute.id
       }
     }

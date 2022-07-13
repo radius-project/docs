@@ -20,7 +20,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 }
 
 //DATABASE
-resource db 'Applications.Connector/microsoftSqlDatabases@2022-03-15-privatepreview' = {
+resource db 'Applications.Connector/sqlDatabases@2022-03-15-privatepreview' = {
   name: 'db'
   location: location
   properties: {
@@ -39,7 +39,6 @@ resource webapp 'Applications.Core/containers@2022-03-15-privatepreview' = {
     application: app.id
     connections: {
       tododb: {
-        kind: 'microsoft.com/SQL'
         source: db.id
       }
     }

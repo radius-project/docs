@@ -3,8 +3,8 @@ import radius as radius
 param location string = resourceGroup().location
 param environment string
 
-param fileShare resource 'Microsoft.Storage/storageAccounts/fileServices/shares@2021-06-01'
-param mongoDB resource 'Microsoft.DocumentDB/databaseAccounts/mongodbDatabases@2021-07-01-preview'
+param fileShareId string
+param mongoDbId string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
@@ -61,7 +61,6 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
     }
     connections: {
       inventory: {
-        kind: 'mongo.com/MongoDB'
         source: db.id
       }
     }
@@ -75,7 +74,7 @@ resource myshare 'Applications.Core/volumes@2022-03-15-privatepreview' = {
   properties:{
     application: app.id
     kind: 'azure.com.fileshare'
-    resource: fileShare.id
+    resource: fileShareId
   }
 }
 
@@ -93,6 +92,6 @@ resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = 
   properties: {
     environment: environment
     application: app.id
-    resource: mongoDB.id
+    resource: mongoDbId
   }
 }

@@ -25,7 +25,6 @@ resource nodesubscriber 'Applications.Core/containers@2022-03-15-privatepreview'
     }
     connections: {
       pubsub: {
-        kind: 'dapr.io/PubSubTopic'
         source: pubsub.id
       }
     }
@@ -53,7 +52,6 @@ resource pythonpublisher 'Applications.Core/containers@2022-03-15-privatepreview
     }
     connections: {
       pubsub: {
-        kind: 'dapr.io/PubSubTopic'
         source: pubsub.id
       }
     }

@@ -104,11 +104,9 @@ resource node_app 'Applications.Core/containers@2022-03-15-privatepreview' = {
     }
     connections: {
       inventory: {
-        kind: 'dapr.io/InvokeHttp'
         source: go_app_route.id
       }
       orders: {
-        kind: 'dapr.io/InvokeHttp'
         source: python_app_route.id
       }
     }
@@ -137,7 +135,6 @@ resource python_app 'Applications.Core/containers@2022-03-15-privatepreview' = {
     }
     connections: {
       kind: {
-        kind: 'dapr.io/StateStore'
         source: statestore.id
       }
     }

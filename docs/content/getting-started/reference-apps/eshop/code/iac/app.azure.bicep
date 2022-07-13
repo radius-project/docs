@@ -61,11 +61,9 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
       }
       connections: {
         sql: {
-          kind: 'microsoft.com/SQL'
           source: sqlCatalog.id
         }
         servicebus: {
-          kind: 'azure'
           source: servicebus.id
         }
       }
@@ -121,39 +119,30 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
       extensions: []
       connections: {
         redis: {
-          kind: 'redislabs.com/Redis'
           source: redisKeystore.id
         }
         sql: {
-          kind: 'microsoft.com/SQL'
           source: sqlIdentity.id
         }
         webmvc: {
-          kind: 'Http'
           source: webmvcHttp.id
         }
         webspa: {
-          kind: 'Http'
           source: webspaHttp.id
         }
         basket: {
-          kind: 'Http'
           source: basketHttp.id
         }
         ordering: {
-          kind: 'Http'
           source: orderingHttp.id
         }
         webshoppingagg: {
-          kind: 'Http'
           source: webshoppingaggHttp.id
         }
         webhooks: {
-          kind: 'Http'
           source: webhooksHttp.id
         }
         webhooksclient: {
-          kind: 'Http'
           source: webhooksclientHttp.id
         }
       }
@@ -206,11 +195,9 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
       extensions: []
       connections: {
         sql: {
-          kind: 'microsoft.com/SQL'
           source: sqlOrdering.id
         }
         identity: {
-          kind: 'Http'
           source: identityHttp.id
         }
         servicebus: {
@@ -270,15 +257,12 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
       extensions: []
       connections: {
         redis: {
-          kind: 'redislabs.com/Redis'
           source: redisBasket.id
         }
         identity: {
-          kind: 'Http'
           source: identityHttp.id
         }
         servicebus: {
-          kind: 'azure'
           source: servicebus.id
         }
       }
@@ -325,11 +309,9 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
       extensions: []
       connections: {
         sql: {
-          kind: 'microsoft.com/SQL'
           source: sqlWebhooks.id
         }
         identity: {
-          kind: 'Http'
           source: identityHttp.id
         }
         servicebus: {
@@ -418,7 +400,6 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
       extensions: []
       connections: {
         sql: {
-          kind: 'microsoft.com/SQL'
           source: sqlOrdering.id
         }
         servicebus: {
@@ -473,19 +454,15 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
       extensions: []
       connections: {
         identity: {
-          kind: 'Http'
           source: identityHttp.id
         }
         ordering: {
-          kind: 'Http'
           source: orderingHttp.id
         }
         catalog: {
-          kind: 'Http'
           source: catalogHttp.id
         }
         basket: {
-          kind: 'Http'
           source: basketHttp.id
         }
       }
@@ -565,23 +542,18 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
       extensions: []
       connections: {
         redis: {
-          kind: 'redislabs.com/Redis'
           source: redisKeystore.id
         }
         identity: {
-          kind: 'Http'
           source: identityHttp.id
         }
         ordering: {
-          kind: 'Http'
           source: orderingHttp.id
         }
         catalog: {
-          kind: 'Http'
           source: catalogHttp.id
         }
         basket: {
-          kind: 'Http'
           source: basketHttp.id
         }
         servicebus: {
@@ -625,11 +597,9 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
       extensions: []
       connections: {
         webhooks: {
-          kind: 'Http'
           source: webhooksHttp.id
         }
         identity: {
-          kind: 'Http'
           source: identityHttp.id
         }
       }
@@ -728,24 +698,16 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
       extensions: []
       connections: {
         redis: {
-          kind: 'redislabs.com/Redis'
           source: redisKeystore.id
         }
         webshoppingagg: {
-          kind: 'Http'
           source: webshoppingaggHttp.id
         }
         identity: {
-          kind: 'Http'
           source: identityHttp.id
         }
         webshoppingapigw: {
-          kind: 'Http'
           source: webshoppingapigwHttp.id
-        }
-        orderingsignalrhub: {
-          kind: 'Http'
-          source: orderingsignalrhubHttp.id
         }
       }
     }
@@ -791,23 +753,18 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
       extensions: []
       connections: {
         redis: {
-          kind: 'redislabs.com/Redis'
           source: redisKeystore.id
         }
         webshoppingagg: {
-          kind: 'Http'
           source: webshoppingaggHttp.id
         }
         identity: {
-          kind: 'Http'
           source: identityHttp.id
         }
         webshoppingapigw: {
-          kind: 'Http'
           source: webshoppingapigwHttp.id
         }
         orderingsignalrhub: {
-          kind: 'Http'
           source: orderingsignalrhubHttp.id
         }
       }

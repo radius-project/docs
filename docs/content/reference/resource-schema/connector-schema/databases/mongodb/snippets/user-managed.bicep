@@ -71,7 +71,6 @@ resource webapp 'Applications.Core/containers@2022-03-15-privatepreview' = {
     //HIDE
     connections: {
       mongo: {
-        kind: 'mongo.com/MongoDB'
         source: db.id
         
       }

@@ -33,7 +33,6 @@ resource webapp 'Applications.Core/containers@2022-03-15-privatepreview' = {
     //HIDE
     connections: {
       messages: {
-        kind: 'rabbitmq.com/MessageQueue'
         source: rabbitmq.id
       }
     }
