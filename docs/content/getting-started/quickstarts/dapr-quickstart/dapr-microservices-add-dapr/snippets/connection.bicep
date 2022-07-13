@@ -85,7 +85,7 @@ resource stateStore 'Applications.Connector/daprStateStores@2022-03-15-privatepr
     type: 'state.redis'
     version: 'v1'
     metadata: {
-      redisHost: '${redisRoute.properties.host}:${redisRoute.properties.port}'
+      redisHost: '${redisRoute.properties.hostname}:${redisRoute.properties.port}'
       redisPassword: ''
     }
   }

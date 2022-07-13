@@ -28,7 +28,7 @@ Secrets are used when defining a RabbitMQ connector with a container or external
 
 | Property | Description | Example |
 |----------|-------------|---------|
-| connectionString | The connection string to the Rabbit MQ Message Queue. Recommended to use parameters and variables to craft. | `'amqp://${username}:${password}@${rmqContainer.properties.host}:${rmqContainer.properties.port}'`
+| connectionString | The connection string to the Rabbit MQ Message Queue. Recommended to use parameters and variables to craft. | `'amqp://${username}:${password}@${rmqContainer.properties.hostname}:${rmqContainer.properties.port}'`
 
 ### Functions
 
