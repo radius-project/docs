@@ -2,7 +2,7 @@ import radius as radius
 
 param environment string
 param location string = resourceGroup().location
-param cosmosDatabase resource 'Microsoft.DocumentDB/databaseAccounts/mongodbDatabases@2021-06-15'
+param cosmosDatabaseId string
 
 // Define app 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
@@ -30,7 +30,6 @@ resource todoapplication 'Applications.Core/containers@2022-03-15-privatepreview
     // Connect container to database 
     connections: {
       itemstore: {
-        kind: 'mongo.com/MongoDB'
         source: db.id
       }
     }
@@ -43,6 +42,6 @@ resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = 
   properties: {
     environment: environment
     application: app.id
-    resource: cosmosDatabase.id 
+    resource: cosmosDatabaseId
   }
 }

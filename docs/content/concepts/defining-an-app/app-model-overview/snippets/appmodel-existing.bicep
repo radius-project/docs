@@ -27,7 +27,7 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
     }
     connections: {
       redis: {
-        kind: 'azure'
+        kind: 'iam'
         source: redis.id
       }
     }

@@ -15,7 +15,7 @@ resource cache 'Microsoft.Cache/Redis@2019-07-01' = {
   }
 }
 
-resource app 'radius.dev/Application@v1alpha3' = {
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
   location: location
   properties: {
@@ -36,7 +36,7 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
     }
     connections: {
       redis: {
-        kind: 'azure'
+        kind: 'iam'
         source: cache.id
         roles: [
           'Redis Cache Contributor'

@@ -38,17 +38,17 @@ resource account 'Microsoft.DocumentDB/databaseAccounts@2020-04-01' = {
   }
 }
 
-resource app 'radius.dev/Application@v1alpha3' = {
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
   location: location
 }
 
-  resource db 'mongo.com.MongoDatabase' = {
-    name: 'db'
-    location: location
-    properties: {
-      resource: account::mongodb.id
-    }
+resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
+  name: 'db'
+  location: location
+  properties: {
+    environment: environment
+    application: app.id
+    resource: account::mongodb.id
   }
-
 }
