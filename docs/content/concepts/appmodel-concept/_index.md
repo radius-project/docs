@@ -98,6 +98,6 @@ Adding connections to the above IaC file, it becomes:
 
 ## Next step
 
-Now that you have an understanding of the Radius app model, learn more about how Radius makes it easy to add portability to your application:
+Now that you have an understanding of the Radius app model, learn more about how Radius is architected:
 
-{{< button text="Learn about portability" page="portability" size="btn-lg" color="success" >}}
+{{< button text="Project Radius architecture" page="architecture" size="btn-lg" color="success" >}}
