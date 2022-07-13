@@ -7,7 +7,7 @@ resource azureTable 'Microsoft.Storage/storageAccounts/tableServices/tables@2021
   name: 'myaccount/default/mytable'
 }
 
-resource app 'radius.dev/Application@v1alpha3' = {
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
   location: location
   properties: {

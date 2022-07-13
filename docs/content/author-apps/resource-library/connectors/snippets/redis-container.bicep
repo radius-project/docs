@@ -24,7 +24,7 @@ resource redisPod 'kubernetes.core/Pod@v1' = {
 }
 //RESOURCE
 
-resource app 'radius.dev/Application@v1alpha3' existing = {
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' existing = {
   name: 'myapp'
 }
 
@@ -49,7 +49,7 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'mycontainer'
   location: location
   properties: {
-    environment: environment
+    application: app.id
     container: {
       image: 'myrepo/myimage'
     }

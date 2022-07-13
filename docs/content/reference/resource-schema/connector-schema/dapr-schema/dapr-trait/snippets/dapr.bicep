@@ -22,9 +22,9 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
       image: 'registry/container:tag'
     }
     //CONTAINER
-    traits: [
+    extensions: [
       {
-        kind: 'dapr.io/Sidecar@v1alpha1'
+        kind: 'daprSidecar'
         appId: 'frontend'
         appPort: 3000
       }

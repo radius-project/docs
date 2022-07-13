@@ -13,7 +13,7 @@ resource secret 'kubernetes.core/Secret@v1' = {
   }
 }
 
-resource app 'radius.dev/Application@v1alpha3' = {
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
   location: location
   properties: {

@@ -17,7 +17,7 @@ A [`dapr.io/Sidecar` trait]({{< ref dapr-trait >}}) on the `backend` resource ca
 
 {{< rad file="snippets/trait.bicep" embed=true marker="//SAMPLE" replace-key-container="//CONTAINER" replace-value-container="container: {...}" >}}
 
-The `traits` section is used to configure cross-cutting behaviors of components. Since Dapr is not part of the standard definition of a container, it can be added via a trait. Traits have a `kind` so that they can be strongly typed.
+The `extensions` section is used to configure cross-cutting behaviors of components. Since Dapr is not part of the standard definition of a container, it can be added via a trait. Traits have a `kind` so that they can be strongly typed.
 
 ## Add `dapr-backend` Dapr Invoke Route
 

@@ -32,9 +32,9 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
         }
       }
     }
-    traits: [
+    extensions: [
       {
-        kind: 'dapr.io/Sidecar@v1alpha1'
+        kind: 'daprSidecar'
         appId: 'mycontainer'
       }
     ]

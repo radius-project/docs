@@ -25,9 +25,9 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
         }
       }
     }
-    traits: [
+    extensions: [
       {
-        kind: 'dapr.io/Sidecar@v1alpha1'
+        kind: 'daprSidecar'
         appId: 'backend'
         appPort: 3000
         provides: daprBackend.id

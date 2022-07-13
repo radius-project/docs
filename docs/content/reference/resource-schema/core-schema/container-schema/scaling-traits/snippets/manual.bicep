@@ -22,9 +22,9 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
       image: 'registry/container:tag'
     }
     //CONTAINER
-    traits: [
+    extensions: [
       {
-        kind: 'radius.dev/ManualScaling@v1alpha1'
+        kind:  'manualScaling'
         replicas: 5
       }
     ]

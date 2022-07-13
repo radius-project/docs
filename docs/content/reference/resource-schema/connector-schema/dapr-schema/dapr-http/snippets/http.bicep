@@ -20,9 +20,9 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
     container: {
       image: 'registry/container:tag'
     }
-    traits: [
+    extensions: [
       {
-        kind: 'dapr.io/Sidecar@v1alpha1'
+        kind: 'daprSidecar'
         appId: 'backend'
         appPort: 80
         provides: backendDapr.id

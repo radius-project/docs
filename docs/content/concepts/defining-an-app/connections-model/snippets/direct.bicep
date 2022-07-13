@@ -2,9 +2,9 @@ import radius as radius
 
 param location string = resourceGroup().location
 param environment string
-param storage resource 'Microsoft.Storage/storageAccounts@2021-06-01'
+param storageId string
 
-resource app 'radius.dev/Application@v1alpha3' = {
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'shopping-app'
   location: location
   properties: {
@@ -25,7 +25,6 @@ resource store 'Applications.Core/containers@2022-03-15-privatepreview' = {
     //CONTAINER
     connections: {
       inventory: {
-        kind: 'dapr.io/StateStore'
         source: inventory.id
       }
     }
@@ -40,7 +39,7 @@ resource inventory 'Applications.Connector/daprStateStores@2022-03-15-privatepre
     environment: environment
     application: app.id
     kind: 'state.azure.tablestorage'
-    resource: storage.id
+    resource: storageId
   }
   //PROPERTIES
 }

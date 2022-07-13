@@ -25,9 +25,9 @@ resource myapp 'Applications.Core/containers@2022-03-15-privatepreview' = {
         source: statestore.id
       }
     }
-    traits: [
+    extensions: [
       {
-        kind: 'dapr.io/Sidecar@v1alpha1'
+        kind: 'daprSidecar'
         appId: 'myapp'
       }
     ]

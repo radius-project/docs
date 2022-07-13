@@ -3,7 +3,7 @@ import radius as radius
 param location string = resourceGroup().location
 param environment string
 
-resource app 'radius.dev/Application@v1alpha3' = {
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
   location: location
   properties: {
@@ -20,9 +20,9 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
     container: {
       image: 'myimage'
     }
-    traits: [
+    extensions: [
       {
-        kind: 'dapr.io/Sidecar@v1alpha1'
+        kind: 'daprSidecar'
         appId: 'mycontainer'
       }
     ]

@@ -30,9 +30,9 @@ resource go_app 'Applications.Core/containers@2022-03-15-privatepreview' = {
         }
       }
     }
-    traits: [
+    extensions: [
       {
-        kind: 'dapr.io/Sidecar@v1alpha1'
+        kind: 'daprSidecar'
         appId: 'go-app'
         appPort: 8050
         provides: go_app_route.id
@@ -112,9 +112,9 @@ resource node_app 'Applications.Core/containers@2022-03-15-privatepreview' = {
         source: python_app_route.id
       }
     }
-    traits: [
+    extensions: [
       {
-        kind: 'dapr.io/Sidecar@v1alpha1'
+        kind: 'daprSidecar'
         appId: 'node-app'
       }
     ]
@@ -141,9 +141,9 @@ resource python_app 'Applications.Core/containers@2022-03-15-privatepreview' = {
         source: statestore.id
       }
     }
-    traits: [
+    extensions: [
       {
-        kind: 'dapr.io/Sidecar@v1alpha1'
+        kind: 'daprSidecar'
         appId: 'python-app'
         appPort: 5000
         provides: python_app_route.id

@@ -3,7 +3,7 @@ import radius as radius
 param location string = resourceGroup().location
 param environment string
 
-resource app 'radius.dev/Application@v1alpha3' = {
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'azure-storage-app'
   location: location
   properties: {
@@ -21,12 +21,14 @@ resource store 'Applications.Core/containers@2022-03-15-privatepreview' = {
     }
     connections: {
       storageresource: {
-        kind:'azure'
+        iam: {
+          kind: 'azure'
+          roles: [
+            'Reader and Data Access'
+            'Storage Blob Data Contributor'
+          ]
+        }
         source: storageAccount.id
-        roles: [
-          'Reader and Data Access'
-          'Storage Blob Data Contributor'
-        ]
       }
     }
   }
@@ -34,7 +36,7 @@ resource store 'Applications.Core/containers@2022-03-15-privatepreview' = {
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
   name: 'StorageAccount-${guid(resourceGroup().name)}'
-  location: resourceGroup().location
+  location: location
   kind: 'StorageV2'
   sku: {
     name: 'Standard_LRS'

@@ -108,7 +108,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           }
         }
       }
-      traits: []
+      extensions: []
       connections: {
         redis: {
           kind: 'redislabs.com/Redis'
@@ -193,7 +193,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           }
         }
       }
-      traits: []
+      extensions: []
       connections: {
         sql: {
           kind: 'microsoft.com/SQL'
@@ -257,7 +257,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           }
         }
       }
-      traits: []
+      extensions: []
       connections: {
         redis: {
           kind: 'redislabs.com/Redis'
@@ -313,7 +313,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           }
         }
       }
-      traits: []
+      extensions: []
       connections: {
         sql: {
           kind: 'microsoft.com/SQL'
@@ -359,7 +359,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           }
         }
       }
-      traits: []
+      extensions: []
       connections: {
         rabbitmq: {
           kind: 'rabbitmq.com/MessageQueue'
@@ -403,7 +403,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           }
         }
       }
-      traits: []
+      extensions: []
       connections: {
         sql: {
           kind: 'microsoft.com/SQL'
@@ -459,7 +459,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           }
         }
       }
-      traits: []
+      extensions: []
       connections: {
         rabbitmq: {
           kind: 'rabbitmq.com/MessageQueue'
@@ -510,7 +510,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           }
         }
       }
-      traits: []
+      extensions: []
       connections: {}
     }
   }
@@ -555,7 +555,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           }
         }
       }
-      traits: []
+      extensions: []
       connections: {
         redis: {
           kind: 'redislabs.com/Redis'
@@ -615,7 +615,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           }
         }
       }
-      traits: []
+      extensions: []
       connections: {
         webhooks: {
           kind: 'Http'
@@ -677,7 +677,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           }
         }
       }
-      traits: []
+      extensions: []
       connections: {}
     }
   }
@@ -717,7 +717,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           }
         }
       }
-      traits: []
+      extensions: []
       connections: {
         redis: {
           kind: 'redislabs.com/Redis'
@@ -780,7 +780,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           }
         }
       }
-      traits: []
+      extensions: []
       connections: {
         redis: {
           kind: 'redislabs.com/Redis'
@@ -830,7 +830,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           }
         }
       }
-      traits: []
+      extensions: []
       connections: {}
     }
   }
