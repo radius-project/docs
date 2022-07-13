@@ -65,7 +65,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           source: sqlCatalog.id
         }
         servicebus: {
-          kind: 'iam'
+          kind: 'azure'
           source: servicebus.id
         }
       }
@@ -214,7 +214,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           source: identityHttp.id
         }
         servicebus: {
-          kind: 'iam'
+          kind: 'azure'
           source: servicebus.id
         }
       }
@@ -278,7 +278,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           source: identityHttp.id
         }
         servicebus: {
-          kind: 'iam'
+          kind: 'azure'
           source: servicebus.id
         }
       }
@@ -333,7 +333,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           source: identityHttp.id
         }
         servicebus: {
-          kind: 'iam'
+          kind: 'azure'
           source: servicebus.id
         }
       }
@@ -373,7 +373,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
       traits: []
       connections: {
         servicebus: {
-          kind: 'iam'
+          kind: 'azure'
           source: servicebus.id
         }
       }
@@ -422,7 +422,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           source: sqlOrdering.id
         }
         servicebus: {
-          kind: 'iam'
+          kind: 'azure'
           source: servicebus.id
         }
       }
@@ -585,7 +585,7 @@ resource eshop 'radius.dev/Application@v1alpha3' existing = {
           source: basketHttp.id
         }
         servicebus: {
-          kind: 'iam'
+          kind: 'azure'
           source: servicebus.id
         }
       }

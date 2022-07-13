@@ -21,11 +21,13 @@ resource store 'Applications.Core/containers@2022-03-15-privatepreview' = {
     }
     connections: {
       translationresource: {
-        kind:'azure'
+        iam: {
+          kind: 'azure'
+          roles: [
+            'Cognitive Services User'
+          ]
+        }
         source: cognitiveServicesAccount.id
-        roles: [
-          'Cognitive Services User'
-        ]
       }
     }
   }
@@ -33,7 +35,7 @@ resource store 'Applications.Core/containers@2022-03-15-privatepreview' = {
 
 resource cognitiveServicesAccount 'Microsoft.CognitiveServices/accounts@2017-04-18' = {
   name: 'TextTranslationAccount-${guid(resourceGroup().name)}'
-  location: resourceGroup().location
+  location: location
   kind: 'TextTranslation'
   sku: {
     name: 'F0'
