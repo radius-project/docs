@@ -15,7 +15,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
     environment: environmentId
   }
 }
-
+//CONTAINER
 resource todoFrontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'frontend'
   location: location
@@ -37,7 +37,7 @@ resource todoFrontend 'Applications.Core/containers@2022-03-15-privatepreview' =
     }
   }
 }
-
+//CONTAINER
 resource todoRoute 'Applications.Core/httproutes@2022-03-15-privatepreview' = {
   name: 'frontend-route'
   location: location
@@ -61,7 +61,7 @@ resource todoGateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
 }
 
 resource mongoContainer 'Applications.Core/containers@2022-03-15-privatepreview' = {
-  name: 'starters-mongo-container-db'
+  name: 'mongo-container-db'
   location: location
   properties: {
     application: app.id
@@ -82,7 +82,7 @@ resource mongoContainer 'Applications.Core/containers@2022-03-15-privatepreview'
 }
 
 resource mongoRoute 'Applications.Core/httproutes@2022-03-15-privatepreview' = {
-  name: 'starters-mongo-route-db'
+  name: 'mongo-route-db'
   location: location
   properties: {
     application: app.id
