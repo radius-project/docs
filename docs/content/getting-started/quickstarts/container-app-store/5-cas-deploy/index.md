@@ -18,10 +18,10 @@ rad env init azure -i
 
 ## Deploy application to Azure
 
-Using the [`rad app deploy`]({{< ref rad_application_deploy >}}) command, deploy the Container App Store Microservice application to your environment:
+Using the [`rad deploy`]({{< ref rad_deploy >}}) command, deploy the Container App Store Microservice application to your environment:
 
 ```sh
-rad app deploy
+rad deploy
 ```
 
 The deployed resources, along with gateway IP address, will be output to the console upon a successful deployment.
