@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Developer Guides"
-linkTitle: "Developer Guides"
+title: "Developer guides"
+linkTitle: "Developer guides"
 description: "Learn about authoring Radius apps"
-weight: 40
+weight: 30
 ---

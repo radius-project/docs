@@ -1,14 +1,12 @@
 ---
 type: docs
-title: "Radius Recipes"
-linkTitle: "Radius Recipes"
+title: "Connector Recipes"
+linkTitle: "Connector Recipes"
 description: "Learn about creating Radius Recipes"
 weight: 100
+toc_hide: true
+hide_summary: true
 ---
 
 > 👷‍♂️ Under construction 🚧 <br>
 This page is still under construction. Please come back soon.
-
-Recipes are great. 
-
-Recipes are in progress, ETA v0.14. 
