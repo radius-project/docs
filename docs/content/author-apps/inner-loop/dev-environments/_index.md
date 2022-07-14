@@ -50,7 +50,7 @@ This will initialize a local Kubernetes cluster within Docker, along with a loca
 
 ### Run applications in the local environment
 
-Once you have a local environment, you can run Radius applications in it with the [`rad app run` command]({{< ref rad_application_run >}}):
+Once you have a local environment, you can run Radius applications in it with the `rad app run` command:
 
 ```sh
 rad app run

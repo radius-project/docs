@@ -36,7 +36,7 @@ Ready (2/2)  localhost:62285  http://localhost:62287  https://localhost:62288
 
 ## Initialize an application
 
-Create a new Radius application with the [`rad app init` command]({{< ref rad_application_init >}}):
+Create a new Radius application with the `rad app init` command:
 
 ```sh
 > rad app init -a myapp
@@ -51,7 +51,7 @@ Have a RAD time 😎
 
 ## Run your application
 
-Run your app locally with the [`rad app run` command]({{< ref rad_application_run >}}):
+Run your app locally with the `rad app run` command:
 
 ```sh
 rad app run
