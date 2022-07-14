@@ -4,6 +4,8 @@ title: "Run apps locally"
 linkTitle: "Run apps locally"
 description: "How to run a Radius application locally"
 weight: 300
+toc_hide: false
+hide_summary: true
 ---
 
 This guide will get you up and running with a local Radius environment and sample application.
@@ -16,7 +18,7 @@ This guide will get you up and running with a local Radius environment and sampl
 
 ## Initialize a local environment
 
-Begin by initializing a local environment with the [`rad env init dev` command]({{< ref rad_env_init_dev >}}):
+Begin by initializing a local environment with the `rad env init dev` command:
 
 ```sh
 > rad env init dev
