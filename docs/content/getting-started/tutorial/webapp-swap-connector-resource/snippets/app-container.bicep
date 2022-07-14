@@ -4,7 +4,9 @@ param environmentId string
 
 param location string = resourceGroup().location
 
-param accountName string = 'todoapp-cosmos-${uniqueString(resourceGroup().id)}'
+param username string = 'admin'
+
+param password string = newGuid()
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'todoapp'
@@ -13,7 +15,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
     environment: environmentId
   }
 }
-
+//CONTAINER
 resource todoFrontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'frontend'
   location: location
@@ -35,11 +37,10 @@ resource todoFrontend 'Applications.Core/containers@2022-03-15-privatepreview' =
     }
   }
 }
-
+//CONTAINER
 resource todoRoute 'Applications.Core/httproutes@2022-03-15-privatepreview' = {
   name: 'frontend-route'
   location: location
-
   properties: {
     application: app.id
   }
@@ -48,7 +49,6 @@ resource todoRoute 'Applications.Core/httproutes@2022-03-15-privatepreview' = {
 resource todoGateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
   name: 'gateway'
   location: location
-
   properties: {
     application: app.id
     routes: [
@@ -59,43 +59,46 @@ resource todoGateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
     ]
   }
 }
+/*
+resource mongoContainer 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'mongo-container-db'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'mongo:4.2'
+      env: {
+        MONGO_INITDB_ROOT_USERNAME: username
+        MONGO_INITDB_ROOT_PASSWORD: password
+      }
+      ports: {
+        mongo: {
+          containerPort: 27017
+          provides: mongoRoute.id
+        }
+      }
+    }
+  }
+}
+
+resource mongoRoute 'Applications.Core/httproutes@2022-03-15-privatepreview' = {
+  name: 'mongo-route-db'
+  location: location
+  properties: {
+    application: app.id
+    port: 27017
+  }
+} */
 
 resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
   name: 'db'
   location: location
   properties: {
     environment: environmentId
-    resource: cosmosAccount::cosmosDb.id
-  }
-}
-
-resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2021-04-15' = {
-  name: toLower(accountName)
-  location: location
-  kind: 'MongoDB'
-  properties: {
-    databaseAccountOfferType: 'Standard'
-    consistencyPolicy: {
-      defaultConsistencyLevel: 'Session'
-    }
-    locations: [
-      {
-        locationName: location
-      }
-    ]
-  }
-  
-
-  resource cosmosDb 'mongodbDatabases' = {
-    name: 'db'
-    properties: {
-      resource: {
-        id: 'db'
-      }
-      options: {
-        throughput: 400
-      }
+    secrets: {
+      connectionString: 'mongodb://${username}:${password}@${mongoRoute.properties.hostname}:${mongoRoute.properties.port}'
+      username: username
+      password: password
     }
   }
-
 }
