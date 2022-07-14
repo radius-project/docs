@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Add a database to the website tutorial app"
-linkTitle: "Add a database"
+linkTitle: "Add a database connector resource"
 description: "Connect a MongoDB to the website tutorial application using a connector"
 slug: "database"
 weight: 3000
@@ -11,47 +11,30 @@ So far you have not yet configured a database, so the todo items you enter will 
 
 In this step you will learn how to add a database and connect to it from the application.
 
-We'll discuss todo.bicep changes and then provide the full, updated file before deployment.
+We'll discuss app.bicep changes and then provide the full, updated file before deployment.
 
 ## Connectors
 
-A [Mongo database connector]({{< ref mongodb >}}) resource provides an abstraction over the Mongo API, allowing the backing resource to be swapped out without any changes to the consuming resource and code.
+A [Mongo database connector]({{< ref mongodb >}}) resource provides an abstraction over the Mongo API, allowing the backing resource to be swapped out without any changes to the consuming resource and code. This helps in separating the concerns of a developer from the infrastructure admin. A developer can use a kubernetes resource to back the connector to build and deploy an application in their developer environment where as the infrastructure-admin can setup a Azure resource to back the connector for production deployments
 
 <img src="mongo-connector.png" width=450px alt="Diagram of a mongo connector" /><br />
 
-To learn more about connectors visit the [concepts docs]({{< ref connections-model >}})
+ To learn more about connectors visit the [concepts docs]({{< ref connections-model >}})
 
-## Add db starter
+## Add database connector
 
-Starters are available to easily add a MongoDB connector to your application using Bicep modules. Update your Bicep file to match the following to add a Mongo database connector to your application:
+In this step, as a developer you will be adding the mongo container to deploy and test the application in your environment before handing off to the infrastructure admin team to carry out the deployment on a production environmnet which will covered in the next part of the tutorial. 
 
-{{< tabs "Mongo container" "Azure CosmosDB" >}}
+Update your Bicep file to match the following to add a Mongo database connector to your application:
 
-{{< codetab >}}
-{{< rad file="snippets/starter-container.bicep" embed=true marker="//STARTER" >}}
-{{< /codetab >}}
+{{< rad file="snippets/db-container.bicep" embed=true marker="//MONGO CONNECTOR" >}}
 
-{{< codetab >}}
-This option is currently only available for Azure environments.
-
-{{< rad file="snippets/starter-azure.bicep" embed=true marker="//STARTER" >}}
-{{< /codetab >}}
-
-{{< /tabs >}}
-
-### Reference new connector
-
-A starter deploys a MongoDB resource (container or CosmosDB), as well as a connector. Currently, the connector must be manually referenced in your application. To reference the deployed connector, use Bicep's `existing` keyword and add the following resource:
-
-{{< rad file="snippets/starter-azure.bicep" embed=true marker="//APP" replace-key-dots="//CONTAINER" replace-value-dots="..." >}}
-
-This manual step will be removed in a future release.
 
 ### Connect to `db` from `frontend`
 
 Once the connector is referenced, you can connect to it by referencing the `db` component from within the `frontend` resource the [`connections`]({{< ref connections-model >}}) section:
 
-{{< rad file="snippets/starter-azure.bicep" embed=true marker="//CONTAINER" replace-key-dots="//IMAGE" replace-value-dots="container: {...}" >}}
+{{< rad file="snippets/db-azure.bicep" embed=true marker="//CONTAINER" replace-key-dots="//IMAGE" replace-value-dots="container: {...}" >}}
 
 [Connections]({{< ref connections-model >}}) are used to configure relationships between two components. The `db` is of kind `mongo.com/MongoDB`, which supports the MongoDB protocol. This declares the *intention* from the `frontend` container to communicate with the `db` resource.
 
@@ -63,17 +46,7 @@ A manual dependency from `frontend` to `dbStarter` need to be added, pending an 
 
 Make sure your Bicep file matches the following:
 
-{{< tabs "Mongo container" "Azure CosmosDB" >}}
-
-{{< codetab >}}
 {{< rad file="snippets/app-container.bicep" embed=true >}}
-{{< /codetab >}}
-
-{{< codetab >}}
-{{< rad file="snippets/app-azure.bicep" embed=true >}}
-{{< /codetab >}}
-
-{{< /tabs >}}
 
 ## Deploy application with database
 

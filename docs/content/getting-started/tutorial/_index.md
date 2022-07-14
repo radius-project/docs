@@ -9,20 +9,21 @@ no_list: true
 
 ## Overview
 
-This tutorial will teach you how to deploy a website as a Radius application from first principles. You will take away two things
+This tutorial will teach you how to deploy a website as a Radius application from first principles. You will take away the following 
 - Enough knowledge to map your own application in Radius 
-- Radius features that will help you quickly iterate in local dev and port applications to cloud/edge
+- Separation of concerns between the different personas involved in a deployment
+- Achieve portability via connectors between your local and cloud environmnets 
 
 ## Tutorial steps
 
 In this tutorial, you will:
 
-- Define an application definition via Radius application model
-- Run the application locally
+- Initialize a Radius environment 
+- Define an application via Radius application model
 - Add connector resources for portability
-- Set up the environment 
-- Deploy the application
-- View the application
+- Deploy and view the application
+- Add an Azure resource to back the connector 
+- Deploy the application to a Radius environmnet configured with Azure cloud provider
 
 ## Prerequisites
 
@@ -39,18 +40,62 @@ In this tutorial, you will:
   - The [Radius VSCode extension]({{< ref "getting-started#setup-vscode" >}}) provides syntax highlighting, completion, and linting.
   - You can also complete this tutorial with any basic text editor.
 
-### Initialize a Radius environment
+## Initialize a Radius environment
 
-A Radius Kubernetes envionment can run in a Kubernetes cluster running on any platform. 
+A Radius Kubernetes envionment can run in a Kubernetes cluster running on any platform.
 
 You can view the current context for kubectl by running
 ```bash
 kubectl config current-context
 ```
 
-Then run the following command to initialize a Radius Kubernetes environment:
-```sh
-rad env init kubernetes
-```
+{{< tabs "rad CLI" "Helm" >}}
 
-<br>{{< button text="Next: application overview" page="webapp-overview.md" >}}
+   {{% codetab %}}
+   Use the [`rad env init kubernetes` command]({{< ref rad_env_init_Kubernetes >}}) to initialize a new environment into your current kubectl context.
+   ```bash
+   rad env init kubernetes -i
+   ```
+
+   Follow the prompts, specifying the namespace which applications will be deployed into.
+   {{% /codetab %}}
+
+   {{% codetab %}}
+   ```sh
+   helm repo add radius https://radius.azurecr.io/helm/v1/repo
+   helm repo update
+   helm upgrade radius radius/radius --install --create-namespace --namespace radius-system --version {{< param chart_version >}} --wait --timeout 15m0s
+   ```
+   {{% /codetab %}}
+
+   {{< /tabs >}}
+
+   {{% alert title="💡 About namespaces" color="success" %}}
+   When Radius initializes a Kubernetes environment, it will deploy the system resources into the `radius-system` namespace. These aren't part your application. The namespace specified in interactive mode will be used for future deployments by default.
+   {{% /alert %}}
+
+1. Verify initialization
+
+   To verify the environment initialization succeeded, you can run the following command:
+
+   ```bash
+   kubectl get deployments -n radius-system
+   ```
+
+   The output should look like this:
+
+   ```bash
+   NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+   ucp                       1/1     1            1           53s
+   appcore-rp                1/1     1            1           53s
+   bicep-deployment-engine   1/1     1            1           53s
+   bicep-de                  1/1     1            1           53s
+   contour-contour           1/1     1            1           46s
+   dapr-dashboard            1/1     1            1           35s
+   radius-rp                 1/1     1            1           53s
+   dapr-sidecar-injector     1/1     1            1           35s
+   dapr-sentry               1/1     1            1           35s
+   dapr-operator             1/1     1            1           35s
+   ```
+
+   An ingress controller is automatically deployed to the `radius-system` namespace for you to manage gateways. In the future you will be able to deploy your own ingress controller. Check back for updates.
