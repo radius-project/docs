@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Add a database to the website tutorial app"
-linkTitle: "Add a database connector resource"
+linkTitle: "Add a database connector"
 description: "Connect a MongoDB to the website tutorial application using a connector"
 slug: "database"
 weight: 3000
@@ -23,9 +23,9 @@ A [Mongo database connector]({{< ref mongodb >}}) resource provides an abstracti
 
 ## Add database connector
 
-In this step, as a developer you will be adding the mongo container to deploy and test the application in your environment before handing off to the infrastructure admin team to carry out the deployment on a production environmnet which will covered in the next part of the tutorial. 
+In this step, as a developer you will be adding the mongo container to deploy and test the application in your environment before handing off to the infrastructure admin team to carry out the deployment on a production environment which will covered in the next part of the tutorial. 
 
-Update your Bicep file to match the following to add a Mongo database connector to your application:
+Update your Bicep file to match the following to add a Mongo database connector backed by a mongo container to your application:
 
 {{< rad file="snippets/db-container.bicep" embed=true marker="//MONGO CONNECTOR" >}}
 
@@ -34,13 +34,13 @@ Update your Bicep file to match the following to add a Mongo database connector 
 
 Once the connector is referenced, you can connect to it by referencing the `db` component from within the `frontend` resource the [`connections`]({{< ref connections-model >}}) section:
 
-{{< rad file="snippets/db-azure.bicep" embed=true marker="//CONTAINER" replace-key-dots="//IMAGE" replace-value-dots="container: {...}" >}}
+{{< rad file="snippets/app-container.bicep" embed=true marker="//CONTAINER" replace-key-dots="//IMAGE" replace-value-dots="container: {...}" >}}
 
 [Connections]({{< ref connections-model >}}) are used to configure relationships between two components. The `db` is of kind `mongo.com/MongoDB`, which supports the MongoDB protocol. This declares the *intention* from the `frontend` container to communicate with the `db` resource.
 
 Now that you have created a connection called `itemstore`, environment variables with connection information will be injected into the `frontend` container. The container reads the database connection string from an environment variable named `CONNECTION_ITEMSTORE_CONNECTIONSTRING`.
 
-A manual dependency from `frontend` to `dbStarter` need to be added, pending an update the the Radius app model in an upcoming release. This ensures the Mongo database starter is deployed before `frontend` is deployed.
+<!--A manual dependency from `frontend` to `dbStarter` need to be added, pending an update the the Radius app model in an upcoming release. This ensures the Mongo database starter is deployed before `frontend` is deployed.-->
 
 ## Update Bicep file
 
@@ -50,14 +50,10 @@ Make sure your Bicep file matches the following:
 
 ## Deploy application with database
 
-{{% alert title="Known issue: Azure deployments" color="warning" %}}
-There is a known issue where deployments to Azure will fail with a "NotFound" error for templates containing starters. This is being addressed in an upcoming release. As a workaround submit the deployment a second time. The second deployment should succeed.
-{{% /alert %}}
-
 1. In a terminal window deploy the Bicep file:
 
    ```sh
-   rad deploy todo.bicep
+   rad deploy app.bicep
    ```
 
    This may take a few minutes to create the database. On completion, you will see the following resources:
@@ -84,6 +80,11 @@ There is a known issue where deployments to Azure will fail with a "NotFound" er
 
    If your page matches, then it means that the container is able to communicate with the database. Just like before, you can test the features of the todo app. Add a task or two. Now your data is being stored in an actual database.
 
+## Handoff
+As a developer you have tested the application with a mongo container and would like to handoff deployment to the infra-admin for deploymnet to other environments. You can use the same app.bicep for handoff by commenting out the mongo container resource. The infra-admin can now set up a Radius environment with Azure cloud provider configured and provision an Azure resource to back the connector. This ensures that you are able to port your application to different environments with minimal rewrites.
+
 ## Cleanup
 
-{{% alert title="Delete application" color="warning" %}} If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to prevent additional charges in your Azure subscription. {{% /alert %}}
+{{% alert title="Delete application" color="warning" %}} If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}})
+
+<br>{{< button text="Next: Add a database to the app" page="webapp-swap-connector-resource" >}}

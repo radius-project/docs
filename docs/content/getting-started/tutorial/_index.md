@@ -57,7 +57,7 @@ kubectl config current-context
    rad env init kubernetes -i
    ```
 
-   Follow the prompts, specifying the namespace which applications will be deployed into.
+   Follow the prompts, skip the step to add cloud provider and specify the namespace which applications will be deployed into.
    {{% /codetab %}}
 
    {{% codetab %}}

@@ -15,7 +15,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
     environment: environmentId
   }
 }
-
+//CONTAINER
 resource todoFrontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'frontend'
   location: location
@@ -37,7 +37,7 @@ resource todoFrontend 'Applications.Core/containers@2022-03-15-privatepreview' =
     }
   }
 }
-
+//CONTAINER
 resource todoRoute 'Applications.Core/httproutes@2022-03-15-privatepreview' = {
   name: 'frontend-route'
   location: location
