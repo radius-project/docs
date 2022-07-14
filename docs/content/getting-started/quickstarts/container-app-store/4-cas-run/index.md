@@ -42,7 +42,7 @@ Begin by create a new Radius [local dev environment]({{< ref dev-environments >}
 
 ## Run application locally
 
-Using the [`rad app run`]({{< ref rad_application_run >}}) command, run the Container App Store Microservice application in your local environment. This will build the Docker containers, push them to the local registry, and deploy them to the local k3d cluster.
+Using the `rad app run` command, run the Container App Store Microservice application in your local environment. This will build the Docker containers, push them to the local registry, and deploy them to the local k3d cluster.
 
 ```sh
 rad app run app --profile dev  
