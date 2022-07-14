@@ -59,7 +59,7 @@ resource todoGateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
     ]
   }
 }
-/*
+
 resource mongoContainer 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'mongo-container-db'
   location: location
@@ -88,7 +88,7 @@ resource mongoRoute 'Applications.Core/httproutes@2022-03-15-privatepreview' = {
     application: app.id
     port: 27017
   }
-} */
+} 
 
 resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
   name: 'db'
