@@ -16,7 +16,7 @@ With a Radius local environment you can run your applications on your machine wi
 
 A Radius local environment automatically creates a local Kubernetes cluster for you on top of Docker, making it easy to get up and running with an application runtime. This removes the need to manually setup and maintain a Kubernetes cluster.
 
-Use [`rad env init dev`]({{< ref rad_env_init_dev>}}) to create an environment.
+Use `rad env init dev` to create an environment.
 
 ### Local container registry
 
@@ -40,7 +40,7 @@ If you configure the optional [Azure provider]({{< ref providers >}}) you can in
 
 ### Create a local dev environment
 
-You can easily get up and running with a local environment with the [`rad env init dev` command]({{< ref rad_env_init_dev >}}):
+You can easily get up and running with a local environment with the `rad env init dev` command:
 
 ```sh
 rad env init dev
@@ -50,7 +50,7 @@ This will initialize a local Kubernetes cluster within Docker, along with a loca
 
 ### Run applications in the local environment
 
-Once you have a local environment, you can run Radius applications in it with the [`rad app run` command]({{< ref rad_application_run >}}):
+Once you have a local environment, you can run Radius applications in it with the `rad app run` command:
 
 ```sh
 rad app run
