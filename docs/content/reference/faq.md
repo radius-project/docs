@@ -6,7 +6,7 @@ description: "Commonly asked questions about best practices"
 weight: 999
 ---
 
-## Appllications
+## Applications
 
 ### Can I incrementally adopt, or "try out" Radius?
 
