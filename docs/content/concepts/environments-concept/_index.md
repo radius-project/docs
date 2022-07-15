@@ -84,7 +84,7 @@ To verify that your environment initialized correctly, you should see it listed 
 rad env list
 ```
 ### Upcoming developments
-We also have plans in our future releases to make environments experiences more. When creating an environment, users can either initalize an env based on a template or they may generate a default, empty environment.
+We also have plans in our future releases to make environments experiences more robust. When creating an environment, users can either initalize an env based on a template or they may generate a default, empty environment.
 
 1. Environments from templates - You can describe an environment's requirements and contents via one of the [supported IaC languages]({{< ref supported-languages >}}). 
 
