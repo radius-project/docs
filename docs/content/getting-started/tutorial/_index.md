@@ -55,7 +55,7 @@ rad env init kubernetes -i
 Follow the prompts, you can choose to add the [Azure cloud provider]({{<ref providers>}}) as you will be deploying an Azure cosmosdb resource in the later part of the tutorial. You can also skip adding cloud provider if you do not have an Azure subscription
 
 {{% alert title="💡 About namespaces" color="success" %}}
-When Radius initializes a Kubernetes environment, it will deploy the system resources into the `radius-system` namespace. These aren't part your application. The namespace specified in interactive mode will be used for future deployments by default.
+When Radius initializes a Kubernetes environment, it will install the Radius control plane into your cluster if needed, using the `radius-system` namespace. These control plane resources aren't part your application. The namespace specified in interactive mode will be used for future application deployments by default.
 {{% /alert %}}
 
 1. Verify initialization
