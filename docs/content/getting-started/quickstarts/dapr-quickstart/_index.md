@@ -31,8 +31,6 @@ In this tutorial, you will:
 - [Install Radius CLI]({{< ref "getting-started#install-radius-cli" >}})
 - Install CLI for target platform:
   - [kubectl CLI](https://kubernetes.io/docs/tasks/tools/) for local and Kubernetes environments
-  - [k3d CLI](https://github.com/k3d-io/k3d/releases) for local environments
-  - [az CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) for Azure environments
   
 - [Install Visual Studio Code](https://code.visualstudio.com/) (recommended)
   - The [Radius VSCode extension]({{< ref "getting-started#setup-vscode" >}}) provides syntax highlighting, completion, and linting.
@@ -42,31 +40,13 @@ In this tutorial, you will:
 
 This tutorial can be completed on any platform Radius supports. To get started, create a new environment:
 
-{{< tabs Local Kubernetes Azure >}}
-
-{{% codetab %}}
-To create a local dev environment on top of Docker, run:
-
-```sh
-rad env init dev
-```
-
-{{% /codetab %}}
+{{< tabs Kubernetes >}}
 
 {{% codetab %}}
 A Kubernetes envionment can run in any Kubernetes cluster. Make sure you have set the correct default kubectl context, and then run:
 
 ```sh
 rad env init kubernetes
-```
-
-{{% /codetab %}}
-
-{{% codetab %}}
-To deploy an Azure environment to your Azure subscription, run:
-
-```sh
-rad env init azure -i
 ```
 
 {{% /codetab %}}
