@@ -59,7 +59,9 @@ Radius gateways are still in development, and will get more features in upcoming
 
 ## Deploy application
 
-Using the [`rad app deploy`]({{< ref rad_application_deploy >}}) command, deploy the eShop application to your environment:
+<!-- TODO: switch from rad app deploy to rad deploy for v0.12 
+https://github.com/project-radius/docs/issues/178 -->
+Using the `rad app deploy` command, deploy the eShop application to your environment:
 
 {{< tabs Containerized Azure >}}
 {{% codetab %}}
