@@ -16,7 +16,7 @@ This tutorial will teach you how to deploy a website as a Radius application fro
 
 ## Tutorial steps
 
-In this tutorial, you will:
+This tutorial contains the following sections:
 
 - App overview - Overview of the website tutorial application
 - Author app definition - Define the application definition with container, gateway and http routes
