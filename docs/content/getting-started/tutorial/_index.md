@@ -28,8 +28,6 @@ In this tutorial, you will:
 
 - [Install Radius CLI]({{< ref "getting-started#install-radius-cli" >}})
 - Install CLI for target platform:
-  - [k3d CLI](https://github.com/k3d-io/k3d/releases) for local environments
-  - [az CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) for Azure environments
   - [kubectl CLI](https://kubernetes.io/docs/tasks/tools/) for Kubernetes environments
 - [Install Visual Studio Code](https://code.visualstudio.com/) (recommended)
   - The [Radius VSCode extension]({{< ref "getting-started#setup-vscode" >}}) provides syntax highlighting, completion, and linting.
