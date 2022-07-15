@@ -1,19 +1,17 @@
 ---
 type: docs
-title: "Author and deploy the application with the frontend service"
-linkTitle: "Author app definition"
-description: "Define the application definition with container, gateway and http routes"
+title: "Deploy the website tutorial frontend"
+linkTitle: "Deploy frontend"
+description: "Deploy the website tutorial frontend in a container"
 weight: 2000
 slug: "frontend"
 ---
-
-As a developer, you will be interested to define the building blocks of your application . In this step, you will create the application definition with the services required by the frontend of the application
 
 ## Define a Radius application in a .bicep file
 
 Radius uses the [Bicep language]({{< ref bicep >}}) as its file-format and structure. In this tutorial you will define an app named `todoapp` that will contain the container and MongoDB connector resources, all described in Bicep.
 
-Create a new file named `app.bicep` and paste the following:
+Create a new file named `todo.bicep` and paste the following:
 
 {{< rad file="snippets/empty-app.bicep" embed=true >}}
 
@@ -40,12 +38,15 @@ Update your Bicep file to match the full application definition:
 
 Now you are ready to deploy the application for the first time.
 
-1. Make sure you have an [Radius environment initialized]({{< ref "tutorial#initialize-a-radius-environment" >}}).
+1. Make sure you have an [Radius environment initialized]({{< ref "getting-started#create-a-radius-environment" >}}).
+   - For Azure environments run `az login` to make sure your token is refreshed.
+   - For Kubernetes environments make sure your `kubectl`  context is set to your cluster.
+   - For local Kubernetes environments make sure Docker is running.
 
 2. Deploy to your Radius environment via the rad CLI:
 
    ```sh
-   rad deploy ./app.bicep
+   rad deploy ./todo.bicep
    ```
 
    This will deploy the application into your environment and launch the container resource for the frontend website. You should see the following resources deployed at the end of `rad deploy`:

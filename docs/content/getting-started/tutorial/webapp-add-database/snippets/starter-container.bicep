@@ -16,9 +16,8 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   }
 }
 
-//MONGO CONNECTOR
 resource mongoContainer 'Applications.Core/containers@2022-03-15-privatepreview' = {
-  name: 'mongo-container-db'
+  name: 'starters-mongo-container-db'
   location: location
   properties: {
     application: app.id
@@ -39,7 +38,7 @@ resource mongoContainer 'Applications.Core/containers@2022-03-15-privatepreview'
 }
 
 resource mongoRoute 'Applications.Core/httproutes@2022-03-15-privatepreview' = {
-  name: 'mongo-route-db'
+  name: 'starters-mongo-route-db'
   location: location
   properties: {
     application: app.id
@@ -59,4 +58,3 @@ resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = 
     }
   }
 }
-//MONGO CONNECTOR
