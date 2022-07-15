@@ -16,7 +16,7 @@ This guide will get you up and running with a local Radius environment and sampl
 
 ## Initialize a local environment
 
-Begin by initializing a local environment with the [`rad env init dev` command]({{< ref rad_env_init_dev >}}):
+Begin by initializing a local environment with the `rad env init dev` command:
 
 ```sh
 > rad env init dev
@@ -36,7 +36,7 @@ Ready (2/2)  localhost:62285  http://localhost:62287  https://localhost:62288
 
 ## Initialize an application
 
-Create a new Radius application with the [`rad app init` command]({{< ref rad_application_init >}}):
+Create a new Radius application with the `rad app init` command:
 
 ```sh
 > rad app init -a myapp
@@ -51,7 +51,7 @@ Have a RAD time 😎
 
 ## Run your application
 
-Run your app locally with the [`rad app run` command]({{< ref rad_application_run >}}):
+Run your app locally with the `rad app run` command:
 
 ```sh
 rad app run
