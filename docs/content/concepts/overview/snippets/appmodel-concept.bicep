@@ -39,6 +39,7 @@ resource todoapplication 'Applications.Core/containers@2022-03-15-privatepreview
 // Define database
 resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
   name: 'db'
+  location: location
   properties: {
     environment: environment
     application: app.id

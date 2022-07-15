@@ -1,6 +1,9 @@
-import kubernetes as kubernetes
+import kubernetes as kubernetes {
+  kubeConfig: '****'
+  namespace: 'default'
+}
 
-resource pod 'kubernetes.core/Pod@v1' = {
+resource pod 'core/Pod@v1' = {
   metadata: {
     name: 'mypod'
   }

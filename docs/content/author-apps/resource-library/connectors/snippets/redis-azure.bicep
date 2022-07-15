@@ -6,7 +6,7 @@ param environment string
 //RESOURCE
 resource azureRedis 'Microsoft.Cache/Redis@2019-07-01' = {
   name: 'myredis'
-  location: 'westus2'
+  location: location
   properties: {
     sku: {
       capacity: 0
@@ -22,7 +22,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' existing
 }
 
 //CONNECTOR
-resource redis 'Applications.Connector/redisCache@2022-03-15-privatepreview' = {
+resource redis 'Applications.Connector/redisCaches@2022-03-15-privatepreview' = {
   name: 'myredis-connector'
   location: location
   properties: {

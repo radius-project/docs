@@ -32,7 +32,7 @@ resource kafkaRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' exi
 }
 
 //SAMPLE
-resource pubsub 'Applications.Connector/daprPubSubTopics@2022-03-15-privatepreview' = {
+resource pubsub 'Applications.Connector/daprPubSubBrokers@2022-03-15-privatepreview' = {
   name: 'pubsub'
   location: location
   properties: {

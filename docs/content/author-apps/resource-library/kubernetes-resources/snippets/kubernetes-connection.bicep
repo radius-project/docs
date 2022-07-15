@@ -1,10 +1,13 @@
-import kubernetes as kubernetes
+import kubernetes as kubernetes {
+  kubeConfig: '*****'
+  namespace: 'default'
+}
 import radius as radius
 
 param location string = resourceGroup().location
 param environment string
 
-resource secret 'kubernetes.core/Secret@v1' = {
+resource secret 'core/Secret@v1' = {
   metadata: {
     name: 'mysecret'
   }

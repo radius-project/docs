@@ -35,6 +35,6 @@ resource stateStore 'Applications.Connector/daprStateStores@2022-03-15-privatepr
     environment: environment
     application: app.id
     kind: 'state.azure.tablestorage'
-    source: storageAccount::tableServices::table.id
+    resource: storageAccount::tableServices::table.id
   }
 }

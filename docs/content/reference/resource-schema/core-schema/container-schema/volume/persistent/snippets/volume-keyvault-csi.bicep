@@ -52,7 +52,7 @@ param secretValue string
 
 resource key_vault 'Microsoft.KeyVault/vaults@2021-04-01-preview' = {
   name: 'kv-${uniqueString('kv', resourceGroup().id)}'
-  location: resourceGroup().location
+  location: location
   properties: {
     enabledForTemplateDeployment: true
     tenantId: subscription().tenantId
@@ -69,8 +69,8 @@ resource my_secret 'Microsoft.KeyVault/vaults/secrets@2021-04-01-preview' = {
   name: 'mysecret'
   properties: {
     value: secretValue
-    attributes:{
-      enabled:true
+    attributes: {
+      enabled: true
     }
   }
 }

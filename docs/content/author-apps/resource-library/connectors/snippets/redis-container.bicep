@@ -1,11 +1,14 @@
 //RESOURCE
-import kubernetes as kubernetes
+import kubernetes as kubernetes {
+  kubeConfig: '*****'
+  namespace: 'default'
+}
 import radius as radius
 
 param location string = resourceGroup().location
 param environment string
 
-resource redisPod 'kubernetes.core/Pod@v1' = {
+resource redisPod 'core/Pod@v1' = {
   metadata: {
     name: 'redis'
   }
@@ -29,7 +32,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' existing
 }
 
 //CONNECTOR
-resource redis 'Applications.Connector/redisCache@2022-03-15-privatepreview' = {
+resource redis 'Applications.Connector/redisCaches@2022-03-15-privatepreview' = {
   name: 'myredis-connector'
   location: location
   properties: {

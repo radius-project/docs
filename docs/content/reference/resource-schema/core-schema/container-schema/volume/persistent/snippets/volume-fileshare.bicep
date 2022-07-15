@@ -3,7 +3,7 @@ import radius as radius
 param location string = resourceGroup().location
 param environment string
 
-param fileshare resource 'Microsoft.Storage/storageAccounts/fileServices/shares@2021-06-01'
+param fileshareId string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
@@ -20,7 +20,7 @@ resource myshare 'Applications.Core/volumes@2022-03-15-privatepreview' = {
   properties: {
     application: app.id
     kind: 'azure.com.fileshare'
-    resource: fileshare.id
+    resource: fileshareId
   }
 }
 

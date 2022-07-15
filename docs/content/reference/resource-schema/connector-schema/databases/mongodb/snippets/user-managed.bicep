@@ -6,7 +6,7 @@ param environment string
 //BICEP
 resource account 'Microsoft.DocumentDB/databaseAccounts@2020-04-01' = {
   name: 'account-${guid(resourceGroup().name)}'
-  location: resourceGroup().location
+  location: location
   kind: 'MongoDB'
   properties: {
     consistencyPolicy: {
@@ -14,7 +14,7 @@ resource account 'Microsoft.DocumentDB/databaseAccounts@2020-04-01' = {
     }
     locations: [
       {
-        locationName: resourceGroup().location
+        locationName: location
         failoverPriority: 0
         isZoneRedundant: false
       }

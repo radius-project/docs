@@ -19,7 +19,7 @@ resource nodesubscriber 'Applications.Core/containers@2022-03-15-privatepreview'
     container: {
       image: 'radiusteam/dapr-pubsub-nodesubscriber:latest'
       env: {
-        SB_PUBSUBNAME: pubsub.properties.pubSubName
+        SB_PUBSUBNAME: pubsub.name
         SB_TOPIC: pubsub.properties.topic
       }
     }
@@ -46,7 +46,7 @@ resource pythonpublisher 'Applications.Core/containers@2022-03-15-privatepreview
     container: {
       image: 'radiusteam/dapr-pubsub-pythonpublisher:latest'
       env: {
-        SB_PUBSUBNAME: pubsub.properties.pubSubName
+        SB_PUBSUBNAME: pubsub.name
         SB_TOPIC: pubsub.properties.topic
       }
     }
@@ -65,7 +65,7 @@ resource pythonpublisher 'Applications.Core/containers@2022-03-15-privatepreview
 }
 
 //SAMPLE
-resource pubsub 'Applications.Connector/daprPubSubTopics@2022-03-15-privatepreview' = {
+resource pubsub 'Applications.Connector/daprPubSubBrokers@2022-03-15-privatepreview' = {
   name: 'pubsub'
   location: location
   properties: {
@@ -80,7 +80,7 @@ resource pubsub 'Applications.Connector/daprPubSubTopics@2022-03-15-privateprevi
 //BICEP
 resource namespace 'Microsoft.ServiceBus/namespaces@2017-04-01' = {
   name: 'ns-${guid(resourceGroup().name)}'
-  location: resourceGroup().location
+  location: location
   resource topic 'topics' = {
     name: 'TOPIC_A'
   }

@@ -26,6 +26,7 @@ resource mongo 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview'
   location: location
   properties: {
     application: myapp.id
+    environment: environment
     resource: cosmos::db.id
   }
 }

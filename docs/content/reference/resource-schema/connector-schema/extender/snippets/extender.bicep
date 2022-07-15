@@ -13,7 +13,10 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   
 resource twilio 'Applications.Connector/extenders@2022-03-15-privatepreview' = {
   name: 'twilio'
+  location: location
   properties: {
+    application: app.id
+    environment: environment
     fromNumber: '222-222-2222'
     secrets: {
       accountSid: 'sid'

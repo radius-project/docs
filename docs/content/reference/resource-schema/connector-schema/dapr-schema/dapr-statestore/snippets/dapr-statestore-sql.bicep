@@ -49,7 +49,7 @@ resource statestore 'Applications.Connector/daprStateStores@2022-03-15-privatepr
 //BICEP
 resource sqlserver 'Microsoft.Sql/servers@2021-05-01-preview' = {
   name: 'sqlserver${uniqueString(resourceGroup().id)}'
-  location:resourceGroup().location
+  location: location
   properties: {
     administratorLogin: 'user${uniqueString(resourceGroup().id)}'
     administratorLoginPassword: 'p@!!${uniqueString(resourceGroup().id)}'

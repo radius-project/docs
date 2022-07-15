@@ -76,6 +76,7 @@ resource redisContainer 'Applications.Core/containers@2022-03-15-privatepreview'
   name: 'redis-container'
   location: location
   properties: {
+    application: app.id
     container: {
       image: 'redis:6.2'
       ports: {

@@ -49,7 +49,7 @@ resource statestore 'Applications.Connector/daprStateStores@2022-03-15-privatepr
 //BICEP
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
   name: 'sa-${guid(resourceGroup().name)}'
-  location: resourceGroup().location
+  location:location
   sku: {
     name: 'Standard_ZRS'
   }
