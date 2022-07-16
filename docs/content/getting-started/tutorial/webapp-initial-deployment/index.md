@@ -81,18 +81,16 @@ You can play around with the application's features:
 - Mark a todo item as complete
 - Delete a todo item
 
-## Interact with your application using the VS Code extension
+## Manage your application using the Radius VS Code extension
 
-{{% alert title="Preview" color="info" %}}
-The following tips are  a preview of how the VS Code Radius extension can be deployed improve developer workflow. As we introduce additional features to the extension we will incorporate them into this section.
-{{% /alert %}}
+The Radius extension improves developer workflows. 
 
-- Open VS Code and navigate to the VS Code Radius extension explorer section.
+- In VS Code, select the "PR" (Project Radius) icon on the left to view the Radius extension.
 
-   The environment you've created should be listed in a tree view that will allow you to see  your webapp application and its different resources.
+   Environments you've created are listed in a tree view. By drilling into your "todoapp" application and its resources.
 
    <img src="radius-explorer-webapp.png" width="400" height="auto" alt="screenshot of the todo application with no database">
 
-- Click on the `todoapp` resource node and click on the `Show Container Logs` to open up a terminal dedicated to viewing the resource logs.
+- Click on the `todoapp` resource node and click on the `Show Container Logs` to open view its logs.
 
 <br>{{< button text="Next: Add a database to the app" page="webapp-add-database" >}}
