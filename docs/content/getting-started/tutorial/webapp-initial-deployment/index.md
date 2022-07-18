@@ -7,7 +7,7 @@ weight: 2000
 slug: "frontend"
 ---
 
-As a developer, you will be interested to define the building blocks of your application . In this step, you will create the application definition with the services required by the frontend of the application
+As a developer, you define the building blocks of your application. In this step, you will create the application template with the services required by the frontend of the application.
 
 ## Define a Radius application in a .bicep file
 
