@@ -21,7 +21,7 @@ This tutorial contains the following sections:
 - App overview - Overview of the website tutorial application
 - Author app definition - Define the application definition with container, gateway and http routes
 - Add a database connector - Connect a MongoDB to the website tutorial application using a connector and deploy to a Radius environment
-- Swap a connector resource - Swap a connector resource for an Azure resource to back the connector and deploy it to an environment with Azure cloud provider configured
+- Swap a connector resource - Swap a MongoDB container for an Azure CosmosDB instance to back the connector and deploy the app to a Radius environment with Azure cloud provider configured
 
 ## Prerequisites
 
