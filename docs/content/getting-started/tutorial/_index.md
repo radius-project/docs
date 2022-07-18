@@ -72,7 +72,6 @@ When Radius initializes a Kubernetes environment, it will install the Radius con
    NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
    ucp                       1/1     1            1           53s
    appcore-rp                1/1     1            1           53s
-   bicep-deployment-engine   1/1     1            1           53s
    bicep-de                  1/1     1            1           53s
    contour-contour           1/1     1            1           46s
    dapr-dashboard            1/1     1            1           35s
