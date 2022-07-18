@@ -85,6 +85,6 @@ As a developer you have tested the application with a mongo container and would 
 
 ## Cleanup
 
-{{% alert title="Delete application" color="warning" %}} If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}})
+{{% alert title="Delete application" color="warning" %}} If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) {{% /alert %}}
 
-<br>{{< button text="Next: Add a database to the app" page="webapp-swap-connector-resource" >}}
+<br> {{< button text="Next step: Add a database to the app" page="webapp-swap-connector-resource" >}} {{< button text="Previous step: Author app definition" page="webapp-initial-deployment" >}}

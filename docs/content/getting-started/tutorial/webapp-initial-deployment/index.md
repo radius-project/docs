@@ -95,4 +95,5 @@ The following tips are  a preview of how the VS Code Radius extension can be dep
 
 - Click on the `todoapp` resource node and click on the `Show Container Logs` to open up a terminal dedicated to viewing the resource logs.
 
-<br>{{< button text="Next: Add a database to the app" page="webapp-add-database" >}}
+<br> {{< button text="Next step: Add a database connector" page="webapp-add-database" >}}
+{{< button text="Previous step: App overview" page="webapp-overview">}} 
