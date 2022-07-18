@@ -4,6 +4,8 @@ title: "Quickstart: Local development"
 linkTitle: "Local development"
 description: "Learn about using Radius local development environments to easily create and test applications" 
 weight: 400
+toc_hide: true
+hide_summary: true
 ---
 
 ## Overview
