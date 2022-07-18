@@ -50,7 +50,7 @@ There is a known issue where deployments to Azure will fail with a "NotFound" er
 
    ```sh
    Public Endpoints:
-      Gateway            frontend-gateway       IP-ADDRESS
+    gateway  Gateway            http://20.252.19.39 
    ```
 
 1. To test your application, navigate to the public endpoint that was printed at the end of the deployment. You should see a page like:
