@@ -1,16 +1,14 @@
 import radius as radius
 
-param environmentId string
-
+param environment string
 param location string = resourceGroup().location
-
 param accountName string = 'todoapp-cosmos-${uniqueString(resourceGroup().id)}'
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'todoapp'
   location: location
   properties: {
-    environment: environmentId
+    environment: environment
   }
 }
 
@@ -39,7 +37,6 @@ resource todoFrontend 'Applications.Core/containers@2022-03-15-privatepreview' =
 resource todoRoute 'Applications.Core/httproutes@2022-03-15-privatepreview' = {
   name: 'frontend-route'
   location: location
-
   properties: {
     application: app.id
   }
@@ -48,7 +45,6 @@ resource todoRoute 'Applications.Core/httproutes@2022-03-15-privatepreview' = {
 resource todoGateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
   name: 'gateway'
   location: location
-
   properties: {
     application: app.id
     routes: [
@@ -64,7 +60,8 @@ resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = 
   name: 'db'
   location: location
   properties: {
-    environment: environmentId
+    environment: environment
+    application: app.id
     resource: cosmosAccount::cosmosDb.id
   }
 }

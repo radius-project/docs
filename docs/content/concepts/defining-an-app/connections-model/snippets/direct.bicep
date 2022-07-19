@@ -1,35 +1,46 @@
-param storage resource 'Microsoft.Storage/storageAccounts@2021-06-01'
+import radius as radius
 
-resource app 'radius.dev/Application@v1alpha3' = {
+param location string = resourceGroup().location
+param environment string
+param storageId string
+
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'shopping-app'
-
-  //SAMPLE
-  resource store 'Container' = {
-    name: 'storefront'
-    properties: {
-      //CONTAINER
-      container: {
-        image: 'radius.azurecr.io/storefront'
-      }
-      //CONTAINER
-      connections: {
-        inventory: {
-          kind: 'dapr.io/StateStore'
-          source: inventory.id
-        }
-      }
-    }
+  location: location
+  properties: {
+    environment: environment
   }
-
-  resource inventory 'dapr.io.StateStore' = {
-    name: 'inventorystore'
-    //PROPERTIES
-    properties: {
-      kind: 'state.azure.tablestorage'
-      resource: storage.id
-    }
-    //PROPERTIES
-  }
-  //SAMPLE
-
 }
+
+//SAMPLE
+resource store 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'storefront'
+  location: location
+  properties: {
+    application: app.id
+    //CONTAINER
+    container: {
+      image: 'radius.azurecr.io/storefront'
+    }
+    //CONTAINER
+    connections: {
+      inventory: {
+        source: inventory.id
+      }
+    }
+  }
+}
+
+resource inventory 'Applications.Connector/daprStateStores@2022-03-15-privatepreview' = {
+  name: 'inventorystore'
+  location: location
+  //PROPERTIES
+  properties: {
+    environment: environment
+    application: app.id
+    kind: 'state.azure.tablestorage'
+    resource: storageId
+  }
+  //PROPERTIES
+}
+//SAMPLE

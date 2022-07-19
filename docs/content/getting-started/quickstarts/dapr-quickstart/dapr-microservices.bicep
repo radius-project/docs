@@ -1,76 +1,115 @@
-resource app 'radius.dev/Application@v1alpha3' = {
+import radius as radius
+
+param location string = resourceGroup().location
+param environment string
+
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'dapr-hello'
-
-  resource nodeapplication_dapr 'dapr.io.InvokeHttpRoute' = {
-    name: 'nodeapp'
-    properties: {
-      appId: 'nodeapp'
-    }
-  }
-
-  resource nodeapplication 'Container' = {
-    name: 'nodeapp'
-    properties: {
-      connections: {
-        statestore: {
-          kind: 'dapr.io/StateStore'
-          source: statestore.id
-        }
-      }
-      container: {
-        image: 'radiusteam/tutorial-nodeapp'
-        ports: {
-          web: {
-            containerPort: 3000
-          }
-        }
-      }
-      traits: [
-        {
-          kind: 'dapr.io/Sidecar@v1alpha1'
-          provides: nodeapplication_dapr.id
-          appId: 'nodeapp'
-          appPort: 3000
-        }
-      ]
-    }
-    dependsOn: [
-      stateStoreStarter
-    ]
-  }
-
-  resource pythonapplication 'Container' = {
-    name: 'pythonapp'
-    properties: {
-      connections: {
-        nodeapp: {
-          kind: 'dapr.io/InvokeHttp'
-          source: nodeapplication_dapr.id
-        }
-      }
-      container: {
-        image: 'radiusteam/tutorial-pythonapp'
-      }
-      traits: [
-        {
-          kind: 'dapr.io/Sidecar@v1alpha1'
-          appId: 'pythonapp'
-        }
-      ]
-    }
-  }
-
-  resource statestore 'dapr.io.StateStore' existing = {
-    name: 'statestore'
+  location: location
+  properties: {
+    environment: environment
   }
 }
 
+resource nodeapplication_dapr 'Applications.Connector/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
+  name: 'nodeapp'
+  location: location
+  properties: {
+    environment: environment
+    application: app.id
+    appId: 'nodeapp'
+  }
+}
 
-// Use a starter module to deploy a Redis container and configure a Dapr state store
-module stateStoreStarter 'br:radius.azurecr.io/starters/dapr-statestore:latest' = {
-  name: 'statestore-starter'
-  params: {
-    radiusApplication: app
-    stateStoreName: 'statestore'
+resource nodeapplication 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'nodeapp'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'radiusteam/tutorial-nodeapp'
+      ports: {
+        web: {
+          containerPort: 3000
+        }
+      }
+    }
+    connections: {
+      statestore: {
+        source: statestore.id
+      }
+    }
+    extensions: [
+      {
+        kind: 'daprSidecar'
+        provides: nodeapplication_dapr.id
+        appId: 'nodeapp'
+        appPort: 3000
+      }
+    ]
+  }
+}
+
+resource pythonapplication 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'pythonapp'
+  location: location
+  properties: {
+    application: app.id
+    connections: {
+      nodeapp: {
+        source: nodeapplication_dapr.id
+      }
+    }
+    container: {
+      image: 'radiusteam/tutorial-pythonapp'
+    }
+    extensions: [
+      {
+        kind: 'daprSidecar'
+        appId: 'pythonapp'
+      }
+    ]
+  }
+}
+
+resource redisContainer 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'redis-container'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'redis:6.2'
+      ports: {
+        redis: {
+          containerPort: 6379
+          provides: redisRoute.id
+        }
+      }
+    }
+  }
+}
+
+resource redisRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
+  name: 'redis-route'
+  location: location
+  properties: {
+    application: app.id
+    port: 6379
+  }
+}
+
+resource statestore 'Applications.Connector/daprStateStores@2022-03-15-privatepreview' = {
+  name: 'statestore'
+  location: location
+  properties: {
+    environment: environment
+    application: app.id
+    kind: 'generic'
+    type: 'state.redis'
+    version: 'v1'
+    metadata: {
+      redisHost: '${redisRoute.properties.hostname}:${redisRoute.properties.port}'
+      redisPassword: ''
+    }
   }
 }

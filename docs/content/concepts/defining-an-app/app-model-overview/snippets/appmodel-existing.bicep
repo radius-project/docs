@@ -1,25 +1,40 @@
+import radius as radius
+
+param location string = resourceGroup().location
+param environment string
+
 // Define existing, pre-deployed resources 
 resource redis 'Microsoft.Cache/Redis@2019-07-01' existing = {
   name: 'myredis'
 }
 
 // Define services and connection to existing resource
-resource app 'radius.dev/Application@v1alpha3' = {
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'app'
+  location: location
+  properties: {
+    environment: environment
+  }
+}
   
-  resource container 'Container' = {
-    name: 'mycontainer'
-    properties: {
-      container: {
-        image: 'myrepository/mycontainer:latest'
-      }
-      connections: {
-        redis: {
+resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'mycontainer'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'myrepository/mycontainer:latest'
+    }
+    connections: {
+      redis: {
+        iam: {
           kind: 'azure'
-          source: redis.id
+          roles: [
+            'Redis Cache Contributor'
+          ]
         }
+        source: redis.id
       }
     }
   }
-  
 }
