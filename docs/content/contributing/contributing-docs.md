@@ -256,7 +256,7 @@ resource app 'radius.dev/Application@v1alpha1' = {
       //BINDINGS
       connections: {
         backend: {
-          kind: 'Http'
+          
           source: other.id
         }
       }

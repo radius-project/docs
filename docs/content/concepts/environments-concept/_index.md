@@ -3,14 +3,15 @@ type: docs
 title: "Radius environments"
 linkTitle: "Environments"
 description: "Learn about Radius Environments"
-weight: 500
+weight: 300
+slug: environment
 ---
 
 ## Introduction
 
 Radius environments are a prepared landing zone for applications. They contain a prepared pool of compute, networking, and shared resources. Radius applications deployed to that environment "bind" to that infrastructure. 
 
-Environments provide a grouping structure for applications and the resources they share. For example, an org might choose to setup separate Radius environments for staging and production. When appropriate, multiple applications can be deployed into the same environment. 
+Environments provide a grouping structure for applications and the resources they share. For example, an org might choose to setup separate Radius environments for staging and production. When appropriate, multiple applications can be deployed into the same environment.
 
 Additionally, environments can be leveraged to realize organizational best practices. 
 
@@ -64,8 +65,48 @@ For example, a workflow where developers build on templates created by administr
 
 When the developer deploys their application, these org-level concerns are automatically wired up based on the environment. Developers don't have to think about credentials or how networking is configured - which enables devs to focus on their applications instead.
 
-## Next step
+## Creating an environment
 
-Now that you've learned about environments, it's time to learn about the Project Radius architecture
+Users can initialize a Radius environment into any Kubernetes cluster. Radius currently supports Kubernetes as the container runtime. We plan to support additional container runtimes in the future.
 
-{{< button text="Architecture" page="architecture" size="btn-lg" color="success" >}}
+### Initializing an environment
+
+To initialize a Radius environment, use `rad env init kubernetes` via rad cli
+
+```bash
+rad env init kubernetes
+```
+
+This command will:
+
+- Install Radius control plane if not already installed
+    - Install Radius control plane services via a set of Helm charts 
+- Create an environment
+    - Create a namespace to hold the environment resource
+    - Create an environment resource
+    - Execute any environment installation templates (e.g. to install Dapr)
+- Configure Cloud Providers
+    - Walk users through configuring cloud providers to connect to public clouds
+
+Each AKS or EKS cluster requires 1 Radius control plane, but it may contain multiple Radius environmnents if desired. 
+
+To verify that your environment initialized correctly, you should see it listed in the output of
+
+```bash
+rad env list
+```
+
+### Upcoming developments
+
+We also have plans in our future releases to make environments experiences more robust. When creating an environment, users can either initalize an env based on a template or they may generate a default, empty environment.
+
+1. Environments from templates - You can describe an environment's requirements and contents via one of the [supported IaC languages]({{< ref supported-languages >}}).
+
+2. Default environments - If you choose not to define environment specs, an empty environment will be created. You can install additional services there later if needed.
+    For example environment definitions, see [link coming soon in other PR]
+<!-- TODO add that link ^  -->
+Check back this section later for more updates!!
+
+## Maintaining an environment
+
+env model makes it easier to make updates and to identify envs that need updates
