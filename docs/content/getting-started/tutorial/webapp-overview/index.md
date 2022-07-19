@@ -53,4 +53,5 @@ As you progress, keep in mind the following benefits that the Radius application
 - Relationships between resources are fully specified with protocols and other strongly-typed information
 - Connectors provide abstraction and portability across local and cloud environments
 
-<br>{{< button text="Next: Deploy the website frontend" page="webapp-initial-deployment" >}}
+<br>{{< button text="Next step: Author app definition" page="webapp-initial-deployment" >}}
+{{< button text=" Previous step: Tutorial Pre-requisites" page="tutorial" >}}

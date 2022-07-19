@@ -26,13 +26,22 @@ This tutorial contains the following sections:
 ## Prerequisites
 
 - [Install Radius CLI]({{< ref "getting-started#install-radius-cli" >}})
+- Set up a Kubernetes Cluster. There are many different options here, including:
+  - [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster)
+    - Note that [AKS-managed AAD](https://docs.microsoft.com/en-us/azure/aks/managed-aad) is not supported currently
+  - [Kubernetes in Docker Desktop](https://www.docker.com/blog/docker-windows-desktop-now-kubernetes/), however it does take up quite a bit of memory on your machine, so use with caution.
+  - [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
+  - [K3s](https://k3s.io), a lightweight single-binary certified Kubernetes distribution from Rancher.
+  - Another Kubernetes provider of your choice.
 - [Install Visual Studio Code](https://code.visualstudio.com/) (recommended)
   - The [Radius VSCode extension]({{< ref "getting-started#setup-vscode" >}}) provides syntax highlighting, completion, and linting.
   - You can also complete this tutorial with any basic text editor.
 
 ## Initialize a Radius environment
 
-A Radius Kubernetes envionment can run in a Kubernetes cluster running on any platform.
+A Radius Kubernetes envionment can run in a Kubernetes cluster running on any platform. In this tutorial you will be replicating a real time scenario of first deploying the application on to your development environmnet and then porting the same application to the production environment. 
+
+In this step, we will be initializing a radius development environment
 
 You can view the current context for kubectl by running
 ```bash
@@ -44,13 +53,19 @@ Use the [`rad env init kubernetes` command]({{< ref rad_env_init_Kubernetes >}})
 rad env init kubernetes -i
 ```
 
-Follow the prompts, you can choose to add the [Azure cloud provider]({{<ref providers>}}) as you will be deploying an Azure cosmosdb resource in the later part of the tutorial. You can also skip adding cloud provider if you do not have an Azure subscription
+Follow the prompts, 
 
-{{% alert title="💡 About namespaces" color="success" %}}
-When Radius initializes a Kubernetes environment, it will install the Radius control plane into your cluster if needed, using the `radius-system` namespace. These control plane resources aren't part your application. The namespace specified in interactive mode will be used for future application deployments by default.
+1. Namespace - This is the namespace where you want the radius application to be deployed in your cluster
+{{% alert title="💡 About namespaces" color="success" %}} When Radius initializes a Kubernetes environment, it will install the Radius control plane into your cluster if needed, using the `radius-system` namespace. These control plane resources aren't part your application. The namespace specified in interactive mode will be used for future application deployments by default.
 {{% /alert %}}
 
-1. Verify initialization
+1. Add Azure provider - Since this is a devlopment environment, you can skip to add the [Azure cloud provider]({{<ref providers>}})
+
+1. Environment name - Lets name the environment as webapp-tutorial-dev-env
+
+Radius installs the control plane, creates an environment resource , creates a workspace and updates the configuration to /.rad/config.yaml
+
+### Verify initialization
 
    To verify the environment initialization succeeded, you can run the following command:
 
@@ -67,10 +82,9 @@ When Radius initializes a Kubernetes environment, it will install the Radius con
    bicep-de                  1/1     1            1           53s
    contour-contour           1/1     1            1           46s
    dapr-dashboard            1/1     1            1           35s
-   radius-rp                 1/1     1            1           53s
    dapr-sidecar-injector     1/1     1            1           35s
    dapr-sentry               1/1     1            1           35s
    dapr-operator             1/1     1            1           35s
    ```
 
-<br>{{< button text="Next: App overview" page="webapp-initial-deployment" >}}
+<br>{{< button text="Next: App overview" page="webapp-overview" >}}
