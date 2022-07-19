@@ -1,51 +1,63 @@
-resource app 'radius.dev/Application@v1alpha3' = {
+import radius as radius
+
+param location string = resourceGroup().location
+param environment string
+
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
+  location: location
+  properties: {
+    environment: environment
+  }
+}
 
-  //CONTAINER
-  resource container 'Container' = {
-    name: 'mycontainer'
-    properties: {
-      container: {
-        image: 'myimage'
-        ports: {
-          web: {
-            containerPort: 80
-          }
-        }
-        volumes: {
-          tmp: {
-            kind: 'ephemeral'
-            managedStore: 'memory'
-            mountPath: '/tmp'
-          }
+//CONTAINER
+resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'mycontainer'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'myimage'
+      ports: {
+        web: {
+          containerPort: 80
         }
       }
-      traits: [
-        {
-          kind: 'dapr.io/Sidecar@v1alpha1'
-          appId: 'mycontainer'
-        }
-      ]
-      connections: {
-        statestore: {
-          kind: 'dapr.io/StateStore'
-          source: statestore.id
+      volumes: {
+        tmp: {
+          kind: 'ephemeral'
+          managedStore: 'memory'
+          mountPath: '/tmp'
         }
       }
     }
-  }
-  //CONTAINER
-
-  resource statestore 'dapr.io.StateStore' = {
-    name: 'inventory'
-    properties: {
-      type: 'state.azure.tablestorage'
-      kind: 'generic'
-      version: 'v1'
-      metadata: {
-        KEY: 'value'
+    extensions: [
+      {
+        kind: 'daprSidecar'
+        appId: 'mycontainer'
+      }
+    ]
+    connections: {
+      statestore: {
+        source: statestore.id
       }
     }
   }
+}
 
+//CONTAINER
+resource statestore 'Applications.Connector/daprStateStores@2022-03-15-privatepreview' = {
+  name: 'inventory'
+  location: location
+  properties: {
+    environment: environment
+    application: app.id
+    type: 'state.azure.tablestorage'
+    kind: 'generic'
+    version: 'v1'
+    metadata: {
+      KEY: 'value'
+    }
+  }
 }

@@ -1,12 +1,23 @@
-resource myapp 'radius.dev/Application@v1alpha3' = {
-  name: 'my-application'
+import radius as radius
 
-  resource frontend 'Container' = {
-    name: 'frontend-service'
-    properties: {
-      container: {
-        image: 'nginx:latest'
-      }
+param location string = resourceGroup().location
+param environment string
+
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+  name: 'my-application'
+  location: location
+  properties: {
+    environment: environment
+  }
+}
+
+resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'frontend-service'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'nginx:latest'
     }
   }
 }

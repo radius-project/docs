@@ -1,3 +1,7 @@
+import radius as radius
+
+param location string = resourceGroup().location
+param environment string
 
 //COSMOS
 resource cosmos 'Microsoft.DocumentDB/databaseAccounts@2021-04-15' existing = {
@@ -9,31 +13,39 @@ resource cosmos 'Microsoft.DocumentDB/databaseAccounts@2021-04-15' existing = {
 }
 //COSMOS
 
-resource myapp 'radius.dev/Application@v1alpha3' = {
+resource myapp 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'my-application'
-
-  //MONGO
-  resource mongo 'mongo.com.MongoDatabase' = {
-    name: 'mongo-db'
-    properties: {
-      resource: cosmos::db.id
-    }
+  location: location
+  properties: {
+    environment: environment
   }
-  //MONGO
+}
 
-  resource frontend 'Container' = {
-    name: 'frontend-service'
-    properties: {
-      //CONTAINER
-      container: {
-        image: 'nginx:latest'
-      }
-      //CONTAINER
-      connections: {
-        db: {
-          kind: 'mongo.com/MongoDB'
-          source: mongo.id
-        }
+//MONGO
+resource mongo 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
+  name: 'mongo-db'
+  location: location
+  properties: {
+    application: myapp.id
+    environment: environment
+    resource: cosmos::db.id
+  }
+}
+//MONGO
+
+resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'frontend-service'
+  location: location
+  properties: {
+    application: myapp.id
+    //CONTAINER
+    container: {
+      image: 'nginx:latest'
+    }
+    //CONTAINER
+    connections: {
+      db: {
+        source: mongo.id
       }
     }
   }

@@ -1,46 +1,62 @@
-resource app 'radius.dev/Application@v1alpha3' = {
+import radius as radius
+
+param location string = resourceGroup().location
+param environment string
+
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
-
-  //HTTPROUTE
-  resource httproute 'HttpRoute' = {
-    name: 'httproute'
+  location: location
+  properties: {
+    environment: environment
   }
-  //HTTPROUTE
-
-  //FRONTEND
-  resource frontend 'Container' = {
-    name: 'frontend'
-    properties: {
-      container: {
-        image: 'registry/container:tag'
-        env: {
-          BACKEND_URL: httproute.properties.url
-        }
-      }
-      connections: {
-        http: {
-          kind: 'Http'
-          source: httproute.id
-        }
-      }
-    }
-  }
-  //FRONTEND
-
-  //BACKEND
-  resource backend 'Container' = {
-    name: 'backend'
-    properties: {
-      container: {
-        image: 'registry/container:tag'
-        ports: {
-          http: {
-            containerPort: 80
-            provides: httproute.id
-          }
-        }
-      }
-    }
-  }
-  //BACKEND
 }
+
+//HTTPROUTE
+resource httproute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
+  name: 'httproute'
+  location: location
+  properties: {
+    application: app.id
+  }
+}
+//HTTPROUTE
+
+//FRONTEND
+resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'frontend'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'registry/container:tag'
+      env: {
+        BACKEND_URL: httproute.properties.url
+      }
+    }
+    connections: {
+      http: {
+        source: httproute.id
+      }
+    }
+  }
+}
+//FRONTEND
+
+//BACKEND
+resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'backend'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'registry/container:tag'
+      ports: {
+        http: {
+          containerPort: 80
+          provides: httproute.id
+        }
+      }
+    }
+  }
+}
+//BACKEND
