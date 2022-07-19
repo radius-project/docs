@@ -18,7 +18,7 @@ These diagrams often include:
 1. Services that run application code, such as containers.
 1. Relationships between resources, like protocols, settings, and permissions
 
-The Radius app model provides a way for developers to translate human-understandable application diagrams into human-understandable application code. 
+The Radius app model provides a way for developers to translate human-understandable application diagrams into human-understandable application code.
 
 ## Defining an Application
 
@@ -30,7 +30,7 @@ The largest circle you can draw around your resources where names have meaning.
 
 <img alt="Whiteboard diagram of an application and its components" src="radius-application.png" width="500px" /><br />
 
-An application is defined as a top-level `resource app` in an instrastructure-as-code file: 
+An application is defined as a top-level `resource app` in an instrastructure-as-code file:
 
 {{< tabs Bicep >}}
 
@@ -80,7 +80,7 @@ These environment variables follow a naming convention that makes their use pred
 
 {{% alert title="💡 Key concept" color="info" %}}
 Each kind of connection defines values that are useful for communication. These could be URIs, connection strings, access keys, or anything that application code needs to successfully communicate. Refer to each resource's reference documentation for more information.
-{{% /alert %}} 
+{{% /alert %}}
 
 The names and semantic meaning of the values available are defined by the connection kind.
 
