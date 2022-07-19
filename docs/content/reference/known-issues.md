@@ -6,8 +6,8 @@ description: "Learn where there are known issues with the latest Radius release 
 weight: 998
 ---
 
-## Radius environments require Owner rights on the subscription
-Creating Radius environments on Azure currently **require you to have *Owner* rights on your subscription.** (This is a current limitation that will be resolved once we've built our Azure Service.)  
+## Radius environments with Azure cloud provider require Owner rights on the subscription
+Configuring  Radius environments with Azure cloud provider currently **require you to have *Owner* rights on your subscription.** (This is a current limitation that will be resolved once we've built our Azure Service.)  
    If you use a service principal for CLI authentication, ensure it also has the proper RBAC assignment on your subscription.
 
 ## Application names with capitol letters fail
