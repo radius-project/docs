@@ -4,8 +4,6 @@ title: "Run apps locally"
 linkTitle: "Run apps locally"
 description: "How to run a Radius application locally"
 weight: 300
-toc_hide: false
-hide_summary: true
 ---
 
 This guide will get you up and running with a local Radius environment and sample application.

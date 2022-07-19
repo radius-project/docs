@@ -3,7 +3,7 @@ type: docs
 title: "Manage Radius Kubernetes environments"
 linkTitle: "Manage environments"
 description: "How to manage Radius Kubernetes environments"
-weight: 900
+weight: 100
 ---
 
 ## Manage environments
@@ -12,8 +12,8 @@ These steps will walk through how to deploy, manage, and delete environments in 
 
 ### Pre-requisites
 
-- [rad CLI]({{< ref "getting-started#install-radius-cli" >}})
-- A Kubernetes Cluster. There are many different options here, including:
+- Install [rad CLI]({{< ref "getting-started#install-radius-cli" >}})
+- Set up a Kubernetes Cluster. There are many different options here, including:
   - [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster)
     - Note that [AKS-managed AAD](https://docs.microsoft.com/en-us/azure/aks/managed-aad) is not supported currently
   - [Kubernetes in Docker Desktop](https://www.docker.com/blog/docker-windows-desktop-now-kubernetes/), however it does take up quite a bit of memory on your machine, so use with caution.
@@ -26,18 +26,17 @@ If you choose a container registry provided by a cloud provider (other than Dock
 {{% /alert %}}
 
 ### Initialize an environment
+The convenient way of [initializing an environment]({{< ref "environments-concept.md#creating-an-environment">}}) is via `rad env init kubernetes`. Below are some of the alternate options available to understand what goes into an environment initialization
 
-1. Initialize a Radius environment:
+1. Install Radius control plane on kubernetes cluster:
 
    {{< tabs "rad CLI" "Helm" >}}
 
    {{% codetab %}}
-   Use the [`rad env init kubernetes` command]({{< ref rad_env_init_Kubernetes >}}) to initialize a new environment into your current kubectl context.
+   Use the [`rad install kubernetes` command]({{< ref rad_env_init_Kubernetes >}}) to install Radius control plane on the kubernetes cluster.
    ```bash
-   rad env init kubernetes -i
+   rad install kubernetes
    ```
-
-   Follow the prompts, specifying the namespace which applications will be deployed into.
    {{% /codetab %}}
 
    {{% codetab %}}
@@ -56,7 +55,7 @@ If you choose a container registry provided by a cloud provider (other than Dock
 
 1. Verify initialization
 
-   To verify the environment initialization succeeded, you can run the following command:
+   To verify the installation succeeded, you can run the following command:
 
    ```bash
    kubectl get deployments -n radius-system
@@ -79,6 +78,10 @@ If you choose a container registry provided by a cloud provider (other than Dock
    ```
 
    An ingress controller is automatically deployed to the `radius-system` namespace for you to manage gateways. In the future you will be able to deploy your own ingress controller. Check back for updates.
+
+1. Use `rad env init kubernetes` to create an environment resource and configure [cloud provider]({{<ref providers>}}) if needed
+    {{% alert title="💡 rad command" color="success" %}}`rad env init kubernetes` also installs Radius control plane if not already installed  .
+    {{% /alert %}}
 
 ### Delete an environment
 

@@ -32,9 +32,9 @@ From the Visual Studio command palette, select `Radius: Show Container Logs` and
 
 ## Installation
 
-1. Download the latest [VSCode extension file](https://get.radapp.dev/tools/vscode/stable/rad-vscode.vsix)
+1. Download the latest [VSCode extension file](https://get.radapp.dev/tools/vscode-extensibility/stable/rad-vscode.vsix)
 
-1. Install the `.vsix` file:
+2. Install the `.vsix` file:
 
    {{< tabs UI Terminal >}}
 
@@ -54,44 +54,10 @@ From the Visual Studio command palette, select `Radius: Show Container Logs` and
    {{% /codetab %}}
    {{< /tabs >}}
 
-1. If running on Windows Subsystem for Linux (WSL), make sure to install the extension in WSL as well:
+3. If running on Windows Subsystem for Linux (WSL), make sure to install the extension in WSL as well:
 
    <img src="./wsl-extension.png" alt="Screenshot of installing a vsix extension in WSL" width=400>
 
 ## Additional resources
 
-- [Edge extension download](https://get.radapp.dev/tools/vscode/edge/rad-vscode.vsix)
-
-
-<!-- TODO - merge below text pasted from old vscode installation page -->
-
-Poject Radius can be used with any text editor, but Radius-specific optimizations are available for [Visual Studio Code](https://code.visualstudio.com/).
-
-## Extension features
-
-{{% alert title="Dual extensions" color="info" %}}
-While Project Radius is still using a forked version of Bicep, two extensions will need to be installed: one for Bicep formatting/linting, and one for interaction with Radius resources. In a future release we will return to a single extension.
-{{% /alert %}}
-
-### Bicep extension fork
-
-The custom Bicep extension provides a number of features to help author Bicep templates, including:
-
-- Syntax highlighting
-- Auto-completion
-- Linting
-- Template visualization
-
-### Radius extension
-
-The Radius VS Code extension provides users:
-
-- Radius environment, application, and resource management
-- Container log streaming
-
-## Other versions
-
-You can access other versions of the Radius Bicep extension fork from the following URLs:
-
-- [Bicep edge](https://radiuspublic.blob.core.windows.net/tools/vscode/edge/rad-vscode-bicep.vsix)
-- [Radius edge](https://radiuspublic.blob.core.windows.net/tools/vscode/edge/rad-vscode.vsix)
+- [Edge extension download](https://radiuspublic.blob.core.windows.net/tools/vscode-extensibility/edge/rad-vscode-bicep.vsix)

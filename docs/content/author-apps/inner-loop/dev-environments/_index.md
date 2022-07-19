@@ -4,8 +4,6 @@ title: "Radius local dev environments"
 linkTitle: "Local environments"
 description: "Run Radius applications locally on your machine"
 weight: 100
-toc_hide: false
-hide_summary: true
 ---
 
 ## Overview

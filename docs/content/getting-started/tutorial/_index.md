@@ -26,14 +26,6 @@ This tutorial contains the following sections:
 ## Prerequisites
 
 - [Install Radius CLI]({{< ref "getting-started#install-radius-cli" >}})
-- Setup a Kubernetes cluster. Could be any of the following
-  - [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster)
-    - Note that [AKS-managed AAD](https://docs.microsoft.com/en-us/azure/aks/managed-aad) is not supported currently
-  - [Kubernetes in Docker Desktop](https://www.docker.com/blog/docker-windows-desktop-now-kubernetes/), however it does take up quite a bit of memory on your machine, so use with caution.
-  - [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
-  - [K3s](https://k3s.io), a lightweight single-binary certified Kubernetes distribution from Rancher.
-- Install CLI for target cloud providers
-  - [az CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) as the tutorial sample application connects to an Azure resource
 - [Install Visual Studio Code](https://code.visualstudio.com/) (recommended)
   - The [Radius VSCode extension]({{< ref "getting-started#setup-vscode" >}}) provides syntax highlighting, completion, and linting.
   - You can also complete this tutorial with any basic text editor.
