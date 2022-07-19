@@ -23,7 +23,7 @@ If you receive an error saying Visual Studio or another application is not autho
 
 ### Error response cannot be parsed: """ error: EOF
 
-If you get an error when initializing an Azure environment after selecting a Resource Group name, make sure you set your subscription to one within the Microsoft tenant:
+If you get an error when configuring Azure cloud provider after selecting a Resource Group name, make sure you set your subscription to one within the Microsoft tenant:
 
 ```bash
 az account set --subscription <SUB-ID>
