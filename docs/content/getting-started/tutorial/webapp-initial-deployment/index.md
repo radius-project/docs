@@ -7,7 +7,7 @@ weight: 2000
 slug: "frontend"
 ---
 
-As a developer, you will be interested to define the building blocks of your application . In this step, you will create the application definition with the services required by the frontend of the application
+As a developer, you define the building blocks of your application. In this step, you will create the application template with the services required by the frontend of the application.
 
 ## Define a Radius application in a .bicep file
 
@@ -93,4 +93,5 @@ The Radius extension improves developer workflows.
 
 - Click on the `todoapp` resource node and click on the `Show Container Logs` to open view its logs.
 
-<br>{{< button text="Next: Add a database to the app" page="webapp-add-database" >}}
+<br> {{< button text="Next step: Add a database connector" page="webapp-add-database" >}}
+{{< button text="Previous step: App overview" page="webapp-overview">}} 

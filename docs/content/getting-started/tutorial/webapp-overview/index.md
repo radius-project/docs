@@ -45,10 +45,13 @@ In order for users to connect to `todoapp` over the internet, a [Gateway]({{< re
 The database is provided by a [MongoDB connector]({{< ref mongodb >}}). You can choose between a MongoDB container or an Azure CosmosDB w/ Mongo API to back the connector.
 
 ## The Radius mindset
-Deployment often involves different teams working together, separating their responsbilities. For example, a developer builds the app definition with services where as the infrastructure administrator sets up the environment and the infrastructure. In this tutorial you will build out this app using the Radius application model from the perspective of a developer and a infra admin person. As you progress, keep in mind the following benefits that it provides:
+Deployment often involves different teams working together, separating their responsibilities. For example, a developer might build the app definition with services, while the infrastructure administrator might set up the environment and the infrastructure. In this tutorial you will build the app from the perspective of a developer and an infrastructure administrator. 
+
+As you progress, keep in mind the following benefits that the Radius application abstraction provides:
 
 - Separation of concerns for the different personas involved in the deploymnet 
 - Relationships between resources are fully specified with protocols and other strongly-typed information
 - Connectors provide abstraction and portability across local and cloud environments
 
-<br>{{< button text="Next: Deploy the website frontend" page="webapp-initial-deployment" >}}
+<br>{{< button text="Next step: Author app definition" page="webapp-initial-deployment" >}}
+{{< button text=" Previous step: Tutorial Pre-requisites" page="tutorial" >}}

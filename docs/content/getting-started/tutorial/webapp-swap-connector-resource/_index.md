@@ -12,7 +12,53 @@ As enterprises have separate teams handling deployment responsibilities, initial
 To abstract the infrastructure workflows from the development workflows, we are working on a solution called **Radius recipes** that will enable the infra-admin to prepare connector recipes with all the organizational requirements which can be used by the developers without having to worry about provisioning or managing a resource. Check back for more updates in our future releases
 
 ## Intialize Radius environment with Azure cloud provider
-You can reuse the same environment created previously if you have configured it with Azure cloud provider or you can create a new environment by following the instructions [here]({{<ref providers>}})
+In this step, you will initialize a radius production environment. So, you will be adding the Azure cloud provider as you will be swapping the connector resource with Azure cosmos db. 
+
+For simplicity purposes, you can use the same cluster that you used before for setting up the dev environment. 
+
+You can view the current context for kubectl by running
+```bash
+kubectl config current-context
+```
+
+Use the [`rad env init kubernetes` command]({{< ref rad_env_init_Kubernetes >}}) to initialize a new environment into your current kubectl context.
+```bash
+rad env init kubernetes -i
+```
+
+Follow the prompts, 
+
+1. Namespace - This is the namespace where you want the radius application to be deployed in your cluster
+{{% alert title="💡 About namespaces" color="success" %}} When Radius initializes a Kubernetes environment, it will install the Radius control plane into your cluster if needed, using the `radius-system` namespace. These control plane resources aren't part your application. The namespace specified in interactive mode will be used for future application deployments by default.
+{{% /alert %}}
+
+1. Add Azure provider - Add the [Azure cloud provider]({{<ref providers>}}). Specify the Azure subscription and resource group where your Azure cosmosdb resource will be deployed
+
+1. Environment name - Lets name the environment as webapp-tutorial-prod-env
+
+Radius installs the control plane, configures Azure cloud provider, creates an environment resource, creates a workspace and updates the configuration to /.rad/config.yaml
+
+### Verify initialization
+
+   To verify the environment initialization succeeded, you can run the following command:
+
+   ```bash
+   kubectl get deployments -n radius-system
+   ```
+
+   The output should look like this:
+
+   ```bash
+   NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+   ucp                       1/1     1            1           53s
+   appcore-rp                1/1     1            1           53s
+   bicep-de                  1/1     1            1           53s
+   contour-contour           1/1     1            1           46s
+   dapr-dashboard            1/1     1            1           35s
+   dapr-sidecar-injector     1/1     1            1           35s
+   dapr-sentry               1/1     1            1           35s
+   dapr-operator             1/1     1            1           35s
+   ```
 
 ## Swap the connector for an azure resource
 
@@ -50,7 +96,7 @@ There is a known issue where deployments to Azure will fail with a "NotFound" er
 
    ```sh
    Public Endpoints:
-      Gateway            frontend-gateway       IP-ADDRESS
+    gateway  Gateway            http://20.252.19.39 
    ```
 
 1. To test your application, navigate to the public endpoint that was printed at the end of the deployment. You should see a page like:

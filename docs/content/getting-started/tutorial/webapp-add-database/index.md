@@ -15,7 +15,7 @@ We'll discuss app.bicep changes and then provide the full, updated file before d
 
 ## Connectors
 
-A [Mongo database connector]({{< ref mongodb >}}) resource provides an abstraction over the Mongo API, allowing the backing resource to be swapped out without any changes to the consuming resource and code. This helps in separating the concerns of a developer from the infrastructure admin. A developer can use a kubernetes resource to back the connector to build and deploy an application in their developer environment where as the infrastructure-admin can setup a Azure resource to back the connector for production deployments
+A [connector]({{< ref connector-schema >}}) provides an infrastructure abstraction for an API, allowing the backing resource type to be swapped out without changing the way the consuming resource is defined. In this example, first a developer uses a Kubernetes resource (MongoDB) as the app's database when deploying to their dev environment. Later, the infrastructure admin uses a Azure resource (Azure CosmosDB) as the app's database when deploying to production.
 
 <img src="mongo-connector.png" width=450px alt="Diagram of a mongo connector" /><br />
 
@@ -36,7 +36,7 @@ Once the connector is referenced, you can connect to it by referencing the `db` 
 
 {{< rad file="snippets/app-container.bicep" embed=true marker="//CONTAINER" replace-key-dots="//IMAGE" replace-value-dots="container: {...}" >}}
 
-[Connections]({{< ref connections-model >}}) are used to configure relationships between two components. The `db` is of kind `mongo.com/MongoDB`, which supports the MongoDB protocol. This declares the *intention* from the `frontend` container to communicate with the `db` resource.
+[Connections]({{< ref connections-model >}}) are used to configure relationships between two components. 
 
 Now that you have created a connection called `itemstore`, environment variables with connection information will be injected into the `frontend` container. The container reads the database connection string from an environment variable named `CONNECTION_ITEMSTORE_CONNECTIONSTRING`.
 
@@ -85,6 +85,6 @@ As a developer you have tested the application with a mongo container and would 
 
 ## Cleanup
 
-{{% alert title="Delete application" color="warning" %}} If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}})
+{{% alert title="Delete application" color="warning" %}} If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) {{% /alert %}}
 
-<br>{{< button text="Next: Add a database to the app" page="webapp-swap-connector-resource" >}}
+<br> {{< button text="Next step: Add a database to the app" page="webapp-swap-connector-resource" >}} {{< button text="Previous step: Author app definition" page="webapp-initial-deployment" >}}

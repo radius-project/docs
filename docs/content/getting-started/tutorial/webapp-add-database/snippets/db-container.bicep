@@ -1,6 +1,6 @@
 import radius as radius
 
-param environmentId string
+param environment string
 
 param location string = resourceGroup().location
 
@@ -12,7 +12,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'todoapp'
   location: location
   properties: {
-    environment: environmentId
+    environment: environment
   }
 }
 
@@ -51,7 +51,7 @@ resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = 
   name: 'db'
   location: location
   properties: {
-    environment: environmentId
+    environment: environment
     secrets: {
       connectionString: 'mongodb://${username}:${password}@${mongoRoute.properties.hostname}:${mongoRoute.properties.port}'
       username: username
