@@ -1,6 +1,6 @@
 import radius as radius
 
-param environmentId string
+param environment string
 
 param location string = resourceGroup().location
 

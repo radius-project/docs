@@ -1,6 +1,6 @@
 import radius as radius
 
-param environmentId string
+param environment string
 
 param location string = resourceGroup().location
 
@@ -31,7 +31,7 @@ resource todoFrontend 'Applications.Core/containers@2022-03-15-privatepreview' =
       }
     }
     connections: {
-      mongodb: {
+      itemstore: {
         source: db.id
       }
     }
