@@ -39,12 +39,6 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
           mountPath: '/tmpfs'
           managedStore: 'memory'
         }
-        persistentVolume:{
-          kind: 'persistent'
-          mountPath:'/tmpfs2'
-          source: myshare.id
-          rbac: 'read'
-        }
       }
       readinessProbe:{
         kind:'httpGet'
@@ -67,16 +61,6 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   }
 }
 //CONTAINER
-  
-resource myshare 'Applications.Core/volumes@2022-03-15-privatepreview' = {
-  name: 'myshare'
-  location: location
-  properties:{
-    application: app.id
-    kind: 'azure.com.fileshare'
-    resource: fileShareId
-  }
-}
 
 resource http 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
   name: 'http'

@@ -5,7 +5,7 @@ param environment string
 
 resource cache 'Microsoft.Cache/Redis@2019-07-01' = {
   name: 'mycache'
-  location: 'westus2'
+  location: location
   properties: {
     sku: {
       capacity: 0
