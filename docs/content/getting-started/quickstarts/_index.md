@@ -16,19 +16,10 @@ no_list: true
 </div>
 {{% /card %}}
 
-{{% card header="CI/CD" %}}
-<div class="text-center"> Coming in v0.12
+{{% card header="[CI/CD](./cicd-quickstart)" footer="Learn about adding your Radius apps to your deployment pipelines" %}}
+<div class="text-center">
+  <a href="./cicd-quickstart">
+    <img src="github-logo.png" alt="GitHub logo">
+  </a>
 </div>
 {{% /card %}}
-
-{{% card header="Local dev" %}}
-<div class="text-center"> Coming in v0.12
-</div>
-{{% /card %}}
-
-{{% card header="Gateways" %}}
-<div class="text-center"> Coming in v0.12
-</div>
-{{% /card %}}
-
-{{< /cardpane >}}
