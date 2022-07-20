@@ -3,7 +3,7 @@ type: docs
 title: "Website tutorial app overview"
 linkTitle: "App overview"
 description: "Overview of the website tutorial application"
-weight: 1000
+weight: 100
 slug: "overview"
 ---
 
@@ -53,5 +53,5 @@ As you progress, keep in mind the following benefits that the Radius application
 - Relationships between resources are fully specified with protocols and other strongly-typed information
 - Connectors provide abstraction and portability across local and cloud environments
 
-<br>{{< button text="Next step: Author app definition" page="webapp-initial-deployment" >}}
+<br>{{< button text="Next step: Initialize a Radius environment" page="webapp-initialize-environment" >}}
 {{< button text=" Previous step: Tutorial Pre-requisites" page="tutorial" >}}

@@ -11,8 +11,8 @@ no_list: true
 
 This tutorial will teach you how to deploy a website as a Radius application from first principles. You will take away the following 
 - Enough knowledge to map your own application in Radius 
-- Separation of concerns between the different personas involved in a deployment
 - Achieve portability via connectors between your local and cloud environments 
+- Understand the separation of concerns for the different personas involved in a deployment
 
 ## Tutorial steps
 
@@ -36,55 +36,9 @@ This tutorial contains the following sections:
 - [Install Visual Studio Code](https://code.visualstudio.com/) (recommended)
   - The [Radius VSCode extension]({{< ref "getting-started#setup-vscode" >}}) provides syntax highlighting, completion, and linting.
   - You can also complete this tutorial with any basic text editor.
-
-## Initialize a Radius environment
-
-A Radius Kubernetes envionment can run in a Kubernetes cluster running on any platform. In this tutorial you will be replicating a real time scenario of first deploying the application on to your development environmnet and then porting the same application to the production environment. 
-
-In this step we will be initializing a Radius Kubernetes environment to use for development.
-
-You can view the current context for kubectl by running
-```bash
-kubectl config current-context
-```
-
-Use the [`rad env init kubernetes` command]({{< ref rad_env_init_Kubernetes >}}) to initialize a new environment into your current kubectl context.
-```bash
-rad env init kubernetes -i
-```
-
-Follow the prompts to configure:
-
-1. **Namespace** - When an application is deployed, this is the namespace where containers and other Kubernetes resources will be run.
-{{% alert title="💡 About namespaces" color="success" %}} When a Kubernetes environment is initialized it will install the Radius control plane into your cluster within the `radius-system` namespace, separate from your applications. The namespace specified in this step will be used for your application deployments.
-{{% /alert %}}
-
-1. **Add Azure provider** - An [Azure cloud provider]({{<ref providers>}}) allows you to deploy and manage Azure resources as part of your application. This step can be skipped for now.
-
-1. **Environment name** - The name of the environment to create. Use `webapp-tutorial-dev-env`.
-
-Radius installs the control plane, creates an environment resource , creates a workspace and updates the configuration to /.rad/config.yaml
-
-### Verify initialization
-
-   To verify the environment initialization succeeded, you can run the following command:
-
-   ```bash
-   kubectl get deployments -n radius-system
-   ```
-
-   The output should look like this:
-
-   ```bash
-   NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
-   ucp                       1/1     1            1           53s
-   appcore-rp                1/1     1            1           53s
-   bicep-de                  1/1     1            1           53s
-   contour-contour           1/1     1            1           46s
-   dapr-dashboard            1/1     1            1           35s
-   dapr-sidecar-injector     1/1     1            1           35s
-   dapr-sentry               1/1     1            1           35s
-   dapr-operator             1/1     1            1           35s
-   ```
+- [Azure cloud provider]({{<ref providers>}}) (optional)
+ - [Azure subscription](https://azure.com)
+ - [az CLI](https://aka.ms/azcli)
+ - [Azure service principal](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) with the [proper permissions](https://aka.ms/azadsp-more)
 
 <br>{{< button text="Next: App overview" page="webapp-overview" >}}
