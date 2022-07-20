@@ -13,9 +13,11 @@ As a developer, you define the building blocks of your application. In this step
 
 Radius uses the [Bicep language]({{< ref bicep >}}) as its file-format and structure. In this tutorial you will define an app named `todoapp` that will contain the container and MongoDB connector resources, all described in Bicep.
 
-Create a new file named `app.bicep` and paste the following:
+Create a new file named `app.bicep` and paste the following to add a radius application 
 
 {{< rad file="snippets/empty-app.bicep" embed=true >}}
+
+The environment property depicts the environment that was initialized in the previous step for the app to land on.
 
 ## Add a container component
 
@@ -51,11 +53,14 @@ Now you are ready to deploy the application for the first time.
    This will deploy the application into your environment and launch the container resource for the frontend website. You should see the following resources deployed at the end of `rad deploy`:
 
    ```sh
-   Resources:
-      Application          todoapp
-      Container            frontend
-      HttpRoute            frontend-route
-      Gateway              frontend-gateway
+   Deployment In Progress:
+   
+     Completed       Application          Applications.Core/applications
+     Completed       Container            Applications.Core/containers
+     Completed       frontend-route       Applications.Core/httpRoutes
+     Completed       gateway              Applications.Core/gateways
+   
+   Deployment Complete 
    ```
 
    Also, a public endpoint will be available to your application as we specified a [Gateway]({{< ref gateway >}}).

@@ -23,7 +23,7 @@ A [connector]({{< ref connector-schema >}}) provides an infrastructure abstracti
 
 ## Add database connector
 
-In this step, as a developer you will be adding the mongo container to deploy and test the application in your environment before handing off to the infrastructure admin team to carry out the deployment on a production environment which will covered in the next part of the tutorial. 
+In this step, you will add the mongo container to deploy and test the application in your environment.
 
 Update your Bicep file to match the following to add a Mongo database connector backed by a mongo container to your application:
 
@@ -39,8 +39,6 @@ Once the connector is referenced, you can connect to it by referencing the `db` 
 [Connections]({{< ref connections-model >}}) are used to configure relationships between two components. 
 
 Now that you have created a connection called `itemstore`, environment variables with connection information will be injected into the `frontend` container. The container reads the database connection string from an environment variable named `CONNECTION_ITEMSTORE_CONNECTIONSTRING`.
-
-<!--A manual dependency from `frontend` to `dbStarter` need to be added, pending an update the the Radius app model in an upcoming release. This ensures the Mongo database starter is deployed before `frontend` is deployed.-->
 
 ## Update Bicep file
 
@@ -58,15 +56,17 @@ Make sure your Bicep file matches the following:
 
    This may take a few minutes to create the database. On completion, you will see the following resources:
 
-   ```sh
-   Resources:
-      Application              todoapp
-      Container                frontend
-      HttpRoute                frontend-route
-      Gateway                  frontend-gateway
-      mongo.com.MongoDatabase  db
-   ```
+     ```sh
+   Deployment In Progress:
 
+     Completed       Application                Applications.Core/applications
+     Completed       Container                  Applications.Core/containers
+     Completed       frontend-route             Applications.Core/httpRoutes
+     Completed       gateway                    Applications.Core/gateways
+     Completed       mongo.com.MongoDatabase    db
+
+   Deployment Complete 
+   ```
    Just like before, a public endpoint will be available through the gateway.
 
    ```sh
@@ -80,11 +80,11 @@ Make sure your Bicep file matches the following:
 
    If your page matches, then it means that the container is able to communicate with the database. Just like before, you can test the features of the todo app. Add a task or two. Now your data is being stored in an actual database.
 
-## Handoff
-As a developer you have tested the application with a mongo container and would like to handoff deployment to the infra-admin for deploymnet to other environments. You can use the same app.bicep for handoff by commenting out the mongo container resource. The infra-admin can now set up a Radius environment with Azure cloud provider configured and provision an Azure resource to back the connector. This ensures that you are able to port your application to different environments with minimal rewrites.
-
 ## Cleanup
 
 {{% alert title="Delete application" color="warning" %}} If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) {{% /alert %}}
+
+## Handoff
+This step closely relates to how the enterprises do hand-offs between different personas involved in the deployment. As a developer you have tested the application with a mongo container and would like to handoff the deployment to the infra-admin for deployments to other environments. The infra-admin can now set up a Radius environment with Azure cloud provider configured and can use th same app bicep template to provision an Azure resource via the connector. This ensures that you are able to port your application to different environments with minimal rewrites.
 
 <br> {{< button text="Next step: Add a database to the app" page="webapp-swap-connector-resource" >}} {{< button text="Previous step: Author app definition" page="webapp-initial-deployment" >}}

@@ -68,7 +68,7 @@ Visit the [Radius getting started guide]({{< ref getting-started >}}) to install
 
 Project Radius resource types are available in Bicep, allowing you to model and connect Radius resources to Azure and Kubernetes resources.
 
-In the below example, a Radius resource of type `radius.dev/Application@v1alpha3` is defined:"
+In the below example, a Radius resource of type `Applications.Core/applications` is defined:"
 
 {{< rad file="snippets/app.bicep" embed=true replace-key-resources="//RESOURCES" replace-value-resources="..." >}}
 
