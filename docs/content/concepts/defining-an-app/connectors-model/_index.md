@@ -8,19 +8,19 @@ weight: 300
 
 Connectors provide an **infrastructure abstraction** that enables **portability** for Radius applications. Connectors utilize open-source APIs, like Redis and MongoDB, to allow users to dynamically bind to platform resources. Instead of identifying a specific instance of a resource, users can specify a connector and the API it can talk to. Connectors support either spinning up a new resource or connecting directly to an existing resource.
 
-TODO: insert image here
+<img src="connectors.png" alt="Diagram of Radius Connector to infrastructure resource." width="500" />
 
 For example, when a user specifies a MongoDB connector, that connector could bind to an Azure CosmosDB, an AWS DynamoDB, or a Mongo Container based on which platform is targeted. An administrator could even specify the exact configurations of the database resource to spin up when a developer needs a database, enhancing a self-serve workflow.
 
-<img width="578" alt="Screen Shot 2022-07-01 at 12 13 43 PM" src="https://user-images.githubusercontent.com/71398878/176956322-63cb7be6-4c51-4e2d-bf6a-143f817a89c7.png">
+<img src="connectors-example.png" alt="Diagram of example architecture using or Radius Conntector. Depicts a Radius Container connected to MongoDB Radius Connector, which can bind to an Azure CosmosDB, an AWS DynamoDB, or a Mongo Container. " width="500" />
 
-<h4>Underlying resource</h4>
+## Underlying resource
 
 In this example, a team wants to use a Mongodb Database on Azure (`underlyingdb`) to fulfill their app's Mongo storage requirement:
 
 {{< rad file="snippets/corerp-connector-example.bicep" embed=true marker="//RESOURCE" >}}
 
-<h4>Connector</h4>
+## Connector
 
 Then, in the app definition, a developer defines a Mongo connector (`dbconnector`) that references the storage resource (`underlyingdb`). 
 
@@ -28,8 +28,7 @@ Then, in the app definition, a developer defines a Mongo connector (`dbconnector
 
 The developer can bind to that resource without any configuration or knowledge of the underlying resource.  
 
-
-<h4>Container</h4>
+## Container
 
 Finally, the developer's container resource (`frontend`) connects to the Mongo connector (`dbconnector`) via the "connections" property:
 

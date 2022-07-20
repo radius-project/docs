@@ -7,7 +7,7 @@ param location string = resourceGroup().location
 //APPLICATION
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'corerp-resources-mongodb'
-  location: 'global'
+  location: location
   properties: {
     environment: environment
   }
