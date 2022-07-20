@@ -8,7 +8,7 @@ weight: 100
 
 ## Overview
 
-The `radius.dev/ManualScaling` trait configures the number of replicas of a compute instance (such as a container) to run.
+The `Applications.Core/manualScaling` trait configures the number of replicas of a compute instance (such as a container) to run.
 
 ## Trait format
 

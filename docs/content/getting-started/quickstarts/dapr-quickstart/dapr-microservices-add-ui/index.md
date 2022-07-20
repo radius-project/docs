@@ -17,7 +17,7 @@ Another container resource is used to specify a few properties about the order g
 
 - **container image**: `radius.azurecr.io/daprtutorial-frontend` is a Docker image the container will run.
 - **connections**: `daprBackend.id` declares the intention for `frontend` to communicate with `backend` through the `daprBackend` Dapr HTTP Route.
-- **traits**: `dapr.io/Sidecar` configures Dapr on the container.
+- **extensions**: `dapr.io/Sidecar` configures Dapr on the container.
 
 Additionally, a [Gateway]({{< ref gateway >}}) and an [HttpRoute]({{< ref httproute >}}) are configured to expose the `frontend` container on a public endpoint.
 

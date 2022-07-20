@@ -1,11 +1,10 @@
 #! /bin/bash
-BICEP_EXECUTABLE="rad-bicep-customrp"
 if [[ ! -z $BICEP_PATH ]]
 then
-    BICEP_EXECUTABLE="$BICEP_PATH/$BICEP_EXECUTABLE"
+    BICEP_EXECUTABLE="$BICEP_PATH/rad-bicep"
 fi
 
-FILES=$(find . -type f -name "*.bicep" ! -name "corerp-*.bicep")
+FILES=$(find . -type f -name "*.bicep")
 FAILURES=()
 for F in $FILES
 do
@@ -24,7 +23,7 @@ do
     STDERR=$($BICEP_EXECUTABLE build $F --stdout 2>&1 1>/dev/null)
     EXITCODE=$?
     exec 3>&-
-
+    
     if [[ ! $EXITCODE -eq 0 || ! -z $STDERR ]]
     then
         echo $STDERR

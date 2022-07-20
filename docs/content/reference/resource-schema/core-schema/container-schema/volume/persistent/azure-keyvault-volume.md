@@ -10,8 +10,6 @@ Radius supports mounting an Azure Key Vault as a persistent volume to the contai
 
 ## Resource format
 
-{{< rad file="snippets/volume-keyvault-csi.bicep" embed=true marker="//SAMPLE" >}}
-
 ### Properties
 
 The following properties are available on the `Volume` resource to which the container attaches:

@@ -51,7 +51,7 @@ In your app's Bicep file, a resource captures:
 | **Essentials** | How do I run this? | Container image and tag (`my-container:latest`)
 | **Connections** | What other Resource will I interact with? | Need to read from `my-db` 
 | **Routes** | What capabilities do I provide for others? | Offer an HTTP endpoint on `/home`
-| **Traits** | What operational behaviors do I offer and interact with? | Need a Dapr sidecar (`dapr.io.App`)
+| **extensions** | What operational behaviors do I offer and interact with? | Need a Dapr sidecar (`dapr.io.App`)
 
 ### Example application 
 

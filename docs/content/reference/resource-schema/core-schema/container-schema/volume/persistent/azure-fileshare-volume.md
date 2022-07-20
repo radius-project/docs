@@ -10,8 +10,6 @@ Radius supports mounting an Azure file share persistent volume to a container. S
 
 ## Resource format
 
-{{< rad file="snippets/volume-fileshare.bicep" embed=true marker="//SAMPLE" >}}
-
 ### Properties
 
 The following properties are available on the `Volume` resource which the container attaches to:

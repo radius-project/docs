@@ -1,21 +1,34 @@
-resource app 'radius.dev/Application@v1alpha3' = {
-  name: 'azure-storage-app'
+import radius as radius
 
-  resource store 'Container' = {
-    name: 'storage-service'
-    properties: {
-      container: {
-        image: 'registry/container:tag'
-      }
-      connections: {
-        storageresource: {
-          kind:'azure'
-          source: storageAccount.id
+param location string = resourceGroup().location
+param environment string
+
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+  name: 'azure-storage-app'
+  location: location
+  properties: {
+    environment: environment
+  }
+}
+
+resource store 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'storage-service'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'registry/container:tag'
+    }
+    connections: {
+      storageresource: {
+        iam: {
+          kind: 'azure'
           roles: [
             'Reader and Data Access'
             'Storage Blob Data Contributor'
           ]
         }
+        source: storageAccount.id
       }
     }
   }
@@ -23,7 +36,7 @@ resource app 'radius.dev/Application@v1alpha3' = {
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
   name: 'StorageAccount-${guid(resourceGroup().name)}'
-  location: resourceGroup().location
+  location: location
   kind: 'StorageV2'
   sku: {
     name: 'Standard_LRS'
