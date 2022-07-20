@@ -93,6 +93,14 @@ PowerShell for Cloud Shell is currently not supported.
 
 Verify the rad CLI is installed correctly by running `rad`. 
 
+## Try out Radius on GitHub Codespaces
+
+If you're running into any difficulties or would prefer to test out Radius in a virtual environment first check out the [official Radius samples repo](https://github.com/project-radius/samples) and test out the sample applications on a pre-configured [GitHub Codespaces](https://github.com/features/codespaces) container.
+
+The environment comes pre-configured with everything you need to run Radius, as well as a post-command dedicated to creating a [Radius local environment](#create-a-radius-environment).
+
+Just enter your desired sample application directory and run `rad app deploy` to see Radius in action.
+
 ## Create a Radius environment
 
 A Radius environment is where you will deploy your applications. Easily deploy a new environment with the [`rad env init`]({{< ref rad_env_init >}}) command:
