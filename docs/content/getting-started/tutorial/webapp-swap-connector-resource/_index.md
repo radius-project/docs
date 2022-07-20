@@ -1,17 +1,18 @@
 ---
 type: docs
-title: "Swap  connector resource"
+title: "Swap connector resource"
 linkTitle: "Swap connector resource"
 description: "Swap a connector resource for an Azure resource to back the connector and deploy it to an environment with Azure cloud provider configured"
 weight: 4000
-slug: "frontend"
+slug: "swap-connector"
 ---
 
 As enterprises have separate teams handling deployment responsibilities, initializing production environment and porting the application is carried out by the infrastructure admin. If you are a developer who handles everything related to deployments, this would be applicable to you as well.
 
 To abstract the infrastructure workflows from the development workflows, we are working on a solution called **Radius recipes** that will enable the infra-admin to prepare connector recipes with all the organizational requirements which can be used by the developers without having to worry about provisioning or managing a resource. Check back for more updates in our future releases
 
-## Intialize Radius environment with Azure cloud provider
+## Initialize Radius environment with Azure cloud provider
+
 In this step, you will initialize a radius production environment. So, you will be adding the Azure cloud provider as you will be swapping the connector resource with Azure cosmos db. 
 
 For simplicity purposes, you can use the same cluster that you used before for setting up the dev environment. 
@@ -60,7 +61,7 @@ Radius installs the control plane, configures Azure cloud provider, creates an e
    dapr-operator             1/1     1            1           35s
    ```
 
-## Swap the connector for an azure resource
+## Swap the connector for an Azure resource
 
 The app.bicep from the previous step should look like this 
 

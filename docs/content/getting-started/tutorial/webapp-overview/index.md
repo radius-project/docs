@@ -49,7 +49,7 @@ Deployment often involves different teams working together, separating their res
 
 As you progress, keep in mind the following benefits that the Radius application abstraction provides:
 
-- Separation of concerns for the different personas involved in the deploymnet 
+- Separation of concerns for the different personas involved in the deployment 
 - Relationships between resources are fully specified with protocols and other strongly-typed information
 - Connectors provide abstraction and portability across local and cloud environments
 

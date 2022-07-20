@@ -41,7 +41,7 @@ This tutorial contains the following sections:
 
 A Radius Kubernetes envionment can run in a Kubernetes cluster running on any platform. In this tutorial you will be replicating a real time scenario of first deploying the application on to your development environmnet and then porting the same application to the production environment. 
 
-In this step, we will be initializing a radius development environment
+In this step we will be initializing a Radius Kubernetes environment to use for development.
 
 You can view the current context for kubectl by running
 ```bash
@@ -53,15 +53,15 @@ Use the [`rad env init kubernetes` command]({{< ref rad_env_init_Kubernetes >}})
 rad env init kubernetes -i
 ```
 
-Follow the prompts, 
+Follow the prompts to configure:
 
-1. Namespace - This is the namespace where you want the radius application to be deployed in your cluster
-{{% alert title="💡 About namespaces" color="success" %}} When Radius initializes a Kubernetes environment, it will install the Radius control plane into your cluster if needed, using the `radius-system` namespace. These control plane resources aren't part your application. The namespace specified in interactive mode will be used for future application deployments by default.
+1. **Namespace** - When an application is deployed, this is the namespace where containers and other Kubernetes resources will be run.
+{{% alert title="💡 About namespaces" color="success" %}} When a Kubernetes environment is initialized it will install the Radius control plane into your cluster within the `radius-system` namespace, separate from your applications. The namespace specified in this step will be used for your application deployments.
 {{% /alert %}}
 
-1. Add Azure provider - Since this is a devlopment environment, you can skip to add the [Azure cloud provider]({{<ref providers>}})
+1. **Add Azure provider** - An [Azure cloud provider]({{<ref providers>}}) allows you to deploy and manage Azure resources as part of your application. This step can be skipped for now.
 
-1. Environment name - Lets name the environment as webapp-tutorial-dev-env
+1. **Environment name** - The name of the environment to create. Use `webapp-tutorial-dev-env`.
 
 Radius installs the control plane, creates an environment resource , creates a workspace and updates the configuration to /.rad/config.yaml
 

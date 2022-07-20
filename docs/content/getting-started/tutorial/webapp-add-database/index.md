@@ -81,6 +81,7 @@ Make sure your Bicep file matches the following:
    If your page matches, then it means that the container is able to communicate with the database. Just like before, you can test the features of the todo app. Add a task or two. Now your data is being stored in an actual database.
 
 ## Handoff
+
 As a developer you have tested the application with a mongo container and would like to handoff deployment to the infra-admin for deploymnet to other environments. You can use the same app.bicep for handoff by commenting out the mongo container resource. The infra-admin can now set up a Radius environment with Azure cloud provider configured and provision an Azure resource to back the connector. This ensures that you are able to port your application to different environments with minimal rewrites.
 
 ## Cleanup
