@@ -4,7 +4,7 @@ param environment string
 
 param location string = resourceGroup().location
 
-param azurelocation string = 'westus3'
+param azureLocation string = 'westus3'
 
 //APPLICATION
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
@@ -19,7 +19,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 //CONTAINER
 resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'frontend'
-  location: 'global'
+  location: location
   properties: {
     application: app.id
     connections: {
@@ -37,7 +37,7 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 //CONNECTOR
 resource dbconnector 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
   name: 'dbconnector'
-  location: 'global'
+  location: location
   properties: {
     environment: environment
     resource: account::underlyingdb.id
@@ -48,7 +48,7 @@ resource dbconnector 'Applications.Connector/mongoDatabases@2022-03-15-privatepr
 //RESOURCE
 resource account 'Microsoft.DocumentDB/databaseAccounts@2020-04-01' = {
   name: 'account-${guid(resourceGroup().name)}'
-  location: azurelocation
+  location: azureLocation
   kind: 'MongoDB'
   properties: {
     consistencyPolicy: {
@@ -56,7 +56,7 @@ resource account 'Microsoft.DocumentDB/databaseAccounts@2020-04-01' = {
     }
     locations: [
       {
-        locationName: azurelocation
+        locationName: azureLocation
         failoverPriority: 0
         isZoneRedundant: false
       }
