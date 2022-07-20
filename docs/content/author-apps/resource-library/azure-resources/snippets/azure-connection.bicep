@@ -1,6 +1,11 @@
+import radius as radius
+
+param location string = resourceGroup().location
+param environment string
+
 resource cache 'Microsoft.Cache/Redis@2019-07-01' = {
   name: 'mycache'
-  location: 'westus2'
+  location: location
   properties: {
     sku: {
       capacity: 0
@@ -10,26 +15,34 @@ resource cache 'Microsoft.Cache/Redis@2019-07-01' = {
   }
 }
 
-resource app 'radius.dev/Application@v1alpha3' = {
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
+  location: location
+  properties: {
+    environment: environment
+  }
+}
 
-  resource container 'Container' = {
-    name: 'mycontainer'
-    properties: {
-      container: {
-        image: 'myimage'
-        env: {
-          REDIS_HOST: cache.properties.hostName
-        }
+resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'mycontainer'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'myimage'
+      env: {
+        REDIS_HOST: cache.properties.hostName
       }
-      connections: {
-        redis: {
+    }
+    connections: {
+      redis: {
+        iam: {
           kind: 'azure'
-          source: cache.id
           roles: [
             'Redis Cache Contributor'
           ]
         }
+        source: cache.id
       }
     }
   }

@@ -1,37 +1,48 @@
-param cosmosDatabase resource 'Microsoft.DocumentDB/databaseAccounts/mongodbDatabases@2021-06-15'
+import radius as radius
+
+param environment string
+param location string = resourceGroup().location
+param cosmosDatabaseId string
 
 // Define app 
-resource app 'radius.dev/Application@v1alpha3' = {
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'webapp'
-
-  // Define container resource to run app code
-  resource todoapplication 'Container' = {
-    name: 'todoapp'
-    properties: {
-      container: {
-        image: 'radius.azurecr.io/webapptutorial-todoapp'
-        ports: {
-          web: {
-            containerPort: 3000
-          }
-        }
-      }
-      // Connect container to database 
-      connections: {
-        itemstore: {
-          kind: 'mongo.com/MongoDB'
-          source: db.id
-        }
-      }
-    }
-  }
- 
-  // Define database
-  resource db 'mongo.com.MongoDatabase' = {
-    name: 'db'
-    properties: {
-      resource: cosmosDatabase.id 
-    }
+  location: location
+  properties: {
+    environment: environment
   }
 }
 
+// Define container resource to run app code
+resource todoapplication 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'todoapp'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'radius.azurecr.io/webapptutorial-todoapp'
+      ports: {
+        web: {
+          containerPort: 3000
+        }
+      }
+    }
+    // Connect container to database 
+    connections: {
+      itemstore: {
+        source: db.id
+      }
+    }
+  }
+}
+ 
+// Define database
+resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
+  name: 'db'
+  location: location
+  properties: {
+    environment: environment
+    application: app.id
+    resource: cosmosDatabaseId
+  }
+}

@@ -1,42 +1,55 @@
-resource app 'radius.dev/Application@v1alpha3' = {
-  name: 'dapr-statestore'
+import radius as radius
 
-  resource myapp 'Container' = {
-    name: 'myapp'
-    properties: {
-      container: {
-        image: 'radius.azurecr.io/magpie:latest'
-      }
-      connections: {
-        pubsub: {
-          kind: 'dapr.io/StateStore'
-          source: statestore.id
-        }
-      }
-      traits: [
-        {
-          kind: 'dapr.io/Sidecar@v1alpha1'
-          appId: 'myapp'
-        }
-      ]
-    }
+param location string = resourceGroup().location
+param environment string
+
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+  name: 'dapr-statestore'
+  location: location
+  properties: {
+    environment: environment
   }
-  
-  //SAMPLE
-  resource statestore 'dapr.io.StateStore' = {
-    name: 'statestore'
-    properties: {
-      kind: 'state.azure.tablestorage'
-      resource: storageAccount::tablestorage.id
-    }
-  }
-  //SAMPLE
 }
+
+resource myapp 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'myapp'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'radius.azurecr.io/magpie:latest'
+    }
+    connections: {
+      pubsub: {
+        source: statestore.id
+      }
+    }
+    extensions: [
+      {
+        kind: 'daprSidecar'
+        appId: 'myapp'
+      }
+    ]
+  }
+}
+  
+//SAMPLE
+resource statestore 'Applications.Connector/daprStateStores@2022-03-15-privatepreview' = {
+  name: 'statestore'
+  location: location
+  properties: {
+    environment: environment
+    application: app.id
+    kind: 'state.azure.tablestorage'
+    resource: storageAccount::tablestorage.id
+  }
+}
+//SAMPLE
 
 //BICEP
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
   name: 'sa-${guid(resourceGroup().name)}'
-  location: resourceGroup().location
+  location:location
   sku: {
     name: 'Standard_ZRS'
   }

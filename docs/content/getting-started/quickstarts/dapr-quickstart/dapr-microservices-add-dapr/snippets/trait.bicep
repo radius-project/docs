@@ -1,28 +1,37 @@
 //SAMPLE
-resource app 'radius.dev/Application@v1alpha3' = {
-  name: 'dapr-tutorial'
+import radius as radius
 
-  resource backend 'Container' = {
-    name: 'backend'
-    properties: {
-      //CONTAINER
-      container: {
-        image: 'radius.azurecr.io/daprtutorial-backend'
-        ports: {
-          orders: {
-            containerPort: 3000
-          }
+param location string = resourceGroup().location
+param environment string
+
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+  name: 'dapr-tutorial'
+  location: location
+  properties: {
+    environment: environment
+  }
+}
+
+resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'backend'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'radius.azurecr.io/daprtutorial-backend'
+      ports: {
+        orders: {
+          containerPort: 3000
         }
       }
-      //CONTAINER
-      traits: [
-        {
-          kind: 'dapr.io/Sidecar@v1alpha1'
-          appId: 'backend'
-          appPort: 3000
-        }
-      ]
     }
+    extensions: [
+      {
+        kind: 'daprSidecar'
+        appId: 'backend'
+        appPort: 3000
+      }
+    ]
   }
 }
 //SAMPLE

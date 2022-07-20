@@ -3,9 +3,7 @@ import radius as radius
 param environment string
 
 param location string = resourceGroup().location
-
 param username string = 'admin'
-
 param password string = newGuid()
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
@@ -93,6 +91,7 @@ resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = 
   location: location
   properties: {
     environment: environment
+    application: app.id
     secrets: {
       connectionString: 'mongodb://${username}:${password}@${mongoRoute.properties.hostname}:${mongoRoute.properties.port}'
       username: username
