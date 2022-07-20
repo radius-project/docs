@@ -4,6 +4,8 @@ param environment string
 
 param location string = resourceGroup().location
 
+param azurelocation string = 'westus3'
+
 //APPLICATION
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'corerp-resources-mongodb'
@@ -46,7 +48,7 @@ resource dbconnector 'Applications.Connector/mongoDatabases@2022-03-15-privatepr
 //RESOURCE
 resource account 'Microsoft.DocumentDB/databaseAccounts@2020-04-01' = {
   name: 'account-${guid(resourceGroup().name)}'
-  location: location
+  location: azurelocation
   kind: 'MongoDB'
   properties: {
     consistencyPolicy: {
@@ -54,7 +56,7 @@ resource account 'Microsoft.DocumentDB/databaseAccounts@2020-04-01' = {
     }
     locations: [
       {
-        locationName: location
+        locationName: azurelocation
         failoverPriority: 0
         isZoneRedundant: false
       }

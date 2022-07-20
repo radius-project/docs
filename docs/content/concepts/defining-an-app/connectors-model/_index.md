@@ -6,7 +6,7 @@ description: "Learn how Radius Connectors enable infrastructure portability"
 weight: 300
 ---
 
-Connectors provide an **infrastructure abstraction** that enables **portability** for Radius applications. Connectors utilize open-source APIs, like Redis and MongoDB, to allow users to dynamically bind to platform resources. Instead of identifying a specific instance of a resource, users can specify a connector and the API it can talk to. Connectors support either spinning up a new resource or connecting directly to an existing resource.
+Connectors provide an **infrastructure abstraction** that enables **portability** for Radius applications. Connectors utilize open-source APIs, like Redis and MongoDB, to allow users to dynamically bind to platform resources. Instead of identifying a specific instance of a resource, users can specify a connector and the API it can talk to. Connectors support connecting directly to an existing resource and will soon support dynamic provisioning.
 
 <img src="connectors.png" alt="Diagram of Radius Connector to infrastructure resource." width="500" />
 
