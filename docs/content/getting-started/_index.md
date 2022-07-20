@@ -180,5 +180,12 @@ While Project Radius is in preview two separate extensions are required, one for
 
    <img src="./wsl-extension.png" alt="Screenshot of installing a vsix extension in WSL" width=400>
 
-<!-- TODO: add table of samples and tutorials 
-(maybe a table like on this page https://docs.dapr.io/getting-started/quickstarts/ ? ) -->
+
+## Learn Radius
+
+| Guides | Description  |
+| --- | ----------- |
+| [Quickstarts]({{< ref quickstarts >}}) | Learn about Project Radius topics via quickstart guides, complete with code samples |
+| [Reference Applications]({{< ref reference-apps >}}) | See how full applications are modeled in Project Radius |
+| [Supported Languages]({{< ref supported-languages >}}) | Learn how to model apps using various IaC tools |
+| [Tutorial]({{< ref tutorial >}}) | Hit the ground running with our Radius tutorial, complete with code samples aimed to get you started quickly with Radius |
