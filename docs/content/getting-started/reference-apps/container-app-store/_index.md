@@ -46,6 +46,6 @@ Adding Project Radius to the container app store application allows teams to:
 - Easily manage configuration and credentials between infrastructure and services, all within the app model
 - Simplify deployment with Bicep and Azure Resource Manager (ARM)
 
-{{< button text="View container app store reference app in samples" link="https://github.com/project-radius/samples" color="success" size="btn-lg" >}}
+{{< button text="View container app store reference app in samples" githubRepo="samples" githubPath="reference-apps/container-app-store" color="success" size="btn-lg" >}}
 
 *Visit the [GitHub docs]({{< ref github >}}) if you need access to the organization*
