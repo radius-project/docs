@@ -27,7 +27,7 @@ This Radius application will have three [resouces]({{< ref appmodel-concept >}})
 
 The user-facing UI app (`frontend`) offers a portal for users to place orders. Upon creating an order, `frontend` uses [Dapr service invocation](https://docs.dapr.io/developing-applications/building-blocks/service-invocation/service-invocation-overview/) to send requests to `nodeapp`.
 
-The `frontend` container is configured with a [Dapr sidecar trait]({{< ref dapr-trait >}}) to add the sidecar container.
+The `frontend` container is configured with a [Dapr sidecar extension]({{< ref dapr-extension >}}) to add the sidecar container.
 
 <img src="./frontend.png" alt="A diagram of the complete application" width=400 />
 
@@ -35,7 +35,7 @@ The `frontend` container is configured with a [Dapr sidecar trait]({{< ref dapr-
 
 The order processing microservice (`backend`) accepts HTTP requests to create or display orders. It accepts HTTP requests on two endpoints: `GET /order` and `POST /neworder`.
 
-The `backend` container is configured with a [Dapr sidecar trait]({{< ref dapr-trait >}}) to add the sidecar container, along with a [Dapr Route](#routes) to model Dapr communication.
+The `backend` container is configured with a [Dapr sidecar extension]({{< ref dapr-extension >}}) to add the sidecar container, along with a [Dapr Route](#routes) to model Dapr communication.
 
 <img src="./backend.png" alt="A diagram of the backend order processing service" width=600 />
 
