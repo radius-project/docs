@@ -28,7 +28,7 @@ The node-app is an express.js API that exposes three endpoints. / will return th
 
 **Order Service (python-app)**
 
-*The python-app is a Python flask app that will retrieve and store the state of orders. It uses > Dapr state management to store the state of the orders. When deployed in Container Apps, Dapr is configured to point to a mongoDB to back the state.*
+The python-app is a Python flask app that will retrieve and store the state of orders. It uses Dapr state management to store the state of the orders. When deployed in Container Apps, Dapr is configured to point to a mongoDB to back the state.
 
 **Inventory Service (go-app)**
 
