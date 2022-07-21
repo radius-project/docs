@@ -21,11 +21,13 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
     }
     connections: {
       mongo: {
-        kind: 'azure'
         source: blobContainer.id
-        rbac: [
-          'Storage Blob Data Reader'
-        ]
+        iam: {
+          kind: 'azure'
+          roles: [
+            'Storage Blob Data Reader'
+          ]
+        }
       }
     }
   }
