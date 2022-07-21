@@ -1,7 +1,6 @@
 import radius as radius
 
 param environment string
-
 param location string = resourceGroup().location
 param username string = 'admin'
 param password string = newGuid()
@@ -13,6 +12,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
     environment: environment
   }
 }
+
 resource todoFrontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'frontend'
   location: location
@@ -28,12 +28,13 @@ resource todoFrontend 'Applications.Core/containers@2022-03-15-privatepreview' =
       }
     }
     connections: {
-      itemstore: {
+      mongodb: {
         source: db.id
       }
     }
   }
 }
+
 resource todoRoute 'Applications.Core/httproutes@2022-03-15-privatepreview' = {
   name: 'frontend-route'
   location: location

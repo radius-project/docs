@@ -1,8 +1,8 @@
 ---
 type: docs
 title: "Add a database to the website tutorial app"
-linkTitle: "Add a database connector"
-description: "Connect a MongoDB to the website tutorial application using a connector and deploy to a Radius environment"
+linkTitle: "Add a database"
+description: "Connect a MongoDB to the website tutorial application using a connector"
 slug: "database"
 weight: 3000
 ---
@@ -11,62 +11,93 @@ So far you have not yet configured a database, so the todo items you enter will 
 
 In this step you will learn how to add a database and connect to it from the application.
 
-We'll discuss app.bicep changes and then provide the full, updated file before deployment.
+We'll discuss todo.bicep changes and then provide the full, updated file before deployment.
 
 ## Connectors
 
-A [connector]({{< ref connector-schema >}}) provides an infrastructure abstraction for an API, allowing the backing resource type to be swapped out without changing the way the consuming resource is defined. In this example, first a developer uses a Kubernetes resource (MongoDB) as the app's database when deploying to their dev environment. Later, the infrastructure admin uses a Azure resource (Azure CosmosDB) as the app's database when deploying to production.
+A [Mongo database connector]({{< ref mongodb >}}) resource provides an abstraction over the Mongo API, allowing the backing resource to be swapped out without any changes to the consuming resource and code.
 
 <img src="mongo-connector.png" width=450px alt="Diagram of a mongo connector" /><br />
 
- To learn more about connectors visit the [concepts docs]({{< ref connections-model >}})
+To learn more about connectors visit the [concepts docs]({{< ref connections-model >}})
 
-## Add database connector
+## Add db starter
 
-In this step, you will add the mongo container to deploy and test the application in your environment.
+Starters are available to easily add a MongoDB connector to your application using Bicep modules. Update your Bicep file to match the following to add a Mongo database connector to your application:
 
-Update your Bicep file to match the following to add a Mongo database connector backed by a mongo container to your application:
+{{< tabs "Mongo container" "Azure CosmosDB" >}}
 
-{{< rad file="snippets/db-container.bicep" embed=true marker="//MONGO CONNECTOR" >}}
+{{< codetab >}}
+{{< rad file="snippets/starter-container.bicep" embed=true marker="//STARTER" >}}
+{{< /codetab >}}
 
+{{< codetab >}}
+This option is currently only available for Azure environments.
+
+{{< rad file="snippets/starter-azure.bicep" embed=true marker="//STARTER" >}}
+{{< /codetab >}}
+
+{{< /tabs >}}
+
+### Reference new connector
+
+A starter deploys a MongoDB resource (container or CosmosDB), as well as a connector. Currently, the connector must be manually referenced in your application. To reference the deployed connector, use Bicep's `existing` keyword and add the following resource:
+
+{{< rad file="snippets/starter-azure.bicep" embed=true marker="//APP" replace-key-dots="//CONTAINER" replace-value-dots="..." >}}
+
+This manual step will be removed in a future release.
 
 ### Connect to `db` from `frontend`
 
 Once the connector is referenced, you can connect to it by referencing the `db` component from within the `frontend` resource the [`connections`]({{< ref connections-model >}}) section:
 
-{{< rad file="snippets/app-container.bicep" embed=true marker="//CONTAINER" replace-key-dots="//IMAGE" replace-value-dots="container: {...}" >}}
+{{< rad file="snippets/starter-azure.bicep" embed=true marker="//CONTAINER" replace-key-dots="//IMAGE" replace-value-dots="container: {...}" >}}
 
-[Connections]({{< ref connections-model >}}) are used to configure relationships between two components. 
+[Connections]({{< ref connections-model >}}) are used to configure relationships between two components. The `db` is of kind `mongo.com/MongoDB`, which supports the MongoDB protocol. This declares the *intention* from the `frontend` container to communicate with the `db` resource.
 
 Now that you have created a connection called `itemstore`, environment variables with connection information will be injected into the `frontend` container. The container reads the database connection string from an environment variable named `CONNECTION_ITEMSTORE_CONNECTIONSTRING`.
+
+A manual dependency from `frontend` to `dbStarter` need to be added, pending an update the the Radius app model in an upcoming release. This ensures the Mongo database starter is deployed before `frontend` is deployed.
 
 ## Update Bicep file
 
 Make sure your Bicep file matches the following:
 
+{{< tabs "Mongo container" "Azure CosmosDB" >}}
+
+{{< codetab >}}
 {{< rad file="snippets/app-container.bicep" embed=true >}}
+{{< /codetab >}}
+
+{{< codetab >}}
+{{< rad file="snippets/app-azure.bicep" embed=true >}}
+{{< /codetab >}}
+
+{{< /tabs >}}
 
 ## Deploy application with database
+
+{{% alert title="Known issue: Azure deployments" color="warning" %}}
+There is a known issue where deployments to Azure will fail with a "NotFound" error for templates containing starters. This is being addressed in an upcoming release. As a workaround submit the deployment a second time. The second deployment should succeed.
+{{% /alert %}}
 
 1. In a terminal window deploy the Bicep file:
 
    ```sh
-   rad deploy app.bicep
+   rad deploy todo.bicep
    ```
 
    This may take a few minutes to create the database. On completion, you will see the following resources:
 
-     ```sh
-   Deployment In Progress:
-
-     Completed       Application                Applications.Core/applications
-     Completed       Container                  Applications.Core/containers
-     Completed       frontend-route             Applications.Core/httpRoutes
-     Completed       gateway                    Applications.Core/gateways
-     Completed       mongo.com.MongoDatabase    db
-
-   Deployment Complete 
+   ```sh
+   Resources:
+      Application              todoapp
+      Container                frontend
+      HttpRoute                frontend-route
+      Gateway                  frontend-gateway
+      mongo.com.MongoDatabase  db
    ```
+
    Just like before, a public endpoint will be available through the gateway.
 
    ```sh
@@ -82,9 +113,4 @@ Make sure your Bicep file matches the following:
 
 ## Cleanup
 
-{{% alert title="Delete application" color="warning" %}} If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) {{% /alert %}}
-
-## Handoff
-This step closely relates to how the enterprises do hand-offs between different personas involved in the deployment. As a developer you have tested the application with a mongo container and would like to handoff the deployment to the infra-admin for deployments to other environments. The infra-admin can now set up a Radius environment with Azure cloud provider configured and can use th same app bicep template to provision an Azure resource via the connector. This ensures that you are able to port your application to different environments with minimal rewrites.
-
-<br> {{< button text="Next step: Add a database to the app" page="webapp-swap-connector-resource" >}} {{< button text="Previous step: Author app definition" page="webapp-initial-deployment" >}}
+{{% alert title="Delete application" color="warning" %}} If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to prevent additional charges in your Azure subscription. {{% /alert %}}

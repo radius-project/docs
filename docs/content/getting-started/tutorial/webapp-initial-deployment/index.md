@@ -1,23 +1,19 @@
 ---
 type: docs
-title: "Author and deploy the application with the frontend service"
-linkTitle: "Author app definition"
-description: "Define the application definition with container, gateway and http routes"
+title: "Deploy the website tutorial frontend"
+linkTitle: "Deploy frontend"
+description: "Deploy the website tutorial frontend in a container"
 weight: 2000
 slug: "frontend"
 ---
-
-As a developer, you define the building blocks of your application. In this step, you will create the application template with the services required by the frontend of the application.
 
 ## Define a Radius application in a .bicep file
 
 Radius uses the [Bicep language]({{< ref bicep >}}) as its file-format and structure. In this tutorial you will define an app named `todoapp` that will contain the container and MongoDB connector resources, all described in Bicep.
 
-Create a new file named `app.bicep` and paste the following to add a radius application 
+Create a new file named `todo.bicep` and paste the following:
 
 {{< rad file="snippets/empty-app.bicep" embed=true >}}
-
-The environment property depicts the environment that was initialized in the previous step for the app to land on.
 
 ## Add a container component
 
@@ -42,25 +38,25 @@ Update your Bicep file to match the full application definition:
 
 Now you are ready to deploy the application for the first time.
 
-1. Make sure you have an [Radius environment initialized]({{< ref "tutorial#initialize-a-radius-environment" >}}).
+1. Make sure you have an [Radius environment initialized]({{< ref "getting-started#create-a-radius-environment" >}}).
+   - For Azure environments run `az login` to make sure your token is refreshed.
+   - For Kubernetes environments make sure your `kubectl`  context is set to your cluster.
+   - For local Kubernetes environments make sure Docker is running.
 
 2. Deploy to your Radius environment via the rad CLI:
 
    ```sh
-   rad deploy ./app.bicep
+   rad deploy ./todo.bicep
    ```
 
    This will deploy the application into your environment and launch the container resource for the frontend website. You should see the following resources deployed at the end of `rad deploy`:
 
    ```sh
-   Deployment In Progress:
-   
-     Completed       Application          Applications.Core/applications
-     Completed       Container            Applications.Core/containers
-     Completed       frontend-route       Applications.Core/httpRoutes
-     Completed       gateway              Applications.Core/gateways
-   
-   Deployment Complete 
+   Resources:
+      Application          todoapp
+      Container            frontend
+      HttpRoute            frontend-route
+      Gateway              frontend-gateway
    ```
 
    Also, a public endpoint will be available to your application as we specified a [Gateway]({{< ref gateway >}}).
@@ -86,17 +82,18 @@ You can play around with the application's features:
 - Mark a todo item as complete
 - Delete a todo item
 
-## Manage your application using the Radius VS Code extension
+## Interact with your application using the VS Code extension
 
-The Radius extension improves developer workflows. 
+{{% alert title="Preview" color="info" %}}
+The following tips are  a preview of how the VS Code Radius extension can be deployed improve developer workflow. As we introduce additional features to the extension we will incorporate them into this section.
+{{% /alert %}}
 
-- In VS Code, select the "PR" (Project Radius) icon on the left to view the Radius extension.
+- Open VS Code and navigate to the VS Code Radius extension explorer section.
 
-   Environments you've created are listed in a tree view. By drilling into your "todoapp" application and its resources.
+   The environment you've created should be listed in a tree view that will allow you to see  your webapp application and its different resources.
 
    <img src="radius-explorer-webapp.png" width="400" height="auto" alt="screenshot of the todo application with no database">
 
-- Click on the `todoapp` resource node and click on the `Show Container Logs` to open view its logs.
+- Click on the `todoapp` resource node and click on the `Show Container Logs` to open up a terminal dedicated to viewing the resource logs.
 
-<br> {{< button text="Next step: Add a database connector" page="webapp-add-database" >}}
-{{< button text="Previous step: App overview" page="webapp-overview">}} 
+<br>{{< button text="Next: Add a database to the app" page="webapp-add-database" >}}
