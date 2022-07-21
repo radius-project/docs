@@ -99,7 +99,7 @@ Verify the rad CLI is installed correctly by running `rad`.
 
 Do you prefer to test out Radius in a fast and easy to use virtual environment? Check out the [official Radius samples repo](https://github.com/project-radius/samples) and test out the sample applications on a pre-configured [GitHub Codespaces](https://github.com/features/codespaces) container.
 
-If in case you'd prefer to run a [dev container](https://docs.github.com/en/codespaces/setting-up-your-project-for-codespaces/introduction-to-dev-containers) on your local machine, the samples repo offer a .devcontainer folder that will allow you to configure the environment anywhere you want as well as automatically set up a [Radius local environment](#create-a-radius-environment).
+If in case you'd prefer to run a [dev container](https://code.visualstudio.com/docs/remote/containers) on your local machine, the samples repo offer a .devcontainer folder that will allow you to configure the environment anywhere you want as well as automatically set up a [Radius local environment](#create-a-radius-environment).
 
 Just enter your desired sample application directory and run `rad app deploy` to see Radius in action.
 
