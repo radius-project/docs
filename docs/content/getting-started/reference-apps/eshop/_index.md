@@ -39,3 +39,5 @@ Adding Project Radius to the eShop on containers application allows teams to:
 - Simplify deployment with Bicep and Azure Resource Manager (ARM)
 
 {{< button text="View eShop reference app in samples" link="https://github.com/project-radius/samples" color="success" size="btn-lg" >}}
+
+*Visit the [GitHub docs]({{< ref github >}}) if you need access to the organization*
