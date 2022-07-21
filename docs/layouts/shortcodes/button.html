@@ -4,7 +4,7 @@
 {{ $text := .Get "text" }}
 {{ $newtab := .Get "newtab" | default "false" }}
 {{ $size := .Get "size" }}
-{{ $newline := .GET "newline" | default "true" }}
+{{ $newline := .Get "newline" | default "true" }}
 
 {{- if $page -}}{{- $link = ref . $page -}}{{- end -}}
 
