@@ -11,13 +11,13 @@ Currently, the data you send to `backend` will be stored in memory inside the ap
 
 In this step you will learn how to add a state store database and connect to it from the application with Dapr.
 
-## Add a Dapr trait
+## Add a Dapr extension
 
-A [`dapr.io/Sidecar` trait]({{< ref dapr-trait >}}) on the `backend` resource can be used to describe the Dapr configuration:
+A [`dapr.io/Sidecar` extension]({{< ref dapr-extension >}}) on the `backend` resource can be used to describe the Dapr configuration:
 
-{{< rad file="snippets/trait.bicep" embed=true marker="//SAMPLE" replace-key-container="//CONTAINER" replace-value-container="container: {...}" >}}
+{{< rad file="snippets/extension.bicep" embed=true marker="//SAMPLE" replace-key-container="//CONTAINER" replace-value-container="container: {...}" >}}
 
-The `extensions` section is used to configure cross-cutting behaviors of components. Since Dapr is not part of the standard definition of a container, it can be added via a trait. Traits have a `kind` so that they can be strongly typed.
+The `extensions` section is used to configure cross-cutting behaviors of components. Since Dapr is not part of the standard definition of a container, it can be added via a extension. Extensions have a `kind` so that they can be strongly typed.
 
 ## Add `dapr-backend` Dapr Invoke Route
 

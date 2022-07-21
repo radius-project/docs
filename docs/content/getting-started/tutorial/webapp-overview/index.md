@@ -3,7 +3,7 @@ type: docs
 title: "Website tutorial app overview"
 linkTitle: "App overview"
 description: "Overview of the website tutorial application"
-weight: 1000
+weight: 100
 slug: "overview"
 ---
 
@@ -46,10 +46,12 @@ The database is provided by a [MongoDB connector]({{< ref mongodb >}}). You can 
 
 ## The Radius mindset
 
-In this tutorial you will build out this app using the Radius application model. As you progress, keep in mind the following benefits that it provides:
+Deployment often involves different teams working together, separating their responsibilities. For example, a developer might build the app definition with services, while the infrastructure administrator might set up the environment and the infrastructure. In this tutorial you will build the app from the perspective of a developer and an infrastructure administrator. 
 
-- Both infrastructure (`db`) and services (`frontend`) are modeled as part of the application within the same template
+As you progress, keep in mind the following benefits that the Radius application abstraction provides:
+
 - Relationships between resources are fully specified with protocols and other strongly-typed information
 - Connectors provide abstraction and portability across local and cloud environments
+- Separation of concerns for the different personas involved in the deployment 
 
-<br>{{< button text="Next: Deploy the website frontend" page="webapp-initial-deployment" >}}
+<br>{{< button text="Next step: Initialize a Radius environment" page="webapp-initialize-environment" newline="false">}} {{< button text=" Previous step: Tutorial Pre-requisites" page="tutorial">}}

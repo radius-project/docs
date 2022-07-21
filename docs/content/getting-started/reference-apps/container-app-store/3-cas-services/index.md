@@ -5,6 +5,8 @@ linkTitle: "Services"
 slug: "services"
 description: "Learn how to model the Container App Store Microservice services"
 weight: 300
+toc_hide: true
+hide_summary: true
 ---
 
 ## Building the services
@@ -62,7 +64,7 @@ The Container App Store services are modeled as Radius [container resources]({{<
 
 {{< /tabs >}}
 
-Note the [`dapr.io/Sidecar` trait]({{< ref dapr-trait >}}) to add Dapr to each service.
+Note the [`dapr.io/Sidecar` extension]({{< ref dapr-extension >}}) to add Dapr to each service.
 
 ## HTTP Route + Gateway
 

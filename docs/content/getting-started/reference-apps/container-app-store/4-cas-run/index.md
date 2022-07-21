@@ -5,6 +5,8 @@ linkTitle: "Run app"
 slug: "run"
 description: "Learn how to run the Container App Store Microservice application locally in a Radius dev environment"
 weight: 400
+toc_hide: true
+hide_summary: true
 ---
 
 ## Initialize environment
