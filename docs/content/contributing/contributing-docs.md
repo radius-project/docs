@@ -461,6 +461,16 @@ You can also reference pages in your button as well:
 
 {{< button text="My Button" page="contributing" newtab="true" >}}
 
+#### Link to a GitHub file/directory
+
+You can link to a GitHub repo and path with the `githubRepo` and `githubPath` parameters:
+
+```
+{{</* button text="My Button" githubRepo="samples" githubPath="reference-apps" */>}}
+```
+
+{{< button text="My Button" githubRepo="samples" githubPath="reference-apps" >}}
+
 #### Button colors
 
 You can customize the colors using the Bootstrap colors:

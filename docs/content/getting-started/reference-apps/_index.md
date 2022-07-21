@@ -15,4 +15,11 @@ no_list: true
   </a>
 </div>
 {{% /card %}}
+{{% card header="[Container Apps Store Microservice](./container-app-store)" footer="Learn how to model and deploy a multiple microservice application with Project Radius" %}}
+<div class="text-center">
+  <a href="./container-app-store">
+    <img src="./container-app-store/container-app-store-radius.png" alt="Container Apps Store Microservice logo">
+  </a>
+</div>
+{{% /card %}}
 {{< /cardpane >}}
