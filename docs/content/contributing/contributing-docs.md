@@ -490,8 +490,8 @@ By default, buttons are padded with new lines below the button. To remove these 
 {{</* button text="Next" link="https://example.com" */>}}
 ```
 
-{{</* button text="Previous" link="https://example.com" newline="false" */>}}
-{{</* button text="Next" link="https://example.com" */>}}
+{{< button text="Previous" link="https://example.com" newline="false" >}}
+{{< button text="Next" link="https://example.com" >}}
 
 ### References
 
