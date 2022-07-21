@@ -6,7 +6,7 @@ description: "Learn about adding your Radius apps to your deployment pipelines"
 weight: 500
 ---
 
-It's easy to get Project Radius added to your GitHub Actions deployment pipelines. By leveraging the `rad` CLI, you can keep your checked-in app definitions in sync with your deployed instances of your app.
+It's easy to get Project Radius added to your GitHub Actions deployment pipelines. By leveraging the `rad` CLI, you can keep your checked-in app definitions in sync with deployed instances of your app.
 
 ## Prerequisites
 
@@ -56,7 +56,7 @@ Next, you will create the environment that you will be deploying your applicatio
 
     Specify the Kubernetes namepace you wish to use for application deployments.
 
-    If you wish to deploy Azure resources, select the option to configure the Azure cloud provider, providing the values output from the above command.
+    If you wish to deploy Azure resources, select the option to configure the Azure cloud provider, providing the values obtained in Step 1.
 
 ## Step 3: Create a workflow file
 
