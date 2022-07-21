@@ -1,6 +1,11 @@
+import radius as radius
+
+param location string = resourceGroup().location
+param environment string
+
 resource account 'Microsoft.DocumentDB/databaseAccounts@2020-04-01' = {
   name: 'account-${guid(resourceGroup().name)}'
-  location: resourceGroup().location
+  location: location
   kind: 'MongoDB'
   //PROPERTIES
   properties: {
@@ -9,7 +14,7 @@ resource account 'Microsoft.DocumentDB/databaseAccounts@2020-04-01' = {
     }
     locations: [
       {
-        locationName: resourceGroup().location
+        locationName: location
         failoverPriority: 0
         isZoneRedundant: false
       }
@@ -33,14 +38,20 @@ resource account 'Microsoft.DocumentDB/databaseAccounts@2020-04-01' = {
   }
 }
 
-resource app 'radius.dev/Application@v1alpha3' = {
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
-
-  resource db 'mongo.com.MongoDatabase' = {
-    name: 'db'
-    properties: {
-      resource: account::mongodb.id
-    }
+  location: location
+  properties: {
+    environment: environment
   }
+}
 
+resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
+  name: 'db'
+  location: location
+  properties: {
+    environment: environment
+    application: app.id
+    resource: account::mongodb.id
+  }
 }

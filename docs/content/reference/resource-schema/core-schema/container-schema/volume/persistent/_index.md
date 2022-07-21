@@ -4,6 +4,8 @@ title: "Persistent volumes"
 linkTitle: "Persistent"
 description: "Learn about Radius persistent volumes"
 weight: 201
+toc_hide: true
+hide_summary: true
 ---
 
 Persistent volumes have lifecycles that are separate from the container. Containers "attach" to another resource which contains the persistent volume.
@@ -21,4 +23,3 @@ A persistent volume can be mounted to a container by specifying the following `v
 | rbac | n | The role-based access control level for the file share. Allowed values are `'read'` and `'write'`. | `'read'`
 
 ### Supported resources
-

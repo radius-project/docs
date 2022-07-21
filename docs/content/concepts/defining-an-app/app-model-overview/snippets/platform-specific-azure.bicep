@@ -1,20 +1,33 @@
-resource app 'radius.dev/Application@v1alpha3' = {
-  name: 'text-translation-app'
+import radius as radius
 
-  resource store 'Container' = {
-    name: 'translation-service'
-    properties: {
-      container: {
-        image: 'registry/container:tag'
-      }
-      connections: {
-        translationresource: {
-          kind:'azure'
-          source: cognitiveServicesAccount.id
+param location string = resourceGroup().location
+param environment string
+
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+  name: 'text-translation-app'
+  location: location
+  properties: {
+    environment: environment
+  }
+}
+
+resource store 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'translation-service'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'registry/container:tag'
+    }
+    connections: {
+      translationresource: {
+        iam: {
+          kind: 'azure'
           roles: [
             'Cognitive Services User'
           ]
         }
+        source: cognitiveServicesAccount.id
       }
     }
   }
@@ -22,7 +35,7 @@ resource app 'radius.dev/Application@v1alpha3' = {
 
 resource cognitiveServicesAccount 'Microsoft.CognitiveServices/accounts@2017-04-18' = {
   name: 'TextTranslationAccount-${guid(resourceGroup().name)}'
-  location: resourceGroup().location
+  location: location
   kind: 'TextTranslation'
   sku: {
     name: 'F0'
