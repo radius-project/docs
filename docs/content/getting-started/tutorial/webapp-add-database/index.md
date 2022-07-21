@@ -80,11 +80,7 @@ Make sure your Bicep file matches the following:
 
    If your page matches, then it means that the container is able to communicate with the database. Just like before, you can test the features of the todo app. Add a task or two. Now your data is being stored in an actual database.
 
-## Cleanup
-
-{{% alert title="Delete application" color="warning" %}} If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) {{% /alert %}}
-
 ## Handoff
 This step closely relates to how the enterprises do hand-offs between different personas involved in the deployment. As a developer you have tested the application with a mongo container and would like to handoff the deployment to the infra-admin for deployments to other environments. The infra-admin can now set up a Radius environment with Azure cloud provider configured and can use th same app bicep template to provision an Azure resource via the connector. This ensures that you are able to port your application to different environments with minimal rewrites.
 
-<br> {{< button text="Next step: Add a database to the app" page="webapp-swap-connector-resource" >}} {{< button text="Previous step: Author app definition" page="webapp-initial-deployment" >}}
+<br> {{<button text="Next step: Add a database to the app" page="webapp-swap-connector-resource" newline="false">}} {{<button text="Previous step: Author app definition" page="webapp-initial-deployment">}}
