@@ -4,9 +4,12 @@
 {{ $text := .Get "text" }}
 {{ $newtab := .Get "newtab" | default "false" }}
 {{ $size := .Get "size" }}
+{{ $newline := .GET "newline" | default "true" }}
 
 {{- if $page -}}{{- $link = ref . $page -}}{{- end -}}
 
 <a class="btn {{ $size }} btn-{{ $color }}" href="{{ $link }}" role="button" {{- if eq $newtab "true" -}}target="_blank"{{- end -}}>{{ $text }}</a>
+{{- if eq $newline "true" -}}
 <br />
 <br />
+{{- end -}}
