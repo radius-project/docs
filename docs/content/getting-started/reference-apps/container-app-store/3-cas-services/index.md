@@ -5,6 +5,8 @@ linkTitle: "Services"
 slug: "services"
 description: "Learn how to model the Container App Store Microservice services"
 weight: 300
+toc_hide: true
+hide_summary: true
 ---
 
 ## Building the services

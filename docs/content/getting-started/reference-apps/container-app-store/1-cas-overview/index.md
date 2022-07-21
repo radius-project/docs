@@ -5,6 +5,8 @@ linkTitle: "Overview"
 slug: "overview"
 description: "Learn about the Container App Store Microservice sample application"
 weight: 100
+toc_hide: true
+hide_summary: true
 ---
 
 ## Background
