@@ -61,7 +61,7 @@ def parse_file(path: str):
     return data
 
 def index_payload(payload):
-    res = index.save_objects(payload)
+    res = index.replace_all_objects(payload)
     res.wait()
 
 
