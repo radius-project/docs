@@ -2,7 +2,7 @@
 type: docs
 title: "Tutorial for Project Radius"
 linkTitle: "Tutorial"
-description: "Hit the ground running with our Radius tutorial, complete with code samples aimed to get you started quickly with Radius"
+description: "Walk through an in-depth example to learn more about how to work with Radius concepts"
 weight: 100
 no_list: true
 ---

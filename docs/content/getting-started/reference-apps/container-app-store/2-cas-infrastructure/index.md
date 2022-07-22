@@ -5,6 +5,8 @@ linkTitle: "Infrastructure"
 slug: "infrastructure"
 description: "Learn how to model the Container App Store Microservice infrastructure in Bicep"
 weight: 200
+toc_hide: true
+hide_summary: true
 ---
 
 In this section you will be defining the Container Apps Store application and infrastructure that compose it.

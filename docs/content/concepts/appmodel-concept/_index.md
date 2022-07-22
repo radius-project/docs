@@ -98,6 +98,6 @@ Adding connections to the above IaC file, it becomes:
 
 ## Next step
 
-Now that you have an understanding of the Radius app model, learn more about how Radius is architected:
+Now that you have an understanding of the Radius app model, learn more about Radius connectors:
 
-{{< button text="Project Radius architecture" page="architecture" size="btn-lg" color="success" >}}
+{{< button text="Connectors" page="connectors-concept" size="btn-lg" color="success" >}}
