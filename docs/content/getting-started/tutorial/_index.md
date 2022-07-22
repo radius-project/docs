@@ -2,7 +2,7 @@
 type: docs
 title: "Tutorial for Project Radius"
 linkTitle: "Tutorial"
-description: "Hit the ground running with our Radius tutorial, complete with code samples aimed to get you started quickly with Radius"
+description: "Walk through an in-depth example to learn more about how to work with Radius concepts"
 weight: 100
 no_list: true
 ---
@@ -36,9 +36,5 @@ This tutorial contains the following sections:
 - [Install Visual Studio Code](https://code.visualstudio.com/) (recommended)
   - The [Radius VSCode extension]({{< ref "getting-started#setup-vscode" >}}) provides syntax highlighting, completion, and linting.
   - You can also complete this tutorial with any basic text editor.
-- [Azure cloud provider]({{<ref providers>}}) (optional)
- - [Azure subscription](https://azure.com)
- - [az CLI](https://aka.ms/azcli)
- - [Azure service principal](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) with the [proper permissions](https://aka.ms/azadsp-more)
 
 <br>{{< button text="Next: App overview" page="webapp-overview" >}}
