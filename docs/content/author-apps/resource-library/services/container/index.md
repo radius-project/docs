@@ -21,13 +21,7 @@ See the [Bicep authoring guide]({{< ref bicep >}}) for more information.
 
 ## Platform resources
 
-Depending on the target environment and configuration, a container can be run on a variety of container runtimes:
-
-| Platform | Container runtime |
-|----------|-------------------|
-| [Local dev]({{< ref dev-environments >}}) | k3d Kubernetes cluster |
-| [Kubernetes]({{< ref kubernetes-environments >}}) | Local Kubernetes cluster |
-| [Microsoft Azure]({{< ref azure-environments >}}) | AKS cluster |
+Depending on the target environment and configuration, a container can be run on a variety of platforms leveraging Kubernetes as the container runtime. 
 
 ## More information
 

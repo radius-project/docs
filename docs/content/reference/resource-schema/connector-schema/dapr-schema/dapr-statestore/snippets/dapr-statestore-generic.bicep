@@ -1,20 +1,32 @@
-resource app 'radius.dev/Application@v1alpha3' = {
-  name: 'dapr-statestore-generic'
+import radius as radius
 
-  //SAMPLE
-  resource statestore 'dapr.io.StateStore@v1alpha3' = {
-    name: 'statestore'
-    properties: {
-      kind: 'generic'
-      type: 'state.couchbase'
-      metadata: {
-        couchbaseURL: '***'
-        username: 'admin'
-        password: '***'
-        bucketName: 'dapr'
-      }
-      version: 'v1'
-    }
+param location string = resourceGroup().location
+param environment string
+
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+  name: 'dapr-statestore-generic'
+  location: location
+  properties: {
+    environment: environment
   }
-  //SAMPLE
 }
+//SAMPLE
+resource statestore 'Applications.Connector/daprStateStores@2022-03-15-privatepreview' = {
+  name: 'statestore'
+  location: location
+  properties: {
+    environment: environment
+    application: app.id
+    kind: 'generic'
+    type: 'state.couchbase'
+    metadata: {
+      couchbaseURL: '***'
+      username: 'admin'
+      password: '***'
+      bucketName: 'dapr'
+    }
+    version: 'v1'
+  }
+}
+//SAMPLE
+

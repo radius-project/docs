@@ -1,11 +1,8 @@
 #! /bin/bash
-BICEP_EXECUTABLE="rad-bicep"
 if [[ ! -z $BICEP_PATH ]]
 then
-    BICEP_EXECUTABLE="$BICEP_PATH/$BICEP_EXECUTABLE"
+    BICEP_EXECUTABLE="$BICEP_PATH/rad-bicep"
 fi
-
-echo "Building with rad-bicep at ${BICEP_EXECUTABLE}"
 
 FILES=$(find . -type f -name "*.bicep")
 FAILURES=()
@@ -26,7 +23,7 @@ do
     STDERR=$($BICEP_EXECUTABLE build $F --stdout 2>&1 1>/dev/null)
     EXITCODE=$?
     exec 3>&-
-
+    
     if [[ ! $EXITCODE -eq 0 || ! -z $STDERR ]]
     then
         echo $STDERR

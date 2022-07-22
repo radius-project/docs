@@ -1,3 +1,8 @@
+import radius as radius
+
+param location string = resourceGroup().location
+param environment string
+
 //PARAMETERS
 param sqldb string
 @secure()
@@ -6,36 +11,43 @@ param username string
 param password string
 //PARAMETERS
 
-resource app 'radius.dev/Application@v1alpha3' = {
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'cosmos-container'
-  
-  //DATABASE
-  resource db 'microsoft.com.SQLDatabase' = {
-    name: 'db'
-    properties: {
-      resource: sqldb
-    }
+  location: location
+  properties: {
+    environment: environment
   }
-  //DATABASE
-
-  //CONTAINER
-  resource webapp 'Container' = {
-    name: 'todoapp'
-    properties: {
-      connections: {
-        tododb: {
-          kind: 'microsoft.com/SQL'
-          source: db.id
-        }
-      }
-      container: {
-        image: 'rynowak/node-todo:latest'
-        env: {
-          DBCONNECTION: 'Data Source=tcp:${db.properties.server},1433;Initial Catalog=${db.properties.database};User Id=${username}@${db.properties.server};Password=${password};Encrypt=true'
-        }
-      }
-    }
-  }
-  //CONTAINER
-
 }
+
+//DATABASE
+resource db 'Applications.Connector/sqlDatabases@2022-03-15-privatepreview' = {
+  name: 'db'
+  location: location
+  properties: {
+    environment: environment
+    application: app.id
+    resource: sqldb
+  }
+}
+//DATABASE
+
+//CONTAINER
+resource webapp 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'todoapp'
+  location: location
+  properties: {
+    application: app.id
+    connections: {
+      tododb: {
+        source: db.id
+      }
+    }
+    container: {
+      image: 'rynowak/node-todo:latest'
+      env: {
+        DBCONNECTION: 'Data Source=tcp:${db.properties.server},1433;Initial Catalog=${db.properties.database};User Id=${username}@${db.properties.server};Password=${password};Encrypt=true'
+      }
+    }
+  }
+}
+//CONTAINER

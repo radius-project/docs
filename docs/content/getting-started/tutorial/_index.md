@@ -2,72 +2,39 @@
 type: docs
 title: "Tutorial for Project Radius"
 linkTitle: "Tutorial"
-description: "Hit the ground running with our Radius tutorial, complete with code samples aimed to get you started quickly with Radius"
+description: "Walk through an in-depth example to learn more about how to work with Radius concepts"
 weight: 100
 no_list: true
 ---
 
 ## Overview
 
-This tutorial will teach you how to deploy a website as a Radius application from first principles. You will learn:  
+This tutorial will teach you how to deploy a website as a Radius application from first principles. You will take away the following 
+- Enough knowledge to map your own application in Radius 
+- Achieve portability via connectors between your local and cloud environments 
+- Understand the separation of concerns for the different personas involved in a deployment
 
-- The concepts of the Radius application model
-- The basic syntax of the Bicep language
+## Tutorial steps
 
-No prior knowledge of Radius or Bicep is needed.
+This tutorial contains the following sections:
 
-### Tutorial steps
-
-In this tutorial, you will:
-
-1. Review and understand the Radius website application
-1. Deploy the website frontend in a container
-1. Connect a MongoDB resource to your website application
+- App overview - Overview of the website tutorial application
+- Author app definition - Define the application definition with container, gateway and http routes
+- Add a database connector - Connect a MongoDB to the website tutorial application using a connector and deploy to a Radius environment
+- Swap a connector resource - Swap a MongoDB container for an Azure CosmosDB instance to back the connector and deploy the app to a Radius environment with Azure cloud provider configured
 
 ## Prerequisites
 
 - [Install Radius CLI]({{< ref "getting-started#install-radius-cli" >}})
-- Install CLI for target platform:
-  - [k3d CLI](https://github.com/k3d-io/k3d/releases) for local environments
-  - [az CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) for Azure environments
-  - [kubectl CLI](https://kubernetes.io/docs/tasks/tools/) for Kubernetes environments
+- Set up a Kubernetes Cluster. There are many different options here, including:
+  - [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster)
+    - Note that [AKS-managed AAD](https://docs.microsoft.com/en-us/azure/aks/managed-aad) is not supported currently
+  - [Kubernetes in Docker Desktop](https://www.docker.com/blog/docker-windows-desktop-now-kubernetes/), however it does take up quite a bit of memory on your machine, so use with caution.
+  - [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
+  - [K3s](https://k3s.io), a lightweight single-binary certified Kubernetes distribution from Rancher.
+  - Another Kubernetes provider of your choice.
 - [Install Visual Studio Code](https://code.visualstudio.com/) (recommended)
   - The [Radius VSCode extension]({{< ref "getting-started#setup-vscode" >}}) provides syntax highlighting, completion, and linting.
   - You can also complete this tutorial with any basic text editor.
 
-### Initialize a Radius environment
-
-This tutorial can be completed on any platform Radius supports. To get started, create a new environment:
-
-{{< tabs Local Kubernetes Azure >}}
-
-{{% codetab %}}
-To create a local dev environment on top of Docker, run:
-
-```sh
-rad env init dev
-```
-
-{{% /codetab %}}
-
-{{% codetab %}}
-A Kubernetes envionment can run in any Kubernetes cluster. Make sure you have set the correct default kubectl context, and then run:
-
-```sh
-rad env init kubernetes
-```
-
-{{% /codetab %}}
-
-{{% codetab %}}
-To deploy an Azure environment to your Azure subscription, run:
-
-```sh
-rad env init azure -i
-```
-
-{{% /codetab %}}
-
-{{< /tabs >}}
-
-<br>{{< button text="Next: application overview" page="webapp-overview.md" >}}
+<br>{{< button text="Next: App overview" page="webapp-overview" >}}

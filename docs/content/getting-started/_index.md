@@ -93,27 +93,20 @@ PowerShell for Cloud Shell is currently not supported.
 
 Verify the rad CLI is installed correctly by running `rad`. 
 
+## Try out Radius on GitHub Codespaces
+
+*Visit the [GitHub docs]({{< ref github >}}) if you need access to the organization*
+
+Do you prefer to test out Radius in a fast and easy to use virtual environment? Check out the [official Radius samples repo](https://github.com/project-radius/samples) and test out the sample applications on a pre-configured [GitHub Codespaces](https://github.com/features/codespaces) container.
+
+If in case you'd prefer to run a [dev container](https://code.visualstudio.com/docs/remote/containers) on your local machine, the samples repo offer a .devcontainer folder that will allow you to configure the environment anywhere you want as well as automatically set up a [Radius local environment](#create-a-radius-environment).
+
+After you launching your codespace or dev container, navigate into your desired sample application directory and run `rad app deploy` to see Radius in action.
+
 ## Create a Radius environment
 
 A Radius environment is where you will deploy your applications. Easily deploy a new environment with the [`rad env init`]({{< ref rad_env_init >}}) command:
 
-{{< tabs "Local" "Kubernetes" "Microsoft Azure" >}}
-
-{{% codetab %}}
-A local environment runs on your local machine, and makes it easy to run and deploy applications quickly.
-
-### Pre-requisites
-
-- [Docker Desktop](https://www.docker.com/products/docker-desktop)
-- [k3d](https://k3d.io/#installation)
-
-```bash
-rad env init dev -i
-```
-
-{{% /codetab %}}
-
-{{% codetab %}}
 ### Pre-requisites
 
 - Kubernetes cluster configured as the default `kubectl` context (verify with `kubectl config current-context`)
@@ -122,32 +115,6 @@ rad env init dev -i
 ```sh
 rad env init kubernetes
 ```
-{{% /codetab %}}
-{{% codetab %}}
-### Pre-requisites
-
-- [Az CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) (version 2.25.0 or later)
-
-_Note that you are responsible for any costs incurred in your subscription._
-
-### Steps
-
-1. Use the `az` CLI to authenticate with Azure your Azure account:
-
-   ```sh
-   az login
-   ```
-
-1. Create a new Azure environment:
-
-   ```sh
-   rad env init azure -i
-   ```
-
-   _This will prompt you for several inputs and then create assets in your subscription (~5-10 mins)._
-{{% /codetab %}}
-
-{{< /tabs >}}
 
 ## Install VS Code extension (optional)
 
@@ -162,12 +129,12 @@ While Project Radius is in preview two separate extensions are required, one for
    {{< tabs Links Terminal >}}
 
    {{% codetab %}}
-   {{< button link="https://radiuspublic.blob.core.windows.net/tools/vscode/stable/rad-vscode-bicep.vsix" text="Download Bicep extension" >}}
+   {{< button link="https://get.radapp.dev/tools/vscode-extensibility/stable/rad-vscode-bicep.vsix" text="Download Bicep extension" >}}
 
    {{< button link="https://radiuspublic.blob.core.windows.net/tools/vscode/stable/rad-vscode.vsix" text="Download Radius extension" >}}
 
    {{< edge >}}
-   {{< button link="https://radiuspublic.blob.core.windows.net/tools/vscode/edge/rad-vscode-bicep.vsix" text="Download Bicep extension (edge)" >}}
+   {{< button link="https://radiuspublic.blob.core.windows.net/tools/vscode-extensibility/edge/rad-vscode-bicep.vsix" text="Download Bicep extension (edge)" >}}
 
    {{< button link="https://radiuspublic.blob.core.windows.net/tools/vscode/edge/rad-vscode.vsix" text="Download Radius extension (edge)" >}}
    {{< /edge >}}
@@ -184,7 +151,7 @@ While Project Radius is in preview two separate extensions are required, one for
 
    {{< /tabs >}}
 
-1. Install the `.vsix` files:
+2. Install the `.vsix` files:
 
    {{< tabs UI Terminal >}}
 
@@ -209,11 +176,18 @@ While Project Radius is in preview two separate extensions are required, one for
 
    {{< /tabs >}}
 
-1. Disable the official Bicep extension if you have it installed. Do not install it if prompted, our custom extension needs to be responsible for handling `.bicep` files and you cannot have both extensions enabled at once.
+3. Disable the official Bicep extension if you have it installed. Do not install it if prompted, our custom extension needs to be responsible for handling `.bicep` files and you cannot have both extensions enabled at once.
 
-1. If running on Windows Subsystem for Linux (WSL), make sure to install the extension in WSL as well:
+4. If running on Windows Subsystem for Linux (WSL), make sure to install the extension in WSL as well:
 
    <img src="./wsl-extension.png" alt="Screenshot of installing a vsix extension in WSL" width=400>
 
-<!-- TODO: add table of samples and tutorials 
-(maybe a table like on this page https://docs.dapr.io/getting-started/quickstarts/ ? ) -->
+
+## Learn Radius
+
+| Guides | Description  |
+| --- | ----------- |
+| [Tutorial]({{< ref tutorial >}}) | Walk through an in-depth example to learn more about how to work with Radius concepts |
+| [Quickstarts]({{< ref quickstarts >}}) | Learn about Project Radius topics via quickstart guides, complete with code samples |
+| [Reference Applications]({{< ref reference-apps >}}) | See how full applications are modeled in Project Radius |
+| [Supported Languages]({{< ref supported-languages >}}) | Learn how to model apps using various IaC tools |

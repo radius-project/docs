@@ -1,13 +1,58 @@
-resource app 'radius.dev/Application@v1alpha3' = {
-  name: 'todoapp'
-}
+import radius as radius
 
-//STARTER
-module dbStarter 'br:radius.azurecr.io/starters/mongo:latest' = {
-  name: 'db-starter'
-  params: {
-    dbName: 'db'
-    radiusApplication: app
+param environment string
+param location string = resourceGroup().location
+param username string = 'admin'
+param password string = newGuid()
+
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+  name: 'todoapp'
+  location: location
+  properties: {
+    environment: environment
   }
 }
-//STARTER
+
+resource mongoContainer 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'starters-mongo-container-db'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'mongo:4.2'
+      env: {
+        MONGO_INITDB_ROOT_USERNAME: username
+        MONGO_INITDB_ROOT_PASSWORD: password
+      }
+      ports: {
+        mongo: {
+          containerPort: 27017
+          provides: mongoRoute.id
+        }
+      }
+    }
+  }
+}
+
+resource mongoRoute 'Applications.Core/httproutes@2022-03-15-privatepreview' = {
+  name: 'starters-mongo-route-db'
+  location: location
+  properties: {
+    application: app.id
+    port: 27017
+  }
+}
+
+resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
+  name: 'db'
+  location: location
+  properties: {
+    environment: environment
+    application: app.id
+    secrets: {
+      connectionString: 'mongodb://${username}:${password}@${mongoRoute.properties.hostname}:${mongoRoute.properties.port}'
+      username: username
+      password: password
+    }
+  }
+}

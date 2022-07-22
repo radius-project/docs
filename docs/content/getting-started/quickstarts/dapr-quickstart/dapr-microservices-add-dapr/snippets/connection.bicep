@@ -1,66 +1,92 @@
-resource app 'radius.dev/Application@v1alpha3' = {
-  name: 'dapr-tutorial'
+import radius as radius
 
-  resource backend 'Container' = {
-    name: 'backend'
-    properties: {
-      //CONTAINER
-      container: {
-        image: 'radius.azurecr.io/daprtutorial-backend'
-        ports: {
-          orders: {
-            containerPort: 3000
-          }
+param location string = resourceGroup().location
+param environment string
+
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+  name: 'dapr-tutorial'
+  location: location
+  properties: {
+    environment: environment
+  }
+}
+
+//BACKEND
+resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'backend'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'radius.azurecr.io/daprtutorial-backend'
+      ports: {
+        orders: {
+          containerPort: 3000
         }
       }
-      //CONTAINER
-      connections: {
-        statestore: {
-          kind: 'dapr.io/StateStore'
-          source: ordersStateStore.id
-        }
-      }
-      //TRAITS
-      traits: [
-        {
-          kind: 'dapr.io/Sidecar@v1alpha1'
-          appId: 'backend'
-          appPort: 3000
-          provides: daprBackend.id
-        }
-      ]
-      //TRAITS
     }
-    // Temporary requirement - will be removed in a future release
-    dependsOn: [
-      stateStoreStarter
+    extensions: [
+      {
+        kind: 'daprSidecar'
+        appId: 'backend'
+        appPort: 3000
+        provides: daprBackend.id
+      }
     ]
   }
+}
+//BACKEND
 
-  //ROUTE
-  resource daprBackend 'dapr.io.InvokeHttpRoute' = {
-    name: 'dapr-backend'
-    properties: {
-      appId: 'backend'
+//ROUTE
+resource daprBackend 'Applications.Connector/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
+  name: 'dapr-backend'
+  location: location
+  properties: {
+    environment: environment
+    application: app.id
+    appId: 'backend'
+  }
+}
+//ROUTE
+
+resource redisContainer 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'redis-container'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'redis:6.2'
+      ports: {
+        redis: {
+          containerPort: 6379
+          provides: redisRoute.id
+        }
+      }
     }
   }
-  //ROUTE
-
-  //CONNECTOR
-  // Temporary requirement - will be removed in a future release
-  resource ordersStateStore 'dapr.io.StateStore' existing = {
-    name: 'orders'
-  }
-  //CONNECTOR
-
 }
 
-//STARTER
-module stateStoreStarter 'br:radius.azurecr.io/starters/dapr-statestore:latest' = {
-  name: 'orders-statestore-starter'
-  params: {
-    radiusApplication: app
-    stateStoreName: 'orders'
+resource redisRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
+  name: 'redis-route'
+  location: location
+  properties: {
+    application: app.id
+    port: 6379
   }
 }
-//STARTER
+
+resource stateStore 'Applications.Connector/daprStateStores@2022-03-15-privatepreview' = {
+  name: 'orders'
+  location: location
+  properties: {
+    environment: environment
+    application: app.id
+    kind: 'generic'
+    type: 'state.redis'
+    version: 'v1'
+    metadata: {
+      redisHost: '${redisRoute.properties.hostname}:${redisRoute.properties.port}'
+      redisPassword: ''
+    }
+  }
+}

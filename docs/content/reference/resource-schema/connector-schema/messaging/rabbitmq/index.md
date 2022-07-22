@@ -28,7 +28,7 @@ Secrets are used when defining a RabbitMQ connector with a container or external
 
 | Property | Description | Example |
 |----------|-------------|---------|
-| connectionString | The connection string to the Rabbit MQ Message Queue. Recommended to use parameters and variables to craft. | `'amqp://${username}:${password}@${rmqContainer.properties.host}:${rmqContainer.properties.port}'`
+| connectionString | The connection string to the Rabbit MQ Message Queue. Recommended to use parameters and variables to craft. | `'amqp://${username}:${password}@${rmqContainer.properties.hostname}:${rmqContainer.properties.port}'`
 
 ### Functions
 
@@ -48,28 +48,3 @@ Connections to the RabbitMQ connector result in the following environment variab
 |----------|-------------|
 | `CONNECTION_<CONNECTION-NAME>-QUEUE` | The queue name. |
 | `CONNECTION_<CONNECTION-NAME>-CONNECTIONSTRING` | The connection string of the RabbitMQ. |
-
-## Starter
-
-You can get up and running quickly with a RabbitMQ Message Queue by using a [starter]({{< ref starter-templates >}}).
-
-{{% alert title="Known issue: dependsOn" color="warning" %}}
-Any service that consumes the `existing` resource will need to manually add a `dependsOn` reference to the starter module. This requirement will be removed in an upcoming release. See the [webapp tutorial]({{< ref webapp-add-database >}}) for an example.
-{{% /alert %}}
-
-## Container
-
-The module `'br:radius.azurecr.io/starters/rabbitmq:latest'` deploys RabbitMQ container and outputs a `rabbitmq.com.MessageQueue` resource.
-
-To use this template, reference it in Bicep as:
-
-{{< rad file="snippets/starter.bicep" embed=true >}}
-
-### Parameters
-
-| Parameter | Description | Required | Default |
-|-----------|-------------|:--------:|---------|
-| radiusApplication | The application resource to use as the parent of the RabbitMQ Broker | Yes | - |
-| queueName | The name of the RabbitMQ queue to create | Yes | - |
-| username | The username for your RabbitMQ Broker | No | `'guest'` |
-| password | The password for your RabbitMQ Broker | No | `newGuid()` |
