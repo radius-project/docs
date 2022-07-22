@@ -11,14 +11,14 @@ Radius enables you to handle multiple Radius environment configuration using wor
 
 ## Workspaces
 
-A Workspace is a client side functionality that enables you to save and manage your environment configurations locally. Workspace enables you to conveniently switch between multiple environments. 
+A Workspace is a client-side functionality that enables you to save and manage your environment configurations locally. Workspaces enable you to conveniently switch between multiple environments.
 
 <img src="workspaces.png" alt="Diagram of Workspace mapping to environments. There can be multiple workspaces and each workspace maps to an environment" width="500" />
 
 A workspace contains reference to the following information
 
 - Connection to your kubernetes cluster
-- Scope for radius resources 
+- Scope for radius resources. Radius resources will be deployed into this resource group by default.
 - Environment id once you have an environment initialized
 - Azure cloud provider configuration if your environment has Azure cloud provider
 
@@ -39,17 +39,17 @@ workspaces:
       scope: /planes/radius/local/resourceGroups/myworkspace
 ```
 Where 
-- context denotes the kubernetes cluster context
-- kind denotes that the workspace is for kubernetes environments
-- scope denotes the reference to radius planes
+- `context` denotes the kubernetes cluster context
+- `kind` denotes that the workspace is for kubernetes environments
+- `scope` denotes the reference to radius planes
 
 ## Using workspaces to switch between environments
 
-When you have multiple environments initialized for different purposes like staging or production, Workspace enables you to switch between different environment configurations easily. You can create separate workspace for each of these environments and switch between them as you are working through your deployment changes in each of the environments
+When you have multiple environments initialized for different purposes like staging or production, the workspace concepts enables you to switch between different environment configurations easily. You can create separate workspaces for each of these environments and switch between them as you are working through your deployment changes in each of the environments.
 
 Lets take an example where you need to create two different environments and switch between them during deployments 
 
-1. Install Radius control plane on kubernetes cluster
+1. Install the Radius control plane on kubernetes cluster
     ```sh
     rad install kubernetes
     ```
@@ -66,7 +66,7 @@ Lets take an example where you need to create two different environments and swi
     ```
     After creating an environment, Radius writes the environment configuration details to your local configuration file `/.rad/config.yaml`
 
-1. Verify config.yaml for your workspace configuration. It should look like below 
+1. Verify that your config.yaml contains your workspace configuration. (e.g. via `rad workspace show`). It should look like below
 
     ```bash
     workspaces:
@@ -81,7 +81,7 @@ Lets take an example where you need to create two different environments and swi
           scope: /planes/radius/local/resourceGroups/radius-workspace-staging
     ```
 
-1. Lets create another workspace with the name "radius-workspace-production" using [`rad workspace init kubernetes`]({{< ref rad_workspace_init_kubernetes >}}) command
+1. Create another workspace with the name "radius-workspace-production" using [`rad workspace init kubernetes`]({{< ref rad_workspace_init_kubernetes >}}) command
     ```sh 
     rad workspace init kubernetes -w radius-workspace-production
     ```
@@ -123,5 +123,3 @@ Lets take an example where you need to create two different environments and swi
     ```sh 
     rad workspace list
     ```
-
-Thus, you can switch between different environments to work through deployments and manage your environments
