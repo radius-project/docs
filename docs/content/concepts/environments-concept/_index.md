@@ -77,14 +77,14 @@ This command will:
 - Configure Cloud Providers
     - Walk users through configuring cloud providers to connect to public clouds 
 
-Each AKS or EKS cluster requires 1 Radius control plane, but it may contain multiple Radius environmnents if desired. 
+Each AKS or EKS cluster requires 1 Radius control plane, but it may contain multiple Radius environments if desired. 
 
 To verify that your environment initialized correctly, you should see it listed in the output of
 ```bash
 rad env list
 ```
 ### Upcoming developments
-We also have plans in our future releases to make environments experiences more robust. When creating an environment, users can either initalize an env based on a template or they may generate a default, empty environment.
+We also have plans in our future releases to make environments experiences more robust. When creating an environment, users can either initialize an env based on a template or they may generate a default, empty environment.
 
 1. Environments from templates - You can describe an environment's requirements and contents via one of the [supported IaC languages]({{< ref supported-languages >}}). 
 
