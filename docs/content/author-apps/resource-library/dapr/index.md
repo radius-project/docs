@@ -14,7 +14,7 @@ A Dapr sidecar allows your services to interact with Dapr building blocks. It is
 
 <img src="dapr-sidecar.png" style="width:600px" alt="Diagram of the Dapr sidecar" /><br />
 
-Easily add the Dapr sidecar to your [Containers]({{< ref container >}}) using a Dapr sidecar trait:
+Easily add the Dapr sidecar to your [Containers]({{< ref container >}}) using a Dapr sidecar extension:
 
 {{< tabs Bicep >}}
 
