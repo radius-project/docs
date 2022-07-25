@@ -15,29 +15,37 @@ For example, when a user specifies a MongoDB connector, that connector could bin
 
 <img src="connectors-example.png" alt="Diagram of example architecture using or Radius Conntector. Depicts a Radius Container connected to MongoDB Radius Connector, which can bind to an Azure CosmosDB, an AWS DynamoDB, or a Mongo Container. " width="700px" />
 
-## Underlying resource
+## Supported connectors
 
-In this example, a team wants to use a Mongodb Database on Azure (`underlyingdb`) to fulfill their app's Mongo storage requirement:
+Project Radius supports a large variety of connectors across databases, queues, caches, and other resource types.
+
+<img src="connector-types.png" alt="Diagram showing supported connector types, including MonogoDB, Redis, Dapr, and Microsoft SQL." width="700px" />
+
+See the [Connector docs]({{< ref connector-schema >}}) for more information.
+
+## Example
+
+In this example, a team wants to use a Mongo Database, and will be deploying to an environment running on Azure.
+
+### Underlying resource
+
+The CosmosDB resource, `underlyingdb`, will fulfill the app's Mongo storage requirement. This resource can be deployed by a central IT team, or by the development team.
 
 {{< rad file="snippets/corerp-connector-example.bicep" embed=true marker="//RESOURCE" >}}
 
-## Connector
+### Connector
 
-Then, in the app definition, a developer defines a Mongo connector (`dbconnector`) that references the storage resource (`underlyingdb`). 
+In the app definition, a developer defines a Mongo connector (`dbconnector`) that references the CosmosDB resource.
 
 {{< rad file="snippets/corerp-connector-example.bicep" embed=true marker="//CONNECTOR" >}}
 
 The developer can bind to that resource without any configuration or knowledge of the underlying resource.  
 
-## Container
+### Container
 
-Finally, the developer's container resource (`frontend`) connects to the Mongo connector (`dbconnector`) via the "connections" property:
+The developer's container resource, `frontend`, connects to the Mongo connector, `dbconnector`, via the "connections" property:
 
 {{< rad file="snippets/corerp-connector-example.bicep" embed=true marker="//CONTAINER" >}}
-
-## Connector categories
-
-For examples on using the various Radius connectors, see [Connector Schemas]({{< ref connector-schema >}}).
 
 ## Next step
 
