@@ -16,13 +16,13 @@ weight: 401
 |------|:--------:|-------------|---------|
 | name | y | The name of your Gateway. | `'gateway'`
 | location | y | The location of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `global`
-| [properties](#properties) | y | Properties of the container resource. | [See below](#properties)
+| [properties](#properties) | y | Properties of the resource. | [See below](#properties)
 
 ### Properties
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| application | y | The ID of the application resource this container belongs to. | `app.id`
+| application | y | The ID of the application resource this resource belongs to. | `app.id`
 | [hostname](#hostname) | n | The hostname information for this gateway. | [See below](#hostname)
 | [routes](#routes) | y | The routes attached to this gateway. | [See below](#routes)
 

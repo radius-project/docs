@@ -22,7 +22,7 @@ Containers are hosted by the Kubernetes as the container runtime today, regardle
 |------|:--------:|-------------|---------|
 | name | y | The name of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `frontend`
 | location | y | The location of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `global`
-| [properties](#properties) | y | Properties of the container resource. | [See below](#properties)
+| [properties](#properties) | y | Properties of the resource. | [See below](#properties)
 
 ### Properties
 

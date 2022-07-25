@@ -16,13 +16,13 @@ weight: 400
 |------|:--------:|-------------|---------|
 | name | y | The name of your HttpRoute. Used to provide status and visualize the resource. | `'web'`
 | location | y | The location of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `global`
-| [properties](#properties) | y | Properties of the container resource. | [See below](#properties)
+| [properties](#properties) | y | Properties of the resource. | [See below](#properties)
 
 ### Properties
 
 | Property | Description | Example |
 |----------|-------------|-------------|
-| application | y | The ID of the application resource this container belongs to. | `app.id`
+| application | y | The ID of the application resource this resource belongs to. | `app.id`
 | hostname | The internal hostname accepting traffic for the HTTP Route. Read only. | `example.com` |
 | port | The port number for the HTTP Route. Defaults to 80. Read only. | `80` |
 | scheme | The scheme used for traffic. Read only. | `http` |
