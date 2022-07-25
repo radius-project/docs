@@ -24,6 +24,38 @@ The Bicep deployment engine does not currently support loops in Bicep. Instead, 
 
 Refer to https://github.com/project-radius/deployment-engine/issues/172 for more information.
 
+## Environments
+
+### Only one environment can be configured per Kubernetes cluster
+
+Today, only one environment can be configured per Kubernetes cluster. A "Found existing Radius Kubernetes environment") error will be thrown when trying to create another environment.
+
+This will be addressed in a future release.
+
+## rad CLI
+
+### Application and resource names are lower-cased after deployment
+
+After deploying an application with application name `AppNAME` and container name `CONTAINERname`, casing information about the casing is lost, resulting in names to be lower-cased. The result is:
+  
+```bash
+rad application list
+RESOURCE           TYPE
+appname            applications.core/applications
+
+rad resource list -a smallAppName
+RESOURCE                 TYPE
+containername            applications.core/containers
+```
+
+This will be addressed in a future release.
+
+### Cannot use underscores in resource names
+
+Using an underscore in a resource name will result in an error.
+
+As a workaround do not use underscores in resource names. Additional validation will be added in a future release.
+
 ## Connectors
 
 ### Dapr resources have application name prefixed to component name
