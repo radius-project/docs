@@ -9,19 +9,17 @@ slug: environment
 
 ## Introduction
 
-Radius environments are a prepared landing zone for applications. They contain a prepared pool of compute, networking, and shared resources. Radius applications deployed to that environment "bind" to that infrastructure. 
+Radius environments are a prepared landing zone for applications. They contain a prepared pool of compute, networking, and shared resources. Radius applications deployed to that environment "bind" to that infrastructure.
 
 Environments provide a grouping structure for applications and the resources they share. For example, an org might choose to setup separate Radius environments for staging and production. When appropriate, multiple applications can be deployed into the same environment.
 
-Additionally, environments can be leveraged to realize organizational best practices. 
+Organizational best-practices such as cost-optimization, resource sharing, and logging can all be codified and enforced with a Radius environment.
 
-<img src="env-with-apps-example.png" alt="Diagram of multiple Radius environments deployed to Azure. One environment contains 1 app, the other environment contains multiple apps." width="500" />
+<img src="env-with-apps-example.png" alt="Diagram of multiple Radius environments deployed to Azure. One environment contains 1 app, the other environment contains multiple apps." width="350px" />
 
 ## Concerns that environments manage
 
 Today, in a DevOps model, every developer might need to understand every nuance of every resource they're using - which makes it nearly impossible to get apps up and running. With Project Radius, environment definitions can be pre-configured to take that mental load away from developers, letting them run faster but stay within guidelines.
-
-<img src="env-template-example.png" alt="Diagram of the contents of an environment" width="250px" /><br />
 
 {{< cardpane >}}
 {{< card header="**Compute**" >}}
@@ -64,37 +62,6 @@ For example, a workflow where developers build on templates created by administr
    - The connector automatically configures security best practices and injects connection information into the consuming container
 
 When the developer deploys their application, these org-level concerns are automatically wired up based on the environment. Developers don't have to think about credentials or how networking is configured - which enables devs to focus on their applications instead.
-
-## Creating an environment
-
-Users can initialize a Radius environment into any Kubernetes cluster. Radius currently supports Kubernetes as the container runtime. We plan to support additional container runtimes in the future.
-
-### Initializing an environment
-
-To initialize a Radius environment, use `rad env init kubernetes` via rad cli
-
-```bash
-rad env init kubernetes
-```
-
-This command will:
-
-- Install Radius control plane if not already installed
-    - Install Radius control plane services via a set of Helm charts 
-- Create an environment
-    - Create a namespace to hold the environment resource
-    - Create an environment resource
-    - Execute any environment installation templates (e.g. to install Dapr)
-- Configure Cloud Providers
-    - Walk users through configuring cloud providers to connect to public clouds
-
-Each AKS or EKS cluster requires 1 Radius control plane, but it may contain multiple Radius environmnents if desired. 
-
-To verify that your environment initialized correctly, you should see it listed in the output of
-
-```bash
-rad env list
-```
 
 ### Upcoming developments
 
