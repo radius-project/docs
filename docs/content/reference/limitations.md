@@ -24,6 +24,12 @@ The Bicep deployment engine does not currently support loops in Bicep. Instead, 
 
 Refer to https://github.com/project-radius/deployment-engine/issues/172 for more information.
 
+## Containers
+
+### Persistent volumes are not supported
+
+Persistent volumes, which provide the ability to mount an Azure Key Vault or an Azure File Share to a container, are not supported in the current version of Radius. This will be addressed in a future release.
+
 ## Environments
 
 ### Only one environment can be configured per Kubernetes cluster
@@ -80,3 +86,10 @@ results in a Dapr component named 'myapp-statestore'.
 
 In order to consume this Dapr resource from a container, either use the environment variable injected into the container (`CONNECTION_STATESTORE_NAME`), or manually craft an environment variable with `'${app.name}-${statestore.name}'`.
 
+## Connections
+
+### Direct connections to Azure resources with IAM roles are not supported
+
+Managed identity support for AKS clusters is not currently supported. This will be addressed in a future release.
+
+As a workaround, manually enable AKS pod identity and assign RBAC assignments to the target resources vis the Azure portal or via the az CLI. See the [Azure docs](https://docs.microsoft.com/azure/aks/use-azure-ad-pod-identity) for more information.
