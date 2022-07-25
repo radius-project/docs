@@ -13,17 +13,33 @@ Radius environments are a prepared landing zone for applications. They contain a
 
 Environments provide a grouping structure for applications and the resources they share. For example, an org might choose to setup separate Radius environments for staging and production. When appropriate, multiple applications can be deployed into the same environment.
 
-Organizational best-practices such as cost-optimization, resource sharing, and logging can all be codified and enforced with a Radius environment.
+
 
 <img src="env-with-apps-example.png" alt="Diagram of multiple Radius environments deployed to Azure. One environment contains 1 app, the other environment contains multiple apps." width="350px" />
 
 ## Concerns that environments manage
 
-Today, in a DevOps model, every developer might need to understand every nuance of every resource they're using - which makes it nearly impossible to get apps up and running. With Project Radius, environment definitions can be pre-configured to take that mental load away from developers, letting them run faster but stay within guidelines.
+### Separation of concerns
+
+With Radius environments, central operations and IT teams can define and share environments with development teams for them to deploy applications into. Ops teams focus on configuring the compute, dependencies, networking, and other infrastructure concerns, while developers focus on the business and application concerns. This allows each team to focus on what matters most to them, without needing to become experts in every aspect of the infraastructure and application.
+
+### Developer productivity
+
+Once an environment template is defined, developers can get up and running with a prepared devlopment, pre-production, or production environment in minutes. No more waiting for manual provisioning or configuration or inter-team coordination.
+
+### Replication and consistency
+
+When an application team needs to scale an application to additional regions or instances, environments can be "stamped out" in minutes and ready for app deployments. Integrations with CI/CD systems such as GitHub Actions allow this process to be automated and repeatable.
+
+### Organization best-practices
+
+Organizational best-practices such as cost-optimization, resource sharing, and logging can all be codified and enforced with a Radius environment.
+
+## Environment features
 
 {{< cardpane >}}
-{{< card header="**Compute**" >}}
-Define compute runtimes such as a Kubernetes cluster or Azure serverless compute (coming soon).
+{{< card header="**Compute runtime**" >}}
+Define compute runtimes such as a Kubernetes cluster or Azure serverless compute (coming soon) where your application's services run.
 {{< /card >}}
 {{< card header="**Shared infrastructure**" >}}
 Deploy shared resources that are available to all applications deployed into the environment.
@@ -37,43 +53,37 @@ Configure and manage diagnostic configuration such as collection policies, reten
 Define networking requirements such that applications are automatically configured with network isolation best-practices.
 {{< /card >}}
 {{< card header="**Identity & access** (coming soon)" >}}
-Limit access to resources and capabilities based on user roles and assignments.
+Limit access to deployments, resources and capabilities based on user roles and assignments.
 {{< /card >}}
 {{< card header="**Dependencies** (coming soon)" >}}
 Define environment requirements such as policy, packages, or other organization requirements.
 {{< /card >}}
 {{< /cardpane >}}
+{{< cardpane >}}
+{{< card header="**Infrastructure provisioning** (coming soon)" >}}
+Automatically provision connector infrastructure at deployment time using pre-defined or custom "recipes".
+{{< /card >}}
+{{< card header="**Dependency management** (coming soon)" >}}
+Manage dependencies and environment capabilities such as packages, frameworks, and other configuration.
+{{< /card >}}
+{{< /cardpane >}}
 
-## Example: handoff between teams
+## Example: Handoff between teams
 
-In some cases a full stack developer might write the app code, author the Radius app defintion, and initialize the Radius environment. However, in some orgs, administrators might build environment templates that the collective group decides to leverage. The separation of an app from an environment makes a separation of concerns possible.
+In this example there are two teams within an organization: a central administration team and a development team. The central administration team is responsible for managing the environment and the central infrastructure resources, and the development team is responsible for the application definition and deployment.
 
-For example, a workflow where developers build on templates created by administrators might look like: 
+A typical workflow for this team structure would look like:
 
-1. An administrator defines a Radius environment template (Bicep/Terraform module)
-   - The compute runtime is configured with networking, identity, diagnostics, and other configuration that matches their org's requirements.
-   - Connector recipes are defined for how to deploy and configure infrastructure resources, such as for a Redis cache connector
-1. The administrator initializes a Radius environment based on the template
-1. A developer authors a Radius application template
-   - The template includes a Redis cache connector
+1. The administrator inializes a new environment, configured with a compute runtime setup with networking, identity, diagnostics, and other configuration that matches their org's requirements.
+1. The developer authors a Radius application template, including containers for their services, connectors for their infrastructure, and routes/gateways for their networking.
 1. The developer deploys the app template to the Radius environment
    - The app's containers automatially run on the container runtime
-   - The Redis cache connector recipe deploys a new Azure Cache for Redis instance and binds it to the connector
    - The connector automatically configures security best practices and injects connection information into the consuming container
 
-When the developer deploys their application, these org-level concerns are automatically wired up based on the environment. Developers don't have to think about credentials or how networking is configured - which enables devs to focus on their applications instead.
+When the developer deploys their application, these org-level concerns are automatically wired up based on the environment. Developers don't have to think about credentials or how networking is configured, enabling them to focus on their applications instead.
 
-### Upcoming developments
+## Next step
 
-We also have plans in our future releases to make environments experiences more robust. When creating an environment, users can either initalize an env based on a template or they may generate a default, empty environment.
+Now that you have an understanding of Radius environments, learn more about the Radius control-plane and architecture:
 
-1. Environments from templates - You can describe an environment's requirements and contents via one of the [supported IaC languages]({{< ref supported-languages >}}).
-
-2. Default environments - If you choose not to define environment specs, an empty environment will be created. You can install additional services there later if needed.
-    For example environment definitions, see [link coming soon in other PR]
-<!-- TODO add that link ^  -->
-Check back this section later for more updates!!
-
-## Maintaining an environment
-
-env model makes it easier to make updates and to identify envs that need updates
+{{< button text="Architecture" page="architecture" size="btn-lg" color="success" >}}
