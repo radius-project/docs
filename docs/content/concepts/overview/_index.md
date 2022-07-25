@@ -47,7 +47,7 @@ The result is no longer just a flat list of resources - it's a fully fledged dia
 
 Environments allow you to:
 
-- Iterate quickly in a local dev environment, then scale that same app up in Azure or Kubernetes environment
+- Iterate quickly in an environment running locally, then scale that same app up in a production environment.
 - Stamp out versions of the app to the edge, to multiple geos, or even to multiple clouds
 - Follow best practices to be naturally secure by default, even with many teams working together
 - Easily layer IT policies across an app (access, backup, ...)
