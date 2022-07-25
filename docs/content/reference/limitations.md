@@ -48,13 +48,13 @@ RESOURCE                 TYPE
 containername            applications.core/containers
 ```
 
-This will be addressed in a future release.
-
 ### Cannot use underscores in resource names
 
 Using an underscore in a resource name will result in an error.
 
 As a workaround do not use underscores in resource names. Additional validation will be added in a future release.
+
+See [app name constraints]({{< ref "resource-schema.md#common-values" >}}) for more information.
 
 ## Connectors
 

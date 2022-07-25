@@ -45,4 +45,14 @@ The resulting names are:
 
 ### Location
 
+The location property defines where to deploy a resource within the targeted platform.
+
+#### Self-hosted environments
+
+For self-hosted environments, the location property must be set to `global`.
+
+#### Microsoft Azure (coming soon)
+
+The location property can be set to any Azure region which supports Project Radius resources. Check back in a future Radius release for more information.
+
 ## Resource categories
