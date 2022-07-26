@@ -83,4 +83,4 @@ Make sure your Bicep file matches the following:
 ## Handoff
 This step closely relates to how the enterprises do hand-offs between different personas involved in the deployment. As a developer you have tested the application with a mongo container and would like to handoff the deployment to the infra-admin for deployments to other environments. The infra-admin can now set up a Radius environment with Azure cloud provider configured and can use th same app bicep template to provision an Azure resource via the connector. This ensures that you are able to port your application to different environments with minimal rewrites.
 
-<br> {{<button text="Next step: Add a database to the app" page="webapp-swap-connector-resource" newline="false">}} {{<button text="Previous step: Author app definition" page="webapp-initial-deployment">}}
+<br> {{< button text="Previous step: Author app definition" page="webapp-initial-deployment" newline="false">}} {{< button text="Next step: Swap connector resource" page="webapp-swap-connector-resource" >}}
