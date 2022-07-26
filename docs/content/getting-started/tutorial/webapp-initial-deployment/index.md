@@ -42,7 +42,7 @@ Update your Bicep file to match the full application definition:
 
 Now you are ready to deploy the application for the first time.
 
-1. Make sure you have an [Radius environment initialized]({{< ref "tutorial#initialize-a-radius-environment" >}}).
+1. Make sure you have an [Radius environment initialized]({{< ref webapp-initialize-environment >}}).
 
 2. Deploy to your Radius environment via the rad CLI:
 
@@ -98,4 +98,4 @@ The Radius extension improves developer workflows.
 
 - Click on the `todoapp` resource node and click on the `Show Container Logs` to open view its logs.
 
-<br> {{< button text="Next step: Add a database connector" page="webapp-add-database" newline="false" >}}{{< button text="Previous step: App overview" page="webapp-overview">}} 
+<br> {{< button text="Next step: Add a database connector" page="webapp-add-database" newline="false" >}}{{< button text="Previous step: Initialize an environment" page="webapp-initialize-environment">}} 

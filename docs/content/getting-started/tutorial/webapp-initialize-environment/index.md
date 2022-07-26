@@ -65,4 +65,4 @@ Radius installs the control plane resources, creates an environment resource, cr
    dapr-operator             1/1     1            1           35s
    ```
 
-<br>{{< button text="Next: Author app definition" page="webapp-initial-deployment" >}} {{< button text="Previous step: App overview" page="webapp-overview" >}}
+<br>{{< button text="Next: Author app definition" page="webapp-initial-deployment" newline="false" >}} {{< button text="Previous step: App overview" page="webapp-overview" >}}
