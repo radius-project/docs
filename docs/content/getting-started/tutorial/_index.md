@@ -37,4 +37,4 @@ This tutorial contains the following sections:
   - The [Radius VSCode extension]({{< ref "getting-started#install-vs-code-extension-optional" >}}) provides syntax highlighting, completion, and linting.
   - You can also complete this tutorial with any basic text editor.
 
-<br>{{< button text="Next: App overview" page="webapp-overview" >}}
+<br>{{< button text="Next step: App overview" page="webapp-overview" >}}

@@ -98,4 +98,4 @@ The Radius extension improves developer workflows.
 
 - Click on the `todoapp` resource node and click on the `Show Container Logs` to open view its logs.
 
-<br> {{< button text="Next step: Add a database connector" page="webapp-add-database" newline="false" >}}{{< button text="Previous step: Initialize an environment" page="webapp-initialize-environment">}} 
+<br> {{< button text="Previous step: Initialize an environment" page="webapp-initialize-environment" newline="false" >}}{{< button text="Next step: Add a database connector" page="webapp-add-database" >}} 
