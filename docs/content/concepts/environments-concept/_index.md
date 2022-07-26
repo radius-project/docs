@@ -21,11 +21,11 @@ Environments provide a grouping structure for applications and the resources the
 
 ### Separation of concerns
 
-With Radius environments, central operations and IT teams can define and share environments with development teams for them to deploy applications into. Ops teams focus on configuring the compute, dependencies, networking, and other infrastructure concerns, while developers focus on the business and application concerns. This allows each team to focus on what matters most to them, without needing to become experts in every aspect of the infraastructure and application.
+With Radius environments, central operations and IT teams can define and share environments with development teams for them to deploy applications into. Ops teams focus on configuring the compute, dependencies, networking, and other infrastructure concerns, while developers focus on the business and application concerns. This allows each team to focus on what matters most to them, without needing to become experts in every aspect of the infrastructure and application.
 
 ### Developer productivity
 
-Once an environment template is defined, developers can get up and running with a prepared devlopment, pre-production, or production environment in minutes. No more waiting for manual provisioning or configuration or inter-team coordination.
+Once an environment template is defined, developers can get up and running with a prepared development, pre-production, or production environment in minutes. No more waiting for manual provisioning or configuration or inter-team coordination.
 
 ### Replication and consistency
 
@@ -74,10 +74,10 @@ In this example there are two teams within an organization: a central administra
 
 A typical workflow for this team structure would look like:
 
-1. The administrator inializes a new environment, configured with a compute runtime setup with networking, identity, diagnostics, and other configuration that matches their org's requirements.
+1. The administrator initializes a new environment, configured with a compute runtime setup with networking, identity, diagnostics, and other configuration that matches their org's requirements.
 1. The developer authors a Radius application template, including containers for their services, connectors for their infrastructure, and routes/gateways for their networking.
 1. The developer deploys the app template to the Radius environment
-   - The app's containers automatially run on the container runtime
+   - The app's containers automatically run on the container runtime
    - The connector automatically configures security best practices and injects connection information into the consuming container
 
 When the developer deploys their application, these org-level concerns are automatically wired up based on the environment. Developers don't have to think about credentials or how networking is configured, enabling them to focus on their applications instead.

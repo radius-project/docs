@@ -33,6 +33,6 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
   }
 }
 
-resource blobContainer 'Microsoft.Storage/storageAccounts/blobServices/containers@2021-06-01' = {
+resource blobContainer 'Microsoft.Storage/storageAccounts/blobServices/containers@2021-06-01' existing = {
   name: 'mystorage/default/mycontainer'
 }

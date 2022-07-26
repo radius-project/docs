@@ -16,8 +16,6 @@ Apps today are modeled and deployed with Dockerfiles, Kubernetes CRDs, Helm char
 
 Once deployed, teams don't have a way to view and manage apps holistically. Instead, they're drowning in lists of disjointed resources.
 
-<img alt="Diagram showing long list of infrastructure" src="ui-mockup-list.png" width="800px" /><br />
-
 What's missing is a way to collapse the entire concept of an application into a single entity so it can be deployed, managed, and scaled easily.
 
 ## Project Radius empowers teams to focus on their apps
@@ -28,20 +26,20 @@ At the heart of Project Radius is a new **application resource**, with an accomp
 
 <img alt="Diagram showing modeling an app with Project Radius" src="cloud-apps-radius.png" width="600px" />
 
-These new resources form the **Radius app model**, which allow you to:
+These new resources form the [**Radius app model**]({{< ref appmodel-concept >}}), which allow you to:
 
 - Visualize the entire application, including its dependencies and relationships
 - Investigate cross-app health and diagnostics, including dependencies and connections
 - Identify ownership and locate artifacts
 - Support handoffs between teams as the app matures
 
-The result is no longer just a flat list of resources - it's a fully fledged diagram of how the pieces relate to each other:
+The result is no longer just a flat list of resources - it's a fully codified abstraction of how the services and infrastructure relate to each other:
 
 <img alt="Diagram showing Radius application in the Azure portal" src="ui-mockup-basic.png" width="700px" /><br />
 
 ### Drastically reduce infra ops time
 
-[App environments]({{< ref environments-concept >}}) act as a landing zone for applications. They are the place where you can deploy, manage, and scale your apps.
+[App environments]({{< ref environments-concept >}}) are landing zones for applications. They are the place where you can deploy, manage, and scale your apps.
 
 <img alt="Diagram showing Radius environments" src="environments.png" width="600px" />
 
@@ -59,7 +57,7 @@ With the Radius app model, teams can easily codify and share pieces of an applic
 {{< tabs Bicep >}}
 
 {{< codetab >}}
-{{< rad file="snippets/appmodel-concept.bicep" embed=true >}}
+{{< rad file="snippets/appmodel-concept.bicep" embed=true marker="//SNIPPET" replace-key-container="//CONTAINER" replace-value-container="container: {...}" replace-key-properties="//PROPERTIES" replace-value-properties="properties: {...}" >}}
 {{< /codetab >}}
 
 {{< /tabs >}}
@@ -77,7 +75,13 @@ Project Radius aims to support all hosting platform types - from hyperscale clou
 
 <img alt="Diagram showing Radius platforms" src="platforms.png" width="800px" />
 
-Our current focus is on delivering robust support for self-hosted environments on Kubernetes. Fully-managed environments on Azure will be supported in the future.
+### Application portability
+
+The Radius app model is designed to be portable across all Radius-supported platforms. Combined with connectors and other frameworks such as [Dapr](https://dapr.io/), teams can write their apps once and deploy to any Radius-enabled platform in minutes.
+
+### Consistent tooling
+
+As teams onboard to Project Radius and begin deploying across platforms, the tooling and experiences are consistent everywhere. The [rad CLI]({{< ref cli >}}) and [Radius VS Code extension]({{< ref vscode >}}) work across every platform and environment. This allows teams to easily scale across platforms and be productive everywhere.
 
 ## Next step
 

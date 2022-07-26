@@ -35,7 +35,7 @@ The CosmosDB resource, `underlyingdb`, will fulfill the app's Mongo storage requ
 
 ### Connector
 
-In the app definition, a developer defines a Mongo connector (`dbconnector`) that references the CosmosDB resource.
+In the app definition, a developer defines a Mongo connector, `dbconnector`, that references the CosmosDB resource.
 
 {{< rad file="snippets/corerp-connector-example.bicep" embed=true marker="//CONNECTOR" >}}
 
