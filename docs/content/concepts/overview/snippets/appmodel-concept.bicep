@@ -2,7 +2,6 @@ import radius as radius
 
 param environment string
 param location string = resourceGroup().location
-param cosmosDatabaseId string
 
 //SNIPPET
 // Infrastructure team provides database to the application team
