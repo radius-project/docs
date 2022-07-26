@@ -37,36 +37,16 @@ Organizational best-practices such as cost-optimization, resource sharing, and l
 
 ## Environment features
 
-{{< cardpane >}}
-{{< card header="**Compute runtime**" >}}
-Define compute runtimes such as a Kubernetes cluster or Azure serverless compute (coming soon) where your application's services run.
-{{< /card >}}
-{{< card header="**Shared infrastructure**" >}}
-Deploy shared resources that are available to all applications deployed into the environment.
-{{< /card >}}
-{{< card header="**Diagnostics** (coming soon)" >}}
-Configure and manage diagnostic configuration such as collection policies, retention periods, and archival settings.
-{{< /card >}}
-{{< /cardpane >}}
-{{< cardpane >}}
-{{< card header="**Networking** (coming soon)" >}}
-Define networking requirements such that applications are automatically configured with network isolation best-practices.
-{{< /card >}}
-{{< card header="**Identity & access** (coming soon)" >}}
-Limit access to deployments, resources and capabilities based on user roles and assignments.
-{{< /card >}}
-{{< card header="**Dependencies** (coming soon)" >}}
-Define environment requirements such as policy, packages, or other organization requirements.
-{{< /card >}}
-{{< /cardpane >}}
-{{< cardpane >}}
-{{< card header="**Infrastructure provisioning** (coming soon)" >}}
-Automatically provision connector infrastructure at deployment time using pre-defined or custom "recipes".
-{{< /card >}}
-{{< card header="**Dependency management** (coming soon)" >}}
-Manage dependencies and environment capabilities such as packages, frameworks, and other configuration.
-{{< /card >}}
-{{< /cardpane >}}
+| Feature | Description |
+|---------|-------------|
+| **Compute runtime** | Define compute runtimes such as a Kubernetes cluster or Azure serverless compute *(coming soon)* where your application's services run. |
+| **Shared infrastructure** | Deploy shared resources that are available to all applications deployed into the environment.
+| **Diagnostics** *(coming soon)* | Configure and manage diagnostic configuration such as collection policies, retention periods, and archival settings.
+| **Networking** *(coming soon)* | Define networking requirements such that applications are automatically configured with network isolation best-practices.
+| **Identity & access** *(coming soon)* | Limit access to deployments, resources and capabilities based on user roles and assignments.
+| **Dependencies** *(coming soon)* | Define environment requirements such as policy, packages, or other organization requirements.
+| **Infrastructure provisioning** *(coming soon)* | Automatically provision connector infrastructure at deployment time using pre-defined or custom "recipes".
+| **Dependency management** *(coming soon)* | Manage dependencies and environment capabilities such as packages, frameworks, and other configuration.
 
 ## Example: Handoff between teams
 
