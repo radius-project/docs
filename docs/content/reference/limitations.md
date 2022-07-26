@@ -28,7 +28,7 @@ Refer to https://github.com/project-radius/deployment-engine/issues/172 for more
 
 ### Persistent volumes are not supported
 
-Persistent volumes, which provide the ability to mount an Azure Key Vault or an Azure File Share to a container, are not supported in the current version of Radius. This will be addressed in a future release.
+Persistent volumes, which are required to mount an Azure Key Vault or an Azure File Share to a Radius container, are not supported in the current version of Radius. This will be addressed in a future release.
 
 ## Environments
 
