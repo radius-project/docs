@@ -49,7 +49,7 @@ rad application list
 RESOURCE           TYPE
 appname            applications.core/applications
 
-rad resource list -a smallAppName
+rad resource list -a appname
 RESOURCE                 TYPE
 containername            applications.core/containers
 ```
@@ -58,7 +58,7 @@ containername            applications.core/containers
 
 Using an underscore in a resource name will result in an error.
 
-As a workaround do not use underscores in resource names. Additional validation will be added in a future release.
+As a workaround do not use underscores in resource names. Additional validation will be added in a future release to help warn against improperly formatted resource names.
 
 See [app name constraints]({{< ref "resource-schema.md#common-values" >}}) for more information.
 
