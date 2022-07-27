@@ -66,7 +66,7 @@ Lets take an example where you need to create two different environments and swi
     ```
     After creating an environment, Radius writes the environment configuration details to your local configuration file `/.rad/config.yaml`
 
-1. Verify that your config.yaml contains your workspace configuration. (e.g. via `rad workspace show`). It should look like below
+1. Verify that your config.yaml contains your workspace configuration. It should look like below
 
     ```bash
     workspaces:
