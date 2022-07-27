@@ -89,7 +89,7 @@ Lets take an example where you need to create two different environments and swi
 1. Switch to the workspace "radius-workspace-production" to initialize a new environment as rad env init picks the default and current workspace to save your configuration
 
     ```sh 
-    rad workspace init kubernetes -w radius-workspace-production
+    rad workspace switch -w radius-workspace-production
     ```
 
 1. Initialize another Radius environment via `rad env init kubernetes` 
