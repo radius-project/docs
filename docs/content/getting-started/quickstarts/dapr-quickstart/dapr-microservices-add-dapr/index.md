@@ -49,9 +49,9 @@ You can choose between a Redis container or Azure Table Storage
 
 Radius captures both logical relationships and related operational details. Examples of this include: wiring up connection strings, granting permissions, or restarting components when a dependency changes.
 
-The [`connections` property]({{< ref "connections-model" >}}) is used to configure relationships between from a service to another resource.
+The [`connections` property]({{< ref "appmodel-concept" >}}) is used to configure relationships between from a service to another resource.
 
-Add a [`connection`]({{< ref "connections-model" >}}) from `backend` to the `orders` state store. This declares the _intention_ from the `backend` component to communicate with the `statestore` component using `dapr.io/StateStore` as the protocol.
+Add a [`connection`]({{< ref "appmodel-concept" >}}) from `backend` to the `orders` state store. This declares the _intention_ from the `backend` component to communicate with the `statestore` component using `dapr.io/StateStore` as the protocol.
 
 Additionally, add a `dependsOn` reference to the starter. This is a tempoarary requirement and will be removed in a future release.
 
@@ -67,7 +67,7 @@ With the connection name of `statestore` and a statestore name of `orders`, Proj
 const stateStoreName = process.env.CONNECTION_ORDERS_STATESTORENAME;
 ```
 
-See the [connections]({{< ref "connections-model#injected-values" >}}) page for more information about this feature.
+See the [connections]({{< ref "appmodel-concept#injected-values" >}}) page for more information about this feature.
 
 ## Deploy application with Dapr
 
