@@ -29,7 +29,7 @@ This directory contains the following files:
 
 ## Radius application
 
-Note the [Radius Application resource]({{< ref defining-an-app >}}) inside of `infra.bicep`:
+Note the [Radius Application resource]({{< ref appmodel-concept >}}) inside of `infra.bicep`:
 
 {{< rad file="snippets/blank-app.bicep" embed=true >}}
 

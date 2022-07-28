@@ -66,3 +66,5 @@ There is a known issue where deployments to Azure will fail with a "NotFound" er
 ## Cleanup
 
 {{% alert title="Delete application" color="warning" %}} If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to prevent additional charges in your Azure subscription. {{% /alert %}}
+
+{{<button text="Previous step: Add a database connector" page="webapp-add-database">}}
