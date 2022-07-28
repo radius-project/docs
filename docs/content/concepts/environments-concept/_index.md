@@ -19,7 +19,7 @@ Environments provide a grouping structure for applications and the resources the
 
 ### Separation of concerns
 
-In many small to medium-sized organizations, a full stack developer might write application code, author the Radius app definition, and create the Radius environment. In larger orgs, there may be separate teams of administrators and developers, where the central admins build environment templates which development teams leverage and deploy to. The separation of an app from an environment makes a separation of concerns possible.
+In many small to medium-sized organizations, a full stack developer might write application code, author the Radius app definition, and create the Radius environment. In larger orgs, there may be separate teams of central operations and developers, where the central teams build environment templates which development teams leverage and deploy to. The separation of an app from an environment makes a separation of concerns possible.
 
 With Radius environments, central operations and IT teams can define and share environments with development teams for them to deploy applications into. Ops teams focus on configuring the compute, dependencies, networking, and other infrastructure concerns, while developers focus on the business and application concerns. This allows each team to focus on what matters most to them, without needing to become experts in every aspect of the infrastructure and application.
 
@@ -50,11 +50,11 @@ Organizational best-practices such as cost-optimization, resource sharing, and l
 
 ## Example: Handoff between teams
 
-In this example there are two teams within an organization: a central administration team and a development team. The central administration team is responsible for managing the environment and the central infrastructure resources, and the development team is responsible for the application definition and deployment.
+In this example there are two teams within an organization: a central operations team and a development team. The central ops team is responsible for managing the environment and the central infrastructure resources, and the development team is responsible for the application definition and deployment.
 
 A typical workflow for this team structure would look like:
 
-1. The administrator initializes a new environment, configured with a compute runtime setup with networking, identity, diagnostics, and other configuration that matches their org's requirements.
+1. The ops team initializes a new environment, configured with a compute runtime setup with networking, identity, diagnostics, and other configuration that matches their org's requirements.
 1. The developer authors a Radius application template, including containers for their services, connectors for their infrastructure, and routes/gateways for their networking.
 1. The developer deploys the app template to the Radius environment
    - The app's containers automatically run on the container runtime
