@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Handle multiple environments"
-linkTitle: "Handle multiple environments"
+title: "Operate on multiple environments"
+linkTitle: "Operate on multiple environments"
 description: "How to handle multiple Radius Kubernetes environments using workspaces"
 weight: 200
 slug : workspaces
