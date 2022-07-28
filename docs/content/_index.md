@@ -10,7 +10,7 @@ weight: 1
 
 {{< cardpane >}}
 {{< card header="**App-centric**" >}}
-Teams [describe their application]({{< ref defining-an-app >}}) services and relationships, rather than just a list of infrastructure.
+Teams [describe their application]({{< ref appmodel-concept >}}) services and relationships, rather than just a list of infrastructure.
 
 <img src="app-diagram.png" alt="Screenshot of a Radius applications diagram" style="width:100%" >
 {{< /card >}}
@@ -42,7 +42,7 @@ Teams can offload the complexity of wiring-up applications and let Radius employ
 <table style="max-width:600px;margin-top:5%">
   <tr>
     <td style="width:25%;text-align:center">
-      <a href="{{< ref connections-model >}}"><img src="connect-logo.svg" alt="Connections logo" style="width:40%"></a>
+      <a href="{{< ref appmodel-concept >}}"><img src="connect-logo.svg" alt="Connections logo" style="width:40%"></a>
     </td>
     <td style="width:25%;text-align:center">
       <a href="{{< ref networking >}}"><img src="network-logo.svg" alt="Networking logo" style="width:40%"></a>
