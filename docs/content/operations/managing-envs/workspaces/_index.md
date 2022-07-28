@@ -64,7 +64,7 @@ Lets take an example where you need to create two different environments and swi
     ```sh 
     rad env init kubernetes -i
     ```
-    After creating an environment, Radius writes the environment configuration details to your local configuration file `/.rad/config.yaml`
+    After creating an environment, Radius writes the environment configuration details to your local configuration file (`~/.rad/config.yaml` on Linux and macOS, `%USERPROFILE%\.rad\config.yaml` on Windows).
 
 1. Verify that your config.yaml contains your workspace configuration. It should look like below
 
