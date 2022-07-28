@@ -10,7 +10,7 @@ slug: "overview"
 You will be deploying an application, `todoapp`, with the following resources:
 
 1. [`frontend`](#frontend-container): A containerized to-do list frontend written in Node.JS
-1. [`frontend-route`](#todoroute-httproute): An [HttpRoute]({{< ref httproute >}}) that declares the connection to the frontend container
+1. [`frontend-route`](#frontend-route-httproute): An [HttpRoute]({{< ref httproute >}}) that declares the connection to the frontend container
 1. [`gateway`](#gateway-gateway): A [Gateway]({{< ref gateway >}}) that exposes the application to the internet
 1. [`db`](#db-connector): A [MongoDB connector]({{< ref mongodb >}}) to save to-do items in. Can be backed by either:
    - A MongoDB container
@@ -54,4 +54,4 @@ As you progress, keep in mind the following benefits that the Radius application
 - Connectors provide abstraction and portability across local and cloud environments
 - Separation of concerns for the different personas involved in the deployment 
 
-<br>{{< button text="Next step: Initialize a Radius environment" page="webapp-initialize-environment" newline="false">}} {{< button text=" Previous step: Tutorial Pre-requisites" page="tutorial">}}
+<br>{{< button text=" Previous step: Tutorial Pre-requisites" page="tutorial"  newline="false">}} {{< button text="Next step: Initialize an environment" page="webapp-initialize-environment">}}
