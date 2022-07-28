@@ -30,14 +30,6 @@ Refer to https://github.com/project-radius/deployment-engine/issues/172 for more
 
 Persistent volumes, which are required to mount an Azure Key Vault or an Azure File Share to a Radius container, are not supported in the current version of Radius. This will be addressed in a future release.
 
-## Environments
-
-### Only one environment can be configured per Kubernetes cluster
-
-Today, only one environment can be configured per Kubernetes cluster. A "Found existing Radius Kubernetes environment") error will be thrown when trying to create another environment.
-
-This will be addressed in a future release.
-
 ## rad CLI
 
 ### Application and resource names are lower-cased after deployment
