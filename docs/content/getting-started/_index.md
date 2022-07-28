@@ -11,6 +11,10 @@ no_list: true
 
 The `rad` CLI manages your applications, resources, and environments. Begin by installing it on your machine:
 
+{{% alert title="Note" color="info" %}}
+You may be prompted for your sudo password during installation.
+{{% /alert %}}
+
 {{< tabs Windows MacOS "Linux/WSL" "Cloud Shell" Binaries >}}
 
 {{% codetab %}}
