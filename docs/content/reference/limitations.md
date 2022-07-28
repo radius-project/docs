@@ -2,7 +2,7 @@
 type: docs
 title: "Known issues and limitations with the latest Radius release"
 linkTitle: "Limitations"
-description: "Learn where there are known issues and limitations with the latest Radius release and how to workaround them"
+description: "Learn where there are known issues and limitations with the latest Radius release and how to work around them"
 weight: 998
 ---
 
@@ -12,7 +12,7 @@ weight: 998
 
 While Project Radius is still in the private preview stage, a fork of the Bicep compiler is being used while the Radius team works with the Bicep team and community to build in the proper support to move back into the primary version. This results in:
 
-- The Bicep VS Code extension must be disabled in favor of the Bicep (Project Radius) extension
+- The "Bicep" VS Code extension must be disabled in favor of the "Bicep (Project Radius)" extension
 - The forked Bicep compiler will be out of date compared to the most recent Bicep public build
 - `az bicep` and `bicep` are not supported with Project Radius. Use `rad deploy` instead.
 
