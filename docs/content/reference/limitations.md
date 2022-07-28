@@ -54,6 +54,12 @@ As a workaround do not use underscores in resource names. Additional validation 
 
 See [app name constraints]({{< ref "resource-schema.md#common-values" >}}) for more information.
 
+### Environment creation and last modified times are incorrect
+
+When running `rad env show`, the `lastmodifiedat` and `createdat` fields display `0001-01-01T00:00:00Z` instead of the actual times.
+
+This will be addressed in an upcoming release.
+
 ## Connectors
 
 ### Dapr resources have application name prefixed to component name
