@@ -58,7 +58,7 @@ Now you are ready to deploy the application for the first time.
 1. To test your `dapr-quickstart` application, open a local tunnel to your application:
 
    ```sh
-   rad resource expose Container backend --application dapr-quickstart --port 3000
+   rad resource expose containers backend --application dapr-quickstart --port 3000
    ```
 
    {{% alert title="💡 rad resource expose" color="primary" %}}

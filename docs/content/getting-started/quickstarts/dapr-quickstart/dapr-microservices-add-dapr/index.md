@@ -97,7 +97,7 @@ const stateStoreName = process.env.CONNECTION_ORDERS_STATESTORENAME;
 1. To test out the state store, open a local tunnel on port 3000 again:
 
    ```sh
-   rad resource expose Container backend --application dapr-quickstart --port 3000
+   rad resource expose containers backend --application dapr-quickstart --port 3000
    ```
 
 1. Visit the the URL [http://localhost:3000/order](http://localhost:3000/order) in your browser. You should see the following message:
