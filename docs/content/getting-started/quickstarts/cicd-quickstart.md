@@ -26,9 +26,9 @@ You can also optionally separate your service principals if you want to separate
 1. Run the following command, making sure to change the values of `subscriptionId` to match your target scope. Note that an owner role is required in order to configure connections from containers to Azure resources.
 
    ```bash
-   az ad sp create-for-rbac -n "Radius deploy SP" --scopes /subscriptions/{subscriptionId} --role owner --sdk-auth
+   az ad sp create-for-rbac --scopes /subscriptions/{subscriptionId} --role owner --sdk-auth
    ```
-   
+
 1. Take the output of the above command and paste it into a [GitHub secret](https://docs.github.com/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) named `AZURE_CREDENTIALS`. This secret will be used to access your AKS cluster, if applicable.
 
 ## Step 2: Create an environment
