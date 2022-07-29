@@ -13,15 +13,23 @@ As a developer, you define the building blocks of your application. In this step
 
 Radius uses the [Bicep language]({{< ref bicep >}}) as its file-format and structure. In this tutorial you will define an app named `todoapp` that will contain the container and MongoDB connector resources, all described in Bicep.
 
-Create a new file named `app.bicep` and paste the following to add a radius application 
+You can clone our [samples repo](https://github.com/project-radius/samples) which contains the source code of tutorial application and the bicep templates. It contains three bicep files
+
+1. app.bicep - Contains the app definition 
+1. mongo-container.bicep - Contains the definition for deploying mongo container
+1. azure-cosmosdb.bicep - Contains the definition for Azure cosmosdb
+
+Lets dig into the `app.bicep` to understand the components. Below is the definition to add a Radius application
 
 {{< rad file="snippets/empty-app.bicep" embed=true >}}
 
-The environment property depicts the environment that was initialized in the previous step for the app to land on.
+The environment property depicts the environment that was initialized in the previous step for the app to land on. Currently the environment property is auto-injected by Radius when the application is deployed.
 
-## Add a container component
+The location property is currently a required property since <!-- insert why and link to known issue-->
 
-Next you'll add resources for the website's frontend.
+## Container component
+
+Next lets look into the definition for the website's frontend. 
 
 Radius captures the relationships and intentions behind an application, which simplifies deployment and management. The `frontend` and `frontend-route` resources in your Bicep file will contain everything needed for the website frontend to run and expose a port to the internet.
 
@@ -34,9 +42,9 @@ The **`gateway`** [Gateway]({{< ref gateway >}}) resource specifies:
 
 - `routes`: The routes handled by this gateway. Here, we specify that `'/'` should map to `frontend-route`, which is provided by the 'frontend' container.
 
-Update your Bicep file to match the full application definition:
+Your bicep file should look like below 
 
-{{< rad file="snippets/container-app.bicep" embed=true >}}
+{{< rad file="snippets/app.bicep" embed=true >}}
 
 ## Deploy the application
 
