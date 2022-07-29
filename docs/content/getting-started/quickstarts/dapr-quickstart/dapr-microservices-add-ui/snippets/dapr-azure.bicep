@@ -4,14 +4,89 @@ param location string = resourceGroup().location
 param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
-  name: 'dapr-tutorial'
+  name: 'dapr-quickstart'
   location: location
   properties: {
     environment: environment
   }
 }
 
-resource frontendGateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
+resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'backend'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'radius.azurecr.io/daprtutorial-backend:latest'
+      ports: {
+        web: {
+          containerPort: 3000
+        }
+      }
+    }
+    connections: {
+      orders: {
+        source: stateStore.id
+      }
+    }
+    extensions: [
+      {
+        kind: 'daprSidecar'
+        provides: backendRoute.id
+        appId: 'backend'
+        appPort: 3000
+      }
+    ]
+  }
+}
+
+resource backendRoute 'Applications.Connector/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
+  name: 'backend-route'
+  location: location
+  properties: {
+    environment: environment
+    application: app.id
+    appId: 'backend'
+  }
+}
+
+resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'frontend'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: 'radius.azurecr.io/daprtutorial-frontend:latest'
+      ports: {
+        ui: {
+          containerPort: 80
+          provides: frontendRoute.id
+        }
+      }
+    }
+    connections: {
+      backend: {
+        source: backendRoute.id
+      }
+    }
+    extensions: [
+      {
+        kind: 'daprSidecar'
+        appId: 'frontend'
+      }
+    ]
+  }
+}
+
+resource frontendRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
+  name: 'frontend-route'
+  location: location
+  properties: {
+    application: app.id
+  }
+}
+
+resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
   name: 'gateway'
   location: location
   properties: {
@@ -24,80 +99,6 @@ resource frontendGateway 'Applications.Core/gateways@2022-03-15-privatepreview' 
     ]
   }
 }
-  
-resource frontendRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
-  name: 'frontend-route'
-  location: location
-  properties: {
-    application: app.id
-  }
-}
-  
-resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
-  name: 'frontend'
-  location: location
-  properties: {
-    application: app.id
-    container: {
-      image: 'radius.azurecr.io/daprtutorial-frontend'
-      ports:{
-        ui: {
-          containerPort: 80
-          provides: frontendRoute.id
-        }
-      }
-    }
-    connections: {
-      backend: {
-        source: daprBackend.id
-      }
-    }
-    extensions: [
-      {
-        kind: 'daprSidecar'
-        appId: 'frontend'
-      }
-    ]
-  }
-}
-
-//BACKEND
-resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
-  name: 'backend'
-  location: location
-  properties: {
-    application: app.id
-    container: {
-      image: 'radius.azurecr.io/daprtutorial-backend'
-      ports: {
-        orders: {
-          containerPort: 3000
-        }
-      }
-    }
-    extensions: [
-      {
-        kind: 'daprSidecar'
-        appId: 'backend'
-        appPort: 3000
-        provides: daprBackend.id
-      }
-    ]
-  }
-}
-//BACKEND
-
-//ROUTE
-resource daprBackend 'Applications.Connector/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
-  name: 'dapr-backend'
-  location: location
-  properties: {
-    environment: environment
-    application: app.id
-    appId: 'backend'
-  }
-}
-//ROUTE
 
 resource account 'Microsoft.Storage/storageAccounts@2019-06-01' = {
   name: 'daprquickstart${uniqueString(resourceGroup().id)}'

@@ -28,12 +28,10 @@ In this tutorial, you will:
 
 ## Prerequisites
 
-- [Install Radius CLI]({{< ref "getting-started#install-radius-cli" >}})
-- Install CLI for target platform:
-  - [kubectl CLI](https://kubernetes.io/docs/tasks/tools/) for local and Kubernetes environments
-  
-- [Install Visual Studio Code](https://code.visualstudio.com/) (recommended)
-  - The [Radius VSCode extension]({{< ref "getting-started#setup-vscode" >}}) provides syntax highlighting, completion, and linting.
+- [Radius CLI]({{< ref "getting-started" >}})
+- [kubectl CLI](https://kubernetes.io/docs/tasks/tools/)
+- [Visual Studio Code](https://code.visualstudio.com/) (recommended)
+  - The [Radius VSCode extension]({{< ref "getting-started" >}}) provides syntax highlighting, completion, and linting.
   - You can also complete this tutorial with any basic text editor.
 
 ### Initialize a Radius environment
@@ -43,7 +41,7 @@ This tutorial can be completed on any platform Radius supports. To get started, 
 {{< tabs Kubernetes >}}
 
 {{% codetab %}}
-A Kubernetes envionment can run in any Kubernetes cluster. Make sure you have set the correct default kubectl context, and then run:
+A Kubernetes environment can run in any Kubernetes cluster. Make sure you have set the correct default kubectl context, and then run:
 
 ```sh
 rad env init kubernetes
@@ -53,5 +51,8 @@ rad env init kubernetes
 
 {{< /tabs >}}
 
-<br />
-{{< button text="Application overview" page="dapr-microservices-overview.md" >}}
+## Next step
+
+Now that you have a Radius environment setup let's take a look at the Dapr microservices application:
+
+{{< button text="Next: Application overview" page="dapr-microservices-overview.md" >}}
