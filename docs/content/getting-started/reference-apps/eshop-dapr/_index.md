@@ -3,7 +3,7 @@ type: docs
 title: "eShop on Dapr sample"
 linkTitle: "eShop on Dapr"
 description: "Learn how to model and deploy a fully portable application with Dapr and Project Radius"
-weight: 100
+weight: 150
 ---
 
 ## Background
