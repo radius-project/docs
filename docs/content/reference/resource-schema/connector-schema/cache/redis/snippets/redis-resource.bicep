@@ -19,7 +19,7 @@ resource redis 'Applications.Connector/redisCaches@2022-03-15-privatepreview' = 
   location: location
   properties: {
     environment: environment
-    application:app.id
+    application: app.id
     resource: azureCacheId
   }
 }
