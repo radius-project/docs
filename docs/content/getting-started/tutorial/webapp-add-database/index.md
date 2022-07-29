@@ -19,7 +19,7 @@ A [connector]({{< ref connector-schema >}}) provides an infrastructure abstracti
 
 <img src="mongo-connector.png" width=450px alt="Diagram of a mongo connector" /><br />
 
- To learn more about connectors visit the [concepts docs]({{< ref connections-model >}})
+To learn more about connectors visit the [concepts docs]({{< ref appmodel-concept >}}
 
 ## Add database connector
 
@@ -32,11 +32,11 @@ Update your Bicep file to match the following to add a Mongo database connector 
 
 ### Connect to `db` from `frontend`
 
-Once the connector is referenced, you can connect to it by referencing the `db` component from within the `frontend` resource the [`connections`]({{< ref connections-model >}}) section:
+Once the connector is referenced, you can connect to it by referencing the `db` component from within the `frontend` resource the [`connections`]({{< ref appmodel-concept >}}) section:
 
 {{< rad file="snippets/app-container.bicep" embed=true marker="//CONTAINER" replace-key-dots="//IMAGE" replace-value-dots="container: {...}" >}}
 
-[Connections]({{< ref connections-model >}}) are used to configure relationships between two components. 
+[Connections]({{< ref appmodel-concept >}}) are used to configure relationships between two components. The `db` is of kind `mongo.com/MongoDB`, which supports the MongoDB protocol. This declares the *intention* from the `frontend` container to communicate with the `db` resource.
 
 Now that you have created a connection called `itemstore`, environment variables with connection information will be injected into the `frontend` container. The container reads the database connection string from an environment variable named `CONNECTION_ITEMSTORE_CONNECTIONSTRING`.
 
@@ -83,4 +83,4 @@ Make sure your Bicep file matches the following:
 ## Handoff
 This step closely relates to how the enterprises do hand-offs between different personas involved in the deployment. As a developer you have tested the application with a mongo container and would like to handoff the deployment to the infra-admin for deployments to other environments. The infra-admin can now set up a Radius environment with Azure cloud provider configured and can use th same app bicep template to provision an Azure resource via the connector. This ensures that you are able to port your application to different environments with minimal rewrites.
 
-<br> {{<button text="Next step: Add a database to the app" page="webapp-swap-connector-resource" newline="false">}} {{<button text="Previous step: Author app definition" page="webapp-initial-deployment">}}
+<br> {{< button text="Previous step: Author app definition" page="webapp-initial-deployment" newline="false">}} {{< button text="Next step: Swap connector resource" page="webapp-swap-connector-resource" >}}

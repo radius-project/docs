@@ -17,7 +17,7 @@ You can view and download the source code in the [samples repo](https://github.c
 
 ## Resources
 
-This Radius application will have three [resouces]({{< ref app-model-overview >}}):
+This Radius application will have three [resouces]({{< ref appmodel-concept >}}):
 
 - A UI for users to place orders written with .NET Blazor (`frontend`)
 - A backend order processing microservice written in Node.JS (`backend`)
@@ -49,7 +49,7 @@ The Dapr component configuration is automatically generated for the statestore b
 
 ## Routes
 
-Radius offers communication between services via [Routes]({{< ref "connections-model#routes" >}}).
+Radius offers communication between services via [Routes]({{< ref "appmodel-concept#routes" >}}).
 
 ### Dapr service invocation
 

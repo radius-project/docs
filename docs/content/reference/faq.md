@@ -47,4 +47,4 @@ Users can employ multiple environments for isolation and organization, for examp
 
 ## Does Radius support all Azure resources?
 
-**Yes**. You can use any Azure resource type by modeling it in Bicep outside the `Applications.Core/applications` resource and defining a connection to the resource from a `Applications.Core/containers`. See the [connections page]({{< ref connections-model >}})) for more details.
+**Yes**. You can use any Azure resource type by modeling it in Bicep outside the `Applications.Core/applications` resource and defining a connection to the resource from a `Applications.Core/containers`. See the [connections page]({{< ref appmodel-concept >}})) for more details.

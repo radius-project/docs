@@ -1,9 +1,9 @@
 ---
 type: docs
-title: Project Radius control-plane services
-linkTitle: Control-plane
+title: Project Radius architecture
+linkTitle: Architecture
 description: Learn how the Project Radius control-plane services deploy and manage your applications
-weight: 400
+weight: 600
 ---
 
 ## Overview
