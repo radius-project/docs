@@ -61,7 +61,7 @@ You have completed this tutorial!
 ## Cleanup
 
 {{% alert title="Delete your environment" color="warning" %}}
-If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to **prevent additional charges in your Azure subscription**.
+If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}).
 {{% /alert %}}
 
 ## Next steps
