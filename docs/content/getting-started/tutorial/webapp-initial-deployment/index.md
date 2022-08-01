@@ -27,7 +27,7 @@ The environment property depicts the environment that was initialized in the pre
 
 The location property defines where to deploy a resource within the targeted platform. It is currently a required property that we expect to remove in a future release. See [Resource Schema]({{< ref resource-schema >}}) for more info.
 
-## Container component
+## Container
 
 Next lets look into the definition for the website's frontend. 
 
@@ -54,13 +54,21 @@ A [connector]({{< ref connector-schema >}}) provides an infrastructure abstracti
 
 To learn more about connectors visit the [concepts docs]({{< ref appmodel-concept >}}
 
-## Add database connector
+### Database connector
 
-In this step, you will add the mongo container to deploy and test the application in your environment.
+Lets look at the definition to add a Mongo database connector backed by a mongo container to your application
 
-Update your Bicep file to match the following to add a Mongo database connector backed by a mongo container to your application:
+Below is the definition to add a mongo database connector
 
 {{< rad file="snippets/app.bicep" embed=true marker="//DATABASE" >}}
+
+### Mongo container 
+
+The definition for the backing mongo container is provided by the `mongo-container.bicep` located in your tutorial source code directory. It contains the definition that is required to deploy the mongo container as a kubernetes resource.
+
+The mongo container definition is then referenced as a module. You can learn more about bicep modules from [here](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/modules)
+
+{{< rad file="snippets/app.bicep" embed=true marker="//MONGOMODULE" >}}
 
 
 ### Connect to `db` from `frontend`
@@ -75,15 +83,11 @@ Once the `db` connector is defined, you can reference it in the [`connections`](
 Now that you have created a connection called `itemstore`, environment variables with connection information will be injected into the `frontend` container. The container reads the database connection string from an environment variable named `CONNECTION_ITEMSTORE_CONNECTIONSTRING`.
 
 
-_______________________
-## Update Bicep file
+## App definition
 
-Your bicep file should look like below 
+Your app.bicep file should look like below 
 
 {{< rad file="snippets/app.bicep" embed=true >}}
-
-
-
 
 
 ## Deploy the application
@@ -103,11 +107,12 @@ Now you are ready to deploy the application for the first time.
    ```sh
    Deployment In Progress:
 
-     Completed       Application                Applications.Core/applications
-     Completed       Container                  Applications.Core/containers
-     Completed       frontend-route             Applications.Core/httpRoutes
-     Completed       gateway                    Applications.Core/gateways
-     Completed       mongo.com.MongoDatabase    db
+     Completed       webapp                     Applications.Core/applications
+     Completed       frontend                   Applications.Core/containers
+     Completed       http-route                 Applications.Core/httpRoutes
+     Completed       public                     Applications.Core/gateways
+     Completed       mongo-module               Microsoft.Resources/deployments
+     Completed       db                         Applications.Connector/mongoDatabases
 
    Deployment Complete 
    ```
@@ -118,6 +123,14 @@ Now you are ready to deploy the application for the first time.
    Public Endpoints:
       Gateway           frontend-gateway      IP-ADDRESS
    ```
+   If you do not see a public endpoint, use `rad app status -a webapp` to get the endpoint
+   ```sh
+   APPLICATION  RESOURCES
+   webapp       4
+
+   GATEWAY   ENDPOINT
+   public    IP-ADDRESS
+   ```
 
 3. To test your application, navigate to the public endpoint that was printed at the end of the deployment.
 
@@ -125,14 +138,14 @@ Now you are ready to deploy the application for the first time.
 
    If the page you see matches the screenshot, that means the container is running as expected.
 
-You can play around with the application's features:
+   You can play around with the application's features:
 
-- Add a todo item
-- Mark a todo item as complete
-- Delete a todo item
+   - Add a todo item
+   - Mark a todo item as complete
+   - Delete a todo item
 
 
 ## Handoff
-This step closely relates to how the enterprises do hand-offs between different personas involved in the deployment. As a developer you have tested the application with a mongo container and would like to handoff the deployment to the infra-admin for deployments to other environments. The infra-admin can now set up a Radius environment with Azure cloud provider configured and can use th same app bicep template to provision an Azure resource via the connector. This ensures that you are able to port your application to different environments with minimal rewrites.
+This step closely relates to how the enterprises do hand-offs between different personas involved in the deployment. As a developer you have tested the application with a mongo container and would like to handoff the deployment to the infra-admin for deployments to other environments. The infra-admin can now set up a Radius environment with Azure cloud provider configured and can use the same app bicep template to provision an Azure resource via the connector. This ensures that you are able to port your application to different environments with minimal rewrites.
 
 <br> {{< button text="Previous step: Initialize an environment" page="webapp-initialize-environment" newline="false" >}} {{< button text="Next step: Swap connector resource" page="webapp-swap-connector-resource" >}}

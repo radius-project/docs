@@ -77,11 +77,13 @@ resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = 
     }
   }
 }
+//DATABASE
 
+//MONGOMODULE
 module mongo 'azure-cosmosdb.bicep' = {
   name: 'mongo-module'
   params: {
-    name: 'db'
+    name: 'webappdb'
   }
 }
-//DATABASE
+//MONGOMODULE

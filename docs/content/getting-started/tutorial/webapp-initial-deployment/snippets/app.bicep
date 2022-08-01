@@ -78,10 +78,14 @@ resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = 
   }
 }
 
+//DATABASE
+
+//MONGOMODULE
 module mongo 'mongo-container.bicep' = {
   name: 'mongo-module'
   params: {
-    name: 'db'
+    name: 'webappdb'
   }
 }
-//DATABASE
+
+//MONGOMODULE
