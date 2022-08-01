@@ -19,9 +19,9 @@ Make sure you have the [environment initialized with Azure cloud provider]({{<re
 
 The app.bicep from the previous step should look like this 
 
-{{< rad file="snippets/app-container.bicep" embed=true >}}
+{{< rad file="snippets/app.bicep" embed=true >}}
 
-Update the bicep file like below to swap the connector resource with an Azure cosmosdb resource
+Simply swap out which module file is referenced for the Mongo infrastructure resource, changing "mongo-container.bicep" to "azure-cosmodb.bicep" in the last resource of the file.
 
 {{< rad file="snippets/app-azure.bicep" embed=true >}}
 
@@ -67,4 +67,4 @@ There is a known issue where deployments to Azure will fail with a "NotFound" er
 
 {{% alert title="Delete application" color="warning" %}} If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to prevent additional charges in your Azure subscription. {{% /alert %}}
 
-{{<button text="Previous step: Add a database connector" page="webapp-add-database">}}
+{{<button text="Previous step: Author app definition" page="webapp-initial-deployment">}}

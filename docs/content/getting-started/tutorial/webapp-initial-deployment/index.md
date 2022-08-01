@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Author and deploy the application with the frontend service"
-linkTitle: "Author app definition"
-description: "Define the application definition with container, gateway and http routes"
+title: "Deploy the application with the frontend service and database"
+linkTitle: "Deploy initial app"
+description: "Define the initial application definition"
 weight: 2000
 slug: "frontend"
 ---
@@ -21,11 +21,11 @@ You can clone our [samples repo](https://github.com/project-radius/samples) whic
 
 Lets dig into the `app.bicep` to understand the components. Below is the definition to add a Radius application
 
-{{< rad file="snippets/empty-app.bicep" embed=true >}}
+{{< rad file="snippets/app.bicep" embed=true marker="//APPBASE" >}}
 
 The environment property depicts the environment that was initialized in the previous step for the app to land on. Currently the environment property is auto-injected by Radius when the application is deployed.
 
-The location property is currently a required property since <!-- insert why and link to known issue-->
+The location property defines where to deploy a resource within the targeted platform. It is currently a required property that we expect to remove in a future release. See [Resource Schema]({{< ref resource-schema >}}) for more info.
 
 ## Container component
 
@@ -38,13 +38,53 @@ The **`frontend`** [container]({{< ref container >}}) resource specifies:
 - `container image`: The container image to run. This is where your website's front end code lives
 - `ports`: The port to expose on the container, along with the [HttpRoute]({{< ref httproute >}}) that will be used to access the container
 
+{{< rad file="snippets/app.bicep" embed=true marker="//CONTAINER" >}}
+
 The **`gateway`** [Gateway]({{< ref gateway >}}) resource specifies:
 
 - `routes`: The routes handled by this gateway. Here, we specify that `'/'` should map to `frontend-route`, which is provided by the 'frontend' container.
 
+{{< rad file="snippets/app.bicep" embed=true marker="//GATEWAY" >}}
+
+## Connectors
+
+A [connector]({{< ref connector-schema >}}) provides an infrastructure abstraction for an API, allowing the backing resource type to be swapped out without changing the way the consuming resource is defined. In this example, first a developer uses a Kubernetes resource (MongoDB) as the app's database when deploying to their dev environment. Later, the infrastructure admin uses a Azure resource (Azure CosmosDB) as the app's database when deploying to production.
+
+<img src="mongo-connector.png" width=450px alt="Diagram of a mongo connector" /><br />
+
+To learn more about connectors visit the [concepts docs]({{< ref appmodel-concept >}}
+
+## Add database connector
+
+In this step, you will add the mongo container to deploy and test the application in your environment.
+
+Update your Bicep file to match the following to add a Mongo database connector backed by a mongo container to your application:
+
+{{< rad file="snippets/app.bicep" embed=true marker="//DATABASE" >}}
+
+
+### Connect to `db` from `frontend`
+
+Once the `db` connector is defined, you can reference it in the [`connections`]({{< ref appmodel-concept >}}) section of the `frontend` resource:
+
+{{< rad file="snippets/app.bicep" embed=true marker="//CONTAINER" >}}
+
+
+[Connections]({{< ref appmodel-concept >}}) are used to configure relationships between two components. The `db` is of kind `mongo.com/MongoDB`, which supports the MongoDB protocol. This declares the *intention* from the `frontend` container to communicate with the `db` resource.
+
+Now that you have created a connection called `itemstore`, environment variables with connection information will be injected into the `frontend` container. The container reads the database connection string from an environment variable named `CONNECTION_ITEMSTORE_CONNECTIONSTRING`.
+
+
+_______________________
+## Update Bicep file
+
 Your bicep file should look like below 
 
 {{< rad file="snippets/app.bicep" embed=true >}}
+
+
+
+
 
 ## Deploy the application
 
@@ -62,16 +102,17 @@ Now you are ready to deploy the application for the first time.
 
    ```sh
    Deployment In Progress:
-   
-     Completed       Application          Applications.Core/applications
-     Completed       Container            Applications.Core/containers
-     Completed       frontend-route       Applications.Core/httpRoutes
-     Completed       gateway              Applications.Core/gateways
-   
+
+     Completed       Application                Applications.Core/applications
+     Completed       Container                  Applications.Core/containers
+     Completed       frontend-route             Applications.Core/httpRoutes
+     Completed       gateway                    Applications.Core/gateways
+     Completed       mongo.com.MongoDatabase    db
+
    Deployment Complete 
    ```
 
-   Also, a public endpoint will be available to your application as we specified a [Gateway]({{< ref gateway >}}).
+   Also, a public endpoint will be available to your application since it contains a [Gateway]({{< ref gateway >}}) resource.
 
    ```sh
    Public Endpoints:
@@ -79,10 +120,6 @@ Now you are ready to deploy the application for the first time.
    ```
 
 3. To test your application, navigate to the public endpoint that was printed at the end of the deployment.
-
-   {{% alert title="⚠️ Local environment endpoint" color="warning" %}}
-   If using a local environment, navigate to the IP address provided by `rad env status`. The address printed at deploy time currently points to the wrong endpoint.
-   {{% /alert %}}
 
    <img src="todoapp-nodb.png" width="400" alt="screenshot of the todo application with no database">
 
@@ -94,16 +131,8 @@ You can play around with the application's features:
 - Mark a todo item as complete
 - Delete a todo item
 
-## Manage your application using the Radius VS Code extension
 
-The Radius extension improves developer workflows. 
+## Handoff
+This step closely relates to how the enterprises do hand-offs between different personas involved in the deployment. As a developer you have tested the application with a mongo container and would like to handoff the deployment to the infra-admin for deployments to other environments. The infra-admin can now set up a Radius environment with Azure cloud provider configured and can use th same app bicep template to provision an Azure resource via the connector. This ensures that you are able to port your application to different environments with minimal rewrites.
 
-- In VS Code, select the "PR" (Project Radius) icon on the left to view the Radius extension.
-
-   Environments you've created are listed in a tree view. By drilling into your "todoapp" application and its resources.
-
-   <img src="radius-explorer-webapp.png" width="400" height="auto" alt="screenshot of the todo application with no database">
-
-- Click on the `todoapp` resource node and click on the `Show Container Logs` to open view its logs.
-
-<br> {{< button text="Previous step: Initialize an environment" page="webapp-initialize-environment" newline="false" >}}{{< button text="Next step: Add a database connector" page="webapp-add-database" >}} 
+<br> {{< button text="Previous step: Initialize an environment" page="webapp-initialize-environment" newline="false" >}} {{< button text="Next step: Swap connector resource" page="webapp-swap-connector-resource" >}}

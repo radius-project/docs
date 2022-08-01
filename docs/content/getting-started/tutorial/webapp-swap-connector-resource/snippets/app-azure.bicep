@@ -1,78 +1,87 @@
+//APPBASE
 import radius as radius
 
 param environment string
 
-param location string = resourceGroup().location
-
-param accountName string = 'todoapp-cosmos-${uniqueString(resourceGroup().id)}'
-
-//APP
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
-  name: 'todoapp'
-  location: location
+  name: 'webapp'
+  location: 'global'
   properties: {
     environment: environment
   }
 }
-//APP
+//APPBASE
 
 //CONTAINER
-resource todoFrontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'frontend'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
-    //IMAGE
     container: {
       image: 'radius.azurecr.io/webapptutorial-todoapp'
+      ports: {
+        web: {
+          containerPort: 3000
+          provides: frontendRoute.id
+        }
+      }
+      env: {
+        DBCONNECTION: db.connectionString()
+      }
     }
-    //IMAGE
     connections: {
-      mongodb: {
+      itemstore: {
         source: db.id
       }
     }
-  } 
+  }
+}
+
+resource frontendRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
+  name: 'http-route'
+  location: 'global'
+  properties: {
+    application: app.id
+  }
 }
 //CONTAINER
 
-resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
-  name: 'db'
-  location: location
+//GATEWAY
+resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
+  name: 'public'
+  location: 'global'
   properties: {
-    environment: environment
-    resource: cosmosAccount::cosmosDb.id
-  }
-}
-
-resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2021-04-15' = {
-  name: toLower(accountName)
-  location: location
-  kind: 'MongoDB'
-  properties: {
-    databaseAccountOfferType: 'Standard'
-    consistencyPolicy: {
-      defaultConsistencyLevel: 'Session'
-    }
-    locations: [
+    application: app.id
+    routes: [
       {
-        locationName: location
+         destination: frontendRoute.id
       }
     ]
   }
-  
+}
+//GATEWAY
 
-  resource cosmosDb 'mongodbDatabases' = {
-    name: 'db'
-    properties: {
-      resource: {
-        id: 'db'
-      }
-      options: {
-        throughput: 400
-      }
+//DATABASE
+resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
+  name: 'db'
+  location: 'global'
+  dependsOn: [
+    mongo
+  ]
+  properties: {
+    environment: app.properties.environment
+    application: app.id
+    secrets: {
+      connectionString: 'mongodb://db:27017/db?authSource=admin'
     }
   }
-
 }
 
+module mongo 'azure-cosmosdb.bicep' = {
+  name: 'mongo-module'
+  params: {
+    name: 'db'
+  }
+}
+//DATABASE
