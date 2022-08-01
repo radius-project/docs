@@ -3,6 +3,8 @@ import radius as radius
 
 param environment string
 
+param location string = resourceGroup().location
+
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'webapp'
   location: 'global'
@@ -84,6 +86,7 @@ module mongo 'azure-cosmosdb.bicep' = {
   name: 'mongo-module'
   params: {
     name: 'webappdb'
-  }
+    location: location
+}
 }
 //MONGOMODULE
