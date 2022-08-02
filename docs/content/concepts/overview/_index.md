@@ -81,7 +81,7 @@ The Radius app model is designed to be portable across all Radius-supported plat
 
 ### Consistent tooling
 
-As teams onboard to Project Radius and begin deploying across platforms, the tooling and experiences are consistent everywhere. The [rad CLI]({{< ref cli >}}) and [Radius VS Code extension]({{< ref vscode >}}) work across every platform and environment. This allows teams to easily scale across platforms and be productive everywhere.
+As teams onboard to Project Radius and begin deploying across platforms, the tooling and experiences are consistent everywhere. The [rad CLI]({{< ref cli >}}) works across every platform and environment. This allows teams to easily scale across platforms and be productive everywhere.
 
 ## Next step
 
