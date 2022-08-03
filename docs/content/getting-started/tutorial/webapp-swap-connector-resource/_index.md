@@ -17,10 +17,6 @@ Make sure you have the [environment initialized with Azure cloud provider]({{<re
 
 ## Swap the connector for an Azure resource
 
-The app.bicep from the previous step should look like this 
-
-{{< rad file="snippets/app.bicep" embed=true >}}
-
 Simply swap out the module file referenced for the Mongo infrastructure resource, changing "mongo-container.bicep" to "azure-cosmodb.bicep" in the last resource of the file.
 {{< rad file="snippets/app-azure.bicep" embed=true marker="//MONGOMODULE">}}
 
@@ -30,9 +26,7 @@ You need to also add the location parameter. This is intermediate step
 param location string = resourceGroup().location
 ```
 
-Your final bicep file should look like below 
-
-Your app.bicep file should look like below 
+Your final app.bicep file should look like below 
 
 {{< rad file="snippets/app-azure.bicep" embed=true >}}
 
@@ -45,7 +39,7 @@ Your app.bicep file should look like below
    ```
    This may take a few minutes to create the database. On completion, you will see the following resources:
 
-     ```sh
+   ```sh
    Deployment In Progress:
 
     Completed            http-route      Applications.Core/httpRoutes
