@@ -11,10 +11,6 @@ no_list: true
 
 The `rad` CLI manages your applications, resources, and environments. Begin by installing it on your machine:
 
-{{% alert title="Note" color="info" %}}
-You may be prompted for your sudo password during installation.
-{{% /alert %}}
-
 {{< tabs Windows MacOS "Linux/WSL" "Cloud Shell" Binaries >}}
 
 {{% codetab %}}
@@ -94,6 +90,8 @@ PowerShell for Cloud Shell is currently not supported.
 {{% /codetab %}}
 
 {{< /tabs >}}
+
+> You may be prompted for your sudo password during installation. If you are unable to sudo you can install the rad CLI to another directory by setting the `RADIUS_INSTALL_DIR` environment variable with your intended install path.
 
 Verify the rad CLI is installed correctly by running `rad`. 
 
