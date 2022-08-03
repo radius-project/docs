@@ -19,7 +19,7 @@ A [connector]({{< ref connector-schema >}}) provides an infrastructure abstracti
 
 <img src="mongo-connector.png" width=450px alt="Diagram of a mongo connector" /><br />
 
- To learn more about connectors visit the [concepts docs]({{< ref connections-model >}})
+To learn more about connectors visit the [concepts docs]({{< ref appmodel-concept >}}
 
 ## Add database connector
 
@@ -32,11 +32,11 @@ Update your Bicep file to match the following to add a Mongo database connector 
 
 ### Connect to `db` from `frontend`
 
-Once the connector is referenced, you can connect to it by referencing the `db` component from within the `frontend` resource the [`connections`]({{< ref connections-model >}}) section:
+Once the connector is referenced, you can connect to it by referencing the `db` component from within the `frontend` resource the [`connections`]({{< ref appmodel-concept >}}) section:
 
 {{< rad file="snippets/app-container.bicep" embed=true marker="//CONTAINER" replace-key-dots="//IMAGE" replace-value-dots="container: {...}" >}}
 
-[Connections]({{< ref connections-model >}}) are used to configure relationships between two components. 
+[Connections]({{< ref appmodel-concept >}}) are used to configure relationships between two components. The `db` is of kind `mongo.com/MongoDB`, which supports the MongoDB protocol. This declares the *intention* from the `frontend` container to communicate with the `db` resource.
 
 Now that you have created a connection called `itemstore`, environment variables with connection information will be injected into the `frontend` container. The container reads the database connection string from an environment variable named `CONNECTION_ITEMSTORE_CONNECTIONSTRING`.
 

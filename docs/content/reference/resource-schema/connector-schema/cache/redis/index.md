@@ -7,31 +7,64 @@ description: "Learn how to use a Redis connector in your application"
 
 The `redislabs.com/Redis` connector is a [portable connector]({{< ref connectors >}}) which can be deployed to any platform Radius supports.
 
-## Supported resources
-
-- [Redis container](https://hub.docker.com/_/redis/)
-- [Azure Cache for Redis](https://docs.microsoft.com/en-us/azure/azure-cache-for-redis/cache-overview)
-
 ## Resource format
 
-The following top-level information is available in the resource:
+{{< tabs Resource Values >}}
+
+{{< codetab >}}
+{{< rad file="snippets/redis-resource.bicep" embed=true marker="//REDIS" >}}
+{{< /codetab >}}
+
+{{< codetab >}}
+{{< rad file="snippets/redis-values.bicep" embed=true marker="//REDIS" >}}
+{{< /codetab >}}
+
+{{< /tabs >}}
+
+### Top-level
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| name | y | The name of your resource. Used to provide status and visualize the resource. | `cache`
+| name | y | The name of your resource. | `cache`
+| location | y | The location of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `global`
+| [properties](#properties) | y | Properties of the resource. | [See below](#properties)
 
-### Provided data
+### Properties
 
-| Property | Description | Example(s) |
-|----------|-------------|------------|
-| `host`  | The Redis host name. | `redis.hello.com`
-| `port` | The Redis port. | `4242`
-| `username` | The username for connecting to the redis cache. |
-| `password()` | The password for connecting to the redis cache. Can be used for password and can be empty. | `d2Y2ba...`
+| Property | Required | Description | Example(s) |
+|----------|:--------:|-------------|------------|
+| application | n | The ID of the application resource this resource belongs to. | `app.id`
+| environment | y | The ID of the environment resource this resource belongs to. | `env.id`
+| resource  | n | The ID of the underlying resource for the connector. Used when building the connector from a resource. | `redisCache.id`
+| host | n | The Redis host name. | `redis.hello.com`
+| port | n | The Redis port. | `4242`
+| [secrets](#secrets) | n | Secrets used when building the connector from values. | [See below](#secrets)
+
+### Secrets
+
+| Property | Required | Description | Example(s) |
+|----------|:--------:|-------------|------------|
+| connectionString | n | The connection string for the Redis cache. Write only. | `https://mycache.redis.cache.windows.net,password=*****,....`
+| password | n | The password for the Redis cache. Write only. | `mypassword`
+
+## Methods
+
+The following methods are available on the Redis connector:
+
+| Method | Description |
+|--------|-------------|
+| connectionString() | Get the connection string for the Redis cache. |
+| password() | Get the password for the Redis cache. |
+
+## Supported resources
+
+The following resources are supported when building the connector from a resource using the `resource` property:
+
+- [Azure Cache for Redis](https://docs.microsoft.com/azure/azure-cache-for-redis/cache-overview)
 
 ## Connections
 
-[Services]({{< ref services >}}) can define [connections]({{< ref connections-model >}}) to connectors using the `connections` property. This allows the service to access properties of the connector and contributes to to visualization and health experiences.
+[Services]({{< ref services >}}) can define [connections]({{< ref appmodel-concept >}}) to connectors using the `connections` property. This allows the service to access properties of the connector and contributes to to visualization and health experiences.
 
 ### Environment variables
 

@@ -2,96 +2,89 @@
 type: docs
 title: Overview for Project Radius 
 linkTitle: Overview
-description: How Project Radius fits into the app development landscape and the long-term vision for its offerings. 
+description: Learn how Project Radius fits into the app development landscape and it's long-term vision
 weight: 100
 ---
 
-## Building cloud-native apps is too difficult today. 
+## Building cloud-native apps is too difficult today
 
-App developers don't have a way to view and manage apps holistically. Instead, they're drowning in lists of disjointed resources and connector information, Helm charts to pass around parameter values, and bash scripts to contain the logic needed to deploy the app. Plus, the range of infrastructure types (cloud, on-premises, serverless) can double or triple the work as teams figure out how to move apps between platforms. 
+App teams today struggle to model and deploy their applications. Complex architectures, cross-platform portability requirements, and org-level best-practices all make it difficult to not only model and deploy, but also maintain and troubleshoot large applications.
+
+Apps today are modeled and deployed with Dockerfiles, Kubernetes CRDs, Helm charts, and infrastructure-as-code templates, with scripts to glue it all together. Plus, the range of infrastructure types (cloud, on-premises, serverless) can double or triple the work as teams figure out how to move apps between platforms.
+
+<img alt="Diagram showing all of the technologies needed to model an application today" src="cloud-apps-today.png" width="600px" />
+
+Once deployed, teams don't have a way to view and manage apps holistically. Instead, they're drowning in lists of disjointed resources.
 
 What's missing is a way to collapse the entire concept of an application into a single entity so it can be deployed, managed, and scaled easily.
 
-## Project Radius empowers app developers to do more.
+## Project Radius empowers teams to focus on their apps
 
-{{< cardpane >}}
+### Build a unified concept of your application
 
-{{< card header="**Build a unified concept of your application**" >}}
-- Visualize the end-to-end app model. 
-- Investigate cross-app health and diagnostics, including dependencies and connections. 
-- Identify ownership and locate artifacts per component. 
-- Support handoffs between teams as the app matures. 
-{{< /card >}}
+At the heart of Project Radius is a new **application resource**, with an accompanying set of resources and abstractions to describe your app's requirements and capabilities. These resources form the [Radius app model]({{< ref appmodel-concept >}}).
 
-{{< card header="**Drastically reduce infra ops time**" >}}
-- Iterate quickly in a local dev environment, then scale that same app up in Azure or Kubernetes.
-- Stamp out versions of the app to the edge, to multiple geos, or even to multiple clouds. 
-- Follow best practices to be naturally secure by default, even with many teams working together. 
-- Easily layer IT policies across an app (access, backup, ...).
-{{< /card >}}
+<img alt="Diagram showing modeling an app with Project Radius" src="cloud-apps-radius.png" width="600px" />
 
-{{< /cardpane >}}
+These new resources form the [**Radius app model**]({{< ref appmodel-concept >}}), which allow you to:
 
+- Visualize the entire application, including its dependencies and relationships
+- Investigate cross-app health and diagnostics, including dependencies and connections
+- Identify ownership and locate artifacts
+- Support handoffs between teams as the app matures
 
-## Applications as code
+The result is no longer just a flat list of resources - it's a fully codified abstraction of how the services and infrastructure relate to each other:
 
-With the Radius app model, teams can easily codify and share pieces of an application. For example, a database owned by one team can seamlessly connect to a container with app code owned by a second team.  
-{{< rad file="snippets/appmodel-concept.bicep" embed=true >}}
+<img alt="Diagram showing Radius application in the Azure portal" src="ui-mockup-basic.png" width="700px" /><br />
 
-The result is no longer just a flat list of resources - it's a fully fledged diagram of how the pieces relate to each other.
-{{< imgproc ui-mockup-basic Fit "700x500">}}
-<i>An example app represented as a Radius Application.</i>
-{{< /imgproc >}}
+### Drastically reduce infra ops time
 
-We're committed to creating a dev experience users love. Developers can easily debug and iterate on that same app locally via VSCode as well. 
-<!-- TODO: make all these diagrams & code show the identically same app -->
-{{< imgproc vscode-mockup-basic Fit "700x500">}}
-<i>An example Radius Application represented in VSCode.</i>
-{{< /imgproc >}}
+[App environments]({{< ref environments-concept >}}) are landing zones for applications. They are the place where you can deploy, manage, and scale your apps.
 
+<img alt="Diagram showing Radius environments" src="environments.png" width="600px" />
 
-## A unified app language
+Environments allow you to:
 
-The Radius platform is comprised of a human-readable language for describing applications and a suite of supporting tools.  
+- Iterate quickly in an environment running locally, then scale that same app up in a production environment.
+- Stamp out versions of the app to the edge, to multiple geos, or even to multiple clouds
+- Follow best practices to be naturally secure by default, even with many teams working together
+- Easily layer IT policies across an app (access, backup, ...)
 
-Radius provides a flexibile model that meets developers where they need it to:  
-- Easy out-of-the-box defaults for basic scenarios.
-- Ability to tune low-level settings. With Radius, users can access all available properties of Azure Services. 
+### Model applications as code
 
-The Radius API provides a single way to manage applications based on a variety of services like Container Apps and Functions. 
+With the Radius app model, teams can easily codify and share pieces of an application. For example, a database owned by one team can seamlessly connect to a container with app code owned by a second team.
+
+{{< tabs Bicep >}}
+
+{{< codetab >}}
+{{< rad file="snippets/appmodel-concept.bicep" embed=true marker="//SNIPPET" replace-key-container="//CONTAINER" replace-value-container="container: {...}" replace-key-properties="//PROPERTIES" replace-value-properties="properties: {...}" >}}
+{{< /codetab >}}
+
+{{< /tabs >}}
+
+Radius uses the [Bicep language]({{< ref bicep >}}) as its file-format and structure. It offers:
+
+- A high quality authoring experience with modules, loops, parametrization, and templating
+- ARM Deployment Stacks as the declarative deployment/rollback mechanism
+- Ability to punch through abstractions to platform when necessary
+- Extensions to work with other providers (e.g. Kubernetes, Azure Active Directory, etc.)
 
 ## Platform strategy
 
 Project Radius aims to support all hosting platform types - from hyperscale cloud, to self-hosted Kubernetes on the edge, to IoT and edge devices.
 
-{{< imgproc platform-goals Fit "700x500" >}}
-{{< /imgproc >}}
+<img alt="Diagram showing Radius platforms" src="platforms.png" width="800px" />
 
-Our current focus is on delivering robust support for Azure, Kubernetes, and AWS. 
+### Application portability
 
-<!-- TODO - incorporate the below text pasted from the old App model index page  -->
-Project Radius provides a descriptive framework for cloud native applications and their requirements. 
+The Radius app model is designed to be portable across all Radius-supported platforms. Combined with connectors and other frameworks such as [Dapr](https://dapr.io/), teams can write their apps once and deploy to any Radius-enabled platform in minutes.
 
-## Deployable architecture diagrams
+### Consistent tooling
 
-Cloud-native applications are often designed and described using lines-and-boxes architecture diagrams as the starting point.
+As teams onboard to Project Radius and begin deploying across platforms, the tooling and experiences are consistent everywhere. The [rad CLI]({{< ref cli >}}) works across every platform and environment. This allows teams to easily scale across platforms and be productive everywhere.
 
-<!-- TODO: make this diagram match the app in the mockup below-->
-{{< imgproc app-diagram Fit "700x500" >}}
-<i>An example app represented as a block diagram.</i>
-{{< /imgproc >}}
+## Next step
 
-These diagrams often include:
-- Infrastructure resources, including databases, messages queues, API gateways, and secret stores
-- Services that run application code, such as containers.
-- Relationships between resources, like protocols, settings, and permissions
+Now that you have an overview of Project Radius, learn more about the Radius app model:
 
-Project Radius provides a way for developers to translate human-understandable application diagrams into human-understandable application code. 
-
-## App model language
-
-Radius uses the [Bicep language]({{< ref bicep >}}) as its file-format and structure. Bicep is an existing Microsoft language that offers:
-- A high quality authoring experience with modules, loops, parametrization, and templating
-- ARM Deployment Stacks as the declarative deployment/rollback mechanism
-- Ability to punch through abstractions to platform when necessary
-- Extensions to work with other providers (e.g. Kubernetes, Azure Active Directory, etc.)
+{{< button text="Learn about the app model" page="appmodel-concept" size="btn-lg" color="success" >}}

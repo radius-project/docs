@@ -19,16 +19,16 @@ It's easy to get Project Radius added to your GitHub Actions deployment pipeline
 This step is only required if you are targeting an AKS cluster or if you are deploying Azure resources with the [Azure cloud provider]({{< ref providers >}}). If your application does not use Azure resources, you can skip this step.
 {{% /alert %}}
 
-An Azure service principal is used to authenticate with Azure both for accessing your AKS cluster (if applicable), and deploying resources into your subscription and resource group(s). 
+An Azure service principal is used to authenticate with Azure both for accessing your AKS cluster (if applicable), and deploying resources into your subscription and resource group(s).
 
 You can also optionally separate your service principals if you want to separately access your AKS cluster and deploy Azure resources with separate service principals.
 
 1. Run the following command, making sure to change the values of `subscriptionId` to match your target scope. Note that an owner role is required in order to configure connections from containers to Azure resources.
 
    ```bash
-   az ad sp create-for-rbac -n "Radius deploy SP" --scopes /subscriptions/{subscriptionId} --role owner --sdk-auth
+   az ad sp create-for-rbac --scopes /subscriptions/{subscriptionId} --role owner --sdk-auth
    ```
-   
+
 1. Take the output of the above command and paste it into a [GitHub secret](https://docs.github.com/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) named `AZURE_CREDENTIALS`. This secret will be used to access your AKS cluster, if applicable.
 
 ## Step 2: Create an environment
@@ -57,6 +57,8 @@ Next, you will create the environment that you will be deploying your applicatio
     Specify the Kubernetes namepace you wish to use for application deployments.
 
     If you wish to deploy Azure resources, select the option to configure the Azure cloud provider, providing the values obtained in Step 1.
+
+    Note the name of the environment you used when creating the environment. For this example we will use `myenv`.
 
 ## Step 3: Create a workflow file
 
@@ -109,7 +111,7 @@ Ensure the service principal created above has the proper RBAC assignment to dow
 
 ### Download rad CLI and connect to environment
 
-Next, download the latest `rad` CLI release and connect to the environment you previously created:
+Next, download the latest `rad` CLI release and connect to the environment you previously created (in this example `myenv`):
 
 ```yml
     - name: Download rad CLI and rad-bicep
@@ -130,7 +132,7 @@ Finally, run the [`rad deploy`]({{< ref rad_deploy >}}) command to deploy your a
       run: ./rad deploy ./iac/app.bicep
 ```
 
-## Step 4: Commit and run your worflow
+## Step 4: Commit and run your workflow
 
 Commit and push your workflow to your repository. This will trigger your workflow to run, and your application to deploy:
 

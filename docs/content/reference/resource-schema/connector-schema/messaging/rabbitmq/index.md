@@ -7,20 +7,32 @@ description: "Learn how to use a RabbitMQ connector in your application"
 
 The `rabbitmq.com/MessageQueue` connector offers a [RabbitMQ message broker](https://www.rabbitmq.com/).
 
-## Supported resources
-
-- [RabbitMQ container](https://hub.docker.com/_/rabbitmq/)
-
 ## Resource format
 
-{{< rad file="snippets/rabbitmq.bicep" embed=true marker="//SAMPLE" >}}
+{{< tabs Values >}}
+
+{{< codetab >}}
+{{< rad file="snippets/rabbitmq-values.bicep" embed=true marker="//SAMPLE" >}}
+{{< /codetab >}}
+
+{{< /tabs >}}
+
+### Top-level
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| name | y | The name of your resource. | `mongo`
+| location | y | The location of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `global`
+| [properties](#properties) | y | Properties of the resource. | [See below](#properties)
 
 ### Properties
 
-| Property | Description | Example(s) |
-|----------|-------------|---------|
-| queue | The name of the queue. | `'orders'` |
-| secrets  | Configuration used to manually specify a RabbitMQ container or other service providing a RabbitMQ Queue. | See [secrets](#secrets) below.
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| application | n | The ID of the application resource this resource belongs to. | `app.id`
+| environment | y | The ID of the environment resource this resource belongs to. | `env.id`
+| queue | y | The name of the queue. | `'orders'` |
+| [secrets](#secrets)  | y | Configuration used to manually specify a RabbitMQ container or other service providing a RabbitMQ Queue. | See [secrets](#secrets) below.
 
 #### Secrets
 
@@ -28,9 +40,9 @@ Secrets are used when defining a RabbitMQ connector with a container or external
 
 | Property | Description | Example |
 |----------|-------------|---------|
-| connectionString | The connection string to the Rabbit MQ Message Queue. Recommended to use parameters and variables to craft. | `'amqp://${username}:${password}@${rmqContainer.properties.hostname}:${rmqContainer.properties.port}'`
+| connectionString | The connection string to the Rabbit MQ Message Queue. Write only | `'amqp://${username}:${password}@${rmqContainer.properties.hostname}:${rmqContainer.properties.port}'`
 
-### Functions
+## Methods
 
 | Property | Description | Example |
 |----------|-------------|---------|
@@ -38,7 +50,7 @@ Secrets are used when defining a RabbitMQ connector with a container or external
 
 ## Connections
 
-[Services]({{< ref services >}}) can define [connections]({{< ref connections-model >}}) to connectors using the `connections` property. This allows the service to access properties of the connector and contributes to to visualization and health experiences.
+[Services]({{< ref services >}}) can define [connections]({{< ref appmodel-concept >}}) to connectors using the `connections` property. This allows the service to access properties of the connector and contributes to to visualization and health experiences.
 
 ### Environment variables
 

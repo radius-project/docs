@@ -120,10 +120,10 @@ rad env init kubernetes
 
 ## Install VS Code extension (optional)
 
-Optionally install the Radius [Visual Studio Code](https://code.visualstudio.com/) extensions for syntax highlighting, auto-completion, and linting.
+Optionally install the Radius Bicep [Visual Studio Code](https://code.visualstudio.com/) extension for syntax highlighting, auto-completion, and linting.
 
 {{% alert title="Note" color="primary" %}}
-While Project Radius is in preview two separate extensions are required, one for Bicep highlighting and one for interacting with Radius applications. In a future release, these will be combined into a single extension.
+While Project Radius is in preview we offer an extension for Bicep highlighting.
 {{% /alert %}}
 
 1. Download the latest extensions
@@ -133,27 +133,30 @@ While Project Radius is in preview two separate extensions are required, one for
    {{% codetab %}}
    {{< button link="https://get.radapp.dev/tools/vscode-extensibility/stable/rad-vscode-bicep.vsix" text="Download Bicep extension" >}}
 
-   {{< button link="https://radiuspublic.blob.core.windows.net/tools/vscode/stable/rad-vscode.vsix" text="Download Radius extension" >}}
-
    {{< edge >}}
    {{< button link="https://radiuspublic.blob.core.windows.net/tools/vscode-extensibility/edge/rad-vscode-bicep.vsix" text="Download Bicep extension (edge)" >}}
-
-   {{< button link="https://radiuspublic.blob.core.windows.net/tools/vscode/edge/rad-vscode.vsix" text="Download Radius extension (edge)" >}}
    {{< /edge >}}
    {{% /codetab %}}
 
    {{% codetab %}}
 
+   Stable Version
+
    ```bash
    curl https://radiuspublic.blob.core.windows.net/tools/vscode/stable/rad-vscode-bicep.vsix --output rad-vscode-bicep.vsix
-   curl https://radiuspublic.blob.core.windows.net/tools/vscode/stable/rad-vscode.vsix --output rad-vscode.vsix
+   ```
+
+   Edge Version
+
+   ```bash
+   curl https://radiuspublic.blob.core.windows.net/tools/vscode-extensibility/edge/rad-vscode-bicep.vsix --output rad-vscode-bicep.vsix
    ```
 
    {{% /codetab %}}
 
    {{< /tabs >}}
 
-2. Install the `.vsix` files:
+2. Install the `.vsix` file:
 
    {{< tabs UI Terminal >}}
 

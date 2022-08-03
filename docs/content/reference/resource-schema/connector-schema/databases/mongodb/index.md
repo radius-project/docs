@@ -7,47 +7,66 @@ description: "Learn how to use a MongoDB connector in your application"
 
 The `mongodb.com/MongoDatabase` connector is a [portable connector]({{< ref connectors >}}) which can be deployed to any platform Radius supports.
 
-## Supported resources
-
-- [MongoDB container](https://hub.docker.com/_/mongo/)
-- [Azure CosmosDB API for MongoDB](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction)
-
 ## Resource format
+
+{{< tabs Resource Values >}}
+
+{{< codetab >}}
+{{< rad file="snippets/mongo-resource.bicep" embed=true marker="//MONGO" >}}
+{{< /codetab >}}
+
+{{< codetab >}}
+{{< rad file="snippets/mongo-values.bicep" embed=true marker="//MONGO" >}}
+{{< /codetab >}}
+
+{{< /tabs >}}
+
+### Top-level
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| name | y | The name of your resource. | `mongo`
+| location | y | The location of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `global`
+| [properties](#properties) | y | Properties of the resource. | [See below](#properties)
 
 ### Properties
 
-A `resource` or set of `secrets` must be set to configure a MongoDB connector. Azure resources use `resource`, where properties and secrets are automatically generated from the Azure resource. Other workloads must manually configure `secrets`.
+| Property | Required | Description | Example(s) |
+|----------|:--------:|-------------|------------|
+| application | n | The ID of the application resource this resource belongs to. | `app.id`
+| environment | y | The ID of the environment resource this resource belongs to. | `env.id`
+| resource  | n | The ID of the underlying resource for the connector. Used when building the connector from a resource. | `cosmosDatabase.id`
+| host | n | The Redis host name. | `mongo.hello.com`
+| port | n | The Redis port. | `4242`
+| [secrets](#secrets) | n | Secrets used when building the connector from values. | [See below](#secrets)
 
-| Property | Description | Example |
-|----------|-------------|---------|
-| resource | The ID of a CosmosDB with Mongo API database to use for this connector. | `account::mongodb.id`
-| secrets  | Configuration used to manually specify a Mongo container or other service providing a MongoDB. | See [secrets](#secrets) below.
+### Secrets
 
-#### Secrets
+| Property | Required | Description | Example(s) |
+|----------|:--------:|-------------|------------|
+| connectionString | n | The connection string for the MongoDb. Write only. | `'https://mymongo.cluster.svc.local,password=*****,....'`
+| username | n | The username for the MongoDb. Write only. | `'myusername'`
+| password | n | The password for the Redis cache. Write only. | `'mypassword'`
 
-Secrets are used when defining a MongoDB connector with a non-Azure Mongo service, such as a container.
+## Methods
 
-| Property | Description | Example |
-|----------|-------------|---------|
-| connectionString | The connection string to the MongoDB. Recommended to use parameters and variables to craft. | `mongodb://${userName}:${password}@${container.spec.hostname}:...`
-| username | The username to use when connecting to the MongoDB. | `admin`
-| password | The password to use when connecting to the MongoDB. | `password`
+The following methods are available on the Redis connector:
 
-### Provided data
+| Method | Description |
+|--------|-------------|
+| connectionString() | Get the connection string for the MongoDb. |
+| username() | Get the username for the MongoDb. |
+| password() | Get the password for the MongoDb. |
 
-#### Functions
+## Supported resources
 
-Secrets must be accessed via Bicep functions to ensure they're not leaked or logged.
+The following resources are supported when building the connector from a resource using the `resource` property:
 
-| Bicep function | Description | Example |
-|----------------|-------------|---------|
-| `connectionString()` | Returns the connection string for the MongoDB. | `mongodb.connectionString()` |
-| `username()` | Returns the username for the MongoDB. | `mongodb.username()` |
-| `password()` | Returns the password for the MongoDB. | `mongodb.password()` |
+- [Azure CosmosDB API for MongoDB](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction)
 
 ## Connections
 
-[Services]({{< ref services >}}) can define [connections]({{< ref connections-model >}}) to connectors using the `connections` property. This allows the service to access properties of the connector and contributes to to visualization and health experiences.
+[Services]({{< ref services >}}) can define [connections]({{< ref appmodel-concept >}}) to connectors using the `connections` property. This allows the service to access properties of the connector and contributes to to visualization and health experiences.
 
 ### Environment variables
 
