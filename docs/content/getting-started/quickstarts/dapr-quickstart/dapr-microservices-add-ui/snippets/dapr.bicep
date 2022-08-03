@@ -124,7 +124,7 @@ resource stateStore 'Applications.Connector/daprStateStores@2022-03-15-privatepr
 // Redis Kubernetes resources
 ////////////////////////////////////////////////////////////////////
 
-import kubernetes as kubernetes{
+import kubernetes as kubernetes {
   kubeConfig: ''
   namespace: 'default'
 }
