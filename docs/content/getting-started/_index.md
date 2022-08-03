@@ -91,6 +91,8 @@ PowerShell for Cloud Shell is currently not supported.
 
 {{< /tabs >}}
 
+> You may be prompted for your sudo password during installation. If you are unable to sudo you can install the rad CLI to another directory by setting the `RADIUS_INSTALL_DIR` environment variable with your intended install path.
+
 Verify the rad CLI is installed correctly by running `rad`. 
 
 ## Try out Radius on GitHub Codespaces
