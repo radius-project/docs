@@ -45,7 +45,7 @@ Additionally, a [Gateway]({{< ref gateway >}}) and an [HttpRoute]({{< ref httpro
    rad deploy dapr.bicep
    ```
 
-   Now that we added a `Gateway` and an `HttpRoute`, a public endpoint will be available to your application.
+   Now that we added a `Gateway` and an `HttpRoute`, a public endpoint will be available to your application automatically ([learn more]({{< ref "gateway#hostname-generation">}})).
 
    ```sh
    Public Endpoints:
