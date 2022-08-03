@@ -144,7 +144,7 @@ Below are some of the alternate options available to do a step by step environme
    dapr-operator             1/1     1            1           35s
    ```
 
-1. Use `rad env init kubernetes` to create an environment resource and configure [cloud provider]({{<ref providers>}}) if needed, with -i option.
+1. Use `rad env init kubernetes` to create an environment resource and configure an Azure [cloud provider]({{<ref providers>}}) if needed. Either the `-i` interactive setup or `--provider` flags can be used to specify the Azure connection information.
     {{% alert title="💡 rad command" color="success" %}}`rad env init kubernetes` also installs Radius control plane if not already installed  .
     {{% /alert %}}
 
