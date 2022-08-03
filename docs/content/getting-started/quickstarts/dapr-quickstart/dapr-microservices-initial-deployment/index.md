@@ -67,7 +67,7 @@ Now you are ready to deploy the application for the first time.
 
 1. Visit the URL [http://localhost:3000/order](http://localhost:3000/order) in your browser. For now, you should see a message like:
 
-   ```
+   ```json
    {"message":"The container is running, but Dapr has not been configured."}
    ```
 
