@@ -9,26 +9,31 @@ slug: "statestore"
 
 ## Overview
 
-A `dapr.io/StateStore` resource represents a [Dapr state store](https://docs.dapr.io/developing-applications/building-blocks/state-management/) topic.
+A `Applications.Connector/daprStateStores` resource represents a [Dapr state store](https://docs.dapr.io/developing-applications/building-blocks/state-management/) topic.
 
 This resource will automatically create and deploy the Dapr component spec for the state store.
 
+## Resource format
+
 {{< rad file="snippets/dapr-statestore-tablestorage.bicep" embed=true marker="//SAMPLE" >}}
 
-| Property | Description | Example |
-|----------|-------------|---------|
-| name | The name of the pub/sub | `my-pubsub` |
-| properties | Properties of the pub/sub | See [Properties](#properties) below |
+### Top-level
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| name | y | The name of the resource. | `my-statestore` |
+| location | y | The location of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `global`
+| [properties](#properties) | y | Properties of the resource. | [See below](#properties)
 
 ### Properties
 
-| Property | Description | Example |
-|----------|-------------|---------|
-| kind | The kind of the underlying state store resource. See [Available Dapr components](#available-dapr-components) for more information. | `state.azure.tablestorage`
-| resource | The ID of the storage resource, if a non-generic `kind` is used. | `account::tables.id`
-| type | The Dapr component type. Used when kind is `generic`. | `state.couchbase`
-| metadata | Metadata for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-state-stores/) | `couchbaseURL: https://*****` |
-| version | The version of the Dapr component. See [Dapr components](https://docs.dapr.io/reference/components-reference/supported-state-stores/) for available versions. | `v1` |
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| kind | y | The kind of the underlying state store resource. See [Available Dapr components](#available-dapr-components) for more information. | `state.azure.tablestorage`
+| resource | n | The ID of the storage resource, if a non-generic `kind` is used. | `account::tables.id`
+| type | n | The Dapr component type. Used when kind is `generic`. | `state.couchbase`
+| metadata | n | Metadata for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-state-stores/) | `couchbaseURL: https://*****` |
+| version | n | The version of the Dapr component. See [Dapr components](https://docs.dapr.io/reference/components-reference/supported-state-stores/) for available versions. | `v1` |
 
 ## Available Dapr components
 
