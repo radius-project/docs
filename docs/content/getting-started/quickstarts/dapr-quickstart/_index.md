@@ -33,7 +33,7 @@ In this tutorial, you will:
   - [kubectl CLI](https://kubernetes.io/docs/tasks/tools/) for local and Kubernetes environments
   
 - [Install Visual Studio Code](https://code.visualstudio.com/) (recommended)
-  - The [Radius VSCode extension]({{< ref "getting-started#setup-vscode" >}}) provides syntax highlighting, completion, and linting.
+  - The [Radius Bicep VSCode extension]({{< ref "getting-started#setup-vscode" >}}) provides syntax highlighting, completion, and linting.
   - You can also complete this tutorial with any basic text editor.
 
 ### Initialize a Radius environment

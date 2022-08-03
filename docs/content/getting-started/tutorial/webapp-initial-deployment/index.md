@@ -144,8 +144,7 @@ Now you are ready to deploy the application for the first time.
    - Mark a todo item as complete
    - Delete a todo item
 
-
 ## Handoff
 This step closely relates to how the enterprises do hand-offs between different personas involved in the deployment. As a developer you have tested the application with a mongo container and would like to handoff the deployment to the infra-admin for deployments to other environments. The infra-admin can now set up a Radius environment with Azure cloud provider configured and can use the same app bicep template to provision an Azure resource via the connector. This ensures that you are able to port your application to different environments with minimal rewrites.
 
-<br> {{< button text="Previous step: Initialize an environment" page="webapp-initialize-environment" newline="false" >}} {{< button text="Next step: Swap connector resource" page="webapp-swap-connector-resource" >}}
+<br> {{< button text="Previous step: Initialize an environment" page="webapp-initialize-environment" newline="false" >}}{{< button text="Next step: Add a database connector" page="webapp-add-database" >}} 
