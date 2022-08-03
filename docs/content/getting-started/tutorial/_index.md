@@ -35,7 +35,7 @@ This tutorial contains the following sections:
   - [K3s](https://k3s.io), a lightweight single-binary certified Kubernetes distribution from Rancher.
   - Another Kubernetes provider of your choice.
 - [Install Visual Studio Code](https://code.visualstudio.com/) (recommended)
-  - The [Radius VSCode extension]({{< ref "getting-started#install-vs-code-extension-optional" >}}) provides syntax highlighting, completion, and linting.
+  - The [Radius Bicep VSCode extension]({{< ref "getting-started#install-vs-code-extension-optional" >}}) provides syntax highlighting, completion, and linting.
   - You can also complete this tutorial with any basic text editor.
 
 <br>{{< button text="Next step: App overview" page="webapp-overview" >}}
