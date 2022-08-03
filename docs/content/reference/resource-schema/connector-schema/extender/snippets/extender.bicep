@@ -10,7 +10,8 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
     environment: environment
   }
 }
-  
+
+//EXTENDER
 resource twilio 'Applications.Connector/extenders@2022-03-15-privatepreview' = {
   name: 'twilio'
   location: location
@@ -24,6 +25,7 @@ resource twilio 'Applications.Connector/extenders@2022-03-15-privatepreview' = {
     }
   }
 }
+//EXTENDER
 
 resource publisher 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'publisher'

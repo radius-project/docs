@@ -13,21 +13,26 @@ A `dapr.io/SecretStore` resource represents a [Dapr secret store](https://docs.d
 
 This resource will automatically create and deploy the Dapr component spec for the secret store.
 
+## Resource format
+
 {{< rad file="snippets/dapr-secretstore-generic.bicep" embed=true marker="//SAMPLE" >}}
 
-| Property | Description | Example |
-|----------|-------------|---------|
-| name | The name of the secret store | `secretstore-generic` |
-| properties | Properties of the secret store| See [Properties](#properties) below |
+### Top-level
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| name | y | The name of the resource. | `my-secretstore` |
+| location | y | The location of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `global`
+| [properties](#properties) | y | Properties of the resource. | [See below](#properties)
 
 ### Properties
 
-| Property | Description | Example |
-|----------|-------------|---------|
-| kind | The kind of the underlying secret store resource. See [Available Dapr components](#available-dapr-components) for more information. | `secretstores.azure.keyvault`
-| type | The Dapr component type. Used when kind is `generic`. | `secretstores.azure.keyvault`
-| metadata | Metadata for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-secret-stores/) | `vaultName: 'test'` |
-| version | The version of the Dapr component. See [Dapr components](https://docs.dapr.io/reference/components-reference/supported-secret-stores/) for available versions. | `v1` |
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| kind | y | The kind of the underlying secret store resource. See [Available Dapr components](#available-dapr-components) for more information. | `secretstores.azure.keyvault`
+| type | n | The Dapr component type. Used when kind is `generic`. | `secretstores.azure.keyvault`
+| metadata | n | Metadata for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-secret-stores/) | `vaultName: 'test'` |
+| version | n | The version of the Dapr component. See [Dapr components](https://docs.dapr.io/reference/components-reference/supported-secret-stores/) for available versions. | `v1` |
 
 ## Available Dapr components
 
@@ -35,7 +40,7 @@ The following resources can act as a `dapr.io.SecretStore` resource:
 
 | kind | Resource |
 |------|----------|
-| `generic` | Generic
+| `generic` | [See below](#generic)
 
 ### Generic
 

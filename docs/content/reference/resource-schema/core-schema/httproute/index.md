@@ -10,30 +10,23 @@ weight: 400
 
 {{< rad file="snippets/httproute.bicep" embed=true marker="//HTTPROUTE" >}}
 
-The following top-level information is available:
+### Top-level
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | name | y | The name of your HttpRoute. Used to provide status and visualize the resource. | `'web'`
-
-## Provided Data
-
-The following data is available for use from the consuming service:
+| location | y | The location of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `global`
+| [properties](#properties) | y | Properties of the resource. | [See below](#properties)
 
 ### Properties
 
 | Property | Description | Example |
 |----------|-------------|-------------|
-| host | The hostname of the HTTP endpoint | `example.com` |
-| port | The port of the HTTP endpoint | `80` |
-| scheme | The scheme of the HTTP endpoint | `http` |
-| url | The full URL of the HTTP endpoint | `http://example.com:80` |
-
-## Service compatibility
-
-| Service | Azure | Kubernetes |
-|-----------|:-----:|:----------:|
-| [`Container`]({{< ref container >}}) | ✅ | ✅ |
+| application | y | The ID of the application resource this resource belongs to. | `app.id`
+| hostname | The internal hostname accepting traffic for the HTTP Route. Read only. | `example.com` |
+| port | The port number for the HTTP Route. Defaults to 80. Read only. | `80` |
+| scheme | The scheme used for traffic. Read only. | `http` |
+| url | A stable URL that that can be used to route traffic to a resource. Read only. | `http://example.com:80` |
 
 ## Example
 
