@@ -1,8 +1,8 @@
 ---
 type: docs
 title: "Deploy the application with the frontend service and database"
-linkTitle: "Deploy initial app"
-description: "Define the initial application definition"
+linkTitle: "Author and deploy app"
+description: "Author and deploy the application"
 weight: 2000
 slug: "frontend"
 ---
@@ -60,7 +60,7 @@ Lets look at the definition to add a Mongo database connector backed by a mongo 
 
 Below is the definition to add a mongo database connector
 
-{{< rad file="snippets/app.bicep" embed=true marker="//DATABASE" >}}
+{{< rad file="snippets/app.bicep" embed=true marker="//DATABASE CONNECTOR" >}}
 
 ### Mongo container 
 

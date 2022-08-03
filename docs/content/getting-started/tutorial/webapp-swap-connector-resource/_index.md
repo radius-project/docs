@@ -24,6 +24,18 @@ The app.bicep from the previous step should look like this
 Simply swap out the module file referenced for the Mongo infrastructure resource, changing "mongo-container.bicep" to "azure-cosmodb.bicep" in the last resource of the file.
 {{< rad file="snippets/app-azure.bicep" embed=true marker="//MONGOMODULE">}}
 
+You need to also add the location parameter. This is intermediate step 
+
+```sh
+param location string = resourceGroup().location
+```
+
+Your final bicep file should look like below 
+
+Your app.bicep file should look like below 
+
+{{< rad file="snippets/app-azure.bicep" embed=true >}}
+
 ## Deploy the application with Azure database
 
 1. In a terminal window deploy the app.bicep file :
@@ -73,4 +85,4 @@ Simply swap out the module file referenced for the Mongo infrastructure resource
 
 {{% alert title="Delete application" color="warning" %}} If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to prevent additional charges in your Azure subscription. {{% /alert %}}
 
-{{<button text="Previous step: Deploy initial app" page="webapp-initial-deployment">}}
+{{<button text="Previous step: Author and deploy app" page="webapp-initial-deployment">}}
