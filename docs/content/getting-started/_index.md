@@ -105,6 +105,10 @@ If in case you'd prefer to run a dev container on your local machine, the [Radiu
 
 After you launching your codespace or dev container, navigate into your desired sample application directory and run `rad app deploy` to see Radius in action.
 
+## Deploy a Kubernetes cluster
+
+Project Radius currently supports deploying applications to Kubernetes environments. Visit the [supported clusters guide]({{< ref "kubernetes#supported-clusters" >}}) to deploy a new cluster.
+
 ## Create a Radius environment
 
 A Radius environment is where you will deploy your applications. Easily deploy a new environment with the [`rad env init`]({{< ref rad_env_init >}}) command:
