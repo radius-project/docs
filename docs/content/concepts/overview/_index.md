@@ -8,7 +8,7 @@ weight: 100
 
 ## Building cloud-native apps is too difficult today
 
-App teams today struggle to model and deploy their applicatations. Complex architectures, cross-platform portability requirements, and org-level best-practices all make it difficult to not only model and deploy, but also maintain and troubleshoot large applications.
+App teams today struggle to model and deploy their applications. Complex architectures, cross-platform portability requirements, and org-level best-practices all make it difficult to not only model and deploy, but also maintain and troubleshoot large applications.
 
 Apps today are modeled and deployed with Dockerfiles, Kubernetes CRDs, Helm charts, and infrastructure-as-code templates, with scripts to glue it all together. Plus, the range of infrastructure types (cloud, on-premises, serverless) can double or triple the work as teams figure out how to move apps between platforms.
 
@@ -81,7 +81,7 @@ The Radius app model is designed to be portable across all Radius-supported plat
 
 ### Consistent tooling
 
-As teams onboard to Project Radius and begin deploying across platforms, the tooling and experiences are consistent everywhere. The [rad CLI]({{< ref cli >}}) and [Radius VS Code extension]({{< ref vscode >}}) work across every platform and environment. This allows teams to easily scale across platforms and be productive everywhere.
+As teams onboard to Project Radius and begin deploying across platforms, the tooling and experiences are consistent everywhere. The [rad CLI]({{< ref cli >}}) works across every platform and environment. This allows teams to easily scale across platforms and be productive everywhere.
 
 ## Next step
 

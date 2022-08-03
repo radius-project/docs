@@ -10,18 +10,21 @@ weight: 401
 
 {{< rad file="snippets/gateway.bicep" embed=true marker="//GATEWAY" >}}
 
-The following top-level information is available:
+### Top-level
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | name | y | The name of your Gateway. | `'gateway'`
+| location | y | The location of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `global`
+| [properties](#properties) | y | Properties of the resource. | [See below](#properties)
 
 ### Properties
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| hostname | n | The hostname information for this gateway. | [See below](#hostname)
-| routes | y | The routes attached to this gateway. | [See below](#routes)
+| application | y | The ID of the application resource this resource belongs to. | `app.id`
+| [hostname](#hostname) | n | The hostname information for this gateway. | [See below](#hostname)
+| [routes](#routes) | y | The routes attached to this gateway. | [See below](#routes)
 
 #### Routes
 

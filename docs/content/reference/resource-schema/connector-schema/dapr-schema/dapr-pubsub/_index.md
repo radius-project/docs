@@ -1,42 +1,47 @@
 ---
 type: docs
 title: "Dapr Pub/Sub resource"
-linkTitle: "Pub/Sub Topic"
-description: "Learn how to use Dapr Pub/Sub resources in Radius"
+linkTitle: "Publish/subscribe"
+description: "Learn how to use Dapr Pub/Sub in Radius"
 weight: 300
 slug: "pubsub"
 ---
 
 ## Overview
 
-A `dapr.io/PubSubTopic` resource represents a [Dapr pub/sub](https://docs.dapr.io/developing-applications/building-blocks/pubsub/pubsub-overview/) topic.
+A `Applications.Connector/daprPubSubBrokers` resource represents a [Dapr pub/sub](https://docs.dapr.io/developing-applications/building-blocks/pubsub/pubsub-overview/) topic.
 
 This resource will automatically create and deploy the Dapr component spec for the specified kind.
 
 {{< rad file="snippets/dapr-pubsub-servicebus.bicep" embed=true marker="//SAMPLE" >}}
 
-| Property | Description | Example |
-|----------|-------------|---------|
-| name | The name of the pub/sub | `my-pubsub` |
-| properties | Properties of the pub/sub | See [Properties](#properties) below |
+### Top-level
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| name | y | The name of the pub/sub | `my-pubsub` |
+| location | y | The location of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `global`
+| [properties](#properties) | y | Properties of the resource. | [See below](#properties)
 
 ### Properties
 
-| Property | Description | Example |
-|----------|-------------|---------|
-| kind | The kind of the underlying pub/sub resource. See [Available Dapr components](#available-dapr-components) for more information. | `pubsub.azure.servicebus`
-| resource | The ID of the mesage broker, if a non-generic `kind` is used. | `namespace::topic.id`
-| type | The Dapr component type. Used when kind is `generic`. | `pubsub.kafka` |
-| metadata | Metadata for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-pubsub/) | `brokers: kafkaRoute.properties.url` |
-| version | The version of the Dapr component. See [Dapr components](https://docs.dapr.io/reference/components-reference/supported-pubsub/) for available versions. | `v1` |
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| application | n | The ID of the application resource this resource belongs to. | `app.id`
+| environment | y | The ID of the environment resource this resource belongs to. | `env.id`
+| kind | y | The kind of the underlying pub/sub resource. See [Available Dapr components](#available-dapr-components) for more information. | `pubsub.azure.servicebus`
+| resource | n | The ID of the mesage broker, if a non-generic `kind` is used. | `namespace::topic.id`
+| type | n |The Dapr component type. Used when kind is `generic`. | `pubsub.kafka` |
+| metadata | n | Metadata for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-pubsub/) | `brokers: kafkaRoute.properties.url` |
+| version | n | The version of the Dapr component. See [Dapr components](https://docs.dapr.io/reference/components-reference/supported-pubsub/) for available versions. | `v1` |
 
-## Avilable Dapr components
+## Available Dapr components
 
 The following resources can act as a `dapr.io.PubSubTopic` kinds:
 
 | kind | Resource |
 |------|----------|
-| `state.azure.servicebus` | [Azure Service Bus](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-messaging-overview)
+| `state.azure.servicebus` | [Azure Service Bus](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-messaging-overview).
 | `generic` | [Any Dapr pub/sub component](https://docs.dapr.io/reference/components-reference/supported-pubsub/)
 
 ### Azure Service Bus Topic

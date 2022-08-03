@@ -8,7 +8,7 @@ weight: 100
 
 ## Overview
 
-The `Applications.Core/manualScaling` extension configures the number of replicas of a compute instance (such as a container) to run.
+The `manualScaling` extension configures the number of replicas of a compute instance (such as a container) to run.
 
 ## Extension format
 
@@ -20,10 +20,5 @@ In this example, a [container service]({{< ref container >}}) adds a manual scal
 
 | Property | Required | Description | Example |
 |----------|:--------:|-------------|---------|
+| kind | y | The kind of extension. | `manualScaling`
 | replicas | Y | The number of replicas to run | `5` |
-
-## Service compatibility
-
-| Service | Azure | Kubernetes |
-|-----------|:-----:|:----------:|
-| [`Container`]({{< ref container >}}) | ✅ | ✅ |
