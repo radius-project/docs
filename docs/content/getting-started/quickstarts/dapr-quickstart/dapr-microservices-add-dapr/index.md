@@ -36,6 +36,7 @@ You can choose between a Redis container or Azure Table Storage
 {{< tabs "Redis Container" "Azure Table Storage" >}}
 
 {{< codetab >}}
+
 {{< rad file="snippets/statestore.bicep" embed=true marker="//SAMPLE" >}}
 {{< /codetab >}}
 

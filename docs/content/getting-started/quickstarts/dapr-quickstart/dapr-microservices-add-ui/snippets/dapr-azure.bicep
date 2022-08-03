@@ -17,7 +17,7 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   properties: {
     application: app.id
     container: {
-      image: 'radius.azurecr.io/daprtutorial-backend:latest'
+      image: 'radius.azurecr.io/qucikstart/dapr-backend:edge'
       ports: {
         web: {
           containerPort: 3000
@@ -56,7 +56,7 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   properties: {
     application: app.id
     container: {
-      image: 'radius.azurecr.io/daprtutorial-frontend:latest'
+      image: 'radius.azurecr.io/quickstarts/dapr-frontend:edge'
       ports: {
         ui: {
           containerPort: 80
@@ -126,13 +126,7 @@ resource stateStore 'Applications.Connector/daprStateStores@2022-03-15-privatepr
   properties: {
     environment: environment
     application: app.id
-    kind: 'generic'
-    type: 'state.azure.tablestorage'
-    version: 'v1'
-    metadata: {
-      accountName: account.name
-      accountKey: account.listKeys().keys[0].value
-      tableName: split(account::tableServices::table.name,'/')[2] 
-    }
+    kind: 'state.azure.tablestorage'
+    resource: account::tableServices::table.id
   }
 }

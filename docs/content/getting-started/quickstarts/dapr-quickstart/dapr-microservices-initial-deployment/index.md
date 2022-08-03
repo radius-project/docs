@@ -23,7 +23,7 @@ Radius captures the relationships and intentions behind an application, which si
 
 Your `backend` resource, which has resource type Container, will specify:
 
-- **container image:** `radius.azurecr.io/daprtutorial-backend`, a Docker image the container will run. This is where your application's backend code lives.
+- **container image:** `radius.azurecr.io/quickstarts/dapr-backend:edge`, a Docker image the container will run. This is where your application's backend code lives.
 - **ports**: orders will be received on port 3000.
 
 Update your dapr.bicep file to match the full application definition:

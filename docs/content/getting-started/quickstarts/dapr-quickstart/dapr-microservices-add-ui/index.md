@@ -13,7 +13,7 @@ To complete the application, you'll add another component for the frontend user 
 
 Another container resource is used to specify a few properties about the order generator:
 
-- **container image**: `radius.azurecr.io/daprtutorial-frontend:latest` is a Docker image the container will run.
+- **container image**: `radius.azurecr.io/quickstarts/dapr-frontend:edge` is a Docker image the container will run.
 - **connections**: `backendRoute.id` declares the intention for `frontend` to communicate with `backend` through the `backendRoute` Dapr HTTP Route.
 - **extensions**: `dapr.io/Sidecar` configures Dapr on the container, which is used to invoke the backend.
 
@@ -26,7 +26,7 @@ var appId = Environment.GetEnvironmentVariable("CONNECTION_BACKEND_APPID");
 services.AddSingleton<HttpClient>(DaprClient.CreateInvokeHttpClient(appId));
 ```
 
-## Add Http Route and Gateway
+## Add HTTP Route and Gateway
 
 Additionally, a [Gateway]({{< ref gateway >}}) and an [HttpRoute]({{< ref httproute >}}) are configured to expose the `frontend` container on a public endpoint.
 
@@ -61,7 +61,7 @@ You have completed this tutorial!
 ## Cleanup
 
 {{% alert title="Delete your environment" color="warning" %}}
-If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}).
+If you're done with testing, you can use the rad CLI to [delete the application]({{< ref rad_application_delete.md >}}).
 {{% /alert %}}
 
 ## Next steps

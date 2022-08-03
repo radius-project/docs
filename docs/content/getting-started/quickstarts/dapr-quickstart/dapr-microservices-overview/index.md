@@ -13,14 +13,16 @@ In this tutorial you will be deploying an online store where you can order items
 
 #### (optional) Download the source code
 
-You can view and download the source code in the [samples repo](https://github.com/project-radius/samples). For access fill out [this form](https://aka.ms/ProjectRadius/GitHubAccess).
+You can view and download the source code in the [samples repo](https://github.com/project-radius/samples).
+
+> For access fill out [this form](https://aka.ms/ProjectRadius/GitHubAccess).
 
 ## Containers
 
 This Radius application will have two [containers]({{< ref appmodel-concept >}}):
 
-- A UI for users to place orders written with .NET Blazor (`frontend`)
-- A backend order processing microservice written in Node.JS (`backend`)
+- A frontend UI for users to place orders. Written with .NET Blazor.
+- A backend order processing microservice. Written in Node.JS.
 
 ### `frontend` container
 
@@ -38,37 +40,30 @@ The `backend` container is configured with a [Dapr sidecar extension]({{< ref da
 
 <img src="./backend.png" alt="A diagram of the backend order processing service" width=600 />
 
-## Connector
-
-A [Dapr statestore connector]({{< ref dapr-secretstore >}}) is used to model and deploy the Dapr statestore component. This tutorial will use:
-
-- A Dapr state store used to store the orders (`statestore`)
-
-### `statestore` Dapr state store
-
-The [Dapr state store]({{< ref dapr-statestore >}}) resource (`statestore`) stores information about orders. It could be any compatible [Dapr state store](https://docs.dapr.io/developing-applications/building-blocks/state-management/state-management-overview/).
-
-The Dapr component configuration is automatically generated for the statestore based on the values provided in the app model.
-
-<img src="./statestore.png" alt="A diagram of the Dapr state store" width=400 />
-
 ## Routes
 
 Radius offers communication between services via [Routes]({{< ref "appmodel-concept#routes" >}}).
 
 ### Dapr service invocation
 
-In this tutorial we will be using a [Dapr HTTP invoke route]({{< ref dapr-http >}}) resource to model communication from `frontend` to `backend`. This allows `frontend` to use Dapr service invocation to interact with `backend`.
+In this quickstart we will be using a [Dapr HTTP invoke route]({{< ref dapr-http >}}) resource to model communication from `frontend` to `backend`. This allows `frontend` to use Dapr service invocation to interact with `backend`.
 
 <img src="./invoke.png" alt="A diagram of the Dapr service invocation" width=500 />
 
-## Summary
+## Connector
 
-In this tutorial, you will learn how Project Radius offers:
+A [Dapr statestore connector]({{< ref dapr-secretstore >}}) is used to model and deploy the Dapr statestore component.
 
-- Compute services, such as a container, to model your running code
-- Relationships between resources that are fully specified with protocols and other strongly-typed information
-- Connector and Route resources for [Dapr building blocks]({{< ref dapr >}})
-- Automatically generated Dapr component configuration
+### `statestore` Dapr state store
+
+The [Dapr state store]({{< ref dapr-statestore >}}) resource (`statestore`) stores information about orders. It could be any compatible [Dapr state store](https://docs.dapr.io/developing-applications/building-blocks/state-management/state-management-overview/).
+
+The Dapr component configuration is automatically generated for the statestore based on the resource or values provided in the connector definition.
+
+#### Swappable infrastructure
+
+In this quickstart you will be able to swap between different Dapr components, such as Azure Table Storage and a Redis container. While the backing infrastructure will change, the container definitions and connections will remain the same. This allows you to easily swap between different backing infrastructure without rewriting your service code or definition.
+
+<img src="./statestore.png" alt="A diagram of the Dapr state store" width=400 />
 
 <br>{{< button text="Next: Deploy the application backend" page="dapr-microservices-initial-deployment.md" >}}
