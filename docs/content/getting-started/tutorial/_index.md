@@ -33,8 +33,6 @@ This tutorial contains the following sections:
   - [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
   - [K3s](https://k3s.io), a lightweight single-binary certified Kubernetes distribution from Rancher.
   - Another Kubernetes provider of your choice.
-- [Install Visual Studio Code](https://code.visualstudio.com/) (recommended)
-  - The [Radius Bicep VSCode extension]({{< ref "getting-started#install-vs-code-extension-optional" >}}) provides syntax highlighting, completion, and linting.
-  - You can also complete this tutorial with any basic text editor.
-
+- Set up an Azure Environment. This is required if you want to deploy the second half of the tutorial to Azure:
+  - Create a [subscription and resource group](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal). Keep a hold of the subscription ID and resource group you would like to deploy resources to.
 <br>{{< button text="Next step: App overview" page="webapp-overview" >}}

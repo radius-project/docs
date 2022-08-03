@@ -54,7 +54,7 @@ There is a known issue where deployments to Azure will fail with a "NotFound" er
 
    ```sh
    Public Endpoints:
-    gateway  Gateway            http://20.252.19.39 
+    gateway  Gateway            IP-ADDRESS
    ```
 
 1. To test your application, navigate to the public endpoint that was printed at the end of the deployment. You should see a page like:
@@ -65,6 +65,16 @@ There is a known issue where deployments to Azure will fail with a "NotFound" er
 
 ## Cleanup
 
-{{% alert title="Delete application" color="warning" %}} If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to prevent additional charges in your Azure subscription. {{% /alert %}}
+{{% alert title="Delete environment" color="warning" %}} If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to delete all Radius resources running on the Kubernetes Cluster. {{% /alert %}}
+
+{{% alert title="Cleanup Azure Resources" color="warning" %}} Azure resources are not deleted when deleting a Radius environment, so to prevent additional charges, make sure to delete all resources from the resource group used. {{% /alert %}}
+
+{{% alert title="Delete other Kubernetes resources used" color="warning" %}} Additional Kubernetes resources need to be cleaned up that were deployed for Mongo. Run the following commands to delete these resources:
+
+```bash
+kubectl delete statefulset,serviceaccount,clusterrolebinding,clusterrole,secret mongo
+kubectl delete pvc db-storage-claim-mongo-0
+```
+{{% /alert %}}
 
 {{<button text="Previous step: Add a database connector" page="webapp-add-database">}}
