@@ -54,6 +54,7 @@ resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
   }
 }
 
+//MONGOMODULE
 resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
   name: 'db'
   location: 'global'
@@ -70,3 +71,4 @@ module mongo 'azure-cosmosdb.bicep' = {
     location: location
   }
 }
+//MONGOMODULE
