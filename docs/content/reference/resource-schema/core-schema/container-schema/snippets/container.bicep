@@ -4,6 +4,7 @@ param location string = resourceGroup().location
 param environment string
 
 param mongoDbId string
+param azureStorage string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
@@ -56,7 +57,22 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
       inventory: {
         source: db.id
       }
+      azureStorage: {
+        source: azureStorage
+        iam: {
+          kind: 'azure'
+          roles: [
+            'Storage Blob Data Contributor'
+          ]
+        }
+      }
     }
+    extensions: [
+      {
+        kind: 'daprSidecar'
+        appId: 'frontend'
+      }
+    ]
   }
 }
 //CONTAINER

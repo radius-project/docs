@@ -16,11 +16,22 @@ Containers are hosted by the Kubernetes as the container runtime today, regardle
 
 {{< rad file="snippets/container.bicep" embed=true marker="//CONTAINER" >}}
 
-The following top-level information is available for containers:
+### Top-level
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| name | y | The name of your resource. Used to provide status and visualize the resource. | `frontend`
+| name | y | The name of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `frontend`
+| location | y | The location of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `global`
+| [properties](#properties) | y | Properties of the resource. | [See below](#properties)
+
+### Properties
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| application | y | The ID of the application resource this container belongs to. | `app.id`
+| [container](#container) | y | Container configuration. | [See below](#container)
+| [connections](#connections) | n | List of connections to other resources. | [See below](#connections)
+| [extensions](#extensions) | n | List of extensions on the container. | [See below](#extensions)
 
 ### Container
 
@@ -29,28 +40,29 @@ Details on what to run and how to run it are defined in the `container` property
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | image | y | The registry and image to download and run in your container. | `radiusteam/frontend`
-| env | n | The environment variables to be set for the container. | `"ENV_VAR": "value"`
-| ports | n | Ports the container provides | [See below](#ports).
-| readinessProbe | n | Readiness probe configuration. | [See below](#readiness-probe).
-| livenessProbe | n | Liveness probe configuration. | [See below](#liveness-probe).
+| env | n | A list of environment variables to be set for the container. | `"ENV_VAR": "value"`
+| [ports](#ports) | n | Ports the container provides | [See below](#ports).
+| [readinessProbe](#readiness-probe) | n | Readiness probe configuration. | [See below](#readiness-probe).
+| [livenessProbe](#liveness-probe) | n | Liveness probe configuration. | [See below](#liveness-probe).
+| [volumes](#volumes) | n | Volumes to mount into the container. | [See below](#volumes).
 
-### Ports
+#### Ports
 
 The ports offered by the container are  defined in the `ports` section.
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | name | y | A name key for the port. | `http`
-| containerPort | y | The port the container exposes | `80`
-| protocol | n | The protocol the container exposes | `'TCP'`
+| containerPort | y | The port the container exposes. | `80`
+| protocol | n | The protocol the container exposes. Options are 'TCP' and 'UCP'. | `'TCP'`
 | provides | n | The id of the [Route]({{< ref networking >}}) the container provides. | `http.id`
 
-### Volumes
+#### Volumes
 
 The volumes mounted to the container, either local or external, are defined in the `volumes` section.
 Learn more about volumes and supported resources in the [Volume docs]({{< ref volume >}}).
 
-### Readiness probe
+#### Readiness probe
 
 Readiness probes detect when a container begins reporting it is ready to receive traffic, such as after loading a large configuration file that may take a couple seconds to process.
 There are three types of probes available, `httpGet`, `tcp` and `exec`. For an `httpGet` probe, an HTTP GET request at the specified endpoint will be used to probe the application. If a success code is returned, the probe passes. If no code or an error code is returned, the probe fails, and the container won't receive any requests after a specified number of failures.
@@ -70,7 +82,7 @@ For an `exec` probe, a command is run within the container. A return code of 0 i
 | failureThreshold | n | Threshold number of times the probe fails after which a failure would be reported. | `5`
 | periodSeconds | n | Interval for the readiness probe in seconds. | `5`
 
-### Liveness probe
+#### Liveness probe
 
 Liveness probes detect when a container is in a broken state, restarting the container to return it to a healthy state.
 There are three types of probes available, `httpGet`, `tcp` and `exec`. For an `httpGet` probe, an HTTP GET request at the specified endpoint will be used to probe the application. If a success code is returned, the probe passes. If no code or an error code is returned, the probe fails, and the container won't receive any requests after a specified number of failures.
@@ -97,7 +109,26 @@ Connections define how a container connects to [other resources]({{< ref resourc
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | name | y | A name key for the port. | `inventory`
-| kind | y | The type of resource you are connecting to. | `mongo.com/MongoDB`
 | source | y | The id of the connector or resource the container is connecting to. | `db.id`
+| [iam](#iam) | n | Identity and access management (IAM) roles to set on the target resource. | [See below](#iam)
+
+#### IAM
+
+Identity and access management (IAM) roles to set on the target resource.
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| kind | y | Type of IAM role. Only `azure` supported today | `'azure'`
+| roles | y | The list IAM roles to set on the target resource. | `'Owner'`
+
+### Extensions
+
+Extensions define additional capabilities and configuration for a container.
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| kind | y | The type of resource you are connecting to. | `mongo.com/MongoDB`
+
+Additional properties are available and required depending on the 'kind' of the extension.
 
 ## Sub-types

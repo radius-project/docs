@@ -4,6 +4,7 @@ title: "Dapr connectors"
 linkTitle: "Dapr"
 description: "Learn what Dapr connectors are available in your application"
 weight: 600
+slug: "dapr"
 ---
 
 Radius provides built-in Dapr hosting, plus integrations with [Radius resources]({{< ref "container.md#dapr-sidecar" >}}).

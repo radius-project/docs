@@ -13,21 +13,21 @@ In this step you will learn how to add a state store database and connect to it 
 
 ## Add a Dapr extension
 
-A [`dapr.io/Sidecar` extension]({{< ref dapr-extension >}}) on the `backend` resource can be used to describe the Dapr configuration:
+A [Dapr extension]({{< ref dapr-extension >}}) on the `backend` resource can be used to describe the Dapr configuration:
 
 {{< rad file="snippets/extension.bicep" embed=true marker="//SAMPLE" replace-key-container="//CONTAINER" replace-value-container="container: {...}" >}}
 
 The `extensions` section is used to configure cross-cutting behaviors of components. Since Dapr is not part of the standard definition of a container, it can be added via a extension. Extensions have a `kind` so that they can be strongly typed.
 
-## Add `dapr-backend` Dapr Invoke Route
+## Add Dapr Invoke Route
 
 In order for other services to invoke `backend` through Dapr service invocation, a [Dapr Route]({{< ref dapr-http >}}) is required.
 
-Add a [`dapr.io.InvokeHttpRoute`]({{< ref dapr-http >}}) resource to the app, and specify that the `backend` resource will provide the Route as part of the `dapr` port:
+Add a [Dapr HTTP route]({{< ref dapr-http >}}) resource to the app, and update the `orders` port definition to provide route:
 
-{{< rad file="snippets/invoke.bicep" embed=true marker="//SAMPLE" replace-key-container="//CONTAINER" replace-value-container="container: {...}" >}}
+{{< rad file="snippets/invoke.bicep" embed=true marker="//SAMPLE" replace-key-extensions="//EXTENSIONS" replace-value-extensions="extensions: [...]" >}}
 
-## Add `orders` statestore
+## Add Dapr statestore
 
 Now that the backend is configured with Dapr, we need to define a state store to save information about orders.
 
@@ -36,11 +36,12 @@ You can choose between a Redis container or Azure Table Storage
 {{< tabs "Redis Container" "Azure Table Storage" >}}
 
 {{< codetab >}}
-{{< rad file="snippets/statestore.bicep" embed=true marker="//SAMPLE" replace-key-container="//BACKEND" replace-value-container="resource backend 'Container' = {...}" replace-key-route="//ROUTE" replace-value-route="resource daprBackend 'dapr.io.InvokeHttpRoute' = {...}" >}}
+
+{{< rad file="snippets/statestore.bicep" embed=true marker="//SAMPLE" >}}
 {{< /codetab >}}
 
 {{< codetab >}}
-{{< rad file="snippets/statestore-azure.bicep" embed=true marker="//SAMPLE" replace-key-container="//BACKEND" replace-value-container="resource backend 'Container' = {...}" replace-key-route="//ROUTE" replace-value-route="resource daprBackend 'dapr.io.InvokeHttpRoute' = {...}" >}}
+{{< rad file="snippets/statestore-azure.bicep" embed=true marker="//SAMPLE" >}}
 {{< /codetab >}}
 
 {{< /tabs >}}
@@ -51,13 +52,11 @@ Radius captures both logical relationships and related operational details. Exam
 
 The [`connections` property]({{< ref "appmodel-concept" >}}) is used to configure relationships between from a service to another resource.
 
-Add a [`connection`]({{< ref "appmodel-concept" >}}) from `backend` to the `orders` state store. This declares the _intention_ from the `backend` component to communicate with the `statestore` component using `dapr.io/StateStore` as the protocol.
+Add a [`connection`]({{< ref "appmodel-concept" >}}) from `backend` to the `orders` state store. This declares the _intention_ from the `backend` container to communicate with the `statestore` resource
 
-Additionally, add a `dependsOn` reference to the starter. This is a tempoarary requirement and will be removed in a future release.
+{{< rad file="snippets/connection.bicep" embed=true marker="//BACKEND" replace-key-container="//CONTAINER" replace-value-container="container: {...}" replace-key-extensions="//EXTENSIONS" replace-value-extensions="extensions: [...]" >}}
 
-{{< rad file="snippets/connection.bicep" embed=true replace-key-container="//CONTAINER" replace-value-container="container: {...}" replace-key-traits="//TRAITS" replace-value-traits="traits: [...]" replace-key-route="//ROUTE" replace-value-route="resource daprBackend 'dapr.io.InvokeHttpRoute' = {...}" replace-key-connector="//CONNECTOR" replace-value-connector="resource ordersStateStore 'dapr.io.StateStore' existing = {...}" replace-key-starter="//STARTER" replace-value-starter="module stateStoreStarter 'br:radius.azurecr.io/starters/dapr-statestore:latest' = {...}" >}}
-
-#### Injected settings from connections
+### Injected settings from connections
 
 Adding a connection to the state store also [configures environment variables]({{< ref "dapr-statestore#provided-data" >}}) inside the the `statestore` component.
 
@@ -67,13 +66,7 @@ With the connection name of `statestore` and a statestore name of `orders`, Proj
 const stateStoreName = process.env.CONNECTION_ORDERS_STATESTORENAME;
 ```
 
-See the [connections]({{< ref "appmodel-concept#injected-values" >}}) page for more information about this feature.
-
 ## Deploy application with Dapr
-
-{{% alert title="Known issue: Azure deployments" color="warning" %}}
-There is a known issue where deployments to Azure will fail with a "NotFound" error for templates containing starters. This is being addressed in an upcoming release. As a workaround submit the deployment a second time. The second deployment should succeed.
-{{% /alert %}}
 
 1. Make sure your `dapr.bicep` file matches the full tutorial file:
 
@@ -91,10 +84,10 @@ There is a known issue where deployments to Azure will fail with a "NotFound" er
 1. You can confirm all the resources were deployed by running:
 
    ```sh
-   rad resource list --application dapr-tutorial
+   rad resource list --application dapr-quickstart
    ```
 
-   You should see both `backend` and `statestore` components in your `dapr-tutorial` application. Example output:
+   You should see both `backend` and `statestore` components in your `dapr-quickstart` application. Example output:
 
    ```sh
     RESOURCE      TYPE                         PROVISIONING_STATE  HEALTH_STATE
@@ -105,7 +98,7 @@ There is a known issue where deployments to Azure will fail with a "NotFound" er
 1. To test out the state store, open a local tunnel on port 3000 again:
 
    ```sh
-   rad resource expose Container backend --application dapr-tutorial --port 3000
+   rad resource expose containers backend --application dapr-quickstart --port 3000
    ```
 
 1. Visit the the URL [http://localhost:3000/order](http://localhost:3000/order) in your browser. You should see the following message:

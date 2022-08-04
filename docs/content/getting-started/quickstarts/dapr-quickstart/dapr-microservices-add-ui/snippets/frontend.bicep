@@ -4,13 +4,14 @@ param location string = resourceGroup().location
 param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
-  name: 'dapr-tutorial'
+  name: 'dapr-quickstart'
   location: location
   properties: {
     environment: environment
   }
 }
 
+//ROUTES
 resource frontendGateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
   name: 'gateway'
   location: location
@@ -32,7 +33,9 @@ resource frontendRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' 
     application: app.id
   }
 }
-  
+//ROUTES
+
+//FRONTEND
 resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'frontend'
   location: location
@@ -60,6 +63,7 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
     ]
   }
 }
+//FRONTEND
 
 //BACKEND
 resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {

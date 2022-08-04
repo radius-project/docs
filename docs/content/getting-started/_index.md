@@ -11,7 +11,7 @@ no_list: true
 
 The `rad` CLI manages your applications, resources, and environments. Begin by installing it on your machine:
 
-{{< tabs Windows MacOS "Linux/WSL" "Cloud Shell" Binaries >}}
+{{< tabs Windows MacOS "Linux/WSL" "Codespace/Dev Container" "Cloud Shell" Binaries >}}
 
 {{% codetab %}}
 
@@ -57,6 +57,16 @@ wget -q "https://radiuspublic.blob.core.windows.net/tools/rad/install.sh" -O - |
 {{% /codetab %}}
 
 {{% codetab %}}
+Do you prefer to test out Radius in a fast and easy to use virtual environment? Check out the [Radius samples repo](https://github.com/project-radius/samples) to test out the sample applications on a pre-configured [GitHub Codespaces](https://github.com/features/codespaces) container.
+
+You can also run a [dev container](https://code.visualstudio.com/docs/remote/containers) on your local machine within Docker.
+
+Visit the [GitHub docs]({{< ref github >}}) if you need access to the organization
+
+This container image is automatically configured with the rad CLI, extension, and a running environment. You can skip down to the [Learn Radius](#learn-radius) section to get started.
+{{% /codetab %}}
+
+{{% codetab %}}
 [Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/overview) is an interactive, authenticated, browser-accessible shell for managing Azure resources.
 
 Azure Cloud Shell for bash doesn't have a sudo command, so users are unable to install Radius to the default `/usr/local/bin` installation path. To install the rad CLI to the home directory, run the following commands:
@@ -91,17 +101,9 @@ PowerShell for Cloud Shell is currently not supported.
 
 {{< /tabs >}}
 
+> You may be prompted for your sudo password during installation. If you are unable to sudo you can install the rad CLI to another directory by setting the `RADIUS_INSTALL_DIR` environment variable with your intended install path.
+
 Verify the rad CLI is installed correctly by running `rad`. 
-
-## Try out Radius on GitHub Codespaces
-
-*Visit the [GitHub docs]({{< ref github >}}) if you need access to the organization*
-
-Do you prefer to test out Radius in a fast and easy to use virtual environment? Check out the [official Radius samples repo](https://github.com/project-radius/samples) and test out the sample applications on a pre-configured [GitHub Codespaces](https://github.com/features/codespaces) container.
-
-If in case you'd prefer to run a dev container on your local machine, the [Radius samples repo](https://github.com/project-radius/samples) offers a .devcontainer folder that will allow you to configure the environment anywhere you want as well as automatically set up a [Radius local environment](#create-a-radius-environment). _Learn more: [Dev containers docs](https://code.visualstudio.com/docs/remote/containers)._
-
-After you launching your codespace or dev container, navigate into your desired sample application directory and run `rad app deploy` to see Radius in action.
 
 ## Create a Radius environment
 
@@ -109,8 +111,7 @@ A Radius environment is where you will deploy your applications. Easily deploy a
 
 ### Pre-requisites
 
-- Kubernetes cluster configured as the default `kubectl` context (verify with `kubectl config current-context`)
-
+- [Supported Kubernetes cluster]({{< ref kubernetes >}}) configured as the default `kubectl` context (verify with `kubectl config current-context`)
 
 ```sh
 rad env init kubernetes
@@ -118,10 +119,10 @@ rad env init kubernetes
 
 ## Install VS Code extension (optional)
 
-Optionally install the Radius [Visual Studio Code](https://code.visualstudio.com/) extensions for syntax highlighting, auto-completion, and linting.
+Optionally install the Radius Bicep [Visual Studio Code](https://code.visualstudio.com/) extension for syntax highlighting, auto-completion, and linting.
 
 {{% alert title="Note" color="primary" %}}
-While Project Radius is in preview two separate extensions are required, one for Bicep highlighting and one for interacting with Radius applications. In a future release, these will be combined into a single extension.
+While Project Radius is in preview we offer an extension for Bicep highlighting.
 {{% /alert %}}
 
 1. Download the latest extensions
@@ -131,27 +132,30 @@ While Project Radius is in preview two separate extensions are required, one for
    {{% codetab %}}
    {{< button link="https://get.radapp.dev/tools/vscode-extensibility/stable/rad-vscode-bicep.vsix" text="Download Bicep extension" >}}
 
-   {{< button link="https://radiuspublic.blob.core.windows.net/tools/vscode/stable/rad-vscode.vsix" text="Download Radius extension" >}}
-
    {{< edge >}}
    {{< button link="https://radiuspublic.blob.core.windows.net/tools/vscode-extensibility/edge/rad-vscode-bicep.vsix" text="Download Bicep extension (edge)" >}}
-
-   {{< button link="https://radiuspublic.blob.core.windows.net/tools/vscode/edge/rad-vscode.vsix" text="Download Radius extension (edge)" >}}
    {{< /edge >}}
    {{% /codetab %}}
 
    {{% codetab %}}
 
+   Stable Version
+
    ```bash
    curl https://radiuspublic.blob.core.windows.net/tools/vscode/stable/rad-vscode-bicep.vsix --output rad-vscode-bicep.vsix
-   curl https://radiuspublic.blob.core.windows.net/tools/vscode/stable/rad-vscode.vsix --output rad-vscode.vsix
+   ```
+
+   Edge Version
+
+   ```bash
+   curl https://radiuspublic.blob.core.windows.net/tools/vscode-extensibility/edge/rad-vscode-bicep.vsix --output rad-vscode-bicep.vsix
    ```
 
    {{% /codetab %}}
 
    {{< /tabs >}}
 
-2. Install the `.vsix` files:
+2. Install the `.vsix` file:
 
    {{< tabs UI Terminal >}}
 

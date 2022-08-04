@@ -4,7 +4,7 @@ param location string = resourceGroup().location
 param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
-  name: 'dapr-tutorial'
+  name: 'dapr-quickstart'
   location: location
   properties: {
     environment: environment
@@ -17,61 +17,43 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   location: location
   properties: {
     application: app.id
+    //CONTAINER
     container: {
-      image: 'radius.azurecr.io/daprtutorial-backend'
+      image: 'radius.azurecr.io/quickstarts/dapr-backend:latest'
       ports: {
         orders: {
           containerPort: 3000
+          provides: backendRoute.id
         }
       }
     }
+    //CONTAINER
+    connections: {
+      orders: {
+        source: stateStore.id
+      }
+    }
+    //EXTENSIONS
     extensions: [
       {
         kind: 'daprSidecar'
         appId: 'backend'
         appPort: 3000
-        provides: daprBackend.id
+        provides: backendRoute.id
       }
     ]
+    //EXTENSIONS
   }
 }
 //BACKEND
 
-//ROUTE
-resource daprBackend 'Applications.Connector/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
+resource backendRoute 'Applications.Connector/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
   name: 'dapr-backend'
   location: location
   properties: {
     environment: environment
     application: app.id
     appId: 'backend'
-  }
-}
-//ROUTE
-
-resource redisContainer 'Applications.Core/containers@2022-03-15-privatepreview' = {
-  name: 'redis-container'
-  location: location
-  properties: {
-    application: app.id
-    container: {
-      image: 'redis:6.2'
-      ports: {
-        redis: {
-          containerPort: 6379
-          provides: redisRoute.id
-        }
-      }
-    }
-  }
-}
-
-resource redisRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
-  name: 'redis-route'
-  location: location
-  properties: {
-    application: app.id
-    port: 6379
   }
 }
 
@@ -85,7 +67,7 @@ resource stateStore 'Applications.Connector/daprStateStores@2022-03-15-privatepr
     type: 'state.redis'
     version: 'v1'
     metadata: {
-      redisHost: '${redisRoute.properties.hostname}:${redisRoute.properties.port}'
+      redisHost: ''
       redisPassword: ''
     }
   }
