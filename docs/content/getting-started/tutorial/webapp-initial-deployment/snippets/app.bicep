@@ -3,8 +3,6 @@ import radius as radius
 
 param environment string
 
-param location string = resourceGroup().location
-
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'webapp'
   location: 'global'
@@ -21,15 +19,12 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   properties: {
     application: app.id
     container: {
-      image: 'radius.azurecr.io/webapptutorial-todoapp'
+      image: 'radius.azurecr.io/tutorial/webapp:edge'
       ports: {
         web: {
           containerPort: 3000
           provides: frontendRoute.id
         }
-      }
-      env: {
-        DBCONNECTION: db.connectionString()
       }
     }
     connections: {
@@ -47,9 +42,7 @@ resource frontendRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' 
     application: app.id
   }
 }
-//CONTAINER
 
-//GATEWAY
 resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
   name: 'public'
   location: 'global'
@@ -57,35 +50,30 @@ resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
     application: app.id
     routes: [
       {
-         destination: frontendRoute.id
+        path: '/'
+        destination: frontendRoute.id
       }
     ]
   }
 }
-//GATEWAY
+//CONTAINER
 
-//DATABASE
+//DATABASE CONNECTOR
 resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
   name: 'db'
   location: 'global'
-  dependsOn: [
-    mongo
-  ]
   properties: {
     environment: app.properties.environment
     application: app.id
     secrets: {
-      connectionString: 'mongodb://db:27017/db?authSource=admin'
+      connectionString: 'mongodb://${mongo.outputs.name}:${mongo.outputs.port}/${mongo.outputs.dbName}?authSource=admin'
     }
   }
 }
-//DATABASE
+// DATABASE CONNECTOR
 
-//MONGOMODULE
-module mongo 'azure-cosmosdb.bicep' = {
+//MONGO MODULE
+module mongo 'mongo-container.bicep' = {
   name: 'mongo-module'
-  params: {
-    location: location
 }
-}
-//MONGOMODULE
+//MONGO MODULE
