@@ -48,7 +48,7 @@ resource frontend 'Applications.Core/containers' = {
 
 If a user runs `rad deploy appA.bicep`, and then `rad deploy appB.bicep`, the 2nd deployment will fail because `/planes/local/resourcegroups/myenv/providers/Applications.Core/containers/frontend` already exists.
 
-As a workaround use separate environments configured with separate Kubernetes namespaces.
+As a workaround, use separate environments for applications that have repeated resource names.
 
 This will be addressed further in a future
 
