@@ -9,9 +9,10 @@ no_list: true
 
 ## Overview
 
-This tutorial will teach you how to deploy a website as a Radius application from first principles. You will take away the following 
-- Enough knowledge to map your own application in Radius 
-- Achieve portability via connectors between your local and cloud environments 
+This tutorial will teach you how to deploy a website as a Radius application from first principles. You will take away the following
+
+- Enough knowledge to map your own application in Radius
+- Achieve portability via connectors between your local and cloud environments
 - Understand the separation of concerns for the different personas involved in a deployment
 
 ## Tutorial steps
