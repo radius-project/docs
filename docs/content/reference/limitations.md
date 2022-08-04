@@ -10,45 +10,9 @@ weight: 998
 
 ### Resource names must be unique for a given resource type across applications
 
-Due to each Radius environment mapping 1-1 to a UCP resource group, resources of a given type must be unique within a given resource group and environment. This means two applications deployed to the same environment must have resources with unique names. When a user tries to deploy an app to an environment with a resource type/name conflict, the deployment will fail.
+Resources for a given type must currently have unique names within an environment, even across applications. For example, if two applications both have a `frontend` container resource, the first application deployment will succeed while the second will fail.
 
-For example, take **appA.bicep** and **appB.bicep**:
-
-{{< tabs "appA.bicep" "appB.bicep" >}}
-
-{{% codetab %}}
-```bicep
-resource app 'Applications.Core/applications' = {
-  name: 'appA'
-  properties: {...}
-}
-
-resource frontend 'Applications.Core/containers' = {
-  name: 'frontend'
-  properties: {...}
-}
-```
-{{% /codetab %}}
-
-{{% codetab %}}
-```bicep
-resource app 'Applications.Core/applications' = {
-  name: 'appB' // Different than appA.bicep
-  properties: {...}
-}
-
-resource frontend 'Applications.Core/containers' = {
-  name: 'frontend' // Same as appA.bicep
-  properties: {...}
-}
-```
-{{% /codetab %}}
-
-{{< /tabs >}}
-
-If a user runs `rad deploy appA.bicep`, and then `rad deploy appB.bicep`, the 2nd deployment will fail because `/planes/local/resourcegroups/myenv/providers/Applications.Core/containers/frontend` already exists.
-
-As a workaround, use separate environments for applications that have repeated resource names.
+As a workaround, use separate environments for applications that have repeated resource names for a given type.
 
 This will be addressed further in a future release.
 
