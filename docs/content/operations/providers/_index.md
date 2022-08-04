@@ -29,9 +29,9 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
 - [Azure subscription](https://azure.com)
 - [az CLI](https://aka.ms/azcli)
 
-#### Add to a local environment
+#### Add to an environment
 
-1. Initialize a new [local environment]({{< ref dev-environments >}}) with `rad env init kubernetes -i`
+1. Initialize a new [environment]({{< ref dev-environments >}}) with `rad env init kubernetes -i`
 1. Specify the option to add the Azure provider
 1. Specify your Azure subscription and resource group
 1. Create an [Azure service principal](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) with the [proper permissions](https://aka.ms/azadsp-more)
