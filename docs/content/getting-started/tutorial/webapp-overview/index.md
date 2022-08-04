@@ -46,12 +46,12 @@ The database is provided by a [MongoDB connector]({{< ref mongodb >}}). You can 
 
 ## The Radius mindset
 
-Deployment often involves different teams working together, separating their responsibilities. For example, a developer might build the app definition with services, while the infrastructure administrator might set up the environment and the infrastructure. In this tutorial you will build the app from the perspective of a developer and an infrastructure administrator. 
+Deployment often involves different teams working together, separating their responsibilities. For example, a developer might build the app definition with services, while the infrastructure administrator might set up the environment and the infrastructure. In this tutorial you will build the app from the perspective of a developer and an infrastructure administrator.
 
 As you progress, keep in mind the following benefits that the Radius application abstraction provides:
 
 - Relationships between resources are fully specified with protocols and other strongly-typed information
 - Connectors provide abstraction and portability across local and cloud environments
-- Separation of concerns for the different personas involved in the deployment 
+- Separation of concerns for the different personas involved in the deployment
 
 <br>{{< button text=" Previous step: Tutorial Pre-requisites" page="tutorial"  newline="false">}} {{< button text="Next step: Initialize an environment" page="webapp-initialize-environment">}}
