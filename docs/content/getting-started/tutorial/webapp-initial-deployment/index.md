@@ -11,11 +11,11 @@ As a developer, you define the building blocks of your application. In this step
 
 ## Define a Radius application in a .bicep file
 
-Radius uses the [Bicep language]({{< ref bicep >}}) as its file-format and structure. In this tutorial you will define an app named `todoapp` that will contain the container and MongoDB connector resources, all described in Bicep.
+Radius uses the [Bicep language]({{< ref bicep >}}) as its file-format and structure. In this tutorial you will define an app named `webapp` that will contain the container and MongoDB connector resources, all described in Bicep.
 
-You can clone our [samples repo](https://github.com/project-radius/samples) which contains the source code of tutorial application and the bicep templates. It contains three bicep files
+You can download the [source code and templates](https://get.radapp.dev/code/edge/tutorial.zip) which contains the source code of tutorial application and the Bicep templates. It contains three bicep files:
 
-1. app.bicep - Contains the app definition 
+1. app.bicep - Contains the app definition
 1. mongo-container.bicep - Contains the definition for deploying mongo container
 1. azure-cosmosdb.bicep - Contains the definition for Azure cosmosdb
 
@@ -29,7 +29,7 @@ The location property defines where to deploy a resource within the targeted pla
 
 ## Container
 
-Next lets look into the definition for the website's frontend. 
+Next lets look into the definition for the website's frontend.
 
 Radius captures the relationships and intentions behind an application, which simplifies deployment and management. The `frontend` and `frontend-route` resources in your Bicep file will contain everything needed for the website frontend to run and expose a port to the internet.
 
@@ -62,7 +62,7 @@ Below is the definition to add a mongo database connector
 
 {{< rad file="snippets/app.bicep" embed=true marker="//DATABASE CONNECTOR" >}}
 
-### Mongo container 
+### Mongo container
 
 The definition for the backing mongo container is provided by the `mongo-container.bicep` located in your tutorial source code directory. It contains the definition that is required to deploy the mongo container as a kubernetes resource.
 
@@ -70,25 +70,21 @@ The mongo container definition is then referenced as a module. You can learn mor
 
 {{< rad file="snippets/app.bicep" embed=true marker="//MONGOMODULE" >}}
 
-
 ### Connect to `db` from `frontend`
 
 Once the `db` connector is defined, you can reference it in the [`connections`]({{< ref appmodel-concept >}}) section of the `frontend` resource:
 
 {{< rad file="snippets/app.bicep" embed=true marker="//CONTAINER" >}}
 
-
 [Connections]({{< ref appmodel-concept >}}) are used to configure relationships between two components. The `db` is of kind `mongo.com/MongoDB`, which supports the MongoDB protocol. This declares the *intention* from the `frontend` container to communicate with the `db` resource.
 
 Now that you have created a connection called `itemstore`, environment variables with connection information will be injected into the `frontend` container. The container reads the database connection string from an environment variable named `CONNECTION_ITEMSTORE_CONNECTIONSTRING`.
 
-
 ## App definition
 
-Your app.bicep file should look like below 
+Your app.bicep file should look like below
 
 {{< rad file="snippets/app.bicep" embed=true >}}
-
 
 ## Deploy the application
 
@@ -135,6 +131,10 @@ Now you are ready to deploy the application for the first time.
 3. To test your application, navigate to the public endpoint that was printed at the end of the deployment.
 
    <img src="todoapp-nodb.png" width="400" alt="screenshot of the todo application with no database">
+
+   {{% alert title="⚠️ Caution" color="warning" %}}
+   If you are unable to connect to webapp in your browser, make sure your organization does not block http traffic to your Kubernetes cluster. You may need to be on your corporate network or use a jumpbox.
+   {{% /alert %}}
 
    If the page you see matches the screenshot, that means the container is running as expected.
 
