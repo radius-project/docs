@@ -24,9 +24,6 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
           provides: frontendRoute.id
         }
       }
-      env: {
-        DBCONNECTION: db.connectionString()
-      }
     }
     connections: {
       itemstore: {
@@ -60,9 +57,6 @@ resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
 resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
   name: 'db'
   location: 'global'
-  dependsOn: [
-    mongo
-  ]
   properties: {
     environment: app.properties.environment
     application: app.id
