@@ -9,7 +9,7 @@ weight: 2000
 
 ## Create a Bicep file
 
-Radius uses the [Bicep language]({{< ref bicep >}}) as its file-format and structure. In this tutorial you will define an app named `dapr-tutorial` that will contain the containers, statestore, and route resources, all described in Bicep.
+Radius uses the [Bicep language]({{< ref bicep >}}) as its file-format and structure. In this tutorial you will define an app named `dapr-quickstart` that will describe the container, statestore, and route resources in Bicep.
 
 Create a new file named `dapr.bicep` and paste the following:
 
@@ -23,7 +23,7 @@ Radius captures the relationships and intentions behind an application, which si
 
 Your `backend` resource, which has resource type Container, will specify:
 
-- **container image:** `radius.azurecr.io/daprtutorial-backend`, a Docker image the container will run. This is where your application's backend code lives.
+- **container image:** `radius.azurecr.io/quickstarts/dapr-backend:edge`, a Docker image the container will run. This is where your application's backend code lives.
 - **ports**: orders will be received on port 3000.
 
 Update your dapr.bicep file to match the full application definition:
@@ -45,29 +45,29 @@ Now you are ready to deploy the application for the first time.
 1. Confirm that your Radius application was deployed:
 
    ```sh
-   rad resource list --application dapr-tutorial
+   rad resource list --application dapr-quickstart
    ```
 
    You should see your `backend` resource. Example output:
 
    ```
    RESOURCE   TYPE
-   backend    Container
+   backend   Applications.Core/containers
    ```
 
-1. To test your `dapr-tutorial` application, open a local tunnel to your application:
+1. To test your `dapr-quickstart` application, open a local tunnel to your application:
 
    ```sh
-   rad resource expose Container backend --application dapr-tutorial --port 3000
+   rad resource expose containers backend --application dapr-quickstart --port 3000
    ```
 
    {{% alert title="💡 rad resource expose" color="primary" %}}
    The [`rad resource expose`]({{< ref rad_resource_expose.md >}}) command accepts the resource type, the resource name, and flags for application name and port. If you changed any of these values when deploying, update your command to match.
    {{% /alert %}}
 
-1. Visit the URL http://localhost:3000/order in your browser. For now, you should see a message like:
+1. Visit the URL [http://localhost:3000/order](http://localhost:3000/order) in your browser. For now, you should see a message like:
 
-   ```
+   ```json
    {"message":"The container is running, but Dapr has not been configured."}
    ```
 

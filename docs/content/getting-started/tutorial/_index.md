@@ -9,9 +9,10 @@ no_list: true
 
 ## Overview
 
-This tutorial will teach you how to deploy a website as a Radius application from first principles. You will take away the following 
-- Enough knowledge to map your own application in Radius 
-- Achieve portability via connectors between your local and cloud environments 
+This tutorial will teach you how to deploy a website as a Radius application from first principles. You will take away the following
+
+- Enough knowledge to map your own application in Radius
+- Achieve portability via connectors between your local and cloud environments
 - Understand the separation of concerns for the different personas involved in a deployment
 
 ## Tutorial steps
@@ -24,7 +25,8 @@ This tutorial contains the following sections:
 - Swap a connector resource - Swap a MongoDB container for an Azure CosmosDB instance to back the connector and deploy the app to a Radius environment with Azure cloud provider configured
 
 ## Prerequisites
-
+{{% alert title="💡 Github Code Spaces" color="success" %}} You can skip this section if you are using [Github codespaces]({{< ref "getting-started#try-out-radius-on-github-codespaces">}})  to try out the tutorial. The dev containers have all the pre-requisites installed and environment initialized.
+{{% /alert %}}
 - [Install Radius CLI]({{< ref "getting-started#install-rad-cli" >}})
 - Set up a Kubernetes Cluster. There are many different options here, including:
   - [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster)

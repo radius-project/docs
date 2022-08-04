@@ -17,19 +17,20 @@ Make sure you have the [environment initialized with Azure cloud provider]({{<re
 
 ## Swap the connector for an Azure resource
 
-The app.bicep from the previous step should look like this 
+Simply swap out the module file referenced for the Mongo infrastructure resource, changing "mongo-container.bicep" to "azure-cosmodb.bicep" in the last resource of the file.
+{{< rad file="snippets/app-azure.bicep" embed=true marker="//MONGOMODULE">}}
 
-{{< rad file="snippets/app-container.bicep" embed=true >}}
+You need to also add the location parameter as well.
 
-Update the bicep file like below to swap the connector resource with an Azure cosmosdb resource
+```sh
+param location string = resourceGroup().location
+```
+
+Your final app.bicep file should look like the file below: 
 
 {{< rad file="snippets/app-azure.bicep" embed=true >}}
 
 ## Deploy the application with Azure database
-
-{{% alert title="Known issue: Azure deployments" color="warning" %}}
-There is a known issue where deployments to Azure will fail with a "NotFound" error for templates containing starters. This is being addressed in an upcoming release. As a workaround submit the deployment a second time. The second deployment should succeed.
-{{% /alert %}}
 
 1. In a terminal window deploy the app.bicep file :
 
@@ -38,14 +39,15 @@ There is a known issue where deployments to Azure will fail with a "NotFound" er
    ```
    This may take a few minutes to create the database. On completion, you will see the following resources:
 
-     ```sh
+   ```sh
    Deployment In Progress:
 
-     Completed       Application                Applications.Core/applications
-     Completed       Container                  Applications.Core/containers
-     Completed       frontend-route             Applications.Core/httpRoutes
-     Completed       gateway                    Applications.Core/gateways
-     Completed       mongo.com.MongoDatabase    db
+    Completed            http-route      Applications.Core/httpRoutes
+    Completed            webapp          Applications.Core/applications
+    Completed            mongo-module    Microsoft.Resources/deployments
+    Completed            public          Applications.Core/gateways
+    Completed            db              Applications.Connector/mongoDatabases
+    Completed            frontend        Applications.Core/containers
 
    Deployment Complete 
    ```
@@ -55,6 +57,16 @@ There is a known issue where deployments to Azure will fail with a "NotFound" er
    ```sh
    Public Endpoints:
     gateway  Gateway            IP-ADDRESS
+   ```
+
+    If you do not see a public endpoint, use `rad app status -a webapp` to get the endpoint
+
+   ```sh
+   APPLICATION  RESOURCES
+   webapp       4
+
+   GATEWAY   ENDPOINT
+   public    IP-ADDRESS
    ```
 
 1. To test your application, navigate to the public endpoint that was printed at the end of the deployment. You should see a page like:
@@ -77,4 +89,4 @@ kubectl delete pvc db-storage-claim-mongo-0
 ```
 {{% /alert %}}
 
-{{<button text="Previous step: Add a database connector" page="webapp-add-database">}}
+{{<button text="Previous step: Author and deploy app" page="webapp-initial-deployment">}}
