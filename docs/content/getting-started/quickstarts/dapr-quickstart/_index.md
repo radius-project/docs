@@ -49,7 +49,7 @@ This tutorial can be completed on any platform Radius supports. To get started, 
 {{< tabs Kubernetes >}}
 
 {{% codetab %}}
-A Kubernetes environment can run in any Kubernetes cluster. Make sure you have set the correct default kubectl context, and then run:
+A Radius environment can be created in any [supported Kubernetes cluster]({{< ref "kubernetes#supported-clusters" >}}). Make sure you have set the correct default kubectl context, and then run:
 
 ```sh
 rad env init kubernetes -i
