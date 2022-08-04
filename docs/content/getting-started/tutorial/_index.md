@@ -33,6 +33,6 @@ This tutorial contains the following sections:
   - [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
   - [K3s](https://k3s.io), a lightweight single-binary certified Kubernetes distribution from Rancher.
   - Another Kubernetes provider of your choice.
-- Set up an Set up an Azure cloud provider. This is required if you want to deploy the second half of the tutorial to Azure
+- Set up an Azure cloud provider. This is required if you want to deploy the second half of the tutorial to Azure
   - Create a [subscription and resource group](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal). Keep a hold of the subscription ID and resource group you would like to deploy resources to.
 <br>{{< button text="Next step: App overview" page="webapp-overview" >}}
