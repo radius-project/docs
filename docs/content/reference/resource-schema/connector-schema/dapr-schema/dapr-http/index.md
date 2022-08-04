@@ -29,8 +29,8 @@ A Dapr HTTP Route is defined as a resource within your Application, defined at t
 
 | Property | Description | Example |
 |----------|-------------|-------------|
-| application | n | The ID of the application resource this resource belongs to. | `app.id`
-| environment | y | The ID of the environment resource this resource belongs to. | `env.id`
+| application | The ID of the application resource this resource belongs to. | `app.id`
+| environment | The ID of the environment resource this resource belongs to. | `env.id`
 | appId    | The appId of the providing resource | `backend` |
 
 ## Example: Container
