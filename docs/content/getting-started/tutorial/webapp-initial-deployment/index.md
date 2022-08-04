@@ -23,7 +23,7 @@ Lets dig into the `app.bicep` to understand the components. Below is the definit
 
 {{< rad file="snippets/app.bicep" embed=true marker="//APPBASE" >}}
 
-The environment property depicts the environment that was initialized in the previous step for the app to land on. Currently the environment property is auto-injected by Radius when the application is deployed.
+The environment property depicts the environment that was initialized in the previous step for the app to land on. Radius will automatically inject the `environment` parameter into the bicep file during deployment.
 
 The location property defines where to deploy a resource within the targeted platform. It is currently a required property that we expect to remove in a future release. See [Resource Schema]({{< ref resource-schema >}}) for more info.
 
