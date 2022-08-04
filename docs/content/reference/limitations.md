@@ -50,7 +50,7 @@ If a user runs `rad deploy appA.bicep`, and then `rad deploy appB.bicep`, the 2n
 
 As a workaround use separate environments configured with separate Kubernetes namespaces.
 
-This will be addressed further in a future
+This will be addressed further in a future release.
 
 ## Bicep & Deployment Engine
 
