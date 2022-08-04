@@ -26,7 +26,7 @@ You need to also add the location parameter. This is intermediate step
 param location string = resourceGroup().location
 ```
 
-Your final app.bicep file should look like below 
+Your final app.bicep file should look like the file below: 
 
 {{< rad file="snippets/app-azure.bicep" embed=true >}}
 
