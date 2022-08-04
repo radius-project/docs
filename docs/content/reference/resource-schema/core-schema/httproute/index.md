@@ -22,7 +22,7 @@ weight: 400
 
 | Property | Description | Example |
 |----------|-------------|-------------|
-| application | y | The ID of the application resource this resource belongs to. | `app.id`
+| application | The ID of the application resource this resource belongs to. | `app.id`
 | hostname | The internal hostname accepting traffic for the HTTP Route. Read only. | `example.com` |
 | port | The port number for the HTTP Route. Defaults to 80. Read only. | `80` |
 | scheme | The scheme used for traffic. Read only. | `http` |
