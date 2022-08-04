@@ -21,4 +21,4 @@ An ephemeral volume can be mounted to a container by specifying the following 'v
 | name | y | A name key for the volume. | `tempstore`
 | kind | y | The type of volume, either `ephemeral` or `persistent`. | `ephemeral`
 | mountPath | y | The container path to mount the volume to. | `\tmp\mystore`
-| managedStore | y | The backing storage medium. Either `disk` or `memory`. | `memory`
+| managedStore | y | The backing storage medium, either `disk` or `memory`. | `memory`
