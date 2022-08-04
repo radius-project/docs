@@ -20,7 +20,7 @@ Make sure you have the [environment initialized with Azure cloud provider]({{<re
 Simply swap out the module file referenced for the Mongo infrastructure resource, changing "mongo-container.bicep" to "azure-cosmodb.bicep" in the last resource of the file.
 {{< rad file="snippets/app-azure.bicep" embed=true marker="//MONGOMODULE">}}
 
-You need to also add the location parameter. This is intermediate step 
+You need to also add the location parameter as well.
 
 ```sh
 param location string = resourceGroup().location
