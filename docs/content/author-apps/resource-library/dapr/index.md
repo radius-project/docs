@@ -36,7 +36,7 @@ Model your building blocks as resources:
 {{< tabs Bicep >}}
 
 {{% codetab %}}
-{{< rad file="snippets/statestore.bicep" embed=true marker="//CONTAINER" >}}
+{{< rad file="snippets/statestore.bicep" embed=true >}}
 {{% /codetab %}}
 
 {{< /tabs >}}
