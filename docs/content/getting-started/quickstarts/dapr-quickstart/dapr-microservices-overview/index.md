@@ -9,7 +9,7 @@ weight: 1000
 
 In this tutorial you will be deploying an online store where you can order items:
 
-<img src="./store.png" alt="A screenshot of the store application" width=500 />
+<img src="./overview.png" alt="A diagram of the Dapr application" width=1000px />
 
 #### (optional) Download the source code
 
@@ -64,6 +64,6 @@ The Dapr component configuration is automatically generated for the statestore b
 
 In this quickstart you will be able to swap between different Dapr components, such as Azure Table Storage and a Redis container. While the backing infrastructure will change, the container definitions and connections will remain the same. This allows you to easily swap between different backing infrastructure without rewriting your service code or definition.
 
-<img src="./statestore.png" alt="A diagram of the Dapr state store" width=400 />
+<img src="./statestore.png" alt="A diagram of the Dapr state store" width=600px />
 
 <br>{{< button text="Next: Deploy the application backend" page="dapr-microservices-initial-deployment.md" >}}
