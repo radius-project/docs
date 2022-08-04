@@ -9,6 +9,9 @@ slug: tutorial-env
 
 ## Initialize a Radius environment
 
+{{% alert title="💡 Github Code Spaces" color="success" %}} You can skip this section if you are using [Github codespaces]({{< ref "getting-started#try-out-radius-on-github-codespaces">}})  to try out the tutorial. The dev containers have all the pre-requisites installed and environment initialized.
+{{% /alert %}}
+
 A Radius [Kubernetes environment]({{<ref environments-concept>}}) can run in a Kubernetes cluster running on any platform. This step is usually done either by an infra-admin person or a developer depending upon the setup of an enterprise. 
 
 In this step we will be initializing a Radius Kubernetes environment.
@@ -65,4 +68,4 @@ Radius installs the control plane resources, creates an environment resource, cr
    dapr-operator             1/1     1            1           35s
    ```
 
-<br>{{< button text="Previous step: App overview" page="webapp-overview" newline="false" >}} {{< button text="Next step: Author app definition" page="webapp-initial-deployment">}}
+<br>{{< button text="Previous step: App overview" page="webapp-overview" newline="false" >}} {{< button text="Next step: Author and deploy app" page="webapp-initial-deployment">}}
