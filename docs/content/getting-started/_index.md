@@ -111,8 +111,7 @@ A Radius environment is where you will deploy your applications. Easily deploy a
 
 ### Pre-requisites
 
-- Kubernetes cluster configured as the default `kubectl` context (verify with `kubectl config current-context`)
-
+- [Supported Kubernetes cluster]({{< ref kubernetes >}}) configured as the default `kubectl` context (verify with `kubectl config current-context`)
 
 ```sh
 rad env init kubernetes
