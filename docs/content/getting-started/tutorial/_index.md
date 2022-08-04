@@ -25,8 +25,10 @@ This tutorial contains the following sections:
 - Swap a connector resource - Swap a MongoDB container for an Azure CosmosDB instance to back the connector and deploy the app to a Radius environment with Azure cloud provider configured
 
 ## Prerequisites
+
 {{% alert title="💡 Github Code Spaces" color="success" %}} You can skip this section if you are using [Github codespaces]({{< ref "getting-started#try-out-radius-on-github-codespaces">}})  to try out the tutorial. The dev containers have all the pre-requisites installed and environment initialized.
 {{% /alert %}}
+
 - [Install Radius CLI]({{< ref "getting-started#install-rad-cli" >}})
 - Set up a Kubernetes Cluster. There are many different options here, including:
   - [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster)
@@ -35,6 +37,6 @@ This tutorial contains the following sections:
   - [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
   - [K3s](https://k3s.io), a lightweight single-binary certified Kubernetes distribution from Rancher.
   - Another Kubernetes provider of your choice.
-- Set up an Azure cloud provider. This is required if you want to deploy the second half of the tutorial to Azure
-  - Create a [subscription and resource group](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal). Keep a hold of the subscription ID and resource group you would like to deploy resources to.
+- [Azure subscription](https://azure.com) (optional - used in last tutorial step to deploy Azure resources)
+
 <br>{{< button text="Next step: App overview" page="webapp-overview" >}}

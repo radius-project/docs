@@ -77,16 +77,22 @@ Your final app.bicep file should look like the file below:
 
 ## Cleanup
 
-{{% alert title="Delete environment" color="warning" %}} If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to delete all Radius resources running on the Kubernetes Cluster. {{% /alert %}}
+{{% alert title="Delete environment" color="warning" %}}
+If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to delete all Radius resourcesrunning on the Kubernetes Cluster.
+{{% /alert %}}
 
-{{% alert title="Cleanup Azure Resources" color="warning" %}} Azure resources are not deleted when deleting a Radius environment, so to prevent additional charges, make sure to delete all resources from the resource group used. {{% /alert %}}
+{{% alert title="Cleanup Azure Resources" color="warning" %}}
+Azure resources are not deleted when deleting a Radius environment, so to prevent additional charges, make sure to delete all resources from theresource group used.
+{{% /alert %}}
 
-{{% alert title="Delete other Kubernetes resources used" color="warning" %}} Additional Kubernetes resources need to be cleaned up that were deployed for Mongo. Run the following commands to delete these resources:
+{{% alert title="Delete other Kubernetes resources used" color="warning" %}}
+Additional Kubernetes resources need to be cleaned up that were deployed for Mongo. Run the following commands to delete these resources:
 
 ```bash
 kubectl delete statefulset,serviceaccount,clusterrolebinding,clusterrole,secret mongo
 kubectl delete pvc db-storage-claim-mongo-0
 ```
+
 {{% /alert %}}
 
-{{<button text="Previous step: Author and deploy app" page="webapp-initial-deployment">}}
+{{< button text="Previous step: Author and deploy app" page="webapp-initial-deployment" >}}

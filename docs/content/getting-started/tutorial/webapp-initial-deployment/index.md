@@ -23,9 +23,9 @@ Lets dig into the `app.bicep` to understand the components. Below is the definit
 
 {{< rad file="snippets/app.bicep" embed=true marker="//APPBASE" >}}
 
-The environment property depicts the environment that was initialized in the previous step for the app to land on. Radius will automatically inject the `environment` parameter into the bicep file during deployment.
+The **environment** property specifies the environmentId to deploy the application and other resources into. Since this was initialized in the previous step via the CLI, `rad deploy` will automatically inject the `environment` parameter into the Bicep file during deployment.
 
-The location property defines where to deploy a resource within the targeted platform. It is currently a required property that we expect to remove in a future release. See [Resource Schema]({{< ref resource-schema >}}) for more info.
+The **location** property defines where to deploy a resource within the targeted platform. For self-hosted Kubernetes environments this value must be set to `'global'`. See [Resource Schema]({{< ref resource-schema >}}) for more info.
 
 ## Container
 
