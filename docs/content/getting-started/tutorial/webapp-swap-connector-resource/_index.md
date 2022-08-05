@@ -21,7 +21,7 @@ The "azure-cosmosdb.bicep" file contains the definition to deploy the Azure cosm
 
 {{< rad file="snippets/app-azure.bicep" embed=true marker="//MONGOMODULE">}}
 
-Update the connection string in the connector resource to `resource: mongo.outputs.cosmosDatabaseId` like below
+Update the connector definition to use a resource reference instead of manually defining the connection string by replacing `secrets: {...}` with `resource: mongo.outputs.cosmosDatabaseId`:
 
 {{< rad file="snippets/app-azure.bicep" embed=true marker="//DATABASE CONNECTOR">}}
 
