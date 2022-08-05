@@ -64,7 +64,7 @@ resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
 }
 //GATEWAY
 
-//DATABASE
+//DATABASE CONNECTOR
 resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
   name: 'db'
   location: 'global'
@@ -74,12 +74,10 @@ resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = 
   properties: {
     environment: app.properties.environment
     application: app.id
-    secrets: {
-      connectionString: 'mongodb://db:27017/db?authSource=admin'
-    }
+    resource: mongo.outputs.dbName
   }
 }
-//DATABASE
+//DATABASE CONNECTOR
 
 //MONGOMODULE
 module mongo 'azure-cosmosdb.bicep' = {
