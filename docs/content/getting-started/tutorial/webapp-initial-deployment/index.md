@@ -52,7 +52,7 @@ A [connector]({{< ref connector-schema >}}) provides an infrastructure abstracti
 
 <img src="mongo-connector.png" width=450px alt="Diagram of a mongo connector" /><br />
 
-To learn more about connectors visit the [concepts docs]({{< ref appmodel-concept >}}
+To learn more about connectors visit the [concepts docs]({{< ref appmodel-concept >}})
 
 ### Database connector
 
