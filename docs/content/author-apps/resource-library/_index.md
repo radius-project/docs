@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Add resources to your Radius application"
-linkTitle: "Resources"
+linkTitle: "Resource types"
 description: "Specs for resources supported in Radius apps"
 weight: 200
 no_list: true
