@@ -33,7 +33,7 @@ rad env init kubernetes -i
 
 ```bash
 k3d cluster create -p '8081:80@loadbalancer' --k3s-arg '--disable=traefik@server:0'
-rad env init kubernetes -i --public-endpoint-override 'http://localhost:8081'"
+rad env init kubernetes -i --public-endpoint-override 'http://localhost:8081'
 ```
 {{% /codetab %}}
 
