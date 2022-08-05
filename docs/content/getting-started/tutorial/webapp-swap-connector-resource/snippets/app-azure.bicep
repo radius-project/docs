@@ -1,10 +1,9 @@
-//APPBASE
 import radius as radius
 
 param environment string
-
 param location string = resourceGroup().location
 
+//APPBASE
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'webapp'
   location: 'global'
@@ -27,9 +26,6 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
           containerPort: 3000
           provides: frontendRoute.id
         }
-      }
-      env: {
-        DBCONNECTION: db.connectionString()
       }
     }
     connections: {
@@ -82,6 +78,6 @@ module mongo 'azure-cosmosdb.bicep' = {
   name: 'mongo-module'
   params: {
     location: location
-}
+  }
 }
 //MONGOMODULE

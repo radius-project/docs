@@ -17,6 +17,8 @@ The following clusters have been tested and validated to ensure they support all
 {{% codetab %}}
 Azure Kubernetes Service (AKS) clusters are the easiest way to get up and running quickly with a Radius environment. To learn how to setup a cluster visit the [Azure docs](https://docs.microsoft.com/azure/aks/learn/quick-kubernetes-deploy-portal?tabs=azure-cli).
 
+Note that [AKS-managed AAD](https://docs.microsoft.com/en-us/azure/aks/managed-aad) is not supported currently.
+
 Once deployed and your kubectl context has been set as your default, you can run the following to configure the Radius control plane:
 
 ```bash

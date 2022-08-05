@@ -10,7 +10,7 @@ weight: 300
 
 ## Platform resources
 
-Containers are hosted by the Kubernetes as the container runtime today, regardless of which platform the application is deployed into. We plan to support additional container runtimes in the future. 
+Containers are hosted by Kubernetes as the container runtime today, regardless of which platform the application is deployed into. We plan to support additional container runtimes in the future. 
 
 ## Resource format
 

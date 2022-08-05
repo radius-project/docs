@@ -75,7 +75,7 @@ The Radius resource provider handles CRUDL requests for Radius applications, con
 - **Applications.Core**: The _core_ resources of an application, including the application itself, containers, gateways, and routes.
 - **Applications.Connectors**: The _connector_ resources that can be used within an application.
 
-Backing resources may be created deleted by the Radius RP for some resources. For example, a Radius container creates a backing Pod or Container App on the target platform and container runtime.
+Backing resources may be created or deleted by the Radius RP for some resources. For example, a Radius container creates a backing Pod or Container App on the target platform and container runtime.
 
 ### Deployment engine
 

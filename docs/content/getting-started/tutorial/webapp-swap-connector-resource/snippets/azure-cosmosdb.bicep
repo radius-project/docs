@@ -1,7 +1,6 @@
 import radius as radius
 
 param location string
-
 param name string = 'todoapp-cosmos-${uniqueString(resourceGroup().id)}'
 
 resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2021-04-15' = {
