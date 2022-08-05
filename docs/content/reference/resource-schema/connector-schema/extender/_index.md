@@ -1,9 +1,8 @@
 ---
 type: docs
-title: "Extender resource"
-linkTitle: "Extender"
+title: "Radius extender resource"
+linkTitle: "Radius Extender"
 description: "Learn how to use Extender resource in Radius"
-weight: 999
 slug: "extender"
 ---
 

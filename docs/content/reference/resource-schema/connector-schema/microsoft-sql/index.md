@@ -3,7 +3,6 @@ type: docs
 title: "Microsoft SQL Server database"
 linkTitle: "Microsoft SQL"
 description: "Sample application running on a user-managed Azure SQL Database"
-weight: 100
 ---
 
 This application showcases how Radius can use a user-manged Azure SQL Database.

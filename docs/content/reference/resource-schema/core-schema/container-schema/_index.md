@@ -131,4 +131,4 @@ Extensions define additional capabilities and configuration for a container.
 
 Additional properties are available and required depending on the 'kind' of the extension.
 
-## Sub-types
+## Properties

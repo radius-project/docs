@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Dapr Sidecar Extension"
-linkTitle: "Dapr extension"
+linkTitle: "Dapr sidecar extension"
 description: "Learn how to add a Dapr sidecar with a Dapr extension"
 weight: 100
 slug: "extension"
