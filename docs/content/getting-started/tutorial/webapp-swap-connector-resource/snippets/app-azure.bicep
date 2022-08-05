@@ -21,7 +21,7 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   properties: {
     application: app.id
     container: {
-      image: 'radius.azurecr.io/webapptutorial-todoapp'
+      image: 'radius.azurecr.io/tutorial/webapp:edge'
       ports: {
         web: {
           containerPort: 3000
@@ -57,6 +57,7 @@ resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
     application: app.id
     routes: [
       {
+         path: '/'
          destination: frontendRoute.id
       }
     ]
@@ -68,9 +69,6 @@ resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
 resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
   name: 'db'
   location: 'global'
-  dependsOn: [
-    mongo
-  ]
   properties: {
     environment: app.properties.environment
     application: app.id
