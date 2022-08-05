@@ -3,6 +3,7 @@ import radius as radius
 param environment string
 param location string = resourceGroup().location
 
+//APPBASE
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'webapp'
   location: 'global'
@@ -10,7 +11,9 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
     environment: environment
   }
 }
+//APPBASE
 
+//CONTAINER
 resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'frontend'
   location: 'global'
@@ -40,7 +43,9 @@ resource frontendRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' 
     application: app.id
   }
 }
+//CONTAINER
 
+//GATEWAY
 resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
   name: 'public'
   location: 'global'
@@ -48,13 +53,15 @@ resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
     application: app.id
     routes: [
       {
+         path: '/'
          destination: frontendRoute.id
       }
     ]
   }
 }
+//GATEWAY
 
-//MONGOMODULE
+//DATABASE CONNECTOR
 resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
   name: 'db'
   location: 'global'
@@ -64,7 +71,9 @@ resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = 
     resource: mongo.outputs.cosmosDatabaseId
   }
 }
+//DATABASE CONNECTOR
 
+//MONGOMODULE
 module mongo 'azure-cosmosdb.bicep' = {
   name: 'mongo-module'
   params: {

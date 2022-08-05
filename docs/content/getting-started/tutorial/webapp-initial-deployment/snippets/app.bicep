@@ -42,7 +42,9 @@ resource frontendRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' 
     application: app.id
   }
 }
+//CONTAINER
 
+//GATEWAY
 resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
   name: 'public'
   location: 'global'
@@ -56,7 +58,7 @@ resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
     ]
   }
 }
-//CONTAINER
+//GATEWAY
 
 //DATABASE CONNECTOR
 resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
@@ -70,10 +72,10 @@ resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = 
     }
   }
 }
-// DATABASE CONNECTOR
+//DATABASE CONNECTOR
 
-//MONGO MODULE
+//MONGOMODULE
 module mongo 'mongo-container.bicep' = {
   name: 'mongo-module'
 }
-//MONGO MODULE
+//MONGOMODULE
