@@ -17,7 +17,7 @@ Make sure you have the [environment initialized with Azure cloud provider]({{<re
 
 ## Swap the connector for an Azure resource
 
-The "azure-cosmosdb.bicep" file contains the definition to deploy  the Azure cosmosdb.Simply swap out the module file referenced for the Mongo infrastructure resource, changing "mongo-container.bicep" to "azure-cosmosdb.bicep" in the last resource of the file. 
+The "azure-cosmosdb.bicep" file contains the definition to deploy the Azure cosmosdb. Simply swap out the module file referenced for the Mongo infrastructure resource, changing "mongo-container.bicep" to "azure-cosmosdb.bicep" in the last resource of the file. 
 
 {{< rad file="snippets/app-azure.bicep" embed=true marker="//MONGOMODULE">}}
 
