@@ -16,13 +16,13 @@ weight: 999
 
 ### Can I connect to an existing environment?
 
-**Yes**. When you initialize an environment via [`rad env init`]({{< ref rad_env_init.md >}})), you can provide an existing Kubernetes cluster context. Radius will update your `config.yaml` file with the appropriate values.
+**Yes**. When you initialize an environment via [`rad env init`]({{< ref rad_env_init.md >}}), you can provide an existing Kubernetes cluster context. Radius will update your `config.yaml` file with the appropriate values.
 
 ### When would/should I use more than one environment?
 
 Users can employ multiple environments for isolation and organization, for example based on:
 - Permissions (managed at the Resource Group/Subscription level in Azure)
-- Purpose (dev vs prod)
+- Purpose (dev vs. prod)
 - Difference in hosting (standalone Kubernetes vs Microsoft Azure)
 
 ## Bicep templates
@@ -47,4 +47,4 @@ Users can employ multiple environments for isolation and organization, for examp
 
 ## Does Radius support all Azure resources?
 
-**Yes**. You can use any Azure resource type by modeling it in Bicep outside the `Applications.Core/applications` resource and defining a connection to the resource from a `Applications.Core/containers`. See the [connections page]({{< ref appmodel-concept >}})) for more details.
+**Yes**. You can use any Azure resource type by modeling it in Bicep outside the `Applications.Core/applications` resource and defining a connection to the resource from a `Applications.Core/containers`. See the [connections page]({{< ref appmodel-concept >}}) for more details.

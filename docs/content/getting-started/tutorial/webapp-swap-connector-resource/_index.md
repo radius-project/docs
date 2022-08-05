@@ -17,7 +17,8 @@ Make sure you have the [environment initialized with Azure cloud provider]({{<re
 
 ## Swap the connector for an Azure resource
 
-Simply swap out the module file referenced for the Mongo infrastructure resource, changing "mongo-container.bicep" to "azure-cosmodb.bicep" in the last resource of the file.
+Simply swap out the module file referenced for the Mongo infrastructure resource, changing "mongo-container.bicep" to "azure-cosmodb.bicep" in the last resource of the file. Also update the definition of your Mongo connector to reference the CosmosDB resource ID instead of manually building the connection string:
+
 {{< rad file="snippets/app-azure.bicep" embed=true marker="//MONGOMODULE">}}
 
 Update the connection string to `resource: mongo.outputs.dbName` like below
@@ -30,7 +31,7 @@ You need to also add the location parameter.
 param location string = resourceGroup().location
 ```
 
-Your final app.bicep file should look like the file below: 
+Your final app.bicep file should look like the file below:
 
 {{< rad file="snippets/app-azure.bicep" embed=true >}}
 
