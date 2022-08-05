@@ -6,10 +6,6 @@ description: "Learn how to model and deploy multiple microservices with Radius a
 weight: 200
 ---
 
-{{% alert title="Preview" color="info" %}}
-The following sample is a preview of how microservices and Dapr can be deployed with Radius. As we introduce additional features to Radius we will incorporate them into this demo.
-{{% /alert %}}
-
 ## Background
 
 This reference application originally comes from the official Azure Github repo [Container App Store Microservice](https://github.com/Azure-Samples/container-apps-store-api-microservice) and contains microservices written in Python, Go, and NodeJS. It uses Dapr to communicate between services.
@@ -18,25 +14,21 @@ This reference application originally comes from the official Azure Github repo 
 
 <img src="container-app-store-radius.png" alt="Architecture diagram of container app store on Radius" width=900 ><br >
 
-This is a sample microservice solution to showcase how Radius can be incorporated into container applications. It will create a store microservice which will need to call into an order service and an inventory service. Dapr is used to secure communication and calls between services, and a mongoDB are created alongside the microservices.
+This is a sample microservice solution to showcase how Radius can be incorporated into container applications. It will create a store microservice which calls into an order service and an inventory service. Dapr is used to secure communication and calls between services, and a mongoDB is created alongside the microservices.
 
 There are three main microservices in the solution:
 
 **Store API (node-app)**
 
-The node-app is an express.js API that exposes three endpoints. / will return the primary index > page, /order will return details on an order (retrieved from the order service), and /inventory > will return details on an inventory item (retrieved from the inventory service).
+The `node-app` is an express.js API that exposes three endpoints. `/` returns the primary index > page, `/order` returns details on an order (retrieved from the order service), and `/inventory` returns details on an inventory item (retrieved from the inventory service).
 
 **Order Service (python-app)**
 
-The python-app is a Python flask app that will retrieve and store the state of orders. It uses Dapr state management to store the state of the orders. When deployed in Container Apps, Dapr is configured to point to a mongoDB to back the state.
+The `python-app` is a Python flask app that retrieves and stores the state of orders. It uses Dapr state management to store the state of the orders. When deployed, Dapr is configured to point to a mongoDB to back the state.
 
 **Inventory Service (go-app)**
 
-The go-app is a Go mux app that will retrieve and store the state of inventory. For this sample, the mux app just returns back a static value.
-
-## Deployment today
-
-There are two options for [deploying the Container App Store Microservice](https://github.com/Azure-Samples/container-apps-store-api-microservice#deploy-and-run) without Radius: GitHub Actions or the Azure CLI.
+The `go-app` is a Go mux app that retrieves and stores the state of inventory. For this sample, the mux app just returns a static value.
 
 ## Adding Radius
 
