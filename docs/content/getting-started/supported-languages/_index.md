@@ -6,10 +6,6 @@ description: "Learn how to model apps using various IaC tools"
 weight: 900
 ---
 
-Project Radius supports a variety of infrastructure-as-code (IaC) languages.
-
-{{% alert title="Other languages" color="info" %}}
-Currently, Project Radius supports Bicep. Terraform support is underway as our next priority IaC language. 
-{{% /alert %}}
+Project Radius is designed to support a variety of infrastructure-as-code (IaC) languages. Currently, Project Radius supports Bicep. Terraform support is underway. 
 
 ## Languages
