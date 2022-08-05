@@ -34,18 +34,18 @@ Follow the prompts to configure:
 {{% alert title="💡 About namespaces" color="success" %}} When you initialize a Radius Kubernetes environment, Radius installs the control plane resources within the `radius-system` namespace in your cluster, separate from your applications. The namespace specified in this step will be used for your application deployments.
 {{% /alert %}}
 
-1. **Add Azure provider** - An [Azure cloud provider]({{<ref providers>}}) allows you to deploy and manage Azure resources as part of your application. If you have have an Azure subscription add an Azure cloud provider to use it later in the tutorial.
+1. **Add Azure provider** - An [Azure cloud provider]({{<ref providers>}}) allows you to deploy and manage Azure resources as part of your application. If you have have an Azure subscription enter "y" to add an Azure cloud provider that will be used later in the tutorial.
 
       - *Subscription and Resource group* - Pick or enter the Azure subscription and resource group where the azure resources will be deployed 
-      - *Service principal* - A service principal is required to authenticate with Azure and create Azure resources. You can use the below command to create a service principal or use an  existing one.
-         ```bash 
-         az ad sp create-for-rbac --role Owner --scope /subscriptions/<subscription name>/resourceGroups/<resource group name>
-         ```
-         Enter the appID, password and the tenant of the service principal 
+      - *Service principal* - A service principal is required to authenticate with Azure and create Azure resources. Open up a new terminal and use the below command to create a service principal or use an existing one.
+      ```bash 
+      az ad sp create-for-rbac --role Owner --scope /subscriptions/<subscription name>/resourceGroups/<resource group name>
+      ```
+      Copy and enter the appID, password and the tenant of the service principal 
 
 1. **Environment name** - The name of the environment to create. Use `webapp-tutorial-environment`.
 
-Radius installs the control plane resources, creates an environment resource, creates a workspace and updates the configuration to /.rad/config.yaml
+Radius installs the control plane services, creates an environment resource, creates a workspace and updates the configuration to /.rad/config.yaml
 
 ### Verify initialization
 
