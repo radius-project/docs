@@ -68,7 +68,7 @@ resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = 
   properties: {
     environment: app.properties.environment
     application: app.id
-    resource: mongo.outputs.dbName
+    resource: mongo.outputs.cosmosDatabaseId
   }
 }
 //DATABASE CONNECTOR
