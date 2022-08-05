@@ -52,7 +52,7 @@ There are two options for [deploying the Container App Store Microservice](https
 Adding Project Radius to the Container App Store Microservice on containers application allows teams to:
 
 - Define first-class relationships between microservices and infrastucture
-- Add portability to the application across Azure, Kubernetes, and local development environments
+- Add portability and tooling consistency to the application across Azure, Kubernetes, and local development environments
 - Run and test the application locally
 
 By the end of this sample you will be able to deploy Container App Store Microservice both locally or to the cloud using Project Radius.

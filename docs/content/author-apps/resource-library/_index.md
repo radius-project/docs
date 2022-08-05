@@ -34,7 +34,7 @@ Define your network relationships & requirements.<br /><br />
 {{< card header="**Connectors**" >}}
 [<img src="connectors.png" alt="Connectors" style="width:325px"/>]({{< ref connectors >}})
 
-Add portability to your application with connectors.<br /><br />
+Add portability and tooling consistency to your applications with connectors.<br /><br />
 [Learn more]({{< ref connectors >}})
 {{< /card >}}
 {{< /cardpane >}}

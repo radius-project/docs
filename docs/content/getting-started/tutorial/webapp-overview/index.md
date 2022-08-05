@@ -51,7 +51,7 @@ Deployment often involves different teams working together, separating their res
 As you progress, keep in mind the following benefits that the Radius application abstraction provides:
 
 - Relationships between resources are fully specified with protocols and other strongly-typed information
-- Connectors provide abstraction and portability across local and cloud environments
+- Connectors provide abstraction and portability across local and cloud environments, enabling tooling consistency
 - Separation of concerns for the different personas involved in the deployment
 
 <br>{{< button text=" Previous step: Tutorial Pre-requisites" page="tutorial"  newline="false">}} {{< button text="Next step: Initialize an environment" page="webapp-initialize-environment">}}

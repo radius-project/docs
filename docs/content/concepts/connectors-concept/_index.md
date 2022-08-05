@@ -13,6 +13,8 @@ Connectors provide an **infrastructure abstraction** that enables **portability*
 
 For example, when a user specifies a MongoDB connector, that connector could bind to an Azure CosmosDB, an AWS DynamoDB, or a Mongo Container based on which platform is targeted. An administrator could even specify the exact configurations of the database resource to spin up when a developer needs a database, enhancing a self-serve workflow.
 
+Even for teams that are not currently prioritizing application portability, connectors enable tooling consistency across an organization that is leveraging multiple clouds across distributed teams. 
+
 <img src="connectors-example.png" alt="Diagram of example architecture using or Radius Conntector. Depicts a Radius Container connected to MongoDB Radius Connector, which can bind to an Azure CosmosDB, an AWS DynamoDB, or a Mongo Container. " width="700px" />
 
 ## Supported connectors
