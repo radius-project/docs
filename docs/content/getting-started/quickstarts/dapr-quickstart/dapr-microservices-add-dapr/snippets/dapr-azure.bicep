@@ -51,7 +51,7 @@ resource backendRoute 'Applications.Connector/daprInvokeHttpRoutes@2022-03-15-pr
 }
 
 resource account 'Microsoft.Storage/storageAccounts@2019-06-01' = {
-  name: 'daprquickstart${uniqueString(resourceGroup().id)}'
+  name: 'dapr${uniqueString(resourceGroup().id)}'
   location: location
   sku: {
     name: 'Standard_LRS'
