@@ -40,8 +40,7 @@ rad env init kubernetes -i --public-endpoint-override 'http://localhost:8081'
 {{% codetab %}}
 [Kind](https://kind.sigs.k8s.io/) is a tool for running local Kubernetes clusters inside Docker containers. Use the following setup to create a new cluster and install the Radius control plane, along with a new environment:
 
-Copy the text below into the local yaml file `kind-config.yaml`:
-### kind-config.yaml
+First, copy the text below into a new file `kind-config.yaml`:
 ```yaml
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
@@ -57,9 +56,11 @@ nodes:
     listenAddress: "0.0.0.0"
 ```
 
+Then, create a kind cluster with this config and initialize your Radius environment:
 ```bash
 # Create the kind cluster
 kind create cluster --config kind-config.yaml
+
 # Verify that the nodes are ready
 # (You should see 2 nodes listed with status Ready)
 kubectl get nodes
