@@ -84,16 +84,27 @@ const stateStoreName = process.env.CONNECTION_ORDERS_STATESTORENAME;
 1. You can confirm all the resources were deployed by running:
 
    ```sh
-   rad resource list --application dapr-quickstart
+   rad resource list containers --application dapr-quickstart
    ```
 
-   You should see both `backend` and `statestore` components in your `dapr-quickstart` application. Example output:
+   Example output:
 
    ```sh
     RESOURCE      TYPE
-    orders        dapr.io.StateStore
-    backend       Container
+    backend       applications.core/containers
    ```
+
+      ```sh
+   rad resource list daprstatestores --application dapr-quickstart
+   ```
+
+   Example output:
+
+   ```sh
+    RESOURCE      TYPE
+    orders        applications.connector/daprstatestores
+   ```
+   You should see both `backend` and `statestore` components in your `dapr-quickstart` application. 
 
 1. To test out the state store, open a local tunnel on port 3000 again:
 
