@@ -45,7 +45,7 @@ Now you are ready to deploy the application for the first time.
 1. Confirm that your Radius application was deployed:
 
    ```sh
-   rad resource list --application dapr-quickstart
+   rad resource list containers --application dapr-quickstart
    ```
 
    You should see your `backend` resource. Example output:
