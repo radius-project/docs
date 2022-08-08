@@ -51,7 +51,7 @@ rad application list
 RESOURCE           TYPE
 appname            applications.core/applications
 
-rad resource list -a appname
+rad resource list containers -a appname
 RESOURCE                 TYPE
 containername            applications.core/containers
 ```

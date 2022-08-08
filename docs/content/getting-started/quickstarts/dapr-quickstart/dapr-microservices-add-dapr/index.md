@@ -84,7 +84,7 @@ const stateStoreName = process.env.CONNECTION_ORDERS_STATESTORENAME;
 1. You can confirm all the resources were deployed by running:
 
    ```sh
-   rad resource list --application dapr-quickstart
+   rad resource list containers --application dapr-quickstart
    ```
 
    You should see both `backend` and `statestore` components in your `dapr-quickstart` application. Example output:
