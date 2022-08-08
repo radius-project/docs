@@ -27,11 +27,11 @@ See the [Connector docs]({{< ref connector-schema >}}) for more information.
 
 ## Example
 
-In this example, a team wants to use a Mongo Database, and will be deploying to an environment running on Azure.
+In this example, a team wants to use a Mongo Database and will be deploying to an environment running on Azure.
 
 ### Underlying resource
 
-The CosmosDB resource, `underlyingdb`, will fulfill the app's Mongo storage requirement. This resource can be deployed by a central IT team, or by the development team.
+The CosmosDB resource, `underlyingdb`, will fulfill the app's Mongo storage requirement. This resource can be deployed by a central IT team or by the development team.
 
 {{< rad file="snippets/corerp-connector-example.bicep" embed=true marker="//RESOURCE" >}}
 

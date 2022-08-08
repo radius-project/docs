@@ -90,9 +90,9 @@ const stateStoreName = process.env.CONNECTION_ORDERS_STATESTORENAME;
    You should see both `backend` and `statestore` components in your `dapr-quickstart` application. Example output:
 
    ```sh
-    RESOURCE      TYPE                         PROVISIONING_STATE  HEALTH_STATE
-    orders        dapr.io.StateStore           Provisioned         Healthy
-    backend       Container                    Provisioned         Healthy
+    RESOURCE      TYPE
+    orders        dapr.io.StateStore
+    backend       Container
    ```
 
 1. To test out the state store, open a local tunnel on port 3000 again:

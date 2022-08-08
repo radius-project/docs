@@ -24,7 +24,6 @@ Easily add the Dapr sidecar to your [Containers]({{< ref container >}}) using a 
 
 {{< /tabs >}}
 
-
 ## Dapr building blocks
 
 Dapr connectors make it easy to model and configure [Dapr building blocks](https://docs.dapr.io/developing-applications/building-blocks/) as resources. Simply specify the building block and the backing resource, and Radius will automatically configure and apply the accompanying Dapr configuration.
@@ -35,9 +34,9 @@ Model your building blocks as resources:
 
 {{< tabs Bicep >}}
 
-{{% codetab %}}
-{{< rad file="snippets/statestore.bicep" embed=true marker="//CONTAINER" >}}
-{{% /codetab %}}
+{{< codetab >}}
+{{< rad file="snippets/statestore.bicep" embed=true marker="//STATESTORE" >}}
+{{< /codetab >}}
 
 {{< /tabs >}}
 
