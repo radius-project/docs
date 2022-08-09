@@ -33,7 +33,7 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
 
 1. Initialize a new [environment]({{< ref managing-envs >}}) with `rad env init kubernetes -i`
 1. Enter "y" to add an Azure cloud provider
-1. Pick or enter your Azure subscription and resource group
+1. Specify your Azure subscription and resource group
 1. Create an [Azure service principal](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) with the [proper permissions](https://aka.ms/azadsp-more). Enter the appID, password and the tenant of the service principal
 1. Deploy your app and any included Azure resources with `rad deploy`
 
@@ -41,6 +41,6 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
 
 1. Reinstall the control plane with the cloud provider via `rad install kubernetes --reinstall -i`
 1. Enter "y" to add an Azure cloud provider
-1. Pick or enter your Azure subscription and resource group
+1. Specify your Azure subscription and resource group
 1. Create an [Azure service principal](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) with the [proper permissions](https://aka.ms/azadsp-more). Enter the appID, password and the tenant of the service principal 
 1. Deploy your app and any included Azure resources with `rad deploy`
