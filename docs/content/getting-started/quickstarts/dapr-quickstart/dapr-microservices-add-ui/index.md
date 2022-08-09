@@ -9,17 +9,13 @@ weight: 4000
 
 To complete the application, you'll add another component for the frontend user interface.
 
-Again, we'll discuss changes to your Bicep file and then provide the full, updated file before deployment.
-
-## Add `frontend` container and `frontend-route` HttpRoute
+## Add `frontend` container
 
 Another container resource is used to specify a few properties about the order generator:
 
-- **container image**: `radius.azurecr.io/daprtutorial-frontend` is a Docker image the container will run.
-- **connections**: `daprBackend.id` declares the intention for `frontend` to communicate with `backend` through the `daprBackend` Dapr HTTP Route.
-- **extensions**: `dapr.io/Sidecar` configures Dapr on the container.
-
-Additionally, a [Gateway]({{< ref gateway >}}) and an [HttpRoute]({{< ref httproute >}}) are configured to expose the `frontend` container on a public endpoint.
+- **container image**: `radius.azurecr.io/quickstarts/dapr-frontend:edge` is a Docker image the container will run.
+- **connections**: `backendRoute.id` declares the intention for `frontend` to communicate with `backend` through the `backendRoute` Dapr HTTP Route.
+- **extensions**: `dapr.io/Sidecar` configures Dapr on the container, which is used to invoke the backend.
 
 {{< rad file="snippets/frontend.bicep" marker="//FRONTEND" embed=true >}}
 
@@ -29,6 +25,12 @@ As before with connections, the `frontend` component is using an environment var
 var appId = Environment.GetEnvironmentVariable("CONNECTION_BACKEND_APPID");
 services.AddSingleton<HttpClient>(DaprClient.CreateInvokeHttpClient(appId));
 ```
+
+## Add HTTP Route and Gateway
+
+Additionally, a [Gateway]({{< ref gateway >}}) and an [HttpRoute]({{< ref httproute >}}) are configured to expose the `frontend` container on a public endpoint.
+
+{{< rad file="snippets/frontend.bicep" marker="//ROUTES" embed=true >}}
   
 ## Deploy application
 
@@ -43,11 +45,11 @@ services.AddSingleton<HttpClient>(DaprClient.CreateInvokeHttpClient(appId));
    rad deploy dapr.bicep
    ```
 
-   Now that we added a `Gateway` and an `HttpRoute`, a public endpoint will be available to your application.
+   Now that we added a `Gateway` and an `HttpRoute`, a public endpoint will be available to your application automatically ([learn more]({{< ref "gateway#hostname-generation">}})).
 
    ```sh
    Public Endpoints:
-      Gateway            frontend-gateway           IP-ADDRESS
+    gateway         Applications.Core/gateways http://gateway.dapr-quickstart.<IP>.nip.io
    ```
 
    Navigate to the endpoint to view the application:
@@ -59,14 +61,14 @@ You have completed this tutorial!
 ## Cleanup
 
 {{% alert title="Delete your environment" color="warning" %}}
-If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to **prevent additional charges in your Azure subscription**.
+If you're done with testing, you can use the rad CLI to [delete the application]({{< ref rad_application_delete.md >}}).
 {{% /alert %}}
 
 ## Next steps
 
-- If you'd like to try another tutorial with your existing environment, go back to the [Radius tutorials]({{< ref tutorial >}}) page. 
+- If you'd like to try another tutorial with your existing environment, go back to the [Radius quickstarts]({{< ref quickstarts >}}) page.
 - Related links for Dapr:
   - [Dapr documentation](https://docs.dapr.io/)
   - [Dapr quickstarts](https://github.com/dapr/quickstarts/tree/v1.0.0/hello-world)
 
-<br>{{< button text="Try another tutorial" page="tutorial" >}}
+<br>{{< button text="Try another quickstart" page="quickstarts" >}}

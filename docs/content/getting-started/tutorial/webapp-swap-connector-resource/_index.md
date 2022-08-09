@@ -13,23 +13,29 @@ To abstract the infrastructure workflows from the development workflows, we are 
 
 ## Initialize Radius environment with Azure cloud provider
 
-Make sure you have the [environment initialized with Azure cloud provider]({{<ref webapp-initialize-environment>}}) 
+Make sure you have the [environment initialized with Azure cloud provider]({{<ref webapp-initialize-environment>}}). If you have created an environment without an Azure cloud provider, you can [add a cloud provider to an existing environment]({{<ref "providers#add-a-cloud-provider-to-an-existing-environment">}}).
 
 ## Swap the connector for an Azure resource
 
-The app.bicep from the previous step should look like this 
+The "azure-cosmosdb.bicep" file contains the definition to deploy the Azure cosmosdb. Simply swap out the module file referenced for the Mongo infrastructure resource, changing "mongo-container.bicep" to "azure-cosmosdb.bicep" in the last resource of the file. 
 
-{{< rad file="snippets/app-container.bicep" embed=true >}}
+{{< rad file="snippets/app-azure.bicep" embed=true marker="//MONGOMODULE">}}
 
-Update the bicep file like below to swap the connector resource with an Azure cosmosdb resource
+Update the connector definition to use a resource reference instead of manually defining the connection string by replacing `secrets: {...}` with `resource: mongo.outputs.cosmosDatabaseId`:
+
+{{< rad file="snippets/app-azure.bicep" embed=true marker="//DATABASE CONNECTOR">}}
+
+You need to also add the location parameter.
+
+```sh
+param location string = resourceGroup().location
+```
+
+Your final app.bicep file should look like the file below:
 
 {{< rad file="snippets/app-azure.bicep" embed=true >}}
 
 ## Deploy the application with Azure database
-
-{{% alert title="Known issue: Azure deployments" color="warning" %}}
-There is a known issue where deployments to Azure will fail with a "NotFound" error for templates containing starters. This is being addressed in an upcoming release. As a workaround submit the deployment a second time. The second deployment should succeed.
-{{% /alert %}}
 
 1. In a terminal window deploy the app.bicep file :
 
@@ -38,14 +44,15 @@ There is a known issue where deployments to Azure will fail with a "NotFound" er
    ```
    This may take a few minutes to create the database. On completion, you will see the following resources:
 
-     ```sh
+   ```sh
    Deployment In Progress:
 
-     Completed       Application                Applications.Core/applications
-     Completed       Container                  Applications.Core/containers
-     Completed       frontend-route             Applications.Core/httpRoutes
-     Completed       gateway                    Applications.Core/gateways
-     Completed       mongo.com.MongoDatabase    db
+    Completed            http-route      Applications.Core/httpRoutes
+    Completed            webapp          Applications.Core/applications
+    Completed            mongo-module    Microsoft.Resources/deployments
+    Completed            public          Applications.Core/gateways
+    Completed            db              Applications.Connector/mongoDatabases
+    Completed            frontend        Applications.Core/containers
 
    Deployment Complete 
    ```
@@ -54,7 +61,17 @@ There is a known issue where deployments to Azure will fail with a "NotFound" er
 
    ```sh
    Public Endpoints:
-    gateway  Gateway            http://20.252.19.39 
+    gateway  Gateway            IP-ADDRESS
+   ```
+
+    If you do not see a public endpoint, use `rad app status -a webapp` to get the endpoint
+
+   ```sh
+   APPLICATION  RESOURCES
+   webapp       4
+
+   GATEWAY   ENDPOINT
+   public    IP-ADDRESS
    ```
 
 1. To test your application, navigate to the public endpoint that was printed at the end of the deployment. You should see a page like:
@@ -65,6 +82,22 @@ There is a known issue where deployments to Azure will fail with a "NotFound" er
 
 ## Cleanup
 
-{{% alert title="Delete application" color="warning" %}} If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to prevent additional charges in your Azure subscription. {{% /alert %}}
+{{% alert title="Delete environment" color="warning" %}}
+If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to delete all Radius resourcesrunning on the Kubernetes Cluster.
+{{% /alert %}}
 
-{{<button text="Previous step: Add a database connector" page="webapp-add-database">}}
+{{% alert title="Cleanup Azure Resources" color="warning" %}}
+Azure resources are not deleted when deleting a Radius environment, so to prevent additional charges, make sure to delete all resources from theresource group used.
+{{% /alert %}}
+
+{{% alert title="Delete other Kubernetes resources used" color="warning" %}}
+Additional Kubernetes resources need to be cleaned up that were deployed for Mongo. Run the following commands to delete these resources:
+
+```bash
+kubectl delete statefulset,serviceaccount,clusterrolebinding,clusterrole,secret mongo
+kubectl delete pvc db-storage-claim-mongo-0
+```
+
+{{% /alert %}}
+
+{{< button text="Previous step: Author and deploy app" page="webapp-initial-deployment" >}}

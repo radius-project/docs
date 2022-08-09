@@ -8,6 +8,8 @@ toc_hide: true
 hide_summary: true
 ---
 
+<!-- DISABLE_ALGOLIA -->
+
 Developers can use the *preview* Radius Visual Studio Code extension which offers a variety of features to help manage Radius applications across cloud and edge.
 
 {{% alert title="Bicep extension" color="info" %}}

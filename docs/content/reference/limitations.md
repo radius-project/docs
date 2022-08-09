@@ -6,6 +6,16 @@ description: "Learn where there are known issues and limitations with the latest
 weight: 998
 ---
 
+## Radius resources
+
+### Resource names must be unique for a given resource type across applications
+
+Resources for a given type must currently have unique names within an environment, even across applications. For example, if two applications both have a `frontend` container resource, the first application deployment will succeed while the second will fail.
+
+As a workaround, use separate environments for applications that have repeated resource names for a given type.
+
+This will be addressed further in a future release.
+
 ## Bicep & Deployment Engine
 
 ### Currently using a forked version of Bicep
@@ -41,7 +51,7 @@ rad application list
 RESOURCE           TYPE
 appname            applications.core/applications
 
-rad resource list -a appname
+rad resource list containers -a appname
 RESOURCE                 TYPE
 containername            applications.core/containers
 ```

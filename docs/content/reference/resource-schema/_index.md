@@ -21,7 +21,7 @@ The name of the resource defines how to address the resource within the context 
 
 #### Naming constraints
 
-Radius resources names follow the DNS-1035 naming convention. This, plus other control-plane requirements, result in resource names that must:
+Radius resource names follow the DNS-1035 naming convention. This, plus other control-plane requirements, result in resource names that must:
 
 - Contain at most 63 user-entered characters
 - Contain only alphanumeric characters or '-'

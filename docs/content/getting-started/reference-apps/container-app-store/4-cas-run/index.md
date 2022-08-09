@@ -9,6 +9,8 @@ toc_hide: true
 hide_summary: true
 ---
 
+<!-- DISABLE_ALGOLIA -->
+
 ## Initialize environment
 
 Begin by create a new Radius [local dev environment]({{< ref dev-environments >}}):

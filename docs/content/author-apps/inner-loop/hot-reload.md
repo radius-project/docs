@@ -8,6 +8,8 @@ toc_hide: true
 hide_summary: true
 ---
 
+<!-- DISABLE_ALGOLIA -->
+
 Hot reload lets you automatically refresh your running application based on a file being updated.
 
 {{% alert title="🚧 Under construction" color="warning" %}}

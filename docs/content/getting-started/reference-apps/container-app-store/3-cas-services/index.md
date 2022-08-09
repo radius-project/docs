@@ -9,6 +9,8 @@ toc_hide: true
 hide_summary: true
 ---
 
+<!-- DISABLE_ALGOLIA -->
+
 ## Building the services
 
 As part of a Radius deployment, the container images are built and provided to the application as parameters.
