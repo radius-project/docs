@@ -27,7 +27,8 @@ def scan_directory(directory: str, pages: list):
         path = os.path.join(directory, file)
         if os.path.isfile(path):
             if file.endswith(".html") and file not in excluded_files:
-                pages.append(path)
+                if 'toc_hide: true' not in open(path).read():
+                    pages.append(path)
         else:
             scan_directory(path, pages)
 
