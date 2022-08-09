@@ -7,3 +7,5 @@ weight: 100
 toc_hide: true
 hide_summary: true
 ---
+
+<!-- DISABLE_ALGOLIA -->

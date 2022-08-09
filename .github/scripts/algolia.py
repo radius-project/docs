@@ -27,7 +27,7 @@ def scan_directory(directory: str, pages: list):
         path = os.path.join(directory, file)
         if os.path.isfile(path):
             if file.endswith(".html") and file not in excluded_files:
-                if 'toc_hide: true' not in open(path).read():
+                if '<!-- DISABLE_ALGOLIA -->' not in open(path).read():
                     print(f'Indexing: {path}')
                     pages.append(path)
                 else:

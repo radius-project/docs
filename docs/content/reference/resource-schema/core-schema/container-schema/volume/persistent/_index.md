@@ -8,6 +8,8 @@ toc_hide: true
 hide_summary: true
 ---
 
+<!-- DISABLE_ALGOLIA -->
+
 Persistent volumes have lifecycles that are separate from the container. Containers "attach" to another resource which contains the persistent volume.
 
 ## Properties

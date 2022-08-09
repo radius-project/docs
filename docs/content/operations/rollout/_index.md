@@ -8,6 +8,8 @@ toc_hide: true
 hide_summary: true
 ---
 
+<!-- DISABLE_ALGOLIA -->
+
 <!-- TODO: topics for this page: A/B testing, circuit braker & retries, blue/green, canary apps.  -->
 
 

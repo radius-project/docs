@@ -8,6 +8,8 @@ weight: 500
 toc_hide: true
 hide_summary: true
 ---
+
+<!-- DISABLE_ALGOLIA -->
  
  <!-- Jason is working on revamping this app into a sample app instead, and this page will go away anyways. 
  https://github.com/project-radius/docs/issues/101 -->

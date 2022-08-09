@@ -9,3 +9,4 @@ hide_summary: true
 ---
 
 <!-- rad app init -->
+<!-- DISABLE_ALGOLIA -->

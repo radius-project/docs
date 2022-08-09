@@ -9,6 +9,8 @@ toc_hide: true
 hide_summary: true
 ---
 
+<!-- DISABLE_ALGOLIA -->
+
 ## Background
 
 The [Container App Store Microservice](https://github.com/Azure-Samples/container-apps-store-api-microservice) reference application contains microservices written in Python, Go, and NodeJS. It uses Dapr to communicate between services.

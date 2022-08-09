@@ -9,6 +9,8 @@ toc_hide: true
 hide_summary: true
 ---
 
+<!-- DISABLE_ALGOLIA -->
+
 In this section you will be defining the Container Apps Store application and infrastructure that compose it.
 
 ## Download the sample application
