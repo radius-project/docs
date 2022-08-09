@@ -29,11 +29,13 @@ As the focus of the eShopOnDapr reference application is on Dapr, the original a
 
 ## Adding Radius
 
-Adding Project Radius to the eShop on Dapr application allows teams to:
+With Dapr, you get code-level portability across different cloud + edge platforms. Adding in Project Radius, you can now describe all of your services and infrastructure as a unified application, and gain full code + infrastructure portability across cloud + edge platforms.
 
-- Define the entire collection of microservices and backing infrastructure as a single application
-- Easily manage configuration and credentials between infrastructure and services, all within the app model
-- Simplify deployment with Bicep and Azure Resource Manager (ARM)
+Project Radius allows the eShop on Dapr application to:
+
+- Define the entire collection of microservices and backing infrastructure as a single application in a single language. No more separate templating languages and scripts to glue it all together.
+- Easily manage configuration and credentials between infrastructure and services, all within the app model. No more manually copying/pasting connection strings or secrets.
+- Simplify deployment with Bicep and Azure Resource Manager (ARM). No more custom deployment scripts or workflows.
 
 {{< button text="View eShop reference app in samples" githubRepo="samples" githubPath="reference-apps/eshop-dapr" color="success" size="btn-lg" >}}
 
