@@ -13,7 +13,7 @@ To abstract the infrastructure workflows from the development workflows, we are 
 
 ## Initialize Radius environment with Azure cloud provider
 
-Make sure you have the [environment initialized with Azure cloud provider]({{<ref webapp-initialize-environment>}}). If you have created an environment without Azure cloud provider, you can follow the instructions to [Add cloud provider to an existing environment]({{<ref "providers#add-a-cloud-provider-to-an-existing-environment">}})
+Make sure you have the [environment initialized with Azure cloud provider]({{<ref webapp-initialize-environment>}}). If you have created an environment without an Azure cloud provider, you can [add a cloud provider to an existing environment]({{<ref "providers#add-a-cloud-provider-to-an-existing-environment">}}).
 
 ## Swap the connector for an Azure resource
 
