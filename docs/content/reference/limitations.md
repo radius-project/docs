@@ -10,9 +10,9 @@ weight: 998
 
 ### Resource names must be unique for a given resource type across applications
 
-Resources for a given type must currently have unique names within an environment, even across applications. For example, if two applications both have a `frontend` container resource, the first application deployment will succeed while the second will fail.
+Resources for a given type must currently have unique names within a [workspace]({{< ref workspaces >}}. For example, if two applications both have a `frontend` container resource, the first application deployment into any environment associated with the workspace will succeed while the second will fail.
 
-As a workaround, use separate environments for applications that have repeated resource names for a given type.
+As a workaround, use separate workspaces for applications that have repeated resource names for a given type.
 
 This will be addressed further in a future release.
 
