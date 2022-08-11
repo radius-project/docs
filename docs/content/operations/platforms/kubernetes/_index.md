@@ -29,7 +29,11 @@ rad env init kubernetes -i
 {{% /codetab %}}
 
 {{% codetab %}}
-[k3d](https://k3d.io) is a lightweight wrapper to run [k3s](https://github.com/rancher/k3s) (Rancher Lab’s minimal Kubernetes distribution) in Docker. Use the following commands to create a new cluster and install the Radius control plane, along with a new environment:
+[k3d](https://k3d.io) is a lightweight wrapper to run [k3s](https://github.com/rancher/k3s) (Rancher Lab’s minimal Kubernetes distribution) in Docker. 
+
+First, ensure that memory resource is 4GB or more in `Resource` setting of `Preferences` if you're using Docker Desktop.
+
+Next, use the following commands to create a new cluster and install the Radius control plane, along with a new environment:
 
 ```bash
 k3d cluster create -p "8081:80@loadbalancer" --k3s-arg "--disable=traefik@server:0"
