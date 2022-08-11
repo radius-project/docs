@@ -47,20 +47,28 @@ Issues faced when deploying applications
 
 ## Troubleshooting Radius Service 
 
-To troubleshoot radius serice user has to fetch the logs from the radius service containers
+To troubleshoot the Radius service, the user should fetch the logs from the Radius service containers.
 
-1. Run the kubectl command to list the applications running in your cluster under the namespace radius-system to get the pod details of appcore-rp, ucp and deployment engine.
+1. Run the `kubectl` command to list the pods running in your cluster under the namespace `radius-system` to  see that `appcore-rp`, `ucp`, and `bicep-de` pods are running.
 
 ```
 kubectl get pods -n radius-system
 ```
 
-2. Get the logs from radius appcore-rp, ucp and deployment engine container by using the pod names captured from the previous step and running the following command.
+2. Get the logs from radius `appcore-rp`, `ucp` and `bicep-de` containers by using the following command.
+
+```
+kubectl logs -n radius-system -l control-plane=de
+kubectl logs -n radius-system -l control-plane=ucp
+kubectl logs -n radius-system -l control-plane=appcore-rp
+```
+
+You can also get the logs by using the pod names captured from the previous step and running the following command. 
 
 ```
 kubectl logs -f <appcore-rp pod name> -n radius-system
-kubectl logs -f <deployment engine pod name> -n radius-system
-kubectl logs -f <ucp pod> -n radius-system
+kubectl logs -f <bicep-de pod name> -n radius-system
+kubectl logs -f <ucp pod name> -n radius-system
 ```
 
 3. Check for the text "panic" in the logs and if you find it open an issue at https://github.com/project-radius/radius by providing the details.
@@ -71,7 +79,7 @@ To troubleshoot issues with the Azure cloud provider and deployments to user's A
 
 ## Examples
 
-Deploying an application to Azure with a service principle with incorrect scope returns an error from deployment engine
+Deploying an application to Azure with a service principal with incorrect scope returns an error from deployment engine
 
 ```
 rad deploy test.bicep
