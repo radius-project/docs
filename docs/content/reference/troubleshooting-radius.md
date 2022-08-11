@@ -63,6 +63,8 @@ kubectl logs -f <deployment engine pod name> -n radius-system
 kubectl logs -f <ucp pod> -n radius-system
 ```
 
+3. Check for the text "panic" in the logs and if you find it open an issue at https://github.com/project-radius/radius by providing the details.
+
 ## Troubleshooting issues with Azure Cloud Provider
 
 To troubleshoot issues with the Azure cloud provider and deployments to user's Azure subscription and resource group, refer to ARM logs. Log in to https://portal.azure.com and within the target resource group navigate to the "Activity logs" from the menu. For details refer https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/activity-log?tabs=powershell#view-the-activity-log  
