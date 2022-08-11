@@ -59,22 +59,17 @@ Your final app.bicep file should look like the file below:
 
    Just like before, a public endpoint will be available through the gateway.
 
-   ```sh
-   Public Endpoints:
-    gateway  Gateway            IP-ADDRESS
-   ```
-
-    If you do not see a public endpoint, use `rad app status -a webapp` to get the endpoint
+    Use `rad app status -a webapp` to get the endpoint:
 
    ```sh
    APPLICATION  RESOURCES
    webapp       4
 
    GATEWAY   ENDPOINT
-   public    IP-ADDRESS
+   public    PUBLIC_ENDPOINT
    ```
 
-1. To test your application, navigate to the public endpoint that was printed at the end of the deployment. You should see a page like:
+1. To test your application, navigate to the public endpoint that was printed by `rad app status -a webapp`. You should see a page like:
 
    <img src="todoapp-withdb.png" width="400" alt="screenshot of the todo application with a database">
 
