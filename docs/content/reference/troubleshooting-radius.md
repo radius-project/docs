@@ -31,7 +31,7 @@ az account set --subscription <SUB-ID>
 
 ## Troubleshooting the Radius control-plane
 
-To troubleshoot the Radius control-plane, begin by viewing the logs from the [control-plane services]({{< ref architecture >}}) within the `radius-system` namespace. The kubectl CLI can be used, or a graphical tool such as [Octant](https://octant.dev/)
+To troubleshoot the Radius control-plane, begin by viewing the logs from the [control-plane services]({{< ref architecture >}}) within the `radius-system` namespace. The kubectl CLI can be used, or a graphical tool such as [Octant](https://octant.dev/). Stay tuned for richer built-in troubleshooting experiences in upcoming releases.
 
 1. Use the `kubectl` CLI to list the control-plane pods running in your cluster under the namespace `radius-system`. You should see the `appcore-rp`, `ucp`, and `bicep-de` pods running:
 
