@@ -94,7 +94,7 @@ results in a Dapr component named 'myapp-statestore'.
 
 In order to consume this Dapr resource from a container, either use the environment variable injected into the container (`CONNECTION_STATESTORE_NAME`), or manually craft an environment variable with `'${app.name}-${statestore.name}'`.
 
-### `connectionString()` method fails to return value for Redis setup with Azure Cache
+### `connectionString()` method returns empty value for RedisCache Connector setup with Azure Redis Cache
 
 If a Redis connector is setup with an Azure Cache for Redis resource, the `connectionString()` method will fail to return a value.
 
