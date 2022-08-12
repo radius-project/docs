@@ -56,7 +56,7 @@ The following methods are available on the Redis connector:
 | connectionString() | Get the connection string for the Redis cache. |
 | password() | Get the password for the Redis cache. |
 
-NOTE: Currently, the `connectionString()` method is not supported for Redis connectors created using the `resource` property. As a workaround, the `connectionString` secret can be manually set and accessed using this method.
+NOTE: Currently, the `connectionString()` method is not supported for Redis connectors created using the `resource` property. As a workaround, the `connectionString` secret can be manually set and then accessed.  See our [known limitations page]({{< ref limitations >}}) for more information.
 
 ## Supported resources
 
