@@ -45,41 +45,46 @@ try some of these solutions:
 
 Issues faced when deploying applications
 
-## Troubleshooting Radius Service 
+## Troubleshooting the Radius control-plane
 
-To troubleshoot the Radius service, the user should fetch the logs from the Radius service containers.
+To troubleshoot the Radius control-plane, begin by viewing the logs from the [control-plane services]({{< ref architecture >}}) within the `radius-system` namespace. The kubectl CLI can be used, or a graphical tool such as [Octant](https://octant.dev/)
 
-1. Run the `kubectl` command to list the pods running in your cluster under the namespace `radius-system` to  see that `appcore-rp`, `ucp`, and `bicep-de` pods are running.
+1.  Use the `kubectl` CLI to list the control-plane pods running in your cluster under the namespace `radius-system`. You should see the `appcore-rp`, `ucp`, and `bicep-de` pods running:
 
-```
-kubectl get pods -n radius-system
-```
+   ```
+   kubectl get pods -n radius-system
+   ```
 
-2. Get the logs from radius `appcore-rp`, `ucp` and `bicep-de` containers by using the following command.
+2. Get the logs from the `appcore-rp`, `ucp` and `bicep-de` containers by using the following commands:
 
-```
-kubectl logs -n radius-system -l control-plane=de
-kubectl logs -n radius-system -l control-plane=ucp
-kubectl logs -n radius-system -l control-plane=appcore-rp
-```
+   ```
+   kubectl logs -n radius-system -l control-plane=de
+   kubectl logs -n radius-system -l control-plane=ucp
+   kubectl logs -n radius-system -l control-plane=appcore-rp
+   ```
 
-You can also get the logs by using the pod names captured from the previous step and running the following command. 
+   You can also get the logs by using the pod names captured from the previous step and running the following commands:
 
-```
-kubectl logs -f <appcore-rp pod name> -n radius-system
-kubectl logs -f <bicep-de pod name> -n radius-system
-kubectl logs -f <ucp pod name> -n radius-system
-```
+   ```
+   kubectl logs -f <appcore-rp pod name> -n radius-system
+   kubectl logs -f <bicep-de pod name> -n radius-system
+   kubectl logs -f <ucp pod name> -n radius-system
+   ```
 
-3. Check for the text "panic" in the logs and if you find it open an issue at https://github.com/project-radius/radius by providing the details.
+3. Look for the text "panic" or "error" in the logs, and if you find it inspect the error message. Also please open an issue at [project-radius/radius](https://github.com/project-radius/radius/issues/new?assignees=&labels=kind%2Fbug&template=bug.md&title=%3CBUG+TITLE%3E) with the details of your error and if possible, how to recreate.
 
 ## Troubleshooting issues with Azure Cloud Provider
 
-To troubleshoot issues with the Azure cloud provider and deployments to user's Azure subscription and resource group, refer to ARM logs. Log in to https://portal.azure.com and within the target resource group navigate to the "Activity logs" from the menu. For details refer https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/activity-log?tabs=powershell#view-the-activity-log  
+To troubleshoot issues with the [Azure cloud provider]({{< ref providers >}}) and deployments to a Microsoft Azure subscription and resource group, refer to your [ARM activity logs](https://docs.microsoft.com/azure/azure-monitor/essentials/activity-log):
+1. Visit https://portal.azure.com
+1. Navigate to your target subscription and resource group
+1. Select "Activity logs" from the menu
+1. Inspect the logs for any errors of failed deployments
+Note that Activity logs may take up to 10 minutes to be available in Azure.
 
 ## Examples
 
-Deploying an application to Azure with a service principal with incorrect scope returns an error from deployment engine
+In this example, a failure is returned after attempting to deploy a Bicep template that contains a Radius application plus Azure resources:
 
 ```
 rad deploy test.bicep
@@ -90,13 +95,18 @@ Deployment In Progress...
 Error: ResourceDeploymentClient#CreateOrUpdate: Failure sending request: StatusCode=0 -- Original Error: Code="InternalServerError" Message="Internal server error."
 ```
 
-Deployment engine logs
+This error isn't very descriptive. Let's take a look at the control-plane logs to see if they can tell us more:
+
 ```
-kubectl logs -f bicep-de-6d4546df86-rhthn -n radius-system
+kubectl logs -n radius-system -l control-plane=de
 
 fail: Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware[1]
 An unhandled exception has occurred while executing the request.
-Azure.RequestFailedException: The client '81082ee4-ace0-4922-a80a-2c02cb0d2207' with object id '81082ee4-ace0-4922-a80a-2c02cb0d2207' does not have authorization to perform action 'Microsoft.Resources/subscriptions/resourcegroups/read' over scope '/subscriptions/66d1209e-1382-45d3-99bb-650e6bf63fc0/resourcegroups/radius-rg-MZ94f' or the scope is invalid. If access was recently granted, please refresh your credentials.
+Azure.RequestFailedException: The client 'APP_ID' with object id 'OBJECT_ID' does not have authorization to perform action 'Microsoft.Resources/subscriptions/resourcegroups/read' over scope '/subscriptions/SUBSCRIPTION_ID/resourcegroups/radius-rg-MZ94f' or the scope is invalid. If access was recently granted, please refresh your credentials.
 Status: 403 (Forbidden)
 ErrorCode: AuthorizationFailed
 ```
+
+This tells us the service principal that was configured with the Azure cloud provider was not properly configured on the target resource group. You can now add your service principal to your resource group and try your deployment again.
+
+Also please make sure to [open an Issue](https://github.com/project-radius/radius/issues/new?assignees=&labels=kind%2Fbug&template=bug.md&title=%3CBUG+TITLE%3E) if you encounter a generic `Internal server error` message, so we can address the root error not being forwarded to the user.
