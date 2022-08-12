@@ -11,13 +11,13 @@ weight: 900
 ### Visual Studio not authorized for single sign-on
 
 If you receive an error saying Visual Studio or another application is not authorized to clone the Radius repo and you need to re-authorize the app, follow these steps:
+
 1. Open a browser to https://github.com/project-radius/radius
 1. Select your profile and click on Settings
 1. Select Applications from the left navbar
 1. Select the Authorized OAuth Apps tab
 1. Find the conflicting app and select Revoke
 1. Reopen app on local machine and re-auth
-
 
 ## Creating environment
 
@@ -29,35 +29,19 @@ If you get an error when configuring Azure cloud provider after selecting a Reso
 az account set --subscription <SUB-ID>
 ```
 
-### Doskey is not recognized
-
-If you receive an error about the `doskey` binary, such as below:
-
-```bash
-Invoking Azure CLI failed with the following error: 'doskey' is not recognized as an internal or external command, operable program or batch file.
-```
-
-try some of these solutions:
-- Make sure C:\Windows\System32 is part of your PATH
-- Make sure you don't have any custom scripts that launch at startup that use doskey to configure special aliases
-
-## Application deployment
-
-Issues faced when deploying applications
-
 ## Troubleshooting the Radius control-plane
 
 To troubleshoot the Radius control-plane, begin by viewing the logs from the [control-plane services]({{< ref architecture >}}) within the `radius-system` namespace. The kubectl CLI can be used, or a graphical tool such as [Octant](https://octant.dev/)
 
-1.  Use the `kubectl` CLI to list the control-plane pods running in your cluster under the namespace `radius-system`. You should see the `appcore-rp`, `ucp`, and `bicep-de` pods running:
+1. Use the `kubectl` CLI to list the control-plane pods running in your cluster under the namespace `radius-system`. You should see the `appcore-rp`, `ucp`, and `bicep-de` pods running:
 
-   ```
+   ```bash
    kubectl get pods -n radius-system
    ```
 
 2. Get the logs from the `appcore-rp`, `ucp` and `bicep-de` containers by using the following commands:
 
-   ```
+   ```bash
    kubectl logs -n radius-system -l control-plane=de
    kubectl logs -n radius-system -l control-plane=ucp
    kubectl logs -n radius-system -l control-plane=appcore-rp
@@ -65,7 +49,7 @@ To troubleshoot the Radius control-plane, begin by viewing the logs from the [co
 
    You can also get the logs by using the pod names captured from the previous step and running the following commands:
 
-   ```
+   ```bash
    kubectl logs -f <appcore-rp pod name> -n radius-system
    kubectl logs -f <bicep-de pod name> -n radius-system
    kubectl logs -f <ucp pod name> -n radius-system
@@ -76,17 +60,19 @@ To troubleshoot the Radius control-plane, begin by viewing the logs from the [co
 ## Troubleshooting issues with Azure Cloud Provider
 
 To troubleshoot issues with the [Azure cloud provider]({{< ref providers >}}) and deployments to a Microsoft Azure subscription and resource group, refer to your [ARM activity logs](https://docs.microsoft.com/azure/azure-monitor/essentials/activity-log):
+
 1. Visit https://portal.azure.com
 1. Navigate to your target subscription and resource group
 1. Select "Activity logs" from the menu
 1. Inspect the logs for any errors of failed deployments
+
 Note that Activity logs may take up to 10 minutes to be available in Azure.
 
-## Examples
+## Example
 
 In this example, a failure is returned after attempting to deploy a Bicep template that contains a Radius application plus Azure resources:
 
-```
+```bash
 rad deploy test.bicep
 Building test.bicep...
 Deploying Application into workspace 'w2'...
@@ -97,7 +83,7 @@ Error: ResourceDeploymentClient#CreateOrUpdate: Failure sending request: StatusC
 
 This error isn't very descriptive. Let's take a look at the control-plane logs to see if they can tell us more:
 
-```
+```bash
 kubectl logs -n radius-system -l control-plane=de
 
 fail: Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware[1]
