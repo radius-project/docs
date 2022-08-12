@@ -98,7 +98,7 @@ In order to consume this Dapr resource from a container, either use the environm
 
 If a Redis connector is setup with an Azure Cache for Redis resource, the `connectionString()` method will fail to return a value.
 
-As a workaround, manually configure the `secrets.connectionString` property in the connector, using values for `host` and `port` that you will get from the Azure Cache.
+As a workaround, manually configure the connector from values, using the `hostName`, `port`, and key that you will get from the Azure Cache for Redis.
 
 For example, for an Azure Cache called `redis`, you can create a connector using the following:
 
