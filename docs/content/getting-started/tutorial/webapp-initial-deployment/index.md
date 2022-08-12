@@ -133,10 +133,10 @@ Now you are ready to deploy the application for the first time.
    webapp       4
 
    GATEWAY   ENDPOINT
-   public    IP-ADDRESS
+   public    PUBLIC_ENDPOINT
    ```
 
-3. To test your application, navigate to the public endpoint that was printed at the end of the deployment.
+3. To test your application, navigate to the public endpoint that was printed by `rad app status -a webapp`.
 
    <img src="todoapp-nodb.png" width="400" alt="screenshot of the todo application with no database">
 

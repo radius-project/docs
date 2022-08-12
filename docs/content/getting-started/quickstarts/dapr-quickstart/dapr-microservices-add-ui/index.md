@@ -47,9 +47,14 @@ Additionally, a [Gateway]({{< ref gateway >}}) and an [HttpRoute]({{< ref httpro
 
    Now that we added a `Gateway` and an `HttpRoute`, a public endpoint will be available to your application automatically ([learn more]({{< ref "gateway#hostname-generation">}})).
 
+   Use `rad app status -a dapr-quickstart` to get the endpoint:
+
    ```sh
-   Public Endpoints:
-    gateway         Applications.Core/gateways http://gateway.dapr-quickstart.<IP>.nip.io
+   APPLICATION      RESOURCES
+   dapr-quickstart  6
+
+   GATEWAY   ENDPOINT
+   gateway   PUBLIC_ENDPOINT
    ```
 
    Navigate to the endpoint to view the application:
