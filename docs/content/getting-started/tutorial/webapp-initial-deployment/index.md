@@ -19,6 +19,8 @@ You can download the [source code and templates](https://get.radapp.dev/code/edg
 1. mongo-container.bicep - Contains the definition for deploying mongo container
 1. azure-cosmosdb.bicep - Contains the definition for Azure cosmosdb
 
+UTM-TODO - tell people to go to the tutorial folder if they're in a codespace 
+
 Lets dig into the `app.bicep` to understand the components. Below is the definition to add a Radius application
 
 {{< rad file="snippets/app.bicep" embed=true marker="//APPBASE" >}}
@@ -84,6 +86,7 @@ Now that you have created a connection called `itemstore`, environment variables
 
 Your app.bicep file should look like below
 
+UTM-TODO - showing the wrong bicep file here? make sure we don't show the comment lines that docsy uses to split out sections of a file
 {{< rad file="snippets/app.bicep" embed=true >}}
 
 ## Deploy the application
@@ -119,8 +122,13 @@ Now you are ready to deploy the application for the first time.
    Public Endpoints:
       Gateway           frontend-gateway      IP-ADDRESS
    ```
-   If you do not see a public endpoint, use `rad app status -a webapp` to get the endpoint
+   UTM-TODO If you do not see a public endpoint, you can get the endpoint via: 
    ```sh
+   rad app status -a webapp
+   ```
+
+   Example output:
+   ```
    APPLICATION  RESOURCES
    webapp       4
 

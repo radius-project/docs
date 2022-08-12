@@ -7,6 +7,11 @@ description: "Overview of the Dapr microservices tutorial application"
 weight: 1000
 ---
 
+UTM-TODO - add note about trying this quickstart with codespaces 
+
+UTM-TODO - find a way to talk about the before state 
+
+
 In this tutorial you will be deploying an online store where you can order items:
 
 <img src="./overview.png" alt="A diagram of the Dapr application" width=1000px />

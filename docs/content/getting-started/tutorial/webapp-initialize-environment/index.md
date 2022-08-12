@@ -10,7 +10,11 @@ slug: tutorial-env
 ## Initialize a Radius environment
 
 {{% alert title="💡 Github Code Spaces" color="success" %}} You can skip this section if you are using [Github codespaces]({{< ref "getting-started#try-out-radius-on-github-codespaces">}})  to try out the tutorial. The dev containers have all the pre-requisites installed and environment initialized.
+
+UTM-TODO - how to view existing env inside codespace
 {{% /alert %}}
+
+UTM-TODO - a lot of this content is not strictly applicable to just the tutorial. pull it out to a separate page? (also, we are inconsistent today about having duplicative info in the tutorial some places and linking out to other docs in other places)
 
 A Radius [Kubernetes environment]({{<ref environments-concept>}}) can run in a Kubernetes cluster running on any platform. This step is usually done either by an infra-admin person or a developer depending upon the setup of an enterprise.
 
@@ -28,7 +32,7 @@ Use the [`rad env init kubernetes` command]({{< ref rad_env_init_Kubernetes >}})
 rad env init kubernetes -i
 ```
 
-Follow the prompts to configure:
+Follow the prompts to configure: UTM-TODO - the command will walk you through the following prompts... 
 
 1. **Namespace** - When an application is deployed, this is the namespace where your containers and other Kubernetes resources will be run. By default, this will be in the `default` namespace.
 {{% alert title="💡 About namespaces" color="success" %}} When you initialize a Radius Kubernetes environment, Radius installs the control plane resources within the `radius-system` namespace in your cluster, separate from your applications. The namespace specified in this step will be used for your application deployments.

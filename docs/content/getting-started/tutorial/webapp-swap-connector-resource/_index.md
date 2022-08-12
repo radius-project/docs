@@ -2,10 +2,13 @@
 type: docs
 title: "Swap connector resource"
 linkTitle: "Swap connector resource"
-description: "Swap a connector resource for an Azure resource to back the connector and deploy it to an environment with Azure cloud provider configured"
+description: "Swap a connector resource for an Azure resource to back the connector and deploy it to an environment with Azure cloud provider configured" UTM-TODO make this shorter
 weight: 4000
 slug: "swap-connector"
 ---
+
+UTM-TODO: local part of the tutorial is done. next part includes deploying to azure. 
+
 
 This step of swapping a connector resource for an Azure resource closely relates to an infrastructure-admin responsibility in enterprises. Once the developer does a handoff, the infrastructure-admin sets up the production environments to port the application. If you are a developer who handles everything related to deployments, this would be applicable to you as well.
 
@@ -13,11 +16,13 @@ To abstract the infrastructure workflows from the development workflows, we are 
 
 ## Initialize Radius environment with Azure cloud provider
 
-Make sure you have the [environment initialized with Azure cloud provider]({{<ref webapp-initialize-environment>}}). If you have created an environment without an Azure cloud provider, you can [add a cloud provider to an existing environment]({{<ref "providers#add-a-cloud-provider-to-an-existing-environment">}}).
+Make sure you have the [environment initialized with Azure cloud provider]({{<ref webapp-initialize-environment>}}). UTM-TODO add text that this link is for first-time setup.  
+
+If you have created an environment without an Azure cloud provider, you can [add a cloud provider to an existing environment]({{<ref "providers#add-a-cloud-provider-to-an-existing-environment">}}).
 
 ## Swap the connector for an Azure resource
 
-The "azure-cosmosdb.bicep" file contains the definition to deploy the Azure cosmosdb. Simply swap out the module file referenced for the Mongo infrastructure resource, changing "mongo-container.bicep" to "azure-cosmosdb.bicep" in the last resource of the file. 
+The "azure-cosmosdb.bicep" file contains the definition to deploy the Azure cosmosdb. Simply swap out the module file referenced for the Mongo infrastructure resource, changing "mongo-container.bicep" to "azure-cosmosdb.bicep" in the last resource of the file. TODO - talk about swapping the file name in the app.bicep file. 
 
 {{< rad file="snippets/app-azure.bicep" embed=true marker="//MONGOMODULE">}}
 
@@ -25,7 +30,7 @@ Update the connector definition to use a resource reference instead of manually 
 
 {{< rad file="snippets/app-azure.bicep" embed=true marker="//DATABASE CONNECTOR">}}
 
-You need to also add the location parameter.
+You need to also add the location parameter. UTM-TODO since we are now deploying to ARM, which requires specifying a location on every resource...
 
 ```sh
 param location string = resourceGroup().location
@@ -64,7 +69,7 @@ Your final app.bicep file should look like the file below:
     gateway  Gateway            IP-ADDRESS
    ```
 
-    If you do not see a public endpoint, use `rad app status -a webapp` to get the endpoint
+    If you do not see a public endpoint, use `rad app status -a webapp` to get the endpoint UTM-TODO make this command copy-able
 
    ```sh
    APPLICATION  RESOURCES
