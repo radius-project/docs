@@ -44,7 +44,6 @@ The `redislabs.com/Redis` connector is a [portable connector]({{< ref connectors
 
 | Property | Required | Description | Example(s) |
 |----------|:--------:|-------------|------------|
-| connectionString | n | The connection string for the Redis cache. Write only. | `https://mycache.redis.cache.windows.net,password=*****,....`
 | password | n | The password for the Redis cache. Write only. | `mypassword`
 
 ## Methods
