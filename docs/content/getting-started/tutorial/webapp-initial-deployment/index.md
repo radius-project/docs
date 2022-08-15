@@ -115,20 +115,16 @@ Now you are ready to deploy the application for the first time.
 
    Also, a public endpoint will be available to your application since it contains a [Gateway]({{< ref gateway >}}) resource.
 
-   ```sh
-   Public Endpoints:
-      Gateway           frontend-gateway      IP-ADDRESS
-   ```
-   If you do not see a public endpoint, use `rad app status -a webapp` to get the endpoint
+   Use `rad app status -a webapp` to get the endpoint:
    ```sh
    APPLICATION  RESOURCES
    webapp       4
 
    GATEWAY   ENDPOINT
-   public    IP-ADDRESS
+   public    PUBLIC_ENDPOINT
    ```
 
-3. To test your application, navigate to the public endpoint that was printed at the end of the deployment.
+3. To test your application, navigate to the public endpoint that was printed by `rad app status -a webapp`.
 
    <img src="todoapp-nodb.png" width="400" alt="screenshot of the todo application with no database">
 

@@ -10,9 +10,9 @@ weight: 998
 
 ### Resource names must be unique for a given resource type across applications
 
-Resources for a given type must currently have unique names within an environment, even across applications. For example, if two applications both have a `frontend` container resource, the first application deployment will succeed while the second will fail.
+Resources for a given type must currently have unique names within a [workspace]({{< ref workspaces >}}. For example, if two applications both have a `frontend` container resource, the first application deployment into any environment associated with the workspace will succeed while the second will fail.
 
-As a workaround, use separate environments for applications that have repeated resource names for a given type.
+As a workaround, use separate workspaces for applications that have repeated resource names for a given type.
 
 This will be addressed further in a future release.
 
@@ -93,6 +93,31 @@ resource statestore 'Applications.Connector/daprStateStores@2022-03-15-privatepr
 results in a Dapr component named 'myapp-statestore'.
 
 In order to consume this Dapr resource from a container, either use the environment variable injected into the container (`CONNECTION_STATESTORE_NAME`), or manually craft an environment variable with `'${app.name}-${statestore.name}'`.
+
+### `connectionString()` method returns empty value for RedisCache Connector setup with Azure Redis Cache
+
+If a Redis connector is setup with an Azure Cache for Redis resource, the `connectionString()` method will fail to return a value.
+
+As a workaround, manually configure the connector from values, using the `hostName`, `port`, and key that you will get from the Azure Cache for Redis.
+
+For example, for an Azure Cache called `redis`, you can create a connector using the following:
+
+```bicep
+resource redisConnector 'Applications.Connector/redisCaches@2022-03-15-privatepreview' = {
+  name: 'redis-connector'
+  location: location
+  properties: {
+    application: app.id
+    environment: environment
+    host: redis.properties.hostName
+    port: redis.properties.sslPort
+    secrets: {
+      password: redis.listKeys().primaryKey
+      connectionString: '${redis.properties.hostName}:${redis.properties.sslPort},password=${redis.listKeys().primaryKey},ssl=True,abortConnect=False'
+    }
+  }
+}
+```
 
 ## Connections
 
