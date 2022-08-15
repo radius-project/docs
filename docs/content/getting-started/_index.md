@@ -7,11 +7,21 @@ weight: 20
 no_list: true
 ---
 
+## Try out Radius on Github codespaces
+
+Do you prefer to test out Radius in a fast and easy to use virtual environment? Check out the [Radius samples repo](https://github.com/project-radius/samples) to test out the sample applications on a pre-configured container. Learn more about [GitHub Codespaces](https://github.com/features/codespaces) .
+
+You can also run a [dev container](https://code.visualstudio.com/docs/remote/containers) on your local machine within Docker.
+
+Visit the [GitHub docs]({{< ref github >}}) if you need access to the organization
+
+This container image is automatically configured with the rad CLI, extension, and a running environment. You can skip down to the [Learn Radius](#learn-radius) section to get started.
+
 ## Install `rad` CLI
 
 The `rad` CLI manages your applications, resources, and environments. Begin by installing it on your machine:
 
-{{< tabs Windows MacOS "Linux/WSL" "Codespace/Dev Container" "Cloud Shell" Binaries >}}
+{{< tabs Windows MacOS "Linux/WSL" "Cloud Shell" Binaries >}}
 
 {{% codetab %}}
 
@@ -54,16 +64,6 @@ To install the latest edge version:
 wget -q "https://radiuspublic.blob.core.windows.net/tools/rad/install.sh" -O - | /bin/bash -s edge
 ```
 {{< /edge >}}
-{{% /codetab %}}
-
-{{% codetab %}}
-Do you prefer to test out Radius in a fast and easy to use virtual environment? Check out the [Radius samples repo](https://github.com/project-radius/samples) to test out the sample applications on a pre-configured [GitHub Codespaces](https://github.com/features/codespaces) container.
-
-You can also run a [dev container](https://code.visualstudio.com/docs/remote/containers) on your local machine within Docker.
-
-Visit the [GitHub docs]({{< ref github >}}) if you need access to the organization
-
-This container image is automatically configured with the rad CLI, extension, and a running environment. You can skip down to the [Learn Radius](#learn-radius) section to get started.
 {{% /codetab %}}
 
 {{% codetab %}}
