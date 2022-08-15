@@ -84,7 +84,7 @@ Now that you have created a connection called `itemstore`, environment variables
 
 Your app.bicep file should look like below
 
-{{< rad file="snippets/app.bicep" embed=true >}}
+{{< rad file="snippets/app-render.bicep" embed=true >}}
 
 ## Deploy the application
 
