@@ -15,7 +15,9 @@ To abstract the infrastructure workflows from the development workflows, we are 
 
 Make sure you have the [environment initialized with Azure cloud provider]({{<ref webapp-initialize-environment>}}). 
 
-If you have created an environment without an Azure cloud provider or if you are using the environment created via codespaces, you need to [add a cloud provider to the existing environment]({{<ref "providers#add-a-cloud-provider-to-an-existing-environment">}}) to continue with the rest of the tutorial.
+{{% alert title="⚠️ Cloud provider" color="warning" %}}
+If you have created an environment without an Azure cloud provider, or if you are using the environment created via Codespaces, you need to [add an Azure cloud provider to your existing environment]({{<ref "providers#add-a-cloud-provider-to-an-existing-environment">}}) in order to continue with the rest of the tutorial.
+{{% /alert %}}
 
 ## Swap the connector for an Azure resource
 
