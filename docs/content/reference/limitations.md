@@ -94,6 +94,31 @@ results in a Dapr component named 'myapp-statestore'.
 
 In order to consume this Dapr resource from a container, either use the environment variable injected into the container (`CONNECTION_STATESTORE_NAME`), or manually craft an environment variable with `'${app.name}-${statestore.name}'`.
 
+### `connectionString()` method returns empty value for RedisCache Connector setup with Azure Redis Cache
+
+If a Redis connector is setup with an Azure Cache for Redis resource, the `connectionString()` method will fail to return a value.
+
+As a workaround, manually configure the connector from values, using the `hostName`, `port`, and key that you will get from the Azure Cache for Redis.
+
+For example, for an Azure Cache called `redis`, you can create a connector using the following:
+
+```bicep
+resource redisConnector 'Applications.Connector/redisCaches@2022-03-15-privatepreview' = {
+  name: 'redis-connector'
+  location: location
+  properties: {
+    application: app.id
+    environment: environment
+    host: redis.properties.hostName
+    port: redis.properties.sslPort
+    secrets: {
+      password: redis.listKeys().primaryKey
+      connectionString: '${redis.properties.hostName}:${redis.properties.sslPort},password=${redis.listKeys().primaryKey},ssl=True,abortConnect=False'
+    }
+  }
+}
+```
+
 ## Connections
 
 ### Direct connections to Azure resources with IAM roles are not supported
