@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Resource timeout/retry policies"
+title: "API timeout/retry policies"
 linkTitle: "Timeout/retry policies"
-description: "Learn the timeout/retry policies of Radius resources"
+description: "Learn the timeout/retry policies of the Radius API"
 weight: 100
 ---
 
@@ -13,16 +13,16 @@ There are two main Radius services that will provide the resources described bel
 - [Deployment Engine]({{< ref "architecture.md#deployment-engine" >}})
 - [Resource Provider]({{< ref "architecture.md#radius-resource-provider" >}})
 
-### Deployment engine resources
+### Deployment engine behavior
 
 | Operation | Resource type | Server Timeout (Seconds) | Async Operation retry condition|
 |------|:--------:|-------------|---------|------------|
 | Default retry timeout for resource deployment | The name of your resource. | 12.5 minutes per resource | Retries on 5xx errors, 50 retry requests
 | Default request timeout | | Dependent on [UCP]({{< ref "architecture.md##universal-control-plane" >}}) |
 
-### Resource provider resources
+### Resource provider behavior
 
-#### Timeout times
+#### Timeout durations
 
 The default timeout times are listed below but be aware that the asynchronous timeout varies per resource type.
 
