@@ -52,11 +52,11 @@ The location property defines where to deploy a resource within the targeted pla
 
 For self-hosted environments, the location property must be set to `global` to indicate the resource is scoped to the entire underlying cluster. This is a point-in-time implementation that will be revisited in a future revision of self-hosted Kubernetes environments.
 
-#### Environment Parameter
+### Environment parameter
 
-The `environment` parameter is auto injected into your Radius application unless specified on the command line as a parameter argument via `rad deploy --params environment=.....`.
+The `environment` string parameter is automatically injected into your Bicep template using the environment ID value specified in your default [workspace]({{< ref workspaces >}}). This value can also be overridden with the rad CLI: `rad deploy --params environment="/planes/radius/..."`.
 
-To access the auto injected parameter users can define the `environment` parameter in their Bicep files as:
+To access the auto-injected value, specify an `environment` string parameter in your Bicep file:
 
 ```bicep
 param environment string
