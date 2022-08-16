@@ -26,7 +26,7 @@ The universal control plane (UCP) provides the front-door endpoint, authenticati
 
 Learn more about the deployment flows:
 
-{{< tabs "Self-hosted template" "Self-hosted imperative" "Azure template" "Azure imperative" >}}
+{{< tabs "Self-hosted template" "Self-hosted imperative" "Azure template" >}}
 
 {{% codetab %}}
 When using Bicep to author and deploy Radius applications:
@@ -55,15 +55,6 @@ In Microsoft Azure environments, Azure Resource Manager (ARM) is used instead of
 - The RP handles CRUDL operations for Radius applications, connectors, and other app-model resources
 
 <img src="azure-deployment.png" alt="Diagram of the Azure environment with template deployment" width="1000" />
-{{% /codetab %}}
-
-{{% codetab %}}
-In Microsoft Azure environments, Azure Resource Manager (ARM) is used instead of UCP.
-
-- ARM routes the CRUDL requests directly to the Radius RP.
-- The client (CLI, other IaC tools) acts as the DE in this case, bypassing the built-in DE.
-
-<img src="azure-imperative-generic.png" alt="Diagram of the Azure environment with imperative deployment" width="1000" />
 {{% /codetab %}}
 
 {{< /tabs >}}
