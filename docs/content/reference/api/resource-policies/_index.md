@@ -36,7 +36,7 @@ Each resource type controller decides whether it will retry to process the opera
 - Panic happens while processing the async operation by code defect (retry once, then mark the operation Failed)
 - RP process exits by unexpected process crashes (such as node failure, memory leak) and redeploying Radius. (retry once , then mark the operation Failed)
 
-##### Applications.Core resource provider
+#### Applications.Core resource provider
 
 | Resource Type  | Operation | API Type | Server Timeout (Seconds) | Async Operation retry condition|
 |------|:--------:|-------------|---------|------------|
@@ -49,7 +49,7 @@ Each resource type controller decides whether it will retry to process the opera
 | Applications.Core/httpRoutes | LIST/GET | Synchronous | default | |
 | Applications.Core/httpRoutes | PUT/PATCH/DELETE | Asynchronous | default | default |
 
-##### Applications.Connector resource provider
+#### Applications.Connector resource provider
 
 | Resource Type  | Operation | API Type | Server Timeout (Seconds) | Async Operation retry condition|
 |------|:--------:|-------------|---------|------------|
