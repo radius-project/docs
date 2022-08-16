@@ -22,7 +22,7 @@ The Project Radius control-plane is a set of services that accepts a Radius appl
 
 ### Universal control plane
 
-The universal control plane (UCP) provides the front-door endpoint, authentication, authorization, and other central capabilities for a self-hosted Radius environment. When deploying to a Radius environment using a deployment JSON file (Bicep) or through single imperative commands (CLI, other IaC tools), UCP handles the request and sends it to the appropriate plane.
+The universal control plane (UCP) provides the front-door endpoint, authentication, authorization, and other central capabilities for a self-hosted Radius environment. When deploying to a Radius environment using a deployment JSON file (Bicep) or through single imperative commands (Radius CLI, other IaC tools), UCP handles the request and sends it to the appropriate plane.
 
 Learn more about the deployment flows:
 
@@ -39,7 +39,7 @@ When using Bicep to author and deploy Radius applications:
 {{% /codetab %}}
 
 {{% codetab %}}
-When using other IaC tools or the rad CLI to deploy and interact with Radius applications:
+When using the rad CLI or other IaC tools to deploy and interact with Radius applications:
 
 - UCP routes the CRUDL requests directly to the Radius RP.
 - The client (CLI, other IaC tools) acts as the DE in this case, bypassing the built-in DE.
