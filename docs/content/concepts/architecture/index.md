@@ -10,7 +10,7 @@ weight: 600
 
 The Project Radius control-plane is a set of services that accepts a Radius application definition and deploys it to the target platform.
 
-<img src="controlplane-services.png" alt="Diagram of the Project Radius control-plane services" width="700" />
+<img src="controlplane-services-generic.png" alt="Diagram of the Project Radius control-plane services" width="700" />
 
 ## Services
 
@@ -22,7 +22,7 @@ The Project Radius control-plane is a set of services that accepts a Radius appl
 
 ### Universal control plane
 
-The universal control plane (UCP) provides the front-door endpoint, authentication, authorization, and other central capabilities for a self-hosted Radius environment. When deploying to a Radius environment using a deployment JSON file (Bicep) or through single imperative commands (CLI, Terraform), UCP handles the request and sends it to the appropriate plane.
+The universal control plane (UCP) provides the front-door endpoint, authentication, authorization, and other central capabilities for a self-hosted Radius environment. When deploying to a Radius environment using a deployment JSON file (Bicep) or through single imperative commands (CLI, other IaC tools), UCP handles the request and sends it to the appropriate plane.
 
 Learn more about the deployment flows:
 
@@ -39,10 +39,10 @@ When using Bicep to author and deploy Radius applications:
 {{% /codetab %}}
 
 {{% codetab %}}
-When using Terraform or the rad CLI to deploy and interact with Radius applications:
+When using other IaC tools or the rad CLI to deploy and interact with Radius applications:
 
 - UCP routes the CRUDL requests directly to the Radius RP.
-- The client (CLI, Terraform) acts as the DE in this case, bypassing the built-in DE.
+- The client (CLI, other IaC tools) acts as the DE in this case, bypassing the built-in DE.
 
 <img src="ucp-selfhosted-imperative.png" alt="Diagram of the UCP on a self-hosted environment with imperative deployment" width="1000" />
 {{% /codetab %}}
@@ -61,9 +61,9 @@ In Microsoft Azure environments, Azure Resource Manager (ARM) is used instead of
 In Microsoft Azure environments, Azure Resource Manager (ARM) is used instead of UCP.
 
 - ARM routes the CRUDL requests directly to the Radius RP.
-- The client (CLI, Terraform) acts as the DE in this case, bypassing the built-in DE.
+- The client (CLI, other IaC tools) acts as the DE in this case, bypassing the built-in DE.
 
-<img src="azure-imperative.png" alt="Diagram of the Azure environment with imperative deployment" width="1000" />
+<img src="azure-imperative-generic.png" alt="Diagram of the Azure environment with imperative deployment" width="1000" />
 {{% /codetab %}}
 
 {{< /tabs >}}
@@ -81,5 +81,5 @@ Backing resources may be created or deleted by the Radius RP for some resources.
 
 The DE service is used when Bicep or ARM JSON is used to deploy Radius applications. It parses and builds the dependency graph of resources and orchestrates the CRUDL requests to the respective resource providers.
 
-For imperative commands (CLI, Terraform), the DE is bypassed and the client (CLI, Terraform) acts as the DE.
+For imperative commands (CLI, other IaC tools), the DE is bypassed and the client (CLI, other IaC tools) acts as the DE.
 
