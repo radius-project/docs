@@ -14,6 +14,7 @@ The following properties and values are available across all Radius resources:
 |------|:--------:|-------------|---------|
 | name | y | The name of your resource. | `mycontainer`
 | location | y | The location of your resource. See below for more information. | `global`
+| environment | y | The environment used by your resources for deployment. | `environment` |
 
 ### Name
 
@@ -50,5 +51,15 @@ The location property defines where to deploy a resource within the targeted pla
 #### Self-hosted environments
 
 For self-hosted environments, the location property must be set to `global` to indicate the resource is scoped to the entire underlying cluster. This is a point-in-time implementation that will be revisited in a future revision of self-hosted Kubernetes environments.
+
+#### Environment Parameter
+
+The `environment` parameter is auto injected into your Radius application unless specified on the command line as a parameter argument via `rad deploy --params environment=.....`.
+
+To access the auto injected parameter users can define the `environment` parameter in their Bicep files as:
+
+```bicep
+param environment string
+```
 
 ## Resource categories
