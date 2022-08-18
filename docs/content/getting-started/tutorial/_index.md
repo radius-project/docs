@@ -30,6 +30,7 @@ This tutorial contains the following sections:
 {{% /alert %}}
 
 - [Install Radius CLI]({{< ref "getting-started#install-rad-cli" >}})
+- [Install az CLI](http://aka.ms/azcli)
 - [Install kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 - Set up a Kubernetes Cluster. Visit the [Kubernetes documentation]({{< ref "kubernetes#supported-clusters" >}}) for a list of supported clusters
 - [Azure subscription](https://azure.com) (optional - used in last tutorial step to deploy Azure resources)
