@@ -20,7 +20,7 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
       image: 'myimage'
     }
     connections: {
-      mongo: {
+      blob: {
         source: blobContainer.id
         iam: {
           kind: 'azure'
