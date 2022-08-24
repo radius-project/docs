@@ -26,7 +26,8 @@ This tutorial contains the following sections:
 
 ## Prerequisites
 
-{{% alert title="💡 Github Code Spaces" color="success" %}} You can skip this section if you are using [Github codespaces]({{< ref "getting-started#try-out-radius-on-github-codespaces">}})  to try out the tutorial. The dev containers have all the pre-requisites installed and environment initialized.
+{{% alert title="💡 Github Codespaces" color="success" %}}
+You can skip this section if you are using [Github Codespaces]({{< ref "getting-started#try-out-radius-on-github-codespaces">}}) to try out the tutorial. The dev containers have all the pre-requisites installed and environment initialized.
 {{% /alert %}}
 
 - [Install Radius CLI]({{< ref "getting-started#install-rad-cli" >}})
