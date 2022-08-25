@@ -1,0 +1,30 @@
+name: Issues Automation
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GH_RAD_CI_BOT_PAT }}
+    steps:
+      - id: get-members
+        name: Get preview members
+        run: |
+          MEMBERS=$(gh api orgs/project-radius/teams/Radius-Preview/members | jq -r '.[] | .login')
+          echo "::set-output name=members::$MEMBERS"
+      - name: Add label if author in preview team
+        env:
+          ISSUE: ${{ github.event.issue.html_url }}
+          AUTHOR: ${{ github.event.issue.actor }}
+          MEMBERS: ${{ steps.get-members.outputs.members }}
+        run: |
+          for USER in $MEMBERS; do
+            if [[ "$USER" == "$AUTHOR" ]]; then
+              echo "Adding label for issue $ISSUE"
+              gh issue edit $ISSUE --add-label "customer-issue"
+            fi
+          done
+  
