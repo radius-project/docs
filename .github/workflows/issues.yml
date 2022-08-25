@@ -19,7 +19,6 @@ jobs:
           MEMBERS=$(gh api orgs/project-radius/teams/Radius-Preview/members | jq -r '.[] | .login')
           ADMINS=$(gh api orgs/project-radius/teams/Radius-Admin/members | jq -r '.[] | .login')
           for USER in $MEMBERS; do
-            echo "Checking user $USER"
             if [[ "$USER" == "$AUTHOR" ]]; then
               ISADMIN=false
               for ADMIN in $ADMINS; do
