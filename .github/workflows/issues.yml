@@ -13,7 +13,7 @@ jobs:
       - name: Add label if author in preview team
         env:
           ISSUE: ${{ github.event.issue.html_url }}
-          AUTHOR: ${{ github.event.issue.user }}
+          AUTHOR: ${{ github.actor }}
         run: |
           MEMBERS=$(gh api orgs/project-radius/teams/Radius-Preview/members | jq -r '.[] | .login')
           for USER in $MEMBERS; do
