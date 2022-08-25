@@ -5,7 +5,8 @@ on:
     types: [opened]
 
 jobs:
-  build:
+  customer:
+    name: Add a label if Isssue created by customer
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GH_RAD_CI_BOT_PAT }}
@@ -16,9 +17,18 @@ jobs:
           AUTHOR: ${{ github.actor }}
         run: |
           MEMBERS=$(gh api orgs/project-radius/teams/Radius-Preview/members | jq -r '.[] | .login')
+          ADMINS=$(gh api orgs/project-radius/teams/Radius-Admin/members | jq -r '.[] | .login')
           for USER in $MEMBERS; do
-            if [[ "$USER" == "$AUTHOR" ]]; then
-              echo "Adding label for issue $ISSUE"
-              gh issue edit $ISSUE --add-label "customer-issue"
+            if [[ "$USER" -eq "$AUTHOR" ]]; then
+              ISADMIN=false
+              for ADMIN in $ADMINS; do
+                if [[ "$USER" -eq "$ADMIN" ]]; then
+                  ISADMIN=true
+                fi
+              done
+              if [[ "$ISADMIN" -eq "false" ]]; then
+                echo "Adding label for issue $ISSUE"
+                gh issue edit $ISSUE --add-label "customer-issue"
+              fi
             fi
           done
