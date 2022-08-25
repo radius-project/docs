@@ -19,15 +19,16 @@ jobs:
           MEMBERS=$(gh api orgs/project-radius/teams/Radius-Preview/members | jq -r '.[] | .login')
           ADMINS=$(gh api orgs/project-radius/teams/Radius-Admin/members | jq -r '.[] | .login')
           for USER in $MEMBERS; do
-            if [[ "$USER" -eq "$AUTHOR" ]]; then
+            echo "Checking user $USER"
+            if [[ "$USER" == "$AUTHOR" ]]; then
               ISADMIN=false
               for ADMIN in $ADMINS; do
-                if [[ "$USER" -eq "$ADMIN" ]]; then
+                if [[ "$USER" == "$ADMIN" ]]; then
                   echo "$USER is an admin, skipping"
                   ISADMIN=true
                 fi
               done
-              if [[ "$ISADMIN" -eq "false" ]]; then
+              if [[ "$ISADMIN" == "false" ]]; then
                 echo "Adding label for issue $ISSUE"
                 gh issue edit $ISSUE --add-label "customer-issue"
               fi
