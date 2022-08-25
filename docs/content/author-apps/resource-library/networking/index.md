@@ -35,8 +35,8 @@ Refer to the [Gateway schema]({{< ref gateway >}}) for more information on how t
 
 {{< tabs Bicep >}}
 
-{{% codetab %}}
+{{< codetab >}}
 {{< rad file="snippets/networking.bicep" embed=true >}}
-{{% /codetab %}}
+{{< /codetab >}}
 
 {{< /tabs >}}
