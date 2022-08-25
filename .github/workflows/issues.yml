@@ -23,6 +23,7 @@ jobs:
               ISADMIN=false
               for ADMIN in $ADMINS; do
                 if [[ "$USER" -eq "$ADMIN" ]]; then
+                  echo "$USER is an admin, skipping"
                   ISADMIN=true
                 fi
               done
