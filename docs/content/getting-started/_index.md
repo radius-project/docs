@@ -21,12 +21,18 @@ Once launched, you can skip directly to [the tutorial]({{< ref tutorial >}}).
 
 The `rad` CLI manages your applications, resources, and environments. Begin by installing it on your machine:
 
-{{< tabs Windows MacOS "Linux/WSL" "Cloud Shell" Binaries >}}
+{{< tabs "Windows PowerShell" MacOS "Linux/WSL" "Cloud Shell" Binaries >}}
 
 {{% codetab %}}
+Run the following in a PowerShell window:
 
 ```powershell
 iwr -useb "https://get.radapp.dev/tools/rad/install.ps1" | iex
+```
+
+You may need to refresh your $PATH environment variable to access `rad`:
+```powershell
+$Env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")
 ```
 
 {{< edge >}}
