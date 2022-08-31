@@ -1,7 +1,6 @@
 import radius as radius
 
 param environment string
-param location string = resourceGroup().id
 
 param azureCacheId string
 
