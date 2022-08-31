@@ -97,6 +97,8 @@ helm repo add radius https://radius.azurecr.io/helm/v1/repo
 helm repo update
 helm upgrade radius radius/radius --install --create-namespace --namespace radius-system --version {{< param chart_version >}} --wait --timeout 15m0s
 ```
+
+Available Helm package versions can be listed via `helm search repo radius --versions`.
 {{% /codetab %}}
 
 {{< /tabs >}}
