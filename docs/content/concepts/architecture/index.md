@@ -14,11 +14,11 @@ The Project Radius control-plane is a set of services that accepts a Radius appl
 
 ## Services
 
-| Service | Description | Self-hosted | Microsoft Azure |
-|---------|-------------|-------------|-----------------|
-| **Universal control plane (UCP)/<br />Azure Resource Manager (ARM)** | The "front door" to the control-plane services. Provides authentication, authorization, routing, and other central capabilities. | Self-hosted UCP service | Azure Resource Manager (ARM) |
-| **Radius resource provider (RP)** | Manages Radius applications and app-model resources. | Self-hosted RP service | Central `Applications.*` Azure resource provider |
-| **Deployment engine (DE)** | Orchestrates UCP and ARM deployments when Bicep or ARM JSON is used to deploy. | Self-hosted DE service | Azure Resource Manager (ARM) |
+| Service | Description |
+|---------|-------------|
+| **Universal control plane (UCP)** | The "front door" to the control-plane services. Provides authentication, authorization, routing, and other central capabilities. |
+| **Radius resource provider (RP)** | Manages Radius applications and app-model resources. |
+| **Deployment engine (DE)** | Orchestrates UCP and ARM deployments when Bicep or ARM JSON is used to deploy. |
 
 ### Universal control plane
 
@@ -26,7 +26,7 @@ The universal control plane (UCP) provides the front-door endpoint, authenticati
 
 Learn more about the deployment flows:
 
-{{< tabs "Self-hosted template" "Self-hosted imperative" "Azure template" >}}
+{{< tabs "Deployment template" "Other IaC/Imperative command">}}
 
 {{% codetab %}}
 When using Bicep to author and deploy Radius applications:
@@ -45,16 +45,6 @@ When using the rad CLI or other IaC tools to deploy and interact with Radius app
 - The client (CLI, other IaC tools) acts as the DE in this case, bypassing the built-in DE.
 
 <img src="ucp-selfhosted-imperative.png" alt="Diagram of the UCP on a self-hosted environment with imperative deployment" width="1000" />
-{{% /codetab %}}
-
-{{% codetab %}}
-In Microsoft Azure environments, Azure Resource Manager (ARM) is used instead of UCP.
-
-- A template is sent from ARM to the deployment engine (DE) for processing and orchestration
-- DE interacts with the Radius RP to manage Radius resources, other RPs for other Azure resource types, and with external planes for other resources (Kubernetes)
-- The RP handles CRUDL operations for Radius applications, connectors, and other app-model resources
-
-<img src="azure-deployment.png" alt="Diagram of the Azure environment with template deployment" width="1000" />
 {{% /codetab %}}
 
 {{< /tabs >}}
