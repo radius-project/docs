@@ -1,11 +1,10 @@
 import radius as radius
 
-param location string = resourceGroup().location
 param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'azure-resources-dapr-pubsub-generic'
-  location: location
+  location: 'global'
   properties: {
     environment: environment
   }
@@ -13,7 +12,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 
 resource publisher 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'publisher'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
     connections: {
@@ -34,7 +33,7 @@ resource kafkaRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' exi
 //SAMPLE
 resource pubsub 'Applications.Connector/daprPubSubBrokers@2022-03-15-privatepreview' = {
   name: 'pubsub'
-  location: location
+  location: 'global'
   properties: {
     environment: environment
     application: app.id

@@ -24,7 +24,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' existing
 //CONNECTOR
 resource redis 'Applications.Connector/redisCaches@2022-03-15-privatepreview' = {
   name: 'myredis-connector'
-  location: location
+  location: 'global'
   properties: {
     environment: environment
     application: app.id
@@ -35,7 +35,7 @@ resource redis 'Applications.Connector/redisCaches@2022-03-15-privatepreview' = 
 //CONTAINER
 resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'mycontainer'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
     container: {

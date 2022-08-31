@@ -7,9 +7,6 @@ weight: 200
 no_list: true
 ---
 
-<!-- TODO: pull all the How To notes out of this folder. Only ref stuff. Move content around authoring apps to the AuthoringApps.Concepts page -->
-
-
 Applications are made up of resources. Resources can be abstract and deployable to multiple Radius platforms (*eg. Container, MongoDB, etc*), or they can be platform specific and deployable to a single platform (*Azure CosmosDB, Kubernetes DaemonSet, etc*).
 
 {{% alert title="Learn about the Radius app model" color="primary" %}}

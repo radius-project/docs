@@ -1,6 +1,5 @@
 import radius as radius
 
-param location string = resourceGroup().location
 param environment string
 
 //COSMOS
@@ -15,7 +14,7 @@ resource cosmos 'Microsoft.DocumentDB/databaseAccounts@2021-04-15' existing = {
 
 resource myapp 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'my-application'
-  location: location
+  location: 'global'
   properties: {
     environment: environment
   }
@@ -23,7 +22,7 @@ resource myapp 'Applications.Core/applications@2022-03-15-privatepreview' = {
 
 resource mongo 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
   name: 'mongo-db'
-  location: location
+  location: 'global'
   properties: {
     application: myapp.id
     environment: environment
