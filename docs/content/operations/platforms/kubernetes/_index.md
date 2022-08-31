@@ -77,3 +77,30 @@ rad env init kubernetes -i --public-endpoint-override 'http://localhost:8080'
 {{% /codetab %}}
 
 {{< /tabs >}}
+
+## Install the Radius control plane
+
+The [Radius control plane]({{< ref architecture >}}) handles the deployment and management of Radius environments, applications, and resources.
+
+{{< tabs "rad CLI" "Helm" >}}
+
+{{% codetab %}}
+Use the [`rad install kubernetes` command]({{< ref rad_env_init_Kubernetes >}}) to install Radius control plane on the kubernetes cluster.
+```bash
+rad install kubernetes
+```
+{{% /codetab %}}
+
+{{% codetab %}}
+```sh
+helm repo add radius https://radius.azurecr.io/helm/v1/repo
+helm repo update
+helm upgrade radius radius/radius --install --create-namespace --namespace radius-system --version {{< param chart_version >}} --wait --timeout 15m0s
+```
+{{% /codetab %}}
+
+{{< /tabs >}}
+
+{{% alert title="💡 About namespaces" color="success" %}}
+When Radius initializes a Kubernetes environment, it will deploy the system resources into the `radius-system` namespace. These aren't part your application. The namespace specified in interactive mode will be used for future deployments by default.
+{{% /alert %}}
