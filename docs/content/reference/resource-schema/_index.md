@@ -13,7 +13,7 @@ The following properties and values are available across all Radius resources:
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | name | y | The name of your resource. | `mycontainer`
-| location | y | The location of your resource. See below for more information. | `global`
+| location | y | The location of your resource. See [below](#location) for more information. | `global`
 | environment | y | The environment used by your resources for deployment. | `environment` |
 
 ### Name
@@ -47,8 +47,6 @@ The resulting names are:
 ### Location
 
 The location property defines where to deploy a resource within the targeted platform.
-
-#### Self-hosted environments
 
 For self-hosted environments, the location property must be set to `global` to indicate the resource is scoped to the entire underlying cluster. This is a point-in-time implementation that will be revisited in a future revision of self-hosted Kubernetes environments.
 
