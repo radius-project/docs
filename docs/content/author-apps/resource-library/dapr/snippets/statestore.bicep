@@ -1,12 +1,11 @@
 import radius as radius
 
-param location string = resourceGroup().location
 param environment string
 
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
-  location: location
+  location: 'global'
   properties: {
     environment: environment
   }
@@ -20,7 +19,7 @@ resource azureTable 'Microsoft.Storage/storageAccounts/tableServices/tables@2021
 // The accompanying Dapr component configuration is automatically generated for you
 resource stateStore 'Applications.Connector/daprStateStores@2022-03-15-privatepreview' = {
   name: 'mystatestore'
-  location: location
+  location: 'global'
   properties: {
     environment: environment
     application: app.id

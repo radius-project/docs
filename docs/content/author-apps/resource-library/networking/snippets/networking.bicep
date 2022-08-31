@@ -1,11 +1,10 @@
 import radius as radius
 
-param location string = resourceGroup().location
 param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
-  location: location
+  location: 'global'
   properties: {
     environment: environment
   }
@@ -13,7 +12,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 
 resource serviceA 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'service-a'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
     container: {
@@ -39,7 +38,7 @@ resource serviceA 'Applications.Core/containers@2022-03-15-privatepreview' = {
 
 resource routeAWeb 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
   name: 'route-a-web'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
   }
@@ -47,7 +46,7 @@ resource routeAWeb 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
 
 resource routeAApi 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
   name: 'route-a-api'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
   }
@@ -55,7 +54,7 @@ resource routeAApi 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
 
 resource serviceB 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'service-b'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
     container: {
@@ -77,7 +76,7 @@ resource serviceB 'Applications.Core/containers@2022-03-15-privatepreview' = {
 
 resource routeB 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
   name: 'route-b'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
   }
@@ -85,7 +84,7 @@ resource routeB 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
 
 resource internetGateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
   name: 'internet-gateway'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
     routes: [

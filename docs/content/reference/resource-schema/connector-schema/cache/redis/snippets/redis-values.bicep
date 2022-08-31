@@ -5,7 +5,7 @@ param location string = resourceGroup().id
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
-  location: location
+  location: 'global'
   properties: {
     environment: environment
   }
@@ -14,7 +14,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 //REDIS
 resource redis 'Applications.Connector/redisCaches@2022-03-15-privatepreview' = {
   name: 'redis'
-  location: location
+  location: 'global'
   properties: {
     environment: environment
     application:app.id

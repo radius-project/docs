@@ -1,6 +1,5 @@
 import radius as radius
 
-param location string = resourceGroup().location
 param environment string
 
 //PARAMS
@@ -10,7 +9,7 @@ param python_service_build object
 //PARAMS
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'store'
-  location: location
+  location: 'global'
   properties: {
     environment: environment
   }
@@ -19,7 +18,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 //GOAPP
 resource go_app 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'go-app'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
     container: {
@@ -44,7 +43,7 @@ resource go_app 'Applications.Core/containers@2022-03-15-privatepreview' = {
 //ROUTE
 resource node_app_gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
   name: 'node-app-gateway'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
     routes: [
@@ -57,7 +56,7 @@ resource node_app_gateway 'Applications.Core/gateways@2022-03-15-privatepreview'
 }
 resource node_app_route 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
   name: 'node-app-route'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
   }
@@ -66,7 +65,7 @@ resource node_app_route 'Applications.Core/httpRoutes@2022-03-15-privatepreview'
 //DAPR
 resource python_app_route 'Applications.Connector/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
   name: 'python-app'
-  location: location
+  location: 'global'
   properties: {
     environment: environment
     application: app.id
@@ -75,7 +74,7 @@ resource python_app_route 'Applications.Connector/daprInvokeHttpRoutes@2022-03-1
 }
 resource go_app_route 'Applications.Connector/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
   name: 'go-app'
-  location: location
+  location: 'global'
   properties: {
     environment: environment
     application: app.id
@@ -86,7 +85,7 @@ resource go_app_route 'Applications.Connector/daprInvokeHttpRoutes@2022-03-15-pr
 //NODEAPP
 resource node_app 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'node-app'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
     container: {
@@ -122,7 +121,7 @@ resource node_app 'Applications.Core/containers@2022-03-15-privatepreview' = {
 //PYTHONAPP
 resource python_app 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'python-app'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
     container: {

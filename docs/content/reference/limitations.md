@@ -83,7 +83,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 
 resource statestore 'Applications.Connector/daprStateStores@2022-03-15-privatepreview' = {
   name: 'statestore'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
   }
@@ -105,7 +105,7 @@ For example, for an Azure Cache called `redis`, you can create a connector using
 ```bicep
 resource redisConnector 'Applications.Connector/redisCaches@2022-03-15-privatepreview' = {
   name: 'redis-connector'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
     environment: environment

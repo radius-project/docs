@@ -1,11 +1,10 @@
 import radius as radius
 
-param location string = resourceGroup().location
 param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'cosmos-container'
-  location: location
+  location: 'global'
   properties: {
     environment: environment
   }
@@ -14,7 +13,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 //SQL
 resource db 'Applications.Connector/sqlDatabases@2022-03-15-privatepreview' = {
   name: 'db'
-  location: location
+  location: 'global'
   properties: {
     environment: environment
     application: app.id

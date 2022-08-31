@@ -1,11 +1,10 @@
 import radius as radius
 
-param location string = resourceGroup().location
 param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
-  location: location
+  location: 'global'
   properties: {
     environment: environment
   }
@@ -14,7 +13,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 //HTTPROUTE
 resource httproute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
   name: 'httproute'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
   }
@@ -24,7 +23,7 @@ resource httproute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
 //FRONTEND
 resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'frontend'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
     container: {
@@ -45,7 +44,7 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 //BACKEND
 resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'backend'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
     container: {
