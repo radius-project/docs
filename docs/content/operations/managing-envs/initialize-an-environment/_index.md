@@ -20,7 +20,7 @@ weight: 100
 If you choose a container registry provided by a cloud provider (other than Dockerhub), you will likely have to take some steps to configure your Kubernetes cluster to allow access. Follow the instructions provided by your cloud provider.
 {{% /alert %}}
 
-## Initialize an environment (Recommended)
+## Initialize an environment (recommended)
 
 A Radius [Kubernetes environment]({{<ref environments-concept>}}) can run in a Kubernetes cluster running on any platform. This step is usually done either by an infra-admin person or a developer depending upon the setup of an enterprise. 
 
