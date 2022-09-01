@@ -88,38 +88,11 @@ workspaces:
           resourcegroup: Prod
 ```
 
-
 ## Schema
 
-| Key | Description | Example |
-|-----|-------------|---------|
-| **default** | The name of the default workspace to use with rad CLI commaands | `dev` |
-| [**items**](#items) | A list of workspaces |
+Visit the [`config.yaml` reference docs]({{< ref config >}}) to learn about workspace definitions.
 
-### items
-
-| Key | Description | Example |
-|-----|-------------|---------|
-| **[workspace-name]** | The name of the workspace. Used as the key for the list entry. | `dev` |
-| [**connection**](#connection) | The connection details for the target Radius platform | |
-| **environment** | The default environment UCP ID to use for the workspace. Can be empty if no environment exists or if no default set | `/planes/radius/local/resourcegroups/dev/providers/applications.core/environments/dev` |
-| **scope** | The default scope UCP ID to use for the workspace | `/planes/radius/local/resourcegroups/dev` |
-| [**providerConfig**](#providerconfig) | The provider configuration for the workspace | |
-
-### connection
-
-| Key | Description | Example |
-|-----|-------------|---------|
-| **context** | The name of the Kubernetes context to use | `DevCluster` |
-| **namespace** | The name of the Kubernetes namespace to use when deploying Radius applications | `default` |
-
-### providerConfig
-
-| Key | Description | Example |
-|-----|-------------|---------|
-| **azure** | The kind of [cloud provider](#cloud-providers) to configure. Currently only 'azure' is supported | `azure` |
-| **subscirptionid** | The Azure subscriptionID to deploy resources into
-| **resourcegroup** | The name of the Azure resource group to deploy Azure resources into | `Dev` |
+{{< button text="config.yaml Schema" page="config" >}}
 
 ## How-to: Use workspaces to switch between environments
 
