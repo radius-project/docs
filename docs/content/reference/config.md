@@ -6,6 +6,8 @@ description: "Detailed reference documentation on the Radius config.yaml configu
 weight: 500
 ---
 
+Radius [workspaces]({{< ref workspaces >}}) are used to easily switch between environments.
+
 ```yaml
 workspaces:
   default: dev
@@ -32,16 +34,21 @@ workspaces:
           resourcegroup: Prod
 ```
 
-## Workspaces
+## Default location
 
-Radius [workspaces]({{< ref workspaces >}}) are used to easily switch between environments.
+- **macOS/Linux:** `~/.radius/config.yaml`
+- **Windows:** `%USERPROFILE%\.radius\config.yaml`
+
+## Schema
+
+### workspaces
 
 | Key | Description | Example |
 |-----|-------------|---------|
 | **default** | The name of the default workspace to use with rad CLI commands | `dev` |
 | [**items**](#items) | A list of workspaces |
 
-### items
+#### items
 
 | Key | Description | Example |
 |-----|-------------|---------|
@@ -51,14 +58,14 @@ Radius [workspaces]({{< ref workspaces >}}) are used to easily switch between en
 | **scope** | The default scope UCP ID to use for the workspace | `/planes/radius/local/resourcegroups/dev` |
 | [**providerConfig**](#providerconfig) | The provider configuration for the workspace | |
 
-### connection
+#### connection
 
 | Key | Description | Example |
 |-----|-------------|---------|
 | **context** | The name of the Kubernetes context to use | `DevCluster` |
 | **namespace** | The name of the Kubernetes namespace to use when deploying Radius applications | `default` |
 
-### providerConfig
+#### providerConfig
 
 | Key | Description | Example |
 |-----|-------------|---------|
