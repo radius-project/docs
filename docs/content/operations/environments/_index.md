@@ -78,10 +78,6 @@ rad env switch -e myenv
 
 The following example shows an environment configured with Kubernetes as the target runtime. The `default` namespace designates where to render application resources.
 
-{{< rad file="snippets/environment.bicep" embed=true marker="//ENV" >}}## Example
-
-The following example shows an environment configured with Kubernetes as the target runtime. The `default` namespace designates where to render application resources.
-
 {{< rad file="snippets/environment.bicep" embed=true marker="//ENV" >}}
 
 ## How-to: Initialize a new environment
