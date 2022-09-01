@@ -6,7 +6,7 @@ description: "Learn about Radius environments and how to interact with them"
 weight: 20
 ---
 
-Radius environments are prepared "landing zones" for Radius applications. Applications depolyed to an environment will inherit the container runtime, configuration, and other settings from the environment. Stay tuned for additional environment capabilities coming soon.
+Radius environments are prepared "landing zones" for Radius applications. Applications deployed to an environment will inherit the container runtime, configuration, and other settings from the environment. Stay tuned for additional environment capabilities coming soon.
 
 ## Configuration
 
@@ -87,7 +87,7 @@ The following example shows an environment configured with Kubernetes as the tar
    ```bash
    kubectl config current-context
    ```
-1. Inialize a new environment with [`rad env init kubernetes` command]({{< ref rad_env_init_Kubernetes >}}):
+1. Initialize a new environment with [`rad env init kubernetes` command]({{< ref rad_env_init_Kubernetes >}}):
    ```bash
    rad env init kubernetes -i
    ```
@@ -99,7 +99,7 @@ The following example shows an environment configured with Kubernetes as the tar
    1. **Install the control plane** - Radius installs the [control plane services]({{< ref architecture >}}) in the `radius-system` namespace
    1. **Create the environment** - An environment resource is created in the Radius control plane. It maps to a Kubernetes namespace.
    1. **Add the Azure Cloud Provider** - The Azure cloud provider configuration is saved in the Radius control plane
-   1. **Create a workspace** - [Workspaces]({{< ref workspaces >}}) are local pointers to a cluster running Radius, and an environment. Workspaces are saved to the Radisu config file (`~/.rad/config.yaml` on Linux and macOS, `%USERPROFILE%\.rad\config.yaml` on Windows)
+   1. **Create a workspace** - [Workspaces]({{< ref workspaces >}}) are local pointers to a cluster running Radius, and an environment. Workspaces are saved to the Radius config file (`~/.rad/config.yaml` on Linux and macOS, `%USERPROFILE%\.rad\config.yaml` on Windows)
 1. Verify the initialization by running:
    ```bash
    kubectl get deployments -n radius-system
