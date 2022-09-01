@@ -1,0 +1,182 @@
+---
+type: docs
+title: "Radius workspaces"
+linkTitle: "Workspaces"
+description: "Learn how to handle multiple Radius platforms and environments with workspaces"
+weight: 30
+---
+
+Workspaces allow you to manage multiple Radius platforms and environments using a local configuration file. You can easily define and switch between workspaces to deploy and manage applications across local, test, and production environments.
+
+<img src=workspaces.png alt="Diagram showing a Radius configuration file mapping workspaces to Kubernetes clusters" width=800px />
+
+## CLI commands
+
+The following commands let you interact with Radius environments:
+
+{{< tabs init list show delete switch >}}
+
+{{% codetab %}}
+[rad workspace init kubernetes]({{< ref rad_workspace_init_kubernetes >}}) initializes a new Kubernetes workspace:
+
+```bash
+rad workspace init kubernetes
+```
+{{% /codetab %}}
+
+{{% codetab %}}
+[rad workspace list]({{< ref rad_workspace_list >}}) lists all of the workspaces in your configuration file:
+
+```bash
+rad workspacae list
+```
+{{% /codetab %}}
+
+{{% codetab %}}
+[rad workspace show]({{< ref rad_workspace_show >}}) prints information on the default or specified wworkspace:
+
+```bash
+rad workspace show
+```
+{{% /codetab %}}
+
+{{% codetab %}}
+[rad workspace delete]({{< ref rad_workspace_delete >}}) deletes the specified workspace:
+
+```bash
+rad workspace delete -w myenv
+```
+{{% /codetab %}}
+
+{{% codetab %}}
+[rad workspace switch]({{< ref rad_workspace_switch >}}) switches the default workspace:
+
+```bash
+rad env switch -e myenv
+```
+{{% /codetab %}}
+
+{{< /tabs >}}
+
+## Example
+
+Your Radius configuration file contains workspace entries that point to a Radius platform and environment:
+
+```yaml
+workspaces:
+  default: dev
+  items:
+    dev:
+      connection:
+        context: DevCluster
+        kind: kubernetes
+      environment: /planes/radius/local/resourcegroups/dev/providers/applications.core/environments/dev
+      scope: /planes/radius/local/resourceGroups/dev
+      providerConfig:
+        azure:
+          subscriptionid: DEV-SUBID
+          resourcegroup: Dev
+    prod:
+      connection:
+        context: ProdCluster
+        kind: kubernetes
+      environment: /planes/radius/local/resourcegroups/prod/providers/applications.core/environments/prod
+      scope: /planes/radius/local/resourceGroups/prod
+      providerConfig:
+        azure:
+          subscriptionid: PROD-SUBID
+          resourcegroup: Prod
+```
+
+
+## Schema
+
+| Key | Description | Example |
+|-----|-------------|---------|
+| **default** | The name of the default workspace to use with rad CLI commaands | `dev` |
+| [**items**](#items) | A list of workspaces |
+
+### items
+
+| Key | Description | Example |
+|-----|-------------|---------|
+| **[workspace-name]** | The name of the workspace. Used as the key for the list entry. | `dev` |
+| [**connection**](#connection) | The connection details for the target Radius platform | |
+| **environment** | The default environment UCP ID to use for the workspace. Can be empty if no environment exists or if no default set | `/planes/radius/local/resourcegroups/dev/providers/applications.core/environments/dev` |
+| **scope** | The default scope UCP ID to use for the workspace | `/planes/radius/local/resourcegroups/dev` |
+| [**providerConfig**](#providerconfig) | The provider configuration for the workspace | |
+
+### connection
+
+| Key | Description | Example |
+|-----|-------------|---------|
+| **context** | The name of the Kubernetes context to use | `DevCluster` |
+| **namespace** | The name of the Kubernetes namespace to use when deploying Radius applications | `default` |
+
+### providerConfig
+
+| Key | Description | Example |
+|-----|-------------|---------|
+| **azure** | The kind of [cloud provider](#cloud-providers) to configure. Currently only 'azure' is supported | `azure` |
+| **subscirptionid** | The Azure subscriptionID to deploy resources into
+| **resourcegroup** | The name of the Azure resource group to deploy Azure resources into | `Dev` |
+
+## How-to: Use workspaces to switch between environments
+
+When you have multiple environments initialized for different purposes like staging or production, workspaces enable you to switch between different environments easily. You can create separate workspaces for staging/production and switch between them as you are working through your deployment lifecycle.
+
+1. Install the Radius control plane on kubernetes cluster
+   ```sh
+   rad install kubernetes
+   ```
+1. Create a workspace named `staging` using [`rad workspace init kubernetes`]({{< ref rad_workspace_init_kubernetes >}}):
+    ```sh 
+    rad workspace init kubernetes -w staging
+    ```
+    Radius writes the workspace details to your local configuration file (`~/.rad/config.yaml` on Linux and macOS, `%USERPROFILE%\.rad\config.yaml` on Windows).
+1. Initialize a Radius environment in your staging workspace via [`rad env init kubernetes`]({{< ref rad_env_init_kubernetes >}}):
+
+    ```sh 
+    rad env init kubernetes -e env1
+    ```
+1. Create another workspace named `production`:
+
+    ```sh 
+    rad workspace init kubernetes -w production
+    ```
+1. Switch to the workspace `production` to set it as the default:
+
+    ```sh 
+    rad workspace switch -w production
+    ```
+1. Initialize a Radius environment in your `production` workspace:
+
+    ```sh 
+    rad env init kubernetes -e env2
+    ```
+1. Verify your `config.yaml` file. It should show both `staging` and `production` workspaces, with your environments:
+    ```yaml
+    workspaces:
+    default: production
+    items:
+      production:
+        connection:
+          context: mycluster
+          kind: kubernetes
+        environment: /planes/radius/local/resourcegroups/production
+        /providers/applications.core/environments/env1
+        scope: /planes/radius/local/resourceGroups/production
+      staging:
+        connection:
+          context: mycluster
+          kind: kubernetes
+        environment: /planes/radius/local/resourcegroups/staging
+        /providers/applications.core/environments/env2
+        scope: /planes/radius/local/resourceGroups/staging
+    ```
+1. You can now deploy applications to both staging and prod using [`rad deploy`]({{< ref rad_deploy >}}), specifying the `-w` flag:
+
+    ```sh 
+    rad deploy -w staging
+    ```
+    This will deploy the applications to the staging environment.
