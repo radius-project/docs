@@ -3,7 +3,7 @@ type: docs
 title: "Cloud providers"
 linkTitle: "Cloud providers"
 description: "Deploy across clouds and platforms with Radius cloud providers"
-weight: 150
+weight: 40
 ---
 
 Radius cloud providers allow you to deploy and connect to cloud resources across various cloud platforms. For example, you can use the Radius Azure provider to run your application's services in your Kubernetes cluster, while deploying Azure resources to a specified Azure subcription and resource group.
@@ -31,7 +31,7 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
 
 #### Add a cloud provider when initializing an environment
 
-1. Initialize a new [environment]({{< ref managing-envs >}}) with `rad env init kubernetes -i`
+1. Initialize a new [environment]({{< ref environments >}}) with `rad env init kubernetes -i`
 1. Enter "y" to add an Azure cloud provider
 1. Specify your Azure subscription and resource group
 1. Create an [Azure service principal](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) with the [proper permissions](https://aka.ms/azadsp-more). Enter the appID, password and the tenant of the service principal
