@@ -111,7 +111,6 @@ jobs:
 
   open_pr_site:
     name: Open PR Staging Site
-    if: github.event_name == 'pull_request' && github.event.action != 'closed'
     needs: ['build']
     runs-on: ubuntu-latest
     steps:
