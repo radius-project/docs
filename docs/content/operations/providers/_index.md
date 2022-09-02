@@ -81,3 +81,23 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
    ```bash
    helm upgrade radius radius/radius --install --create-namespace --namespace radius-system --version 0.12.0 --wait --timeout 15m0s --set rp.provider.azure.podidentity=radius --set rp.provider.azure.subscriptionId=MY_SUBSCIRPTION_ID --set rp.provider.azure.resourceGroup=MY_RESOURCE_GROUP
    ```
+1. Create a new environment:
+   ```bash
+   rad env init kubernetes -i
+   ```
+1. Manually add the `subscriptionId` and `resourcegroup` Azure cloud provider values to your local config:
+   ```yaml
+   workspaces:
+     default: myenv
+     items:
+       myenv:
+         connection:
+           context: MY_CONTEXT
+           kind: kubernetes
+         environment: /planes/radius/local/resourcegroups/myenv/providers/applications.core/environments/myenv
+         scope: /planes/radius/local/resourceGroups/myenv
+         providerConfig:
+           azure:
+             subscriptionid: "MY_SUBSCIRPTION_ID"
+             resourcegroup: "MY_RESOURCE_GROUP"
+   ```
