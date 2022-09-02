@@ -57,11 +57,11 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
    ```
 1. Deploy an AKS cluster with [pod identity](https://docs.microsoft.com/azure/aks/use-azure-ad-pod-identity) enabled, or enable it on your existing cluster
    ```bash
-   az aks create -g MY_RESOURCE_GROUP -n MY_CLUSTER --enable-pod-identity --enable-pod-identity-with-kubenet
+   az aks create -g MY_RESOURCE_GROUP -n ${MY_CLUSTER} --enable-pod-identity --enable-pod-identity-with-kubenet
    ```
    or
    ```bash
-   az aks update -g MY_RESOURCE_GROUP -n MY_CLUSTER --enable-pod-identity --enable-pod-identity-with-kubenet
+   az aks update -g MY_RESOURCE_GROUP -n ${MY_CLUSTER} --enable-pod-identity --enable-pod-identity-with-kubenet
    ```
 1. Deploy a User Assigned Managed identity, and give it a Contributor (or custom) role assignment to your desired Azure resource group
    ```bash
@@ -70,16 +70,16 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
    export IDENTITY_RESOURCE_ID="$(az identity show -g MY_RESOURCE_GROUP -n IDENTITY_NAME --query id -otsv)"
    ```
    ```bash
-   GROUP_RESOURCE_ID=$(az group show -n MY_RESOURCE_GROUP -o tsv --query "id")
-   az role assignment create --role "Contributor" --assignee "$IDENTITY_CLIENT_ID" --scope $GROUP_RESOURCE_ID
+   export GROUP_RESOURCE_ID=$(az group show -n MY_RESOURCE_GROUP -o tsv --query "id")
+   az role assignment create --role "Contributor" --assignee ${IDENTITY_CLIENT_ID} --scope ${GROUP_RESOURCE_ID}
    ```
 1. Create a pod identity named "radius" with the User Assigned Managed identity:
    ```bash
-   az aks pod-identity add --resource-group MY_RESOURCE_GROUP --cluster-name MY_CLUSTER --namespace radius-system  --name radius --identity-resource-id ${IDENTITY_RESOURCE_ID}
+   az aks pod-identity add --resource-group ${MY_RESOURCE_GROUP} --cluster-name ${MY_CLUSTER} --namespace radius-system  --name radius --identity-resource-id ${IDENTITY_RESOURCE_ID}
    ```
 1. Install the Radius Helm chart with the azure provider values set:
    ```bash
-   helm upgrade radius radius/radius --install --create-namespace --namespace radius-system --version 0.12.0 --wait --timeout 15m0s --set rp.provider.azure.podidentity=radius --set rp.provider.azure.subscriptionId=MY_SUBSCIRPTION_ID --set rp.provider.azure.resourceGroup=MY_RESOURCE_GROUP
+   helm upgrade radius radius/radius --install --create-namespace --namespace radius-system --version 0.12.0 --wait --timeout 15m0s --set rp.provider.azure.podidentity=radius --set rp.provider.azure.subscriptionId=${MY_SUBSCIRPTION_ID} --set rp.provider.azure.resourceGroup=${MY_RESOURCE_GROUP}
    ```
 1. Create a new environment:
    ```bash
