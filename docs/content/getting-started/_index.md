@@ -7,15 +7,13 @@ weight: 20
 no_list: true
 ---
 
-## Try out Radius on Github Codespaces
+{{< alert title="Get started in seconds with a Codespace" color="primary" >}}
+Use a free [GitHub Codespace](https://github.com/features/codespaces) to test out the sample applications and build your own in a pre-configured container complete with the rad CLI, Bicep extension, and a pre-deployed environment. Once launched, you can skip directly to [the tutorial]({{< ref tutorial >}}).
 
-Do you prefer to test out Radius in a fast and easy to use virtual environment? Use a [GitHub Codespace](https://github.com/features/codespaces) to test out the sample applications and build your own in a pre-configured container complete with the rad CLI, Bicep extension, and a pre-deployed environment. You can also run the container as a [dev container](https://code.visualstudio.com/docs/remote/containers) on your local machine within Docker.
+<a class="btn btn-primary" href="https://aka.ms/ProjectRadius/Codespace" role="button" target="_blank">Launch a new Codespace</a>
 
-{{< button link="https://github.com/codespaces/new?hide_repo_select=true&repo=482051978" text="Launch new Codespace" newtab="true" >}}
-
-Once launched, you can skip directly to [the tutorial]({{< ref tutorial >}}).
-
-> Visit the [GitHub docs]({{< ref github >}}) if you need access to the organization. Project Radius currently pays for any Codespaces you create.
+_Visit the [GitHub docs]({{< ref github >}}) if you need access to the organization._
+{{< /alert >}}
 
 ## Install `rad` CLI
 
