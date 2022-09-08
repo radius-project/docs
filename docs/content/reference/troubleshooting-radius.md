@@ -31,31 +31,20 @@ az account set --subscription <SUB-ID>
 
 ## Troubleshooting the Radius control-plane
 
-To troubleshoot the Radius control-plane, begin by viewing the logs from the [control-plane services]({{< ref architecture >}}) within the `radius-system` namespace. The kubectl CLI can be used, or a graphical tool such as [Octant](https://octant.dev/). Stay tuned for richer built-in troubleshooting experiences in upcoming releases.
+To troubleshoot the Radius control-plane, you can use the command [`rad debug-logs`]({{< ref rad_debug-logs >}}) to get logs from each of control plane pods.
 
-1. Use the `kubectl` CLI to list the control-plane pods running in your cluster under the namespace `radius-system`. You should see the `appcore-rp`, `ucp`, and `bicep-de` pods running:
-
-   ```bash
-   kubectl get pods -n radius-system
-   ```
-
-2. Get the logs from the `appcore-rp`, `ucp` and `bicep-de` containers by using the following commands:
+1. Run `rad debug-logs` to get a zip of log files for each of the pods running in the Radius control-plane. You should see the `appcore-rp`, `ucp`, and `bicep-de` logs:
 
    ```bash
-   kubectl logs -n radius-system -l control-plane=de
-   kubectl logs -n radius-system -l control-plane=ucp
-   kubectl logs -n radius-system -l control-plane=appcore-rp
+   rad debug-logs
+   Capturing logs from the Radius workspace "myworkspace"
+   Wrote zip file debug-logs.zip. Please inspect each log file and remove any private information before sharing feedback.
    ```
 
-   You can also get the logs by using the pod names captured from the previous step and running the following commands:
 
-   ```bash
-   kubectl logs -f <appcore-rp pod name> -n radius-system
-   kubectl logs -f <bicep-de pod name> -n radius-system
-   kubectl logs -f <ucp pod name> -n radius-system
-   ```
+2. In these log files, look for the text "panic", "error", or "Exception" in the logs, and if you find it inspect the error message. Also please open an issue at [project-radius/radius](https://github.com/project-radius/radius/issues/new?assignees=&labels=kind%2Fbug&template=bug.md&title=%3CBUG+TITLE%3E) with the details of your error and if possible, how to recreate. Please ensure that no sensitive information is in the logs prior to attaching them to an issue.
 
-3. Look for the text "panic" or "error" in the logs, and if you find it inspect the error message. Also please open an issue at [project-radius/radius](https://github.com/project-radius/radius/issues/new?assignees=&labels=kind%2Fbug&template=bug.md&title=%3CBUG+TITLE%3E) with the details of your error and if possible, how to recreate.
+> Visit https://aka.ms/ProjectRadius/GitHubAccess if you need access to the repo to open a bug.
 
 ## Troubleshooting issues with Azure Cloud Provider
 
@@ -84,8 +73,12 @@ Error: ResourceDeploymentClient#CreateOrUpdate: Failure sending request: StatusC
 This error isn't very descriptive. Let's take a look at the control-plane logs to see if they can tell us more:
 
 ```bash
-kubectl logs -n radius-system -l control-plane=de
+rad debug-logs
+```
 
+After inspecting the log files, we see in the bicep-de-... log:
+
+```
 fail: Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware[1]
 An unhandled exception has occurred while executing the request.
 Azure.RequestFailedException: The client 'APP_ID' with object id 'OBJECT_ID' does not have authorization to perform action 'Microsoft.Resources/subscriptions/resourcegroups/read' over scope '/subscriptions/SUBSCRIPTION_ID/resourcegroups/radius-rg-MZ94f' or the scope is invalid. If access was recently granted, please refresh your credentials.
