@@ -31,18 +31,20 @@ az account set --subscription <SUB-ID>
 
 ## Troubleshooting the Radius control-plane
 
-To troubleshoot the Radius control-plane, you can use the command `rad debug-logs` to get logs from each of control plane pieces.
+To troubleshoot the Radius control-plane, you can use the command [`rad debug-logs`]({{< ref rad_debug-logs >}}) to get logs from each of control plane pods.
 
-1. Run `rad debug-logs` to get a zip of log files for each of the pods running in the Radius control-plane You should see the `appcore-rp`, `ucp`, and `bicep-de` logs:
+1. Run `rad debug-logs` to get a zip of log files for each of the pods running in the Radius control-plane. You should see the `appcore-rp`, `ucp`, and `bicep-de` logs:
 
    ```bash
    rad debug-logs
-   Capturing logs from the Radius workspace "justin-rad"
+   Capturing logs from the Radius workspace "myworkspace"
    Wrote zip file debug-logs.zip. Please inspect each log file and remove any private information before sharing feedback.
    ```
 
 
-2. In these log files, look for the text "panic", "error", or "Exception" in the logs, and if you find it inspect the error message. Also please open an issue at [project-radius/radius](https://github.com/project-radius/radius/issues/new?assignees=&labels=kind%2Fbug&template=bug.md&title=%3CBUG+TITLE%3E) with the details of your error and if possible, how to recreate. Please ensure that no sensitive information are in the logs prior to attaching them to an issue.
+2. In these log files, look for the text "panic", "error", or "Exception" in the logs, and if you find it inspect the error message. Also please open an issue at [project-radius/radius](https://github.com/project-radius/radius/issues/new?assignees=&labels=kind%2Fbug&template=bug.md&title=%3CBUG+TITLE%3E) with the details of your error and if possible, how to recreate. Please ensure that no sensitive information is in the logs prior to attaching them to an issue.
+
+> Visit https://aka.ms/ProjectRadius/GitHubAccess if you need access to the repo to open a bug.
 
 ## Troubleshooting issues with Azure Cloud Provider
 
