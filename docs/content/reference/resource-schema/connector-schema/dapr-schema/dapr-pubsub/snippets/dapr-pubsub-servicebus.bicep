@@ -5,7 +5,7 @@ param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'dapr-pubsub'
-  location: location
+  location: 'global'
   properties: {
     environment: environment
   }
@@ -13,7 +13,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 
 resource nodesubscriber 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'nodesubscriber'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
     container: {
@@ -40,7 +40,7 @@ resource nodesubscriber 'Applications.Core/containers@2022-03-15-privatepreview'
 
 resource pythonpublisher 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'pythonpublisher'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
     container: {
@@ -67,7 +67,7 @@ resource pythonpublisher 'Applications.Core/containers@2022-03-15-privatepreview
 //SAMPLE
 resource pubsub 'Applications.Connector/daprPubSubBrokers@2022-03-15-privatepreview' = {
   name: 'pubsub'
-  location: location
+  location: 'global'
   properties: {
     environment: environment
     application: app.id

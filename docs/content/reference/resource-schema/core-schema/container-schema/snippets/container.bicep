@@ -1,6 +1,5 @@
 import radius as radius
 
-param location string = resourceGroup().location
 param environment string
 
 param mongoDbId string
@@ -8,7 +7,7 @@ param azureStorage string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
-  location: location
+  location: 'global'
   properties: {
     environment: environment
   }
@@ -17,7 +16,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 //CONTAINER
 resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'frontend'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
     container: {
@@ -79,7 +78,7 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 
 resource http 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
   name: 'http'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
   }
@@ -87,7 +86,7 @@ resource http 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
 
 resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
   name: 'database'
-  location: location
+  location: 'global'
   properties: {
     environment: environment
     application: app.id

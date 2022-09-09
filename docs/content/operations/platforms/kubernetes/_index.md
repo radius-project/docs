@@ -77,3 +77,53 @@ rad env init kubernetes -i --public-endpoint-override 'http://localhost:8080'
 {{% /codetab %}}
 
 {{< /tabs >}}
+
+## Install the Radius control plane
+
+The [Radius control plane]({{< ref architecture >}}) handles the deployment and management of Radius environments, applications, and resources.
+
+{{< tabs "rad CLI" "Helm" >}}
+
+{{% codetab %}}
+Use the [`rad install kubernetes` command]({{< ref rad_env_init_Kubernetes >}}) to install Radius control plane on the kubernetes cluster.
+```bash
+rad install kubernetes
+```
+{{% /codetab %}}
+
+{{% codetab %}}
+```sh
+helm repo add radius https://radius.azurecr.io/helm/v1/repo
+helm repo update
+helm upgrade radius radius/radius --install --create-namespace --namespace radius-system --version {{< param chart_version >}} --wait --timeout 15m0s
+```
+
+Available Helm package versions can be listed via `helm search repo radius --versions`.
+{{% /codetab %}}
+
+{{< /tabs >}}
+
+{{% alert title="💡 About namespaces" color="success" %}}
+When Radius initializes a Kubernetes environment, it will deploy the system resources into the `radius-system` namespace. These aren't part your application. The namespace specified in interactive mode will be used for future deployments by default.
+{{% /alert %}}
+
+## Configure container registry access
+
+If you choose a private container registry you will need to take steps to configure your Kubernetes cluster to allow access. Follow the instructions provided by your cloud provider.
+
+{{< tabs "Generic" "AKS + ACR" >}}
+
+{{% codetab %}}
+Visit the [Kubernetes docs](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/) to learn how to configure your cluster to access a private registry, such as Docker Hub.
+{{% /codetab %}}
+
+{{% codetab %}}
+Visit the [Azure docs](https://docs.microsoft.com/azure/aks/cluster-container-registry-integration?tabs=azure-cli)to learn how to configure access to an ACR registry.
+
+```bash
+az aks update --name myAKSCluster -resource-group myResourceGroup --subscription mySubscription --attach-acr <acr-name>
+```
+
+{{% /codetab %}}
+
+{{< /tabs >}}

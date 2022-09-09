@@ -1,11 +1,10 @@
 import radius as radius
 
-param location string = resourceGroup().location
 param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
-  location: location
+  location: 'global'
   properties: {
     environment: environment
   }
@@ -14,7 +13,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 //GATEWAY
 resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
   name: 'gateway'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
     hostname: {
@@ -42,7 +41,7 @@ resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
 //FRONTENDROUTE
 resource frontendroute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
   name: 'frontendroute'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
   }
@@ -52,7 +51,7 @@ resource frontendroute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' 
 //BACKENDROUTE
 resource backendroute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
   name: 'backendroute'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
   }
@@ -62,7 +61,7 @@ resource backendroute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' =
 //FRONTEND
 resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'frontend'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
     container: {
@@ -89,7 +88,7 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 //BACKEND
 resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'backend'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
     container: {

@@ -1,7 +1,6 @@
 import radius as radius
 
 param environment string
-param location string = resourceGroup().location
 
 //SNIPPET
 // Infrastructure team provides database to the application team
@@ -10,7 +9,7 @@ param databaseId string
 // Define application
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
-  location: location
+  location: 'global'
   //PROPERTIES
   properties: {
     environment: environment
@@ -21,7 +20,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 // Define container resource to run app code
 resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'frontend'
-  location: location
+  location: 'global'
   properties: {
     application: app.id
     //CONTAINER
