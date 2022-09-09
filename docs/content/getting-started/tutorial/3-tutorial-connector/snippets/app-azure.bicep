@@ -1,8 +1,9 @@
-//APPBASE
 import radius as radius
 
 param environment string
+param location string = resourceGroup().location
 
+//APPBASE
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'webapp'
   location: 'global'
@@ -52,8 +53,8 @@ resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
     application: app.id
     routes: [
       {
-        path: '/'
-        destination: frontendRoute.id
+         path: '/'
+         destination: frontendRoute.id
       }
     ]
   }
@@ -67,15 +68,17 @@ resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = 
   properties: {
     environment: app.properties.environment
     application: app.id
-    secrets: {
-      connectionString: 'mongodb://${mongo.outputs.name}:${mongo.outputs.port}/${mongo.outputs.dbName}?authSource=admin'
-    }
+    // Automatically build the connector from the resource ID
+    resource: mongo.outputs.cosmosDatabaseId
   }
 }
 //DATABASE CONNECTOR
 
 //MONGOMODULE
-module mongo 'mongo-container.bicep' = {
+module mongo 'mongo-azurecosmosdb.bicep' = {
   name: 'mongo-module'
+  params: {
+    location: location
+  }
 }
 //MONGOMODULE

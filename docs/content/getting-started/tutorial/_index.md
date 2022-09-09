@@ -1,39 +1,71 @@
 ---
 type: docs
-title: "Tutorial for Project Radius"
+title: "Project Radius Tutorial"
 linkTitle: "Tutorial"
-description: "Walk through an in-depth example to learn more about how to work with Radius concepts"
+description: "Walk through an in-depth example to learn about Project Radius"
 weight: 100
 no_list: true
 ---
 
-## Overview
+## Steps
 
-This tutorial will teach you how to deploy a website as a Radius application from first principles. You will take away the following
+This tutorial will teach you how to deploy a "Rad-ified" website. You will learn:
 
-- Enough knowledge to map your own application in Radius
-- Achieve portability via connectors between your local and cloud environments
-- Understand the separation of concerns for the different personas involved in a deployment
+{{< cardpane width=70% >}}
+{{< card header="**1. Setup an environment**" footer="Deploy a [Radius environment]({{< ref environments >}}) to your Kubernetes cluster" >}}
+<img src="illustration-tools.png" alt="Illustration of tooling" /><br />
+{{< /card >}}
+{{< card header="**2. Model an application**" footer="Leverage a [Radius application]({{< ref appmodel-concept >}}) to model, deploy, and manage your app" >}}
+<img src="illustration-appmodel.png" width=90% alt="Illustration of app model" /><br />
+{{< /card >}}
+{{< card header="**3. Achieve infrastructure portability**"  footer="Leverage [Radius connectors]({{< ref connectors >}}) to easily deploy across platforms and clouds">}}
+<img src="illustration-deploy.png" alt="Illustration of deploying app" /><br />
+{{< /card >}}
+{{< /cardpane >}}
 
-## Tutorial steps
+## Application overview
 
-This tutorial contains the following sections:
+You will be deploying an application, `todoapp`, with the following resources:
 
-- App overview - Overview of the website tutorial application
-- Author app definition - Define the application definition with container, gateway and http routes
-- Add a database connector - Connect a MongoDB to the website tutorial application using a connector and deploy to a Radius environment
-- Swap a connector resource - Swap a MongoDB container for an Azure CosmosDB instance to back the connector and deploy the app to a Radius environment with Azure cloud provider configured
+<img src="diagram-app.png" width=900px alt="Diagram of the tutorial application">
 
-## Prerequisites
+1. [`frontend`](#frontend-container): A containerized to-do list frontend written in Node.JS
+1. [`frontend-route`](#frontend-route-httproute): An [HttpRoute]({{< ref httproute >}}) models HTTP traffic to the frontend container
+1. [`gateway`](#gateway-gateway): A [Gateway]({{< ref gateway >}}) that exposes the application to the internet
+1. [`db`](#db-connector): A [MongoDB connector]({{< ref mongodb >}}) to save to-do items in. Can be backed by either:
+   - A MongoDB container
+   - An Azure CosmosDB w/ Mongo API
 
-{{% alert title="💡 Github Codespaces" color="success" %}}
-You can skip this section if you are using [Github Codespaces]({{< ref "getting-started#try-out-radius-on-github-codespaces">}}) to try out the tutorial. The dev containers have all the pre-requisites installed and environment initialized.
-{{% /alert %}}
+### `frontend` container
 
-- [Install Radius CLI]({{< ref "getting-started#install-rad-cli" >}})
-- [Install az CLI](http://aka.ms/azcli)
-- [Install kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
-- Set up a Kubernetes Cluster. Visit the [Kubernetes documentation]({{< ref "kubernetes#supported-clusters" >}}) for a list of supported clusters
-- [Azure subscription](https://azure.com) (optional - used in last tutorial step to deploy Azure resources)
+The example website is a single-page-application (SPA) with a Node.JS backend running in a [container]({{< ref container >}}). The SPA sends HTTP requests to the Node.JS backend to read and store todo items.
 
-<br>{{< button text="Next step: App overview" page="webapp-overview" >}}
+The website listens on port 3000 for HTTP requests.
+
+The website uses the MongoDB protocol to read and store data in a database. The website reads the environment variable `CONNECTION_ITEMSTORE_CONNECTIONSTRING` to discover the database connection string. If the connection string is not set the website will store the todo items in memory and not persist them.
+
+> You can view and download the source code in the [samples repo](https://github.com/project-radius/samples). For access fill out [this form](https://aka.ms/ProjectRadius/GitHubAccess).
+
+### `frontend-route` HttpRoute
+
+An [HttpRoute]({{< ref httproute >}}) is used to define communication to the container app `frontend`.
+
+### `gateway` Gateway
+
+In order for users to connect to `todoapp` over the internet, a [Gateway]({{< ref gateway >}}) is used to define the appropriate route paths.
+
+### `db` Connector
+
+The database is provided by a [MongoDB connector]({{< ref mongodb >}}). You can choose between a MongoDB container or an Azure CosmosDB w/ Mongo API to back the connector.
+
+## The Radius mindset
+
+Deployment often involves different teams working together, separating their responsibilities. For example, a developer might build the app definition with services, while the infrastructure administrator might set up the environment and the infrastructure. In this tutorial you will build the app from the perspective of a developer and an infrastructure administrator.
+
+As you progress, keep in mind the following benefits that the Radius application abstraction provides:
+
+- Relationships between resources are fully specified with protocols and other strongly-typed information
+- Connectors provide abstraction and portability across local and cloud environments
+- Separation of concerns for the different personas involved in the deployment
+
+<br>{{< button text="Begin the Tutorial" page="1-tutorial-environment" size="btn-lg" >}}
