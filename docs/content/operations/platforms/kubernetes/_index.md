@@ -37,7 +37,7 @@ Next, use the following commands to create a new cluster and install the Radius 
 
 ```bash
 k3d cluster create -p "8081:80@loadbalancer" --k3s-arg "--disable=traefik@server:0"
-rad env init kubernetes -i --public-endpoint-override 'http://localhost:8081'
+rad env init kubernetes -i --public-endpoint-override 'localhost:8081'
 ```
 {{% /codetab %}}
 
@@ -72,7 +72,7 @@ kind create cluster --config kind-config.yaml
 kubectl get nodes
 
 # Install Radius
-rad env init kubernetes -i --public-endpoint-override 'http://localhost:8080'
+rad env init kubernetes -i --public-endpoint-override 'localhost:8080'
 ```
 {{% /codetab %}}
 
