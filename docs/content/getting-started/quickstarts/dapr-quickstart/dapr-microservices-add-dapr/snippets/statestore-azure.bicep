@@ -5,7 +5,7 @@ param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'dapr-quickstart'
-  location: location
+  location: 'global'
   properties: {
     environment: environment
   }
@@ -14,7 +14,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 //SAMPLE
 resource stateStore 'Applications.Connector/daprStateStores@2022-03-15-privatepreview' = {
   name: 'orders'
-  location: location
+  location: 'global'
   properties: {
     environment: environment
     application: app.id

@@ -11,7 +11,7 @@ Connectors provide an **infrastructure abstraction** that enables **portability*
 
 <img src="connectors.png" alt="Diagram of Radius Connector to infrastructure resource." width="400px" />
 
-For example, when a user specifies a MongoDB connector, that connector could bind to an Azure CosmosDB, an AWS DynamoDB, or a Mongo Container based on which platform is targeted. An administrator could even specify the exact configurations of the database resource to spin up when a developer needs a database, enhancing a self-serve workflow.
+For example, when a user specifies a MongoDB connector, that connector could bind to an Azure CosmosDB, or MongoDB services from other cloud providers. An administrator could even specify the exact configurations of the database resource to spin up when a developer needs a database, enhancing a self-serve workflow.
 
 <img src="connectors-example.png" alt="Diagram of example architecture using or Radius Conntector. Depicts a Radius Container connected to MongoDB Radius Connector, which can bind to an Azure CosmosDB, an AWS DynamoDB, or a Mongo Container. " width="700px" />
 

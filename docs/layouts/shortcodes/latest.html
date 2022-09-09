@@ -1,0 +1,8 @@
+{{ $version := $.Page.Site.Params.version }}
+{{ $content := .Inner }}
+
+{{ if ne $version "edge" }}
+{{ $content }}
+{{ else }}
+To try out a stable release visit the [latest docs](https://radapp.dev).
+{{ end }}

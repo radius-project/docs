@@ -22,7 +22,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2021-06-01' = {
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'store'
-  location: location
+  location: 'global'
   properties: {
     environment: environment
   }
@@ -30,7 +30,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 
 resource stateStore 'Applications.Connector/daprStateStores@2022-03-15-privatepreview' = {
   name: 'statestore'
-  location: location
+  location: 'global'
   properties: {
     environment: environment
     application: app.id

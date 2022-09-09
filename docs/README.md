@@ -34,6 +34,7 @@ This directory contains the files to generate the https://radapp.dev site. Pleas
    ```
 
 ## Run local server
+
 1. Make sure you're still in the `docs` directory
 2. Run
    ```sh
