@@ -105,7 +105,7 @@ If you're done with testing, you can use the rad CLI to [delete an environment](
 {{% /alert %}}
 
 {{% alert title="Cleanup Azure Resources" color="warning" %}}
-Azure resources are not deleted when deleting a Radius environment, so to prevent additional charges, make sure to delete all resources from the resource group youu used for your cloud provider.
+Azure resources are not deleted when deleting a Radius environment, so to prevent additional charges, make sure to delete all resources from the resource group you used for your cloud provider.
 {{% /alert %}}
 
 {{% alert title="Delete other Kubernetes resources used" color="warning" %}}
