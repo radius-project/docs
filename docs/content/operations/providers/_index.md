@@ -41,7 +41,7 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
 
 1. Reinstall the control plane with the cloud provider via `rad install kubernetes --reinstall -i`
    - If using a Codespace or k3s, append `--public-endpoint-override "https://localhost:8081"` to the command
-   - If using Kind, append `--public-endpoint-override "http://localhost:8080"` to the command
+   - If using Kind, append `--public-endpoint-override "localhost:8080"` to the command
 2. Enter "y" to add an Azure cloud provider
 3. Specify your Azure subscription and resource group
 4. Create an [Azure service principal](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) with the [proper permissions](https://aka.ms/azadsp-more). Enter the appID, password and the tenant of the service principal 
