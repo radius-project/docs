@@ -91,9 +91,9 @@ PowerShell for Cloud Shell is currently not supported.
 {{% codetab %}}
 {{< latest >}}
 1. Download the `rad` CLI from one of these URLs:
-   - MacOS: https://get.radapp.dev/tools/rad/edge/macos-x64/rad
-   - Linux: https://get.radapp.dev/tools/rad/edge/linux-x64/rad
-   - Windows: https://get.radapp.dev/tools/rad/edge/windows-x64/rad.exe
+   - MacOS: https://get.radapp.dev/tools/rad/0.13/macos-x64/rad
+   - Linux: https://get.radapp.dev/tools/rad/0.13/linux-x64/rad
+   - Windows: https://get.radapp.dev/tools/rad/0.13/windows-x64/rad.exe
 1. Ensure the user has permission to execute the binary and place it somewhere on your PATH so it can be invoked easily.
 {{< /latest >}}
 {{< edge >}}
@@ -123,7 +123,7 @@ Visual Studio Code offers the best authoring experience for Project Radius and B
    {{< button link="https://get.radapp.dev/tools/vscode-extensibility/stable/rad-vscode-bicep.vsix" text="Download Bicep extension" >}}
 
    {{< edge >}}
-   {{< button link="https://radiuspublic.blob.core.windows.net/tools/vscode-extensibility/edge/rad-vscode-bicep.vsix" text="Download Bicep extension (edge)" >}}
+   {{< button link="https://get.radapp.dev/tools/vscode-extensibility/edge/rad-vscode-bicep.vsix" text="Download Bicep extension (edge)" >}}
    {{< /edge >}}
    {{% /codetab %}}
 
@@ -132,13 +132,13 @@ Visual Studio Code offers the best authoring experience for Project Radius and B
    Stable Version
 
    ```bash
-   curl https://radiuspublic.blob.core.windows.net/tools/vscode/stable/rad-vscode-bicep.vsix --output rad-vscode-bicep.vsix
+   curl https://get.radapp.dev/tools/vscode/stable/rad-vscode-bicep.vsix --output rad-vscode-bicep.vsix
    ```
 
    Edge Version
 
    ```bash
-   curl https://radiuspublic.blob.core.windows.net/tools/vscode-extensibility/edge/rad-vscode-bicep.vsix --output rad-vscode-bicep.vsix
+   curl https://get.radapp.dev/tools/vscode-extensibility/edge/rad-vscode-bicep.vsix --output rad-vscode-bicep.vsix
    ```
 
    {{% /codetab %}}
