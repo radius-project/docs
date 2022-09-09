@@ -7,7 +7,7 @@ weight: 200
 slug: init-environment
 ---
 
-{{% alert title="💡 Github Codespaces" color="success" %}}
+{{% alert title="💻 Github Codespaces" color="warning" %}}
 You can skip this section if you are using a [Github Codespace]({{< ref "getting-started" >}}) to try out the tutorial. The container have all the pre-requisites installed and environment initialized.
 {{% /alert %}}
 
@@ -18,7 +18,7 @@ You can skip this section if you are using a [Github Codespace]({{< ref "getting
    - [kubectl CLI](https://kubernetes.io/docs/tasks/tools/#kubectl)
    - [az CLI](http://aka.ms/azcli)
 
-1. Next, make sure you have a [supported Kubernetes cluster]({{< ref kubernetes >}}) deployed and setup with a kuebctl context
+1. Next, make sure you have a [supported Kubernetes cluster]({{< ref kubernetes >}}) deployed and setup with a kubectl context
 1. If deploying to Azure, create or ensure access to an [Azure subscription](https://azure.com) _(optional - used in last tutorial step to deploy Azure resources)_
 
 ## Initialize a Radius environment
@@ -39,13 +39,13 @@ In this step we will be initializing a Radius Kubernetes environment.
    rad env init kubernetes -i
    ```
 
-   Follow the prompts to install the [control plane services]({{< ref architecture >}}), creates an [environment resource]({{< ref environments >}}), and creates a [;local workspace]({{< ref workspaces >}}). You will be asked for:
+   Follow the prompts to install the [control plane services]({{< ref architecture >}}), creates an [environment resource]({{< ref environments >}}), and creates a [local workspace]({{< ref workspaces >}}). You will be asked for:
 
    - **Namespace** - When an application is deployed, this is the namespace where your containers and other Kubernetes resources will be run. By default, this will be in the `default` namespace.
    {{% alert title="💡 About namespaces" color="success" %}} When you initialize a Radius Kubernetes environment, Radius installs the control plane resources within    the `radius-system` namespace in your cluster, separate from your applications. The namespace specified in this step will be used for your application deployments.
    {{% /alert %}}
    -  **Add Azure provider** - An [Azure cloud provider]({{<ref providers>}}) allows you to deploy and manage Azure resources as part of your application. If you have have an Azure subscription enter `y` and follow the instructions.
-   - **Environment name** - The name of the environment to create. You can specify any name with lowercase letters.
+   - **Environment name** - The name of the environment to create. You can specify any name with lowercase letters, such as `myenv`.
 
 1. Verify the control-plane was deployed by running:
 

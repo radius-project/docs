@@ -9,7 +9,9 @@ slug: "application"
 
 ## Download the source code
 
-{{< tabs "ZIP Download" "GitHub Codespace" >}}
+The tutorial source code will contain the app templates and frontend code for this tutorial.
+
+{{< tabs "ZIP Download" "GitHub Codespace" "Git Clone" >}}
 
 {{% codetab %}}
 Download and unzip `tutorial.zip`:
@@ -23,9 +25,17 @@ cd tutorial
 ```
 {{% /codetab %}}
 
+{{% codetab %}}
+Clone the [project-radius/samples](https://github.com/project-radius/samples) repository:
+```bash
+git clone https://github.com/project-radius/samples.git
+cd samples/tutorial
+```
+{{% /codetab %}}
+
 {{< /tabs >}}
 
-The tutorial directory contains three files:
+The tutorial directory contains three Bicep files:
 
 1. **app.bicep** - Contains the app definition
 1. **mongo-container.bicep** - Contains the definition for deploying mongo container
@@ -33,7 +43,7 @@ The tutorial directory contains three files:
 
 ## Application
 
-Let's dig into the `app.bicep` to understand the input parameters and `Applications.Core/applications` resource:
+Let's dig into the `app.bicep` to understand the input parameters and `Applications.Core/applications` resource. The application acts as the container for all of your application services, infrastructure, and relationships. It's the top-level resource a developer will model and configure.
 
 {{< rad file="snippets/app.bicep" embed=true marker="//APPBASE" >}}
 
@@ -150,7 +160,7 @@ Now you are ready to deploy the application for the first time:
    <img src="todoapp.png" width="400" alt="screenshot of the todo application">
 
    {{% alert title="⚠️ Caution" color="warning" %}}
-   If you are unable to connect to webapp in your browser, make sure your organization does not block HTTP traffic to your Kubernetes cluster. You may need to be on your corporate network or use a jumpbox. As a workaround, you can run `rad resource expose containers frontend -a webapp --port 3000` to port-forward the frontend container to your local machine. Then, you can access the application at `http://localhost:3000`.
+   If you are unable to connect to webapp in your browser, make sure your organization does not block HTTP traffic to your Kubernetes cluster. You may need to be on your corporate network or use a jumpbox. As a workaround, you can run `rad resource expose containers frontend -a webapp --port 3000` to [port-forward the frontend container]({{< ref rad_resource_expose >}}) to your local machine. Then, you can access the application at `http://localhost:3000`.
    {{% /alert %}}
 
    You can play around with the application's features:
