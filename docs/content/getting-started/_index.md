@@ -24,6 +24,7 @@ The `rad` CLI manages your applications, resources, and environments. Begin by i
 {{< tabs "Windows PowerShell" MacOS "Linux/WSL" "Cloud Shell" Binaries >}}
 
 {{% codetab %}}
+{{< latest >}}
 Run the following in a PowerShell window:
 
 ```powershell
@@ -34,7 +35,7 @@ You may need to refresh your $PATH environment variable to access `rad`:
 ```powershell
 $Env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")
 ```
-
+{{< /latest >}}
 {{< edge >}}
 To install the latest edge version:
 
@@ -45,10 +46,11 @@ $script=iwr -useb  https://radiuspublic.blob.core.windows.net/tools/rad/install.
 {{% /codetab %}}
 
 {{% codetab %}}
+{{< latest >}}
 ```bash
 curl -fsSL "https://get.radapp.dev/tools/rad/install.sh" | /bin/bash
 ```
-
+{{< /latest >}}
 {{< edge >}}
 To install the latest edge version:
 
@@ -59,10 +61,11 @@ curl -fsSL "https://radiuspublic.blob.core.windows.net/tools/rad/install.sh" | /
 {{% /codetab %}}
 
 {{% codetab %}}
+{{< latest >}}
 ```bash
 wget -q "https://get.radapp.dev/tools/rad/install.sh" -O - | /bin/bash
 ```
-
+{{< /latest >}}
 {{< edge >}}
 To install the latest edge version:
 
@@ -88,20 +91,19 @@ PowerShell for Cloud Shell is currently not supported.
 {{% /codetab %}}
 
 {{% codetab %}}
+{{< latest >}}
 1. Download the `rad` CLI from one of these URLs:
-
    - MacOS: https://get.radapp.dev/tools/rad/edge/macos-x64/rad
    - Linux: https://get.radapp.dev/tools/rad/edge/linux-x64/rad
    - Windows: https://get.radapp.dev/tools/rad/edge/windows-x64/rad.exe
-
 1. Ensure the user has permission to execute the binary and place it somewhere on your PATH so it can be invoked easily.
-
+{{< /latest >}}
 {{< edge >}}
-### Edge releases
-
-- MacOS: https://radiuspublic.blob.core.windows.net/tools/rad/edge/macos-x64/rad
-- Linux: https://radiuspublic.blob.core.windows.net/tools/rad/edge/linux-x64/rad
-- Windows: https://radiuspublic.blob.core.windows.net/tools/rad/edge/windows-x64/rad.exe
+1. Download the `rad` CLI from one of these URLs:
+   - MacOS: https://radiuspublic.blob.core.windows.net/tools/rad/edge/macos-x64/rad
+   - Linux: https://radiuspublic.blob.core.windows.net/tools/rad/edge/linux-x64/rad
+   - Windows: https://radiuspublic.blob.core.windows.net/tools/rad/edge/windows-x64/rad.exe
+1. Ensure the user has permission to execute the binary and place it somewhere on your PATH so it can be invoked easily.
 {{< /edge >}}
 {{% /codetab %}}
 
