@@ -11,7 +11,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
-      - v0.12
+      - v0.13
     paths:
       - 'docs/**'
       - '.github/workflows/website.yaml'
