@@ -26,7 +26,7 @@ az aks create --subscription mySubscription --resource-group myResourceGroup --n
 az aks get-credentials --subscription mySubscription --resource-group myResourceGroup --name myAKSCluster
 ```
 
-Once deployed and your kubectl context has been set as your default, you can run the following to configure the Radius control plane:
+Once deployed and your kubectl context has been set as your default, you can run the following to create a Radius environment and install the control plane:
 
 ```bash
 rad env init kubernetes -i
@@ -82,13 +82,13 @@ rad env init kubernetes -i --public-endpoint-override 'http://localhost:8080'
 {{% /codetab %}}
 
 {{% codetab %}}
-Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service that you can use to run Kubernetes on AWS. Learn how to set up an EKS cluster on the [AWS docs](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-console.html).
+Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service that you can use to run Kubernetes on AWS. Learn how to set up an EKS cluster on the [AWS docs](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html).
 
 ```bash
 eksctl create cluster --name my-cluster --region region-code --fargate
 ```
 
-Once deployed and your kubectl context has been set as your default, you can run the following to configure the Radius control plane:
+Once deployed and your kubectl context has been set as your default, you can run the following to create a Radius environment and install the control plane:
 
 ```bash
 rad env init kubernetes -i
