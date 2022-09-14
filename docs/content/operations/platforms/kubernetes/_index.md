@@ -91,6 +91,10 @@ eksctl create cluster --name my-cluster --region region-code --fargate
 Once deployed and your kubectl context has been set as your default, you can run the following to create a Radius environment and install the control plane:
 
 ```bash
+# Note: make sure to provide a valid (alphanumeric with hyphens)
+# environment name, since the default will not be valid.
+
+# Enter an environment name [arn:aws:eks:region:account:cluster/cluster-name]: cluster-name
 rad env init kubernetes -i
 ```
 
