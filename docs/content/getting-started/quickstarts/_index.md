@@ -8,7 +8,7 @@ no_list: true
 ---
 
 {{< cardpane width=750px >}}
-{{% card header="[Environment variables](./environment-variables)" footer="Learn How to set environment variables in your Radius container" %}}
+{{% card header="[Environment variables](./environment-variables)" footer="Learn How to set environment variables in your Radius containers" %}}
 <div class="text-center">
   <a href="./environment-variables">
     <img src="./environment-variables/envvar.svg" alt="Environment variable icon" width="150px">

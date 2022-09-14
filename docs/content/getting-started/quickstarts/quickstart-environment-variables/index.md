@@ -19,7 +19,7 @@ This quickstart will teach you:
 
 ## Step 1: Model an app and container
 
-Create a new file named `app.bicep` and add the following code:
+Create a new file named `app.bicep` and add an application and a [container]({{< ref container >}}):
 
 {{< rad file="snippets/1-app.bicep" embed=true >}}
 
@@ -27,7 +27,7 @@ The image `radius.azurecr.io/quickstarts/envvars` simply prints out the environm
 
 ## Step 2: Manually set environment variables
 
-Add an `env` property which will contain a list of environment variables to set. Within `env` set the `FOO` environment variable to `bar` and the `BAZ` environment variable to `app.name`.
+Add an `env` property which will contain a list of environment variables to set. Within `env` set the `FOO` environment variable to the string `bar` and the `BAZ` environment variable to the value of `app.name`:
    
 {{< rad file="snippets/2-app.bicep" embed=true marker="//CONTAINER" >}}
 
@@ -38,7 +38,7 @@ Add an `env` property which will contain a list of environment variables to set.
    ```bash
    rad deploy ./app.bicep
    ```
-1. Port-forward the container to your machine:
+1. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose >}}):
 
     ```bash
     rad resource expose containers mycontainer -a myapp --port 5000
@@ -47,15 +47,17 @@ Add an `env` property which will contain a list of environment variables to set.
 
    <img src="screenshot.jpg" alt="Screenshot of the app printing the environment variables" width=1000px />
 
+   Here you can see the environment variables `FOO` and `BAZ`, with their accompanying values.
+
 ## Step 4: Add a Mongo Connector
 
-Next, add to `app.bicep` a module with a containerized Mongo database (leveraging a Bicep module containing Kubernetes resources), along with a Mongo connector:
+Next, add to `app.bicep` a module with a containerized Mongo database (leveraging a Bicep module containing Kubernetes resources), along with a [Mongo connector]({{< ref connectors >}}):
 
 {{< rad file="snippets/3-app.bicep" embed=true marker="//CONNECTOR" >}}
 
 ## Step 5: Connect to the Mongo Connector
 
-Update your container definition to add a connection to the new Mongo connector:
+Connections from a container to a connector result in environment variables for connection information [automatically being set on the container]({{< ref "appmodel-concept#injected-values" >}}). Update your container definition to add a connection to the new Mongo connector:
 
 {{< rad file="snippets/3-app.bicep" embed=true marker="//CONTAINER" >}}
 
