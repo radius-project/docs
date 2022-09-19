@@ -1,6 +1,7 @@
 name: Project Radius Website
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - v0.13
