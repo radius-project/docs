@@ -85,7 +85,7 @@ rad env init kubernetes -i --public-endpoint-override 'http://localhost:8080'
 Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service that you can use to run Kubernetes on AWS. Learn how to set up an EKS cluster on the [AWS docs](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html).
 
 ```bash
-eksctl create cluster --name my-cluster --region region-code --fargate
+eksctl create cluster --name my-cluster --region region-code
 ```
 
 Once deployed and your kubectl context has been set as your default, you can run the following to create a Radius environment and install the control plane:

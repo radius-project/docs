@@ -83,6 +83,8 @@ The following example shows an environment configured with Kubernetes as the tar
 ## How-to: Initialize a new environment
 
 1. Begin by deploying a compatible [Kubernetes cluster]({{< ref kubernetes >}})
+> Visit the [Kubernetes platform docs]({{< ref kubernetes >}}) for a list of supported clusters and specific cluster requirements.
+
 1. Ensure your target kubectl context is set as the default:
    ```bash
    kubectl config current-context
