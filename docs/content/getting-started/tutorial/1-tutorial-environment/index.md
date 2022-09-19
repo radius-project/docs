@@ -27,13 +27,14 @@ A Radius [Kubernetes environment]({{<ref environments-concept>}}) can run in a K
 
 In this step we will be initializing a Radius Kubernetes environment.
 
-> Visit the [Kubernetes platform docs]({{< ref kubernetes >}}) for a list of supported clusters and specific cluster requirements.
-
 1. You can view the current context for kubectl by running:
 
    ```bash
    kubectl config current-context
    ```
+
+   {{% alert color="success" %}} Visit the [Kubernetes platform docs]({{< ref kubernetes >}}) for a list of supported clusters and specific cluster requirements.
+   {{% /alert %}}
 
 1. Use the [`rad env init kubernetes` command]({{< ref rad_env_init_Kubernetes >}}) to initialize a new environment into your current kubectl context:
 
