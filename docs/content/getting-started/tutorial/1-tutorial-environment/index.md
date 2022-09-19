@@ -33,6 +33,9 @@ In this step we will be initializing a Radius Kubernetes environment.
    kubectl config current-context
    ```
 
+   {{% alert color="success" %}} Visit the [Kubernetes platform docs]({{< ref kubernetes >}}) for a list of supported clusters and specific cluster requirements.
+   {{% /alert %}}
+
 1. Use the [`rad env init kubernetes` command]({{< ref rad_env_init_Kubernetes >}}) to initialize a new environment into your current kubectl context:
 
    ```bash

@@ -70,6 +70,20 @@ When running `rad env show`, the `lastmodifiedat` and `createdat` fields display
 
 This will be addressed in an upcoming release.
 
+### Environment creation on EKS fails with default values
+
+When running `rad env init kubernetes` on an EKS cluster, the default environment name for EKS is invalid with current env name requirements.
+
+As a workaround, run `rad env init kubernetes -i`. As part of the init prompts, provide a custom name with only alphanumeric/hyphen characters:
+
+```
+❯ rad env init kubernetes -i
+...
+Enter an environment name [arn:aws:eks:region:account:cluster/mycluster]: mycluster
+```
+
+This will be addressed in an upcoming release.
+
 ## Connectors
 
 ### Dapr resources have application name prefixed to component name
