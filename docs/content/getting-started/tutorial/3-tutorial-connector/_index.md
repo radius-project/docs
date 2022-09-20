@@ -57,6 +57,8 @@ Lastly, update the connector definition to use a resource reference instead of m
 
 {{< rad file="snippets/app-azure.bicep" embed=true marker="//DATABASE CONNECTOR">}}
 
+Add the location parameter.
+
 ```sh
 param location string = resourceGroup().location
 ```
