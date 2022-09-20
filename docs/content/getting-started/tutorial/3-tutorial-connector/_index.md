@@ -57,6 +57,10 @@ Lastly, update the connector definition to use a resource reference instead of m
 
 {{< rad file="snippets/app-azure.bicep" embed=true marker="//DATABASE CONNECTOR">}}
 
+```sh
+param location string = resourceGroup().location
+```
+
 ## Deploy the application with Azure database
 
 1. In a terminal window deploy `app.bicep`:
