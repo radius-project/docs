@@ -25,6 +25,7 @@ Available Commands:
   uninstall   Uninstall radius for a specific platform
   version     Prints the versions of the rad cli
   workspace   Manage local workspaces
+  group       Manage resource groups
 
 Flags:
       --config string   config file (default is $HOME/.rad/config.yaml)
