@@ -59,6 +59,8 @@ Lastly, update the connector definition to use a resource reference instead of m
 
 ## Add the location parameter
 
+Next, add the following line to the top of your Bicep file:
+
 ```sh
 param location string = resourceGroup().location
 ```
