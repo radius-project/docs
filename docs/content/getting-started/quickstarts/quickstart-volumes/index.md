@@ -8,7 +8,7 @@ weight: 200
 
 This quickstart will provide an overview of how to:
 
-- Mount an ephemeral volume to a container
+- Mount an ephemeral (short-lived) volume to a container
 
 ## Prerequisites
 
@@ -17,7 +17,7 @@ This quickstart will provide an overview of how to:
 
 ## Step 1: Define an app and a container
 
-Begin by creating a file named `app.bicep` with a Radius application and [container]({{< ref containers >}}):
+Begin by creating a file named `app.bicep` with a Radius application and [container]({{< ref container >}}):
 
 {{< rad file="snippets/1-app.bicep" embed=true >}}
 
