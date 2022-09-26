@@ -34,6 +34,7 @@ This resource will automatically create and deploy the Dapr component spec for t
 | type | n |The Dapr component type. Used when kind is `generic`. | `pubsub.kafka` |
 | metadata | n | Metadata for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-pubsub/) | `brokers: kafkaRoute.properties.url` |
 | version | n | The version of the Dapr component. See [Dapr components](https://docs.dapr.io/reference/components-reference/supported-pubsub/) for available versions. | `v1` |
+| componentName | n | _(read-only)_ The name of the Dapr component that is generated and applied to the underlying system. Used by the Dapr SDKs or APIs to access the Dapr component. | `myapp-mypubsub` |
 
 ## Available Dapr components
 
@@ -55,3 +56,11 @@ An Azure Service Bus Topic can be used as a Dapr Pub/Sub message broker. Simply 
 A generic pub/sub lets you manually specify the metadata of a Dapr pub/sub broker. When `kind` is set to `generic`, you can specify `type`, `metadata`, and `version` to create a Dapr component spec. These values must match the schema of the intended [Dapr component](https://docs.dapr.io/reference/components-reference/supported-pubsub/).
 
 {{< rad file="snippets/dapr-pubsub-kafka.bicep" embed=true marker="//SAMPLE" >}}
+
+## Injected values
+
+Connections from [Radius services]({{< ref services >}}) to [connectors]({{< ref connectors >}}) by default inject the following values into the environment of the service:
+
+| Key | Value |
+|-----|-------|
+| `CONNECTION_<CONNECTIONNAME>_COMPONENTNAME` | `properties.componentName` |
