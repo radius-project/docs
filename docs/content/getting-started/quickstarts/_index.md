@@ -16,6 +16,14 @@ no_list: true
 </div>
 {{% /card %}}
 
+{{% card header="[Volumes](./volumes)" footer="Learn How to mount volumes in your Radius containers" %}}
+<div class="text-center">
+  <a href="./volumes">
+    <img src="./quickvolumes/volume.svg" alt="Volume icon" width="150px">
+  </a>
+</div>
+{{% /card %}}
+
 {{% card header="[Dapr](./dapr-quickstart)" footer="Learn Project Radius by authoring templates and deploying a Dapr application" %}}
 <div class="text-center">
   <a href="./dapr-quickstart">
