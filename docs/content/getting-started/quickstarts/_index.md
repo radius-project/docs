@@ -23,4 +23,12 @@ no_list: true
   </a>
 </div>
 {{% /card %}}
+
+{{% card header="[AWS MemoryDB](./aws-memorydb-quickstart)" footer="Learn about using Radius to deploy MemoryDB for Redis to AWS" %}}
+<div class="text-center">
+  <a href="./aws-memorydb-quickstart">
+    <img src="memorydb-logo.jpeg" alt="memorydb logo" width="200px">
+  </a>
+</div>
+{{% /card %}}
 {{< /cardpane >}}
