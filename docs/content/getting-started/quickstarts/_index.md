@@ -7,7 +7,15 @@ weight: 200
 no_list: true
 ---
 
-{{< cardpane width=500px >}}
+{{< cardpane width=750px >}}
+{{% card header="[Environment variables](./environment-variables)" footer="Learn How to set environment variables in your Radius containers" %}}
+<div class="text-center">
+  <a href="./environment-variables">
+    <img src="./environment-variables/envvar.svg" alt="Environment variable icon" width="150px">
+  </a>
+</div>
+{{% /card %}}
+
 {{% card header="[Dapr](./dapr-quickstart)" footer="Learn Project Radius by authoring templates and deploying a Dapr application" %}}
 <div class="text-center">
   <a href="./dapr-quickstart">
@@ -19,7 +27,7 @@ no_list: true
 {{% card header="[CI/CD](./cicd-quickstart)" footer="Learn about adding your Radius apps to your deployment pipelines" %}}
 <div class="text-center">
   <a href="./cicd-quickstart">
-    <img src="github-logo.png" alt="GitHub logo" width="200px">
+    <img src="github-logo.png" alt="GitHub logo" width="150px">
   </a>
 </div>
 {{% /card %}}

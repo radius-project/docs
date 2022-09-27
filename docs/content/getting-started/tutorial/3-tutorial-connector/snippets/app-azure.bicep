@@ -75,7 +75,7 @@ resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = 
 //DATABASE CONNECTOR
 
 //MONGOMODULE
-module mongo 'mongo-azurecosmosdb.bicep' = {
+module mongo 'azure-cosmosdb.bicep' = {
   name: 'mongo-module'
   params: {
     location: location
