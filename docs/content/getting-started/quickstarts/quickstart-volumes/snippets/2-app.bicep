@@ -22,7 +22,7 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
         tmp: {
           kind: 'ephemeral'
           managedStore: 'memory'
-          mountPath: '/tmp'
+          mountPath: '/tmpdir'
         }
       }
     }
