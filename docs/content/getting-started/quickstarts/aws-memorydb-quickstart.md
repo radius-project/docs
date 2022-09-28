@@ -51,7 +51,7 @@ Create the environment that you will be deploying your AWS resources to.
 
 {{< rad file="snippets/aws-memorydb.bicep" embed=true marker="//SAMPLE" >}}
 
-Here note that the bicep name and the clusterName specified in the bicep file should match. We are currently adding support to model and deploy other AWS resources. Stay tuned for more updates!
+Note that the resource `name` and the `clusterName` are required to match.
 
 ## Step 4: Deploy the bicep file
 
