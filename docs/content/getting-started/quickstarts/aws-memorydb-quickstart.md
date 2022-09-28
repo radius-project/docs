@@ -53,7 +53,7 @@ Create the environment that you will be deploying your AWS resources to.
 
 Note that the resource `name` and the `clusterName` are required to match.
 
-## Step 4: Deploy the bicep file
+## Step 4: Deploy the Bicep file
 
 Deploy the Bicep file created in step 3 by the running [`rad deploy`]({{< ref rad_deploy >}}):
 
