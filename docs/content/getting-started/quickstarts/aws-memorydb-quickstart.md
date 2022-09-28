@@ -1,61 +1,62 @@
 ---
 type: docs
-title: "Quickstart: Deploy MemoryDB for Redis cluster to AWS"
-linkTitle: "Deploy AWS MemoryDB for Redis"
-description: "Learn about using Radius to deploy MemoryDB for Redis cluster to AWS" 
+title: "Quickstart: Deploy AWS resources via Radius"
+linkTitle: "Deploy AWS resources"
+description: "Learn about how to setup an AWS cloud provider and deploy an AWS MemoryDB for Redis via Radius"
 weight: 500
 ---
 
-This quickstart will walk you through the process of using Radius to deploy a MemoryDB for Redis cluster to AWS.
+This quickstart will teach you
+1. How to create a Radius environment with an AWS cloud provider 
+1. How to model an AWS resource in bicep
+1. How to deploy and view the status of the AWS resource
 
 ## Prerequisites
 
-- AWS account
-- AWS CLI
-- Kubernetes cluster (AKS, EKS, GKE, etc.)
-
-## Step 1: Create AWS Access Key
-
-First, [create an AWS access key](https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key/) and copy the AWS Access Key ID and the AWS Secret Access Key to a secure location for use later. You could also use a pre-existing Access Key if you have already created one.
+- Make sure you have an [AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/0) and an [IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html')
+    - [Create an IAM AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) and copy the AWS Access Key ID and the AWS Secret Access Key to a secure location for use later. You could also use a pre-existing Access Key if you have already created one.
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+- Next, make sure you have a [supported Kubernetes cluster]({{< ref kubernetes >}}) deployed and setup with a kubectl context
 
 
-## Step 2: Create an environment configured with the AWS cloud provider
+## Step 1: Create a Radius environment with the AWS cloud provider
 
-Next, you will create the environment that you will be deploying your applications into.
+Create the environment that you will be deploying your AWS resources to.
 
-1. Download your kubectl context:
+1. You can view the current context for kubectl by running:
 
-   {{< tabs AKS >}}
-
-   {{% codetab %}}
-   Replace subscriptionName, resourceGroupName, and clusterName with your values:
    ```bash
-   az aks get-credentials --subscription subscriptionName --resource-group resourceGroupName --name aksName
+   kubectl config current-context
    ```
-   {{% /codetab %}}
+   {{% alert color="success" %}} Visit the [Kubernetes platform docs]({{< ref kubernetes >}}) for a list of supported clusters and specific cluster requirements.
+   {{% /alert %}}
 
-   {{< /tabs >}}
+1. Use the [`rad env init kubernetes` command]({{< ref rad_env_init_Kubernetes >}}) to initialize a new environment into your current kubectl context:
 
-2. Install the Radius runtime and create a new environment:
-
-    ```bash
+   ```bash
    rad env init kubernetes -i
    ```
 
-    Select the option to configure the AWS cloud provider, providing a valid AWS region and the values obtained in Step 1 for IAM Access Key ID and IAM Secret Access Keys.
+   Follow the prompts to install the [control plane services]({{< ref architecture >}}), creates an [environment resource]({{< ref environments >}}), and creates a [local workspace]({{< ref workspaces >}}). You will be asked for:
 
+   - **Namespace** - When an application is deployed, this is the namespace where your containers and other Kubernetes resources will be run. By default, this will be in the `default` namespace.
+   {{% alert title="💡 About namespaces" color="success" %}} When you initialize a Radius Kubernetes environment, Radius installs the control plane resources within    the `radius-system` namespace in your cluster, separate from your applications. The namespace specified in this step will be used for your application deployments.
+   {{% /alert %}}
+   -  **Add Azure provider** - Enter 'n'
+   -  **Add AWS provider** - Enter 'y'and follow the instructions. Provide a valid AWS region and the values obtained for IAM Access Key ID and IAM Secret Access Keys.
+   - **Environment name** - The name of the environment to create. You can specify any name with lowercase letters, such as `myAWSenv`.
 
 ## Step 3: Create a bicep file with MemoryDB for Redis
 
 {{< rad file="snippets/aws-memorydb.bicep" embed=true marker="//SAMPLE" >}}
 
-Here note that the bicep name and the clusterName specified in the bicep file should match.
+Here note that the bicep name and the clusterName specified in the bicep file should match. We are currently adding support to model and deploy other AWS resources. Stay tuned for more updates!
 
-## Step4: Deploy the bicep file
+## Step 4: Deploy the bicep file
 
 Deploy the bicep file created in step 3 by the running the command below.
 
-```
+```bash
 rad deploy .snippets/aws-memorydb.bicep
 ```
 
@@ -63,10 +64,7 @@ rad deploy .snippets/aws-memorydb.bicep
 
 Use the AWS CLI command below to verify that the cluster is deployed.
 
-```
+``` bash
 aws memorydb describe-clusters
 ```
-
 Alternatively, you could also use the [AWS Management Console](https://aws.amazon.com/console/) to verify the deployment of the cluster.
-
-Done!
