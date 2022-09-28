@@ -55,7 +55,7 @@ Note that the resource `name` and the `clusterName` are required to match.
 
 ## Step 4: Deploy the bicep file
 
-Deploy the bicep file created in step 3 by the running the command below.
+Deploy the Bicep file created in step 3 by the running [`rad deploy`]({{< ref rad_deploy >}}):
 
 ```bash
 rad deploy .snippets/aws-memorydb.bicep
