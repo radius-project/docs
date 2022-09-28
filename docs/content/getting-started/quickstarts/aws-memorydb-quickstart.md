@@ -63,7 +63,7 @@ rad deploy .snippets/aws-memorydb.bicep
 
 ## Step 5: Verify that the MemoryDB for Redis cluster has been created.
 
-Use the AWS CLI command below to verify that the cluster is deployed.
+Use the AWS CLI to verify that the cluster is deployed:
 
 ``` bash
 aws memorydb describe-clusters
