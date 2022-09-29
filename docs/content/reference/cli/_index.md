@@ -19,6 +19,7 @@ Available Commands:
   debug-logs  Captures information about the current Radius Workspace for debugging and diagnostics. Creates a ZIP file of logs in the current directory. WARNING Please inspect all logs before sending feedback to confirm no private information is included.
   deploy      Deploy a RAD application
   env         Manage environments
+  group       Manage resource groups
   help        Help about any command
   install     Installs radius for a given platform
   resource    Manage resources
