@@ -43,7 +43,7 @@ If you have created an environment without an Azure cloud provider, or if you ar
 
 The file `azure-cosmosdb.bicep` contains the definition to deploy the Azure CosmsoDB:
 
-{{< rad file="snippets/mongo-azurecosmosdb.bicep" embed=true replace-key-cosmos="//COSMOS" replace-value-cosmos="resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2021-04-15' = {...}" >}}
+{{< rad file="snippets/azure-cosmosdb.bicep" embed=true replace-key-cosmos="//COSMOS" replace-value-cosmos="resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2021-04-15' = {...}" >}}
 
 ## Swap the module
 
@@ -56,6 +56,14 @@ Replace the existing Bicep module in `app.bicep` to reference the Azure CosmosDB
 Lastly, update the connector definition to use a resource reference instead of manually defining the connection string by replacing `secrets: {...}` with `resource: mongo.outputs.cosmosDatabaseId`:
 
 {{< rad file="snippets/app-azure.bicep" embed=true marker="//DATABASE CONNECTOR">}}
+
+## Add the location parameter
+
+Next, add the following line to the top of your Bicep file:
+
+```sh
+param location string = resourceGroup().location
+```
 
 ## Deploy the application with Azure database
 
