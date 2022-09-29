@@ -79,7 +79,7 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
    ```
 1. Install the Radius Helm chart with the azure provider values set:
    ```bash
-   helm upgrade radius radius/radius --install --create-namespace --namespace radius-system --version 0.12.0 --wait --timeout 15m0s --set rp.provider.azure.podidentity=radius --set rp.provider.azure.subscriptionId=${MY_SUBSCIRPTION_ID} --set rp.provider.azure.resourceGroup=${MY_RESOURCE_GROUP}
+   helm upgrade radius radius/radius --install --create-namespace --namespace radius-system --version <VERSION> --wait --timeout 15m0s --set rp.provider.azure.podidentity=radius --set rp.provider.azure.subscriptionId=${MY_SUBSCIRPTION_ID} --set rp.provider.azure.resourceGroup=${MY_RESOURCE_GROUP}
    ```
 1. Create a new environment:
    ```bash
