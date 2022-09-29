@@ -1,5 +1,5 @@
 import kubernetes as kubernetes {
-  kubeConfig: '*****'
+  kubeConfig: ''
   namespace: 'default'
 }
 import radius as radius
@@ -10,7 +10,7 @@ resource secret 'core/Secret@v1' = {
   metadata: {
     name: 'mysecret'
   }
-  data: {
+  stringData: {
     key: 'value'
   }
 }
@@ -29,9 +29,9 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
   properties: {
     application: app.id
     container: {
-      image: 'myimage'
+      image: 'nginx:latest'
       env: {
-        SECRET: secret.data['key']
+        SECRET: base64ToString(secret.data.key)
       }
     }
   }
