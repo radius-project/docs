@@ -148,14 +148,14 @@ Now you are ready to deploy the application for the first time:
    http-route  applications.core/httproutes
    frontend    applications.core/containers
    ```
+   
 1. Get the public endpoint address for the gateway:
 
    A public endpoint will also be available to your application from the [Gateway]({{< ref gateway >}}) resource. Use [`rad app status`]({{< ref rad_application_status >}}) to get the endpoint:
    ```bash
    rad app status -a webapp
    ```
-
-3. To test your application, navigate to the public endpoint:
+1. To test your application, navigate to the public endpoint:
 
    <img src="todoapp.png" width="400" alt="screenshot of the todo application">
 
