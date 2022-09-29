@@ -58,4 +58,6 @@ A container can connect to the Redis connector without any configuration or know
 
 ## Connector categories
 
-Check out the Radius connector library to begin authoring portable applications:
+Check out the Radius connector resource schema docs to learn how to leverage connectors in your application:
+
+{{< button text="Connector resources" page="connector-schema" >}}

@@ -30,7 +30,7 @@ This resource will automatically create and deploy the Dapr component spec for t
 | application | n | The ID of the application resource this resource belongs to. | `app.id`
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
 | kind | y | The kind of the underlying pub/sub resource. See [Available Dapr components](#available-dapr-components) for more information. | `pubsub.azure.servicebus`
-| resource | n | The ID of the mesage broker, if a non-generic `kind` is used. | `namespace::topic.id`
+| resource | n | The ID of the message broker resource, if a non-generic `kind` is used. For Azure Service Bus this is the namespace ID. | `namespace.id`
 | type | n |The Dapr component type. Used when kind is `generic`. | `pubsub.kafka` |
 | metadata | n | Metadata for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-pubsub/) | `brokers: kafkaRoute.properties.url` |
 | version | n | The version of the Dapr component. See [Dapr components](https://docs.dapr.io/reference/components-reference/supported-pubsub/) for available versions. | `v1` |
@@ -47,7 +47,7 @@ The following resources can act as a `dapr.io.PubSubTopic` kinds:
 
 ### Azure Service Bus Topic
 
-An Azure Service Bus Topic can be used as a Dapr Pub/Sub message broker. Simply provide the topic ID to the Dapr Pub/Sub resources, and the Dapr component spec will automatically be generated and deployed:
+An Azure Service Bus Topic can be used as a Dapr Pub/Sub message broker. Simply provide the namespace ID to the Dapr Pub/Sub resources, and the Dapr component spec will automatically be generated and deployed:
 
 {{< rad file="snippets/dapr-pubsub-servicebus.bicep" embed=true marker="//SAMPLE" >}}
 
