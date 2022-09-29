@@ -45,7 +45,7 @@ Create the environment that you will be deploying your AWS resources to.
    {{% /alert %}}
    -  **Add Azure provider** - Enter 'n'
    -  **Add AWS provider** - Enter 'y'and follow the instructions. Provide a valid AWS region and the values obtained for IAM Access Key ID and IAM Secret Access Keys.
-   - **Environment name** - The name of the environment to create. You can specify any name with lowercase letters, such as `myAWSenv`.
+   - **Environment name** - The name of the environment to create. You can specify any name with lowercase letters, such as `myawsenv`.
 
 ## Step 3: Create a bicep file with MemoryDB for Redis
 
