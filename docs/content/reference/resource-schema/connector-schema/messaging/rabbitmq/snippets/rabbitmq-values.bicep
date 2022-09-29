@@ -12,6 +12,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 
 //SAMPLE
 param rmqUsername string
+@secure()
 param rmqPassword string
 param rmqHost string
 param rmqPort string
