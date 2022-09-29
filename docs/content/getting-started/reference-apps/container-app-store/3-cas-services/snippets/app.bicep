@@ -91,8 +91,8 @@ resource node_app 'Applications.Core/containers@2022-03-15-privatepreview' = {
     container: {
       image: node_service_build.image
       env: {
-        'ORDER_SERVICE_NAME': python_app_route.properties.appId
-        'INVENTORY_SERVICE_NAME': go_app_route.properties.appId
+        ORDER_SERVICE_NAME: python_app_route.properties.appId
+        INVENTORY_SERVICE_NAME: go_app_route.properties.appId
       }
       ports: {
         web: {
