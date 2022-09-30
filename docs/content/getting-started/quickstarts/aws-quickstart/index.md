@@ -70,13 +70,7 @@ aws memorydb describe-clusters
 ```
 Alternatively, you could also use the [AWS Management Console](https://aws.amazon.com/console/) to verify the deployment of the cluster.
 
-
-## Step 6: Consume the MemoryDB cluster in a Radius application
-
-You can create a connection to the MemoryDB for Redis cluster to use it in a Radius application. For example:-
-{{< rad file="snippets/aws-memorydb-app.bicep" embed=true marker="//SAMPLE" >}}
-
-## Step 7: Cleanup
+## Step 6: Cleanup
 
 Delete the MemoryDB for Redis cluster that we deployed by running the command:
 ```bash
