@@ -32,7 +32,7 @@ no_list: true
 </div>
 {{% /card %}}
 
-{{% card header="[Deploy AWS resources](./aws-memorydb-quickstart)" footer="Learn about using Radius to deploy MemoryDB for Redis to AWS" %}}
+{{% card header="[Deploy AWS resources](./cicd-quickstart)" footer="Learn about using Radius to deploy MemoryDB for Redis to AWS" %}}
 <div class="text-center">
   <a href="./aws-memorydb-quickstart">
     <img src="AWS-logo.png" alt="AWS logo" width="200px">

@@ -55,7 +55,7 @@ Note that the resource `name` and the `clusterName` are required to match.
 
 ## Step 4: Deploy the Bicep file
 
-Deploy the Bicep file created in step 3 by the running [`rad deploy`]({{< ref rad_deploy >}}):
+Deploy the Bicep file created in step 3 by running [`rad deploy`]({{< ref rad_deploy >}}):
 
 ```bash
 rad deploy .snippets/aws-memorydb.bicep
@@ -69,3 +69,16 @@ Use the AWS CLI to verify that the cluster is deployed:
 aws memorydb describe-clusters
 ```
 Alternatively, you could also use the [AWS Management Console](https://aws.amazon.com/console/) to verify the deployment of the cluster.
+
+
+## Step 6: Consume the MemoryDB cluster in a Radius application
+
+You can create a connection to the MemoryDB for Redis cluster to use it in a Radius application. For example:-
+{{< rad file="snippets/aws-memorydb-app.bicep" embed=true marker="//SAMPLE" >}}
+
+## Step 7: Cleanup
+
+Delete the MemoryDB for Redis cluster that we deployed by running the command:
+```bash
+aws memorydb delete-cluster --cluster-name <your-cluster-name>
+```
