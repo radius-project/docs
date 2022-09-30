@@ -1,3 +1,5 @@
+import aws as aws
+
 resource testResource 'AWS.MemoryDB/Cluster@default' = {
   name: 'my-test-cluster'
     properties: {
