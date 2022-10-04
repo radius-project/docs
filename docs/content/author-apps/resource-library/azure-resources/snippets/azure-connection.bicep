@@ -1,6 +1,6 @@
 import radius as radius
 
-param environment string
+param radEnvironment string
 param location string = resourceGroup().location
 
 resource cache 'Microsoft.Cache/Redis@2019-07-01' = {
@@ -19,7 +19,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
   location: 'global'
   properties: {
-    environment: environment
+    environment: radEnvironment
   }
 }
 

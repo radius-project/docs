@@ -1,6 +1,6 @@
 import radius as radius
 
-param environment string
+param radEnvironment string
 
 //SNIPPET
 // Infrastructure team provides database to the application team
@@ -12,7 +12,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   location: 'global'
   //PROPERTIES
   properties: {
-    environment: environment
+    environment: radEnvironment
   }
   //PROPERTIES
 }

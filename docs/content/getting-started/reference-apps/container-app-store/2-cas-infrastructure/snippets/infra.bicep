@@ -1,7 +1,7 @@
 import radius as radius
 
 param location string = resourceGroup().location
-param environment string
+param radEnvironment string
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-06-01' = {
   name: 'radcas${uniqueString(resourceGroup().id)}'
@@ -24,7 +24,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'store'
   location: 'global'
   properties: {
-    environment: environment
+    environment: radEnvironment
   }
 }
 
@@ -32,7 +32,7 @@ resource stateStore 'Applications.Connector/daprStateStores@2022-03-15-privatepr
   name: 'statestore'
   location: 'global'
   properties: {
-    environment: environment
+    environment: radEnvironment
     application: app.id
     kind: 'state.azure.tablestorage'
     resource: storageAccount::tableServices::table.id

@@ -1,6 +1,6 @@
 import radius as radius
 
-param environment string
+param radEnvironment string
 
 param mongoDbId string
 param azureStorage string
@@ -9,7 +9,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
   location: 'global'
   properties: {
-    environment: environment
+    environment: radEnvironment
   }
 }
 
@@ -88,7 +88,7 @@ resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = 
   name: 'database'
   location: 'global'
   properties: {
-    environment: environment
+    environment: radEnvironment
     application: app.id
     resource: mongoDbId
   }

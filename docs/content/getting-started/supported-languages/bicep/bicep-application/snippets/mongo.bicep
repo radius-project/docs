@@ -1,6 +1,6 @@
 import radius as radius
 
-param environment string
+param radEnvironment string
 
 //COSMOS
 resource cosmos 'Microsoft.DocumentDB/databaseAccounts@2021-04-15' existing = {
@@ -16,7 +16,7 @@ resource myapp 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'my-application'
   location: 'global'
   properties: {
-    environment: environment
+    environment: radEnvironment
   }
 }
 
@@ -25,7 +25,7 @@ resource mongo 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview'
   location: 'global'
   properties: {
     application: myapp.id
-    environment: environment
+    environment: radEnvironment
     resource: cosmos::db.id
   }
 }

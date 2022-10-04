@@ -57,7 +57,7 @@ The `environment` string parameter is automatically injected into your Bicep tem
 To access the auto-injected value, specify an `environment` string parameter in your Bicep file:
 
 ```bicep
-param environment string
+param radEnvironment string
 ```
 
 ## Resource categories

@@ -1,13 +1,13 @@
 import radius as radius
 
 param location string = resourceGroup().location
-param environment string
+param radEnvironment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'dapr-pubsub'
   location: 'global'
   properties: {
-    environment: environment
+    environment: radEnvironment
   }
 }
 
@@ -16,7 +16,7 @@ resource pubsub 'Applications.Connector/daprPubSubBrokers@2022-03-15-privateprev
   name: 'pubsub'
   location: 'global'
   properties: {
-    environment: environment
+    environment: radEnvironment
     application: app.id
     kind: 'pubsub.azure.servicebus'
     resource: namespace.id
