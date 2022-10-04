@@ -47,7 +47,7 @@ Let's dig into the `app.bicep` to understand the input parameters and `Applicati
 
 {{< rad file="snippets/app.bicep" embed=true marker="//APPBASE" >}}
 
-Within the application resource, the **environment** property specifies the environmentId to deploy the application and other resources into. Since this was initialized in the previous step via the CLI, `rad deploy` will automatically inject the `environment` parameter into the Bicep file during deployment.
+Within the application resource, the **radEnvironment** property specifies the environmentId to deploy the application and other resources into. Since this was initialized in the previous step via the CLI, `rad deploy` will automatically inject the `radEnvironment` parameter into the Bicep file during deployment.
 
 The **location** property defines where to deploy a resource within the targeted platform. For self-hosted Kubernetes environments this value must be set to `'global'`. See [Resource Schema]({{< ref resource-schema >}}) for more info.
 
