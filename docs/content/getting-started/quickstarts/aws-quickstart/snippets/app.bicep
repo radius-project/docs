@@ -17,7 +17,7 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   properties: {
     application: app.id
     container: {
-      image: 'willsmithradius.azurecr.io/radius-tutorial-amd64:latest'
+      image: 'radius.azurecr.io/tutorial/webapp:edge'
       ports: {
         web: {
           containerPort: 3000
