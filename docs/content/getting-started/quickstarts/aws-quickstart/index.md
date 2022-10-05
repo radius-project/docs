@@ -19,10 +19,9 @@ This quickstart will teach you:
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 - A kubecontext pointing to a valid [EKS cluster]({{< ref kubernetes >}})
 
-
 ## Step 1: Create a Radius environment with the AWS cloud provider
 
-Create the environment that you will be deploying your AWS resources to.
+Create a [Radius environment]({{< ref environments >}}) where you will deploy your application.
 
 1. You can view the current context for kubectl by running:
 
@@ -48,19 +47,21 @@ Create the environment that you will be deploying your AWS resources to.
 
 ## Step 3: Create a bicep file with MemoryDB for Redis
 
-This bicep file holds all of the information necessary to deploy a MemoryDB cluster to the same VPC as your EKS cluster. Deploying to the same VPC is the recommended way to access a MemoryDB cluster from your EKS cluster.
+This Bicep file defines a MemoryDB cluster, configuring it in the same VPC as your EKS cluster. Deploying to the same VPC is the recommended way to access a MemoryDB cluster from your EKS cluster.
 
 ### aws-memorydb.bicep
+
 {{< rad file="snippets/aws-memorydb.bicep" embed=true >}}
 
 {{% alert color="success" %}} Make sure to set `eksClusterName` to the name of your EKS cluster.
 {{% /alert %}}
 
-## Step 4: Create a bicep file that uses MemoryDB
+## Step 4: Create an app.bicep that uses the MemoryDB
 
-This bicep file deploys a publicly-accessible webapp which uses the MemoryDB we created in step 3 as a datastore.
+This Bicep file defines a publicly-accessible webapp [container]({{< ref container >}}), which connects to the MemoryDB we created in step 3 and uses is as a datastore.
 
 ### app.bicep
+
 {{< rad file="snippets/app.bicep" embed=true >}}
 
 
@@ -114,3 +115,6 @@ This bicep file deploys a publicly-accessible webapp which uses the MemoryDB we 
    - Add a todo item
    - Mark a todo item as complete
    - Delete a todo item
+   
+## Cleanup
+

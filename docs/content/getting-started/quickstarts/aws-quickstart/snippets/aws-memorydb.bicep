@@ -1,6 +1,6 @@
 import aws as aws
 
-param eksClusterName string = 'your-eks-cluster-name' // Replace this with your EKS cluster name
+param eksClusterName string
 
 resource eksCluster 'AWS.EKS/Cluster@default' existing = {
   name: eksClusterName

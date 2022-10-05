@@ -68,4 +68,7 @@ resource db 'Applications.Connector/redisCaches@2022-03-15-privatepreview' = {
 
 module memoryDB 'aws-memorydb.bicep' = {
   name: 'memorydb-module'
+  params: {
+    eksClusterName: 'YOUR-EKS-CLUSTER-NAME' // Replace this value
+  }
 }
