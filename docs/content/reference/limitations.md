@@ -34,6 +34,22 @@ The Bicep deployment engine does not currently support loops in Bicep. Instead, 
 
 Refer to https://github.com/project-radius/deployment-engine/issues/172 for more information.
 
+### `environment()` Bicep function collides with `param environment string`
+
+We currently use `param environment string` to pass in the Radius environmentId into your Bicep template. This collides with the Bicep `environment()` function.
+
+To access `environment()`, prefix it with `az.`. For example:
+
+```bicep
+import radius as rad
+
+param environment string
+
+var stgSuffixes = az.environment().suffixes.storage
+```
+
+This will be addressed in a future release when we change how the environmentId is passed into the file.
+
 ## Containers
 
 ### Persistent volumes are not supported
