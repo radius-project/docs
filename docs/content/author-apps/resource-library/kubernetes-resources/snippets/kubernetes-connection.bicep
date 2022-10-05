@@ -4,7 +4,7 @@ import kubernetes as kubernetes {
 }
 import radius as radius
 
-param radEnvironment string
+param environmentId string
 
 resource secret 'core/Secret@v1' = {
   metadata: {
@@ -19,7 +19,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
   location: 'global'
   properties: {
-    environment: radEnvironment
+    environment: environmentId
   }
 }
 

@@ -1,6 +1,6 @@
 import radius as radius
 
-param radEnvironment string
+param environmentId string
 param location string = resourceGroup().location
 
 //APPBASE
@@ -8,7 +8,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'webapp'
   location: 'global'
   properties: {
-    environment: radEnvironment
+    environment: environmentId
   }
 }
 //APPBASE

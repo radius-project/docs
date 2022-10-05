@@ -1,6 +1,6 @@
 import radius as radius
 
-param radEnvironment string
+param environmentId string
 
 param azureLocation string = 'westus3'
 
@@ -9,7 +9,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'corerp-resources-mongodb'
   location: 'global'
   properties: {
-    environment: radEnvironment
+    environment: environmentId
   }
 }
 //APPLICATION
@@ -37,7 +37,7 @@ resource dbconnector 'Applications.Connector/mongoDatabases@2022-03-15-privatepr
   name: 'dbconnector'
   location: 'global'
   properties: {
-    environment: radEnvironment
+    environment: environmentId
     resource: account::underlyingdb.id
   }
 }

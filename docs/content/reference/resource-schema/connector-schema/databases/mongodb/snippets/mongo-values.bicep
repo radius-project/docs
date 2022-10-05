@@ -1,12 +1,12 @@
 import radius as radius
 
-param radEnvironment string
+param environmentId string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'cosmos-container-usermanaged'
   location: 'global'
   properties: {
-    environment: radEnvironment
+    environment: environmentId
   }
 }
 
@@ -15,7 +15,7 @@ resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = 
   name: 'db'
   location: 'global'
   properties: {
-    environment: radEnvironment
+    environment: environmentId
     application: app.id
     host: 'https://mymongo.cluster.svc.local'
     port: 4242

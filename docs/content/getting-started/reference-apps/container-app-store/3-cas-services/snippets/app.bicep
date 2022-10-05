@@ -1,6 +1,6 @@
 import radius as radius
 
-param radEnvironment string
+param environmentId string
 
 //PARAMS
 param go_service_build object
@@ -11,7 +11,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'store'
   location: 'global'
   properties: {
-    environment: radEnvironment
+    environment: environmentId
   }
 }
 
@@ -67,7 +67,7 @@ resource python_app_route 'Applications.Connector/daprInvokeHttpRoutes@2022-03-1
   name: 'python-app'
   location: 'global'
   properties: {
-    environment: radEnvironment
+    environment: environmentId
     application: app.id
     appId: 'python-app'
   }
@@ -76,7 +76,7 @@ resource go_app_route 'Applications.Connector/daprInvokeHttpRoutes@2022-03-15-pr
   name: 'go-app'
   location: 'global'
   properties: {
-    environment: radEnvironment
+    environment: environmentId
     application: app.id
     appId: 'go-app'
   }

@@ -5,7 +5,7 @@ import kubernetes as kubernetes {
 }
 import radius as radius
 
-param radEnvironment string
+param environmentId string
 
 resource redisPod 'core/Pod@v1' = {
   metadata: {
@@ -35,7 +35,7 @@ resource redis 'Applications.Connector/redisCaches@2022-03-15-privatepreview' = 
   name: 'myredis-connector'
   location: 'global'
   properties: {
-    environment: radEnvironment
+    environment: environmentId
     application: app.id
     host: redisPod.spec.hostname
     port: redisPod.spec.containers[0].ports[0].containerPort

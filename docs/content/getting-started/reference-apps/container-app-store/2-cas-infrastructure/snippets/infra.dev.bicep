@@ -1,12 +1,12 @@
 import radius as radius
 
-param radEnvironment string
+param environmentId string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'store'
   location: 'global'
   properties: {
-    environment: radEnvironment
+    environment: environmentId
   }
 }
 
@@ -40,7 +40,7 @@ resource stateStore 'Applications.Connector/daprStateStores@2022-03-15-privatepr
   name: 'statestore'
   location: 'global'
   properties: {
-    environment: radEnvironment
+    environment: environmentId
     application: app.id
     kind: 'generic'
     type: 'state.redis'

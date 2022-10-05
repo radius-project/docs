@@ -1,12 +1,12 @@
 import radius as radius
 
-param radEnvironment string
+param environmentId string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
   location: 'global'
   properties: {
-    environment: radEnvironment
+    environment: environmentId
   }
 }
 
@@ -16,7 +16,7 @@ resource twilio 'Applications.Connector/extenders@2022-03-15-privatepreview' = {
   location: 'global'
   properties: {
     application: app.id
-    environment: radEnvironment
+    environment: environmentId
     fromNumber: '222-222-2222'
     secrets: {
       accountSid: 'sid'
