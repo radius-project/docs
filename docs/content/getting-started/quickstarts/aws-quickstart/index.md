@@ -49,9 +49,16 @@ Create a [Radius environment]({{< ref environments >}}) where you will deploy yo
 
 This Bicep file defines a MemoryDB cluster, configuring it in the same VPC as your EKS cluster. Deploying to the same VPC is the recommended way to access a MemoryDB cluster from your EKS cluster.
 
+{{< tabs "New MemoryDB Resource" "Existing MemoryDB Resource" >}}
+
+{{% codetab %}}
 ### aws-memorydb.bicep
 
 {{< rad file="snippets/aws-memorydb.bicep" embed=true >}}
+
+{{% /codetab %}}
+
+{{% codetab %}}
 
 Alternatively, you could specify an existing MemoryDB resource to use:
 
@@ -59,49 +66,105 @@ Alternatively, you could specify an existing MemoryDB resource to use:
 
 {{< rad file="snippets/aws-memorydb-existing.bicep" embed=true >}}
 
+{{% /codetab %}}
+
+{{< /tabs >}}
 
 ## Step 4: Create an app.bicep that uses the MemoryDB
 
-This Bicep file defines a webapp [container]({{< ref container >}}), which connects to the MemoryDB we created in step 3 and uses it as a datastore.
+This Bicep file defines a webapp [container]({{< ref container >}}), which connects to the MemoryDB we created in Step 3 and uses it as a datastore.
 
+{{< tabs "New MemoryDB Resource" "Existing MemoryDB Resource" >}}
+
+{{% codetab %}}
 ### app.bicep
 
 {{< rad file="snippets/app.bicep" embed=true >}}
 
-To use an existing MemoryDB resource defined in `aws-memorydb-existing.bicep`, you can swap out the `memoryDB` module above with the following:
-{{< rad file="snippets/existing-memory-db.bicep" embed=true >}}
+{{% /codetab %}}
+
+{{% codetab %}}
+
+### app.bicep
+
+{{< rad file="snippets/app-existing.bicep" embed=true >}}
+
+{{% /codetab %}}
+
+{{< /tabs >}}
+
 
 ## Step 5: Deploy the application
 
 1. Deploy your application to your environment:
 
+   {{< tabs "New MemoryDB Resource" "Existing MemoryDB Resource" >}}
+
+   {{% codetab %}}
+
    ```bash
    rad deploy ./app.bicep --parameters eksClusterName=YOUR_EKS_CLUSTER_NAME
    ```
-   {{% alert color="success" %}}
+
    Make sure to replace YOUR_EKS_CLUSTER_NAME with your EKS cluster name.
-   {{% /alert %}}
+
 
    This will deploy the application into your environment and launch the container resource for the frontend website. You should see the following resources deployed at the end of `rad deploy`:
 
    ```
-   Deployment In Progress:
+   Deployment In Progress...
 
-   Completed            webapp          Applications.Core/applications
    Completed            memorydb-module Microsoft.Resources/deployments
-   Completed            frontend        Applications.Core/containers
+   Completed            webapp          Applications.Core/applications
+   Completed            demo-memorydb-subnet-group AWS.MemoryDB/SubnetGroup
+   Completed            demo-memorydb-cluster AWS.MemoryDB/Cluster
+   Completed            <YOUR_EKS_CLUSTER_NAME> AWS.EKS/Cluster     
+   Completed            demo-memorydb-cluster AWS.MemoryDB/Cluster
    Completed            db              Applications.Connector/redisCaches
+   Completed            frontend        Applications.Core/containers
 
-   Deployment Complete 
+   Deployment Complete
 
    Resources:
-      your-eks-cluster-name AWS.EKS/Cluster     
+      <YOUR_EKS_CLUSTER_NAME> AWS.EKS/Cluster     
       demo-memorydb-cluster AWS.MemoryDB/Cluster
       demo-memorydb-subnet-group AWS.MemoryDB/SubnetGroup
       db              Applications.Connector/redisCaches
       webapp          Applications.Core/applications
       frontend        Applications.Core/containers
    ```
+
+   {{% /codetab %}}
+
+   {{% codetab %}}
+
+   ```bash
+   rad deploy ./app.bicep
+   ```
+
+   This will deploy the application into your environment and launch the container resource for the frontend website. You should see the following resources deployed at the end of `rad deploy`:
+
+   ```
+   Deployment In Progress...
+
+   Completed            memorydb-module Microsoft.Resources/deployments
+   Completed            webapp          Applications.Core/applications
+   Completed            demo-memorydb-cluster AWS.MemoryDB/Cluster
+   Completed            db              Applications.Connector/redisCaches
+   Completed            frontend        Applications.Core/containers
+
+   Deployment Complete
+
+   Resources:
+      demo-memorydb-cluster AWS.MemoryDB/Cluster
+      db              Applications.Connector/redisCaches
+      webapp          Applications.Core/applications
+      frontend        Applications.Core/containers
+   ```
+
+   {{% /codetab %}}
+
+   {{< /tabs >}}
 
 1. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose >}}):
 

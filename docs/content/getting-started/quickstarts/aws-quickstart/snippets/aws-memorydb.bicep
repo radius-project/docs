@@ -6,7 +6,7 @@ resource eksCluster 'AWS.EKS/Cluster@default' existing = {
   name: eksClusterName
 }
 
-param subnetGroupName string = 'demo-memorydb-subnet-group-two'
+param subnetGroupName string = 'demo-memorydb-subnet-group'
 resource subnetGroup 'AWS.MemoryDB/SubnetGroup@default' = {
   name: subnetGroupName
   properties: {
@@ -15,7 +15,7 @@ resource subnetGroup 'AWS.MemoryDB/SubnetGroup@default' = {
   }
 }
 
-param memoryDBClusterName string = 'demo-memorydb-cluster-two'
+param memoryDBClusterName string = 'demo-memorydb-cluster'
 resource memoryDBCluster 'AWS.MemoryDB/Cluster@default' = {
   name: memoryDBClusterName
   properties: {
