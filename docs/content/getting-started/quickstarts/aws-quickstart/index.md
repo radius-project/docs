@@ -8,9 +8,9 @@ slug: "aws"
 ---
 
 This quickstart will teach you:
-* How to create a Radius environment with an AWS cloud provider 
+* How to create a Radius environment with an AWS cloud provider
 * How to model an AWS resource in bicep
-* How to deploy and view the status of an AWS resource
+* How to use an AWS resource as part of your Radius application
 
 ## Prerequisites
 
@@ -53,35 +53,42 @@ This Bicep file defines a MemoryDB cluster, configuring it in the same VPC as yo
 
 {{< rad file="snippets/aws-memorydb.bicep" embed=true >}}
 
-{{% alert color="success" %}} Make sure to set `eksClusterName` to the name of your EKS cluster.
-{{% /alert %}}
+Alternatively, you could specify an existing MemoryDB resource to use:
+
+### aws-memorydb-existing.bicep
+
+{{< rad file="snippets/aws-memorydb-existing.bicep" embed=true >}}
+
 
 ## Step 4: Create an app.bicep that uses the MemoryDB
 
-This Bicep file defines a publicly-accessible webapp [container]({{< ref container >}}), which connects to the MemoryDB we created in step 3 and uses is as a datastore.
+This Bicep file defines a webapp [container]({{< ref container >}}), which connects to the MemoryDB we created in step 3 and uses it as a datastore.
 
 ### app.bicep
 
 {{< rad file="snippets/app.bicep" embed=true >}}
 
+To use an existing MemoryDB resource defined in `aws-memorydb-existing.bicep`, you can swap out the `memoryDB` module above with the following:
+{{< rad file="snippets/existing-memory-db.bicep" embed=true >}}
 
 ## Step 5: Deploy the application
 
-1. Deploy to your Radius environment via the rad CLI:
+1. Deploy your application to your environment:
 
-   ```sh
-   rad deploy ./app.bicep
+   ```bash
+   rad deploy ./app.bicep --parameters eksClusterName=YOUR_EKS_CLUSTER_NAME
    ```
+   {{% alert color="success" %}}
+   Make sure to replace YOUR_EKS_CLUSTER_NAME with your EKS cluster name.
+   {{% /alert %}}
 
    This will deploy the application into your environment and launch the container resource for the frontend website. You should see the following resources deployed at the end of `rad deploy`:
 
    ```
    Deployment In Progress:
 
-   Completed            http-route      Applications.Core/httpRoutes
    Completed            webapp          Applications.Core/applications
    Completed            memorydb-module Microsoft.Resources/deployments
-   Completed            public          Applications.Core/gateways
    Completed            frontend        Applications.Core/containers
    Completed            db              Applications.Connector/redisCaches
 
@@ -94,27 +101,31 @@ This Bicep file defines a publicly-accessible webapp [container]({{< ref contain
       db              Applications.Connector/redisCaches
       webapp          Applications.Core/applications
       frontend        Applications.Core/containers
-      public          Applications.Core/gateways
-      http-route      Applications.Core/httpRoutes
-
-   Public Endpoints:
-      public          Applications.Core/gateways <PUBLIC_ENDPOINT>
    ```
 
-1. Get the public endpoint address for the gateway:
+1. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose >}}):
 
-   A public endpoint will also be available to your application from the [Gateway]({{< ref gateway >}}) resource. You can also use [`rad app status`]({{< ref rad_application_status >}}) to get the endpoint:
-   ```bash
-   rad app status -a webapp
-   ```
+    ```bash
+    rad resource expose containers frontend -a webapp --port 3000
+    ```
+1. Visit [localhost:3000](http://localhost:3000) in your browser. You should see a page like:
 
-1. To test your application, navigate to the public endpoint.
+   <img src="todoapp-withdb.png" width="400" alt="screenshot of the todo application with an AWS MemoryDB database">
+
+   If your page matches, then it means that the container is able to communicate with the AWS MemoryDB database.
 
    You can play around with the application's features:
 
    - Add a todo item
    - Mark a todo item as complete
    - Delete a todo item
-   
+
 ## Cleanup
 
+{{% alert title="Delete environment" color="warning" %}}
+If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to delete all Radius resources running on the EKS Cluster.
+{{% /alert %}}
+
+{{% alert title="Cleanup AWS Resources" color="warning" %}}
+AWS resources are not deleted when deleting a Radius environment, so to prevent additional charges, make sure to delete all resources created in this quickstart. This includes the SubnetGroup and MemoryDB created in Step 3. You can delete these resources in the AWS Console or via the AWS CLI.
+{{% /alert %}}

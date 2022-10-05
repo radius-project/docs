@@ -1,5 +1,7 @@
 import radius as radius
 
+param eksClusterName string
+
 param environment string
 param location string = 'global'
 
@@ -18,40 +20,12 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
     application: app.id
     container: {
       image: 'radius.azurecr.io/tutorial/webapp:edge'
-      ports: {
-        web: {
-          containerPort: 3000
-          provides: frontendRoute.id
-        }
-      }
     }
     connections: {
       redis: {
         source: db.id
       }
     }
-  }
-}
-
-resource frontendRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
-  name: 'http-route'
-  location: location
-  properties: {
-    application: app.id
-  }
-}
-
-resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
-  name: 'public'
-  location: location
-  properties: {
-    application: app.id
-    routes: [
-      {
-        path: '/'
-        destination: frontendRoute.id
-      }
-    ]
   }
 }
 
@@ -69,6 +43,6 @@ resource db 'Applications.Connector/redisCaches@2022-03-15-privatepreview' = {
 module memoryDB 'aws-memorydb.bicep' = {
   name: 'memorydb-module'
   params: {
-    eksClusterName: 'YOUR-EKS-CLUSTER-NAME' // Replace this value
+    eksClusterName: eksClusterName
   }
 }
