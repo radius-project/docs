@@ -3,7 +3,7 @@ type: docs
 title: "Radius environments"
 linkTitle: "Environments"
 description: "Learn about Radius environments and how to interact with them"
-weight: 20
+weight: 30
 ---
 
 Radius environments are prepared "landing zones" for Radius applications. Applications deployed to an environment will inherit the container runtime, configuration, and other settings from the environment. Stay tuned for additional environment capabilities coming soon.
