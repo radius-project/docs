@@ -108,7 +108,7 @@ This Bicep file defines a webapp [container]({{< ref container >}}), which conne
 
 1. Deploy your application to your environment:
 
-   {{< tabs "New MemoryDB Resource" "Existing MemoryDB Resource" >}}
+   {{< tabs "New MemoryDB Resource" "Custom Subnet IDs" "Existing MemoryDB Resource" >}}
 
    {{% codetab %}}
 
@@ -118,21 +118,48 @@ This Bicep file defines a webapp [container]({{< ref container >}}), which conne
 
    Make sure to replace `YOUR_EKS_CLUSTER_NAME` with your EKS cluster name.
 
-   You could also specify the Subnet IDs to use for the MemoryDB cluster by passing in the `subnetIds` parameter. For example:
+   This will deploy the application into your environment and launch the container resource for the frontend website. This operation may take some time, since it is deploying a MemoryDB resource to AWS. You should see the following resources deployed at the end of `rad deploy`:
 
-   ```bash
-   rad deploy ./app.bicep --subnetIds=subnet-1234567890abcdef0,subnet-1234567890abcdef1 --parameters eksClusterName=YOUR_EKS_CLUSTER_NAME
+   ```
+   Deployment In Progress...
+
+   Completed            memorydb-module Microsoft.Resources/deployments
+   Completed            webapp          Applications.Core/applications
+   Completed            demo-memorydb-subnet-group AWS.MemoryDB/SubnetGroup
+   Completed            demo-memorydb-cluster AWS.MemoryDB/Cluster
+   Completed            <YOUR_EKS_CLUSTER_NAME> AWS.EKS/Cluster     
+   Completed            demo-memorydb-cluster AWS.MemoryDB/Cluster
+   Completed            db              Applications.Connector/redisCaches
+   Completed            frontend        Applications.Core/containers
+
+   Deployment Complete
+
+   Resources:
+      <YOUR_EKS_CLUSTER_NAME> AWS.EKS/Cluster     
+      demo-memorydb-cluster AWS.MemoryDB/Cluster
+      demo-memorydb-subnet-group AWS.MemoryDB/SubnetGroup
+      db              Applications.Connector/redisCaches
+      webapp          Applications.Core/applications
+      frontend        Applications.Core/containers
    ```
 
    {{% /codetab %}}
 
    {{% codetab %}}
 
+   You can specify the Subnet IDs to use for the MemoryDB cluster by passing in the `subnetIds` parameter. For example:
+
    ```bash
+   rad deploy ./app.bicep --parameters @parameters.json
    ```
 
+   where `parameters.json` contains:
 
-   This will deploy the application into your environment and launch the container resource for the frontend website. You should see the following resources deployed at the end of `rad deploy`:
+   {{< rad file="snippets/parameters.json" embed=true >}}
+
+   Make sure to replace `YOUR_EKS_CLUSTER_NAME` with your EKS cluster name and the `subnetIds` array to your Subnet IDs.
+
+   This will deploy the application into your environment and launch the container resource for the frontend website. This operation may take some time, since it is deploying a MemoryDB resource to AWS. You should see the following resources deployed at the end of `rad deploy`:
 
    ```
    Deployment In Progress...

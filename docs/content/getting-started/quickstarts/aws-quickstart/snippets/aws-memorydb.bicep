@@ -1,7 +1,7 @@
 import aws as aws
 
 param eksClusterName string
-param subnetIds array = []
+param subnetIds array
 
 resource eksCluster 'AWS.EKS/Cluster@default' existing = {
   name: eksClusterName
