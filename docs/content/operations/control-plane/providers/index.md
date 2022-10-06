@@ -3,7 +3,7 @@ type: docs
 title: "Cloud providers"
 linkTitle: "Cloud providers"
 description: "Deploy across clouds and platforms with Radius cloud providers"
-weight: 40
+weight: 200
 ---
 
 Radius cloud providers allow you to deploy and connect to cloud resources across various cloud platforms. For example, you can use the Radius Azure provider to run your application's services in your Kubernetes cluster, while deploying Azure resources to a specified Azure subcription and resource group.
