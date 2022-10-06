@@ -17,9 +17,19 @@ This quickstart will teach you:
 - Make sure you have an [AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/0) and an [IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html)
     - [Create an IAM AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) and copy the AWS Access Key ID and the AWS Secret Access Key to a secure location for use later. You could also use a pre-existing Access Key if you have already created one.
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-- A kubecontext pointing to a valid [EKS cluster]({{< ref kubernetes >}})
+- [eksctl CLI](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
 
-## Step 1: Create a Radius environment with the AWS cloud provider
+## Step 1: Create an EKS cluster
+
+Create an EKS cluster by using the `eksctl` CLI. This command will create a cluster in the `us-west-2` region, as well as a VPC and the Subnets, Security Groups, and IAM Roles required for the cluster.
+
+```bash
+eksctl create cluster --name my-cluster --region=us-west-2 --zones=us-west-2a,us-west-2b,us-west-2c
+```
+
+> Note: If you are using an existing cluster, you can skip this step. However, make sure that the each of the Subnets in your EKS cluster Subnet Group are within the [list of supported MemoryDB availability zones](https://docs.aws.amazon.com/memorydb/latest/devguide/subnetgroups.html). You could also supply valid Subnet IDs as deployment parameters in Step 5.
+
+## Step 2: Create a Radius environment with the AWS cloud provider
 
 Create a [Radius environment]({{< ref environments >}}) where you will deploy your application.
 
@@ -47,7 +57,7 @@ Create a [Radius environment]({{< ref environments >}}) where you will deploy yo
 
 ## Step 3: Create a bicep file with MemoryDB for Redis
 
-This Bicep file defines a MemoryDB cluster, configuring it in the same VPC as your EKS cluster. Deploying to the same VPC is the recommended way to access a MemoryDB cluster from your EKS cluster.
+This Bicep file defines a MemoryDB cluster, configuring it in the same VPC as your EKS cluster. Deploying to the same VPC is the recommended way to access a MemoryDB cluster from your EKS cluster. It also optionally accepts `subnetIds` as a parameter, which can be supplied to use a different set of Subnet Ids.
 
 {{< tabs "New MemoryDB Resource" "Existing MemoryDB Resource" >}}
 
@@ -106,7 +116,20 @@ This Bicep file defines a webapp [container]({{< ref container >}}), which conne
    rad deploy ./app.bicep --parameters eksClusterName=YOUR_EKS_CLUSTER_NAME
    ```
 
-   Make sure to replace YOUR_EKS_CLUSTER_NAME with your EKS cluster name.
+   Make sure to replace `YOUR_EKS_CLUSTER_NAME` with your EKS cluster name.
+
+   You could also specify the Subnet IDs to use for the MemoryDB cluster by passing in the `subnetIds` parameter. For example:
+
+   ```bash
+   rad deploy ./app.bicep --subnetIds=subnet-1234567890abcdef0,subnet-1234567890abcdef1 --parameters eksClusterName=YOUR_EKS_CLUSTER_NAME
+   ```
+
+   {{% /codetab %}}
+
+   {{% codetab %}}
+
+   ```bash
+   ```
 
 
    This will deploy the application into your environment and launch the container resource for the frontend website. You should see the following resources deployed at the end of `rad deploy`:
