@@ -108,7 +108,7 @@ This Bicep file defines a webapp [container]({{< ref container >}}), which conne
 
 1. Deploy your application to your environment:
 
-   {{< tabs "New MemoryDB Resource" "Custom Subnet IDs" "Existing MemoryDB Resource" >}}
+   {{< tabs "New MemoryDB Resource" "New Memory DB Resource with custom Subnets" "Existing MemoryDB Resource" >}}
 
    {{% codetab %}}
 
@@ -162,6 +162,12 @@ This Bicep file defines a webapp [container]({{< ref container >}}), which conne
       }
    }
    ```
+
+   ```bash
+   rad deploy ./app.bicep --parameters eksClusterName=YOUR_EKS_CLUSTER_NAME
+   ```
+
+   Make sure to replace `YOUR_EKS_CLUSTER_NAME` with your EKS cluster name.
 
    This will deploy the application into your environment and launch the container resource for the frontend website. This operation may take some time, since it is deploying a MemoryDB resource to AWS. You should see the following resources deployed at the end of `rad deploy`:
 
