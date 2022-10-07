@@ -1,7 +1,6 @@
 import aws as aws
 
 param eksClusterName string
-param subnetIds array
 
 resource eksCluster 'AWS.EKS/Cluster@default' existing = {
   name: eksClusterName
@@ -12,7 +11,7 @@ resource subnetGroup 'AWS.MemoryDB/SubnetGroup@default' = {
   name: subnetGroupName
   properties: {
     SubnetGroupName: subnetGroupName
-    SubnetIds: !empty(subnetIds) ? subnetIds : eksCluster.properties.ResourcesVpcConfig.SubnetIds
+    SubnetIds: eksCluster.properties.ResourcesVpcConfig.SubnetIds
   }
 }
 

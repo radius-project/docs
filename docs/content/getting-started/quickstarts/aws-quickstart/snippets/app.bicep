@@ -1,7 +1,6 @@
 import radius as radius
 
 param eksClusterName string
-param subnetIds array = []
 
 param environment string
 param location string = 'global'
@@ -45,6 +44,5 @@ module memoryDB 'aws-memorydb.bicep' = {
   name: 'memorydb-module'
   params: {
     eksClusterName: eksClusterName
-    subnetIds: subnetIds
   }
 }
