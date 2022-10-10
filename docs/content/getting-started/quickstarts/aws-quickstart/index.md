@@ -15,7 +15,7 @@ This quickstart will teach you:
 ## Prerequisites
 
 - Make sure you have an [AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account) and an [IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html)
-    - [Create an IAM AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) and copy the AWS Access Key ID and the AWS Secret Access Key to a secure location for use later. You could also use a pre-existing Access Key if you have already created one.
+    - [Create an IAM AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) and copy the AWS Access Key ID and the AWS Secret Access Key to a secure location for use later. If you have already created an Access Key pair, you can use that instead.
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 - [eksctl CLI](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
 
@@ -27,7 +27,7 @@ Create an EKS cluster by using the `eksctl` CLI. This command will create a clus
 eksctl create cluster --name my-cluster --region=us-west-2 --zones=us-west-2a,us-west-2b,us-west-2c
 ```
 
-> Note: If you are using an existing cluster, you can skip this step. However, make sure that the each of the Subnets in your EKS cluster Subnet Group are within the [list of supported MemoryDB availability zones](https://docs.aws.amazon.com/memorydb/latest/devguide/subnetgroups.html). You could also supply valid Subnet IDs as deployment parameters in Step 5.
+> Note: If you are using an existing cluster, you can skip this step. However, make sure that the each of the Subnets in your EKS cluster Subnet Group are within the [list of supported MemoryDB availability zones](https://docs.aws.amazon.com/memorydb/latest/devguide/subnetgroups.html). If your cluster includes Subnets outside of a supported MemoryDB availability zone, or if using your own custom subnets, supply them as part of the deployment file in Step 5.
 
 ## Step 2: Create a Radius environment with the AWS cloud provider
 
@@ -70,7 +70,7 @@ This Bicep file defines a MemoryDB cluster, configuring it in the same VPC as yo
 
 {{% codetab %}}
 
-Alternatively, you could specify an existing MemoryDB resource to use:
+Alternatively, if you have an existing MemoryDB resource that you would want to use instead:
 
 ### aws-memorydb-existing.bicep
 
