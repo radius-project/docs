@@ -31,4 +31,12 @@ no_list: true
   </a>
 </div>
 {{% /card %}}
+
+{{% card header="[Deploy AWS resources](./aws)" footer="Learn about using Radius to deploy MemoryDB for Redis to AWS" %}}
+<div class="text-center">
+  <a href="./aws">
+    <img src="./aws/AWS-logo.png" alt="AWS logo" width="200px">
+  </a>
+</div>
+{{% /card %}}
 {{< /cardpane >}}
