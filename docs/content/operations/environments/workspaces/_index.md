@@ -14,10 +14,10 @@ Workspaces allow you to manage multiple Radius platforms and environments using 
 
 The following commands let you interact with Radius environments:
 
-{{< tabs init list show delete switch >}}
+{{< tabs create list show delete switch >}}
 
 {{% codetab %}}
-[rad workspace init kubernetes]({{< ref rad_workspace_init_kubernetes >}}) initializes a new Kubernetes workspace:
+[rad workspace init kubernetes]({{< ref rad_workspace_create >}}) creates a new workspace:
 
 ```bash
 rad workspace init kubernetes
@@ -102,9 +102,9 @@ When you have multiple environments initialized for different purposes like stag
    ```sh
    rad install kubernetes
    ```
-1. Create a workspace named `staging` using [`rad workspace init kubernetes`]({{< ref rad_workspace_init_kubernetes >}}):
+1. Create a workspace named `staging` using [`rad workspace create`]({{< ref rad_workspace_create >}}):
     ```sh 
-    rad workspace init kubernetes -w staging
+    rad workspace create kubernetes staging
     ```
     Radius writes the workspace details to your local configuration file (`~/.rad/config.yaml` on Linux and macOS, `%USERPROFILE%\.rad\config.yaml` on Windows).
 1. Initialize a Radius environment in your staging workspace via [`rad env init kubernetes`]({{< ref rad_env_init_kubernetes >}}):
