@@ -12,18 +12,23 @@ Project Radius can be installed and run on top of Kubernetes clusters. This allo
 
 The following clusters have been tested and validated to ensure they support all of the features of Project Radius:
 
-{{< tabs AKS k3d kind >}}
+{{< tabs AKS k3d kind EKS >}}
 
 {{% codetab %}}
 Azure Kubernetes Service (AKS) clusters are the easiest way to get up and running quickly with a Radius environment. To learn how to setup a cluster visit the [Azure docs](https://docs.microsoft.com/azure/aks/learn/quick-kubernetes-deploy-portal?tabs=azure-cli).
 
 Note that [AKS-managed AAD](https://docs.microsoft.com/en-us/azure/aks/managed-aad) is not supported currently.
 
-Once deployed and your kubectl context has been set as your default, you can run the following to configure the Radius control plane:
+To create a new AKS cluster and retrieve its kubecontext, you can run the following commands:
 
 ```bash
 az aks create --subscription mySubscription --resource-group myResourceGroup --name myAKSCluster --node-count 1
 az aks get-credentials --subscription mySubscription --resource-group myResourceGroup --name myAKSCluster
+```
+
+Once deployed and your kubectl context has been set as your default, you can run the following to create a Radius environment and install the control plane:
+
+```bash
 rad env init kubernetes -i
 ```
 {{% /codetab %}}
@@ -74,6 +79,25 @@ kubectl get nodes
 # Install Radius
 rad env init kubernetes -i --public-endpoint-override 'localhost:8080'
 ```
+{{% /codetab %}}
+
+{{% codetab %}}
+Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service that you can use to run Kubernetes on AWS. Learn how to set up an EKS cluster on the [AWS docs](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html).
+
+```bash
+eksctl create cluster --name my-cluster --region region-code
+```
+
+Once deployed and your kubectl context has been set as your default, you can run the following to create a Radius environment and install the control plane:
+
+```bash
+# Note: The default environment name for EKS is invalid with current env name requirements
+# As part of the init prompts, provide a custom name with only alphanumeric/hyphen characters
+
+# i.e. Enter an environment name [arn:aws:eks:region:account:cluster/mycluster]: mycluster
+rad env init kubernetes -i
+```
+
 {{% /codetab %}}
 
 {{< /tabs >}}

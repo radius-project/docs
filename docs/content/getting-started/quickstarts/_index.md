@@ -30,12 +30,20 @@ no_list: true
 
 ## Extensibility
 
-{{< cardpane width=250px >}}
+{{< cardpane width=500px >}}
 
 {{% card header="[Dapr](./dapr-quickstart)" footer="Learn Project Radius by authoring templates and deploying a Dapr application" %}}
 <div class="text-center">
   <a href="./dapr-quickstart">
     <img src="./dapr-quickstart/dapr-microservices.svg" alt="Dapr logo" width="200px">
+  </a>
+</div>
+{{% /card %}}
+
+{{% card header="[Deploy AWS resources](./aws)" footer="Learn about using Radius to deploy MemoryDB for Redis to AWS" %}}
+<div class="text-center">
+  <a href="./aws">
+    <img src="./aws/AWS-logo.png" alt="AWS logo" width="200px">
   </a>
 </div>
 {{% /card %}}

@@ -34,6 +34,22 @@ The Bicep deployment engine does not currently support loops in Bicep. Instead, 
 
 Refer to https://github.com/project-radius/deployment-engine/issues/172 for more information.
 
+### `environment()` Bicep function collides with `param environment string`
+
+We currently use `param environment string` to pass in the Radius environmentId into your Bicep template. This collides with the Bicep `environment()` function.
+
+To access `environment()`, prefix it with `az.`. For example:
+
+```bicep
+import radius as rad
+
+param environment string
+
+var stgSuffixes = az.environment().suffixes.storage
+```
+
+This will be addressed in a future release when we change how the environmentId is passed into the file.
+
 ## Containers
 
 ### Persistent volumes are not supported
@@ -67,6 +83,20 @@ See [app name constraints]({{< ref "resource-schema.md#common-values" >}}) for m
 ### Environment creation and last modified times are incorrect
 
 When running `rad env show`, the `lastmodifiedat` and `createdat` fields display `0001-01-01T00:00:00Z` instead of the actual times.
+
+This will be addressed in an upcoming release.
+
+### Environment creation on EKS fails with default values
+
+When running `rad env init kubernetes` on an EKS cluster, the default environment name for EKS is invalid with current env name requirements.
+
+As a workaround, run `rad env init kubernetes -i`. As part of the init prompts, provide a custom name with only alphanumeric/hyphen characters:
+
+```
+❯ rad env init kubernetes -i
+...
+Enter an environment name [arn:aws:eks:region:account:cluster/mycluster]: mycluster
+```
 
 This will be addressed in an upcoming release.
 
