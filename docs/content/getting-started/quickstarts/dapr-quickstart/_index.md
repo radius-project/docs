@@ -3,7 +3,7 @@ type: docs
 title: "Dapr Microservices Tutorial"
 linkTitle: "Dapr microservices"
 description: "Learn Project Radius by authoring templates and deploying a Dapr application"
-weight: 200
+weight: 300
 no_list: true
 ---
 
