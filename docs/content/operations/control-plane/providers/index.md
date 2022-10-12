@@ -15,12 +15,17 @@ Radius cloud providers allow you to deploy and connect to cloud resources across
 | Provider | Description |
 |----------|-------------|
 | [Microsoft Azure](#azure-provider) | Deploy and connect to Azure resources |
+| [Amazon Web Services](#aws-provider) | Deploy and connect to AWS resources |
 
 ## Configure a cloud provider
 
 When initializing a new Radius environment you can optionally configure a cloud provider for your environment
 
-### Azure provider
+{{< tabs "Azure Provider" "AWS Provider" >}}
+
+{{% codetab %}}
+
+### Azure Provider
 
 The Azure provider allows you to deploy and connect to Azure resources from a self-hosted Radius environment. 
 
@@ -77,9 +82,9 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
    ```bash
    az aks pod-identity add --resource-group ${MY_RESOURCE_GROUP} --cluster-name ${MY_CLUSTER} --namespace radius-system  --name radius --identity-resource-id ${IDENTITY_RESOURCE_ID}
    ```
-1. Install the Radius Helm chart with the azure provider values set:
+1. Install the [Radius Helm chart]({{< ref kubernetes >}}) with the azure provider values set:
    ```bash
-   helm upgrade radius radius/radius --install --create-namespace --namespace radius-system --version 0.12.0 --wait --timeout 15m0s --set rp.provider.azure.podidentity=radius --set rp.provider.azure.subscriptionId=${MY_SUBSCIRPTION_ID} --set rp.provider.azure.resourceGroup=${MY_RESOURCE_GROUP}
+   helm upgrade radius radius/radius --install --create-namespace --namespace radius-system --version {{< param chart_version >}} --wait --timeout 15m0s --set rp.provider.azure.podidentity=radius --set rp.provider.azure.subscriptionId=${MY_SUBSCIRPTION_ID} --set rp.provider.azure.resourceGroup=${MY_RESOURCE_GROUP}
    ```
 1. Create a new environment:
    ```bash
@@ -101,3 +106,25 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
              subscriptionid: "MY_SUBSCIRPTION_ID"
              resourcegroup: "MY_RESOURCE_GROUP"
    ```
+{{% /codetab %}}
+
+{{% codetab %}}
+
+### AWS Provider
+
+The AWS provider allows you to deploy and connect to AWS resources from a Radius environment on an EKS cluster. 
+
+#### Prerequisites
+- [AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account) and an [IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html)
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+
+#### Add a cloud provider when initializing an environment
+
+1. Initialize a new [environment]({{< ref environments >}}) with `rad env init kubernetes -i`
+1. Enter "n" to add an Azure cloud provider
+1. Enter "y" to add an AWS cloud provider
+1. Enter a valid AWS region
+1. [Create an IAM AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) and enter the Access Key ID and the AWS Secret Access Key. If you have already created an Access Key pair, you can use that instead.
+1. Deploy your app and any included AWS resources with `rad deploy`
+
+{{% /codetab %}}

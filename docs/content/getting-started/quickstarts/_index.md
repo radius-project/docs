@@ -7,7 +7,9 @@ weight: 200
 no_list: true
 ---
 
-{{< cardpane width=750px >}}
+## Containers
+
+{{< cardpane width=500px >}}
 {{% card header="[Environment variables](./environment-variables)" footer="Learn How to set environment variables in your Radius containers" %}}
 <div class="text-center">
   <a href="./environment-variables">
@@ -16,18 +18,24 @@ no_list: true
 </div>
 {{% /card %}}
 
-{{% card header="[Dapr](./dapr-quickstart)" footer="Learn Project Radius by authoring templates and deploying a Dapr application" %}}
+{{% card header="[Volumes](./volumes)" footer="Learn How to mount volumes in your Radius containers" %}}
 <div class="text-center">
-  <a href="./dapr-quickstart">
-    <img src="./dapr-quickstart/dapr-microservices.svg" alt="Dapr logo" width="200px">
+  <a href="./volumes">
+    <img src="./volumes/volume.svg" alt="Volume icon" width="150px">
   </a>
 </div>
 {{% /card %}}
 
-{{% card header="[CI/CD](./cicd-quickstart)" footer="Learn about adding your Radius apps to your deployment pipelines" %}}
+{{< /cardpane >}}
+
+## Extensibility
+
+{{< cardpane width=500px >}}
+
+{{% card header="[Dapr](./dapr-quickstart)" footer="Learn Project Radius by authoring templates and deploying a Dapr application" %}}
 <div class="text-center">
-  <a href="./cicd-quickstart">
-    <img src="github-logo.png" alt="GitHub logo" width="150px">
+  <a href="./dapr-quickstart">
+    <img src="./dapr-quickstart/dapr-microservices.svg" alt="Dapr logo" width="200px">
   </a>
 </div>
 {{% /card %}}
@@ -39,4 +47,19 @@ no_list: true
   </a>
 </div>
 {{% /card %}}
+
+{{< /cardpane >}}
+
+## Moving to production
+
+{{< cardpane width=250px >}}
+
+{{% card header="[CI/CD](./cicd-quickstart)" footer="Learn about adding your Radius apps to your deployment pipelines" %}}
+<div class="text-center">
+  <a href="./cicd-quickstart">
+    <img src="github-logo.png" alt="GitHub logo" width="150px">
+  </a>
+</div>
+{{% /card %}}
+
 {{< /cardpane >}}
