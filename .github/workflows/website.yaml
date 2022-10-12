@@ -110,9 +110,8 @@ jobs:
           publish-profile: ${{ secrets.DOCS_SITE_PUBLISHPROFILE }}
           package: site/
 
-  open_pr_site:
-    name: Open PR Staging Site
-    if: github.event_name == 'pull_request' && github.event.action != 'closed'
+  open_staging_site:
+    name: Open Staging Site
     needs: ['build']
     runs-on: ubuntu-latest
     steps:
