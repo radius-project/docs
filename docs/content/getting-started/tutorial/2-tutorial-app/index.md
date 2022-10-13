@@ -107,9 +107,7 @@ Once the `db` connector is defined, you can reference it in the [`connections`](
 
 Now that you have created a connection called `itemstore`, environment variables with connection information will be injected into the `frontend` container. The container reads the database connection string from an environment variable named `CONNECTION_ITEMSTORE_CONNECTIONSTRING`.
 
-{{% alert title="💡 Connection Data" color="primary" %}}
 Connections automatically inject connection data into containers as environment variables. The name of the environment variable is the connection name in all caps, prefixed with `CONNECTION_`. For example, the connection named `itemstore` will inject the variable `CONNECTION_ITEMSTORE_CONNECTIONSTRING` with the connection string from `db`. Learn more in the [connections docs]({{< ref appmodel-concept >}}).
-{{% /alert %}}
 
 ## Deploy the application
 
