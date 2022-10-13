@@ -68,7 +68,7 @@ The **`frontend`** [container]({{< ref container >}}) resource specifies:
 
 ## Gateway
 
-A **`gateway`** [Gateway]({{< ref gateway >}}) is how users will interact with your frontend container. The gateway resource specifies:
+The **`gateway`** resource is how users will interact with your frontend container. The [Gateway]({{< ref gateway >}})  specifies:
 
 - **application**: The application to which this gateway belongs. The ID of the application defined above is used.
 - **routes**: The routes handled by this gateway. Here, we specify that `'/'` should map to `frontend-route`, which is provided by the `frontend` container.
