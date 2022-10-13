@@ -55,7 +55,7 @@ The **location** property defines where to deploy a resource within the targeted
 
 Next, let's look into the definition for the website's frontend container.
 
-Radius captures the relationships and intentions behind an application, which simplifies deployment and management. The `frontend` and `frontend-route` resources in your Bicep file will contain everything needed for the website frontend to run and expose a port to the internet.
+Radius captures the relationships and intentions behind an application, which simplifies deployment and management. The `frontend` and `frontendRoute` resources in your Bicep file will contain everything needed for the website frontend to run and expose a port to the internet.
 
 The **`frontend`** [container]({{< ref container >}}) resource specifies:
 
@@ -71,7 +71,7 @@ The **`frontend`** [container]({{< ref container >}}) resource specifies:
 The **`gateway`** resource is how users will interact with your frontend container. The [Gateway]({{< ref gateway >}})  specifies:
 
 - **application**: The application to which this gateway belongs. The ID of the application defined above is used.
-- **routes**: The routes handled by this gateway. Here, we specify that `'/'` should map to `frontend-route`, which is provided by the `frontend` container.
+- **routes**: The routes handled by this gateway. Here, we specify that `'/'` should map to `frontendRoute`, which is provided by the `frontend` container.
 
 {{< rad file="snippets/app.bicep" embed=true marker="//GATEWAY" >}}
 
