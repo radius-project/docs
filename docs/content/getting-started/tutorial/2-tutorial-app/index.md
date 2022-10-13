@@ -35,7 +35,7 @@ cd samples/tutorial
 
 {{< /tabs >}}
 
-The tutorial directory contains three Bicep files:
+The tutorial directory contains three [Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview?tabs=bicep) files:
 
 1. **app.bicep** - Contains the app definition
 1. **mongo-container.bicep** - Contains the definition for deploying mongo container
