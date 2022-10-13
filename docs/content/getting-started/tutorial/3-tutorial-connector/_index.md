@@ -23,7 +23,13 @@ If you have created an environment without an Azure cloud provider, or if you ar
     ```
 1. Reinitialize your Radius environment, this time configuring the Azure cloud provider:
 
-   {{< tabs "GitHub Codespace/k3s" "AKS" >}}
+   {{< tabs "AKS" "GitHub Codespace" "k3s" >}}
+   
+   {{% codetab %}}
+   ```bash
+   rad env init kubernetes -i
+   ```
+   {{% /codetab %}}
    
    {{% codetab %}}
    ```bash
@@ -33,7 +39,7 @@ If you have created an environment without an Azure cloud provider, or if you ar
    
    {{% codetab %}}
    ```bash
-   rad env init kubernetes -i
+   rad env init kubernetes --public-endpoint-override 'localhost:8081' -i
    ```
    {{% /codetab %}}
    
