@@ -53,7 +53,7 @@ The **location** property defines where to deploy a resource within the targeted
 
 ## Container and route
 
-Next, lets look into the definition for the website's frontend container.
+Next, let's look into the definition for the website's frontend container.
 
 Radius captures the relationships and intentions behind an application, which simplifies deployment and management. The `frontend` and `frontend-route` resources in your Bicep file will contain everything needed for the website frontend to run and expose a port to the internet.
 
@@ -77,7 +77,7 @@ A **`gateway`** [Gateway]({{< ref gateway >}}) is how users will interact with y
 
 ## Connectors
 
-A [Radius connector]({{< ref connector-schema >}}) provides an abstraction for an infrastructure resource through its API, allowing the backing resource type to be swapped out without changing the way the consuming resource is defined. In this example, a developer can first use a containerized Mongo DB as the app's database when deploying to their dev environment. Later, the infrastructure admin can use an Azure CosmosDB w/ Mongo API as the app's database when deploying to production.
+A [Radius connector]({{< ref connector-schema >}}) provides an abstraction for an infrastructure resource through its API, allowing the backing resource type to be swapped out without changing the way the consuming resource is defined. In this example, a developer can first use a containerized Mongo DB as the app's database when deploying to their dev environment. Later, the infrastructure admin can use an Azure Cosmos DB for MongoDB as the app's database when deploying to production.
 
 <img src="mongo-connector.png" width=450px alt="Diagram of a mongo connector" /><br />
 
