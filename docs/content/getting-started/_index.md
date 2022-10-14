@@ -19,29 +19,7 @@ _Visit the [GitHub docs]({{< ref github >}}) if you need access to the organizat
 
 The `rad` CLI manages your applications, resources, and environments. Begin by installing it on your machine:
 
-{{< tabs "Windows PowerShell" MacOS "Linux/WSL" "Cloud Shell" Binaries >}}
-
-{{% codetab %}}
-{{< latest >}}
-Run the following in a PowerShell window:
-
-```powershell
-iwr -useb "https://get.radapp.dev/tools/rad/install.ps1" | iex
-```
-
-You may need to refresh your $PATH environment variable to access `rad`:
-```powershell
-$Env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")
-```
-{{< /latest >}}
-{{< edge >}}
-To install the latest edge version:
-
-```powershell
-$script=iwr -useb  https://radiuspublic.blob.core.windows.net/tools/rad/install.ps1; $block=[ScriptBlock]::Create($script); invoke-command -ScriptBlock $block -ArgumentList edge
-```
-{{< /edge >}}
-{{% /codetab %}}
+{{< tabs MacOS "Linux/WSL" "Windows PowerShell" "Cloud Shell" Binaries >}}
 
 {{% codetab %}}
 {{< latest >}}
@@ -69,6 +47,28 @@ To install the latest edge version:
 
 ```bash
 wget -q "https://radiuspublic.blob.core.windows.net/tools/rad/install.sh" -O - | /bin/bash -s edge
+```
+{{< /edge >}}
+{{% /codetab %}}
+
+{{% codetab %}}
+{{< latest >}}
+Run the following in a PowerShell window:
+
+```powershell
+iwr -useb "https://get.radapp.dev/tools/rad/install.ps1" | iex
+```
+
+You may need to refresh your $PATH environment variable to access `rad`:
+```powershell
+$Env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")
+```
+{{< /latest >}}
+{{< edge >}}
+To install the latest edge version:
+
+```powershell
+$script=iwr -useb  https://radiuspublic.blob.core.windows.net/tools/rad/install.ps1; $block=[ScriptBlock]::Create($script); invoke-command -ScriptBlock $block -ArgumentList edge
 ```
 {{< /edge >}}
 {{% /codetab %}}
@@ -107,7 +107,7 @@ PowerShell for Cloud Shell is currently not supported.
 
 {{< /tabs >}}
 
-> You may be prompted for your sudo password during installation. If you are unable to sudo you can install the rad CLI to another directory by setting the `RADIUS_INSTALL_DIR` environment variable with your intended install path.
+> You may be prompted for your sudo password during installation, as the installer places the `rad` binary under `/usr/local/bin`. If you are unable to sudo you can install the rad CLI to another directory by setting the `RADIUS_INSTALL_DIR` environment variable with your intended install path.
 
 Verify the rad CLI is installed correctly by running `rad`.
 
