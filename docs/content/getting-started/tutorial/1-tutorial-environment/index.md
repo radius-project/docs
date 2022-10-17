@@ -69,6 +69,9 @@ In this step we will be initializing a Radius Kubernetes environment.
    dapr-sentry               1/1     1            1           35s
    dapr-operator             1/1     1            1           35s
    ```
+
+   Note that Dapr and Contour are also both installed into the `radius-system` namespace to help get you up and running quickly for our quickstarts and tutorial. This is a [point-in-time limitation]({{< ref limitations >}}) that will be addressed with richer environment customization in a future update.
+
 1. Verify the environment resource was created by running:
 
    ```bash
