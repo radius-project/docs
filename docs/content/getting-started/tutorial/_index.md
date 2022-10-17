@@ -36,6 +36,8 @@ You will be deploying an application, `todoapp`, with the following resources:
    - A MongoDB container
    - An Azure CosmosDB w/ Mongo API
 
+> You can view and download the source code in the [samples repo](https://github.com/project-radius/samples). For access fill out [this form](https://aka.ms/ProjectRadius/GitHubAccess).
+
 ### `frontend` container
 
 The example website is a single-page-application (SPA) with a Node.JS backend running in a [container]({{< ref container >}}). The SPA sends HTTP requests to the Node.JS backend to read and store todo items.
@@ -43,8 +45,6 @@ The example website is a single-page-application (SPA) with a Node.JS backend ru
 The website listens on port 3000 for HTTP requests.
 
 The website uses the MongoDB protocol to read and store data in a database. The website reads the environment variable `CONNECTION_ITEMSTORE_CONNECTIONSTRING` to discover the database connection string. If the connection string is not set the website will store the todo items in memory and not persist them.
-
-> You can view and download the source code in the [samples repo](https://github.com/project-radius/samples). For access fill out [this form](https://aka.ms/ProjectRadius/GitHubAccess).
 
 ### `frontend-route` HttpRoute
 
