@@ -3,6 +3,7 @@ ACR
 AKS
 APIs
 APPBASE
+aspell
 Async
 Async
 Azure
