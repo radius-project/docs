@@ -36,7 +36,7 @@ In this step we will be initializing a Radius Kubernetes environment.
    {{% alert color="success" %}} Visit the [Kubernetes platform docs]({{< ref kubernetes >}}) for a list of supported clusters and specific cluster requirements.
    {{% /alert %}}
 
-1. Use the [`rad env init kubernetes` command]({{< ref rad_env_init_Kubernetes >}}) to initialize a new environment into your current kubectl context:
+1. Use the [`rad env init kubernetes` command]({{< ref rad_env_init_Kubernetes >}}) with the `-i` interactive flag to initialize a new environment into your current kubectl context:
 
    ```bash
    rad env init kubernetes -i
@@ -69,6 +69,9 @@ In this step we will be initializing a Radius Kubernetes environment.
    dapr-sentry               1/1     1            1           35s
    dapr-operator             1/1     1            1           35s
    ```
+
+   Note that Dapr and Contour are also both installed into the `radius-system` namespace to help get you up and running quickly for our quickstarts and tutorial. This is a [point-in-time limitation]({{< ref limitations >}}) that will be addressed with richer environment customization in a future update.
+
 1. Verify the environment resource was created by running:
 
    ```bash
