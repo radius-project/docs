@@ -30,7 +30,7 @@ When you run an application locally the logs of your services are output to the 
 
 ### Deploy Azure resources
 
-If you configure the optional [Azure provider]({{< ref providers >}}) you can include Azure resources in your application, which will be deployed to the subscription and resource group you specify. This allows you to run your services locally while connnecting to cloud resources.
+If you configure the optional [Azure provider]({{< ref providers >}}) you can include Azure resources in your application, which will be deployed to the subscription and resource group you specify. This allows you to run your services locally while connecting to cloud resources.
 
 ## Try a local environment
 

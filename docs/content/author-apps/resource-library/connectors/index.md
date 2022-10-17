@@ -8,7 +8,7 @@ weight: 300
 
 ## Overview
 
-Connectors provide **abstraction** and **portability** to Radius applications. This allows developement teams to depend on high level resource types and APIs, and let infra teams swap out the underlying resource and configuration.
+Connectors provide **abstraction** and **portability** to Radius applications. This allows development teams to depend on high level resource types and APIs, and let infra teams swap out the underlying resource and configuration.
 
 <img src="connectors.png" alt="Diagram of a connector connecting from a container to either an Azure Redis Cache or a Kubernetes Deployment" width=700px />
 
