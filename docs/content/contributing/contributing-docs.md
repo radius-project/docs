@@ -4,6 +4,7 @@ title: "Contributing to Project Radius documentation"
 linkTitle: "Docs"
 description: "How to contribute to the Project Radius documentation"
 weight: 200
+slug: "docs"
 ---
 
 The Project Radius docs are built on [Hugo](https://gohugo.io) with the [Docsy](https://docsy.dev) theme. GitHub Actions are used to build and deploy the docs upon each PR.
@@ -71,6 +72,10 @@ These conventions should be followed throughout all Radius documentation to ensu
 - **Avoid the first person** - Use second person "you", "your" instead of "I", "we", "our".
 - **Assume a new developer audience** - Some obvious steps can seem hard. E.g. Now set an environment variable Radius to a value X. It is better to give the reader the explicit command to do this, rather than having them figure this out.
 - **Use present tense** - Avoid sentences like "this command will install redis", which implies the action is in the future. Instead use "This command installs redis" which is in the present tense.
+
+## Spelling
+
+The docs pipeline uses [aspell](http://aspell.net/) to check for spelling mistakes. If you need to add a new custom word to the allow-list, update `.github/config/en-custom.txt`.
 
 ## Contributing a new docs page
 
