@@ -35,7 +35,7 @@ cd samples/tutorial
 
 {{< /tabs >}}
 
-The tutorial directory contains three Bicep files:
+The tutorial directory contains three [Bicep]({{< ref bicep >}}) files:
 
 1. **app.bicep** - Contains the app definition
 1. **mongo-container.bicep** - Contains the definition for deploying mongo container
@@ -53,9 +53,9 @@ The **location** property defines where to deploy a resource within the targeted
 
 ## Container and route
 
-Next, lets look into the definition for the website's frontend container.
+Next, let's look into the definition for the website's frontend container.
 
-Radius captures the relationships and intentions behind an application, which simplifies deployment and management. The `frontend` and `frontend-route` resources in your Bicep file will contain everything needed for the website frontend to run and expose a port to the internet.
+Radius captures the relationships and intentions behind an application, which simplifies deployment and management. The `frontend` and `frontendRoute` resources in your Bicep file will contain everything needed for the website frontend to run and expose a port to the internet.
 
 The **`frontend`** [container]({{< ref container >}}) resource specifies:
 
@@ -68,16 +68,16 @@ The **`frontend`** [container]({{< ref container >}}) resource specifies:
 
 ## Gateway
 
-A **`gateway`** [Gateway]({{< ref gateway >}}) is how users will interact with your frontend container. The gateway resource specifies:
+The **`gateway`** resource is how users will interact with your frontend container. The [Gateway]({{< ref gateway >}})  specifies:
 
 - **application**: The application to which this gateway belongs. The ID of the application defined above is used.
-- **routes**: The routes handled by this gateway. Here, we specify that `'/'` should map to `frontend-route`, which is provided by the `frontend` container.
+- **routes**: The routes handled by this gateway. Here, we specify that `'/'` should map to `frontendRoute`, which is provided by the `frontend` container.
 
 {{< rad file="snippets/app.bicep" embed=true marker="//GATEWAY" >}}
 
 ## Connectors
 
-A [Radius connector]({{< ref connector-schema >}}) provides an abstraction for an infrastructure resource through its API, allowing the backing resource type to be swapped out without changing the way the consuming resource is defined. In this example, a developer can first use a containerized Mongo DB as the app's database when deploying to their dev environment. Later, the infrastructure admin can use an Azure CosmosDB w/ Mongo API as the app's database when deploying to production.
+A [Radius connector]({{< ref connector-schema >}}) provides an abstraction for an infrastructure resource through its API, allowing the backing resource type to be swapped out without changing the way the consuming resource is defined. In this example, a developer can first use a containerized Mongo DB as the app's database when deploying to their dev environment. Later, the infrastructure admin can use an Azure Cosmos DB for MongoDB as the app's database when deploying to production.
 
 <img src="mongo-connector.png" width=450px alt="Diagram of a mongo connector" /><br />
 
@@ -107,9 +107,7 @@ Once the `db` connector is defined, you can reference it in the [`connections`](
 
 Now that you have created a connection called `itemstore`, environment variables with connection information will be injected into the `frontend` container. The container reads the database connection string from an environment variable named `CONNECTION_ITEMSTORE_CONNECTIONSTRING`.
 
-{{% alert title="💡 Connection Data" color="primary" %}}
 Connections automatically inject connection data into containers as environment variables. The name of the environment variable is the connection name in all caps, prefixed with `CONNECTION_`. For example, the connection named `itemstore` will inject the variable `CONNECTION_ITEMSTORE_CONNECTIONSTRING` with the connection string from `db`. Learn more in the [connections docs]({{< ref appmodel-concept >}}).
-{{% /alert %}}
 
 ## Deploy the application
 
