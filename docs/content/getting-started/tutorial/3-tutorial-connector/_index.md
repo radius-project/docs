@@ -7,7 +7,7 @@ weight: 4000
 slug: "swap-connector"
 ---
 
-This step of swapping a connector resource for an Azure resource shows how the application can easily movev to production in Azure. Once the developer does a handoff, the operator sets up the production environments to port the application. If you are a developer who handles everything related to deployments, this would be applicable to you as well.
+This step of swapping a connector resource for an Azure resource shows how the application can easily move to production in Azure, where an Azure CosmosDB is used instead of a local MongoDB container.
 
 ## Ensure you have an Azure cloud provider configured
 
