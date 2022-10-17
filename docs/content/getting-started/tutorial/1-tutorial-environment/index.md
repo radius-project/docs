@@ -35,7 +35,7 @@ A Radius [environment]({{<ref environments-concept>}}) is a "landing zone"  whic
    {{% alert color="success" %}} Visit the [Kubernetes platform docs]({{< ref kubernetes >}}) for a list of supported clusters and specific cluster requirements.
    {{% /alert %}}
 
-1. Use the [`rad env init kubernetes` command]({{< ref rad_env_init_Kubernetes >}}) to initialize a new environment into your current kubectl context:
+1. Use the [`rad env init kubernetes` command]({{< ref rad_env_init_Kubernetes >}}) with the `-i` interactive flag to initialize a new environment into your current kubectl context:
 
    ```bash
    rad env init kubernetes -i
