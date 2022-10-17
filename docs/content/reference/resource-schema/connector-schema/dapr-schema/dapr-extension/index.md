@@ -9,7 +9,7 @@ slug: "extension"
 
 ## Overview
 
-The `daprSidecar` extensions adds and configures a [Dapr](https://dapr.io) sidecar to your application.
+The `daprSidecar` extensions addss and configures a [Dapr](https://dapr.io) sidecar to your application.
 
 ## Extension format
 
