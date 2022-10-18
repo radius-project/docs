@@ -11,7 +11,7 @@ on:
       - '.github/workflows/spellcheck.yaml'
       - '.github/config/**'
   pull_request:
-    types: [opened, synchronize, reopened, closed]
+    types: [opened, synchronize, reopened]
     branches:
       - v*.*
     paths:
