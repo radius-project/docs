@@ -16,7 +16,7 @@ The following configuration options are available for environments:
 
 Radius environments can be configured with a container runtime, where Radius [containers]({{< ref container >}}) will be run, along with [gateways and routes]({{< ref networking >}}).
 
-A Kubernetes namespace is specied on the environment to tell Radius where to render application resources at deploy time.
+A Kubernetes namespace is specified on the environment to tell Radius where to render application resources at deploy time.
 
 <img src=environments.png alt="Diagram showing a Radius environment mapping to a Kubernetes cluster and namespace" width=800px />
 

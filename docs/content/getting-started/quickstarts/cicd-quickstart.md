@@ -54,7 +54,7 @@ Next, you will create the environment that you will be deploying your applicatio
     rad env init kubernetes -i
     ```
 
-    Specify the Kubernetes namepace you wish to use for application deployments.
+    Specify the Kubernetes namespace you wish to use for application deployments.
 
     If you wish to deploy Azure resources, select the option to configure the Azure cloud provider, providing the values obtained in Step 1.
 

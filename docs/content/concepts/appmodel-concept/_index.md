@@ -30,7 +30,7 @@ The largest circle you can draw around your resources where names have meaning.
 
 <img alt="Whiteboard diagram of an application and its components" src="radius-application.png" width="500px" /><br />
 
-An application is defined as a top-level `resource app` in an instrastructure-as-code file:
+An application is defined as a top-level `resource app` in an infrastructure-as-code file:
 
 {{< tabs Bicep >}}
 

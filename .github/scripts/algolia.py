@@ -37,6 +37,8 @@ def scan_directory(directory: str, pages: list):
 
 def parse_file(path: str):
     data = {}
+    data["hierarchy"] = {}
+    data["type"] = "lvl2"
     data["lvl0"] = ""
     data["lvl1"] = ""
     data["lvl2"] = ""
@@ -48,15 +50,18 @@ def parse_file(path: str):
     for meta in soup.find_all("meta"):
         if meta.get("name") == "description":
             data["lvl2"] = meta.get("content")
+            data["hierarchy"]["lvl1"] = meta.get("content")
         elif meta.get("property") == "og:title":
             data["lvl0"] = meta.get("content")
-            #data["lvl1"] = meta.get("content")
+            data["hierarchy"]["lvl0"] = meta.get("content")
+            data["hierarchy"]["lvl2"] = meta.get("content")
         elif meta.get("property") == "og:url":
             data["url"] = meta.get("content")
             data["path"] = meta.get("content").split(url)[1]
-            data["objectID"] = meta.get("content").split(url)[1]
+            data["objectID"] = meta.get("content").split(url)[1]                
     for bc in soup.find_all("li", class_="breadcrumb-item"):
         data["lvl1"] = bc.text
+        data["hierarchy"]["lvl0"] = bc.text
         break
     for p in soup.find_all("p"):
         if p.text != "":

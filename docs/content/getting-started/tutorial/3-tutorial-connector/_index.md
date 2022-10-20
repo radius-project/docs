@@ -41,7 +41,7 @@ If you have created an environment without an Azure cloud provider, or if you ar
 
 ## Azure CosmosDB Mongo DB
 
-The file `azure-cosmosdb.bicep` contains the definition to deploy the Azure CosmsoDB:
+The file `azure-cosmosdb.bicep` contains the definition to deploy the Azure CosmosDB:
 
 {{< rad file="snippets/azure-cosmosdb.bicep" embed=true replace-key-cosmos="//COSMOS" replace-value-cosmos="resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2021-04-15' = {...}" >}}
 
@@ -109,7 +109,7 @@ param location string = resourceGroup().location
 ## Cleanup
 
 {{% alert title="Delete environment" color="warning" %}}
-If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to delete all Radius resourcesrunning on the Kubernetes Cluster.
+If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to delete all Radius resources running on the Kubernetes Cluster.
 {{% /alert %}}
 
 {{% alert title="Cleanup Azure Resources" color="warning" %}}
