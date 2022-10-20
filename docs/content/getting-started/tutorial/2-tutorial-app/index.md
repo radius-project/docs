@@ -159,6 +159,6 @@ Now you are ready to deploy the application for the first time:
 
 ## Next step: Moving to production on Azure
 
-This step has shown how a developer can test the application with a Mongo container. When moving to production, the dev may now want to handoff the deployment to the operations team for deployments to other environments. The operator can now setup a Radius environment with Azure cloud provider and use the same app, but now connect it to an Azure CosmosDB using the Mongo connector. The next step will show how the connector can be updated to use a CosmosDB instead of a Mongo container:
+When moving to production, you may want to swap your locally running container for an Azure CosmosDB for your Mongo database. The next step will show you how to swap your connector infrastructure to an Azure resource, leveraging the Azure [cloud provider]({{< ref providers >}}).
 
 <br> {{< button text="Previous: Initialize an environment" page="1-tutorial-environment" newline="false" >}}{{< button text="Next: Swap connector resource (optional)" page="3-tutorial-connector" >}} 
