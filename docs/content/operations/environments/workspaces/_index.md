@@ -33,7 +33,7 @@ rad workspacae list
 {{% /codetab %}}
 
 {{% codetab %}}
-[rad workspace show]({{< ref rad_workspace_show >}}) prints information on the default or specified wworkspace:
+[rad workspace show]({{< ref rad_workspace_show >}}) prints information on the default or specified workspace:
 
 ```bash
 rad workspace show
