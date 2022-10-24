@@ -1,10 +1,9 @@
 ---
 type: docs
 title: "Using AWS S3 with Radius"
-linkTitle: "Using AWS S3 "
+linkTitle: "Using AWS S3"
 description: "Learn about how to model AWS S3 resources in Bicep and Radius"
 weight: 500
-slug: "aws"
 ---
 
 This reference app will show you:
@@ -21,16 +20,15 @@ Create a new file called `app.bicep` and add the following bicep code:
 
 {{< rad file="snippets/app.bicep" embed=true >}}
 
-
 ## Step 2: Deploy the application
 
 1. Deploy your application to your environment:
 
-   ```bash
-   rad deploy ./app.bicep -p aws_access_key_id=<AWS_ACCESS_KEY_ID> -p aws_secret_access_key=<AWS_SECRET_ACCESS_KEY> -p aws_region=<REGION> -p bucket=<BUCKET_NAME>
-   ```
+    ```bash
+    rad deploy ./app.bicep -p aws_access_key_id=<AWS_ACCESS_KEY_ID> -p aws_secret_access_key=<AWS_SECRET_ACCESS_KEY> -p aws_region=<REGION> -p bucket=<BUCKET_NAME>
+    ```
 
-The access key, secret key, and region can be the same values you used in the [AWS Quickstart](../../quickstarts/aws-quickstart/index.md). These are used so the container we are deploying can connect to AWS. The AWS S3 Bucket name must follow the [following naming conventions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html).
+    The access key, secret key, and region can be the same values you used in the [AWS Quickstart](../../quickstarts/aws-quickstart/index.md). These are used so the container we are deploying can connect to AWS. The AWS S3 Bucket name must follow the [following naming conventions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html).
 
 1. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose >}}):
 
@@ -38,7 +36,7 @@ The access key, secret key, and region can be the same values you used in the [A
     rad resource expose containers frontend -a webapp --port 5234
     ```
 
-1. Visit [localhost:3000](http://localhost:5234/swagger/index.html) in your browser. This is a swagger doc for the sample application. You can use this to interact with the AWS S3 Bucket you created. For example, you can try to upload a file to the bucket via the `/upload` endpoint.
+1. Visit [localhost:5234](http://localhost:5234/swagger/index.html) in your browser. This is a swagger doc for the sample application. You can use this to interact with the AWS S3 Bucket you created. For example, you can try to upload a file to the bucket via the `/upload` endpoint.
 
 
 ## Cleanup
