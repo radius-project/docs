@@ -45,7 +45,7 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
         AWS_SECRET_ACCESS_KEY: aws_secret_access_key
         AWS_DEFAULT_REGION: aws_region
       }
-      image: 'radius.azurecr.io/awssample:latest'
+      image: 'radius.azurecr.io/quickstarts/aws:edge'
     }
   }
 }
