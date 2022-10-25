@@ -24,7 +24,10 @@ resource memoryDBCluster 'AWS.MemoryDB/Cluster@default' = {
     ACLName: 'open-access'
     SecurityGroupIds: [eksCluster.properties.ClusterSecurityGroupId]
     SubnetGroupName: subnetGroup.name
+<<<<<<< HEAD
+=======
     NumReplicasPerShard: 0
+>>>>>>> origin/v0.14
   }
 }
 
