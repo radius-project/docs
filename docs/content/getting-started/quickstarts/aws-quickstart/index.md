@@ -52,11 +52,7 @@ Create a [Radius environment]({{< ref environments >}}) where you will deploy yo
    - **Namespace** - When an application is deployed, this is the namespace where your containers and other Kubernetes resources will be run. By default, this will be in the `default` namespace.
    {{% alert title="💡 About namespaces" color="success" %}} When you initialize a Radius Kubernetes environment, Radius installs the control plane resources within    the `radius-system` namespace in your cluster, separate from your applications. The namespace specified in this step will be used for your application deployments.
    {{% /alert %}}
-<<<<<<< HEAD
-   -  **Add AWS provider** - Enter 'y' and follow the instructions. Provide a valid AWS region and the values obtained for IAM Access Key ID and IAM Secret Access Keys.
-=======
    -  **Add AWS provider** - An [AWS cloud provider]({{<ref providers>}}) allows you to deploy and manage AWS resources as part of your application. Enter 'y' and follow the instructions. Provide a valid AWS region and the values obtained for IAM Access Key ID and IAM Secret Access Keys.
->>>>>>> origin/v0.14
    - **Environment name** - The name of the environment to create. You can specify any name with lowercase letters, such as `myawsenv`.
 
 ## Step 3: Create a bicep file with MemoryDB for Redis

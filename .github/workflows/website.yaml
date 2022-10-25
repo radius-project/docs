@@ -12,11 +12,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
-<<<<<<< HEAD
-      - v0.13
-=======
       - v0.14
->>>>>>> origin/v0.14
     paths:
       - 'docs/**'
       - '.github/workflows/website.yaml'
@@ -115,13 +111,8 @@ jobs:
           publish-profile: ${{ secrets.DOCS_SITE_PUBLISHPROFILE }}
           package: site/
 
-<<<<<<< HEAD
-  open_pr_site:
-    name: Open PR Staging Site
-=======
   open_staging_site:
     name: Open Staging Site
->>>>>>> origin/v0.14
     needs: ['build']
     runs-on: ubuntu-latest
     steps:
