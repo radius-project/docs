@@ -1,6 +1,7 @@
 AAD
 ACR
 AKS
+AmazonS
 APIs
 APPBASE
 aspell
@@ -165,6 +166,7 @@ hardcoding
 hostname
 hostnames
 http
+html
 httpRoutes
 httproute
 https
@@ -295,6 +297,7 @@ ubuntu
 ui
 unmanaged
 url
+userguide
 utf
 vis
 vscode
