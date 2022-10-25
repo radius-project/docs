@@ -11,7 +11,7 @@ slug: "extension"
 
 The `daprSidecar` extensions adds and configures a [Dapr](https://dapr.io) sidecar to your application.
 
-## Exntension format
+## Extension format
 
 In this example a [container]({{< ref container >}}) adds a Dapr extension to add a Dapr sidecar:
 

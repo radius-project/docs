@@ -2,7 +2,7 @@
 type: docs
 title: "Model your application infrastructure in Bicep"
 linkTitle: "Infrastructure"
-description: "Learn how to model your infrastucture in the Bicep language"
+description: "Learn how to model your infrastructure in the Bicep language"
 weight: 300
 ---
 
@@ -10,7 +10,7 @@ Application "infrastructure" is the underlying resources that your service inter
 
 ## Model and deploy with Bicep
 
-The following example shows an Azure CosmosDB account and MondoDB database that will be deployed with Bicep. This is useful if you want to leverage Bicep and Azure to manage the lifecycle of your resource:
+The following example shows an Azure CosmosDB account and MongoDB database that will be deployed with Bicep. This is useful if you want to leverage Bicep and Azure to manage the lifecycle of your resource:
 
 {{< rad file="snippets/new.bicep" embed=true >}}
 
@@ -26,7 +26,7 @@ You can now use the `cosmos::db` resource in your Radius application.
 Alternately, you can [reference an existing resource](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/resource-declaration?tabs=azure-powershell#reference-existing-resources) that is deployed and managed by another process.
 
 {{% alert title="Incremental adoption" color="info" %}}
-The `existing` keyword lets you add Radius to exsting resources and infrastructure. This can be useful if you want to reuse existing infrastructure that you've already deployed through another process.
+The `existing` keyword lets you add Radius to existing resources and infrastructure. This can be useful if you want to reuse existing infrastructure that you've already deployed through another process.
 {{% /alert %}}
 
 Here's an example of a CosmosDB account and MongoDB resource:
@@ -43,6 +43,6 @@ For more information refer to the Bicep documentation on [scopes](https://docs.m
 
 ## Next step
 
-Now that you have modeled your infrasturcture in Bicep, you can add your Radius application and services:
+Now that you have modeled your infrastructure in Bicep, you can add your Radius application and services:
 
 {{< button page="bicep-application" text="Model your application and services" >}}

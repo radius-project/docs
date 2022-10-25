@@ -6,6 +6,14 @@ description: "Learn where there are known issues and limitations with the latest
 weight: 998
 ---
 
+## Radius control plane
+
+### `rad install kubernetes` and `rad env init kubernetes` installs Dapr and Contour in addition to Radius
+
+Dapr and Contour are also both installed into the `radius-system` namespace to help get you up and running quickly for our quickstarts and tutorial. This is a point-in-time limitation that will be addressed with richer environment customization in a future update.
+
+While Contour is required for Radius gateways and routes, you can manually delete the [Dapr Helm chart](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/#uninstall-dapr-on-kubernetes) if you do not use Dapr.
+
 ## Radius resources
 
 ### Resource names must be unique for a given resource type across applications

@@ -22,7 +22,7 @@ There are two main Radius services that will provide the resources described bel
 
 ### Resource provider behavior
 
-#### Timeout durations
+#### Timeout duration
 
 The default timeout times are listed below but be aware that the asynchronous timeout varies per resource type.
 

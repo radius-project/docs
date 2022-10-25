@@ -19,13 +19,12 @@ You can skip this section if you are using a [Github Codespace]({{< ref "getting
    - [az CLI](http://aka.ms/azcli)
 
 1. Next, make sure you have a [supported Kubernetes cluster]({{< ref kubernetes >}}) deployed and setup with a kubectl context
-1. If deploying to Azure, create or ensure access to an [Azure subscription](https://azure.com) _(optional - used in last tutorial step to deploy Azure resources)_
+
+1. If deploying Azure infrastructure, create or ensure you have access to an [Azure subscription](https://azure.com) _(optional - used in last tutorial step to deploy Azure resources)_
 
 ## Initialize a Radius environment in Kubernetes
 
-A Radius [Kubernetes environment]({{<ref environments-concept>}}) can run in a Kubernetes cluster running on any platform. This step is usually done either by an infra-admin person or a developer depending upon the setup of an enterprise.
-
-In this step we will be initializing a Radius Kubernetes environment.
+A Radius [environment]({{<ref environments-concept>}}) is a "landing zone"  which defines the container runtime and other configuration for your applications. Begin by initializing an environment in your Kubernetes cluster:
 
 1. You can view the current context for kubectl by running:
 
@@ -36,7 +35,7 @@ In this step we will be initializing a Radius Kubernetes environment.
    {{% alert color="success" %}} Visit the [Kubernetes platform docs]({{< ref kubernetes >}}) for a list of supported clusters and specific cluster requirements.
    {{% /alert %}}
 
-1. Use the [`rad env init kubernetes` command]({{< ref rad_env_init_Kubernetes >}}) to initialize a new environment into your current kubectl context:
+1. Use the [`rad env init kubernetes` command]({{< ref rad_env_init_Kubernetes >}}) with the `-i` interactive flag to initialize a new environment into your current kubectl context:
 
    ```bash
    rad env init kubernetes -i
@@ -67,6 +66,9 @@ In this step we will be initializing a Radius Kubernetes environment.
    dapr-sentry               1/1     1            1           35s
    dapr-operator             1/1     1            1           35s
    ```
+
+   Note that Dapr and Contour are also both installed into the `radius-system` namespace to help get you up and running quickly for our quickstarts and tutorial. This is a [point-in-time limitation]({{< ref limitations >}}) that will be addressed with richer environment customization in a future update.
+
 1. Verify the environment resource was created by running:
 
    ```bash
