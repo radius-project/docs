@@ -26,6 +26,8 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   }
 }
 
+
+
 resource producer 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'producer'
   location: location
@@ -38,7 +40,8 @@ resource producer 'Applications.Core/containers@2022-03-15-privatepreview' = {
         AWS_SECRET_ACCESS_KEY: aws_secret_access_key
         AWS_REGION: aws_region
       }
-      image: 'asilverman.azurecr.io/sqsgo:latest'
+      //  image: 'asilverman.azurecr.io/sqsgo:latest'
+      image: 'radius.azurecr.io//quickstarts/aws-sqs-sample:edge'
     }
   }
 }
