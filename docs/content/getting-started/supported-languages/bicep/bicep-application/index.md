@@ -41,7 +41,7 @@ For example, you can add a [container]({{< ref container >}}):
 Relationships between Radius services and other resources can be defined through [connections]({{< ref appmodel-concept >}}). Connections allow you to configure:
 
 - Environment variables with resource properties and connection information
-- Managed identities and role based acces control (where applicable)
+- Managed identities and role based access control (where applicable)
 - Scoping and least-privilege communication (where applicable)
 
 {{< rad file="snippets/connection.bicep" embed=true replace-key-mongo="//MONGO" replace-value-mongo="resource mongo 'mongo.com.MongoDatabase' = {...}" replace-key-cosmos="//COSMOS" replace-value-cosmos="resource cosmos 'Microsoft.DocumentDB/databaseAccounts@2021-04-15' existing = {...}" replace-key-container="//CONTAINER" replace-value-container="container: {...}" >}}

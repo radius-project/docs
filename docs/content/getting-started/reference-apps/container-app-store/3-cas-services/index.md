@@ -42,7 +42,7 @@ stages:
   ...
 ```
 
-Within `app.bicep`, object parameters with the same name as the build steps are available to use with the container image imformation from the above step:
+Within `app.bicep`, object parameters with the same name as the build steps are available to use with the container image information from the above step:
 
 {{< rad file="snippets/app.bicep" embed=true marker="//PARAMS" >}}
 

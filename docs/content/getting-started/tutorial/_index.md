@@ -29,13 +29,6 @@ You will be deploying an application, `todoapp`, with the following resources:
 
 <img src="diagram-app.png" width=900px alt="Diagram of the tutorial application">
 
-1. [`frontend`](#frontend-container): A containerized to-do list frontend written in Node.JS
-1. [`frontend-route`](#frontend-route-httproute): An [HttpRoute]({{< ref httproute >}}) models HTTP traffic to the frontend container
-1. [`gateway`](#gateway-gateway): A [Gateway]({{< ref gateway >}}) that exposes the application to the internet
-1. [`db`](#db-connector): A [MongoDB connector]({{< ref mongodb >}}) to save to-do items in. Can be backed by either:
-   - A MongoDB container
-   - An Azure CosmosDB w/ Mongo API
-
 ### `frontend` container
 
 The example website is a single-page-application (SPA) with a Node.JS backend running in a [container]({{< ref container >}}). The SPA sends HTTP requests to the Node.JS backend to read and store todo items.

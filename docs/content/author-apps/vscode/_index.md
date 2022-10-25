@@ -22,7 +22,7 @@ In addition to the Project Radius extension described in this page, a forked Bic
 
 View and interact with environments, applications and resources deployed to your Radius environments.
 
-Simply open the Project Radius extension and the extension will list all the environmetns in your local config, along with all of the applications and resources deployed to them:
+Simply open the Project Radius extension and the extension will list all the environments in your local config, along with all of the applications and resources deployed to them:
 
 <img src="vscode-tree.png" alt="Screenshot of environments, applications, and resources listed inside of VS Code" width="600px">
 

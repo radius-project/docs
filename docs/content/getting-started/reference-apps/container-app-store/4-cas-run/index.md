@@ -29,7 +29,7 @@ Begin by create a new Radius [local dev environment]({{< ref dev-environments >}
    rad env status
    ```
 
-   You should see a table outputed with information regarding `Nodes`, `Registry`, `Ingress(HTTP)`, `Ingress(HTTPS)` of your enviroment. Example output:
+   You should see a table containing information regarding `Nodes`, `Registry`, `Ingress(HTTP)`, `Ingress(HTTPS)` of your environment. Example output:
 
    ```sh
       NODES        REGISTRY         INGRESS (HTTP)          INGRESS (HTTPS)
