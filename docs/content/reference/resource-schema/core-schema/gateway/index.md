@@ -34,6 +34,7 @@ You can define a list of routes, each representing a connection to a service. Sp
 |------|:--------:|-------------|---------|
 | path | y | The path to match the incoming request path on. | `'/service'`
 | destination | y | The [HttpRoute]({{< ref httproute >}}) to direct traffic to when the path is matched. | `route.id`
+| replacePrefix | n | The prefix to replace in the incoming request path that is sent to the destination route. | `'/'`
 
 #### Hostname
 
