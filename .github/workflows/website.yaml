@@ -56,9 +56,10 @@ jobs:
       - name: Setup Docsy
         run: |
           cd docs
-          git submodule update --init --recursive
           sudo npm install -D --save autoprefixer
           sudo npm install -D --save postcss-cli
+          cd themes/docsy
+          npm install
       - name: Restore Go Modules Cache
         uses: actions/cache@v2
         with:
