@@ -255,6 +255,7 @@ rbac
 readinessProbe
 redis
 redisCaches
+replacePrefix
 repo
 resourceGroupName
 resourceId
