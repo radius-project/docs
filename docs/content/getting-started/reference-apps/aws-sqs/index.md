@@ -21,12 +21,16 @@ Create a new file called `app.bicep` and add the following bicep code:
 
 {{< rad file="snippets/app.bicep" embed=true >}}
 
+This application models two http services: (1) `producer` and (2) `consumer` that run as containers that communicate via a queue as shown in the diagram below
+
+<img src="./diagram.jpg" alt="Boxes and arrows diagram of the sqs-awesome app" width=400>
+
 ## Step 2: Deploy the application
 
 1. Deploy your application to your environment:
 
     ```bash
-    rad deploy ./app.bicep -p aws_access_key_id=$AWS_ACCESS_KEY_ID -p aws_secret_access_key=$AWS_SECRET_ACCESS_KEY -p aws_region=$AWS_REGION -p app_name='sqs-sample'
+    rad deploy ./app.bicep -p aws_access_key_id=$AWS_ACCESS_KEY_ID -p aws_secret_access_key=$AWS_SECRET_ACCESS_KEY -p aws_region=$AWS_REGION -p app_name='sqs-awesome'
     ```
 
     The access key, secret key, and region can be the same values you used in the [AWS Quickstart]({{< ref aws-quickstart >}}). These are used so the container we are deploying can connect to AWS. The AWS SQS Queue name must follow the [`Queue name` conventions](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-queues.html).
