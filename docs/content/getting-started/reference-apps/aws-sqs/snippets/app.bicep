@@ -11,7 +11,7 @@ param aws_access_key_id string
 param aws_secret_access_key string
 param aws_region string
 
-var awsCredential = {
+var aws_credential = {
   AWS_ACCESS_KEY_ID: aws_access_key_id
   AWS_SECRET_ACCESS_KEY: aws_secret_access_key
   AWS_REGION: aws_region
@@ -43,7 +43,7 @@ resource producer 'Applications.Core/containers@2022-03-15-privatepreview' = {
           SQS_QUEUE_URL: queue.properties.QueueUrl
           HTTP_SERVER_PORT: '3000'
         },
-        awsCredential
+        aws_credential
       )
       image: 'radius.azurecr.io/reference-apps/aws-sqs-sample:edge'
     }
@@ -61,7 +61,7 @@ resource consumer 'Applications.Core/containers@2022-03-15-privatepreview' = {
           SQS_QUEUE_URL: queue.properties.QueueUrl
           HTTP_SERVER_PORT: '4000'
         },
-        awsCredential
+        aws_credential
       )
       image: 'radius.azurecr.io/reference-apps/aws-sqs-sample:edge'
     }
