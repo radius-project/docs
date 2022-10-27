@@ -6,6 +6,7 @@ APPBASE
 aspell
 Async
 Async
+AWSSimpleQueueService
 Azure
 Blazor
 CLI
@@ -37,6 +38,7 @@ GKE
 GOAPP
 GitHubAccess
 Hostname
+html
 HttpRoute
 HttpRoutes
 IAM
@@ -75,6 +77,7 @@ Rollout
 SDKs
 SQL
 SQS
+SQSDeveloperGuide
 STATESTORE
 StatefulSet
 StatefulSets
