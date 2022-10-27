@@ -74,6 +74,7 @@ ResourceDeploymentClient
 Rollout
 SDKs
 SQL
+SQS
 STATESTORE
 StatefulSet
 StatefulSets
