@@ -23,7 +23,7 @@ Create a new file called `app.bicep` and add the following bicep code:
 
 This application models two http services: (1) `producer` and (2) `consumer` that run as containers that communicate via a queue as shown in the diagram below
 
-<img src="./diagram.jpg" alt="Boxes and arrows diagram of the sqs-awesome app" width=1200>
+<img src="./diagram.jpg" alt="Boxes and arrows diagram of the sqs-awesome app" width=1000px>
 
 ## Step 2: Deploy the application
 
