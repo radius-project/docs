@@ -1,20 +1,20 @@
 ---
 type: docs
-title: "Radius Connectors"
-linkTitle: "Connectors"
-description: "Add cross-platform connectors to your Radius application with Connectors"
+title: "Radius Links"
+linkTitle: "Links"
+description: "Add cross-platform links to your Radius application with Links"
 weight: 300
 ---
 
 ## Overview
 
-Connectors provide **abstraction** and **portability** to Radius applications. This allows development teams to depend on high level resource types and APIs, and let infra teams swap out the underlying resource and configuration.
+Links provide **abstraction** and **portability** to Radius applications. This allows development teams to depend on high level resource types and APIs, and let infra teams swap out the underlying resource and configuration.
 
-<img src="connectors.png" alt="Diagram of a connector connecting from a container to either an Azure Redis Cache or a Kubernetes Deployment" width=700px />
+<img src="links.png" alt="Diagram of a link connecting from a container to either an Azure Redis Cache or a Kubernetes Deployment" width=700px />
 
 ### Example
 
-The following examples show how a [container]({{< ref container >}}) can connect to a Redis connector, which in turn binds to an Azure Cache for Redis or a Kubernetes Pod.
+The following examples show how a [container]({{< ref container >}}) can connect to a Redis link, which in turn binds to an Azure Cache for Redis or a Kubernetes Pod.
 
 {{< tabs Kubernetes Azure >}}
 
@@ -25,11 +25,11 @@ In this example Redis is provided by a Kubernetes Pod:
 
 {{< rad file="snippets/redis-container.bicep" embed=true marker="//RESOURCE" >}}
 
-<h4>Connector</h4>
+<h4>Link</h4>
 
-A Redis connector can be configured with properties from the Kubernetes Pod:
+A Redis link can be configured with properties from the Kubernetes Pod:
 
-{{< rad file="snippets/redis-container.bicep" embed=true marker="//CONNECTOR" >}}
+{{< rad file="snippets/redis-container.bicep" embed=true marker="//LINK" >}}
 
 {{< /codetab >}}
 
@@ -40,11 +40,11 @@ In this example Redis is provided by an Azure Cache for Redis:
 
 {{< rad file="snippets/redis-azure.bicep" embed=true marker="//RESOURCE" >}}
 
-<h4>Connector</h4>
+<h4>Link</h4>
 
-A Redis connector can be configured with an Azure resource:
+A Redis link can be configured with an Azure resource:
 
-{{< rad file="snippets/redis-azure.bicep" embed=true marker="//CONNECTOR" >}}
+{{< rad file="snippets/redis-azure.bicep" embed=true marker="//LINK" >}}
 
 {{< /codetab >}}
 
@@ -52,12 +52,12 @@ A Redis connector can be configured with an Azure resource:
 
 <h4>Container</h4>
 
-A container can connect to the Redis connector without any configuration or knowledge of the underlying resource:
+A container can connect to the Redis link without any configuration or knowledge of the underlying resource:
 
 {{< rad file="snippets/redis-azure.bicep" embed=true marker="//CONTAINER" >}}
 
-## Connector categories
+## Link categories
 
-Check out the Radius connector resource schema docs to learn how to leverage connectors in your application:
+Check out the Radius link resource schema docs to learn how to leverage links in your application:
 
-{{< button text="Connector resources" page="connector-schema" >}}
+{{< button text="Link resources" page="link-schema" >}}

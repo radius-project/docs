@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "Connector resource schemas"
-linkTitle: "Connectors"
-description: "Reference the schemas of the Radius connector resources"
+title: "Link resource schemas"
+linkTitle: "Links"
+description: "Reference the schemas of the Radius link resources"
 weight: 200
 ---
 
-## Connector resource types
+## Link resource types

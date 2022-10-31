@@ -94,6 +94,6 @@ Adding connections to the above IaC file, it becomes:
 
 ## Next step
 
-Now that you have an understanding of the Radius app model, learn more about Radius connectors:
+Now that you have an understanding of the Radius app model, learn more about Radius links:
 
-{{< button text="Connectors" page="connectors-concept" size="btn-lg" color="success" >}}
+{{< button text="Links" page="links-concept" size="btn-lg" color="success" >}}

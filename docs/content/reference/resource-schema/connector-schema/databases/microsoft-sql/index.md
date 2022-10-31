@@ -36,7 +36,7 @@ This application showcases how Radius can use a user-manged Azure SQL Database.
 |----------|:--------:|-------------|------------|
 | application | n | The ID of the application resource this resource belongs to. | `app.id`
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
-| resource  | n | The ID of the underlying resource for the connector. Used when building the connector from a resource. | `sqlDb.id`
+| resource  | n | The ID of the underlying resource for the link. Used when building the link from a resource. | `sqlDb.id`
 | server | n | The fully qualified domain name of the SQL server. | `sql.hello.com`
 | database | n | The name of the SQL database. | `5000`
 
@@ -46,7 +46,7 @@ This application showcases how Radius can use a user-manged Azure SQL Database.
 
 ## Connections
 
-[Services]({{< ref services >}}) can define [connections]({{< ref appmodel-concept >}}) to connectors using the `connections` property. This allows the service to access properties of the connector and contributes to to visualization and health experiences.
+[Services]({{< ref services >}}) can define [connections]({{< ref appmodel-concept >}}) to links using the `connections` property. This allows the service to access properties of the link and contributes to to visualization and health experiences.
 
 ### Environment variables
 

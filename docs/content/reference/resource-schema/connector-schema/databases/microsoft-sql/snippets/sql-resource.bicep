@@ -13,7 +13,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 }
 
 //SQL
-resource db 'Applications.Connector/sqlDatabases@2022-03-15-privatepreview' = {
+resource db 'Applications.Link/sqlDatabases@2022-03-15-privatepreview' = {
   name: 'db'
   location: 'global'
   properties: {

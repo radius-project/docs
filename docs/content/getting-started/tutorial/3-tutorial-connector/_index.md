@@ -1,13 +1,13 @@
 ---
 type: docs
-title: "Swap connector resource"
-linkTitle: "Swap connector resource"
+title: "Swap link resource"
+linkTitle: "Swap link resource"
 description: "Move to production using Azure infrastructure"
 weight: 4000
-slug: "swap-connector"
+slug: "swap-link"
 ---
 
-This step of swapping a connector resource for an Azure resource shows how the application can easily move to production in Azure, where an Azure CosmosDB is used instead of a local MongoDB container.
+This step of swapping a link resource for an Azure resource shows how the application can easily move to production in Azure, where an Azure CosmosDB is used instead of a local MongoDB container.
 
 ## Ensure you have an Azure cloud provider configured
 
@@ -57,11 +57,11 @@ Replace the existing Bicep module in `app.bicep` to reference the Azure CosmosDB
 
 {{< rad file="snippets/app-azure.bicep" embed=true marker="//MONGOMODULE">}}
 
-## Update the connector definition
+## Update the link definition
 
-Lastly, update the connector definition to use a resource reference instead of manually defining the connection string by replacing `secrets: {...}` with `resource: mongo.outputs.cosmosDatabaseId`:
+Lastly, update the link definition to use a resource reference instead of manually defining the connection string by replacing `secrets: {...}` with `resource: mongo.outputs.cosmosDatabaseId`:
 
-{{< rad file="snippets/app-azure.bicep" embed=true marker="//DATABASE CONNECTOR">}}
+{{< rad file="snippets/app-azure.bicep" embed=true marker="//DATABASE LINK">}}
 
 ## Add the location parameter
 
@@ -87,7 +87,7 @@ param location string = resourceGroup().location
     Completed            webapp          Applications.Core/applications
     Completed            mongo-module    Microsoft.Resources/deployments
     Completed            public          Applications.Core/gateways
-    Completed            db              Applications.Connector/mongoDatabases
+    Completed            db              Applications.Link/mongoDatabases
     Completed            frontend        Applications.Core/containers
 
    Deployment Complete 

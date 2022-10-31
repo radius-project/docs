@@ -46,7 +46,7 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
 }
 
 //CONTAINER
-resource statestore 'Applications.Connector/daprStateStores@2022-03-15-privatepreview' = {
+resource statestore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' = {
   name: 'inventory'
   location: 'global'
   properties: {

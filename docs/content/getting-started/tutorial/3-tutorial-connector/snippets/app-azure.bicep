@@ -61,18 +61,18 @@ resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
 }
 //GATEWAY
 
-//DATABASE CONNECTOR
-resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
+//DATABASE LINK
+resource db 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
   name: 'db'
   location: 'global'
   properties: {
     environment: app.properties.environment
     application: app.id
-    // Automatically build the connector from the resource ID
+    // Automatically build the link from the resource ID
     resource: mongo.outputs.cosmosDatabaseId
   }
 }
-//DATABASE CONNECTOR
+//DATABASE LINK
 
 //MONGOMODULE
 module mongo 'azure-cosmosdb.bicep' = {

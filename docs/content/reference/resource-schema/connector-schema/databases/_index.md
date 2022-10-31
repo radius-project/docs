@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Database connectors"
+title: "Database links"
 linkTitle: "Databases"
-description: "Learn what database connectors are available in your application"
+description: "Learn what database links are available in your application"
 weight: 200
 ---

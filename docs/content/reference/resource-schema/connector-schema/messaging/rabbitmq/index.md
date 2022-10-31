@@ -1,11 +1,11 @@
 ---
 type: docs
-title: "RabbitMQ message broker connector"
+title: "RabbitMQ message broker link"
 linkTitle: "RabbitMQ"
-description: "Learn how to use a RabbitMQ connector in your application"
+description: "Learn how to use a RabbitMQ link in your application"
 ---
 
-The `rabbitmq.com/MessageQueue` connector offers a [RabbitMQ message broker](https://www.rabbitmq.com/).
+The `rabbitmq.com/MessageQueue` link offers a [RabbitMQ message broker](https://www.rabbitmq.com/).
 
 ## Resource format
 
@@ -36,7 +36,7 @@ The `rabbitmq.com/MessageQueue` connector offers a [RabbitMQ message broker](htt
 
 #### Secrets
 
-Secrets are used when defining a RabbitMQ connector with a container or external service.
+Secrets are used when defining a RabbitMQ link with a container or external service.
 
 | Property | Description | Example |
 |----------|-------------|---------|
@@ -50,11 +50,11 @@ Secrets are used when defining a RabbitMQ connector with a container or external
 
 ## Connections
 
-[Services]({{< ref services >}}) can define [connections]({{< ref appmodel-concept >}}) to connectors using the `connections` property. This allows the service to access properties of the connector and contributes to visualization and health experiences.
+[Services]({{< ref services >}}) can define [connections]({{< ref appmodel-concept >}}) to links using the `connections` property. This allows the service to access properties of the link and contributes to visualization and health experiences.
 
 ### Environment variables
 
-Connections to the RabbitMQ connector result in the following environment variables being set on your service:
+Connections to the RabbitMQ link result in the following environment variables being set on your service:
 
 | Variable | Description |
 |----------|-------------|

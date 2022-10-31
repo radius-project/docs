@@ -9,7 +9,7 @@ slug: "statestore"
 
 ## Overview
 
-A `Applications.Connector/daprStateStores` resource represents a [Dapr state store](https://docs.dapr.io/developing-applications/building-blocks/state-management/) topic.
+A `Applications.Link/daprStateStores` resource represents a [Dapr state store](https://docs.dapr.io/developing-applications/building-blocks/state-management/) topic.
 
 This resource will automatically create and deploy the Dapr component spec for the state store.
 
@@ -60,7 +60,7 @@ A generic pub/sub lets you manually specify the metadata of a Dapr state store. 
 
 ## Injected values
 
-Connections from [Radius services]({{< ref services >}}) to [connectors]({{< ref connectors >}}) by default inject the following values into the environment of the service:
+Connections from [Radius services]({{< ref services >}}) to [links]({{< ref links >}}) by default inject the following values into the environment of the service:
 
 | Key | Value |
 |-----|-------|

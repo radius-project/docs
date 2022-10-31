@@ -108,7 +108,7 @@ Enter an environment name [arn:aws:eks:region:account:cluster/mycluster]: myclus
 
 This will be addressed in an upcoming release.
 
-## Connectors
+## Links
 
 ### Dapr resources have application name prefixed to component name
 
@@ -119,7 +119,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
    name: 'myapp'
 }
 
-resource statestore 'Applications.Connector/daprStateStores@2022-03-15-privatepreview' = {
+resource statestore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' = {
   name: 'statestore'
   location: 'global'
   properties: {

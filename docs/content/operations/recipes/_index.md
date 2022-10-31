@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Connector Recipes"
-linkTitle: "Connector Recipes"
+title: "Link Recipes"
+linkTitle: "Link Recipes"
 description: "Learn about creating Radius Recipes"
 weight: 100
 toc_hide: true

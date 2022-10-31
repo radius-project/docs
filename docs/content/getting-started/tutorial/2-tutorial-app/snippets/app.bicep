@@ -60,20 +60,20 @@ resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
 }
 //GATEWAY
 
-//DATABASE CONNECTOR
-resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
+//DATABASE LINK
+resource db 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
   name: 'db'
   location: 'global'
   properties: {
     environment: app.properties.environment
     application: app.id
     secrets: {
-      // Manually build the connector from the connectionString value
+      // Manually build the link from the connectionString value
       connectionString: mongo.outputs.connectionString
     }
   }
 }
-//DATABASE CONNECTOR
+//DATABASE LINK
 
 //MONGOMODULE
 module mongo 'mongo-container.bicep' = {

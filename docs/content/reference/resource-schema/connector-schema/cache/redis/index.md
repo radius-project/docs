@@ -1,11 +1,11 @@
 ---
 type: docs
-title: "Redis cache connector"
+title: "Redis cache link"
 linkTitle: "Redis"
-description: "Learn how to use a Redis connector in your application"
+description: "Learn how to use a Redis link in your application"
 ---
 
-The `redislabs.com/Redis` connector is a [portable connector]({{< ref connectors >}}) which can be deployed to any platform Radius supports.
+The `redislabs.com/Redis` link is a [portable link]({{< ref links >}}) which can be deployed to any platform Radius supports.
 
 ## Resource format
 
@@ -35,10 +35,10 @@ The `redislabs.com/Redis` connector is a [portable connector]({{< ref connectors
 |----------|:--------:|-------------|------------|
 | application | n | The ID of the application resource this resource belongs to. | `app.id`
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
-| resource  | n | The ID of the underlying resource for the connector. Used when building the connector from a resource. | `redisCache.id`
+| resource  | n | The ID of the underlying resource for the link. Used when building the link from a resource. | `redisCache.id`
 | host | n | The Redis host name. | `redis.hello.com`
 | port | n | The Redis port. | `4242`
-| [secrets](#secrets) | n | Secrets used when building the connector from values. | [See below](#secrets)
+| [secrets](#secrets) | n | Secrets used when building the link from values. | [See below](#secrets)
 
 ### Secrets
 
@@ -49,7 +49,7 @@ The `redislabs.com/Redis` connector is a [portable connector]({{< ref connectors
 
 ## Methods
 
-The following methods are available on the Redis connector:
+The following methods are available on the Redis link:
 
 | Method | Description |
 |--------|-------------|
@@ -58,17 +58,17 @@ The following methods are available on the Redis connector:
 
 ## Supported resources
 
-The following resources are supported when building the connector from a resource using the `resource` property:
+The following resources are supported when building the link from a resource using the `resource` property:
 
 - [Azure Cache for Redis](https://docs.microsoft.com/azure/azure-cache-for-redis/cache-overview)
 
 ## Connections
 
-[Services]({{< ref services >}}) can define [connections]({{< ref appmodel-concept >}}) to connectors using the `connections` property. This allows the service to access properties of the connector and contributes to to visualization and health experiences.
+[Services]({{< ref services >}}) can define [connections]({{< ref appmodel-concept >}}) to links using the `connections` property. This allows the service to access properties of the link and contributes to to visualization and health experiences.
 
 ### Environment variables
 
-Connections to the Redis connector result in the following environment variables being set on your service:
+Connections to the Redis link result in the following environment variables being set on your service:
 
 | Variable | Description |
 |----------|-------------|

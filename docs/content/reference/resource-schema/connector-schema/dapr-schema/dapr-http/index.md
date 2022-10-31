@@ -9,7 +9,7 @@ slug: "http"
 
 ## Overview
 
-`Applications.Connector/daprInvokeHttpRoutes` defines Dapr Service Invocation communication through the HTTP API between two or more [services]({{< ref container >}}).
+`Applications.Link/daprInvokeHttpRoutes` defines Dapr Service Invocation communication through the HTTP API between two or more [services]({{< ref container >}}).
 
 ## Resource format
 

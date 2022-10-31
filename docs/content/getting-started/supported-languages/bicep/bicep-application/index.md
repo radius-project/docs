@@ -14,15 +14,15 @@ Create a new Bicep resource that represents your [application]({{< ref appmodel-
 
 {{< rad file="snippets/blank.bicep" embed=true >}}
 
-## (optional) Add portable connectors
+## (optional) Add portable links
 
-If your application needs to be portable across platforms, you can use connectors to add an abstraction layer for each resource. Connectors present common values like `host`, `port` and `connectionString` that Service resources (like containers) can use to connect to the related API or service. The underlying infrastructure type can then be swapped out.
+If your application needs to be portable across platforms, you can use links to add an abstraction layer for each resource. Links present common values like `host`, `port` and `connectionString` that Service resources (like containers) can use to connect to the related API or service. The underlying infrastructure type can then be swapped out.
 
-{{< button text="Connectors library" page="connectors" >}}
+{{< button text="Links library" page="links" >}}
 
-For example, the [mongo.com.mongoDatabase]({{< ref mongodb >}}) connector allows either an Azure CosmosDB and a MongoDB container to bind to it.
+For example, the [mongo.com.mongoDatabase]({{< ref mongodb >}}) link allows either an Azure CosmosDB and a MongoDB container to bind to it.
 
-A MongoDB connector can be modeled as:
+A MongoDB link can be modeled as:
 
 {{< rad file="snippets/mongo.bicep" embed=true replace-key-cosmos="//COSMOS" replace-value-cosmos="resource cosmos 'Microsoft.DocumentDB/databaseAccounts@2021-04-15' existing = {...}" >}}
 

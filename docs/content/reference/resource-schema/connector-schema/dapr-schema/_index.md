@@ -1,14 +1,14 @@
 ---
 type: docs
-title: "Dapr connectors"
+title: "Dapr links"
 linkTitle: "Dapr"
-description: "Learn what Dapr connectors are available in your application"
+description: "Learn what Dapr links are available in your application"
 weight: 600
 slug: "dapr"
 ---
 
 Radius provides built-in Dapr hosting, plus integrations with [Radius resources]({{< ref "container.md#dapr-sidecar" >}}).
 
-Additionally, there are Dapr connectors which offer abstractions for [Dapr building blocks](https://docs.dapr.io/developing-applications/building-blocks/).
+Additionally, there are Dapr links which offer abstractions for [Dapr building blocks](https://docs.dapr.io/developing-applications/building-blocks/).
 
-## Dapr connectors
+## Dapr links

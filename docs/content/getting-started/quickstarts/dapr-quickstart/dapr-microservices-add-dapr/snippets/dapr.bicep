@@ -43,7 +43,7 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   }
 }
 
-resource backendRoute 'Applications.Connector/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
+resource backendRoute 'Applications.Link/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
   name: 'backend-route'
   location: 'global'
   properties: {
@@ -53,7 +53,7 @@ resource backendRoute 'Applications.Connector/daprInvokeHttpRoutes@2022-03-15-pr
   }
 }
 
-resource stateStore 'Applications.Connector/daprStateStores@2022-03-15-privatepreview' = {
+resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' = {
   name: 'statestore'
   location: 'global'
   properties: {

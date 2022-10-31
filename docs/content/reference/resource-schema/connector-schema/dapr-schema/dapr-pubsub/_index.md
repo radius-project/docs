@@ -9,7 +9,7 @@ slug: "pubsub"
 
 ## Overview
 
-A `Applications.Connector/daprPubSubBrokers` resource represents a [Dapr pub/sub](https://docs.dapr.io/developing-applications/building-blocks/pubsub/pubsub-overview/) topic.
+A `Applications.Link/daprPubSubBrokers` resource represents a [Dapr pub/sub](https://docs.dapr.io/developing-applications/building-blocks/pubsub/pubsub-overview/) topic.
 
 This resource will automatically create and deploy the Dapr component spec for the specified kind.
 
@@ -59,7 +59,7 @@ A generic pub/sub lets you manually specify the metadata of a Dapr pub/sub broke
 
 ## Injected values
 
-Connections from [Radius services]({{< ref services >}}) to [connectors]({{< ref connectors >}}) by default inject the following values into the environment of the service:
+Connections from [Radius services]({{< ref services >}}) to [links]({{< ref links >}}) by default inject the following values into the environment of the service:
 
 | Key | Value |
 |-----|-------|

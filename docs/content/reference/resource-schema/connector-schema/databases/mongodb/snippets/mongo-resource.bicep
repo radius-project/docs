@@ -13,7 +13,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 }
 
 //MONGO
-resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
+resource db 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
   name: 'db'
   location: 'global'
   properties: {

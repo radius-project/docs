@@ -17,7 +17,7 @@ param rmqPassword string
 param rmqHost string
 param rmqPort string
 
-resource rabbitmq 'Applications.Connector/rabbitmqMessageQueues@2022-03-15-privatepreview' = {
+resource rabbitmq 'Applications.Link/rabbitmqMessageQueues@2022-03-15-privatepreview' = {
   name: 'rabbitmq'
   location: 'global'
   properties: {

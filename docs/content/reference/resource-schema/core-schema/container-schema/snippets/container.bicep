@@ -84,7 +84,7 @@ resource http 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
   }
 }
 
-resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
+resource db 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
   name: 'database'
   location: 'global'
   properties: {

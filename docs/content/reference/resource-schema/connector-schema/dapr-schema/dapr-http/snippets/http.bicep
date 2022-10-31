@@ -32,7 +32,7 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 //BACKEND
 
 //ROUTE
-resource backendDapr 'Applications.Connector/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
+resource backendDapr 'Applications.Link/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
   name: 'dapr-backend'
   location: 'global'
   properties: {

@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Cache connectors"
+title: "Cache links"
 linkTitle: "Cache"
-description: "Learn what cache connectors are available in your application"
+description: "Learn what cache links are available in your application"
 weight: 300
 ---

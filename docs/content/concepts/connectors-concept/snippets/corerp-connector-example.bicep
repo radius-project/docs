@@ -22,7 +22,7 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
     application: app.id
     connections: {
       mongodb: {
-        source: dbconnector.id
+        source: dblink.id
       }
     }
     container: {
@@ -32,16 +32,16 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 }
 //CONTAINER
 
-//CONNECTOR
-resource dbconnector 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
-  name: 'dbconnector'
+//LINK
+resource dblink 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
+  name: 'dblink'
   location: 'global'
   properties: {
     environment: environment
     resource: account::underlyingdb.id
   }
 }
-//CONNECTOR
+//LINK
 
 //RESOURCE
 resource account 'Microsoft.DocumentDB/databaseAccounts@2020-04-01' = {

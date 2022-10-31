@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Messaging connectors"
+title: "Messaging links"
 linkTitle: "Messaging"
-description: "Learn what messaging connectors are available in your application"
+description: "Learn what messaging links are available in your application"
 weight: 400
 ---

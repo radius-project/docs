@@ -1,11 +1,11 @@
 ---
 type: docs
-title: "MongoDB database connector"
+title: "MongoDB database link"
 linkTitle: "MongoDB"
-description: "Learn how to use a MongoDB connector in your application"
+description: "Learn how to use a MongoDB link in your application"
 ---
 
-The `mongodb.com/MongoDatabase` connector is a [portable connector]({{< ref connectors >}}) which can be deployed to any platform Radius supports.
+The `mongodb.com/MongoDatabase` link is a [portable link]({{< ref links >}}) which can be deployed to any platform Radius supports.
 
 ## Resource format
 
@@ -35,10 +35,10 @@ The `mongodb.com/MongoDatabase` connector is a [portable connector]({{< ref conn
 |----------|:--------:|-------------|------------|
 | application | n | The ID of the application resource this resource belongs to. | `app.id`
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
-| resource  | n | The ID of the underlying resource for the connector. Used when building the connector from a resource. | `cosmosDatabase.id`
+| resource  | n | The ID of the underlying resource for the link. Used when building the link from a resource. | `cosmosDatabase.id`
 | host | n | The Redis host name. | `mongo.hello.com`
 | port | n | The Redis port. | `4242`
-| [secrets](#secrets) | n | Secrets used when building the connector from values. | [See below](#secrets)
+| [secrets](#secrets) | n | Secrets used when building the link from values. | [See below](#secrets)
 
 ### Secrets
 
@@ -50,7 +50,7 @@ The `mongodb.com/MongoDatabase` connector is a [portable connector]({{< ref conn
 
 ## Methods
 
-The following methods are available on the Redis connector:
+The following methods are available on the Redis link:
 
 | Method | Description |
 |--------|-------------|
@@ -60,17 +60,17 @@ The following methods are available on the Redis connector:
 
 ## Supported resources
 
-The following resources are supported when building the connector from a resource using the `resource` property:
+The following resources are supported when building the link from a resource using the `resource` property:
 
 - [Azure CosmosDB API for MongoDB](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction)
 
 ## Connections
 
-[Services]({{< ref services >}}) can define [connections]({{< ref appmodel-concept >}}) to connectors using the `connections` property. This allows the service to access properties of the connector and contributes to to visualization and health experiences.
+[Services]({{< ref services >}}) can define [connections]({{< ref appmodel-concept >}}) to links using the `connections` property. This allows the service to access properties of the link and contributes to to visualization and health experiences.
 
 ### Environment variables
 
-Connections to the MongoDatabase connector result in the following environment variables being set on your service:
+Connections to the MongoDatabase link result in the following environment variables being set on your service:
 
 | Variable | Description |
 |----------|-------------|
