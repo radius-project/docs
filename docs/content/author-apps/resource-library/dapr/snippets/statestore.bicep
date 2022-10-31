@@ -17,7 +17,7 @@ resource azureTable 'Microsoft.Storage/storageAccounts/tableServices/tables@2021
 }
 
 // The accompanying Dapr component configuration is automatically generated for you
-resource stateStore 'Applications.Connector/daprStateStores@2022-03-15-privatepreview' = {
+resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' = {
   name: 'mystatestore'
   location: 'global'
   properties: {

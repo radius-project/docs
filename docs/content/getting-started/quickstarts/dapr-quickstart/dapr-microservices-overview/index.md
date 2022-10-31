@@ -50,15 +50,15 @@ In this quickstart we will be using a [Dapr HTTP invoke route]({{< ref dapr-http
 
 <img src="./invoke.png" alt="A diagram of the Dapr service invocation" width=500 />
 
-## Connector
+## Link
 
-A [Dapr statestore connector]({{< ref dapr-secretstore >}}) is used to model and deploy the Dapr statestore component.
+A [Dapr statestore link]({{< ref dapr-secretstore >}}) is used to model and deploy the Dapr statestore component.
 
 ### `statestore` Dapr state store
 
 The [Dapr state store]({{< ref dapr-statestore >}}) resource (`statestore`) stores information about orders. It could be any compatible [Dapr state store](https://docs.dapr.io/developing-applications/building-blocks/state-management/state-management-overview/).
 
-The Dapr component configuration is automatically generated for the statestore based on the resource or values provided in the connector definition.
+The Dapr component configuration is automatically generated for the statestore based on the resource or values provided in the link definition.
 
 #### Swappable infrastructure
 

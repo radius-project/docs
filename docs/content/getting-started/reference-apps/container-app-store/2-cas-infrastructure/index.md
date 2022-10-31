@@ -35,9 +35,9 @@ Note the [Radius Application resource]({{< ref appmodel-concept >}}) inside of `
 
 {{< rad file="snippets/blank-app.bicep" embed=true >}}
 
-## Dapr state store connector
+## Dapr state store link
 
-A [Dapr state store connector]({{< ref dapr-statestore >}}) resource is required by the container apps store microservices.
+A [Dapr state store link]({{< ref dapr-statestore >}}) resource is required by the container apps store microservices.
 
 Within `infra.dev.bicep` and `infra.bicep` you will find the following resources:
 

@@ -102,7 +102,7 @@ const stateStoreName = process.env.CONNECTION_ORDERS_COMPONENTNAME;
 
    ```sh
     RESOURCE      TYPE
-    orders        applications.connector/daprstatestores
+    orders        applications.link/daprstatestores
    ```
    You should see both `backend` and `statestore` components in your `dapr-quickstart` application. 
 

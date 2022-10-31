@@ -28,7 +28,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   }
 }
 
-resource stateStore 'Applications.Connector/daprStateStores@2022-03-15-privatepreview' = {
+resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' = {
   name: 'statestore'
   location: 'global'
   properties: {

@@ -28,11 +28,11 @@ Model your running code with services.<br /><br />
 Define your network relationships & requirements.<br /><br />
 [Learn more]({{< ref networking >}})
 {{< /card >}}
-{{< card header="**Connectors**" >}}
-[<img src="connectors.png" alt="Connectors" style="width:325px"/>]({{< ref connectors >}})
+{{< card header="**Links**" >}}
+[<img src="links.png" alt="Links" style="width:325px"/>]({{< ref links >}})
 
-Add portability to your application with connectors.<br /><br />
-[Learn more]({{< ref connectors >}})
+Add portability to your application with links.<br /><br />
+[Learn more]({{< ref links >}})
 {{< /card >}}
 {{< /cardpane >}}
 {{< cardpane >}}

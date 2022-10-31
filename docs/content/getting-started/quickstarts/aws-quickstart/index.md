@@ -129,7 +129,7 @@ This Bicep file defines a webapp [container]({{< ref container >}}), which conne
    Completed            demo-memorydb-cluster AWS.MemoryDB/Cluster
    Completed            <YOUR_EKS_CLUSTER_NAME> AWS.EKS/Cluster     
    Completed            demo-memorydb-cluster AWS.MemoryDB/Cluster
-   Completed            db              Applications.Connector/redisCaches
+   Completed            db              Applications.Link/redisCaches
    Completed            frontend        Applications.Core/containers
 
    Deployment Complete
@@ -138,7 +138,7 @@ This Bicep file defines a webapp [container]({{< ref container >}}), which conne
       <YOUR_EKS_CLUSTER_NAME> AWS.EKS/Cluster     
       demo-memorydb-cluster AWS.MemoryDB/Cluster
       demo-memorydb-subnet-group AWS.MemoryDB/SubnetGroup
-      db              Applications.Connector/redisCaches
+      db              Applications.Link/redisCaches
       webapp          Applications.Core/applications
       frontend        Applications.Core/containers
    ```
@@ -180,7 +180,7 @@ This Bicep file defines a webapp [container]({{< ref container >}}), which conne
    Completed            demo-memorydb-cluster AWS.MemoryDB/Cluster
    Completed            <YOUR_EKS_CLUSTER_NAME> AWS.EKS/Cluster     
    Completed            demo-memorydb-cluster AWS.MemoryDB/Cluster
-   Completed            db              Applications.Connector/redisCaches
+   Completed            db              Applications.Link/redisCaches
    Completed            frontend        Applications.Core/containers
 
    Deployment Complete
@@ -189,7 +189,7 @@ This Bicep file defines a webapp [container]({{< ref container >}}), which conne
       <YOUR_EKS_CLUSTER_NAME> AWS.EKS/Cluster     
       demo-memorydb-cluster AWS.MemoryDB/Cluster
       demo-memorydb-subnet-group AWS.MemoryDB/SubnetGroup
-      db              Applications.Connector/redisCaches
+      db              Applications.Link/redisCaches
       webapp          Applications.Core/applications
       frontend        Applications.Core/containers
    ```
@@ -210,14 +210,14 @@ This Bicep file defines a webapp [container]({{< ref container >}}), which conne
    Completed            memorydb-module Microsoft.Resources/deployments
    Completed            webapp          Applications.Core/applications
    Completed            demo-memorydb-cluster AWS.MemoryDB/Cluster
-   Completed            db              Applications.Connector/redisCaches
+   Completed            db              Applications.Link/redisCaches
    Completed            frontend        Applications.Core/containers
 
    Deployment Complete
 
    Resources:
       demo-memorydb-cluster AWS.MemoryDB/Cluster
-      db              Applications.Connector/redisCaches
+      db              Applications.Link/redisCaches
       webapp          Applications.Core/applications
       frontend        Applications.Core/containers
    ```
