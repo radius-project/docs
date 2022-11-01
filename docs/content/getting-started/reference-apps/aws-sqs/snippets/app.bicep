@@ -3,7 +3,7 @@ import radius as radius
 
 param location string = 'global'
 param environment string
-param app_name string
+param queue_name string
 
 @secure()
 param aws_access_key_id string
@@ -17,18 +17,19 @@ var aws_credential = {
   AWS_REGION: aws_region
 }
 
-resource queue 'AWS.SQS/Queue@default' = {
-  name: '${app_name}-queue'
-  properties: {
-    QueueName: '${app_name}-queue'
-  }
-}
-
+var app_name = 'sqs-sample-app'
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: app_name
   location: location
   properties: {
     environment: environment
+  }
+}
+
+resource queue 'AWS.SQS/Queue@default' = {
+  name: '${app_name}-${queue_name}'
+  properties: {
+    QueueName: 'sqs-sample-${queue_name}'
   }
 }
 
