@@ -53,5 +53,5 @@ If you're done with testing, you can use the rad CLI to [delete an environment](
 {{% /alert %}}
 
 {{% alert title="Cleanup AWS Resources" color="warning" %}}
-AWS resources are not deleted when deleting a Radius environment, so to prevent additional charges, make sure to delete all resources created in this reference app. You can delete these resources in the AWS Console or via the AWS CLI. To delete the AWS SQS Queue, see https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/step-delete-queue.html.
+AWS resources are not deleted when deleting a Radius environment, so to prevent additional charges, make sure to delete all resources created in this reference app. You can delete these resources in the AWS Console or via the AWS CLI. To delete the AWS SQS Queue, see [this guide](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/step-delete-queue.html).
 {{% /alert %}}
