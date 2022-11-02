@@ -51,6 +51,14 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
         kind:'exec'
         command:'ls /tmp'
       }
+      command: [
+        '/bin/sh'
+      ]
+      args: [
+        '-c'
+        'while true; do echo hello; sleep 10;done'
+      ]
+      workingDir: '/app'
     }
     connections: {
       inventory: {
