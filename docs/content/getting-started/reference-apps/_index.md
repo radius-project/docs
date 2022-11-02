@@ -29,4 +29,11 @@ no_list: true
   </a>
 </div>
 {{% /card %}}
+{{% card header="[AWS SQS Queues](./aws-sqs)" footer="Learn about how to model AWS SQS Queue resources in Bicep" %}}
+<div class="text-center">
+  <a href="./aws-sqs">
+    <img src="./aws-sqs/aws-logo.png" alt="AWS logo">
+  </a>
+</div>
+{{% /card %}}
 {{< /cardpane >}}
