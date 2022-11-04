@@ -39,8 +39,8 @@ Details on what to run and how to run it are defined in the `container` property
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| image | y | The registry and image to download and run in your container. | `radiusteam/frontend`
-| env | n | A list of environment variables to be set for the container. | `"ENV_VAR": "value"`
+| image | y | The registry and image to download and run in your container. | `'myregistry/myimage:tag'`
+| env | n | A list of environment variables to be set for the container. | `'ENV_VAR': 'value'`
 | command | n | Entrypoint array. Overrides the container image's ENTRYPOINT. | `['/bin/sh']`
 | args | n | Arguments to the entrypoint. Overrides the container image's CMD. | `['-c', 'while true; do echo hello; sleep 10;done']`
 | workingDir | n | Working directory for the container. | `'/app'`
