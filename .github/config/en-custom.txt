@@ -4,6 +4,7 @@ AKS
 AmazonS
 APIs
 APPBASE
+args
 aspell
 Async
 Async
@@ -31,6 +32,7 @@ Dockerfiles
 Docsy
 DocumentDB
 EKS
+entrypoint
 EOF
 Extensibility
 FileShare
@@ -306,6 +308,7 @@ webapp
 webpage
 westus
 westus2
+workingDir
 workspaceTypes
 workspaces
 yaml
