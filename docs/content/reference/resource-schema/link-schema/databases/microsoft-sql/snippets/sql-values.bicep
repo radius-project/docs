@@ -17,6 +17,7 @@ resource db 'Applications.Link/sqlDatabases@2022-03-15-privatepreview' = {
   properties: {
     environment: environment
     application: app.id
+    mode: 'values'
     server: 'https://sql.contoso.com'
     database: 'inventory'
   }
