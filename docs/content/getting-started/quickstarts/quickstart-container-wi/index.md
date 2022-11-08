@@ -15,7 +15,7 @@ This quickstart will provide an overview of how to:
 
 - [rad CLI]({{< ref getting-started >}})
 - [Radius environment]({{< ref environments >}})
-- [Azure AD Workload Identity] (https://azure.github.io/azure-workload-identity/docs/installation.html)
+- [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html)
    - This quickstart is a Radius version of the [Azure AD workload identity quickstart](https://azure.github.io/azure-workload-identity/docs/quick-start.html) 
 
 ## Step 1: Run `rad env init kubernetes` 
@@ -23,7 +23,7 @@ This quickstart will provide an overview of how to:
 Begin by running `rad env init kubernetes` and configuring an Azure cloud provider:
 
  ```bash
-   rad env init kubernetes --environment default --provider-azure --provider-azure-resource-group ${AZURE_RESOURCE_GROUP} --provider-azure-client-id ${AZURE_CLIENT_ID} --provider-azure-client-secret ${AZURE_CLIENT_SECRET} --provider-azure-tenant-id ${AZURE_TENANT_ID} --provider-azure-subscription ${AZURE_SUBSCRIPTION}
+   rad env init kubernetes --environment default --provider-azure --provider-azure-resource-group <AZURE_RESOURCE_GROUP> --provider-azure-client-id <AZURE_CLIENT_ID> --provider-azure-client-secret <AZURE_CLIENT_SECRET> --provider-azure-tenant-id <AZURE_TENANT_ID> --provider-azure-subscription <AZURE_SUBSCRIPTION>
    ```
 
 ## Step 2: Define an app and a container
@@ -37,7 +37,7 @@ Create a file named `app.bicep` with a Radius application, [container]({{< ref c
 1. Deploy your app by specifying the OIDC issuer URL. To retrieve the OIDC issuer URL, follow the Azure Workload Identity installation guide.
 
    ```bash
-   rad deploy ./app.bicep -p oidcIssuer=${OIDC_ISSUER_URL}
+   rad deploy ./app.bicep -p oidcIssuer=<OIDC_ISSUER_URL>
    ```
 
 ## Step 4: Verify access to the keyvault
