@@ -33,6 +33,14 @@ Details on what to run and how to run it are defined in the `container` property
 | kind | y | The kind of container runtime to use. Only option is `'kubernetes'` | `'kubernetes'`
 | namespace | y | The Kubernetes namespace to render application resources into | `'default'`
 | resourceId | n | The resource ID of the AKS cluster to render application resources into. Only required for Azure environments | `aksCluster.id`
+| identity | n | The cluster identity setting | [See below](#identity) |
+
+### identity
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| kind | y | The kind of identity | `azure.com.workload` |
+| oidcIssuer | n | The OIDC issuer URL for workload identity | `https://radiusoidc.blob.core.windows.net/kubeoidc/` |
 
 ## Further reading
 

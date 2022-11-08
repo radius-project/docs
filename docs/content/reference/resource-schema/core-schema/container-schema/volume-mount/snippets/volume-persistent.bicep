@@ -1,16 +1,45 @@
 import radius as rad
 
-param environment string
-
 resource keyvault 'Microsoft.KeyVault/vaults@2022-07-01' existing = {
   name: 'myvault'
 }
+
+@description('Specifies the environment for resources.')
+#disable-next-line no-hardcoded-env-urls
+param oidcIssuer string
+
+@description('Specifies the scope of azure resources.')
+param rootScope string = resourceGroup().id
+
+// myenv environment resource where workload identity is supported.
+
+resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
+  name: 'myenv'
+  location: 'global'
+  properties: {
+    compute: {
+      kind: 'kubernetes'
+      resourceId: 'self'
+      namespace: 'default'
+      identity: {
+        kind: 'azure.com.workload'
+        oidcIssuer: oidcIssuer
+      }
+    }
+    providers: {
+      azure: {
+        scope: rootScope
+      }
+    }
+  }
+}
+
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
   location: 'global'
   properties: {
-    environment: environment
+    environment: env
   }
 }
 
