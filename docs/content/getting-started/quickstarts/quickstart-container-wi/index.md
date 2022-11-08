@@ -34,7 +34,7 @@ Create a file named `app.bicep` with a Radius application, [container]({{< ref c
 
 ## Step 3: Deploy the app and container
 
-1. Deploy your app by specifying the OIDC issuer URL. To retrieve the OIDC issuer URL, follow the Azure Workload Identity installation guide.
+Deploy your app by specifying the OIDC issuer URL. To retrieve the OIDC issuer URL, follow the Azure Workload Identity installation guide.
 
    ```bash
    rad deploy ./app.bicep -p oidcIssuer=<OIDC_ISSUER_URL>
@@ -55,7 +55,7 @@ Create a file named `app.bicep` with a Radius application, [container]({{< ref c
 
 ## Cleanup
 
-1. Run the following command to delete your app and container:
+Run the following command to delete your app and container:
 
    ```bash
    rad app delete myapp --yes
