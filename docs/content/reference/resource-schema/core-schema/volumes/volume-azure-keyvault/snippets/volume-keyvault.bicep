@@ -1,0 +1,54 @@
+import radius as rad
+
+param azLocation string = resourceGroup().location
+
+param environment string
+
+resource keyvault 'Microsoft.KeyVault/vaults@2022-07-01' = {
+  name: 'myvault'
+  location: azLocation
+  properties: {
+    sku: {
+      family: 'A'
+      name: 'standard'
+    }
+    tenantId: subscription().tenantId
+    enableRbacAuthorization: true
+  }
+}
+
+//VOLUME
+resource volume 'Applications.Core/volumes@2022-03-15-privatepreview' = {
+  name: 'myvolume'
+  location: 'global'
+  properties: {
+    kind: 'azure.com.keyvault'
+    resource: keyvault.id
+    secrets: {
+      mysecret: {
+        name: 'secret1'      // required
+        version: '1'         // optional, defaults to latest version
+        alias: 'secretalias' // optional, defaults to secret name (mysecret)
+        encoding: 'utf-8'    // optional, defaults to utf-8
+      }
+    }
+    certificates: {
+      mycertificate: {
+        name: 'cert1'              // required
+        version: '1'               // optional, defaults to latest version
+        alias: 'certificatealias'  // optional, defaults to certificate name (mycertificate)
+        encoding: 'base64'         // optional, defaults to utf-8
+        certType: 'privatekey'     // optional, defaults to utf-8
+        format: 'pem'              // optional, defaults to pfx
+      }
+    }
+    keys: {
+      mykey: {
+        name: 'key1'       // required
+        version: '1'       // optional, defaults to latest version
+        alias: 'keyalias'  // optional, defaults to key name (mycertificate)
+      }
+    }
+  }
+}
+//VOLUME

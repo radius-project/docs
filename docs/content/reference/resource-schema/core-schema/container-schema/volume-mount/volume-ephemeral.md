@@ -4,6 +4,7 @@ title: "Ephemeral volumes"
 linkTitle: "Ephemeral"
 description: "Learn about Radius ephemeral volumes"
 weight: 200
+slug: "ephemeral"
 ---
 
 ## Ephemeral volumes
