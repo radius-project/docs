@@ -47,7 +47,7 @@ Details on what to run and how to run it are defined in the `container` property
 | [ports](#ports) | n | Ports the container provides | [See below](#ports).
 | [readinessProbe](#readiness-probe) | n | Readiness probe configuration. | [See below](#readiness-probe).
 | [livenessProbe](#liveness-probe) | n | Liveness probe configuration. | [See below](#liveness-probe).
-| [volumes](#volumes) | n | Volumes to mount into the container. | [See below](#volume).
+| [volumes](#volumes) | n | Volumes to mount into the container. | [See below](#volumes).
 
 #### Ports
 
