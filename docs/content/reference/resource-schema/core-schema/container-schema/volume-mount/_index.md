@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Radius Volume"
-linkTitle: "Volume"
-description: "Learn about Radius volumes"
+title: "Mount a volume to a container"
+linkTitle: "Volume mounts"
+description: "Learn how to mount a volume to a container"
 weight: 100
 slug: "volumes"
 ---
