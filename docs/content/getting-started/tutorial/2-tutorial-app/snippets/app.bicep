@@ -67,6 +67,9 @@ resource db 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
   properties: {
     environment: app.properties.environment
     application: app.id
+    mode: 'values'
+    host: mongo.outputs.host
+    port: mongo.outputs.port
     secrets: {
       // Manually build the link from the connectionString value
       connectionString: mongo.outputs.connectionString

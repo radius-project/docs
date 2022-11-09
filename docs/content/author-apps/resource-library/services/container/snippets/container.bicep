@@ -6,7 +6,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
   location: 'global'
   properties: {
-    environment: environment
+    environment: environment   
   }
 }
 
@@ -52,7 +52,7 @@ resource statestore 'Applications.Link/daprStateStores@2022-03-15-privatepreview
   properties: {
     environment: environment
     application: app.id
-    mode: 'resource'
+    mode: 'values'
     type: 'state.azure.tablestorage'
     kind: 'generic'
     version: 'v1'

@@ -27,6 +27,7 @@ resource mongo 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
   properties: {
     application: myapp.id
     environment: environment
+    mode: 'resource'
     resource: cosmos::db.id
   }
 }
