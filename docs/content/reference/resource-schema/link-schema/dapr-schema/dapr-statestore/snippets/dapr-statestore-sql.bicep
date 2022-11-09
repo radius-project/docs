@@ -40,8 +40,8 @@ resource statestore 'Applications.Link/daprStateStores@2022-03-15-privatepreview
   properties: {
     environment: environment
     application: app.id
-    kind: 'state.sqlserver'
     mode: 'resource'
+    kind: 'state.sqlserver'
     resource: sqlserver.id
   }
 }
