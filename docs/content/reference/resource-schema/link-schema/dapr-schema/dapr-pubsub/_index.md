@@ -30,7 +30,6 @@ This resource will automatically create and deploy the Dapr component spec for t
 | application | n | The ID of the application resource this resource belongs to. | `app.id`
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
 | kind | y | The kind of the underlying pub/sub resource. See [Available Dapr components](#available-dapr-components) for more information. | `pubsub.azure.servicebus`
-| mode | y |The mode used to build the pub/sub resource. Options are to build automatically via 'recipe', build via 'resource' or build manually via 'values'. Selection determines which set of fields to additionally require. | `recipe`
 | resource | n | The ID of the message broker resource, if a non-generic `kind` is used. For Azure Service Bus this is the namespace ID. | `namespace.id`
 | type | n |The Dapr component type. Used when kind is `generic`. | `pubsub.kafka` |
 | metadata | n | Metadata for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-pubsub/) | `brokers: kafkaRoute.properties.url` |
