@@ -71,6 +71,8 @@ resource db 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
     secrets: {
       // Manually build the link from the connectionString value
       connectionString: mongo.outputs.connectionString
+      host: mongo.outputs.host
+      port: mongo.outputs.port
     }
   }
 }
