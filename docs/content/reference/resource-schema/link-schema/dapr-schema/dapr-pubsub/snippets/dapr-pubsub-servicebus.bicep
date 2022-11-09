@@ -18,8 +18,8 @@ resource pubsub 'Applications.Link/daprPubSubBrokers@2022-03-15-privatepreview' 
   properties: {
     environment: environment
     application: app.id
-    kind: 'pubsub.azure.servicebus'
     mode: 'resource'
+    kind: 'pubsub.azure.servicebus'
     resource: namespace.id
   }
 }
