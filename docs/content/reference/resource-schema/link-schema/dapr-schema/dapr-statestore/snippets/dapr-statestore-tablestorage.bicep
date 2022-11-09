@@ -41,6 +41,7 @@ resource statestore 'Applications.Link/daprStateStores@2022-03-15-privatepreview
     environment: environment
     application: app.id
     kind: 'state.azure.tablestorage'
+    mode: 'resource'
     resource: storageAccount::tablestorage.id
   }
 }

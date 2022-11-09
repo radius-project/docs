@@ -30,6 +30,7 @@ This resource will automatically create and deploy the Dapr component spec for t
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | kind | y | The kind of the underlying state store resource. See [Available Dapr components](#available-dapr-components) for more information. | `state.azure.tablestorage`
+| mode | y |The mode used to build the pub/sub resource. Options are to build automatically via 'recipe', build via 'resource' or build manually via 'values'. Selection determines which set of fields to additionally require. | `recipe`
 | resource | n | The ID of the storage resource, if a non-generic `kind` is used. | `account::tables.id`
 | type | n | The Dapr component type. Used when kind is `generic`. | `state.couchbase`
 | metadata | n | Metadata for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-state-stores/) | `couchbaseURL: https://*****` |
