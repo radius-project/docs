@@ -37,6 +37,7 @@ resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
   properties: {
     environment: environment
     application: app.id
+    mode: 'values'
     host: redisPod.spec.hostname
     port: redisPod.spec.containers[0].ports[0].containerPort
     secrets: {
