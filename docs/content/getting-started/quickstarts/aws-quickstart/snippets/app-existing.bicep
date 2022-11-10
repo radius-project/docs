@@ -34,7 +34,7 @@ resource db 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
     environment: environment
     mode: 'values'
     host: memoryDB.outputs.memoryDBHost
-    port: memoryDB.outputs.memoryDBPORT
+    port: memoryDB.outputs.memoryDBPort
     secrets: {
       connectionString: memoryDB.outputs.memoryDBConnectionString
     }
