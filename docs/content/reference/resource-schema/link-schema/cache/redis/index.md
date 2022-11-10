@@ -37,7 +37,7 @@ The `redislabs.com/Redis` link is a [portable link]({{< ref links >}}) which can
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
 | resource  | n | The ID of the underlying resource for the link. Used when building the link from a resource. | `redisCache.id`
 | host | n | The Redis host name. | `redis.hello.com`
-| mode | n | Specifies how to build the Link resource. Options are to build automatically via 'recipe' or build manually via 'values'. Selection determines which set of fields to additionally require. | `recipe`
+| mode | Y | Specifies how to build the Link resource. Options are to build automatically via 'recipe' or build manually via 'values'. Selection determines which set of fields to additionally require. | `recipe`
 | [secrets](#secrets) | n | Secrets used when building the link from values. | [See below](#secrets)
 
 ### Secrets
