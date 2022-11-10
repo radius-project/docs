@@ -30,4 +30,4 @@ resource memoryDBCluster 'AWS.MemoryDB/Cluster@default' = {
 
 output memoryDBConnectionString string = 'rediss://${memoryDBCluster.properties.ClusterEndpoint.Address}:${memoryDBCluster.properties.ClusterEndpoint.Port}'
 output memoryDBHost string = memoryDBCluster.properties.ClusterEndpoint.Address
-output memoryDBPORT int = memoryDBCluster.properties.ClusterEndpoint.Port
+output memoryDBPort int = memoryDBCluster.properties.ClusterEndpoint.Port
