@@ -18,6 +18,7 @@ This quickstart will teach you:
     - [Create an IAM AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) and copy the AWS Access Key ID and the AWS Secret Access Key to a secure location for use later. If you have already created an Access Key pair, you can use that instead.
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 - [eksctl CLI](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
+- Run "aws configure" on cli, and supply your credentail information
 
 ## Step 1: Create an EKS cluster
 
