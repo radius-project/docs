@@ -64,6 +64,7 @@ NAV
 NODEAPP
 NodeJS
 OAuth
+OIDC
 PARAMS
 PYTHONAPP
 PowerShell
@@ -230,6 +231,7 @@ navbar
 newtab
 npm
 objectname
+oidcIssuer
 org's
 orgs
 pageinfo
