@@ -10,9 +10,6 @@ param location string = 'global'
 @description('Specifies the location for Azure resources.')
 param azLocation string = resourceGroup().location
 
-@description('Specifies the scope of azure resources.')
-param rootScope string = resourceGroup().id
-
 resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
   name: 'kv-volume-quickstart'
   location: location
@@ -28,7 +25,7 @@ resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
     }
     providers: {
       azure: {
-        scope: rootScope
+        scope: resourceGroup().id
       }
     }
   }
@@ -45,7 +42,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 }
 
 resource volume 'Applications.Core/volumes@2022-03-15-privatepreview' = {
-  name: 'vqs-${uniqueString(resourceGroup().id)}'
+  name: 'myvolume'
   location: location
   properties: {
     application: app.id
@@ -90,11 +87,6 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
       image: 'debian'
       command: ['/bin/sh']
       args: ['-c', 'while true; do ls /var/secrets; sleep 10;done']
-      ports: {
-        web: {
-          containerPort: 3000
-        }
-      }
       volumes: {
         volkv: {
           kind: 'persistent'
@@ -103,17 +95,6 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
         }
       }
       
-    }
-    connections: {
-      vault: {
-        source: keyvault.id
-        iam: {
-          kind: 'azure'
-          roles: [
-            'Key Vault Secrets User'
-          ]
-        }
-      }
     }
   }
 }

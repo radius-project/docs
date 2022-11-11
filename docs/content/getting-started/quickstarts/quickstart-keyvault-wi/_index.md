@@ -37,11 +37,11 @@ Create a file named `app.bicep` and define a Radius environment with the identit
 
 ## Step 3: Define an app, container, Key Vault, and volume
 
-1. Add a Radius application, an Azure Key Vault, and a volume to your `app.bicep` file:
+1. Add a Radius application, an Azure Key Vault, and a volume which uses the Key Vault to your `app.bicep` file:
 
 {{< rad file="snippets/keyvault-wi.bicep" embed=true marker="//APP" >}}
 
-2. Then, add a Radius [container]({{< ref container >}}):
+2. Then, add a Radius [container]({{< ref container >}}) with a volume mount for the Radius volume:
 
 {{< rad file="snippets/keyvault-wi.bicep" embed=true marker="//CONTAINER" >}}
 

@@ -5,7 +5,7 @@ import radius as radius
 param location string = 'global'
 
 @description('Specifies the location for Azure resources.')
-param azLocation string = 'westus3'
+param azLocation string = resourceGroup().location
 
 @description('Specifies the OIDC issuer URL')
 param oidcIssuer string 
