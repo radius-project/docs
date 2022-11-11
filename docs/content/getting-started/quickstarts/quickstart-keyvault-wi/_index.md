@@ -1,10 +1,10 @@
 ---
 type: docs
-title: "Quickstart: Mount a Key vault as a volume to a container"
-linkTitle: "Mount a Key vault as a volume"
-description: "Learn how to mount an Azure Key vault as a volume to a container" 
+title: "Quickstart: Mount an Azure Key Vault as a volume to a container"
+linkTitle: "Persistent Key Vault volume"
+description: "Learn how to mount an Azure Key Vault as a volume to a container" 
 weight: 700
-slug: 'keyvault-wi'
+slug: 'volume-keyvault'
 ---
 
 This quickstart will provide an overview of how to:
@@ -18,30 +18,32 @@ This quickstart will provide an overview of how to:
 
 - [rad CLI]({{< ref getting-started >}})
 - [Supported Kubernetes cluster]({{< ref kubernetes >}}) deployed with [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed
+- [Azure Keyvault Provider](https://azure.github.io/secrets-store-csi-driver-provider-azure/docs/getting-started/installation/)
+   - The above installation will also install the required [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation.html)
 
-## Step 1: Run `rad env init kubernetes` 
+## Step 1: Initialize Radius 
 
 Begin by running [`rad env init kubernetes`]({{< ref rad_env_init_kubernetes >}}). Make sure to configure an Azure cloud provider:
 
  ```bash
-   rad env init kubernetes -i
-   ```
+rad env init kubernetes -i
+```
 
 ## Step 2: Define a Radius environment
 
 Create a file named `app.bicep` and define a Radius environment with the identity property set:
 
-{{< rad file="snippets/keyvault-wi-1.bicep" embed=true >}}
+{{< rad file="snippets/keyvault-wi.bicep" embed=true marker="//ENVIRONMENT">}}
 
-## Step 3: Define an app, container, Key vault, and volume
+## Step 3: Define an app, container, Key Vault, and volume
 
-1. Add a Radius application, [container]({{< ref container >}}), and Key vault to your `app.bicep` file. Then, mount a volume to your container:
+1. Add a Radius application, an Azure Key Vault, and a volume to your `app.bicep` file:
 
-{{< rad file="snippets/Key vault-wi-2.bicep" embed=true marker="//CONTAINER" >}}
+{{< rad file="snippets/keyvault-wi.bicep" embed=true marker="//APP" >}}
 
-2. Then, add a Key vault and mount a volume to your container:
+2. Then, add a Radius [container]({{< ref container >}}):
 
-{{< rad file="snippets/keyvault-wi-2.bicep" embed=true marker="//VOLUME" >}}
+{{< rad file="snippets/keyvault-wi.bicep" embed=true marker="//CONTAINER" >}}
 
 
 ## Step 4: Deploy the app
@@ -49,27 +51,29 @@ Create a file named `app.bicep` and define a Radius environment with the identit
 Deploy your app by specifying the OIDC issuer URL. To retrieve the OIDC issuer URL, follow the Azure Workload Identity installation guide.
 
 ```bash
-   rad deploy ./app.bicep -p oidcIssuer=${OIDC_ISSUER_URL}
-   ```
+rad deploy ./app.bicep -p oidcIssuer=<OIDC_ISSUER_URL>
+```
 
-## Step 5: Verify access to the Key vault
+## Step 5: Verify access to the mounted Azure Key Vault
 
 1. Once deployment completes, read the logs from your running container resource:
 
-```bash
+   ```bash
    rad resource logs containers mycontainers -a myapp
    ```
 
 2. You should see the contents of the `/var/secrets` mount path defined in your `app.bicep` file:
 
-```txt
-[myapp-mycontainer-84bf87d96f-scb2t] mysecret
-```
+   ```txt
+   [myapp-mycontainer-84bf87d96f-scb2t] mysecret
+   ```
 
 ## Cleanup
 
 1. Run the following command to delete your app and container:
 
-```bash
+   ```bash
    rad app delete myapp --yes
    ```
+   
+2. Delete the deployed Azure Key Vault via the Azure portal or the Azure CLI

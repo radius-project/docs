@@ -20,52 +20,54 @@ The steps below will showcase a "rad-ified" version of the existing [Azure AD wo
 - [rad CLI]({{< ref getting-started >}}) installed on your machine
 - [Supported Kubernetes cluster]({{< ref kubernetes >}}) deployed with [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed
 
-## Step 1: Run `rad env init kubernetes` 
+## Step 1: Initialize Radius 
 
 Begin by running [`rad env init kubernetes`]({{< ref rad_env_init_kubernetes >}}). Make sure to configure an Azure cloud provider:
 
  ```bash
-   rad env init kubernetes -i
-   ```
+rad env init kubernetes -i
+```
 
 ## Step 2: Define a Radius environment 
 
-Create a file named `app.bicep` and define a Radius environment with the identity property set:
+Create a file named `app.bicep` and define a Radius environment with [identity property]({{< ref environments >}}) set:
 
-{{< rad file="snippets/container-wi-1.bicep" embed=true >}}
+{{< rad file="snippets/container-wi.bicep" embed=true marker="//ENVIRONMENT">}}
 
 ## Step 3: Define an app and a container
 
-Add a Radius application, [container]({{< ref container >}}), and Key vault to your `app.bicep` file:
+Add a Radius application, a Radius [container]({{< ref container >}}), and an Azure Key Vault to your `app.bicep` file:
 
-{{< rad file="snippets/container-wi-2.bicep" embed=true marker="//CONTAINER" >}}
+{{< rad file="snippets/container-wi.bicep" embed=true marker="//CONTAINER" >}}
 
 ## Step 4: Deploy the app and container
 
-Deploy your app by specifying the OIDC issuer URL. To retrieve the OIDC issuer URL, follow the Azure Workload Identity installation guide.
+Deploy your app by specifying the OIDC issuer URL. To retrieve the OIDC issuer URL, follow the [Azure Workload Identity installation guide](https://azure.github.io/azure-workload-identity/docs/installation.html).
 
 ```bash
-   rad deploy ./app.bicep -p oidcIssuer=<OIDC_ISSUER_URL>
-   ```
+rad deploy ./app.bicep -p oidcIssuer=<OIDC_ISSUER_URL>
+```
 
-## Step 5: Verify access to the Key vault
+## Step 5: Verify access to the Key Vault
 
 1. Once deployment completes, read the logs from your running container resource:
 
-```bash
+   ```bash
    rad resource logs containers mycontainers -a myapp
    ```
 
-2. You should see the contents of the secret defined in your `app.bicep` file:
+2. You should see the contents of the secret from your Key Vault:
 
-```txt
-[myapp-mycontainer-79c54bd7c7-tgdpn] I1108 18:39:53.636314       1 main.go:33] "successfully got secret" secret="supersecret"
-```
+   ```txt
+   [myapp-mycontainer-79c54bd7c7-tgdpn] I1108 18:39:53.636314       1 main.go:33] "successfully got secret" secret="supersecret"
+   ```
 
 ## Cleanup
 
-Run the following command to delete your app and container:
+1. Run the following command to delete your app and container:
 
-```bash
+   ```bash
    rad app delete myapp --yes
    ```
+
+2. Delete the deployed Azure Key Vault via the Azure portal or the Azure CLI

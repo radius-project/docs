@@ -1,3 +1,4 @@
+//ENVIRONMENT
 import radius as radius
 
 @description('Specifies the location for Radius resources.')
@@ -7,7 +8,6 @@ param location string = 'global'
 param azLocation string = 'westus3'
 
 @description('Specifies the OIDC issuer URL')
-#disable-next-line no-hardcoded-env-urls
 param oidcIssuer string 
 
 resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
@@ -30,6 +30,7 @@ resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
     }
   }
 }
+//ENVIRONMENT
 
 //CONTAINER
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
