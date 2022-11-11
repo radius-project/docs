@@ -1,7 +1,5 @@
 import radius as rad
 
-@description('Specifies the environment for resources.')
-#disable-next-line no-hardcoded-env-urls
 param oidcIssuer string
 
 //ENV
