@@ -31,6 +31,7 @@ The `rabbitmq.com/MessageQueue` link offers a [RabbitMQ message broker](https://
 |------|:--------:|-------------|---------|
 | application | n | The ID of the application resource this resource belongs to. | `app.id`
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
+| mode | y | Specifies how to build the Link resource. Options are to build automatically via 'recipe' or build manually via 'values'. Selection determines which set of fields to additionally require. | `recipe`
 | queue | y | The name of the queue. | `'orders'` |
 | [secrets](#secrets)  | y | Configuration used to manually specify a RabbitMQ container or other service providing a RabbitMQ Queue. | See [secrets](#secrets) below.
 

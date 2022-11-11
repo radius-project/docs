@@ -17,6 +17,7 @@ resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
   properties: {
     environment: environment
     application:app.id
+    mode: 'values'
     host: 'myredis.cluster.svc.local'
     port: 6679
     secrets: {

@@ -68,6 +68,7 @@ resource db 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
   properties: {
     environment: app.properties.environment
     application: app.id
+    mode: 'resource'
     // Automatically build the link from the resource ID
     resource: mongo.outputs.cosmosDatabaseId
   }

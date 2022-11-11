@@ -38,6 +38,7 @@ resource dblink 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
   location: 'global'
   properties: {
     environment: environment
+    mode: 'resource'
     resource: account::underlyingdb.id
   }
 }

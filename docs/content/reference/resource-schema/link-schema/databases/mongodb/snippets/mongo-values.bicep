@@ -17,6 +17,7 @@ resource db 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
   properties: {
     environment: environment
     application: app.id
+    mode: 'values'
     host: 'https://mymongo.cluster.svc.local'
     port: 4242
     secrets: {

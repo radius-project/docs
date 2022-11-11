@@ -8,6 +8,7 @@ args
 aspell
 Async
 Async
+AWSSimpleQueueService
 Azure
 Blazor
 CLI
@@ -40,6 +41,7 @@ GKE
 GOAPP
 GitHubAccess
 Hostname
+html
 HttpRoute
 HttpRoutes
 IAM
@@ -78,6 +80,8 @@ ResourceDeploymentClient
 Rollout
 SDKs
 SQL
+SQS
+SQSDeveloperGuide
 STATESTORE
 StatefulSet
 StatefulSets
@@ -261,6 +265,7 @@ rbac
 readinessProbe
 redis
 redisCaches
+replacePrefix
 repo
 resourceGroupName
 resourceId
