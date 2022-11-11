@@ -13,6 +13,10 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   }
 }
 
+resource volume 'Applications.Core/volumes@2022-03-15-privatepreview' existing = {
+  name: 'myvolume'
+}
+
 //CONTAINER
 resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'frontend'
@@ -33,10 +37,14 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
         }
       }
       volumes: {
-        tempdir: {
+        ephemeralVolume: {
           kind: 'ephemeral'
           mountPath: '/tmpfs'
           managedStore: 'memory'
+        }
+        persistentVolume: {
+          kind: 'persistent'
+          source: volume.id
         }
       }
       readinessProbe:{

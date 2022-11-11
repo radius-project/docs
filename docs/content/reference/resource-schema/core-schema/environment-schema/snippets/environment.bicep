@@ -10,9 +10,9 @@ resource environment 'Applications.Core/environments@2022-03-15-privatepreview' 
   location: 'global'
   properties: {
     compute: {
-      kind: 'kubernetes'   // What kind of container runtime to use
-      namespace: 'default' // Where application resources are rendered
-      identity: {
+      kind: 'kubernetes'   // Required. The kind of container runtime to use
+      namespace: 'default' // Required. The Kubernetes namespace in which to render application resources
+      identity: {          // Optional. External identity providers to use for connections
         kind: 'azure.com.workload'
         oidcIssuer: oidcIssuer
       }

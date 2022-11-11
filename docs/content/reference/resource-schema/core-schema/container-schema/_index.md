@@ -62,8 +62,20 @@ The ports offered by the container are  defined in the `ports` section.
 
 #### Volumes
 
-The volumes mounted to the container, either local or external, are defined in the `volumes` section.
-Learn more about volumes and supported resources in the [Volume docs]({{< ref volume-mount >}}).
+The volumes mounted to the container, either ephemeral or persistent, are defined in the `volumes` section.
+
+Ephemeral volumes have the same lifecycle as the container, being deployed and deleted with the container. They create an empty directory on the host and mount it to the container.
+
+Persistent volumes have lifecycles that are separate from the container. Containers can mount these persistent volumes and restart without losing data. Persistent volumes can also be useful for storing data that needs to be accessed by multiple containers.
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| name | y | A name key for the volume. | `tempstore`
+| kind | y | The type of volume, either `ephemeral` or `persistent`. | `ephemeral`
+| mountPath | y | The container path to mount the volume to. | `\tmp\mystore`
+| managedStore | y* | The backing storage medium to use when kind is 'ephemeral'. Either `disk` or `memory`. | `memory`
+| source | y* | A volume resource to mount when kind is 'persistent'. | `myvolume.id`
+| rbac | n | The role-based access control level when kind is 'persistent'. Allowed values are `'read'` and `'write'`. Defaults to 'read'. | `'read'`
 
 #### Readiness probe
 
