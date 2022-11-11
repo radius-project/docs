@@ -22,7 +22,7 @@ What's missing is a way to collapse the entire concept of an application into a 
 
 ### Build a unified concept of your application
 
-At the heart of Project Radius is a new **application resource**, with an accompanying set of resources and abstractions to describe your app's requirements and capabilities. These resources form the [Radius app model]({{< ref appmodel-concept >}}).
+At the heart of Project Radius is a new **application resource**, with an accompanying set of resources and abstractions to describe your app's requirements and capabilities. 
 
 <img alt="Diagram showing modeling an app with Project Radius" src="cloud-apps-radius.png" width="600px" />
 
