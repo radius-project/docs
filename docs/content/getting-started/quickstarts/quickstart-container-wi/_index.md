@@ -62,6 +62,8 @@ rad deploy ./app.bicep -p oidcIssuer=<OIDC_ISSUER_URL>
    [myapp-mycontainer-79c54bd7c7-tgdpn] I1108 18:39:53.636314       1 main.go:33] "successfully got secret" secret="supersecret"
    ```
 
+   Note: You might need to wait 1-2 minutes for the pods and identities to be set up completely. Retry in a few minutes if you are unable to view the secret contents.
+
 ## Cleanup
 
 1. Run the following command to delete your app and container:
