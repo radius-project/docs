@@ -65,7 +65,7 @@ rad deploy ./app.bicep -p oidcIssuer=<OIDC_ISSUER_URL>
 2. You should see the contents of the `/var/secrets` mount path defined in your `app.bicep` file:
 
    ```txt
-   [myapp-mycontainer-84bf87d96f-scb2t] mysecret
+   [myapp-mycontainer-d8b4fc44-qrhnn] secret context : supersecret
    ```
 
 ## Cleanup

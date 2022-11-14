@@ -86,7 +86,7 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
     container: {
       image: 'debian'
       command: ['/bin/sh']
-      args: ['-c', 'while true; do ls /var/secrets; sleep 10;done']
+      args: ['-c', 'while true; do echo secret context : `cat /var/secrets/mysecret`; sleep 10; done']
       volumes: {
         volkv: {
           kind: 'persistent'
