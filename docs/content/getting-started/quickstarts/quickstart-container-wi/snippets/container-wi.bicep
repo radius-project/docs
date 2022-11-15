@@ -53,11 +53,6 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
         KEYVAULT_URL: keyvault.properties.vaultUri
         SECRET_NAME: 'mysecret'
       }
-      ports: {
-        web: {
-          containerPort: 3000
-        }
-      }
     }
     connections: {
       vault: {
@@ -74,7 +69,7 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
 }
 
 resource keyvault 'Microsoft.KeyVault/vaults@2021-10-01' = {
-  name: 'vqs-${uniqueString(resourceGroup().id)}'
+  name: 'qs-${uniqueString(resourceGroup().id)}'
   location: azLocation
   properties: {
     enabledForTemplateDeployment: true
