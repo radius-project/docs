@@ -18,25 +18,26 @@ The steps below will showcase a "rad-ified" version of the existing [Azure AD wo
 ## Prerequisites
 
 - [rad CLI]({{< ref getting-started >}}) installed on your machine
-- [Supported Kubernetes cluster]({{< ref kubernetes >}}) deployed with [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed
+- [Supported Kubernetes cluster]({{< ref kubernetes >}})
+- [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed in your cluster
 
 ## Step 1: Initialize Radius 
 
 Begin by running [`rad env init kubernetes`]({{< ref rad_env_init_kubernetes >}}). Make sure to configure an Azure cloud provider:
 
- ```bash
+```bash
 rad env init kubernetes -i
 ```
 
 ## Step 2: Define a Radius environment 
 
-Create a file named `app.bicep` and define a Radius environment with [identity property]({{< ref environments >}}) set:
+Create a file named `app.bicep` and define a Radius environment with [identity property]({{< ref environments >}}) set. This configures your environment to use your Azure AD workload identity installation with your cluster's OIDC endpoint:
 
 {{< rad file="snippets/container-wi.bicep" embed=true marker="//ENVIRONMENT">}}
 
 ## Step 3: Define an app and a container
 
-Add a Radius application, a Radius [container]({{< ref container >}}), and an Azure Key Vault to your `app.bicep` file:
+Add a Radius application, a Radius [container]({{< ref container >}}), and an Azure Key Vault to your `app.bicep` file. Note the connection from the container to the Key Vault, with an iam property set for the Azure AD RBAC role:
 
 {{< rad file="snippets/container-wi.bicep" embed=true marker="//CONTAINER" >}}
 
@@ -62,7 +63,7 @@ rad deploy ./app.bicep -p oidcIssuer=<OIDC_ISSUER_URL>
    [myapp-mycontainer-79c54bd7c7-tgdpn] I1108 18:39:53.636314       1 main.go:33] "successfully got secret" secret="supersecret"
    ```
 
-   Note: You might need to wait 1-2 minutes for the pods and identities to be set up completely. Retry in a few minutes if you are unable to view the secret contents.
+   Note: the container retrieves the secret every 60 seconds. If you get an error on the first attempt, wait a minute and try again. The Azure AD federation may still be in progress.
 
 ## Cleanup
 

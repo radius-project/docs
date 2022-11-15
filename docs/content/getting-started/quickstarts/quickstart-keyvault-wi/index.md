@@ -17,7 +17,8 @@ This quickstart will provide an overview of how to:
 ## Prerequisites
 
 - [rad CLI]({{< ref getting-started >}})
-- [Supported Kubernetes cluster]({{< ref kubernetes >}}) deployed with [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed
+- [Supported Kubernetes cluster]({{< ref kubernetes >}})
+- [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed on your cluster
 - [Azure Keyvault Provider](https://azure.github.io/secrets-store-csi-driver-provider-azure/docs/getting-started/installation/)
    - The above installation will also install the required [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation.html)
 
@@ -25,7 +26,7 @@ This quickstart will provide an overview of how to:
 
 Begin by running [`rad env init kubernetes`]({{< ref rad_env_init_kubernetes >}}). Make sure to configure an Azure cloud provider:
 
- ```bash
+```bash
 rad env init kubernetes -i
 ```
 
@@ -35,20 +36,21 @@ Create a file named `app.bicep` and define a Radius environment with the identit
 
 {{< rad file="snippets/keyvault-wi.bicep" embed=true marker="//ENVIRONMENT">}}
 
-## Step 3: Define an app, container, Key Vault, and volume
+## Step 3: Define an app, Key  Vault, and volume
 
-1. Add a Radius application, an Azure Key Vault, and a volume which uses the Key Vault to your `app.bicep` file:
+Add a Radius application, an Azure Key Vault, and a Radius volume which uses the Key Vault to your `app.bicep` file:
 
 {{< rad file="snippets/keyvault-wi.bicep" embed=true marker="//APP" >}}
 
-2. Then, add a Radius [container]({{< ref container >}}) with a volume mount for the Radius volume:
+## Step 4: Define an app, Key  Vault, and volume
+
+Now add a Radius [container]({{< ref container >}}) with a volume mount for the Radius volume:
 
 {{< rad file="snippets/keyvault-wi.bicep" embed=true marker="//CONTAINER" >}}
 
+## Step 5: Deploy the app
 
-## Step 4: Deploy the app
-
-Deploy your app by specifying the OIDC issuer URL. To retrieve the OIDC issuer URL, follow the Azure Workload Identity installation guide.
+Deploy your app, specifying the OIDC issuer URL. To retrieve the OIDC issuer URL, follow the [Azure Workload Identity installation guide](https://azure.github.io/azure-workload-identity/docs/installation.html).
 
 ```bash
 rad deploy ./app.bicep -p oidcIssuer=<OIDC_ISSUER_URL>
@@ -64,7 +66,7 @@ rad deploy ./app.bicep -p oidcIssuer=<OIDC_ISSUER_URL>
 
 2. You should see the contents of the `/var/secrets` mount path defined in your `app.bicep` file:
 
-   ```txt
+   ```
    [myapp-mycontainer-d8b4fc44-qrhnn] secret context : supersecret
    ```
 
