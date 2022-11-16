@@ -41,7 +41,7 @@ The tutorial directory contains three [Bicep]({{< ref bicep >}}) files:
 1. **mongo-container.bicep** - Contains the definition for deploying mongo container
 1. **azure-cosmosdb.bicep** - Contains the definition for Azure cosmosdb
 
-## Application
+## Defining a Radius application
 
 Let's dig into the `app.bicep` to understand the input parameters and `Applications.Core/applications` resource. The application acts as the container for all of your application services, infrastructure, and relationships. It's the top-level resource a developer will model and configure.
 

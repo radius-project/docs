@@ -18,7 +18,7 @@ While Contour is required for Radius gateways and routes, you can manually delet
 
 ### Resource names must be unique for a given resource type across applications
 
-Resources for a given type must currently have unique names within a [workspace]({{< ref workspaces >}}. For example, if two applications both have a `frontend` container resource, the first application deployment into any environment associated with the workspace will succeed while the second will fail.
+Resources for a given type must currently have unique names within a [workspace]({{< ref workspaces >}}). For example, if two applications both have a `frontend` container resource, the first application deployment into any environment associated with the workspace will succeed while the second will fail.
 
 As a workaround, use separate workspaces for applications that have repeated resource names for a given type.
 
