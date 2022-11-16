@@ -75,13 +75,13 @@ The **`gateway`** resource is how users will interact with your frontend contain
 
 {{< rad file="snippets/app.bicep" embed=true marker="//GATEWAY" >}}
 
-## Connectors
+## Links
 
-A [Radius connector]({{< ref connector-schema >}}) provides an abstraction for an infrastructure resource through its API, allowing the backing resource type to be swapped out without changing the way the consuming resource is defined. In this example, a developer can first use a containerized Mongo DB as the app's database when deploying to their dev environment. Later, the infrastructure admin can use an Azure Cosmos DB for MongoDB as the app's database when deploying to production.
+A [Radius link]({{< ref link-schema >}}) provides an abstraction for an infrastructure resource through its API, allowing the backing resource type to be swapped out without changing the way the consuming resource is defined. In this example, a developer can first use a containerized Mongo DB as the app's database when deploying to their dev environment. Later, the infrastructure admin can use an Azure Cosmos DB for MongoDB as the app's database when deploying to production.
 
-<img src="mongo-connector.png" width=450px alt="Diagram of a mongo connector" /><br />
+<img src="mongo-link.png" width=450px alt="Diagram of a mongo link" /><br />
 
-To learn more about connectors visit the [concepts docs]({{< ref appmodel-concept >}}).
+To learn more about links visit the [concepts docs]({{< ref appmodel-concept >}}).
 
 ### Containerized Mongo DB
 
@@ -93,15 +93,15 @@ The mongo container definition is then referenced within `app.bicep` as a [Bicep
 
 {{< rad file="snippets/app.bicep" embed=true marker="//MONGOMODULE" >}}
 
-### Mongo connector
+### Mongo link
 
-Now that you have modeled your infrastructure, look how the `Applications.Connector/mongoDatabases` connector is built using the `connectionString` output:
+Now that you have modeled your infrastructure, look how the `Applications.Link/mongoDatabases` link is built using the `connectionString` output:
 
-{{< rad file="snippets/app.bicep" embed=true marker="//DATABASE CONNECTOR" >}}
+{{< rad file="snippets/app.bicep" embed=true marker="//DATABASE LINK" >}}
 
 ### Connect to `db` from `frontend`
 
-Once the `db` connector is defined, you can reference it in the [`connections`]({{< ref appmodel-concept >}}) section of the `frontend` resource, as shown above.
+Once the `db` link is defined, you can reference it in the [`connections`]({{< ref appmodel-concept >}}) section of the `frontend` resource, as shown above.
 
 [Connections]({{< ref appmodel-concept >}}) are used to configure relationships between the source container and the target resource. This declares the *intention* from the `frontend` container to communicate with the `db` resource.
 
@@ -131,7 +131,7 @@ Now you are ready to deploy the application for the first time:
      Completed       http-route                 Applications.Core/httpRoutes
      Completed       public                     Applications.Core/gateways
      Completed       mongo-module               Microsoft.Resources/deployments
-     Completed       db                         Applications.Connector/mongoDatabases
+     Completed       db                         Applications.Link/mongoDatabases
 
    Deployment Complete 
    ```
@@ -157,6 +157,6 @@ Now you are ready to deploy the application for the first time:
 
 ## Next step: Moving to production on Azure
 
-When moving to production, you may want to swap your locally running container for an Azure CosmosDB for your Mongo database. The next step will show you how to swap your connector infrastructure to an Azure resource, leveraging the Azure [cloud provider]({{< ref providers >}}).
+When moving to production, you may want to swap your locally running container for an Azure CosmosDB for your Mongo database. The next step will show you how to swap your link infrastructure to an Azure resource, leveraging the Azure [cloud provider]({{< ref providers >}}).
 
-<br> {{< button text="Previous: Initialize an environment" page="1-tutorial-environment" newline="false" >}}{{< button text="Next: Swap connector resource (optional)" page="3-tutorial-connector" >}} 
+<br> {{< button text="Previous: Initialize an environment" page="1-tutorial-environment" newline="false" >}}{{< button text="Next: Swap link resource (optional)" page="3-tutorial-link" >}} 

@@ -25,27 +25,30 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
     }
     connections: {
       myconnection: {
-        source: mongoConnector.id
+        source: mongoLink.id
       }
     }
   }
 }
 //CONTAINER
 
-//CONNECTOR
+//LINK
 module mongoContainerModule 'br:radius.azurecr.io/modules/mongo-container:edge' = {
   name: 'mongo-container-module'
 }
 
-resource mongoConnector 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
-  name: 'mongo-connector'
+resource mongoLink 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
+  name: 'mongo-link'
   location: 'global'
   properties: {
     environment: environment
     application: app.id
+    mode: 'values'
+    host: mongoContainerModule.outputs.host
+    port: mongoContainerModule.outputs.port
     secrets: {
       connectionString: mongoContainerModule.outputs.connectionString
     }
   }
 }
-//CONNECTOR
+//LINK

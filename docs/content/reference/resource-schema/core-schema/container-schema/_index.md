@@ -10,7 +10,7 @@ weight: 300
 
 ## Platform resources
 
-Containers are hosted by Kubernetes as the container runtime today, regardless of which platform the application is deployed into. We plan to support additional container runtimes in the future. 
+Containers are hosted by Kubernetes as the container runtime today, regardless of which platform the application is deployed into. We plan to support additional container runtimes in the future.
 
 ## Resource format
 
@@ -39,8 +39,11 @@ Details on what to run and how to run it are defined in the `container` property
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| image | y | The registry and image to download and run in your container. | `radiusteam/frontend`
-| env | n | A list of environment variables to be set for the container. | `"ENV_VAR": "value"`
+| image | y | The registry and image to download and run in your container. | `'myregistry/myimage:tag'`
+| env | n | A list of environment variables to be set for the container. | `'ENV_VAR': 'value'`
+| command | n | Entrypoint array. Overrides the container image's ENTRYPOINT. | `['/bin/sh']`
+| args | n | Arguments to the entrypoint. Overrides the container image's CMD. | `['-c', 'while true; do echo hello; sleep 10;done']`
+| workingDir | n | Working directory for the container. | `'/app'`
 | [ports](#ports) | n | Ports the container provides | [See below](#ports).
 | [readinessProbe](#readiness-probe) | n | Readiness probe configuration. | [See below](#readiness-probe).
 | [livenessProbe](#liveness-probe) | n | Liveness probe configuration. | [See below](#liveness-probe).
@@ -109,7 +112,7 @@ Connections define how a container connects to [other resources]({{< ref resourc
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | name | y | A name key for the port. | `inventory`
-| source | y | The id of the connector or resource the container is connecting to. | `db.id`
+| source | y | The id of the link or resource the container is connecting to. | `db.id`
 | [iam](#iam) | n | Identity and access management (IAM) roles to set on the target resource. | [See below](#iam)
 
 #### IAM

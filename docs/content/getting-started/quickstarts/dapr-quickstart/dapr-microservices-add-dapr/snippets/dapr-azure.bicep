@@ -40,7 +40,7 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   }
 }
 
-resource backendRoute 'Applications.Connector/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
+resource backendRoute 'Applications.Link/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
   name: 'backend-route'
   location: 'global'
   properties: {
@@ -70,12 +70,13 @@ resource account 'Microsoft.Storage/storageAccounts@2019-06-01' = {
   }
 }
 
-resource stateStore 'Applications.Connector/daprStateStores@2022-03-15-privatepreview' = {
+resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' = {
   name: 'orders'
   location: 'global'
   properties: {
     environment: environment
     application: app.id
+    mode: 'values'
     kind: 'generic'
     type: 'state.azure.tablestorage'
     version: 'v1'

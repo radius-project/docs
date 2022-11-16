@@ -4,9 +4,11 @@ AKS
 AmazonS
 APIs
 APPBASE
+args
 aspell
 Async
 Async
+AWSSimpleQueueService
 Azure
 Blazor
 CLI
@@ -31,6 +33,7 @@ Dockerfiles
 Docsy
 DocumentDB
 EKS
+entrypoint
 EOF
 Extensibility
 FileShare
@@ -38,6 +41,7 @@ GKE
 GOAPP
 GitHubAccess
 Hostname
+html
 HttpRoute
 HttpRoutes
 IAM
@@ -75,6 +79,8 @@ ResourceDeploymentClient
 Rollout
 SDKs
 SQL
+SQS
+SQSDeveloperGuide
 STATESTORE
 StatefulSet
 StatefulSets
@@ -257,6 +263,7 @@ rbac
 readinessProbe
 redis
 redisCaches
+replacePrefix
 repo
 resourceGroupName
 resourceId
@@ -306,6 +313,7 @@ webapp
 webpage
 westus
 westus2
+workingDir
 workspaceTypes
 workspaces
 yaml

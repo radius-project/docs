@@ -63,7 +63,7 @@ resource node_app_route 'Applications.Core/httpRoutes@2022-03-15-privatepreview'
 }
 //ROUTE
 //DAPR
-resource python_app_route 'Applications.Connector/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
+resource python_app_route 'Applications.Link/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
   name: 'python-app'
   location: 'global'
   properties: {
@@ -72,7 +72,7 @@ resource python_app_route 'Applications.Connector/daprInvokeHttpRoutes@2022-03-1
     appId: 'python-app'
   }
 }
-resource go_app_route 'Applications.Connector/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
+resource go_app_route 'Applications.Link/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
   name: 'go-app'
   location: 'global'
   properties: {
@@ -149,7 +149,7 @@ resource python_app 'Applications.Core/containers@2022-03-15-privatepreview' = {
 }
 //PYTHONAPP
 //STATESTORE
-resource statestore 'Applications.Connector/daprStateStores@2022-03-15-privatepreview' existing = {
+resource statestore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' existing = {
   name: 'orders'
 }
 //STATESTORE

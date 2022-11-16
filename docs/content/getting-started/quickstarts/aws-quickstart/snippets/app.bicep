@@ -29,11 +29,14 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   }
 }
 
-resource db 'Applications.Connector/redisCaches@2022-03-15-privatepreview' = {
+resource db 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
   name: 'db'
   location: location
   properties: {
     environment: environment
+    mode: 'values'
+    host: memoryDB.outputs.memoryDBHost
+    port: memoryDB.outputs.memoryDBPort
     secrets: {
       connectionString: memoryDB.outputs.memoryDBConnectionString
     }

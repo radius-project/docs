@@ -49,15 +49,15 @@ Add an `env` property which will contain a list of environment variables to set.
 
    Here you can see the environment variables `FOO` and `BAZ`, with their accompanying values.
 
-## Step 4: Add a Mongo Connector
+## Step 4: Add a Mongo Link
 
-Next, add to `app.bicep` a module with a containerized Mongo database (leveraging a Bicep module containing Kubernetes resources), along with a [Mongo connector]({{< ref connectors >}}):
+Next, add to `app.bicep` a module with a containerized Mongo database (leveraging a Bicep module containing Kubernetes resources), along with a [Mongo link]({{< ref links >}}):
 
-{{< rad file="snippets/3-app.bicep" embed=true marker="//CONNECTOR" >}}
+{{< rad file="snippets/3-app.bicep" embed=true marker="//LINK" >}}
 
-## Step 5: Connect to the Mongo Connector
+## Step 5: Connect to the Mongo Link
 
-Connections from a container to a connector result in environment variables for connection information [automatically being set on the container]({{< ref "appmodel-concept#injected-values" >}}). Update your container definition to add a connection to the new Mongo connector:
+Connections from a container to a link result in environment variables for connection information [automatically being set on the container]({{< ref "appmodel-concept#injected-values" >}}). Update your container definition to add a connection to the new Mongo link:
 
 {{< rad file="snippets/3-app.bicep" embed=true marker="//CONTAINER" >}}
 
@@ -79,7 +79,7 @@ Connections from a container to a connector result in environment variables for 
 
 ## Cleanup
 
-1. Run `rad app delete` to cleanup your Radius application, container, and connector:
+1. Run `rad app delete` to cleanup your Radius application, container, and link:
 
    ```bash
    rad app delete -a myapp

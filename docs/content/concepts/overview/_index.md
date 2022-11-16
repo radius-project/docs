@@ -77,7 +77,7 @@ Project Radius aims to support all hosting platform types - from hyperscale clou
 
 ### Application portability
 
-The Radius app model is designed to be portable across all Radius-supported platforms. Combined with connectors and other frameworks such as [Dapr](https://dapr.io/), teams can write their apps once and deploy to any Radius-enabled platform in minutes.
+The Radius app model is designed to be portable across all Radius-supported platforms. Combined with links and other frameworks such as [Dapr](https://dapr.io/), teams can write their apps once and deploy to any Radius-enabled platform in minutes.
 
 ### Consistent tooling
 

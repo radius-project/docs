@@ -122,6 +122,8 @@ resource service 'core/Service@v1' = {
 }
 //SERVICE
 
+output host string = name
+output port int = int(port)
 output connectionString string = 'mongodb://${name}:${port}/${name}?authSource=admin'
 //MONGO
 
