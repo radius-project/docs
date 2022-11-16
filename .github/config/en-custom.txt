@@ -66,6 +66,7 @@ NAV
 NODEAPP
 NodeJS
 OAuth
+OIDC
 PARAMS
 PYTHONAPP
 PowerShell
@@ -313,6 +314,7 @@ webapp
 webpage
 westus
 westus2
+wi
 workingDir
 workspaceTypes
 workspaces
