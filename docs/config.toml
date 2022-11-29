@@ -41,7 +41,7 @@ category = "categories"
 [[menu.main]]
     name = "GitHub"
     weight = 40
-    url = "https://github.com/project-radius/docs"
+    url = "https://github.com/project-radius"
     pre = "<i class='fab fa-github'></i>"
 [[menu.main]]
     name = "Community"
