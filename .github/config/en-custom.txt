@@ -315,6 +315,7 @@ webapp
 webpage
 westus
 westus2
+wi
 workingDir
 workspaceTypes
 workspaces
