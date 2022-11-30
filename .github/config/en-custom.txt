@@ -235,6 +235,7 @@ navbar
 newtab
 npm
 objectname
+oidcIssuer
 org's
 orgs
 pageinfo

@@ -20,11 +20,15 @@ A Kubernetes namespace is specified on the environment to tell Radius where to r
 
 <img src=environments.png alt="Diagram showing a Radius environment mapping to a Kubernetes cluster and namespace" width=800px />
 
-## Schema
+### External identity provider
 
-Visit the [environment schema page]({{< ref environment-schema >}}) to learn more about environment properties and values.
+You can optionally specify an external identity provider for your environment. This allows you to add to a Radius container an external identity such as an Azure user-assigned managed identity, and then specify role-based access control (RBAC) policies for that identity on Azure resources.
 
-{{< button page="environment-schema" text="Schema" >}}
+Supported identity providers:
+
+- [Azure AD workload identity](https://azure.github.io/azure-workload-identity/docs/introduction.html)
+
+Visit the Azure direct connection quickstart for more information. (coming soon)
 
 ## CLI commands
 
@@ -73,6 +77,12 @@ rad env switch -e myenv
 {{% /codetab %}}
 
 {{< /tabs >}}
+
+## Schema
+
+Visit the [environment schema page]({{< ref environment-schema >}}) to learn more about environment properties and values.
+
+{{< button page="environment-schema" text="Schema" >}}
 
 ## Example
 
