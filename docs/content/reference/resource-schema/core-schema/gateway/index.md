@@ -17,6 +17,8 @@ weight: 401
 | name | y | The name of your Gateway. | `'gateway'`
 | location | y | The location of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `global`
 | [properties](#properties) | y | Properties of the resource. | [See below](#properties)
+| [tls](#TLS) | n | TLS Configurations of the gateway. | [See below](#properties)
+
 
 ### Properties
 
@@ -25,6 +27,15 @@ weight: 401
 | application | y | The ID of the application resource this resource belongs to. | `app.id`
 | [hostname](#hostname) | n | The hostname information for this gateway. | [See below](#hostname)
 | [routes](#routes) | y | The routes attached to this gateway. | [See below](#routes)
+
+### TLS
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| sslPassThrough| y | Determines if the gateway passthrough the TLS traffic to backend server. Currently only `true` is supported. | `true`
+
+With sslPassThrough set to `true`, the gateway can only support SNI routing. Path based routing cannot be supported.
+
 
 #### Routes
 
