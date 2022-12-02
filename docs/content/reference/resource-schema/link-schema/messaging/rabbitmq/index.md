@@ -51,7 +51,7 @@ Secrets are used when defining a RabbitMQ link with a container or external serv
 
 ## Connections
 
-[Services]({{< ref services >}}) can define [connections]({{< ref appmodel-concept >}}) to links using the `connections` property. This allows the service to access properties of the link and contributes to visualization and health experiences.
+[Services]({{< ref container >}}) can define [connections]({{< ref appmodel-concept >}}) to links using the `connections` property. This allows the service to access properties of the link and contributes to visualization and health experiences.
 
 ### Environment variables
 

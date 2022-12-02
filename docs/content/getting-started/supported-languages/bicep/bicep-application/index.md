@@ -28,9 +28,9 @@ A MongoDB link can be modeled as:
 
 ## Add services
 
-Now that you have an application resource defined you can add [services]({{< ref services >}}) to it.
+Now that you have an application resource defined you can add [containers]({{< ref container >}}) to it.
 
-{{< button text="Service library" page="services" >}}
+{{< button text="Service library" page="container" >}}
 
 For example, you can add a [container]({{< ref container >}}):
 
