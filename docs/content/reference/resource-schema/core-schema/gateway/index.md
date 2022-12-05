@@ -19,7 +19,6 @@ weight: 401
 | [properties](#properties) | y | Properties of the resource. | [See below](#properties)
 | [tls](#TLS) | n | TLS Configurations of the gateway. | [See below](#properties)
 
-
 ### Properties
 
 | Key  | Required | Description | Example |
