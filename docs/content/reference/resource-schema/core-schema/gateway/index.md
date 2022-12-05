@@ -35,7 +35,6 @@ weight: 401
 
 With sslPassThrough set to `true`, the gateway can only support SNI routing. Path based routing cannot be supported.
 
-
 #### Routes
 
 You can define a list of routes, each representing a connection to a service. Specifying a route opens the destination [HTTP Route]({{< ref httproute >}}) to the internet.
