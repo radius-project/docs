@@ -30,9 +30,9 @@ In this tutorial, you will:
 
 Dapr integrates directly with Project Radius to provide a simple, easy to use, and powerful way to build microservices. Dapr developers can:
 
-- Model Dapr building blocks as [Radius connector resources]({{< ref dapr-schema >}})
+- Model Dapr building blocks as [Radius link resources]({{< ref dapr-schema >}})
 - Automatically generate Dapr component configuration files based on the source resource
-- (coming soon) Automatically configure component scoping and other secure configuration based upon connections to the Dapr connectors
+- (coming soon) Automatically configure component scoping and other secure configuration based upon connections to the Dapr links
 
 ## Prerequisites
 

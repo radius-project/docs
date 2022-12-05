@@ -33,7 +33,7 @@ When using Bicep to author and deploy Radius applications:
 
 - A template is sent from UCP to the deployment engine (DE) for processing and orchestration
 - DE interacts with the Radius RP to manage Radius resources, and with external planes for other resource types (Kubernetes, Azure, etc.)
-- The RP handles CRUDL operations for Radius applications, connectors, and other app-model resources
+- The RP handles CRUDL operations for Radius applications, links, and other app-model resources
 
 <img src="ucp-selfhosted.png" alt="Diagram of the UCP on a self-hosted environment with template deployment" width="1000" />
 {{% /codetab %}}
@@ -51,10 +51,10 @@ When using the rad CLI or other IaC tools to deploy and interact with Radius app
 
 ### Radius resource provider
 
-The Radius resource provider handles CRUDL requests for Radius applications, connectors, and other app-model resources. The resource provider is split into two namespaces:
+The Radius resource provider handles CRUDL requests for Radius applications, links, and other app-model resources. The resource provider is split into two namespaces:
 
 - **Applications.Core**: The _core_ resources of an application, including the application itself, containers, gateways, and routes.
-- **Applications.Connectors**: The _connector_ resources that can be used within an application.
+- **Applications.Links**: The _link_ resources that can be used within an application.
 
 Backing resources may be created or deleted by the Radius RP for some resources. For example, a Radius container creates a backing Pod or Container App on the target platform and container runtime.
 

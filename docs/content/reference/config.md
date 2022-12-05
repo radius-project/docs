@@ -70,5 +70,5 @@ workspaces:
 | Key | Description | Example |
 |-----|-------------|---------|
 | **azure** | The kind of [cloud provider](#cloud-providers) to configure. Currently only 'azure' is supported | `azure` |
-| **subscirptionid** | The Azure subscriptionID to deploy resources into
+| **subscriptionid** | The Azure subscriptionID to deploy resources into
 | **resourcegroup** | The name of the Azure resource group to deploy Azure resources into | `Dev` |

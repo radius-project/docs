@@ -46,7 +46,7 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 }
 //BACKEND
 
-resource backendRoute 'Applications.Connector/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
+resource backendRoute 'Applications.Link/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
   name: 'dapr-backend'
   location: 'global'
   properties: {
@@ -56,12 +56,13 @@ resource backendRoute 'Applications.Connector/daprInvokeHttpRoutes@2022-03-15-pr
   }
 }
 
-resource stateStore 'Applications.Connector/daprStateStores@2022-03-15-privatepreview' = {
+resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' = {
   name: 'orders'
   location: 'global'
   properties: {
     environment: environment
     application: app.id
+    mode: 'values'
     kind: 'generic'
     type: 'state.redis'
     version: 'v1'

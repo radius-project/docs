@@ -31,7 +31,7 @@ These new resources form the [**Radius app model**]({{< ref appmodel-concept >}}
 - Visualize the entire application, including its dependencies and relationships
 - Investigate cross-app health and diagnostics, including dependencies and connections
 - Identify ownership and locate artifacts
-- Support handoffs between teams as the app matures
+- Support handoff between teams as the app matures
 
 The result is no longer just a flat list of resources - it's a fully codified abstraction of how the services and infrastructure relate to each other:
 
@@ -77,7 +77,7 @@ Project Radius aims to support all hosting platform types - from hyperscale clou
 
 ### Application portability
 
-The Radius app model is designed to be portable across all Radius-supported platforms. Combined with connectors and other frameworks such as [Dapr](https://dapr.io/), teams can write their apps once and deploy to any Radius-enabled platform in minutes.
+The Radius app model is designed to be portable across all Radius-supported platforms. Combined with links and other frameworks such as [Dapr](https://dapr.io/), teams can write their apps once and deploy to any Radius-enabled platform in minutes.
 
 ### Consistent tooling
 

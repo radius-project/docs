@@ -19,29 +19,7 @@ _Visit the [GitHub docs]({{< ref github >}}) if you need access to the organizat
 
 The `rad` CLI manages your applications, resources, and environments. Begin by installing it on your machine:
 
-{{< tabs "Windows PowerShell" MacOS "Linux/WSL" "Cloud Shell" Binaries >}}
-
-{{% codetab %}}
-{{< latest >}}
-Run the following in a PowerShell window:
-
-```powershell
-iwr -useb "https://get.radapp.dev/tools/rad/install.ps1" | iex
-```
-
-You may need to refresh your $PATH environment variable to access `rad`:
-```powershell
-$Env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")
-```
-{{< /latest >}}
-{{< edge >}}
-To install the latest edge version:
-
-```powershell
-$script=iwr -useb  https://radiuspublic.blob.core.windows.net/tools/rad/install.ps1; $block=[ScriptBlock]::Create($script); invoke-command -ScriptBlock $block -ArgumentList edge
-```
-{{< /edge >}}
-{{% /codetab %}}
+{{< tabs MacOS "Linux/WSL" "Windows PowerShell" "Cloud Shell" Binaries >}}
 
 {{% codetab %}}
 {{< latest >}}
@@ -74,6 +52,28 @@ wget -q "https://radiuspublic.blob.core.windows.net/tools/rad/install.sh" -O - |
 {{% /codetab %}}
 
 {{% codetab %}}
+{{< latest >}}
+Run the following in a PowerShell window:
+
+```powershell
+iwr -useb "https://get.radapp.dev/tools/rad/install.ps1" | iex
+```
+
+You may need to refresh your $PATH environment variable to access `rad`:
+```powershell
+$Env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")
+```
+{{< /latest >}}
+{{< edge >}}
+To install the latest edge version:
+
+```powershell
+$script=iwr -useb  https://radiuspublic.blob.core.windows.net/tools/rad/install.ps1; $block=[ScriptBlock]::Create($script); invoke-command -ScriptBlock $block -ArgumentList edge
+```
+{{< /edge >}}
+{{% /codetab %}}
+
+{{% codetab %}}
 [Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/overview) is an interactive, authenticated, browser-accessible shell for managing Azure resources.
 
 Azure Cloud Shell for bash doesn't have a sudo command, so users are unable to install Radius to the default `/usr/local/bin` installation path. To install the rad CLI to the home directory, run the following commands:
@@ -91,9 +91,9 @@ PowerShell for Cloud Shell is currently not supported.
 {{% codetab %}}
 {{< latest >}}
 1. Download the `rad` CLI from one of these URLs:
-   - MacOS: https://get.radapp.dev/tools/rad/edge/macos-x64/rad
-   - Linux: https://get.radapp.dev/tools/rad/edge/linux-x64/rad
-   - Windows: https://get.radapp.dev/tools/rad/edge/windows-x64/rad.exe
+   - MacOS: https://get.radapp.dev/tools/rad/0.14/macos-x64/rad
+   - Linux: https://get.radapp.dev/tools/rad/0.14/linux-x64/rad
+   - Windows: https://get.radapp.dev/tools/rad/0.14/windows-x64/rad.exe
 1. Ensure the user has permission to execute the binary and place it somewhere on your PATH so it can be invoked easily.
 {{< /latest >}}
 {{< edge >}}
@@ -107,7 +107,7 @@ PowerShell for Cloud Shell is currently not supported.
 
 {{< /tabs >}}
 
-> You may be prompted for your sudo password during installation. If you are unable to sudo you can install the rad CLI to another directory by setting the `RADIUS_INSTALL_DIR` environment variable with your intended install path.
+> You may be prompted for your sudo password during installation, as the installer places the `rad` binary under `/usr/local/bin`. If you are unable to sudo you can install the rad CLI to another directory by setting the `RADIUS_INSTALL_DIR` environment variable with your intended install path.
 
 Verify the rad CLI is installed correctly by running `rad`.
 
@@ -123,7 +123,7 @@ Visual Studio Code offers the best authoring experience for Project Radius and B
    {{< button link="https://get.radapp.dev/tools/vscode-extensibility/stable/rad-vscode-bicep.vsix" text="Download Bicep extension" >}}
 
    {{< edge >}}
-   {{< button link="https://radiuspublic.blob.core.windows.net/tools/vscode-extensibility/edge/rad-vscode-bicep.vsix" text="Download Bicep extension (edge)" >}}
+   {{< button link="https://get.radapp.dev/tools/vscode-extensibility/edge/rad-vscode-bicep.vsix" text="Download Bicep extension (edge)" >}}
    {{< /edge >}}
    {{% /codetab %}}
 
@@ -132,13 +132,13 @@ Visual Studio Code offers the best authoring experience for Project Radius and B
    Stable Version
 
    ```bash
-   curl https://radiuspublic.blob.core.windows.net/tools/vscode/stable/rad-vscode-bicep.vsix --output rad-vscode-bicep.vsix
+   curl https://get.radapp.dev/tools/vscode/stable/rad-vscode-bicep.vsix --output rad-vscode-bicep.vsix
    ```
 
    Edge Version
 
    ```bash
-   curl https://radiuspublic.blob.core.windows.net/tools/vscode-extensibility/edge/rad-vscode-bicep.vsix --output rad-vscode-bicep.vsix
+   curl https://get.radapp.dev/tools/vscode-extensibility/edge/rad-vscode-bicep.vsix --output rad-vscode-bicep.vsix
    ```
 
    {{% /codetab %}}

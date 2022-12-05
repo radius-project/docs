@@ -24,7 +24,10 @@ resource memoryDBCluster 'AWS.MemoryDB/Cluster@default' = {
     ACLName: 'open-access'
     SecurityGroupIds: [eksCluster.properties.ClusterSecurityGroupId]
     SubnetGroupName: subnetGroup.name
+    NumReplicasPerShard: 0
   }
 }
 
 output memoryDBConnectionString string = 'rediss://${memoryDBCluster.properties.ClusterEndpoint.Address}:${memoryDBCluster.properties.ClusterEndpoint.Port}'
+output memoryDBHost string = memoryDBCluster.properties.ClusterEndpoint.Address
+output memoryDBPort int = memoryDBCluster.properties.ClusterEndpoint.Port

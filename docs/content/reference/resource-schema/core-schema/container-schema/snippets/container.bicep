@@ -51,6 +51,14 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
         kind:'exec'
         command:'ls /tmp'
       }
+      command: [
+        '/bin/sh'
+      ]
+      args: [
+        '-c'
+        'while true; do echo hello; sleep 10;done'
+      ]
+      workingDir: '/app'
     }
     connections: {
       inventory: {
@@ -84,12 +92,13 @@ resource http 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
   }
 }
 
-resource db 'Applications.Connector/mongoDatabases@2022-03-15-privatepreview' = {
+resource db 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
   name: 'database'
   location: 'global'
   properties: {
     environment: environment
     application: app.id
+    mode: 'resource'
     resource: mongoDbId
   }
 }

@@ -30,7 +30,7 @@ The largest circle you can draw around your resources where names have meaning.
 
 <img alt="Whiteboard diagram of an application and its components" src="radius-application.png" width="500px" /><br />
 
-An application is defined as a top-level `resource app` in an instrastructure-as-code file:
+An application is defined as a top-level `resource app` in an infrastructure-as-code file:
 
 {{< tabs Bicep >}}
 
@@ -94,6 +94,6 @@ Adding connections to the above IaC file, it becomes:
 
 ## Next step
 
-Now that you have an understanding of the Radius app model, learn more about Radius connectors:
+Now that you have an understanding of the Radius app model, learn more about Radius links:
 
-{{< button text="Connectors" page="connectors-concept" size="btn-lg" color="success" >}}
+{{< button text="Links" page="links-concept" size="btn-lg" color="success" >}}
