@@ -16,26 +16,26 @@ Project Radius enables you to retain or use your own defined tagging scheme for 
 
 You can set the labels and annotations on an environment or an application or a container resource using the Kubernetes metadata extension type. All the set labels and annotation will be added to the underlying deployment resource and pods associated to your workflow
 
-Below is an example of how to set labels and annotations on an environment 
+Below is an example of how to set labels and annotations on an environment. The same can be set at the application or container resource
 ```yaml
 import radius as radius
 
 resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
-  name: 'test-env'
+  name: 'myenv'
   location: 'global'
   properties: {
     compute: {
       kind: 'kubernetes'
-      namespace: 'test-ns'
+      namespace: 'my-ns'
     }
     extensions: [
       {
         kind: 'kubernetesMetadata'
-        annotations: {
+        labels: {
           'myapp.team.name':'Operations'
           'myapp.team.contact':'support-operations@myapp.com'
         }
-        labels: {
+        annotations: {
           'prometheus.io/scrape': 'true'
           'prometheus.io/port': '9090'
         }
@@ -44,123 +44,57 @@ resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
   }
 }
 ```
-
-
-eg. Kubernetes Metadata at Application level
-```yaml
-import radius as radius
-
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
-  name: 'test-app'
-  location: 'global'
-  properties: {
-    environment: env.id
-    extensions: [
-      {
-        kind: 'kubernetesMetadata'
-        annotations: {
-          'app.ann.1': 'app.ann.val.1'
-          'app.ann.2': 'app.ann.val.2'
-        }
-        labels: {
-          'app.lbl.1': 'app.lbl.val.1'
-          'app.lbl.2': 'app.lbl.val.2'
-        }
-      }
-    ]
-  }
-
-}
+In the above example, the labels at the deployment and pod include :
 ```
-
-
-eg. Kubernetes Metadata at Container/Service level
-```yaml
-import radius as radius
-
-@description('Specifies the image of the container resource.')
-param magpieimage string = 'radiusdev.azurecr.io/magpiego:latest'
-
-resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
-  name: 'test-ctnr'
-  location: 'global'
-  properties: {
-    application: app.id
-    container: {
-      image: magpieimage
-      ports: {
-        web: {
-          containerPort: 3000
-        }
-      }
-    }
-    extensions: [
-      {
-        kind: 'kubernetesMetadata'
-        annotations: {
-          'cntr.ann.1': 'cntr.ann.val.1'
-          'cntr.ann.2': 'cntr.ann.val.2'
-        }
-        labels: {
-          'cntr.lbl.1': 'cntr.lbl.val.1'
-          'cntr.lbl.2': 'cntr.lbl.val.2'
-        }
-      }
-    ]
-  }
-}
-
+Labels:  myapp.team.name:Operations
+         myapp.team.contact':support-operations@myapp.com 
+              
+Annotations:   prometheus.io/scrape: true
+               prometheus.io/port': 9090
 ```
 
 ## Cascading Kubernetes Metadata to Various Resources
-Kubernetes extensions are applied to resources in a cascading order. The resource type of the resource where the extension is included determines the order. Labels/Annotations declared at the Environment level and/or Application levels are applied to all associated Containers/Services. 
+Kubernetes metadata are applied to the Radius resources in a cascading order. For eg : You can set the labels and annotations at an environment level and have it cascaded to all of the application and resources in that environment. 
 
-In the above example, the labels at the deployment and pod include :
-```
-Labels:       env.lbl.1=env.lbl.val.1
-              env.lbl.2=env.lbl.val.2  
-              app.lbl.1=app.lbl.val.1
-              app.lbl.2=app.lbl.val.2
-              cntr.lbl.1=cntr.lbl.val.1
-              cntr.lbl.2=cntr.lbl.val.2
-              
-Annotations:  env.ann.1: env.ann.val.1
-              env.ann.2: env.ann.val.2
-              app.ann.1: app.ann.val.1
-              app.ann.2: app.ann.val.2
-              cntr.ann.1: cntr.ann.val.1
-              cntr.ann.2: cntr.ann.val.2
-```
+<!---can we attach a pic of how all of the resources inside an environment has the labels and annotations!--->
 
-In case of conflicts, when key(s) defined for labels/annotations at different levels are the same, the last level in the order takes precedence. 
+You can also override the labels and annotations set at an environment resource either at an application or container level. 
 
-Environment -> Application -> Container/Service
+Lets consider an example where the service team wants to override the contact information that was set at the environment level.
+The infrastructure operator sets up a generic contact at the environment resource for troubleshooting
 
-eg. Kubernetes Metadata at Application and Container levels with conflict in keys
 ```yaml
 import radius as radius
 
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
-  name: 'test-app'
+resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
+  name: 'myenv'
   location: 'global'
   properties: {
-    environment: env.id
+    compute: {
+      kind: 'kubernetes'
+      namespace: 'myns'
+    }
     extensions: [
       {
         kind: 'kubernetesMetadata'
-        annotations: {
-          'conflict.ann.1': 'app.level.ann.conflictval'
-        }
         labels: {
-          'conflict.lbl.1': 'app.level.lbl.conflictval'
+          'myapp.team.name':'Operations'
+          'myapp.team.contact':'support-operations@myapp.com'
+        }
+        annotations: {
+          'prometheus.io/scrape': 'true'
+          'prometheus.io/port': '9090'
         }
       }
     ]
   }
 }
+```
+The developer or any engineer can choose to override this contact information at the container level as they might be supporting only a certain service.
 
+```yaml
 resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
-  name: 'test-ctnr'
+  name: 'myapp-ui'
   location: 'global'
   properties: {
     application: app.id
@@ -175,38 +109,46 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
     extensions: [
       {
         kind: 'kubernetesMetadata'
-        annotations: {
-         'conflict.ann.1': 'cntr.level.ann.conflictval'
-        }
         labels: {
-           'conflict.lbl.1': 'cntr.level.lbl.conflictval'
+          'myapp.team.name':'myapp-UI'
+          'myapp.team.contact':'support-ui@myapp.com'
         }
-      }
     ]
   }
 }
-
 ```
 
-In the above example, the labels at the deployment and pod would include the conflict keys and values specified at the Container/Service level :
+The labels and annotations at the deployment and pod looks like below
 ```
-Labels:       conflict.ann.1: cntr.level.ann.conflictval
+Labels:  myapp.team.name: myapp-UI
+         myapp.team.contact: support-ui@myapp.com 
               
-Annotations:  conflict.lbl.1: cntr.level.lbl.conflictval
-```
+Annotations:   prometheus.io/scrape: true
+               prometheus.io/port': 9090
 
-## Reserved Key Prefix
-Certain labels/annotations have special uses to Radius internally and are not allowed to be overriden by user input.
-Labels/Annotations with keys that have a prefix : `radius.dev/` will be ignored during processing.
 
-## Order of Extensions processing
-Amongst the various extensions, the order in which they are rendered is as follows from first to last:
+
+When key(s) defined for labels/annotations at different levels are the same, the last level in the order takes precedence. 
+
+Container/Service > Applications > Environment
+
+Container/Service has the highest precedence, than applications and environment
+
+## Behavior of Kubernetes metadata in the realm of other things
+
+### Reserved Key Prefix
+Certain labels/annotations have special uses to Radius internally and are not allowed to be overriden by user. Labels/Annotations with keys that have a prefix : `radius.dev/` will be ignored during processing.
+
+### Order of Extensions processing
+Radius already uses extensions type to add a Dapr sidecar and to manually scale on containers. The order in which they are executed is as follows from first to last:
 
 Container -> Dapr Sidecar Extension -> Manual Scale Extension -> Kubernetes Metadata Extension
 
-This implies any labels/annotations defined in extensions other than Kubernetes Metadata Extension are included in the rendering of Kubernetes Metadata Extension.
+This implies any labels/annotations defined as part of extensions other than Kubernetes Metadata Extension are also added to the deployments and pods 
 
-## Metadata Tags for Azure Resources
+When labels/annotation have the same set of key(s) added by two or more extensions, the final value is determined by the order of the extension execution
+
+### Metadata Tags for Azure Resources
 Project Radius allows for users to specify tags on Azure resources. These tags are applied directly on the target resource and do not affect output resources such as Kubernetes deployments or pods.
 
 eg. 
