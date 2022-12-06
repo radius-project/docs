@@ -99,8 +99,8 @@ jobs:
     needs: ['build']
     runs-on: ubuntu-latest
     environment:
-      name: $ENV_NAME
-      url: $ENV_URL
+      name: ${{ env.ENV_NAME }}
+      url: ${{ env.ENV_URL }}
     steps:
       - name: Checkout docs repo
         uses: actions/checkout@v2
@@ -159,7 +159,7 @@ jobs:
     needs: ['build', 'deploy']
     runs-on: ubuntu-latest
     environment:
-      name: $ENV_NAME
+      name: ${{ env.ENV_NAME }}
     env:
       ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_API_APPID }}
       ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
