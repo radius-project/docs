@@ -17,7 +17,6 @@ resource secretstore 'Applications.Link/daprSecretStores@2022-03-15-privateprevi
     environment: environment
     application: app.id
     mode: 'values'
-    kind: 'generic'
     type: 'secretstores.azure.keyvault'
     metadata: {
       vaultName: 'myvault'
