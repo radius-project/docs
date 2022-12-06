@@ -110,7 +110,7 @@ jobs:
       - name: Deploy to WebApp
         uses: Azure/webapps-deploy@v2
         with:
-          app-name: {{ secrets.ENV_APPSERVICE_NAME }}
+          app-name: ${{ secrets.ENV_APPSERVICE_NAME }}
           publish-profile: ${{ secrets.ENV_APPSERVICE_PUBLISHPROFILE }}
           package: site/
 
