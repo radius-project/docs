@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - edge
+      - v*.*
     paths:
       - 'docs/**'
       - '.github/workflows/website.yaml'
@@ -13,10 +14,15 @@ on:
     types: [opened, synchronize, reopened, closed]
     branches:
       - edge
+      - v*.*
     paths:
       - 'docs/**'
       - '.github/workflows/website.yaml'
       - '.github/scripts/**'
+
+env:
+  ENV_NAME: ${{ github.base_ref == 'edge' && 'edge' || 'latest' }}
+  ENV_URL: ${{ github.base_ref == 'edge' && 'https://edge.radapp.dev' || 'https://radapp.dev' }}
 
 jobs:
   build:
@@ -93,8 +99,8 @@ jobs:
     needs: ['build']
     runs-on: ubuntu-latest
     environment:
-      name: edge
-      url: https://edge.radapp.dev
+      name: ${{ env.ENV_NAME }}
+      url: ${{ env.ENV_URL }}
     steps:
       - name: Checkout docs repo
         uses: actions/checkout@v2
@@ -153,7 +159,7 @@ jobs:
     needs: ['build', 'deploy']
     runs-on: ubuntu-latest
     environment:
-      name: edge
+      name: ${{ env.ENV_NAME }}
     env:
       ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_API_APPID }}
       ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
