@@ -125,7 +125,7 @@ Labels:  myapp.team.name: myapp-UI
               
 Annotations:   prometheus.io/scrape: true
                prometheus.io/port': 9090
-
+```
 
 
 When key(s) defined for labels/annotations at different levels are the same, the last level in the order takes precedence. 
