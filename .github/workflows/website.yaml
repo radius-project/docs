@@ -152,10 +152,12 @@ jobs:
     if: github.event_name == 'push'
     needs: ['build', 'deploy']
     runs-on: ubuntu-latest
+    environment:
+      name: edge
     env:
       ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_API_APPID }}
       ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
-      ALGOLIA_INDEX_NAME: radapp-dev-edge
+      ALGOLIA_INDEX_NAME: ${{ secrets.ENV_ALGOLIA_INDEXNAME }}
     steps:
       - name: Checkout docs repo
         uses: actions/checkout@v2
