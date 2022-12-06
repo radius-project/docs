@@ -92,6 +92,9 @@ jobs:
     if: github.event_name == 'push'
     needs: ['build']
     runs-on: ubuntu-latest
+    environment:
+      name: edge
+      url: https://edge.radapp.dev
     steps:
       - name: Checkout docs repo
         uses: actions/checkout@v2
@@ -107,8 +110,8 @@ jobs:
       - name: Deploy to WebApp
         uses: Azure/webapps-deploy@v2
         with:
-          app-name: radius-edge
-          publish-profile: ${{ secrets.EDGE_DOCS_SITE_PUBLISHPROFILE }}
+          app-name: {{ secrets.ENV_APPSERVICE_NAME }}
+          publish-profile: ${{ secrets.ENV_APPSERVICE_PUBLISHPROFILE }}
           package: site/
 
   open_staging_site:
