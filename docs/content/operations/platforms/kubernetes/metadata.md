@@ -19,7 +19,7 @@ This is implemented using Extensions. Dapr sidecar and Manual Scale Extensions h
 You will be able to specify labels and annotations for each of these resource types using Kubernetes Metadata Extensions. The implementation modifies the deployment resource and all pods associated with user-provided labels and annotations. 
 
 eg. Kubernetes Metadata at Environment
-```
+```yaml
 import radius as radius
 
 resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
@@ -49,7 +49,7 @@ resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
 
 
 eg. Kubernetes Metadata at Application level
-```
+```yaml
 import radius as radius
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
@@ -77,7 +77,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 
 
 eg. Kubernetes Metadata at Container/Service level
-```
+```yaml
 import radius as radius
 
 @description('Specifies the image of the container resource.')
@@ -139,7 +139,7 @@ In case of conflicts, when key(s) defined for labels/annotations at different le
 Environment -> Application -> Container/Service
 
 eg. Kubernetes Metadata at Application and Container levels with conflict in keys
-```
+```yaml
 import radius as radius
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
@@ -212,7 +212,7 @@ This implies any labels/annotations defined in extensions other than Kubernetes 
 Project Radius allows for users to specify tags on Azure resources. These tags are applied directly on the target resource and do not affect output resources such as Kubernetes deployments or pods.
 
 eg. 
-```
+```yaml
 ...
 resource store 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'db-service'
