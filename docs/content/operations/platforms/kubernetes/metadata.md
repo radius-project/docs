@@ -7,18 +7,16 @@ weight: 10
 ---
 
 ## Kubernetes Labels and Annotations 
-Labels are key/value pairs attached to Kubernetes objects and used to identify groups of related resources by organizational structure, release, process etc. Labels are descriptive in nature and can be queried.
+[Labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/) are key/value pairs attached to Kubernetes objects and used to identify groups of related resources by organizational structure, release, process etc. Labels are descriptive in nature and can be queried.
 
-Annotations attach non-identifying information to Kubernetes objects. They are used to provide  additional information to users and can also be used for operational purposes. Annotations are used to represent behavior that can be leveraged by tools and libraries and often they are not human readable or queried.
-
+[Annotations](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/) attach non-identifying information to Kubernetes objects. They are used to provide  additional information to users and can also be used for operational purposes. Annotations are used to represent behavior that can be leveraged by tools and libraries and often they are not human readable or queried.
 
 ## Kubernetes Metadata Extension in Radius
-Project Radius allows you to specify your own tagging scheme for Kubernetes resources using Kubernetes labels and annotations. You now have a way to inject metadata into Kubernetes resources and transform them.
+Project Radius enables you to retain or use your own defined tagging scheme for Kubernetes resources using Kubernetes labels and annotations. This enables users to incrementally adopt Radius for microservices built in the Kubernetes ecosystem using the Kubernetes native metadata concepts without having to do much customizations
 
-This is implemented using Extensions. Dapr sidecar and Manual Scale Extensions have been     available as options to extend capabilities of Container/Services. Kubernetes Metadata Extensions is now available as an ExtensionType for Environment, Application and Container/Services resources.
-You will be able to specify labels and annotations for each of these resource types using Kubernetes Metadata Extensions. The implementation modifies the deployment resource and all pods associated with user-provided labels and annotations. 
+You can set the labels and annotations on an environment or an application or a container resource using the Kubernetes metadata extension type. All the set labels and annotation will be added to the underlying deployment resource and pods associated to your workflow
 
-eg. Kubernetes Metadata at Environment
+Below is an example of how to set labels and annotations on an environment 
 ```yaml
 import radius as radius
 
@@ -34,12 +32,12 @@ resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
       {
         kind: 'kubernetesMetadata'
         annotations: {
-          'env.ann.1': 'env.ann.val.1'
-          'env.ann.2': 'env.ann.val.2'
+          'myapp.team.name':'Operations'
+          'myapp.team.contact':'support-operations@myapp.com'
         }
         labels: {
-          'env.lbl.1': 'env.lbl.val.1'
-          'env.lbl.2': 'env.lbl.val.2'
+          'prometheus.io/scrape': 'true'
+          'prometheus.io/port': '9090'
         }
       }
     ]
