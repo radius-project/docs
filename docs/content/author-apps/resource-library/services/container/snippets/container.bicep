@@ -54,7 +54,6 @@ resource statestore 'Applications.Link/daprStateStores@2022-03-15-privatepreview
     application: app.id
     mode: 'values'
     type: 'state.azure.tablestorage'
-    kind: 'generic'
     version: 'v1'
     metadata: {
       KEY: 'value'
