@@ -25,6 +25,8 @@ weight: 401
 | application | y | The ID of the application resource this resource belongs to. | `app.id`
 | [hostname](#hostname) | n | The hostname information for this gateway. | [See below](#hostname)
 | [routes](#routes) | y | The routes attached to this gateway. | [See below](#routes)
+| [tls](#TLS) | n | The routes attached to this gateway. | [See below](#TLS)
+
 
 #### Routes
 
@@ -44,6 +46,14 @@ You can define hostname information for how to access your application. See [bel
 |------|:--------:|-------------|---------|
 | prefix | n | A custom DNS prefix for the generated hostname. | `'prefix'`
 | fullyQualifiedHostname | n | A fully-qualified domain name to use for the gateway. | `'myapp.mydomain.com'`
+
+#### TLS
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| sslPassthrough | n | Configures the gateway to passthrough encrypted SSL traffic to the target container. Disables route-based matching and routing. Defaults to 'false'. | `true`
+
+With sslPassThrough set to `true`, the gateway can only support SNI routing. Path based routing cannot be supported.
+
 
 ## Hostname Generation
 
