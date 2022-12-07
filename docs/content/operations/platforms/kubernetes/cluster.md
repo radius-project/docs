@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Kubernetes cluster"
+title: "Supported Kubernetes clusters"
 linkTitle: "Kubernetes cluster"
 description: "Learn how to setup Kubernetes cluster"
 weight: 10
