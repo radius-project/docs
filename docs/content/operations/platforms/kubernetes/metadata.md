@@ -12,7 +12,7 @@ weight: 10
 [Annotations](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/) attach non-identifying information to Kubernetes objects. They are used to provide  additional information to users and can also be used for operational purposes. Annotations are used to represent behavior that can be leveraged by tools and libraries and often they are not human readable or queried.
 
 ## Kubernetes Metadata Extension in Radius
-Project Radius enables you to retain or use your own defined tagging scheme for Kubernetes resources using Kubernetes labels and annotations. This enables users to incrementally adopt Radius for microservices built in the Kubernetes ecosystem using the Kubernetes native metadata concepts without having to do much customizations
+Project Radius enables you to retain or use your own defined tagging scheme for Kubernetes resources using Kubernetes labels and annotations. This enables users to incrementally adopt Radius for microservices built in the Kubernetes ecosystem using the Kubernetes native metadata concepts without having to do too many customizations
 
 You can set the labels and annotations on an environment or an application or a container resource using the Kubernetes metadata extension type. All the set labels and annotation will be added to the underlying deployment resource and pods associated to your workflow
 
@@ -132,7 +132,7 @@ When key(s) defined for labels/annotations at different levels are the same, the
 
 Container/Service > Applications > Environment
 
-Container/Service has the highest precedence, than applications and environment
+Container/Service has the highest precedence, compared to applications and environment
 
 ## Behavior of Kubernetes metadata in the realm of other things
 
