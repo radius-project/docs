@@ -185,6 +185,7 @@ infrastructure
 init
 initialDelaySeconds
 integrations
+io
 js
 json
 jumpbox
@@ -193,6 +194,7 @@ keyvault
 kubecontext
 kubectl
 kubernetes
+kubernetesNamespace
 lifecycle
 lifecycles
 linkTitle
