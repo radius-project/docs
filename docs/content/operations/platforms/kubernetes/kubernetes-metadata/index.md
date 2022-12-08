@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Set Kubernetes metadata"
-linkTitle: "Kubernetes Metadata"
+linkTitle: "Kubernetes metadata"
 description: "Learn how to configure Kubernetes labels and annotations for generated objects"
 weight: 20
 ---
@@ -11,7 +11,7 @@ weight: 20
 
 [Annotations](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/) attach non-identifying information to Kubernetes objects. They are used to provide  additional information to users and can also be used for operational purposes. Annotations are used to represent behavior that can be leveraged by tools and libraries and often they are not human readable or queried.
 
-## KubernetesMetadata extension
+## Kubernetes metadata extension
 Project Radius enables you to retain or use your own defined tagging scheme for Kubernetes resources using Kubernetes labels and annotations. This enables users to incrementally adopt Radius for microservices built in the Kubernetes ecosystem using the Kubernetes native metadata concepts without having to do additional customizations.
 
 You can set labels and annotations on an environment, application, or container using the KubernetesMetadata extension. The Kubernetes objects output from your resources (Deployments, Pods, etc.) will get the defined metadata.
@@ -81,7 +81,7 @@ Annotations:      prometheus.io/port: 9090
 ```
 
 ### Reserved keys
-Certain labels/annotations have special uses to Radius internally and are not allowed to be overriden by user. Labels/Annotations with keys that have a prefix : `radius.dev/` will be ignored during processing.
+Certain labels/annotations have special uses to Radius internally and are not allowed to be overridden by user. Labels/Annotations with keys that have a prefix : `radius.dev/` will be ignored during processing.
 
 ### Order of extension processing
 Other extensions may set Kubernetes metadata. For example, the `daprSidecar` extension sets the `dapr.io/enabled` annotation, as well as some others. This may cause issues in the case of conflicts.
