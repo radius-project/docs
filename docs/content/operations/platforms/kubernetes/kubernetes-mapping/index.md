@@ -15,7 +15,7 @@ When deploying Radius resources to environments running on Kubernetes, the [cont
 
 Radius environments allow you to specify the Kubernetes namespace where environment-scoped resources are generated. For example, if you set a Radius environment to use the namespace 'default' and deploy an environment-scoped Dapr Link, the backing dapr.io/Component will be deployed into the 'default' namespace.
 
-Application-scoped resources are by default generated in a new Kubernetes namespace with the name format '<appName>-<envNamespace>'. For example, an application named 'myapp' with a container named 'frontend', deployed into the environment from above, will cause a Deployment named 'frontend' to be deployed into the namespace 'myapp-default'. This prevents multiple applications from conflicting with each other.
+Application-scoped resources are by default generated in a new Kubernetes namespace with the name format '<envNamespace>-<appname>'. For example, an application named 'myapp' with a container named 'frontend', deployed into the environment from above, will cause a Deployment named 'frontend' to be deployed into the namespace 'default-myapp'. This prevents multiple applications from conflicting with each other.
 
 If you would like to override the default behavior and specify your own namespace for application resources to be generated into, you can leverage the kubernetesNamespace container extension. All application-scoped resources will be deployed into this namespace instead.
 
