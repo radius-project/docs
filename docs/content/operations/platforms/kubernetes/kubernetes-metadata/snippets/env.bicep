@@ -1,7 +1,6 @@
 import radius as radius
 
-param environment string
-
+//ENV
 resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
   name: 'myenv'
   location: 'global'
@@ -14,34 +13,57 @@ resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
       {
         kind: 'kubernetesMetadata'
         labels: {
-          'myapp.team.name':'Operations'
-          'myapp.team.contact':'support-operations'
-        }
-        annotations: {
-          'prometheus.io/scrape': 'true'
-          'prometheus.io/port': '9090'
+          'key1': 'envValueA'
+          'key2': 'envValueB'
         }
       }
     ]
   }
 }
+//ENV
 
+//APP
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
-  name: 'webapp'
+  name: 'myapp'
   location: 'global'
   properties: {
-    environment: environment
+    environment: env.id
+    extensions: [
+      {
+        kind: 'kubernetesMetadata'
+        labels: {
+          'key1': 'appValue1'
+          'key2': 'appValue2'
+          'key3': 'appValue3'
+        }
+        annotation: {
+          'prometheus.io/port': '9090'
+          'prometheus.io/scrape': 'true'
+        }
+      }
+    ]
+  }
 }
-}
+//APP
 
+//CONTAINER
 resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'frontend'
   location: 'global'
   properties: {
     application: app.id
     container: {
-      image: 'radius.azurecr.io/tutorial/webapp:edge'
+      image: 'myregistry/mycontainer:latest'
     }
+    extensions: [
+      {
+        kind: 'kubernetesMetadata'
+        labels: {
+          'key1': 'containerValueX'
+          'key2': 'conatienrValueY'
+        }
+      }
+    ]
+  }
 }
-}
-
+//CONTAINER
