@@ -142,6 +142,7 @@ Certain labels/annotations have special uses to Radius internally and are not al
 
 ### Order of extension processing
 Other extensions may set Kubernetes metadata. For example, the `daprSidecar` extension sets the `dapr.io/enabled` annotation, as well as some others. This may cause issues in the case of conflicts.
+
 The order in which extensions are executed is as follows, from first to last:
 
 Container -> Dapr Sidecar Extension -> Manual Scale Extension -> Kubernetes Metadata Extension
