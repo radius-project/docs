@@ -1,9 +1,9 @@
 ---
 type: docs
 title: "Supported Kubernetes clusters"
-linkTitle: "Kubernetes cluster"
+linkTitle: "Supported clusters"
 description: "Learn how to setup Radius on supported Kubernetes clusters"
-weight: 10
+weight: 100
 ---
 
 The following clusters have been tested and validated to ensure they support all of the features of Project Radius:
@@ -97,41 +97,6 @@ rad env init kubernetes -i
 {{% /codetab %}}
 
 {{< /tabs >}}
-
-## Install the Radius control plane
-
-The [Radius control plane]({{< ref architecture >}}) handles the deployment and management of Radius environments, applications, and resources.
-
-{{< tabs "rad CLI" "Helm" >}}
-
-{{% codetab %}}
-Use the [`rad install kubernetes` command]({{< ref rad_env_init_Kubernetes >}}) to install Radius control plane on the kubernetes cluster.
-```bash
-rad install kubernetes
-```
-{{% /codetab %}}
-
-{{% codetab %}}
-1. Begin by adding the Radius Helm repository:
-   ```bash
-   helm repo add radius https://radius.azurecr.io/helm/v1/repo
-   helm repo update
-   ```
-1. Get all available versions:
-   ```bash
-   helm search repo radius --versions
-   ```
-1. Install the specified chart:
-   ```bash
-   helm upgrade radius radius/radius --install --create-namespace --namespace radius-system --version {{< param chart_version >}} --wait --timeout 15m0s
-   ```
-{{% /codetab %}}
-
-{{< /tabs >}}
-
-{{% alert title="💡 About namespaces" color="success" %}}
-When Radius initializes a Kubernetes environment, it will deploy the system resources into the `radius-system` namespace. These aren't part your application. The namespace specified in interactive mode will be used for future deployments by default.
-{{% /alert %}}
 
 ## Configure container registry access
 
