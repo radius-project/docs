@@ -14,7 +14,7 @@ weight: 20
 ## Kubernetes metadata extension
 Project Radius enables you to retain or use your own defined tagging scheme for Kubernetes resources using Kubernetes labels and annotations. This enables users to incrementally adopt Radius for microservices built in the Kubernetes ecosystem using the Kubernetes native metadata concepts without having to do additional customizations.
 
-You can set labels and annotations on an environment, application, or container using the KubernetesMetadata extension. The Kubernetes objects output from your resources (Deployments, Pods, etc.) will get the defined metadata.
+You can set labels and annotations on an environment, application, or container using the Kubernetes metadata extension. The Kubernetes objects output from your resources (Deployments, Pods, etc.) will get the defined metadata.
 
 ### Example
 Here is an example of how to set labels and annotations at the environment layer. All resources within the environment with Kubernetes object outputs will gain this metadata:
@@ -65,7 +65,7 @@ The developer or any engineer can choose to override this contact information at
 
 {{< rad file="snippets/override.bicep" embed=true marker="//CONTAINER" >}}
 
-Once it gets deployed, the labels and annotations at the deployment and pod will be :
+Once it gets deployed, the labels and annotations at the deployment and pod are as follows
 ``` bash
 Labels:           app.kubernetes.io/managed-by=radius-rp
                   app.kubernetes.io/name=frontend
@@ -88,8 +88,8 @@ Other extensions may set Kubernetes metadata. For example, the `daprSidecar` ext
 
 The order in which extensions are executed is as follows, from first to last:
 
-Container -> Dapr Sidecar Extension -> Manual Scale Extension -> Kubernetes Metadata Extension
+Container -> Dapr sidecar extension -> Manual scale extension -> Kubernetes metadata extension
 
-This implies any labels/annotations defined as part of extensions other than Kubernetes Metadata Extension are also added to the deployments and pods 
+This implies any labels/annotations defined as part of extensions other than Kubernetes metadata extension are also added to the deployments and pods 
 
 When labels/annotation have the same set of key(s) added by two or more extensions, the final value is determined by the order of the extension execution
