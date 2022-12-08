@@ -19,123 +19,66 @@ You can set labels and annotations on an environment, application, or container 
 ### Example
 Here is an example of how to set labels and annotations at the environment layer. All resources within the environment with Kubernetes object outputs will gain this metadata:
 
-```yaml
-import radius as radius
+{{< rad file="snippets/env.bicep" embed=true >}}
 
-resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
-  name: 'myenv'
-  location: 'global'
-  properties: {
-    compute: {
-      kind: 'kubernetes'
-      namespace: 'my-ns'
-    }
-    extensions: [
-      {
-        kind: 'kubernetesMetadata'
-        labels: {
-          'myapp.team.name':'Operations'
-          'myapp.team.contact':'support-operations@myapp.com'
-        }
-        annotations: {
-          'prometheus.io/scrape': 'true'
-          'prometheus.io/port': '9090'
-        }
-      }
-    ]
-  }
-}
+Once deployed, containers deployed in this environment will gain these labels. You can view the labels and annotations set on your pods using the command below
+
+```bash
+kubectl describe pod <podname>
 ```
-Once deployed, containers deployed in this environment will gain these labels. For example:
-```
-Labels:  myapp.team.name:Operations
-         myapp.team.contact':support-operations@myapp.com 
-              
-Annotations:   prometheus.io/scrape: true
-               prometheus.io/port': 9090
+
+```bash
+Name:             <podname>
+Namespace:        default
+Priority:         0
+Labels:           app.kubernetes.io/managed-by=radius-rp
+                  app.kubernetes.io/name=frontend
+                  app.kubernetes.io/part-of=myapp
+                  myapp.team.contact=support-operations
+                  myapp.team.name=Operations
+                  pod-template-hash=874f4f56f
+                  radius.dev/application=myapp
+                  radius.dev/resource=frontend
+                  radius.dev/resource-type=applications.core-containers
+Annotations:      prometheus.io/port: 9090
+                  prometheus.io/scrape: true
 ```
 
 ## Cascading metadata
 Kubernetes metadata can be applied at the environment, application, or container layers. Metadata cascades down from the environment to the application to the container. For example, you can set the labels and annotations at an environment level and all containers within the environment will gain these labels and annotations.
 
-<!---can we attach a pic of how all of the resources inside an environment has the labels and annotations!--->
+### Overriding behavior
 
-You can also override the labels and annotations set at an environment resource either at an application or container level. 
-
-### Example
-Lets consider an example where the service team wants to override the contact information that was set at the environment level.
-The infrastructure operator sets up a generic contact at the environment resource for troubleshooting
-
-```yaml
-import radius as radius
-
-resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
-  name: 'myenv'
-  location: 'global'
-  properties: {
-    compute: {
-      kind: 'kubernetes'
-      namespace: 'myns'
-    }
-    extensions: [
-      {
-        kind: 'kubernetesMetadata'
-        labels: {
-          'myapp.team.name':'Operations'
-          'myapp.team.contact':'support-operations@myapp.com'
-        }
-        annotations: {
-          'prometheus.io/scrape': 'true'
-          'prometheus.io/port': '9090'
-        }
-      }
-    ]
-  }
-}
-```
-The developer or any engineer can choose to override this contact information at the container level as they might be supporting only a certain service.
-
-```yaml
-resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
-  name: 'myapp-ui'
-  location: 'global'
-  properties: {
-    application: app.id
-    container: {
-      image: magpieimage
-      ports: {
-        web: {
-          containerPort: 3000
-        }
-      }
-    }
-    extensions: [
-      {
-        kind: 'kubernetesMetadata'
-        labels: {
-          'myapp.team.name':'myapp-UI'
-          'myapp.team.contact':'support-ui@myapp.com'
-        }
-    ]
-  }
-}
-```
-
-The labels and annotations at the deployment and pod looks like below
-```
-Labels:  myapp.team.name: myapp-UI
-         myapp.team.contact: support-ui@myapp.com 
-              
-Annotations:   prometheus.io/scrape: true
-               prometheus.io/port': 9090
-```
-
-
-When key(s) defined for labels/annotations at different levels are the same, the last level in the order takes precedence. 
+You can also override the labels and annotations set at an environment resource either at an application or container level for the same key(s)
 
 Environment -> Applications -> Container/Service
 
-Container/Service has the highest precedence, compared to applications and environment
+Container/Service has the highest precedence in overriding, compared to applications and environment
+
+#### Example
+Lets consider an example where the service team wants to override the contact information that was set at the environment level.
+The infrastructure operator sets up a generic contact at the environment resource for troubleshooting
+
+{{< rad file="snippets/override.bicep" embed=true marker="//ENV" >}}
+
+The developer or any engineer can choose to override this contact information at the container level as they might be supporting only a certain service.
+
+{{< rad file="snippets/override.bicep" embed=true marker="//CONTAINER" >}}
+
+The labels and annotations at the deployment and pod looks like below
+``` bash
+Labels:           app.kubernetes.io/managed-by=radius-rp
+                  app.kubernetes.io/name=frontend
+                  app.kubernetes.io/part-of=myapp
+                  myapp.team.contact=support-UI
+                  myapp.team.name=UI
+                  pod-template-hash=874f4f56f
+                  radius.dev/application=myapp
+                  radius.dev/resource=frontend
+                  radius.dev/resource-type=applications.core-containers
+Annotations:      prometheus.io/port: 9090
+                  prometheus.io/scrape: true
+```
 
 ### Reserved keys
 Certain labels/annotations have special uses to Radius internally and are not allowed to be overriden by user. Labels/Annotations with keys that have a prefix : `radius.dev/` will be ignored during processing.
