@@ -185,6 +185,7 @@ infrastructure
 init
 initialDelaySeconds
 integrations
+io
 js
 json
 jumpbox
