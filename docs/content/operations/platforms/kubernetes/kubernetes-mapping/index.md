@@ -17,7 +17,7 @@ Radius environments allow you to specify the Kubernetes namespace where environm
 
 Application-scoped resources are by default generated in a new Kubernetes namespace with the name format '<envNamespace>-<appname>'. For example, an application named 'myapp' with a container named 'frontend', deployed into the environment from above, will cause a Deployment named 'frontend' to be deployed into the namespace 'default-myapp'. This prevents multiple applications from conflicting with each other.
 
-If you would like to override the default behavior and specify your own namespace for application resources to be generated into, you can leverage the kubernetesNamespace container extension. All application-scoped resources will be deployed into this namespace instead.
+If you would like to override the default behavior and specify your own namespace for application resources to be generated into, you can leverage the `kubernetesNamespace` application extension. All application-scoped resources will be deployed into this namespace instead.
 
 ## Resource mapping
 
