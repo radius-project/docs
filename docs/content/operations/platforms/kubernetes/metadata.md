@@ -140,7 +140,7 @@ Container/Service has the highest precedence, compared to applications and envir
 ### Reserved keys
 Certain labels/annotations have special uses to Radius internally and are not allowed to be overriden by user. Labels/Annotations with keys that have a prefix : `radius.dev/` will be ignored during processing.
 
-### Order of extensions processing
+### Order of extension processing
 Other extensions may set Kubernetes metadata. For example, the `daprSidecar` extension sets the `dapr.io/enabled` annotation, as well as some others. This may cause issues in the case of conflicts.
 The order in which extensions are executed is as follows, from first to last:
 
