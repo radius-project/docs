@@ -2,13 +2,9 @@
 type: docs
 title: "Supported Kubernetes clusters"
 linkTitle: "Kubernetes cluster"
-description: "Learn how to setup Kubernetes cluster"
+description: "Learn how to setup Radius on supported Kubernetes clusters"
 weight: 10
 ---
-
-Project Radius can be installed and run on top of Kubernetes clusters. This allows you to deploy and manage Radius applications across any cloud or on-premises cluster.
-
-## Supported clusters
 
 The following clusters have been tested and validated to ensure they support all of the features of Project Radius:
 
