@@ -13,7 +13,7 @@ hide_summary: true
 
 ## Initialize environment
 
-Begin by create a new Radius [local dev environment]({{< ref dev-environments >}}):
+Begin by create a new Radius local dev environment:
 
 1. Create your Radius environment via the rad CLI:
 

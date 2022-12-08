@@ -2,10 +2,9 @@
 type: docs
 title: "Kubernetes resources"
 linkTitle: "Kubernetes"
-description: "Learn how to model and deploy Kubernetes resources as part of your application"
-weight: 400
+description: "Deploy and connect to Kubernetes resources in your application"
+weight: 100
 ---
-<!-- TODO: this page needs some love -->
 
 Radius applications are able to connect to and leverage Kubernetes resources.
 
@@ -13,7 +12,7 @@ Radius applications are able to connect to and leverage Kubernetes resources.
 
 Visit [GitHub](https://github.com/Azure/bicep-types-k8s/blob/main/generated/index.md) to reference the Kubernetes resource.
 
-{{< button text="Kubernetes resource library" link="https://github.com/Azure/bicep-types-k8s/blob/main/generated/index.md" >}}
+{{< button text="Kubernetes resource library" link="https://github.com/Azure/bicep-types-k8s/blob/main/generated/index.md" newtab="true" >}}
 
 ## Example
 

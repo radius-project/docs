@@ -12,7 +12,7 @@ no_list: true
 This tutorial will teach you how to deploy a Dapr microservices application using Radius. You will learn:  
 
 - The concepts of the Radius application model
-- How [Dapr and Radius]({{< ref resource-library >}}) seamlessly work together  
+- How [Dapr and Radius]({{< ref dapr >}}) seamlessly work together  
 - The basic syntax of the [Bicep language]({{< ref bicep >}})
 
 No prior knowledge of Dapr, Radius, or Bicep is needed.

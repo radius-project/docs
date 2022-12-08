@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "Dapr resources"
+title: "Dapr building blocks"
 linkTitle: "Dapr"
-description: "Learn how to model and deploy Dapr resources as part of your application"
-weight: 600
+description: "Easily leverage Dapr building blocks in your application"
+weight: 500
 ---
 
 Project Radius offers first-class support for the [Dapr](https://dapr.io) runtime and building blocks to make it easy to make your code fully portable across code and infrastructure.

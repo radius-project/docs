@@ -52,7 +52,7 @@ A generic secretstore lets you manually specify the metadata of a Dapr secret st
 
 ## Injected values
 
-Connections from [Radius services]({{< ref services >}}) to [links]({{< ref links >}}) by default inject the following values into the environment of the service:
+Connections from [Radius services]({{< ref container >}}) to [links]({{< ref links >}}) by default inject the following values into the environment of the service:
 
 | Key | Value |
 |-----|-------|
