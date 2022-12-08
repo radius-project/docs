@@ -193,6 +193,7 @@ keyvault
 kubecontext
 kubectl
 kubernetes
+kubernetesNamespace
 lifecycle
 lifecycles
 linkTitle
