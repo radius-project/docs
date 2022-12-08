@@ -84,9 +84,9 @@ When this file is deployed, the metadata on the `frontend` deployment is:
 $ kubectl describe deployment frontend
 Name:             frontend
 Namespace:        default-myapp
-Labels:           key1=valueX
-                  key2=valueY
-                  key3=value3
+Labels:           key1=containerValueX
+                  key2=containerValueY
+                  key3=appValue3
                   radius.dev/application=myapp
                   radius.dev/resource=frontend
                   radius.dev/resource-type=applications.core-containers
