@@ -17,7 +17,7 @@ Application-scoped resources are by default generated in a new Kubernetes namesp
 
 For example, let's take an application named `'myapp'` with a container named `'frontend'`. This application is deployed into an environment configured with with the `'default'` namespace. A Kubernetes Deployment named `'frontend'` is now deployed into the namespace `'default-myapp'`.
 
-If you wish to override the default behavior and specify your own namespace for application resources to be generated into, you can leverage the `kubernetesNamespace` application extension. All application-scoped resources will be deployed into this namespace instead.
+If you wish to override the default behavior and specify your own namespace for application resources to be generated into, you can leverage the [`kubernetesNamespace` application extension]({{< ref "application-schema#kubernetesNamespace" >}}). All application-scoped resources will now be deployed into this namespace instead.
 
 ## Resource mapping
 
