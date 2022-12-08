@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Set Kubernetes Metadata"
+title: "Set Kubernetes metadata"
 linkTitle: "Kubernetes Metadata"
 description: "Learn how to configure Kubernetes labels and annotations for generated objects"
 weight: 20
@@ -65,7 +65,7 @@ The developer or any engineer can choose to override this contact information at
 
 {{< rad file="snippets/override.bicep" embed=true marker="//CONTAINER" >}}
 
-The labels and annotations at the deployment and pod looks like below
+Once it gets deployed, the labels and annotations at the deployment and pod will be :
 ``` bash
 Labels:           app.kubernetes.io/managed-by=radius-rp
                   app.kubernetes.io/name=frontend
