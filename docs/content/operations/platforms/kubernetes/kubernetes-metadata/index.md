@@ -46,9 +46,9 @@ Labels and annotations are processed in the following order, combining the keys/
 1. Application
 1. Container
 
-### Conflicts
+### Conflicts and overrides
 
-In the case where layers have conflicting keys (_i.e. Application and Contaienr both specify a `myapp.team.name` label_), the last level to process wins out (container). The metadata specified on the container will override the metadata specified on the application or environment.
+In the case where layers have conflicting keys (_i.e. Application and Contaienr both specify a `myapp.team.name` label_), the last level to process wins out and overrides other values (container). The metadata specified on the container will override the metadata specified on the application or environment.
 
 ## Reserved keys
 
