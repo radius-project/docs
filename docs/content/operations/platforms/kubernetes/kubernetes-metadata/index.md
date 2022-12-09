@@ -87,7 +87,7 @@ Namespace:        default-myapp
 Labels:           key1=appValue1
                   key2=containerValue2
                   team.contact.name=Frontend
-                  team.contact.email=frontend-eng@example.com
+                  team.contact.alias=frontend-eng
                   radius.dev/application=myapp
                   radius.dev/resource=frontend
                   radius.dev/resource-type=applications.core-containers
@@ -105,7 +105,7 @@ The labels & annotations were set based on the following:
 | `key1` | `appValue1` | Application value is applied
 | `key2` | `containerValue2` | Container value overrides application value
 | `team.contact.name` | `Frontend` | Container value overrides application value
-| `team.contact.email` | `frontend-eng@example.com` | Container value overrides application value
+| `team.contact.alias` | `frontend-eng` | Container value overrides application value
 | `radius.dev/application` | `myapp` | Radius-injected label
 | `radius.dev/resource` | `frontend` | Radius-injected label
 | `radius.dev/resource-type` | `applications.core-containers` | Radius-injected label

@@ -13,8 +13,8 @@ resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
       {
         kind: 'kubernetesMetadata'
         labels: {
-          'key1': 'envValue1'
-          'key2': 'envValue2'
+          'env.key1': 'envValue1'
+          'env.key2': 'envValue2'
         }
       }
     ]
@@ -32,12 +32,12 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
       {
         kind: 'kubernetesMetadata'
         labels: {
-          'key1': 'appValue1'
-          'key2': 'appValue2'
+          'app.key1': 'appValue1'
+          'app.key2': 'appValue2'
           'team.contact.name': 'Operations'
-          'team.contact.email': 'ops@example.com'
+          'team.contact.alias': 'ops'
         }
-        annotation: {
+        annotations: {
           'prometheus.io/port': '9090'
           'prometheus.io/scrape': 'true'
         }
@@ -60,9 +60,9 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
       {
         kind: 'kubernetesMetadata'
         labels: {
-          'key2': 'containerValue2'
+          'con.key2': 'containerValue2'
           'team.contact.name': 'Frontend'
-          'team.contact.email': 'frontend-eng@example.com'
+          'team.contact.alias': 'frontend-eng'
         }
       }
     ]
