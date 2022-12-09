@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "Networking resources"
+title: "Application networking"
 linkTitle: "Networking"
 description: "Learn how to add networking to your Radius application"
-weight: 300
+weight: 200
 ---
 
 Radius networking resources allow you to model:
@@ -13,7 +13,7 @@ Radius networking resources allow you to model:
 
 ## HTTP Routes
 
-An `HttpRoute` resources defines HTTP communication between two [services]({{< ref services >}}). They can be used to define both one-way communication, as well as cycles of communication between services.
+An `HttpRoute` resources defines HTTP communication between two [services]({{< ref container >}}). They can be used to define both one-way communication, as well as cycles of communication between services.
 
 <img src="networking-cycles.png" style="width:400px" alt="Diagram of Radius service-to-service networking with cycles" /><br />
 

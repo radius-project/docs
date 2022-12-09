@@ -64,7 +64,7 @@ The following resources are supported when building the link from a resource usi
 
 ## Connections
 
-[Services]({{< ref services >}}) can define [connections]({{< ref appmodel-concept >}}) to links using the `connections` property. This allows the service to access properties of the link and contributes to to visualization and health experiences.
+[Services]({{< ref container >}}) can define [connections]({{< ref appmodel-concept >}}) to links using the `connections` property. This allows the service to access properties of the link and contributes to to visualization and health experiences.
 
 ### Environment variables
 
