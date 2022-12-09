@@ -13,8 +13,8 @@ resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
       {
         kind: 'kubernetesMetadata'
         labels: {
-          'key1': 'envValueA'
-          'key2': 'envValueB'
+          'key1': 'envValue1'
+          'key2': 'envValue2'
         }
       }
     ]
@@ -34,7 +34,8 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
         labels: {
           'key1': 'appValue1'
           'key2': 'appValue2'
-          'key3': 'appValue3'
+          'team.contact.name': 'Operations'
+          'team.contact.email': 'ops@example.com'
         }
         annotation: {
           'prometheus.io/port': '9090'
@@ -59,8 +60,9 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
       {
         kind: 'kubernetesMetadata'
         labels: {
-          'key1': 'containerValueX'
-          'key2': 'conatienrValueY'
+          'key2': 'containerValue2'
+          'team.contact.name': 'Frontend'
+          'team.contact.email': 'frontend-eng@example.com'
         }
       }
     ]

@@ -84,9 +84,10 @@ When this file is deployed, the metadata on the `frontend` deployment is:
 $ kubectl describe deployment frontend
 Name:             frontend
 Namespace:        default-myapp
-Labels:           key1=containerValueX
-                  key2=containerValueY
-                  key3=appValue3
+Labels:           key1=appValue1
+                  key2=containerValue2
+                  team.contact.name=Frontend
+                  team.contact.email=frontend-eng@example.com
                   radius.dev/application=myapp
                   radius.dev/resource=frontend
                   radius.dev/resource-type=applications.core-containers
@@ -101,9 +102,10 @@ The labels & annotations were set based on the following:
 | Key | Value | Description |
 |-----|-------|-------------|
 | **Labels**
-| `key1` | `containerValueX` | Container value overrides application value
-| `key2` | `containerValueY` | Container value overrides application value
-| `key3` | `appValue3` | Application value is applied
+| `key1` | `appValue1` | Application value is applied
+| `key2` | `containerValue2` | Container value overrides application value
+| `team.contact.name` | `Frontend` | Container value overrides application value
+| `team.contact.email` | `frontend-eng@example.com` | Container value overrides application value
 | `radius.dev/application` | `myapp` | Radius-injected label
 | `radius.dev/resource` | `frontend` | Radius-injected label
 | `radius.dev/resource-type` | `applications.core-containers` | Radius-injected label
