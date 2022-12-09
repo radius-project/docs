@@ -13,8 +13,8 @@ resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
       {
         kind: 'kubernetesMetadata'
         labels: {
-          'env.key1': 'envValue1'
-          'env.key2': 'envValue2'
+          'team.key1': 'envValue1'
+          'team.key2': 'envValue2'
         }
       }
     ]
@@ -32,8 +32,8 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
       {
         kind: 'kubernetesMetadata'
         labels: {
-          'app.key1': 'appValue1'
-          'app.key2': 'appValue2'
+          'team.key1': 'appValue1'
+          'team.key2': 'appValue2'
           'team.contact.name': 'Operations'
           'team.contact.alias': 'ops'
         }
@@ -60,7 +60,7 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
       {
         kind: 'kubernetesMetadata'
         labels: {
-          'con.key2': 'containerValue2'
+          'team.key2': 'containerValue2'
           'team.contact.name': 'Frontend'
           'team.contact.alias': 'frontend-eng'
         }
