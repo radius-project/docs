@@ -60,10 +60,6 @@ This will be addressed in a future release when we change how the environmentId 
 
 ## Containers
 
-### Persistent volumes are not supported
-
-Persistent volumes, which are required to mount an Azure Key Vault or an Azure File Share to a Radius container, are not supported in the current version of Radius. This will be addressed in a future release.
-
 ## rad CLI
 
 ### Application and resource names are lower-cased after deployment
@@ -107,35 +103,3 @@ Enter an environment name [arn:aws:eks:region:account:cluster/mycluster]: myclus
 ```
 
 This will be addressed in an upcoming release.
-
-## Links
-
-### Dapr resources have application name prefixed to component name
-
-When a user specifies a Dapr component in a resource, the component name is prefixed with the application name. For example, the following Bicep code:
-
-```bicep
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
-   name: 'myapp'
-}
-
-resource statestore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' = {
-  name: 'statestore'
-  location: 'global'
-  properties: {
-    application: app.id
-  }
-}
-```
-
-results in a Dapr component named 'myapp-statestore'.
-
-In order to consume this Dapr resource from a container, either use the environment variable injected into the container (`CONNECTION_STATESTORE_NAME`), or manually craft an environment variable with `'${app.name}-${statestore.name}'`.
-
-## Connections
-
-### Direct connections to Azure resources with IAM roles are not supported
-
-Managed identity support for AKS clusters is not currently supported. This will be addressed in a future release.
-
-As a workaround, manually enable AKS pod identity and assign RBAC assignments to the target resources vis the Azure portal or via the az CLI. See the [Azure docs](https://docs.microsoft.com/azure/aks/use-azure-ad-pod-identity) for more information.
