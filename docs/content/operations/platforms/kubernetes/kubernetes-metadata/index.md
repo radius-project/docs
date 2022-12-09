@@ -70,11 +70,11 @@ When labels/annotation have the same set of key(s) added by two or more extensio
 
 ## Example
 
-Let's take an example of an application with the following labels and annotations:
+Let's take an example of an application with some labels and annotations. This example shows some generic 'keys', as well as an example of how an organization may use labels to track organization contact information inside labels for troubleshooting scenarios:
 
 {{< rad file="snippets/env.bicep" embed=true marker="//APP" >}}
 
-All resources within this application with Kubernetes outputs will gain these labels. Let's now take a look at a container:
+All resources within this application with Kubernetes outputs will gain these labels. Let's now take a look at a frontend container, where the frontend team has overridden some of the values:
 
 {{< rad file="snippets/env.bicep" embed=true marker="//CONTAINER" >}}
 
