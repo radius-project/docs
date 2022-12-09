@@ -1,11 +1,6 @@
 import radius as radius
 
-
-@description('Specifies the environment for resources.')
 param environment string
-
-@description('Specifies Kubernetes namespace for redis.')
-param namespace string = 'default'
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'dapr-quickstart'
