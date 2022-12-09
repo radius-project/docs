@@ -24,6 +24,10 @@ As a workaround, use separate workspaces for applications that have repeated res
 
 This will be addressed further in a future release.
 
+### Changing the Kubernetes namespace of an environment or application requires the app to be deleted and redeployed
+
+A Radius environment allows you to specify Kubernetes as your compute platform, as well as specify the Kubernetes namespace in which Kubernetes objects are deployed. Additionally, you can override the namespace for a specific application using the [kubernetesNamespace extension.]({{< ref "application-schema#kubernetesNamespace" >}}). Currently, changing the namespace of an environment or application requires the application to be deleted and redeployed. If you need to change the namespace of an application, you can do so by deleting the application and/or environment and redeploying it with the new namespace.
+
 ## Bicep & Deployment Engine
 
 ### Currently using a forked version of Bicep
