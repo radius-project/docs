@@ -40,12 +40,6 @@ While Project Radius is still in the private preview stage, a fork of the Bicep 
 
 To use the forked build of Bicep directly, you can reference `~/.rad/bin/rad-bicep` (Linux/macOS) or `%HOMEPATH%\.rad\bin\rad-bicep.exe` (Windows).
 
-### Loops are not supported
-
-The Bicep deployment engine does not currently support loops in Bicep. Instead, manually unroll your loops until a fix is deployed.
-
-Refer to https://github.com/project-radius/deployment-engine/issues/172 for more information.
-
 ### `environment()` Bicep function collides with `param environment string`
 
 We currently use `param environment string` to pass in the Radius environmentId into your Bicep template. This collides with the Bicep `environment()` function.
