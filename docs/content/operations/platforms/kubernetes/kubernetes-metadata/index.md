@@ -3,93 +3,112 @@ type: docs
 title: "Set Kubernetes metadata"
 linkTitle: "Kubernetes metadata"
 description: "Learn how to configure Kubernetes labels and annotations for generated objects"
-weight: 20
+weight: 300
 ---
 
-## Kubernetes labels and annotations 
-[Labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/) are key/value pairs attached to Kubernetes objects and used to identify groups of related resources by organizational structure, release, process etc. Labels are descriptive in nature and can be queried.
+## Background
 
-[Annotations](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/) attach non-identifying information to Kubernetes objects. They are used to provide  additional information to users and can also be used for operational purposes. Annotations are used to represent behavior that can be leveraged by tools and libraries and often they are not human readable or queried.
+[Kubernetes Labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/) are key/value pairs attached to Kubernetes objects and used to identify groups of related resources by organizational structure, release, process etc. Labels are descriptive in nature and can be queried.
+
+[Kubernetes Annotations](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/) attach non-identifying information to Kubernetes objects. They are used to provide  additional information to users and can also be used for operational purposes. Annotations are used to represent behavior that can be leveraged by tools and libraries and often they are not human readable or queried.
 
 ## Kubernetes metadata extension
-Project Radius enables you to retain or use your own defined tagging scheme for Kubernetes resources using Kubernetes labels and annotations. This enables users to incrementally adopt Radius for microservices built in the Kubernetes ecosystem using the Kubernetes native metadata concepts without having to do additional customizations.
 
-You can set labels and annotations on an environment, application, or container using the Kubernetes metadata extension. The Kubernetes objects output from your resources (Deployments, Pods, etc.) will get the defined metadata.
+Project Radius enables you to retain or use your own defined tagging scheme for Kubernetes resources using Kubernetes labels and annotations. This enables users to incrementally adopt Radius for microservices built in the Kubernetes ecosystem using Kubernetes metadata concepts.
 
-### Example
-Here is an example of how to set labels and annotations at the environment layer. All resources within the environment with Kubernetes object outputs will gain this metadata:
+You can set labels and annotations on an environment, application, or container using the Kubernetes metadata extension. The Kubernetes objects output from your resources (_Deployments, Services, etc._) will now have the defined metadata.
 
-{{< rad file="snippets/env.bicep" embed=true >}}
+{{< tabs Environment Application Container >}}
 
-Once deployed, containers deployed in this environment will gain these labels. You can view the labels and annotations set on your pods using the command below
+{{% codetab %}}
+{{< rad file="snippets/env.bicep" embed=true marker="//ENV" >}}
+{{% /codetab %}}
 
-```bash
-kubectl describe pod <podname>
-```
+{{% codetab %}}
+{{< rad file="snippets/env.bicep" embed=true marker="//APP" >}}
+{{% /codetab %}}
 
-```bash
-Name:             <podname>
-Namespace:        default
-Priority:         0
-Labels:           app.kubernetes.io/managed-by=radius-rp
-                  app.kubernetes.io/name=frontend
-                  app.kubernetes.io/part-of=myapp
-                  myapp.team.contact=support-operations
-                  myapp.team.name=Operations
-                  pod-template-hash=874f4f56f
-                  radius.dev/application=myapp
-                  radius.dev/resource=frontend
-                  radius.dev/resource-type=applications.core-containers
-Annotations:      prometheus.io/port: 9090
-                  prometheus.io/scrape: true
-```
+{{% codetab %}}
+{{< rad file="snippets/env.bicep" embed=true marker="//CONTAINER" >}}
+{{% /codetab %}}
+
+{{< /tabs >}}
 
 ## Cascading metadata
-Kubernetes metadata can be applied at the environment, application, or container layers. Metadata cascades down from the environment to the application to the container. For example, you can set the labels and annotations at an environment level and all containers within the environment will gain these labels and annotations.
 
-### Overriding behavior
+Kubernetes metadata can be applied at the environment, application, or container layers. Metadata cascades down from the environment to the application to the container. For example, you can set labels and annotations at an environment level and all containers within the environment will gain these labels and annotation, without the need for an explicit extension on the containers.
 
-You can also override the labels and annotations set at an environment resource either at an application or container level for the same key(s)
+### Metadata processing order
 
-Environment -> Applications -> Container/Service
+Labels and annotations are processed in the following order, combining the keys/values at each level:
 
-Container/Service has the highest precedence in overriding, compared to applications and environment
+1. Environment
+1. Application
+1. Container
 
-#### Example
-Lets consider an example where the service team wants to override the contact information that was set at the environment level.
-The infrastructure operator sets up a generic contact at the environment resource for troubleshooting
+### Conflicts and overrides
 
-{{< rad file="snippets/override.bicep" embed=true marker="//ENV" >}}
+In the case where layers have conflicting keys (_i.e. Application and Contaienr both specify a `myapp.team.name` label_), the last level to process wins out and overrides other values (container). The metadata specified on the container will override the metadata specified on the application or environment.
 
-The developer or any engineer can choose to override this contact information at the container level as they might be supporting only a certain service.
+## Reserved keys
 
-{{< rad file="snippets/override.bicep" embed=true marker="//CONTAINER" >}}
-
-Once it gets deployed, the labels and annotations at the deployment and pod are as follows
-``` bash
-Labels:           app.kubernetes.io/managed-by=radius-rp
-                  app.kubernetes.io/name=frontend
-                  app.kubernetes.io/part-of=myapp
-                  myapp.team.contact=support-UI
-                  myapp.team.name=UI
-                  pod-template-hash=874f4f56f
-                  radius.dev/application=myapp
-                  radius.dev/resource=frontend
-                  radius.dev/resource-type=applications.core-containers
-Annotations:      prometheus.io/port: 9090
-                  prometheus.io/scrape: true
-```
-
-### Reserved keys
 Certain labels/annotations have special uses to Radius internally and are not allowed to be overridden by user. Labels/Annotations with keys that have a prefix : `radius.dev/` will be ignored during processing.
 
-### Order of extension processing
+## Extension processing order
+
 Other extensions may set Kubernetes metadata. For example, the `daprSidecar` extension sets the `dapr.io/enabled` annotation, as well as some others. This may cause issues in the case of conflicts.
 
 The order in which extensions are executed is as follows, from first to last:
 
-Container -> Dapr sidecar extension -> Manual scale extension -> Kubernetes metadata extension
+1. Dapr sidecar extension 
+1. Manual scale extension
+1. Kubernetes metadata extension
 
-This implies any labels/annotations defined as part of extensions other than Kubernetes metadata extension are also added to the deployments and pods 
+### Conflicts
 
-When labels/annotation have the same set of key(s) added by two or more extensions, the final value is determined by the order of the extension execution
+When labels/annotation have the same set of key(s) added by two or more extensions, the final value is determined by the last extension that is processed.
+
+## Example
+
+Let's take an example of an application with some labels and annotations. This example shows some generic 'keys', as well as an example of how an organization may use labels to track organization contact information inside labels for troubleshooting scenarios:
+
+{{< rad file="snippets/env.bicep" embed=true marker="//APP" >}}
+
+All resources within this application with Kubernetes outputs will gain these labels. Let's now take a look at a frontend container, where the frontend team has overridden some of the values:
+
+{{< rad file="snippets/env.bicep" embed=true marker="//CONTAINER" >}}
+
+When this file is deployed, the metadata on the `frontend` deployment is:
+
+```bash
+$ kubectl describe deployment frontend
+Name:             frontend
+Namespace:        default-myapp
+Labels:           key1=appValue1
+                  key2=containerValue2
+                  team.contact.name=Frontend
+                  team.contact.alias=frontend-eng
+                  radius.dev/application=myapp
+                  radius.dev/resource=frontend
+                  radius.dev/resource-type=applications.core-containers
+                  ...
+Annotations:      prometheus.io/port: 9090
+                  prometheus.io/scrape: true
+                  ...
+```
+
+The labels & annotations were set based on the following:
+
+| Key | Value | Description |
+|-----|-------|-------------|
+| **Labels**
+| `key1` | `appValue1` | Application value is applied
+| `key2` | `containerValue2` | Container value overrides application value
+| `team.contact.name` | `Frontend` | Container value overrides application value
+| `team.contact.alias` | `frontend-eng` | Container value overrides application value
+| `radius.dev/application` | `myapp` | Radius-injected label
+| `radius.dev/resource` | `frontend` | Radius-injected label
+| `radius.dev/resource-type` | `applications.core-containers` | Radius-injected label
+| **Annotations**
+| `prometheus.io/port` | `9090` | Application annotation is applied
+| `prometheus.io/scrape` | `true `| Application annotation is applied
