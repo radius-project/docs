@@ -102,8 +102,8 @@ The labels & annotations were set based on the following:
 | Key | Value | Description |
 |-----|-------|-------------|
 | **Labels**
-| `key1` | `appValue1` | Application value is applied
-| `key2` | `containerValue2` | Container value overrides application value
+| `team.key1` | `appValue1` | Application value is applied
+| `team.key2` | `containerValue2` | Container value overrides application value
 | `team.contact.name` | `Frontend` | Container value overrides application value
 | `team.contact.alias` | `frontend-eng` | Container value overrides application value
 | `radius.dev/application` | `myapp` | Radius-injected label
