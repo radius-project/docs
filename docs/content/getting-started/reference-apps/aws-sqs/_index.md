@@ -1,4 +1,4 @@
-<!-- ---
+---
 type: docs
 title: "Using AWS SQS Queues with Radius"
 linkTitle: "Using AWS SQS Queues"
