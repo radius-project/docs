@@ -44,7 +44,7 @@ This application models two http services: (1) `producer` and (2) `consumer` tha
 
 1. Visit [localhost:3000/send](http://localhost:3000/send) in your browser, this will send a message to the SQS Queue provisioned in `app.bicep`. 
 
-1. Visit [localhost:4000/receive](http://localhost:3000/send) in your browser, this will consume the SQS Queue message and display its contents.
+1. Visit [localhost:4000/receive](http://localhost:4000/receive) in your browser, this will consume the SQS Queue message and display its contents.
 
 ## Cleanup
 
