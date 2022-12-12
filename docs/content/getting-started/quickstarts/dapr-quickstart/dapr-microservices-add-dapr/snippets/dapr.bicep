@@ -1,6 +1,10 @@
 import radius as radius
 
+@description('Specifies the environment for resources.')
 param environment string
+
+@description('Specifies Kubernetes namespace for redis.')
+param namespace string = 'default'
 
 ////////////////////////////////////////////////////////////////////
 // Radius resources
@@ -63,7 +67,7 @@ resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview
     type: 'state.redis'
     version: 'v1'
     metadata: {
-      redisHost: '${service.metadata.name}:${service.spec.ports[0].port}'
+      redisHost: '${service.metadata.name}.${namespace}.svc.cluster.local:${service.spec.ports[0].port}'
       redisPassword: ''
     }
   }
@@ -75,7 +79,7 @@ resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview
 
 import kubernetes as kubernetes{
   kubeConfig: ''
-  namespace: 'default'
+  namespace: namespace
 }
 
 resource statefulset 'apps/StatefulSet@v1' = {
