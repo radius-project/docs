@@ -133,6 +133,7 @@ containername
 corerp
 cosmosAccount
 cosmosdb
+customizations
 dapr
 daprInvokeHttpRoutes
 daprPubSubBrokers
