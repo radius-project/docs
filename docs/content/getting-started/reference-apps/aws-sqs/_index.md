@@ -1,11 +1,10 @@
----
+<!-- ---
 type: docs
 title: "Using AWS SQS Queues with Radius"
 linkTitle: "Using AWS SQS Queues"
 description: "Learn about how to model AWS SQS Queue resources in Bicep and them it in a Radius application"
 weight: 500
-unlisted: true
----
+--- -->
 
 This reference app will show you:
 
