@@ -6,6 +6,8 @@ description: "Learn about how to model AWS SQS Queue resources in Bicep and them
 weight: 500
 --- -->
 
+<!-- DISABLE_ALGOLIA -->
+
 This reference app will show you:
 
 * How to model AWS SQS resources in Bicep
