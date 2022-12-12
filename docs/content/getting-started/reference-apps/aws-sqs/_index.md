@@ -6,7 +6,7 @@ description: "Learn about how to model AWS SQS Queue resources in Bicep and them
 weight: 500
 toc_hide: true
 hide_summary: true
---- -->
+---
 
 <!-- DISABLE_ALGOLIA -->
 
