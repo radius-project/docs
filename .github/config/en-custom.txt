@@ -66,6 +66,7 @@ NAV
 NODEAPP
 NodeJS
 OAuth
+OIDC
 PARAMS
 PYTHONAPP
 PowerShell
@@ -236,6 +237,7 @@ navbar
 newtab
 npm
 objectname
+oidcIssuer
 org's
 orgs
 pageinfo
@@ -315,6 +317,7 @@ webapp
 webpage
 westus
 westus2
+wi
 workingDir
 workspaceTypes
 workspaces
