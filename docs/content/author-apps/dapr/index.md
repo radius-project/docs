@@ -8,6 +8,10 @@ weight: 500
 
 Project Radius offers first-class support for the [Dapr](https://dapr.io) runtime and building blocks to make it easy to make your code fully portable across code and infrastructure.
 
+## Installation 
+
+Follow the instructions [here](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/) to install Dapr in a Kubernetes cluster.
+
 ## Dapr sidecar
 
 A Dapr sidecar allows your services to interact with Dapr building blocks. It is required if your service connects to a Dapr building block resource.

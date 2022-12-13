@@ -20,6 +20,7 @@ The [Container App Store Microservice](https://github.com/Azure-Samples/containe
 - [rad CLI]({{< ref "getting-started#install-radius-cli" >}})
 - [Docker Desktop](https://www.docker.com/products/docker-desktop) (if running locally)
 - [Dapr CLI](https://docs.dapr.io/getting-started/install-dapr-cli/) (if running locally or on Kubernetes)
+- [Install Dapr](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/)
 
 ### Architecture
 
