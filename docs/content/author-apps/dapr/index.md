@@ -10,7 +10,7 @@ Project Radius offers first-class support for the [Dapr](https://dapr.io) runtim
 
 ## Installation 
 
-Follow the instructions [here](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/) to install Dapr in a Kubernetes cluster.
+Follow the instructions [here](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/) to install Dapr in your Kubernetes cluster. Once Dapr is installed Radius can begin adding Dapr sidecars to your containers and managing your Dapr components.
 
 ## Dapr sidecar
 
