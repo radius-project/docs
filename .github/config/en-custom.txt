@@ -295,7 +295,7 @@ sql
 sqlDatabases
 ss
 sslpassthrough
-sslPassThrough
+sslPassthrough
 statefulset
 statestore
 statestore
