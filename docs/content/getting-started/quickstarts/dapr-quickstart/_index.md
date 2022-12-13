@@ -41,6 +41,7 @@ Dapr integrates directly with Project Radius to provide a simple, easy to use, a
 - [Visual Studio Code](https://code.visualstudio.com/) (recommended)
   - The [Radius VSCode extension]({{< ref "getting-started" >}}) provides syntax highlighting, completion, and linting.
   - You can also complete this quickstart with any basic text editor.
+- [Install Dapr](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/) 
 
 ### Initialize a Radius environment
 
