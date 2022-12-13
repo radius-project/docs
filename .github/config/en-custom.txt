@@ -79,9 +79,11 @@ RabbitMQ
 ResourceDeploymentClient
 Rollout
 SDKs
+SNI
 SQL
 SQS
 SQSDeveloperGuide
+SSL
 STATESTORE
 StatefulSet
 StatefulSets
@@ -92,6 +94,7 @@ Subnets
 Swappable
 TCP
 Terraform
+TLS
 ToCs
 UCP
 UDP
@@ -244,6 +247,7 @@ orgs
 pageinfo
 param
 parametrization
+passthrough
 pem
 performant
 periodSeconds
@@ -290,6 +294,8 @@ spf
 sql
 sqlDatabases
 ss
+sslpassthrough
+sslPassThrough
 statefulset
 statestore
 statestore
