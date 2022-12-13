@@ -31,12 +31,30 @@ A gateway can optionally be added for external users to access the Route.
 
 Refer to the [Gateway schema]({{< ref gateway >}}) for more information on how to model gateways.
 
+### SSL Passthrough
+
+A gateway can be configured to passthrough encrypted SSL traffic to an HTTP route and container. This is useful for applications that already have SSL termination configured, and do not want to terminate SSL at the gateway.
+
+To set up SSL passthrough, set `tls.sslPassthrough` to `true` on the gateway, and set a single route with no `path` defined (just `destination`).
+
 ## Example
+
+### Path-based HTTP routing
 
 {{< tabs Bicep >}}
 
 {{< codetab >}}
 {{< rad file="snippets/networking.bicep" embed=true >}}
+{{< /codetab >}}
+
+{{< /tabs >}}
+
+### SSL Passthrough
+
+{{< tabs Bicep >}}
+
+{{< codetab >}}
+{{< rad file="snippets/networking-sslpassthrough.bicep" embed=true marker="//GATEWAY" >}}
 {{< /codetab >}}
 
 {{< /tabs >}}
