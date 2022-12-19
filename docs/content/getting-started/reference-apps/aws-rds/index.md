@@ -1,15 +1,15 @@
 ---
 type: docs
 title: "Deploying an AWS RDS-backed Wordpress site with Radius"
-linkTitle: "Deploying an AWS RDS-backed Wordpress site with Radius"
-description: "Learn about how to use Radius to deploy a Wordpress site that uses an AWS RDS database"
-weight: 500
+linkTitle: "WordPress on AWS"
+description: "Learn about how to use Radius to deploy a WordPress site that uses an AWS RDS database"
+weight: 600
 ---
 
 This reference app will show you:
 
-* How to model and deploy container apps on AWS
-* How to model AWS RDS resources in Bicep
+* How to model and deploy containers in Radius
+* How to model an AWS RDS resource in Bicep
 
 ## Prerequisites
 
@@ -35,7 +35,7 @@ Create a new file called `app.bicep` and add the following bicep code:
     rad resource expose containers wordpress-container --application wordpress-app --port 8080 --remote-port 80
     ```
 
-> Note: the `--remote-port` flag is set because the port exposed by the `wordpress` image is `80`.
+   Note: the `--remote-port` flag is set because the port exposed by the `wordpress` image is `80`.
 
 1. Visit [localhost:8080](http://localhost:8080) in your browser. You can now create your site with Wordpress.
 
