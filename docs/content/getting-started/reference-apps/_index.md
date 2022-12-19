@@ -36,6 +36,13 @@ no_list: true
   </a>
 </div>
 {{% /card %}}
+{{% card header="[Wordpress on AWS](./aws-rds)" footer="Learn about how to model and deploy a Wordpress site using AWS RDS with Project Radius" %}}
+<div class="text-center">
+  <a href="./aws-rds">
+    <img src="./aws-rds/aws-rds.png" alt="AWS RDS Logo">
+  </a>
+</div>
+{{% /card %}}
 <!-- {{% card header="[AWS SQS Queues](./aws-sqs)" footer="Learn about how to model AWS SQS Queue resources in Bicep" %}}
 <div class="text-center">
   <a href="./aws-sqs">
