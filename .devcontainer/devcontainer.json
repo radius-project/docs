@@ -10,9 +10,6 @@
 		},
 		"ghcr.io/devcontainers/features/node:1": {}
 	},
-	"forwardPorts": [
-		"1313:1313"
-	],
 	"remoteUser": "vscode",
 	"settings": {
 		"terminal.integrated.defaultProfile.linux": "bash"
@@ -27,6 +24,12 @@
 					}
 				}
 			}
+		}
+	},
+	"portsAttributes": {
+		"1313": {
+			"label": "hugo server",
+			"onAutoForward": "openBrowser"
 		}
 	}
 }
