@@ -78,7 +78,7 @@ jobs:
       - name: Generate Swagger docs
         run : |
           mkdir -p ./docs/static/swagger
-          cp -r ./radius/swagger ./docs/static/swagger
+          cp -r ./radius/swagger ./docs/static/
       - name: Build Hugo Site
         run: |
           cd docs
