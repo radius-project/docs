@@ -67,11 +67,11 @@ github_branch = "edge"
 version_menu = "Releases"
 [[params.versions]]
   version = "edge (preview)"
-  url = "https://edge.radapp.dev"
+  url = "https://edge.docs.radapp.dev"
 
 [[params.versions]]
   version = "latest"
-  url = "https://radapp.dev"
+  url = "https://docs.radapp.dev"
 
 # Markdown Engine - Allow inline html
 [markup]
