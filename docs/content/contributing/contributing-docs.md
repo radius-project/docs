@@ -68,7 +68,7 @@ Get up and running with a GitHub Codespace in seconds. This will give you a full
    npm install
    ```
 
-7. Initilize the docsy theme:
+7. Initialize the docsy theme:
 
    ```sh
    cd themes
