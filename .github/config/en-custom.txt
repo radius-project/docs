@@ -127,6 +127,8 @@ cas
 centric
 cli
 clusterName
+codespace
+codespaces
 codetab
 componentName
 componentname
@@ -152,6 +154,7 @@ de
 declaratively
 deployable
 dev
+docsy
 eCommerce
 eShop
 eShopOnContainers
@@ -177,6 +180,7 @@ handoff
 hardcoding
 hostname
 hostnames
+hugo
 http
 html
 httpRoutes
