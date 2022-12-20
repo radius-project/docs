@@ -1,6 +1,6 @@
 {
 	"name": "Radius Docs Dev Container",
-    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+	"image": "mcr.microsoft.com/devcontainers/base:ubuntu",
 	"features": {
 		"ghcr.io/devcontainers/features/git:1": {},
 		"ghcr.io/devcontainers/features/go:1": {},
@@ -17,5 +17,16 @@
 	"settings": {
 		"terminal.integrated.defaultProfile.linux": "bash"
 	},
-	"postCreateCommand": "bash .devcontainer/post-create.sh"
+	"postCreateCommand": "bash .devcontainer/post-create.sh",
+	"customizations": {
+		"codespaces": {
+			"repositories": {
+				"project-radius/radius": {
+					"permissions": {
+						"contents": "read"
+					}
+				}
+			}
+		}
+	}
 }
