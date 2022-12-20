@@ -17,7 +17,9 @@ This reference app will show you:
 
 ## Step 1: Create a Bicep file which uses AWS RDS
 
-Create a new file called `app.bicep` and add the following bicep code:
+This Bicep file defines:
+* A `container` resource which serves the WordPress application.
+* An RDS instance of a MySQL database, along with a subnet group resource. The setup here ensures that the RDS instance is deployed to the same subnet group and VPC as your EKS cluster, and additionally has the correct security group to enable communication between pods in the EKS cluster and the database.
 
 {{< rad file="snippets/app.bicep" embed=true >}}
 
@@ -26,7 +28,7 @@ Create a new file called `app.bicep` and add the following bicep code:
 1. Deploy your application to your environment:
 
     ```bash
-    rad deploy ./app.bicep -p databasePassword=<YOUR_DATABASE_PASSWORD>
+    rad deploy ./app.bicep -p eksClusterName=<YOUR_EXISTING_EKS_CLUSTER_NAME> -p subnetGroupName=<YOUR_SUBNET_GROUP_NAME> -p databaseIdentifier=<YOUR_DATABASE_NAME> -p databasePassword=<YOUR_DATABASE_PASSWORD>
     ```
 
 1. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose >}}):

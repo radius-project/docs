@@ -40,14 +40,14 @@ resource wordpress 'Applications.Core/containers@2022-03-15-privatepreview' = {
   }
 }
 
-param eksClusterName string = 'willsmith-eks-env'
+param eksClusterName string
 resource eksCluster 'AWS.EKS/Cluster@default' existing = {
   properties: {
     Name: eksClusterName
   }
 }
 
-param subnetGroupName string = 'wordpress-subnetgroup-2'
+param subnetGroupName string
 resource subnetGroup 'AWS.RDS/DBSubnetGroup@default' = {
   properties: {
     DBSubnetGroupName: subnetGroupName
@@ -56,7 +56,7 @@ resource subnetGroup 'AWS.RDS/DBSubnetGroup@default' = {
   }
 }
 
-param databaseIdentifier string = 'wordpress-db-2'
+param databaseIdentifier string
 resource db 'AWS.RDS/DBInstance@default' = {
   properties: {
     DBInstanceIdentifier: databaseIdentifier
