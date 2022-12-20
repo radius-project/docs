@@ -75,6 +75,10 @@ jobs:
         run: |
           cd radius
           go run ./cmd/docgen/main.go ../docs/content/reference/cli
+      - name: Generate Swagger docs
+        run : |
+          mkdir -p ./docs/static/swagger
+          cp -r ./radius/swagger ./docs/static/swagger
       - name: Build Hugo Site
         run: |
           cd docs
