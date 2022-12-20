@@ -100,7 +100,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: ${{ github.ref_name == 'edge' && 'edge' || 'latest' }}
-      url: ${{ github.ref_name == 'edge' && 'https://edge.radapp.dev' || 'https://radapp.dev' }}
+      url: ${{ github.ref_name == 'edge' && 'https://edge.docs.radapp.dev' || 'https://docs.radapp.dev' }}
     steps:
       - name: Checkout docs repo
         uses: actions/checkout@v2
