@@ -27,6 +27,7 @@ highlightClass.forEach(element => {
       await navigator.clipboard.writeText(selection.toString());
       console.log('Text copied to clipboard');
       copyIcon.classList.replace('fa-copy', 'fa-check');
+      selection.removeAllRanges();
     } catch (error) {
       console.error('Failed to copy: ', error);
     }
