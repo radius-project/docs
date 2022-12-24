@@ -83,4 +83,4 @@ version_menu = "Releases"
 [params.ui]
 sidebar_menu_compact = true
 sidebar_search_disable = true
-ul_show = 2
+ul_show = 1
