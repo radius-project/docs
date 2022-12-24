@@ -13,13 +13,8 @@ input[type="text"]:focus {
     border: 2px solid #555;
 }
 
-.card {
+.sample {
     display: flex;
     align-items: center;
-}
-
-.card-body {
     max-width: 80%;
-    display: flex;
-    align-items: center;
 }
