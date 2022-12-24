@@ -13,7 +13,7 @@ This reference app will show you:
 
 ## Prerequisites
 
-- [Complete the getting started guide for AWS up to Step 2]({{< ref aws-quickstart >}})
+- [Complete the getting started guide for AWS up to Step 2]({{< ref quickstart-aws >}})
 
 ## Step 1: Create a Bicep file which uses AWS Simple Storage Service (S3)
 
@@ -29,7 +29,7 @@ Create a new file called `app.bicep` and add the following bicep code:
     rad deploy ./app.bicep -p aws_access_key_id=<AWS_ACCESS_KEY_ID> -p aws_secret_access_key=<AWS_SECRET_ACCESS_KEY> -p aws_region=<REGION> -p bucket=<BUCKET_NAME>
     ```
 
-    The access key, secret key, and region can be the same values you used in the [AWS Quickstart]({{< ref aws-quickstart >}}). These are used so the container we are deploying can connect to AWS. The AWS S3 Bucket name must follow the [following naming conventions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html).
+    The access key, secret key, and region can be the same values you used in the [AWS Quickstart]({{< ref quickstart-aws >}}). These are used so the container we are deploying can connect to AWS. The AWS S3 Bucket name must follow the [following naming conventions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html).
 
 1. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose >}}):
 

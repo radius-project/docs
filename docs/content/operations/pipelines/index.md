@@ -12,4 +12,4 @@ It's easy to get Project Radius added to your GitHub Actions deployment pipeline
 
 <img src="gh-actions.png" alt="Diagram of a Radius app being continually deployed to a Radius environment" width="500px" /><br />
 
-To learn more, visit the [GitHub Actions quickstart]({{< ref cicd-quickstart >}}).
+To learn more, visit the [GitHub Actions quickstart]({{< ref quickstart-cicd >}}).
