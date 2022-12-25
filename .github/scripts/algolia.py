@@ -22,6 +22,15 @@ excluded_files = [
     "404.html",
 ]
 
+rankings = {
+    "Concepts": 0,
+    "Getting started": 1,
+    "Developing applications": 2,
+    "Operations": 3,
+    "Reference": 4,
+    "Contributing": 5
+}
+
 def scan_directory(directory: str, pages: list):
     for file in os.listdir(directory):
         path = os.path.join(directory, file)
@@ -60,8 +69,10 @@ def parse_file(path: str):
             data["path"] = meta.get("content").split(url)[1]
             data["objectID"] = meta.get("content").split(url)[1]                
     for bc in soup.find_all("li", class_="breadcrumb-item"):
-        data["lvl1"] = bc.text
-        data["hierarchy"]["lvl0"] = bc.text
+        section = bc.text.rstrip()
+        data["lvl1"] = section
+        data["hierarchy"]["lvl0"] = section
+        data["rank"] = rankings[section]
         break
     for p in soup.find_all("p"):
         if p.text != "":
