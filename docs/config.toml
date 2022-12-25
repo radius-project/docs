@@ -39,6 +39,11 @@ category = "categories"
 
 # Top Nav Bar
 [[menu.main]]
+    name = "Home"
+    weight = 10
+    url = "https://radapp.dev"
+    pre = "<i class='fas fa-home'></i>"
+[[menu.main]]
     name = "GitHub"
     weight = 40
     url = "https://github.com/project-radius"
