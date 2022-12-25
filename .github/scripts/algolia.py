@@ -23,13 +23,13 @@ excluded_files = [
 ]
 
 rankings = {
-    "Concepts": 1,
+    "Concepts": 100,
     "Getting started": 0,
-    "Developer guides": 2,
-    "Administrator guides": 3,
-    "Reference": 4,
-    "Contributing": 5,
-    "Home": 6
+    "Developer guides": 200,
+    "Administrator guides": 300,
+    "Reference": 400,
+    "Contributing": 500,
+    "Home": 600
 }
 
 def scan_directory(directory: str, pages: list):
@@ -55,6 +55,7 @@ def parse_file(path: str):
     data["lvl2"] = ""
     data["lvl3"] = ""
     text = ""
+    subrank = 0
     with open(path, "r", errors='ignore') as file:
         content = file.read()
         soup = BeautifulSoup(content, "html.parser")
@@ -69,13 +70,15 @@ def parse_file(path: str):
         elif meta.get("property") == "og:url":
             data["url"] = meta.get("content")
             data["path"] = meta.get("content").split(url)[1]
-            data["objectID"] = meta.get("content").split(url)[1]                
+            data["objectID"] = meta.get("content").split(url)[1]
+    # Promote parent pages over child pages in rankings
+    subrank = soup.find_all("li", class_="breadcrumb-item").count()
     for bc in soup.find_all("li", class_="breadcrumb-item"):
         section = bc.text.strip()
         data["lvl1"] = section
         data["hierarchy"]["lvl0"] = section
         try:
-            data["rank"] = rankings[section]
+            data["rank"] = rankings[section] + subrank
         except:
             print(f"Rank not found for section {section}")
             data["rank"] = 998
