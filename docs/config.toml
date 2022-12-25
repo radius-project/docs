@@ -1,6 +1,6 @@
 baseURL = "https://docs.radapp.dev/"
 languageCode = "en-us"
-title = "Project Radius"
+title = "Project Radius Docs"
 theme =  "docsy"
 
 disableFastRender = true
