@@ -49,6 +49,7 @@ def parse_file(path: str):
     data = {}
     data["hierarchy"] = {}
     data["rank"] = 999
+    data["subrank"] = 99
     data["type"] = "lvl2"
     data["lvl0"] = ""
     data["lvl1"] = ""
@@ -74,8 +75,10 @@ def parse_file(path: str):
     breadcrumbs = soup.find_all("li", class_="breadcrumb-item")
     try:
         subrank = len(breadcrumbs)
+        data["subrank"] = subrank
     except:
-        subrank = 0
+        subrank = 99
+        data["subrank"] = 99
     for bc in breadcrumbs:
         section = bc.text.strip()
         data["lvl1"] = section
