@@ -71,9 +71,12 @@ def parse_file(path: str):
             data["url"] = meta.get("content")
             data["path"] = meta.get("content").split(url)[1]
             data["objectID"] = meta.get("content").split(url)[1]
-    # Promote parent pages over child pages in rankings
-    subrank = soup.find_all("li", class_="breadcrumb-item").count()
-    for bc in soup.find_all("li", class_="breadcrumb-item"):
+    breadcrumbs = soup.find_all("li", class_="breadcrumb-item")
+    try:
+        subrank = len(breadcrumbs)
+    except:
+        subrank = 0
+    for bc in breadcrumbs:
         section = bc.text.strip()
         data["lvl1"] = section
         data["hierarchy"]["lvl0"] = section
