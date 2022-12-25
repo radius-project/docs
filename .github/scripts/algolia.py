@@ -23,8 +23,8 @@ excluded_files = [
 ]
 
 rankings = {
-    "Concepts": 0,
-    "Getting started": 1,
+    "Concepts": 1,
+    "Getting started": 0,
     "Developing applications": 2,
     "Operations": 3,
     "Reference": 4,
@@ -47,6 +47,7 @@ def scan_directory(directory: str, pages: list):
 def parse_file(path: str):
     data = {}
     data["hierarchy"] = {}
+    data["rank"] = 999
     data["type"] = "lvl2"
     data["lvl0"] = ""
     data["lvl1"] = ""
@@ -69,10 +70,14 @@ def parse_file(path: str):
             data["path"] = meta.get("content").split(url)[1]
             data["objectID"] = meta.get("content").split(url)[1]                
     for bc in soup.find_all("li", class_="breadcrumb-item"):
-        section = bc.text.rstrip()
+        section = bc.text.strip()
         data["lvl1"] = section
         data["hierarchy"]["lvl0"] = section
-        data["rank"] = rankings[section]
+        try:
+            data["rank"] = rankings[section]
+        except:
+            print(f"Rank not found for section {section}")
+            data["rank"] = 998
         break
     for p in soup.find_all("p"):
         if p.text != "":
