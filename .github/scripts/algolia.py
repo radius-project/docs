@@ -25,10 +25,11 @@ excluded_files = [
 rankings = {
     "Concepts": 1,
     "Getting started": 0,
-    "Developing applications": 2,
-    "Operations": 3,
+    "Developer guides": 2,
+    "Administrator guides": 3,
     "Reference": 4,
-    "Contributing": 5
+    "Contributing": 5,
+    "Home": 6
 }
 
 def scan_directory(directory: str, pages: list):
