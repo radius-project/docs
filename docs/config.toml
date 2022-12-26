@@ -12,6 +12,8 @@ ignoreFiles = ["/code/*"]
 [services.googleAnalytics]
 id = "G-9JR8B6TPF9"
 
+enableGitInfo = true
+
 # Mounts
 [module]
   [[module.mounts]]
@@ -67,6 +69,7 @@ algolia_docsearch = true
 github_repo = "https://github.com/project-radius/docs"
 github_subdir = "docs"
 github_branch = "edge"
+github_project_repo = "https://github.com/project-radius/radius"
 
 # Versioning
 version_menu = "Releases"
