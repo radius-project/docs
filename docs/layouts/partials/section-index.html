@@ -31,7 +31,7 @@
             {{ end }}
             {{ $manualLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) }}
             <div class="card mb-4 sample" style="width: {{ $cardWidth }}px; max-width: {{ $cardWidth }}px">
-                <div class="card-header">
+                <div class="card-header" style="width: 100%">
                     <b><a href="{{ $manualLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{ end }}>{{- .Title -}}</a></b>
                 </div>
                 <div class="card-body sample">
@@ -39,7 +39,7 @@
                         <img src="{{ $manualLink }}/icon.png" alt="Logo for {{ .Title }}">
                     </a>
                 </div>
-                <div class="card-footer sample">
+                <div class="card-footer">
                     <p>{{ .Description | markdownify }}</p>
                 </div>
             </div>
