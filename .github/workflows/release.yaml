@@ -1,0 +1,29 @@
+name: Release docs website
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_name:
+        description: "Version number to be released. Must be prefixed with 'v' and contain two numbers separated by a period. Example: v0.17"
+        required: true
+
+jobs:
+  create_and_set_default_branch:
+    name: Create and set Default Branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate branch name
+        run: |
+          if [[ ! ${{ github.event.inputs.version_name }} =~ ^v[0-9]+\.[0-9]+$ ]]; then
+            echo "Invalid version name. Must be prefixed with 'v' and contain two numbers separated by a period. Example: v0.17"
+            exit 1
+          fi
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Create new branch
+        run: |
+          git checkout -b ${{ github.event.inputs.version_name }}
+          git push origin ${{ github.event.inputs.version_name }}
+      - name: Set new branch as default
+        run: |
+          gh api /repos/project-radius/docs --method PATCH -H "Accept: application/vnd.github+json" -f default_branch=${{ github.event.inputs.version_name }}
