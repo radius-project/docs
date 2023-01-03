@@ -27,3 +27,7 @@ jobs:
       - name: Set new branch as default
         run: |
           gh api /repos/project-radius/docs --method PATCH -H "Accept: application/vnd.github+json" -f default_branch=${{ github.event.inputs.version_name }}
+      ## TODO: Delete old branch policy so updates to the old branch don't trigger a build
+      - name: Create a new deployment branch policy
+        run: |
+          gh api --method POST -H "Accept: application/vnd.github+json" /repos/project-radius/docs/environments/latest/deployment-branch-policies -f name=${{ github.event.inputs.version_name }}
