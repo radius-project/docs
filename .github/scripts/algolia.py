@@ -22,6 +22,16 @@ excluded_files = [
     "404.html",
 ]
 
+rankings = {
+    "Concepts": 100,
+    "Getting started": 0,
+    "Developer guides": 200,
+    "Administrator guides": 300,
+    "Reference": 400,
+    "Contributing": 500,
+    "Home": 600
+}
+
 def scan_directory(directory: str, pages: list):
     for file in os.listdir(directory):
         path = os.path.join(directory, file)
@@ -38,12 +48,15 @@ def scan_directory(directory: str, pages: list):
 def parse_file(path: str):
     data = {}
     data["hierarchy"] = {}
+    data["rank"] = 999
+    data["subrank"] = 99
     data["type"] = "lvl2"
     data["lvl0"] = ""
     data["lvl1"] = ""
     data["lvl2"] = ""
     data["lvl3"] = ""
     text = ""
+    subrank = 0
     with open(path, "r", errors='ignore') as file:
         content = file.read()
         soup = BeautifulSoup(content, "html.parser")
@@ -58,10 +71,23 @@ def parse_file(path: str):
         elif meta.get("property") == "og:url":
             data["url"] = meta.get("content")
             data["path"] = meta.get("content").split(url)[1]
-            data["objectID"] = meta.get("content").split(url)[1]                
-    for bc in soup.find_all("li", class_="breadcrumb-item"):
-        data["lvl1"] = bc.text
-        data["hierarchy"]["lvl0"] = bc.text
+            data["objectID"] = meta.get("content").split(url)[1]
+    breadcrumbs = soup.find_all("li", class_="breadcrumb-item")
+    try:
+        subrank = len(breadcrumbs)
+        data["subrank"] = subrank
+    except:
+        subrank = 99
+        data["subrank"] = 99
+    for bc in breadcrumbs:
+        section = bc.text.strip()
+        data["lvl1"] = section
+        data["hierarchy"]["lvl0"] = section
+        try:
+            data["rank"] = rankings[section] + subrank
+        except:
+            print(f"Rank not found for section {section}")
+            data["rank"] = 998
         break
     for p in soup.find_all("p"):
         if p.text != "":

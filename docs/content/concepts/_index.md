@@ -5,5 +5,3 @@ linkTitle: "Concepts"
 description: "Learn about the Project Radius mission, core concepts, and architecture"
 weight: 10
 ---
-
-## Concepts

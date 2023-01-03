@@ -9,12 +9,29 @@ slug: "docs"
 
 The Project Radius docs are built on [Hugo](https://gohugo.io) with the [Docsy](https://docsy.dev) theme. GitHub Actions are used to build and deploy the docs upon each PR.
 
-## Building docs locally
+## Docs environment
+
+### GitHub Codespace
+
+Get up and running with a GitHub Codespace in seconds. This will give you a fully configured environment with all the tools you need to build the docs.
+
+{{< button link="https://github.com/codespaces/new?hide_repo_select=true&repo=421982809" text="Create codespace" >}}
+
+> Note the `postCreateCommand` may take up to 3 minutes to complete after the codespace is created to complete.
+
+1. Start Codespace
+2. Wait for `postCreateCommand` to complete
+3. Run `cd docs` to enter the hugo site directory
+4. Run `hugo server` to start the local server
+5. Click on the link in the terminal to open the docs in your browser
+
+### Local machine
 
 ### Pre-requisites
 
 - [Hugo extended version](https://gohugo.io/getting-started/installing)
 - [Node.js](https://nodejs.org/en/)
+- [git](https://git-scm.com/downloads)
 
 ### Environment setup
 
@@ -49,6 +66,14 @@ The Project Radius docs are built on [Hugo](https://gohugo.io) with the [Docsy](
 
    ```sh
    npm install
+   ```
+
+7. Initialize the docsy theme:
+
+   ```sh
+   cd themes
+   npm install
+   cd ..
    ```
 
 ### Run local server

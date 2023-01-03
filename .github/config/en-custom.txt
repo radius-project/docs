@@ -79,9 +79,11 @@ RabbitMQ
 ResourceDeploymentClient
 Rollout
 SDKs
+SNI
 SQL
 SQS
 SQSDeveloperGuide
+SSL
 STATESTORE
 StatefulSet
 StatefulSets
@@ -92,6 +94,7 @@ Subnets
 Swappable
 TCP
 Terraform
+TLS
 ToCs
 UCP
 UDP
@@ -103,6 +106,7 @@ VSIX
 WSL
 addon
 aks
+api
 appID
 appId
 appId
@@ -123,6 +127,8 @@ cas
 centric
 cli
 clusterName
+codespace
+codespaces
 codetab
 componentName
 componentname
@@ -148,6 +154,7 @@ de
 declaratively
 deployable
 dev
+docsy
 eCommerce
 eShop
 eShopOnContainers
@@ -173,6 +180,7 @@ handoff
 hardcoding
 hostname
 hostnames
+hugo
 http
 html
 httpRoutes
@@ -244,6 +252,7 @@ orgs
 pageinfo
 param
 parametrization
+passthrough
 pem
 performant
 periodSeconds
@@ -268,6 +277,7 @@ rbac
 readinessProbe
 redis
 redisCaches
+redoc
 replacePrefix
 repo
 resourceGroupName
@@ -290,6 +300,8 @@ spf
 sql
 sqlDatabases
 ss
+sslpassthrough
+sslPassthrough
 statefulset
 statestore
 statestore
@@ -307,6 +319,7 @@ toc
 todo
 ubuntu
 ui
+ucp
 unmanaged
 url
 userguide
