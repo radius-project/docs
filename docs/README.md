@@ -17,12 +17,13 @@ This directory contains the files to generate the https://radapp.dev site. Pleas
    ```
 3. Generate CLI docs:
    ```sh
-   cd radius
+   pushd radius
    go run ./cmd/docgen/main.go ../docs/docs/content/reference/cli
+   popd
    ```
 4. Change to docs directory:
    ```sh
-   cd ../docs/docs
+   cd docs/docs
    ```
 5. Update submodules:
    ```sh
@@ -32,10 +33,16 @@ This directory contains the files to generate the https://radapp.dev site. Pleas
    ```sh
    npm install
    ```
+7. Install Docsy dependencies
+   ```sh
+   pushd ./themes/docsy
+   sudo npm install
+   popd
+   ```
 
 ## Run local server
 
-1. Make sure you're still in the `docs` directory
+1. Make sure you're still in the `docs/docs` directory
 2. Run
    ```sh
    hugo server
