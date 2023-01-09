@@ -19,7 +19,10 @@ This reference app will show you:
 
 This Bicep file defines:
 * A `container` resource which serves the WordPress application.
-* An RDS instance of a MySQL database, along with a subnet group resource. The setup here ensures that the RDS instance is deployed to the same subnet group and VPC as your EKS cluster, and additionally has the correct security group to enable communication between pods in the EKS cluster and the database.
+* An RDS instance of a MySQL database
+* A RDS Subnet Group resource
+
+The setup here ensures that the RDS instance is deployed to the set of subnets and VPC as your EKS cluster, and additionally has the correct security group to enable communication between pods in the EKS cluster and the database.
 
 {{< rad file="snippets/app.bicep" embed=true >}}
 
