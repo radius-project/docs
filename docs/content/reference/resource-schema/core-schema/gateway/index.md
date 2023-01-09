@@ -32,7 +32,7 @@ You can define a list of routes, each representing a connection to a service. Sp
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| path | y | The path to match the incoming request path on. | `'/service'`
+| path | y* | The path to match the incoming request path on. Not required when `tls.sslPassthrough` is set to `'true'`. | `'/service'`
 | destination | y | The [HttpRoute]({{< ref httproute >}}) to direct traffic to when the path is matched. | `route.id`
 | replacePrefix | n | The prefix to replace in the incoming request path that is sent to the destination route. | `'/'`
 
@@ -44,6 +44,14 @@ You can define hostname information for how to access your application. See [bel
 |------|:--------:|-------------|---------|
 | prefix | n | A custom DNS prefix for the generated hostname. | `'prefix'`
 | fullyQualifiedHostname | n | A fully-qualified domain name to use for the gateway. | `'myapp.mydomain.com'`
+
+#### TLS
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| sslPassthrough | n | Configures the gateway to passthrough encrypted SSL traffic to an HTTP route and container. Requires a single route to be set with no 'path' defined (just destination). Not compatible with path-based routing. Defaults to 'false'. | `true`
+
+With sslPassthrough set to `true`, the gateway can only support SNI routing. Path based routing cannot be supported.
 
 ## Hostname Generation
 

@@ -1,6 +1,6 @@
-baseURL = "https://edge.radapp.dev/"
+baseURL = "https://edge.docs.radapp.dev/"
 languageCode = "en-us"
-title = "Project Radius"
+title = "Project Radius Docs"
 theme =  "docsy"
 
 disableFastRender = true
@@ -11,6 +11,8 @@ ignoreFiles = ["/code/*"]
 # Google Analytics
 [services.googleAnalytics]
 id = "G-9JR8B6TPF9"
+
+enableGitInfo = true
 
 # Mounts
 [module]
@@ -39,6 +41,11 @@ category = "categories"
 
 # Top Nav Bar
 [[menu.main]]
+    name = "Home"
+    weight = 10
+    url = "https://radapp.dev"
+    pre = "<i class='fas fa-home'></i>"
+[[menu.main]]
     name = "GitHub"
     weight = 40
     url = "https://github.com/project-radius"
@@ -53,7 +60,7 @@ category = "categories"
 copyright = "Project Radius"
 
 version = "edge"
-chart_version = "0.11.0"
+chart_version = "0.16.0"
 
 # Algolia Search
 algolia_docsearch = true
@@ -62,16 +69,17 @@ algolia_docsearch = true
 github_repo = "https://github.com/project-radius/docs"
 github_subdir = "docs"
 github_branch = "edge"
+github_project_repo = "https://github.com/project-radius/radius"
 
 # Versioning
 version_menu = "Releases"
 [[params.versions]]
   version = "edge (preview)"
-  url = "https://edge.radapp.dev"
+  url = "https://edge.docs.radapp.dev"
 
 [[params.versions]]
   version = "latest"
-  url = "https://radapp.dev"
+  url = "https://docs.radapp.dev"
 
 # Markdown Engine - Allow inline html
 [markup]
@@ -83,4 +91,4 @@ version_menu = "Releases"
 [params.ui]
 sidebar_menu_compact = true
 sidebar_search_disable = true
-ul_show = 2
+ul_show = 1

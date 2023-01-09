@@ -124,7 +124,7 @@ resource service 'core/Service@v1' = {
 
 output host string = name
 output port int = int(port)
-output connectionString string = 'mongodb://${name}:${port}/${name}?authSource=admin'
+output connectionString string = 'mongodb://${name}.${namespace}.svc.cluster.local:${port}/${name}?authSource=admin'
 //MONGO
 
 resource sa 'core/ServiceAccount@v1' = {

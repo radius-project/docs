@@ -3,7 +3,6 @@ type: docs
 title: "API timeout/retry policies"
 linkTitle: "Timeout/retry policies"
 description: "Learn the timeout/retry policies of the Radius API"
-weight: 100
 ---
 
 ## Radius services

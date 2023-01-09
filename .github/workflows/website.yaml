@@ -75,6 +75,10 @@ jobs:
         run: |
           cd radius
           go run ./cmd/docgen/main.go ../docs/content/reference/cli
+      - name: Generate Swagger docs
+        run : |
+          mkdir -p ./docs/static/swagger
+          cp -r ./radius/swagger ./docs/static/
       - name: Build Hugo Site
         run: |
           cd docs
@@ -83,7 +87,7 @@ jobs:
           fi
           hugo ${STAGING_URL+-b "$STAGING_URL"}
       - name: Upload Hugo artifacts
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@v3
         with:
           name: hugo_build
           path: ./docs/public/
@@ -96,7 +100,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: ${{ github.ref_name == 'edge' && 'edge' || 'latest' }}
-      url: ${{ github.ref_name == 'edge' && 'https://edge.radapp.dev' || 'https://radapp.dev' }}
+      url: ${{ github.ref_name == 'edge' && 'https://edge.docs.radapp.dev' || 'https://docs.radapp.dev' }}
     steps:
       - name: Checkout docs repo
         uses: actions/checkout@v2
@@ -105,7 +109,7 @@ jobs:
       - name: Parse release version and set environment variables
         run: python ./.github/scripts/get_release_version.py
       - name: Download Hugo artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: hugo_build
           path: site/
@@ -122,7 +126,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download Hugo artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: hugo_build
           path: site/
@@ -166,7 +170,7 @@ jobs:
         with:
           submodules: false
       - name: Download Hugo artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: hugo_build
           path: site/
