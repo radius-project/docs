@@ -13,7 +13,7 @@ This reference app will show you:
 
 ## Prerequisites
 
-- [Complete the getting started guide for AWS up to Step 2]({{< ref aws-quickstart >}})
+- [Complete the getting started guide for AWS up to Step 2]({{< ref quickstart-aws >}})
 
 ## Step 1: Create a Bicep file which uses AWS RDS
 
