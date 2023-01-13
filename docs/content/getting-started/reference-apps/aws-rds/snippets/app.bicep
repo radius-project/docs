@@ -4,11 +4,32 @@ import aws as aws
 param location string = 'global'
 param environment string
 
+@description('Database name (default: wordpress)')
 param databaseName string = 'wordpress'
+
+@description('Database username (default: admin)')
 param databaseUsername string = 'admin'
 
+@description('Database password. Pass at deployment time as a parameter.')
 @secure()
 param databasePassword string
+
+@description('This should equal the name of an existing EKS cluster.')
+param eksClusterName string
+
+@description('''
+The name of your database subnet group.
+
+Naming constraints: Must contain no more than 255 lowercase alphanumeric characters or hyphens. Must not be "Default".
+''')
+param subnetGroupName string
+
+@description('''
+The name of your database instance.
+
+Naming constraints: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html#RDS_Limits.Constraints
+''')
+param databaseIdentifier string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'wordpress-app'
@@ -40,14 +61,12 @@ resource wordpress 'Applications.Core/containers@2022-03-15-privatepreview' = {
   }
 }
 
-param eksClusterName string
 resource eksCluster 'AWS.EKS/Cluster@default' existing = {
   properties: {
     Name: eksClusterName
   }
 }
 
-param subnetGroupName string
 resource subnetGroup 'AWS.RDS/DBSubnetGroup@default' = {
   properties: {
     DBSubnetGroupName: subnetGroupName
@@ -56,7 +75,6 @@ resource subnetGroup 'AWS.RDS/DBSubnetGroup@default' = {
   }
 }
 
-param databaseIdentifier string
 resource db 'AWS.RDS/DBInstance@default' = {
   properties: {
     DBInstanceIdentifier: databaseIdentifier
