@@ -37,13 +37,13 @@ Recipes are templates stored in container registries that can be deployed by [Li
 
 ### Authoring Recipes
 
-To learn more about how to create your own custom Recipe visit the [administrative Recipe guide]({{< >}})
+To learn more about how to create your own custom Recipe visit the [administrative Recipe guide]
 
 
 ### Example
 
 {{% alert title="Prerequisite" color="info" %}}
-Add a Recipe to your Radius environment by following the [administrative Recipe guide]({{< >}})
+Add a Recipe to your Radius environment by following the [administrative Recipe guide]
 {{% /alert %}}
 
 <h4>Step 1: Create a Redis Link</h4>
@@ -66,5 +66,5 @@ Kube
 
 ## Additional guides
 
-For more information refer to the [Recipe quickstart]({{< >}})
+For more information refer to the [Recipe quickstart]
 
