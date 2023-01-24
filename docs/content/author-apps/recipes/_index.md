@@ -26,7 +26,7 @@ In this example the following Recipe template is stored in a container registry:
 
 A Redis link can be configured with parameters that are enabled by the infra team in each Recipe when needed:
 
-{{< rad file="snippets/redis-container.bicep" embed=true >}}
+{{< rad file="snippets/link-example.bicep" embed=true >}}
 
 
 ## Recipe Guides
