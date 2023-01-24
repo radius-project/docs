@@ -20,7 +20,7 @@ The following examples show how a **link** can deploy a Recipe, which in deploys
 
 In this example the following Recipe template is stored in a container registry:
 
-{{< rad file="snippets/recipe-template.bicep" embed=true>}}
+{{< rad file="snippets/recipe-template.bicep" embed=true >}}
 
 <h4>Link</h4>
 
