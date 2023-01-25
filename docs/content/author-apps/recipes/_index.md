@@ -48,7 +48,7 @@ Add a Recipe to your Radius environment by following the [administrative Recipe 
 
 <h4>Step 1: Create a Redis Link</h4>
 
-{{< rad file="snippets/link-template.bicep" embed=true >}}
+{{< rad file="snippets/link-example.bicep" embed=true >}}
 
 <h4>Step 2: Deploy with `rad deploy`</h4>
 
