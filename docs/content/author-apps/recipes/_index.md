@@ -27,13 +27,41 @@ Recipes are templates stored in container registries that can be deployed by [Li
 | **Recipe Packs** *(coming soon)* | Create Recipes and organize them into groups of Recipe templates that can be consumed as individual groups.
 
 ## Rad CLI commands
-| Command | Description |
-|---------|-------------|
-| [**rad recipe**]({{< ref rad_recipe >}}) | Manage link recipes Link recipes automate the deployment of infrastructure and configuration of links.
-| [**rad recipe list**]({{< ref rad_recipe_list >}}) | List link recipes within an environment.
-| [**rad recipe register**]({{< ref rad_recipe_register >}}) | Add a link recipe to an environment. You can specify parameters using the ‘–parameter’ flag (’-p’ for short).
-| [**rad recipe unregister**]({{< ref rad_recipe_unregister >}}) | Unregister a link recipe from an environment.
 
+{{< tabs "recipe" "recipe list" "recipe register" "recipe unregister"  >}}
+
+{{% codetab %}}
+Manage link recipes Link recipes automate the deployment of infrastructure and configuration of links with [**rad recipe**]({{< ref rad_recipe >}}):
+
+```zsh
+rad recipe
+```
+{{% /codetab %}}
+
+{{% codetab %}}
+List link recipes within an environment with [**rad recipe list**]({{< ref rad_recipe_list >}})
+
+```zsh
+rad recipe list
+```
+{{% /codetab %}}
+{{% codetab %}}
+Add a link recipe to an environment with [**rad recipe register**]({{< ref rad_recipe_register >}}). You can specify parameters using the ‘–parameter’ flag (’-p’ for short).
+
+```zsh
+rad recipe register
+```
+{{% /codetab %}}
+{{% codetab %}}
+Unregister a link recipe from an environment with [**rad recipe unregister**]({{< ref rad_recipe_unregister >}}).
+
+```zsh
+rad recipe unregister
+```
+{{% /codetab %}}
+
+
+{{< /tabs >}}
 
 ### Authoring Recipes
 
