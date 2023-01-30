@@ -12,7 +12,8 @@ Recipes are a work-in-progress, currently we support the following Links: [Mongo
 
 ## Overview
 
-Recipes are templates stored in container registries that can be deployed by [Links]({{< ref links-concept >}}) once a Recipe has been registered in a Radius environment. Their purpose is to facilitate a **separation of concerns** between infrastructure teams and developers by allowing for a **automated infrastructure deployment** that doesn't require developers to pick up infrastructure resource expertise.
+Recipes enables  **separation of concerns** between infrastructure teams and developers by allowing for a **automated infrastructure deployment** that doesn't require developers to pick up infrastructure resource expertise.
+Recipe is a bicep template stored in container registry that can be deployed by [Links]({{< ref links-concept >}}) once a Recipe has been registered in a Radius environment. 
 
 
 <img src="recipes.png" alt="Diagram of a container registry containing multiple templates and linking back to a Radius application with a Link" width=700px />
