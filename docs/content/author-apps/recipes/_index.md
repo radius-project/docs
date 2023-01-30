@@ -10,10 +10,6 @@ weight: 300
 
 Recipes enable a **separation of concerns** between infrastructure teams and developers by allowing for a **automated infrastructure deployment** that doesn't require developers to have infrastructure resource expertise.
 
-{{% alert title="Prerequisite" color="info" %}}
-[administrative Recipe guide]
-{{% /alert %}}
-
 
 <img src="recipes.png" alt="Diagram of a container registry containing multiple templates and linking back to a Radius application with a Link" width=700px />
 
