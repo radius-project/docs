@@ -17,8 +17,15 @@ The best way to interact with us currently is through the [Project Radius Previe
 Every month we host a community meeting to showcase new features, review upcoming milestones, and engage in a Q&A. 
 Anyone from the Radius Private Preview community can participate, present a topic, or host. All are welcome!
 
-- The meeting link and details are sent out via email. Contact your Radius Core Team contact to be added to the meeting invite.
-- To present a specific topic on the next Radius community call start by filling out this short form, [Radius community call presenter sign-up form](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbRw_b7M-8iE1NkIMvs0xAJFFUQlozVThYSzI4OVhRU0E3NlI0U05GNzZFTi4u).
+### Meeting link
+
+The meeting link and details are sent out via email. Contact your Radius Core Team contact to be added to the meeting invite.
+
+### Present your topic
+
+To present a specific topic on the next Radius community call start by filling out this short form, [Radius community call presenter sign-up form](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbRw_b7M-8iE1NkIMvs0xAJFFUQlozVThYSzI4OVhRU0E3NlI0U05GNzZFTi4u).
+
+### Calendar
 
 | Date | Topic(s) | Recording Link |
 |------|----------|----------------|
