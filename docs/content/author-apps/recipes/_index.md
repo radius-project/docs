@@ -8,82 +8,86 @@ weight: 300
 
 ## Overview
 
-Recipes enable a **separation of concerns** between infrastructure teams and developers by allowing for a **automated infrastructure deployment** that doesn't require developers to have infrastructure resource expertise.
+Recipes enable a **separation of concerns** between infrastructure teams and developers by allowing for a **automated infrastructure deployment** that doesn't require developers to have infrastructure resource expertise. This abstraction is enabled by utilizing [Links]({{< ref links-concept >}}) as the connection to a Recipe.
 
 
-<img src="dev-guide-recipes.png" alt="Diagram of a container registry containing multiple templates and linking back to a Radius application with a Link" width=700px />
+<img src="dev-guide-recipes.png" alt="Diagram of showing a 'Dev' and 'Prod' Radius environment containing multiple templates and linking back to a Radius application with a Link" width=700px />
 
-## Recipe features
+## Recipe capabilities
 
-| Feature | Description |
-|---------|-------------|
-| **Name** | Assign specific names to templates to enable discovery and usability throughout your Radius environment |
-| **Default Recipes** *(coming soon)* | Define a default set of Recipes in order to enable usability without identification by developers.
-| **Parameters** | Define resource configuration parameters inside a Recipe for user customizability and pass in values either through your Radius environment or through individual Link creation.
-| **Recipe Packs** *(coming soon)* | Create Recipes and organize them into groups of Recipe templates that can be consumed as individual groups.
+### Select any Recipe connected to your Radius environment
+
+When a Recipe is created it contains a unique **name** identifier that enables discovery and usability throughout your Radius environment.
+
+```bicep
+resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
+  name: 'mylink'
+  properties: {
+    mode: 'recipe'
+    recipe: {
+      name: '<RECIPE-NAME-EXAMPLE>'
+    }
+  }
+}
+```
+##### Identify all available  Recipes in your environment
+
+List Recipes within an environment with [**rad recipe list**]({{< ref rad_recipe_list >}})
+
+### Customize Recipes with parameters
+
+Authors of a Recipe can allow for resource configuration parameters inside of a Recipe which allows for user customizability when initializing a Link.
+
+```bicep
+resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
+  name: 'mylink'
+  properties: {
+    mode: 'recipe'
+    recipe: {
+      name: 'prod'
+      parameters: {
+        location: 'global'
+        minimumTlsVersion: '1.2'
+      }
+    }
+  }
+}
+```
 
 ## Rad CLI commands
 
-{{< tabs "recipe" "recipe list" "recipe register" "recipe unregister"  >}}
-
-{{% codetab %}}
-Manage the deployment of infrastructure and configuration of Recipes with [**rad recipe**]({{< ref rad_recipe >}}):
-
-```zsh
-rad recipe
-```
-{{% /codetab %}}
-
-{{% codetab %}}
-Add a Recipe to an environment with [**rad recipe register**]({{< ref rad_recipe_register >}}). You can specify parameters using the ‘–parameter’ flag (’-p’ for short).
-
-```zsh
-rad recipe register
-```
-{{% /codetab %}}
-{{% codetab %}}
-List Recipes within an environment with [**rad recipe list**]({{< ref rad_recipe_list >}})
-
-```zsh
-rad recipe list
-```
-{{% /codetab %}}
-{{% codetab %}}
-Unregister a Recipe from an environment with [**rad recipe unregister**]({{< ref rad_recipe_unregister >}}).
-
-```zsh
-rad recipe unregister
-```
-{{% /codetab %}}
-
-{{< /tabs >}}
+For a reference to all Recipe related CLI commands, please visit [**rad recipe**]({{< ref rad_recipe >}}).
 
 
-### Authoring Recipes
-
-To learn more about how to create your own custom Recipe visit the [administrative Recipe guide]
-
-
-### Example
-
-{{% alert title="Prerequisite" color="info" %}}
-Add a Recipe to your Radius environment by following the [administrative Recipe guide]
+## Authoring Recipes
+{{% alert title="Warning" color="warning" %}}
+Recipes are a work-in-progress and currently only support [Redis Cache Links]({{< ref redis >}})
 {{% /alert %}}
 
-<h4>Step 1: Create a Redis Link</h4>
 
-{{< rad file="snippets/link-example.bicep" embed=true >}}
+To learn more about how to create your own custom Recipe visit the administrative Recipe guide.
 
-<h4>Step 2: Deploy with `rad deploy`</h4>
 
-```zsh
-TODO
-Deploy............
-```
+## Example
 
-<h4>Step 3: Confirm containers have been deployed with `kubectl get pods`</h4>
+{{% alert title="Prerequisite" color="info" %}}
+Follow the administrative Recipe guide for information on how to add a Recipe to your Radius environment.
+{{% /alert %}}
 
-```zsh
-TODO
-Kube
+<h4>Create a Redis Link</h4>
+
+```bicep
+resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
+  name: 'mylink'
+  properties: {
+    mode: 'recipe'
+    recipe: {
+      name: 'prod'
+      parameters: {
+        location: 'global'
+        minimumTlsVersion: '1.2'
+      }
+    }
+  }
+}
 ```
