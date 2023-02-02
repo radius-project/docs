@@ -4,6 +4,8 @@ title: "Run your first app"
 linkTitle: "Run your first app"
 weight: 50
 description: "Take a tour of Radius by running your first app"
+aliases:
+    - /getting-started/tutorial/
 ---
 
 This guide offers the quickest way to get started using Radius. You'll walk through both installing Radius and running your first Radius app.
