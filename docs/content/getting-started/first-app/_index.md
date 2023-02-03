@@ -24,7 +24,7 @@ Ensure your cluster is set as your current context:
 kubectl config current-context
 ```
 
-## 2. Install Radius
+## 2. Install Radius CLI
 
 {{< tabs MacOS "Linux/WSL" "Windows PowerShell" >}}
 
