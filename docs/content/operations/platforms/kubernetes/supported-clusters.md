@@ -31,7 +31,7 @@ az aks get-credentials --subscription mySubscription --resource-group myResource
 Once deployed and your kubectl context has been set as your default, you can run the following to create a Radius environment and install the control plane:
 
 ```bash
-rad env init kubernetes -i
+rad init
 ```
 {{% /codetab %}}
 

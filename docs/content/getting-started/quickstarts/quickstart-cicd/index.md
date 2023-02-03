@@ -51,7 +51,7 @@ Next, you will create the environment that you will be deploying your applicatio
 1. Install the Radius runtime and create a new environment:
 
     ```bash
-    rad env init kubernetes -i
+    rad init
     ```
 
     Specify the Kubernetes namespace you wish to use for application deployments.
