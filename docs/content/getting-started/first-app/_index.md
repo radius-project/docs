@@ -112,7 +112,7 @@ Congrats! You're running your first Radius app.
 
 It's easy to build on the default app and add more resources to the app. 
 
-To delete your app, see [rad app delete]({{< ref rad_application_delete >}}).
+To delete your app, see [rad app delete]({{< ref rad_application_delete >}}), or [rad env delete]({{< ref rad_env_delete >}}) to delete environment and app.
 
 <br>
 {{< button text="Next step: Radius Quickstarts" page="getting-started/quickstarts" >}}
