@@ -8,11 +8,9 @@ weight: 998
 
 ## Radius control plane
 
-### `rad install kubernetes` and `rad env init kubernetes` installs Dapr and Contour in addition to Radius
+### `rad install kubernetes` and `rad init` installs Contour in addition to Radius
 
-Dapr and Contour are also both installed into the `radius-system` namespace to help get you up and running quickly for our quickstarts and tutorial. This is a point-in-time limitation that will be addressed with richer environment customization in a future update.
-
-While Contour is required for Radius gateways and routes, you can manually delete the [Dapr Helm chart](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/#uninstall-dapr-on-kubernetes) if you do not use Dapr.
+Contour is also installed into the `radius-system` namespace to help get you up and running quickly for our quickstarts and tutorial. This is a point-in-time limitation that will be addressed with richer environment customization in a future update.
 
 ## Radius resources
 
@@ -85,19 +83,5 @@ See [app name constraints]({{< ref "resource-schema.md#common-values" >}}) for m
 ### Environment creation and last modified times are incorrect
 
 When running `rad env show`, the `lastmodifiedat` and `createdat` fields display `0001-01-01T00:00:00Z` instead of the actual times.
-
-This will be addressed in an upcoming release.
-
-### Environment creation on EKS fails with default values
-
-When running `rad env init kubernetes` on an EKS cluster, the default environment name for EKS is invalid with current env name requirements.
-
-As a workaround, run `rad env init kubernetes -i`. As part of the init prompts, provide a custom name with only alphanumeric/hyphen characters:
-
-```
-❯ rad env init kubernetes -i
-...
-Enter an environment name [arn:aws:eks:region:account:cluster/mycluster]: mycluster
-```
 
 This will be addressed in an upcoming release.
