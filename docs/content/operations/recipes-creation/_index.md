@@ -2,30 +2,46 @@
 type: docs
 title: "Radius Recipes"
 linkTitle: "Recipes"
-description: "Learn about Radius recipes and how to create and connect them to your environments"
+description: "Learn how to automate infrastructure deployment with Recipes"
 weight: 30
 ---
 
 {{% alert title="Warning" color="warning" %}}
-Recipes are a work-in-progress, currently we support the following Links: [MongoDb]({{< ref mongodb >}}), [Redis]({{< ref redis >}})
+Recipes are a work-in-progress, currently we support the following Links: [Redis]({{< ref redis >}})
 {{% /alert %}}
 
 
 Recipes enables  **separation of concerns** between infrastructure teams and developers by allowing for a **automated infrastructure deployment** that doesn't require developers to pick up infrastructure resource expertise.
-Recipe is a bicep template stored in container registry that can be deployed by [Links]({{< ref links-concept >}}) once a Recipe has been registered in a Radius environment. 
 
 ## Recipe features
 
 ### Recipe Template Parameters
 
-| Feature | Description | Example |
-|---------|-------------|------------|
-| `context` | The `context` parameter is an object that contains information about the Link calling the recipe and is passed to a template automatically by Radius. The following properties can be found: `resource`, `application`, `environment`, `runtime` | `param context object` |
-| **Custom Parameters** | Any [parameter type supported by Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/parameters) can be placed in your template to allow for developers or custom Radius environments to overwrite. |  `param <parameter-name> <parameter-data-type> = <default-value>` |
+
+#### Create **unique** and **repeatable** infrastructure
+
+ You can leverage the `context` parameter which contains information about the Link deploying the recipe and is passed automatically by the Radius server in order to have multiple Links relying on a Recipe. The following metadata can be found and leveraged in the `context` parameter:
+
+
+| Key | Type | Description | Example |
+|-----|------|-------------|---------|
+| `resource` | object | An object containing information on the resource 
+| `application` | object | An object containing information on the application the resource belongs to
+| `environment` | object | An object containing information on the environment the resource belongs to
+| `runtime` | object | An object containing information on the underlying runtime
+
+
+#### Customize Recipes on demand
+
+You can create any [parameter type supported by Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/parameters) for your Recipe to allow for developers or custom Radius environments to overwrite.   
+
+```bicep
+param <parameter-name> <parameter-data-type> = <default-value>` 
+```
 
 ### Recipe Output Parameters
 
-Recipe templates allow users **2** possible returnable objects `value` and `resource`.
+Recipes allow users **2** possible returnable objects `value` and `resource`.
 
 {{< tabs Value Resource  >}}
 
@@ -53,11 +69,41 @@ output resource string = memoryDBCluster.id
 {{% /codetab %}}
 {{< /tabs >}}
 
+If you specify both `values` and `resource` objects, any configuration inside the `values` object will override what is set by the `resource` object.
 
-## Example
+## Author a Recipe
 
-### How to author a recipe template
+### Create a Bicep file
 
-### How to publish a recipe template
+You can turn any valid Bicep file into a Recipe by setting up the following structure in your file:
 
-### How to register a recipe
+```bicep
+param context object
+
+// YOUR INFRASTRUCTURE RESOURCES
+...
+
+output values object = {
+  host: ...
+  port: ...
+}
+```
+
+
+### Store your Bicep file in a OCI compliant registry
+
+Make sure your Cloud provider configured in your Radius environment pull permissions for your container registry.
+
+Example:
+```
+az bicep publish --file <YOUR-FILENAME>.bicep --target
+```
+
+### Register your Recipe with your Radius environment
+
+```
+rad recipe register --name <NAME-OF-RECIPE> -e <ENV-NAME> -w <WORKSPACE-NAME> --template-path <PATH-TO-FILE-IN-REGISTRY> --link-type Applications.Link/<LINK-TYPE>
+```
+
+## Further reading
+- Visit the Recipe developer guide for more information.
