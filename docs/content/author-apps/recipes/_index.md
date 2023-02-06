@@ -2,19 +2,19 @@
 type: docs
 title: "Radius Recipes"
 linkTitle: "Recipes"
-description: "Use Recipes for infrastructure deployment in your Radius application"
+description: "Automate infrastructure deployment for your resources with Radius resources"
 weight: 300
 ---
 
 ## Overview
 
-Recipes enable a **separation of concerns** between infrastructure teams and developers by allowing for a **automated infrastructure deployment** that doesn't require developers to have infrastructure resource expertise.
+Recipes enable a **separation of concerns** between infrastructure teams and developers by **automating infrastructure deployment**. Developers select the resource they want in their app (_Mongo Database, Redis Cache, Dapr State Store, etc._), and infrastructure teams codify how these resources should be deployed and configured (_lightweight containers, Azure resources, AWS resources, etc._). When a developer deploys their application and its resources, Recipes deploy the backing infrastructure and bind it to the developer's resources.
 
 ## Recipe capabilities
 
-### Select any Recipes in your Radius environment
+### Select the Recipe that meets your needs
 
-You can use any Recipes integrated into your Radius environment by  identifying them by name when defining a Link.
+Recipes can be created for any environment, from dev to prod. Simply specify `mode: 'recipe'` in your resource, and select the Recipe you want to run:
 
 
 ```bicep
@@ -28,13 +28,11 @@ resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
   }
 }
 ```
-##### Find your Recipes
-
-List Recipes within an environment with [**rad recipe list**]({{< ref rad_recipe_list >}})
+Use [**rad recipe list**]({{< ref rad_recipe_list >}}) to view the Recipes available to you in your environment.
 
 ### Customize Recipes with parameters
 
-You can customize Recipes by passing resource configuration parameters inside your Link.
+Recipes can be customized with parameters, allowing developers to fine-tune infrastructure to meet their specific needs:
 
 ```bicep
 resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
@@ -53,6 +51,8 @@ resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
 ```
 
 ## Supported resources
+
+We currently support the following resources for Recipes. Support for additional resources is actively being worked on.
 
 - `Applications.Link/redisCaches`
 
