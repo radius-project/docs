@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Radius recipes"
+title: "Radius Recipes"
 linkTitle: "Recipes"
 description: "Learn about Radius recipes and how to create and connect them to your environments"
 weight: 30
@@ -11,7 +11,8 @@ Recipes are a work-in-progress, currently we support the following Links: [Mongo
 {{% /alert %}}
 
 
-Recipes are templates stored in container registries that can be deployed by [Links]({{< ref links-concept >}}) once a Recipe has been registered in a Radius environment. They simplify operational workloads by allowing infrastructure teams to create templates that when deployed by developers are guranteed to always be  **unique** and be **repeatable infrastructure resources**.
+Recipes enables  **separation of concerns** between infrastructure teams and developers by allowing for a **automated infrastructure deployment** that doesn't require developers to pick up infrastructure resource expertise.
+Recipe is a bicep template stored in container registry that can be deployed by [Links]({{< ref links-concept >}}) once a Recipe has been registered in a Radius environment. 
 
 ## Recipe features
 
