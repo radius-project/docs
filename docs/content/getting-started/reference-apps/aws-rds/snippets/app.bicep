@@ -62,12 +62,14 @@ resource wordpress 'Applications.Core/containers@2022-03-15-privatepreview' = {
 }
 
 resource eksCluster 'AWS.EKS/Cluster@default' existing = {
+  alias: eksClusterName
   properties: {
     Name: eksClusterName
   }
 }
 
 resource subnetGroup 'AWS.RDS/DBSubnetGroup@default' = {
+  alias: subnetGroupName
   properties: {
     DBSubnetGroupName: subnetGroupName
     DBSubnetGroupDescription: subnetGroupName
@@ -76,6 +78,7 @@ resource subnetGroup 'AWS.RDS/DBSubnetGroup@default' = {
 }
 
 resource db 'AWS.RDS/DBInstance@default' = {
+  alias: databaseIdentifier
   properties: {
     DBInstanceIdentifier: databaseIdentifier
     Engine: 'mysql'

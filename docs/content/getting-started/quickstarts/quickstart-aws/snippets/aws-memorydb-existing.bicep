@@ -2,6 +2,7 @@ import aws as aws
 
 param memoryDBClusterName string = 'demo-memorydb-cluster'
 resource memoryDBCluster 'AWS.MemoryDB/Cluster@default' existing = {
+  alias: memoryDBClusterName
   properties: {
     ClusterName: memoryDBClusterName
   }
