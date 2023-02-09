@@ -1,4 +1,4 @@
-baseURL = "https://edge.docs.radapp.dev/"
+baseURL = "https://radapp.dev/"
 languageCode = "en-us"
 title = "Project Radius Docs"
 theme =  "docsy"
@@ -59,8 +59,8 @@ category = "categories"
 [params]
 copyright = "Project Radius"
 
-version = "edge"
-chart_version = "0.16.0"
+version = "v0.17"
+chart_version = "0.17.0"
 
 # Algolia Search
 algolia_docsearch = true
