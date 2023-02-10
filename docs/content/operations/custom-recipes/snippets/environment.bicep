@@ -12,7 +12,11 @@ resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
     recipes: {
       myrecipe: {
           linkType: 'Applications.Link/redisCaches' 
-          templatePath: 'https://myregistry.azurecr.io/recipes/myrecipe:v1' 
+          templatePath: 'https://myregistry.azurecr.io/recipes/myrecipe:v1'
+          // Optionally set parameters for all resources calling this Recipe
+          parameters: {
+            capacity: 1
+          }
       }
     }
   }
