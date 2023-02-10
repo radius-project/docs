@@ -107,26 +107,18 @@ When you have multiple environments initialized for different purposes like stag
     rad workspace create kubernetes staging
     ```
     Radius writes the workspace details to your local configuration file (`~/.rad/config.yaml` on Linux and macOS, `%USERPROFILE%\.rad\config.yaml` on Windows).
-1. Initialize a Radius environment in your staging workspace via [`rad env init kubernetes`]({{< ref rad_env_init_kubernetes >}}):
+1. Initialize a Radius environment in your staging workspace via `rad init`:
 
     ```sh 
-    rad env init kubernetes -e env1
+    rad init
     ```
+    Name your environment 'staging' when prompted.
 1. Create another workspace named `production`:
 
     ```sh 
-    rad workspace init kubernetes -w production
+    rad init kubernetes
     ```
-1. Switch to the workspace `production` to set it as the default:
-
-    ```sh 
-    rad workspace switch -w production
-    ```
-1. Initialize a Radius environment in your `production` workspace:
-
-    ```sh 
-    rad env init kubernetes -e env2
-    ```
+    Name your environment 'production' when prompted.
 1. Verify your `config.yaml` file. It should show both `staging` and `production` workspaces, with your environments:
     ```yaml
     workspaces:
@@ -137,14 +129,14 @@ When you have multiple environments initialized for different purposes like stag
           context: mycluster
           kind: kubernetes
         environment: /planes/radius/local/resourcegroups/production
-        /providers/applications.core/environments/env1
+        /providers/applications.core/environments/production
         scope: /planes/radius/local/resourceGroups/production
       staging:
         connection:
           context: mycluster
           kind: kubernetes
         environment: /planes/radius/local/resourcegroups/staging
-        /providers/applications.core/environments/env2
+        /providers/applications.core/environments/staging
         scope: /planes/radius/local/resourceGroups/staging
     ```
 1. You can now deploy applications to both staging and prod using [`rad deploy`]({{< ref rad_deploy >}}), specifying the `-w` flag:

@@ -6,6 +6,12 @@ description: "Learn how to setup Radius on supported Kubernetes clusters"
 weight: 100
 ---
 
+## Minimum version
+
+Kubernetes version `1.23.8` or higher is recommended to run Project Radius.
+
+## Supported clusters
+
 The following clusters have been tested and validated to ensure they support all of the features of Project Radius:
 
 {{< tabs AKS k3d kind EKS >}}
@@ -25,14 +31,18 @@ az aks get-credentials --subscription mySubscription --resource-group myResource
 Once deployed and your kubectl context has been set as your default, you can run the following to create a Radius environment and install the control plane:
 
 ```bash
-rad env init kubernetes -i
+rad init
 ```
 {{% /codetab %}}
 
 {{% codetab %}}
 [k3d](https://k3d.io) is a lightweight wrapper to run [k3s](https://github.com/rancher/k3s) (Rancher Lab’s minimal Kubernetes distribution) in Docker. 
 
-First, ensure that memory resource is 4GB or more in `Resource` setting of `Preferences` if you're using Docker Desktop.
+First, ensure that memory resource is 4GB or more in `Resource` setting of `Preferences` if you're using Docker Desktop. Also make sure you've enabled Rosetta if you're running on an Apple M1 chip:
+
+```bash
+softwareupdate --install-rosetta --agree-to-license
+```
 
 Next, use the following commands to create a new cluster and install the Radius control plane, along with a new environment:
 
@@ -45,9 +55,14 @@ rad env init kubernetes -i --public-endpoint-override 'localhost:8081'
 {{% codetab %}}
 [Kind](https://kind.sigs.k8s.io/) is a tool for running local Kubernetes clusters inside Docker containers. Use the following setup to create a new cluster and install the Radius control plane, along with a new environment:
 
-First, ensure that memory resource is 4GB or more in `Resource` setting of `Preferences` if you're using Docker Desktop.
+First, ensure that memory resource is 4GB or more in `Resource` setting of `Preferences` if you're using Docker Desktop. Also make sure you've enabled Rosetta if you're running on an Apple M1 chip:
+
+```bash
+softwareupdate --install-rosetta --agree-to-license
+```
 
 Second, copy the text below into a new file `kind-config.yaml`:
+
 ```yaml
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4

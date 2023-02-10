@@ -37,10 +37,10 @@ The following commands let you interact with Radius environments:
 {{< tabs init list show delete switch >}}
 
 {{% codetab %}}
-[rad env init kubernetes]({{< ref rad_env_init_kubernetes >}}) initializes a new Kubernetes environment:
+`rad init` initializes a new Kubernetes environment:
 
 ```bash
-rad env init kubernetes
+rad init
 ```
 {{% /codetab %}}
 
@@ -100,9 +100,9 @@ The following example shows an environment configured with Kubernetes as the tar
    ```bash
    kubectl config current-context
    ```
-1. Initialize a new environment with [`rad env init kubernetes` command]({{< ref rad_env_init_Kubernetes >}}):
+1. Initialize a new environment with `rad init` command:
    ```bash
-   rad env init kubernetes -i
+   rad init
    ```
 1. Follow the prompts, specifying:
    - **Namespace** - The Kubernetes namespace where your application containers and networking resources will be deployed (different than the Radius control-plane namespace, `radius-system`)

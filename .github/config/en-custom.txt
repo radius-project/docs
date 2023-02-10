@@ -37,6 +37,7 @@ entrypoint
 EOF
 Extensibility
 FileShare
+FTEs
 GKE
 GOAPP
 GitHubAccess
@@ -92,6 +93,7 @@ Subnet
 SubnetGroup
 Subnets
 Swappable
+TBD
 TCP
 Terraform
 TLS
@@ -315,6 +317,7 @@ subscriptionid
 sudo
 tablestorage
 templating
+th
 toc
 todo
 ubuntu

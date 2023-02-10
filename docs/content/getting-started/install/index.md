@@ -7,7 +7,7 @@ weight: 100
 ---
 
 {{< alert title="Get started in seconds with a Codespace" color="primary" >}}
-Use a free [GitHub Codespace](https://github.com/features/codespaces) to test out the sample applications and build your own in a pre-configured container complete with the rad CLI, Bicep extension, and a pre-deployed environment. Once launched, you can skip directly to [the tutorial]({{< ref tutorial >}}).
+Use a free [GitHub Codespace](https://github.com/features/codespaces) to test out the sample applications and build your own in a pre-configured container complete with the rad CLI, Bicep extension, and a pre-deployed environment. Once launched, you can [run your first app]({{< ref first-app >}}).
 
 <a class="btn btn-primary" href="https://aka.ms/ProjectRadius/Codespace" role="button" target="_blank">Launch a new Codespace</a>
 
@@ -178,7 +178,7 @@ Visual Studio Code offers the best authoring experience for Project Radius and B
 
 | Guides | Description  |
 | --- | ----------- |
-| [Tutorial]({{< ref tutorial >}}) | Walk through an in-depth example to learn more about how to work with Radius concepts |
+| [Run your first app]({{< ref first-app >}}) | Take a tour of Radius by running your first app |
 | [Quickstarts]({{< ref quickstarts >}}) | Learn about Project Radius topics via quickstart guides, complete with code samples |
 | [Reference Applications]({{< ref reference-apps >}}) | See how full applications are modeled in Project Radius |
 | [Supported Languages]({{< ref supported-languages >}}) | Learn how to model apps using various IaC tools |
