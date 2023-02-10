@@ -56,29 +56,6 @@ We currently support the following resources for Recipes. Support for additional
 
 - `Applications.Link/redisCaches`
 
-## Example
-
-{{% alert title="Prerequisite" color="info" %}}
-Follow the administrative Recipe guide for information on how to add a Recipe to your Radius environment.
-{{% /alert %}}
-
-<h4>Create a Redis Link</h4>
-
-```bicep
-resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
-  name: 'mylink'
-  properties: {
-    mode: 'recipe'
-    recipe: {
-      name: 'prod'
-      parameters: {
-        location: 'global'
-        minimumTlsVersion: '1.2'
-      }
-    }
-  }
-}
-```
 
 ## Further Reading
 
