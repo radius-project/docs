@@ -341,3 +341,6 @@ workspaces
 yaml
 yml
 zsh
+OCI
+RESOURCEOBJECT
+CUSTOMPARAM
