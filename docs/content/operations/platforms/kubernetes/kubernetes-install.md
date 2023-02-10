@@ -10,7 +10,7 @@ The [Radius control plane]({{< ref architecture >}}) handles the deployment and 
 
 ## Install with the rad CLI
 
-Use the [`rad install kubernetes` command]({{< ref rad_env_init_Kubernetes >}}) to install Radius control plane on the kubernetes cluster.
+Use the [`rad install kubernetes` command]({{< ref rad_install_Kubernetes >}}) to install Radius control plane on the kubernetes cluster.
 ```bash
 rad install kubernetes
 ```

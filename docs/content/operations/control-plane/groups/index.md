@@ -16,7 +16,7 @@ Note that resource groups in Radius are not the same as [Azure resource groups](
 
 ## Initialization
 
-As part of [`rad env init kubernetes`]({{< ref rad_env_init_kubernetes >}}), a default resource group is created for you, with the same name as your environment. This resource group is set as the default 'scope' of your [workspace]({{< ref workspaces >}}), so that all Radius resources you deploy will be created in this resource group.
+As part of `rad init`, a default resource group is created for you, with the same name as your environment. This resource group is set as the default 'scope' of your [workspace]({{< ref workspaces >}}), so that all Radius resources you deploy will be created in this resource group.
 
 ## Manage groups with rad CLI
 

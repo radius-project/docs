@@ -16,7 +16,7 @@ weight: 999
 
 ### Can I connect to an existing environment?
 
-**Yes**. When you initialize an environment via [`rad env init`]({{< ref rad_env_init.md >}}), you can provide an existing Kubernetes cluster context. Radius will update your `config.yaml` file with the appropriate values.
+**Yes**. When you initialize an environment via `rad init`, you can provide an existing Kubernetes cluster context. Radius will update your `config.yaml` file with the appropriate values.
 
 ### When would/should I use more than one environment?
 
