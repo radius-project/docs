@@ -60,4 +60,3 @@ We currently support the following resources for Recipes. Support for additional
 ## Further Reading
 
 - For a reference to all Recipe related CLI commands, please visit [**rad recipe**]({{< ref rad_recipe >}}).
-- To learn more about how to create your own custom Recipe visit the administrative Recipe guide.
