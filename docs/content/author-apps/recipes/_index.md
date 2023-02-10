@@ -16,7 +16,6 @@ Recipes enable a **separation of concerns** between infrastructure teams and dev
 
 Recipes can be used in any environment, from dev to prod. Simply specify `mode: 'recipe'` in your [Link resource](https://docs.radapp.dev/author-apps/links/), and select the Recipe you want to run:
 
-
 {{< rad file="snippets/recipe-link-example.bicep" embed=true marker="//BASIC" >}}
 
 Use [**rad recipe list**]({{< ref rad_recipe_list >}}) to view the Recipes available to you in your environment.
@@ -27,22 +26,17 @@ Recipes can be customized with parameters, allowing developers to fine-tune infr
 
 {{< rad file="snippets/recipe-link-example.bicep" embed=true marker="//PARAMETERS" >}}
 
-#### Finding out supported parameters
-
-Visit [**rad recipe**]({{< ref rad_recipe_show >}}).
-
+You can use [**rad recipe show**]({{< ref rad_recipe_show >}}) to view the parameters available to you in a Recipe.
 
 ## Supported resources
 
-We currently support the following resources for Recipes. Support for additional resources is actively being worked on.
+Recipes currently support the following resources. Support for additional resources is actively being worked on.
 
-
-| Resources Supported | 
-|-----|
+| Supported resources | 
+|---------------------|
 | `Applications.Link/redisCaches` | 
 | `Applications.Link/mongoDatabases` |
 | `Applications.Link/daprStateStores` |
-
 
 ## Further Reading
 
