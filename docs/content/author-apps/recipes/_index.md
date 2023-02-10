@@ -17,46 +17,31 @@ Recipes enable a **separation of concerns** between infrastructure teams and dev
 Recipes can be used in any environment, from dev to prod. Simply specify `mode: 'recipe'` in your [Link resource](https://docs.radapp.dev/author-apps/links/), and select the Recipe you want to run:
 
 
-```bicep
-resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
-  name: 'mylink'
-  properties: {
-    mode: 'recipe'
-    recipe: {
-      name: '<RECIPE-NAME-EXAMPLE>'
-    }
-  }
-}
-```
+{{< rad file="snippets/recipe-link-example.bicep" embed=true marker="//BASIC" >}}
+
 Use [**rad recipe list**]({{< ref rad_recipe_list >}}) to view the Recipes available to you in your environment.
 
 ### Customize Recipes with parameters
 
 Recipes can be customized with parameters, allowing developers to fine-tune infrastructure to meet their specific needs:
 
-```bicep
-resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
-  name: 'mylink'
-  properties: {
-    mode: 'recipe'
-    recipe: {
-      name: '<RECIPE-NAME-EXAMPLE>'
-      parameters: {
-        location: 'global'
-        minimumTlsVersion: '1.2'
-      }
-    }
-  }
-}
-```
+{{< rad file="snippets/recipe-link-example.bicep" embed=true marker="//PARAMETERS" >}}
+
+#### Finding out supported parameters
+
+Visit [**rad recipe**]({{< ref rad_recipe_show >}}).
+
 
 ## Supported resources
 
 We currently support the following resources for Recipes. Support for additional resources is actively being worked on.
 
-- `Applications.Link/redisCaches`
-- `Applications.Link/mongoDatabases`
-- `Applications.Link/daprStateStores`
+
+| Resources Supported | 
+|-----|
+| `Applications.Link/redisCaches` | 
+| `Applications.Link/mongoDatabases` |
+| `Applications.Link/daprStateStores` |
 
 
 ## Further Reading
