@@ -30,8 +30,7 @@ To make naming easy, a `context` parameter is automatically injected into your t
 
 For example, you can use `context.resource.id` to generate a unique and repeatable name:
 
-{{< rad file="snippets/=template.bicep" embed="true" marker="//NAME" >}}
-
+{{< rad file="snippets/recipe-template-example.bicep" embed=true marker="//OUTPUT" >}}
 
 
 ### Add parameters for Recipe customization (optional)
@@ -40,10 +39,8 @@ You can optionally choose to add parameters to your Recipe to allow developers o
 
 You can create any [parameter type supported by Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/parameters):
 
-```bicep
-@description('A custom parameter that can be set by a developer or operator')
-param myParam string = 'default value'` 
-```
+{{< rad file="snippets/recipe-template-example.bicep" embed=true marker="//CUSTOMPARAM" >}}
+
 
 ### Output the target infrastructure
 
@@ -58,14 +55,8 @@ When you output a `values` object, all of the individual properties will be dire
 
 Simply define an object that matches the schema of the resource calling the Recipe. For example, for an `Application.Link/redisCaches` resource, a Recipe would output:
 
-```bicep
-output values object = {
-  host: memoryDBCluster.properties.ClusterEndpoint.Address
-  port: memoryDBCluster.properties.ClusterEndpoint.Port
-  connectionString: 'redis://${memoryDBCluster.properties.ClusterEndpoint.Address}:${memoryDBCluster.properties.ClusterEndpoint.Port}'
-  password: ''
-}
-```
+{{< rad file="snippets/recipe-template-example.bicep" embed=true marker="//OUTPUT" >}}
+
 {{% /codetab %}}
 {{% codetab %}}
 
@@ -73,11 +64,9 @@ Some Radius resources, such as Links, may support automatically mapping infrastr
 
 For supported infrastructure and resources, you can simply output the resource ID as a string, and the properties will automatically configured. For example, `Applications.Link/redisCaches` supports auto-mapping of `Microsoft.Cache/redis`:
 
-```bicep
-resource azureCache `Microsoft.Cache/redis@2022-06-01' = {...}
+{{< rad file="snippets/recipe-template-example.bicep" embed=true marker="//RESOURCEOBJECT" >}}
 
-output resource string = azureCache.id
-```
+
 {{% /codetab %}}
 {{< /tabs >}}
 
@@ -100,9 +89,19 @@ Now that your Recipe Bicep template has been stored within your Bicep registry, 
 
 Recipes can be added via the rad CLI, or via an environment Bicep definition:
 
+{{< tabs "rad CLI" "Bicep environment" >}}
+
+{{% codetab %}}
 ```bash
 rad recipe register --name <NAME-OF-RECIPE> -e <ENV-NAME> -w <WORKSPACE-NAME> --template-path <PATH-TO-FILE-IN-REGISTRY> --link-type Applications.Link/<LINK-TYPE>
 ```
+{{% /codetab %}}
+{{% codetab %}}
+{{< rad file="snippets/recipe-env-example.bicep" embed=true >}}
+
+{{% /codetab %}}
+
+{{< /tabs >}}
 
 ## Further reading
 
