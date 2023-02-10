@@ -40,4 +40,5 @@ Recipes currently support the following resources. Support for additional resour
 
 ## Further Reading
 
-- For a reference to all Recipe related CLI commands, please visit [**rad recipe**]({{< ref rad_recipe >}}).
+- [`rad recipe` CLI reference]({{< ref rad_recipe >}})
+- [Author custom recipes]({{< ref custom-recipes >}})
