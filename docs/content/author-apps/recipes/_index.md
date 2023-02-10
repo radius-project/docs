@@ -2,7 +2,7 @@
 type: docs
 title: "Radius Recipes"
 linkTitle: "Recipes"
-description: "Automate infrastructure deployment for your resources with Radius resources"
+description: "Automate infrastructure deployment for your resources with Radius recipes"
 weight: 300
 ---
 
@@ -14,7 +14,7 @@ Recipes enable a **separation of concerns** between infrastructure teams and dev
 
 ### Select the Recipe that meets your needs
 
-Recipes can be created for any environment, from dev to prod. Simply specify `mode: 'recipe'` in your resource, and select the Recipe you want to run:
+Recipes can be used in any environment, from dev to prod. Simply specify `mode: 'recipe'` in your [Link resource](https://docs.radapp.dev/author-apps/links/), and select the Recipe you want to run:
 
 
 ```bicep
