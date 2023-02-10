@@ -20,20 +20,18 @@ This page will describe how to author and publish a custom Recipe template, lett
 
 Today, Recipes only support the Bicep IaC language. Your custom Recipe template will begin with a new Bicep file, which will contain all of the resources you want to automatically deploy for each resource that runs the Recipe.
 
-
 ### Ensure your resource names are **unique** and **repeatable**
-Recipe will be called by multiple many resources and need to be generalized templates. The resources inside of a Recipe cannot interfere or overwrite each other. To make sure you don't accidently overwrite or corrupt your infrastructure, you will want to make sure **each resource in your Recipe contains unique names**.
-Additionally, every time an application is deployed, Recipes are re-evaluated and deployed. Because IaC languages like Bicep are idempotent, if there are no changes to the template then nothing is re-deployed or re-configured. To make sure Recipes can be re-run, **each resource needs a repeatable name that is the same every time it is deployed**.
-To make naming easy, a `context` parameter is automatically injected into your template.
-It contains information about the backing resource which you can use to generate unique and repeatable names:
 
+Recipes need to be generalized templates, as multiple resources can run each Recipe. The resources inside of a Recipe cannot interfere or overwrite each other. To make sure you don't accidentally overwrite or corrupt your infrastructure, you will want to make sure **each resource in your Recipe contains unique names**.
 
-| Key | Type | Description | Example |
-|-----|------|-------------|---------|
-| `resource` | object | An object containing information on the resource 
-| `application` | object | An object containing information on the application the resource belongs to
-| `environment` | object | An object containing information on the environment the resource belongs to
-| `runtime` | object | An object containing information on the underlying runtime
+Additionally, every time an application is deployed, Recipes are re-evaluated and re-deployed. Because IaC languages like Bicep are idempotent, if there are no changes to the template, then nothing is changed. To make sure Recipes can be re-run, **each resource needs a repeatable name that is the same every time it is deployed**.
+
+To make naming easy, a `context` parameter is automatically injected into your template. It contains information about the backing resource which you can use to generate unique and repeatable names.
+
+For example, you can use `context.resource.id` to generate a unique and repeatable name:
+
+{{< rad file="snippets/=template.bicep" embed="true" marker="//NAME" >}}
+
 
 
 ### Add parameters for Recipe customization (optional)
