@@ -55,6 +55,8 @@ resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
 We currently support the following resources for Recipes. Support for additional resources is actively being worked on.
 
 - `Applications.Link/redisCaches`
+- `Applications.Link/mongoDatabases`
+- `Applications.Link/daprStateStores`
 
 
 ## Further Reading
