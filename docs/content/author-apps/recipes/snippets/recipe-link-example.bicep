@@ -1,10 +1,17 @@
+import radius as rad
+param environment string
+param application string
+
 //BASIC
 resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
   name: 'mylink'
+  location: 'global'
   properties: {
+    environment: environment
+    application: application
     mode: 'recipe'
     recipe: {
-      name: '<RECIPE-NAME-EXAMPLE>'
+      name: 'azure-prod'
     }
   }
 }
@@ -12,14 +19,17 @@ resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
 
 
 //PARAMETERS
-resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
+resource redisParam 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
   name: 'mylink'
+  location: 'global'
   properties: {
+    environment: environment
+    application: application
     mode: 'recipe'
     recipe: {
-      name: '<RECIPE-NAME-EXAMPLE>'
+      name: 'azure-prod'
       parameters: {
-        subnetId: "<EXAMPLE>"
+        sku: 'Premium'
       }
     }
   }
