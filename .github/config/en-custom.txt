@@ -69,6 +69,8 @@ NodeJS
 OAuth
 OCI
 OIDC
+OUTRESOURCE
+OUTVALUES
 PARAMS
 PYTHONAPP
 PowerShell
@@ -211,6 +213,7 @@ kubernetesNamespace
 lifecycle
 lifecycles
 linkTitle
+linter
 linux
 liveness
 livenessProbe
@@ -254,6 +257,7 @@ org's
 orgs
 pageinfo
 param
+params
 parametrization
 passthrough
 pem
