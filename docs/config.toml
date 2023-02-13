@@ -68,7 +68,7 @@ algolia_docsearch = true
 # GitHub Information
 github_repo = "https://github.com/project-radius/docs"
 github_subdir = "docs"
-github_branch = "edge"
+github_branch = "v0.17"
 github_project_repo = "https://github.com/project-radius/radius"
 
 # Versioning
