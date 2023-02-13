@@ -86,7 +86,7 @@ In addition to starting Radius services in your Kubernetes cluster, this initial
 
 {{< rad file="snippets/app.bicep" embed=true >}}
 
-> This file will run the `radius.azurecr.io/tutorial/demo` image. This image is published by the Radius team to a public registry, you do not need to create it.
+> This file will run the `radius.azurecr.io/tutorial/webapp` image. This image is published by the Radius team to a public registry, you do not need to create it.
 
 ## 4. Run the app
 
@@ -149,7 +149,7 @@ rad run app.bicep
 
 Open the browser to [http://localhost:3000](http://localhost:3000) and you should see that the environment variables have changed. The `demo` container now has connection information for Redis (`CONNECTION_REDIS_HOST`, `CONNECTION_REDIS_PORT`).
 
-<img src="./demo-screenshot-with-redis.png" alt="Screenshot of the demo container" width=400>
+<img src="./demo-with-redis-screenshot.png" alt="Screenshot of the demo container" width=400>
 <br /><br />
 
 Navigate to the TODO page and test out the application. Using the TODO page will update the saved state in Redis.
