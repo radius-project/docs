@@ -11,6 +11,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 }
 
 //SAMPLE
+param namespace string = 'default'
 resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' = {
   name: 'statestore'
   location: 'global'
@@ -21,7 +22,7 @@ resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview
     type: 'state.redis'
     version: 'v1'
     metadata: {
-      redisHost: '${service.metadata.name}:${service.spec.ports[0].port}'
+      redisHost: '${service.metadata.name}.${namespace}.svc.cluster.local:${service.spec.ports[0].port}'
       redisPassword: ''
     }
   }
@@ -29,7 +30,7 @@ resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview
 
 import kubernetes as kubernetes{
   kubeConfig: ''
-  namespace: 'default'
+  namespace: namespace
 }
 
 resource statefulset 'apps/StatefulSet@v1' = {

@@ -24,7 +24,7 @@ Ensure your cluster is set as your current context:
 kubectl config current-context
 ```
 
-## 2. Install Radius
+## 2. Install Radius CLI
 
 {{< tabs MacOS "Linux/WSL" "Windows PowerShell" >}}
 
@@ -107,6 +107,54 @@ Access the application by opening [http://localhost:3000](http://localhost:3000)
 <img src="./demo-screenshot.png" alt="Screenshot of the demo container" width=400>
 <br /><br />
 Congrats! You're running your first Radius app. 
+
+When you're ready to move on to the next step, use `CTRL+C` to exit the command.
+
+### 5: Add Database
+
+This step will add a database (Redis Cache) to the application.
+
+You can create a Redis Cache using [Recipes]({{< ref recipes >}}) provided by Radius. The Radius community provides Recipes for running commonly used application dependencies, including Redis.
+
+In this step you will:
+
+- Add Redis to the application using a Recipe.
+- Connect to Redis from the `demo` container using environment variables that Radius automatically sets.
+
+Open `app.bicep` in your editor and get ready to edit the file.
+
+First add some new code to `app.bicep` by pasting in the content below:
+
+{{< rad file="snippets/app-with-redis-snippets.bicep" embed=true marker="//REDIS" >}}
+
+The code you just added creates a Redis Cache resource and specifies that it should be created by a Recipe.
+
+Next, add this code to the container definition inside `properties`:
+
+{{< rad file="snippets/app-with-redis-snippets.bicep" embed=true marker="//CONNECTION" >}}
+
+The code you just added creates a connection between the container and the database. Based on this connection, Radius will define environment variables in the container that tell the container how to connect. You will view these in the next step.
+
+The finished `app.bicep` should like this:
+
+{{< rad file="snippets/app-with-redis.bicep" embed=true >}}
+
+## 6: Rerun the application with a database
+
+Use `rad run` to run the updated application again:
+
+```sh
+rad run app.bicep
+```
+
+Open the browser to [http://localhost:3000](http://localhost:3000) and you should see that the environment variables have changed. The `demo` container now has connection information for Redis (`CONNECTION_REDIS_HOST`, `CONNECTION_REDIS_PORT`).
+
+<img src="./demo-screenshot-with-redis.png" alt="Screenshot of the demo container" width=400>
+<br /><br />
+
+Navigate to the TODO page and test out the application. Using the TODO page will update the saved state in Redis.
+
+Press CTRL+C when you are finished with the website.
 
 ## Recap and next steps
 

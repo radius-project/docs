@@ -24,10 +24,10 @@ This quickstart will provide an overview of how to:
 
 ## Step 1: Initialize Radius 
 
-Begin by running [`rad env init kubernetes`]({{< ref rad_env_init_kubernetes >}}). Make sure to configure an Azure cloud provider:
+Begin by running `rad init`. Make sure to configure an Azure cloud provider:
 
 ```bash
-rad env init kubernetes -i
+rad init
 ```
 
 ## Step 2: Define a Radius environment
