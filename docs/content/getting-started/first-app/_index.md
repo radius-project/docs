@@ -110,7 +110,7 @@ Congrats! You're running your first Radius app.
 
 When you're ready to move on to the next step, use `CTRL+C` to exit the command.
 
-## 5: Add Database
+## 5. Add Database
 
 This step will add a database (Redis Cache) to the application.
 
@@ -139,7 +139,7 @@ The finished `app.bicep` should like this:
 
 {{< rad file="snippets/app-with-redis.bicep" embed=true >}}
 
-## 6: Rerun the application with a database
+## 6. Rerun the application with a database
 
 Use `rad run` to run the updated application again:
 
