@@ -149,7 +149,7 @@ rad run app.bicep
 
 Open the browser to [http://localhost:3000](http://localhost:3000) and you should see that the environment variables have changed. The `demo` container now has connection information for Redis (`CONNECTION_REDIS_HOST`, `CONNECTION_REDIS_PORT`).
 
-<img src="./demo-screenshot-with-redis.png" alt="Screenshot of the demo container" width=400>
+<img src="./demo-with-redis-screenshot.png" alt="Screenshot of the demo container" width=400>
 <br /><br />
 
 Navigate to the TODO page and test out the application. Using the TODO page will update the saved state in Redis.
