@@ -86,7 +86,7 @@ In addition to starting Radius services in your Kubernetes cluster, this initial
 
 {{< rad file="snippets/app.bicep" embed=true >}}
 
-> This file will run the `radius.azurecr.io/tutorial/demo` image. This image is published by the Radius team to a public registry, you do not need to create it.
+> This file will run the `radius.azurecr.io/tutorial/webapp` image. This image is published by the Radius team to a public registry, you do not need to create it.
 
 ## 4. Run the app
 
