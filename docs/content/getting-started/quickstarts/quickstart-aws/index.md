@@ -155,6 +155,7 @@ This Bicep file defines a webapp [container]({{< ref container >}}), which conne
    ```bicep
    param subnetGroupName string = 'demo-memorydb-subnet-group'
    resource subnetGroup 'AWS.MemoryDB/SubnetGroup@default' = {
+      alias: subnetGroupName
       properties: {
          SubnetGroupName: subnetGroupName
          // Update this line to include your subnets:

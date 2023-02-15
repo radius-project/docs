@@ -3,6 +3,7 @@ import aws as aws
 param eksClusterName string
 
 resource eksCluster 'AWS.EKS/Cluster@default' existing = {
+  alias: eksClusterName
   properties: {
     Name: eksClusterName
   }
@@ -10,6 +11,7 @@ resource eksCluster 'AWS.EKS/Cluster@default' existing = {
 
 param subnetGroupName string = 'demo-memorydb-subnet-group'
 resource subnetGroup 'AWS.MemoryDB/SubnetGroup@default' = {
+  alias:subnetGroupName
   properties: {
     SubnetGroupName: subnetGroupName
     SubnetIds: eksCluster.properties.ResourcesVpcConfig.SubnetIds
@@ -18,6 +20,7 @@ resource subnetGroup 'AWS.MemoryDB/SubnetGroup@default' = {
 
 param memoryDBClusterName string = 'demo-memorydb-cluster'
 resource memoryDBCluster 'AWS.MemoryDB/Cluster@default' = {
+  alias: memoryDBClusterName
   properties: {
     ClusterName: memoryDBClusterName
     NodeType: 'db.t4g.small'
