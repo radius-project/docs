@@ -13,7 +13,7 @@ the cloud or on-premises.
 
 ## Configuration
 
-The `tracing` section under the `radius-dev.yaml` spec contains the following properties:
+The `tracerProvider` section under the `radius-dev.yaml` spec contains the following properties:
 
 ```yml
 # Tracing configuration
@@ -30,4 +30,7 @@ The following table lists the properties for tracing:
 | `zipkin` | section | Identifies we are using Zipkin as our tracing tool.
 | `url` | string | Sets the Zipkin server address. 
 | `serviceName` | string | Is the serviceName used to identify the service which is generating traces.
+
+
+Not having a tracerProvider section disables tracing.
 
