@@ -67,8 +67,8 @@ description: "How to install Fluentd, Elastic Search, and Kibana to search logs 
 1. Install config map and Fluentd as a daemonset
 
     Download these config files:
-    - [fluentd-config-map.yaml](/docs/fluentd-config-map.yaml)
-    - [fluentd-radius-with-rbac.yaml](/docs/fluentd-radius-with-rbac.yaml)
+    - [fluentd-config-map.yaml](fluentd-config-map.yaml)
+    - [fluentd-radius-with-rbac.yaml](fluentd-radius-with-rbac.yaml)
 
     > Note: If you already have Fluentd running in your cluster, please enable the nested json parser so that it can parse JSON-formatted logs from radius.
 
