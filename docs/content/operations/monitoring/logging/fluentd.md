@@ -120,39 +120,39 @@ Enable JSON formatted log in all radius services by adding `logging` section dep
 
 3. Expand the drop-down menu and click **Management → Stack Management**
 
-    ![Stack Management item under Kibana Management menu options](/images/kibana-1.png)
+    ![Stack Management item under Kibana Management menu options](kibana-1.png)
 
 4. On the Stack Management page, select **Data → Index Management** and wait until `radius-*` is indexed.
 
-    ![Index Management view on Kibana Stack Management page](/images/kibana-2.png)
+    ![Index Management view on Kibana Stack Management page](kibana-2.png)
 
 5. Once `radius-*` is indexed, click on **Kibana → Index Patterns** and then the **Create index pattern** button.
 
-    ![Kibana create index pattern button](/images/kibana-3.png)
+    ![Kibana create index pattern button](kibana-3.png)
 
 6. Define a new index pattern by typing `radius*` into the **Index Pattern name** field, then click the **Next step** button to continue.
 
-    ![Kibana define an index pattern page](/images/kibana-4.png)
+    ![Kibana define an index pattern page](kibana-4.png)
 
 7. Configure the primary time field to use with the new index pattern by selecting the `@timestamp` option from the **Time field** drop-down. Click the **Create index pattern** button to complete creation of the index pattern.
 
-    ![Kibana configure settings page for creating an index pattern](/images/kibana-5.png)
+    ![Kibana configure settings page for creating an index pattern](kibana-5.png)
 
 8. The newly created index pattern should be shown. Confirm that the fields of interest such as `scope`, `type`, `app_id`, `level`, etc. are being indexed by using the search box in the **Fields** tab.
 
     > Note: If you cannot find the indexed field, please wait. The time it takes to search across all indexed fields depends on the volume of data and size of the resource that the elastic search is running on.
 
-    ![View of created Kibana index pattern](/images/kibana-6.png)
+    ![View of created Kibana index pattern](kibana-6.png)
 
 9. To explore the indexed data, expand the drop-down menu and click **Analytics → Discover**.
 
-    ![Discover item under Kibana Analytics menu options](/images/kibana-7.png)
+    ![Discover item under Kibana Analytics menu options](kibana-7.png)
 
 10. In the search box, type in a query string such as `scope:*` and click the **Refresh** button to view the results.
 
     > Note: This can take a long time. The time it takes to return all results depends on the volume of data and size of the resource that the elastic search is running on.
 
-    ![Using the search box in the Kibana Analytics Discover page](/images/kibana-8.png)
+    ![Using the search box in the Kibana Analytics Discover page](kibana-8.png)
 
 ## References
 
