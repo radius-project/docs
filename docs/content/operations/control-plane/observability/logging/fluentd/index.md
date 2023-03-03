@@ -86,13 +86,7 @@ description: "How to install Fluentd, Elastic Search, and Kibana to search logs 
 
 ## Install Radius control plane 
 
-Enable JSON formatted log in all radius services by adding `logging` section deployment yaml:
-
-```yaml
-# Logging configuration
-logging:
-  level: "info"
-  json: true
+By default, Radius has logging enabled, in json format. Once we install radius control plane, and have the EFK setup, we will be able to view logs as we use radius for deploying applications.
 ...
 ```
 
