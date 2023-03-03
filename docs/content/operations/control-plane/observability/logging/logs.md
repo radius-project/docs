@@ -21,11 +21,11 @@ Radius produces logs based on the following schema:
 | time  | ISO8601 Timestamp | `2011-10-05T14:48:00.000Z` |
 | severity | Log Level (info/warn/debug/error) | `info` |
 | message   | Log Message | `hello radius!` |
-| name   | Logging scope | `applications.core.Applications.Core async worker` |
+| name   | Logging scope | `ucplogger.api` |
 | version | radius control plane version | `1.9.0` |
-| serviceName | radius service name | `applications.core` |
-| hostName | radius service host name | `appcore-rp` |
-| resourceId | radius resourceId | `appcore-rp` |
+| serviceName | name of radius control plane service | `ucp` |
+| hostName | radius service host name | `ucp-77bc9b4cbb-nmjlz` |
+| resourceId | radius resourceId | `/apis/api.ucp.dev/v1alpha3/planes/deployments/local/resourcegroups/nsdemo2/providers/Microsoft.Resources/deployments/rad-deploy-6c0d37b0-705e-454b-9167-877aa080e656` |
 | traceId | w3c traceId | `d1ba9c7d2326ee1b44eb0b8177ef554f` |
 | spanId | w3c spanId | `ce52a91ed3c86c6d` |
 
@@ -54,7 +54,7 @@ Radius supports either plain-text or JSON-formatted logs (default).
 
 ## Log collectors
 
-If you run Dapr in a Kubernetes cluster, [Fluentd](https://www.fluentd.org/) is a popular container log collector. You can use Fluentd with a [JSON parser plugin](https://docs.fluentd.org/parser/json) to parse Dapr JSON-formatted logs. This [how-to]({{< ref fluentd.md >}}) shows how to configure Fluentd in your cluster.
+If you run Radius in a Kubernetes cluster, [Fluentd](https://www.fluentd.org/) is a popular container log collector. You can use Fluentd with a [JSON parser plugin](https://docs.fluentd.org/parser/json) to parse Radius JSON-formatted logs. This [how-to]({{< ref fluentd.md >}}) shows how to configure Fluentd in your cluster.
 
 If you are using Azure Kubernetes Service, you can use the built-in agent to collect logs with Azure Monitor without needing to install Fluentd.
 
@@ -67,4 +67,3 @@ If you are using the Azure Kubernetes Service, you can use [Azure Monitor for co
 ## References
 
 - [How-to: Set up Fleuntd, Elastic search, and Kibana]({{< ref fluentd.md >}})
-- [How-to: Set up Azure Monitor in Azure Kubernetes Service]({{< ref azure-monitor.md >}})
