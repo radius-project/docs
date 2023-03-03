@@ -8,7 +8,7 @@ description: "How to install Fluentd, Elastic Search, and Kibana to search logs 
 
 ## Prerequisites
 
-- Kubernetes (> 1.14)
+- [Supported Kubernetes cluster]({{< ref supported-clusters >}})
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [Helm 3](https://helm.sh/)
 
@@ -29,19 +29,13 @@ description: "How to install Fluentd, Elastic Search, and Kibana to search logs 
 
 3. Install Elastic Search using Helm
 
-    By default, the chart creates 3 replicas which must be on different nodes. If your cluster has fewer than 3 nodes, specify a smaller number of replicas.  For example, this sets the number of replicas to 1:
+    _By default, the chart creates three replicas which must be on different nodes. If your cluster has fewer than 3 nodes, specify a smaller number of replicas with the `--set replicas=1` flag:_
 
     ```bash
     helm install elasticsearch elastic/elasticsearch --version 7.17.3 -n radius-monitoring --set replicas=1
     ```
 
-    Otherwise:
-
-    ```bash
-    helm install elasticsearch elastic/elasticsearch --version 7.17.3 -n radius-monitoring
-    ```
-
-    If you are using minikube or simply want to disable persistent volumes for development purposes, you can do so by using the following command:
+    _If you are using minikube or simply want to disable persistent volumes for development purposes, you can do so with `--set persistence.enabled=false`:_
 
     ```bash
     helm install elasticsearch elastic/elasticsearch --version 7.17.3 -n radius-monitoring --set persistence.enabled=false,replicas=1
@@ -70,7 +64,7 @@ description: "How to install Fluentd, Elastic Search, and Kibana to search logs 
     - [fluentd-config-map.yaml](fluentd-config-map.yaml)
     - [fluentd-radius-with-rbac.yaml](fluentd-radius-with-rbac.yaml)
 
-    > Note: If you already have Fluentd running in your cluster, please enable the nested json parser so that it can parse JSON-formatted logs from radius.
+    _Note: If you already have Fluentd running in your cluster, enable the nested json parser so that it can parse JSON-formatted logs from radius._
 
     Apply the configurations to your cluster:
 
@@ -90,21 +84,21 @@ description: "How to install Fluentd, Elastic Search, and Kibana to search logs 
     fluentd-sdrld                 1/1     Running   0          14s
     ```
 
-## Install radius 
+## Install Radius control plane 
 
 Enable JSON formatted log in all radius services by adding `logging` section deployment yaml:
 
-    ```yaml
-    # Logging configuration
-    logging:
-      level: "info"
-      json: true
-    ...
-    ```
+```yaml
+# Logging configuration
+logging:
+  level: "info"
+  json: true
+...
+```
 
 ## Search logs
 
-> Note: Elastic Search takes a time to index the logs that Fluentd sends.
+_Note: There is a small delay for Elastic Search to index the logs that Fluentd sends. You may need to wait a minute and refresh to see your logs._
 
 1. Port-forward from localhost to `svc/kibana-kibana`
 
@@ -140,7 +134,7 @@ Enable JSON formatted log in all radius services by adding `logging` section dep
 
 8. The newly created index pattern should be shown. Confirm that the fields of interest such as `scope`, `type`, `app_id`, `level`, etc. are being indexed by using the search box in the **Fields** tab.
 
-    > Note: If you cannot find the indexed field, please wait. The time it takes to search across all indexed fields depends on the volume of data and size of the resource that the elastic search is running on.
+    _Note: If you cannot find the indexed field, please wait. The time it takes to search across all indexed fields depends on the volume of data and size of the resource that the elastic search is running on._
 
     ![View of created Kibana index pattern](kibana-6.png)
 
@@ -150,7 +144,7 @@ Enable JSON formatted log in all radius services by adding `logging` section dep
 
 10. In the search box, type in a query string such as `scope:*` and click the **Refresh** button to view the results.
 
-    > Note: This can take a long time. The time it takes to return all results depends on the volume of data and size of the resource that the elastic search is running on.
+    _Note: This can take a long time. The time it takes to return all results depends on the volume of data and size of the resource that the elastic search is running on._
 
     ![Using the search box in the Kibana Analytics Discover page](kibana-8.png)
 
