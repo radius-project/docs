@@ -10,14 +10,19 @@ The easiest way to get up and runnning with a docs environment is a GitHub codes
 2. Ensure postCreate script has completed (takes ~2 minutes to build CLI docs)
 3. `cd docs` to change into the docs directory
 4. `hugo server` to run a docs server
-5. Click the `localhost:1313` link in your terminal to open the Codespace tunnel to the page
+5. Click the `localhost:1313` link in your terminal to open the Codespace tunnel to the page\
+6. Done!
 
-## Pre-requisites
+## Local machine
+
+> If using a codespace you do not need to run these steps, as the Codespace handles everything for you
+
+### Pre-requisites
 
 - [Hugo extended version](https://gohugo.io/getting-started/installing)
 - [Node.js](https://nodejs.org/en/)
 
-## Environment setup
+### Environment setup
 
 1. Ensure pre-requisites are installed
 2. Clone this repository and the radius repository
@@ -27,7 +32,7 @@ The easiest way to get up and runnning with a docs environment is a GitHub codes
    ```
 3. Generate CLI docs:
    ```sh
-   pushd radius
+   pushd ./radius
    go run ./cmd/docgen/main.go ../docs/docs/content/reference/cli
    popd
    ```
@@ -50,7 +55,7 @@ The easiest way to get up and runnning with a docs environment is a GitHub codes
    popd
    ```
 
-## Run local server
+### Run local server
 
 1. Make sure you're still in the `docs/docs` directory
 2. Run
