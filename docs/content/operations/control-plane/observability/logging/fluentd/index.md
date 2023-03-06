@@ -86,9 +86,17 @@ description: "How to install Fluentd, Elastic Search, and Kibana to search contr
 
 ## Install Radius control plane 
 
-By default, Radius has logging enabled, in json format. Once we install radius control plane, and have the EFK setup, we will be able to view logs as we use radius for deploying applications.
+Visit [supported platforms]({{< ref platforms >}}) to learn how to install the Project Radius control plane. By default, Radius has JSON logging enabled.
+
+For Kubernetes, you can install with the rad CLI:
+
+```bash
+rad install kubernetes
+```
 
 ## Search logs
+
+Once the Radius control plane is installed, you can search the logs using Kibana.
 
 _Note: There is a small delay for Elastic Search to index the logs that Fluentd sends. You may need to wait a minute and refresh to see your logs._
 
