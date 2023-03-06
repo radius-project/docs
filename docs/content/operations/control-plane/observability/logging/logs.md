@@ -6,28 +6,26 @@ weight: 100
 description: "Understand Project Radius control plane logs"
 ---
 
-Radius produces structured logs to stdout, either in plain-text or JSON-formatted. By default, all Radius services produce Json formatted logs. 
+The Project Radius control plane outputs structured logs to stdout, either plain-text or JSON-formatted. By default, services produce JSON formatted logs. 
 
-{{% alert title="Note" color="primary" %}}
-If you want to use a search engine such as Elastic Search or Azure Monitor to search the logs, it is strongly recommended to use JSON-formatted logs which the log collector and search engine can parse using the built-in JSON parser.
-{{% /alert %}}
+> If you want to use a search engine such as Elastic Search or Azure Monitor to search logs, it is strongly recommended to use JSON-formatted logs which the log collector and the search engine can parse using the built-in JSON parser.
 
 ## Log schema
 
-Radius produces logs based on the following schema:
+Control plane logs contain the following fields:
 
 | Field | Description       | Example |
 |-------|-------------------|---------|
-| time  | ISO8601 Timestamp | `2011-10-05T14:48:00.000Z` |
-| severity | Log Level (info/warn/debug/error) | `info` |
-| message   | Log Message | `hello radius!` |
-| name   | Logging scope | `ucplogger.api` |
-| version | radius control plane version | `1.9.0` |
-| serviceName | name of radius control plane service | `ucp` |
-| hostName | radius service host name | `ucp-77bc9b4cbb-nmjlz` |
-| resourceId | radius resourceId | `/apis/api.ucp.dev/v1alpha3/planes/deployments/local/resourcegroups/nsdemo2/providers/Microsoft.Resources/deployments/rad-deploy-6c0d37b0-705e-454b-9167-877aa080e656` |
-| traceId | w3c traceId | `d1ba9c7d2326ee1b44eb0b8177ef554f` |
-| spanId | w3c spanId | `ce52a91ed3c86c6d` |
+| `time`  | [ISO8601](https://www.iso.org/iso-8601-date-and-time-format.html) timestamp | `2023-01-01T14:48:00.000Z` |
+| `severity` | Log level. Available levels are info, warn, debug, and error. | `info` |
+| `message`   | Log message | `proxying request target: http://de-api.radius-system:6443` |
+| `name`   | Logging scope | `ucplogger.api` |
+| `version` | Control plane version | `0.18` |
+| `serviceName` | Name of control plane service | `ucplogger` |
+| `hostName` | Service host name | `ucp-77bc9b4cbb-nmjlz` |
+| `resourceId` | The resourceId being affected, if applicable | `/apis/api.ucp.dev/v1alpha3/planes/deployments/local/resourcegroups/myrg/providers/Microsoft.Resources/deployments/rad-deploy-6c0d37b0-705e-454b-9167-877aa080e656` |
+| `traceId` | [w3c traceId](https://www.w3.org/TR/trace-context/#trace-id). Used to uniquely identify a [distributed trace](https://www.w3.org/TR/trace-context/#dfn-distributed-traces) through a system.  | `d1ba9c7d2326ee1b44eb0b8177ef554f` |
+| `spanId` | [w3c spanId](https://www.w3.org/TR/trace-context/#parent-id) The ID of this request as known by the caller. Also known as `parent-id` in some tracing systems.  | `ce52a91ed3c86c6d` |
 
 * JSON-formatted log examples
 
@@ -39,7 +37,7 @@ Radius produces logs based on the following schema:
     "caller": "planes/proxyplane.go:171",
     "message": "proxying request target: http://de-api.radius-system:6443",
     "serviceName": "ucplogger",
-    "version": "0.17",
+    "version": "0.18",
     "hostName": "ucp-77bc9b4cbb-nmjlz",
     "resourceId": "/apis/api.ucp.dev/v1alpha3/planes/deployments/local/resourcegroups/nsdemo2/providers/Microsoft.Resources/deployments/rad-deploy-6c0d37b0-705e-454b-9167-877aa080e656",
     "traceId": "2435428bbf8533c68b122b1ef31bb42f",
