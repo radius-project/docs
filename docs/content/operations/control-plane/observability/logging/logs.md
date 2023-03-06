@@ -3,8 +3,36 @@ type: docs
 title: "Control plane logs"
 linkTitle: "Logs"
 weight: 100
-description: "Understand Project Radius control plane logs"
+description: "Use logs to monitor and troubleshoot the control plane."
 ---
+
+The Project Radius control plane produces logs that you can use to monitor and troubleshoot the control plane. This document describes how to collect and search logs, as well as the log schema.
+
+## Log formats
+
+The Project Radius control plane outputs structured logs to stdout, either plain-text or JSON-formatted. By default, services produce JSON formatted logs. 
+
+> If you want to use a search engine such as Elastic Search or Azure Monitor to search logs, it is strongly recommended to use JSON-formatted logs which the log collector and the search engine can parse using the built-in JSON parser.
+
+## Log collectors
+
+### Fluentd
+
+If you run the control plane in a Kubernetes cluster, [Fluentd](https://www.fluentd.org/) is a popular container log collector. You can use Fluentd with a [JSON parser plugin](https://docs.fluentd.org/parser/json) to parse Radius JSON-formatted logs. This [how-to]({{< ref fluentd.md >}}) shows how to configure Fluentd in your cluster.
+
+### Azure Monitor
+
+If you are using Azure Kubernetes Service, you can use the [built-in agent to collect logs with Azure Monitor](https://learn.microsoft.com/azure/aks/monitor-aks) without needing to install Fluentd.
+
+## Search engines
+
+### Elastic Search and Kibana
+
+If you use [Fluentd](https://www.fluentd.org/), we recommend using Elastic Search and Kibana. This [how-to]({{< ref fluentd.md >}}) shows how to set up Elastic Search and Kibana in your Kubernetes cluster.
+
+### Azure Monitor
+
+If you are using the Azure Kubernetes Service, you can use [Azure Monitor for containers](https://docs.microsoft.com/azure/azure-monitor/insights/container-insights-overview) without installing any additional monitoring tools. Also read [How to enable Azure Monitor for containers](https://learn.microsoft.com/azure/azure-monitor/containers/container-insights-onboard)
 
 ## Log schema
 
@@ -41,32 +69,6 @@ Control plane logs contain the following fields:
     "spanId": "30a88181fe683c00"
 }
 ```
-
-## Log formats
-
-The Project Radius control plane outputs structured logs to stdout, either plain-text or JSON-formatted. By default, services produce JSON formatted logs. 
-
-> If you want to use a search engine such as Elastic Search or Azure Monitor to search logs, it is strongly recommended to use JSON-formatted logs which the log collector and the search engine can parse using the built-in JSON parser.
-
-## Log collectors
-
-### Fluentd
-
-If you run the control plane in a Kubernetes cluster, [Fluentd](https://www.fluentd.org/) is a popular container log collector. You can use Fluentd with a [JSON parser plugin](https://docs.fluentd.org/parser/json) to parse Radius JSON-formatted logs. This [how-to]({{< ref fluentd.md >}}) shows how to configure Fluentd in your cluster.
-
-### Azure Monitor
-
-If you are using Azure Kubernetes Service, you can use the [built-in agent to collect logs with Azure Monitor](https://learn.microsoft.com/azure/aks/monitor-aks) without needing to install Fluentd.
-
-## Search engines
-
-### Elastic Search and Kibana
-
-If you use [Fluentd](https://www.fluentd.org/), we recommend using Elastic Search and Kibana. This [how-to]({{< ref fluentd.md >}}) shows how to set up Elastic Search and Kibana in your Kubernetes cluster.
-
-### Azure Monitor
-
-If you are using the Azure Kubernetes Service, you can use [Azure Monitor for containers](https://docs.microsoft.com/azure/azure-monitor/insights/container-insights-overview) without installing any additional monitoring tools. Also read [How to enable Azure Monitor for containers](https://learn.microsoft.com/azure/azure-monitor/containers/container-insights-onboard)
 
 ## References
 
