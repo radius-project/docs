@@ -70,5 +70,5 @@ If you are using the Azure Kubernetes Service, you can use [Azure Monitor for co
 
 ## References
 
-- [How-to: Set up Fleuntd, Elastic search, and Kibana]({{< ref fluentd.md >}})
+- [How-to: Set up Fluentd, Elastic search, and Kibana]({{< ref fluentd.md >}})
 - [How-to: Set up Azure Monitor for containers](https://learn.microsoft.com/azure/aks/monitor-aks)
