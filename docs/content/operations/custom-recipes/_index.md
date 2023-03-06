@@ -77,11 +77,22 @@ Recipes leverage [Bicep registries](https://learn.microsoft.com/azure/azure-reso
 
 For private registries, make sure the cloud provider configured in your Radius environment has pull permissions for your container registry.
 
-You can use the `az bicep publish` to easily publish your Recipe Bicep template:
-```bash
-az bicep publish --file myrecipe.bicep --target myregistry.azurecr.io/recipes/myrecipe:v1
-```
+You can use your rad-bicep binary to publish your Recipe to your Bicep registry:
 
+{{< tabs "MacOS/Linux/WSL" "Windows PowerShell" >}}
+
+{{% codetab %}}
+```bash
+~/.rad/bin/rad-bicep publish myrecipe.bicep --target br:myregistry.azurecr.io/recipes/myrecipe:v1
+```
+{{% /codetab %}}
+
+{{% codetab %}}
+```bash
+& "$env:UserProfile\.rad\bin\rad-bicep.exe" publish myrecipe.bicep --target br:myregistry.azurecr.io/recipes/myrecipe:v1
+```
+{{% /codetab %}}
+{{< /tabs >}}
 ### Step 6: Register your Recipe with your environment
 
 Now that your Recipe Bicep template has been stored within your Bicep registry, you can add it your Radius environment to be used by developers. This allows you to mix-and-match templates for each of your environments such as dev, canary, and prod.

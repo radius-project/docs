@@ -53,3 +53,4 @@ If you're done with testing, you can use the rad CLI to [delete an environment](
 
 {{% alert title="Cleanup AWS Resources" color="warning" %}}
 AWS resources are not deleted when deleting a Radius environment, so to prevent additional charges, make sure to delete all resources created in this reference app. You can delete these resources in the AWS Console or via the AWS CLI.
+{{% /alert %}}

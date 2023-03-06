@@ -61,8 +61,10 @@ RELEASE   VERSION   BICEP     COMMIT
 ## 3. Initialize Radius
 
 Create a new directory for your app and navigate into it:
+
 ```bash
-mkdir first-app && cd first-app
+mkdir first-app
+cd first-app
 ```
 
 Initialize Radius. For this example, accept all the default options (press ENTER to confirm): 
@@ -106,7 +108,7 @@ Access the application by opening [http://localhost:3000](http://localhost:3000)
 
 <img src="./demo-screenshot.png" alt="Screenshot of the demo container" width=400>
 <br /><br />
-Congrats! You're running your first Radius app. 
+Congrats! You're running your first Radius app.
 
 When you're ready to move on to the next step, use `CTRL+C` to exit the command.
 
@@ -149,7 +151,7 @@ rad run app.bicep
 
 Open the browser to [http://localhost:3000](http://localhost:3000) and you should see that the environment variables have changed. The `demo` container now has connection information for Redis (`CONNECTION_REDIS_HOST`, `CONNECTION_REDIS_PORT`).
 
-<img src="./demo-screenshot-with-redis.png" alt="Screenshot of the demo container" width=400>
+<img src="./demo-with-redis-screenshot.png" alt="Screenshot of the demo container" width=400>
 <br /><br />
 
 Navigate to the TODO page and test out the application. Using the TODO page will update the saved state in Redis.
