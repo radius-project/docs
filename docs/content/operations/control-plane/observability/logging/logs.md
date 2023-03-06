@@ -18,7 +18,7 @@ Radius produces logs based on the following schema:
 
 | Field | Description       | Example |
 |-------|-------------------|---------|
-| time  | ISO8601 Timestamp | `2011-10-05T14:48:00.000Z` |
+| timestamp  | ISO8601 Timestamp | `2011-10-05T14:48:00.000Z` |
 | severity | Log Level (info/warn/debug/error) | `info` |
 | message   | Log Message | `hello radius!` |
 | name   | Logging scope | `ucplogger.api` |
@@ -26,6 +26,7 @@ Radius produces logs based on the following schema:
 | serviceName | name of radius control plane service | `ucp` |
 | hostName | radius service host name | `ucp-77bc9b4cbb-nmjlz` |
 | resourceId | radius resourceId | `/apis/api.ucp.dev/v1alpha3/planes/deployments/local/resourcegroups/nsdemo2/providers/Microsoft.Resources/deployments/rad-deploy-6c0d37b0-705e-454b-9167-877aa080e656` |
+| caller | radius service logging point | `planes/proxyplane.go:171`
 | traceId | w3c traceId | `d1ba9c7d2326ee1b44eb0b8177ef554f` |
 | spanId | w3c spanId | `ce52a91ed3c86c6d` |
 
