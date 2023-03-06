@@ -61,10 +61,6 @@ Create a [Radius environment]({{< ref environments >}}) where you will deploy yo
 The Radius community provides Recipes for running commonly used application dependencies, including Redis. You can create your own MemoryDB recipe using [Recipes]({{< ref recipes >}}) or use an already published `redis-aws` recipe. 
 
 The `redis-aws` provisions a new MemoryDB in the same VPC as your EKS cluster. Deploying to the same VPC is the recommended way to access a MemoryDB cluster from your EKS cluster. It also optionally accepts `subnetIds` as a parameter, which can be supplied to use a different set of Subnet Ids.
-
-{{< tabs "MemoryDB Resource using Recipes" "Existing MemoryDB Resource" >}}
-
-{{% codetab %}}
  
  Make sure the `redis-aws` is registered to your `myawsenv` environment 
    ```bash
@@ -82,49 +78,19 @@ Below is the `redis-aws` recipe published to the Radius ACR
 
 {{< rad file="snippets/redis-aws-recipe.bicep" embed=true >}}
 
-{{% /codetab %}}
-
-{{% codetab %}}
-
-Alternatively, if you have an existing MemoryDB resource that you would want to use instead:
-
-### aws-memorydb-existing.bicep
-
-{{< rad file="snippets/aws-memorydb-existing.bicep" embed=true >}}
-
-{{% /codetab %}}
-
-{{< /tabs >}}
-
 ## Step 4: Create an app.bicep that uses the MemoryDB
 
 This Bicep file defines a webapp [container]({{< ref container >}}), which connects to the MemoryDB we created in Step 3 and uses it as a datastore.
 
-{{< tabs "New MemoryDB Resource using recipes" "Existing MemoryDB Resource" >}}
-
-{{% codetab %}}
 ### app.bicep
 
 {{< rad file="snippets/app.bicep" embed=true >}}
-
-{{% /codetab %}}
-
-{{% codetab %}}
-
-### app.bicep
-
-{{< rad file="snippets/app-existing.bicep" embed=true >}}
-
-{{% /codetab %}}
-
-{{< /tabs >}}
-
 
 ## Step 5: Deploy the application
 
 1. Deploy your application to your environment:
 
-   {{< tabs "New MemoryDB Resource using recipes" "New Memory DB Resource with custom Subnets" "Existing MemoryDB Resource" >}}
+   {{< tabs "New MemoryDB Resource" "New Memory DB Resource with custom subnets" >}}
 
    {{% codetab %}}
 
@@ -163,27 +129,13 @@ This Bicep file defines a webapp [container]({{< ref container >}}), which conne
 
    {{% codetab %}}
 
-   You can specify the Subnet IDs to use for the MemoryDB cluster by replacing the Subnet IDs in `aws-memorydb.bicep`:
-
-   ### aws-memorydb.bicep
-
-   ```bicep
-   param subnetGroupName string = 'demo-memorydb-subnet-group'
-   resource subnetGroup 'AWS.MemoryDB/SubnetGroup@default' = {
-      alias: subnetGroupName
-      properties: {
-         SubnetGroupName: subnetGroupName
-         // Update this line to include your subnets:
-         SubnetIds: ['subnet-0a1b2c3d4e5f6g7h8', 'subnet-0a1b2c3d4e5f6g7h9']
-      }
-   }
-   ```
+   You can specify the Subnet IDs to use for the MemoryDB cluster as a parameter.
 
    ```bash
-   rad deploy ./app.bicep --parameters eksClusterName=YOUR_EKS_CLUSTER_NAME
+   rad deploy ./app.bicep --parameters eksClusterName=YOUR_EKS_CLUSTER_NAME subnetIds=<your subnetid>
    ```
 
-   Make sure to replace `YOUR_EKS_CLUSTER_NAME` with your EKS cluster name.
+   Make sure to replace `YOUR_EKS_CLUSTER_NAME` with your EKS cluster name and subenteIDS with the list of custom subnets.
 
    This will deploy the application into your environment and launch the container resource for the frontend website. This operation may take some time, since it is deploying a MemoryDB resource to AWS. You should see the following resources deployed at the end of `rad deploy`:
 
