@@ -8,22 +8,29 @@ description: "How to view Radius metrics in Grafana dashboards."
 
 ## Available dashboards
 
-{{< tabs "Core RP & Link RP" "Deployment Engine" "UCP" >}}
+{{< tabs "Radius Overview" "Resource Provider" >}}
 
 {{% codetab %}}
-The `grafana-system-services-dashboard.json` template shows Radius Core RP and Link RP statuses, including runtime, server-side, and async operation health:
+The `radius-overview-dashboard.json` template shows Radius and Deployment Engine statuses, including runtime, and server-side health:
 
-<img src="/corerp-linkrp-grafana-dashboard.png" alt="Screenshot of the Core RP and Link RP dashboard" width=1200>
+Radius Runtime Overview<br/>
+<img src="radius-overview-1.png" alt="1st screenshot of the Radius Overview Dashboard" width=1200><br/>
+
+Service Overview and Deployment Engine Overview<br/>
+<img src="radius-overview-2.png" alt="2nd screenshot of the Radius Overview Dashboard" width=1200><br/>
+
 {{% /codetab %}}
 
 {{% codetab %}}
-The `grafana-sidecar-dashboard.json` template shows Radius Deployment Engine status, including runtime and server-side health:
+The `radius-resource-provider-dashboard.json` template shows Radius Resource Provider status, including runtime, server-side, and operations health:
 
-<img src="/images/grafana-sidecar-dashboard.png" alt="Screenshot of the sidecar dashboard" width=1200>
+Radius Resource Provider Runtime and Server-Side Overview<br/>
+<img src="radius-resource-provider-1.png" alt="1st screenshot of the Radius Resource Provider Dashboard" width=1200><br/>
+
+Radius Resource Provider Operations Overview<br/>
+<img src="radius-resource-provider-2.png" alt="2nd screenshot of the Radius Resource Provider Dashboard" width=1200><br/>
+
 {{% /codetab %}}
-
-{{% codetab %}}
-Upcoming Feature...
 
 {{< /tabs >}}
 
@@ -68,7 +75,7 @@ Upcoming Feature...
 1. Validation Grafana is running in your cluster:
 
    ```bash
-   kubectl get pods -n dapr-monitoring
+   kubectl get pods -n radius-monitoring
 
    NAME                                                  READY   STATUS       RESTARTS   AGE
    radius-prom-kube-state-metrics-9849d6cc6-t94p8        1/1     Running      0          4m58s
@@ -87,7 +94,7 @@ First you need to connect Prometheus as a data source to Grafana.
 1. Port-forward to svc/grafana:
 
    ```bash
-   kubectl port-forward svc/grafana 8080:80 -n dapr-monitoring
+   kubectl port-forward svc/grafana 8080:80 -n radius-monitoring
 
    Forwarding from 127.0.0.1:8080 -> 3000
    Forwarding from [::1]:8080 -> 3000

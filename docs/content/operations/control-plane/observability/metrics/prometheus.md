@@ -42,10 +42,7 @@ Run Prometheus with your configuration to start it collecting metrics from the s
 ```bash
 ./prometheus --config.file=/tmp/prometheus.yml --web.listen-address=:8080
 ```
-> We change the port so it doesn't conflict with Dapr's own metrics endpoint.
-
-If you are not currently running a Dapr application, the target will show as offline. In order to start
-collecting metrics you must start Dapr with the metrics port matching the one provided as the target in the configuration.
+> We change the port so it doesn't conflict with Radius's own metrics endpoint.
 
 Once Prometheus is running, you'll be able to visit its dashboard by visiting `http://localhost:8080`.
 
@@ -59,7 +56,6 @@ docker run \
     -v /tmp/prometheus.yml:/etc/prometheus/prometheus.yml \
     prom/prometheus --config.file=/etc/prometheus/prometheus.yml --web.listen-address=:8080
 ```
-`--net=host` ensures that the Prometheus instance will be able to connect to any Dapr instances running on the host machine. If you plan to run your Dapr apps in containers as well, you'll need to run them on a shared Docker network and update the configuration with the correct target address.
 
 Once Prometheus is running, you'll be able to visit its dashboard by visiting `http://localhost:8080`.
 
