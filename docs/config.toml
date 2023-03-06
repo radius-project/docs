@@ -1,4 +1,4 @@
-baseURL = "https://radapp.dev/"
+baseURL = "https://edge.docs.radapp.dev/"
 languageCode = "en-us"
 title = "Project Radius Docs"
 theme =  "docsy"
@@ -59,8 +59,8 @@ category = "categories"
 [params]
 copyright = "Project Radius"
 
-version = "v0.17"
-chart_version = "0.17.0"
+version = "edge"
+chart_version = "0.16.0"
 
 # Algolia Search
 algolia_docsearch = true
@@ -68,7 +68,7 @@ algolia_docsearch = true
 # GitHub Information
 github_repo = "https://github.com/project-radius/docs"
 github_subdir = "docs"
-github_branch = "v0.17"
+github_branch = "edge"
 github_project_repo = "https://github.com/project-radius/radius"
 
 # Versioning

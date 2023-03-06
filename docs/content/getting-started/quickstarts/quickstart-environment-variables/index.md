@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Quickstart: Environment Variables"
+title: "Environment Variables Quickstart"
 linkTitle: "Environment variables"
 description: "Learn how to set environment variables manually and through connections"
 weight: 100

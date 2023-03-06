@@ -128,5 +128,3 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
 1. Deploy your app and any included AWS resources with `rad deploy`
 
 {{% /codetab %}}
-
-{{< /tabs >}}

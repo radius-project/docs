@@ -8,11 +8,9 @@ weight: 300
 
 ## Overview
 
-Recipes enable a **separation of concerns** between infrastructure teams and developers by **automating infrastructure deployment**. Developers select the resource they want in their app (_Mongo Database, Redis Cache, Dapr State Store, etc._), and infrastructure teams codify in their environment how these resources should be deployed and configured (_lightweight containers, Azure resources, AWS resources, etc._). When a developer deploys their application and its resources, Recipes automatically deploy the backing infrastructure and bind it to the developer's resources.
+Recipes enable a **separation of concerns** between infrastructure teams and developers by **automating infrastructure deployment**. Developers select the resource they want in their app (_Mongo Database, Redis Cache, Dapr State Store, etc._), and infrastructure teams codify how these resources should be deployed and configured (_lightweight containers, Azure resources, AWS resources, etc._). When a developer deploys their application and its resources, Recipes deploy the backing infrastructure and bind it to the developer's resources.
 
-<img src="recipes.png" alt="Diagram showing developers adding Redis to their app and operators adding a Recipe that Redis should deploy an Azure Cache for Redis" width=700px >
-
-## Capabilities
+## Recipe capabilities
 
 ### Select the Recipe that meets your needs
 
@@ -22,11 +20,7 @@ Recipes can be used in any environment, from dev to prod. Simply specify `mode: 
 
 Use [**rad recipe list**]({{< ref rad_recipe_list >}}) to view the Recipes available to you in your environment.
 
-### Use community "dev" Recipes
-
-Radius environments make it easy to get up and running with Recipes instantly. When you run [`rad init`]({{< ref rad_init >}}) you get a set of containerized dev Recipes pre-registered in your environment. These Recipes are designed to help you get started quickly with Recipes using lightweight containers. You can use these Recipes to test your app locally, or deploy them to a dev environment.
-
-### Customize with parameters
+### Customize Recipes with parameters
 
 Recipes can be customized with parameters, allowing developers to fine-tune infrastructure to meet their specific needs:
 
@@ -34,19 +28,15 @@ Recipes can be customized with parameters, allowing developers to fine-tune infr
 
 You can use [**rad recipe show**]({{< ref rad_recipe_show >}}) to view the parameters available to you in a Recipe.
 
-### Author custom Recipes
-
-It's easy to author and register your own Recipes which define how to deploy and configure infrastructure that meets your organization's needs. See the [custom Recipes guide]({{< ref custom-recipes >}}) for more information.
-
 ## Supported resources
 
 Recipes currently support the following resources. Support for additional resources is actively being worked on.
 
 | Supported resources | 
 |---------------------|
-| [`Applications.Link/redisCaches`]({{< ref redis >}}) | 
-| [`Applications.Link/mongoDatabases`]({{< ref mongodb >}}) |
-| [`Applications.Link/daprStateStores`]({{< ref dapr-statestore >}}) |
+| `Applications.Link/redisCaches` | 
+| `Applications.Link/mongoDatabases` |
+| `Applications.Link/daprStateStores` |
 
 ## Further Reading
 
