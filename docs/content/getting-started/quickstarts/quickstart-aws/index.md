@@ -9,8 +9,7 @@ slug: "aws"
 
 This quickstart will teach you:
 * How to create a Radius environment with an AWS cloud provider
-* How to model an AWS resource in bicep
-* How to use an AWS resource as part of your Radius application
+* How to use an AWS resource recipe as part of your Radius application
 
 ## Prerequisites
 
@@ -28,7 +27,7 @@ Create an EKS cluster by using the `eksctl` CLI. This command will create a clus
 eksctl create cluster --name my-cluster --region=us-west-2 --zones=us-west-2a,us-west-2b,us-west-2c
 ```
 
-> Note: If you are using an existing cluster, you can skip this step. However, make sure that the each of the Subnets in your EKS cluster Subnet Group are within the [list of supported MemoryDB availability zones](https://docs.aws.amazon.com/memorydb/latest/devguide/subnetgroups.html). If your cluster includes Subnets outside of a supported MemoryDB availability zone, or if using your own custom subnets, supply them as part of the deployment file in Step 5.
+> Note: If you are using an existing cluster, you can skip this step. However, make sure that the each of the Subnets in your EKS cluster Subnet Group are within the [list of supported MemoryDB availability zones](https://docs.aws.amazon.com/memorydb/latest/devguide/subnetgroups.html). If your using your own custom subnets, supply them as part of the deployment file in Step 5.
 
 ## Step 2: Create a Radius environment with the AWS cloud provider
 
@@ -50,22 +49,38 @@ Create a [Radius environment]({{< ref environments >}}) where you will deploy yo
 
    Follow the prompts to install the [control plane services]({{< ref architecture >}}), create an [environment resource]({{< ref environments >}}), and create a [local workspace]({{< ref workspaces >}}). You will be asked for:
 
+   - **Environment name** - The name of the environment to create. You can specify any name with lowercase letters, such as `myawsenv`.
    - **Namespace** - When an application is deployed, this is the namespace where your containers and other Kubernetes resources will be run. By default, this will be in the `default` namespace.
    {{% alert title="💡 About namespaces" color="success" %}} When you initialize a Radius Kubernetes environment, Radius installs the control plane resources within    the `radius-system` namespace in your cluster, separate from your applications. The namespace specified in this step will be used for your application deployments.
    {{% /alert %}}
-   -  **Add AWS provider** - An [AWS cloud provider]({{<ref providers>}}) allows you to deploy and manage AWS resources as part of your application. Enter 'y' and follow the instructions. Provide a valid AWS region and the values obtained for IAM Access Key ID and IAM Secret Access Keys.
-   - **Environment name** - The name of the environment to create. You can specify any name with lowercase letters, such as `myawsenv`.
+   -  **Add AWS Cloud provider** - An [AWS cloud provider]({{<ref providers>}}) allows you to deploy and manage AWS resources as part of your application. Select 'yes' to add cloud provider and select the cloud provider 'AWS'. Provide a valid AWS region and the values obtained for IAM Access Key ID and IAM Secret Access Keys.
+   -  **Setup application in the current directory** - Select 'yes' if you want to have an app.bicep created 
 
-## Step 3: Create a bicep file with MemoryDB for Redis
+## Step 3: Add MemoryDB for Redis
 
-This Bicep file defines a MemoryDB cluster, configuring it in the same VPC as your EKS cluster. Deploying to the same VPC is the recommended way to access a MemoryDB cluster from your EKS cluster. It also optionally accepts `subnetIds` as a parameter, which can be supplied to use a different set of Subnet Ids.
+The Radius community provides Recipes for running commonly used application dependencies, including Redis. You can create your own MemoryDB recipe using [Recipes]({{< ref recipes >}}) or use an already published `redis-aws` recipe. 
 
-{{< tabs "New MemoryDB Resource" "Existing MemoryDB Resource" >}}
+The `redis-aws` provisions a new MemoryDB in the same VPC as your EKS cluster. Deploying to the same VPC is the recommended way to access a MemoryDB cluster from your EKS cluster. It also optionally accepts `subnetIds` as a parameter, which can be supplied to use a different set of Subnet Ids.
+
+{{< tabs "MemoryDB Resource using Recipes" "Existing MemoryDB Resource" >}}
 
 {{% codetab %}}
-### aws-memorydb.bicep
+ 
+ Make sure the `redis-aws` is registered to your `myawsenv` environment 
+   ```bash
+   rad recipe list 
+   ```
 
-{{< rad file="snippets/aws-memorydb.bicep" embed=true >}}
+   ```
+   NAME              TYPE                              TEMPLATE
+   redis-aws         Applications.Link/redisCaches     radius.azurecr.io/recipes/rediscaches/aws:1.0
+   redis-kubernetes  Applications.Link/redisCaches     radius.azurecr.io/recipes/rediscaches/kubernetes:1.0
+   mongo-azure       Applications.Link/mongoDatabases  radius.azurecr.io/recipes/mongodatabases/azure:1.0
+   ```
+### redis-aws-recipe.bicep
+Below is the `redis-aws` recipe published to the Radius ACR  
+
+{{< rad file="snippets/redis-aws-recipe.bicep" embed=true >}}
 
 {{% /codetab %}}
 
@@ -85,7 +100,7 @@ Alternatively, if you have an existing MemoryDB resource that you would want to 
 
 This Bicep file defines a webapp [container]({{< ref container >}}), which connects to the MemoryDB we created in Step 3 and uses it as a datastore.
 
-{{< tabs "New MemoryDB Resource" "Existing MemoryDB Resource" >}}
+{{< tabs "New MemoryDB Resource using recipes" "Existing MemoryDB Resource" >}}
 
 {{% codetab %}}
 ### app.bicep
@@ -109,7 +124,7 @@ This Bicep file defines a webapp [container]({{< ref container >}}), which conne
 
 1. Deploy your application to your environment:
 
-   {{< tabs "New MemoryDB Resource" "New Memory DB Resource with custom Subnets" "Existing MemoryDB Resource" >}}
+   {{< tabs "New MemoryDB Resource using recipes" "New Memory DB Resource with custom Subnets" "Existing MemoryDB Resource" >}}
 
    {{% codetab %}}
 

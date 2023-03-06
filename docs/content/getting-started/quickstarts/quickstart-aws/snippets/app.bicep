@@ -34,18 +34,12 @@ resource db 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
   location: location
   properties: {
     environment: environment
-    mode: 'values'
-    host: memoryDB.outputs.memoryDBHost
-    port: memoryDB.outputs.memoryDBPort
-    secrets: {
-      connectionString: memoryDB.outputs.memoryDBConnectionString
+    mode: 'recipe'
+    recipe: {
+      name: 'redis-aws'
+      parameters: {
+        eksClusterName: eksClusterName
+      }
     }
-  }
-}
-
-module memoryDB 'aws-memorydb.bicep' = {
-  name: 'memorydb-module'
-  params: {
-    eksClusterName: eksClusterName
   }
 }
