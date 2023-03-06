@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To: Set up Fluentd, Elastic search and Kibana in Kubernetes"
-linkTitle: "FluentD"
+linkTitle: "Fluentd"
 weight: 2000
 description: "How to install Fluentd, Elastic Search, and Kibana to search control plane logs in Kubernetes"
 ---
@@ -73,7 +73,7 @@ description: "How to install Fluentd, Elastic Search, and Kibana to search contr
     kubectl apply -f ./fluentd-radius-with-rbac.yaml
     ```
 
-2. Ensure that Fluentd is running as a daemonset. The number of FluentD instances should be the same as the number of cluster nodes. In the example below, there is only one node in the cluster:
+2. Ensure that Fluentd is running as a daemonset. The number of Fluentd instances should be the same as the number of cluster nodes. In the example below, there is only one node in the cluster:
 
     ```bash
     $ kubectl get pods -n kube-system -w
