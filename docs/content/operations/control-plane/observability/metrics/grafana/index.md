@@ -1,44 +1,36 @@
 ---
 type: docs
 title: "How-To: Observe metrics with Grafana"
-linkTitle: "Grafana dashboards"
-weight: 5000
-description: "How to view Radius metrics in Grafana dashboards."
+linkTitle: "Grafana"
+weight: 3000
+description: "Learn how to view the Project Radius control-plane metrics in Grafana dashboards"
 ---
 
-## Available dashboards
+[Grafana](https://grafana.com/) is an open source visualization and analytics tool that allows you to query, visualize, alert on, and explore your metrics. This guide will show you how to install Grafana and configure it to visualize the Project Radius control plane metrics from Prometheus.
 
-{{< tabs "Radius Overview" "Resource Provider" >}}
+## Easily monitor the Radius control plane
 
-{{% codetab %}}
-The `radius-overview-dashboard.json` template shows Radius and Deployment Engine statuses, including runtime, and server-side health:
+### Control plane overview
 
-Radius Runtime Overview<br/>
+The [`radius-overview-dashboard.json`](#TBD) template provides an overview of the Radius control plane, including universal control plane, the Radius resource provider, and the deployment engine:
+
 <img src="radius-overview-1.png" alt="1st screenshot of the Radius Overview Dashboard" width=1200><br/>
 
-Service Overview and Deployment Engine Overview<br/>
 <img src="radius-overview-2.png" alt="2nd screenshot of the Radius Overview Dashboard" width=1200><br/>
 
-{{% /codetab %}}
+### Resource provider overview
 
-{{% codetab %}}
-The `radius-resource-provider-dashboard.json` template shows Radius Resource Provider status, including runtime, server-side, and operations health:
+The [`radius-resource-provider-dashboard.json`](#TBD) template provides details on the Radius resource provider:
 
-Radius Resource Provider Runtime and Server-Side Overview<br/>
 <img src="radius-resource-provider-1.png" alt="1st screenshot of the Radius Resource Provider Dashboard" width=1200><br/>
 
-Radius Resource Provider Operations Overview<br/>
 <img src="radius-resource-provider-2.png" alt="2nd screenshot of the Radius Resource Provider Dashboard" width=1200><br/>
 
-{{% /codetab %}}
-
-{{< /tabs >}}
-
-## Pre-requisites
-
-- [Setup Prometheus]({{<ref prometheus.md>}})
-
 ## Setup on Kubernetes
+
+### Pre-requisites
+
+- [Setup Prometheus]({{<ref prometheus.md>}}) on your Kubernetes cluster
 
 ### Install Grafana
 
@@ -55,14 +47,11 @@ Radius Resource Provider Operations Overview<br/>
    helm install grafana grafana/grafana -n radius-monitoring
    ```
 
-   {{% alert title="Note" color="primary" %}}
    If you are Minikube user or want to disable persistent volume for development purpose, you can disable it by using the following command instead:
 
    ```bash
    helm install grafana grafana/grafana -n radius-monitoring --set persistence.enabled=false
    ```
-   {{% /alert %}}
-
 
 1. Retrieve the admin password for Grafana login:
 
@@ -72,47 +61,40 @@ Radius Resource Provider Operations Overview<br/>
 
    You will get a password similar to `cj3m0OfBNx8SLzUlTx91dEECgzRlYJb60D2evof1%`. Remove the `%` character from the password to get `cj3m0OfBNx8SLzUlTx91dEECgzRlYJb60D2evof1` as the admin password.
 
-1. Validation Grafana is running in your cluster:
+1. Validate that Grafana is running in your cluster:
 
    ```bash
    kubectl get pods -n radius-monitoring
+   ```
+   You should see something similar to the following:
 
-   NAME                                                  READY   STATUS       RESTARTS   AGE
-   radius-prom-kube-state-metrics-9849d6cc6-t94p8        1/1     Running      0          4m58s
-   radius-prom-prometheus-alertmanager-749cc46f6-9b5t8   2/2     Running      0          4m58s
-   radius-prom-prometheus-node-exporter-5jh8p            1/1     Running      0          4m58s
-   radius-prom-prometheus-node-exporter-88gbg            1/1     Running      0          4m58s
-   radius-prom-prometheus-node-exporter-bjp9f            1/1     Running      0          4m58s
-   radius-prom-prometheus-pushgateway-688665d597-h4xx2   1/1     Running      0          4m58s
-   radius-prom-prometheus-server-694fd8d7c-q5d59         2/2     Running      0          4m58s
-   grafana-c49889cff-x56vj                               1/1     Running      0          5m10s
+   ```
+   NAME                        READY   STATUS       RESTARTS   AGE
+   grafana-c49889cff-x56vj     1/1     Running      0          5m10s
+   ...
    ```
 
 ### Configure Prometheus as data source
-First you need to connect Prometheus as a data source to Grafana.
 
-1. Port-forward to svc/grafana:
+Now that Grafana is installed, you need to configure it to use Prometheus as a data source.
+
+1. Port-forward to your Grafana service:
 
    ```bash
    kubectl port-forward svc/grafana 8080:80 -n radius-monitoring
-
-   Forwarding from 127.0.0.1:8080 -> 3000
-   Forwarding from [::1]:8080 -> 3000
-   Handling connection for 8080
-   Handling connection for 8080
    ```
 
-1. Open a browser to `http://localhost:8080`
+1. Open a browser to [`http://localhost:8080`](http://localhost:8080)
 
 1. Login to Grafana
-   - Username = `admin`
-   - Password = Password from above
+   - Username: `admin`
+   - Password: Password from above
 
 1. Select `Configuration` and `Data Sources`
 
 1. Add Prometheus as a data source.
 
-1. Get your Prometheus HTTP URL
+1. Get your Prometheus HTTP URL:
 
    The Prometheus HTTP URL follows the format `http://<prometheus service endpoint>.<namespace>`
 
@@ -120,7 +102,11 @@ First you need to connect Prometheus as a data source to Grafana.
 
    ```bash
    kubectl get svc -n radius-monitoring
+   ```
 
+   You should see something similar to the following:
+
+   ```
    NAME                                     TYPE        CLUSTER-IP        EXTERNAL-IP   PORT(S)             AGE
    radius-prom-kube-state-metrics           ClusterIP   10.0.174.177      <none>        8080/TCP            7d9h
    radius-prom-prometheus-alertmanager      ClusterIP   10.0.255.199      <none>        80/TCP              7d9h
@@ -128,10 +114,9 @@ First you need to connect Prometheus as a data source to Grafana.
    radius-prom-prometheus-pushgateway       ClusterIP   10.0.190.59       <none>        9091/TCP            7d9h
    radius-prom-prometheus-server            ClusterIP   10.0.172.191      <none>        80/TCP              7d9h
    grafana                                  ClusterIP   10.0.15.229       <none>        80/TCP              5d5h
-
    ```
 
-      In this guide the server name is `radius-prom-prometheus-server` and the namespace is `radius-monitoring`, so the HTTP URL will be `http://radius-prom-prometheus-server.radius-monitoring`.
+   In this example the server name is `radius-prom-prometheus-server` and the namespace is `radius-monitoring`, so the HTTP URL will be `http://radius-prom-prometheus-server.radius-monitoring`.
 
 1. Fill in the following settings:
 
@@ -141,13 +126,11 @@ First you need to connect Prometheus as a data source to Grafana.
 
 1. Click `Save & Test` button to verify that the connection succeeded.
 
-## Import dashboards in Grafana
+### Import dashboards in Grafana
 
-1. In the upper left corner of the Grafana home screen, click the "+" option, then "Import".
-
-   You can now import [Grafana dashboard templates](https://github.com/dapr/dapr/tree/master/grafana) from [release assets](https://github.com/dapr/dapr/releases) for your Radius version.
-
-1. Find the dashboard that you imported and enjoy.
+1. Download the [Grafana dashboard templates](#TBD)
+1. In the upper left corner of the Grafana home screen, click the "+" option, then "Import", and select your templates.
+1. Select the dashboard that you imported and enjoy!
 
 ## References
 
