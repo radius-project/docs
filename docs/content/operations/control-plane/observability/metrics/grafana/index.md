@@ -12,7 +12,8 @@ description: "Learn how to view the Project Radius control-plane metrics in Graf
 
 ### Control plane overview
 
-The [`radius-overview-dashboard.json`](#TBD) template provides an overview of the Radius control plane, including universal control plane, the Radius resource provider, and the deployment engine:
+{{% codetab %}}
+The [radius-overview-dashboard.json](https://get.radapp.dev/tools/grafana/radius-overview-dashboard.json) template shows Radius and Deployment Engine statuses, including runtime, and server-side health:
 
 <img src="radius-overview-1.png" alt="1st screenshot of the Radius Overview Dashboard" width=1200><br/>
 
@@ -20,7 +21,8 @@ The [`radius-overview-dashboard.json`](#TBD) template provides an overview of th
 
 ### Resource provider overview
 
-The [`radius-resource-provider-dashboard.json`](#TBD) template provides details on the Radius resource provider:
+{{% codetab %}}
+The [radius-resource-provider-dashboard.json](https://get.radapp.dev/tools/grafana/radius-resource-provider-dashboard.json) template shows Radius Resource Provider status, including runtime, server-side, and operations health:
 
 <img src="radius-resource-provider-1.png" alt="1st screenshot of the Radius Resource Provider Dashboard" width=1200><br/>
 

@@ -358,3 +358,6 @@ daemonset
 fluentd
 minikube
 Observability
+Grafana
+grafana
+analytics
