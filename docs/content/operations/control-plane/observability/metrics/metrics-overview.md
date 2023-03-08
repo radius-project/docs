@@ -2,7 +2,7 @@
 type: docs
 title: "Understand control plane metrics"
 linkTitle: "Overview"
-weight: 200
+weight: 1000
 description: "Learn about the metrics that are omitted by the Project Radius control plane"
 slug: "overview"
 ---
