@@ -1,7 +1,9 @@
 import aws as aws
 
+// Bicep params are used in this module for reusability. You can also hardcode the values in the module.
 param eksClusterName string
 
+// We need to reference the existing EKS cluster to get the VPC and subnet IDs. This is done by using the existing keyword.
 resource eksCluster 'AWS.EKS/Cluster@default' existing = {
   alias: eksClusterName
   properties: {
@@ -9,7 +11,10 @@ resource eksCluster 'AWS.EKS/Cluster@default' existing = {
   }
 }
 
+// Here we are using a param but providing a default value. This allows the user to override the value if they want.
 param subnetGroupName string = 'demo-memorydb-subnet-group'
+
+// Here we use the eksCluster resource to get the VPC and subnet IDs. We also use the param for the subnet group name.
 resource subnetGroup 'AWS.MemoryDB/SubnetGroup@default' = {
   alias:subnetGroupName
   properties: {
@@ -19,6 +24,8 @@ resource subnetGroup 'AWS.MemoryDB/SubnetGroup@default' = {
 }
 
 param memoryDBClusterName string = 'demo-memorydb-cluster'
+
+// Here we are using the existing keyword to reference the subnet group we created above.
 resource memoryDBCluster 'AWS.MemoryDB/Cluster@default' = {
   alias: memoryDBClusterName
   properties: {
@@ -31,6 +38,7 @@ resource memoryDBCluster 'AWS.MemoryDB/Cluster@default' = {
   }
 }
 
+// Bicep modules use the output keyword to expose values to the parent module. This allows you to use the module in a nested fashion.
 output memoryDBConnectionString string = 'rediss://${memoryDBCluster.properties.ClusterEndpoint.Address}:${memoryDBCluster.properties.ClusterEndpoint.Port}'
 output memoryDBHost string = memoryDBCluster.properties.ClusterEndpoint.Address
 output memoryDBPort int = memoryDBCluster.properties.ClusterEndpoint.Port
