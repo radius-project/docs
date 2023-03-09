@@ -25,7 +25,7 @@ resource subnetGroup 'AWS.MemoryDB/SubnetGroup@default' = {
 
 param memoryDBClusterName string = 'demo-memorydb-cluster'
 
-// Here we are using the existing keyword to reference the subnet group we created above.
+// Here we are using the eksCluster resource to get the security group ID and the subnet group resource to get the subnet group name.
 resource memoryDBCluster 'AWS.MemoryDB/Cluster@default' = {
   alias: memoryDBClusterName
   properties: {
