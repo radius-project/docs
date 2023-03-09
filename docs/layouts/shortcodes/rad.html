@@ -1,7 +1,7 @@
 {{ $file := .Get "file" }}
 {{ $filePath := (path.Join $.Page.File.Dir $file ) }}
 {{ $fileContents := $filePath | readFile }}
-{{ $lang := "sh" }}
+{{ $lang := "Bicep" }}
 {{ $embed := .Get "embed" | default false }}
 {{ $download := .Get "download" | default false }}
 {{ if $download }}
