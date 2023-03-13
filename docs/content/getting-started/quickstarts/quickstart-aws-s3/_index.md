@@ -1,19 +1,28 @@
 ---
 type: docs
-title: "Using AWS S3 with Radius"
-linkTitle: "Using AWS S3"
+title: "Quickstart: Deploy and Model AWS resources"
+linkTitle: "Deploy and Model AWS resources"
 description: "Learn about how to model AWS S3 resources in Bicep and Radius"
-weight: 500
+weight: 200
+taxonomy:
+  category: aws
+  tags: aws, s3
 ---
 
 This reference app will show you:
 
-* How to model AWS S3 resources in Bicep
+* How to model an AWS S3 resource in Bicep
 * How to use a sample application to interact with AWS S3
 
 ## Prerequisites
+- [AWS Account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/)
+    - [AWS IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html)
+    - [AWS IAM User Access Key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)
+    - [AWS IAM User Secret Key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
+- [eksctl CLI](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
+- [kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/)  
 
-- [Complete the getting started guide for AWS up to Step 2]({{< ref quickstart-aws >}})
 
 ## Step 1: Create a Bicep file which uses AWS Simple Storage Service (S3)
 
@@ -29,7 +38,7 @@ Create a new file called `app.bicep` and add the following bicep code:
     rad deploy ./app.bicep -p aws_access_key_id=<AWS_ACCESS_KEY_ID> -p aws_secret_access_key=<AWS_SECRET_ACCESS_KEY> -p aws_region=<REGION> -p bucket=<BUCKET_NAME>
     ```
 
-    The access key, secret key, and region can be the same values you used in the [AWS Quickstart]({{< ref quickstart-aws >}}). These are used so the container we are deploying can connect to AWS. The AWS S3 Bucket name must follow the [following naming conventions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html).
+    The access key, secret key, and region can be the same values you used in the. These are used so the container we are deploying can connect to AWS. The AWS S3 Bucket name must follow the [following naming conventions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html).
 
 1. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose >}}):
 

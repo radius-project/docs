@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Quickstart: Deploy AWS resources"
-linkTitle: "Deploy AWS resources"
+title: "Quickstart: Deploy using AWS recipes"
+linkTitle: "Deploy using AWS recipes"
 description: "Learn about how to setup an AWS cloud provider and deploy an AWS MemoryDB for Redis with Radius"
 weight: 500
 slug: "aws"
