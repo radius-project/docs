@@ -29,7 +29,7 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   }
 }
 
-// We utilize the memoryDB module to create a Redis instance then access the bicep module outputs to access the connection string and host.
+// Radius Redis cache link resource that enables connection to the underlying MmeoryDB cluster with outputs from the Bicep module below
 resource db 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
   name: 'db'
   location: location
@@ -44,7 +44,7 @@ resource db 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
   }
 }
 
-// We call the memoryDB module here and pass in the name of the EKS cluster.
+// Invoke the memoryDB provisioning using Bicep module and pass in the name of the EKS cluster.
 module memoryDB 'aws-memorydb.bicep' = {
   name: 'memorydb-module'
   params: {
