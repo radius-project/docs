@@ -40,7 +40,7 @@ Kubernetes metadata can be applied at the environment, application, or container
 
 ### Supported resources
 
-The following resources will gain the Kubernetes metadata for its [output resources]({{< ref resource-mapping> }}):
+The following resources will gain the Kubernetes metadata for its [output resources]({{ < ref resource-mapping > }}):
 
 - Applications.Core/containers
 - Applications.Core/httpRoutes
