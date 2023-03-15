@@ -42,14 +42,6 @@ Kubernetes metadata can be applied at the environment, application, or container
 - Applications.Core/httpRoutes
 - Applications.Core/gateways
 
-### Supported resources
-
-The following resources will gain the Kubernetes metadata for its [output resources]({{ < ref resource-mapping > }}):
-
-- Applications.Core/containers
-- Applications.Core/httpRoutes
-- Applications.Core/gateways
-
 ### Metadata processing order
 
 Labels and annotations are processed in the following order, combining the keys/values at each level:
