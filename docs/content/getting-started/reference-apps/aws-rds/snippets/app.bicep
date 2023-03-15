@@ -45,7 +45,7 @@ resource wordpress 'Applications.Core/containers@2022-03-15-privatepreview' = {
   properties: {
     application: app.id
     container: {
-      image: 'wordpress:6.1.1'
+      image: 'radius.azurecr.io/reference-apps/wordpress:6.1.1'
       ports: {
         web: {
           containerPort: 80
