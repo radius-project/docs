@@ -23,7 +23,7 @@ Radius uses the [AWS Cloud Control API](https://docs.aws.amazon.com/cloudcontrol
 {{% codetab %}}
 In the following example, a [Container]({{< ref container >}}) is connecting to an S3 bucket. 
 
-{{< rad file="snippets/aws-connection.bicep" embed=true >}}
+{{< rad file="snippets/aws.bicep" embed=true >}}
 {{% /codetab %}} 
 
 {{< /tabs >}}
