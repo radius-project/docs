@@ -10,7 +10,7 @@ Radius applications are able to connect to and leverage AWS resource with Bicep.
 
 ## Resource library
 
-Radius uses the [AWS CloudControl API](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/what-is-cloudcontrolapi.html) to interact with AWS resources. This means that you can model your AWS resources in Bicep and Radius will be able to deploy and manage them.
+Radius uses the [AWS Cloud Control API](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/what-is-cloudcontrolapi.html) to interact with AWS resources. This means that you can model your AWS resources in Bicep and Radius will be able to deploy and manage them.
 
 
 {{< button text="AWS resource library" link="https://github.com/project-radius/bicep-types-aws/blob/main/artifacts/bicep/index.md" newtab="true" >}}
