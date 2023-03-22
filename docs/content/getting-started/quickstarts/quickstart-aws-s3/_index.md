@@ -1,12 +1,11 @@
 ---
 type: docs
-title: "Quickstart: Deploy and Model AWS resources"
-linkTitle: "Deploy and Model AWS resources"
+title: "Quickstart: Model and deploy AWS resources"
+linkTitle: "Model and deploy AWS resources"
 description: "Learn about how to model AWS S3 resources in Bicep and Radius"
 weight: 200
-taxonomy:
-  category: aws
-  tags: aws, s3
+categories: "AWS"
+tags: "S3"
 ---
 
 This reference app will show you:

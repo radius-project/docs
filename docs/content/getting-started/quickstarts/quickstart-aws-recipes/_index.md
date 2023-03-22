@@ -4,7 +4,8 @@ title: "Quickstart: Deploy using AWS recipes"
 linkTitle: "Deploy using AWS recipes"
 description: "Learn about how to setup an AWS cloud provider and deploy an AWS MemoryDB for Redis with Radius"
 weight: 500
-slug: "aws"
+categories: "AWS"
+tags: "memorydb"
 ---
 
 This quickstart will teach you:
