@@ -22,7 +22,6 @@ This quickstart will teach you:
 - [eksctl CLI](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
 
 ## Step 1: Create an EKS cluster
-
 Create an EKS cluster by using the `eksctl` CLI. This command will create a cluster in the `us-west-2` region, as well as a VPC and the Subnets, Security Groups, and IAM Roles required for the cluster.
 
 ```bash
