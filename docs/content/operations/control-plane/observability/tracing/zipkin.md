@@ -25,7 +25,7 @@ rad install kubernetes --set  global.tracerProvider.zipkin.url=http://zipkin.def
 
 ## Configure Kubernetes
 
-The following steps shows you how to configure Dapr to send distributed tracing data to Zipkin running as a container in your Kubernetes cluster, and how to view them.
+The following steps shows you how to configure Radius control plane to send distributed tracing data to Zipkin running as a container in your Kubernetes cluster, and how to view them.
 
 ### Setup
 
