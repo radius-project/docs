@@ -17,9 +17,10 @@ To enable Radius tracing, use
 
 ```
    rad install -set  global.tracerProvider.zipkin.url=zipkin_endpoint_url
-
+```
    For example, 
+```
    rad install -set  global.tracerProvider.zipkin.url=http://zipkin.default.svc.cluster.local:9411/api/v2/spans
 ```
 
-
+If needed, use `rad init` to set up a environment once rad install completes. 
