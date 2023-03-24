@@ -17,7 +17,6 @@ Install radius with tracing enabled by following below steps:
 rad install kubernetes --set  global.tracerProvider.zipkin.url=zipkin_endpoint_url
 ```
 where zipkin_endpoint_url is the endpoint of installed zipkin
-
 For example, 
 ```
 rad install kubernetes --set  global.tracerProvider.zipkin.url=http://zipkin.default.svc.cluster.local:9411/api/v2/spans
