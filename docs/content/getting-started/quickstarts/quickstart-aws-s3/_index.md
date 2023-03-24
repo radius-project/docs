@@ -8,7 +8,7 @@ categories: "AWS"
 tags: "S3"
 ---
 
-This reference app will show you:
+This quickstart will show you:
 
 * How to model an AWS S3 resource in Bicep
 * How to use a sample application to interact with AWS S3
