@@ -20,6 +20,7 @@ This quickstart will show you:
 - [kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/)  
 
 ## Step 1: Create an EKS Cluster
+
 Create an EKS cluster by using the `eksctl` CLI. 
 
 ```bash
