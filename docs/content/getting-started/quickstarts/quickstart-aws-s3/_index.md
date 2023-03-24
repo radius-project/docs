@@ -20,6 +20,7 @@ This quickstart will show you:
 - [kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/)  
 
 ## Step 1: Create an EKS Cluster
+
 Create an EKS cluster by using the `eksctl` CLI. 
 
 ```bash
@@ -30,13 +31,6 @@ eksctl create cluster --name <my-cluster> --region=<my-region>
 
 Create a [Radius environment]({{< ref environments >}}) where you will deploy your application.
 
-1. You can view the current context for kubectl by running:
-
-   ```bash
-   kubectl config current-context
-   ```
-   {{% alert color="success" %}} Make sure that your kubecontext is set to a running EKS cluster.
-   {{% /alert %}}
 
 1. Use the `rad init` command to initialize a new environment into your current kubectl context:
 
