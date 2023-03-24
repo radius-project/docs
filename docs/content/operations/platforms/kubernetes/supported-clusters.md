@@ -48,7 +48,8 @@ Next, use the following commands to create a new cluster and install the Radius 
 
 ```bash
 k3d cluster create -p "8081:80@loadbalancer" --k3s-arg "--disable=traefik@server:0"
-rad env init kubernetes -i --public-endpoint-override 'localhost:8081'
+rad install kubernetes --set global.rp.publicEndpointOverride=localhost:8081
+rad init
 ```
 {{% /codetab %}}
 
@@ -88,7 +89,8 @@ kind create cluster --config kind-config.yaml
 kubectl get nodes
 
 # Install Radius
-rad env init kubernetes -i --public-endpoint-override 'localhost:8080'
+rad install kubernetes --set global.rp.publicEndpointOverride=localhost:8080
+rad init
 ```
 {{% /codetab %}}
 
@@ -102,11 +104,7 @@ eksctl create cluster --name my-cluster --region region-code
 Once deployed and your kubectl context has been set as your default, you can run the following to create a Radius environment and install the control plane:
 
 ```bash
-# Note: The default environment name for EKS is invalid with current env name requirements
-# As part of the init prompts, provide a custom name with only alphanumeric/hyphen characters
-
-# i.e. Enter an environment name [arn:aws:eks:region:account:cluster/mycluster]: mycluster
-rad env init kubernetes -i
+rad init
 ```
 
 {{% /codetab %}}
