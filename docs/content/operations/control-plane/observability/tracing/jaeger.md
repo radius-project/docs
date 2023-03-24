@@ -6,25 +6,6 @@ weight: 3000
 description: "Set up Jaeger for distributed tracing"
 type: docs
 ---
-
-Radius supports the Zipkin protocol. Since Jaeger is compatible with Zipkin, the Zipkin protocol can be used to communication with Jaeger.
-
-### Setup
-
-The simplest way to start Jaeger is to use the pre-built all-in-one Jaeger image published to DockerHub:
-
-```bash
-docker run -d --name jaeger \
-  -e COLLECTOR_ZIPKIN_HOST_PORT=:9411 \
-  -p 16686:16686 \
-  -p 9411:9411 \
-  jaegertracing/all-in-one:1.22
-```
-
-
-### Viewing Traces
-To view traces, in your browser go to http://localhost:16686 to see the Jaeger UI.
-
 ## Configure Kubernetes
 The following steps shows you how to configure Radius control plane to send distributed tracing data to Jaeger running as a container in your Kubernetes cluster, how to view them.
 
@@ -165,7 +146,7 @@ kubectl apply -f jaeger-allinall.yaml
 4. Wait for Jaeger to be up and running
 ```
 kubectl wait deploy --selector app=jaeger --for=condition=available -n radius-monitoring
-``
+```
 
 ### Configure Radius
 
@@ -193,7 +174,7 @@ kubectl port-forward svc/tracing 16686 -n radius-monitoring
 
 In your browser, go to `http://localhost:16686` and you will see the Jaeger UI.
 
-![jaeger](/images/jaeger_ui.png)
+![jaeger](/jaeger_ui.png)
 
 ## References
 - [Jaeger Getting Started](https://www.jaegertracing.io/docs/1.21/getting-started/#all-in-one)
