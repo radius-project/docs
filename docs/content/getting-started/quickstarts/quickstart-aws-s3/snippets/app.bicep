@@ -18,7 +18,7 @@ param aws_region string
 resource s3 'AWS.S3/Bucket@default' = {
   alias: bucket
   properties: {
-    BucketName: bucket
+    BucketName: 'mys3bucket'
     AccessControl: 'PublicRead'
   }
 }

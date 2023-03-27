@@ -57,7 +57,7 @@ Create a new file called `app.bicep` and add the following bicep code:
 1. Deploy your application to your environment:
 
     ```bash
-    rad deploy ./app.bicep -p aws_access_key_id=<AWS_ACCESS_KEY_ID> -p aws_secret_access_key=<AWS_SECRET_ACCESS_KEY> -p aws_region=<REGION> -p bucket=<BUCKET_NAME>
+    rad deploy ./app.bicep -p aws_access_key_id=<AWS_ACCESS_KEY_ID> -p aws_secret_access_key=<AWS_SECRET_ACCESS_KEY> -p aws_region=<REGION>
     ```
 
     The access key, secret key, and region can be the same values you used in while creating environment in step 2. These are used so the container we are deploying can connect to AWS. The AWS S3 Bucket name must follow the [following naming conventions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html).
