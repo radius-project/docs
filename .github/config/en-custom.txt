@@ -6,6 +6,7 @@ APIs
 APPBASE
 args
 aspell
+Analytics
 Async
 Async
 AWSSimpleQueueService
@@ -37,6 +38,7 @@ entrypoint
 EOF
 Extensibility
 FileShare
+Fluentd
 FTEs
 GKE
 GOAPP
@@ -45,6 +47,7 @@ Hostname
 html
 HttpRoute
 HttpRoutes
+Kibana
 IAM
 IaC
 InternalServerError
@@ -184,6 +187,7 @@ githubRepo
 handoff
 hardcoding
 hostname
+hostName
 hostnames
 hugo
 http
@@ -299,9 +303,11 @@ secretstore
 serverless
 serverless
 servicebus
+serviceName
 shortcode
 shortcodes
 shortname
+spanId
 specificed
 spf
 sql
@@ -312,6 +318,7 @@ sslPassthrough
 statefulset
 statestore
 statestore
+stdout
 stgSuffixes
 submodules
 subnet
@@ -325,6 +332,7 @@ templating
 th
 toc
 todo
+traceId
 ubuntu
 ui
 ucp
@@ -346,3 +354,10 @@ workspaces
 yaml
 yml
 zsh
+daemonset
+fluentd
+minikube
+Observability
+Grafana
+grafana
+analytics
