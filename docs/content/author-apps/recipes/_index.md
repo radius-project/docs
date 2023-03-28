@@ -48,6 +48,10 @@ Recipes currently support the following resources. Support for additional resour
 | [`Applications.Link/mongoDatabases`]({{< ref mongodb >}}) |
 | [`Applications.Link/daprStateStores`]({{< ref dapr-statestore >}}) |
 
+## Infrastructure lifecycle
+
+When Recipe-supported resources are deployed the Recipe is run, which deploys the underlying infrastructure. When the Recipe-supported resource is deleted the underlying infrastructure is not deleted and remains deployed. Stay tuned for updates on infrastructure auto-deletion, where infrastructure is automatically deleted when the Recipe-supported resource is deleted.
+
 ## Further Reading
 
 - [`rad recipe` CLI reference]({{< ref rad_recipe >}})
