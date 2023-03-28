@@ -23,7 +23,14 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
     container: {
       image: 'myimage'
       env: {
-        DAPR_COMPONENTNAME: statestore.properties.componentName
+        // Option 1: Manually set component name as an environment variable
+        DAPR_COMPONENTNAME: statestore.name
+      }
+    }
+    connections: {
+      // Option 2 (preferred): Automatically set environment variable with component name
+      c1: {
+        source: statestore.id // Results in CONNECTION_C1_COMPONENTNAME
       }
     }
   }
