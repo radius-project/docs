@@ -10,59 +10,23 @@ It's easy to get Project Radius added to your GitHub Actions deployment pipeline
 
 ## Prerequisites
 
-- [az CLI](https://aka.ms/azcli) (only if deploying Azure resources)
 - Kubernetes cluster (AKS, EKS, GKE, etc.)
+- Radius control plane [installed in your cluster]({{< ref kubernetes-install >}})
+- GitHub repo with Actions enabled
 
-## Step 1: Create an Azure Service Principal
+## Step 1: Create your environment and application definitions
 
-{{% alert title="Optional" color="warning" %}}
-This step is only required if you are targeting an AKS cluster or if you are deploying Azure resources with the [Azure cloud provider]({{< ref providers >}}). If your application does not use Azure resources, you can skip this step.
-{{% /alert %}}
+Make sure you have the following files checked into your repository under `iac/`:
 
-An Azure service principal is used to authenticate with Azure both for accessing your AKS cluster (if applicable), and deploying resources into your subscription and resource group(s).
+### `env.bicep`
 
-You can also optionally separate your service principals if you want to separately access your AKS cluster and deploy Azure resources with separate service principals.
+{{< rad file="snippets/env.bicep" embed="true" >}}
 
-1. Run the following command, making sure to change the values of `subscriptionId` to match your target scope. Note that an owner role is required in order to configure connections from containers to Azure resources.
+### `app.bicep`
 
-   ```bash
-   az ad sp create-for-rbac --scopes /subscriptions/{subscriptionId} --role owner --sdk-auth
-   ```
+{{< rad file="snippets/app.bicep" embed="true" >}}
 
-1. Take the output of the above command and paste it into a [GitHub secret](https://docs.github.com/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) named `AZURE_CREDENTIALS`. This secret will be used to access your AKS cluster, if applicable.
-
-## Step 2: Create an environment
-
-Next, you will create the environment that you will be deploying your applications into.
-
-1. Download your kubectl context:
-
-   {{< tabs AKS >}}
-
-   {{% codetab %}}
-   Replace subscriptionName, resourceGroupName, and clusterName with your values:
-   ```bash
-   az aks get-credentials --subscription subscriptionName --resource-group resourceGroupName --name aksName
-   ```
-   {{% /codetab %}}
-
-   {{< /tabs >}}
-
-1. Install the Radius runtime and create a new environment:
-
-    ```bash
-    rad init
-    ```
-
-    Specify the Kubernetes namespace you wish to use for application deployments.
-
-    If you wish to deploy Azure resources, select the option to configure the Azure cloud provider, providing the values obtained in Step 1.
-
-    Note the name of the environment you used when creating the environment. For this example we will use `myenv`.
-
-## Step 3: Create a workflow file
-
-### Basics
+## Step 2: Create your workflow file
 
 Create a new file named `deploy-radius.yml` under `.github/workflows/` and paste the following:
 
@@ -88,11 +52,11 @@ jobs:
 
 This workflow begins by checking out the repository. It then sets up the kubectl tool to access your cluster.
 
-### Download kubectl context
+## Step 3: Connect to your cluster
 
-To interact with the cluster, the rad CLI requires a valid kubectl context.
+To interact with the cluster, the rad CLI requires a valid kubectl context. Add the following steps to your workflow to connect to your cluster:
 
-{{< tabs AKS >}}
+{{< tabs AKS AWS >}}
 
 {{% codetab %}}
 Ensure the service principal created above has the proper RBAC assignment to download the AKS context. Then append the following steps to your workflow:
@@ -107,11 +71,26 @@ Ensure the service principal created above has the proper RBAC assignment to dow
 ```
 {{% /codetab %}}
 
+{{% codetab %}}
+
+```yml
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-2
+    - name: Get EKS kubeconfig
+      run: aws eks update-kubeconfig --region us-east-2 --name my-cluster
+```
+
+{{% /codetab %}}
+
 {{< /tabs >}}
 
-### Download rad CLI and connect to environment
+## Step 4: Install the rad CLI and deploy environment
 
-Next, download the latest `rad` CLI release and connect to the environment you previously created (in this example `myenv`):
+Next, download the latest `rad` CLI release and setup your workspace:
 
 ```yml
     - name: Download rad CLI and rad-bicep
@@ -120,10 +99,16 @@ Next, download the latest `rad` CLI release and connect to the environment you p
         ./rad bicep download
         ./rad --version
     - name: Initialize Radius environment
-      run: ./rad env init kubernetes -e myenv
+      run: |
+        ./rad group create default
+        ./rad workspace create default --group default
+        ./rad env create temp
+        ./rad env switch temp
 ```
 
-### Deploy application
+> **Note**: Radius currently requires an environment be present in order to deploy an environment via Bicep. This will be fixed in an upcoming release.
+
+## Step 5: Deploy application
 
 Finally, run the [`rad deploy`]({{< ref rad_deploy >}}) command to deploy your application. Specify the path to your application Bicep. If the application had been previously deployed, it will be updated.
 
