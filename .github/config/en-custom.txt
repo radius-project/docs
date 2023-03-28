@@ -276,6 +276,7 @@ privateprevie
 privatepreview
 providerConfig
 publickey
+publicEndpointOverride
 pubsub
 px
 quickstart
@@ -295,6 +296,7 @@ resourceGroupName
 resourceId
 resourcegroup
 rollout
+rp
 runtime
 runtimes
 schemas
@@ -361,3 +363,5 @@ Observability
 Grafana
 grafana
 analytics
+publicEndpointOverride
+rp
