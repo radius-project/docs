@@ -1,0 +1,12 @@
+<div class="card-pane">
+    {{ range $key, $taxonomy := .Site.Taxonomies.categories }}
+    &nbsp;
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title"><b>{{ $key }}</b></h3>
+          {{ range $taxonomy.Pages }}
+          <p class="card-text"><li hugo-nav="{{ .RelPermalink}}"><a href="{{ .Permalink}}">{{ .Title }}</a></li></p>
+          {{end}}
+        </div> 
+      </div>
+      {{end}}

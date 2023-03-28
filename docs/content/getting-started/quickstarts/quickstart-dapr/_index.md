@@ -6,6 +6,7 @@ description: "Learn Project Radius by authoring templates and deploying a Dapr a
 weight: 300
 no_list: true
 slug: "dapr"
+categories : "dapr"
 ---
 
 ## Overview
@@ -13,7 +14,7 @@ slug: "dapr"
 This tutorial will teach you how to deploy a Dapr microservices application using Radius. You will learn:  
 
 - The concepts of the Radius application model
-- How [Dapr and Radius]({{< ref dapr >}}) seamlessly work together  
+- How [Dapr and Radius]({{< ref dapr-resource >}}) seamlessly work together  
 - The basic syntax of the [Bicep language]({{< ref bicep >}})
 
 No prior knowledge of Dapr, Radius, or Bicep is needed.
