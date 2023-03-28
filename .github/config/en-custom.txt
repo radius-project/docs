@@ -295,6 +295,7 @@ resourceGroupName
 resourceId
 resourcegroup
 rollout
+rp
 runtime
 runtimes
 schemas
