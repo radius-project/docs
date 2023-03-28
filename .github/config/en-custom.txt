@@ -276,6 +276,7 @@ privateprevie
 privatepreview
 providerConfig
 publickey
+publicEndpointOverride
 pubsub
 px
 quickstart
