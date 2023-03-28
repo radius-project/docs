@@ -1,24 +1,26 @@
 ---
 type: docs
-title: "Dapr building blocks"
+title: "Overview: Dapr building blocks"
 linkTitle: "Dapr"
 description: "Easily leverage Dapr building blocks in your application"
 weight: 500
 ---
 
-Project Radius offers first-class support for the [Dapr](https://dapr.io) runtime and building blocks to make it easy to make your code fully portable across code and infrastructure.
+Project Radius offers first-class support for the [Dapr](https://dapr.io) runtime and building blocks to make it easy to make your code fully portable across code and infrastructure. Simply drop in your Dapr building blocks as resources and Radius will automatically configure and apply the accompanying Dapr configuration.
 
 ## Installation 
 
-Follow the instructions [here](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/) to install Dapr in your Kubernetes cluster. Once Dapr is installed Radius can begin adding Dapr sidecars to your containers and managing your Dapr components.
+Follow the [Dapr installation instructions](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/) to install Dapr in your Kubernetes cluster. Once installed, you can begin adding Dapr sidecars and building blocks.
 
-## Dapr sidecar
+{{< button text="Setup Dapr" link="https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/" newtab="true" >}}
 
-A Dapr sidecar allows your services to interact with Dapr building blocks. It is required if your service connects to a Dapr building block resource.
+## Sidecar
+
+A [Dapr sidecar](https://docs.dapr.io/concepts/dapr-services/sidecar/) allows your services to interact with Dapr building blocks. It is required if your service leverages Dapr.
 
 <img src="dapr-sidecar.png" style="width:600px" alt="Diagram of the Dapr sidecar" /><br />
 
-Easily add the Dapr sidecar to your [Containers]({{< ref container >}}) using a Dapr sidecar extension:
+You can easily add the Dapr sidecar to your [Containers]({{< ref container >}}) using a Dapr sidecar extension:
 
 {{< tabs Bicep >}}
 
@@ -30,9 +32,9 @@ Easily add the Dapr sidecar to your [Containers]({{< ref container >}}) using a 
 
 Your container can now interact with the sidecar using the Dapr [building block APIs](https://docs.dapr.io/concepts/building-blocks-concept/) or the [Dapr SDKs](https://docs.dapr.io/developing-applications/sdks/).
 
-## Dapr building blocks
+## Building blocks
 
-Dapr links make it easy to model and configure [Dapr building block APIs](https://docs.dapr.io/developing-applications/building-blocks/) as resources. Simply specify the building block and the backing resource, and Radius will automatically configure and apply the accompanying Dapr configuration.
+Dapr resources make it easy to model and configure [Dapr building block APIs](https://docs.dapr.io/developing-applications/building-blocks/). Simply specify the building block and the backing resource, and Radius will automatically configure and apply the accompanying Dapr component configuration.
 
 <img src="dapr-buildingblocks.png" style="width:1000px" alt="Diagram of all the Dapr building blocks" /><br />
 
@@ -46,15 +48,29 @@ Model your building blocks as resources:
 
 {{< /tabs >}}
 
-### Dapr component naming
+### Component naming
 
 To interact with a Dapr building block, you need to know the name of the [Dapr component](https://docs.dapr.io/concepts/components-concept/). This name is the same as the name of the building block resource.
 
 For example, if you have a `Applications.Link/daprStateStores` resource named `mystatestore` the Dapr component name will be `mystatestore`. Your code will then interact with this component via `http://localhost:3500/v1.0/state/mystatestore`, or via the Dapr SDKs through the `mystatestore` component name.
 
-Radius offers a [`componentName` property]({{< ref dapr-secretstore >}}) on all Dapr links to make it easy to access the Dapr `componentName` within your template. This makes it easy to update your Dapr links without needing to update your code. Instead, the name can be passed in as an environment variable.
+### Connecting to Dapr building blocks
+
+You can connect to a Dapr building block by manually referencing the resource name or by adding a connection. Connections automatically inject environment variables into your container with the resource name prefixed.
 
 {{< rad file="snippets/dapr-componentname.bicep" embed=true marker="//MARKER" replace-key-ss="//STATESTORE" replace-value-ss="resource statestore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' = {...}" >}}
+
+### Service invocation
+
+Dapr [service invocation](https://docs.dapr.io/developing-applications/building-blocks/service-invocation/service-invocation-overview/) allows your services to discover and call each other. You can easily model service invocation with Dapr routes:
+
+{{< tabs Bicep >}}
+
+{{< codetab >}}
+{{< rad file="snippets/service-invocation.bicep" embed=true marker="//INVOKE" >}}
+{{< /codetab >}}
+
+{{< /tabs >}}
 
 ## Resource schema
 
