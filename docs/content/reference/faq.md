@@ -29,7 +29,7 @@ Users can employ multiple environments for isolation and organization, for examp
 
 ### Why do I need to manually output a Kubernetes UCP ID as part of my Bicep Recipe?
 
-The Bicep deployment engine currently does not ouput Kubernetes resource (UCP) IDs upon completion, meaning Recipes cannot automatically link a Recipe-enabled resource to the underlying infrastructure. This also means Kubernetes resources are not automatically cleaned up when a Recipe-enabled resource is deleted.
+The Bicep deployment engine currently does not output Kubernetes resource (UCP) IDs upon completion, meaning Recipes cannot automatically link a Recipe-enabled resource to the underlying infrastructure. This also means Kubernetes resources are not automatically cleaned up when a Recipe-enabled resource is deleted.
 
 To fix this, you can manually build and output UCP IDs, which will cause the infrastructure to be linked to the resource:
 
