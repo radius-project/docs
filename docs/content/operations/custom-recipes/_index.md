@@ -51,11 +51,36 @@ Recipes allow you to either specify `values` or `resource`:
 {{% codetab %}}
 When you output a `values` object, all of the individual properties will be directly mapped to the resource calling the Recipe. This allows you that most control over the resource being created within the application.
 
+#### Properties
+
 Simply define an object that matches the schema of the resource calling the Recipe. For example, for an `Application.Link/redisCaches` resource, a Recipe would output:
 
 {{< rad file="snippets/recipe.bicep" embed=true marker="//OUTVALUES" >}}
 
 _Note: Secure output parameters is in development. For now, you can use `#disable-next-line outputs-should-not-contain-secrets` to bypass the linter._
+
+#### Linking
+
+You also need to make sure to **link** your infrastructure resources, so Radius can delete them later on when the resource is deleted.
+
+Linking is done automatically for any new Azure or AWS resource ([_Kubernetes coming soon_]({{< ref "faq#why-do-i-need-to-manually-output-a-kubernetes-ucp-id-as-part-of-my-bicep-recipe" >}})) defined in a Bicep Recipe. Radius inspects [the output of the deployment](https://learn.microsoft.com/rest/api/resources/deployments/get#resourcereference) and links any created resources.
+
+[Bicep `existing`](https://learn.microsoft.com/azure/azure-resource-manager/bicep/existing-resource) resources are not currently linked as part of Recipe-enabled resources, meaning you won't see them in the definition of the resource and they aren't [deleted later on](#infrastructure-lifecycle), unlike new resources.
+
+You can also manually link resources via the `values` output of a Recipe. This can be used for Kubernetes resources, [which aren't currently linked automatically]({{< ref "faq#why-do-i-need-to-manually-output-a-kubernetes-ucp-id-as-part-of-my-bicep-recipe" >}}). To link a resource to a Recipe-enabled resource, add its ID to an array of resource IDs:
+
+```bicep
+// ....resources defined above
+
+output values object = {
+  resources: [
+    // ID via reference (Azure/AWS)
+    resource1.id
+    // ID via manual entry (Kubernetes)
+    '/planes/kubernetes/local/namespaces/${deployment.metadata.namespace}/providers/apps/Deployment/${deployment.metadata.name}'
+  ]
+}
+```
 
 {{% /codetab %}}
 {{% codetab %}}
@@ -93,6 +118,7 @@ You can use your rad-bicep binary to publish your Recipe to your Bicep registry:
 ```
 {{% /codetab %}}
 {{< /tabs >}}
+
 ### Step 6: Register your Recipe with your environment
 
 Now that your Recipe Bicep template has been stored within your Bicep registry, you can add it your Radius environment to be used by developers. This allows you to mix-and-match templates for each of your environments such as dev, canary, and prod.

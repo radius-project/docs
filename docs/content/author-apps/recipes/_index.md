@@ -48,11 +48,15 @@ Recipes currently support the following resources. Support for additional resour
 | [`Applications.Link/mongoDatabases`]({{< ref mongodb >}}) |
 | [`Applications.Link/daprStateStores`]({{< ref dapr-statestore >}}) |
 
+## Infrastructure linking
+
+When you use a Recipe to deploy infrastructure (_e.g. Azure, AWS resources_), that infrastructure can be linked and tracked as part of the Recipe-enabled resource. This means you can inspect what infrastructure supports the resource. Use [`rad resource show -o json`]({{< ref rad_resource_show >}}) to view this information.
+
 ## Infrastructure lifecycle
 
-When Recipe-supported resources are deployed the Recipe is run, which deploys the underlying infrastructure. When the Recipe-supported resource is deleted the underlying infrastructure is not deleted and remains deployed. Stay tuned for updates on infrastructure auto-deletion, where infrastructure is automatically deleted when the Recipe-supported resource is deleted.
+The lifecycle of Recipe infrastructure is tied to the resource calling the Recipe. When a Recipe-supported resource is deployed it triggers the Recipe, which in turn deploys the underlying infrastructure. When the Recipe-supported resource is deleted the underlying infrastructure is deleted as well.
 
 ## Further Reading
 
-- [`rad recipe` CLI reference]({{< ref rad_recipe >}})
 - [Author custom recipes]({{< ref custom-recipes >}})
+- [`rad recipe` CLI reference]({{< ref rad_recipe >}})
