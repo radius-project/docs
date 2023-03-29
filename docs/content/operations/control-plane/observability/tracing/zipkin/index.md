@@ -34,12 +34,12 @@ That's it! Your Radius control plane is now configured to send traces to Zipkin.
 Install radius with tracing enabled by following the steps below:
 
 ```
-rad install kubernetes --set  global.tracerProvider.zipkin.url=zipkin_endpoint_url
+rad install kubernetes --set  global.zipkin.url=zipkin_endpoint_url
 ```
 where `zipkin_endpoint_url` is the endpoint of the installed instance of Zipkin
 For example, 
 ```
-rad install kubernetes --set  global.tracerProvider.zipkin.url=http://zipkin.default.svc.cluster.local:9411/api/v2/spans
+rad install kubernetes --set  global.zipkin.url=http://zipkin.default.svc.cluster.local:9411/api/v2/spans
 ```
 
 ### Viewing Tracing Data

@@ -152,13 +152,13 @@ kubectl wait deploy --selector app=jaeger --for=condition=available -n radius-mo
 Install radius with tracing enabled by following the steps below. If needed, use `rad init` to set up an environment once `rad install` completes.
 
 ```
-rad install kubernetes --set  global.tracerProvider.zipkin.url=zipkin_endpoint_url
+rad install kubernetes --set  global.zipkin.url=zipkin_endpoint_url
 ```
 where `zipkin_endpoint_url` is the Zipkin collector endpoint of the installed instance of Jaeger
 
 For example, 
 ```
-rad install kubernetes --set  global.tracerProvider.zipkin.url=http://jaeger-collector.radius-monitoring.svc.cluster.local:9411/api/v2/spans
+rad install kubernetes --set  global.zipkin.url=http://jaeger-collector.radius-monitoring.svc.cluster.local:9411/api/v2/spans
 ```
 
 That's it! Your Radius control plane is now configured for use with Jaeger.
