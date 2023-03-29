@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Tracing"
+title: "Control plane tracing"
 linkTitle: "Tracing"
-weight: 100
-description: "How to setup your observability tools to receive radius control plane traces"
+weight: 150
+description: "How to setup your observability tools to receive Radius control plane traces"
 ---

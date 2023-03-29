@@ -2,22 +2,21 @@
 type: docs
 title: "How-To: Set up Jaeger for distributed tracing"
 linkTitle: "Jaeger"
-weight: 3000
 description: "Set up Jaeger for distributed tracing"
 type: docs
 ---
 ## Configure Kubernetes
-The following steps shows you how to configure Radius control plane to send distributed tracing data to Jaeger running as a container in your Kubernetes cluster, how to view them.
+The following steps show you how to configure Radius control plane to send distributed tracing data to Jaeger running as a container in your Kubernetes cluster and how to view the data.
 
 ### Setup Jaeger
 
-1. Create namespace radius-monitoring
+1. Create namespace `radius-monitoring`
 ```
 kubectl create namespace radius-monitoring
 ```
 
-2. Create the following YAML file to install Jaeger, file name is `jaeger-allinall.yaml`
-By default, the allInOne Jaeger image uses memory as the backend storage and it is not recommended to use this in a production environment.
+2. Create the following YAML file to install Jaeger, file name is `jaeger-allinone.yaml`
+By default, the all-in-one Jaeger image uses memory as the backend storage and it is not recommended to use this in a production environment.
 
 ```yaml
 apiVersion: apps/v1
@@ -140,7 +139,7 @@ spec:
 
 3. Install Jaeger
 ```
-kubectl apply -f jaeger-allinall.yaml
+kubectl apply -f jaeger-allinone.yaml
 ```
 
 4. Wait for Jaeger to be up and running
@@ -150,12 +149,12 @@ kubectl wait deploy --selector app=jaeger --for=condition=available -n radius-mo
 
 ### Configure Radius
 
-Install radius with tracing enabled by following below steps.  If needed, use `rad init` to set up a environment once rad install completes. 
+Install radius with tracing enabled by following the steps below. If needed, use `rad init` to set up an environment once `rad install` completes.
 
 ```
 rad install kubernetes --set  global.tracerProvider.zipkin.url=zipkin_endpoint_url
 ```
-where zipkin_endpoint_url is the zipkin collector endpoint of installed jaeger
+where `zipkin_endpoint_url` is the Zipkin collector endpoint of the installed instance of Jaeger
 
 For example, 
 ```
@@ -166,7 +165,7 @@ That's it! Your Radius control plane is now configured for use with Jaeger.
 
 ### Viewing Tracing Data
 
-To view traces, connect to the Jaeger Service and open the UI:
+To view traces, connect to the Jaeger service and navigate to the UI:
 
 ```bash
 kubectl port-forward svc/tracing 16686 -n radius-monitoring 
@@ -174,7 +173,7 @@ kubectl port-forward svc/tracing 16686 -n radius-monitoring
 
 In your browser, go to `http://localhost:16686` and you will see the Jaeger UI.
 
-![jaeger](/jaeger_ui.png)
+<img src="jaeger_ui.png" alt="" style="width:100%" >
 
 ## References
 - [Jaeger Getting Started](https://www.jaegertracing.io/docs/1.21/getting-started/#all-in-one)
