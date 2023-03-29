@@ -2,18 +2,22 @@ import radius as radius
 param application string
 param environment string
 
-resource demo 'Applications.Core/containers@2022-03-15-privatepreview' = {
-  name: 'demo'
-  location: 'global'
+//TODO rewrite for all options
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+  name: 'webapp'
+  location: location
   properties: {
-    application: application
+    environment: environment
+  }
+}
+
+resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'frontend'
+  location: location
+  properties: {
+    application: app.id
     container: {
       image: 'radius.azurecr.io/tutorial/webapp:edge'
-      ports: {
-        web: {
-          containerPort: 3000
-        }
-      }
     }
     connections: {
       redis: {
@@ -31,7 +35,7 @@ resource db 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
     environment: environment
     mode: 'recipe'
     recipe: {
-      name: 'redis-kubernetes'
+      name: ''
     }
   }
 }
