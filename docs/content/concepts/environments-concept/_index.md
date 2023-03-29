@@ -21,7 +21,7 @@ Environments provide a grouping structure for applications and the resources the
 
 In many small to medium-sized organizations, a full stack developer might write application code, author the Radius app definition, and create the Radius environment. In larger orgs, there may be separate teams of central operations and developers, where the central teams build environment templates which development teams leverage and deploy to. The separation of an app from an environment makes a separation of concerns possible.
 
-With Radius environments, central operations and IT teams can define and share environments with development teams for them to deploy applications into. Ops teams can focus on configuring the compute, dependencies, networking, and other infrastructure concerns through [Recipes]({{< ref custom-recipes >}}), while developers focus on the business and application concerns. This allows each team to focus on what matters most to them, without needing to become experts in every aspect of the infrastructure and application.
+With Radius environments, central operations and IT teams can define and share environments with development teams for them to deploy applications into. Ops teams can focus on configuring the compute, dependencies, networking, and other infrastructure concerns through [Recipes]({{< ref recipes >}}), while developers focus on the business and application concerns. This allows each team to focus on what matters most to them, without needing to become experts in every aspect of the infrastructure and application.
 
 ### Developer productivity
 
@@ -45,7 +45,7 @@ Organizational best-practices such as cost-optimization, resource sharing, and l
 | **Networking** *(coming soon)* | Define networking requirements such that applications are automatically configured with network isolation best-practices.
 | **Identity & access** *(coming soon)* | Limit access to deployments, resources and capabilities based on user roles and assignments.
 | **Dependencies** *(coming soon)* | Define environment requirements such as policy, packages, or other organization requirements.
-| **Infrastructure provisioning**  | Automatically provision infrastructure at deployment time through [Recipes]({{< ref custom-recipes >}}).
+| **Infrastructure provisioning** | Automatically provision infrastructure at deployment time through [Recipes]({{< ref recipes >}}).
 | **Dependency management** *(coming soon)* | Manage dependencies and environment capabilities such as packages, frameworks, and other configuration.
 
 ## Example: Handoff between teams
