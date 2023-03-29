@@ -37,10 +37,6 @@ Options for set command:
 
 
 
-
-
-
-
 {{% alert title="💡 About namespaces" color="success" %}}
 When Radius initializes a Kubernetes environment, it will deploy the system resources into the `radius-system` namespace. These aren't part your application. The namespace specified in interactive mode will be used for future deployments by default.
 {{% /alert %}}
