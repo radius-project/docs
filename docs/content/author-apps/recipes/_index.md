@@ -48,9 +48,19 @@ Recipes currently support the following resources. Support for additional resour
 | [`Applications.Link/mongoDatabases`]({{< ref mongodb >}}) |
 | [`Applications.Link/daprStateStores`]({{< ref dapr-statestore >}}) |
 
+## Infrastructure linking
+
+When you use a Recipe to deploy infrastructure (_e.g. Azure, AWS resources_), that infrastructure is automatically linked and tracked as part of the Recipe-enabled resource. This means you can inspect what infrastructure supports the resource. Use [`rad resource show -o json`]({{< ref rad_resource_show >}}) to view this information.
+
 ## Infrastructure lifecycle
 
-When Recipe-supported resources are deployed the Recipe is run, which deploys the underlying infrastructure. When the Recipe-supported resource is deleted the underlying infrastructure is not deleted and remains deployed. Stay tuned for updates on infrastructure auto-deletion, where infrastructure is automatically deleted when the Recipe-supported resource is deleted.
+When Recipe-supported resources are deployed it triggers the Recipe, which in turn deploys the underlying infrastructure. When the Recipe-supported resource is deleted the underlying infrastructure is deleted as well.
+
+### Existing resources
+
+If you leverage [Bicep existing resources](https://learn.microsoft.com/azure/azure-resource-manager/bicep/existing-resource) in your Recipe, they will not be deleted when the Recipe-supported resource is deleted.
+
+> Note: `existing` resources are not currently [tracked](#infrastructure-linking) as part of Recipe-enabled resources, meaning you won't see them in the definition of the resource, unlike regular resources which are linked to the resource.
 
 ## Further Reading
 
