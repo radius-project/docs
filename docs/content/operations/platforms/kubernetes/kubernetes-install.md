@@ -28,12 +28,12 @@ Options for set command:
 | `global.prometheus.path`   |  "/metrics"                   | set this variable to meter endpoint                                             |
 | `global.prometheus.port`   |  9090                         | set this variable to meter port                                                 |
 | `rp.image`          |  radius.azurecr.io/appcore-rp | set this variable to location of radius rp image                                |
-| `rp.tag`            |  radius.azurecr.io/appcore-rp | set this variable to tag of radius rp image                                      |  
+| `rp.tag`            |  latest | set this variable to tag of radius rp image                                      |  
 |`rp.publicEndpointOverride` | ""      |set this variable to the public endpoint of the Kubernetes cluster |
-| `de.image`                 |  radius.azurecr.io/appcore-rp | set this variable to tag of radius rp image                                      |  
-| `de.tag`                   |  radius.azurecr.io/appcore-rp | set this variable to tag of radius rp image                                      |  
-| `ucp.image`                |  radius.azurecr.io/appcore-rp | set this variable to tag of radius rp image                                      |  
-| `ucp.tag`                  |  radius.azurecr.io/appcore-rp | set this variable to tag of radius rp image                                      | 
+| `de.image`                 |  radius.azurecr.io/deployment-engine | set this variable to location of de image                                      |  
+| `de.tag`                   |  latest | set this variable to tag of de image                                      |  
+| `ucp.image`                |  radius.azurecr.io/ucpd | set this variable to the location of ucp image                                      |  
+| `ucp.tag`                  |  latest | set this variable to tag of ucp image                                      | 
 
 
 
