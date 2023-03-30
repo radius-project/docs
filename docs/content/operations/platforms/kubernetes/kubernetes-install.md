@@ -10,36 +10,15 @@ The [Radius control plane]({{< ref architecture >}}) handles the deployment and 
 
 ## Install with the rad CLI
 
-Use the [`rad install kubernetes` command]({{< ref rad_install_Kubernetes >}}) to install Radius control plane on the kubernetes cluster.
+Use the [`rad install kubernetes` command]({{< ref rad_install_kubernetes >}}) to install the Radius control plane into the `radius-system` namespace on your Kubernetes cluster. You can optionally use the `--set` flag to customize the installation with [Helm configuration options](#helm-configuration-options):
+
 ```bash
+# Install the Radius control plane
 rad install kubernetes
+
+# Install the Radius control plane with tracing and public endpoint override
+rad install kubernetes --set global.zipkin.url=http://jaeger-collector.radius-monitoring.svc.cluster.local:9411/api/v2/spans,rp.publicEndpointOverride=localhost:8081`
 ```
-`rad install kubernetes set` can be used to configure options on the command line to be passed to the Radius Helm chart and the Kubernetes cluster upon install. You can specify multiple values in a comma-separated list, for example: key1=val1,key2=val2.
-
-For example,
-`rad install kubernetes --set global.zipkin.url=http://jaeger-collector.radius-monitoring.svc.cluster.local:9411/api/v2/spans,rp.publicEndpointOverride=localhost:8081`
-
-Options for set command:
-
-| Name                       | Default                       |  Description                                                                   |
-| ---------------------------| ------------------------------|--------------------------------------------------------------------------------|
-| `global.zipkin.url`        |  None                         | set this variable to valid zipkin collector url to turn on distributed tracing |
-| `global.prometheus.enabled`|  true                         | set this variable to false to turn off metrics                                 |
-| `global.prometheus.path`   |  "/metrics"                   | set this variable to meter endpoint                                             |
-| `global.prometheus.port`   |  9090                         | set this variable to meter port                                                 |
-| `rp.image`          |  radius.azurecr.io/appcore-rp | set this variable to location of radius rp image                                |
-| `rp.tag`            |  latest | set this variable to tag of radius rp image                                      |  
-|`rp.publicEndpointOverride` | ""      |set this variable to the public endpoint of the Kubernetes cluster |
-| `de.image`                 |  radius.azurecr.io/deployment-engine | set this variable to location of de image                                      |  
-| `de.tag`                   |  latest | set this variable to tag of de image                                      |  
-| `ucp.image`                |  radius.azurecr.io/ucpd | set this variable to the location of ucp image                                      |  
-| `ucp.tag`                  |  latest | set this variable to tag of ucp image                                      | 
-
-
-
-{{% alert title="💡 About namespaces" color="success" %}}
-When Radius initializes a Kubernetes environment, it will deploy the system resources into the `radius-system` namespace. These aren't part your application. The namespace specified in interactive mode will be used for future deployments by default.
-{{% /alert %}}
 
 ## Install with Helm
 
@@ -56,3 +35,19 @@ When Radius initializes a Kubernetes environment, it will deploy the system reso
    ```bash
    helm upgrade radius radius/radius --install --create-namespace --namespace radius-system --version {{< param chart_version >}} --wait --timeout 15m0s
    ```
+
+### Helm configuration options
+
+| Name | Default | Description |
+|------|---------|-------------|
+| `global.zipkin.url` | | Zipkin collector URL. If not specified, tracing is disabled.
+| `global.prometheus.enabled` | `true` | Enables Prometheus metrics. Defaults to `true`
+| `global.prometheus.path` | `"/metrics"` | Metrics endpoint
+| `global.prometheus.port` | `9090` | Metrics port
+| `rp.image` | `radius.azurecr.io/appcore-rp` | Location of the Radius resource provider (RP) image
+| `rp.tag` | `latest` | Tag of the Radius resource provider (RP) image
+|`rp.publicEndpointOverride` | | Public endpoint of the Kubernetes cluster. Overrides the default behavior of automatically detecting the public endpoint.
+| `de.image` | `radius.azurecr.io/deployment-engine` | Location of the Bicep deployment engine (DE) image
+| `de.tag` | `latest` | Tag of the Bicep deployment engine (DE) image
+| `ucp.image` | `radius.azurecr.io/ucpd` | Location of universal control plane (UCP) image
+| `ucp.tag` | `latest` | Tag of the universal control plane (UCP) image
