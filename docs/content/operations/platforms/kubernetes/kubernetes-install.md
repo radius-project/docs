@@ -17,7 +17,7 @@ rad install kubernetes
 `rad install kubernetes set` can be used to configure options on the command line to be passed to the Radius Helm chart and the Kubernetes cluster upon install. You can specify multiple values in a comma-separated list, for example: key1=val1,key2=val2.
 
 For example,
-`rad install kubernetes --set global.zipkin.url=http://jaeger-collector.radius-monitoring.svc.cluster.local:9411/api/v2/spans,radius-rp.publicEndpointOverride=localhost:8081`
+`rad install kubernetes --set global.zipkin.url=http://jaeger-collector.radius-monitoring.svc.cluster.local:9411/api/v2/spans,rp.publicEndpointOverride=localhost:8081`
 
 Options for set command:
 
@@ -27,9 +27,9 @@ Options for set command:
 | `global.prometheus.enabled`|  true                         | set this variable to false to turn off metrics                                 |
 | `global.prometheus.path`   |  "/metrics"                   | set this variable to meter endpoint                                             |
 | `global.prometheus.port`   |  9090                         | set this variable to meter port                                                 |
-| `radius-rp.image`          |  radius.azurecr.io/appcore-rp | set this variable to location of radius rp image                                |
-| `radius-rp.tag`            |  radius.azurecr.io/appcore-rp | set this variable to tag of radius rp image                                      |  
-|`radius-rp.publicEndpointOverride` | ""      |set this variable to the public endpoint of the Kubernetes cluster |
+| `rp.image`          |  radius.azurecr.io/appcore-rp | set this variable to location of radius rp image                                |
+| `rp.tag`            |  radius.azurecr.io/appcore-rp | set this variable to tag of radius rp image                                      |  
+|`rp.publicEndpointOverride` | ""      |set this variable to the public endpoint of the Kubernetes cluster |
 | `de.image`                 |  radius.azurecr.io/appcore-rp | set this variable to tag of radius rp image                                      |  
 | `de.tag`                   |  radius.azurecr.io/appcore-rp | set this variable to tag of radius rp image                                      |  
 | `ucp.image`                |  radius.azurecr.io/appcore-rp | set this variable to tag of radius rp image                                      |  
