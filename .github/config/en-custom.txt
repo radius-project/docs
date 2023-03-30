@@ -211,6 +211,7 @@ jumpbox
 kafka
 keyvault
 kubecontext
+kubeConfig
 kubectl
 kubernetes
 kubernetesNamespace
@@ -365,3 +366,9 @@ grafana
 analytics
 publicEndpointOverride
 rp
+Zipkin
+observability
+Jaeger
+jaeger
+svc
+zipkin
