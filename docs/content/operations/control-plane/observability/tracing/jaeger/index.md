@@ -2,178 +2,60 @@
 type: docs
 title: "How-To: Set up Jaeger for distributed tracing"
 linkTitle: "Jaeger"
-description: "Set up Jaeger for distributed tracing"
+description: "Learn how to deploy and set up Jaeger for distributed tracing"
 type: docs
 ---
-## Configure Kubernetes
-The following steps show you how to configure Radius control plane to send distributed tracing data to Jaeger running as a container in your Kubernetes cluster and how to view the data.
 
-### Setup Jaeger
+[Jaeger](https://www.jaegertracing.io/) is an open source distributed tracing system. It helps gather timing data needed to troubleshoot latency problems in microservice architectures. It manages both the collection and lookup of this data.
 
-1. Create namespace `radius-monitoring`
-```
-kubectl create namespace radius-monitoring
-```
+The following steps show you how to configure the Radius control plane to send distributed tracing data to Jaeger running as a container in your Kubernetes cluster and how to view the data.
 
-2. Create the following YAML file to install Jaeger, file name is `jaeger-allinone.yaml`
-By default, the all-in-one Jaeger image uses memory as the backend storage and it is not recommended to use this in a production environment.
+## Step 1: Install Jaeger on Kubernetes
 
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: jaeger
-  namespace: radius-monitoring
-  labels:
-    app: jaeger
-spec:
-  selector:
-    matchLabels:
-      app: jaeger
-  template:
-    metadata:
-      labels:
-        app: jaeger
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "14269"
-    spec:
-      containers:
-        - name: jaeger
-          image: "docker.io/jaegertracing/all-in-one:1.42"
-          env:
-            - name: BADGER_EPHEMERAL
-              value: "false"
-            - name: SPAN_STORAGE_TYPE
-              value: "badger"
-            - name: BADGER_DIRECTORY_VALUE
-              value: "/badger/data"
-            - name: BADGER_DIRECTORY_KEY
-              value: "/badger/key"
-            - name: COLLECTOR_ZIPKIN_HOST_PORT
-              value: ":9411"
-            - name: MEMORY_MAX_TRACES
-              value: "50000"
-            - name: QUERY_BASE_PATH
-              value: /jaeger
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 14269
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 14269
-          volumeMounts:
-            - name: data
-              mountPath: /badger
-          resources:
-            requests:
-              cpu: 10m
-      volumes:
-        - name: data
-          emptyDir: {}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: tracing
-  namespace: radius-monitoring
-  labels:
-    app: jaeger
-spec:
-  type: ClusterIP
-  ports:
-    - name: http-query
-      port: 16686
-      protocol: TCP
-      targetPort: 16686
-    # Note: Change port name if you add '--query.grpc.tls.enabled=true'
-    - name: grpc-query
-      port: 16685
-      protocol: TCP
-      targetPort: 16685
-  selector:
-    app: jaeger
----
-# Jaeger implements the Zipkin API. To support swapping out the tracing backend, we use a Service named Zipkin.
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    name: zipkin
-  name: zipkin
-  namespace: radius-monitoring
-spec:
-  ports:
-    - port: 9411
-      targetPort: 9411
-      name: http-query
-  selector:
-    app: jaeger
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: jaeger-collector
-  namespace: radius-monitoring
-  labels:
-    app: jaeger
-spec:
-  type: ClusterIP
-  ports:
-  - name: jaeger-collector-http
-    port: 14268
-    targetPort: 14268
-    protocol: TCP
-  - name: jaeger-collector-grpc
-    port: 14250
-    targetPort: 14250
-    protocol: TCP
-  - port: 9411
-    targetPort: 9411
-    name: http-zipkin
-  selector:
-    app: jaeger
-```
+1. Create the namespace `radius-monitoring`:
 
-3. Install Jaeger
-```
-kubectl apply -f jaeger-allinone.yaml
-```
+   ```bash
+   kubectl create namespace radius-monitoring
+   ```
+
+2. Create the file `jaeger.yaml`, and paste the following YAML:
+
+   {{< button text="Download jaeger.yaml" link="jaeger.yaml" >}}
+
+3. Install Jaeger:
+
+   ```bash
+   kubectl apply -f jaeger.yaml
+   ```
 
 4. Wait for Jaeger to be up and running
-```
-kubectl wait deploy --selector app=jaeger --for=condition=available -n radius-monitoring
-```
 
-### Configure Radius
+   ```bash
+   kubectl wait deploy --selector app=jaeger --for=condition=available -n radius-monitoring
+   ```
 
-Install radius with tracing enabled by following the steps below. If needed, use `rad init` to set up an environment once `rad install` completes.
+## Step 2: Configure Radius control plane
 
-```
-rad install kubernetes --set  global.zipkin.url=zipkin_endpoint_url
-```
-where `zipkin_endpoint_url` is the Zipkin collector endpoint of the installed instance of Jaeger
+1. Install the Radius control plane with your Zipkin endpoint set to your Jaeger collector endpoint using [`rad install kubernetes`]({{< ref rad_install_kubernetes >}}):
 
-For example, 
-```
-rad install kubernetes --set  global.zipkin.url=http://jaeger-collector.radius-monitoring.svc.cluster.local:9411/api/v2/spans
-```
+   ```bash
+   rad install kubernetes --set  global.zipkin.url=http://jaeger-collector.radius-monitoring.svc.cluster.local:9411/api/v2/spans
+   ```
 
-That's it! Your Radius control plane is now configured for use with Jaeger.
+   > **Note:** `http://jaeger-collector.radius-monitoring.svc.cluster.local:9411/api/v2/spans` is the default URL for Jaeger when installed using the above instructions. If you have changed the service name or namespace, use that instead.
 
-### Viewing Tracing Data
+## Step 3: View Tracing Data
 
-To view traces, connect to the Jaeger service and navigate to the UI:
+1. Port forward the Jaeger service to your local machine:
 
-```bash
-kubectl port-forward svc/tracing 16686 -n radius-monitoring 
-```
+   ```bash
+   kubectl port-forward svc/tracing 16686 -n radius-monitoring 
+   ```
 
-In your browser, go to `http://localhost:16686` and you will see the Jaeger UI.
+2. In your browser, go to [http://localhost:16686](http://localhost:16686) to see the Jaeger UI:
 
-<img src="jaeger_ui.png" alt="" style="width:100%" >
+   <img src="jaeger_ui.png" alt="" style="width:100%" >
 
 ## References
+
 - [Jaeger Getting Started](https://www.jaegertracing.io/docs/1.21/getting-started/#all-in-one)

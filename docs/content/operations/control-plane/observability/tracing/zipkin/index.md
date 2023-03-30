@@ -2,56 +2,56 @@
 type: docs
 title: "How-To: Set up Zipkin for distributed tracing"
 linkTitle: "Zipkin"
-weight: 100
-description: "Set up Zipkin for distributed tracing"
+description: "Learn how to deploy and set up Zipkin for distributed tracing"
 type: docs
 ---
 
-## Configure Kubernetes
+[Zipkin](https://zipkin.io/) is an open source distributed tracing system. It helps gather timing data needed to troubleshoot latency problems in microservice architectures. It manages both the collection and lookup of this data.
 
-The following steps show you how to configure the Radius control plane to send distributed tracing data to Zipkin running as a container in your Kubernetes cluster and how to view the data.
+The following steps show you how to configure the [Radius control plane]({{< ref architecture >}}) to send distributed tracing data to Zipkin running as a container in your Kubernetes cluster and how to view the data.
 
-### Setup Zipkin
+## Step 1: Install Zipkin on Kubernetes
 
-1. Create namespace `radius-monitoring`
-```
-kubectl create namespace radius-monitoring
-```
-2. Deploy Zipkin
-```
-kubectl create deployment zipkin --image openzipkin/zipkin -n radius-monitoring
-```
+1. Create the namespace `radius-monitoring`:
 
-Create a Kubernetes service for the Zipkin pod:
-```
-kubectl expose deployment zipkin --type ClusterIP --port 9411 -n radius-monitoring
-```
+   ```bash
+   kubectl create namespace radius-monitoring
+   ```
 
-That's it! Your Radius control plane is now configured to send traces to Zipkin.
+2. Deploy the Zipkin deployment and service:
 
-### Configure Radius
+   ```bash
+   kubectl create deployment zipkin --image openzipkin/zipkin -n radius-monitoring
+   ```
 
-Install radius with tracing enabled by following the steps below:
+   ```bash
+   kubectl expose deployment zipkin --type ClusterIP --port 9411 -n radius-monitoring
+   ```
 
-```
-rad install kubernetes --set  global.zipkin.url=zipkin_endpoint_url
-```
-where `zipkin_endpoint_url` is the endpoint of the installed instance of Zipkin
-For example, 
-```
-rad install kubernetes --set  global.zipkin.url=http://zipkin.default.svc.cluster.local:9411/api/v2/spans
-```
+## Step 2: Configure Radius control plane
 
-### Viewing Tracing Data
+1. Install the Radius control plane with your Zipkin endpoint set using [`rad install kubernetes`]({{< ref rad_install_kubernetes >}}):
 
-To view traces, connect to the Zipkin service and navigate to the UI:
-```
-kubectl port-forward svc/zipkin 9411:9411 -n radius-monitoring
-```
+   ```bash
+   rad install kubernetes --set  global.zipkin.url=http://zipkin.radius-monitoring.svc.cluster.local:9411/api/v2/spans
+   ```
 
-In your browser, go to `http://localhost:9411` and you will see the Zipkin UI.
+   > **Note:** `http://zipkin.radius-monitoring.svc.cluster.local:9411/api/v2/spans` is the default URL for Zipkin when installed using the above instructions. If you have changed the service name or namespace, use that instead.
 
-<img src="zipkin_ui.png" alt="" style="width:100%" >
+### Step 3: View Tracing Data
+
+1. Port forward the Zipkin service to your local machine:
+
+   ```bash
+   kubectl port-forward svc/zipkin 9411:9411 -n radius-monitoring
+   ```
+
+2. In your browser, go to [http://localhost:9411](http://localhost:9411) to see the Zipkin UI and run a query:
+
+   <img src="zipkin_ui.png" alt="" style="width:100%" >
+
+3. Done! You can now use the Zipkin UI to view tracing data for your Radius control plane.
 
 ## References
+
 - [Zipkin for distributed tracing](https://zipkin.io/)
