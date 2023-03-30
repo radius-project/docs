@@ -211,6 +211,7 @@ jumpbox
 kafka
 keyvault
 kubecontext
+kubeConfig
 kubectl
 kubernetes
 kubernetesNamespace
@@ -369,3 +370,5 @@ Zipkin
 observability
 Jaeger
 jaeger
+svc
+zipkin
