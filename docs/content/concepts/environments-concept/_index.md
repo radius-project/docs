@@ -21,11 +21,11 @@ Environments provide a grouping structure for applications and the resources the
 
 In many small to medium-sized organizations, a full stack developer might write application code, author the Radius app definition, and create the Radius environment. In larger orgs, there may be separate teams of central operations and developers, where the central teams build environment templates which development teams leverage and deploy to. The separation of an app from an environment makes a separation of concerns possible.
 
-With Radius environments, central operations and IT teams can define and share environments with development teams for them to deploy applications into. Ops teams focus on configuring the compute, dependencies, networking, and other infrastructure concerns, while developers focus on the business and application concerns. This allows each team to focus on what matters most to them, without needing to become experts in every aspect of the infrastructure and application.
+With Radius environments, central operations and IT teams can define and share environments with development teams for them to deploy applications into. Ops teams can focus on configuring the compute, dependencies, networking, and other infrastructure concerns through [Recipes]({{< ref recipes >}}), while developers focus on the business and application concerns. This allows each team to focus on what matters most to them, without needing to become experts in every aspect of the infrastructure and application.
 
 ### Developer productivity
 
-Once an environment template is defined, developers can get up and running with a prepared development, pre-production, or production environment in minutes. No more waiting for manual provisioning or configuration or inter-team coordination.
+Once an environment template is defined, developers can get up and running with a prepared development, pre-production, or production environment in minutes. No more waiting for manual provisioning, configuration or inter-team coordination. Simply use the [Recipes]({{< ref recipes >}}) linked to your Radius environment and deploy your application.
 
 ### Replication and consistency
 
@@ -45,7 +45,7 @@ Organizational best-practices such as cost-optimization, resource sharing, and l
 | **Networking** *(coming soon)* | Define networking requirements such that applications are automatically configured with network isolation best-practices.
 | **Identity & access** *(coming soon)* | Limit access to deployments, resources and capabilities based on user roles and assignments.
 | **Dependencies** *(coming soon)* | Define environment requirements such as policy, packages, or other organization requirements.
-| **Infrastructure provisioning** *(coming soon)* | Automatically provision link infrastructure at deployment time using pre-defined or custom "recipes".
+| **Infrastructure provisioning** | Automatically provision infrastructure at deployment time through [Recipes]({{< ref recipes >}}).
 | **Dependency management** *(coming soon)* | Manage dependencies and environment capabilities such as packages, frameworks, and other configuration.
 
 ## Example: Handoff between teams
