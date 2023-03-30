@@ -46,7 +46,7 @@ rad install kubernetes --set global.zipkin.url=http://jaeger-collector.radius-mo
 | `global.prometheus.port` | `9090` | Metrics port
 | `rp.image` | `radius.azurecr.io/appcore-rp` | Location of the Radius resource provider (RP) image
 | `rp.tag` | `latest` | Tag of the Radius resource provider (RP) image
-|`rp.publicEndpointOverride` | | Public endpoint of the Kubernetes cluster. Overrides the default behavior of automatically detecting the public endpoint.
+|`rp.publicEndpointOverride` | `""` | Public endpoint of the Kubernetes cluster. Overrides the default behavior of automatically detecting the public endpoint.
 | `de.image` | `radius.azurecr.io/deployment-engine` | Location of the Bicep deployment engine (DE) image
 | `de.tag` | `latest` | Tag of the Bicep deployment engine (DE) image
 | `ucp.image` | `radius.azurecr.io/ucpd` | Location of universal control plane (UCP) image
