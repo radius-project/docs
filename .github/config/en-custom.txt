@@ -365,3 +365,6 @@ grafana
 analytics
 publicEndpointOverride
 rp
+Zipkin
+observability
+Jaeger
