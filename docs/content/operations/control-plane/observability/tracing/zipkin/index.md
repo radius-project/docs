@@ -38,7 +38,7 @@ The following steps show you how to configure the [Radius control plane]({{< ref
 
    > **Note:** `http://zipkin.radius-monitoring.svc.cluster.local:9411/api/v2/spans` is the default URL for Zipkin when installed using the above instructions. If you have changed the service name or namespace, use that instead.
 
-### Step 3: View Tracing Data
+## Step 3: View Tracing Data
 
 1. Port forward the Zipkin service to your local machine:
 
