@@ -17,7 +17,9 @@ rad install kubernetes
 `rad install kubernetes set` can be used to configure options on the command line to be passed to the Radius Helm chart and the Kubernetes cluster upon install. You can specify multiple values in a comma-separated list, for example: key1=val1,key2=val2.
 
 For example,
-`rad install kubernetes --set global.zipkin.url=http://jaeger-collector.radius-monitoring.svc.cluster.local:9411/api/v2/spans,rp.publicEndpointOverride=localhost:8081`
+```
+rad install kubernetes --set global.zipkin.url=http://jaeger-collector.radius-monitoring.svc.cluster.local:9411/api/v2/spans,rp.publicEndpointOverride=localhost:8081`
+```
 
 Options for set command:
 
