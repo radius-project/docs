@@ -16,15 +16,11 @@ This quickstart will teach you:
 ## Prerequisites
 
 - Install the [rad CLI]({{< ref getting-started >}})
-- [Supported Kubernetes clusters]({{< ref kubernetes >}})
+- A supported [Kubernetes cluster]({{< ref kubernetes >}})
 
 ## Overview
 
-[Recipes]({{< ref recipes >}}) enable a separation of concerns between infrastructure teams and developers by automating infrastructure deployment.
-
-### How?
-
-Recipes are a collection of infrastructure resources that can be deployed as part of a Radius application. Currently Recipes can be written in [Bicep](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview) and can be stored in [Azure Container Registries](https://azure.microsoft.com/en-us/products/container-registry/).
+[Recipes]({{< ref recipes >}}) enable a separation of concerns between infrastructure teams and developers by automating infrastructure deployment. Developers define _what_ they need (_Redis, Mongo, etc._), and operators define _how_ it will be deployed (_Azure/AWS/Kubernetes infrastructure_).
 
 ## Application overview
 
