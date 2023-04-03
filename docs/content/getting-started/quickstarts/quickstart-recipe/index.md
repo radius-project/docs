@@ -1,8 +1,8 @@
 ---
 type: docs
 title: "Quickstart: Deploy Recipes in your Radius Application"
-linkTitle: "Deploy Recipes in your Radius Application"
-description: "Learn how to use community 'dev' Recipes and your custom made Recipes in a Radius Environment"
+linkTitle: "Recipes"
+description: "Learn how to use Radius Recipes within your application"
 weight: 500
 slug: "recipes"
 ---
@@ -12,7 +12,6 @@ This quickstart will teach you:
 * How to use community “dev” Recipes in your Radius Environment
 * How to deploy your own Recipes in your Radius Environment for multiple cloud providers.
 * How to author your own Recipes
-
 
 ## Prerequisites
 
