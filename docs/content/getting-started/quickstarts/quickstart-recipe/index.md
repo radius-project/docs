@@ -29,6 +29,7 @@ This application is a simple to-do list which stores and visualized to-do items.
 <img src="recipe-quickstart-diagram.png" alt="Screenshot of the todoapp with Kubernetes, Azure and AWS Redis Cache options" style="width:100%" >
 
 ## Step 1: Initialize a Radius environment
+
 Navigate to the directory where you want to create your application and run the following command:
 
 1. Begin in a new directory for your application:
@@ -42,7 +43,6 @@ Navigate to the directory where you want to create your application and run the 
    ```
 
 {{< button text="Learn more about Recipes" page="recipes" newtab="true" >}}
-
 
 ### `dev` Recipes
 
@@ -59,7 +59,8 @@ redis-aws         Applications.Link/redisCaches     radius.azurecr.io/recipes/re
 redis-kubernetes  Applications.Link/redisCaches     radius.azurecr.io/recipes/rediscaches/kubernetes:1.0
 redis-azure       Applications.Link/redisCaches     radius.azurecr.io/recipes/rediscaches/azure:1.0
 ```
- ## Step 2: Deploy your application
+
+## Step 2: Deploy your application
 
 1. Create a Bicep file `app.bicep` with the following content:
 
@@ -74,7 +75,6 @@ Update the recipe name to `redis-kubernetes` to use the redis container
    ```
 
 You've now deployed your application to your Kubernetes cluster. You can access your application by opening http://localhost:3000 in a browser.
-
 
 ## Step 3: Use Azure / AWS recipes in your application
 > *This step needs an Azure subscription or an AWS account to deploy the application which would incur some costs. Add the required cloud provider (AWS/Azure) to your environment in order to deploy an Azure or AWS recipe*
@@ -124,7 +124,6 @@ Update the recipe name to `redis-aws` to use the redis container
    ```  
 {{% /codetab %}}
 {{< /tabs >}}
-
 
 ## Next steps
 - To learn how to create your own custom Recipe visit our [administrator guide]({{< ref custom-recipes.md >}})
