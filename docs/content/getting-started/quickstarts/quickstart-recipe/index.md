@@ -67,19 +67,15 @@ The Radius community provides Recipes for running commonly used application depe
 |`redis-kubernetes`| provisions a new redis container |
 |`redis-azure`| provisions a new Azure cache for Redis |
 
- ## Step 2: Deploy your application
+ ## Step 2: Deploy your application with a Kubernetes recipe
 
 1. Create a Bicep file `app.bicep` with the following content:
 
 {{< rad file="snippets/app.bicep" embed=true >}}
 
-
-{{< tabs Kubernetes Azure AWS >}}
-{{% codetab %}}
-
 Update the recipe name to `redis-kubernetes` to use the redis container
 
-1. Use the `rad run ` command to initialize a new environment:
+1. Use the `rad run` command to initialize a new environment:
 
    ```bash
    rad run app.bicep
@@ -87,13 +83,20 @@ Update the recipe name to `redis-kubernetes` to use the redis container
 
 You've now deployed your application to your Kubernetes cluster. You can access your application by opening http://localhost:3000 in a browser.
 
+
+## Step 3: Use Azure / AWS recipes in your application
+> *This step needs an Azure subscription or an AWS account to deploy the application which would incur some costs. Add the required cloud provider (AWS/Azure) to your environment in order to deploy an Azure or AWS recipe*
+
+{{< tabs Azure AWS >}}
+{{% codetab %}}
+
 {{% /codetab %}}
 
 {{% codetab %}}
-{{% /codetab %}}
 
-{{% codetab %}}
 Update the recipe name to `redis-aws` to use the redis container
+
+> *You can run this only on an EKS cluster. Make sure that the each of the Subnets in your EKS cluster Subnet Group are within the [list of supported MemoryDB availability zones](https://docs.aws.amazon.com/memorydb/latest/devguide/subnetgroups.html)*
 
 1. Deploy your application to your environment:
 
