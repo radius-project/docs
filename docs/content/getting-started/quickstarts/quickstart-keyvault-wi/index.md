@@ -5,7 +5,7 @@ linkTitle: "Persistent Key Vault volume"
 description: "Learn how to mount an Azure Key Vault as a volume to a container" 
 weight: 700
 slug: 'volume-keyvault'
-categories: ["azure","containers"]
+tags: ["azure","containers"]
 ---
 
 This quickstart will provide an overview of how to:

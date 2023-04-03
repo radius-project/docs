@@ -4,7 +4,7 @@ title: "Quickstart: Github Actions CI/CD integration"
 linkTitle: "GitHub Actions CI/CD"
 description: "Learn about adding your Radius apps to your deployment pipelines" 
 weight: 300
-categories: "CI/CD"
+tags: ["CI/CD"]
 ---
 
 It's easy to get Project Radius added to your GitHub Actions deployment pipelines. By leveraging the `rad` CLI, you can keep your checked-in app definitions in sync with deployed instances of your app.

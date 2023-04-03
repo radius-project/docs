@@ -1,5 +1,5 @@
 <div class="card-pane">
-    {{ range $key, $taxonomy := .Site.Taxonomies.categories }}
+  {{ range $key, $taxonomy := .Site.Taxonomies.tags }}
     &nbsp;
       <div class="card">
         <div class="card-body">
@@ -9,4 +9,5 @@
           {{end}}
         </div> 
       </div>
-      {{end}}
+  {{end}}
+</div>

@@ -5,7 +5,7 @@ linkTitle: "Connect to Azure resources"
 description: "Learn how to connect a container to an Azure resource with managed identities and RBAC" 
 weight: 600
 slug: 'azure-connection'
-categories: "azure"
+tags: ["azure","containers"]
 ---
 
 This quickstart will provide an overview of how to:
