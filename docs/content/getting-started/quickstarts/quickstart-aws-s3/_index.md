@@ -77,5 +77,4 @@ Create a new file called `app.bicep` and add the following bicep code:
 
 2. Cleanup AWS Resources - AWS resources are not deleted when deleting a Radius environment, so to prevent additional charges, make sure to delete all resources created in this reference app. You can delete these resources in the AWS Console or via the AWS CLI. To delete the AWS S3 Bucket, see https://docs.aws.amazon.com/AmazonS3/latest/userguide/delete-bucket.html.
 
-## Next steps
-{{< button text="Deploy using AWS recipes" page="quickstart-aws-recipes" >}}
+
