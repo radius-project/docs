@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Quickstart: Deploy Recipes in your Radius Application"
-linkTitle: "Recipes"
+linkTitle: "Deploy Recipes in your Radius Application"
 description: "Learn how to use Radius Recipes within your application"
 weight: 500
 slug: "recipes"
@@ -9,7 +9,7 @@ slug: "recipes"
 
 This quickstart will teach you:
 
-* How to use community “dev” Recipes in your Radius Environment
+* How to use “dev” Recipes in your Radius Environment
 * How to deploy your own Recipes in your Radius Environment for multiple cloud providers.
 * How to author your own Recipes
 
@@ -29,45 +29,37 @@ This application is a simple to-do list which stores and visualized to-do items.
 <img src="recipe-quickstart-diagram.png" alt="Screenshot of the todoapp with Kubernetes, Azure and AWS Redis Cache options" style="width:100%" >
 
 ## Step 1: Initialize a Radius environment
-
 Navigate to the directory where you want to create your application and run the following command:
 
-1. Use the `rad init --dev` command to initialize a new environment with [community `dev` Recipes]({{< ref "recipes#use-community-dev-recipes" >}}) linked to your environment:
-
+1. Begin in a new directory for your application:
+   ```bash
+   mkdir recipes
+   cd recipes
+   ```
+2. Initialize a new environment with [`dev` Recipes]({{< ref "recipes#use-community-dev-recipes" >}}):
    ```bash
    rad init --dev
    ```
 
-   Follow the prompts to install the [control plane services]({{< ref architecture >}}), create an [environment resource]({{< ref environments >}}), and create a [local workspace]({{< ref workspaces >}}). You will be asked for:
-   * **Environment name** - The name of the environment to create. You can specify any name with lowercase letters, such as `local`.
-
-{{% alert title="📄 Cloud Providers" color="primary" %}}
-To learn more about how to configure cloud providers such as AWS and Azure please visit our [cloud provider page]({{<ref providers >}}).
-{{% /alert %}}
+{{< button text="Learn more about Recipes" page="recipes" newtab="true" >}}
 
 
 ### `dev` Recipes
 
-The Radius community provides Recipes for running commonly used application dependencies, including Redis. 
+[`dev` Recipes]({{< ref "recipes#use-community-dev-recipes" >}}) allow you to quickly get up and running with infrastructure for your [Links]({{< ref links >}}). You can view this with [`rad recipe list`]({{< ref rad_recipe_list >}}):
 
- ```bash
-   rad recipe list 
-   ```
+```bash
+rad recipe list 
+```
 
-   ```
-   NAME              TYPE                              TEMPLATE
-   redis-aws         Applications.Link/redisCaches     radius.azurecr.io/recipes/rediscaches/aws:1.0
-   redis-kubernetes  Applications.Link/redisCaches     radius.azurecr.io/recipes/rediscaches/kubernetes:1.0
-   redis-azure       Applications.Link/redisCaches     radius.azurecr.io/recipes/rediscaches/azure:1.0
-   ```
-
-| Recipe | Description |
-|---------|-------------|
-|`redis-aws`|`redis-aws` provisions a new MemoryDB in the same VPC as your EKS cluster. Deploying to the same VPC is the recommended way to access a MemoryDB cluster from your EKS cluster. It also optionally accepts `subnetIds` as a parameter, which can be supplied to use a different set of Subnet Ids.|
-|`redis-kubernetes`| provisions a new redis container |
-|`redis-azure`| provisions a new Azure cache for Redis |
-
- ## Step 2: Deploy your application with a Kubernetes recipe
+You should see a table of available Recipes (_with more to be added soon_):
+```
+NAME              TYPE                              TEMPLATE
+redis-aws         Applications.Link/redisCaches     radius.azurecr.io/recipes/rediscaches/aws:1.0
+redis-kubernetes  Applications.Link/redisCaches     radius.azurecr.io/recipes/rediscaches/kubernetes:1.0
+redis-azure       Applications.Link/redisCaches     radius.azurecr.io/recipes/rediscaches/azure:1.0
+```
+ ## Step 2: Deploy your application
 
 1. Create a Bicep file `app.bicep` with the following content:
 
