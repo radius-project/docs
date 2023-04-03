@@ -41,7 +41,7 @@ Navigate to the directory where you want to create your application and run the 
    rad init --dev
    ```
 
-//TODO Button link to Recipes dev page
+{{< button text="Learn more about Recipes" page="recipes" newtab="true" >}}
 
 
 ### `dev` Recipes
