@@ -211,6 +211,7 @@ jumpbox
 kafka
 keyvault
 kubecontext
+kubeConfig
 kubectl
 kubernetes
 kubernetesNamespace
@@ -276,6 +277,7 @@ privateprevie
 privatepreview
 providerConfig
 publickey
+publicEndpointOverride
 pubsub
 px
 quickstart
@@ -295,6 +297,7 @@ resourceGroupName
 resourceId
 resourcegroup
 rollout
+rp
 runtime
 runtimes
 schemas
@@ -361,3 +364,11 @@ Observability
 Grafana
 grafana
 analytics
+publicEndpointOverride
+rp
+Zipkin
+observability
+Jaeger
+jaeger
+svc
+zipkin
