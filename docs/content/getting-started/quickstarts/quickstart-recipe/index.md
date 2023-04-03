@@ -24,22 +24,12 @@ This quickstart will teach you:
 
 ## Application overview
 
+This application is a simple to-do list which stores and visualized to-do items. It consists of a frontend [container]({{< ref container >}}) and a backend [Redis Link]({{< ref links >}}):
+
 <img src="recipe-quickstart-diagram.png" alt="Screenshot of the todoapp with Kubernetes, Azure and AWS Redis Cache options" style="width:100%" >
 
-### **todoapp** explained:
+## Step 1: Initialize a Radius environment
 
-The following application you'll be deploying is made up of the following IaC application model:
-
--  The **frontend** [container]({{< ref container >}}) resource which contains:
-
-   - application: The application to which this container belongs. The ID of the application defined above is used.
-   - container image: The container image to run. This is where your website's front end code lives.
-   - container ports: The ports to expose on the container, along with the [HttpRoute]({{< ref httproute >}}) that will be used to access the container.
-   - connections: The connections to make to other resources. In this case, the frontend container will connect to the backing database.
-
-- The **db** [Link resource]({{< ref link-schema >}}) provides an abstraction for an infrastructure resource through its API, allowing the backing resource type to be swapped out without changing the way the consuming resource is defined.
-
-## Step 1: Initialize a Radius environment 
 Navigate to the directory where you want to create your application and run the following command:
 
 1. Use the `rad init --dev` command to initialize a new environment with [community `dev` Recipes]({{< ref "recipes#use-community-dev-recipes" >}}) linked to your environment:
@@ -56,7 +46,7 @@ To learn more about how to configure cloud providers such as AWS and Azure pleas
 {{% /alert %}}
 
 
-### Community `dev` Recipes
+### `dev` Recipes
 
 The Radius community provides Recipes for running commonly used application dependencies, including Redis. 
 
