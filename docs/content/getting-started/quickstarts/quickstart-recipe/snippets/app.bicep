@@ -28,7 +28,7 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   }
 }
 
-// Radius Redis cache link resource
+// Redis Cache Link resource
 resource db 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
   name: 'db'
   location: location

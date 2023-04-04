@@ -22,6 +22,8 @@ This quickstart will teach you:
 
 [Recipes]({{< ref recipes >}}) enable a separation of concerns between infrastructure teams and developers by automating infrastructure deployment. Developers define _what_ they need (_Redis, Mongo, etc._), and operators define _how_ it will be deployed (_Azure/AWS/Kubernetes infrastructure_).
 
+{{< button text="Learn more about Recipes here" page="recipes" newtab="true" >}}
+
 ## Application overview
 
 This application is a simple to-do list which stores and visualized to-do items. It consists of a frontend [container]({{< ref container >}}) and a backend [Redis Link]({{< ref links >}}):
@@ -41,8 +43,6 @@ Navigate to the directory where you want to create your application and run the 
    ```bash
    rad init --dev
    ```
-
-{{< button text="Learn more about Recipes" page="recipes" newtab="true" >}}
 
 ### `dev` Recipes
 
@@ -66,27 +66,66 @@ redis-azure       Applications.Link/redisCaches     radius.azurecr.io/recipes/re
 
 {{< rad file="snippets/app.bicep" embed=true >}}
 
-Update the recipe name to `redis-kubernetes` to use the redis container
+Update the recipe name to `redis-kubernetes` to use the redis container for your Kubernetes cluster.
 
-1. Use the `rad run` command to initialize a new environment:
+{{< rad file="snippets/redis-kubernetes.bicep" embed=true marker="//KUBERNETES" >}}
+
+
+2. Use the `rad deploy` command to deploy your application:
 
    ```bash
-   rad run app.bicep
+   rad deploy ./app.bicep
    ```
 
-You've now deployed your application to your Kubernetes cluster. You can access your application by opening http://localhost:3000 in a browser.
+   You should see the following logs:
+   ```bash
+   Building app.bicep...
+   Deploying template 'app.bicep' into environment 'default' from workspace 'default'...
+
+   Deployment In Progress...
+
+   Completed            db              Applications.Link/redisCaches
+   Completed            webapp          Applications.Core/applications
+   Completed            frontend        Applications.Core/containers
+
+   Deployment Complete
+
+   Resources:
+      webapp          Applications.Core/applications
+      frontend        Applications.Core/containers
+      db              Applications.Link/redisCaches
+   ```
+
+
+You've now deployed your application to your Kubernetes cluster!
 
 ## Step 3: Use Azure / AWS recipes in your application
 > *This step needs an Azure subscription or an AWS account to deploy the application which would incur some costs. Add the required cloud provider (AWS/Azure) to your environment in order to deploy an Azure or AWS recipe*
 
+{{< button text="Learn more about Radius environments" page="environments" newtab="true" >}}
+
 {{< tabs Azure AWS >}}
 {{% codetab %}}
+
+Update the recipe name to `redis-azure` to use the Redis Cache container.
+
+1. Deploy your application to your environment:
+
+   ```bash
+   rad deploy ./app.bicep 
+   ```
+
+   This will deploy the application into your environment and launch the container resource for the frontend website. This operation may take some time, since it is deploying a Redis Cache resource to Azure. You should see the following resources deployed at the end of `rad deploy`:
+
+   ```
+
+   ```
 
 {{% /codetab %}}
 
 {{% codetab %}}
 
-Update the recipe name to `redis-aws` to use the redis container
+Update the recipe name to `redis-aws` to use the Redis Cache container.
 
 > *You can run this only on an EKS cluster. Make sure that the each of the Subnets in your EKS cluster Subnet Group are within the [list of supported MemoryDB availability zones](https://docs.aws.amazon.com/memorydb/latest/devguide/subnetgroups.html)*
 
