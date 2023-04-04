@@ -1,3 +1,5 @@
+import radius as radius
+
 param location string = 'global'
 param environment string
 
