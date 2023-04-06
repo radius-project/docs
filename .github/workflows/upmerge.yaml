@@ -1,0 +1,30 @@
+name: Upmerge docs to edge
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to upmerge from'
+        required: true
+
+jobs:
+  upmerge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: edge
+      - name: Create upmerge docs
+        run: |
+          export DATE=$(date +%Y-%m-%d)
+          git config --global user.email "radiuscoreteam@service.microsoft.com"
+          git config --global user.name "Radius CI Bot"
+          git checkout -b upmerge/$DATE
+          git merge --no-ff --no-commit origin/${{ github.event.inputs.branch }}
+          git reset HEAD docs/config.toml docs/layouts/partials/hooks/body-end.html
+          git commit -m "Upmerge to edge"
+          git push origin upmerge/$DATE
+      - name: Create pull request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_RAD_CI_BOT_PAT}}
+        run: gh pr create --title "Upmerge to edge" --body "Upmerge to edge" --base edge --head upmerge/$DATE
