@@ -7,7 +7,9 @@ jobs:
   upmerge:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_RAD_CI_BOT_PAT }}
       - name: Create upmerge docs
         run: |
           export DATE=$(date +%Y-%m-%d)
@@ -15,7 +17,7 @@ jobs:
           echo "Upmerging docs from $SOURCE_BRANCH to edge"
           git config --global user.email "radiuscoreteam@service.microsoft.com"
           git config --global user.name "Radius CI Bot"
-          git checkout origin/edge
+          git checkout edge
           git checkout -b upmerge/$DATE
           git merge --no-ff --no-commit origin/$SOURCE_BRANCH
           git reset HEAD docs/config.toml docs/layouts/partials/hooks/body-end.html
