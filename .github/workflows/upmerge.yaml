@@ -20,7 +20,7 @@ jobs:
           git fetch origin edge
           git checkout edge
           git checkout -b upmerge/$DATE
-          git merge --no-ff --no-commit origin/$SOURCE_BRANCH
+          git merge --no-ff --no-commit --allow-unrelated-histories origin/$SOURCE_BRANCH
           git reset HEAD docs/config.toml docs/layouts/partials/hooks/body-end.html
           git commit -m "Upmerge to edge"
           git push --set-upstream origin upmerge/$DATE
