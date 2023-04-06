@@ -4,9 +4,13 @@ on:
   issues:
     types: [opened, edited, deleted, closed, reopened, labeled, unlabeled, assigned]
 
+concurrency:
+  group: issue-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
 jobs:
   customer:
-    name: Add a label if Isssue created by customer
+    name: Add a label if Issue created by customer
     if: github.event.action == 'opened'
     runs-on: ubuntu-latest
     env:

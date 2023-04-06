@@ -18,7 +18,6 @@ Teams [describe their application]({{< ref appmodel-concept >}}) services and re
 Radius applications and tooling are agnostic of platform, services, and infrastructure. 
 <table style="max-width:600px;margin-top:10%">
   <tr>
-<!-- TODO: put something else here -->
   </tr>
 </table>
 {{< /card >}}
@@ -48,7 +47,7 @@ Teams can offload the complexity of wiring-up applications and let Radius employ
       <a href="{{< ref networking >}}"><img src="network-logo.svg" alt="Networking logo" style="width:40%"></a>
     </td>
     <td style="width:25%;text-align:center">
-      <a href="{{< ref dapr >}}"><img src="dapr-logo.svg" alt="Dapr logo" style="width:40%"></a>
+      <a href="{{< ref dapr-resources >}}"><img src="dapr-logo.svg" alt="Dapr logo" style="width:40%"></a>
     </td>
   </tr>
   </table>
