@@ -47,7 +47,10 @@ For the following steps, treat `v1.0` as the current release and `edge` as the p
    git merge --no-ff --no-commit v1.0
    ```
 
-1. Make sure included files look accurate. Inspect any merge conflicts in VS Code. Remove configuration changes or version information that does not need to be merged.
+1. Make sure included files look accurate. Inspect any merge conflicts in VS Code. Remove configuration changes or version information that does not need to be merged. Examples of files that usually shouldn't be merged:
+   - docs/config.toml
+   - docs/layouts/partials/hooks/body-end.html
+   - docsy sub-module
 1. Commit the staged changes and push to the upmerge branch (`upmerge_MM-DD`).
 1. Open a PR from the upmerge branch to the upcoming release branch (`edge`).
 1. Review the PR and double check that no unintended changes were pushed to the upmerge branch.
