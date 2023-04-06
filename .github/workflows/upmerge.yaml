@@ -20,10 +20,10 @@ jobs:
           git config --global user.email "radiuscoreteam@service.microsoft.com"
           git config --global user.name "Radius CI Bot"
           git checkout -b upmerge/$DATE
-          git merge --no-ff --no-commit origin/${{ github.event.inputs.branch }}
+          git merge --no-ff --no-commit ${{ github.event.inputs.branch }}
           git reset HEAD docs/config.toml docs/layouts/partials/hooks/body-end.html
           git commit -m "Upmerge to edge"
-          git push origin upmerge/$DATE
+          git push
       - name: Create pull request
         env:
           GITHUB_TOKEN: ${{ secrets.GH_RAD_CI_BOT_PAT}}
