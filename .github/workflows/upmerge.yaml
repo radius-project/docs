@@ -17,6 +17,7 @@ jobs:
           echo "Upmerging docs from $SOURCE_BRANCH to edge"
           git config --global user.email "radiuscoreteam@service.microsoft.com"
           git config --global user.name "Radius CI Bot"
+          git fetch origin edge
           git checkout edge
           git checkout -b upmerge/$DATE
           git merge --no-ff --no-commit origin/$SOURCE_BRANCH
