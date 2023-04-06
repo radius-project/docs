@@ -3,31 +3,40 @@ name: Release docs website
 on:
   workflow_dispatch:
     inputs:
-      version_name:
-        description: "Version number to be released. Must be prefixed with 'v' and contain two numbers separated by a period. Example: v0.17"
+      version:
+        description: "Version number to be released, in semver format (e.g. 0.17, 0.17-rc.1)"
         required: true
 
 jobs:
-  create_and_set_default_branch:
+  release:
     name: Create and set Default Branch
     runs-on: ubuntu-latest
     steps:
       - name: Validate branch name
         run: |
-          if [[ ! ${{ github.event.inputs.version_name }} =~ ^v[0-9]+\.[0-9]+$ ]]; then
-            echo "Invalid version name. Must be prefixed with 'v' and contain two numbers separated by a period. Example: v0.17"
+          if [[ ! ${{ github.event.inputs.version }} =~ ^[0-9]+\.[0-9]+(-(rc|alpha|beta)\.[0-9]+)?$ ]]; then
+            echo "Invalid version name: ${{ github.event.inputs.version }}"
             exit 1
           fi
+          echo "VERSION_NAME=v${{ github.event.inputs.version }}" >> $GITHUB_ENV
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          ref: edge
+          token: ${{ secrets.GH_RAD_CI_BOT_PAT }}
       - name: Create new branch
         run: |
-          git checkout -b ${{ github.event.inputs.version_name }}
-          git push origin ${{ github.event.inputs.version_name }}
-      - name: Set new branch as default
+          git config --global user.name "Radius CI Bot"
+          git config --global user.email "radiuscoreteam@service.microsoft.com"
+          echo "Creating and pushing new branch $VERSION_NAME"
+          git checkout -b $VERSION_NAME
+      - name: Update version in config
         run: |
-          gh api /repos/project-radius/docs --method PATCH -H "Accept: application/vnd.github+json" -f default_branch=${{ github.event.inputs.version_name }}
-      ## TODO: Delete old branch policy so updates to the old branch don't trigger a build
-      - name: Create a new deployment branch policy
-        run: |
-          gh api --method POST -H "Accept: application/vnd.github+json" /repos/project-radius/docs/environments/latest/deployment-branch-policies -f name=${{ github.event.inputs.version_name }}
+          sed -i "s/^baseURL = .*/baseURL = \"https\:\/\/docs\.radapp\.dev\/\"/" docs/config.toml
+          sed -i "s/^version = \"edge\"/version = \"v$VERSION\"/" docs/config.toml
+          sed -i "s/^chart_version = .*/chart_version = \"$VERSION.0\"/" docs/config.toml
+          sed -i "s/^github_branch = .*/github_branch = \"v$VERSION\"/" docs/config.toml
+          git add docs/config.toml
+          git commit -m "Update version to $VERSION_NAME"
+      - name: Push  to new branch
+        run: git push origin $VERSION_NAME
