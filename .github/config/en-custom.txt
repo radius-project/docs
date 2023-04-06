@@ -372,3 +372,6 @@ Jaeger
 jaeger
 svc
 zipkin
+upmerge
+upmerges
+approver
