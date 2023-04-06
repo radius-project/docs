@@ -18,9 +18,11 @@ jobs:
           git config --global user.email "radiuscoreteam@service.microsoft.com"
           git config --global user.name "Radius CI Bot"
           git fetch origin edge
+          git fetch origin $SOURCE_BRANCH
+          git checkout $SOURCE_BRANCH
           git checkout edge
           git checkout -b upmerge/$DATE
-          git merge --no-ff --no-commit --allow-unrelated-histories origin/$SOURCE_BRANCH
+          git merge --no-ff --no-commit --allow-unrelated-histories $SOURCE_BRANCH
           git reset HEAD docs/config.toml docs/layouts/partials/hooks/body-end.html
           git commit -m "Upmerge to edge"
           git push --set-upstream origin upmerge/$DATE
