@@ -5,6 +5,7 @@ linkTitle: "Environment variables"
 description: "Learn how to set environment variables manually and through connections"
 weight: 100
 slug: "environment-variables"
+tags: ["containers"]
 ---
 
 This quickstart will teach you:
