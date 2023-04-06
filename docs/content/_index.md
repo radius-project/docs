@@ -18,7 +18,6 @@ Teams [describe their application]({{< ref appmodel-concept >}}) services and re
 Radius applications and tooling are agnostic of platform, services, and infrastructure. 
 <table style="max-width:600px;margin-top:10%">
   <tr>
-<!-- TODO: put something else here -->
   </tr>
 </table>
 {{< /card >}}
