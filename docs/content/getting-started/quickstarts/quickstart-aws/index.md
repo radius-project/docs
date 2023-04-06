@@ -42,10 +42,10 @@ Create a [Radius environment]({{< ref environments >}}) where you will deploy yo
    {{% alert color="success" %}} Make sure that your kubecontext is set to a running EKS cluster.
    {{% /alert %}}
 
-1. Use the [`rad env init kubernetes` command]({{< ref rad_env_init_Kubernetes >}}) to initialize a new environment into your current kubectl context:
+1. Use the `rad init` command to initialize a new environment into your current kubectl context:
 
    ```bash
-   rad env init kubernetes -i
+   rad init
    ```
 
    Follow the prompts to install the [control plane services]({{< ref architecture >}}), create an [environment resource]({{< ref environments >}}), and create a [local workspace]({{< ref workspaces >}}). You will be asked for:
@@ -155,6 +155,7 @@ This Bicep file defines a webapp [container]({{< ref container >}}), which conne
    ```bicep
    param subnetGroupName string = 'demo-memorydb-subnet-group'
    resource subnetGroup 'AWS.MemoryDB/SubnetGroup@default' = {
+      alias: subnetGroupName
       properties: {
          SubnetGroupName: subnetGroupName
          // Update this line to include your subnets:

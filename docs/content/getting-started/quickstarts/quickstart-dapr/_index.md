@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Dapr Microservices Tutorial"
+title: "Quickstart: Dapr Microservices"
 linkTitle: "Dapr microservices"
 description: "Learn Project Radius by authoring templates and deploying a Dapr application"
 weight: 300
@@ -51,10 +51,10 @@ This tutorial can be completed on any platform Radius supports. To get started, 
 {{< tabs Kubernetes >}}
 
 {{% codetab %}}
-A Radius environment can be created in any [supported Kubernetes cluster]({{< ref "kubernetes#supported-clusters" >}}). Make sure you have set the correct default kubectl context, and then run:
+A Radius environment can be created in any [supported Kubernetes cluster]({{< ref "kubernetes#supported-clusters" >}}):
 
 ```sh
-rad env init kubernetes -i
+rad init
 ```
 
 If you wish to deploy an Azure storage account in an upcoming step follow the instructions to setup an Azure [cloud provider]({{< ref providers >}}).

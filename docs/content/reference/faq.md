@@ -16,7 +16,7 @@ weight: 999
 
 ### Can I connect to an existing environment?
 
-**Yes**. When you initialize an environment via [`rad env init`]({{< ref rad_env_init.md >}}), you can provide an existing Kubernetes cluster context. Radius will update your `config.yaml` file with the appropriate values.
+**Yes**. When you initialize an environment via `rad init`, you can provide an existing Kubernetes cluster context. Radius will update your `config.yaml` file with the appropriate values.
 
 ### When would/should I use more than one environment?
 
@@ -24,6 +24,33 @@ Users can employ multiple environments for isolation and organization, for examp
 - Permissions (managed at the Resource Group/Subscription level in Azure)
 - Purpose (dev vs. prod)
 - Difference in hosting (standalone Kubernetes vs Microsoft Azure)
+
+## Recipes
+
+### Why do I need to manually output a Kubernetes UCP ID as part of my Bicep Recipe?
+
+The Bicep deployment engine currently does not output Kubernetes resource (UCP) IDs upon completion, meaning Recipes cannot automatically link a Recipe-enabled resource to the underlying infrastructure. This also means Kubernetes resources are not automatically cleaned up when a Recipe-enabled resource is deleted.
+
+To fix this, you can manually build and output UCP IDs, which will cause the infrastructure to be linked to the resource:
+
+```bicep
+import kubernetes as k8s {
+  kubeConfig: ''
+  namespace: 'default'
+}
+
+resource deployment 'apps/Deployment@v1' = {...}
+
+resource service 'core/Service@v1' = {...}
+
+output values object = {
+  resources: [
+    // Manually build UCP IDs (/planes/<PLANE>/local/namespaces/<NAMESPACE>/providers/<GROUP>/<TYPE>/<NAME>)
+    '/planes/kubernetes/local/namespaces/${deployment.metadata.namespace}/providers/apps/Deployment/${deployment.metadata.name}'
+    '/planes/kubernetes/local/namespaces/${service.metadata.namespace}/providers/core/Service/${service.metadata.name}'
+  ]
+}
+```
 
 ## Bicep templates
 
@@ -45,6 +72,6 @@ Users can employ multiple environments for isolation and organization, for examp
 
 **Not yet**. For now we're focusing on containers, but in the future we plan on expanding to other Azure services such as App Service, Functions, Logic Apps, and others. Stay tuned for more information.
 
-## Does Radius support all Azure resources?
+### Does Radius support all Azure resources?
 
 **Yes**. You can use any Azure resource type by modeling it in Bicep outside the `Applications.Core/applications` resource and defining a connection to the resource from a `Applications.Core/containers`. See the [connections page]({{< ref appmodel-concept >}}) for more details.

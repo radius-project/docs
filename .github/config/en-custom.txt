@@ -6,6 +6,7 @@ APIs
 APPBASE
 args
 aspell
+Analytics
 Async
 Async
 AWSSimpleQueueService
@@ -37,6 +38,8 @@ entrypoint
 EOF
 Extensibility
 FileShare
+Fluentd
+FTEs
 GKE
 GOAPP
 GitHubAccess
@@ -44,6 +47,7 @@ Hostname
 html
 HttpRoute
 HttpRoutes
+Kibana
 IAM
 IaC
 InternalServerError
@@ -66,7 +70,10 @@ NAV
 NODEAPP
 NodeJS
 OAuth
+OCI
 OIDC
+OUTRESOURCE
+OUTVALUES
 PARAMS
 PYTHONAPP
 PowerShell
@@ -92,6 +99,7 @@ Subnet
 SubnetGroup
 Subnets
 Swappable
+TBD
 TCP
 Terraform
 TLS
@@ -179,6 +187,7 @@ githubRepo
 handoff
 hardcoding
 hostname
+hostName
 hostnames
 hugo
 http
@@ -202,12 +211,14 @@ jumpbox
 kafka
 keyvault
 kubecontext
+kubeConfig
 kubectl
 kubernetes
 kubernetesNamespace
 lifecycle
 lifecycles
 linkTitle
+linter
 linux
 liveness
 livenessProbe
@@ -251,6 +262,7 @@ org's
 orgs
 pageinfo
 param
+params
 parametrization
 passthrough
 pem
@@ -265,6 +277,7 @@ privateprevie
 privatepreview
 providerConfig
 publickey
+publicEndpointOverride
 pubsub
 px
 quickstart
@@ -284,6 +297,7 @@ resourceGroupName
 resourceId
 resourcegroup
 rollout
+rp
 runtime
 runtimes
 schemas
@@ -292,9 +306,11 @@ secretstore
 serverless
 serverless
 servicebus
+serviceName
 shortcode
 shortcodes
 shortname
+spanId
 specificed
 spf
 sql
@@ -305,6 +321,7 @@ sslPassthrough
 statefulset
 statestore
 statestore
+stdout
 stgSuffixes
 submodules
 subnet
@@ -315,8 +332,10 @@ subscriptionid
 sudo
 tablestorage
 templating
+th
 toc
 todo
+traceId
 ubuntu
 ui
 ucp
@@ -338,3 +357,18 @@ workspaces
 yaml
 yml
 zsh
+daemonset
+fluentd
+minikube
+Observability
+Grafana
+grafana
+analytics
+publicEndpointOverride
+rp
+Zipkin
+observability
+Jaeger
+jaeger
+svc
+zipkin
