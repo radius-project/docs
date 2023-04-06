@@ -19,14 +19,15 @@ jobs:
         run: |
           export DATE=$(date +%Y-%m-%d) >> $GITHUB_ENV
           echo "Current branch: $(git branch --show-current)"
-          git checkout -b upmerge/$DATE
+          git checkout -b upmerge/$DATE origin/edge
           echo "Current branch: $(git branch --show-current)"
+          echo $(git status)
       - name: Upmerge docs
         run: |
           export SOURCE_BRANCH=$(basename ${{ github.ref }})
           echo "Upmerging docs from $SOURCE_BRANCH to edge"
           git fetch origin $SOURCE_BRANCH
-          git merge --no-ff --no-commit --allow-unrelated-histories origin/$SOURCE_BRANCH
+          git merge --no-ff --no-commit origin/$SOURCE_BRANCH
           git reset HEAD docs/config.toml docs/layouts/partials/hooks/body-end.html
       - name: Commit changes
         run: |
