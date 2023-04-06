@@ -112,6 +112,7 @@ The following example shows an environment configured with Kubernetes as the tar
    1. **Install the control plane** - Radius installs the [control plane services]({{< ref architecture >}}) in the `radius-system` namespace
    1. **Create the environment** - An environment resource is created in the Radius control plane. It maps to a Kubernetes namespace.
    1. **Add the Azure Cloud Provider** - The Azure cloud provider configuration is saved in the Radius control plane
+   1. **Add the AWS Cloud Provider** - The AWS cloud provider configuration is saved in the Radius control plane
    1. **Create a workspace** - [Workspaces]({{< ref workspaces >}}) are local pointers to a cluster running Radius, and an environment. Workspaces are saved to the Radius config file (`~/.rad/config.yaml` on Linux and macOS, `%USERPROFILE%\.rad\config.yaml` on Windows)
 1. Verify the initialization by running:
    ```bash
