@@ -30,8 +30,8 @@ To present a specific topic on the next Radius community call start by filling o
 | Date | Topic(s) | Meeting Link | Recording |
 |------|----------|--------------|-----------|
 | Thursday Feb 16th 9:00am Pacific Time (PST) | v0.17 release | [Teams](https://teams.microsoft.com/l/meetup-join/19%3ameeting_MGRhYzc0NzAtZDEzMi00NjA0LTllYTItNDc1M2EzNzQwMTUz%40thread.v2/0?context=%7b%22Tid%22%3a%2272f988bf-86f1-41af-91ab-2d7cd011db47%22%2c%22Oid%22%3a%22a6a9b210-8672-47c2-b58f-0aa092ed4b39%22%7d) | [Stream](https://microsoft.sharepoint.com/:v:/r/teams/radius/Shared%20Documents/General/Community%20Calls/2023-02-16%20Project%20Radius%20Community%20Call.mp4?csf=1&web=1&e=u11ceV) |
-| Thursday Mar 16th 9:00am Pacific Time (PST) | v0.18 release | [Teams](https://teams.microsoft.com/l/meetup-join/19%3ameeting_MWNhNzZiYTQtNmQ3MC00ZWQ5LTliY2ItNjUwZDEzOTVhZDAy%40thread.v2/0?context=%7b%22Tid%22%3a%2272f988bf-86f1-41af-91ab-2d7cd011db47%22%2c%22Oid%22%3a%22a6a9b210-8672-47c2-b58f-0aa092ed4b39%22%7d) | TBD |
-| Thursday Apr 20th 9:00am Pacific Time (PST) | v0.19 release | | TBD |
+| Thursday Mar 16th 9:00am Pacific Time (PST) | v0.18 release | [Teams](https://teams.microsoft.com/l/meetup-join/19%3ameeting_MWNhNzZiYTQtNmQ3MC00ZWQ5LTliY2ItNjUwZDEzOTVhZDAy%40thread.v2/0?context=%7b%22Tid%22%3a%2272f988bf-86f1-41af-91ab-2d7cd011db47%22%2c%22Oid%22%3a%22a6a9b210-8672-47c2-b58f-0aa092ed4b39%22%7d) | [Stream](https://microsoft.sharepoint.com/:v:/r/teams/radius/Shared%20Documents/General/Community%20Calls/2023-03-16%20Project%20Radius%20Community%20Call.mp4?csf=1&web=1&e=LMW6HE) |
+| Thursday Apr 20th 9:00am Pacific Time (PST) | v0.19 release | [Teams](https://teams.microsoft.com/l/meetup-join/19%3ameeting_MzNmOTQ1YTctOTVjNi00ZjdhLTk1YjgtMzExZWYwNmRlMjU1%40thread.v2/0?context=%7b%22Tid%22%3a%2272f988bf-86f1-41af-91ab-2d7cd011db47%22%2c%22Oid%22%3a%22a6a9b210-8672-47c2-b58f-0aa092ed4b39%22%7d) | TBD |
 | Thursday May 18th 9:00am Pacific Time (PST) | v0.20 release | | TBD |
 
 ## GitHub Issues & repositories
