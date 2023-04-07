@@ -4,6 +4,8 @@ title: "Container App Store Microservice sample"
 linkTitle: "Container App Store"
 description: "Learn how to model and deploy multiple microservices with Radius and Dapr"
 weight: 200
+categories: "Reference-app"
+tags: ["Azure"]
 ---
 
 {{% alert title="Preview" color="info" %}}

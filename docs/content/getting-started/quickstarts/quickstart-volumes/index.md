@@ -5,6 +5,7 @@ linkTitle: "Volume mounts"
 description: "Learn how to mount a volume to a container" 
 weight: 200
 slug: 'volumes'
+categories: "Quickstart"
 tags: ["containers"]
 ---
 

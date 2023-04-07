@@ -26,3 +26,10 @@ Depending on the target environment and configuration, a container can be run on
 ## More information
 
 - [Container schema]({{< ref container-schema >}})
+
+## Other guides
+
+{{< categorize category="Quickstart" tag="containers" >}}
+{{< categorize category="How-to" tag="containers" >}}
+
+
