@@ -5,6 +5,8 @@ linkTitle: "Deploy Recipes in your Radius Application"
 description: "Learn how to use Radius Recipes within your application"
 weight: 500
 slug: "recipes"
+categories: "Quickstart"
+tags: ["Azure", "AWS", "Recipes"]
 ---
 
 This quickstart will teach you:
