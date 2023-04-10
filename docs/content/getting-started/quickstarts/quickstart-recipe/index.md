@@ -68,11 +68,6 @@ redis-azure       Applications.Link/redisCaches     radius.azurecr.io/recipes/re
 
 {{< rad file="snippets/app.bicep" embed=true >}}
 
-Update the recipe name to `redis-kubernetes` to use the redis container for your Kubernetes cluster.
-
-{{< rad file="snippets/redis-kubernetes.bicep" embed=true marker="//KUBERNETES" >}}
-
-
 2. Use the `rad deploy` command to deploy your application:
 
    ```bash
