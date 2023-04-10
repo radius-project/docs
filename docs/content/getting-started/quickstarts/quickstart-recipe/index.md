@@ -104,7 +104,7 @@ You've now deployed your application to your Kubernetes cluster!
 ## Step 3: Use Azure / AWS recipes in your application
 > *This step needs an Azure subscription or an AWS account to deploy the application which would incur some costs. Add the required cloud provider (AWS/Azure) to your environment in order to deploy an Azure or AWS recipe*
 
-{{< button text="Learn more about Radius environments" page="environments" newtab="true" >}}
+{{< button text="Learn more about configuring Cloud providers" page="providers#configure-a-cloud-provider" newtab="true" >}}
 
 {{< tabs Azure AWS >}}
 {{% codetab %}}
