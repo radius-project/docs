@@ -95,6 +95,14 @@ redis-azure       Applications.Link/redisCaches     radius.azurecr.io/recipes/re
 
 You've now deployed your application to your Kubernetes cluster!
 
+3. Port-forward the container to your machine with `rad resource expose`:
+
+```bash
+rad resource expose containers frontend -a webapp --port 3000
+```
+
+Visit localhost:3000 in your browser.
+
 ## Step 3: Use Azure / AWS recipes in your application
 > *This step needs an Azure subscription or an AWS account to deploy the application which would incur some costs. Add the required cloud provider (AWS/Azure) to your environment in order to deploy an Azure or AWS recipe*
 
@@ -103,7 +111,7 @@ You've now deployed your application to your Kubernetes cluster!
 {{< tabs Azure AWS >}}
 {{% codetab %}}
 
-Update the recipe name to `redis-azure` to use the Redis Cache container.
+Update the recipe name to `redis-azure` to use the Redis cache on Azure.
 
 1. Deploy your application to your environment:
 
@@ -114,7 +122,21 @@ Update the recipe name to `redis-azure` to use the Redis Cache container.
    This will deploy the application into your environment and launch the container resource for the frontend website. This operation may take some time, since it is deploying a Redis Cache resource to Azure. You should see the following resources deployed at the end of `rad deploy`:
 
    ```
+   Building ./app.bicep...
+   Deploying template './app.bicep' for application 'samples' and environment 'default' from workspace 'default'...
 
+   Deployment In Progress... 
+
+   Completed            webapp          Applications.Core/applications
+   Completed            db              Applications.Link/redisCaches
+   Completed            frontend        Applications.Core/containers
+
+   Deployment Complete
+
+   Resources:
+      webapp          Applications.Core/applications
+      frontend        Applications.Core/containers
+      db              Applications.Link/redisCaches
    ```
 
 {{% /codetab %}}
@@ -157,8 +179,18 @@ Update the recipe name to `redis-aws` to use the Amazon MemoryDB for Redis.
       webapp          Applications.Core/applications
       frontend        Applications.Core/containers
    ```  
+
+{{% alert title="Cleanup AWS Resources" color="warning" %}}
+AWS resources are not deleted when deleting a Radius environment, so to prevent additional charges, make sure to delete all resources created in this quickstart. This includes the SubnetGroup and MemoryDB created in Step 3. You can delete these resources in the AWS Console or via the AWS CLI.
+{{% /alert %}}
+
 {{% /codetab %}}
 {{< /tabs >}}
+
+{{% alert title="Delete environment" color="warning" %}}
+If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to delete all Radius resources running on your cluster.
+{{% /alert %}}
+
 
 ## Next steps
 - To learn how to create your own custom Recipe visit our [administrator guide]({{< ref custom-recipes.md >}})
