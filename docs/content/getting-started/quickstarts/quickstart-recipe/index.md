@@ -101,7 +101,7 @@ You've now deployed your application to your Kubernetes cluster!
 rad resource expose containers frontend -a webapp --port 3000
 ```
 
-Visit localhost:3000 in your browser.
+4. Visit `localhost:3000` in your browser.
 
 ## Step 3: Use Azure / AWS recipes in your application
 > *This step needs an Azure subscription or an AWS account to deploy the application which would incur some costs. Add the required cloud provider (AWS/Azure) to your environment in order to deploy an Azure or AWS recipe*
