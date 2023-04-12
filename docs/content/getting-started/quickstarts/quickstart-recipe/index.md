@@ -121,7 +121,7 @@ Update the recipe name to `redis-azure` to use the Redis Cache container.
 
 {{% codetab %}}
 
-Update the recipe name to `redis-aws` to use the Redis Cache container.
+Update the recipe name to `redis-aws` to use the Amazon MemoryDB for Redis.
 
 > *You can run this only on an EKS cluster. Make sure that the each of the Subnets in your EKS cluster Subnet Group are within the [list of supported MemoryDB availability zones](https://docs.aws.amazon.com/memorydb/latest/devguide/subnetgroups.html)*
 
