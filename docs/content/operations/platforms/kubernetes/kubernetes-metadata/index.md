@@ -5,7 +5,7 @@ linkTitle: "Kubernetes metadata"
 description: "Learn how to configure Kubernetes labels and annotations for generated objects"
 weight: 300
 categories: "How-to"
-tags: ["containers","KubernetesMetadata"]
+tags: ["containers","Kubernetes Metadata"]
 ---
 
 ## Background
