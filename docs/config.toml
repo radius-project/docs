@@ -38,6 +38,7 @@ enableGitInfo = true
 # Taxonomies
 [taxonomies]
 category = "categories"
+tag = "tags"
 
 # Top Nav Bar
 [[menu.main]]
