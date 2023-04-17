@@ -4,7 +4,6 @@ param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'azure-resources-dapr-pubsub-generic'
-  location: 'global'
   properties: {
     environment: environment
   }
@@ -12,7 +11,6 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 
 resource publisher 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'publisher'
-  location: 'global'
   properties: {
     application: app.id
     connections: {
@@ -33,7 +31,6 @@ resource kafkaRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' exi
 //SAMPLE
 resource pubsub 'Applications.Link/daprPubSubBrokers@2022-03-15-privatepreview' = {
   name: 'pubsub'
-  location: 'global'
   properties: {
     environment: environment
     application: app.id

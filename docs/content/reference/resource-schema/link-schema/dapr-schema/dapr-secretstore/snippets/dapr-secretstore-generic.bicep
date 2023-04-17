@@ -4,7 +4,6 @@ param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'dapr-secretstore-generic'
-  location: 'global'
   properties: {
     environment: environment
   }
@@ -12,7 +11,6 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 //SAMPLE
 resource secretstore 'Applications.Link/daprSecretStores@2022-03-15-privatepreview' = {
   name: 'secretstore-generic'
-  location: 'global'
   properties: {
     environment: environment
     application: app.id

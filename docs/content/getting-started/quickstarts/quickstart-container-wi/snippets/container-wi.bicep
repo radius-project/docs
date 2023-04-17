@@ -1,9 +1,6 @@
 //ENVIRONMENT
 import radius as radius
 
-@description('Specifies the location for Radius resources.')
-param location string = 'global'
-
 @description('Specifies the location for Azure resources.')
 param azLocation string = resourceGroup().location
 
@@ -12,7 +9,7 @@ param oidcIssuer string
 
 resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
   name: 'iam-quickstart'
-  location: location
+
   properties: {
     compute: {
       kind: 'kubernetes'
@@ -35,7 +32,7 @@ resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
 //CONTAINER
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
-  location: location
+
   properties: {
     environment: env.id
   }
@@ -43,7 +40,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 
 resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'mycontainer'
-  location: location
+
   properties: {
     application: app.id
     container: {

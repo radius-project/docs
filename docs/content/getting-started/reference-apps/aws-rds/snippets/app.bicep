@@ -1,7 +1,6 @@
 import radius as radius
 import aws as aws
 
-param location string = 'global'
 param environment string
 
 @description('Database name (default: wordpress)')
@@ -33,7 +32,7 @@ param databaseIdentifier string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'wordpress-app'
-  location: location
+
   properties: {
     environment: environment
   }
@@ -41,7 +40,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 
 resource wordpress 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'wordpress-container'
-  location: location
+
   properties: {
     application: app.id
     container: {
