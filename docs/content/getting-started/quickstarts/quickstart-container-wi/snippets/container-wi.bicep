@@ -9,7 +9,6 @@ param oidcIssuer string
 
 resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
   name: 'iam-quickstart'
-
   properties: {
     compute: {
       kind: 'kubernetes'
@@ -32,7 +31,6 @@ resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
 //CONTAINER
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
-
   properties: {
     environment: env.id
   }
@@ -40,7 +38,6 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 
 resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'mycontainer'
-
   properties: {
     application: app.id
     container: {

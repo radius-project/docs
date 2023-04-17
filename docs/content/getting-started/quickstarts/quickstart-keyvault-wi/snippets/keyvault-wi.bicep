@@ -9,7 +9,6 @@ param azLocation string = resourceGroup().location
 
 resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
   name: 'kv-volume-quickstart'
-
   properties: {
     compute: {
       kind: 'kubernetes'
@@ -32,7 +31,6 @@ resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
 //APP
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
-
   properties: {
     environment: env.id
   }
@@ -40,7 +38,6 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 
 resource volume 'Applications.Core/volumes@2022-03-15-privatepreview' = {
   name: 'myvolume'
-
   properties: {
     application: app.id
     kind: 'azure.com.keyvault'
@@ -77,7 +74,6 @@ resource keyvault 'Microsoft.KeyVault/vaults@2021-10-01' = {
 //CONTAINER
 resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'mycontainer'
-
   properties: {
     application: app.id
     container: {

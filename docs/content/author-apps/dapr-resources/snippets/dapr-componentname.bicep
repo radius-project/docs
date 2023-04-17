@@ -8,7 +8,6 @@ resource table 'Microsoft.Storage/storageAccounts/tableServices/tables@2021-09-0
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
-  location: 'global'
   properties: {
     environment: environment
   }
@@ -17,7 +16,6 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 //MARKER
 resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'mycontainer'
-  location: 'global'
   properties: {
     application: app.id
     container: {
@@ -39,7 +37,6 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
 //STATESTORE
 resource statestore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' = {
   name: 'mystatestore'
-  location: 'global'
   properties: {
     mode: 'resource'
     resource: table.id

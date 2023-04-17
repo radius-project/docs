@@ -25,7 +25,6 @@ resource s3 'AWS.S3/Bucket@default' = {
 // get a radius container which uses the s3 bucket
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 's3app'
-
   properties: {
     environment: environment
   }
@@ -33,7 +32,6 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 
 resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 's3container'
-
   properties: {
     application: app.id
     container: {

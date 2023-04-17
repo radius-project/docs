@@ -32,7 +32,6 @@ param databaseIdentifier string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'wordpress-app'
-
   properties: {
     environment: environment
   }
@@ -40,7 +39,6 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 
 resource wordpress 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'wordpress-container'
-
   properties: {
     application: app.id
     container: {
