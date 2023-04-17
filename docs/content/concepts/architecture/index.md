@@ -3,7 +3,7 @@ type: docs
 title: Project Radius architecture
 linkTitle: Architecture
 description: Learn how the Project Radius control-plane services deploy and manage your applications
-weight: 600
+weight: 200
 ---
 
 ## Overview
@@ -64,3 +64,8 @@ The DE service is used when Bicep or ARM JSON is used to deploy Radius applicati
 
 For imperative commands (CLI, other IaC tools), the DE is bypassed and the client (CLI, other IaC tools) acts as the DE.
 
+## Next step
+
+Now that you have an understanding of the Radius architecture, learn more about the Radius environment:
+
+{{< button text="Radius Environments" page="environments-concept" size="btn-lg" color="success" >}}

@@ -64,6 +64,6 @@ When the developer deploys their application, these org-level concerns are autom
 
 ## Next step
 
-Now that you have an understanding of Radius environments, learn more about the Radius control-plane and architecture:
+Now that you have an understanding of Radius Environments, learn more about the Radius application model:
 
-{{< button text="Architecture" page="architecture" size="btn-lg" color="success" >}}
+{{< button text="Radius Applications" page="appmodel-concept" size="btn-lg" color="success" >}}

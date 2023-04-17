@@ -3,7 +3,7 @@ type: docs
 title: "Radius application model"
 linkTitle: "App model"
 description: "Learn how to model your applications with the Radius application model"
-weight: 200
+weight: 500
 ---
 
 ## Deployable architecture diagrams
@@ -94,6 +94,6 @@ Adding connections to the above IaC file, it becomes:
 
 ## Next step
 
-Now that you have an understanding of the Radius app model, learn more about Radius links:
+Now that you have an understanding of the Radius app model, learn more about Radius Links:
 
 {{< button text="Links" page="links-concept" size="btn-lg" color="success" >}}
