@@ -100,7 +100,18 @@ These conventions should be followed throughout all Radius documentation to ensu
 
 ## Spelling
 
+### General grammar
+
 The docs pipeline uses [aspell](http://aspell.net/) to check for spelling mistakes. If you need to add a new custom word to the allow-list, update `.github/config/en-custom.txt`.
+
+### Radius concepts
+
+This convention of capitalization should be followed throughout all Radius documentation to ensure a consistent experience across all docs when introducing Radius specific concepts.
+
+- **Radius Environment**
+- **Radius Application**
+- **Radius Recipe**
+- **Radius Link**
 
 ## Contributing a new docs page
 
