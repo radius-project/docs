@@ -3,7 +3,6 @@ param application string
 
 resource demo 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'demo'
-  location: 'global'
   properties: {
     application: application
     container: {
@@ -25,7 +24,6 @@ resource demo 'Applications.Core/containers@2022-03-15-privatepreview' = {
 param environment string
 resource db 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
   name: 'db'
-  location: 'global'
   properties: {
     application: application
     environment: environment

@@ -4,7 +4,6 @@ param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'dapr-quickstart'
-  location: 'global'
   properties: {
     environment: environment
   }
@@ -13,7 +12,6 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 //BACKEND
 resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'backend'
-  location: 'global'
   properties: {
     application: app.id
     //CONTAINER
@@ -48,7 +46,6 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 
 resource backendRoute 'Applications.Link/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
   name: 'dapr-backend'
-  location: 'global'
   properties: {
     environment: environment
     application: app.id
@@ -58,7 +55,6 @@ resource backendRoute 'Applications.Link/daprInvokeHttpRoutes@2022-03-15-private
 
 resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' = {
   name: 'orders'
-  location: 'global'
   properties: {
     environment: environment
     application: app.id

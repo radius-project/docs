@@ -17,7 +17,6 @@ resource cache 'Microsoft.Cache/Redis@2019-07-01' = {
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
-  location: 'global'
   properties: {
     environment: environment
   }
@@ -25,7 +24,6 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 
 resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'mycontainer'
-  location: 'global'
   properties: {
     application: app.id
     container: {
