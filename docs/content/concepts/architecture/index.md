@@ -3,7 +3,7 @@ type: docs
 title: Project Radius architecture
 linkTitle: Architecture
 description: Learn how the Project Radius control-plane services deploy and manage your applications
-weight: 200
+weight: 600
 ---
 
 ## Overview
@@ -66,6 +66,6 @@ For imperative commands (CLI, other IaC tools), the DE is bypassed and the clien
 
 ## Next step
 
-Now that you have an understanding of the Radius architecture, learn more about the Radius environment:
+Now that you have an understanding of the Radius architecture, try Radius out:
 
-{{< button text="Radius Environments" page="environments-concept" size="btn-lg" color="success" >}}
+{{< button text="Radius Demo" page="first-app" size="btn-lg" color="success" >}}

@@ -3,7 +3,7 @@ type: docs
 title: "Links"
 linkTitle: "Links"
 description: "Learn how Radius Links enable infrastructure portability"
-weight: 600
+weight: 300
 slug: "links"
 ---
 
@@ -49,6 +49,6 @@ The developer's container resource, `frontend`, connects to the Mongo link, `dbl
 
 ## Next step
 
-Now that you have an understanding of Radius Links, try Radius out:
+Now that you have an understanding of Radius Links, learn more about the Radius architecture:
 
-{{< button text="Radius Demo" page="first-app" size="btn-lg" color="success" >}}
+{{< button text="Learn about the Radius architecture" page="architecture" size="btn-lg" color="success" >}}

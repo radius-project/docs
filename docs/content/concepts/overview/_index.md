@@ -85,6 +85,6 @@ As teams onboard to Project Radius and begin deploying across platforms, the too
 
 ## Next step
 
-Now that you have an overview of Project Radius, learn more about how it works:
+Now that you have an overview of Project Radius, learn more about the Radius app model:
 
-{{< button text="Learn about the Radius architecture" page="architecture" size="btn-lg" color="success" >}}
+{{< button text="Learn about the Radius application model" page="appmodel-concept" size="btn-lg" color="success" >}}

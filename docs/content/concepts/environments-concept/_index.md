@@ -64,6 +64,6 @@ When the developer deploys their application, these org-level concerns are autom
 
 ## Next step
 
-Now that you have an understanding of Radius Environments, learn more about the Radius application model:
+Now that you have an understanding of Radius Environments, learn more about Radius Links:
 
-{{< button text="Radius Applications" page="appmodel-concept" size="btn-lg" color="success" >}}
+{{< button text="Links" page="links-concept" size="btn-lg" color="success" >}}
