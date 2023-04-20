@@ -24,7 +24,6 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' existing
 //LINK
 resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
   name: 'myredis-link'
-  location: 'global'
   properties: {
     environment: environment
     application: app.id
@@ -36,7 +35,6 @@ resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
 //CONTAINER
 resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'mycontainer'
-  location: 'global'
   properties: {
     application: app.id
     container: {

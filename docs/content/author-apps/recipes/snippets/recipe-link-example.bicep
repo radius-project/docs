@@ -5,7 +5,6 @@ param application string
 //BASIC
 resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
   name: 'mylink'
-  location: 'global'
   properties: {
     environment: environment
     application: application
@@ -21,7 +20,6 @@ resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
 //PARAMETERS
 resource redisParam 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
   name: 'mylink'
-  location: 'global'
   properties: {
     environment: environment
     application: application

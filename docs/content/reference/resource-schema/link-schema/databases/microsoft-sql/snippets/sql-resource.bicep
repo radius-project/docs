@@ -6,7 +6,6 @@ param sqldb string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'cosmos-container'
-  location: 'global'
   properties: {
     environment: environment
   }
@@ -15,7 +14,6 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 //SQL
 resource db 'Applications.Link/sqlDatabases@2022-03-15-privatepreview' = {
   name: 'db'
-  location: 'global'
   properties: {
     environment: environment
     application: app.id

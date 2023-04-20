@@ -3,7 +3,6 @@ import radius as radius
 //ENV
 resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
   name: 'myenv'
-  location: 'global'
   properties: {
     compute: {
       kind: 'kubernetes'
@@ -25,7 +24,6 @@ resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
 //APP
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
-  location: 'global'
   properties: {
     environment: env.id
     extensions: [
@@ -50,7 +48,6 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 //CONTAINER
 resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'frontend'
-  location: 'global'
   properties: {
     application: app.id
     container: {
