@@ -2,6 +2,7 @@ import radius as radius
 
 param environment string
 
+@description('The geo-location where the resource lives.')
 param azureLocation string = 'westus3'
 
 //APPLICATION

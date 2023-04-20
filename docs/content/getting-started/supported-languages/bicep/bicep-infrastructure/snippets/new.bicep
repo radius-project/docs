@@ -1,3 +1,4 @@
+@description('The geo-location where the resource lives.')
 param location string = 'westus2'
 
 resource cosmos 'Microsoft.DocumentDB/databaseAccounts@2021-04-15' = {
