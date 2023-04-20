@@ -104,6 +104,7 @@ rad resource expose containers frontend -a webapp --port 3000
 4. Visit `localhost:3000` in your browser.
 
 ## Step 3: Use Azure / AWS recipes in your application
+
 > *This step needs an Azure subscription or an AWS account to deploy the application which would incur some costs. Add the required cloud provider (AWS/Azure) to your environment in order to deploy an Azure or AWS recipe*
 
 {{< button text="Learn more about configuring Cloud providers" page="providers#configure-a-cloud-provider" newtab="true" >}}
@@ -143,11 +144,28 @@ Update the recipe name to `redis-azure` to use the Redis cache on Azure.
 
 {{% codetab %}}
 
-Update the recipe name to `redis-aws` to use the Amazon MemoryDB for Redis.
-
 > *You can run this only on an EKS cluster. Make sure that the each of the Subnets in your EKS cluster Subnet Group are within the [list of supported MemoryDB availability zones](https://docs.aws.amazon.com/memorydb/latest/devguide/subnetgroups.html)*
 
-1. Deploy your application to your environment:
+Update the recipe name to `redis-aws` to use the Amazon MemoryDB for Redis and pass the eksClusterName as parameter to the recipe.
+
+```bicep
+resource db 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
+   name: 'db'
+   location: location
+   properties: {
+      environment: environment
+      mode: 'recipe'
+      recipe: {
+         name: 'redis-aws'
+         parameters: {
+            eksClusterName: eksClusterName
+         }
+      }
+   }
+}
+```
+
+Deploy your application to your environment:
 
    ```bash
    rad deploy ./app.bicep --parameters eksClusterName=YOUR_EKS_CLUSTER_NAME
@@ -179,18 +197,14 @@ Update the recipe name to `redis-aws` to use the Amazon MemoryDB for Redis.
       webapp          Applications.Core/applications
       frontend        Applications.Core/containers
    ```  
-
-{{% alert title="Cleanup AWS Resources" color="warning" %}}
-AWS resources are not deleted when deleting a Radius environment, so to prevent additional charges, make sure to delete all resources created in this quickstart. This includes the SubnetGroup and MemoryDB created in Step 3. You can delete these resources in the AWS Console or via the AWS CLI.
-{{% /alert %}}
-
 {{% /codetab %}}
 {{< /tabs >}}
 
-{{% alert title="Delete environment" color="warning" %}}
-If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to delete all Radius resources running on your cluster.
-{{% /alert %}}
+## Step 4: Cleanup your environment
 
+1. If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to delete all Radius resources running on your cluster.
+2. Azure/AWS resources are not deleted when deleting a Radius environment, so to prevent additional charges, make sure to delete all resources created in this quickstart. For Azure, this includes the Azure Redis cache and for AWS, this includes the SubnetGroup and MemoryDB.
 
 ## Next steps
+
 - To learn how to create your own custom Recipe visit our [administrator guide]({{< ref custom-recipes.md >}})
