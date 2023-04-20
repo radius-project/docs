@@ -165,7 +165,7 @@ resource db 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
 }
 ```
 
-Deploy your application to your environment:
+1. Deploy your application to your environment:
 
    ```bash
    rad deploy ./app.bicep --parameters eksClusterName=YOUR_EKS_CLUSTER_NAME
@@ -199,6 +199,21 @@ Deploy your application to your environment:
    ```  
 {{% /codetab %}}
 {{< /tabs >}}
+
+1. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose>}})
+
+    ```bash
+    rad resource expose containers frontend -a webapp --port 3000
+    ```
+1. Visit [localhost:3000](http://localhost:3000) in your browser. You should see a page like
+
+   <img src="todoapp.png" width="1000" alt="screenshot of the todo application">
+
+   You can play around with the application's features:
+
+   - Add a todo item
+   - Mark a todo item as complete
+   - Delete a todo item
 
 ## Step 4: Cleanup your environment
 
