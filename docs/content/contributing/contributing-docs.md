@@ -91,16 +91,16 @@ Get up and running with a GitHub Codespace in seconds. This will give you a full
 
 These conventions should be followed throughout all Radius documentation to ensure a consistent experience across all docs.
 
-- **Casing** - Use upper case only at the start of a sentence or for proper nouns including names of technologies (Radius, Redis, Kubernetes etc.).
-- **Headers and titles** - Headers and titles must be descriptive and clear, use sentence casing i.e. use the above casing guidance for headers and titles too
-- **Use simple sentences** - Easy-to-read sentences mean the reader can quickly use the guidance you share.
-- **Avoid the first person** - Use second person "you", "your" instead of "I", "we", "our".
-- **Assume a new developer audience** - Some obvious steps can seem hard. E.g. Now set an environment variable Radius to a value X. It is better to give the reader the explicit command to do this, rather than having them figure this out.
-- **Use present tense** - Avoid sentences like "this command will install redis", which implies the action is in the future. Instead use "This command installs redis" which is in the present tense.
+| Style/Tone | Guidance |
+|---------|-------------|
+|**Casing**|Use upper case only:<ul><li>At the start of a sentence or header</li><li>For proper nouns including names of technologies (Redis, Kubernetes, etc.)</li> <li>Radius conventions (Radius Recipe, Radius Environment, Radius Application, etc.)</li></ul>|
+|**Headers and titles**|Headers and titles must be descriptive and clear, use sentence casing i.e. use the above casing guidance for headers and titles too| 
+|**Use simple sentences**|Easy-to-read sentences mean the reader can quickly use the guidance you share.| 
+|**Avoid the first person**|Use second person "you", "your" instead of "I", "we", "our".| 
+|**Assume a new developer audience**|Some obvious steps can seem hard. E.g. Now set an environment variable Radius to a value X. It is better to give the reader the explicit command to do this, rather than having them figure this out.| 
+|**Use present tense**|Avoid sentences like "this command will install redis", which implies the action is in the future. Instead use "This command installs redis" which is in the present tense. |
 
 ## Spelling
-
-### General grammar
 
 The docs pipeline uses [aspell](http://aspell.net/) to check for spelling mistakes. If you need to add a new custom word to the allow-list, update `.github/config/en-custom.txt`.
 
