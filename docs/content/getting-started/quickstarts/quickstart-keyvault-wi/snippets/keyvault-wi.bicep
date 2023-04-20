@@ -1,6 +1,9 @@
 //ENVIRONMENT
 import radius as rad
 
+@description('The geo-location where the resource lives.')
+param azLocation string = resourceGroup().location
+
 @description('Specifies the environment for resources.')
 param oidcIssuer string
 
@@ -49,6 +52,7 @@ resource volume 'Applications.Core/volumes@2022-03-15-privatepreview' = {
 
 resource keyvault 'Microsoft.KeyVault/vaults@2021-10-01' = {
   name: 'kvqs-${uniqueString(resourceGroup().id)}'
+  location: azLocation
   properties: {
     sku: {
       family: 'A'

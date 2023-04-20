@@ -1,5 +1,8 @@
 import radius as radius
 
+@description('The geo-location where the resource lives.')
+param location string = resourceGroup().location
+
 param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
@@ -95,6 +98,7 @@ resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
 
 resource account 'Microsoft.Storage/storageAccounts@2019-06-01' = {
   name: 'dapr${uniqueString(resourceGroup().id)}'
+  location: location
   sku: {
     name: 'Standard_LRS'
   }

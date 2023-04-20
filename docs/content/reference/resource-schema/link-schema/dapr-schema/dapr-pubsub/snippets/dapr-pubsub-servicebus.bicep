@@ -1,5 +1,8 @@
 import radius as radius
 
+@description('The geo-location where the resource lives.')
+param location string = resourceGroup().location
+
 param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
@@ -24,5 +27,6 @@ resource pubsub 'Applications.Link/daprPubSubBrokers@2022-03-15-privatepreview' 
 //BICEP
 resource namespace 'Microsoft.ServiceBus/namespaces@2017-04-01' = {
   name: 'ns-${uniqueString(resourceGroup().id)}'
+  location: location
 }
 //BICEP

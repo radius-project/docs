@@ -2,8 +2,12 @@ import radius as radius
 
 param environment string
 
+@description('The geo-location where the resource lives.')
+param location string = resourceGroup().location
+
 resource cache 'Microsoft.Cache/Redis@2019-07-01' = {
   name: 'mycache'
+  location: location
   properties: {
     sku: {
       capacity: 0

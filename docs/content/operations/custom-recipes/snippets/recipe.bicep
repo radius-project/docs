@@ -2,9 +2,13 @@
 @description('Radius-provided object containing information about the resouce calling the Recipe')
 param context object
 
+@description('The geo-location where the resource lives.')
+param location string = resourceGroup().location
+
 resource azureCache 'Microsoft.Cache/redis@2022-06-01' = {
   // Ensure the resource name is unique and repeatable
   name: 'cache-${uniqueString(context.resource.id)}'
+  location: location
   properties: {
     sku: {
       capacity: 0

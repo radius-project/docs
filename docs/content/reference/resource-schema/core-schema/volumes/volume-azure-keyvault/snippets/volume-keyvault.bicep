@@ -1,5 +1,8 @@
 import radius as rad
 
+@description('The geo-location where the resource lives.')
+param azLocation string = resourceGroup().location
+
 param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
@@ -11,6 +14,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 
 resource keyvault 'Microsoft.KeyVault/vaults@2022-07-01' = {
   name: 'myvault'
+  location: azLocation
   properties: {
     sku: {
       family: 'A'

@@ -1,5 +1,8 @@
 import radius as radius
 
+@description('The geo-location where the resource lives.')
+param location string = resourceGroup().location
+
 param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
@@ -45,6 +48,7 @@ resource statestore 'Applications.Link/daprStateStores@2022-03-15-privatepreview
 //BICEP
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
   name: 'sa-${guid(resourceGroup().name)}'
+  location:location
   sku: {
     name: 'Standard_ZRS'
   }
