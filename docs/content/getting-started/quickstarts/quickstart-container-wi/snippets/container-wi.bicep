@@ -1,9 +1,6 @@
 //ENVIRONMENT
 import radius as radius
 
-@description('Specifies the location for Azure resources.')
-param azLocation string = resourceGroup().location
-
 @description('Specifies the OIDC issuer URL')
 param oidcIssuer string 
 
@@ -64,7 +61,6 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
 
 resource keyvault 'Microsoft.KeyVault/vaults@2021-10-01' = {
   name: 'qs-${uniqueString(resourceGroup().id)}'
-  location: azLocation
   properties: {
     enabledForTemplateDeployment: true
     tenantId: subscription().tenantId

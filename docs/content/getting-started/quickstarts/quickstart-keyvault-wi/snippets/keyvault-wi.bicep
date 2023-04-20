@@ -4,9 +4,6 @@ import radius as rad
 @description('Specifies the environment for resources.')
 param oidcIssuer string
 
-@description('Specifies the location for Azure resources.')
-param azLocation string = resourceGroup().location
-
 resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
   name: 'kv-volume-quickstart'
   properties: {
@@ -52,7 +49,6 @@ resource volume 'Applications.Core/volumes@2022-03-15-privatepreview' = {
 
 resource keyvault 'Microsoft.KeyVault/vaults@2021-10-01' = {
   name: 'kvqs-${uniqueString(resourceGroup().id)}'
-  location: azLocation
   properties: {
     sku: {
       family: 'A'

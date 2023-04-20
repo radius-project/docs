@@ -10,7 +10,6 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 }
 
 //SAMPLE
-param location string = resourceGroup().location
 resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' = {
   name: 'orders'
   properties: {
@@ -23,7 +22,6 @@ resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview
 
 resource account 'Microsoft.Storage/storageAccounts@2019-06-01' = {
   name: 'dapr${uniqueString(resourceGroup().id)}'
-  location: location
   sku: {
     name: 'Standard_LRS'
   }

@@ -21,7 +21,7 @@ Containers are hosted by Kubernetes as the container runtime today, regardless o
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | name | y | The name of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `frontend`
-| location | y | The location of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `global`
+| location | n | The location of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `global`
 | [properties](#properties) | y | Properties of the resource. | [See below](#properties)
 
 ### Properties

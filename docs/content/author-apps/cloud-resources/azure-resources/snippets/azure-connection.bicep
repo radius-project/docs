@@ -1,11 +1,9 @@
 import radius as radius
 
 param environment string
-param location string = resourceGroup().location
 
 resource cache 'Microsoft.Cache/Redis@2019-07-01' = {
   name: 'mycache'
-  location: location
   properties: {
     sku: {
       capacity: 0

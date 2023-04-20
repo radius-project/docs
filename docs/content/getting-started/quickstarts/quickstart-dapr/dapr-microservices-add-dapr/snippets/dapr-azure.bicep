@@ -1,6 +1,5 @@
 import radius as radius
 
-param location string = resourceGroup().location
 param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
@@ -49,7 +48,6 @@ resource backendRoute 'Applications.Link/daprInvokeHttpRoutes@2022-03-15-private
 
 resource account 'Microsoft.Storage/storageAccounts@2019-06-01' = {
   name: 'dapr${uniqueString(resourceGroup().id)}'
-  location: location
   sku: {
     name: 'Standard_LRS'
   }
