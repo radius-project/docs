@@ -93,7 +93,7 @@ These conventions should be followed throughout all Radius documentation to ensu
 
 | Style/Tone | Guidance |
 |---------|-------------|
-|**Casing**|Use upper case only:<ul><li>At the start of a sentence or header</li><li>For proper nouns including names of technologies (Redis, Kubernetes, etc.)</li> <li>Radius conventions (Radius Recipe, Radius Environment, Radius Application, etc.)</li></ul>|
+|**Casing**|Use upper case only:<ul><li>At the start of a sentence or header</li><li>For proper nouns including names of technologies (Redis, Kubernetes, etc.)</li> <li>Names of Radius concepts (Radius Recipe, Radius Environment, Radius Application, etc.)</li></ul>|
 |**Headers and titles**|Headers and titles must be descriptive and clear, use sentence casing i.e. use the above casing guidance for headers and titles too| 
 |**Use simple sentences**|Easy-to-read sentences mean the reader can quickly use the guidance you share.| 
 |**Avoid the first person**|Use second person "you", "your" instead of "I", "we", "our".| 
