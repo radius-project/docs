@@ -260,6 +260,7 @@ objectname
 oidcIssuer
 org's
 orgs
+openapi
 pageinfo
 param
 params
