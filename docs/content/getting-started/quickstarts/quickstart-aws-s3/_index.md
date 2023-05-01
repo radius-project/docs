@@ -7,8 +7,8 @@ description: "Learn about how to add AWS resources to your application and deplo
 
 This quickstart will show you:
 
-* How to model an AWS S3 resource in Bicep
-* How to use a sample application to interact with AWS S3
+- How to model an AWS S3 resource in Bicep
+- How to use a sample application to interact with AWS S3
 
 ## Prerequisites
 
