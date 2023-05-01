@@ -1,9 +1,10 @@
 import aws as aws
+
 import radius as radius
 
 param environment string
 
-param bucket string
+param bucket string ='mys3bucket'
 
 @secure()
 param aws_access_key_id string
@@ -16,13 +17,8 @@ param aws_region string
 resource s3 'AWS.S3/Bucket@default' = {
   alias: bucket
   properties: {
-<<<<<<< HEAD:docs/content/getting-started/quickstarts/quickstart-aws-s3/snippets/app.bicep
-    BucketName: 'mys3bucket'
-    AccessControl: 'PublicRead'
-=======
     BucketName: bucket
     AccessControl: 'Private'
->>>>>>> edge:docs/content/getting-started/reference-apps/aws-s3/snippets/app.bicep
   }
 }
 
