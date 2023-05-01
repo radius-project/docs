@@ -62,7 +62,7 @@ Within the `container.volume` property, add a new volume named `temp` and config
    ```
    
    
-1. Visit localhost:5000 in your browser. You should see the contents of `/tmpdir`, showing an empty directory.
+1. Visit [localhost:5000](http://localhost:5000) in your browser. You should see the contents of `/tmpdir`, showing an empty directory.
 
    <img src="screenshot-empty.jpg" width=500px alt="Screeshot of container showing that the tmp directory has no items">
 1. Press the `Create file` button to generate a new file in the directory, such as `test.txt`:
