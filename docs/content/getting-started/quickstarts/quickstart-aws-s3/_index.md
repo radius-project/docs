@@ -60,7 +60,7 @@ Create a new file called `app.bicep` and add the following bicep code:
     rad deploy ./app.bicep -p aws_access_key_id=<AWS_ACCESS_KEY_ID> -p aws_secret_access_key=<AWS_SECRET_ACCESS_KEY> -p aws_region=<REGION>
     ```
 
-    Make sure to create a different[IAM AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for data plane operations. These are used so the container we are deploying can connect to AWS. 
+    Make sure to create a different [IAM AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for data plane operations. These are used so the container we are deploying can connect to AWS. 
 
 1. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose >}}):
 
