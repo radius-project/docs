@@ -90,9 +90,10 @@ PowerShell for Cloud Shell is currently not supported.
 {{% codetab %}}
 {{< latest >}}
 1. Download the `rad` CLI from one of these URLs:
-   - MacOS: https://get.radapp.dev/tools/rad/0.17/macos-x64/rad
-   - Linux: https://get.radapp.dev/tools/rad/0.17/linux-x64/rad
-   - Windows: https://get.radapp.dev/tools/rad/0.17/windows-x64/rad.exe
+   - MacOS x64: https://get.radapp.dev/tools/rad/0.19/macos-x64/rad
+   - MacOS arm64: https://get.radapp.dev/tools/rad/0.19/macos-arm64/rad
+   - Linux x64: https://get.radapp.dev/tools/rad/0.19/linux-x64/rad
+   - Windows x64: https://get.radapp.dev/tools/rad/0.19/windows-x64/rad.exe
 1. Ensure the user has permission to execute the binary and place it somewhere on your PATH so it can be invoked easily.
 {{< /latest >}}
 {{< edge >}}
@@ -106,7 +107,7 @@ PowerShell for Cloud Shell is currently not supported.
 
 {{< /tabs >}}
 
-> You may be prompted for your sudo password during installation, as the installer places the `rad` binary under `/usr/local/bin`. If you are unable to sudo you can install the rad CLI to another directory by setting the `RADIUS_INSTALL_DIR` environment variable with your intended install path.
+> You may be prompted for your sudo password during installation, as the installer places the `rad` binary under `/usr/local/bin`. If you are unable to sudo you can install the rad CLI to another directory by setting the `RADIUS_INSTALL_DIR` environment variable with your intended install path. Make sure you add this to your path ([Unix](https://www.howtogeek.com/658904/how-to-add-a-directory-to-your-path-in-linux/), [Windows](https://windowsloop.com/how-to-add-to-windows-path/)) if you wish to reference it via `rad`, like in the docs.
 
 Verify the rad CLI is installed correctly by running `rad`.
 

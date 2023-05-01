@@ -4,7 +4,6 @@ param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
-  location: 'global'
   properties: {
     environment: environment
   }
@@ -12,7 +11,6 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 
 resource httpRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
   name: 'http-route'
-  location: 'global'
   properties: {
     application: app.id
   }
@@ -21,7 +19,6 @@ resource httpRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
 //GATEWAY
 resource internetGateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
   name: 'internet-gateway'
-  location: 'global'
   properties: {
     application: app.id
     tls: {

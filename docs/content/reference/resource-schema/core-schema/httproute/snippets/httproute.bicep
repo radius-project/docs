@@ -4,7 +4,6 @@ param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
-  location: 'global'
   properties: {
     environment: environment
   }
@@ -13,7 +12,6 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 //HTTPROUTE
 resource httproute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
   name: 'httproute'
-  location: 'global'
   properties: {
     application: app.id
   }
@@ -23,7 +21,6 @@ resource httproute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
 //FRONTEND
 resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'frontend'
-  location: 'global'
   properties: {
     application: app.id
     container: {
@@ -44,7 +41,6 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 //BACKEND
 resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'backend'
-  location: 'global'
   properties: {
     application: app.id
     container: {

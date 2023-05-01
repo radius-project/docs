@@ -260,6 +260,7 @@ objectname
 oidcIssuer
 org's
 orgs
+openapi
 pageinfo
 param
 params
@@ -372,3 +373,7 @@ Jaeger
 jaeger
 svc
 zipkin
+upmerge
+upmerges
+approver
+toml

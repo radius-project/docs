@@ -9,7 +9,6 @@ param databaseId string
 // Define application
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
-  location: 'global'
   //PROPERTIES
   properties: {
     environment: environment
@@ -20,7 +19,6 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 // Define container resource to run app code
 resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'frontend'
-  location: 'global'
   properties: {
     application: app.id
     //CONTAINER
