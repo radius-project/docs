@@ -86,6 +86,8 @@ RabbitMQ
 ResourceDeploymentClient
 Rollout
 SDKs
+SecretStore
+SecretStores
 SNI
 SQL
 SQS
@@ -303,7 +305,8 @@ runtime
 runtimes
 schemas
 secretstore
-secretstore
+secretStores
+secretstores
 serverless
 serverless
 servicebus
