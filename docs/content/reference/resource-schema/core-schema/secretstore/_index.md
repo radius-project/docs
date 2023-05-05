@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Radius Secret Store"
-linkTitle: "SecretStore"
+linkTitle: "Secret Store"
 description: "Learn about Radius Secret Store"
 ---
 
