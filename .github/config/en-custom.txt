@@ -94,6 +94,8 @@ SQS
 SQSDeveloperGuide
 SSL
 STATESTORE
+SECRETSTORENEW
+SECRETSTOREREF
 StatefulSet
 StatefulSets
 StatusCode
