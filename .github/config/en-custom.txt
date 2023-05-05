@@ -86,16 +86,12 @@ RabbitMQ
 ResourceDeploymentClient
 Rollout
 SDKs
-SecretStore
-SecretStores
 SNI
 SQL
 SQS
 SQSDeveloperGuide
 SSL
 STATESTORE
-SECRETSTORENEW
-SECRETSTOREREF
 StatefulSet
 StatefulSets
 StatusCode
@@ -307,8 +303,6 @@ runtime
 runtimes
 schemas
 secretstore
-secretStores
-secretstores
 serverless
 serverless
 servicebus
