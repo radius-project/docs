@@ -9,13 +9,14 @@ resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
       namespace: 'default'
     }
     recipes: {
-      myrecipe: {
-          linkType: 'Applications.Link/redisCaches' 
+      'Applications.Link/redisCaches':{
+        myrecipe: {
           templatePath: 'https://myregistry.azurecr.io/recipes/myrecipe:v1'
           // Optionally set parameters for all resources calling this Recipe
           parameters: {
             capacity: 1
           }
+        }
       }
     }
   }
