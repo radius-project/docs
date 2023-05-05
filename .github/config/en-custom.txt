@@ -377,3 +377,4 @@ upmerge
 upmerges
 approver
 toml
+templatePath
