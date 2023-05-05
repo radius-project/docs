@@ -93,7 +93,7 @@ PowerShell for Cloud Shell is currently not supported.
    - MacOS x64: https://get.radapp.dev/tools/rad/0.20/macos-x64/rad
    - MacOS arm64: https://get.radapp.dev/tools/rad/0.20/macos-arm64/rad
    - Linux x64: https://get.radapp.dev/tools/rad/0.20/linux-x64/rad
-   - Windows x64: https://get.radapp.dev/tools/rad/0.19/windows-x64/rad.exe
+   - Windows x64: https://get.radapp.dev/tools/rad/0.20/windows-x64/rad.exe
 1. Ensure the user has permission to execute the binary and place it somewhere on your PATH so it can be invoked easily.
 {{< /latest >}}
 {{< edge >}}
@@ -132,7 +132,7 @@ Visual Studio Code offers the best authoring experience for Project Radius and B
    Stable Version
 
    ```bash
-   curl https://get.radapp.dev/tools/vscode/stable/rad-vscode-bicep.vsix --output rad-vscode-bicep.vsix
+   curl https://get.radapp.dev/tools/vscode-extensibility/stable/rad-vscode-bicep.vsix --output rad-vscode-bicep.vsix
    ```
 
    Edge Version
