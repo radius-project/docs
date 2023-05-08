@@ -5,7 +5,7 @@ linkTitle: "Secret Store"
 description: "Learn about Radius Secret Store"
 ---
 
-Sensitive data, such as TLS certificates, tokens, passwords, and keys that serve as digital authentication credentials are commonly referred to as secrets. A Radius Secret Store enables you to either store these secrets or reference existing secrets stored in external secret management solutions, such as Azure Keyvault or AWS Secrets Manager. An independent resource with its own lifecycle, a Radius Secret Store ensures that data is persisted across container restarts or mounts and can interact directly with the Radius Application Model. For instance, an Applications.Core/gateways resource can use this resource to store a TLS certificate and reference it.
+Sensitive data, such as TLS certificates, tokens, passwords, and keys that serve as digital authentication credentials are commonly referred to as secrets. A Radius Secret Store enables you to either store these secrets or reference existing secrets stored in external secret management solutions, such as Azure Keyvault or AWS Secrets Manager. An independent resource with its own lifecycle, a Radius Secret Store ensures that data is persisted across container restarts or mounts and can interact directly with the Radius application model. For instance, an Applications.Core/gateways resource can use this resource to store a TLS certificate and reference it.
 
 ## Resource format
 
