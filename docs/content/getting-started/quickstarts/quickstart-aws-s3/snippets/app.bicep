@@ -5,7 +5,7 @@ import radius as radius
 param environment string
 
 @description('The name of your S3 bucket.The AWS S3 Bucket name must follow the [following naming conventions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html).')
-param bucket string ='mys3bucket'
+param bucket string ='mys3bucketrun'
 
 @secure()
 param aws_access_key_id string
@@ -13,7 +13,8 @@ param aws_access_key_id string
 @secure()
 param aws_secret_access_key string
 
-param aws_region string
+@description('AWS region (default: us-east-2)')
+param aws_region string = 'us-east-2'
 
 resource s3 'AWS.S3/Bucket@default' = {
   alias: bucket

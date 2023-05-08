@@ -8,12 +8,13 @@ description: "Learn about how to add AWS resources to your application and deplo
 This quickstart will show you:
 
 - How to model an AWS S3 resource in Bicep
-- How to use a sample application to interact with AWS S3
+- How to use a sample application to interact with AWS S3 bucket
+   <img src="./s3appdiagram.png" alt="Screenshot of the sample application to interact with s3 bucket " width=400>
 
 ## Prerequisites
 
 - Make sure you have an [AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account) and an [IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html)
-    - [Create an IAM AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) and copy the AWS Access Key ID and the AWS Secret Access Key to a secure location for use later. If you have already created an Access Key pair, you can
+    - [Create an IAM AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) and copy the AWS Access Key ID and the AWS Secret Access Key to a secure location for use later. If you have already created an Access Key pair, you can use that instead.
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
     - Configure your CLI with [`aws configure`](https://docs.aws.amazon.com/cli/latest/reference/configure/index.html), specifying your configuration values
 - [eksctl CLI](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
@@ -30,7 +31,6 @@ eksctl create cluster --name <my-cluster> --region=<my-region>
 ## Step 2: Create a Radius environment with the AWS cloud provider
 
 Create a [Radius environment]({{< ref environments >}}) where you will deploy your application.
-
 
 1. Use the `rad init` command to initialize a new environment into your current kubectl context:
 
@@ -70,11 +70,10 @@ Create a new file called `app.bicep` and add the following bicep code:
 
 1. Visit [localhost:5234](http://localhost:5234/swagger/index.html) in your browser. This is a swagger doc for the sample application. You can use this to interact with the AWS S3 Bucket you created. For example, you can try to upload a file to the bucket via the `/upload` endpoint.
 
+    <img src="./s3app.png" alt="Screenshot of the sample application to interact with s3 bucket " width=900>
 
 ## Step 5: Cleanup
 
 1. When you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to delete all Radius resources running on the EKS Cluster.
 
 2. Cleanup AWS Resources - AWS resources are not deleted when deleting a Radius environment, so make sure to delete all resources created in this reference app to prevent additional charges. You can delete these resources in the AWS Console or via the AWS CLI. Instructions to delete an AWS S3 Bucket are available [here](https://docs.aws.amazon.com/AmazonS3/latest/userguide/delete-bucket.html).
-
-
