@@ -3,6 +3,7 @@ type: docs
 title: "Quickstart: Deploy AWS resources"
 linkTitle: "Deploy AWS resources"
 description: "Learn about how to add AWS resources to your application and deploy them with Radius"
+tags: ["aws"]
 ---
 
 This quickstart will show you:
@@ -47,11 +48,25 @@ Create a [Radius environment]({{< ref environments >}}) where you will deploy yo
    -  **Add AWS provider** - An [AWS cloud provider]({{<ref providers>}}) allows you to deploy and manage AWS resources as part of your application. Enter 'y' and follow the instructions. Provide a valid AWS region and the values obtained for IAM Access Key ID and IAM Secret Access Keys.
    - **Environment name** - The name of the environment to create. You can specify any name with lowercase letters, such as `myawsenv`.
 
-## Step 3: Create a Bicep file which uses AWS Simple Storage Service (S3)
+## Step 3: Create a Bicep file to model AWS Simple Storage Service (S3)
 
-Create a new file called `app.bicep` and add the following bicep code:
+Create a new file called `app.bicep` and add the following bicep code to model an AWS S3 Bucket:
+
+{{< rad file="snippets/s3.bicep" embed=true >}}
+
+Radius uses the [AWS Cloud Control API](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/what-is-cloudcontrolapi.html) to interact with AWS resources. This means that you can model your AWS resources in Bicep and Radius will be able to deploy and manage them. You can find the list of supported AWS resources in the [AWS resource library]({{< ref "aws-resources#resource-library" >}}).
+
+## Step 4: Add a Radius container to interact with the AWS S3 Bucket
+
+Open the `app.bicep` and paste the following bicep code:
 
 {{< rad file="snippets/app.bicep" embed=true >}}
+
+This creates a container that will be deployed to your Kubernetes cluster. The container will be able to interact with the AWS S3 Bucket you created in the previous step.
+
+## Step 5: Create a separate IAM AWS access key for data plane operations
+
+ Make sure to create a different [IAM AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for the container to connect to the S3 bucket. It is recommended to have separate credentials and intended to be used only by the containerized application.
 
 ## Step 4: Deploy the application
 
@@ -60,13 +75,12 @@ Create a new file called `app.bicep` and add the following bicep code:
     ```bash
     rad deploy ./app.bicep -p aws_access_key_id=<AWS_ACCESS_KEY_ID> -p aws_secret_access_key=<AWS_SECRET_ACCESS_KEY>
     ```
-
-    Make sure to create a different [IAM AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for data plane operations. It is recommended to These are used so the container we are deploying can connect to AWS. 
+    > Replace `<AWS_ACCESS_KEY_ID>` and `<AWS_SECRET_ACCESS_KEY>` with the values obtained from the previous step.
 
 1. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose >}}):
 
     ```bash
-    rad resource expose containers frontend -a webapp --port 5234
+    rad resource expose containers frontend -a s3app --port 5234
     ```
 
 1. Visit [localhost:5234](http://localhost:5234/swagger/index.html) in your browser. This is a swagger doc for the sample application. You can use this to interact with the AWS S3 Bucket you created. For example, you can try to upload a file to the bucket via the `/upload` endpoint.
