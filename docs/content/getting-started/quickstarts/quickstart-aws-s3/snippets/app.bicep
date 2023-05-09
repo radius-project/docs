@@ -2,8 +2,10 @@ import aws as aws
 
 import radius as radius
 
+@description('Radius environment')
 param environment string
 
+@description('Radius application')
 param application string
 
 @description('IAM Access Key ID')
