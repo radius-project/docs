@@ -95,7 +95,7 @@ jobs:
   
   deploy:
     name: Deploy Hugo Website
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch')
     needs: ['build']
     runs-on: ubuntu-latest
     environment:
@@ -155,7 +155,7 @@ jobs:
 
   algolia_index:
     name: Index site for Algolia
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch')
     needs: ['build', 'deploy']
     runs-on: ubuntu-latest
     environment:
