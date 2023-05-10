@@ -111,7 +111,6 @@ jobs:
         uses: Azure/webapps-deploy@v2.2.9
         with:
           app-name: ${{ secrets.ENV_APPSERVICE_NAME }}
-          slot-name: production
           publish-profile: ${{ secrets.ENV_APPSERVICE_PUBLISHPROFILE }}
           package: site/
 
