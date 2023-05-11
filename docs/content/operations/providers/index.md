@@ -36,21 +36,33 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
 
 #### Add a cloud provider when initializing an environment
 
-1. Initialize a new [environment]({{< ref environments >}}) with `rad env init kubernetes -i`
-1. Enter "y" to add an Azure cloud provider
+1. Initialize a new [environment]({{< ref environments >}}) with `rad init`
+1. Select the kubernetes cluster to install Radius. Enter an environment name and namespace to deploy the apps into. Note that this namespace is used for application deployments.
+1. Select "yes" to add a cloud provider and select Azure as the cloud provider
 1. Specify your Azure subscription and resource group
 1. Create an [Azure service principal](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) with the [proper permissions](https://aka.ms/azadsp-more). Enter the appID, password and the tenant of the service principal
 1. Deploy your app and any included Azure resources with `rad deploy`
 
 #### Add a cloud provider to an existing environment
 
-1. Reinstall the control plane with the cloud provider via `rad install kubernetes --reinstall -i`
-   - If using a Codespace or k3s, append `--public-endpoint-override "localhost:8081"` to the command
-   - If using Kind, append `--public-endpoint-override "localhost:8080"` to the command
-2. Enter "y" to add an Azure cloud provider
-3. Specify your Azure subscription and resource group
-4. Create an [Azure service principal](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) with the [proper permissions](https://aka.ms/azadsp-more). Enter the appID, password and the tenant of the service principal 
-5. Deploy your app and any included Azure resources with `rad deploy`
+1. Create an [Azure service principal](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) with the [proper permissions](https://aka.ms/azadsp-more). 
+
+   ```bash
+   az ad sp create-for-rbac --role Owner --scope --scope /subscriptions/<subscriptionid>/resourceGroups/<resourcegroupname> 
+   ```
+   Replace it with your subscription id and resource group name
+   
+1. Register the service principal in your control plane
+   ```bash
+   rad credential register azure --client-id <appId> --client-secret <password> --tenant-id <tenant id>
+   ```
+   Replace it with your service principal appId, password and tenant id
+
+1. Update your environment with your Azure subscription and resource group
+   ```bash
+   rad env update <myenv> --azure-subscription-id <subscriptionid> --azure-resource-group <resourcegroupname> 
+   ```
+1. Deploy your app and any included Azure resources with `rad deploy`
 
 #### Add a cloud provider to an AKS cluster using AAD pod identity
 
@@ -88,7 +100,7 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
    ```
 1. Create a new environment:
    ```bash
-   rad env init kubernetes -i
+   rad init
    ```
 1. Manually add the `subscriptionId` and `resourcegroup` Azure cloud provider values to your local config:
    ```yaml
@@ -120,9 +132,9 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
 
 #### Add a cloud provider when initializing an environment
 
-1. Initialize a new [environment]({{< ref environments >}}) with `rad env init kubernetes -i`
-1. Enter "n" to add an Azure cloud provider
-1. Enter "y" to add an AWS cloud provider
+1. Initialize a new [environment]({{< ref environments >}}) with `rad init`
+1. Select the kubernetes cluster to install Radius. Enter an environment name and namespace to deploy the apps into. Note that this namespace is used for application deployments.
+1. Select "yes" to add a cloud provider and select Azure as the cloud provider
 1. Enter a valid AWS region
 1. [Create an IAM AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) and enter the Access Key ID and the AWS Secret Access Key. If you have already created an Access Key pair, you can use that instead.
 1. Deploy your app and any included AWS resources with `rad deploy`
