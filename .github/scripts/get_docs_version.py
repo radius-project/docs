@@ -20,7 +20,7 @@ import re
 import sys
 
 gitRefName = os.getenv("GITHUB_REF_NAME")
-print("GITHUB_REF_NAME: {}".format(gitRefName)
+print("GITHUB_REF_NAME: {}".format(gitRefName))
 
 with open(os.getenv("GITHUB_ENV"), "a") as githubEnv:
     version = "DOCS_CHANNEL=edge"
