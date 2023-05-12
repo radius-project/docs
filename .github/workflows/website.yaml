@@ -33,11 +33,11 @@ jobs:
       SWA_BASE: 'wonderful-plant-020417a1e'
     steps:
       - name: Checkout docs repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: true
       - name: Checkout radius repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: project-radius/radius
           path: ./radius
@@ -124,6 +124,7 @@ jobs:
     name: Open Staging Site
     needs: ['build']
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - name: Download Hugo artifacts
         uses: actions/download-artifact@v3
