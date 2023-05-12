@@ -19,8 +19,8 @@ import os
 import re
 import sys
 
-gitRefName = os.getenv("GITHUB_REF_NAME")
-print("GITHUB_REF_NAME: {}".format(gitRefName))
+gitRefName = os.getenv("GITHUB_BASE_REF")
+print("GITHUB_BASE_REF: {}".format(gitRefName))
 
 with open(os.getenv("GITHUB_ENV"), "a") as githubEnv:
     version = "DOCS_CHANNEL=edge"
@@ -32,7 +32,7 @@ with open(os.getenv("GITHUB_ENV"), "a") as githubEnv:
         print("This is an edge build, setting DOCS_CHANNEL to 'edge'")
         version = "DOCS_CHANNEL=edge"
     elif gitRefName.startswith('v'):
-        print("This is a release build, setting DOCS_CHANNEL to verion")
+        print("This is a release build, setting DOCS_CHANNEL to version")
         versionNumber = gitRefName.split('v')[1]
         version = "DOCS_CHANNEL=" + versionNumber
 
