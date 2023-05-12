@@ -40,7 +40,7 @@ This property is an object to represent key-value type secrets. You define your 
 |------|:--------:|-------------|---------|
 | value | y | The value of the secret key. | `'secretString'`
 | encoding | n | The encoding type of the data value (default is `'raw'`). | `'base64'`
-| [valueFrom](#valuefrom) | n | An object to define the secret store `properties.resource` reference | [See below](#valueFrom)
+| [valueFrom](#valuefrom) | n | An object to define the secret store `properties.resource` reference | [See below](#valuefrom)
 
 ###### valueFrom
 
