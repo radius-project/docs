@@ -124,6 +124,7 @@ jobs:
     name: Open Staging Site
     needs: ['build']
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - name: Download Hugo artifacts
         uses: actions/download-artifact@v3
