@@ -5,17 +5,17 @@ linkTitle: "Secret Store"
 description: "Learn how to define a secret store"
 ---
 
-# Resource format
+## Resource format
 
-## Creating a new Secret Store
+### Creating a new Secret Store
 
 {{< rad file="snippets/secretstore.bicep" embed=true marker="//SECRET_STORE_NEW" >}}
 
-## Referencing an existing Secret Store
+### Referencing an existing Secret Store
 
 {{< rad file="snippets/secretstore.bicep" embed=true marker="//SECRET_STORE_REF" >}}
 
-## Top-level
+### Top-level
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
@@ -23,7 +23,7 @@ description: "Learn how to define a secret store"
 | location | y | The location of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `global`
 | [properties](#properties) | y | Properties of the resource. | [See below](#properties)
 
-### properties
+#### properties
 
 | Key | Required | Description | Example |
 |----------|:--------:|-------------|---------|
@@ -32,7 +32,7 @@ description: "Learn how to define a secret store"
 | type | y | The type of secret in your resource. | `'certificate'`
 | [data](#data) | y | An object to represent key-value type secrets. | [See below](#data)
 
-#### data
+##### data
 
 This property is an object to represent key-value type secrets. You define your own key for each secret (e.g. `'tls.key'`), with the `encoding`, `value`, and `valueFrom` properties representing each secret value:
 
@@ -42,7 +42,7 @@ This property is an object to represent key-value type secrets. You define your 
 | encoding | n | The encoding type of the data value (default is `'raw'`). | `'base64'`
 | [valueFrom](#valuefrom) | n | An object to define the secret store `properties.resource` reference | [See below](#valueFrom)
 
-##### valueFrom
+###### valueFrom
 
 | Key | Required | Description | Example |
 |------------|:--------:|-------------|---------|

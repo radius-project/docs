@@ -26,7 +26,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   }
 }
 
-//SECRETSTORENEW
+//SECRET_STORE_NEW
 resource appCert 'Applications.Core/secretStores@2022-03-15-privatepreview' = {
   name: 'appcert'
   properties:{
@@ -42,9 +42,9 @@ resource appCert 'Applications.Core/secretStores@2022-03-15-privatepreview' = {
     }
   }
 }
-//SECRETSTORENEW
+//SECRET_STORE_NEW
 
-//SECRETSTOREREF
+//SECRET_STORE_REF
 resource existingAppCert 'Applications.Core/secretStores@2022-03-15-privatepreview' = {
   name: 'existing-appcert'
   properties:{
@@ -65,4 +65,4 @@ resource existingAppCert 'Applications.Core/secretStores@2022-03-15-privateprevi
     resource: 'secret-app-existing-secret'
   }
 }
-//SECRETSTOREREF
+//SECRET_STORE_REF
