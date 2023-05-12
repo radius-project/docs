@@ -16,7 +16,6 @@
 # DOCS_CHANNEL is used to upload assets to different paths
 
 import os
-import re
 import sys
 
 gitRefName = os.getenv("GITHUB_BASE_REF")
