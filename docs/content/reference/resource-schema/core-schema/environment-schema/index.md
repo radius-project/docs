@@ -23,6 +23,7 @@ weight: 000
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | [compute](#compute) | y | Container runtime configuration. | [See below](#compute)
+| [recipes](#recipes) | n | Recipes registered to the environment | [See below](#recipes)
 
 ### compute
 
@@ -41,6 +42,21 @@ Details on what to run and how to run it are defined in the `container` property
 |------|:--------:|-------------|---------|
 | kind | y | The kind of identity. 'azure.com.workload' is currently only supported. | `'azure.com.workload'` |
 | oidcIssuer | n | The [OIDC issuer URL](https://azure.github.io/azure-workload-identity/docs/installation/self-managed-clusters/oidc-issuer.html) for your Kubernetes cluster. | `'{IssuerURL}/.well-known/openid-configuration'` |
+
+### recipes
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| \<resource-type\> | y | The type of resource to register Recipes for. | `'Applications.Link/redisCaches'`
+| recipes | y | The list of Recipes registered to a given resource type | [See below](#recipe-properties)
+
+### recipe properties
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| \<recipe-name\> | y | The name of the Recipe. Must be unique within the resource-type. | `myrecipe`
+| templatePath | y | The path to the Recipe contents. For Bicep Recipes this is a Bicep module registry address. | `'mycr.azurecr.io/recipes/myrecipe:1.0'`
+| parameters | n | A list of parameters to set on the Recipe for every Recipe usage and deployment. Can be overridden by the resource calling the Recipe. | `capacity: 1`
 
 ## Further reading
 

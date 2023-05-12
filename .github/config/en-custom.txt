@@ -303,7 +303,8 @@ runtime
 runtimes
 schemas
 secretstore
-secretstore
+secretstores
+secretStores
 serverless
 serverless
 servicebus
@@ -377,3 +378,4 @@ upmerge
 upmerges
 approver
 toml
+templatePath
