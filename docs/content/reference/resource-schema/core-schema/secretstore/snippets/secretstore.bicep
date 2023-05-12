@@ -42,6 +42,7 @@ resource appCert 'Applications.Core/secretStores@2022-03-15-privatepreview' = {
     }
   }
 }
+//SECRETSTORENEW
 
 //SECRETSTOREREF
 resource existingAppCert 'Applications.Core/secretStores@2022-03-15-privatepreview' = {
@@ -64,3 +65,4 @@ resource existingAppCert 'Applications.Core/secretStores@2022-03-15-privateprevi
     resource: 'secret-app-existing-secret'
   }
 }
+//SECRETSTOREREF
