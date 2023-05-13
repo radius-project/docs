@@ -19,7 +19,7 @@ description: "Learn how to define a secret store"
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| name | y | The name of your Secret Store. Used to provide status and visualize the resource. | `'web'`
+| name | y | The name of your Secret Store. | `'secret'`
 | location | y | The location of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `global`
 | [properties](#properties) | y | Properties of the resource. | [See below](#properties)
 
