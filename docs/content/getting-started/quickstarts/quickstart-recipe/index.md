@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Quickstart: Deploy Recipes in your Radius Application"
-linkTitle: "Deploy Recipes in your Radius Application"
+linkTitle: "Recipes"
 description: "Learn how to use Radius Recipes within your application"
 weight: 500
 slug: "recipes"
@@ -33,21 +33,18 @@ This application is a simple to-do list which stores and visualized to-do items.
 
 ## Step 1: Initialize a Radius environment
 
-Navigate to the directory where you want to create your application and run the following command:
-
 1. Begin in a new directory for your application:
    ```bash
    mkdir recipes
    cd recipes
    ```
-2. Initialize a new environment with [`dev` Recipes]({{< ref "recipes#use-community-dev-recipes" >}}):
+2. Initialize a new dev environment, which is pre-loaded with lightweight dev Recipes:
    ```bash
    rad init --dev
    ```
 
-### `dev` Recipes
-
-[`dev` Recipes]({{< ref "recipes#use-community-dev-recipes" >}}) allow you to quickly get up and running with infrastructure for your [Links]({{< ref links >}}). You can view this with [`rad recipe list`]({{< ref rad_recipe_list >}}):
+   [`dev` Recipes]({{< ref "recipes#use-community-dev-recipes" >}}) allow you to quickly get up and running with infrastructure for your [Links]({{< ref links >}})._
+   3. Use [`rad recipe list`]({{< ref rad_recipe_list >}}) to view the Recipes in your dev environment:
 
 ```bash
 rad recipe list 
