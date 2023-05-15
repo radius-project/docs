@@ -68,4 +68,4 @@ For imperative commands (CLI, other IaC tools), the DE is bypassed and the clien
 
 Now that you have an understanding of the Radius architecture, try Radius out:
 
-{{< button text="Radius Demo" page="first-app" size="btn-lg" color="success" >}}
+{{< button text="Get started" page="first-app" size="btn-lg" color="success" >}}
