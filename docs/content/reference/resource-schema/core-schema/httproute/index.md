@@ -15,7 +15,7 @@ weight: 400
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | name | y | The name of your HttpRoute. Used to provide status and visualize the resource. | `'web'`
-| location | n | The location of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `global`
+| location | y | The location of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `global`
 | [properties](#properties) | y | Properties of the resource. | [See below](#properties)
 
 ### Properties

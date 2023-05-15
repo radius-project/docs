@@ -22,7 +22,7 @@ This resource will automatically create and deploy the Dapr component spec for t
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | name | y | The name of the resource. Names must contain at most 63 characters, contain only lowercase alphanumeric characters, '-', or '.', start with an alphanumeric character, and end with an alphanumeric character. | `my-statestore` |
-| location | n | The location of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `global`
+| location | y | The location of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `global`
 | [properties](#properties) | y | Properties of the resource. | [See below](#properties)
 
 ### Properties
