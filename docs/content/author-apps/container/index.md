@@ -31,5 +31,3 @@ Depending on the target environment and configuration, a container can be run on
 
 {{< categorizeby category="Quickstart" tag="containers" >}}
 {{< categorizeby category="How-to" tag="containers" >}}
-
-

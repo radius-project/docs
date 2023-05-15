@@ -566,6 +566,7 @@ By default, buttons are padded with new lines below the button. To remove these 
 {{< button text="Next" link="https://example.com" >}}
 
 #### Categorize content 
+
 You can use the `categorizeby` shortcode to pull and organize content by either categories and tags. This is useful when you want to categorize content by tags and the type of the document
 
 ```
