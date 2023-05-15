@@ -29,7 +29,7 @@ This quickstart will teach you:
 
 This application is a simple to-do list which stores and visualized to-do items. It consists of a frontend [container]({{< ref container >}}) and a backend [Redis Link]({{< ref links >}}):
 
-<img src="recipe-quickstart-diagram.png" alt="Screenshot of the todoapp with Kubernetes, Azure and AWS Redis Cache options" style="width:100%" >
+<img src="recipe-quickstart-diagram.png" alt="Screenshot of the todoapp with Kubernetes, Azure and AWS Redis Cache options" style="width:1000px" >
 
 ## Step 1: Initialize a Radius environment
 
@@ -46,17 +46,17 @@ This application is a simple to-do list which stores and visualized to-do items.
    [`dev` Recipes]({{< ref "recipes#use-community-dev-recipes" >}}) allow you to quickly get up and running with infrastructure for your [Links]({{< ref links >}})._
    3. Use [`rad recipe list`]({{< ref rad_recipe_list >}}) to view the Recipes in your dev environment:
 
-```bash
-rad recipe list 
-```
+   ```bash
+   rad recipe list 
+   ```
 
-You should see a table of available Recipes (_with more to be added soon_):
-```
-NAME              TYPE                              TEMPLATE
-redis-aws         Applications.Link/redisCaches     radius.azurecr.io/recipes/rediscaches/aws:1.0
-redis-kubernetes  Applications.Link/redisCaches     radius.azurecr.io/recipes/rediscaches/kubernetes:1.0
-redis-azure       Applications.Link/redisCaches     radius.azurecr.io/recipes/rediscaches/azure:1.0
-```
+   You should see a table of available Recipes (_with more to be added soon_):
+   ```bash
+   NAME              TYPE                              TEMPLATE
+   redis-aws         Applications.Link/redisCaches     radius.azurecr.io/recipes/rediscaches/aws:1.0
+   redis-kubernetes  Applications.Link/redisCaches     radius.azurecr.io/recipes/rediscaches/kubernetes:1.0
+   redis-azure       Applications.Link/redisCaches     radius.azurecr.io/recipes/rediscaches/azure:1.0
+   ```
 
 ## Step 2: Deploy your application
 
@@ -71,7 +71,7 @@ redis-azure       Applications.Link/redisCaches     radius.azurecr.io/recipes/re
    ```
 
    You should see the following logs:
-   ```bash
+   ```
    Building app.bicep...
    Deploying template 'app.bicep' into environment 'default' from workspace 'default'...
 
@@ -94,9 +94,9 @@ You've now deployed your application to your Kubernetes cluster!
 
 3. Port-forward the container to your machine with `rad resource expose`:
 
-```bash
-rad resource expose containers frontend -a webapp --port 3000
-```
+   ```bash
+   rad resource expose containers frontend -a webapp --port 3000
+   ```
 
 4. Visit `localhost:3000` in your browser.
 
