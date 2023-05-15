@@ -27,7 +27,7 @@ with open(os.getenv("GITHUB_ENV"), "a") as githubEnv:
     if gitRefName is None:
         print("This is not running in github, GITHUB_REF_NAME is null. Assuming a local build. Setting DOCS_CHANNEL to 'edge'")
         version = "DOCS_CHANNEL=edge"
-    elif gitRefName == 'edge':
+    elif gitRefName.lower() == 'edge':
         print("This is an edge build, setting DOCS_CHANNEL to 'edge'")
         version = "DOCS_CHANNEL=edge"
     elif gitRefName.startswith('v'):
