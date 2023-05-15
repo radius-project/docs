@@ -129,7 +129,7 @@ Recipes can be added via the rad CLI or an environment Bicep definition:
 
 {{% codetab %}}
 ```bash
-rad recipe register --name myrecipe --environment myenv --template-path myregistry.azurecr.io/recipes/myrecipe:v1 --link-type Applications.Link/redisCaches
+rad recipe register myrecipe --environment myenv --template-path myregistry.azurecr.io/recipes/myrecipe:v1 --link-type Applications.Link/redisCaches
 ```
 {{% /codetab %}}
 {{% codetab %}}
