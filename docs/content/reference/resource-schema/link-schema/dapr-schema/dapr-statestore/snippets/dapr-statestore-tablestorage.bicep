@@ -1,11 +1,12 @@
 import radius as radius
 
+@description('The Azure region to deploy Azure resource(s) into. Defaults to the region of the target Azure resource group.')
 param location string = resourceGroup().location
+
 param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'dapr-statestore'
-  location: 'global'
   properties: {
     environment: environment
   }
@@ -13,7 +14,6 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 
 resource myapp 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'myapp'
-  location: 'global'
   properties: {
     application: app.id
     container: {
@@ -36,7 +36,6 @@ resource myapp 'Applications.Core/containers@2022-03-15-privatepreview' = {
 //SAMPLE
 resource statestore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' = {
   name: 'statestore'
-  location: 'global'
   properties: {
     environment: environment
     application: app.id

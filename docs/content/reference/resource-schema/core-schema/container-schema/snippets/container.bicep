@@ -7,7 +7,6 @@ param azureStorage string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
-  location: 'global'
   properties: {
     environment: environment
   }
@@ -20,7 +19,6 @@ resource volume 'Applications.Core/volumes@2022-03-15-privatepreview' existing =
 //CONTAINER
 resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'frontend'
-  location: 'global'
   properties: {
     application: app.id
     container: {
@@ -94,7 +92,6 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 
 resource http 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
   name: 'http'
-  location: 'global'
   properties: {
     application: app.id
   }
@@ -102,7 +99,6 @@ resource http 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
 
 resource db 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
   name: 'database'
-  location: 'global'
   properties: {
     environment: environment
     application: app.id

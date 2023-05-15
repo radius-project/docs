@@ -2,12 +2,12 @@ import radius as radius
 
 param environment string
 
+@description('The Azure region to deploy Azure resource(s) into. Defaults to the region of the target Azure resource group.')
 param azureLocation string = 'westus3'
 
 //APPLICATION
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'corerp-resources-mongodb'
-  location: 'global'
   properties: {
     environment: environment
   }
@@ -17,7 +17,6 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 //CONTAINER
 resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'frontend'
-  location: 'global'
   properties: {
     application: app.id
     connections: {
@@ -35,7 +34,6 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 //LINK
 resource dblink 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
   name: 'dblink'
-  location: 'global'
   properties: {
     environment: environment
     mode: 'resource'

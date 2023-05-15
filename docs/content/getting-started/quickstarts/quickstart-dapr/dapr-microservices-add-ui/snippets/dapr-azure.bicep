@@ -1,11 +1,12 @@
 import radius as radius
 
+@description('The Azure region to deploy Azure resource(s) into. Defaults to the region of the target Azure resource group.')
 param location string = resourceGroup().location
+
 param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'dapr-quickstart'
-  location: 'global'
   properties: {
     environment: environment
   }
@@ -13,7 +14,6 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 
 resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'backend'
-  location: 'global'
   properties: {
     application: app.id
     container: {
@@ -42,7 +42,6 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 
 resource backendRoute 'Applications.Link/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
   name: 'backend-route'
-  location: 'global'
   properties: {
     environment: environment
     application: app.id
@@ -52,7 +51,6 @@ resource backendRoute 'Applications.Link/daprInvokeHttpRoutes@2022-03-15-private
 
 resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'frontend'
-  location: 'global'
   properties: {
     application: app.id
     container: {
@@ -80,7 +78,6 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 
 resource frontendRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
   name: 'frontend-route'
-  location: 'global'
   properties: {
     application: app.id
   }
@@ -88,7 +85,6 @@ resource frontendRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' 
 
 resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
   name: 'gateway'
-  location: 'global'
   properties: {
     application: app.id
     routes: [
@@ -122,7 +118,6 @@ resource account 'Microsoft.Storage/storageAccounts@2019-06-01' = {
 
 resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' = {
   name: 'orders'
-  location: location
   properties: {
     environment: environment
     application: app.id

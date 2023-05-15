@@ -1,6 +1,8 @@
 import radius as radius
 
+@description('The Azure region to deploy Azure resource(s) into. Defaults to the region of the target Azure resource group.')
 param location string = resourceGroup().location
+
 param environment string
 
 //RESOURCE
@@ -24,7 +26,6 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' existing
 //LINK
 resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
   name: 'myredis-link'
-  location: 'global'
   properties: {
     environment: environment
     application: app.id
@@ -36,7 +37,6 @@ resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
 //CONTAINER
 resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'mycontainer'
-  location: 'global'
   properties: {
     application: app.id
     container: {

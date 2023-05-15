@@ -4,17 +4,17 @@ param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'dapr-quickstart'
-  location: 'global'
   properties: {
     environment: environment
   }
 }
 
 //SAMPLE
+@description('The Azure region to deploy Azure resource(s) into. Defaults to the region of the target Azure resource group.')
 param location string = resourceGroup().location
+
 resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' = {
   name: 'orders'
-  location: 'global'
   properties: {
     environment: environment
     application: app.id

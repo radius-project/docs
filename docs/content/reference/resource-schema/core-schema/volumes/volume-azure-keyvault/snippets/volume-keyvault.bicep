@@ -1,12 +1,12 @@
 import radius as rad
 
+@description('The Azure region to deploy Azure resource(s) into. Defaults to the region of the target Azure resource group.')
 param azLocation string = resourceGroup().location
 
 param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
-  location: 'global'
   properties: {
     environment: environment
   }
@@ -29,7 +29,6 @@ resource keyvault 'Microsoft.KeyVault/vaults@2022-07-01' = {
 //VOLUME
 resource volume 'Applications.Core/volumes@2022-03-15-privatepreview' = {
   name: 'myvolume'
-  location: 'global'
   properties: {
     application: app.id
     kind: 'azure.com.keyvault'

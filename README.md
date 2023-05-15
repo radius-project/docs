@@ -36,4 +36,4 @@ Edge docs are available at https://edge.radapp.dev
 
 ### Staging docs
 
-Staging docs are generated for each PR, with the URL posted as a comment.
+Staging docs are generated for each PR, with the URL posted as a comment. Access it currently limited to Docs maintainers.
