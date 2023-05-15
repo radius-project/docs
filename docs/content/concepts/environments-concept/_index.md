@@ -66,4 +66,4 @@ When the developer deploys their application, these org-level concerns are autom
 
 Now that you have an understanding of Radius Environments, learn more about Radius Links:
 
-{{< button text="Links" page="links-concept" size="btn-lg" color="success" >}}
+{{< button text="Radius Links" page="links-concept" size="btn-lg" color="success" >}}
