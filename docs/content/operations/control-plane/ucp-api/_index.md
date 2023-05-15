@@ -6,34 +6,98 @@ weight: 300
 description: "How-To: Interact directly with the UCP API using the Postman API Platform"
 ---
 
-## Prerequisites
-- Postman API Platform installed on your machine
-- A Radius environment running inside a Kubernetes cluster
-- Access to the Kubernetes cluster using kubectl command line tool
+## Pre-requisites
 
+Before you can start using Postman with to interact with the UCP API, you will need the following:
 
-## Steps
+- [Postman](https://www.postman.com/)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+- A [Radius environment](https://docs.radapp.dev/getting-started/)
 
-1. Download the UCP API schema file openapi.yaml from the [UCP API reference page]()
-1. Deploy the schema file to the Kubernetes cluster by running the following command:
+## Step 1: Create Kubernetes Objects
 
-```bash
-kubectl apply -f openapi.yaml
-```
+1. Create a new file, `postman.yaml` and add the following Kubernetes objects:
+   
+   - A `ServiceAccount` named `postman-account`
+   - A `ClusterRole` named `postman-role` with full access to all `api.ucp.dev` resources
+   - A `ClusterRoleBinding` named `postman-role-binding` that binds the `postman-account` to the `postman-role`
 
-1. Generate a service account (SA) token for the UCP API by running the following command:
-```bash
-kubectl get secret $(kubectl get sa ucp-serviceaccount -o jsonpath='{.secrets[0].name}') -o go-template='{{.data.token | base64decode}}'
-```
+   ```yaml
+   apiVersion: v1
+   kind: ServiceAccount
+   metadata:
+     name: postman-account
+     namespace: radius-system
+   ---
+   apiVersion: rbac.authorization.k8s.io/v1
+   kind: ClusterRole
+   metadata:
+     name: postman-role
+     namespace: radius-system
+   rules:
+     - apiGroups: ["", "api.ucp.dev"]
+       resources: ["*"]
+       verbs: ["*"]
+   ---
+   apiVersion: rbac.authorization.k8s.io/v1
+   kind: ClusterRoleBinding
+   metadata:
+     name: postman-role-binding
+     namespace: radius-system
+   subjects:
+     - kind: ServiceAccount
+       name: postman-account
+       namespace: radius-system
+   roleRef:
+     kind: ClusterRole
+     name: postman-role
+     apiGroup: rbac.authorization.k8s.io
+   ```
 
-1. Open Postman on your machine.
-1. In Postman, click on the Import button and select Import from Link.
-1. Paste the URL of the UCP API schema file openapi.yaml.
-1. Click on Import.
-1. In Postman, click on the Authorization tab.
-1. Set the Type field to Bearer Token.
-1. Paste the service account token generated in step 3 into the Token field.
-1. Click on the Send button to make a request to the UCP API.
-1. You should receive a response from the UCP API in Postman.
+2. Apply the `postman.yaml` file:
 
-Congratulations, you have successfully interacted directly with the UCP API using the Postman API Platform!
+   ```bash
+   kubectl apply -f postman.yaml
+   ```
+
+## Step 2: Generate a token
+
+1. Generate a token that can be used to authenticate to the Kubernetes API:
+
+   > **Note**: the default expiration time for this token is 1 hour. You can use the `--duration` flag to set a different expiration time, up to 48 hours.
+
+   ```bash
+   kubectl create token postman-account -n radius-system
+   ```
+
+## Step 3: Get your Kubernetes API host
+
+1. Get the control plane API endpoint for your Kubernetes cluster:
+
+   ```bash
+   kubectl cluster-info
+   ```
+
+## Step 4: Use Postman
+
+1. Open Postman and create a new request:
+
+   - Set the method to `GET`
+   - Set the URL to `https://<your-cluster>/apis/api.ucp.dev/v1alpha3/planes/radius/local/resourcegroups?api-version=2022-09-01-privatepreview`
+   - Open the `Authorization` tab and select `Bearer Token` from the `Type` dropdown. Paste the token you generated in the previous step into the `Token` field.
+
+2. Click 'Send' to send the request. You should now see all of your UCP resource groups:
+
+   ```
+   {
+       "value": [
+           {
+               "id": "/planes/radius/local/resourcegroups/default",
+               "location": "global",
+               "name": "default",
+               "tags": {},
+               "type": "System.Resources/resourceGroups"
+           }
+       ]
+   }
+   ```
