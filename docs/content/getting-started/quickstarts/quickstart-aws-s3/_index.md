@@ -87,7 +87,7 @@ This creates a container that will be deployed to your Kubernetes cluster. The c
 
     <img src="./s3app.png" alt="Screenshot of the sample application to interact with s3 bucket " width=900>
 
-## Step 5: Cleanup
+## Step 7: Cleanup
 
 1. When you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to delete all Radius resources running on the EKS Cluster.
 
