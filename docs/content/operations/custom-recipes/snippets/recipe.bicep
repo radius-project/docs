@@ -2,7 +2,7 @@
 @description('Radius-provided object containing information about the resouce calling the Recipe')
 param context object
 
-@description('The geo-location where the resource lives.')
+@description('The Azure region to deploy Azure resource(s) into. Defaults to the region of the target Azure resource group.')
 param location string = resourceGroup().location
 
 resource azureCache 'Microsoft.Cache/redis@2022-06-01' = {

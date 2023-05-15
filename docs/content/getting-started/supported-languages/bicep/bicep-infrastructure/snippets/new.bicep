@@ -1,4 +1,4 @@
-@description('The geo-location where the resource lives.')
+@description('The Azure region to deploy Azure resource(s) into. Defaults to the region of the target Azure resource group.')
 param location string = 'westus2'
 
 resource cosmos 'Microsoft.DocumentDB/databaseAccounts@2021-04-15' = {
