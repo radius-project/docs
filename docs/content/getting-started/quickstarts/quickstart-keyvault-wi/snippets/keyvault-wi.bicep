@@ -1,11 +1,11 @@
 //ENVIRONMENT
 import radius as rad
 
+@description('The Azure region to deploy Azure resource(s) into. Defaults to the region of the target Azure resource group.')
+param azLocation string = resourceGroup().location
+
 @description('Specifies the environment for resources.')
 param oidcIssuer string
-
-@description('Specifies the location for Azure resources.')
-param azLocation string = resourceGroup().location
 
 resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
   name: 'kv-volume-quickstart'

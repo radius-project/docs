@@ -87,4 +87,4 @@ As teams onboard to Project Radius and begin deploying across platforms, the too
 
 Now that you have an overview of Project Radius, learn more about the Radius app model:
 
-{{< button text="Learn about the app model" page="appmodel-concept" size="btn-lg" color="success" >}}
+{{< button text="Learn about the Radius application model" page="appmodel-concept" size="btn-lg" color="success" >}}
