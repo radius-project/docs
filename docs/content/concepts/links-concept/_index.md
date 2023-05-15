@@ -49,6 +49,6 @@ The developer's container resource, `frontend`, connects to the Mongo link, `dbl
 
 ## Next step
 
-Now that you have an understanding of Radius links, learn more about Radius environments:
+Now that you have an understanding of Radius Links, learn more about the Radius architecture:
 
-{{< button text="Environments" page="environments-concept" size="btn-lg" color="success" >}}
+{{< button text="Radius architecture" page="architecture" size="btn-lg" color="success" >}}
