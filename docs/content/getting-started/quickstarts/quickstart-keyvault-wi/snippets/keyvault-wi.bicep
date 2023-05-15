@@ -4,15 +4,11 @@ import radius as rad
 @description('Specifies the environment for resources.')
 param oidcIssuer string
 
-@description('Specifies the location for Radius resources.')
-param location string = 'global'
-
 @description('Specifies the location for Azure resources.')
 param azLocation string = resourceGroup().location
 
 resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
   name: 'kv-volume-quickstart'
-  location: location
   properties: {
     compute: {
       kind: 'kubernetes'
@@ -35,7 +31,6 @@ resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
 //APP
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
-  location: location
   properties: {
     environment: env.id
   }
@@ -43,7 +38,6 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 
 resource volume 'Applications.Core/volumes@2022-03-15-privatepreview' = {
   name: 'myvolume'
-  location: location
   properties: {
     application: app.id
     kind: 'azure.com.keyvault'
@@ -80,7 +74,6 @@ resource keyvault 'Microsoft.KeyVault/vaults@2021-10-01' = {
 //CONTAINER
 resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'mycontainer'
-  location: location
   properties: {
     application: app.id
     container: {

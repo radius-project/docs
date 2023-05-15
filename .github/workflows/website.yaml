@@ -95,26 +95,20 @@ jobs:
   
   deploy:
     name: Deploy Hugo Website
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch')
     needs: ['build']
     runs-on: ubuntu-latest
     environment:
       name: ${{ github.ref_name == 'edge' && 'edge' || 'latest' }}
       url: ${{ github.ref_name == 'edge' && 'https://edge.docs.radapp.dev' || 'https://docs.radapp.dev' }}
     steps:
-      - name: Checkout docs repo
-        uses: actions/checkout@v2
-        with:
-          submodules: false
-      - name: Parse release version and set environment variables
-        run: python ./.github/scripts/get_release_version.py
       - name: Download Hugo artifacts
         uses: actions/download-artifact@v3
         with:
           name: hugo_build
           path: site/
       - name: Deploy to WebApp
-        uses: Azure/webapps-deploy@v2
+        uses: Azure/webapps-deploy@v2.2.7
         with:
           app-name: ${{ secrets.ENV_APPSERVICE_NAME }}
           publish-profile: ${{ secrets.ENV_APPSERVICE_PUBLISHPROFILE }}
@@ -155,7 +149,7 @@ jobs:
 
   algolia_index:
     name: Index site for Algolia
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch')
     needs: ['build', 'deploy']
     runs-on: ubuntu-latest
     environment:
