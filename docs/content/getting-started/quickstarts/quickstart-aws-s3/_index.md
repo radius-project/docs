@@ -68,7 +68,7 @@ This creates a container that will be deployed to your Kubernetes cluster. The c
 
  Make sure to create a different [IAM AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for the container to connect to the S3 bucket. It is recommended to have separate credentials and intended to be used only by the containerized application.
 
-## Step 4: Deploy the application
+## Step 6: Deploy the application
 
 1. Deploy your application to your environment:
 
