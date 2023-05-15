@@ -3,7 +3,6 @@ param application string
 
 resource demo 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'demo'
-  location: 'global'
   properties: {
     application: application
     container: {
