@@ -1,7 +1,7 @@
 //ENVIRONMENT
 import radius as radius
 
-@description('Specifies the location for Azure resources.')
+@description('The Azure region to deploy Azure resource(s) into. Defaults to the region of the target Azure resource group.')
 param azLocation string = resourceGroup().location
 
 @description('Specifies the OIDC issuer URL')
