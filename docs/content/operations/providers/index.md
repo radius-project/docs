@@ -50,7 +50,7 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
    ```bash
    az ad sp create-for-rbac --role Owner --scope /subscriptions/<subscriptionid>/resourceGroups/<resourcegroupname> 
    ```
-   Replace it with your subscription id and resource group name
+   Make sure to update the command with your subscription id and resource group name
    
 1. Register the service principal in your control plane
    ```bash
