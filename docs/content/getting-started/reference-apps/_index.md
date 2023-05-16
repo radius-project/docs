@@ -7,4 +7,4 @@ weight: 300
 no_list: true
 ---
  
- {{< categorizeby category="Reference-app" >}}
+ {{< categorizeby category="Reference application" >}}
