@@ -200,7 +200,7 @@ Front-matter should be completed with all fields including type, title, linkTitl
 - `categories` should be one of the following:
     - Concept
     - Quickstart
-    - Reference app
+    - Reference application
     - How to
 - `tags` should be a comma separated list of metadata tags.
 
