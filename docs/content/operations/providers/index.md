@@ -45,7 +45,7 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
 
 #### Add a cloud provider to an existing environment
 
-1. Create an [Azure service principal](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) with the [proper permissions](https://aka.ms/azadsp-more). 
+1. Create an [Azure service principal](https://learn.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) with the [proper permissions](https://aka.ms/azadsp-more). 
 
    ```bash
    az ad sp create-for-rbac --role Owner --scope --scope /subscriptions/<subscriptionid>/resourceGroups/<resourcegroupname> 
