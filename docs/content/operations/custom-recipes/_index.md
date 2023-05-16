@@ -4,6 +4,8 @@ title: "Author Custom Radius Recipes"
 linkTitle: "Custom Recipes"
 description: "Learn how to author custom Recipe templates to automate infrastructure deployment"
 weight: 500
+categories: "How-To"
+tags: ["recipes"]
 ---
 
 Recipes enable a **separation of concerns** between infrastructure teams and developers by **automating infrastructure deployment**.

@@ -4,6 +4,8 @@ title: "How-To: Observe metrics with Grafana"
 linkTitle: "Grafana"
 weight: 3000
 description: "Learn how to view the Project Radius control-plane metrics in Grafana dashboards"
+categories: "How-To"
+tags: ["metrics", "grafana"]
 ---
 
 [Grafana](https://grafana.com/) is an open source visualization and analytics tool that allows you to query, visualize, alert on, and explore your metrics. This guide will show you how to install Grafana and configure it to visualize the Project Radius control plane metrics from Prometheus.

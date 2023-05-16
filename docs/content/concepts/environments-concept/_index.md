@@ -5,6 +5,7 @@ linkTitle: "Environments"
 description: "Learn about Radius Environments"
 weight: 300
 slug: environment
+categories: "Concept"
 ---
 
 ## Introduction

@@ -4,6 +4,8 @@ title: "Install Project Radius"
 linkTitle: "Install Radius"
 description: "Learn how to install the Radius tools on your local machine"
 weight: 100
+categories: "How-To"
+tags: ["install"]
 ---
 
 {{< alert title="Get started in seconds with a Codespace" color="primary" >}}

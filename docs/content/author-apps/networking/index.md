@@ -4,6 +4,8 @@ title: "Application networking"
 linkTitle: "Networking"
 description: "Learn how to add networking to your Radius application"
 weight: 200
+categories: "Concept"
+tags: ["routes","gateways"]
 ---
 
 Radius networking resources allow you to model:
