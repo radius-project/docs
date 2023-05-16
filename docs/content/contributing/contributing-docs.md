@@ -138,9 +138,9 @@ The docs pipeline uses [aspell](http://aspell.net/) to check for spelling mistak
 - Do not assume the reader is using a specific environment unless the article itself is specific to an environment. This include OS (Windows/Linux/MacOS), deployment target (Kubernetes, IoT etc.) or programming language. If instructions vary between operating systems, provide guidance for all.
 - Include code/sample/config snippets that can be easily copied and pasted.
 - At the end of the article, provide the reader with related links and next steps (this can be other relevant "how-to", samples for reference or related concepts).
-- Set the `category` as `How to` in [Hugo front-matter](#front-matter).
+- Set the `category` as `How To` in [Hugo front-matter](#front-matter).
 
-### Contributing a new Reference-app
+### Contributing a new Reference application
 
 - Ensure the doc has enough instructions to run the sample
 - Add the architecture diagram of the application sample if possible 

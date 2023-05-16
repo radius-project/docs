@@ -4,7 +4,7 @@ title: "eShop on containers sample"
 linkTitle: "eShop"
 description: "Learn how to model and deploy a production-level application with Radius"
 weight: 100
-categories: "Reference-app"
+categories: "Reference application"
 tags: ["AWS","Azure"]
 ---
 
