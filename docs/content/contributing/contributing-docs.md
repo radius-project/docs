@@ -141,6 +141,7 @@ The docs pipeline uses [aspell](http://aspell.net/) to check for spelling mistak
 - Set the `category` as `How to` in [Hugo front-matter](#front-matter).
 
 ### Contributing a new Reference-app
+
 - Ensure the doc has enough instructions to run the sample
 - Add the architecture diagram of the application sample if possible 
 - Make sure the sample code is added to [radius samples](https://github.com/project-radius/samples)
