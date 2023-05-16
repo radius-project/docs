@@ -4,6 +4,7 @@ title: "Install Radius on Kubernetes"
 linkTitle: "Installation"
 description: "Learn how to setup Radius on supported Kubernetes clusters"
 weight: 200
+categories: "How-To"
 tags: ["Kubernetes", "install"]
 ---
 
