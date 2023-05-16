@@ -4,7 +4,7 @@ title: "Using AWS S3 with Radius"
 linkTitle: "Using AWS S3"
 description: "Learn about how to model AWS S3 resources in Bicep and Radius"
 weight: 500
-categories: "Reference-app"
+categories: "Reference application"
 tags: ["AWS"]
 ---
 
