@@ -6,6 +6,7 @@ description: "Learn Project Radius by authoring templates and deploying a Dapr a
 weight: 300
 no_list: true
 slug: "dapr"
+categories: "Quickstart"
 tags : ["Dapr"]
 ---
 

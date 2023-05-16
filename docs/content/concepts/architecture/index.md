@@ -64,3 +64,8 @@ The DE service is used when Bicep or ARM JSON is used to deploy Radius applicati
 
 For imperative commands (CLI, other IaC tools), the DE is bypassed and the client (CLI, other IaC tools) acts as the DE.
 
+## Next step
+
+Now that you have an understanding of the Radius architecture, try Radius out:
+
+{{< button text="Get started" page="first-app" size="btn-lg" color="success" >}}
