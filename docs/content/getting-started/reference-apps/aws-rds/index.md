@@ -4,7 +4,7 @@ title: "Deploy an AWS RDS-backed WordPress site"
 linkTitle: "WordPress on AWS"
 description: "Learn about how to use Radius to deploy a WordPress site that uses an AWS RDS database"
 weight: 600
-categories: "Reference-app"
+categories: "Reference application"
 tags: ["AWS"]
 ---
 
