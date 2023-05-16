@@ -58,7 +58,7 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
    ```
    Replace it with your service principal appId, password and tenant id
 
-1. Update your environment with your Azure subscription and resource group
+1. Update your environment with your Azure subscription and resource group. This is where Azure resources will be deployed.
    ```bash
    rad env update <myenv> --azure-subscription-id <subscriptionid> --azure-resource-group <resourcegroupname> 
    ```
