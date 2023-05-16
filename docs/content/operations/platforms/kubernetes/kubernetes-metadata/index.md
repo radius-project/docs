@@ -4,7 +4,7 @@ title: "Set Kubernetes metadata"
 linkTitle: "Kubernetes metadata"
 description: "Learn how to configure Kubernetes labels and annotations for generated objects"
 weight: 300
-categories: "How-to"
+categories: "How-To"
 tags: ["containers","Kubernetes Metadata"]
 ---
 
