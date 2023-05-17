@@ -90,7 +90,7 @@ This application is a simple to-do list which stores and visualized to-do items.
 
 You've now deployed your application to your Kubernetes cluster!
 
-3.To confirm that the infrastructure deployed by the Recipe is correctly deployed in a Kubernetes pod you can leverage `kubectl`.
+3. To confirm that the infrastructure deployed by the Recipe is correctly deployed in a Kubernetes pod you can leverage `kubectl`.
 
    You should be able to see the following output by running:
 
