@@ -5,7 +5,7 @@ linkTitle: "Prometheus"
 weight: 2000
 description: "Use Prometheus to collect time-series data from the Project Radius control plane"
 categories: "How-To"
-tags: ["metrics", "prometheus"]
+tags: ["metrics", "Prometheus"]
 ---
 
 [Prometheus](https://prometheus.io/) collects and stores metrics as time series data. This guide will show you how to collect Project Radius control plane metrics to then be visualized and queried.
