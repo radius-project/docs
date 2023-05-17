@@ -4,6 +4,8 @@ title: "eShop on Dapr sample"
 linkTitle: "eShop on Dapr"
 description: "Learn how to model and deploy a fully portable application with Dapr and Project Radius"
 weight: 150
+categories: "Reference application"
+tags: ["Dapr"]
 ---
 
 ## Background
