@@ -163,7 +163,9 @@ You've now deployed your application to your Kubernetes cluster!
    rad recipe register aws -e default  --template-path radius.azurecr.io/recipes/rediscaches/aws:1.0 --link-type Applications.Link/redisCaches
    ```
 
-   Update the recipe name to `redis-aws` to use the Amazon MemoryDB for Redis and pass the eksClusterName as parameter to the recipe.
+   Update the recipe name to `redis-aws` to use the Amazon MemoryDB for Redis and pass the `eksClusterName` as parameter to the recipe.
+
+   > Note: Passing the `eksClusterName` during the registration of the Recipe is a temporary additional step as Radius builds up AWS support.
 
    ```bicep
    resource db 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {

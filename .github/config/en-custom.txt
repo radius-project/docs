@@ -34,6 +34,7 @@ Dockerfiles
 Docsy
 DocumentDB
 EKS
+eksClusterName
 entrypoint
 EOF
 Extensibility
