@@ -15,7 +15,7 @@ resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
   properties: {
     application: app.id
     hostname: {
-      // Omiting hostname properties results in gatewayname.appname.PUBLIC_HOSTNAME_OR_IP.nip.io
+      // Omitting hostname properties results in gatewayname.appname.PUBLIC_HOSTNAME_OR_IP.nip.io
       
       // Results in prefix.appname.PUBLIC_HOSTNAME_OR_IP.nip.io
       prefix: 'prefix'
