@@ -18,7 +18,7 @@ Recipes enable a **separation of concerns** between infrastructure teams and dev
 
 ### Select the Recipe that meets your needs
 
-Recipes can be used in any environment, from dev to prod. Simply specify `mode: 'recipe'` in your [Link resource]({{< ref links >}}), and select the Recipe you want to run:
+Recipes can be used in any environment, from dev to prod. Simply specify `mode: 'recipe'` in your [Link resource]({{< ref links-resources >}}), and select the Recipe you want to run:
 
 {{< rad file="snippets/recipe-link-example.bicep" embed=true marker="//BASIC" >}}
 

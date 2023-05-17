@@ -6,7 +6,7 @@ description: "Detailed reference documentation on the Radius config.yaml configu
 weight: 500
 ---
 
-Radius [workspaces]({{< ref workspaces >}}) are used to easily switch between environments.
+Radius [workspaces]({{< ref local-workspaces >}}) are used to easily switch between environments.
 
 ```yaml
 workspaces:

@@ -48,7 +48,7 @@ rad init
 {{% /codetab %}}
 
 {{% codetab %}}
-[rad env list]({{< ref rad_env_list >}}) lists all of the environments in your [workspace]({{< ref workspaces >}}):
+[rad env list]({{< ref rad_env_list >}}) lists all of the environments in your [workspace]({{< ref local-workspaces >}}):
 
 ```bash
 rad env list
@@ -95,9 +95,9 @@ The following example shows an environment configured with Kubernetes as the tar
 
 ## How-to: Initialize a new environment
 
-1. Begin by deploying a compatible [Kubernetes cluster]({{< ref kubernetes >}})
+1. Begin by deploying a compatible [Kubernetes cluster]({{< ref kubernetes-platform >}})
 
-   *Visit the [Kubernetes platform docs]({{< ref kubernetes >}}) for a list of supported clusters and specific cluster requirements.*
+   *Visit the [Kubernetes platform docs]({{< ref kubernetes-platform >}}) for a list of supported clusters and specific cluster requirements.*
 
 1. Ensure your target kubectl context is set as the default:
    ```bash

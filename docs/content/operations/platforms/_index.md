@@ -5,7 +5,6 @@ linkTitle: "Platforms"
 description: "Learn what platforms are supported by Project Radius"
 weight: 100
 categories: "Concept"
-tags: ["Hosting platforms"]
 ---
 
 Project Radius supports the following platforms:

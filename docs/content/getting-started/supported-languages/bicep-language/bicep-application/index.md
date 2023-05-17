@@ -4,6 +4,8 @@ title: "Model your application and its services in Bicep"
 linkTitle: "Application"
 description: "Learn how to model your application and its services in Radius in Bicep"
 weight: 400
+categories: "How-To"
+tags: ["application"]
 ---
 
 Now that your infrastructure is modeled in Bicep, you can model your app's services with Radius resources.

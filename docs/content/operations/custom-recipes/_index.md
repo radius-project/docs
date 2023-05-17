@@ -143,7 +143,7 @@ rad recipe register --name myrecipe --environment myenv --template-path myregist
 
 ### Done
 
-You can now use your custom recipe in its accompanying resource. Visit the [Recipe developer guide]({{< ref recipes >}}) for more information.
+You can now use your custom recipe in its accompanying resource. Visit the [Recipe developer guide]({{< ref recipes-concept >}}) for more information.
 
 ## `context` parameter properties
 
@@ -193,5 +193,5 @@ In the following tables, "resource" refers to the resource "calling" the Recipe.
 
 ## Further reading
 
-- [Recipes overview]({{< ref recipes >}})
+- [Recipes overview]({{< ref recipes-concept >}})
 - [`rad recipe CLI reference`]({{< ref rad_recipe >}})
