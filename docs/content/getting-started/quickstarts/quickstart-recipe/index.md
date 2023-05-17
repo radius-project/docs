@@ -53,9 +53,7 @@ This application is a simple to-do list which stores and visualized to-do items.
    You should see a table of available Recipes (_with more to be added soon_):
    ```bash
    NAME              TYPE                              TEMPLATE
-   redis-aws         Applications.Link/redisCaches     radius.azurecr.io/recipes/rediscaches/aws:1.0
-   redis-kubernetes  Applications.Link/redisCaches     radius.azurecr.io/recipes/rediscaches/kubernetes:1.0
-   redis-azure       Applications.Link/redisCaches     radius.azurecr.io/recipes/rediscaches/azure:1.0
+   kubernetes  Applications.Link/redisCaches     radius.azurecr.io/recipes/rediscaches/kubernetes:1.0
    ```
 
 ## Step 2: Deploy your application
@@ -92,13 +90,23 @@ This application is a simple to-do list which stores and visualized to-do items.
 
 You've now deployed your application to your Kubernetes cluster!
 
-3. Port-forward the container to your machine with `rad resource expose`:
+3.To confirm that the infrastructure deployed by the Recipe is correctly deployed in a Kubernetes pod you can leverage `kubectl`.
+
+   You should be able to see the following output by running:
+
+   ```bash
+   kubectl get pods -n default-webapp
+   ```
+
+4. Port-forward the container to your machine with `rad resource expose`:
 
    ```bash
    rad resource expose containers frontend -a webapp --port 3000
    ```
 
-4. Visit `localhost:3000` in your browser.
+5. Visit `localhost:3000` in your browser.
+
+   You will now be able to see both the metadata of your container application as well as interact with the `Todo App` and add/remove items in it as wanted.
 
 ## Step 3: Use Azure / AWS recipes in your application
 
@@ -109,9 +117,15 @@ You've now deployed your application to your Kubernetes cluster!
 {{< tabs Azure AWS >}}
 {{% codetab %}}
 
-Update the recipe name to `redis-azure` to use the Redis cache on Azure.
+1. Register the Recipe to your Radius Environment:
 
-1. Deploy your application to your environment:
+   ```bash
+   rad recipe register azure -e default  --template-path radius.azurecr.io/recipes/rediscaches/azure:1.0 --link-type Applications.Link/redisCaches
+   ```
+
+   Update the Recipe name given to the resource to `azure` to use the Redis cache on Azure .
+
+2. Deploy your application to your environment:
 
    ```bash
    rad deploy ./app.bicep 
@@ -143,26 +157,32 @@ Update the recipe name to `redis-azure` to use the Redis cache on Azure.
 
 > *You can run this only on an EKS cluster. Make sure that the each of the Subnets in your EKS cluster Subnet Group are within the [list of supported MemoryDB availability zones](https://docs.aws.amazon.com/memorydb/latest/devguide/subnetgroups.html)*
 
-Update the recipe name to `redis-aws` to use the Amazon MemoryDB for Redis and pass the eksClusterName as parameter to the recipe.
+1. Register the Recipe to your Radius Environment:
 
-```bicep
-resource db 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
-   name: 'db'
-   location: location
-   properties: {
-      environment: environment
-      mode: 'recipe'
-      recipe: {
-         name: 'redis-aws'
-         parameters: {
-            eksClusterName: eksClusterName
+   ```bash
+   rad recipe register aws -e default  --template-path radius.azurecr.io/recipes/rediscaches/aws:1.0 --link-type Applications.Link/redisCaches
+   ```
+
+   Update the recipe name to `redis-aws` to use the Amazon MemoryDB for Redis and pass the eksClusterName as parameter to the recipe.
+
+   ```bicep
+   resource db 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
+      name: 'db'
+      location: location
+      properties: {
+         environment: environment
+         mode: 'recipe'
+         recipe: {
+            name: 'redis-aws'
+            parameters: {
+               eksClusterName: eksClusterName
+            }
          }
       }
    }
-}
-```
+   ```
 
-1. Deploy your application to your environment:
+2. Deploy your application to your environment:
 
    ```bash
    rad deploy ./app.bicep --parameters eksClusterName=YOUR_EKS_CLUSTER_NAME
