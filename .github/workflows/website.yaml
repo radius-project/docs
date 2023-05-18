@@ -81,7 +81,7 @@ jobs:
             ${{ runner.os }}-cli-
       - name: Generate CLI Docs
         run: |
-          if [ ! "$(ls -A ./docs/content/reference/cli)" ]; then
+          if [ ! -f ./docs/content/reference/cli/rad.md ]; then
             cd radius
             go run ./cmd/docgen/main.go ../docs/content/reference/cli
           fi
