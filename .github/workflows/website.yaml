@@ -115,7 +115,6 @@ jobs:
         uses: Azure/webapps-deploy@v2
         with:
           app-name: ${{ secrets.ENV_APPSERVICE_NAME }}
-          publish-profile: ${{ secrets.ENV_APPSERVICE_PUBLISHPROFILE }}
           package: site/
 
   open_staging_site:
