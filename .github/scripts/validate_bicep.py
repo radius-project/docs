@@ -2,7 +2,7 @@ import os
 import subprocess
 import concurrent.futures
 
-num_workers = 15
+num_workers = 10
 
 # set the bicep binary name based on the OS
 if os.name == 'nt':
@@ -17,14 +17,14 @@ if os.environ.get("GITHUB_ACTIONS", "false") == "false":
     print("Running locally")
     bicep_path = os.path.join(home_path, '.rad', 'bin')
 else:
-    print("Running in GitHub Actions")
+    print("Running in GitHub Actions", flush=True)
     bicep_path = "."
 
 # allow override through an environment variable
 bicep_path = os.environ.get("BICEP_PATH", bicep_path)
 bicep_executable = os.path.join(bicep_path, bicep_bin)
 
-print(f"Using Bicep binary: {bicep_executable}")
+print(f"Using Bicep binary: {bicep_executable}", flush=True)
 
 files = []
 failures = []
@@ -36,7 +36,7 @@ for root, _, filenames in os.walk("."):
             files.append(os.path.join(root, filename))
 
 def validate_file(f):
-    print(f"Validating {f}...")
+    print(f"Validating {f}...", flush=True)
 
     result = subprocess.run([bicep_executable, "build", f, "--stdout"], capture_output=True)
     stderr = result.stderr.decode("utf-8")
