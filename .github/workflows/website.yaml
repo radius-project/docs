@@ -64,6 +64,7 @@ jobs:
           npm install
       - name: Restore CLI Docs Cache
         uses: actions/cache@v2
+        id: cli_cache
         with:
           path: |
             ./docs/content/reference/cli
@@ -72,7 +73,7 @@ jobs:
             ${{ runner.os }}-cli-
       - name: Restore Go Modules Cache
         uses: actions/cache@v2
-        if: steps.restore_cli_docs_cache.outputs.cache-hit != 'true'
+        if: steps.cli_cache.outputs.cache-hit != 'true'
         with:
           path: |
             ~/.cache/go-build
