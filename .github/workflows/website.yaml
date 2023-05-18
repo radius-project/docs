@@ -72,8 +72,6 @@ jobs:
           path: |
             ./docs/content/reference/cli
           key: ${{ runner.os }}-cli-${{ hashFiles('radius/pkg/cli') }}
-          restore-keys: |
-            ${{ runner.os }}-cli-
       - name: Restore Go Modules Cache
         uses: actions/cache@v3
         if: steps.cli_cache.outputs.cache-hit != 'true'
