@@ -38,19 +38,23 @@ for root, _, filenames in os.walk("."):
 def validate_file(f):
     print(f"Validating {f}...", flush=True)
 
-    result = subprocess.run([bicep_executable, "build", f, "--stdout"], capture_output=True)
+    result = subprocess.run(
+        [bicep_executable, "build", f, "--stdout"],
+        stderr=subprocess.PIPE,
+        stdout=subprocess.DEVNULL,
+    )
     stderr = result.stderr.decode("utf-8")
     exitcode = result.returncode
 
     if exitcode != 0:
         failures.append(f)
-        print(stderr)
+        print(stderr, flush=True)
 
 with concurrent.futures.ThreadPoolExecutor(max_workers=num_workers) as executor:
     futures = [executor.submit(validate_file, f) for f in files]
 concurrent.futures.wait(futures)
 
 for f in failures:
-    print(f"Failed: {f}")
+    print(f"Failed: {f}", flush=True)
 
 exit(len(failures))
