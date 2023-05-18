@@ -111,12 +111,12 @@ jobs:
         with:
           name: hugo_build
           path: site/
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.AZURE_SP_TESTS_APPID }}
-          tenant-id: ${{ secrets.AZURE_SP_TESTS_TENANTID }}
-          subscription-id: ${{ vars.ENV_APPSERVICE_SUBSCRIPTIONID }}
+      - name: az CLI login
+        run: |
+          az login --service-principal \
+            --username ${{ secrets.AZURE_SP_TESTS_APPID }} \
+            --password ${{ secrets.AZURE_SP_TESTS_PASSWORD }} \
+            --tenant ${{ secrets.AZURE_SP_TESTS_TENANTID }}
       - name: Deploy to WebApp
         uses: Azure/webapps-deploy@v2
         with:
