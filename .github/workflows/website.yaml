@@ -62,8 +62,18 @@ jobs:
           sudo npm install -D --save postcss-cli
           cd themes/docsy
           npm install
+      - name: Restore CLI Docs Cache
+        uses: actions/cache@v2
+        id: cli_cache
+        with:
+          path: |
+            ./docs/content/reference/cli
+          key: ${{ runner.os }}-cli-${{ hashFiles('radius/pkg/cli') }}
+          restore-keys: |
+            ${{ runner.os }}-cli-
       - name: Restore Go Modules Cache
         uses: actions/cache@v2
+        if: steps.cli_cache.outputs.cache-hit != 'true'
         with:
           path: |
             ~/.cache/go-build
@@ -71,14 +81,6 @@ jobs:
           key: ${{ runner.os }}-go-${{ hashFiles('radius/go.sum') }}
           restore-keys: |
             ${{ runner.os }}-go-
-      - name: Restore CLI Docs Cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./docs/content/reference/cli
-          key: ${{ runner.os }}-cli-${{ hashFiles('radius/pkg/cli') }}
-          restore-keys: |
-            ${{ runner.os }}-cli-
       - name: Generate CLI Docs
         run: |
           if [ ! -f ./docs/content/reference/cli/rad.md ]; then
