@@ -2,6 +2,8 @@ import os
 import subprocess
 import concurrent.futures
 
+num_workers = 5
+
 # set the bicep binary name based on the OS
 if os.name == 'nt':
     bicep_bin = 'rad-bicep.exe'
@@ -44,7 +46,7 @@ def validate_file(f):
         failures.append(f)
         print(stderr)
 
-with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+with concurrent.futures.ThreadPoolExecutor(max_workers=num_workers) as executor:
     futures = [executor.submit(validate_file, f) for f in files]
 concurrent.futures.wait(futures)
 
