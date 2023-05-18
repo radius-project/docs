@@ -32,12 +32,12 @@ jobs:
       HUGO_ENV: production
       SWA_BASE: 'wonderful-plant-020417a1e'
     steps:
-      - name: Parse release version and set environment variables
-        run: python ./.github/scripts/get_docs_version.py
       - name: Checkout docs repo
         uses: actions/checkout@v3
         with:
           submodules: true
+      - name: Parse release version and set environment variables
+        run: python ./.github/scripts/get_docs_version.py
       - name: Checkout radius repo
         uses: actions/checkout@v3
         with:
