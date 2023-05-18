@@ -72,7 +72,7 @@ jobs:
             ${{ runner.os }}-cli-
       - name: Restore Go Modules Cache
         uses: actions/cache@v2
-        if: steps.restore_cli_docs.outputs.cache-hit != 'true'
+        if: steps.restore_cli_docs_cache.outputs.cache-hit != 'true'
         with:
           path: |
             ~/.cache/go-build
