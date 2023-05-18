@@ -115,11 +115,13 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+          subscription: ${{ vars.ENV_APPSERVICE_SUBSCRIPTIONID }}
       - name: Deploy to WebApp
         uses: Azure/webapps-deploy@v2
         with:
-          app-name: ${{ secrets.ENV_APPSERVICE_NAME }}
+          app-name: ${{ vars.ENV_APPSERVICE_NAME }}
           package: site/
+          resourceGroupName: ${{ vars.ENV_APPSERVICE_RESOURCEGROUP }}
 
   open_staging_site:
     name: Open Staging Site
