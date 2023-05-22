@@ -30,6 +30,4 @@ jobs:
         chmod +x rad-bicep
         ./rad-bicep --version
     - name: Verify Bicep files
-      run: ./.github/scripts/validate-bicep.sh
-      env: 
-        BICEP_PATH: .
+      run: python ./.github/scripts/validate_bicep.py
