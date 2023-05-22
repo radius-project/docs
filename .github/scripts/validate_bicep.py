@@ -2,7 +2,7 @@ import os
 import subprocess
 import concurrent.futures
 
-num_workers = 2
+num_workers = 5
 
 # set the bicep binary name based on the OS
 if os.name == 'nt':
