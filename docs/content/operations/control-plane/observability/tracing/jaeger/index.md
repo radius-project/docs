@@ -5,7 +5,7 @@ linkTitle: "Jaeger"
 description: "Learn how to deploy and set up Jaeger for distributed tracing"
 type: docs
 categories: "How-To"
-tags: ["tracing", "Jaeger"]
+tags: ["tracing", "observability"]
 ---
 
 [Jaeger](https://www.jaegertracing.io/) is an open source distributed tracing system. It helps gather timing data needed to troubleshoot latency problems in microservice architectures. It manages both the collection and lookup of this data.

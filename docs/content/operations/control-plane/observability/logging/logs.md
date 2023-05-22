@@ -5,7 +5,7 @@ linkTitle: "Logs"
 weight: 100
 description: "Use logs to monitor and troubleshoot the control plane."
 categories: "How-To"
-tags: ["logs","troubleshooting"]
+tags: ["logs","troubleshooting", "observability"]
 ---
 
 The Project Radius control plane produces logs that you can use to monitor and troubleshoot the control plane. This document describes how to collect and search logs, as well as the log schema.

@@ -5,7 +5,7 @@ linkTitle: "Fluentd"
 weight: 2000
 description: "How to install Fluentd, Elastic Search, and Kibana to search control plane logs in Kubernetes"
 categories: "How-To"
-tags: ["logs","Fluentd"]
+tags: ["logs","observability"]
 ---
 
 ## Prerequisites
