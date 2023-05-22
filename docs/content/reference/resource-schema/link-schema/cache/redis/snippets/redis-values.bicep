@@ -9,6 +9,10 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   }
 }
 
+resource azureRedis 'Microsoft.Cache/redis@2022-06-01' = {
+  name: 'mycache'
+}
+
 //REDIS
 resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
   name: 'redis'
