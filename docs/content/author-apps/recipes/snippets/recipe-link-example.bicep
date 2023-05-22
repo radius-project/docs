@@ -8,7 +8,6 @@ resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
   properties: {
     environment: environment
     application: application
-    mode: 'recipe'
     recipe: {
       name: 'azure-prod'
     }
@@ -23,7 +22,6 @@ resource redisParam 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
   properties: {
     environment: environment
     application: application
-    mode: 'recipe'
     recipe: {
       name: 'azure-prod'
       parameters: {
@@ -33,3 +31,13 @@ resource redisParam 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
   }
 }
 //PARAMETERS
+
+//DEFAULT
+resource redisDefault 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
+  name: 'mylink'
+  properties: {
+    environment: environment
+    application: application
+  }
+}
+//DEFAULT

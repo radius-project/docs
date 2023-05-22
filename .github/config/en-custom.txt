@@ -382,3 +382,4 @@ templatePath
 categorizeby
 jargons
 mins
+resourceProvisioning
