@@ -9,17 +9,7 @@ The `redislabs.com/Redis` link is a [portable link]({{< ref links >}}) which can
 
 ## Resource format
 
-{{< tabs Resource Values >}}
-
-{{< codetab >}}
-{{< rad file="snippets/redis-resource.bicep" embed=true marker="//REDIS" >}}
-{{< /codetab >}}
-
-{{< codetab >}}
 {{< rad file="snippets/redis-values.bicep" embed=true marker="//REDIS" >}}
-{{< /codetab >}}
-
-{{< /tabs >}}
 
 ### Top-level
 

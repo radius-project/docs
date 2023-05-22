@@ -16,11 +16,13 @@ resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
     environment: environment
     application:app.id
     resourceProvisioning: 'manual'
-    host: 'myredis.cluster.svc.local'
-    port: 6679
+    resources: [{
+      id: azureRedis.id
+    }]
+    hostname: azureRedis.properties.hostname
+    port: azureRedis.properties.port
     secrets: {
-      connectionString: '**********'
-      password: '**************'
+      password: azureRedis.listKeys().primaryKey
     }
   }
 }
