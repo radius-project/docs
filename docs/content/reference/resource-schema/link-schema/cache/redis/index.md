@@ -43,6 +43,7 @@ The `redislabs.com/Redis` link is a [portable link]({{< ref links >}}) which can
 | [secrets](#secrets) | n | Secrets used when building the link from values. | [See below](#secrets)
 
 ### Recipe
+
 | Property  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | \<recipe-name\> | y | The name of the Recipe. Must be unique within the resource-type. | `myrecipe`
@@ -50,7 +51,8 @@ The `redislabs.com/Redis` link is a [portable link]({{< ref links >}}) which can
 | parameters | n | A list of parameters to set on the Recipe for every Recipe usage and deployment. Can be overridden by the resource calling the Recipe. | `capacity: 1`
 
 
-### Resources 
+### Resources
+
 | Property | Required | Description | Example(s) |
 |----------|:--------:|-------------|------------|
 | id | y | The resource ID of the underlying resources for the link. | `redisCache.id`
