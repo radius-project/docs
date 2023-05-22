@@ -44,11 +44,8 @@ You can create any [parameter type supported by Bicep](https://learn.microsoft.c
 
 Once you have defined your backing infrastructure, you will need to output it from your IaC template so it can be "wired-up" to the resource that called the Recipe.
 
-Recipes allow you to specify `values`:
+Using the `values` output parameter, you can pass back information about your infrastructure.
 
-{{< tabs Values Resource >}}
-
-{{% codetab %}}
 When you output a `values` object, all of the individual properties will be directly mapped to the resource calling the Recipe. This allows you that most control over the resource being created within the application.
 
 #### Properties
@@ -81,9 +78,6 @@ output values object = {
   ]
 }
 ```
-
-{{% /codetab %}}
-{{< /tabs >}}
 
 ### Step 5: Store your template in a Bicep registry
 

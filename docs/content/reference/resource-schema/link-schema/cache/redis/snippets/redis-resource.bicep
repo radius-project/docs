@@ -24,8 +24,8 @@ resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
     hostname: azureRedis.properties.hostname
     port: azureRedis.properties.port
     secrets: {
-      connectionString: '**********'
-      password: '**************'
+      password: azureRedis.listPasswords()[0].password
+      connectionString: azureRedis.listConnectionStrings()[0].connectionString
     }
   }
 }
