@@ -57,6 +57,7 @@ Example output:
 RELEASE   VERSION   BICEP     COMMIT
 0.15.0    v0.15.0   0.11.13   2e60bfb46de73ec5cc70485d53e67f8eaa914ba7
 ```
+To easily author and validate the bicep templates in VSCode, you can install the [Radius Bicep VSCode extension]({{< ref "install.md#setup-vs-code" >}}).
 
 ## 3. Initialize Radius
 
