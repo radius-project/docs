@@ -9,7 +9,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   }
 }
 
-resource azureRedis 'Microsoft.Cache/redis@2022-06-01' = {
+resource azureRedis 'Microsoft.Cache/redis@2022-06-01' existing = {
   name: 'mycache'
 }
 
@@ -23,7 +23,7 @@ resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
     resources: [{
       id: azureRedis.id
     }]
-    hostname: azureRedis.properties.hostname
+    hostname: azureRedis.properties.hostName
     port: azureRedis.properties.port
     secrets: {
       password: azureRedis.listKeys().primaryKey
