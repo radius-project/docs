@@ -31,3 +31,13 @@ resource redisParam 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
   }
 }
 //PARAMETERS
+
+//DEFAULT
+resource redisParam 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
+  name: 'mylink'
+  properties: {
+    environment: environment
+    application: application
+  }
+}
+//DEFAULT
