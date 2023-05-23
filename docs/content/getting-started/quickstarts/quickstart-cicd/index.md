@@ -4,6 +4,7 @@ title: "Quickstart: Github Actions CI/CD integration"
 linkTitle: "GitHub Actions CI/CD"
 description: "Learn about adding your Radius apps to your deployment pipelines" 
 weight: 300
+categories: "Quickstart"
 tags: ["CI/CD"]
 ---
 

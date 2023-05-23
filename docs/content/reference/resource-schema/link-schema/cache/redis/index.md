@@ -9,17 +9,7 @@ The `redislabs.com/Redis` link is a [portable link]({{< ref links >}}) which can
 
 ## Resource format
 
-{{< tabs Resource Values >}}
-
-{{< codetab >}}
-{{< rad file="snippets/redis-resource.bicep" embed=true marker="//REDIS" >}}
-{{< /codetab >}}
-
-{{< codetab >}}
 {{< rad file="snippets/redis-values.bicep" embed=true marker="//REDIS" >}}
-{{< /codetab >}}
-
-{{< /tabs >}}
 
 ### Top-level
 
@@ -35,10 +25,27 @@ The `redislabs.com/Redis` link is a [portable link]({{< ref links >}}) which can
 |----------|:--------:|-------------|------------|
 | application | n | The ID of the application resource this resource belongs to. | `app.id`
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
-| resource  | n | The ID of the underlying resource for the link. Used when building the link from a resource. | `redisCache.id`
 | host | n | The Redis host name. | `redis.hello.com`
-| mode | Y | Specifies how to build the Link resource. Options are to build automatically via 'recipe' or build manually via 'values'. Selection determines which set of fields to additionally require. | `recipe`
+| port | n | The Redis port value. | `6379`
+| resourceProvisioning | n | Specifies how to build the Link resource. Options are to build automatically via 'recipe' or build manually via 'manually'. Selection determines which set of fields to additionally require. | `manual`
+| [recipe](#recipe)  | n | The recipe to deploy. | `redisCache.id`
+| [resources](#resources)  | n | An array of IDs of the underlying resources for the link. | [See below](#resources)
 | [secrets](#secrets) | n | Secrets used when building the link from values. | [See below](#secrets)
+
+### Recipe
+
+| Property  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| \<recipe-name\> | y | The name of the Recipe. Must be unique within the resource-type. | `myrecipe`
+| templatePath | y | The path to the Recipe contents. For Bicep Recipes this is a Bicep module registry address. | `'mycr.azurecr.io/recipes/myrecipe:1.0'`
+| parameters | n | A list of parameters to set on the Recipe for every Recipe usage and deployment. Can be overridden by the resource calling the Recipe. | `capacity: 1`
+
+
+### Resources
+
+| Property | Required | Description | Example(s) |
+|----------|:--------:|-------------|------------|
+| id | y | The resource ID of the underlying resources for the link. | `redisCache.id`
 
 ### Secrets
 

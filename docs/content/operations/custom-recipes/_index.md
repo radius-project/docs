@@ -44,11 +44,8 @@ You can create any [parameter type supported by Bicep](https://learn.microsoft.c
 
 Once you have defined your backing infrastructure, you will need to output it from your IaC template so it can be "wired-up" to the resource that called the Recipe.
 
-Recipes allow you to either specify `values` or `resource`:
+Using the `values` output parameter, you can pass back information about your infrastructure.
 
-{{< tabs Values Resource >}}
-
-{{% codetab %}}
 When you output a `values` object, all of the individual properties will be directly mapped to the resource calling the Recipe. This allows you that most control over the resource being created within the application.
 
 #### Properties
@@ -82,20 +79,6 @@ output values object = {
 }
 ```
 
-{{% /codetab %}}
-{{% codetab %}}
-
-Some Radius resources, such as Links, may support automatically mapping infrastructure via a resource ID. Refer to the backing resource's documentation to know what infrastructure is supported.
-
-For supported infrastructure and resources, you can simply output the resource ID as a string, and the properties will automatically configured. For example, `Applications.Link/redisCaches` supports auto-mapping of `Microsoft.Cache/redis`:
-
-{{< rad file="snippets/recipe.bicep" embed=true marker="//OUTRESOURCE" >}}
-
-{{% /codetab %}}
-{{< /tabs >}}
-
-If you specify both `values` and `resource`, `resource` will be used first and then `values` will override.
-
 ### Step 5: Store your template in a Bicep registry
 
 Recipes leverage [Bicep registries](https://learn.microsoft.com/azure/azure-resource-manager/bicep/private-module-registry) for template storage. Once you've authored a Recipe, you can publish it to your preferred OCI-compliant registry.
@@ -123,13 +106,15 @@ You can use your rad-bicep binary to publish your Recipe to your Bicep registry:
 
 Now that your Recipe Bicep template has been stored within your Bicep registry, you can add it your Radius environment to be used by developers. This allows you to mix-and-match templates for each of your environments such as dev, canary, and prod.
 
+Recipes now support a default experience, where you can register a Recipe under the name `default` within an environment. Developers can then call the Recipe without specifying a name, and Radius will automatically use the `default` Recipe. If you want to register a Recipe that is not the default, you can specify a custom name.
+
 Recipes can be added via the rad CLI or an environment Bicep definition:
 
 {{< tabs "rad CLI" "Bicep environment" >}}
 
 {{% codetab %}}
 ```bash
-rad recipe register --name myrecipe --environment myenv --template-path myregistry.azurecr.io/recipes/myrecipe:v1 --link-type Applications.Link/redisCaches
+rad recipe register --name default --environment myenv --template-path myregistry.azurecr.io/recipes/default:v1 --link-type Applications.Link/redisCaches
 ```
 {{% /codetab %}}
 {{% codetab %}}

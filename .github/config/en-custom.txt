@@ -379,3 +379,7 @@ upmerges
 approver
 toml
 templatePath
+categorizeby
+jargons
+mins
+resourceProvisioning

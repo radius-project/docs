@@ -7,4 +7,5 @@ weight: 200
 no_list: true
 ---
 
-{{< categorize >}}
+{{< categorizeby category="Quickstart">}}
+
