@@ -16,7 +16,7 @@ Before you get started, you'll need to make sure you have the following tools an
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [Radius environment](https://docs.radapp.dev/getting-started/)
 
-### Step 1: Create Kubernetes Objects
+### Step 1: Create Kubernetes objects
 
 The first step is to create the necessary Kubernetes objects. You can do this by creating a new file named `postman.yaml` and adding the following contents:
 
