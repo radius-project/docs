@@ -390,3 +390,4 @@ apiGroups
 ClusterRoleBinding
 roleRef
 dropdown
+apiGroup
