@@ -17,8 +17,14 @@ resource db 'Applications.Link/sqlDatabases@2022-03-15-privatepreview' = {
   properties: {
     environment: environment
     application: app.id
-    mode: 'resource'
-    resource: sqldb
+    resourceProvisioning: 'manual'
+    resources:[
+      {
+        id: sqldb
+      }
+    ]
+    database: 'https://sql.contoso.com'
+    server: 'inventory'
   }
 }
 //SQL
