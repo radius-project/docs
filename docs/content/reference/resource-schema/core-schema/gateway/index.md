@@ -25,6 +25,7 @@ weight: 401
 | application | y | The ID of the application resource this resource belongs to. | `app.id`
 | [hostname](#hostname) | n | The hostname information for this gateway. | [See below](#hostname)
 | [routes](#routes) | y | The routes attached to this gateway. | [See below](#routes)
+| [tls](#tls) | n | TLS/SSL configuration for this gateway. | [See below](#tls)
 
 #### Routes
 
@@ -51,7 +52,7 @@ You can define hostname information for how to access your application. See [bel
 |------|:--------:|-------------|---------|
 | sslPassthrough | n | Configures the gateway to passthrough encrypted SSL traffic to an HTTP route and container. Requires a single route to be set with no 'path' defined (just destination). With sslPassthrough set to `true`, the gateway can only support SNI routing. Path based routing cannot be supported. Defaults to 'false'. | `true`
 | hostname | n | The hostname for TLS termination. | `'hostname.radapp.dev'`
-| certificateFrom | n | The Radius SecretStore resource ID that holds the TLS certificate data for TLS termination. | `secretstore.id`
+| certificateFrom | n | The Radius Secret Store resource ID that holds the TLS certificate data for TLS termination. | `secretstore.id`
 | minimumProtocolVersion | n | The minimum TLS protocol to support for TLS termination. | `'1.2'`
 
 Note that SSL passthrough and TLS termination functionality are mutually exclusive.
