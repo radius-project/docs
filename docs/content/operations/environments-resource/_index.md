@@ -48,7 +48,7 @@ rad init
 {{% /codetab %}}
 
 {{% codetab %}}
-[rad env list]({{< ref rad_env_list >}}) lists all of the environments in your [workspace]({{< ref local-workspaces >}}):
+[rad env list]({{< ref rad_env_list >}}) lists all of the environments in your [workspace]({{< ref workspaces >}}):
 
 ```bash
 rad env list

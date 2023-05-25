@@ -52,7 +52,7 @@ For self-hosted environments, the location property is defaulted to `global` to 
 
 ### Environment parameter
 
-The `environment` string parameter is automatically injected into your Bicep template using the environment ID value specified in your default [workspace]({{< ref local-workspaces >}}). This value can also be overridden with the rad CLI: `rad deploy --params environment="/planes/radius/..."`.
+The `environment` string parameter is automatically injected into your Bicep template using the environment ID value specified in your default [workspace]({{< ref workspaces >}}). This value can also be overridden with the rad CLI: `rad deploy --params environment="/planes/radius/..."`.
 
 To access the auto-injected value, specify an `environment` string parameter in your Bicep file:
 

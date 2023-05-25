@@ -6,6 +6,7 @@ description: "Automate infrastructure deployment for your resources with Radius 
 weight: 300
 categories: "Concept"
 tags: ["recipes"]
+slug: recipes
 ---
 
 ## Overview

@@ -116,7 +116,7 @@ When you're ready to move on to the next step, use `CTRL+C` to exit the command.
 
 This step will add a database (Redis Cache) to the application.
 
-You can create a Redis Cache using [Recipes]({{< ref recipes-concept >}}) provided by Radius. The Radius community provides Recipes for running commonly used application dependencies, including Redis.
+You can create a Redis Cache using [Recipes]({{< ref recipes-overview >}}) provided by Radius. The Radius community provides Recipes for running commonly used application dependencies, including Redis.
 
 In this step you will:
 
