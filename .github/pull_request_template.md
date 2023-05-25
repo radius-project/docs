@@ -15,6 +15,10 @@ In addition, please fill out the following to help reviewers understand this pul
 
 <!--Please explain the changes you've made-->
 
+### Auto-generated description
+
+copilot:all
+
 ## Issue reference
 
 <!--Please reference the issue this docs PR reference from the radius repo: #[issue number]-->
