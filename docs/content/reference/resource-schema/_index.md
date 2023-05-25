@@ -13,7 +13,7 @@ The following properties and values are available across all Radius resources:
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | name | y | The name of your resource. | `mycontainer`
-| location | n | The location of your resource. See [below](#location) for more information. Defaults to 'global' for Radius resources. | `global`
+| location | y | The location of your resource. See [below](#location) for more information. The rad CLI defaults the value to 'global' for Radius resources. Direct API calls require `location` to be set to `'global'`. | `global`
 | environment | y | The environment used by your resources for deployment. | `environment` |
 
 ### Name
@@ -48,7 +48,7 @@ The resulting names are:
 
 The location property defines where to deploy a resource within the targeted platform.
 
-For self-hosted environments, the location property is defaulted to `global` to indicate the resource is scoped to the entire underlying cluster. This is a point-in-time implementation that will be revisited in a future revision of self-hosted Kubernetes environments.
+For self-hosted environments, the location property is defaulted to `global` by the rad CLI to indicate the resource is scoped to the entire underlying cluster. Direct API calls require `location` to be set to `'global'`. This is a point-in-time implementation that will be revisited in a future revision of self-hosted Kubernetes environments.
 
 ### Environment parameter
 

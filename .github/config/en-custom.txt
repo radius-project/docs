@@ -392,3 +392,4 @@ roleRef
 dropdown
 apiGroup
 prometheus
+valueFrom
