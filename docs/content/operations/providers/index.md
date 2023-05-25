@@ -36,76 +36,35 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
 
 #### Add a cloud provider when initializing an environment
 
-1. Initialize a new [environment]({{< ref environments >}}) with `rad env init kubernetes -i`
-1. Enter "y" to add an Azure cloud provider
+1. Initialize a new [environment]({{< ref environments >}}) with `rad init`
+1. Select the Kubernetes cluster to install Radius into. Enter an environment name and base Kubernetes namespace to deploy the apps into.
+1. Select "yes" to add a cloud provider and select Azure as the cloud provider
 1. Specify your Azure subscription and resource group
 1. Create an [Azure service principal](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) with the [proper permissions](https://aka.ms/azadsp-more). Enter the appID, password and the tenant of the service principal
 1. Deploy your app and any included Azure resources with `rad deploy`
 
 #### Add a cloud provider to an existing environment
 
-1. Reinstall the control plane with the cloud provider via `rad install kubernetes --reinstall -i`
-   - If using a Codespace or k3s, append `--public-endpoint-override "localhost:8081"` to the command
-   - If using Kind, append `--public-endpoint-override "localhost:8080"` to the command
-2. Enter "y" to add an Azure cloud provider
-3. Specify your Azure subscription and resource group
-4. Create an [Azure service principal](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) with the [proper permissions](https://aka.ms/azadsp-more). Enter the appID, password and the tenant of the service principal 
-5. Deploy your app and any included Azure resources with `rad deploy`
+1. Create an [Azure service principal](https://learn.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) with the [proper permissions](https://aka.ms/azadsp-more). 
 
-#### Add a cloud provider to an AKS cluster using AAD pod identity
+   ```bash
+   az ad sp create-for-rbac --role Owner --scope /subscriptions/<subscriptionid>/resourceGroups/<resourcegroupname> 
+   ```
+   Make sure to update the command with your subscription id and resource group name
+   
+1. Register the service principal in your control plane
+   ```bash
+   rad credential register azure --client-id <appId> --client-secret <password> --tenant-id <tenant id>
+   ```
+   Replace it with your service principal appId, password and tenant id
 
-[Azure Active Directory (Azure AD) pod-managed identities](https://docs.microsoft.com/azure/aks/use-azure-ad-pod-identity) use Kubernetes primitives to associate managed identities for Azure resources and identities in Azure AD with pods. Administrators create identities and bindings as Kubernetes primitives that allow pods to access Azure resources that rely on Azure AD as an identity provider.
+1. Update your environment with your Azure subscription and resource group. This is where Azure resources will be deployed.
+   ```bash
+   rad env update <myenv> --azure-subscription-id <subscriptionid> --azure-resource-group <resourcegroupname> 
+   ```
+1. Deploy your app and any included Azure resources with `rad deploy`
 
-1. Enable the preview az aks addon:
-   ```bash
-   az extension add --name aks-preview && az extension update --name aks-preview
-   ```
-1. Deploy an AKS cluster with [pod identity](https://docs.microsoft.com/azure/aks/use-azure-ad-pod-identity) enabled, or enable it on your existing cluster
-   ```bash
-   az aks create -g MY_RESOURCE_GROUP -n ${MY_CLUSTER} --enable-pod-identity --enable-pod-identity-with-kubenet
-   ```
-   or
-   ```bash
-   az aks update -g MY_RESOURCE_GROUP -n ${MY_CLUSTER} --enable-pod-identity --enable-pod-identity-with-kubenet
-   ```
-1. Deploy a User Assigned Managed identity, and give it a Contributor (or custom) role assignment to your desired Azure resource group
-   ```bash
-   az identity create --resource-group MY_RESOURCE_GROUP --name IDENTITY_NAME
-   export IDENTITY_CLIENT_ID="$(az identity show -g MY_RESOURCE_GROUP -n IDENTITY_NAME --query clientId -otsv)"
-   export IDENTITY_RESOURCE_ID="$(az identity show -g MY_RESOURCE_GROUP -n IDENTITY_NAME --query id -otsv)"
-   ```
-   ```bash
-   export GROUP_RESOURCE_ID=$(az group show -n MY_RESOURCE_GROUP -o tsv --query "id")
-   az role assignment create --role "Contributor" --assignee ${IDENTITY_CLIENT_ID} --scope ${GROUP_RESOURCE_ID}
-   ```
-1. Create a pod identity named "radius" with the User Assigned Managed identity:
-   ```bash
-   az aks pod-identity add --resource-group ${MY_RESOURCE_GROUP} --cluster-name ${MY_CLUSTER} --namespace radius-system  --name radius --identity-resource-id ${IDENTITY_RESOURCE_ID}
-   ```
-1. Install the [Radius Helm chart]({{< ref kubernetes >}}) with the azure provider values set:
-   ```bash
-   helm upgrade radius radius/radius --install --create-namespace --namespace radius-system --version {{< param chart_version >}} --wait --timeout 15m0s --set rp.provider.azure.podidentity=radius --set rp.provider.azure.subscriptionId=${MY_SUBSCIRPTION_ID} --set rp.provider.azure.resourceGroup=${MY_RESOURCE_GROUP}
-   ```
-1. Create a new environment:
-   ```bash
-   rad env init kubernetes -i
-   ```
-1. Manually add the `subscriptionId` and `resourcegroup` Azure cloud provider values to your local config:
-   ```yaml
-   workspaces:
-     default: myenv
-     items:
-       myenv:
-         connection:
-           context: MY_CONTEXT
-           kind: kubernetes
-         environment: /planes/radius/local/resourcegroups/myenv/providers/applications.core/environments/myenv
-         scope: /planes/radius/local/resourceGroups/myenv
-         providerConfig:
-           azure:
-             subscriptionid: "MY_SUBSCIRPTION_ID"
-             resourcegroup: "MY_RESOURCE_GROUP"
-   ```
+
 {{% /codetab %}}
 
 {{% codetab %}}
@@ -120,9 +79,9 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
 
 #### Add a cloud provider when initializing an environment
 
-1. Initialize a new [environment]({{< ref environments >}}) with `rad env init kubernetes -i`
-1. Enter "n" to add an Azure cloud provider
-1. Enter "y" to add an AWS cloud provider
+1. Initialize a new [environment]({{< ref environments >}}) with `rad init`
+1. Select the Kubernetes cluster to install Radius into. Enter an environment name and base Kubernetes namespace to deploy the apps into.
+1. Select "yes" to add a cloud provider and select AWS as the cloud provider
 1. Enter a valid AWS region
 1. [Create an IAM AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) and enter the Access Key ID and the AWS Secret Access Key. If you have already created an Access Key pair, you can use that instead.
 1. Deploy your app and any included AWS resources with `rad deploy`
