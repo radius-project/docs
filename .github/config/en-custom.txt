@@ -382,4 +382,13 @@ templatePath
 categorizeby
 jargons
 mins
+resourceProvisioning
+ServiceAccount
+apiVersion
+ClusterRole
+apiGroups
+ClusterRoleBinding
+roleRef
+dropdown
+apiGroup
 prometheus

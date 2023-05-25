@@ -32,7 +32,7 @@ An extender resource could be used to bring in a custom resource into Radius for
 
 ## Methods
 
-The following methods are available on the Redis link:
+The following methods are available on the Extender link:
 
 | Method | Description |
 |--------|-------------|
