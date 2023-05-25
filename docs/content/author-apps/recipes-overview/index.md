@@ -18,8 +18,11 @@ Recipes enable a **separation of concerns** between infrastructure teams and dev
 ## Capabilities
 
 ### Select the Recipe that meets your needs
+Recipes can be used in any environment, from dev to prod. You can run a default recipe registered in your environment or select the specific Recipe you want to run. To run a default recipe, simply add the resource you want to your app and omit the Recipe name:
 
-Recipes can be used in any environment, from dev to prod. Simply specify `mode: 'recipe'` in your [Link resource]({{< ref links-resources >}}), and select the Recipe you want to run:
+{{< rad file="snippets/recipe-link-example.bicep" embed=true marker="//DEFAULT" >}} 
+
+If you want to use a specific Recipe, you can specify the Recipe name in the `recipe` parameter:
 
 {{< rad file="snippets/recipe-link-example.bicep" embed=true marker="//BASIC" >}}
 
