@@ -5,7 +5,7 @@ linkTitle: "Redis"
 description: "Learn how to use a Redis link in your application"
 ---
 
-The `redislabs.com/Redis` link is a [portable link]({{< ref links >}}) which can be deployed to any platform Radius supports.
+The `redislabs.com/Redis` link is a [portable link]({{< ref links-resources >}}) which can be deployed to any platform Radius supports.
 
 ## Resource format
 

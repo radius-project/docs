@@ -391,4 +391,5 @@ ClusterRoleBinding
 roleRef
 dropdown
 apiGroup
+prometheus
 valueFrom

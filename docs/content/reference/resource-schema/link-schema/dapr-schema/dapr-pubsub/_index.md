@@ -56,7 +56,7 @@ You can also manually specify the metadata of a Dapr state store. When `mode` is
 
 ## Injected values
 
-Connections from [Radius services]({{< ref container >}}) to [links]({{< ref links >}}) by default inject the following values into the environment of the service:
+Connections from [Radius services]({{< ref container >}}) to [links]({{< ref links-resources >}}) by default inject the following values into the environment of the service:
 
 | Key | Value |
 |-----|-------|

@@ -4,6 +4,8 @@ title: "Author Custom Radius Recipes"
 linkTitle: "Custom Recipes"
 description: "Learn how to author custom Recipe templates to automate infrastructure deployment"
 weight: 500
+categories: "How-To"
+tags: ["recipes"]
 ---
 
 Recipes enable a **separation of concerns** between infrastructure teams and developers by **automating infrastructure deployment**.
@@ -126,7 +128,7 @@ rad recipe register myrecipe --environment myenv --template-path myregistry.azur
 
 ### Done
 
-You can now use your custom recipe in its accompanying resource. Visit the [Recipe developer guide]({{< ref recipes >}}) for more information.
+You can now use your custom recipe in its accompanying resource. Visit the [Recipe developer guide]({{< ref recipes-overview >}}) for more information.
 
 ## `context` parameter properties
 
@@ -176,5 +178,5 @@ In the following tables, "resource" refers to the resource "calling" the Recipe.
 
 ## Further reading
 
-- [Recipes overview]({{< ref recipes >}})
+- [Recipes overview]({{< ref recipes-overview >}})
 - [`rad recipe CLI reference`]({{< ref rad_recipe >}})

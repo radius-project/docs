@@ -4,6 +4,8 @@ title: "Bicep language overview"
 linkTitle: "Bicep"
 description: "Learn about the Bicep language and how Radius integrates with it"
 weight: 200
+categories: "How-To"
+tags: ["bicep"]
 ---
 
 Project Radius uses the [Bicep language](https://docs.microsoft.com/EN-US/azure/azure-resource-manager/bicep/) to describe your application and its resources.

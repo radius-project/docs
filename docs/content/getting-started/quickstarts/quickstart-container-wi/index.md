@@ -20,7 +20,7 @@ The steps below will showcase a "rad-ified" version of the existing [Azure AD wo
 ## Prerequisites
 
 - [rad CLI]({{< ref getting-started >}}) installed on your machine
-- [Supported Kubernetes cluster]({{< ref kubernetes >}})
+- [Supported Kubernetes cluster]({{< ref kubernetes-platform >}})
 - [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed in your cluster
 
 ## Step 1: Initialize Radius 
@@ -33,7 +33,7 @@ rad init
 
 ## Step 2: Define a Radius environment 
 
-Create a file named `app.bicep` and define a Radius environment with [identity property]({{< ref environments >}}) set. This configures your environment to use your Azure AD workload identity installation with your cluster's OIDC endpoint:
+Create a file named `app.bicep` and define a Radius environment with [identity property]({{< ref environments-resource >}}) set. This configures your environment to use your Azure AD workload identity installation with your cluster's OIDC endpoint:
 
 {{< rad file="snippets/container-wi.bicep" embed=true marker="//ENVIRONMENT">}}
 

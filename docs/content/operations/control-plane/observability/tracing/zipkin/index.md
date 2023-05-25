@@ -4,6 +4,8 @@ title: "How-To: Set up Zipkin for distributed tracing"
 linkTitle: "Zipkin"
 description: "Learn how to deploy and set up Zipkin for distributed tracing"
 type: docs
+categories: "How-To"
+tags: ["tracing", "observability"]
 ---
 
 [Zipkin](https://zipkin.io/) is an open source distributed tracing system. It helps gather timing data needed to troubleshoot latency problems in microservice architectures. It manages both the collection and lookup of this data.

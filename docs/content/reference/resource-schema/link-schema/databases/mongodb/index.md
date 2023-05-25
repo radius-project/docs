@@ -5,7 +5,7 @@ linkTitle: "MongoDB"
 description: "Learn how to use a MongoDB link in your application"
 ---
 
-The `mongodb.com/MongoDatabase` link is a [portable link]({{< ref links >}}) which can be deployed to any platform Radius supports.
+The `mongodb.com/MongoDatabase` link is a [portable link]({{< ref links-resources >}}) which can be deployed to any platform Radius supports.
 
 ## Resource format
 

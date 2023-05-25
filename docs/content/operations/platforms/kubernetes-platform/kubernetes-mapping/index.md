@@ -5,6 +5,8 @@ linkTitle: "Resource mapping"
 description: "Learn how Radius resources map to Kubernetes objects"
 weight: 200
 slug: "resource-mapping"
+categories: "Concept"
+tags: ["Kubernetes"]
 ---
 
 When deploying Radius resources to environments running on Kubernetes, the [control plane]({{< ref architecture >}}) will map these resources into one or more Kubernetes objects. This page describes these mappings and naming conventions.

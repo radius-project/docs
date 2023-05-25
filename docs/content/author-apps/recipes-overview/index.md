@@ -4,6 +4,9 @@ title: "Radius Recipes"
 linkTitle: "Recipes"
 description: "Automate infrastructure deployment for your resources with Radius recipes"
 weight: 300
+categories: "Concept"
+tags: ["recipes"]
+slug: recipes
 ---
 
 ## Overview
@@ -15,7 +18,6 @@ Recipes enable a **separation of concerns** between infrastructure teams and dev
 ## Capabilities
 
 ### Select the Recipe that meets your needs
-
 Recipes can be used in any environment, from dev to prod. You can run a default recipe registered in your environment or select the specific Recipe you want to run. To run a default recipe, simply add the resource you want to your app and omit the Recipe name:
 
 {{< rad file="snippets/recipe-link-example.bicep" embed=true marker="//DEFAULT" >}} 

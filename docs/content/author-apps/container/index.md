@@ -4,6 +4,8 @@ title: "Containerized workloads"
 linkTitle: "Containers"
 description: "Model and run container workloads in your Radius application"
 weight: 100
+categories: "Concept"
+tags: ["containers"]
 ---
 
 A Radius container represents a container workload within your application.
