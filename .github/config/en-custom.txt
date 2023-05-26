@@ -393,3 +393,6 @@ dropdown
 apiGroup
 prometheus
 valueFrom
+tls
+minimumProtocolVersion
+certificateFrom
