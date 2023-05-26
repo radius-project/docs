@@ -23,8 +23,8 @@ resource db 'Applications.Link/sqlDatabases@2022-03-15-privatepreview' = {
         id: sqldb
       }
     ]
-    database: 'https://sql.contoso.com'
-    server: 'inventory'
+    server: 'https://sql.contoso.com'
+    database: 'inventory'
   }
 }
 //SQL
