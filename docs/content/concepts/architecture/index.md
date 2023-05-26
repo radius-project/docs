@@ -4,6 +4,8 @@ title: Project Radius architecture
 linkTitle: Architecture
 description: Learn how the Project Radius control-plane services deploy and manage your applications
 weight: 600
+categories: "Concept"
+tags: ["control plane"]
 ---
 
 ## Overview

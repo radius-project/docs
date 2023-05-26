@@ -4,6 +4,8 @@ title: "Author Custom Radius Recipes"
 linkTitle: "Custom Recipes"
 description: "Learn how to author custom Recipe templates to automate infrastructure deployment"
 weight: 500
+categories: "How-To"
+tags: ["recipes"]
 ---
 
 Recipes enable a **separation of concerns** between infrastructure teams and developers by **automating infrastructure deployment**.
@@ -85,22 +87,11 @@ Recipes leverage [Bicep registries](https://learn.microsoft.com/azure/azure-reso
 
 For private registries, make sure the cloud provider configured in your Radius environment has pull permissions for your container registry.
 
-You can use your rad-bicep binary to publish your Recipe to your Bicep registry:
+Recipes can be published via the rad CLI:
 
-{{< tabs "MacOS/Linux/WSL" "Windows PowerShell" >}}
-
-{{% codetab %}}
 ```bash
-~/.rad/bin/rad-bicep publish myrecipe.bicep --target br:myregistry.azurecr.io/recipes/myrecipe:v1
+rad bicep publish --file myrecipe.bicep --target br:myregistry.azurecr.io/recipes/myrecipe:v1
 ```
-{{% /codetab %}}
-
-{{% codetab %}}
-```bash
-& "$env:UserProfile\.rad\bin\rad-bicep.exe" publish myrecipe.bicep --target br:myregistry.azurecr.io/recipes/myrecipe:v1
-```
-{{% /codetab %}}
-{{< /tabs >}}
 
 ### Step 6: Register your Recipe with your environment
 
@@ -114,7 +105,7 @@ Recipes can be added via the rad CLI or an environment Bicep definition:
 
 {{% codetab %}}
 ```bash
-rad recipe register --name default --environment myenv --template-path myregistry.azurecr.io/recipes/default:v1 --link-type Applications.Link/redisCaches
+rad recipe register myrecipe --environment myenv --template-path myregistry.azurecr.io/recipes/myrecipe:v1 --link-type Applications.Link/redisCaches
 ```
 {{% /codetab %}}
 {{% codetab %}}
@@ -126,7 +117,7 @@ rad recipe register --name default --environment myenv --template-path myregistr
 
 ### Done
 
-You can now use your custom recipe in its accompanying resource. Visit the [Recipe developer guide]({{< ref recipes >}}) for more information.
+You can now use your custom recipe in its accompanying resource. Visit the [Recipe developer guide]({{< ref recipes-overview >}}) for more information.
 
 ## `context` parameter properties
 
@@ -176,5 +167,5 @@ In the following tables, "resource" refers to the resource "calling" the Recipe.
 
 ## Further reading
 
-- [Recipes overview]({{< ref recipes >}})
+- [Recipes overview]({{< ref recipes-overview >}})
 - [`rad recipe CLI reference`]({{< ref rad_recipe >}})

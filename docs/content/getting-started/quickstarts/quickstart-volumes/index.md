@@ -16,7 +16,7 @@ This quickstart will provide an overview of how to:
 ## Prerequisites
 
 - [rad CLI]({{< ref getting-started >}})
-- [Radius environment]({{< ref environments >}})
+- [Radius environment]({{< ref environments-resource >}})
 
 ## Step 1: Define an app and a container
 

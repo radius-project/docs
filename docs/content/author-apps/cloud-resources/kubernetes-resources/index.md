@@ -4,6 +4,8 @@ title: "Kubernetes resources"
 linkTitle: "Kubernetes"
 description: "Deploy and connect to Kubernetes resources in your application"
 weight: 100
+categories: "Concept"
+tags: ["Kubernetes"]
 ---
 
 Radius applications are able to connect to and leverage Kubernetes resources.

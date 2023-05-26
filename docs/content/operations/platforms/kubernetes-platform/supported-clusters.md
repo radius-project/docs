@@ -4,6 +4,8 @@ title: "Supported Kubernetes clusters"
 linkTitle: "Supported clusters"
 description: "Learn how to setup Radius on supported Kubernetes clusters"
 weight: 100
+categories: "How-To"
+tags: ["Kubernetes", "control plane"]
 ---
 
 ## Minimum version

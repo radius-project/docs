@@ -5,6 +5,8 @@ linkTitle: "Links"
 description: "Learn how Radius Links enable infrastructure portability"
 weight: 300
 slug: "links"
+categories: "Concept"
+tags: ["links","portability"]
 ---
 
 Links provide an **infrastructure abstraction** that enables **portability** for Radius applications. Links utilize open-source APIs, like Redis and MongoDB, to allow users to dynamically bind to platform resources. Instead of identifying a specific instance of a resource, users can specify a link and the API it can talk to. Links support connecting directly to an existing resource and will soon support dynamic provisioning.

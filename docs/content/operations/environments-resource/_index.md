@@ -4,6 +4,9 @@ title: "Radius environments"
 linkTitle: "Environments"
 description: "Learn about Radius environments and how to interact with them"
 weight: 400
+
+categories: "How-To"
+tags: ["environments"]
 ---
 
 Radius environments are prepared "landing zones" for Radius applications. Applications deployed to an environment will inherit the container runtime, configuration, and other settings from the environment. Stay tuned for additional environment capabilities coming soon.
@@ -92,9 +95,9 @@ The following example shows an environment configured with Kubernetes as the tar
 
 ## How-to: Initialize a new environment
 
-1. Begin by deploying a compatible [Kubernetes cluster]({{< ref kubernetes >}})
+1. Begin by deploying a compatible [Kubernetes cluster]({{< ref kubernetes-platform >}})
 
-   *Visit the [Kubernetes platform docs]({{< ref kubernetes >}}) for a list of supported clusters and specific cluster requirements.*
+   *Visit the [Kubernetes platform docs]({{< ref kubernetes-platform >}}) for a list of supported clusters and specific cluster requirements.*
 
 1. Ensure your target kubectl context is set as the default:
    ```bash

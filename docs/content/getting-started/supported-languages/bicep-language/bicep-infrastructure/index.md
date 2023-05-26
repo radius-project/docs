@@ -20,6 +20,7 @@ You can now use the `cosmos::db` resource in your Radius application.
 
 - [Microsoft Azure resources]({{< ref azure-resources >}})
 - [Kubernetes resources]({{< ref kubernetes-resources >}})
+- [AWS resources]({{< ref aws-resources >}})
 
 ## Reference an existing resource
 
