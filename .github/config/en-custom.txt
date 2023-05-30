@@ -378,6 +378,7 @@ upmerge
 upmerges
 approver
 toml
+templateKind
 templatePath
 categorizeby
 jargons
