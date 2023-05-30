@@ -120,7 +120,7 @@ You've now deployed your application to your Kubernetes cluster!
 1. Register the Recipe to your Radius Environment:
 
    ```bash
-   rad recipe register azure -e default  --template-path radius.azurecr.io/recipes/rediscaches/azure:1.0 --link-type Applications.Link/redisCaches
+   rad recipe register azure -e default  --template-path radius.azurecr.io/recipes/rediscaches/azure:1.0 --link-type Applications.Link/redisCaches --template-kind bicep
    ```
 
    Update the Recipe name given to the resource to `azure` to use the Redis cache on Azure .
@@ -160,7 +160,7 @@ You've now deployed your application to your Kubernetes cluster!
 1. Register the Recipe to your Radius Environment:
 
    ```bash
-   rad recipe register aws -e default  --template-path radius.azurecr.io/recipes/rediscaches/aws:1.0 --link-type Applications.Link/redisCaches
+   rad recipe register redis-aws -e default  --template-path radius.azurecr.io/recipes/rediscaches/aws:1.0 --link-type Applications.Link/redisCaches --template-kind bicep
    ```
 
    Update the recipe name to `redis-aws` to use the Amazon MemoryDB for Redis and pass the `eksClusterName` as parameter to the recipe.
@@ -168,6 +168,7 @@ You've now deployed your application to your Kubernetes cluster!
    > Note: Passing the `eksClusterName` during the registration of the Recipe is a temporary additional step as Radius builds up AWS support.
 
    ```bicep
+   param eksClusterName string
    resource db 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
       name: 'db'
       location: location
@@ -197,24 +198,16 @@ You've now deployed your application to your Kubernetes cluster!
    ```
    Deployment In Progress...
 
-   Completed            memorydb-module Microsoft.Resources/deployments
    Completed            webapp          Applications.Core/applications
-   Completed            demo-memorydb-subnet-group AWS.MemoryDB/SubnetGroup
-   Completed            demo-memorydb-cluster AWS.MemoryDB/Cluster
-   Completed            <YOUR_EKS_CLUSTER_NAME> AWS.EKS/Cluster     
-   Completed            demo-memorydb-cluster AWS.MemoryDB/Cluster
    Completed            db              Applications.Link/redisCaches
    Completed            frontend        Applications.Core/containers
 
    Deployment Complete
 
    Resources:
-      <YOUR_EKS_CLUSTER_NAME> AWS.EKS/Cluster     
-      demo-memorydb-cluster AWS.MemoryDB/Cluster
-      demo-memorydb-subnet-group AWS.MemoryDB/SubnetGroup
-      db              Applications.Link/redisCaches
-      webapp          Applications.Core/applications
-      frontend        Applications.Core/containers
+    webapp          Applications.Core/applications
+    frontend        Applications.Core/containers
+    db              Applications.Link/redisCaches
    ```  
 {{% /codetab %}}
 {{< /tabs >}}
