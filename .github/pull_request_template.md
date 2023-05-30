@@ -21,4 +21,10 @@ copilot:all
 
 ## Issue reference
 
-<!--Please reference the issue this docs PR reference from the radius repo: #[issue number]-->
+<!--
+Please reference the docs or Radius issue that this pull request addresses:
+
+Fixes: #[issue number]
+or
+Fixes: https://github.com/project-radius/radius/issues/[issue number]
+-->
