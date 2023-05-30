@@ -5,7 +5,7 @@ linkTitle: "MongoDB"
 description: "Learn how to use a MongoDB link in your application"
 ---
 
-The `mongodb.com/MongoDatabase` link is a [portable link]({{< ref links >}}) which can be deployed to any platform Radius supports.
+The `mongodb.com/MongoDatabase` link is a [portable link]({{< ref links-resources >}}) which can be deployed to any platform Radius supports.
 
 ## Resource format
 
@@ -36,8 +36,8 @@ The `mongodb.com/MongoDatabase` link is a [portable link]({{< ref links >}}) whi
 | application | n | The ID of the application resource this resource belongs to. | `app.id`
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
 | resource  | n | The ID of the underlying resource for the link. Used when building the link from a resource. | `cosmosDatabase.id`
-| host | n | The Redis host name. | `mongo.hello.com`
-| port | n | The Redis port. | `4242`
+| host | n | The MongoDB host name. | `mongo.hello.com`
+| port | n | The MongoDB port. | `4242`
 | [secrets](#secrets) | n | Secrets used when building the link from values. | [See below](#secrets)
 
 ### Secrets

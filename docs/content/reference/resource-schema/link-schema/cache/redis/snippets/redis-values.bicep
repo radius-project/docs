@@ -9,18 +9,24 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   }
 }
 
+resource azureRedis 'Microsoft.Cache/redis@2022-06-01' existing = {
+  name: 'mycache'
+}
+
 //REDIS
 resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
   name: 'redis'
   properties: {
     environment: environment
     application:app.id
-    mode: 'values'
-    host: 'myredis.cluster.svc.local'
-    port: 6679
+    resourceProvisioning: 'manual'
+    resources: [{
+      id: azureRedis.id
+    }]
+    host: azureRedis.properties.hostName
+    port: azureRedis.properties.port
     secrets: {
-      connectionString: '**********'
-      password: '**************'
+      password: azureRedis.listKeys().primaryKey
     }
   }
 }
