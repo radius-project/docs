@@ -82,14 +82,6 @@ jobs:
           key: ${{ runner.os }}-go-${{ hashFiles('radius/go.sum') }}
           restore-keys: |
             ${{ runner.os }}-go-
-      - name: Restore CLI Docs Cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./docs/content/reference/cli
-          key: ${{ runner.os }}-cli-${{ hashFiles('radius/pkg/cli') }}
-          restore-keys: |
-            ${{ runner.os }}-cli-
       - name: Generate CLI Docs
         run: |
           if [ ! -f ./docs/content/reference/cli/rad.md ]; then
