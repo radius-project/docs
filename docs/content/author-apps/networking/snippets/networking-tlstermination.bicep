@@ -50,7 +50,7 @@ resource wwwRadiusTLS 'Applications.Core/secretStores@2022-03-15-privatepreview'
     // Applications.Core/gateways requires 'tls.crt' and 'tls.key' keys to be present in the
     // this secretstore resource.
     data: {
-      // Radius ensures if specified 'tls.crt' and 'tls.key' keys are present in refereced Kubernetes secret,
+      // Radius ensures that the specified 'tls.crt' and 'tls.key' keys are present in refereced Kubernetes secret,
       // default/wwwradiustls. Otherwise, it will return the bad request error. 
       'tls.crt': {}
       'tls.key': {}
