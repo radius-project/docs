@@ -44,13 +44,14 @@ resource wwwRadiusTLS 'Applications.Core/secretStores@2022-03-15-privatepreview'
   properties: {
     application: app.id
     type: 'certificate'
-    // 'tls-wwwradius' resource references 'wwwradiustls' kubernetes tls secret in 'default' namespace
+    // This resource references 'wwwradiustls' kubernetes tls secret in 'default' namespace.
     resource: 'default/wwwradiustls'
 
-    // data property requires 'tls.crt' and 'tls.key' secret key because Applications.Core/gateways needs these keys to enable TLS termination.
+    // data property requires 'tls.crt' and 'tls.key' secret keys because Applications.Core/gateways needs
+    // these keys to enable TLS termination.
     data: {
-      // Radius ensures that the specified 'tls.crt' and 'tls.key' keys are present in referenced Kubernetes secret,
-      // 'default/wwwradiustls'. It will return the bad request error if the keys are not present in 'default/wwwradiustls'.
+      // Radius ensures that the specified 'tls.crt' and 'tls.key' keys exist in referenced Kubernetes secret,
+      // 'default/wwwradiustls'. Otherwise, it will return the bad request error.
       'tls.crt': {}
       'tls.key': {}
     }
