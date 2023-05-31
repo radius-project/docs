@@ -52,16 +52,8 @@ resource existingAppCert 'Applications.Core/secretStores@2022-03-15-privateprevi
     resource: 'secret-app-existing-secret' // Reference to the name of a secret in existing secret store
     type: 'certificate' // The type of secret in your resource
     data: {
-      'tls.crt': {
-        valueFrom: {
-          name: 'tls.crt'
-        }
-      }
-      'tls.key': {
-        valueFrom: {
-          name: 'tls.key'
-        }
-      }
+      'tls.crt': {}
+      'tls.key': {}
     }
   }
 }
