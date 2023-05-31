@@ -43,12 +43,16 @@ resource wwwRadiusTLS 'Applications.Core/secretStores@2022-03-15-privatepreview'
   name: 'tls-wwwradius'
   properties: {
     application: app.id
+    type: 'certificate'
+    // 'tls-wwwradius' resource references 'wwwradiustls' kubernetes tls secret in 'default' namespace
+    resource: 'default/wwwradiustls'
+
     data: {
+      // Refereced Kubenretes secret, default/wwwradiustls, must include both 'tls.crt' and 'tls.key' keys,
+      // consumed by Applications.Core/gateways to enable TLS termination.
       'tls.crt': {}
       'tls.key': {}
     }
-    // 'wwwradiustls' is the kubernetes tls secret in 'default' namespace
-    resource: 'default/wwwradiustls'
   }
 }
 //GATEWAY

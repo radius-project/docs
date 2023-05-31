@@ -35,9 +35,7 @@ Refer to the [Gateway schema]({{< ref gateway >}}) for more information on how t
 
 ### TLS Termination
 
-`Gateway` supports TLS termination for the incoming traffic, allowing unencrypted traffic to be directed to the destinations specified in `properties.routes`. TLS certificates needs to be maintained securely or referenced using [Secret Store]({{< ref secretstore >}}).
-
-Refer to the [Secret Store schema]({{< ref secretstore >}}) for more information on how to model secret stores.
+Gateways support TLS termination. This allows incoming encrypted traffic to be decrypted with a user-specific certificate and then routed, unencrypted, to the specified routes. TLS certificates can be stored or referenced via a [Radius secret store]({{< ref secretstore >}}).
 
 ### SSL Passthrough
 
