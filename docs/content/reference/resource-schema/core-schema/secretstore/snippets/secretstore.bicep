@@ -49,9 +49,10 @@ resource existingAppCert 'Applications.Core/secretStores@2022-03-15-privateprevi
   name: 'existing-appcert'
   properties:{
     application: app.id
-    resource: 'secret-app-existing-secret' // Reference to the name of a secret in existing secret store
+    resource: 'secret-app-existing-secret' // Reference to the name of an external secret store
     type: 'certificate' // The type of secret in your resource
     data: {
+      // The keys in this object are the names of the secrets in an external secret store
       'tls.crt': {}
       'tls.key': {}
     }

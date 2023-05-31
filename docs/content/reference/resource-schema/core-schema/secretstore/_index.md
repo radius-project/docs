@@ -42,11 +42,11 @@ This property is an object to represent key-value type secrets. You define your 
 |------|:--------:|-------------|---------|
 | value | y | The value of the secret key. | `'secretString'`
 | encoding | n | The encoding type of the data value (default is `'raw'`). | `'base64'`
-| [valueFrom](#valuefrom) | n | An object to define the secret store `properties.resource` reference (not yet supported for Kubernetes Secrets) | [See below](#valuefrom)
+| [valueFrom](#valuefrom) | n | A reference to an external secret. This field is currently not in use, as it is meant for supporting more types of external secrets in the future. | [See below](#valuefrom)
 
 ###### valueFrom
 
-*Note:* `valueFrom` is not yet supported for Kubernetes Secrets
+*Note:* `valueFrom` is not supported for Kubernetes Secrets, but may be used for other secret store types in the future.
 
 | Key | Required | Description | Example |
 |------------|:--------:|-------------|---------|
