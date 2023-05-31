@@ -160,6 +160,7 @@ databaseAccounts
 datastore
 de
 declaratively
+decrypted
 deployable
 dev
 docsy
@@ -342,7 +343,6 @@ traceId
 ubuntu
 ui
 ucp
-unencrypted
 unmanaged
 url
 userguide
