@@ -47,8 +47,8 @@ resource wwwRadiusTLS 'Applications.Core/secretStores@2022-03-15-privatepreview'
       'tls.crt': {}
       'tls.key': {}
     }
-    // 'radiustls' is the kubernetes tls secret in 'default' namespace
-    resource: 'default/radiustls'
+    // 'wwwradiustls' is the kubernetes tls secret in 'default' namespace
+    resource: 'default/wwwradiustls'
   }
 }
 //GATEWAY
