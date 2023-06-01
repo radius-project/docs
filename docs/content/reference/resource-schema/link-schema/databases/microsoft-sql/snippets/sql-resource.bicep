@@ -2,12 +2,17 @@ import radius as radius
 
 param environment string
 
-param sqldb string
-
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'cosmos-container'
   properties: {
     environment: environment
+  }
+}
+
+resource sqldb 'Microsoft.Sql/servers@2021-02-01-preview' existing = {
+  name: 'sqldb'
+  resource dbinner 'databases' existing = {
+    name: 'cool-database'
   }
 }
 
@@ -20,11 +25,11 @@ resource db 'Applications.Link/sqlDatabases@2022-03-15-privatepreview' = {
     resourceProvisioning: 'manual'
     resources:[
       {
-        id: sqldb
+        id: sqldb::dbinner.id
       }
     ]
-    server: 'https://sql.contoso.com'
-    database: 'inventory'
+    server: sqldb.properties.fullyQualifiedDomainName
+    database: sqldb::dbinner.name
   }
 }
 //SQL
