@@ -19,7 +19,7 @@ This quickstart will provide an overview of how to:
 ## Prerequisites
 
 - [rad CLI]({{< ref getting-started >}})
-- [Supported Kubernetes cluster]({{< ref kubernetes-platform >}})
+- [Supported Kubernetes cluster]({{< ref "/operations/platforms/kubernetes" >}})
 - [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed on your cluster
 - [Azure Keyvault Provider](https://azure.github.io/secrets-store-csi-driver-provider-azure/docs/getting-started/installation/)
    - The above installation will also install the required [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation.html)
