@@ -120,7 +120,7 @@ This command:
 - Creates a port-forward from localhost to port 3000 inside the container so you can navigate to the app's frontend UI
 - Streams container logs to your terminal
 
-Access the application by opening [http://localhost:3000](http://localhost:3000) in a browser. If you are using codespaces, you can get the demo app url from the ports tab in VsCode.
+Access the application by opening [http://localhost:3000](http://localhost:3000) in a browser. If you are using codespaces, you can get the demo app url from the ports tab in VSCode.
 
 <img src="./demo-screenshot.png" alt="Screenshot of the demo container" width=400>
 <br /><br />
@@ -165,7 +165,7 @@ Use below command to run the updated application again:
 rad run app.bicep
 ```
 
-Open the browser to [http://localhost:3000](http://localhost:3000) and you should see that the environment variables have changed. The `demo` container now has connection information for Redis (`CONNECTION_REDIS_HOST`, `CONNECTION_REDIS_PORT`). If you are using codespaces, you can get the demo app url from the ports tab in VsCode
+Open the browser to [http://localhost:3000](http://localhost:3000) and you should see that the environment variables have changed. The `demo` container now has connection information for Redis (`CONNECTION_REDIS_HOST`, `CONNECTION_REDIS_PORT`). If you are using codespaces, you can get the demo app url from the ports tab in VSCode
 
 <img src="./demo-with-redis-screenshot.png" alt="Screenshot of the demo container" width=500>
 <br /><br />
