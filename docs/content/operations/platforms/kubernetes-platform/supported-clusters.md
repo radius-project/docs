@@ -6,6 +6,8 @@ description: "Learn how to setup Radius on supported Kubernetes clusters"
 weight: 100
 categories: "How-To"
 tags: ["Kubernetes", "control plane"]
+aliases:
+    - /operations/platforms/kubernetes/supported-clusters/
 ---
 
 ## Minimum version
