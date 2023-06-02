@@ -6,12 +6,13 @@ description: "Learn how to use Radius Recipes within your application"
 weight: 500
 slug: "recipes"
 categories: "Quickstart"
+tags : ["Recipe"]
 ---
 
 This quickstart will teach you:
 
 * How to use “dev” Recipes in your Radius Environment
-* How to deploy your own Recipes in your Radius Environment for multiple cloud providers.
+* How to deploy your own Recipes in your Radius Environment for Azure.
 * How to author your own Recipes
 
 ## Prerequisites
@@ -108,13 +109,13 @@ You've now deployed your application to your Kubernetes cluster!
 
    You will now be able to see both the metadata of your container application as well as interact with the `Todo App` and add/remove items in it as wanted.
 
-## Step 3: Use Azure / AWS recipes in your application
+## Step 3: Use Azure recipes in your application
 
-> *This step needs an Azure subscription or an AWS account to deploy the application which would incur some costs. Add the required cloud provider (AWS/Azure) to your environment in order to deploy an Azure or AWS recipe*
+> *This step needs an Azure subscription to deploy the application which would incur some costs. Add the required cloud provider (Azure) to your environment in order to deploy an Azure recipe*
 
 {{< button text="Learn more about configuring Cloud providers" page="providers#configure-a-cloud-provider" newtab="true" >}}
 
-{{< tabs Azure AWS >}}
+{{< tabs Azure >}}
 {{% codetab %}}
 
 1. Register the Recipe to your Radius Environment:
@@ -152,64 +153,6 @@ You've now deployed your application to your Kubernetes cluster!
    ```
 
 {{% /codetab %}}
-
-{{% codetab %}}
-
-> *You can run this only on an EKS cluster. Make sure that the each of the Subnets in your EKS cluster Subnet Group are within the [list of supported MemoryDB availability zones](https://docs.aws.amazon.com/memorydb/latest/devguide/subnetgroups.html)*
-
-1. Register the Recipe to your Radius Environment:
-
-   ```bash
-   rad recipe register redis-aws -e default  --template-path radius.azurecr.io/recipes/rediscaches/aws:1.0 --link-type Applications.Link/redisCaches --template-kind bicep
-   ```
-
-   Update the recipe name to `redis-aws` to use the Amazon MemoryDB for Redis and pass the `eksClusterName` as parameter to the recipe.
-
-   > Note: Passing the `eksClusterName` during the registration of the Recipe is a temporary additional step as Radius builds up AWS support.
-
-   ```bicep
-   param eksClusterName string
-   resource db 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
-      name: 'db'
-      location: location
-      properties: {
-         environment: environment
-         mode: 'recipe'
-         recipe: {
-            name: 'redis-aws'
-            parameters: {
-               eksClusterName: eksClusterName
-            }
-         }
-      }
-   }
-   ```
-
-2. Deploy your application to your environment:
-
-   ```bash
-   rad deploy ./app.bicep --parameters eksClusterName=YOUR_EKS_CLUSTER_NAME
-   ```
-
-   Make sure to replace `YOUR_EKS_CLUSTER_NAME` with your EKS cluster name.
-
-   This will deploy the application into your environment and launch the container resource for the frontend website. This operation may take some time, since it is deploying a MemoryDB resource to AWS. You should see the following resources deployed at the end of `rad deploy`:
-
-   ```
-   Deployment In Progress...
-
-   Completed            webapp          Applications.Core/applications
-   Completed            db              Applications.Link/redisCaches
-   Completed            frontend        Applications.Core/containers
-
-   Deployment Complete
-
-   Resources:
-    webapp          Applications.Core/applications
-    frontend        Applications.Core/containers
-    db              Applications.Link/redisCaches
-   ```  
-{{% /codetab %}}
 {{< /tabs >}}
 
 1. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose>}})
@@ -230,7 +173,7 @@ You've now deployed your application to your Kubernetes cluster!
 ## Step 4: Cleanup your environment
 
 1. If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to delete all Radius resources running on your cluster.
-2. Azure/AWS resources are not deleted when deleting a Radius environment, so to prevent additional charges, make sure to delete all resources created in this quickstart. For Azure, this includes the Azure Redis cache and for AWS, this includes the SubnetGroup and MemoryDB.
+2. Azure resources are not deleted when deleting a Radius environment, so to prevent additional charges, make sure to delete all resources created in this quickstart. For Azure, this includes the Azure Redis cache.
 
 ## Next steps
 
