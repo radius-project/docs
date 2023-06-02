@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: demo-certificate
+spec:
+  commonName: YOUR_DOMAIN
+  dnsNames:
+    - YOUR_DOMAIN
+  issuerRef:
+    name: example-issuer
+    kind: ClusterIssuer
+  secretName: demo-secret

@@ -1,0 +1,58 @@
+---
+type: docs
+title: "Quickstart: TLS termination with existing TLS certificate"
+linkTitle: "TLS termination"
+description: "Learn about how to use Radius to deploy HTTPS-enabled application with a TLS certificate" 
+weight: 800
+slug: 'tls-termination'
+categories: "Quickstart"
+tags: ["https"]
+---
+
+This quickstart will show you:
+
+- How to model and use Secret Stores for a bring-your-own certificate scenario
+- How to model and use Gateways for a Radius Gateway TLS termination scenario.
+
+## Prerequisites
+
+- [rad CLI]({{< ref getting-started >}})
+- [Supported Kubernetes cluster]({{< ref kubernetes-platform >}})
+
+## Step 1: Initialize a Radius environment
+
+Begin by running `rad init`.
+
+```sh
+rad init
+```
+
+## Step 2: Define an Application, Secret Store, and Gateway
+
+Begin by creating a file named `app.bicep`. You can either provide the certificate data directly in the Bicep file, or reference an existing Kubernetes secret with your certificate data.
+
+{{< tabs "Certificate Data" "Kubernetes Secret" >}}
+
+{{% codetab %}}
+
+{{< rad file="snippets/tls-termination-data.bicep" embed=true >}}
+
+{{% /codetab %}}
+
+{{% codetab %}}
+
+{{< rad file="snippets/tls-termination-k8s-secret.bicep" embed=true >}}
+
+{{% /codetab %}}
+
+{{< /tabs >}}
+
+## Step 3: Deploy the application
+
+```sh
+rad deploy app.bicep
+```
+
+Once the deployment is complete, you should see a public endpoint displayed at the end. Navigating to this public endpoint should show you your application that is accessed via HTTPS, assuming that you have a valid TLS certificate.
+
+<img src="https-app.png" alt="Azure DNS Zone configuration" width=700 />
