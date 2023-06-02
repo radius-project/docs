@@ -14,7 +14,19 @@ This guide offers the quickest way to get started using Radius. You'll walk thro
 
 ## 1. Have your Kubernetes cluster handy
 
-Radius runs inside [Kubernetes]({{< ref kubernetes-platform >}}). However you run Kubernetes, get a cluster ready.
+Radius runs inside [Kubernetes]({{< ref kubernetes-platform >}}). Get a Kubernetes cluster ready with one of the options below
+
+{{< tabs "Codespaces" "Kubernetes Cluster" >}}
+
+{{% codetab %}}
+Use [Codespaces](https://github.com/features/codespaces) to launch a pre-configured container with Radius installation on a k3d cluster
+
+<a class="btn btn-primary" href="https://aka.ms/ProjectRadius/Codespace" role="button" target="_blank">Launch a new Codespace</a>
+
+_Visit the [GitHub docs]({{< ref github >}}) if you need access to the organization._
+{{% /codetab %}}
+
+{{% codetab %}}
 
 > *If you don't have a preferred way to create Kubernetes clusters, you might try using [k3d](https://k3d.io/), which runs a minimal Kubernetes distribution in Docker.*
 
@@ -23,8 +35,12 @@ Ensure your cluster is set as your current context:
 ```bash
 kubectl config current-context
 ```
+{{% /codetab %}}
+
+{{< /tabs >}}
 
 ## 2. Install Radius CLI
+> Skip this step if you are using codespaces as the containers are already pre-configured with Radius installation
 
 {{< tabs MacOS "Linux/WSL" "Windows PowerShell" >}}
 
@@ -92,7 +108,7 @@ In addition to starting Radius services in your Kubernetes cluster, this initial
 
 ## 4. Run the app
 
-Use the `rad run` command to run the app in your environment:
+Use the below command to run the app in your environment:
 
 ```bash
 rad run app.bicep
@@ -104,7 +120,7 @@ This command:
 - Creates a port-forward from localhost to port 3000 inside the container so you can navigate to the app's frontend UI
 - Streams container logs to your terminal
 
-Access the application by opening [http://localhost:3000](http://localhost:3000) in a browser:
+Access the application by opening [http://localhost:3000](http://localhost:3000) in a browser. If you are using codespaces, you can get the demo app url from the ports tab in VsCode.
 
 <img src="./demo-screenshot.png" alt="Screenshot of the demo container" width=400>
 <br /><br />
@@ -131,9 +147,9 @@ First add some new code to `app.bicep` by pasting in the content below:
 
 The code you just added creates a Redis Cache resource and specifies that it should be created by a Recipe.
 
-Next, add this code to the container definition inside `properties`:
+Next, update your container definition to include `connectionS` inside the `properties`:
 
-{{< rad file="snippets/app-with-redis-snippets.bicep" embed=true marker="//CONNECTION" >}}
+{{< rad file="snippets/app-with-redis-snippets.bicep" embed=true marker="//CONTAINER" >}}
 
 The code you just added creates a connection between the container and the database. Based on this connection, Radius will define environment variables in the container that tell the container how to connect. You will view these in the next step.
 
@@ -143,18 +159,21 @@ The finished `app.bicep` should like this:
 
 ## 6. Rerun the application with a database
 
-Use `rad run` to run the updated application again:
+Use below command to run the updated application again:
 
 ```sh
 rad run app.bicep
 ```
 
-Open the browser to [http://localhost:3000](http://localhost:3000) and you should see that the environment variables have changed. The `demo` container now has connection information for Redis (`CONNECTION_REDIS_HOST`, `CONNECTION_REDIS_PORT`).
+Open the browser to [http://localhost:3000](http://localhost:3000) and you should see that the environment variables have changed. The `demo` container now has connection information for Redis (`CONNECTION_REDIS_HOST`, `CONNECTION_REDIS_PORT`). If you are using codespaces, you can get the demo app url from the ports tab in VsCode
 
-<img src="./demo-with-redis-screenshot.png" alt="Screenshot of the demo container" width=400>
+<img src="./demo-with-redis-screenshot.png" alt="Screenshot of the demo container" width=500>
 <br /><br />
 
-Navigate to the TODO page and test out the application. Using the TODO page will update the saved state in Redis.
+Navigate to the TODO List tab and test out the application. Using the TODO page will update the saved state in Redis.
+
+<img src="./demo-with-todolist.png" alt="Screenshot of the todolist" width=500>
+<br /><br />
 
 Press CTRL+C when you are finished with the website.
 
