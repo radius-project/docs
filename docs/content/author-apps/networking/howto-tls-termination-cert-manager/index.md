@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How To: TLS termination with cert-manager and Let's Encrypt"
-linkTitle: "TLS termination with cert-manager"
+linkTitle: "How-To: TLS termination with cert-manager"
 description: "Learn about how to use Radius to deploy HTTPS-enabled application with a TLS certificate" 
 weight: 900
 slug: 'tls-termination-cert-manager'

@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "How To: TLS termination with existing TLS certificate"
-linkTitle: "TLS termination"
+title: "How To: TLS termination with your own TLS certificate"
+linkTitle: "How-To: TLS termination with a TLS certificate"
 description: "Learn about how to use Radius to deploy HTTPS-enabled application with a TLS certificate" 
 weight: 800
 slug: 'tls-termination'
