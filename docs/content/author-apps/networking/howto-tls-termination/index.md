@@ -50,9 +50,9 @@ Begin by creating a file named `app.bicep`. You can either provide the certifica
 ## Step 3: Deploy the application
 
 ```sh
-rad deploy app.bicep
+rad deploy app.bicep -p tlscrt=<base64-encoded TLS certificate> -p tlskey=<base64-encoded TLS certificate private key>
 ```
 
 Once the deployment is complete, you should see a public endpoint displayed at the end. Navigating to this public endpoint should show you your application that is accessed via HTTPS, assuming that you have a valid TLS certificate.
 
-<img src="https-app.png" alt="Azure DNS Zone configuration" width=700 />
+<img src="https-app.png" alt="View TLS certificate" width=700 />

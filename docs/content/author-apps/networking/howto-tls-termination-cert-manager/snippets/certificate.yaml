@@ -5,8 +5,8 @@ metadata:
 spec:
   commonName: YOUR_DOMAIN
   dnsNames:
-    - YOUR_DOMAIN
+  - YOUR_DOMAIN
   issuerRef:
-    name: example-issuer
+    name: demo-issuer
     kind: ClusterIssuer
   secretName: demo-secret

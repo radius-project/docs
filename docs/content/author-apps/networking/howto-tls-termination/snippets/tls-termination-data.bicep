@@ -1,5 +1,12 @@
 import radius as radius
+
 param environment string
+
+@description('Specifies TLS cert secret values.')
+@secure()
+param tlscrt string
+@secure()
+param tlskey string
 
 resource httpsApplication 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'https-application'
@@ -16,11 +23,11 @@ resource httpsSecretStore 'Applications.Core/secretStores@2022-03-15-privateprev
     data: {
       'tls.crt': {
         encoding: 'base64'
-        value: 'YOUR_CERT'
+        value: tlscrt
       }
       'tls.key': {
         encoding: 'base64'
-        value: 'YOUR_KEY'
+        value: tlskey
       }
     }
   }

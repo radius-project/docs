@@ -16,12 +16,7 @@ This guide will show you:
 ## Prerequisites
 
 - [rad CLI]({{< ref getting-started >}})
-- [AKS Cluster]({{< ref kubernetes-platform >}})
 - [kubectl CLI](https://kubernetes.io/docs/tasks/tools/)
-- A domain on [Azure DNS](https://azure.microsoft.com/en-us/products/dns)
-- [az CLI](https://learn.microsoft.com/en-us/cli/azure/)
-- [jq CLI](https://jqlang.github.io/jq/)
-
 
 ## Step 1: Initialize a Radius environment
 
@@ -35,27 +30,34 @@ rad init
 ## Step 2: Set up domain
 
 1. Run the following command and copy the EXTERNAL-IP field:
-<img src="app-ip.png" alt="Screenshot of the output of kubectl get svc -n radius-system contour-envoy" />
 
-1. In the Azure DNS zone, press the [+ Record set] button to add an A record and add your IP address from above in the list of IP addresses.
-<img src="azure-dns-zone.png" alt="Azure DNS Zone configuration" width=400 />
+```sh
+$ kubectl get svc -n radius-system contour-envoy
+NAME            TYPE           CLUSTER-IP    EXTERNAL-IP    PORT(S)                      AGE
+contour-envoy   LoadBalancer   10.0.10.1     <EXTERNAL-IP>  80:31734/TCP,443:32517/TCP   67m
+```
 
+1. Configure DNS server to set A record for your domain name and external IP address.
+
+```
+YOUR_DOMAIN A <EXTERNAL-IP>
+```
 
 ## Step 3: Install cert-manager
 
 Next, run the following command to install [cert-manager](https://cert-manager.io/):
+
 ```sh
 kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.yaml
 ```
 
+## Step 4: Set up HTTP-01 Challenge
 
-## Step 4: Set up DNS01 Challenge
+To use Let's encrypt, you need to configure [ACME Issuer](https://cert-manager.io/docs/configuration/acme/) using cert-mananger. This how-to uses [HTTP-01 Challenge](https://cert-manager.io/docs/configuration/acme/http01/) to verify that a client owns a domain.
 
-Follow the [cert-manager guide](https://cert-manager.io/docs/configuration/acme/dns01/azuredns/#service-principal) for setting up the AzureDNS DNS01 Challenge for a Kubernetes cluster using an Azure Service Principal.
+Here is what your HTTP-01 ACME ClusterIssuer resource should look like:
 
-At the end of this process, you should have a Secret resource called `azuredns-config` as well as a ClusterIssuer resource. Here is what your ClusterIssuer resource should look like:
-
-{{< rad file="snippets/clusterissuer-prod.yaml" embed=true >}}
+{{< rad file="snippets/clusterissuer-http01.yaml" embed=true >}}
 
 > Note that this guide shows how to set up a certificate using Let's Encrypt prod. For testing purposes, you can change this to the [staging endpoint](https://letsencrypt.org/docs/staging-environment/).
 
@@ -66,7 +68,7 @@ Create a file `certificate.yaml` with the following data, replacing the placehol
 
 {{< rad file="snippets/certificate.yaml" embed=true >}}
 
-Also create `tls-delegation.yaml` with the following data.
+Then create `tls-delegation.yaml` with the following data.
 
 {{< rad file="snippets/delegation.yaml" embed=true >}}
 
@@ -95,4 +97,4 @@ rad deploy app.bicep
 
 Once the deployment is complete, you should see a public endpoint displayed at the end. Navigating to this public endpoint should show you your application that is accessed via HTTPS and has a Let's Encrypt certificate enable TLS Termination on the Radius Gateway.
 
-<img src="https-app.png" alt="Azure DNS Zone configuration" width=700 />
+<img src="https-app.png" alt="View TLS certificate." width=700 />
