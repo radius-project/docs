@@ -16,7 +16,7 @@ This quickstart will show you:
 ## Prerequisites
 
 - [rad CLI]({{< ref getting-started >}})
-- [Supported Kubernetes cluster]({{< ref kubernetes-platform >}})
+- [AKS Cluster]({{< ref kubernetes-platform >}})
 - [kubectl CLI](https://kubernetes.io/docs/tasks/tools/)
 - A domain on [Azure DNS](https://azure.microsoft.com/en-us/products/dns)
 - [az CLI](https://learn.microsoft.com/en-us/cli/azure/)
@@ -28,7 +28,6 @@ This quickstart will show you:
 Begin by running `rad install kubernetes` and `rad init`. This will tell Radius which domain name your application will be accessed by.
 
 ```sh
-rad install kubernetes --set rp.publicEndpointOverride=YOUR_DOMAIN
 rad init
 ```
 
@@ -56,21 +55,9 @@ Follow the [cert-manager guide](https://cert-manager.io/docs/configuration/acme/
 
 At the end of this process, you should have a Secret resource called `azuredns-config` as well as a ClusterIssuer resource. Here is what your ClusterIssuer resource should look like:
 
-{{< tabs "Let's Encrypt Staging" "Let's Encrypt Prod" >}}
-
-{{% codetab %}}
-
-{{< rad file="snippets/clusterissuer-staging.yaml" embed=true >}}
-
-{{% /codetab %}}
-
-{{% codetab %}}
-
 {{< rad file="snippets/clusterissuer-prod.yaml" embed=true >}}
 
-{{% /codetab %}}
-
-{{< /tabs >}}
+> Note that this guide shows how to set up a certificate using Let's Encrypt prod. For testing purposes, you can change this to the [staging endpoint](https://letsencrypt.org/docs/staging-environment/).
 
 
 ## Step 5: Create Certificate resource

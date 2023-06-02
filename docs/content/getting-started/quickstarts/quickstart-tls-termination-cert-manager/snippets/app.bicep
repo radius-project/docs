@@ -25,6 +25,9 @@ resource demoGateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
   name: 'demo-gateway'
   properties: {
     application: demoApplication.id
+    hostname: {
+       fullyQualifiedHostname: 'YOUR_DOMAIN'
+    }
     routes: [
       {
         path: '/'
