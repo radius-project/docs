@@ -36,7 +36,8 @@ This application showcases how Radius can use a user-manged Azure SQL Database.
 |----------|:--------:|-------------|------------|
 | application | n | The ID of the application resource this resource belongs to. | `app.id`
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
-| resource  | n | The ID of the underlying resource for the link. Used when building the link from a resource. | `sqlDb.id`
+| resourceProvisioning | n | Specifies how the underlying service/resource is provisioned and managed. | `manual`
+| resources  | n | The IDs of the underlying resource for the link. Used when building the link from resources. | `sqlDb.id`
 | server | n | The fully qualified domain name of the SQL server. | `sql.hello.com`
 | database | n | The name of the SQL database. | `5000`
 
