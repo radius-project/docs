@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "Quickstart: TLS termination with existing TLS certificate"
+title: "How To: TLS termination with existing TLS certificate"
 linkTitle: "TLS termination"
 description: "Learn about how to use Radius to deploy HTTPS-enabled application with a TLS certificate" 
 weight: 800
 slug: 'tls-termination'
-categories: "Quickstart"
+categories: "How-To"
 tags: ["https"]
 ---
 
-This quickstart will show you:
+This guide will show you:
 
 - How to model and use Secret Stores for a bring-your-own certificate scenario
 - How to model and use Gateways for a Radius Gateway TLS termination scenario.

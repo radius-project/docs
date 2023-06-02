@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "Quickstart: TLS termination with cert-manager and Let's Encrypt"
+title: "How To: TLS termination with cert-manager and Let's Encrypt"
 linkTitle: "TLS termination with cert-manager"
 description: "Learn about how to use Radius to deploy HTTPS-enabled application with a TLS certificate" 
 weight: 900
 slug: 'tls-termination-cert-manager'
-categories: "Quickstart"
+categories: "How-To"
 tags: ["https"]
 ---
 
-This quickstart will show you:
+This guide will show you:
 
 - How to integrate Radius with cert-manager and Let's Encrypt in order to enable HTTPS for your app
 
