@@ -40,6 +40,10 @@ enableGitInfo = true
 category = "categories"
 tag = "tags"
 
+[permalinks]
+  categories = '/categories/:title-category'
+  tags = '/tags/:title-tag'
+
 # Top Nav Bar
 [[menu.main]]
     name = "Home"
