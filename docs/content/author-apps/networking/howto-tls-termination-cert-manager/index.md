@@ -20,7 +20,7 @@ This guide will show you:
 
 ## Step 1: Initialize a Radius environment
 
-Begin by running `rad install kubernetes` and `rad init`. This will tell Radius which domain name your application will be accessed by.
+Begin by running `rad init` to initialize the Radius environment.
 
 ```sh
 rad init
@@ -99,4 +99,4 @@ rad deploy app.bicep
 
 Once the deployment is complete, you should see a public endpoint displayed at the end. Navigating to this public endpoint should show you your application that is accessed via HTTPS and has a Let's Encrypt certificate enable TLS Termination on the Radius Gateway.
 
-<img src="https-app.png" alt="View TLS certificate." width=700 />
+<img src="certificate.png" alt="View application." width=700 />

@@ -36,6 +36,7 @@ resource demoGateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
     ]
     tls: {
       certificateFrom: demoSecretStore.id
+      minimumProtocolVersion: '1.2'
     }
   }
 }
