@@ -51,6 +51,8 @@ Next, run the following command to install [cert-manager](https://cert-manager.i
 kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.yaml
 ```
 
+> You can find the other method, such as helm, to install cert-manager [here](https://cert-manager.io/docs/installation/#getting-started).
+
 ## Step 4: Set up HTTP-01 Challenge
 
 To use Let's encrypt, you need to configure [ACME Issuer](https://cert-manager.io/docs/configuration/acme/) using cert-manager. This how-to uses [HTTP-01 Challenge](https://cert-manager.io/docs/configuration/acme/http01/) to verify that a client owns a domain.
