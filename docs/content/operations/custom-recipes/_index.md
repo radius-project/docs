@@ -12,7 +12,7 @@ Recipes enable a **separation of concerns** between infrastructure teams and dev
 
 Learn more in the Recipes overview page:
 
-{{< button page="recipes" text="Recipes overview" newline=false >}}
+{{< button page="/author-apps/recipes" text="Recipes overview" newline=false >}}
 
 ## Author a custom Recipe
 
@@ -117,7 +117,7 @@ rad recipe register myrecipe --environment myenv --template-kind bicep --templat
 
 ### Done
 
-You can now use your custom recipe in its accompanying resource. Visit the [Recipe developer guide]({{< ref recipes-overview >}}) for more information.
+You can now use your custom recipe in its accompanying resource. Visit the [Recipe developer guide]({{< ref "/author-apps/recipes" >}}) for more information.
 
 ## `context` parameter properties
 
@@ -167,5 +167,5 @@ In the following tables, "resource" refers to the resource "calling" the Recipe.
 
 ## Further reading
 
-- [Recipes overview]({{< ref recipes-overview >}})
+- [Recipes overview]({{< ref "/author-apps/recipes" >}})
 - [`rad recipe CLI reference`]({{< ref rad_recipe >}})
