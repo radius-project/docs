@@ -12,6 +12,8 @@ Async
 AWSSimpleQueueService
 Azure
 Blazor
+clusterissuer
+ClusterIssuer
 CLI
 CLIs
 CMD

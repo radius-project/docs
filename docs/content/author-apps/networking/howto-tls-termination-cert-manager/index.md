@@ -53,7 +53,7 @@ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5
 
 ## Step 4: Set up HTTP-01 Challenge
 
-To use Let's encrypt, you need to configure [ACME Issuer](https://cert-manager.io/docs/configuration/acme/) using cert-mananger. This how-to uses [HTTP-01 Challenge](https://cert-manager.io/docs/configuration/acme/http01/) to verify that a client owns a domain.
+To use Let's encrypt, you need to configure [ACME Issuer](https://cert-manager.io/docs/configuration/acme/) using cert-manager. This how-to uses [HTTP-01 Challenge](https://cert-manager.io/docs/configuration/acme/http01/) to verify that a client owns a domain.
 
 Here is what your HTTP-01 ACME ClusterIssuer resource should look like:
 
