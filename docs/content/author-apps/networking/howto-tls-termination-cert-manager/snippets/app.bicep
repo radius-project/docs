@@ -1,4 +1,6 @@
 import radius as radius
+
+@description('ID of the Radius environment. Passed in automatically via the rad CLI')
 param environment string
 
 resource demoApplication 'Applications.Core/applications@2022-03-15-privatepreview' = {
@@ -14,9 +16,12 @@ resource demoSecretStore 'Applications.Core/secretStores@2022-03-15-privateprevi
     application: demoApplication.id
     type: 'certificate'
     data: {
+      // Make the tls.crt and tls.key secrets available to the application
       'tls.crt': {}
       'tls.key': {}
     }
+    // Reference the existing default/demo-secret Kubernetes secret
+    // Created automatically by cert-manager
     resource: 'default/demo-secret'
   }
 }

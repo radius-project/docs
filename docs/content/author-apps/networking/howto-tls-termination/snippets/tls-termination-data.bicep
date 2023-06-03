@@ -1,10 +1,13 @@
 import radius as radius
 
+@description('ID of your Radius environment. Passed in automatically by rad CLI')
 param environment string
 
-@description('Specifies TLS cert secret values.')
+@description('TLS certificate data')
 @secure()
 param tlscrt string
+
+@description('TLS certificate key')
 @secure()
 param tlskey string
 

@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How To: TLS termination with your own TLS certificate"
-linkTitle: "How-To: TLS termination with a TLS certificate"
+linkTitle: "How-To: TLS with a custom certificate"
 description: "Learn about how to use Radius to deploy HTTPS-enabled application with a TLS certificate" 
 weight: 800
 slug: 'tls-termination'
@@ -21,7 +21,7 @@ This guide will show you:
 
 ## Step 1: Initialize a Radius environment
 
-Begin by running `rad init`.
+Begin by running `rad init` to initialize Radius and create an environment:
 
 ```sh
 rad init
