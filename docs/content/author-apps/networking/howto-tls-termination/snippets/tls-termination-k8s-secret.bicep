@@ -29,6 +29,9 @@ resource httpsGateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
   name: 'https-gateway'
   properties: {
     application: httpsApplication.id
+    hostname: {
+      fullyQualifiedHostname: 'YOUR_DOMAIN' // Replace with your domain name.
+    }
     routes: [
       {
         path: '/'
@@ -37,6 +40,7 @@ resource httpsGateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
     ]
     tls: {
       certificateFrom: httpsSecretStore.id
+      minimumProtocolVersion: '1.2'
     }
   }
 }

@@ -32,7 +32,7 @@ resource demoGateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
   properties: {
     application: demoApplication.id
     hostname: {
-       fullyQualifiedHostname: 'YOUR_DOMAIN'
+       fullyQualifiedHostname: 'YOUR_DOMAIN' // Replace with your domain name.
     }
     routes: [
       {
