@@ -15,11 +15,11 @@ resource httpsSecretStore 'Applications.Core/secretStores@2022-03-15-privateprev
   properties: {
     application: httpsApplication.id
     type: 'certificate'
+    resource: 'default/tls-certificate'
     data: {
       'tls.crt': {}
       'tls.key': {}
     }
-    resource: 'default/tls-certificate'
   }
 }
 

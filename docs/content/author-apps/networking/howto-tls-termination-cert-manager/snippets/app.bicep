@@ -15,14 +15,15 @@ resource demoSecretStore 'Applications.Core/secretStores@2022-03-15-privateprevi
   properties: {
     application: demoApplication.id
     type: 'certificate'
+    
+    // Reference the existing default/demo-secret Kubernetes secret
+    // Created automatically by cert-manager
+    resource: 'default/demo-secret'
     data: {
       // Make the tls.crt and tls.key secrets available to the application
       'tls.crt': {}
       'tls.key': {}
     }
-    // Reference the existing default/demo-secret Kubernetes secret
-    // Created automatically by cert-manager
-    resource: 'default/demo-secret'
   }
 }
 

@@ -28,18 +28,13 @@ rad init
 You'll next need a DNS record to point to your Kubernetes cluster and service in order to issue the certificate and allow traffic to your application.
 
 1. Run the following command and copy the EXTERNAL-IP field:
-
-```sh
-$ kubectl get svc -n radius-system contour-envoy
-NAME            TYPE           CLUSTER-IP    EXTERNAL-IP    PORT(S)                      AGE
-contour-envoy   LoadBalancer   10.0.10.1     <EXTERNAL-IP>  80:31734/TCP,443:32517/TCP   67m
-```
+    ```sh
+    $ kubectl get svc -n radius-system contour-envoy
+    NAME            TYPE           CLUSTER-IP    EXTERNAL-IP    PORT(S)                      AGE
+    contour-envoy   LoadBalancer   10.0.10.1     <EXTERNAL-IP>  80:31734/TCP,443:32517/TCP   67m
+    ```
 
 1. Configure your DNS server with an A record for your domain name and external IP address. Refer to your DNS provider for instructions on how to configure this.
-
-```
-YOUR_DOMAIN A <EXTERNAL-IP>
-```
 
 ## Step 3: Install cert-manager
 
@@ -63,22 +58,23 @@ Here is what your HTTP-01 ACME ClusterIssuer resource should look like:
 
 ## Step 5: Create a Certificate resource
 
-Create a file `certificate.yaml` with the following data, replacing the placeholders as necessary:
+1. Create a file `certificate.yaml` with the following data, replacing the placeholders as necessary:
 
-{{< rad file="snippets/certificate.yaml" embed=true >}}
+    {{< rad file="snippets/certificate.yaml" embed=true >}}
 
-Then create `tls-delegation.yaml` with the following data.
+1. Then create `tls-delegation.yaml` with the following data.
 
-{{< rad file="snippets/delegation.yaml" embed=true >}}
+    {{< rad file="snippets/delegation.yaml" embed=true >}}
 
-Run the following commands to create the certificate resource and authorize Radius to access the resource:
+1. Run the following commands to create the certificate resource and authorize Radius to access the resource:
 
-```sh
-kubectl apply -f certificate.yaml
-kubectl apply -f tls-delegation.yaml
-```
+    ```sh
+    kubectl apply -f certificate.yaml
+    kubectl apply -f tls-delegation.yaml
+    ```
 
-You may need to wait a minute or two for cert-manager to authorize with Let's Encrypt and create the secret on the cluster. Once this process completes, you should see a secret called `demo-secret` in the default namespace. This secret is managed by cert-manager.
+    You may need to wait a minute or two for cert-manager to authorize with Let's Encrypt and create the secret on the cluster. Once this process completes, you should see a secret called `demo-secret` in the default namespace. This secret is managed by cert-manager.
+
 ## Step 6: Define a Radius application and gateway
 
 Create a file named `app.bicep` with the following contents. Note that we reference the `demo-secret` and reference the Secret Store in the Gateway to enable TLS termination.
