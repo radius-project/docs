@@ -15,8 +15,10 @@ resource httpsSecretStore 'Applications.Core/secretStores@2022-03-15-privateprev
   properties: {
     application: httpsApplication.id
     type: 'certificate'
+    // Reference the existing default/tls-certificate Kubernetes secret
     resource: 'default/tls-certificate'
     data: {
+      // Make the tls.crt and tls.key secrets available to the application
       'tls.crt': {}
       'tls.key': {}
     }
