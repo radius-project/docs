@@ -44,7 +44,7 @@ This application is a simple to-do list which stores and visualized to-do items.
    rad init --dev
    ```
 
-   [`dev` Recipes]({{< ref "recipes#use-community-dev-recipes" >}}) allow you to quickly get up and running with infrastructure for your [Links]({{< ref links >}})._
+   [`dev` Recipes]({{< ref "recipes#use-community-dev-recipes" >}}) provide a set of Recipes that allow you to quickly get up and running with lightweight containerized infrastructure.
    3. Use [`rad recipe list`]({{< ref rad_recipe_list >}}) to view the Recipes in your dev environment:
 
    ```bash
@@ -53,9 +53,8 @@ This application is a simple to-do list which stores and visualized to-do items.
 
    You should see a table of available Recipes (_with more to be added soon_):
    ```bash
-   NAME              TYPE                              TEMPLATE
-   kubernetes  Applications.Link/redisCaches     radius.azurecr.io/recipes/rediscaches/kubernetes:1.0
-   ```
+   NAME          TYPE                              TEMPLATE
+   default       Applications.Link/redisCaches     radius.azurecr.io/recipes/dev/rediscaches:v0.21
 
 ## Step 2: Deploy your application
 
@@ -91,9 +90,7 @@ This application is a simple to-do list which stores and visualized to-do items.
 
 You've now deployed your application to your Kubernetes cluster!
 
-3. To confirm that the infrastructure deployed by the Recipe is correctly deployed in a Kubernetes pod you can leverage `kubectl`.
-
-   You should be able to see the following output by running:
+3. List your Kubernetes Pods to see the infrastructure container deployed by the Recipe:
 
    ```bash
    kubectl get pods -n default-webapp
@@ -108,7 +105,7 @@ You've now deployed your application to your Kubernetes cluster!
 5. Visit `localhost:3000` in your browser.
 
    You will now be able to see both the metadata of your container application as well as interact with the `Todo App` and add/remove items in it as wanted.
-
+ <img src="todoapp.png" width="1000" alt="screenshot of the todo application">
 ## Step 3: Use Azure recipes in your application
 
 > *This step needs an Azure subscription to deploy the application which would incur some costs. Add the required cloud provider (Azure) to your environment in order to deploy an Azure recipe*
