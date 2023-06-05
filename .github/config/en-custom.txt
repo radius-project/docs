@@ -6,6 +6,7 @@ APIs
 APPBASE
 args
 aspell
+azurecr
 Analytics
 Async
 Async
@@ -289,6 +290,7 @@ rabbitmq
 radapp
 radiuspublic
 rbac
+rediscaches
 readinessProbe
 redis
 redisCaches
