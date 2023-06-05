@@ -6,7 +6,7 @@ description: "Learn how to use Radius Recipes within your application"
 weight: 500
 slug: "recipes"
 categories: "Quickstart"
-tags : ["Recipe"]
+tags : ["recipes"]
 ---
 
 This quickstart will teach you:
