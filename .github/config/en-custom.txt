@@ -357,6 +357,7 @@ wi
 workingDir
 workspaceTypes
 workspaces
+walkthrough
 yaml
 yml
 zsh
