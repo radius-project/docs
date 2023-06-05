@@ -36,9 +36,6 @@ resource db 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
   location: location
   properties: {
     environment: environment
-    mode: 'recipe'
-    recipe: {
-      name: 'default'
-    }
+    application: app.id
   }
 }
