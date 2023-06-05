@@ -105,7 +105,9 @@ You've now deployed your application to your Kubernetes cluster!
 5. Visit `localhost:3000` in your browser.
 
    You will now be able to see both the metadata of your container application as well as interact with the `Todo App` and add/remove items in it as wanted.
+
  <img src="todoapp.png" width="1000" alt="screenshot of the todo application">
+ 
 ## Step 3: Use Azure recipes in your application
 
 > *This step needs an Azure subscription to deploy the application which would incur some costs. Add the required cloud provider (Azure) to your environment in order to deploy an Azure recipe*
