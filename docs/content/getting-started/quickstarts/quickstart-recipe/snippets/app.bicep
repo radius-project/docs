@@ -23,6 +23,7 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
       image: 'radius.azurecr.io/tutorial/webapp:edge'
     }
     connections: {
+      // Here you can see a frontend container talking to a Redis database, where the Redis database is using the `default` Recipe
       redis: {
         source: db.id
       }
@@ -30,7 +31,7 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   }
 }
 
-// Redis Cache Link resource
+// Redis Cache Link resource that utilizes a `default` Recipe
 resource db 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
   name: 'db'
   location: location

@@ -42,6 +42,7 @@ This application is a simple to-do list which stores and visualized to-do items.
    ```bash
    rad init --dev
    ```
+   > **Note**: Do not allow Radius to setup an application in the current directory 
 
    [`dev` Recipes]({{< ref "recipes#use-community-dev-recipes" >}}) provide a set of Recipes that allow you to quickly get up and running with lightweight containerized infrastructure.
    3. Use [`rad recipe list`]({{< ref rad_recipe_list >}}) to view the Recipes in your dev environment:
@@ -122,9 +123,9 @@ You've now deployed your application to your Kubernetes cluster!
    rad recipe register azure --environment default --template-kind bicep --template-path radius.azurecr.io/recipes/azure/rediscaches:0.21 --link-type Applications.Link/redisCaches 
    ```
 
-   Update the Recipe name given to the resource to `azure` to use the Redis cache on Azure .
+2. Update your resource to use the `azure` Recipe
 
-2. Deploy your application to your environment:
+3. Deploy your application to your environment:
 
    ```bash
    rad deploy ./app.bicep 
