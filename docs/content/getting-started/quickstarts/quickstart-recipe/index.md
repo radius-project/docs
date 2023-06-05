@@ -31,6 +31,7 @@ This quickstart will teach you:
 This application is a simple to-do list which stores and visualized to-do items. It consists of a frontend [container]({{< ref container >}}) and a backend [Redis Link]({{< ref links >}}):
 
 <img src="recipe-quickstart-diagram.png" alt="Screenshot of the todoapp with Kubernetes, Azure and AWS Redis Cache options" style="width:1000px" >
+> **Note**: An AWS walkthrough will be added to Step 3 in the future however Recipes do support AWS resources.
 
 ## Step 1: Initialize a Radius environment
 
