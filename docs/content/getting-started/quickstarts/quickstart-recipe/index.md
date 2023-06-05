@@ -13,7 +13,6 @@ This quickstart will teach you:
 
 * How to use “dev” Recipes in your Radius Environment
 * How to deploy your own Recipes in your Radius Environment for Azure.
-* How to author your own Recipes
 
 ## Prerequisites
 
@@ -110,9 +109,9 @@ You've now deployed your application to your Kubernetes cluster!
  
 ## Step 3: Use Azure recipes in your application
 
-> *This step needs an Azure subscription to deploy the application which would incur some costs. Add the required cloud provider (Azure) to your environment in order to deploy an Azure recipe*
+> *This step requires an Azure subscription to deploy cloud resources, which will incur costs. You will need to add the [Azure cloud provider]({{< ref providers >}}) to your environment in order to deploy Azure resources and leverage Azure Recipes.*
 
-{{< button text="Learn more about configuring Cloud providers" page="providers#configure-a-cloud-provider" newtab="true" >}}
+{{< button text="Add a cloud provider" page="providers#configure-a-cloud-provider" newtab="true" >}}
 
 {{< tabs Azure >}}
 {{% codetab %}}
@@ -120,7 +119,7 @@ You've now deployed your application to your Kubernetes cluster!
 1. Register the Recipe to your Radius Environment:
 
    ```bash
-   rad recipe register azure -e default  --template-path radius.azurecr.io/recipes/rediscaches/azure:1.0 --link-type Applications.Link/redisCaches --template-kind bicep
+   rad recipe register azure --environment default --template-kind bicep --template-path radius.azurecr.io/recipes/azure/rediscaches:0.21 --link-type Applications.Link/redisCaches 
    ```
 
    Update the Recipe name given to the resource to `azure` to use the Redis cache on Azure .
@@ -131,7 +130,7 @@ You've now deployed your application to your Kubernetes cluster!
    rad deploy ./app.bicep 
    ```
 
-   This will deploy the application into your environment and launch the container resource for the frontend website. This operation may take some time, since it is deploying a Redis Cache resource to Azure. You should see the following resources deployed at the end of `rad deploy`:
+   This operation may take some time, as the 'azure' Recipe is deploying an Azure Cache for Redis resource into your Azure subscription. It will then update your 'db' resource to use the Azure Redis. Once completed you should see the following resources deployed at the end of `rad deploy`:
 
    ```
    Building ./app.bicep...
@@ -172,7 +171,7 @@ You've now deployed your application to your Kubernetes cluster!
 ## Step 4: Cleanup your environment
 
 1. If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to delete all Radius resources running on your cluster.
-2. Azure resources are not deleted when deleting a Radius environment, so to prevent additional charges, make sure to delete all resources created in this quickstart. For Azure, this includes the Azure Redis cache.
+2. Azure resources are not currently deleted when deleting a Radius environment. To prevent additional charges, make sure to delete the Azure Cache for Redis using the [Azure portal](https://portal.azure.com).
 
 ## Next steps
 
