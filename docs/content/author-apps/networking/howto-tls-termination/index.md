@@ -17,7 +17,7 @@ This guide will show you:
 ## Prerequisites
 
 - [rad CLI]({{< ref getting-started >}})
-- [Supported Kubernetes cluster]({{< ref kubernetes-platform >}})
+- [Supported Kubernetes cluster]({{< ref kubernetes-install >}})
 
 ## Step 1: Initialize a Radius environment
 
