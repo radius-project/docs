@@ -1,7 +1,9 @@
 import radius as radius
 
+@description('Specifies the Radius environment for resources.')
 param environment string
 
+@description('Specifies the location for resources.')
 param location string = 'global'
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
@@ -36,7 +38,7 @@ resource db 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
     environment: environment
     mode: 'recipe'
     recipe: {
-      name: 'redis-kubernetes'
+      name: 'default'
     }
   }
 }
