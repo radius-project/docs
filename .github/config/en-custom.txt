@@ -78,6 +78,7 @@ PARAMS
 PYTHONAPP
 PowerShell
 Pre
+PubSub
 ProjectRadius
 Quickstart
 Quickstarts
