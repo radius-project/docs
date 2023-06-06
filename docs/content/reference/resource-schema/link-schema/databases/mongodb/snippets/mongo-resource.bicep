@@ -18,7 +18,9 @@ resource db 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
     environment: environment
     application: app.id
     resourceProvisioning: 'manual'
-    resources: cosmosDatabase
+    resources: [
+        { id: cosmosDatabase }
+      ]
   }
 }
 //MONGO
