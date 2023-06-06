@@ -169,12 +169,12 @@ This application is a simple to-do list which stores and visualized to-do items.
 {{% /codetab %}}
 {{< /tabs >}}
 
-1. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose>}})
+4. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose>}})
 
     ```bash
     rad resource expose containers frontend -a webapp --port 3000
     ```
-1. Visit [localhost:3000](http://localhost:3000) in your browser. You should see a page like
+5. Visit [localhost:3000](http://localhost:3000) in your browser. You should see a page like
 
    <img src="todoapp.png" width="1000" alt="screenshot of the todo application">
 
