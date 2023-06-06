@@ -88,7 +88,7 @@ This application is a simple to-do list which stores and visualized to-do items.
    ```
 
 
-You've now deployed your application to your Kubernetes cluster!
+   You've now deployed your application to your Kubernetes cluster!
 
 3. List your Kubernetes Pods to see the infrastructure container deployed by the Recipe:
 
