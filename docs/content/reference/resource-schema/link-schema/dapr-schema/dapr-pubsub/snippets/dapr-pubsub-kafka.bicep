@@ -34,8 +34,7 @@ resource pubsub 'Applications.Link/daprPubSubBrokers@2022-03-15-privatepreview' 
   properties: {
     environment: environment
     application: app.id
-    mode: 'values'
-    type: 'pubsub.kafka'
+    resourceProvisioning: 'manual'    type: 'pubsub.kafka'
     metadata: {
       brokers: kafkaRoute.properties.url
       authRequired: false
