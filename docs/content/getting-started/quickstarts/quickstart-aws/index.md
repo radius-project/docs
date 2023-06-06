@@ -4,8 +4,9 @@ title: "Quickstart: Deploy AWS resources"
 linkTitle: "Deploy AWS resources"
 description: "Learn about how to setup an AWS cloud provider and deploy an AWS MemoryDB for Redis with Radius"
 weight: 500
-categories: "Quickstart"
-tags: ["AWS"]
+toc_hide: true
+hide_summary: true
+
 ---
 
 This quickstart will teach you:
