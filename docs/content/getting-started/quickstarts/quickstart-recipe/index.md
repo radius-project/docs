@@ -60,7 +60,7 @@ This application is a simple to-do list which stores and visualized to-do items.
 
 1. Create a Bicep file `app.bicep` with the following content:
 
-{{< rad file="snippets/app.bicep" embed=true >}}
+   {{< rad file="snippets/app.bicep" embed=true >}}
 
 2. Use the `rad deploy` command to deploy your application:
 
