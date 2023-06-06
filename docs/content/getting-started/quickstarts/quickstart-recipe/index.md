@@ -106,7 +106,7 @@ You've now deployed your application to your Kubernetes cluster!
 
    You will now be able to see both the metadata of your container application as well as interact with the `Todo App` and add/remove items in it as wanted.
 
- <img src="todoapp.png" width="1000" alt="screenshot of the todo application">
+ <img src="todoapp.png" width="500" alt="screenshot of the todo application">
  
 ## Step 3: Use Azure recipes in your application
 
