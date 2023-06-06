@@ -28,5 +28,5 @@ Here is an example of using a Secret Store to reference secrets stores in an exi
 
 ## Further reading
 
-- [How To: TLS termination with your own TLS certificate]({{< ref tls-termination >}})
-- [How To: TLS termination with a certificate from Let's Encrypt]({{< ref tls-termination-letsencrypt >}})
+- [How To: TLS termination with your own TLS certificate]({{< ref howto-tls-termination >}})
+- [How To: TLS termination with a certificate from Let's Encrypt]({{< ref howto-tls-termination-cert-manager >}})
