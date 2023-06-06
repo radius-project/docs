@@ -37,7 +37,7 @@ Your container can now interact with the sidecar using the Dapr [building block 
 
 ## Building blocks
 
-Dapr resources make it easy to model and configure [Dapr building block APIs](https://docs.dapr.io/developing-applications/building-blocks/). Simply specify the building block and the backing resource, and Radius will automatically configure and apply the accompanying Dapr component configuration.
+Dapr resources make it easy to model and configure [Dapr building block APIs](https://docs.dapr.io/developing-applications/building-blocks/). Simply specify the building block and the backing resource, and Radius will apply the accompanying Dapr component configuration.
 
 <img src="dapr-buildingblocks.png" style="width:1000px" alt="Diagram of all the Dapr building blocks" /><br />
 
