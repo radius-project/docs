@@ -4,6 +4,8 @@ title: "AWS resources"
 linkTitle: "AWS"
 description: "Deploy and connect to AWS resources in your application"
 weight: 800
+categories: "Concept"
+tags: ["AWS"]
 ---
 
 Radius applications are able to connect to and leverage AWS resource with Bicep. Simply model your AWS resources in Bicep and connect to them from Radius resources.

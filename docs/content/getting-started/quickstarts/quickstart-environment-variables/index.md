@@ -5,6 +5,7 @@ linkTitle: "Environment variables"
 description: "Learn how to set environment variables manually and through connections"
 weight: 100
 slug: "environment-variables"
+categories: "Quickstart"
 tags: ["containers"]
 ---
 
@@ -16,7 +17,7 @@ This quickstart will teach you:
 ## Prerequisites
 
 - [Radius CLI]({{< ref "getting-started" >}})
-- [Radius environment]({{< ref "getting-started" >}})
+- [Radius environment]({{< ref "environments-resource" >}})
 
 ## Step 1: Model an app and container
 
@@ -52,7 +53,7 @@ Add an `env` property which will contain a list of environment variables to set.
 
 ## Step 4: Add a Mongo Link
 
-Next, add to `app.bicep` a module with a containerized Mongo database (leveraging a Bicep module containing Kubernetes resources), along with a [Mongo link]({{< ref links >}}):
+Next, add to `app.bicep` a module with a containerized Mongo database (leveraging a Bicep module containing Kubernetes resources), along with a [Mongo link]({{< ref links-resources >}}):
 
 {{< rad file="snippets/3-app.bicep" embed=true marker="//LINK" >}}
 

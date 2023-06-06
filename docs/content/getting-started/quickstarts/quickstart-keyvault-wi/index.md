@@ -5,6 +5,7 @@ linkTitle: "Persistent Key Vault volume"
 description: "Learn how to mount an Azure Key Vault as a volume to a container" 
 weight: 700
 slug: 'volume-keyvault'
+categories: "Quickstart"
 tags: ["Azure","containers"]
 ---
 
@@ -18,7 +19,7 @@ This quickstart will provide an overview of how to:
 ## Prerequisites
 
 - [rad CLI]({{< ref getting-started >}})
-- [Supported Kubernetes cluster]({{< ref kubernetes >}})
+- [Supported Kubernetes cluster]({{< ref kubernetes-platform >}})
 - [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed on your cluster
 - [Azure Keyvault Provider](https://azure.github.io/secrets-store-csi-driver-provider-azure/docs/getting-started/installation/)
    - The above installation will also install the required [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation.html)

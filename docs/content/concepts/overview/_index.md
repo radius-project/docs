@@ -4,6 +4,7 @@ title: Overview for Project Radius
 linkTitle: Overview
 description: Learn how Project Radius fits into the app development landscape and it's long-term vision
 weight: 100
+categories: "Concept"
 ---
 
 ## Building cloud-native apps is too difficult today

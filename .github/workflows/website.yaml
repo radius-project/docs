@@ -33,13 +33,16 @@ jobs:
       SWA_BASE: 'wonderful-plant-020417a1e'
     steps:
       - name: Checkout docs repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: true
+      - name: Parse release version and set environment variables
+        run: python ./.github/scripts/get_docs_version.py
       - name: Checkout radius repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: project-radius/radius
+          ref: ${{ env.RELEASE_BRANCH }}
           path: ./radius
           token: ${{ secrets.GH_RAD_CI_BOT_PAT }}
       - name: Setup Go ${{ env.GOVER }}
@@ -62,8 +65,16 @@ jobs:
           sudo npm install -D --save postcss-cli
           cd themes/docsy
           npm install
+      - name: Restore CLI Docs Cache
+        uses: actions/cache@v3
+        id: cli_cache
+        with:
+          path: |
+            ./docs/content/reference/cli
+          key: ${{ runner.os }}-cli-${{ hashFiles('radius/pkg/cli') }}
       - name: Restore Go Modules Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
+        if: steps.cli_cache.outputs.cache-hit != 'true'
         with:
           path: |
             ~/.cache/go-build
@@ -71,10 +82,20 @@ jobs:
           key: ${{ runner.os }}-go-${{ hashFiles('radius/go.sum') }}
           restore-keys: |
             ${{ runner.os }}-go-
+      - name: Restore CLI Docs Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./docs/content/reference/cli
+          key: ${{ runner.os }}-cli-${{ hashFiles('radius/pkg/cli') }}
+          restore-keys: |
+            ${{ runner.os }}-cli-
       - name: Generate CLI Docs
         run: |
-          cd radius
-          go run ./cmd/docgen/main.go ../docs/content/reference/cli
+          if [ ! -f ./docs/content/reference/cli/rad.md ]; then
+            cd radius
+            go run ./cmd/docgen/main.go ../docs/content/reference/cli
+          fi
       - name: Generate Swagger docs
         run : |
           mkdir -p ./docs/static/swagger
@@ -95,29 +116,40 @@ jobs:
   
   deploy:
     name: Deploy Hugo Website
-    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch')
+    if: github.event_name == 'push'
     needs: ['build']
     runs-on: ubuntu-latest
     environment:
       name: ${{ github.ref_name == 'edge' && 'edge' || 'latest' }}
       url: ${{ github.ref_name == 'edge' && 'https://edge.docs.radapp.dev' || 'https://docs.radapp.dev' }}
     steps:
+      - name: Checkout docs repo
+        uses: actions/checkout@v3
+        with:
+          submodules: false
       - name: Download Hugo artifacts
         uses: actions/download-artifact@v3
         with:
           name: hugo_build
           path: site/
+      - name: az CLI login
+        run: |
+          az login --service-principal \
+            --username ${{ secrets.AZURE_SP_TESTS_APPID }} \
+            --password ${{ secrets.AZURE_SP_TESTS_PASSWORD }} \
+            --tenant ${{ secrets.AZURE_SP_TESTS_TENANTID }}
       - name: Deploy to WebApp
-        uses: Azure/webapps-deploy@v2.2.7
+        uses: Azure/webapps-deploy@v2
         with:
-          app-name: ${{ secrets.ENV_APPSERVICE_NAME }}
-          publish-profile: ${{ secrets.ENV_APPSERVICE_PUBLISHPROFILE }}
+          app-name: ${{ vars.ENV_APPSERVICE_NAME }}
+          resource-group-name: ${{ vars.ENV_APPSERVICE_RESOURCEGROUP }}
           package: site/
 
   open_staging_site:
     name: Open Staging Site
     needs: ['build']
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - name: Download Hugo artifacts
         uses: actions/download-artifact@v3
@@ -149,7 +181,7 @@ jobs:
 
   algolia_index:
     name: Index site for Algolia
-    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch')
+    if: github.event_name == 'push'
     needs: ['build', 'deploy']
     runs-on: ubuntu-latest
     environment:

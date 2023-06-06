@@ -4,6 +4,8 @@ title: "Author Custom Radius Recipes"
 linkTitle: "Custom Recipes"
 description: "Learn how to author custom Recipe templates to automate infrastructure deployment"
 weight: 500
+categories: "How-To"
+tags: ["recipes"]
 ---
 
 Recipes enable a **separation of concerns** between infrastructure teams and developers by **automating infrastructure deployment**.
@@ -44,11 +46,8 @@ You can create any [parameter type supported by Bicep](https://learn.microsoft.c
 
 Once you have defined your backing infrastructure, you will need to output it from your IaC template so it can be "wired-up" to the resource that called the Recipe.
 
-Recipes allow you to either specify `values` or `resource`:
+Using the `values` output parameter, you can pass back information about your infrastructure.
 
-{{< tabs Values Resource >}}
-
-{{% codetab %}}
 When you output a `values` object, all of the individual properties will be directly mapped to the resource calling the Recipe. This allows you that most control over the resource being created within the application.
 
 #### Properties
@@ -82,46 +81,23 @@ output values object = {
 }
 ```
 
-{{% /codetab %}}
-{{% codetab %}}
-
-Some Radius resources, such as Links, may support automatically mapping infrastructure via a resource ID. Refer to the backing resource's documentation to know what infrastructure is supported.
-
-For supported infrastructure and resources, you can simply output the resource ID as a string, and the properties will automatically configured. For example, `Applications.Link/redisCaches` supports auto-mapping of `Microsoft.Cache/redis`:
-
-{{< rad file="snippets/recipe.bicep" embed=true marker="//OUTRESOURCE" >}}
-
-{{% /codetab %}}
-{{< /tabs >}}
-
-If you specify both `values` and `resource`, `resource` will be used first and then `values` will override.
-
 ### Step 5: Store your template in a Bicep registry
 
 Recipes leverage [Bicep registries](https://learn.microsoft.com/azure/azure-resource-manager/bicep/private-module-registry) for template storage. Once you've authored a Recipe, you can publish it to your preferred OCI-compliant registry.
 
 For private registries, make sure the cloud provider configured in your Radius environment has pull permissions for your container registry.
 
-You can use your rad-bicep binary to publish your Recipe to your Bicep registry:
+Recipes can be published via the rad CLI:
 
-{{< tabs "MacOS/Linux/WSL" "Windows PowerShell" >}}
-
-{{% codetab %}}
 ```bash
-~/.rad/bin/rad-bicep publish myrecipe.bicep --target br:myregistry.azurecr.io/recipes/myrecipe:v1
+rad bicep publish --file myrecipe.bicep --target br:myregistry.azurecr.io/recipes/myrecipe:v1
 ```
-{{% /codetab %}}
-
-{{% codetab %}}
-```bash
-& "$env:UserProfile\.rad\bin\rad-bicep.exe" publish myrecipe.bicep --target br:myregistry.azurecr.io/recipes/myrecipe:v1
-```
-{{% /codetab %}}
-{{< /tabs >}}
 
 ### Step 6: Register your Recipe with your environment
 
 Now that your Recipe Bicep template has been stored within your Bicep registry, you can add it your Radius environment to be used by developers. This allows you to mix-and-match templates for each of your environments such as dev, canary, and prod.
+
+Recipes now support a default experience, where you can register a Recipe under the name `default` within an environment. Developers can then call the Recipe without specifying a name, and Radius will automatically use the `default` Recipe. If you want to register a Recipe that is not the default, you can specify a custom name.
 
 Recipes can be added via the rad CLI or an environment Bicep definition:
 
@@ -129,7 +105,7 @@ Recipes can be added via the rad CLI or an environment Bicep definition:
 
 {{% codetab %}}
 ```bash
-rad recipe register --name myrecipe --environment myenv --template-path myregistry.azurecr.io/recipes/myrecipe:v1 --link-type Applications.Link/redisCaches
+rad recipe register myrecipe --environment myenv --template-path myregistry.azurecr.io/recipes/myrecipe:v1 --link-type Applications.Link/redisCaches
 ```
 {{% /codetab %}}
 {{% codetab %}}
@@ -141,7 +117,7 @@ rad recipe register --name myrecipe --environment myenv --template-path myregist
 
 ### Done
 
-You can now use your custom recipe in its accompanying resource. Visit the [Recipe developer guide]({{< ref recipes >}}) for more information.
+You can now use your custom recipe in its accompanying resource. Visit the [Recipe developer guide]({{< ref recipes-overview >}}) for more information.
 
 ## `context` parameter properties
 
@@ -191,5 +167,5 @@ In the following tables, "resource" refers to the resource "calling" the Recipe.
 
 ## Further reading
 
-- [Recipes overview]({{< ref recipes >}})
+- [Recipes overview]({{< ref recipes-overview >}})
 - [`rad recipe CLI reference`]({{< ref rad_recipe >}})

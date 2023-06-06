@@ -4,6 +4,8 @@ title: "Containerized workloads"
 linkTitle: "Containers"
 description: "Model and run container workloads in your Radius application"
 weight: 100
+categories: "Concept"
+tags: ["containers"]
 ---
 
 A Radius container represents a container workload within your application.
@@ -26,3 +28,8 @@ Depending on the target environment and configuration, a container can be run on
 ## More information
 
 - [Container schema]({{< ref container-schema >}})
+
+## Other guides
+
+{{< categorizeby category="Quickstart" tag="containers" >}}
+{{< categorizeby category="How-To" tag="containers" >}}

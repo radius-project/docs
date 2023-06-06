@@ -9,7 +9,7 @@ weight: 2000
 
 ## Create a Bicep file
 
-Radius uses the [Bicep language]({{< ref bicep >}}) as its file-format and structure. In this tutorial you will define an app named `dapr-quickstart` that will describe the container, statestore, and route resources in Bicep.
+Radius uses the [Bicep language]({{< ref bicep-language >}}) as its file-format and structure. In this tutorial you will define an app named `dapr-quickstart` that will describe the container, statestore, and route resources in Bicep.
 
 Create a new file named `dapr.bicep` and paste the following:
 
