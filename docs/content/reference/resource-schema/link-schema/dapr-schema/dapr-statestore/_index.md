@@ -15,7 +15,7 @@ This resource will automatically create and deploy the Dapr component spec for t
 
 ## Resource format
 
-{{< rad file="snippets/dapr-statestore-tablestorage.bicep" embed=true marker="//SAMPLE" >}}
+{{< rad file="snippets/dapr-statestore-manual.bicep" embed=true marker="//SAMPLE" >}}
 
 ### Top-level
 
@@ -31,30 +31,26 @@ This resource will automatically create and deploy the Dapr component spec for t
 |------|:--------:|-------------|---------|
 | application | n | The ID of the application resource this resource belongs to. | `app.id`
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
-| mode | y | Specifies how to build the state store resource. Options are to build automatically via 'recipe' or 'resource', or build manually via 'values'. Selection determines which set of fields to additionally require. | `recipe`
-| resource | n | The ID of the storage resource, if a non-generic `kind` is used. | `account::tables.id`
-| type | n | The Dapr component type. Used when mode is `values`. | `state.couchbase`
-| metadata | n | Metadata for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-state-stores/) | `couchbaseURL: https://*****` |
-| version | n | The version of the Dapr component. See [Dapr components](https://docs.dapr.io/reference/components-reference/supported-state-stores/) for available versions. | `v1` |
+| resourceProvisioning | y | Specifies how to build the state store resource. Options are to build automatically via 'recipe' or build manually via 'manual'. Selection determines which set of fields to additionally require. | `recipe`
+| resources | n | The IDs of related resources such as storage accounts or databases. | `account::tableService::table.id`
+| type | n | The Dapr component type. Used when `resourceProvisioning` is set to `manual`. | `state.couchbase`
+| metadata | n | Metadata for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-state-stores/). Used when `resourceProvisioning` is set to `manual`. | `couchbaseURL: https://*****` |
+| version | n | The version of the Dapr component. See [Dapr components](https://docs.dapr.io/reference/components-reference/supported-state-stores/) for available versions. Used when `resourceProvisioning` is set to `manual`. | `v1` |
 | componentName | n | _(read-only)_ The name of the Dapr component that is generated and applied to the underlying system. Used by the Dapr SDKs or APIs to access the Dapr component. | `mystatestore` |
 
-## Resource backed Link
+## Using resourceProvisioning: recipe
 
-The following resources can be used to automatically generate the Link:
+When `resourceProvisioning` is omitted or set to `recipe`, then a [Recipe]({{< ref recipes >}}) will be used to create the underlying resource and configure the Dapr building-block.
 
-- [Azure Table Storage](https://docs.microsoft.com/en-us/azure/storage/tables/table-storage-overview)
+{{< rad file="snippets/dapr-statestore-recipe.bicep" embed=true marker="//SAMPLE" >}}
 
-### Azure Table Storage
+## Using resourceProvisioning: manual 
 
-When `mode` is set to `resource`, you can specify a `resource` value of an Azure Table Storage table to automatically build the Link and create a Dapr component spec for Azure Table Storage.
+You can also manually specify the metadata of a Dapr state store. When `resourceProvisioning` is set to `manual`, you should specify `type`, `metadata`, and `version` to create a Dapr component spec. These values must match the schema of the intended [Dapr component](https://docs.dapr.io/reference/components-reference/supported-state-stores/).
 
-{{< rad file="snippets/dapr-statestore-tablestorage.bicep" embed=true marker="//SAMPLE" >}}
+{{< rad file="snippets/dapr-statestore-manual.bicep" embed=true marker="//SAMPLE" >}}
 
-## Value backed Link
-
-You can also manually specify the metadata of a Dapr state store. When `mode` is set to `values`, you can specify `type`, `metadata`, and `version` to create a Dapr component spec. These values must match the schema of the intended [Dapr component](https://docs.dapr.io/reference/components-reference/supported-state-stores/).
-
-{{< rad file="snippets/dapr-statestore-generic.bicep" embed=true marker="//SAMPLE" >}}
+You can also provide the associated backing resources via the `resources` property. This does not affect the configuration of the Dapr building-block but will document the relationships between the resources.
 
 ## Injected values
 
