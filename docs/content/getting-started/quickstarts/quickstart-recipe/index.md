@@ -125,6 +125,21 @@ You've now deployed your application to your Kubernetes cluster!
 
 2. Update your resource to use the `azure` Recipe
 
+   ```
+   // Redis Cache Link resource that utilizes a `azure` Recipe
+   resource db 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
+      name: 'db'
+      location: location
+      properties: {
+         environment: environment
+         application: app.id
+         recipe: {
+            name: 'azure'
+         }
+      }
+   }
+   ```
+
 3. Deploy your application to your environment:
 
    ```bash
