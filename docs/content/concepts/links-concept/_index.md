@@ -13,7 +13,7 @@ Links provide an **infrastructure abstraction** that enables **portability** for
 
 <img src="links.png" alt="Diagram of Radius Link to infrastructure resource." width="400px" />
 
-For example, when a user specifies a MongoDB link, that link could bind to an Azure CosmosDB, or MongoDB services from other cloud providers. An administrator could even specify the exact configurations of the database resource to spin up when a developer needs a database, enhancing a self-serve workflow.
+For example, when a user specifies a MongoDB link, that link could bind to an Azure CosmosDB, or MongoDB services from other cloud providers. An operator could even specify the exact configurations of the database resource to spin up when a developer needs a database, enhancing a self-serve workflow.
 
 <img src="links-example.png" alt="Diagram of example architecture using or Radius Conntector. Depicts a Radius Container connected to MongoDB Radius Link, which can bind to an Azure CosmosDB, an AWS DynamoDB, or a Mongo Container. " width="700px" />
 

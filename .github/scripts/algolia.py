@@ -26,7 +26,7 @@ rankings = {
     "Concepts": 100,
     "Getting started": 0,
     "Developer guides": 200,
-    "Administrator guides": 300,
+    "Operator guides": 300,
     "Reference": 400,
     "Contributing": 500,
     "Home": 600
