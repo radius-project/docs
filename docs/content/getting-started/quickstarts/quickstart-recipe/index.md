@@ -144,7 +144,7 @@ This step requires an Azure subscription to deploy cloud resources, which will i
 {{< tabs Azure >}}
 {{% codetab %}}
 
-1. Delete your existin Redis cache, which we will redeploy with an Azure resource:
+1. Delete your existing Redis cache, which we will redeploy with an Azure resource:
 
    ```bash
    rad resource delete rediscaches db
