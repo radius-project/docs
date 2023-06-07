@@ -11,13 +11,13 @@ tags : ["recipes"]
 
 This quickstart will teach you:
 
-* How to use “dev” Recipes in your Radius Environment
-* How to deploy your own Recipes in your Radius Environment for Azure.
+* How to use “dev” Recipes in your Radius Environment to quickly run with containerized infrastructure.
+* How to deploy your own Recipes in your Radius Environment to leverage cloud resources.
 
 ## Prerequisites
 
 - Install the [rad CLI]({{< ref getting-started >}})
-- A supported [Kubernetes cluster]({{< ref kubernetes >}})
+- Setup a supported [Kubernetes cluster]({{< ref kubernetes >}})
 
 ## Overview
 
@@ -27,51 +27,71 @@ This quickstart will teach you:
 
 ## Application overview
 
-This application is a simple to-do list which stores and visualized to-do items. It consists of a frontend [container]({{< ref container >}}) and a backend [Redis Link]({{< ref links >}}):
+This application is a simple to-do list which stores and visualizes to-do items. It consists of a frontend [container]({{< ref container >}}) and a backend [Redis Cache]({{< ref redis >}}).
 
-<img src="recipe-quickstart-diagram.png" alt="Screenshot of the todoapp with Kubernetes, Azure and AWS Redis Cache options" style="width:1000px" >
+<img src="recipe-quickstart-diagram.png" alt="Screenshot of the todoapp with Kubernetes, Azure and AWS Redis Cache options" style="width:500px" >
+
+{{< alert title="💡 Portable resources" color="info" >}}
+Developers don't need to specify what cloud resources they're using in their application. Instead, they choose the portable Redis API which can be provided by any cloud provider (or a Docker container). When deployed, a Recipe will select what infrastructure to deploy and run.
+{{< /alert >}}
 
 ## Step 1: Initialize a Radius environment
 
 1. Begin in a new directory for your application:
+
    ```bash
    mkdir recipes
    cd recipes
    ```
-2. Initialize a new dev environment, which is pre-loaded with lightweight dev Recipes:
+2. Initialize a new dev environment:
+
    ```bash
    rad init --dev
    ```
-   > **Note**: Do not allow Radius to setup an application in the current directory 
 
-   [`dev` Recipes]({{< ref "recipes#use-community-dev-recipes" >}}) provide a set of Recipes that allow you to quickly get up and running with lightweight containerized infrastructure.
-   3. Use [`rad recipe list`]({{< ref rad_recipe_list >}}) to view the Recipes in your dev environment:
+   **Select 'Yes' when prompted to create an application.**
+
+3. Use [`rad recipe list`]({{< ref rad_recipe_list >}}) to view the Recipes in your environment:
 
    ```bash
    rad recipe list 
    ```
 
    You should see a table of available Recipes (_with more to be added soon_):
-   ```bash
+   
+   ```
    NAME          TYPE                              TEMPLATE
    default       Applications.Link/redisCaches     radius.azurecr.io/recipes/dev/rediscaches:v0.21
+   ```
 
-## Step 2: Deploy your application
+   {{< alert title="💡 Dev Recipes" color="info" >}}
+   Dev environments are preloaded with [`dev` Recipes]({{< ref "recipes#use-community-dev-recipes" >}}), a set of Recipes that allow you to quickly get up and running with lightweight containerized infrastructure. In this quickstart, the dev Redis Recipe deploys a lightweight Redis container into your Kubernetes cluster.
 
-1. Create a Bicep file `app.bicep` with the following content:
+   When a Recipe is named "default" it will be used by default when deploying resources when a Recipe is not specified.
+   {{< /alert >}}
 
-   {{< rad file="snippets/app.bicep" embed=true >}}
+## Step 2: Define your application
 
-2. Use the `rad deploy` command to deploy your application:
+Update `app.bicep` with the following set of resources:
+
+> app.bicep was created automatically when you ran `rad init --dev`
+
+{{< rad file="snippets/app.bicep" embed=true >}}
+
+Note that no Recipe name is specified with 'db', so it will be using the default Recipe in your environment.
+
+## Step 3: Deploy your application
+
+1. Run [`rad deploy`]({{< ref rad_deploy >}}) to deploy your application:
 
    ```bash
    rad deploy ./app.bicep
    ```
 
-   You should see the following logs:
+   You should see the following output:
    ```
    Building app.bicep...
-   Deploying template 'app.bicep' into environment 'default' from workspace 'default'...
+   Deploying template './app.bicep' for application 'recipes' and environment 'default' from workspace 'default'...
 
    Deployment In Progress...
 
@@ -87,70 +107,70 @@ This application is a simple to-do list which stores and visualized to-do items.
       db              Applications.Link/redisCaches
    ```
 
+   Your application is now deployed and running in your Kubernetes cluster.
 
-   You've now deployed your application to your Kubernetes cluster!
-
-3. List your Kubernetes Pods to see the infrastructure container deployed by the Recipe:
+2. List your Kubernetes Pods to see the infrastructure container deployed by the Recipe:
 
    ```bash
    kubectl get pods -n default-webapp
    ```
 
-4. Port-forward the container to your machine with `rad resource expose`:
+   You will see your 'frontend' container, along with the Redis cache that was automatically created by the default dev Recipe:
 
-   ```bash
-   rad resource expose containers frontend -a webapp --port 3000
+   ```
+   NAME                                   READY   STATUS    RESTARTS   AGE
+   frontend-6d447f5994-pnmzv              1/1     Running   0          13m
+   redis-ymbjcqyjzwkpg-66fdbf8bb6-brb6q   2/2     Running   0          13m
    ```
 
-5. Visit `localhost:3000` in your browser.
+3. Port-forward the container to your machine with `rad resource expose`:
 
-   You will now be able to see both the metadata of your container application as well as interact with the `Todo App` and add/remove items in it as wanted.
+   ```bash
+   rad resource expose containers frontend --port 3000
+   ```
 
- <img src="todoapp.png" width="500" alt="screenshot of the todo application">
+4. Visit [`http://localhost:3000`](http://localhost:3000) in your browser.
+
+   You can now see both the environment variables of your container as well as interact with the `Todo App` and add/remove items in it as wanted:
+
+   <img src="todoapp.png" width="700px" alt="screenshot of the todo application">
  
-## Step 3: Use Azure recipes in your application
+## Step 4: Use Azure recipes in your application
 
-> *This step requires an Azure subscription to deploy cloud resources, which will incur costs. You will need to add the [Azure cloud provider]({{< ref providers >}}) to your environment in order to deploy Azure resources and leverage Azure Recipes.*
+This step requires an Azure subscription to deploy cloud resources, which will incur costs. You will need to add the [Azure cloud provider]({{< ref providers >}}) to your environment in order to deploy Azure resources and leverage Azure Recipes.
 
 {{< button text="Add a cloud provider" page="providers#configure-a-cloud-provider" newtab="true" >}}
 
 {{< tabs Azure >}}
 {{% codetab %}}
 
-1. Register the Recipe to your Radius Environment:
+1. Delete your existin Redis cache, which we will redeploy with an Azure resource:
 
    ```bash
-   rad recipe register azure --environment default --template-kind bicep --template-path radius.azurecr.io/recipes/azure/rediscaches:0.21 --link-type Applications.Link/redisCaches 
+   rad resource delete rediscaches db
    ```
 
-2. Update your resource to use the `azure` Recipe
+2. Register the Recipe to your Radius Environment:
 
    ```bash
-   // Redis Cache Link resource that utilizes a `azure` Recipe
-   resource db 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
-      name: 'db'
-      location: location
-      properties: {
-         environment: environment
-         application: app.id
-         recipe: {
-            name: 'azure'
-         }
-      }
-   }
+   rad recipe register azure --environment default --template-kind bicep --template-path radius.azurecr.io/recipes/azure/rediscaches:{{< param tag_version >}} --link-type Applications.Link/redisCaches 
    ```
 
-3. Deploy your application to your environment:
+3. Update your db resource to use the `azure` Recipe, instead of the default Recipe:
+
+   {{< rad file="snippets/app-azure.bicep" marker="//DB" embed=true >}}
+
+4. Redeploy your application to your environment:
 
    ```bash
    rad deploy ./app.bicep 
    ```
 
-   This operation may take some time, as the 'azure' Recipe is deploying an Azure Cache for Redis resource into your Azure subscription. It will then update your 'db' resource to use the Azure Redis. Once completed you should see the following resources deployed at the end of `rad deploy`:
+   This operation may take some time, as the 'azure' Recipe is deploying an Azure Cache for Redis resource into your Azure subscription. Once complete, you should see:
 
    ```
    Building ./app.bicep...
-   Deploying template './app.bicep' for application 'samples' and environment 'default' from workspace 'default'...
+   Deploying template './app.bicep' for application 'recipes' and environment 'default' from workspace 'default'...
 
    Deployment In Progress... 
 
@@ -169,25 +189,34 @@ This application is a simple to-do list which stores and visualized to-do items.
 {{% /codetab %}}
 {{< /tabs >}}
 
-4. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose>}})
+5. Use the az CLI to see your newly deployed Azure Cache for Redis:
+
+   ```bash
+   az redis list --subscription "My Subscription" --query "[].name" 
+   ```
+
+   You should see the name of your Redis cache, which is prefixed `cache`:
+
+   ```
+   [
+     "cache-goqoxgqkw2ogw"
+   ]
+   ```
+
+6. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose>}})
 
     ```bash
     rad resource expose containers frontend -a webapp --port 3000
     ```
-5. Visit [localhost:3000](http://localhost:3000) in your browser. You should see a page like
+7. Visit [localhost:3000](http://localhost:3000) in your browser again and interact with your application.
 
-   <img src="todoapp.png" width="1000" alt="screenshot of the todo application">
+## Step 5: Cleanup your environment
 
-   You can play around with the application's features:
-
-   - Add a todo item
-   - Mark a todo item as complete
-   - Delete a todo item
-
-## Step 4: Cleanup your environment
-
-1. If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to delete all Radius resources running on your cluster.
-2. Azure resources are not currently deleted when deleting a Radius environment. To prevent additional charges, make sure to delete the Azure Cache for Redis using the [Azure portal](https://portal.azure.com).
+You can use the rad CLI to [delete your environment]({{< ref rad_env_delete.md >}}) and all the Radius resources running on your cluster:
+   
+```bash
+rad env delete default --yes
+```
 
 ## Next steps
 

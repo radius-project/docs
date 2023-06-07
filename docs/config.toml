@@ -61,6 +61,7 @@ tag = "tags"
 copyright = "Project Radius"
 
 version = "edge"
+tag_version = "latest"
 chart_version = "0.19.0"
 
 # Algolia Search

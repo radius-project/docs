@@ -1,29 +1,21 @@
 import radius as radius
 
-@description('Specifies the Radius environment for resources.')
+@description('The ID of your Radius environment. Automatically injected by the rad CLI.')
 param environment string
 
-@description('Specifies the location for resources.')
-param location string = 'global'
-
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
-  name: 'webapp'
-  location: location
-  properties: {
-    environment: environment
-  }
-}
+@description('The ID of your Radius application. Automatically injected by the rad CLI.')
+param application string
 
 resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'frontend'
-  location: location
   properties: {
-    application: app.id
+    application: application
     container: {
       image: 'radius.azurecr.io/tutorial/webapp:edge'
     }
     connections: {
-      // Here you can see a frontend container talking to a Redis database, where the Redis database is using the `default` Recipe
+      // Define a connection to the redis container
+      // Automatically injects conneciton information into the container
       redis: {
         source: db.id
       }
@@ -31,12 +23,11 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   }
 }
 
-// Redis Cache Link resource that utilizes a `default` Recipe
 resource db 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
   name: 'db'
-  location: location
   properties: {
     environment: environment
-    application: app.id
+    application: application
+    // recipe is not specified, so it uses 'default' if present
   }
 }
