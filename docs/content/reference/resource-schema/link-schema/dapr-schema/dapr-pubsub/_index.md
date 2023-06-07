@@ -30,7 +30,7 @@ This resource will automatically create and deploy the Dapr component spec for t
 | application | n | The ID of the application resource this resource belongs to. | `app.id`
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
 | resourceProvisioning | n | Specifies how the underlying service/resource is provisioned and managed. Options are to provision automatically via 'recipe' or provision manually via 'manual'. Selection determines which set of fields to additionally require. | `manual`
-| [recipe](#recipe)  | n | An object containing the name of the Recipe as well as additional optional parameters to deploy. | `name: 'pubsub-prod'`
+| [recipe](#recipe)  | n | Configuration for the Recipe which will deploy the backing infrastructure. | `name: 'pubsub-prod'`
 | [resources](#resources)  | n | An array of IDs of the underlying resources for the link, in this case could contain the ID of the message broker resource, if a non-generic `kind` is used. | [See below](#resources)
 | type | n | The Dapr component type. Used when resourceProvisioning is `manual`. | `pubsub.kafka` |
 | metadata | n | Metadata for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-pubsub/) | `brokers: kafkaRoute.properties.url` |
