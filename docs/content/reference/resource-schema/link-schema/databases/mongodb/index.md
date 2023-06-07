@@ -41,15 +41,17 @@ The `mongodb.com/MongoDatabase` link is a [portable link]({{< ref links-resource
 | application | n | The ID of the application resource this resource belongs to. | `app.id`
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
 | resourceProvisioning | n | Specifies how the underlying service/resource is provisioned and managed. Options are to provision automatically via 'recipe' or provision manually via 'manual'. Selection determines which set of fields to additionally require. | `manual`
-| [recipe]({{< ref recipes-overview>}})  | n | Configuration for the Recipe which will deploy the backing infrastructure. | `name: 'mongodb-prod'`
-| [resources](#resources)  | n | An array of IDs of the underlying resources for the link. | [See below](#resources)
+| [recipe](#recipe)  | n | Configuration for the Recipe which will deploy the backing infrastructure. | [See below](#recipe)
+| [resources](#resources)  | n | An array of resources which underlay this resource. For example, an Azure CosmosDB database ID if the Mongo resource is leveraging CosmosDB. | [See below](#resources)
 | host | n | The MongoDB host name. | `mongo.hello.com`
 | port | n | The MongoDB port. | `4242`
 | [secrets](#secrets) | n | Secrets used when building the link from values. | [See below](#secrets)
 
-## Recipe backed
+## Recipe infrastructure provisioning
 
-You can manually specify a Recipe name and other supported parameters for them in the `recipe` property block or choose to leave the property block undefined if your Radius Environment contains a registered Recipe as `default` for the specific resource.
+[Recipes]({{< recipes >}}) automate infrastructure provisioning using approved templates.
+When no Recipe configuration is set Radius will use the default Recipe in the environment.
+Otherwise, a Recipe name and parameters can optionally be set.
 
 ### Secrets
 

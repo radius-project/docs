@@ -19,7 +19,11 @@ resource db 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
     application: app.id
     recipe: {
       // Name a specific recipe to use
-      name: 'azure'
+      name: 'azure-cosmosdb'
+      // Set optional/required parameters (specific to the Recipe)
+      parameters: {
+        size: 'large'
+      }
     }
   }
 }
