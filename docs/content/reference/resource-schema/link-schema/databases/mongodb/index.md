@@ -3,20 +3,25 @@ type: docs
 title: "MongoDB database link"
 linkTitle: "MongoDB"
 description: "Learn how to use a MongoDB link in your application"
+categories: "Reference"
 ---
 
 The `mongodb.com/MongoDatabase` link is a [portable link]({{< ref links-resources >}}) which can be deployed to any platform Radius supports.
 
 ## Resource format
 
-{{< tabs Resource Values >}}
+{{< tabs Recipe Values >}}
 
 {{< codetab >}}
-{{< rad file="snippets/mongo-resource.bicep" embed=true marker="//MONGO" >}}
+
+{{< rad file="snippets/mongo-recipe.bicep" embed=true marker="//MONGO" >}}
+
 {{< /codetab >}}
 
 {{< codetab >}}
+
 {{< rad file="snippets/mongo-values.bicep" embed=true marker="//MONGO" >}}
+
 {{< /codetab >}}
 
 {{< /tabs >}}
@@ -36,11 +41,15 @@ The `mongodb.com/MongoDatabase` link is a [portable link]({{< ref links-resource
 | application | n | The ID of the application resource this resource belongs to. | `app.id`
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
 | resourceProvisioning | n | Specifies how the underlying service/resource is provisioned and managed. Options are to provision automatically via 'recipe' or provision manually via 'manual'. Selection determines which set of fields to additionally require. | `manual`
-| [recipe](#recipe)  | n | The recipe to deploy. | `mongodb.id`
+| [recipe]({{< ref recipes-overview>}})  | n | Configuration for the Recipe which will deploy the backing infrastructure. | `name: 'mongodb-prod'`
 | [resources](#resources)  | n | An array of IDs of the underlying resources for the link. | [See below](#resources)
 | host | n | The MongoDB host name. | `mongo.hello.com`
 | port | n | The MongoDB port. | `4242`
 | [secrets](#secrets) | n | Secrets used when building the link from values. | [See below](#secrets)
+
+## Recipe backed
+
+You can manually specify a Recipe name and other supported parameters for them in the `recipe` property block or choose to leave the property block undefined if your Radius Environment contains a registered Recipe as `default` for the specific resource.
 
 ### Secrets
 
@@ -59,12 +68,6 @@ The following methods are available on the Redis link:
 | connectionString() | Get the connection string for the MongoDb. |
 | username() | Get the username for the MongoDb. |
 | password() | Get the password for the MongoDb. |
-
-## Supported resources
-
-The following resources are supported when building the link from a resource using the `resource` property:
-
-- [Azure CosmosDB API for MongoDB](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction)
 
 ## Connections
 
