@@ -10,7 +10,7 @@ categories: "Reference"
 
 ## Overview
 
-A `Applications.Link/daprPubSubBrokers` resource represents a [Dapr pub/sub](https://docs.dapr.io/developing-applications/building-blocks/pubsub/pubsub-overview/) topic.
+An `Applications.Link/daprPubSubBrokers` resource represents a [Dapr pub/sub](https://docs.dapr.io/developing-applications/building-blocks/pubsub/pubsub-overview/) message broker.
 
 ## Resource format
 
@@ -45,21 +45,25 @@ A `Applications.Link/daprPubSubBrokers` resource represents a [Dapr pub/sub](htt
 | application | n | The ID of the application resource this resource belongs to. | `app.id`
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
 | resourceProvisioning | n | Specifies how the underlying service/resource is provisioned and managed. Options are to provision automatically via 'recipe' or provision manually via 'manual'. Selection determines which set of fields to additionally require. | `manual`
-| [recipe]({{< ref recipes-overview>}}) | n | Configuration for the Recipe which will deploy the backing infrastructure. | `name: 'pubsub-prod'`
-| [resources](#resources)  | n | An array of IDs of the underlying resources for the link, in this case could contain the ID of the message broker resource, if a non-generic `kind` is used. | [See below](#resources)
-| type | n | The Dapr component type. Used when resourceProvisioning is `manual`. | `pubsub.kafka` |
-| metadata | n | Metadata for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-pubsub/) | `brokers: kafkaRoute.properties.url` |
-| version | n | The version of the Dapr component. See [Dapr components](https://docs.dapr.io/reference/components-reference/supported-pubsub/) for available versions. | `v1` |
+| [recipe](#recipe) | n | Configuration for the Recipe which will deploy the backing infrastructure. | [See below](#recipe)
+| [resources](#resources)  | n | An array of resources which underlay this resource. For example, an Azure Service Bus namespace ID if the Dapr Pub/Sub resource is leveraging Service Bus. | [See below](#resources)
+| type | n | The Dapr component type. Set only when resourceProvisioning is 'manual'. | `pubsub.kafka` |
+| metadata | n | Metadata for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-pubsub/). Set only when resourceProvisioning is 'manual'. | `brokers: kafkaRoute.properties.url` |
+| version | n | The version of the Dapr component. See [Dapr components](https://docs.dapr.io/reference/components-reference/supported-pubsub/) for available versions. Set only when resourceProvisioning is 'manual'. | `v1` |
 | componentName | n | _(read-only)_ The name of the Dapr component that is generated and applied to the underlying system. Used by the Dapr SDKs or APIs to access the Dapr component. | `myapp-mypubsub` |
 
 
-## Recipe backed
+## Recipe infrastructure provisioning
 
-You can manually specify a Recipe name and other supported parameters for them in the `recipe` property block or choose to leave the property block undefined if your Radius Environment contains a registered Recipe as `default` for the specific resource.
 
-## Values backed
+[Recipes]({{< recipes >}}) automate infrastructure provisioning using approved templates.
 
-You can manually specify the metadata of a Dapr PubSub. When `resourceProvisioning` is set to `manual`, you can specify `type`, `metadata`, and `version` to create a Dapr component spec. These values must match the schema of the intended [Dapr component](https://docs.dapr.io/reference/components-reference/supported-pubsub/).
+When no Recipe configuration is set Radius will use the default Recipe in the environment.
+Otherwise, a Recipe name and parameters can optionally be set.
+
+## Manual infrastructure provisioning
+
+If you want to manually manage your infrastructure provisioning outside of Recipes, you can set `resourceProvisioning` to `'manual'` and specify `type`, `metadata`, and `version` for the Dapr component. These values must match the schema of the intended [Dapr component](https://docs.dapr.io/reference/components-reference/supported-pubsub/).
 
 ## Injected values
 

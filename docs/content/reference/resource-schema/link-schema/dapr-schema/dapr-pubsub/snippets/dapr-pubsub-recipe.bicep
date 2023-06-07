@@ -18,7 +18,11 @@ resource pubsub 'Applications.Link/daprPubSubBrokers@2022-03-15-privatepreview' 
     application: app.id
     recipe: {
       // Name a specific recipe to use
-      name: 'service-bus-prod'
+      name: 'azure-servicebus'
+      // Set optional/required parameters (specific to the Recipe)
+      parameters: {
+        size: 'large'
+      }
     }
   }
 }
