@@ -26,6 +26,12 @@ Here is an example of using a Secret Store to reference secrets stores in an exi
 
 {{< rad file="snippets/secretstore.bicep" embed=true marker="//SECRET_STORE_REF" >}}
 
+## Using Secret Stores
+
+Secret Stores can currently be used for TLS certificates with [Radius Gateways]({{< ref "networking#gateways" >}}).
+
+Additional use-cases will be added in upcoming releases.
+
 ## Further reading
 
 - [How To: TLS termination with your own TLS certificate]({{< ref howto-tls-termination >}})
