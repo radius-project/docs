@@ -6,6 +6,7 @@ APIs
 APPBASE
 args
 aspell
+azurecr
 Analytics
 Async
 Async
@@ -34,6 +35,7 @@ Dockerfiles
 Docsy
 DocumentDB
 EKS
+eksClusterName
 entrypoint
 EOF
 Extensibility
@@ -288,6 +290,7 @@ rabbitmq
 radapp
 radiuspublic
 rbac
+rediscaches
 readinessProbe
 redis
 redisCaches
@@ -356,6 +359,7 @@ wi
 workingDir
 workspaceTypes
 workspaces
+walkthrough
 yaml
 yml
 zsh
@@ -396,3 +400,4 @@ valueFrom
 tls
 minimumProtocolVersion
 certificateFrom
+preloaded
