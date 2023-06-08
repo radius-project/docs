@@ -147,7 +147,7 @@ First add some new code to `app.bicep` by pasting in the content below:
 
 The code you just added creates a Redis Cache resource and specifies that it should be created by a Recipe.
 
-Next, update your container definition to include `connections` inside the `properties`:
+Next, update your container definition to include `connections` inside `properties`:
 
 {{< rad file="snippets/app-with-redis-snippets.bicep" embed=true marker="//CONTAINER" >}}
 
