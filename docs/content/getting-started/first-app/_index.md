@@ -28,7 +28,7 @@ _Visit the [GitHub docs]({{< ref github >}}) if you need access to the organizat
 
 {{% codetab %}}
 
-> *If you don't have a preferred way to create Kubernetes clusters, you might try using [k3d](https://k3d.io/), which runs a minimal Kubernetes distribution in Docker.*
+> *If you don't have a preferred way to create Kubernetes clusters, you could try using [k3d](https://k3d.io/), which runs a minimal Kubernetes distribution in Docker.*
 
 Ensure your cluster is set as your current context:
 
