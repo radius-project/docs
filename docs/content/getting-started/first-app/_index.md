@@ -165,7 +165,7 @@ Use below command to run the updated application again:
 rad run app.bicep
 ```
 
-Open the browser to [http://localhost:3000](http://localhost:3000) and you should see that the environment variables have changed. The `demo` container now has connection information for Redis (`CONNECTION_REDIS_HOST`, `CONNECTION_REDIS_PORT`). If you are using codespaces, you can get the demo app url from the ports tab in VSCode
+Open the browser to [http://localhost:3000](http://localhost:3000) and you should see that the environment variables have changed. The `demo` container now has connection information for Redis (`CONNECTION_REDIS_HOST`, `CONNECTION_REDIS_PORT`). If you are using codespaces, you can get the demo app url from the ports tab in VSCode.
 
 <img src="./demo-with-redis-screenshot.png" alt="Screenshot of the demo container" width=500>
 <br /><br />
