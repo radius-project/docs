@@ -1,4 +1,4 @@
-# Project Radius documentation
+# Radius documentation
 
 This directory contains the files to generate the https://radapp.dev site. Please go there to consume Project Radius docs. This document will describe how to build Project Radius docs locally.
 

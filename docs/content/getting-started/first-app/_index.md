@@ -14,7 +14,7 @@ This guide offers the quickest way to get started using Radius. You'll walk thro
 
 ## 1. Have your Kubernetes cluster handy
 
-Radius runs inside [Kubernetes]({{< ref kubernetes-platform >}}). Get a Kubernetes cluster ready with one of the options below
+Radius runs inside [Kubernetes]({{< ref "/operations/platforms/kubernetes" >}}). However you run Kubernetes, get a cluster ready.
 
 {{< tabs "Codespaces" "Kubernetes Cluster" >}}
 
@@ -132,7 +132,7 @@ When you're ready to move on to the next step, use `CTRL+C` to exit the command.
 
 This step will add a database (Redis Cache) to the application.
 
-You can create a Redis Cache using [Recipes]({{< ref recipes-overview >}}) provided by Radius. The Radius community provides Recipes for running commonly used application dependencies, including Redis.
+You can create a Redis Cache using [Recipes]({{< ref "/author-apps/recipes" >}}) provided by Radius. The Radius community provides Recipes for running commonly used application dependencies, including Redis.
 
 In this step you will:
 

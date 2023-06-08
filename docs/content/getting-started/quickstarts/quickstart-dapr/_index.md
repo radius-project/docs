@@ -53,7 +53,7 @@ This tutorial can be completed on any platform Radius supports. To get started, 
 {{< tabs Kubernetes >}}
 
 {{% codetab %}}
-A Radius environment can be created in any [supported Kubernetes cluster]({{< ref "kubernetes#supported-clusters" >}}):
+A Radius environment can be created in any [supported Kubernetes cluster]({{< ref "/operations/platforms/kubernetes#supported-clusters" >}}):
 
 ```sh
 rad init
