@@ -10,7 +10,9 @@ Welcome to the Project Radius community. We are currently in a private release p
 
 ## Discussions
 
-The best way to interact with us currently is through the [Project Radius Preview Teams Channel](https://teams.microsoft.com/l/channel/19%3a97f6300da02447aba041e010c478567e%40thread.tacv2/Preview%2520Discussion?groupId=7eb9839b-5ec6-448d-8447-a820b6bd2cdd&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47) or your Radius Core Team contact. Feel free to post into the group discussion so that other community members can jump in and answer as well.
+The best way to interact with us currently is through Discord over at the Radius Discord server:
+
+{{< button link="https://discord.gg/SRG3ePMKNy" text="Radius Discord" newtab="true" >}}
 
 ## Community meetings
 
