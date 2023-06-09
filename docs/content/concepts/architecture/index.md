@@ -1,8 +1,8 @@
 ---
 type: docs
-title: Project Radius architecture
+title: Radius architecture
 linkTitle: Architecture
-description: Learn how the Project Radius control-plane services deploy and manage your applications
+description: Learn how the Radius control-plane services deploy and manage your applications
 weight: 600
 categories: "Concept"
 tags: ["control plane"]
@@ -10,9 +10,9 @@ tags: ["control plane"]
 
 ## Overview
 
-The Project Radius control-plane is a set of services that accepts a Radius application definition and deploys it to the target platform.
+The Radius control-plane is a set of services that accepts a Radius application definition and deploys it to the target platform.
 
-<img src="controlplane-services-generic.png" alt="Diagram of the Project Radius control-plane services" width="700" />
+<img src="controlplane-services-generic.png" alt="Diagram of the Radius control-plane services" width="700" />
 
 ## Services
 

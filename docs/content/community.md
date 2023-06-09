@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "Project Radius Community"
+title: "Radius Community"
 linkTitle: "Community"
-description: "Information about the Project Radius community"
+description: "Information about the Radius community"
 weight: 85
 ---
 
-Welcome to the Project Radius community. We are currently in a private release phase which is open to Microsoft FTEs and select partners. The team is working on a public preview release which will be announced on this page.
+Welcome to the Radius community. We are currently in a private release phase which is open to Microsoft FTEs and select partners. The team is working on a public preview release which will be announced on this page.
 
 ## Discussions
 
@@ -38,7 +38,7 @@ To present a specific topic on the next Radius community call start by filling o
 
 ## GitHub Issues & repositories
 
-GitHub access is optional and not required to try out and run Project Radius. If you would like to directly file Issues and have access to the source code, please contact your Radius Core Team contact.
+GitHub access is optional and not required to try out and run Radius. If you would like to directly file Issues and have access to the source code, please contact your Radius Core Team contact.
 
 ## How can I get involved?
 

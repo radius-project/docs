@@ -1,6 +1,6 @@
 baseURL = "https://docs.radapp.dev/"
 languageCode = "en-us"
-title = "Project Radius Docs"
+title = "Radius Docs"
 theme =  "docsy"
 
 disableFastRender = true
@@ -58,7 +58,7 @@ tag = "tags"
     pre = "<i class='fab fa-discord'></i>"
 
 [params]
-copyright = "Project Radius"
+copyright = "Radius"
 
 version = "v0.21"
 chart_version = "0.21.0"

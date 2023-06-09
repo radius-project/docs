@@ -4,7 +4,7 @@ This repo contains the documentation source for https://radapp.dev
 
 ## 📦 Framework
 
-Project Radius uses [Hugo](https://gohugo.io/) to generate the docs site.
+Radius uses [Hugo](https://gohugo.io/) to generate the docs site.
 
 ### Theme
 
@@ -24,7 +24,7 @@ Visit the [docs guide](./docs) to learn how to build the docs locally.
 
 ## ☁ Hosting
 
-The Project Radius docs are hosted on Azure App Service.
+The Radius docs are hosted on Azure App Service.
 
 ### Latest docs
 

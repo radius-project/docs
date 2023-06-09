@@ -8,7 +8,7 @@ categories: "Quickstart"
 tags: ["CI/CD"]
 ---
 
-It's easy to get Project Radius added to your GitHub Actions deployment pipelines. By leveraging the `rad` CLI, you can keep your checked-in app definitions in sync with deployed instances of your app.
+It's easy to get Radius added to your GitHub Actions deployment pipelines. By leveraging the `rad` CLI, you can keep your checked-in app definitions in sync with deployed instances of your app.
 
 ## Prerequisites
 
