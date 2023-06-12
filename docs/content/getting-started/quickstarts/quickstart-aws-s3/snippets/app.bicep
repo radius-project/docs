@@ -2,8 +2,6 @@ import aws as aws
 
 import radius as radius
 
-param application string
-
 @description('Radius environment')
 param environment string
 
