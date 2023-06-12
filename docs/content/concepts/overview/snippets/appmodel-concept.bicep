@@ -3,7 +3,7 @@ import radius as radius
 param environment string
 
 //SNIPPET
-// Infrastructure team provides database to the application team
+// Infrastructure operators provide database to the application team
 param databaseId string
 
 // Define application

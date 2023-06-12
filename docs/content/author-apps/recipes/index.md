@@ -11,13 +11,14 @@ slug: recipes
 
 ## Overview
 
-Recipes enable a **separation of concerns** between infrastructure teams and developers by **automating infrastructure deployment**. Developers select the resource they want in their app (_Mongo Database, Redis Cache, Dapr State Store, etc._), and infrastructure teams codify in their environment how these resources should be deployed and configured (_lightweight containers, Azure resources, AWS resources, etc._). When a developer deploys their application and its resources, Recipes automatically deploy the backing infrastructure and bind it to the developer's resources.
+Recipes enable a **separation of concerns** between infrastructure operators and developers by **automating infrastructure deployment**. Developers select the resource they want in their app (_Mongo Database, Redis Cache, Dapr State Store, etc._), and infrastructure operators codify in their environment how these resources should be deployed and configured (_lightweight containers, Azure resources, AWS resources, etc._). When a developer deploys their application and its resources, Recipes automatically deploy the backing infrastructure and bind it to the developer's resources.
 
 <img src="recipes.png" alt="Diagram showing developers adding Redis to their app and operators adding a Recipe that Redis should deploy an Azure Cache for Redis" width=700px >
 
 ## Capabilities
 
 ### Select the Recipe that meets your needs
+
 Recipes can be used in any environment, from dev to prod. You can run a default recipe registered in your environment or select the specific Recipe you want to run. To run a default recipe, simply add the resource you want to your app and omit the Recipe name:
 
 {{< rad file="snippets/recipe-link-example.bicep" embed=true marker="//DEFAULT" >}} 
