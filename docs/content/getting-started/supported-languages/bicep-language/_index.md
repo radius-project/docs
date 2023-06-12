@@ -74,8 +74,3 @@ In the below example, a Radius resource of type `Applications.Core/applications`
 
 {{< rad file="snippets/app.bicep" embed=true replace-key-resources="//RESOURCES" replace-value-resources="..." >}}
 
-## Next step
-
-Next, we'll use the Bicep language to model your application's infrastructure:
-
-{{< button page="bicep-infrastructure" text="Model your infrastructure in Bicep" >}}
