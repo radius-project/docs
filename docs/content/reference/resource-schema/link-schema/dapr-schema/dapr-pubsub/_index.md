@@ -44,7 +44,7 @@ An `Applications.Link/daprPubSubBrokers` resource represents a [Dapr pub/sub](ht
 |------|:--------:|-------------|---------|
 | application | n | The ID of the application resource this resource belongs to. | `app.id`
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
-| [resourceProvisioning](#resource-provisioniong) | n | Specifies how the underlying service/resource is provisioned and managed. Options are to provision automatically via 'recipe' or provision manually via 'manual'. Selection determines which set of fields to additionally require. | `manual`
+| [resourceProvisioning](#resource-provisioning) | n | Specifies how the underlying service/resource is provisioned and managed. Options are to provision automatically via 'recipe' or provision manually via 'manual'. Selection determines which set of fields to additionally require. | `manual`
 | [recipe](#recipe) | n | Configuration for the Recipe which will deploy the backing infrastructure. | [See below](#recipe)
 | resources | n | An array of resources which underlay this resource. For example, an Azure Service Bus namespace ID if the Dapr Pub/Sub resource is leveraging Service Bus. | `[ { id: serviceBus.id } ]`
 | type | n | The Dapr component type. Set only when resourceProvisioning is 'manual'. | `pubsub.kafka` |
@@ -86,7 +86,7 @@ resource pubsub 'Applications.Link/daprPubSubBrokers@2022-03-15-privatepreview' 
 }
 ``` 
 
-## Resource provisioniong
+## Resource provisioning
 
 ### Provision with Recipes
 

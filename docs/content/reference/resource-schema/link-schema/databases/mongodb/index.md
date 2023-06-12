@@ -42,7 +42,7 @@ The `mongodb.com/MongoDatabase` link is a [portable link]({{< ref links-resource
 |----------|:--------:|-------------|------------|
 | application | n | The ID of the application resource this resource belongs to. | `app.id`
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
-| [resourceProvisioning](#resource-provisioniong) | n | Specifies how the underlying service/resource is provisioned and managed. Options are to provision automatically via 'recipe' or provision manually via 'manual'. Selection determines which set of fields to additionally require. | `manual`
+| [resourceProvisioning](#resource-provisioning) | n | Specifies how the underlying service/resource is provisioned and managed. Options are to provision automatically via 'recipe' or provision manually via 'manual'. Selection determines which set of fields to additionally require. | `manual`
 | [recipe](#recipe) | n | Configuration for the Recipe which will deploy the backing infrastructure. | [See below](#recipe)
 | resources | n | An array of resources which underlay this resource. For example, an Azure CosmosDB database ID if the MongoDB resource is leveraging CosmosDB. | `[ { id: cosmosDB.id } ]`
 | host | n | The MongoDB host name. | `mongo.hello.com`
@@ -104,7 +104,7 @@ The following methods are available on the MongoDB link:
 | password() | Get the password for the MongoDB. |
 
 
-## Resource provisioniong
+## Resource provisioning
 
 ### Provision with Recipes
 
