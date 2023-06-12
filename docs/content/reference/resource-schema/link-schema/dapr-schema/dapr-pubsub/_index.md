@@ -90,7 +90,7 @@ resource pubsub 'Applications.Link/daprPubSubBrokers@2022-03-15-privatepreview' 
 
 ### Provision with Recipes
 
-[Recipes]({{< ref recipes-overview>}}) automate infrastructure provisioning using approved templates.
+[Recipes]({{< ref recipes-overview >}}) automate infrastructure provisioning using approved templates.
 When no Recipe configuration is set Radius will use the Recipe registered as the **default** in the environment for the given resource. Otherwise, a Recipe name and parameters can optionally be set.
 
 ### Provision with manual
