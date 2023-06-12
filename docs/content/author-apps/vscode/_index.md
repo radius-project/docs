@@ -2,7 +2,7 @@
 type: docs
 title: "Visual Studio Code extension"
 linkTitle: "Visual Studio Code"
-description: "Overview of the Project Radius Visual Studio Code extension"
+description: "Overview of the Radius Visual Studio Code extension"
 weight: 300
 toc_hide: true
 hide_summary: true
@@ -13,7 +13,7 @@ hide_summary: true
 Developers can use the *preview* Radius Visual Studio Code extension which offers a variety of features to help manage Radius applications across cloud and edge.
 
 {{% alert title="Bicep extension" color="info" %}}
-In addition to the Project Radius extension described in this page, a forked Bicep extension is also used for formatting and linting. This requirement will be removed in a future release. Visit the [getting started guide]({{< ref "getting-started#setup-vscode" >}}) for instructions on installing the custom Bicep extension.
+In addition to the Radius extension described in this page, a forked Bicep extension is also used for formatting and linting. This requirement will be removed in a future release. Visit the [getting started guide]({{< ref "getting-started#setup-vscode" >}}) for instructions on installing the custom Bicep extension.
 {{% /alert %}}
 
 ## Features
@@ -22,7 +22,7 @@ In addition to the Project Radius extension described in this page, a forked Bic
 
 View and interact with environments, applications and resources deployed to your Radius environments.
 
-Simply open the Project Radius extension and the extension will list all the environments in your local config, along with all of the applications and resources deployed to them:
+Simply open the Radius extension and the extension will list all the environments in your local config, along with all of the applications and resources deployed to them:
 
 <img src="vscode-tree.png" alt="Screenshot of environments, applications, and resources listed inside of VS Code" width="600px">
 

@@ -19,7 +19,7 @@ For example, when a user specifies a MongoDB link, that link could bind to an Az
 
 ## Supported links
 
-Project Radius supports a large variety of links across databases, queues, caches, and other resource types.
+Radius supports a large variety of links across databases, queues, caches, and other resource types.
 
 <img src="link-types.png" alt="Diagram showing supported link types, including MonogoDB, Redis, Dapr, and Microsoft SQL." width="700px" />
 

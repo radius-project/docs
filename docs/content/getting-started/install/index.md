@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Install Project Radius"
+title: "Install Radius"
 linkTitle: "Install Radius"
 description: "Learn how to install the Radius tools on your local machine"
 weight: 100
@@ -115,7 +115,7 @@ Verify the rad CLI is installed correctly by running `rad`.
 
 ## Setup VS Code
 
-Visual Studio Code offers the best authoring experience for Project Radius and Bicep. Download and install the Radius Bicep extension to easily author and validate Bicep templates:
+Visual Studio Code offers the best authoring experience for Radius and Bicep. Download and install the Radius Bicep extension to easily author and validate Bicep templates:
 
 1. Download the latest extensions
 
@@ -182,6 +182,6 @@ Visual Studio Code offers the best authoring experience for Project Radius and B
 | Guides | Description  |
 | --- | ----------- |
 | [Run your first app]({{< ref first-app >}}) | Take a tour of Radius by running your first app |
-| [Quickstarts]({{< ref quickstarts >}}) | Learn about Project Radius topics via quickstart guides, complete with code samples |
-| [Reference Applications]({{< ref reference-apps >}}) | See how full applications are modeled in Project Radius |
+| [Quickstarts]({{< ref quickstarts >}}) | Learn about Radius topics via quickstart guides, complete with code samples |
+| [Reference Applications]({{< ref reference-apps >}}) | See how full applications are modeled in Radius |
 | [Supported Languages]({{< ref supported-languages >}}) | Learn how to model apps using various IaC tools |

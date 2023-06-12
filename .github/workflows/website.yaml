@@ -1,4 +1,4 @@
-name: Project Radius Website
+name: Radius Website
 
 on:
   workflow_dispatch:

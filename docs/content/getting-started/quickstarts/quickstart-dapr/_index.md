@@ -2,7 +2,7 @@
 type: docs
 title: "Quickstart: Dapr Microservices"
 linkTitle: "Dapr microservices"
-description: "Learn Project Radius by authoring templates and deploying a Dapr application"
+description: "Learn Radius by authoring templates and deploying a Dapr application"
 weight: 300
 no_list: true
 slug: "dapr"
@@ -29,9 +29,9 @@ In this tutorial, you will:
 1. Deploy and connect a Dapr statestore resource
 1. Add a frontend container to submit orders to the backend
 
-### Project Radius + Dapr
+### Radius + Dapr
 
-Dapr integrates directly with Project Radius to provide a simple, easy to use, and powerful way to build microservices. Dapr developers can:
+Dapr integrates directly with Radius to provide a simple, easy to use, and powerful way to build microservices. Dapr developers can:
 
 - Model Dapr building blocks as [Radius link resources]({{< ref dapr-schema >}})
 - Automatically generate Dapr component configuration files based on the source resource

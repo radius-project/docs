@@ -1,8 +1,8 @@
 ---
 type: docs
-title: Overview for Project Radius 
+title: Overview for Radius 
 linkTitle: Overview
-description: Learn how Project Radius fits into the app development landscape and it's long-term vision
+description: Learn how Radius fits into the app development landscape and it's long-term vision
 weight: 100
 categories: "Concept"
 ---
@@ -19,13 +19,13 @@ Once deployed, teams don't have a way to view and manage apps holistically. Inst
 
 What's missing is a way to collapse the entire concept of an application into a single entity so it can be deployed, managed, and scaled easily.
 
-## Project Radius empowers teams to focus on their apps
+## Radius empowers teams to focus on their apps
 
 ### Build a unified concept of your application
 
-At the heart of Project Radius is a new **application resource**, with an accompanying set of resources and abstractions to describe your app's requirements and capabilities. 
+At the heart of Radius is a new **application resource**, with an accompanying set of resources and abstractions to describe your app's requirements and capabilities. 
 
-<img alt="Diagram showing modeling an app with Project Radius" src="cloud-apps-radius.png" width="600px" />
+<img alt="Diagram showing modeling an app with Radius" src="cloud-apps-radius.png" width="600px" />
 
 These new resources form the [**Radius app model**]({{< ref appmodel-concept >}}), which allow you to:
 
@@ -72,7 +72,7 @@ Radius uses the [Bicep language]({{< ref bicep >}}) as its file-format and struc
 
 ## Platform strategy
 
-Project Radius aims to support all hosting platform types - from hyperscale cloud, to self-hosted Kubernetes on the edge, to IoT and edge devices.
+Radius aims to support all hosting platform types - from hyperscale cloud, to self-hosted Kubernetes on the edge, to IoT and edge devices.
 
 <img alt="Diagram showing Radius platforms" src="platforms.png" width="800px" />
 
@@ -82,10 +82,10 @@ The Radius app model is designed to be portable across all Radius-supported plat
 
 ### Consistent tooling
 
-As teams onboard to Project Radius and begin deploying across platforms, the tooling and experiences are consistent everywhere. The [rad CLI]({{< ref cli >}}) works across every platform and environment. This allows teams to easily scale across platforms and be productive everywhere.
+As teams onboard to Radius and begin deploying across platforms, the tooling and experiences are consistent everywhere. The [rad CLI]({{< ref cli >}}) works across every platform and environment. This allows teams to easily scale across platforms and be productive everywhere.
 
 ## Next step
 
-Now that you have an overview of Project Radius, learn more about the Radius app model:
+Now that you have an overview of Radius, learn more about the Radius app model:
 
 {{< button text="Learn about the Radius application model" page="appmodel-concept" size="btn-lg" color="success" >}}

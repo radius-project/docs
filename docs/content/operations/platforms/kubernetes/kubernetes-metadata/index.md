@@ -16,7 +16,7 @@ tags: ["containers","Kubernetes","applications", "environments"]
 
 ## Kubernetes metadata extension
 
-Project Radius enables you to retain or use your own defined tagging scheme for Kubernetes resources using Kubernetes labels and annotations. This enables users to incrementally adopt Radius for microservices built in the Kubernetes ecosystem using Kubernetes metadata concepts.
+Radius enables you to retain or use your own defined tagging scheme for Kubernetes resources using Kubernetes labels and annotations. This enables users to incrementally adopt Radius for microservices built in the Kubernetes ecosystem using Kubernetes metadata concepts.
 
 You can set labels and annotations on an environment, application, or container using the Kubernetes metadata extension. The Kubernetes objects output from your resources (_Deployments, Services, etc._) will now have the defined metadata.
 
