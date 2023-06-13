@@ -57,7 +57,7 @@ An `Applications.Link/daprPubSubBrokers` resource represents a [Dapr pub/sub](ht
 | Property | Required | Description | Example(s) |
 |------|:--------:|-------------|---------|
 | name | n | Specifies the name of the Recipe that should be deployed. If not set, the name defaults to `default`. | `name: 'azure-prod'`
-| parameters | n |An object that contains optional parameters that can be passed to values parameters inside of the Recipe to override or set values. | `parameters: { size: 'large' }`
+| parameters | n | An object that contains a list of parameters to set on the Recipe for every Recipe usage and deployment. Can be overridden by the resource calling the Recipe. | `parameters: { size: 'large' }`
 
 ## Resource provisioning
 
