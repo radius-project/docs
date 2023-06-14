@@ -5,6 +5,7 @@ linkTitle: "Service invocation"
 description: "Learn how to use Dapr's HTTP API in Radius"
 weight: 150
 slug: "http"
+categories: "Reference"
 ---
 
 ## Overview

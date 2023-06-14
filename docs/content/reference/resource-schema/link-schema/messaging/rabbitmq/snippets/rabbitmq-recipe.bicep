@@ -11,22 +11,20 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 }
 
 //SAMPLE
-resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
-  name: 'frontend'
+resource rabbitmq 'Applications.Link/rabbitmqMessageQueues@2022-03-15-privatepreview' = {
+  name: 'rabbitmq'
   properties: {
+    environment: environment
     application: app.id
-    //CONTAINER
-    container: {
-      image: 'registry/container:tag'
-    }
-    //CONTAINER
-    extensions: [
-      {
-        kind: 'daprSidecar'
-        appId: 'frontend'
-        appPort: 3000
+    recipe: {
+      // Name a specific Recipe to use
+      name: 'prod-rabbitmq'
+      // Set optional/required parameters (specific to the Recipe)
+      parameters: {
+        port: '10040'
       }
-    ]
+    }
   }
 }
 //SAMPLE
+

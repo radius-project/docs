@@ -4,20 +4,26 @@ title: "Microsoft SQL Server database"
 linkTitle: "Microsoft SQL"
 description: "Sample application running on a user-managed Azure SQL Database"
 weight: 100
+categories: "Reference"
 ---
 
+## Overview
 This application showcases how Radius can use a user-manged Azure SQL Database.
 
 ## Resource format
 
-{{< tabs Resource Values >}}
+{{< tabs Recipe Manual >}}
 
 {{< codetab >}}
-{{< rad file="snippets/sql-resource.bicep" embed=true marker="//SQL" >}}
+
+{{< rad file="snippets/sql-recipe.bicep" embed=true marker="//SQL" >}}
+
 {{< /codetab >}}
 
 {{< codetab >}}
-{{< rad file="snippets/sql-values.bicep" embed=true marker="//SQL" >}}
+
+{{< rad file="snippets/sql-manual.bicep" embed=true marker="//SQL" >}}
+
 {{< /codetab >}}
 
 {{< /tabs >}}
@@ -36,22 +42,32 @@ This application showcases how Radius can use a user-manged Azure SQL Database.
 |----------|:--------:|-------------|------------|
 | application | n | The ID of the application resource this resource belongs to. | `app.id`
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
-| resourceProvisioning | n | Specifies how the underlying service/resource is provisioned and managed. | `manual`
-| resources  | n | The IDs of the underlying resource for the link. Used when building the link from resources. | `sqlDb.id`
+| [resourceProvisioning](#resource-provisioning) | n | Specifies how the underlying service/resource is provisioned and managed. Options are to provision automatically via 'recipe' or provision manually via 'manual'. Selection determines which set of fields to additionally require. Defaults to 'recipe'. | `manual`
+| [recipe](#recipe) | n | Configuration for the Recipe which will deploy the backing infrastructure. | [See below](#recipe)
+| [resources](#resources)  | n | An array of IDs of the underlying resources for the link. | [See below](#resources)
 | server | n | The fully qualified domain name of the SQL server. | `sql.hello.com`
 | database | n | The name of the SQL database. | `5000`
 
-## Supported resources
+#### Recipe
 
-- [Azure SQL](https://docs.microsoft.com/en-us/azure/azure-sql/)
+| Property | Required | Description | Example(s) |
+|------|:--------:|-------------|---------|
+| name | n | Specifies the name of the Recipe that should be deployed. If not set, the name defaults to `default`. | `name: 'azure-prod'`
+| parameters | n | An object that contains a list of parameters to set on the Recipe. | `{ size: 'large' }`
 
-## Connections
+#### Resources
 
-[Services]({{< ref container >}}) can define [connections]({{< ref appmodel-concept >}}) to links using the `connections` property. This allows the service to access properties of the link and contributes to to visualization and health experiences.
+| Property | Required | Description | Example(s) |
+|----------|:--------:|-------------|------------|
+| id | n | List of the resource IDs that support the resource |`sqlDb.id`
 
-### Environment variables
+## Resource provisioning
 
-| Variable | Description |
-|----------|-------------|
-| `CONNECTION_<CONNECTION-NAME>-SERVER` | The fully-qualified hostname of the database server. |
-| `CONNECTION_<CONNECTION-NAME>-DATABASE` | The name of the SQL Server database. |
+### Provision with a Recipe
+
+[Recipes]({{< ref recipes-overview >}}) automate infrastructure provisioning using approved templates.
+When no Recipe configuration is set Radius will use the Recipe registered as the **default** in the environment for the given resource. Otherwise, a Recipe name and parameters can optionally be set.
+
+### Provision manually
+
+If you want to manually manage your infrastructure provisioning outside of Recipes, you can set `resourceProvisioning` to `'manual'` and provide all necessary parameters and values in order for Radius to be able to deploy/connect to the desired infrastructure.

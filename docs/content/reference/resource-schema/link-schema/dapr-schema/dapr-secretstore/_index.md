@@ -15,7 +15,21 @@ This resource will automatically create and deploy the Dapr component spec for t
 
 ## Resource format
 
-{{< rad file="snippets/dapr-secretstore-generic.bicep" embed=true marker="//SAMPLE" >}}
+{{< tabs Recipe Manual >}}
+
+{{< codetab >}}
+
+{{< rad file="snippets/dapr-secretstore-recipe.bicep" embed=true marker="//SAMPLE" >}}
+
+{{< /codetab >}}
+
+{{< codetab >}}
+
+{{< rad file="snippets/dapr-secretstore-manual.bicep" embed=true marker="//SAMPLE" >}}
+
+{{< /codetab >}}
+
+{{< /tabs >}}
 
 ### Top-level
 
@@ -29,22 +43,27 @@ This resource will automatically create and deploy the Dapr component spec for t
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| resourceProvisioning | n | Specifies how the underlying service/resource is provisioned and managed. Options are to provision automatically via 'recipe' or provision manually via 'manual'. Selection determines which set of fields to additionally require. | `manual`
+| [resourceProvisioning](#resource-provisioning) | n | Specifies how the underlying service/resource is provisioned and managed. Options are to provision automatically via 'recipe' or provision manually via 'manual'. Selection determines which set of fields to additionally require. Defaults to 'recipe'. | `manual`
+| [recipe](#recipe) | n | Configuration for the Recipe which will deploy the backing infrastructure. | [See below](#recipe)
 | type | n | The Dapr component type. Used when resourceProvisioning is `manual`. | `secretstores.azure.keyvault`
 | metadata | n | Metadata for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-secret-stores/) | `vaultName: 'test'` |
 | version | n | The version of the Dapr component. See [Dapr components](https://docs.dapr.io/reference/components-reference/supported-secret-stores/) for available versions. | `v1` |
 | componentName | n | _(read-only)_ The name of the Dapr component that is generated and applied to the underlying system. Used by the Dapr SDKs or APIs to access the Dapr component. | `mysecretstore` |
 
-## Value backed Link
+#### Recipe
 
-You can also manually specify the metadata of a Dapr state store. When `resourceProvisioning` is set to `manual`, you can specify `type`, `metadata`, and `version` to create a Dapr component spec. These values must match the schema of the intended [Dapr component](https://docs.dapr.io/reference/components-reference/supported-secret-stores/).
+| Property | Required | Description | Example(s) |
+|------|:--------:|-------------|---------|
+| name | n | Specifies the name of the Recipe that should be deployed. If not set, the name defaults to `default`. | `name: 'azure-prod'`
+| parameters | n | An object that contains a list of parameters to set on the Recipe. | `{ size: 'large' }`
 
-{{< rad file="snippets/dapr-secretstore-generic.bicep" embed=true marker="//SAMPLE" >}}
+## Resource provisioning
 
-## Injected values
+### Provision with a Recipe
 
-Connections from [Radius services]({{< ref container >}}) to [links]({{< ref links-resources >}}) by default inject the following values into the environment of the service:
+[Recipes]({{< ref recipes-overview >}}) automate infrastructure provisioning using approved templates.
+When no Recipe configuration is set Radius will use the Recipe registered as the **default** in the environment for the given resource. Otherwise, a Recipe name and parameters can optionally be set.
 
-| Key | Value |
-|-----|-------|
-| `CONNECTION_<CONNECTIONNAME>_COMPONENTNAME` | `properties.componentName` |
+### Provision manually
+
+If you want to manually manage your infrastructure provisioning outside of Recipes, you can set `resourceProvisioning` to `'manual'` and provide all necessary parameters and values in order for Radius to be able to deploy/connect to the desired infrastructure.
