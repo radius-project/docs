@@ -47,7 +47,7 @@ The `mongodb.com/MongoDatabase` link is a [portable link]({{< ref links-resource
 | resources | n | An array of resources which underlay this resource. For example, an Azure CosmosDB database ID if the MongoDB resource is leveraging CosmosDB. | `[ { id: cosmosDB.id } ]`
 | host | n | The MongoDB host name. | `mongo.hello.com`
 | port | n | The MongoDB port. | `4242`
-| username | n | The username for the MongoDB. Write only. | `'myusername'`
+| username | n | The username for the MongoDB. | `'myusername'`
 | [secrets](#secrets) | n | Secrets used when building the link from values. | [See below](#secrets)
 
 #### Recipe
@@ -55,7 +55,7 @@ The `mongodb.com/MongoDatabase` link is a [portable link]({{< ref links-resource
 | Property | Required | Description | Example(s) |
 |------|:--------:|-------------|---------|
 | name | n | Specifies the name of the Recipe that should be deployed. If not set, the name defaults to `default`. | `name: 'azure-prod'`
-| parameters | n | An object that contains a list of parameters to set on the Recipe for every Recipe usage and deployment. Can be overridden by the resource calling the Recipe.  | `parameters: { size: 'large' }`
+| parameters | n | An object that contains a list of parameters to set on the Recipe. | `{ size: 'large' }`
 
 #### Secrets
 
