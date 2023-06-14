@@ -83,11 +83,11 @@ The following methods are available on the MongoDB link:
 
 ## Resource provisioning
 
-### Provision with Recipes
+### Provision with a Recipe
 
 [Recipes]({{< ref recipes-overview >}}) automate infrastructure provisioning using approved templates.
 When no Recipe configuration is set Radius will use the Recipe registered as the **default** in the environment for the given resource. Otherwise, a Recipe name and parameters can optionally be set.
 
-### Provision with manual
+### Provision manually
 
 If you want to manually manage your infrastructure provisioning outside of Recipes, you can set `resourceProvisioning` to `'manual'` and provide all necessary parameters and values in order for Radius to be able to deploy/connect to the desired infrastructure.

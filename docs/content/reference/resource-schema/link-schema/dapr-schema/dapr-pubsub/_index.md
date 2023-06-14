@@ -67,11 +67,11 @@ An `Applications.Link/daprPubSubBrokers` resource represents a [Dapr pub/sub](ht
 
 ## Resource provisioning
 
-### Provision with Recipes
+### Provision with a Recipe
 
 [Recipes]({{< ref recipes-overview >}}) automate infrastructure provisioning using approved templates.
 When no Recipe configuration is set Radius will use the Recipe registered as the **default** in the environment for the given resource. Otherwise, a Recipe name and parameters can optionally be set.
 
-### Provision with manual
+### Provision manually
 
 If you want to manually manage your infrastructure provisioning outside of Recipes, you can set `resourceProvisioning` to `'manual'` and specify `type`, `metadata`, and `version` for the Dapr component. These values must match the schema of the intended [Dapr component](https://docs.dapr.io/reference/components-reference/supported-pubsub/).
