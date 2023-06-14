@@ -83,7 +83,8 @@ The following tables shows some examples of resource ids from different resource
 
 #### Resource manager: Radius
 
-This example shows a Radius application named `my-app` in the `my-group` resource group, running on the local cluster.
+This example shows a Radius application named `my-app` in the `my-group` resource group, running on the local cluster:
+
 | Key                | Example                                                                              |
 | ------------------ | ------------------------------------------------------------------------------------ |
 | **Root scope**     | `/planes/radius/local/resourceGroups/my-group`                                       |
@@ -93,7 +94,7 @@ This example shows a Radius application named `my-app` in the `my-group` resourc
 
 #### Resource manager: AWS
 
-This example shows an AWS Kinesis Stream named `my-stream` in the `0123456789` account, running in the `us-west-2` region.
+This example shows an AWS Kinesis Stream named `my-stream` in the `0123456789` account, running in the `us-west-2` region:
 
 | Key                | Example                                                                               |
 | ------------------ | ------------------------------------------------------------------------------------- |
@@ -104,7 +105,7 @@ This example shows an AWS Kinesis Stream named `my-stream` in the `0123456789` a
 
 #### Resource manager: Azure
 
-This example shows an Azure Storage Account named `myaccount` in the `00000000-0000-0000-0000-000000000000` subscription and `my-group` Azure resource group.
+This example shows an Azure Storage Account named `myaccount` in the `00000000-0000-0000-0000-000000000000` subscription and `my-group` Azure resource group:
 
 | Key                | Example                                                                                                                                           |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
