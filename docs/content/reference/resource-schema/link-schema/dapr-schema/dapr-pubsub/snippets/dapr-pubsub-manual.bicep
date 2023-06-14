@@ -40,7 +40,7 @@ resource pubsub 'Applications.Link/daprPubSubBrokers@2022-03-15-privatepreview' 
     application: app.id
     resourceProvisioning: 'manual'
     resources: [
-      { id: account.id }
+      { id: kafkaRoute.id }
     ]
     type: 'pubsub.kafka'
     metadata: {
