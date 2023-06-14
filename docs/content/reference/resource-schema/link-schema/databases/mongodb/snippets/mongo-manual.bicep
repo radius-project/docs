@@ -21,6 +21,8 @@ resource db 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
     application: app.id
     resourceProvisioning: 'manual'
     host: 'https://mymongo.cluster.svc.local'
+    database: 'mongodb-prod'
+    username: 'admin'
     port: 4242
     resources: [
       { id: account.id }
@@ -28,7 +30,6 @@ resource db 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
     secrets: {
       connectionString: 'https://mymongo.cluster.svc.local,password=*****,....'
       password: '*********'
-      username: 'admin'
     }
   }
 }

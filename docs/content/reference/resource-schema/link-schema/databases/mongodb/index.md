@@ -44,7 +44,8 @@ The `mongodb.com/MongoDatabase` link is a [portable link]({{< ref links-resource
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
 | [resourceProvisioning](#resource-provisioning) | n | Specifies how the underlying service/resource is provisioned and managed. Options are to provision automatically via 'recipe' or provision manually via 'manual'. Selection determines which set of fields to additionally require. Defaults to 'recipe'. | `manual`
 | [recipe](#recipe) | n | Configuration for the Recipe which will deploy the backing infrastructure. | [See below](#recipe)
-| resources | n | An array of resources which underlay this resource. For example, an Azure CosmosDB database ID if the MongoDB resource is leveraging CosmosDB. | `[ { id: cosmosDB.id } ]`
+| [resources](#resources) | n | An array of resources which underlay this resource. For example, an Azure CosmosDB database ID if the MongoDB resource is leveraging CosmosDB. | [See below](#resources)
+| database | n | Database name of the target MongoDB | `mongodb-prod`
 | host | n | The MongoDB host name. | `mongo.hello.com`
 | port | n | The MongoDB port. | `4242`
 | username | n | The username for the MongoDB. | `'myusername'`
@@ -56,6 +57,12 @@ The `mongodb.com/MongoDatabase` link is a [portable link]({{< ref links-resource
 |------|:--------:|-------------|---------|
 | name | n | Specifies the name of the Recipe that should be deployed. If not set, the name defaults to `default`. | `name: 'azure-prod'`
 | parameters | n | An object that contains a list of parameters to set on the Recipe. | `{ size: 'large' }`
+
+#### Resources
+
+| Property | Required | Description | Example(s) |
+|----------|:--------:|-------------|------------|
+| id | n | List of the resource IDs that support the resource | `account.id`
 
 #### Secrets
 

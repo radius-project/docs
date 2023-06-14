@@ -46,7 +46,7 @@ An `Applications.Link/daprPubSubBrokers` resource represents a [Dapr pub/sub](ht
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
 | [resourceProvisioning](#resource-provisioning) | n | Specifies how the underlying service/resource is provisioned and managed. Options are to provision automatically via 'recipe' or provision manually via 'manual'. Selection determines which set of fields to additionally require. Defaults to 'recipe'. | `manual`
 | [recipe](#recipe) | n | Configuration for the Recipe which will deploy the backing infrastructure. | [See below](#recipe)
-| resources | n | An array of resources which underlay this resource. For example, an Azure Service Bus namespace ID if the Dapr Pub/Sub resource is leveraging Service Bus. | `[ { id: serviceBus.id } ]`
+| [resources](#resources) | n | An array of resources which underlay this resource. For example, an Azure Service Bus namespace ID if the Dapr Pub/Sub resource is leveraging Service Bus. | [See below](#resources)
 | type | n | The Dapr component type. Set only when resourceProvisioning is 'manual'. | `pubsub.kafka` |
 | metadata | n | Metadata for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-pubsub/). Set only when resourceProvisioning is 'manual'. | `brokers: kafkaRoute.properties.url` |
 | version | n | The version of the Dapr component. See [Dapr components](https://docs.dapr.io/reference/components-reference/supported-pubsub/) for available versions. Set only when resourceProvisioning is 'manual'. | `v1` |
@@ -57,7 +57,13 @@ An `Applications.Link/daprPubSubBrokers` resource represents a [Dapr pub/sub](ht
 | Property | Required | Description | Example(s) |
 |------|:--------:|-------------|---------|
 | name | n | Specifies the name of the Recipe that should be deployed. If not set, the name defaults to `default`. | `name: 'azure-prod'`
-| parameters | n | An object that contains a list of parameters to set on the Recipe for every Recipe usage and deployment. Can be overridden by the resource calling the Recipe. | `parameters: { size: 'large' }`
+| parameters | n | An object that contains a list of parameters to set on the Recipe. | `{ size: 'large' }`
+
+#### Resources
+
+| Property | Required | Description | Example(s) |
+|----------|:--------:|-------------|------------|
+| id | n | List of the resource IDs that support the resource | `account.id`
 
 ## Resource provisioning
 
