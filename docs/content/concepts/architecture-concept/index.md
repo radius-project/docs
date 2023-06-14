@@ -133,6 +133,8 @@ When listing applications using the `rad` CLI:
 3. UCP proxies the HTTP request to the `Applications.Core` resource provider.
 4. The `Applications.Core` resource provider handles the request and responds with the list of applications.
 
+<img src="flow-list-apps.png" alt="Diagram of the API flow described above" width="1000px" >
+
 {{% /codetab %}}
 
 {{% codetab %}}
@@ -145,17 +147,20 @@ When using Bicep to author and deploy Radius applications:
   a. The `Bicep.Deployments` resource provider makes a request to UCP to Create/Update the resource.
   b. UCP routes the request to the appropriate resource provider to be handled.
 
+<img src="flow-deploy.png" alt="Diagram of the API flow described above" width="1000px" >
+
 {{% /codetab %}}
 
 {{% codetab %}}
 When using the `tf` CLI to deploy a Radius application using Terraform:
 
-1. Terraform reads the configuration, loads credentials, parses the file, and instantiates its plugins. For each resource in the file:
-  a. Terraform asks the appropriate plugin to Create or Update the resource. 
-  b. In the case of a non-Radius resource, (eg: AWS S3 Bucket) the Terraform plugin processes the resource without involving the Radius API.
-  c. In the case of a Radius resource the Terraform plugin makes a request the Radius API to Create/Update a resource.
+1. Terraform reads the configuration, loads credentials, parses the file, and instantiates its providers. For each resource in the file:
+  a. Terraform asks the appropriate provider to Create or Update the resource. 
+  b. In the case of a non-Radius resource, (eg: AWS S3 Bucket) the Terraform provider processes the resource without involving the Radius API.
+  c. In the case of a Radius resource the Terraform provider makes a request the Radius API to Create/Update a resource.
   d. UCP routes the request to the appropriate resource provider to be handled.
 
+<img src="flow-terraform.png" alt="Diagram of the API flow described above" width="1000px" >
 
 {{% /codetab %}}
 
