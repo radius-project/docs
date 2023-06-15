@@ -40,6 +40,17 @@ This application showcases how Radius can use a user-manged Azure SQL Database.
 | resources  | n | The IDs of the underlying resource for the link. Used when building the link from resources. | `sqlDb.id`
 | server | n | The fully qualified domain name of the SQL server. | `sql.hello.com`
 | database | n | The name of the SQL database. | `5000`
+| port | n | The MongoDB port. | `1433`
+| username | n | The username for the SQL database. | `'myusername'`
+| [secrets](#secrets) | n | Secrets used when building the link from values. | [See below](#secrets)
+
+### Secrets
+
+| Property | Required | Description | Example(s) |
+|----------|:--------:|-------------|------------|
+| connectionString | n | The connection string for the SQL database. Write only. | `'https://mymongo.cluster.svc.local,password=*****,....'`
+| password | n | The password for the SQL database. Write only. | `'mypassword'`
+
 
 ## Supported resources
 
