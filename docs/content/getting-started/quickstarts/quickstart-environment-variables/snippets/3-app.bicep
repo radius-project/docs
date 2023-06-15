@@ -31,21 +31,12 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
 //CONTAINER
 
 //LINK
-module mongoContainerModule 'br:radius.azurecr.io/modules/mongo-container:edge' = {
-  name: 'mongo-container-module'
-}
-
 resource mongoLink 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
   name: 'mongo-link'
   properties: {
     environment: environment
     application: app.id
-    mode: 'values'
-    host: mongoContainerModule.outputs.host
-    port: mongoContainerModule.outputs.port
-    secrets: {
-      connectionString: mongoContainerModule.outputs.connectionString
-    }
+    // Use the "default" Recipe to provision the MongoDB
   }
 }
 //LINK
