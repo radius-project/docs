@@ -6,6 +6,7 @@ description: Learn about the architecture of the Radius API and services
 weight: 600
 categories: "Concept"
 tags: ["control plane"]
+slug: 'architecture'
 ---
 
 ## Overview
