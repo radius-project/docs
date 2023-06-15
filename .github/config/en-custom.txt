@@ -13,6 +13,8 @@ Async
 AWSSimpleQueueService
 Azure
 Blazor
+clusterissuer
+ClusterIssuer
 CLI
 CLIs
 CMD
@@ -166,6 +168,7 @@ databaseAccounts
 datastore
 de
 declaratively
+decrypted
 deployable
 dev
 docsy
@@ -345,12 +348,14 @@ sudo
 tablestorage
 templating
 th
+tlstermination
 toc
 todo
 traceId
 ubuntu
 ui
 ucp
+unencrypted
 unmanaged
 url
 userguide
@@ -389,6 +394,7 @@ upmerge
 upmerges
 approver
 toml
+templateKind
 templatePath
 categorizeby
 jargons
@@ -408,3 +414,6 @@ tls
 minimumProtocolVersion
 certificateFrom
 preloaded
+SRG
+ePMKNy
+gg

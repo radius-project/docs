@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Reference applications for Project Radius"
+title: "Reference applications for Radius"
 linkTitle: "Reference apps"
-description: "See how full applications are modeled in Project Radius"
+description: "See how full applications are modeled in Radius"
 weight: 300
 no_list: true
 ---

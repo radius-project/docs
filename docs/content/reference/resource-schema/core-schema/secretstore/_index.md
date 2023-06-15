@@ -5,6 +5,8 @@ linkTitle: "Secret Store"
 description: "Learn how to define a secret store"
 ---
 
+Note that only Kubernetes Secrets are currently supported with more to come in the future.
+
 ## Resource format
 
 ### Creating a new Secret Store
@@ -28,7 +30,7 @@ description: "Learn how to define a secret store"
 | Key | Required | Description | Example |
 |----------|:--------:|-------------|---------|
 | application | y | The ID of the application resource this resource belongs to. | `app.id` |
-| resource | n | Reference to the backing secret store resource, required only if valueFrom specifies referenced secret name. | `UCP_RESOURCE_ID` |
+| resource | n | Reference to the backing secret store resource, required only if valueFrom specifies referenced secret name. | `namespace/secretName` |
 | type | y | The type of secret in your resource. | `'certificate'`
 | [data](#data) | y | An object to represent key-value type secrets. | [See below](#data)
 
@@ -40,9 +42,11 @@ This property is an object to represent key-value type secrets. You define your 
 |------|:--------:|-------------|---------|
 | value | y | The value of the secret key. | `'secretString'`
 | encoding | n | The encoding type of the data value (default is `'raw'`). | `'base64'`
-| [valueFrom](#valuefrom) | n | An object to define the secret store `properties.resource` reference | [See below](#valuefrom)
+| [valueFrom](#valuefrom) | n | A reference to an external secret. This field is currently not in use, as it is meant for supporting more types of external secrets in the future. | [See below](#valuefrom)
 
 ###### valueFrom
+
+*Note:* `valueFrom` is not supported for Kubernetes Secrets, but may be used for other secret store types in the future.
 
 | Key | Required | Description | Example |
 |------------|:--------:|-------------|---------|

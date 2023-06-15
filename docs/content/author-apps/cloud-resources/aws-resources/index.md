@@ -15,7 +15,7 @@ Radius uses the [AWS Cloud Control API](https://docs.aws.amazon.com/cloudcontrol
 ## Resource library
 
 {{< button text="AWS resource library" link="https://github.com/project-radius/bicep-types-aws/blob/main/artifacts/bicep/index.md" newtab="true" >}}
-> *If you don't have access to the Bicep-types-aws github repo, please visit https://aka.ms/ProjectRadius/GitHubAccess to request access to the Project Radius GitHub organization.*
+> *If you don't have access to the Bicep-types-aws github repo, please visit https://aka.ms/ProjectRadius/GitHubAccess to request access to the Radius GitHub organization.*
 
 ## Example
 

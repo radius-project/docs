@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Project Radius concepts"
+title: "Radius concepts"
 linkTitle: "Concepts"
-description: "Learn about the Project Radius mission, core concepts, and architecture"
+description: "Learn about the Radius mission, core concepts, and architecture"
 weight: 10
 ---
