@@ -25,6 +25,7 @@ Codespace
 Codespaces
 CosmosDB
 CreateOrUpdate
+Datastores
 DDD
 DNS
 DaemonSet
@@ -57,6 +58,7 @@ IoT
 JSON
 JSON
 KeyVault
+Kinesis
 Kubernetes
 ListSecret
 Liveness
@@ -87,6 +89,7 @@ RBAC
 RabbitMQ
 ResourceDeploymentClient
 Rollout
+SaaS
 SDKs
 SNI
 SQL
@@ -137,6 +140,7 @@ cas
 centric
 cli
 clusterName
+codebase
 codespace
 codespaces
 codetab
@@ -304,6 +308,8 @@ rollout
 rp
 runtime
 runtimes
+scalable
+scalability
 schemas
 secretstore
 secretstores
@@ -312,6 +318,7 @@ serverless
 serverless
 servicebus
 serviceName
+sharded
 shortcode
 shortcodes
 shortname
