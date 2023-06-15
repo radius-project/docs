@@ -33,6 +33,10 @@ A gateway can optionally be added for external users to access the Route.
 
 Refer to the [Gateway schema]({{< ref gateway >}}) for more information on how to model gateways.
 
+### TLS Termination
+
+Gateways support TLS termination. This allows incoming encrypted traffic to be decrypted with a user-specific certificate and then routed, unencrypted, to the specified routes. TLS certificates can be stored or referenced via a [Radius secret store]({{< ref secretstore >}}).
+
 ### SSL Passthrough
 
 A gateway can be configured to passthrough encrypted SSL traffic to an HTTP route and container. This is useful for applications that already have SSL termination configured, and do not want to terminate SSL at the gateway.
@@ -50,6 +54,17 @@ To set up SSL passthrough, set `tls.sslPassthrough` to `true` on the gateway, an
 {{< /codetab >}}
 
 {{< /tabs >}}
+
+### TLS termination
+
+{{< tabs Bicep >}}
+
+{{< codetab >}}
+{{< rad file="snippets/networking-tlstermination.bicep" embed=true marker="//GATEWAY" >}}
+{{< /codetab >}}
+
+{{< /tabs >}}
+
 
 ### SSL Passthrough
 

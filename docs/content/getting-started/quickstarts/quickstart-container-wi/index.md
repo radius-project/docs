@@ -20,7 +20,7 @@ The steps below will showcase a "rad-ified" version of the existing [Azure AD wo
 ## Prerequisites
 
 - [rad CLI]({{< ref getting-started >}}) installed on your machine
-- [Supported Kubernetes cluster]({{< ref kubernetes-platform >}})
+- [Supported Kubernetes cluster]({{< ref "/operations/platforms/kubernetes" >}})
 - [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed in your cluster
 
 ## Step 1: Initialize Radius 

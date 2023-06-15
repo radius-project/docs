@@ -1,13 +1,13 @@
 ---
 type: docs
-title: "Contributing to Project Radius documentation"
+title: "Contributing to Radius documentation"
 linkTitle: "Docs"
-description: "How to contribute to the Project Radius documentation"
+description: "How to contribute to the Radius documentation"
 weight: 200
 slug: "docs"
 ---
 
-The Project Radius docs are built on [Hugo](https://gohugo.io) with the [Docsy](https://docsy.dev) theme. GitHub Actions are used to build and deploy the docs upon each PR.
+The Radius docs are built on [Hugo](https://gohugo.io) with the [Docsy](https://docsy.dev) theme. GitHub Actions are used to build and deploy the docs upon each PR.
 
 ## Docs environment
 

@@ -6,6 +6,7 @@ description: "Learn how to setup Radius on supported Kubernetes clusters"
 weight: 200
 categories: "How-To"
 tags: ["Kubernetes"]
+slug: 'install'
 ---
 
 Radius handles the deployment and management of environments, applications, and other resources with components that are installed into the Kubernetes cluster.

@@ -6,15 +6,17 @@ description: "Learn how to setup Radius on supported Kubernetes clusters"
 weight: 100
 categories: "How-To"
 tags: ["Kubernetes", "control plane"]
+aliases:
+    - /operations/platforms/kubernetes/supported-clusters/
 ---
 
 ## Minimum version
 
-Kubernetes version `1.23.8` or higher is recommended to run Project Radius.
+Kubernetes version `1.23.8` or higher is recommended to run Radius.
 
 ## Supported clusters
 
-The following clusters have been tested and validated to ensure they support all of the features of Project Radius:
+The following clusters have been tested and validated to ensure they support all of the features of Radius:
 
 {{< tabs AKS k3d kind EKS >}}
 
