@@ -3,8 +3,7 @@ type: docs
 title: "Radius environments"
 linkTitle: "Environments"
 description: "Learn about Radius environments and how to interact with them"
-weight: 400
-
+weight: 200
 categories: "How-To"
 tags: ["environments"]
 ---
@@ -22,6 +21,18 @@ Radius environments can be configured with a container runtime, where Radius [co
 A Kubernetes namespace is specified on the environment to tell Radius where to render application resources at deploy time.
 
 <img src=environments.png alt="Diagram showing a Radius environment mapping to a Kubernetes cluster and namespace" width=800px />
+
+### Cloud Provider
+Radius cloud providers allow you to deploy and connect to cloud resources across various cloud platforms. For example, you can use the Radius Azure provider to run your application's services in your Kubernetes cluster, while deploying Azure resources to a specified Azure subscription and resource group.
+
+<img src="providers-overview.png" alt="Diagram of cloud resources getting forwarded to cloud platforms upon deployment" width="800px" >
+
+## Supported cloud providers
+
+| Provider | Description |
+|----------|-------------|
+| [Microsoft Azure](#azure-provider) | Deploy and connect to Azure resources |
+| [Amazon Web Services](#aws-provider) | Deploy and connect to AWS resources |
 
 ### External identity provider
 
