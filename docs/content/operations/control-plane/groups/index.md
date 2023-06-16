@@ -68,5 +68,6 @@ rad group switch mygroup
 
 ## Additional information
 
-- [Radius control plane architecture]({{< ref architecture >}})
+- [Radius API]({{< ref api-concept >}})
+- [Radius architecture]({{< ref architecture-concept >}})
 - [rad CLI reference]({{< ref rad_group >}})

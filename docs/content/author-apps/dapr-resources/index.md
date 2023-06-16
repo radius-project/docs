@@ -9,7 +9,7 @@ categories: "Concept"
 tags: ["Dapr"]
 ---
 
-Project Radius offers first-class support for the [Dapr](https://dapr.io) runtime and building blocks to make it easy to make your code fully portable across code and infrastructure. Simply drop in your Dapr building blocks as resources and Radius will automatically configure and apply the accompanying Dapr configuration.
+Radius offers first-class support for the [Dapr](https://dapr.io) runtime and building blocks to make it easy to make your code fully portable across code and infrastructure. Simply drop in your Dapr building blocks as resources and Radius will automatically configure and apply the accompanying Dapr configuration.
 
 ## Installation 
 

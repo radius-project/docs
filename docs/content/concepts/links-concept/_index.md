@@ -13,13 +13,13 @@ Links provide an **infrastructure abstraction** that enables **portability** for
 
 <img src="links.png" alt="Diagram of Radius Link to infrastructure resource." width="400px" />
 
-For example, when a user specifies a MongoDB link, that link could bind to an Azure CosmosDB, or MongoDB services from other cloud providers. An administrator could even specify the exact configurations of the database resource to spin up when a developer needs a database, enhancing a self-serve workflow.
+For example, when a user specifies a MongoDB link, that link could bind to an Azure CosmosDB, or MongoDB services from other cloud providers. An operator could even specify the exact configurations of the database resource to spin up when a developer needs a database, enhancing a self-serve workflow.
 
 <img src="links-example.png" alt="Diagram of example architecture using or Radius Conntector. Depicts a Radius Container connected to MongoDB Radius Link, which can bind to an Azure CosmosDB, an AWS DynamoDB, or a Mongo Container. " width="700px" />
 
 ## Supported links
 
-Project Radius supports a large variety of links across databases, queues, caches, and other resource types.
+Radius supports a large variety of links across databases, queues, caches, and other resource types.
 
 <img src="link-types.png" alt="Diagram showing supported link types, including MonogoDB, Redis, Dapr, and Microsoft SQL." width="700px" />
 
@@ -51,6 +51,6 @@ The developer's container resource, `frontend`, connects to the Mongo link, `dbl
 
 ## Next step
 
-Now that you have an understanding of Radius Links, learn more about the Radius architecture:
+Now that you have an understanding of Radius Links, learn more about the Radius API architecture:
 
-{{< button text="Radius architecture" page="architecture" size="btn-lg" color="success" >}}
+{{< button text="Radius API" page="api-concept" size="btn-lg" color="success" >}}

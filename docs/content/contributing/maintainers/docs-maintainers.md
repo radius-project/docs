@@ -1,18 +1,18 @@
 ---
 type: docs
-title: "Maintaining Project Radius docs"
+title: "Maintaining Radius docs"
 linkTitle: "Docs"
 weight: 200
-description: "Learn about the Project Radius docs maintenance process"
+description: "Learn about the Radius docs maintenance process"
 ---
 
-In this guide, you’ll learn how to perform routine Project Radius docs maintainer and approver responsibilities. In order to successfully accomplish these tasks, you need either approver or maintainer status in the [`project-radius/docs`](https://github.com/project-radius/docs) repo. 
+In this guide, you’ll learn how to perform routine Radius docs maintainer and approver responsibilities. In order to successfully accomplish these tasks, you need either approver or maintainer status in the [`project-radius/docs`](https://github.com/project-radius/docs) repo. 
 
-To learn how to contribute to Project Radius docs, review the [Contributor guide]({{< ref contributing-docs >}}).
+To learn how to contribute to Radius docs, review the [Contributor guide]({{< ref contributing-docs >}}).
 
 ## Branch guidance
 
-The Project Radius docs handles branching differently than most code repositories. Instead of a `main` branch, every branch is labeled to match the major and minor version of a runtime release, plus an `edge` branch for in-flight work. For example, the `v1.0` branch contains the docs for the `v1.0` release. The `edge` branch contains the latest in-flight work.
+The Radius docs handles branching differently than most code repositories. Instead of a `main` branch, every branch is labeled to match the major and minor version of a runtime release, plus an `edge` branch for in-flight work. For example, the `v1.0` branch contains the docs for the `v1.0` release. The `edge` branch contains the latest in-flight work.
 
 ### Managing content between branches
 
@@ -20,7 +20,7 @@ As a docs approver or maintainer, you need to perform routine **upmerges** to ke
 
 For the following steps, treat `v1.0` as the current release and `edge` as the pre-release branch.
 
-1. Open Visual Studio Code to the Project Radius docs repo.
+1. Open Visual Studio Code to the Radius docs repo.
 1. From your local repo, switch to the latest branch (`v1.0`) and synchronize changes:
 
    ```bash

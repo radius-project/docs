@@ -13,6 +13,8 @@ Async
 AWSSimpleQueueService
 Azure
 Blazor
+clusterissuer
+ClusterIssuer
 CLI
 CLIs
 CMD
@@ -25,6 +27,7 @@ Codespace
 Codespaces
 CosmosDB
 CreateOrUpdate
+Datastores
 DDD
 DNS
 DaemonSet
@@ -57,6 +60,7 @@ IoT
 JSON
 JSON
 KeyVault
+Kinesis
 Kubernetes
 ListSecret
 Liveness
@@ -88,6 +92,7 @@ RBAC
 RabbitMQ
 ResourceDeploymentClient
 Rollout
+SaaS
 SDKs
 SNI
 SQL
@@ -138,6 +143,7 @@ cas
 centric
 cli
 clusterName
+codebase
 codespace
 codespaces
 codetab
@@ -163,6 +169,7 @@ databaseAccounts
 datastore
 de
 declaratively
+decrypted
 deployable
 dev
 docsy
@@ -305,6 +312,8 @@ rollout
 rp
 runtime
 runtimes
+scalable
+scalability
 schemas
 secretstore
 secretstores
@@ -313,6 +322,7 @@ serverless
 serverless
 servicebus
 serviceName
+sharded
 shortcode
 shortcodes
 shortname
@@ -339,12 +349,14 @@ sudo
 tablestorage
 templating
 th
+tlstermination
 toc
 todo
 traceId
 ubuntu
 ui
 ucp
+unencrypted
 unmanaged
 url
 userguide
@@ -383,6 +395,7 @@ upmerge
 upmerges
 approver
 toml
+templateKind
 templatePath
 categorizeby
 jargons
@@ -402,3 +415,6 @@ tls
 minimumProtocolVersion
 certificateFrom
 preloaded
+SRG
+ePMKNy
+gg
