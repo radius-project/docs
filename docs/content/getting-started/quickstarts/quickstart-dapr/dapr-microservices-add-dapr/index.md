@@ -60,7 +60,7 @@ Add a [`connection`]({{< ref "appmodel-concept" >}}) from `backend` to the `orde
 
 Adding a connection to the state store also [configures environment variables]({{< ref "dapr-statestore#provided-data" >}}) inside the the `statestore` component.
 
-With the connection name of `statestore` and a statestore name of `orders`, Project Radius will inject information related to the state store using the environment variable `CONNECTION_ORDERS_COMPONENTNAME`. The application code inside `backend` uses this environment variable to access the state store name and avoid hardcoding.
+With the connection name of `statestore` and a statestore name of `orders`, Radius will inject information related to the state store using the environment variable `CONNECTION_ORDERS_COMPONENTNAME`. The application code inside `backend` uses this environment variable to access the state store name and avoid hardcoding.
 
 ```js
 const stateStoreName = process.env.CONNECTION_ORDERS_COMPONENTNAME;

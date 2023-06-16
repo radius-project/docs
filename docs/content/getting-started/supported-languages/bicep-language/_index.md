@@ -8,7 +8,7 @@ categories: "How-To"
 tags: ["bicep"]
 ---
 
-Project Radius uses the [Bicep language](https://docs.microsoft.com/EN-US/azure/azure-resource-manager/bicep/) to describe your application and its resources.
+Radius uses the [Bicep language](https://docs.microsoft.com/EN-US/azure/azure-resource-manager/bicep/) to describe your application and its resources.
 
 ## Bicep
 
@@ -66,11 +66,12 @@ $ az cosmosdb create \
 
 Visit the [Radius getting started guide]({{< ref getting-started >}}) to install the Radius CLI, Bicep CLI and compiler, and the Bicep extension for VS Code.
 
-## Radius resources
+## Radius resource types
 
-Project Radius resource types are available in Bicep, allowing you to model and connect Radius resources to Azure and Kubernetes resources.
+Radius resource types are available in Bicep, allowing you to model and connect Radius resources to Azure, AWS and Kubernetes resources.
 
 In the below example, a Radius resource of type `Applications.Core/applications` is defined:"
 
 {{< rad file="snippets/app.bicep" embed=true replace-key-resources="//RESOURCES" replace-value-resources="..." >}}
 
+You can find more details on the supported resource types for your application [here]({{< ref author-apps >}})
