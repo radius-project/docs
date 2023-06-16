@@ -6,6 +6,7 @@ description: "Learn how to setup Radius on supported Kubernetes clusters"
 weight: 200
 categories: "How-To"
 tags: ["Kubernetes"]
+slug: 'install'
 ---
 
 The [Radius control plane]({{< ref architecture >}}) handles the deployment and management of Radius environments, applications, and resources.
