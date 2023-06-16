@@ -3,8 +3,14 @@ import radius as radius
 @description('The ID of your Radius environment. Automatically injected by the rad CLI.')
 param environment string
 
-@description('Mock account object.')
-param account object
+resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2022-08-15' existing = {
+  name: 'mycosmos'
+
+  resource database 'mongodbDatabases' existing = {
+    name: 'mydb'
+  }
+
+}
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'cosmos-container-usermanaged'
@@ -20,16 +26,16 @@ resource db 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
     environment: environment
     application: app.id
     resourceProvisioning: 'manual'
-    host: 'https://mymongo.cluster.svc.local'
-    database: 'mongodb-prod'
-    username: 'admin'
-    port: 4242
+    host: split(cosmosAccount.properties.documentEndpoint, ':')[0]
+    port: split(split(split(cosmosAccount.properties.documentEndpoint, ':')[1], ':')[0], '/')[0]
+    database: cosmosAccount::database.name
+    username: ''
     resources: [
-      { id: account.id }
+      { id: cosmosAccount.id }
     ]
     secrets: {
-      connectionString: 'https://mymongo.cluster.svc.local,password=*****,....'
-      password: '*********'
+      connectionString: cosmosAccount.listConnectionStrings().connectionStrings[0].connectionString
+      password: base64ToString(cosmosAccount.listKeys().primaryMasterKey)
     }
   }
 }
