@@ -2,7 +2,7 @@ import radius as radius
 
 param environment string
 param username string
-param port string
+param port int
 
 @secure()
 param password string
@@ -27,6 +27,7 @@ resource db 'Applications.Link/sqlDatabases@2022-03-15-privatepreview' = {
     username: username
     secrets:{
       password: password
+      connectionString:'Data Source=tcp:sql.contoso.com,port;Initial Catalog=inventory;User Id=${username};Password=${password};Encrypt=True;TrustServerCertificate=True'
     }
   }
 }

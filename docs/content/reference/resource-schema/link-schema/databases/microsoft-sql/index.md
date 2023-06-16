@@ -26,7 +26,7 @@ This application showcases how Radius can use a user-manged Azure SQL Database.
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| name | y | The name of your resource. | `mongo`
+| name | y | The name of your resource. | `sql`
 | location | y | The location of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `global`
 | [properties](#properties) | y | Properties of the resource. | [See below](#properties)
 
@@ -40,7 +40,7 @@ This application showcases how Radius can use a user-manged Azure SQL Database.
 | resources  | n | The IDs of the underlying resource for the link. Used when building the link from resources. | `sqlDb.id`
 | server | n | The fully qualified domain name of the SQL server. | `sql.hello.com`
 | database | n | The name of the SQL database. | `5000`
-| port | n | The MongoDB port. | `1433`
+| port | n | The SQL database port. | `1433`
 | username | n | The username for the SQL database. | `'myusername'`
 | [secrets](#secrets) | n | Secrets used when building the link from values. | [See below](#secrets)
 
@@ -48,9 +48,8 @@ This application showcases how Radius can use a user-manged Azure SQL Database.
 
 | Property | Required | Description | Example(s) |
 |----------|:--------:|-------------|------------|
-| connectionString | n | The connection string for the SQL database. Write only. | `'https://mymongo.cluster.svc.local,password=*****,....'`
+| connectionString | n | The connection string for the SQL database. Write only. | `'https://mysqlserver.cluster.svc.local,password=*****,....'`
 | password | n | The password for the SQL database. Write only. | `'mypassword'`
-
 
 ## Supported resources
 
