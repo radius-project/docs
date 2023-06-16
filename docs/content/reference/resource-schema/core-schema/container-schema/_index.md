@@ -142,7 +142,7 @@ Extensions define additional capabilities and configuration for a container.
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| kind | y | The type of resource you are connecting to. | `mongo.com/MongoDB`
+| kind | y | The kind of extension being used. | `kubernetesmetadataextension`
 
 Additional properties are available and required depending on the 'kind' of the extension.
 
