@@ -3,7 +3,6 @@ type: docs
 title: "MongoDB database link"
 linkTitle: "MongoDB"
 description: "Learn how to use a MongoDB link in your application"
-categories: "Reference"
 ---
 
 ## Overview
@@ -62,7 +61,7 @@ The `mongodb.com/MongoDatabase` link is a [portable link]({{< ref links-resource
 
 | Property | Required | Description | Example(s) |
 |----------|:--------:|-------------|------------|
-| id | n | List of the resource IDs that support the resource | `account.id`
+| id | n | Resource ID of the supporting resource. | `account.id`
 
 #### Secrets
 
@@ -86,7 +85,9 @@ The following methods are available on the MongoDB link:
 ### Provision with a Recipe
 
 [Recipes]({{< ref recipes-overview >}}) automate infrastructure provisioning using approved templates.
-When no Recipe configuration is set Radius will use the Recipe registered as the **default** in the environment for the given resource. Otherwise, a Recipe name and parameters can optionally be set.
+You can specify a Recipe name that is registered in the environment or omit the name and use the "default" Recipe.
+
+Parameters can also optionally be specified for the Recipe.
 
 ### Provision manually
 
