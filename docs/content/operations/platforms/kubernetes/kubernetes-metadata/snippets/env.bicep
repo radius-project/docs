@@ -66,16 +66,3 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   }
 }
 //CONTAINER
-
-resource app1 'Applications.Core/applications@2022-03-15-privatepreview'={
-  name: 'myapp1'
-  properties: {
-    environment:env.id
-    extensions:[
-      {
-        kind: 'kubernetesMetadata'
-        
-      }
-    ]
-  }
-}
