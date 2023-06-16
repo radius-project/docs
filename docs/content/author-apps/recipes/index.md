@@ -3,7 +3,7 @@ type: docs
 title: "Radius Recipes"
 linkTitle: "Recipes"
 description: "Automate infrastructure deployment for your resources with Radius recipes"
-weight: 300
+weight: 700
 categories: "Concept"
 tags: ["recipes"]
 slug: recipes

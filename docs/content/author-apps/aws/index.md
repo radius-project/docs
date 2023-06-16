@@ -3,7 +3,7 @@ type: docs
 title: "AWS resources"
 linkTitle: "AWS"
 description: "Deploy and connect to AWS resources in your application"
-weight: 800
+weight: 900
 categories: "Concept"
 tags: ["AWS"]
 ---
@@ -11,6 +11,20 @@ tags: ["AWS"]
 Radius applications are able to connect to and leverage AWS resource with Bicep. Simply model your AWS resources in Bicep and connect to them from Radius resources.
 
 Radius uses the [AWS Cloud Control API](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/what-is-cloudcontrolapi.html) to interact with AWS resources. This means that you can model your AWS resources in Bicep and Radius will be able to deploy and manage them.
+
+## Configure an AWS Provider
+
+The AWS provider allows you to deploy and connect to AWS resources from a Radius environment on an EKS cluster. 
+
+### Prerequisites
+- [AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account) and an [IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html)
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+
+### Add a cloud provider when initializing an environment
+
+1. Initialize a new [environment]({{< ref environments-resource >}}) with `rad init`
+1. Select the Kubernetes cluster to install Radius into. Enter an environment name and base Kubernetes namespace to deploy the apps into.
+1. Select "yes" to add a cloud provider and select AWS as the cloud provider
 
 ## Resource library
 

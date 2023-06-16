@@ -3,7 +3,7 @@ type: docs
 title: "Radius Links"
 linkTitle: "Links"
 description: "Add cross-platform links to your Radius application with Links"
-weight: 300
+weight: 600
 categories: "Concept"
 tags: ["links","portability"]
 ---
