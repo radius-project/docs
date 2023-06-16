@@ -84,7 +84,7 @@ The following methods are available on the MongoDB link:
 
 ### Provision with a Recipe
 
-[Recipes]({{< ref recipes-overview >}}) automate infrastructure provisioning using approved templates.
+[Recipes]({{< ref "/author-apps/recipes" >}}) automate infrastructure provisioning using approved templates.
 You can specify a Recipe name that is registered in the environment or omit the name and use the "default" Recipe.
 
 Parameters can also optionally be specified for the Recipe.
