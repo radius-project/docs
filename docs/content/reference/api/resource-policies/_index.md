@@ -52,8 +52,6 @@ Each resource type controller decides whether it will retry to process the opera
 
 | Resource Type  | Operation | API Type | Server Timeout (Seconds) | Async Operation retry condition|
 |------|:--------:|-------------|---------|------------|
-| Applications.Link/daprInvokeHttpRoutes | LIST/GET/PUT/PATCH/DELETE | Synchronous | default | |
-| Applications.Link/daprInvokeHttpRoutes | POST ListSecret | Synchronous | default | |
 | Applications.Link/daprPubSubBrokers | LIST/GET/PUT/PATCH/DELETE | Synchronous | default | |
 | Applications.Link/daprPubSubBrokers | POST ListSecret | Synchronous | default | |
 | Applications.Link/daprSecretStores | LIST/GET/PUT/PATCH/DELETE | Synchronous | default | |

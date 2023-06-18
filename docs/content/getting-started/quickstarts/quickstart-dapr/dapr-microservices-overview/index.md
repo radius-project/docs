@@ -36,17 +36,14 @@ The `frontend` container is configured with a [Dapr sidecar extension]({{< ref d
 
 The order processing microservice (`backend`) accepts HTTP requests to create or display orders. It accepts HTTP requests on two endpoints: `GET /order` and `POST /neworder`.
 
-The `backend` container is configured with a [Dapr sidecar extension]({{< ref dapr-extension >}}) to add the sidecar container, along with a [Dapr Route](#routes) to model Dapr communication.
+The `backend` container is configured with a [Dapr sidecar extension]({{< ref dapr-extension >}}) to add the sidecar container, along with an app ID to so it can be used with service invocation.
 
 <img src="./backend.png" alt="A diagram of the backend order processing service" width=600 />
 
-## Routes
-
-Radius offers communication between services via [Routes]({{< ref "appmodel-concept#routes" >}}).
 
 ### Dapr service invocation
 
-In this quickstart we will be using a [Dapr HTTP invoke route]({{< ref dapr-http >}}) resource to model communication from `frontend` to `backend`. This allows `frontend` to use Dapr service invocation to interact with `backend`.
+In this quickstart we will be using a [Dapr Service Invocation](https://docs.dapr.io/developing-applications/building-blocks/service-invocation/service-invocation-overview/) for communication from `frontend` to `backend`.
 
 <img src="./invoke.png" alt="A diagram of the Dapr service invocation" width=500 />
 
