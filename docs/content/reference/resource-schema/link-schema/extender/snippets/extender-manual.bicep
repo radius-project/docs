@@ -20,6 +20,7 @@ resource twilio 'Applications.Link/extenders@2022-03-15-privatepreview' = {
       accountSid: 'sid'
       authToken: 'token'
     }
+    resourceProvisioning: 'manual'
   }
 }
 //EXTENDER
