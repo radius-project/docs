@@ -102,7 +102,5 @@ resource db 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
   properties: {
     environment: environment
     application: app.id
-    mode: 'resource'
-    resource: mongoDbId
   }
 }
