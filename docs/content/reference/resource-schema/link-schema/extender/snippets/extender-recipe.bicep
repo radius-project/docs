@@ -9,6 +9,9 @@ resource twilio 'Applications.Link/extenders@2022-03-15-privatepreview' = {
   properties: {
     application: application
     environment: environment
+    recipe: {
+      name: 'twilio'
+    }
   }
 }
 //EXTENDER
