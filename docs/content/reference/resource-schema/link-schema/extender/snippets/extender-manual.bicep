@@ -15,12 +15,12 @@ resource twilio 'Applications.Link/extenders@2022-03-15-privatepreview' = {
   properties: {
     application: app.id
     environment: environment
+    resourceProvisioning: 'manual'
     fromNumber: '222-222-2222'
     secrets: {
       accountSid: 'sid'
       authToken: 'token'
     }
-    resourceProvisioning: 'manual'
   }
 }
 //EXTENDER
