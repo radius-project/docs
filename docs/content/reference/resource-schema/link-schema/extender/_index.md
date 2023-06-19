@@ -50,8 +50,8 @@ An extender resource could be used to bring in a custom resource into Radius for
 
 | Property | Required | Description | Example(s) |
 |------|:--------:|-------------|---------|
-| name | n | Specifies the name of the Recipe that should be deployed. If not set, the name defaults to `default`. | `name: 'azure-prod'`
-| parameters | n | An object that contains a list of parameters to set on the Recipe. | `{ size: 'large' }`
+| name | n | Specifies the name of the Recipe that should be deployed. If not set, the name defaults to `default`. | `name: 'twilio'`
+| parameters | n | An object that contains a list of parameters to set on the Recipe. | `{ fromNumber: '222-222-2222' }`
 
 ## Methods
 
