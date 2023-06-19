@@ -40,7 +40,7 @@ This resource will automatically create and deploy the Dapr component spec for t
 
 ## Using resourceProvisioning: recipe
 
-When `resourceProvisioning` is omitted or set to `recipe`, then a [Recipe]({{< ref recipes >}}) will be used to create the underlying resource and configure the Dapr building-block.
+When `resourceProvisioning` is omitted or set to `recipe`, then a [Recipe]({{< ref "/author-apps/recipes" >}}) will be used to create the underlying resource and configure the Dapr building-block.
 
 {{< rad file="snippets/dapr-statestore-recipe.bicep" embed=true marker="//SAMPLE" >}}
 

@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Project Radius"
+title: "Radius"
 linkTitle: "Home"
 description: "Model, deploy, and manage applications across cloud and edge"
 weight: 1
