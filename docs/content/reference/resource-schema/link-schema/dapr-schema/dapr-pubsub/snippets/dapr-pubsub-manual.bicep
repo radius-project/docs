@@ -1,5 +1,6 @@
 import radius as radius
 
+@description('The ID of your Radius environment. Automatically injected by the rad CLI.')
 param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
@@ -34,7 +35,10 @@ resource pubsub 'Applications.Link/daprPubSubBrokers@2022-03-15-privatepreview' 
   properties: {
     environment: environment
     application: app.id
-    mode: 'values'
+    resourceProvisioning: 'manual'
+    resources: [
+      { id: kafkaRoute.id }
+    ]
     type: 'pubsub.kafka'
     metadata: {
       brokers: kafkaRoute.properties.url
