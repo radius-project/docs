@@ -26,8 +26,8 @@ resource db 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
     environment: environment
     application: app.id
     resourceProvisioning: 'manual'
-    host: split(substring(cosmosAccount.properties.documentEndpoint, indexOf(cosmosAccount.properties.documentEndpoint, ':') + 2), ':')[0]
-    port: int(substring(cosmosAccount.properties.documentEndpoint,lastIndexOf(cosmosAccount.properties.documentEndpoint, ':') + 1))
+    host: substring(cosmosAccount.properties.documentEndpoint, 0, lastIndexOf(cosmosAccount.properties.documentEndpoint, ':'))
+    port: int(split(substring(cosmosAccount.properties.documentEndpoint,lastIndexOf(cosmosAccount.properties.documentEndpoint, ':') + 1), '/')[0])
     database: cosmosAccount::database.name
     username: ''
     resources: [
