@@ -21,10 +21,10 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
       {
         kind: 'kubernetesMetadata'
         labels: {
-          'team.name':'frontend-eng'
+          'team.name': 'frontend-eng'
         }
         annotations:{
-          'app.io/port':'8081'
+          'app.io/port': '8081'
         }
       }
     ]

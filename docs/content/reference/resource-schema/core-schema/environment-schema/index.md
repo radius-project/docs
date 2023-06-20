@@ -65,25 +65,44 @@ Extensions allow you to customize how resources are generated or customized as p
 
 #### kubernetesMetadata
 
-The Kubernetes Metadata extension enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius application 
+The [Kubernetes Metadata extension]({{< ref "/operations/platforms/kubernetes/kubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius application 
+
+##### Extension format
+
+```bicep 
+extensions: [
+  {
+    kind: 'kubernetesMetadata'
+    labels: [
+      'team.name': 'frontend'
+      'team.email': 'frontend@contoso.com'
+    ]
+    annotations: [
+      'app.io/port': '8081'
+      'app.io/protocol': 'http'
+    ]
+  }
+]
+```
+##### Properties
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | kind | y | The kind of extension being used. Must be 'kubernetesMetadata' | 'kubernetesMetadata' |
-| [labels](#labels)| n | The Kubernetes labels to be set on the application and its resources | [See below](#labels)|
-| [annotations](#annotations) | n | The Kubernetes annotations to set on your application and its resources  | [See below](#annotations)|
+| [labels](#labels) | n | The Kubernetes labels to be set on the application and its resources | [See below](#labels)|
+| [annotations](#annotations) | n | The Kubernetes annotations to set on your application and its resources | [See below](#annotations)|
 
 ##### labels
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| label key | y | The key and value of the label to be set on the application and its resources.| `team.name:frontend` |
+| user defined label key | y | The key and value of the label to be set on the application and its resources.|`team.name:frontend`
 
 ##### annotations
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| annotation key | y | The key and value of the annotation to be set on the application and its resources.| `app.io/port:8081` |
+| user defined annotation key | y | The key and value of the annotation to be set on the application and its resources.| `app.io/port:8081` |
 
 ## Further reading
 

@@ -7,7 +7,7 @@ weight: 110
 ---
 ## Overview
 
-The Kubernetes Metadata extension enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius application 
+The [Kubernetes Metadata extension]({{< ref "/operations/platforms/kubernetes/kubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius application 
 
 ## Extension format
 

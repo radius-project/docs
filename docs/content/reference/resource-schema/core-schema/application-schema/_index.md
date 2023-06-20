@@ -40,7 +40,26 @@ The Kubernetes namespace extension allows you to customize how all of the resour
 
 ##### kubernetesMetadata
 
-The Kubernetes Metadata extension enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius application 
+The [Kubernetes Metadata extension]({{< ref "/operations/platforms/kubernetes/kubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius application 
+
+###### Extension format
+
+```bicep 
+extensions: [
+  {
+    kind: 'kubernetesMetadata'
+    labels: [
+      'team.name': 'frontend'
+      'team.email': 'frontend@contoso.com'
+    ]
+    annotations: [
+      'app.io/port': '8081'
+      'app.io/protocol': 'http'
+    ]
+  }
+]
+```
+###### Properties
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
@@ -52,12 +71,10 @@ The Kubernetes Metadata extension enables you set and cascade Kubernetes metadat
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| label key | y | The key and value of the label to be set on the application and its resources.| `team.name:frontend` |
+| user defined label key | y | The key and value of the label to be set on the application and its resources.|`team.name:frontend`
 
 ###### annotations
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| annotation key | y | The key and value of the annotation to be set on the application and its resources.| `app.io/port:8081` |
-
-
+| user defined annotation key | y | The key and value of the annotation to be set on the application and its resources.| `app.io/port:8081` |
