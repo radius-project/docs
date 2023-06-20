@@ -14,6 +14,14 @@ resource environment 'Applications.Core/environments@2022-03-15-privatepreview' 
         oidcIssuer: oidcIssuer
       }
     }
+    extensions: [
+      {
+        kind: 'kubernetesMetadata'
+        labels: {
+          'team.contact.name': 'Frontend'
+        }
+      }
+    ]
   }
 }
 //ENV

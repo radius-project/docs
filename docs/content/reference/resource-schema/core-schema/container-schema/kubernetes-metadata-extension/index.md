@@ -27,10 +27,10 @@ In this example, a [container service]({{< ref container >}}) adds a Kubernetes 
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| label key | y | The key and value of the label to be set on the application and its resources.| `team.name:frontend` |
+| user defined label key | y | The key and value of the label to be set on the application and its resources.| `team.name:frontend` |
 
 #### annotations
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| annotation key | y | The key and value of the annotation to be set on the application and its resources.| `app.io/port:8081` |
+| user defined annotation key | y | The key and value of the annotation to be set on the application and its resources.| `app.io/port:8081` |

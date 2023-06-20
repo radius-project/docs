@@ -12,6 +12,12 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
         kind: 'kubernetesNamespace'
         namespace: 'myapp'
       }
+      {
+        kind: 'kubernetesMetadata'
+        labels: {
+          'team.contact.name': 'Frontend'
+        }
+      }
     ]
   }
 }
