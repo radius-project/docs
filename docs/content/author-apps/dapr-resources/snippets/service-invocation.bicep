@@ -1,6 +1,5 @@
 import radius as rad
 
-param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' existing = {
   name: 'myapp'
@@ -18,20 +17,11 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
       {
         kind: 'daprSidecar'
         appId: 'backend'
-        provides: daprRoute.id
       }
     ]
   }
 }
 
-resource daprRoute 'Applications.Link/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
-  name: 'backend-invoke-route'
-  properties: {
-    environment: environment
-    application: app.id
-    appId: 'backend'
-  }
-}
 
 // Frontend invokes backend
 resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
@@ -40,12 +30,16 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
     application: app.id
     container: {
       image: 'frontend:latest'
-    }
-    connections: {
-      // Automatically inject environment variables
-      backend: {
-        source: daprRoute.id
+      env: {
+        // Configures the appID of the backend service.
+        CONNECTION_BACKEND_APPID: 'backend'
       }
     }
+    extensions: [
+      {
+        kind: 'daprSidecar'
+        appId: 'frontend'
+      }
+    ]
   }
 }
