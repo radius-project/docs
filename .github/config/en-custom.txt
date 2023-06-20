@@ -84,6 +84,7 @@ PARAMS
 PYTHONAPP
 PowerShell
 Pre
+PubSub
 ProjectRadius
 Quickstart
 Quickstarts
@@ -157,7 +158,6 @@ cosmosAccount
 cosmosdb
 customizations
 dapr
-daprInvokeHttpRoutes
 daprPubSubBrokers
 daprSecretStores
 daprStateStores

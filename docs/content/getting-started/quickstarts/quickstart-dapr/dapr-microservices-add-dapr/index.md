@@ -19,14 +19,6 @@ A [Dapr extension]({{< ref dapr-extension >}}) on the `backend` resource can be 
 
 The `extensions` section is used to configure cross-cutting behaviors of components. Since Dapr is not part of the standard definition of a container, it can be added via a extension. Extensions have a `kind` so that they can be strongly typed.
 
-## Add Dapr Invoke Route
-
-In order for other services to invoke `backend` through Dapr service invocation, a [Dapr Route]({{< ref dapr-http >}}) is required.
-
-Add a [Dapr HTTP route]({{< ref dapr-http >}}) resource to the app, and update the `orders` port definition to provide route:
-
-{{< rad file="snippets/invoke.bicep" embed=true marker="//SAMPLE" replace-key-extensions="//EXTENSIONS" replace-value-extensions="extensions: [...]" >}}
-
 ## Add Dapr statestore
 
 Now that the backend is configured with Dapr, we need to define a state store to save information about orders.
