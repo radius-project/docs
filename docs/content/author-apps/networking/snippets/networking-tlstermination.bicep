@@ -22,10 +22,13 @@ resource internetGateway 'Applications.Core/gateways@2022-03-15-privatepreview' 
   name: 'internet-gateway'
   properties: {
     application: app.id
+    hostname: {
+      // Specify your hostname used with the TLS certificate
+      fullyQualifiedHostname: 'www.radapp.dev'
+    }
     tls: {
       // Specify TLS Termination for your app. Mutually exclusive with SSL Passthrough.
-      // Hostname for TLS termination
-      hostname: 'www.radapp.dev'
+
       // The Radius Secret Store holding TLS certificate data
       certificateFrom: wwwRadiusTLS.id
       // The minimum TLS protocol version to support. Defaults to 1.2

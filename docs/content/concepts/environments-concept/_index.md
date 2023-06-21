@@ -65,6 +65,6 @@ When the developer deploys their application, these org-level concerns are autom
 
 ## Next step
 
-Now that you have an understanding of Radius Environments, learn more about Radius Links:
+Now that you have an understanding of Radius Environments, learn more about the Radius API:
 
-{{< button text="Radius Links" page="links-concept" size="btn-lg" color="success" >}}
+{{< button text="Radius API" page="api-concept" size="btn-lg" color="success" >}}

@@ -65,7 +65,9 @@ You can connect to a Dapr building block by manually referencing the resource na
 
 ### Service invocation
 
-Dapr [service invocation](https://docs.dapr.io/developing-applications/building-blocks/service-invocation/service-invocation-overview/) allows your services to discover and call each other. You can easily model service invocation with Dapr routes:
+Dapr [service invocation](https://docs.dapr.io/developing-applications/building-blocks/service-invocation/service-invocation-overview/) allows your services to discover and call each other.
+
+One container in an application can invoke another using the `AppId`.
 
 {{< tabs Bicep >}}
 

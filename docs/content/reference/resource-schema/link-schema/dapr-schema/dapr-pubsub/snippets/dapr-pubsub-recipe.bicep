@@ -1,8 +1,6 @@
 import radius as radius
 
-@description('The Azure region to deploy Azure resource(s) into. Defaults to the region of the target Azure resource group.')
-param location string = resourceGroup().location
-
+@description('The ID of your Radius environment. Automatically injected by the rad CLI.')
 param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
@@ -18,15 +16,14 @@ resource pubsub 'Applications.Link/daprPubSubBrokers@2022-03-15-privatepreview' 
   properties: {
     environment: environment
     application: app.id
-    mode: 'resource'
-    resource: namespace.id
+    recipe: {
+      // Name a specific recipe to use
+      name: 'azure-servicebus'
+      // Set optional/required parameters (specific to the Recipe)
+      parameters: {
+        size: 'large'
+      }
+    }
   }
 }
 //SAMPLE
-
-//BICEP
-resource namespace 'Microsoft.ServiceBus/namespaces@2017-04-01' = {
-  name: 'ns-${uniqueString(resourceGroup().id)}'
-  location: location
-}
-//BICEP
