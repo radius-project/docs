@@ -54,8 +54,8 @@ The `redislabs.com/Redis` link is a [portable link]({{< ref links-resources >}})
 
 | Property | Required | Description | Example(s) |
 |------|:--------:|-------------|---------|
-| name | n | Specifies the name of the Recipe that should be deployed. If not set, the name defaults to `default`. | `name: 'azure-prod'`
-| parameters | n | An object that contains a list of parameters to set on the Recipe. | `{ size: 'large' }`
+| \<recipe-name\> | y | The name of the Recipe. Must be unique within the resource-type. | `myrecipe`
+| parameters | n | A list of parameters to set on the Recipe for every Recipe usage and deployment. Can be overridden by the resource calling the Recipe. | `capacity: 1`
 
 #### Resources
 

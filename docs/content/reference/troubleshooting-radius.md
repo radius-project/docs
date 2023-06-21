@@ -2,7 +2,7 @@
 type: docs
 title: "Troubleshoot issues and common problems"
 linkTitle: "Troubleshooting"
-description: "Common issues users may have with Project Radius and how to address them"
+description: "Common issues users may have with Radius and how to address them"
 weight: 900
 categories: "How-To"
 tags: ["troubleshooting"]

@@ -3,12 +3,12 @@ type: docs
 title: "How-To: Collect metrics with Prometheus"
 linkTitle: "Prometheus"
 weight: 2000
-description: "Use Prometheus to collect time-series data from the Project Radius control plane"
+description: "Use Prometheus to collect time-series data from the Radius control plane"
 categories: "How-To"
 tags: ["metrics", "observability"]
 ---
 
-[Prometheus](https://prometheus.io/) collects and stores metrics as time series data. This guide will show you how to collect Project Radius control plane metrics to then be visualized and queried.
+[Prometheus](https://prometheus.io/) collects and stores metrics as time series data. This guide will show you how to collect Radius control plane metrics to then be visualized and queried.
 
 ## Install Prometheus on Kubernetes
 
@@ -58,7 +58,7 @@ tags: ["metrics", "observability"]
    radius-prom-prometheus-server-694fd8d7c-q5d59         2/2     Running   0          4m58s
    ```
 
-1. Done! Prometheus is now installed and ready to collect metrics from the Project Radius control plane.
+1. Done! Prometheus is now installed and ready to collect metrics from the Radius control plane.
 
 ## Next step: Add a Grafana dashboard
 
