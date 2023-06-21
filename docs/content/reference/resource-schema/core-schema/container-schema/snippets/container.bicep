@@ -2,7 +2,6 @@ import radius as radius
 
 param environment string
 
-param mongoDbId string
 param azureStorage string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
