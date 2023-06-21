@@ -58,6 +58,7 @@ Recipes currently support the following resources. Support for additional resour
 | [`Applications.Link/daprStateStores`]({{< ref dapr-statestore >}}) |
 | [`Applications.Link/daprPubSubBrokers`]({{< ref dapr-pubsub >}}) |
 | [`Applications.Link/daprSecretStore`]({{< ref dapr-secretstore >}}) |
+| [`Applications.Link/extenders`]({{< ref extender >}}) |
 
 ## Infrastructure linking
 
