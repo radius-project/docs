@@ -35,7 +35,6 @@
 			]
 		  }
 	},
-	
 	"portsAttributes": {
 		"1313": {
 			"label": "hugo server",
