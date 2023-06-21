@@ -2,7 +2,7 @@
 type: docs
 title: "Radius Links"
 linkTitle: "Links"
-description: "Add cross-platform links to your Radius application with Links"
+description: "Add links to your Radius application for infrastructure portability"
 weight: 600
 categories: "Concept"
 tags: ["links","portability"]

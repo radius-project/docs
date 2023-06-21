@@ -22,7 +22,7 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
 
 ### Add a cloud provider when initializing an environment
 
-1. Initialize a new [environment]({{< ref environments-resource >}}) with `rad init`
+1. Initialize a new [environment]({{< ref "operations/environments" >}}) with `rad init`
 1. Select the Kubernetes cluster to install Radius into. Enter an environment name and base Kubernetes namespace to deploy the apps into.
 1. Select "yes" to add a cloud provider and select AWS as the cloud provider
 

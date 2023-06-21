@@ -21,7 +21,7 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
 
 ### Add a cloud provider when initializing an environment
 
-1. Initialize a new [environment]({{< ref environments >}}) with `rad init`
+1. Initialize a new [environment]({{< ref "operations/environments" >}}) with `rad init`
 1. Select the Kubernetes cluster to install Radius into. Enter an environment name and base Kubernetes namespace to deploy the apps into.
 1. Select "yes" to add a cloud provider and select Azure as the cloud provider
 1. Specify your Azure subscription and resource group

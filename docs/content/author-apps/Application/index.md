@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Radius Application"
+title: "Radius application"
 linkTitle: "Application"
 description: "Learn how to model your application and its services in Radius "
 weight: 100
