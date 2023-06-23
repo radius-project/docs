@@ -6,4 +6,5 @@ description: "Deploy and connect to resources that are hosted in Kubernetes, Azu
 weight: 1000
 categories: "Concept"
 ---
-Radius applications are able to connect to and leverage resources that are hosted in Kubernetes, Azure and AWS platforms. Simply model your resources and add a connection from your Radius resources.
+
+Kubernetes, Azure and AWS resources can all be added to your Radius application. Simply model your resources and add a connection from a Radius container.
