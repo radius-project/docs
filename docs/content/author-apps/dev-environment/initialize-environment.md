@@ -10,7 +10,7 @@ tags: ["environments"]
 
 ## Overview 
 
-A Radius development environment is a basic environment that enables you to quickly get started with Radius and start authoring your application locally. The dev environments are also preloaded with a set of development [recipes]({{< ref "author-apps/recipes" >}}) that enables you to use lightweight containers for commonly used services such as databases, message queues, etc in your application. 
+Radius development environments enable you to quickly get started with Radius and begin writing new applications. Dev environments come preloaded with a set of development [recipes]({{< ref "author-apps/recipes" >}}) with lightweight containers for commonly used resources such as Redis and Mongo, helping you get up and running instantly.
 
 ## Pre-requisites
 
