@@ -4,7 +4,7 @@ title: "Containerized workloads"
 linkTitle: "Containers"
 description: "Model and run container workloads in your Radius application"
 weight: 300
-categories: "Concept"
+categories: "Conc"
 tags: ["containers"]
 ---
 

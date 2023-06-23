@@ -2,11 +2,15 @@
 type: docs
 title: "How-To: Setup a development environment"
 linkTitle: "Developer environments"
-description: "Learn how to initialize a new Radius environment"
+description: "Learn how to initialize a new Radius development environment"
 weight: 200
 categories: "How-To"
 tags: ["environments"]
 ---
+
+## Overview 
+
+A Radius development environment is basic environment that enables you to quickly get started with Radius and start authoring your application locally. The dev environments are also preloaded with a set of development [recipes]({{< ref "author-apps/recipes" >}}) that enables you to use light weight containers for the commonly used services such as databases, message queues, etc in your application. 
 
 ## Pre-requisites
 
@@ -25,6 +29,22 @@ tags: ["environments"]
    ```bash
    rad init --dev
    ```
+   
+   Select `Yes` to setup the app.bicep in the current directory
+
+   ```
+   Initializing Radius...                                                
+                                                                      
+   🕔 Install Radius 0.21                                             
+      - Kubernetes cluster: kind
+      - Kubernetes namespace: radius-system                              
+   ⏳ Create new environment default                                     
+      - Kubernetes namespace: default                                    
+      - Recipe pack: dev                                                 
+   ⏳ Scaffold application                                          
+   ⏳ Update local configuration                                                 
+   ```                                             
+
 2. Verify the initialization by running:
    ```bash
    kubectl get deployments -n radius-system
@@ -45,5 +65,22 @@ tags: ["environments"]
    ```bash
    rad env list
    ```
+3. Use `rad recipe list` to see the list of available recipes:
+   ```bash
+   rad recipe list
+   ```
+   ```
+   NAME      TYPE                              TEMPLATE KIND  TEMPLATE
+   default   Applications.Link/mongoDatabases  bicep          radius.azurecr.io/recipes/dev/mongodatabases:latest
+   default   Applications.Link/redisCaches     bicep          radius.azurecr.io/recipes/dev/rediscaches:latest
+   ``` 
+   You can follow the [recipes]({{< ref "author-apps/recipes" >}}) documentation to learn more about the recipes and how to use them in your application.
 
+## Resource schema 
+
+- [Environment schema]({{< ref environment-schema >}})
+
+## Further reading
+
+Refer to the [environments]({{< ref "/tags/environments" >}}) tag for more guides on the environment resource.
 

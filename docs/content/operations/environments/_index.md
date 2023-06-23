@@ -30,8 +30,8 @@ You can optionally configure cloud providers allow you to deploy and connect to 
 
 | Provider | Description |
 |----------|-------------|
-| Microsoft Azure | Deploy and connect to Azure resources |
-| Amazon Web Services | Deploy and connect to AWS resources |
+|[Microsoft Azure]({{< ref "providers#azure-provider" >}}) | Deploy and connect to Azure resources |
+| [Amazon Web Services]({{< ref "providers#aws-provider" >}}) | Deploy and connect to AWS resources |
 
 ### External identity provider
 
