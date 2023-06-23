@@ -21,7 +21,7 @@ resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
       name: 'azure-redis'
       // Set optional/required parameters (specific to the Recipe)
       parameters: {
-        port: '6379'
+        port: 6379
       }
     }
   }

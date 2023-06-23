@@ -18,10 +18,10 @@ resource rabbitmq 'Applications.Link/rabbitmqMessageQueues@2022-03-15-privatepre
     application: app.id
     recipe: {
       // Name a specific Recipe to use
-      name: 'prod-rabbitmq'
-      // Set optional/required parameters (specific to the Recipe)
+      name: 'rabbit'
+      // Optionally set recipe parameters if needed (specific to the Recipe)
       parameters: {
-        port: '10040'
+        queue: '*****'
       }
     }
   }

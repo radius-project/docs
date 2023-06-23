@@ -4,6 +4,7 @@ title: "Dapr Secret Store resource"
 linkTitle: "Secret Store"
 description: "Learn how to use a Dapr Secret Store resource in Radius"
 weight: 500
+categories: "Schema"
 slug: "secretstore"
 ---
 

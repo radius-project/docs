@@ -3,7 +3,7 @@ type: docs
 title: "Redis cache link"
 linkTitle: "Redis"
 description: "Learn how to use a Redis link in your application"
-categories: "Reference"
+categories: "Schema"
 ---
 
 ## Overview

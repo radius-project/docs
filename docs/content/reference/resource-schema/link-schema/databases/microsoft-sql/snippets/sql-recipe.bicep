@@ -19,9 +19,9 @@ resource db 'Applications.Link/sqlDatabases@2022-03-15-privatepreview' = {
     recipe: {
       // Name a specific Recipe to use
       name: 'azure-sqldb'
-      // Set optional/required parameters (specific to the Recipe)
+      // Optionally set recipe parameters if needed (specific to the Recipe)
       parameters: {
-        port: '6379'
+        server: '*******'
       }
     }
   }

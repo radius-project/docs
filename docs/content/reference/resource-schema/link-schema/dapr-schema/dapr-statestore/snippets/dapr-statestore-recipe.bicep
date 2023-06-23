@@ -35,10 +35,10 @@ resource statestore 'Applications.Link/daprStateStores@2022-03-15-privatepreview
     application: application
     recipe: {
       // Name a specific Recipe to use
-      name: 'prod'
-      // Set optional/required parameters (specific to the Recipe)
+      name: 'etcd'
+      // Optionally set recipe parameters if needed (specific to the Recipe)
       parameters: {
-        version: 'v1'
+        // ....
       }
     }
   }

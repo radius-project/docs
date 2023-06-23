@@ -4,7 +4,7 @@ title: "Microsoft SQL Server database"
 linkTitle: "Microsoft SQL"
 description: "Sample application running on a user-managed Azure SQL Database"
 weight: 100
-categories: "Reference"
+categories: "Schema"
 ---
 
 ## Overview

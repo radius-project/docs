@@ -3,7 +3,7 @@ type: docs
 title: "RabbitMQ message broker link"
 linkTitle: "RabbitMQ"
 description: "Learn how to use a RabbitMQ link in your application"
-categories: "Reference"
+categories: "Schema"
 ---
 
 ## Overview
