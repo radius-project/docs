@@ -38,10 +38,6 @@ tags: ["environments"]
    appcore-rp                1/1     1            1           53s
    bicep-de                  1/1     1            1           53s
    contour-contour           1/1     1            1           46s
-   dapr-dashboard            1/1     1            1           35s
-   dapr-sidecar-injector     1/1     1            1           35s
-   dapr-sentry               1/1     1            1           35s
-   dapr-operator             1/1     1            1           35s
    ```
 
    You can also use [`rad env list`]({{< ref rad_env_list.md >}}) to see if the created environment gets listed:
