@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "Radius environments"
+title: "Radius Environments"
 linkTitle: "Environments"
-description: "Learn about Radius environments and how to interact with them"
+description: "Learn about Radius Environments and how to interact with them"
 weight: 400
 
 categories: "How-To"
 tags: ["environments"]
 ---
 
-Radius environments are prepared "landing zones" for Radius applications. Applications deployed to an environment will inherit the container runtime, configuration, and other settings from the environment. Stay tuned for additional environment capabilities coming soon.
+Radius Environments are prepared "landing zones" for Radius applications. Applications deployed to an environment will inherit the container runtime, configuration, and other settings from the environment. Stay tuned for additional environment capabilities coming soon.
 
 ## Configuration
 
@@ -69,6 +69,7 @@ rad env show
 ```bash
 rad env delete -e myenv
 ```
+
 {{% /codetab %}}
 
 {{% codetab %}}
@@ -95,18 +96,40 @@ The following example shows an environment configured with Kubernetes as the tar
 
 ## How-to: Initialize a new environment
 
-1. Begin by deploying a compatible [Kubernetes cluster]({{< ref "/operations/platforms/kubernetes" >}})
+Begin by ensuring you are using a compatible [Kubernetes cluster]({{< ref "/operations/platforms/kubernetes" >}})
 
    *Visit the [Kubernetes platform docs]({{< ref "/operations/platforms/kubernetes" >}}) for a list of supported clusters and specific cluster requirements.*
 
-1. Ensure your target kubectl context is set as the default:
+{{< tabs "Dev environment" "Customized environment" "Manual" >}}
+
+{{% codetab %}}
+1. Initialize a new environment with `rad init --dev` command:
+
    ```bash
-   kubectl config current-context
+   rad init --dev
    ```
+
+   This will automatically select your current Kubernetes cluster context and initialized a preconfigured Radius environment containing [Recipes]({{< ref "/author-apps/recipes" >}}) to get you started in your development environment.
+
+
+   ```bash                                                             
+   Initializing Radius...                                       
+                                                               
+   ✅ Use existing Radius 0.42.42-dev install on k3d-k3s-default
+   ✅ Use existing environment default                          
+   ✅ Scaffold application samples                              
+   ✅ Update local configuration                                
+                                                               
+   Initialization complete! Have a RAD time 😎         
+   ```
+{{% /codetab %}}
+
+{{% codetab %}}
 1. Initialize a new environment with `rad init` command:
    ```bash
    rad init
    ```
+
 1. Follow the prompts, specifying:
    - **Namespace** - The Kubernetes namespace where your application containers and networking resources will be deployed (different than the Radius control-plane namespace, `radius-system`)
    - **Azure provider** (optional) - Allows you to [deploy and manage Azure resources]({{<ref providers>}})
@@ -116,7 +139,23 @@ The following example shows an environment configured with Kubernetes as the tar
    2. **Create the environment** - An environment resource is created in the Radius control plane. It maps to a Kubernetes namespace.
    3. **Add the Azure Cloud Provider** - The Azure cloud provider configuration is saved in the Radius control plane
    4. **Add the AWS Cloud Provider** - The AWS cloud provider configuration is saved in the Radius control plane
-   5. **Create a workspace** - [Workspaces]({{< ref workspaces >}}) are local pointers to a cluster running Radius, and an environment. Workspaces are saved to the Radius config file (`~/.rad/config.yaml` on Linux and macOS, `%USERPROFILE%\.rad\config.yaml` on Windows)
+   
+   You should see the following output:
+
+   ```bash
+   Initializing Radius...                     
+                                           
+   ✅ Install Radius 3d979bd                  
+      - Kubernetes cluster: k3d-k3s-default   
+      - Kubernetes namespace: radius-system   
+   ✅ Create new environment default          
+      - Kubernetes namespace: default         
+   ✅ Scaffold application samples            
+   ✅ Update local configuration              
+                                             
+   Initialization complete! Have a RAD time 😎
+   ```
+
 2. Verify the initialization by running:
    ```bash
    kubectl get deployments -n radius-system
@@ -125,15 +164,11 @@ The following example shows an environment configured with Kubernetes as the tar
    You should see:
 
    ```
-   NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
-   ucp                       1/1     1            1           53s
-   appcore-rp                1/1     1            1           53s
-   bicep-de                  1/1     1            1           53s
-   contour-contour           1/1     1            1           46s
-   dapr-dashboard            1/1     1            1           35s
-   dapr-sidecar-injector     1/1     1            1           35s
-   dapr-sentry               1/1     1            1           35s
-   dapr-operator             1/1     1            1           35s
+   NAME              READY   UP-TO-DATE   AVAILABLE   AGE
+   ucp               1/1     1            1           2m56s
+   appcore-rp        1/1     1            1           2m56s
+   bicep-de          1/1     1            1           2m56s
+   contour-contour   1/1     1            1           2m33s
    ```
 
    You can also use [`rad env list`]({{< ref rad_env_list.md >}}) to see if the created environment gets listed:
@@ -142,4 +177,44 @@ The following example shows an environment configured with Kubernetes as the tar
    rad env list
    ```
 
+{{% /codetab %}}
 
+{{% codetab %}}
+
+1. Install Radius onto a Kubernetes cluster:
+
+    Use the following command to target your desired Kubernetes cluster.
+
+    For a list of all the supported command options visit [rad install kubernetes]({{< ref rad_install_kubernetes >}})
+
+    ```bash
+    rad install kubernetes --chart <user-chart> --tag <user-tag> --set <user-set>
+    ```
+
+2. Create a new Radius resource group:
+
+    Radius resource groups are used to organize Radius resources, such as applications, environments, links, and routes. For more information visit [Radius resource groups]({{< ref groups >}}).
+
+    For a dive into the command visit [`rad group create`]({{< ref rad_group_create >}})
+
+    ```bash
+    rad group create <user-radius-resource-group>
+    ```
+
+4. Create your Radius Environment and pass it your Kubernetes namespace:
+
+    ```bash
+    rad env create <user-radius-environment> --namespace <kubernetes-namespace>
+    ```
+
+    For a dive into the command visit [`rad env create`]({{< ref rad_env_create >}})
+
+5. Set your Radius Environment:
+
+    ```bash
+    rad env switch kind-radius
+    ```
+
+    For a dive into the command visit [`rad env switch`]({{< ref rad_env_switch >}}).
+
+{{% /codetab %}}
