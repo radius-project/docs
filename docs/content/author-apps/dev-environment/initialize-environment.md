@@ -60,7 +60,7 @@ A Radius development environment is a basic environment that enables you to quic
    contour-contour           1/1     1            1           46s
    ```
 
-   You can also use [`rad env list`]({{< ref rad_env_list.md >}}) to see if the created environment gets listed:
+   You can also use [`rad env list`]({{< ref rad_env_list.md >}}) to view your environment:
    
    ```bash
    rad env list
