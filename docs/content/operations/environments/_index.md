@@ -23,16 +23,15 @@ A Kubernetes namespace is specified on the environment to tell Radius where to r
 <img src=environments.png alt="Diagram showing a Radius environment mapping to a Kubernetes cluster and namespace" width=800px />
 
 ### Cloud Provider
-Radius cloud providers allow you to deploy and connect to cloud resources across various cloud platforms. For example, you can use the Radius Azure provider to run your application's services in your Kubernetes cluster, while deploying Azure resources to a specified Azure subscription and resource group.
 
-<img src="providers-overview.png" alt="Diagram of cloud resources getting forwarded to cloud platforms upon deployment" width="800px" >
+You can optionally configure cloud providers allow you to deploy and connect to cloud resources across various cloud platforms. For example, you can use the Radius Azure provider to run your application's services in your Kubernetes cluster, while deploying Azure resources to a specified Azure subscription and resource group. More information on setting up a cloud provider can be found in the [providers]({{< ref providers >}}) section.
 
 #### Supported cloud providers
 
 | Provider | Description |
 |----------|-------------|
-| [Microsoft Azure](#azure-provider) | Deploy and connect to Azure resources |
-| [Amazon Web Services](#aws-provider) | Deploy and connect to AWS resources |
+| Microsoft Azure | Deploy and connect to Azure resources |
+| Amazon Web Services | Deploy and connect to AWS resources |
 
 ### External identity provider
 
@@ -120,7 +119,8 @@ The following example shows an environment configured with Kubernetes as the tar
    ```
 1. Follow the prompts, specifying:
    - **Namespace** - The Kubernetes namespace where your application containers and networking resources will be deployed (different than the Radius control-plane namespace, `radius-system`)
-   - **Azure provider** (optional) - Allows you to [deploy and manage Azure resources]({{<ref providers>}})
+   - **Azure provider** (optional) - Allows you to [deploy and manage Azure resources]({{< ref "providers#azure-provider" >}})
+   - **AWS provider** (optional) - Allows you to [deploy and manage AWS resources]({{< ref "providers#aws-provider" >}})
    - **Environment name** - The name of the environment to create
 1. Let the rad CLI run the following tasks:
    1. **Install Radius** - Radius installs the [control plane services]({{< ref architecture-concept >}}) in the `radius-system` namespace

@@ -14,17 +14,7 @@ Radius uses the [AWS Cloud Control API](https://docs.aws.amazon.com/cloudcontrol
 
 ## Configure an AWS Provider
 
-The AWS provider allows you to deploy and connect to AWS resources from a Radius environment on an EKS cluster. 
-
-### Prerequisites
-- [AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account) and an [IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html)
-- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-
-### Add a cloud provider when initializing an environment
-
-1. Initialize a new [environment]({{< ref "operations/environments" >}}) with `rad init`
-1. Select the Kubernetes cluster to install Radius into. Enter an environment name and base Kubernetes namespace to deploy the apps into.
-1. Select "yes" to add a cloud provider and select AWS as the cloud provider
+The AWS provider allows you to deploy and connect to AWS resources from a Radius environment on an EKS cluster. To configure an AWS provider, you can follow the documentation [here]({{< ref "providers#aws-provider" >}}).
 
 ## Resource library
 
