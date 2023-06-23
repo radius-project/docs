@@ -195,5 +195,26 @@ Begin by ensuring you are using a compatible [Kubernetes cluster]({{< ref "/oper
     rad env switch kind-radius
     ```
     For a dive into the command visit [`rad env switch`]({{< ref rad_env_switch >}}).
+
+6. Verify the initialization by running:
+   ```bash
+   kubectl get deployments -n radius-system
+   ```
+
+   You should see:
+
+   ```
+   NAME              READY   UP-TO-DATE   AVAILABLE   AGE
+   ucp               1/1     1            1           2m56s
+   appcore-rp        1/1     1            1           2m56s
+   bicep-de          1/1     1            1           2m56s
+   contour-contour   1/1     1            1           2m33s
+   ```
+
+   You can also use [`rad env list`]({{< ref rad_env_list.md >}}) to see if the created environment gets listed:
+
+   ```bash
+   rad env list
+   ```
 {{% /codetab %}}
 {{< /tabs >}}
