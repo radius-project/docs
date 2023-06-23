@@ -73,7 +73,7 @@ Secrets are used when defining a RabbitMQ link with a container or external serv
 
 ### Provision with a Recipe
 
-[Recipes]({{< ref recipes-overview >}}) automate infrastructure provisioning using approved templates.
+[Recipes]({{< ref custom-recipes >}}) automate infrastructure provisioning using approved templates.
 When no Recipe configuration is set Radius will use the Recipe registered as the **default** in the environment for the given resource. Otherwise, a Recipe name and parameters can optionally be set.
 
 ### Provision manually
