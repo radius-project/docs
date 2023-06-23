@@ -34,7 +34,7 @@
 				"/tmp/rad-vscode-bicep.vsix"
 			]
 		  }
-	},
+	}, 
 	"portsAttributes": {
 		"1313": {
 			"label": "hugo server",
