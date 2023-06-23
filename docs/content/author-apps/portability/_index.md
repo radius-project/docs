@@ -6,6 +6,5 @@ description: "Learn how to make your applications portable"
 weight: 500
 tags: ["portability"]
 ---
-## Overview
 
-Radius enables portability of your applications across Kubernetes, Azure and AWS platforms. This means that you can model your application once and deploy it to across these platforms using Radius provided abstractions.
+Radius applications can be deployed across Kubernetes, Azure and AWS environments. Using the set of Radius resources that act as abstractions across popular open-source technologies, developers can author their application once and operators can deploy across any cloud or on-premises Radius environment.
