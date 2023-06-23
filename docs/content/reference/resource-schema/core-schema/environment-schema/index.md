@@ -65,30 +65,13 @@ Extensions allow you to customize how resources are generated or customized as p
 
 #### kubernetesMetadata
 
-The [Kubernetes Metadata extension]({{< ref "/operations/platforms/kubernetes/kubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius application 
+The [Kubernetes Metadata extension]({{< ref "/operations/platforms/kubernetes/kubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius application. For examples, please refer to the extension overview page.
 
-##### Extension format
-
-```bicep 
-extensions: [
-  {
-    kind: 'kubernetesMetadata'
-    labels: [
-      'team.name': 'frontend'
-      'team.email': 'frontend@contoso.com'
-    ]
-    annotations: [
-      'app.io/port': '8081'
-      'app.io/protocol': 'http'
-    ]
-  }
-]
-```
 ##### Properties
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| kind | y | The kind of extension being used. Must be 'kubernetesMetadata' | 'kubernetesMetadata' |
+| kind | y | The kind of extension being used. Must be 'kubernetesMetadata' | `kubernetesMetadata` |
 | [labels](#labels) | n | The Kubernetes labels to be set on the application and its resources | [See below](#labels)|
 | [annotations](#annotations) | n | The Kubernetes annotations to set on your application and its resources | [See below](#annotations)|
 

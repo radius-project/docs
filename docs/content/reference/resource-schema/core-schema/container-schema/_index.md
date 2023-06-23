@@ -142,8 +142,55 @@ Extensions define additional capabilities and configuration for a container.
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| kind | y | The kind of extension being used. | `kubernetesmetadataextension`
+| kind | y | The kind of extension being used. | `kubernetesMetadataextension`
 
 Additional properties are available and required depending on the 'kind' of the extension.
 
-## Sub-types
+#### kubernetesMetadata
+
+The [Kubernetes Metadata extension]({{< ref "/operations/platforms/kubernetes/kubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius application. For examples refer to the extension overview page.
+
+##### Properties
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| kind | y | The kind of extension being used. Must be 'kubernetesMetadata' | `kubernetesMetadata` |
+| [labels](#labels)| n | The Kubernetes labels to be set on the application and its resources | [See below](#labels)|
+| [annotations](#annotations) | n | The Kubernetes annotations to set on your application and its resources  | [See below](#annotations)|
+
+###### labels
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| user defined label key | y | The key and value of the label to be set on the application and its resources.|`team.name:frontend`
+
+###### annotations
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| user defined annotation key | y | The key and value of the annotation to be set on the application and its resources.| `app.io/port:8081` |
+
+#### daprSidecar
+
+The `daprSidecar` extensions adds and configures a [Dapr](https://dapr.io) sidecar to your application.
+
+##### Properties
+
+| Property | Required | Description | Example |
+|----------|:--------:|-------------|---------|
+| kind | y | The kind of extension. | `daprSidecar`
+| appId | n | The appId of the Dapr sidecar. | `backend` |
+| appPort | n | The port your service exposes to Dapr | `3500`
+| config | n | The configuration to use for the Dapr sidecar |
+
+#### manualScaling
+
+The `manualScaling` extension configures the number of replicas of a compute instance (such as a container) to run.
+
+##### Properties
+
+| Property | Required | Description | Example |
+|----------|:--------:|-------------|---------|
+| kind | y | The kind of extension. | `manualScaling`
+| replicas | Y | The number of replicas to run | `5` |
+
