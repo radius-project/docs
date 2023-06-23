@@ -3,7 +3,7 @@ type: docs
 title: "Containerized workloads"
 linkTitle: "Containers"
 description: "Model and run container workloads in your Radius application"
-weight: 100
+weight: 300
 categories: "Concept"
 tags: ["containers"]
 ---
