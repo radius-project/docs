@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Radius developer environment"
+title: "How-To: Setup a development environment"
 linkTitle: "Developer environments"
 description: "Learn how to initialize a new Radius environment"
 weight: 200
