@@ -10,8 +10,7 @@ tags: ["application"]
 
 ## Overview
 
-An [application]({{< ref appmodel-concept >}}) is the primary resource that contains all of your services and relationships. It is the top-level resource in your Bicep file.
-{{< rad file="snippets/blank.bicep" embed=true >}}
+An [application]({{< ref appmodel-concept >}}) is the primary resource that contains all of your services and relationships.
 
 ## Extensions
 
