@@ -5,7 +5,7 @@ linkTitle: "State Store"
 description: "Learn how to use a Dapr State Store resource in Radius"
 weight: 300
 slug: "statestore"
-categories: "Reference"
+categories: "Schema"
 ---
 
 ## Overview

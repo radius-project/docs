@@ -18,10 +18,10 @@ resource secretstore 'Applications.Link/daprSecretStores@2022-03-15-privateprevi
     application: app.id
     recipe: {
       // Name a specific Recipe to use
-      name: 'secret-prod'
-      // Set optional/required parameters (specific to the Recipe)
+      name: 'keyvault'
+      // Optionally set recipe parameters if needed (specific to the Recipe)
       parameters: {
-        version: 'v1'
+        // ....
       }
     }
   }
