@@ -143,7 +143,7 @@ The docs pipeline uses [aspell](http://aspell.net/) to check for spelling mistak
 
 ### Contributing a new How-To guide
 
-- Subdirectory naming - the directory name should be descriptive and if referring to a specific component or concept should begin with the relevant name. Example *pubsub-namespaces*.
+- Sub directory naming - the directory name should be descriptive and if referring to a specific component or concept should begin with the relevant name. Example *pubsub-namespaces*.
 - Do not assume the reader is using a specific environment unless the article itself is specific to an environment. This includes OS (Windows/Linux/MacOS), deployment target (Kubernetes, IoT, etc.), or programming language. If instructions vary between operating systems, provide guidance for all.
 - Include code/sample/config snippets that can be easily copied and pasted.
 - At the end of the article, provide the reader with related links and next steps (this can be other relevant "how-to", samples for reference or related concepts).
