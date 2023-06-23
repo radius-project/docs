@@ -112,11 +112,13 @@ Begin by ensuring you are using a compatible [Kubernetes cluster]({{< ref "/oper
    This will automatically select your current Kubernetes cluster context and initialized a preconfigured Radius environment containing [Recipes]({{< ref "/author-apps/recipes" >}}) to get you started in your development environment.
 
 
-   ```bash                                                             
+   ```bash                                                                                                    
    Initializing Radius...                                       
                                                                
-   ✅ Use existing Radius 0.42.42-dev install on k3d-k3s-default
-   ✅ Use existing environment default                          
+   ✅ Use existing Radius v0.21 install on k3d-k3s-default
+   ✅ Create new environment default                            
+      - Kubernetes namespace: default                           
+      - Recipe pack: dev                                        
    ✅ Scaffold application samples                              
    ✅ Update local configuration                                
                                                                
@@ -145,7 +147,7 @@ Begin by ensuring you are using a compatible [Kubernetes cluster]({{< ref "/oper
    ```bash
    Initializing Radius...                     
                                            
-   ✅ Install Radius 3d979bd                  
+   ✅ Install Radius v0.21                  
       - Kubernetes cluster: k3d-k3s-default   
       - Kubernetes namespace: radius-system   
    ✅ Create new environment default          
