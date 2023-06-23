@@ -9,7 +9,7 @@ categories: "Concept"
 tags: ["Dapr"]
 ---
 
-Project Radius offers first-class support for the [Dapr](https://dapr.io) runtime and building blocks to make it easy to make your code fully portable across code and infrastructure. Simply drop in your Dapr building blocks as resources and Radius will automatically configure and apply the accompanying Dapr configuration.
+Radius offers first-class support for the [Dapr](https://dapr.io) runtime and building blocks to make it easy to make your code fully portable across code and infrastructure. Simply drop in your Dapr building blocks as resources and Radius will automatically configure and apply the accompanying Dapr configuration.
 
 ## Installation 
 
@@ -65,7 +65,9 @@ You can connect to a Dapr building block by manually referencing the resource na
 
 ### Service invocation
 
-Dapr [service invocation](https://docs.dapr.io/developing-applications/building-blocks/service-invocation/service-invocation-overview/) allows your services to discover and call each other. You can easily model service invocation with Dapr routes:
+Dapr [service invocation](https://docs.dapr.io/developing-applications/building-blocks/service-invocation/service-invocation-overview/) allows your services to discover and call each other.
+
+One container in an application can invoke another using the `AppId`.
 
 {{< tabs Bicep >}}
 

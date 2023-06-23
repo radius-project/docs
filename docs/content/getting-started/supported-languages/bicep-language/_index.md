@@ -8,7 +8,7 @@ categories: "How-To"
 tags: ["bicep"]
 ---
 
-Project Radius uses the [Bicep language](https://docs.microsoft.com/EN-US/azure/azure-resource-manager/bicep/) to describe your application and its resources.
+Radius uses the [Bicep language](https://docs.microsoft.com/EN-US/azure/azure-resource-manager/bicep/) to describe your application and its resources.
 
 ## Bicep
 

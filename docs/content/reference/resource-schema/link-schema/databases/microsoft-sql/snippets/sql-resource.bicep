@@ -1,6 +1,11 @@
 import radius as radius
 
 param environment string
+param username string
+param port int
+
+@secure()
+param password string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'cosmos-container'
@@ -30,6 +35,12 @@ resource db 'Applications.Link/sqlDatabases@2022-03-15-privatepreview' = {
     ]
     server: sqldb.properties.fullyQualifiedDomainName
     database: sqldb::dbinner.name
+    port: port
+    username: username
+    secrets:{
+      password: password
+      connectionString: 'Data Source=tcp:${sqldb.properties.fullyQualifiedDomainName},${port};Initial Catalog=${sqldb::dbinner.name};User Id=${username};Password=${password};Encrypt=True;TrustServerCertificate=True'
+    }
   }
 }
 //SQL

@@ -88,7 +88,7 @@ tags: ["logs","observability"]
 
 ## Install Radius control plane 
 
-Visit [supported platforms]({{< ref platforms >}}) to learn how to install the Project Radius control plane. By default, Radius has JSON logging enabled.
+Visit [supported platforms]({{< ref platforms >}}) to learn how to install the Radius control plane. By default, Radius has JSON logging enabled.
 
 For Kubernetes, you can install with the rad CLI:
 

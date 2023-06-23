@@ -30,11 +30,11 @@ A Radius environment allows you to specify Kubernetes as your compute platform, 
 
 ### Currently using a forked version of Bicep
 
-While Project Radius is still in the private preview stage, a fork of the Bicep compiler is being used while the Radius team works with the Bicep team and community to build in the proper support to move back into the primary version. This results in:
+While Radius is still in the private preview stage, a fork of the Bicep compiler is being used while the Radius team works with the Bicep team and community to build in the proper support to move back into the primary version. This results in:
 
-- The "Bicep" VS Code extension must be disabled in favor of the "Bicep (Project Radius)" extension
+- The "Bicep" VS Code extension must be disabled in favor of the "Bicep (Radius)" extension
 - The forked Bicep compiler will be out of date compared to the most recent Bicep public build
-- `az bicep` and `bicep` are not supported with Project Radius. Use `rad deploy` instead.
+- `az bicep` and `bicep` are not supported with Radius. Use `rad deploy` instead.
 
 To use the forked build of Bicep directly, you can reference `~/.rad/bin/rad-bicep` (Linux/macOS) or `%HOMEPATH%\.rad\bin\rad-bicep.exe` (Windows).
 

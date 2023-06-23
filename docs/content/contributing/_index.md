@@ -1,13 +1,13 @@
 ---
 type: docs
-title: "Contributing to Project Radius"
+title: "Contributing to Radius"
 linkTitle: "Contributing"
-description: "Guides and requirements for contributing to Project Radius"
+description: "Guides and requirements for contributing to Radius"
 weight: 80
 no_list: true
 ---
 
-We welcome contributions to the Project Radius! Check  out  the following table to learn where and how you can contribute:
+We welcome contributions to the Radius! Check  out  the following table to learn where and how you can contribute:
 
 | Component | Description | Contribution guides |
 |-----------|-------------|---------------------|
@@ -16,4 +16,4 @@ We welcome contributions to the Project Radius! Check  out  the following table 
 | **ARM Deployment Engine** | Processes the output of the Bicep compiler and deploys resources. | [project-radius/deployment-engine](https://github.com/project-radius/deployment-engine/blob/main/CONTRIBUTING.md) |
 | **Radius Control Plane** | Implements operations on the application model as a sequence of resource management operations | [project-radius/radius](https://github.com/project-radius/radius/tree/main/docs/contributing/contributing-code) |
 | **Templates** | Deployable starter templates for getting up and running with Radius | [project-radius/templates](https://github.com/project-radius/templates) |
-| **Docs** | Documentation for Project Radius | [Contributing to docs]({{< ref contributing-docs >}}) |
+| **Docs** | Documentation for Radius | [Contributing to docs]({{< ref contributing-docs >}}) |

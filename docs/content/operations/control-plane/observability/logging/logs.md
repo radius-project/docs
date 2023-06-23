@@ -8,11 +8,11 @@ categories: "How-To"
 tags: ["logs","troubleshooting", "observability"]
 ---
 
-The Project Radius control plane produces logs that you can use to monitor and troubleshoot the control plane. This document describes how to collect and search logs, as well as the log schema.
+The Radius control plane produces logs that you can use to monitor and troubleshoot the control plane. This document describes how to collect and search logs, as well as the log schema.
 
 ## Log formats
 
-The Project Radius control plane outputs structured logs to stdout, either plain-text or JSON-formatted. By default, services produce JSON formatted logs. 
+The Radius control plane outputs structured logs to stdout, either plain-text or JSON-formatted. By default, services produce JSON formatted logs. 
 
 > If you want to use a search engine such as Elastic Search or Azure Monitor to search logs, it is strongly recommended to use JSON-formatted logs which the log collector and the search engine can parse using the built-in JSON parser.
 

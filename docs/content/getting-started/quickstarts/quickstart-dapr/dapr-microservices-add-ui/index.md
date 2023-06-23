@@ -14,8 +14,8 @@ To complete the application, you'll add another component for the frontend user 
 Another container resource is used to specify a few properties about the order generator:
 
 - **container image**: `radius.azurecr.io/quickstarts/dapr-frontend:edge` is a Docker image the container will run.
-- **connections**: `backendRoute.id` declares the intention for `frontend` to communicate with `backend` through the `backendRoute` Dapr HTTP Route.
-- **extensions**: `dapr.io/Sidecar` configures Dapr on the container, which is used to invoke the backend.
+- **environment variables**: The `CONNECTION_BACKEND_APPID` environment variable will be used to configure the appID of the backend.
+- **extensions**: `daprSidecar` configures Dapr on the container, which is used to invoke the backend.
 
 {{< rad file="snippets/frontend.bicep" marker="//FRONTEND" embed=true >}}
 

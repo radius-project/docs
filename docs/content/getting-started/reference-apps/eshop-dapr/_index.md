@@ -2,7 +2,7 @@
 type: docs
 title: "eShop on Dapr sample"
 linkTitle: "eShop on Dapr"
-description: "Learn how to model and deploy a fully portable application with Dapr and Project Radius"
+description: "Learn how to model and deploy a fully portable application with Dapr and Radius"
 weight: 150
 categories: "Reference application"
 tags: ["Dapr"]
@@ -31,9 +31,9 @@ As the focus of the eShopOnDapr reference application is on Dapr, the original a
 
 ## Adding Radius
 
-With Dapr, you get code-level portability across different cloud + edge platforms. Adding in Project Radius, you can now describe all of your services and infrastructure as a unified application, and gain full code + infrastructure portability across cloud + edge platforms.
+With Dapr, you get code-level portability across different cloud + edge platforms. Adding in Radius, you can now describe all of your services and infrastructure as a unified application, and gain full code + infrastructure portability across cloud + edge platforms.
 
-Project Radius allows the eShop on Dapr application to:
+Radius allows the eShop on Dapr application to:
 
 - Define the entire collection of microservices, backing infrastructure, and connections as a single application in a single language. No more separate templating languages and scripts to glue it all together.
 - Easily manage configuration and credentials between infrastructure and services, all within the app model. No more manually copying/pasting connection strings or secrets.
