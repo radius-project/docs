@@ -110,8 +110,8 @@ The docs pipeline uses [aspell](http://aspell.net/) to check for spelling mistak
 - Avoid creating new sections where possible, there is a good chance a proper place in the docs hierarchy already exists.
 - Make sure to include a complete [Hugo front-matter](#front-matter).
 - Determine the category or the type of doc you are contributing.
-   - **Concept** - A concept doc is a high-level overview of the project or a building block of the project.
-   - **Overview** - A overview doc is high-level documentation of the feature area.
+   - **Concept** - A concept doc is a high-level overview of the project or an area of the project.
+   - **Overview** - A overview page documents a specific feature or capability of the project, with information on what the feature is and additional context and links on how to use it.
    - **Quickstart** - A quickstart guide is a short step-by-step guide to help the reader quickly learn something and achieve a specific goal in 5-10 mins.
    - **Reference app** - A reference app-doc is for running an application sample or an example of using the project or a particular feature.
    - **How-To** - A how-to guide is an elaborate step-by-step guide to help the reader achieve a specific goal. It should provide the reader with an in-depth understanding of what the feature does. While Quickstart is a subset of How-To, they can be differentiated by the time to achieve a specific goal.
