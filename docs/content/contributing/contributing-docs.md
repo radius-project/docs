@@ -129,7 +129,7 @@ The docs pipeline uses [aspell](http://aspell.net/) to check for spelling mistak
 - Ensure the doc is in the correct place in the hierarchy.
 - Ensure the reader can understand why they should care about the feature and what it enables them to do. 
 - If applicable, ensure the doc references the reference spec document.
-- Ensure the spec is consistent with the concept in terms of names, parameters, and terminology. Update both the concept and the spec as needed. Avoid repeating the spec. The idea is to give the reader more information and background on the capability so that they can try this out. 
+- If applicable, ensure the doc is consistent with any related concepts or specs in terms of names, parameters, and terminology. Update both the concept, spec, and the doc as needed. Avoid repeating the spec. The idea is to give the reader more information and background on the capability so that they can try this out. 
 - Provide a link to the spec in the [Reference]({{<ref reference >}}) section and provide the reader with related links (this can be other quickstarts, "how-to", samples for reference )
 - Set the `category` as `Overview` in [Hugo front-matter](#front-matter).
 
