@@ -21,24 +21,6 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
           containerPort: 80
         }
       }
-      volumes: {
-        tmp: {
-          kind: 'ephemeral'
-          managedStore: 'memory'
-          mountPath: '/tmp'
-        }
-      }
-    }
-    extensions: [
-      {
-        kind: 'daprSidecar'
-        appId: 'mycontainer'
-      }
-    ]
-    connections: {
-      statestore: {
-        source: statestore.id
-      }
     }
   }
 }
