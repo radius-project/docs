@@ -24,8 +24,16 @@
 					}
 				}
 			}
-		}
-	},
+		},
+		// Configure properties specific to VS Code.
+		"vscode": {
+			"settings": {},
+			"extensions": [
+				"GitHub.copilot",
+				"/tmp/rad-vscode-bicep.vsix"
+			]
+		  }
+	}, 
 	"portsAttributes": {
 		"1313": {
 			"label": "hugo server",
