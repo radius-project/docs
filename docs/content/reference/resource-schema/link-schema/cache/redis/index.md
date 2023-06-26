@@ -31,6 +31,7 @@ The `redislabs.com/Redis` link is a [portable link]({{< ref links-resources >}})
 | [recipe](#recipe)  | n | The recipe to deploy. | `redisCache.id`
 | [resources](#resources)  | n | An array of IDs of the underlying resources for the link. | [See below](#resources)
 | [secrets](#secrets) | n | Secrets used when building the link from values. | [See below](#secrets)
+| tls | n | Specifies whether to enable SSL connections to the Redis cache. This value with be computed based on the port value specified. TLS will be set to true and used if the port value is set to 6380. Otherwise, the computed value will be false. If SSL is required on a different port, the computed value for TLS can be manually overriden by setting TLS to true in the resource definition | `true`
 
 ### Recipe
 
@@ -52,6 +53,7 @@ The `redislabs.com/Redis` link is a [portable link]({{< ref links-resources >}})
 |----------|:--------:|-------------|------------|
 | connectionString | n | The connection string for the Redis cache. Write only. | `https://mycache.redis.cache.windows.net,password=*****,....`
 | password | n | The password for the Redis cache. Write only. | `mypassword`
+| url | n | The connection URL for the Redis cache. Write only. | `redis://localhost:6380/0?ssl=true` |
 
 ## Methods
 
