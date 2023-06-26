@@ -26,7 +26,7 @@ Additionally you can customize the behavior of the containers with the help of [
 
 ### Image
 
-The image for your container workload to pull and run. If you want to pull the container image from a private container register, you need to allow access from your Kubernetes cluster. Follow the documentation to [configure private container registries access]({{< ref "/operations/platforms/kubernetes/supported-clusters#configure-container-registry-access" >}}).
+An image can be specified container workload to pull and run. Refer to the [container reference docs]({{< ref container-schema >}}) for more information on image requirements. If you want to pull the container image from a private container register, you need to allow access from your Kubernetes cluster. Follow the documentation to [configure private container registries access]({{< ref "/operations/platforms/kubernetes/supported-clusters#configure-container-registry-access" >}}).
 
 ### Ports
 
