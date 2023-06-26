@@ -61,5 +61,3 @@ The [Kubernetes Metadata extension]({{< ref "/operations/platforms/kubernetes/ku
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | user defined annotation key | y | The key and value of the annotation to be set on the application and its resources.| `'app.io/port': '8081'` |
-
-

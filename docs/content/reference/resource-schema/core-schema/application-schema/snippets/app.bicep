@@ -15,7 +15,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
       {
         kind: 'kubernetesMetadata'
         labels: {
-          'team.contact.name': 'Frontend'
+          'team.contact.name':0 'frontend'
         }
       }
     ]

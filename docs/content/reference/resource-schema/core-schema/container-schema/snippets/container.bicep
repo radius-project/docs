@@ -91,7 +91,7 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
       {
         kind: 'kubernetesMetadata'
         labels: {
-          'team.contact.name': 'Frontend'
+          'team.contact.name': 'frontend'
         }
       }
     ]
