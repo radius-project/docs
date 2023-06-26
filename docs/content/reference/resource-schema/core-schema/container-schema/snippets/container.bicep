@@ -84,6 +84,16 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
         kind: 'daprSidecar'
         appId: 'frontend'
       }
+      {
+        kind:  'manualScaling'
+        replicas: 5
+      }
+      {
+        kind: 'kubernetesMetadata'
+        labels: {
+          'team.contact.name': 'frontend'
+        }
+      }
     ]
   }
 }

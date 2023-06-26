@@ -35,5 +35,29 @@ The Kubernetes namespace extension allows you to customize how all of the resour
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| kind | y | The kind of extension being used. Must be 'kubernetesNamespace' | 'kubernetesNamespace' |
-| namespace | y | The namespace where all application-scoped resources generate Kubernetes objects. | 'default' |
+| kind | y | The kind of extension being used. Must be 'kubernetesNamespace' | `kubernetesNamespace` |
+| namespace | y | The namespace where all application-scoped resources generate Kubernetes objects. | `default` |
+
+##### kubernetesMetadata
+
+The [Kubernetes Metadata extension]({{< ref "/operations/platforms/kubernetes/kubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius application. For examples, please refer to the extension overview page.
+
+###### Properties
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| kind | y | The kind of extension being used. Must be 'kubernetesMetadata' | `kubernetesMetadata` |
+| [labels](#labels)| n | The Kubernetes labels to be set on the application and its resources | [See below](#labels)|
+| [annotations](#annotations) | n | The Kubernetes annotations to set on your application and its resources  | [See below](#annotations)|
+
+###### labels
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| user defined label key | y | The key and value of the label to be set on the application and its resources.|`'team.name': 'frontend'`
+
+###### annotations
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| user defined annotation key | y | The key and value of the annotation to be set on the application and its resources.| `'app.io/port': '8081'` |
