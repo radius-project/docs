@@ -29,7 +29,7 @@ The image for your container workload to pull and run. If you want to pull the c
 
 ### Ports
 
-The ports section defines the ports that the container exposes and consumes. Refer to the [networking guide]({{< ref networking >}}) for more information on container networking.
+Ports allow you to expose your container to incoming network traffic. Refer to the [networking guide]({{< ref networking >}}) for more information on container networking.
 
 ### Volumes
 
