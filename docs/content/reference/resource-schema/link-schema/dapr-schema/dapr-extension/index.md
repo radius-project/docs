@@ -5,7 +5,7 @@ linkTitle: "Dapr extension"
 description: "Learn how to add a Dapr sidecar with a Dapr extension"
 weight: 100
 slug: "extension"
-categories: "Reference"
+categories: "Schema"
 ---
 
 ## Overview
