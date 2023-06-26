@@ -23,6 +23,7 @@ Containers are run on the same Kubernetes cluster as your [Radius installation](
 Radius containers enables you to specify the image for the container, the ports the container provides and consumes, the environment variables to set, the volumes to mount, and the probes to run.
 
 Additionally you can customize the behavior of the containers with the help of [extensions](#extensions).
+
 ### Image
 
 The image for your container workload to pull and run. If you want to pull the container image from a private container register, you need to allow access from your Kubernetes cluster. Follow the documentation to [configure private container registries access]({{< ref "/operations/platforms/kubernetes/supported-clusters#configure-container-registry-access" >}}).
