@@ -33,7 +33,7 @@ weight: 300
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| image | y | The registry and image to download and run in your container. | `'myregistry/myimage:tag'`
+| image | y | The registry and image to download and run in your container. | [See below](#image)
 | env | n | A list of environment variables to be set for the container. | `'ENV_VAR': 'value'`
 | command | n | Entrypoint array. Overrides the container image's ENTRYPOINT. | `['/bin/sh']`
 | args | n | Arguments to the entrypoint. Overrides the container image's CMD. | `['-c', 'while true; do echo hello; sleep 10;done']`
@@ -42,6 +42,18 @@ weight: 300
 | [readinessProbe](#readiness-probe) | n | Readiness probe configuration. | [See below](#readiness-probe).
 | [livenessProbe](#liveness-probe) | n | Liveness probe configuration. | [See below](#liveness-probe).
 | [volumes](#volumes) | n | Volumes to mount into the container. | [See below](#volumes).
+
+#### Image
+
+An image can be specified with the naming format that follows 
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| image | y | `<registry-hostname>:<port>/<image-name>:<tag>` | `myregistry.azurecr.io/myimage:latest`|
+
+- Registry hostname is optional. When not specified it defaults to the Docker public registry.
+- Port is optional. When not specified it defaults to 443.
+- Tag is optional. When not specified it defaults to `latest`.
 
 #### Ports
 
