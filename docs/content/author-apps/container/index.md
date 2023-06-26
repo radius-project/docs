@@ -16,13 +16,20 @@ A Radius container provides the abstraction to model and run your container work
 
 ## Supported runtimes
 
-Containers are hosted by Kubernetes as the container runtime today, regardless of which platform the application is deployed into. We plan to support additional container runtimes in the future
+Containers are run on the same Kubernetes cluster as your [Radius installation]({{< ref platforms >}}). We plan to support additional container runtimes and configurations in the future
 
 ## Capabilities
 
 Radius containers enables you to specify the image for the container, the ports the container provides and consumes, the environment variables to set, the volumes to mount, and the probes to run.
 
-Additionally you can customize the behavior of the containers with the help of extensions.
+Additionally you can customize the behavior of the containers with the help of [extension](#extensions).
+### Image
+
+The image for your container workload to pull and run. If you want to pull the container image from a private container register, you need to allow access from your Kubernetes cluster. Follow the documentation to [configure private container registries access]({{< ref "supported-clusters/#configure-container-registry-access" >}}).
+
+### Ports
+
+The ports section defines the ports that the container exposes and consumes. Refer to the [networking guide]({{< ref networking >}}) for more information on container networking.
 
 ### Volumes
 
