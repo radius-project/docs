@@ -79,13 +79,13 @@ The [Kubernetes Metadata extension]({{< ref "/operations/platforms/kubernetes/ku
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| user defined label key | y | The key and value of the label to be set on the application and its resources.|`team.name:frontend`
+| user defined label key | y | The key and value of the label to be set on the application and its resources.|`'team.name' :'frontend'`
 
 ##### annotations
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| user defined annotation key | y | The key and value of the annotation to be set on the application and its resources.| `app.io/port:8081` |
+| user defined annotation key | y | The key and value of the annotation to be set on the application and its resources.| `'app.io/port' :'8081'` |
 
 ## Further reading
 
