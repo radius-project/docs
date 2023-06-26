@@ -35,7 +35,7 @@ resource statestore 'Applications.Link/daprStateStores@2022-03-15-privatepreview
     application: application
     recipe: {
       // Name a specific Recipe to use
-      name: 'etcd'
+      name: 'azure-redis'
       // Optionally set recipe parameters if needed (specific to the Recipe)
       parameters: {
         // ....
