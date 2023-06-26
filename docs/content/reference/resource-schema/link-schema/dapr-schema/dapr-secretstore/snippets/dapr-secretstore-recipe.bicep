@@ -18,7 +18,7 @@ resource secretstore 'Applications.Link/daprSecretStores@2022-03-15-privateprevi
     application: app.id
     recipe: {
       // Name a specific Recipe to use
-      name: 'keyvault'
+      name: 'secret-provider'
       // Optionally set recipe parameters if needed (specific to the Recipe)
       parameters: {
         // ....
