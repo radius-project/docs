@@ -417,3 +417,6 @@ preloaded
 SRG
 ePMKNy
 gg
+kubernetesMetadata
+daprSidecar
+manualScaling
