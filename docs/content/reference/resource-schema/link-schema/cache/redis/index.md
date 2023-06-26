@@ -61,7 +61,7 @@ The `redislabs.com/Redis` link is a [portable link]({{< ref links-resources >}})
 
 | Property | Required | Description | Example(s) |
 |----------|:--------:|-------------|------------|
-| id | n | List of the resource IDs that support the resource |`redisCache.id`
+| id | n | Resource ID of the supporting resource. |`redisCache.id`
 
 #### Secrets
 

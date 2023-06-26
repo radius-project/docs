@@ -44,6 +44,7 @@ The `rabbitmq.com/MessageQueue` link offers a [RabbitMQ message broker](https://
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
 | [resourceProvisioning](#resource-provisioning) | n | Specifies how the underlying service/resource is provisioned and managed. Options are to provision automatically via 'recipe' or provision manually via 'manual'. Selection determines which set of fields to additionally require. Defaults to 'recipe'. | `manual`
 | [recipe](#recipe) | n | Configuration for the Recipe which will deploy the backing infrastructure. | [See below](#recipe)
+| [resources](#resources)  | n | An array of IDs of the underlying resources for the link. | [See below](#resources)
 | queue | y | The name of the queue. | `'orders'` |
 | [secrets](#secrets)  | y | Configuration used to manually specify a RabbitMQ container or other service providing a RabbitMQ Queue. | See [secrets](#secrets) below.
 
@@ -54,6 +55,11 @@ The `rabbitmq.com/MessageQueue` link offers a [RabbitMQ message broker](https://
 | name | n | Specifies the name of the Recipe that should be deployed. If not set, the name defaults to `default`. | `name: 'azure-prod'`
 | parameters | n | An object that contains a list of parameters to set on the Recipe. | `{ port: '10040' }`
 
+#### Resources
+
+| Property | Required | Description | Example(s) |
+|----------|:--------:|-------------|------------|
+| id | n |  Resource ID of the supporting resource. |`queue.id`
 
 #### Secrets
 

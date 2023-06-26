@@ -65,7 +65,7 @@ This resource will automatically create and deploy the Dapr component spec for t
 
 | Property | Required | Description | Example(s) |
 |----------|:--------:|-------------|------------|
-| id | n | List of the resource IDs that support the resource |`account::tableService::table.id`
+| id | n |  Resource ID of the supporting resource. |`account::tableService::table.id`
 
 ## Resource provisioning
 
