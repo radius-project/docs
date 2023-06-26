@@ -3,12 +3,16 @@ type: docs
 title: "Microsoft Azure resources"
 linkTitle: "Microsoft Azure"
 description: "Deploy and connect to Azure resources in your application"
-weight: 200
+weight: 800
 categories: "Concept"
 tags: ["Azure"]
 ---
 
 Radius applications are able to connect to and leverage every Azure resource with Bicep. Simply model your Azure resources in Bicep and add a connection from your Radius resources.
+
+## Configure an Azure Provider
+
+The Azure provider allows you to deploy and connect to Azure resources from a Radius environment on any of the [supported clusters]({{< ref supported-clusters>}}). To configure an Azure provider, you can follow the documentation [here]({{< ref "providers#azure-provider" >}}).
 
 ## Resource library
 
@@ -27,3 +31,4 @@ In the following example, a [Container]({{< ref container >}}) is connecting to 
 {{% /codetab %}}
 
 {{< /tabs >}}
+

@@ -61,4 +61,4 @@ Details on what to run and how to run it are defined in the `container` property
 
 ## Further reading
 
-- [Radius environments]({{< ref environments-resource >}})
+- [Radius environments]({{< ref "operations/environments" >}})
