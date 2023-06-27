@@ -34,7 +34,7 @@ eksctl create cluster --name <my-cluster> --region=<my-region>
 
 ## Step 2: Create a Radius environment with the AWS cloud provider
 
-Create a [Radius environment]({{< ref environments >}}) where you will deploy your application.
+Create a [Radius environment]({{< ref "/operations/environments" >}}) where you will deploy your application.
 
 Use the `rad init` command to initialize a new environment into your current kubectl context:
 
@@ -42,7 +42,7 @@ Use the `rad init` command to initialize a new environment into your current kub
 rad init
 ```
 
-Follow the prompts to install the [control plane services]({{< ref architecture >}}), create an [environment resource]({{< ref environments >}}), and create a [local workspace]({{< ref workspaces >}}). You will be asked for:
+Follow the prompts to install the [control plane services]({{< ref architecture-concept >}}), create an [environment resource]({{< ref "operations/environments" >}}), and create a [local workspace]({{< ref workspaces >}}). You will be asked for:
 
 - **Namespace** - When an application is deployed, this is the namespace where your containers and other Kubernetes resources will be run. By default, this will be in the `default` namespace.
 {{% alert title="💡 About namespaces" color="success" %}} When you initialize a Radius Kubernetes environment, Radius installs the control plane resources within    the `radius-system` namespace in your cluster, separate from your applications. The namespace specified in this step will be used for your application deployments.
@@ -56,7 +56,7 @@ Create a new file called `app.bicep` and add the following bicep code to model a
 
 {{< rad file="snippets/s3.bicep" embed=true >}}
 
-Radius uses the [AWS Cloud Control API](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/what-is-cloudcontrolapi.html) to interact with AWS resources. This means that you can model your AWS resources in Bicep and Radius will be able to deploy and manage them. You can find the list of supported AWS resources in the [AWS resource library]({{< ref "aws-resources#resource-library" >}}).
+Radius uses the [AWS Cloud Control API](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/what-is-cloudcontrolapi.html) to interact with AWS resources. This means that you can model your AWS resources in Bicep and Radius will be able to deploy and manage them. You can find the list of supported AWS resources in the [AWS resource library]({{< ref "/author-apps/platform-resources/aws#resource-library" >}}).
 
 ## Step 4: Add a Radius container to interact with the AWS S3 Bucket
 
