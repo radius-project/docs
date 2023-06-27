@@ -30,7 +30,8 @@
 		"vscode": {
 			"settings": {},
 			"extensions": [
-				"GitHub.copilot"
+				"GitHub.copilot",
+				"/tmp/rad-vscode-bicep.vsix"
 			]
 		  }
 	}, 
