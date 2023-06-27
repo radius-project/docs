@@ -5,6 +5,7 @@ linkTitle: "Dapr extension"
 description: "Learn how to add a Dapr sidecar with a Dapr extension"
 weight: 100
 slug: "extension"
+categories: "Schema"
 ---
 
 ## Overview
@@ -22,7 +23,6 @@ In this example a [container]({{< ref container >}}) adds a Dapr extension to ad
 | Property | Required | Description | Example |
 |----------|:--------:|-------------|---------|
 | kind | y | The kind of extension. | `dapr`
-| appId | n | The appId of the Dapr sidecar. Will use the value of an attached [Route]({{< ref dapr-http >}}) if present. | `backend` |
+| appId | n | The appId of the Dapr sidecar. | `backend` |
 | appPort | n | The port your service exposes to Dapr | `3500`
-| provides | n | The [Dapr Route]({{< ref dapr-http >}}) provided by the Extension | `daprHttp.id`
 | config | n | The configuration to use for the Dapr sidecar |

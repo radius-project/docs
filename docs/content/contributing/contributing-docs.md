@@ -1,13 +1,13 @@
 ---
 type: docs
-title: "Contributing to Project Radius documentation"
+title: "Contributing to Radius documentation"
 linkTitle: "Docs"
-description: "How to contribute to the Project Radius documentation"
+description: "How to contribute to the Radius documentation"
 weight: 200
 slug: "docs"
 ---
 
-The Project Radius docs are built on [Hugo](https://gohugo.io) with the [Docsy](https://docsy.dev) theme. GitHub Actions are used to build and deploy the docs upon each PR.
+The Radius docs are built on [Hugo](https://gohugo.io) with the [Docsy](https://docsy.dev) theme. GitHub Actions are used to build and deploy the docs upon each PR.
 
 ## Docs environment
 
@@ -98,7 +98,7 @@ These conventions should be followed throughout all Radius documentation to ensu
 |**Use simple sentences**|Easy-to-read sentences mean the reader can quickly use the guidance you share.| 
 |**Avoid the first person**|Use second person "you", "your" instead of "I", "we", "our".| 
 |**Assume a new developer audience**|Some obvious steps can seem hard. E.g. Now set an environment variable Radius to a value X. It is better to give the reader the explicit command to do this, rather than having them figure this out.| 
-|**Use present tense**|Avoid sentences like "this command will install redis", which implies the action is in the future. Instead use "This command installs redis" which is in the present tense. |
+|**Use present tense**|Avoid sentences like "this command will install redis", which implies the action is in the future. Instead, use "This command installs redis" which is in the present tense. |
 
 ## Spelling
 
@@ -109,33 +109,42 @@ The docs pipeline uses [aspell](http://aspell.net/) to check for spelling mistak
 - Make sure the documentation you are writing is in the correct place in the hierarchy.
 - Avoid creating new sections where possible, there is a good chance a proper place in the docs hierarchy already exists.
 - Make sure to include a complete [Hugo front-matter](#front-matter).
-- Determine the category or the type of the doc you are contributing.
-   - **Concept** - A concept doc is a high-level overview of the project or a building block of the project or a feature area that defines the purpose. 
-   - **Quickstart** - A quickstart guide is a short step-by-step guide to help the reader to quickly learn something and achieve a specific goal in 5-10 mins.
-   - **Reference app** - A reference app doc is for running an application sample or an example of using the project or a particular feature.
-   - **How-To** - A how-to guide is a elaborate step-by-step guide to help the reader achieve a specific goal. It should provide the reader with an in-depth understanding of what the feature does. While Quickstart is subset of How-To, they can be differentiated by the time to achieve a specific goal.
+- Determine the category or the type of doc you are contributing.
+   - **Concept** - A concept doc is a high-level overview of the project or an area of the project.
+   - **Overview** - A overview page documents a specific feature or capability of the project, with information on what the feature is and additional context and links on how to use it.
+   - **Quickstart** - A quickstart guide is a short step-by-step guide to help the reader quickly learn something and achieve a specific goal in 5-10 mins.
+   - **Reference app** - A reference app-doc is for running an application sample or an example of using the project or a particular feature.
+   - **How-To** - A how-to guide is an elaborate step-by-step guide to help the reader achieve a specific goal. It should provide the reader with an in-depth understanding of what the feature does. While Quickstart is a subset of How-To, they can be differentiated by the time to achieve a specific goal.
 
-### Contributing a new concept doc
+### Contributing a new Concept doc
 
 - Ensure the doc is in the correct place in the hierarchy.
-- Ensure the reader can understand why they should care about the project , the concept or the feature. What problems does it help them solve?
-- Ensure the doc references the spec for examples of using the API.
-- Ensure the spec is consistent with concept in terms of names, parameters and terminology. Update both the concept and the spec as needed. Avoid repeating the spec. The idea is to give the reader more information and background on the capability so that they can try this out. 
-- Provide a link to the spec in the [Reference]({{<ref reference >}}) section and provide the reader with related links (this can be other quickstarts, "how-to", samples for reference )
+- Ensure the reader can understand why they should care about the project or the concept. What problems does it help them solve?
+- Provide a link to the overview page of the feature that justifies the concept(s)
+- Also provide the reader with related links if needed (this can be other quickstarts, "how-to", samples for reference)
 - Set the `category` as `Concept` in [Hugo front-matter](#front-matter).
+
+### Contributing a new Overview doc
+
+- Ensure the doc is in the correct place in the hierarchy.
+- Ensure the reader can understand why they should care about the feature and what it enables them to do. 
+- If applicable, ensure the doc references the reference spec document.
+- If applicable, ensure the doc is consistent with any related concepts or specs in terms of names, parameters, and terminology. Update both the concept, spec, and the doc as needed. Avoid repeating the spec. The idea is to give the reader more information and background on the capability so that they can try this out. 
+- Provide a link to the spec in the [Reference]({{<ref reference >}}) section and provide the reader with related links (this can be other quickstarts, "how-to", samples for reference )
+- Set the `category` as `Overview` in [Hugo front-matter](#front-matter).
 
 ### Contributing a new Quickstart
 
 - Make sure the guide stays within 5-6 steps.
 - Include code/sample/config snippets that can be easily copied and pasted.
-- Do not assume the reader is using a specific environment unless the article itself is specific to an environment. This include OS (Windows/Linux/MacOS), deployment target (Kubernetes, IoT etc.) or programming language. If instructions vary between operating systems, provide guidance for all.-
-- Do not explain all the jargons or features the quickstart references, provide the reader with related links and next steps (this can be other "how-to", samples for reference or related concepts).
+- Do not assume the reader is using a specific environment unless the article itself is specific to an environment. This includes OS (Windows/Linux/MacOS), deployment target (Kubernetes, IoT, etc.), or programming language. If instructions vary between operating systems, provide guidance for all.-
+- Do not explain all the jargon or features of the quickstart references, provide the reader with related links and next steps (this can be other "how-to", samples for reference, or related concepts).
 - Set the `category` as `Quickstart` in [Hugo front-matter](#front-matter).
 
 ### Contributing a new How-To guide
 
-- Sub directory naming - the directory name should be descriptive and if referring to specific component or concept should begin with the relevant name. Example *pubsub-namespaces*.
-- Do not assume the reader is using a specific environment unless the article itself is specific to an environment. This include OS (Windows/Linux/MacOS), deployment target (Kubernetes, IoT etc.) or programming language. If instructions vary between operating systems, provide guidance for all.
+- Sub directory naming - the directory name should be descriptive and if referring to a specific component or concept should begin with the relevant name. Example *pubsub-namespaces*.
+- Do not assume the reader is using a specific environment unless the article itself is specific to an environment. This includes OS (Windows/Linux/MacOS), deployment target (Kubernetes, IoT, etc.), or programming language. If instructions vary between operating systems, provide guidance for all.
 - Include code/sample/config snippets that can be easily copied and pasted.
 - At the end of the article, provide the reader with related links and next steps (this can be other relevant "how-to", samples for reference or related concepts).
 - Set the `category` as `How To` in [Hugo front-matter](#front-matter).
@@ -159,7 +168,7 @@ File and folder names should be globally unique.
 
 ### Front-matter
 
-[Front-matter](https://www.docsy.dev/docs/adding-content/content/#page-frontmatter) is what takes regular markdown files and upgrades them into Hugo compatible docs for rendering into the nav bars and ToCs.
+[Front-matter](https://www.docsy.dev/docs/adding-content/content/#page-frontmatter) is what takes regular markdown files and upgrades them into Hugo-compatible docs for rendering into the nav bars and ToCs.
 
 Every page needs a section at the top of the document like this:
 
@@ -191,19 +200,20 @@ tags: "Dapr"
 
 > **Weight** determines the order of the pages in the left sidebar, with 0 being the top-most.
 > - Index file weights follow the parent directory's ordering.
-> - For the first page in a new directory, reset the counter and set weight to be an order of magnitude greater.
+> - For the first page in a new directory, reset the counter and set the weight to be an order of magnitude greater.
 
 Front-matter should be completed with all fields including type, title, linkTitle, weight, description, categories and tags.
 
-- `title` should be 1 sentence, no period at the end
+- `title` should be 1 sentence, with no period at the end
 - `linkTitle` should be 1-3 words, with the exception of How-to at the front.
 - `description` should be 1-2 sentences on what the reader will learn, accomplish, or do in this doc.
 - `categories` should be one of the following:
     - Concept
+    - Overview
     - Quickstart
     - Reference application
     - How-To
-- `tags` should be a comma separated list of metadata tags.
+- `tags` should be a comma-separated list of metadata tags.
 
 As per the [styling conventions](#styling-conventions), titles should only capitalize the first word and proper nouns, with the exception of "How-To:"
     - "Getting started with Dapr service invocation"
@@ -229,11 +239,11 @@ This shortcode will link to a specific page:
 
 #### Referencing sections in other pages
 
-To reference a specific section in another page, add `#section-short-name` to the end of your reference.
+To reference a specific section on another page, add `#section-short-name` to the end of your reference.
 
-As a general rule, the section short name is the text of the section title, all lowercase, with spaces changed to "-". You can check the section short name by visiting the website page, clicking the link icon (🔗) next to the section, and see how the URL renders in the nav bar. The content after the "#" is your section shortname.
+As a general rule, the section's short name is the text of the section title, all lowercase, with spaces changed to "-". You can check the section's short name by visiting the website page, clicking the link icon (🔗) next to the section, and see how the URL renders in the nav bar. The content after the "#" is your section shortname.
 
-As an example, for this specific section the complete reference to the page and section would be:
+As an example, for this specific section, the complete reference to the page and section would be:
 
 ```md
 {{</* ref "contributing-docs.md#referencing-sections-in-other-pages" */>}}

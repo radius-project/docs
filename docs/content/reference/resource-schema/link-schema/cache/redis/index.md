@@ -3,13 +3,30 @@ type: docs
 title: "Redis cache link"
 linkTitle: "Redis"
 description: "Learn how to use a Redis link in your application"
+categories: "Schema"
 ---
+
+## Overview
 
 The `redislabs.com/Redis` link is a [portable link]({{< ref links-resources >}}) which can be deployed to any platform Radius supports.
 
 ## Resource format
 
-{{< rad file="snippets/redis-values.bicep" embed=true marker="//REDIS" >}}
+{{< tabs Recipe Manual >}}
+
+{{< codetab >}}
+
+{{< rad file="snippets/redis-recipe.bicep" embed=true marker="//REDIS" >}}
+
+{{< /codetab >}}
+
+{{< codetab >}}
+
+{{< rad file="snippets/redis-manual.bicep" embed=true marker="//REDIS" >}}
+
+{{< /codetab >}}
+
+{{< /tabs >}}
 
 ### Top-level
 
@@ -27,34 +44,33 @@ The `redislabs.com/Redis` link is a [portable link]({{< ref links-resources >}})
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
 | host | n | The Redis host name. | `redis.hello.com`
 | port | n | The Redis port value. | `6379`
-| resourceProvisioning | n | Specifies how to build the Link resource. Options are to build automatically via 'recipe' or build manually via 'manually'. Selection determines which set of fields to additionally require. | `manual`
-| [recipe](#recipe)  | n | The recipe to deploy. | `redisCache.id`
+| [resourceProvisioning](#resource-provisioning) | n | Specifies how the underlying service/resource is provisioned and managed. Options are to provision automatically via 'recipe' or provision manually via 'manual'. Selection determines which set of fields to additionally require. Defaults to 'recipe'. | `manual`
+| [recipe](#recipe) | n | Configuration for the Recipe which will deploy the backing infrastructure. | [See below](#recipe)
 | [resources](#resources)  | n | An array of IDs of the underlying resources for the link. | [See below](#resources)
+| username | n | The username for Redis cache. | `myusername`
 | [secrets](#secrets) | n | Secrets used when building the link from values. | [See below](#secrets)
 
-### Recipe
+#### Recipe
 
-| Property  | Required | Description | Example |
+| Property | Required | Description | Example(s) |
 |------|:--------:|-------------|---------|
 | \<recipe-name\> | y | The name of the Recipe. Must be unique within the resource-type. | `myrecipe`
-| templatePath | y | The path to the Recipe contents. For Bicep Recipes this is a Bicep module registry address. | `'mycr.azurecr.io/recipes/myrecipe:1.0'`
 | parameters | n | A list of parameters to set on the Recipe for every Recipe usage and deployment. Can be overridden by the resource calling the Recipe. | `capacity: 1`
 
-
-### Resources
+#### Resources
 
 | Property | Required | Description | Example(s) |
 |----------|:--------:|-------------|------------|
-| id | y | The resource ID of the underlying resources for the link. | `redisCache.id`
+| id | n | Resource ID of the supporting resource. |`redisCache.id`
 
-### Secrets
+#### Secrets
 
 | Property | Required | Description | Example(s) |
 |----------|:--------:|-------------|------------|
 | connectionString | n | The connection string for the Redis cache. Write only. | `https://mycache.redis.cache.windows.net,password=*****,....`
 | password | n | The password for the Redis cache. Write only. | `mypassword`
 
-## Methods
+### Methods
 
 The following methods are available on the Redis link:
 
@@ -63,24 +79,13 @@ The following methods are available on the Redis link:
 | connectionString() | Get the connection string for the Redis cache. |
 | password() | Get the password for the Redis cache. |
 
-## Supported resources
+## Resource provisioning
 
-The following resources are supported when building the link from a resource using the `resource` property:
+### Provision with a Recipe
 
-- [Azure Cache for Redis](https://docs.microsoft.com/azure/azure-cache-for-redis/cache-overview)
+[Recipes]({{< ref custom-recipes >}}) automate infrastructure provisioning using approved templates.
+When no Recipe configuration is set, Radius will use the currently registered Recipe as the **default** in the environment for the given resource. Otherwise, a Recipe name and parameters can optionally be set to override this default.
 
-## Connections
+### Provision manually
 
-[Services]({{< ref container >}}) can define [connections]({{< ref appmodel-concept >}}) to links using the `connections` property. This allows the service to access properties of the link and contributes to to visualization and health experiences.
-
-### Environment variables
-
-Connections to the Redis link result in the following environment variables being set on your service:
-
-| Variable | Description |
-|----------|-------------|
-| `CONNECTION_<CONNECTION-NAME>-HOST` | The host name of the Redis cache. |
-| `CONNECTION_<CONNECTION-NAME>-PORT` | The port of the Redis cache. |
-| `CONNECTION_<CONNECTION-NAME>-USERNAME` | The username of the Redis cache. |
-| `CONNECTION_<CONNECTION-NAME>-PASSWORD` | The password of the Redis cache. |
-| `CONNECTION_<CONNECTION-NAME>-CONNECTION_STRING` | The connection string of the Redis cache. |
+If you want to manually manage your infrastructure provisioning without the use of Recipes, you can set `resourceProvisioning` to `'manual'` and provide all necessary parameters and values that enable Radius to deploy or connect to the desired infrastructure.

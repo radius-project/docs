@@ -20,7 +20,6 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
       ports: {
         orders: {
           containerPort: 3000
-          provides: backendRoute.id
         }
       }
     }
@@ -36,22 +35,12 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
         kind: 'daprSidecar'
         appId: 'backend'
         appPort: 3000
-        provides: backendRoute.id
       }
     ]
     //EXTENSIONS
   }
 }
 //BACKEND
-
-resource backendRoute 'Applications.Link/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
-  name: 'dapr-backend'
-  properties: {
-    environment: environment
-    application: app.id
-    appId: 'backend'
-  }
-}
 
 resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' = {
   name: 'orders'

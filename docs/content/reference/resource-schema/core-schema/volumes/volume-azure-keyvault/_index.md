@@ -12,7 +12,7 @@ Radius supports mounting an Azure Key Vault as a persistent volume to the contai
 
 - [Azure Key Vault CSI Driver](https://azure.github.io/secrets-store-csi-driver-provider-azure/demos/standard-walkthrough/) installed on your cluster
 - [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed on your cluster
-- `azure.com.workload` identity configured on your [environment]({{< ref environments-resource >}})
+- `azure.com.workload` identity configured on your [environment]({{< ref "operations/environments" >}})
 - Your Azure Key Vault access policy should be set to [Azure role-based access control](https://learn.microsoft.com/azure/key-vault/general/rbac-guide?tabs=azure-cli)
 
 ## Resource format

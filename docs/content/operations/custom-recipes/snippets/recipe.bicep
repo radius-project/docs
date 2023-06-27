@@ -1,5 +1,5 @@
 //RESOURCE
-@description('Radius-provided object containing information about the resouce calling the Recipe')
+@description('Radius-provided object containing information about the resource calling the Recipe')
 param context object
 
 @description('The Azure region to deploy Azure resource(s) into. Defaults to the region of the target Azure resource group.')

@@ -1,6 +1,6 @@
 baseURL = "https://edge.docs.radapp.dev/"
 languageCode = "en-us"
-title = "Project Radius Docs"
+title = "Radius Docs"
 theme =  "docsy"
 
 disableFastRender = true
@@ -52,13 +52,13 @@ tag = "tags"
     url = "https://github.com/project-radius"
     pre = "<i class='fab fa-github'></i>"
 [[menu.main]]
-    name = "Community"
-    weight = 50
-    url = "https://aka.ms/projectradius"
-    pre = "<i class='fas fa-comment'></i>"
+    name = "Discord"
+    weight = 90
+    url = "https://discord.gg/SRG3ePMKNy"
+    pre = "<i class='fab fa-discord'></i>"
 
 [params]
-copyright = "Project Radius"
+copyright = "Radius"
 
 version = "edge"
 tag_version = "latest"
