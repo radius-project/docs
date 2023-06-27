@@ -5,6 +5,7 @@ linkTitle: "State Store"
 description: "Learn how to use a Dapr State Store resource in Radius"
 weight: 300
 slug: "statestore"
+categories: "Schema"
 ---
 
 ## Overview
@@ -15,7 +16,21 @@ This resource will automatically create and deploy the Dapr component spec for t
 
 ## Resource format
 
+{{< tabs Recipe Manual >}}
+
+{{< codetab >}}
+
+{{< rad file="snippets/dapr-statestore-recipe.bicep" embed=true marker="//SAMPLE" >}}
+
+{{< /codetab >}}
+
+{{< codetab >}}
+
 {{< rad file="snippets/dapr-statestore-manual.bicep" embed=true marker="//SAMPLE" >}}
+
+{{< /codetab >}}
+
+{{< /tabs >}}
 
 ### Top-level
 
@@ -31,31 +46,34 @@ This resource will automatically create and deploy the Dapr component spec for t
 |------|:--------:|-------------|---------|
 | application | n | The ID of the application resource this resource belongs to. | `app.id`
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
-| resourceProvisioning | y | Specifies how to build the state store resource. Options are to build automatically via 'recipe' or build manually via 'manual'. Selection determines which set of fields to additionally require. | `recipe`
-| resources | n | The IDs of related resources such as storage accounts or databases. | `account::tableService::table.id`
+| [resourceProvisioning](#resource-provisioning) | n | Specifies how the underlying service/resource is provisioned and managed. Options are to provision automatically via 'recipe' or provision manually via 'manual'. Selection determines which set of fields to additionally require. Defaults to 'recipe'. | `manual`
+| [recipe](#recipe) | n | Configuration for the Recipe which will deploy the backing infrastructure. | [See below](#recipe)
+| [resources](#resources)  | n | An array of IDs of the underlying resources for the link. | [See below](#resources)
 | type | n | The Dapr component type. Used when `resourceProvisioning` is set to `manual`. | `state.couchbase`
 | metadata | n | Metadata for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-state-stores/). Used when `resourceProvisioning` is set to `manual`. | `couchbaseURL: https://*****` |
 | version | n | The version of the Dapr component. See [Dapr components](https://docs.dapr.io/reference/components-reference/supported-state-stores/) for available versions. Used when `resourceProvisioning` is set to `manual`. | `v1` |
 | componentName | n | _(read-only)_ The name of the Dapr component that is generated and applied to the underlying system. Used by the Dapr SDKs or APIs to access the Dapr component. | `mystatestore` |
 
-## Using resourceProvisioning: recipe
+#### Recipe
 
-When `resourceProvisioning` is omitted or set to `recipe`, then a [Recipe]({{< ref "/author-apps/recipes" >}}) will be used to create the underlying resource and configure the Dapr building-block.
+| Property | Required | Description | Example(s) |
+|------|:--------:|-------------|---------|
+| name | n | Specifies the name of the Recipe that should be deployed. If not set, the name defaults to `default`. | `name: 'azure-prod'`
+| parameters | n | An object that contains a list of parameters to set on the Recipe. | `{ version: 'v1' }`
 
-{{< rad file="snippets/dapr-statestore-recipe.bicep" embed=true marker="//SAMPLE" >}}
+#### Resources
 
-## Using resourceProvisioning: manual 
+| Property | Required | Description | Example(s) |
+|----------|:--------:|-------------|------------|
+| id | n |  Resource ID of the supporting resource. |`account::tableService::table.id`
 
-You can also manually specify the metadata of a Dapr state store. When `resourceProvisioning` is set to `manual`, you should specify `type`, `metadata`, and `version` to create a Dapr component spec. These values must match the schema of the intended [Dapr component](https://docs.dapr.io/reference/components-reference/supported-state-stores/).
+## Resource provisioning
 
-{{< rad file="snippets/dapr-statestore-manual.bicep" embed=true marker="//SAMPLE" >}}
+### Provision with a Recipe
 
-You can also provide the associated backing resources via the `resources` property. This does not affect the configuration of the Dapr building-block but will document the relationships between the resources.
+[Recipes]({{< ref custom-recipes >}}) automate infrastructure provisioning using approved templates.
+When no Recipe configuration is set Radius will use the Recipe registered as the **default** in the environment for the given resource. Otherwise, a Recipe name and parameters can optionally be set.
 
-## Injected values
+### Provision manually
 
-Connections from [Radius services]({{< ref container >}}) to [links]({{< ref links-resources >}}) by default inject the following values into the environment of the service:
-
-| Key | Value |
-|-----|-------|
-| `CONNECTION_<CONNECTIONNAME>_COMPONENTNAME` | `properties.componentName` |
+If you want to manually manage your infrastructure provisioning outside of Recipes, you can set `resourceProvisioning` to `'manual'` and provide all necessary parameters and values and values that enable Radius to deploy or connect to the desired infrastructure.

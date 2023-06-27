@@ -1,6 +1,9 @@
 import radius as radius
 
+@description('The app ID of your Radius application. Set automatically by the rad CLI.')
 param application string
+
+@description('The ID of your Radius environment. Automatically injected by the rad CLI.')
 param environment string
 
 //SAMPLE
