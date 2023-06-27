@@ -1,9 +1,10 @@
 ---
 type: docs
-title: "Versioning"
+title: "Overview: Radius versioning policy"
 linkTitle: "Versioning"
 description: "Radius versioning policy"
 weight: 600
+category: "Overview"
 ---
 
 ## Overview
