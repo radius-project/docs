@@ -109,7 +109,7 @@ Begin by ensuring you are using a compatible [Kubernetes cluster]({{< ref "/oper
 
    *Visit the [Kubernetes platform docs]({{< ref "/operations/platforms/kubernetes" >}}) for a list of supported clusters and specific cluster requirements.*
 
-{{< tabs "Customized environment" "Manual" >}}
+{{< tabs "Interactive" "Manual" >}}
 
 {{% codetab %}}
 
@@ -177,26 +177,20 @@ Begin by ensuring you are using a compatible [Kubernetes cluster]({{< ref "/oper
     For a list of all the supported command options visit [rad install kubernetes]({{< ref rad_install_kubernetes >}})
 
     ```bash
-    rad install kubernetes --chart <user-chart> --tag <user-tag> --set <user-set>
+    rad install kubernetes
     ```
 2. Create a new Radius resource group:
     Radius resource groups are used to organize Radius resources, such as applications, environments, links, and routes. For more information visit [Radius resource groups]({{< ref groups >}}).
-    For a dive into the command visit [`rad group create`]({{< ref rad_group_create >}})
+    For more information on the command visit [`rad group create`]({{< ref rad_group_create >}})
     ```bash
-    rad group create <user-radius-resource-group>
+    rad group create myGroup
     ```
 4. Create your Radius Environment and pass it your Kubernetes namespace:
     ```bash
-    rad env create <user-radius-environment> --namespace <kubernetes-namespace>
+    rad env create myEnvironment --namespace my-namespace --group myGroup
     ```
-    For a dive into the command visit [`rad env create`]({{< ref rad_env_create >}})
-5. Set your Radius Environment:
-    ```bash
-    rad env switch kind-radius
-    ```
-    For a dive into the command visit [`rad env switch`]({{< ref rad_env_switch >}}).
-
-6. Verify the initialization by running:
+    For more information on the command visit [`rad env create`]({{< ref rad_env_create >}})
+5. Verify the initialization by running:
    ```bash
    kubectl get deployments -n radius-system
    ```
@@ -214,7 +208,7 @@ Begin by ensuring you are using a compatible [Kubernetes cluster]({{< ref "/oper
    You can also use [`rad env list`]({{< ref rad_env_list.md >}}) to see if the created environment gets listed:
 
    ```bash
-   rad env list
+   rad env list --group myGroup
    ```
 {{% /codetab %}}
 {{< /tabs >}}
