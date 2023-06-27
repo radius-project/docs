@@ -23,7 +23,7 @@ popd
 mkdir -p ./docs/static/swagger
 cp -r ./radius/swagger ./docs/static/
 
-# Set Radius Bicep extension version
+## Install branch-specific Bicep extension
 CURRENT_BRANCH=$(git branch --show-current)
 echo "Current branch: $CURRENT_BRANCH"
 
@@ -40,7 +40,10 @@ else
 fi
 
 ## Download Bicep extension
-curl https://get.radapp.dev/tools/vscode-extensibility/$RADIUS_VERSION/rad-vscode-bicep.vsix --output .devcontainer/rad-vscode-bicep.vsix
+curl https://get.radapp.dev/tools/vscode-extensibility/$RADIUS_VERSION/rad-vscode-bicep.vsix --output /tmp/rad-vscode-bicep.vsix
+
+## Race condition workaround for `code --install-extension` command
+at now + 1 minute
 
 ## Install Radius Bicep extension
-code --install-extension .devcontainer/rad-vscode-bicep.vsix
+code --install-extension /tmp/rad-vscode-bicep.vsix
