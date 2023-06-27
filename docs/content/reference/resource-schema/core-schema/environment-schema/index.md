@@ -50,7 +50,7 @@ Details on what to run and how to run it are defined in the `container` property
 | \<resource-type\> | y | The type of resource to register Recipes for. | `'Applications.Link/redisCaches'`
 | recipes | y | The list of Recipes registered to a given resource type | [See below](#recipe-properties)
 
-### recipe properties
+#### recipe properties
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
@@ -58,6 +58,34 @@ Details on what to run and how to run it are defined in the `container` property
 | templateKind | y | Format of the template provided by the recipe. Allowed values: bicep | `'bicep'`
 | templatePath | y | The path to the Recipe contents. For Bicep Recipes this is a Bicep module registry address. | `'mycr.azurecr.io/recipes/myrecipe:1.0'`
 | parameters | n | A list of parameters to set on the Recipe for every Recipe usage and deployment. Can be overridden by the resource calling the Recipe. | `capacity: 1`
+
+### extensions
+
+Extensions allow you to customize how resources are generated or customized as part of deployment.
+
+#### kubernetesMetadata
+
+The [Kubernetes Metadata extension]({{< ref "/operations/platforms/kubernetes/kubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius application. For examples, please refer to the extension overview page.
+
+##### Properties
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| kind | y | The kind of extension being used. Must be 'kubernetesMetadata' | `kubernetesMetadata` |
+| [labels](#labels) | n | The Kubernetes labels to be set on the application and its resources | [See below](#labels)|
+| [annotations](#annotations) | n | The Kubernetes annotations to set on your application and its resources | [See below](#annotations)|
+
+##### labels
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| user defined label key | y | The key and value of the label to be set on the application and its resources.|`'team.name': 'frontend'`
+
+##### annotations
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| user defined annotation key | y | The key and value of the annotation to be set on the application and its resources.| `'app.io/port': '8081'` |
 
 ## Further reading
 

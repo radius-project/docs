@@ -1,5 +1,6 @@
 import radius as radius
 
+@description('The ID of your Radius environment. Automatically injected by the rad CLI.')
 param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
@@ -8,6 +9,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
     environment: environment
   }
 }
+
 //SAMPLE
 resource secretstore 'Applications.Link/daprSecretStores@2022-03-15-privatepreview' = {
   name: 'secretstore-generic'
