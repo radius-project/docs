@@ -60,11 +60,54 @@ Radius uses the [AWS Cloud Control API](https://docs.aws.amazon.com/cloudcontrol
 
 ## Step 4: Add a Radius container to interact with the AWS S3 Bucket
 
-Open the `app.bicep` and add the following Radius resources:
+Open the `app.bicep` and append the following Radius resources:
+
+```bicep
+
+@description('Radius environment')
+param environment string
+resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+  name: 's3app'
+  properties: {
+    environment: environment
+  }
+}
+```
+
+```bicep
+@description('IAM Access Key ID')
+@secure()
+param aws_access_key_id string
+
+@description('IAM Access Key Secret')
+@secure()
+param aws_secret_access_key string
+
+@description('Region where the S3 bucket is created. This will be the same region that you input when adding AWS cloudprovider to an environment in Radius.')
+param aws_region string = 'us-west-2'
+
+// get a radius container which uses the s3 bucket
+resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'frontend'
+  properties: {
+    application: app.id
+    container: {
+      env: {
+        BUCKET_NAME: s3.properties.BucketName
+        AWS_ACCESS_KEY_ID: aws_access_key_id
+        AWS_SECRET_ACCESS_KEY: aws_secret_access_key
+        AWS_DEFAULT_REGION: aws_region
+      }
+      image: 'radius.azurecr.io/reference-apps/aws:edge'
+    }
+  }
+}
+```
+Your final `app.bicep` file should look like this
 
 {{< rad file="snippets/app.bicep" embed=true >}}
 
-This creates a container that will be deployed to your Kubernetes cluster. The container will be able to interact with the AWS S3 Bucket you created in the previous step.
+This creates a container that will be deployed to your Kubernetes cluster. This container will interact with the AWS S3 Bucket you created in the previous step.
 
 ## Step 5: Deploy the application
 
