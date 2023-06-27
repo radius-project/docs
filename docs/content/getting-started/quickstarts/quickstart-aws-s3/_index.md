@@ -83,7 +83,7 @@ param aws_access_key_id string
 @secure()
 param aws_secret_access_key string
 
-@description('Region where the S3 bucket is created. This will be the same region that you input when adding AWS cloudprovider to an environment in Radius.')
+@description('Region where the S3 bucket is created. This will be the same region that you input when adding AWS cloud provider to an environment in Radius.')
 param aws_region string = 'us-west-2'
 
 // get a radius container which uses the s3 bucket
