@@ -1,5 +1,6 @@
 import radius as radius
 
+@description('The ID of your Radius environment. Automatically injected by the rad CLI.')
 param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
@@ -10,22 +11,20 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 }
 
 //SAMPLE
-param rmqUsername string
-@secure()
-param rmqPassword string
-param rmqHost string
-param rmqPort string
-
 resource rabbitmq 'Applications.Link/rabbitmqMessageQueues@2022-03-15-privatepreview' = {
   name: 'rabbitmq'
   properties: {
     environment: environment
     application: app.id
-    resourceProvisioning: 'manual'
-    queue: 'radius-queue'
-    secrets: {
-      connectionString: 'amqp://${rmqUsername}:${rmqPassword}@${rmqHost}:${rmqPort}'
+    recipe: {
+      // Name a specific Recipe to use
+      name: 'rabbit'
+      // Optionally set recipe parameters if needed (specific to the Recipe)
+      parameters: {
+        queue: '*****'
+      }
     }
   }
 }
 //SAMPLE
+
