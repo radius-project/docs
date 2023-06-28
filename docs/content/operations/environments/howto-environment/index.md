@@ -132,13 +132,11 @@ Setting up a [cloud provider]({{<ref providers>}}) allows you to deploy and mana
     rad env update <user-radius-environment> --azure-subscription-id <user-azure-subscription-id> --azure-resource-group  <user-azure-resource-group>
     ```
     This command updates the configuration of an environment for properties that are able to be changed. For more information visit [`rad env update`]({{< ref rad_env_update >}})
-2. Add your Azure cloud provider credentials:
+2. Use [`rad credential register azure`]({{< ref rad_credential_register_azure >}}) to add an Azure service principal to your Radius installation:
     ```bash
     rad credential register azure --client-id ***  --client-secret ***  --tenant-id ***
     ```
-    Radius will use the provided service principal for all interactions with Azure, including Bicep deployment, Radius Environments, and Radius Links.
-    
-    For more information on the command arguments visit [`rad credential register azure`]({{< ref rad_credential_register_azure >}})
+    Radius will use the provided service principal for all interactions with Azure, including Bicep and Recipe deployments.
 {{% /codetab %}}
 {{% codetab %}}
 1. Update your Radius Environment with your AWS region and AWS account ID:
