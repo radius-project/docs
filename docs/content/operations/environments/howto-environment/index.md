@@ -126,12 +126,12 @@ Setting up a [cloud provider]({{<ref providers>}}) allows you to deploy and mana
 
 {{% codetab %}}
 
-1. Update your Radius Environment with your Azure subscription ID and Azure resource group:
+1. Use [`rad env update`]({{< ref rad_env_update >}}) to update your Radius Environment with your Azure subscription ID and Azure resource group:
 
     ```bash
     rad env update <user-radius-environment> --azure-subscription-id <user-azure-subscription-id> --azure-resource-group  <user-azure-resource-group>
     ```
-    This command updates the configuration of an environment for properties that are able to be changed. For more information visit [`rad env update`]({{< ref rad_env_update >}})
+
 2. Use [`rad credential register azure`]({{< ref rad_credential_register_azure >}}) to add an Azure service principal to your Radius installation:
     ```bash
     rad credential register azure --client-id ***  --client-secret ***  --tenant-id ***
