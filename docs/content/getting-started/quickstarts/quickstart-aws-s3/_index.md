@@ -97,3 +97,11 @@ This creates a container that will be deployed to your Kubernetes cluster. This 
 1. When you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to delete all Radius resources running on the EKS Cluster.
 
 2. Cleanup AWS Resources - AWS resources are not deleted when deleting a Radius environment, so make sure to delete all resources created in this reference app to prevent additional charges. You can delete these resources in the AWS Console or via the AWS CLI. Instructions to delete an AWS S3 Bucket are available [here](https://docs.aws.amazon.com/AmazonS3/latest/userguide/delete-bucket.html).
+
+## Further Reading
+
+{{< categorizeby category="Overview" tag="AWS" >}}
+
+{{< categorizeby category="How-To" tag="AWS" >}}
+
+{{< categorizeby category="Reference application" tag="AWS" >}}

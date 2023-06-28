@@ -4,7 +4,7 @@ title: "Kubernetes resources"
 linkTitle: "Kubernetes"
 description: "Deploy and connect to Kubernetes resources in your application"
 weight: 1000
-categories: "Concept"
+categories: "Overview"
 tags: ["Kubernetes"]
 ---
 
