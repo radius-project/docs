@@ -3,12 +3,12 @@ type: docs
 title: "How-To: Initialize Radius Environments"
 linkTitle: "How-To: Radius Environments"
 description: "How-To: Initialize Radius Environments"
-weight: 200
+weight: 100
 categories: "How-To"
 tags: ["environments"]
 ---
 
-## How-to: Initialize a Radius Environment
+## Pre-requisites
 
 Begin by ensuring you are using a compatible [Kubernetes cluster]({{< ref "/operations/platforms/kubernetes" >}})
 
@@ -118,7 +118,7 @@ Begin by ensuring you are using a compatible [Kubernetes cluster]({{< ref "/oper
 {{% /codetab %}}
 {{< /tabs >}}
 
-### Optional: Cloud provider configuration
+## Configure cloud providers (optional)
 
 Setting up a [cloud provider]({{<ref providers>}}) allows you to deploy and manage resources from either Azure or AWS as part of your Radius Application.
 
@@ -126,28 +126,74 @@ Setting up a [cloud provider]({{<ref providers>}}) allows you to deploy and mana
 
 {{% codetab %}}
 
+### Pre-requisites
+
+- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/what-is-azure-cli)
+
+### Configuration steps
+
 1. Use [`rad env update`]({{< ref rad_env_update >}}) to update your Radius Environment with your Azure subscription ID and Azure resource group:
 
     ```bash
-    rad env update <user-radius-environment> --azure-subscription-id <user-azure-subscription-id> --azure-resource-group  <user-azure-resource-group>
+    rad env update myEnvironment --azure-subscription-id myAzureSubscriptionId --azure-resource-group  myAzureResourceGroup
     ```
 
-2. Use [`rad credential register azure`]({{< ref rad_credential_register_azure >}}) to add an Azure service principal to your Radius installation:
+2. Run `az ad sp create-for-rbac` to create a Service Principal without a role assignment and obtain your `appId`, `displayName`, `password`, and `tenant` information.
+
+   ```bash
+   {
+   "appId": "****",
+   "displayName": "****",
+   "password": "****",
+   "tenant": "****"
+   }
+   ```
+
+
+3. Use [`rad credential register azure`]({{< ref rad_credential_register_azure >}}) to add the Azure service principal to your Radius installation:
     ```bash
-    rad credential register azure --client-id ***  --client-secret ***  --tenant-id ***
+    rad credential register azure --client-id myClientId  --client-secret myClientSecret  --tenant-id myTenantId
     ```
     Radius will use the provided service principal for all interactions with Azure, including Bicep and Recipe deployments.
+
 {{% /codetab %}}
 {{% codetab %}}
-1. Update your Radius Environment with your AWS region and AWS account ID:
+
+### Pre-requisites
+
+- Make sure you have an [AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account) and an [IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html)
+    - [Create an IAM AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) and copy the AWS Access Key ID and the AWS Secret Access Key to a secure location for use later. If you have already created an Access Key pair, you can use that instead.
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+   - Configure your CLI with [`aws configure`](https://docs.aws.amazon.com/cli/latest/reference/configure/index.html), specifying your configuration values
+- [eksctl CLI](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
+
+### Configuration steps
+
+1. Create an EKS cluster by using the `eksctl` CLI. This command will create a cluster in the `us-west-2` region, as well as a VPC and the Subnets, Security Groups, and IAM Roles required for the cluster.
+
+   ```bash
+   eksctl create cluster --name my-cluster --region=us-west-2 --zones=us-west-2a,us-west-2b,us-west-2c
+   ```
+
+   > Note: If you are using an existing cluster, you can skip this step. However, make sure that the each of the Subnets in your EKS cluster Subnet Group are within the [list of supported MemoryDB availability zones](https://docs.aws.amazon.com/memorydb/latest/devguide/subnetgroups.html). If your cluster includes Subnets outside of a supported MemoryDB availability zone, or if using your own custom subnets, supply them as part of the deployment file as the following:   
+
+   ```bash
+   rad deploy ./app.bicep --parameters eksClusterName=YOUR_EKS_CLUSTER_NAME
+   ```
+
+2. Update your Radius Environment with your AWS region and AWS account ID:
     ```bash
-    rad env update <user-radius-environment> --aws-region <user-aws-region> --aws-account-id ***
+    rad env update myEnvironment --aws-region myAwsRegion --aws-account-id myAwsAccountId
     ```
     This command updates the configuration of an environment for properties that are able to be changed. For more information visit [`rad env update`]({{< ref rad_env_update >}})
-2. Add your AWS cloud provider credentials:
+3. Add your AWS cloud provider credentials:
     ```bash
-    rad credential register aws --access-key-id *** --secret-access-key ***
+    rad credential register aws --access-key-id myAccessKeyId --secret-access-key mySecretAccessKey
     ```
     For more information on the command arguments visit [`rad credential register aws`]({{< ref rad_credential_register_aws >}})
 {{% /codetab %}}
 {{< /tabs >}}
+
+## Next steps
+
+- Learn about [Radius Workspaces]({{< ref workspaces >}})
