@@ -2,6 +2,16 @@ import aws as aws
 
 import radius as radius
 
+@description('The name of your S3 bucket.The AWS S3 Bucket name must follow the [following naming conventions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html).')
+param bucket string ='mys3bucket'
+
+resource s3 'AWS.S3/Bucket@default' = {
+  alias: bucket
+  properties: {
+    BucketName: bucket
+  }
+}
+
 //S3APP
 @description('The environment ID of your Radius application. Set automatically by the rad CLI.')
 param environment string
