@@ -1,14 +1,7 @@
+//APP
 import radius as radius
 
-@description('Specifies the environment for resources.')
 param environment string
-
-@description('Specifies Kubernetes namespace for redis.')
-param namespace string = 'default'
-
-////////////////////////////////////////////////////////////////////
-// Radius resources
-////////////////////////////////////////////////////////////////////
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'dapr-quickstart'
@@ -16,35 +9,35 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
     environment: environment
   }
 }
+//APP
 
+//BACKEND
 resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'backend'
   properties: {
     application: app.id
+    //CONTAINER
     container: {
       image: 'radius.azurecr.io/quickstarts/dapr-backend:edge'
       ports: {
-        web: {
+        orders: {
           containerPort: 3000
         }
       }
     }
-    connections: {
-      orders: {
-        source: stateStore.id
-      }
-    }
+    //CONTAINER
     extensions: [
       {
         kind: 'daprSidecar'
-        provides: backendRoute.id
         appId: 'backend'
         appPort: 3000
       }
     ]
   }
 }
+//BACKEND
 
+//ROUTE_BACK
 resource backendRoute 'Applications.Link/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
   name: 'backend-route'
   properties: {
@@ -53,54 +46,10 @@ resource backendRoute 'Applications.Link/daprInvokeHttpRoutes@2022-03-15-private
     appId: 'backend'
   }
 }
+//ROUTE_BACK
 
-resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
-  name: 'frontend'
-  properties: {
-    application: app.id
-    container: {
-      image: 'radius.azurecr.io/quickstarts/dapr-frontend:edge'
-      ports: {
-        ui: {
-          containerPort: 80
-          provides: frontendRoute.id
-        }
-      }
-    }
-    connections: {
-      backend: {
-        source: backendRoute.id
-      }
-    }
-    extensions: [
-      {
-        kind: 'daprSidecar'
-        appId: 'frontend'
-      }
-    ]
-  }
-}
-
-resource frontendRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
-  name: 'frontend-route'
-  properties: {
-    application: app.id
-  }
-}
-
-resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
-  name: 'gateway'
-  properties: {
-    application: app.id
-    routes: [
-      {
-        path: '/'
-        destination: frontendRoute.id
-      }
-    ]
-  }
-}
-
+//REDIS
+param namespace string = 'default'
 resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' = {
   name: 'statestore'
   properties: {
@@ -116,11 +65,7 @@ resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview
   }
 }
 
-////////////////////////////////////////////////////////////////////
-// Redis Kubernetes resources
-////////////////////////////////////////////////////////////////////
-
-import kubernetes as kubernetes {
+import kubernetes as kubernetes{
   kubeConfig: ''
   namespace: namespace
 }
@@ -187,3 +132,4 @@ resource service 'core/Service@v1' = {
     }
   }
 }
+//REDIS

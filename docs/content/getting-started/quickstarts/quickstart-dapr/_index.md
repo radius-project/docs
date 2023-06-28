@@ -10,63 +10,155 @@ categories: "Quickstart"
 tags : ["Dapr"]
 ---
 
-## Overview
+This quickstart will teach you:
 
-This tutorial will teach you how to deploy a Dapr microservices application using Radius. You will learn:  
-
-- The concepts of the Radius application model
-- How [Dapr and Radius]({{< ref dapr-resources >}}) seamlessly work together  
-- The basic syntax of the [Bicep language]({{< ref bicep >}})
-
-No prior knowledge of Dapr, Radius, or Bicep is needed.
-
-### Quickstart steps
-
-In this tutorial, you will:
-
-1. Review and understand the Radius Dapr microservices application
-1. Deploy the backend container
-1. Deploy and connect a Dapr statestore resource
-1. Add a frontend container to submit orders to the backend
-
-### Radius + Dapr
-
-Dapr integrates directly with Radius to provide a simple, easy to use, and powerful way to build microservices. Dapr developers can:
-
-- Model Dapr building blocks as [Radius link resources]({{< ref dapr-schema >}})
-- Automatically generate Dapr component configuration files based on the source resource
-- (coming soon) Automatically configure component scoping and other secure configuration based upon connections to the Dapr links
+- How to use Radius to deploy a Dapr microservices sample application for an online shop
+- How [Dapr and Radius]({{< ref dapr-resources >}}) seamlessly work together
+- To see more details of the app and access the source code, visit the `quickstarts/dapr` directory in the [samples repo](https://github.com/project-radius/samples)
 
 ## Prerequisites
 
 - [Radius CLI]({{< ref "getting-started" >}})
+- [Radius environment]({{< ref "environments-resource" >}})
 - [kubectl CLI](https://kubernetes.io/docs/tasks/tools/)
+- [Installation of Dapr](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/) 
 - [Visual Studio Code](https://code.visualstudio.com/) (recommended)
-  - The [Radius VSCode extension]({{< ref "getting-started" >}}) provides syntax highlighting, completion, and linting.
-  - You can also complete this quickstart with any basic text editor.
-- [Install Dapr](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/) 
+  - The [Radius VSCode extension]({{< ref "getting-started" >}}) is highly recommended to provide syntax highlighting, completion, and linting.
+  - Although not recommended, you can also complete this quickstart with any basic text editor.
 
-### Initialize a Radius environment
+## Step 1: Define an application
 
-This tutorial can be completed on any platform Radius supports. To get started, create a new environment:
+Begin by creating a new file named `dapr.bicep` with a Radius application:
 
-{{< tabs Kubernetes >}}
+{{< rad file="snippets/1-dapr-backend.bicep" embed=true marker="//APP">}}
 
-{{% codetab %}}
-A Radius environment can be created in any [supported Kubernetes cluster]({{< ref "/operations/platforms/kubernetes#supported-clusters" >}}):
+## Step 2: Add `backend` container
 
-```sh
-rad init
-```
+Next you'll add a `backend` [container]({{< ref container >}}): 
 
-If you wish to deploy an Azure storage account in an upcoming step follow the instructions to setup an Azure [cloud provider]({{< ref providers >}}).
+{{< rad file="snippets/1-dapr-backend.bicep" embed=true marker="//BACKEND" >}}
 
-{{% /codetab %}}
+> The image `radius.azurecr.io/quickstarts/dapr-backend:edge` is where your application's backend code lives.
 
-{{< /tabs >}}
+## Step 3: Add Dapr state store with Redis
 
-## Next step
+1. Add a [Dapr extension]({{< ref dapr-extension >}}) resource to the `backend` resource to describe the Dapr configuration:
 
-Now that you have a Radius environment setup let's take a look at the Dapr microservices application:
+{{< rad file="snippets/2-dapr-statestore.bicep" embed=true marker="//BACKEND" replace-key-container="//CONTAINER" replace-value-container="container: {...}">}}
 
-{{< button text="Next: Application overview" page="dapr-microservices-overview.md" >}}
+2. Add Redis container configured with [Dapr state store]({{< ref dapr-resources >}}):
+
+{{< rad file="snippets/2-dapr-statestore.bicep" embed=true marker="//REDIS">}}
+
+## Step 4: Connect `backend` and Dapr to Redis
+
+1. Add a [`connection`]({{< ref "appmodel-concept" >}}) in `backend` to connect it with `statestore`:
+
+{{< rad file="snippets/3-dapr-statestore-connect.bicep" embed=true marker="//BACKEND" replace-key-container="//CONTAINER" replace-value-container="container: {...}" replace-key-extensions="//EXTENSIONS" replace-value-extensions="extensions: [...]">}}
+
+2. Add a [Dapr HTTP route]({{< ref dapr-http >}}) resource to enable other services to invoke `backend` through Dapr service invocation, and update the `orders` port definition to provide the route:
+
+{{< rad file="snippets/2-dapr-statestore.bicep" embed=true marker="//ROUTE_BACK">}}
+
+## Step 5: Add `frontend` container
+
+1. Now you'll add a `frontend` [container]({{< ref container >}}) which will serve as the application's frontend:
+
+{{< rad file="snippets/4-dapr-frontend.bicep" embed=true marker="//FRONTEND" >}}
+
+> The `radius.azurecr.io/quickstarts/dapr-frontend:edge` image is where your application's backend code lives. 
+
+> The `backendRoute.id` connection declares the intention for `frontend` to communicate with `backend` through the `backendRoute` Dapr HTTP Route.
+
+> The `dapr.io/Sidecar` extension configures Dapr on the container, which is used to invoke the backend.
+
+<br>
+
+2. Add an [HttpRoute]({{< ref httproute >}}) and [Gateway]({{< ref gateway >}}) to expose the `frontend` container on a public endpoint:
+
+{{< rad file="snippets/4-dapr-frontend.bicep" embed=true marker="//ROUTE_FRONT">}}
+
+## Step 5. Deploy your application
+
+1. Confirm that your complete `dapr.bicep` file is as follows:
+
+{{< rad file="snippets/5-dapr.bicep" embed=true >}}
+
+2. Deploy the application to your environment:
+
+   ```sh
+   rad deploy dapr.bicep
+   ```
+
+3. Confirm that your Radius application was deployed:
+
+   ```sh
+   rad resource list containers --application dapr-quickstart
+   ```
+
+    You should see your `backend` and `frontend` resources:
+
+      ```sh
+      RESOURCE   TYPE
+      backend   Applications.Core/containers
+      frontend   Applications.Core/containers
+      ```
+
+## Step 6. Test your application
+
+1. Fetch the public endpoint that has been made available to your application automatically by the [`Gateway`]({{< ref "gateway#hostname-generation">}}) you had added in previous steps:
+
+   ```sh
+   rad app status -a dapr-quickstart
+   ```
+
+   ```sh
+   APPLICATION      RESOURCES
+   dapr-quickstart  6
+
+   GATEWAY   ENDPOINT
+   gateway   <YOUR_PUBLIC_ENDPOINT>
+   ```
+
+1. Navigate to the endpoint in your browser to view the application:
+
+   <img src="frontend.png" alt="Screenshot of frontend application" width=500 >
+
+## Cleanup
+
+1. Run `rad app delete` to cleanup your Radius application, container, and link:
+
+   ```bash
+   rad app delete -a dapr-quickstart
+   ```
+
+1. Delete the Redis Kubernetes resources:
+
+   ```bash
+   kubectl delete statefulset,service
+   ```
+
+## Next steps
+
+- If you'd like to try another tutorial with your existing environment, go back to the [Radius quickstarts]({{< ref quickstarts >}}) page.
+- Related links for Dapr:
+  - [Dapr documentation](https://docs.dapr.io/)
+  - [Dapr quickstarts](https://github.com/dapr/quickstarts/tree/v1.0.0/hello-world)
+
+<br>{{< button text="Try another quickstart" page="quickstarts" >}}
+
+<!-- ## TODO
+
+1. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose >}}):
+
+   ```sh
+   rad resource expose containers backend --application dapr-quickstart --port 3000
+   ```
+
+1. Visit [http://localhost:3000/order](http://localhost:3000/order) in your browser. You should see the following message:
+
+   ```json
+   {"message":"The container is running, but Dapr has not been configured."}
+   ```
+
+1. When you are done testing press `CTRL+C` to terminate the port-forward. -->
