@@ -2,16 +2,7 @@ import aws as aws
 
 import radius as radius
 
-@description('The name of your S3 bucket.The AWS S3 Bucket name must follow the [following naming conventions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html).')
-param bucket string ='mys3bucket'
-
-resource s3 'AWS.S3/Bucket@default' = {
-  alias: bucket
-  properties: {
-    BucketName: bucket
-  }
-}
-
+//S3APP
 @description('The environment ID of your Radius application. Set automatically by the rad CLI.')
 param environment string
 
@@ -30,7 +21,7 @@ param aws_access_key_id string
 @secure()
 param aws_secret_access_key string
 
-@description('Region where the S3 bucket is created. This will be the same region that you input when adding AWS cloudprovider to an environment in Radius.')
+@description('Region where the S3 bucket is created. This will be the same region that you input when adding AWS cloud provider to an environment in Radius.')
 param aws_region string = 'us-west-2'
 
 // get a radius container which uses the s3 bucket
@@ -49,3 +40,4 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
     }
   }
 }
+//S3APP
