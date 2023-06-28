@@ -10,7 +10,7 @@ tags: ["containers"]
 
 ## Overview
 
-A Radius container provides the abstraction to model and run your container workloads in your Radius application. 
+A Radius container provides an abstraction to model and run your container workloads as part of your Radius application. 
 
 {{< rad file="snippets/container.bicep" embed=true marker="//CONTAINER" >}}
 
