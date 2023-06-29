@@ -44,14 +44,62 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 }
 //BACKEND
 
+<<<<<<< HEAD:docs/content/getting-started/quickstarts/quickstart-dapr/snippets/5-dapr-frontend.bicep
 //REDIS
 param namespace string = 'default'
+=======
+resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'frontend'
+  properties: {
+    application: app.id
+    container: {
+      image: 'radius.azurecr.io/quickstarts/dapr-frontend:edge'
+      env: {
+        CONNECTION_BACKEND_APPID: 'backend'
+      }
+      ports: {
+        ui: {
+          containerPort: 80
+          provides: frontendRoute.id
+        }
+      }
+    }
+    extensions: [
+      {
+        kind: 'daprSidecar'
+        appId: 'frontend'
+      }
+    ]
+  }
+}
+
+resource frontendRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
+  name: 'frontend-route'
+  properties: {
+    application: app.id
+  }
+}
+
+resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
+  name: 'gateway'
+  properties: {
+    application: app.id
+    routes: [
+      {
+        path: '/'
+        destination: frontendRoute.id
+      }
+    ]
+  }
+}
+
+>>>>>>> b2a8f92c84a60561a87c4a900177905ac5fd9eb1:docs/content/getting-started/quickstarts/quickstart-dapr/dapr-microservices-add-ui/snippets/dapr.bicep
 resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' = {
   name: 'statestore'
   properties: {
     environment: environment
     application: app.id
-    mode: 'values'
+    resourceProvisioning: 'manual'
     type: 'state.redis'
     version: 'v1'
     metadata: {

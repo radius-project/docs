@@ -9,7 +9,7 @@ categories: "Concept"
 tags: ["Kubernetes"]
 ---
 
-When deploying Radius resources to environments running on Kubernetes, the [control plane]({{< ref architecture >}}) will map these resources into one or more Kubernetes objects. This page describes these mappings and naming conventions.
+When deploying resources such as a containers to environments running on Kubernetes, Radius will map these resources into one or more Kubernetes objects. This page describes these mappings and naming conventions.
 
 <img src="kubernetes-mapping.png" alt="Diagram showing Radius resources being mapped to Kubernetes objects" width=600px />
 

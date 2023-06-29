@@ -9,11 +9,25 @@ slug: "pubsub"
 
 ## Overview
 
-A `Applications.Link/daprPubSubBrokers` resource represents a [Dapr pub/sub](https://docs.dapr.io/developing-applications/building-blocks/pubsub/pubsub-overview/) topic.
+An `Applications.Link/daprPubSubBrokers` resource represents a [Dapr pub/sub](https://docs.dapr.io/developing-applications/building-blocks/pubsub/pubsub-overview/) message broker.
 
-This resource will automatically create and deploy the Dapr component spec for the specified kind.
+## Resource format
 
-{{< rad file="snippets/dapr-pubsub-servicebus.bicep" embed=true marker="//SAMPLE" >}}
+{{< tabs Recipe Manual >}}
+
+{{< codetab >}}
+
+{{< rad file="snippets/dapr-pubsub-recipe.bicep" embed=true marker="//SAMPLE" >}}
+
+{{< /codetab >}}
+
+{{< codetab >}}
+
+{{< rad file="snippets/dapr-pubsub-manual.bicep" embed=true marker="//SAMPLE" >}}
+
+{{< /codetab >}}
+
+{{< /tabs >}}
 
 ### Top-level
 
@@ -29,35 +43,37 @@ This resource will automatically create and deploy the Dapr component spec for t
 |------|:--------:|-------------|---------|
 | application | n | The ID of the application resource this resource belongs to. | `app.id`
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
-| mode | y | Specifies how to build the pub/sub resource. Options are to build automatically via 'recipe' or 'resource', or build manually via 'values'. Selection determines which set of fields to additionally require. | `recipe`
-| resource | n | The ID of the message broker resource, if a non-generic `kind` is used. For Azure Service Bus this is the namespace ID. | `namespace.id`
-| type | n |The Dapr component type. Used when kind is `generic`. | `pubsub.kafka` |
-| metadata | n | Metadata for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-pubsub/) | `brokers: kafkaRoute.properties.url` |
-| version | n | The version of the Dapr component. See [Dapr components](https://docs.dapr.io/reference/components-reference/supported-pubsub/) for available versions. | `v1` |
+| [resourceProvisioning](#resource-provisioning) | n | Specifies how the underlying service/resource is provisioned and managed. Options are to provision automatically via 'recipe' or provision manually via 'manual'. Selection determines which set of fields to additionally require. Defaults to 'recipe'. | `manual`
+| [recipe](#recipe) | n | Configuration for the Recipe which will deploy the backing infrastructure. | [See below](#recipe)
+| [resources](#resources) | n | An array of resources which underlay this resource. For example, an Azure Service Bus namespace ID if the Dapr Pub/Sub resource is leveraging Service Bus. | [See below](#resources)
+| type | n | The Dapr component type. Set only when resourceProvisioning is 'manual'. | `pubsub.kafka` |
+| metadata | n | Metadata object for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-pubsub/). Set only when resourceProvisioning is 'manual'. | `{ brokers: kafkaRoute.properties.url }` |
+| version | n | The version of the Dapr component. See [Dapr components](https://docs.dapr.io/reference/components-reference/supported-pubsub/) for available versions. Set only when resourceProvisioning is 'manual'. | `v1` |
 | componentName | n | _(read-only)_ The name of the Dapr component that is generated and applied to the underlying system. Used by the Dapr SDKs or APIs to access the Dapr component. | `myapp-mypubsub` |
 
-## Resource backed Link
+#### Recipe
 
-The following resources can be used to automatically generate the Link:
+| Property | Required | Description | Example(s) |
+|------|:--------:|-------------|---------|
+| name | n | Specifies the name of the Recipe that should be deployed. If not set, the name defaults to `default`. | `name: 'azure-prod'`
+| parameters | n | An object that contains a list of parameters to set on the Recipe. | `{ size: 'large' }`
 
-- [Azure Service Bus](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-messaging-overview).
+#### Resources
 
-### Azure Service Bus Topic
+| Property | Required | Description | Example(s) |
+|----------|:--------:|-------------|------------|
+| id | n | Resource ID of the supporting resource. | `account.id`
 
-An Azure Service Bus Topic can be used as a Dapr Pub/Sub message broker. Simply specify the namespace ID as the `resource` value, and the Dapr component spec will automatically be generated and deployed:
+## Resource provisioning
 
-{{< rad file="snippets/dapr-pubsub-servicebus.bicep" embed=true marker="//SAMPLE" >}}
+### Provision with a Recipe
 
-## Value backed Link
+[Recipes]({{< ref "/author-apps/recipes" >}}) automate infrastructure provisioning using approved templates.
 
-You can also manually specify the metadata of a Dapr state store. When `mode` is set to `values`, you can specify `type`, `metadata`, and `version` to create a Dapr component spec. These values must match the schema of the intended [Dapr component](https://docs.dapr.io/reference/components-reference/supported-pubsub/).
+You can specify a Recipe name that is registered in the environment or omit the name and use the "default" Recipe.
 
-{{< rad file="snippets/dapr-pubsub-kafka.bicep" embed=true marker="//SAMPLE" >}}
+Parameters can also optionally be specified for the Recipe.
 
-## Injected values
+### Provision manually
 
-Connections from [Radius services]({{< ref container >}}) to [links]({{< ref links-resources >}}) by default inject the following values into the environment of the service:
-
-| Key | Value |
-|-----|-------|
-| `CONNECTION_<CONNECTIONNAME>_COMPONENTNAME` | `properties.componentName` |
+If you want to manually manage your infrastructure provisioning outside of Recipes, you can set `resourceProvisioning` to `'manual'` and specify `type`, `metadata`, and `version` for the Dapr component. These values must match the schema of the intended [Dapr component](https://docs.dapr.io/reference/components-reference/supported-pubsub/).

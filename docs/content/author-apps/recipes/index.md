@@ -3,7 +3,7 @@ type: docs
 title: "Radius Recipes"
 linkTitle: "Recipes"
 description: "Automate infrastructure deployment for your resources with Radius recipes"
-weight: 300
+weight: 700
 categories: "Concept"
 tags: ["recipes"]
 slug: recipes
@@ -53,7 +53,12 @@ Recipes currently support the following resources. Support for additional resour
 |---------------------|
 | [`Applications.Link/redisCaches`]({{< ref redis >}}) | 
 | [`Applications.Link/mongoDatabases`]({{< ref mongodb >}}) |
+| [`Applications.Link/sqlDatabase`]({{< ref microsoft-sql >}}) | 
+| [`Applications.Link/rabbitmqMessageQueues`]({{< ref rabbitmq >}}) |
 | [`Applications.Link/daprStateStores`]({{< ref dapr-statestore >}}) |
+| [`Applications.Link/daprPubSubBrokers`]({{< ref dapr-pubsub >}}) |
+| [`Applications.Link/daprSecretStore`]({{< ref dapr-secretstore >}}) |
+| [`Applications.Link/extenders`]({{< ref extender >}}) |
 
 ## Infrastructure linking
 

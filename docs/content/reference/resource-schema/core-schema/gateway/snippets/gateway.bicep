@@ -36,9 +36,6 @@ resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
       // Specify SSL Passthrough for your app (default: false)
       sslPassthrough: false
 
-      // Specify TLS Termination for your app. Mutually exclusive with SSL Passthrough.
-      // Hostname for TLS termination
-      hostname: 'hostname.radapp.dev'
       // The Radius Secret Store holding TLS certificate data
       certificateFrom: secretstore.id
       // The minimum TLS protocol version to support. Defaults to 1.2

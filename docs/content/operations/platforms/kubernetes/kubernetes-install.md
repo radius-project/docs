@@ -9,17 +9,17 @@ tags: ["Kubernetes"]
 slug: 'install'
 ---
 
-The [Radius control plane]({{< ref architecture >}}) handles the deployment and management of Radius environments, applications, and resources.
+Radius handles the deployment and management of environments, applications, and other resources with components that are installed into the Kubernetes cluster.
 
 ## Install with the rad CLI
 
-Use the [`rad install kubernetes` command]({{< ref rad_install_kubernetes >}}) to install the Radius control plane into the `radius-system` namespace on your Kubernetes cluster. You can optionally use the `--set` flag to customize the installation with [Helm configuration options](#helm-configuration-options):
+Use the [`rad install kubernetes` command]({{< ref rad_install_kubernetes >}}) to install Radius into the `radius-system` namespace on your Kubernetes cluster. You can optionally use the `--set` flag to customize the installation with [Helm configuration options](#helm-configuration-options):
 
 ```bash
-# Install the Radius control plane
+# Install Radius
 rad install kubernetes
 
-# Install the Radius control plane with tracing and public endpoint override
+# Install Radius with tracing and public endpoint override
 rad install kubernetes --set global.zipkin.url=http://jaeger-collector.radius-monitoring.svc.cluster.local:9411/api/v2/spans,rp.publicEndpointOverride=localhost:8081`
 ```
 

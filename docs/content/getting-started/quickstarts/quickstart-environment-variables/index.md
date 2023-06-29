@@ -17,7 +17,7 @@ This quickstart will teach you:
 ## Prerequisites
 
 - [Radius CLI]({{< ref "getting-started" >}})
-- [Radius environment]({{< ref "environments-resource" >}})
+- [Radius environment]({{< ref "operations/environments" >}})
 
 ## Step 1: Model an app and container
 
@@ -53,7 +53,7 @@ Add an `env` property which will contain a list of environment variables to set.
 
 ## Step 4: Add a Mongo Link
 
-Next, add to `app.bicep` a module with a containerized Mongo database (leveraging a Bicep module containing Kubernetes resources), along with a [Mongo link]({{< ref links-resources >}}):
+Next, add to `app.bicep` a [Mongo link]({{< ref links-resources >}}), leveraging the default "dev" Recipe:
 
 {{< rad file="snippets/3-app.bicep" embed=true marker="//LINK" >}}
 
@@ -81,14 +81,8 @@ Connections from a container to a link result in environment variables for conne
 
 ## Cleanup
 
-1. Run `rad app delete` to cleanup your Radius application, container, and link:
+Run `rad app delete` to cleanup your Radius application, container, and link:
 
-   ```bash
-   rad app delete -a myapp
-   ```
-1. Delete the Mongo Kubernetes resources:
-
-   ```bash
-   kubectl delete statefulset,serviceaccount,clusterrolebinding,clusterrole,secret mongo
-   kubectl delete pvc db-storage-claim-mongo-0
-   ```
+```bash
+rad app delete -a myapp
+```

@@ -6,19 +6,11 @@ on:
     branches:
       - edge
       - v*.*
-    paths:
-      - 'docs/**'
-      - '.github/workflows/website.yaml'
-      - '.github/scripts/**'
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
       - edge
       - v*.*
-    paths:
-      - 'docs/**'
-      - '.github/workflows/website.yaml'
-      - '.github/scripts/**'
 
 jobs:
   build:

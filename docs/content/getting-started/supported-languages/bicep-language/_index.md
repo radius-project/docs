@@ -66,16 +66,12 @@ $ az cosmosdb create \
 
 Visit the [Radius getting started guide]({{< ref getting-started >}}) to install the Radius CLI, Bicep CLI and compiler, and the Bicep extension for VS Code.
 
-## Radius resources
+## Radius resource types
 
-Radius resource types are available in Bicep, allowing you to model and connect Radius resources to Azure and Kubernetes resources.
+Radius resource types are available in Bicep, allowing you to model and connect Radius resources to Azure, AWS and Kubernetes resources.
 
 In the below example, a Radius resource of type `Applications.Core/applications` is defined:"
 
 {{< rad file="snippets/app.bicep" embed=true replace-key-resources="//RESOURCES" replace-value-resources="..." >}}
 
-## Next step
-
-Next, we'll use the Bicep language to model your application's infrastructure:
-
-{{< button page="bicep-infrastructure" text="Model your infrastructure in Bicep" >}}
+You can find more details on the supported resource types for your application [here]({{< ref author-apps >}})
