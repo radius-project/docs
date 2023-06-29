@@ -26,6 +26,7 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
       }
     }
     //CONTAINER
+    //EXTENSIONS
     extensions: [
       {
         kind: 'daprSidecar'
@@ -33,20 +34,15 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
         appPort: 3000
       }
     ]
+    //EXTENSIONS
+    connections: {
+      orders: {
+        source: stateStore.id
+      }
+    }
   }
 }
 //BACKEND
-
-//ROUTE_BACK
-resource backendRoute 'Applications.Link/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
-  name: 'backend-route'
-  properties: {
-    environment: environment
-    application: app.id
-    appId: 'backend'
-  }
-}
-//ROUTE_BACK
 
 //REDIS
 param namespace string = 'default'
@@ -133,3 +129,14 @@ resource service 'core/Service@v1' = {
   }
 }
 //REDIS
+
+//ROUTE_BACK
+resource backendRoute 'Applications.Link/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
+  name: 'backend-route'
+  properties: {
+    environment: environment
+    application: app.id
+    appId: 'backend'
+  }
+}
+//ROUTE_BACK

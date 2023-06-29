@@ -32,39 +32,124 @@ Begin by creating a new file named `dapr.bicep` with a Radius application:
 
 {{< rad file="snippets/1-dapr-backend.bicep" embed=true marker="//APP">}}
 
-## Step 2: Add `backend` container
+## Step 2: Add and deploy `backend` container
 
-Next you'll add a `backend` [container]({{< ref container >}}): 
+1. Next you'll add a `backend` [container]({{< ref container >}}): 
 
 {{< rad file="snippets/1-dapr-backend.bicep" embed=true marker="//BACKEND" >}}
 
 > The image `radius.azurecr.io/quickstarts/dapr-backend:edge` is where your application's backend code lives.
 
+<br>
+
+2. Deploy to your Radius environment to launch the container resource for the backend website:
+
+   ```sh
+   rad deploy dapr.bicep
+   ```
+
+1. Confirm that your Radius application was deployed:
+
+   ```sh
+   rad resource list containers --application dapr-quickstart
+   ```
+
+   You should see your `backend` resource:
+
+   ```
+   RESOURCE   TYPE
+   backend   Applications.Core/containers
+   ```
+
+1. To test your `dapr-quickstart` deployment so far, open a local tunnel to your application:
+
+   ```sh
+   rad resource expose containers backend --application dapr-quickstart --port 3000
+   ```
+
+1. Visit the URL [http://localhost:3000/order](http://localhost:3000/order) in your browser. You should see the following message which indicates that the container is running as expected:
+
+   ```json
+   {"message":"The container is running, but Dapr has not been configured."}
+   ```
+
+1. When you are done testing press `CTRL+C` to terminate the port-forward.
+
 ## Step 3: Add Dapr state store with Redis
 
-1. Add a [Dapr extension]({{< ref dapr-extension >}}) resource to the `backend` resource to describe the Dapr configuration:
+1. Modify your `backend` resource to add a [Dapr `extension`]({{< ref dapr-extension >}}) that describes the Dapr configuration:
 
-{{< rad file="snippets/2-dapr-statestore.bicep" embed=true marker="//BACKEND" replace-key-container="//CONTAINER" replace-value-container="container: {...}">}}
+{{< rad file="snippets/2-dapr-redis.bicep" embed=true marker="//BACKEND" replace-key-container="//CONTAINER" replace-value-container="container: {...}">}}
 
 2. Add Redis container configured with [Dapr state store]({{< ref dapr-resources >}}):
 
-{{< rad file="snippets/2-dapr-statestore.bicep" embed=true marker="//REDIS">}}
+{{< rad file="snippets/2-dapr-redis.bicep" embed=true marker="//REDIS">}}
 
 ## Step 4: Connect `backend` and Dapr to Redis
 
-1. Add a [`connection`]({{< ref "appmodel-concept" >}}) in `backend` to connect it with `statestore`:
+1. Add a [Dapr HTTP route]({{< ref dapr-http >}}) resource to enable other services to invoke `backend` through Dapr service invocation:
 
-{{< rad file="snippets/3-dapr-statestore-connect.bicep" embed=true marker="//BACKEND" replace-key-container="//CONTAINER" replace-value-container="container: {...}" replace-key-extensions="//EXTENSIONS" replace-value-extensions="extensions: [...]">}}
+{{< rad file="snippets/3-dapr-route.bicep" embed=true marker="//ROUTE_BACK">}}
 
-2. Add a [Dapr HTTP route]({{< ref dapr-http >}}) resource to enable other services to invoke `backend` through Dapr service invocation, and update the `orders` port definition to provide the route:
+2. Update the `orders` port definition in `backend` to provide the route:
 
-{{< rad file="snippets/2-dapr-statestore.bicep" embed=true marker="//ROUTE_BACK">}}
+{{< rad file="snippets/3-dapr-route.bicep" embed=true marker="//BACKEND" replace-key-extensions="//EXTENSIONS" replace-value-extensions="extensions: [...]">}}
 
-## Step 5: Add `frontend` container
+3. Add a [`connection`]({{< ref "appmodel-concept" >}}) in `backend` to connect it with `statestore`:
+
+{{< rad file="snippets/4-dapr-connection.bicep" embed=true marker="//BACKEND" replace-key-container="//CONTAINER" replace-value-container="container: {...}" replace-key-extensions="//EXTENSIONS" replace-value-extensions="extensions: [...]">}}
+
+## Step 5. Deploy the Dapr-enabled `backend` application:
+
+1. Re-deploy the application to include the Dapr state store:
+
+   ```sh
+   rad deploy dapr.bicep
+   ```
+
+1. You can confirm all the resources were deployed by running:
+
+   ```sh
+   rad resource list containers --application dapr-quickstart
+   ```
+
+   and:
+
+   ```sh
+   rad resource list daprstatestores --application dapr-quickstart
+   ```
+
+   You should see both `backend` and `statestore` components in your `dapr-quickstart` application. :
+
+   ```
+    RESOURCE      TYPE
+    backend       applications.core/containers
+   ```
+
+   ```
+    RESOURCE      TYPE
+    orders        applications.link/daprstatestores
+   ```
+
+1. To test the Dapr state store, open a local tunnel on port 3000:
+
+   ```sh
+   rad resource expose containers backend --application dapr-quickstart --port 3000
+   ```
+
+1. Visit the the URL [http://localhost:3000/order](http://localhost:3000/order) in your browser. You should see the following message, which indicates that the `backend` container is able to communicate with the Dapr state store:
+
+   ```json
+   {"message":"no orders yet"}
+   ```
+
+1. Press CTRL+C to terminate the port-forward.
+
+## Step 6: Add `frontend` container
 
 1. Now you'll add a `frontend` [container]({{< ref container >}}) which will serve as the application's frontend:
 
-{{< rad file="snippets/4-dapr-frontend.bicep" embed=true marker="//FRONTEND" >}}
+{{< rad file="snippets/5-dapr-frontend.bicep" embed=true marker="//FRONTEND" >}}
 
 > The `radius.azurecr.io/quickstarts/dapr-frontend:edge` image is where your application's backend code lives. 
 
@@ -76,21 +161,21 @@ Next you'll add a `backend` [container]({{< ref container >}}):
 
 2. Add an [HttpRoute]({{< ref httproute >}}) and [Gateway]({{< ref gateway >}}) to expose the `frontend` container on a public endpoint:
 
-{{< rad file="snippets/4-dapr-frontend.bicep" embed=true marker="//ROUTE_FRONT">}}
+{{< rad file="snippets/5-dapr-frontend.bicep" embed=true marker="//ROUTE_FRONT">}}
 
-## Step 5. Deploy your application
+## Step 7. Deploy your application
 
-1. Confirm that your complete `dapr.bicep` file is as follows:
+<!-- 1. Confirm that your complete `dapr.bicep` file is as follows:
 
-{{< rad file="snippets/5-dapr.bicep" embed=true >}}
+{{< rad file="snippets/5-dapr.bicep" embed=true >}} -->
 
-2. Deploy the application to your environment:
+1. Deploy the application to your environment:
 
    ```sh
    rad deploy dapr.bicep
    ```
 
-3. Confirm that your Radius application was deployed:
+1. Confirm that your Radius application was deployed:
 
    ```sh
    rad resource list containers --application dapr-quickstart
@@ -100,11 +185,11 @@ Next you'll add a `backend` [container]({{< ref container >}}):
 
       ```sh
       RESOURCE   TYPE
-      backend   Applications.Core/containers
+      backend    Applications.Core/containers
       frontend   Applications.Core/containers
       ```
 
-## Step 6. Test your application
+## Step 8. Test your application
 
 1. Fetch the public endpoint that has been made available to your application automatically by the [`Gateway`]({{< ref "gateway#hostname-generation">}}) you had added in previous steps:
 
@@ -135,7 +220,7 @@ Next you'll add a `backend` [container]({{< ref container >}}):
 1. Delete the Redis Kubernetes resources:
 
    ```bash
-   kubectl delete statefulset,service
+   kubectl delete statefulset,service redis
    ```
 
 ## Next steps

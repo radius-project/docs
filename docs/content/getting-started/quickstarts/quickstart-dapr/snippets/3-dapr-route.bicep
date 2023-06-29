@@ -16,19 +16,13 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'backend'
   properties: {
     application: app.id
-    //CONTAINER
     container: {
       image: 'radius.azurecr.io/quickstarts/dapr-backend:edge'
       ports: {
         orders: {
           containerPort: 3000
+          provides: backendRoute.id
         }
-      }
-    }
-    //CONTAINER
-    connections: {
-      orders: {
-        source: stateStore.id
       }
     }
     //EXTENSIONS
