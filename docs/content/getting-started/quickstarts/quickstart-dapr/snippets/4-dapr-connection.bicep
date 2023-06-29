@@ -44,11 +44,8 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 }
 //BACKEND
 
-<<<<<<< HEAD:docs/content/getting-started/quickstarts/quickstart-dapr/snippets/4-dapr-connection.bicep
 //REDIS
 param namespace string = 'default'
-=======
->>>>>>> b2a8f92c84a60561a87c4a900177905ac5fd9eb1:docs/content/getting-started/quickstarts/quickstart-dapr/dapr-microservices-add-dapr/snippets/dapr.bicep
 resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' = {
   name: 'statestore'
   properties: {
