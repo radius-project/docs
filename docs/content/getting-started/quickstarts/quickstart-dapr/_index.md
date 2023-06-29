@@ -30,7 +30,7 @@ This quickstart will teach you:
 
 Begin by creating a new file named `dapr.bicep` with a Radius application:
 
-{{< rad file="snippets/1-dapr-backend.bicep" embed=true marker="//APP">}}
+{{< rad file="snippets/1-dapr-backend.bicep" embed=true marker="//APP" >}}
 
 ## Step 2: Add and deploy `backend` container
 
@@ -75,31 +75,33 @@ Begin by creating a new file named `dapr.bicep` with a Radius application:
 
 1. When you are done testing press `CTRL+C` to terminate the port-forward.
 
-## Step 3: Add Dapr state store with Redis
+## Step 3: Add Dapr extension and route
 
 1. Modify your `backend` resource to add a [Dapr `extension`]({{< ref dapr-extension >}}) that describes the Dapr configuration:
 
-{{< rad file="snippets/2-dapr-redis.bicep" embed=true marker="//BACKEND" replace-key-container="//CONTAINER" replace-value-container="container: {...}">}}
+{{< rad file="snippets/2-dapr-route.bicep" embed=true marker="//BACKEND" replace-key-container="//CONTAINER" replace-value-container="container: {...}">}}
 
-2. Add Redis container configured with [Dapr state store]({{< ref "dapr-resources#building-blocks" >}}):
+2. Add a [Dapr HTTP route]({{< ref dapr-schema >}}) resource to enable other services to invoke `backend` through Dapr service invocation:
 
-{{< rad file="snippets/2-dapr-redis.bicep" embed=true marker="//REDIS">}}
+{{< rad file="snippets/2-dapr-route.bicep" embed=true marker="//ROUTE_BACK">}}
 
-## Step 4: Connect `backend` and Dapr to Redis
+3. Update the `orders` port definition in `backend` to provide the route:
 
-1. Add a [Dapr HTTP route]({{< ref dapr-schema >}}) resource to enable other services to invoke `backend` through Dapr service invocation:
+{{< rad file="snippets/3-dapr-redis.bicep" embed=true marker="//BACKEND" replace-key-extensions="//EXTENSIONS" replace-value-extensions="extensions: [...]">}}
 
-{{< rad file="snippets/3-dapr-route.bicep" embed=true marker="//ROUTE_BACK">}}
+## Step 4: Add a Redis state store container
 
-2. Update the `orders` port definition in `backend` to provide the route:
+Add Redis container configured with [Dapr state store]({{< ref "dapr-resources#building-blocks" >}}):
 
-{{< rad file="snippets/3-dapr-route.bicep" embed=true marker="//BACKEND" replace-key-extensions="//EXTENSIONS" replace-value-extensions="extensions: [...]">}}
+{{< rad file="snippets/3-dapr-redis.bicep" embed=true marker="//REDIS">}}
 
-3. Add a [`connection`]({{< ref "appmodel-concept" >}}) in `backend` to connect it with `statestore`:
+## Step 5: Connect `backend` to the Dapr Redis state store
+
+1. Add a [`connection`]({{< ref "appmodel-concept" >}}) in `backend` to connect it with `statestore`:
 
 {{< rad file="snippets/4-dapr-connection.bicep" embed=true marker="//BACKEND" replace-key-container="//CONTAINER" replace-value-container="container: {...}" replace-key-extensions="//EXTENSIONS" replace-value-extensions="extensions: [...]">}}
 
-## Step 5. Deploy the Dapr-enabled `backend` application:
+## Step 6. Deploy the Dapr-enabled `backend` application:
 
 1. Re-deploy the application to include the Dapr state store:
 
@@ -145,7 +147,7 @@ Begin by creating a new file named `dapr.bicep` with a Radius application:
 
 1. Press CTRL+C to terminate the port-forward.
 
-## Step 6: Add `frontend` container
+## Step 7: Add `frontend` container
 
 1. Now you'll add a `frontend` [container]({{< ref container >}}) which will serve as the application's frontend:
 
@@ -163,7 +165,7 @@ Begin by creating a new file named `dapr.bicep` with a Radius application:
 
 {{< rad file="snippets/5-dapr-frontend.bicep" embed=true marker="//ROUTE_FRONT">}}
 
-## Step 7. Deploy your application
+## Step 8. Deploy your application
 
 <!-- 1. Confirm that your complete `dapr.bicep` file is as follows:
 

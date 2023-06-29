@@ -44,6 +44,17 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 }
 //BACKEND
 
+//ROUTE_BACK
+resource backendRoute 'Applications.Link/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
+  name: 'backend-route'
+  properties: {
+    environment: environment
+    application: app.id
+    appId: 'backend'
+  }
+}
+//ROUTE_BACK
+
 //REDIS
 param namespace string = 'default'
 resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' = {
@@ -51,7 +62,7 @@ resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview
   properties: {
     environment: environment
     application: app.id
-    resourceProvisioning: 'manual'
+    mode: 'values'
     type: 'state.redis'
     version: 'v1'
     metadata: {
@@ -129,14 +140,3 @@ resource service 'core/Service@v1' = {
   }
 }
 //REDIS
-
-//ROUTE_BACK
-resource backendRoute 'Applications.Link/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
-  name: 'backend-route'
-  properties: {
-    environment: environment
-    application: app.id
-    appId: 'backend'
-  }
-}
-//ROUTE_BACK
