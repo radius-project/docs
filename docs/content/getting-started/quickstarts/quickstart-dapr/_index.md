@@ -19,7 +19,7 @@ This quickstart will teach you:
 ## Prerequisites
 
 - [Radius CLI]({{< ref "getting-started" >}})
-- [Radius environment]({{< ref "environments-resource" >}})
+- [Radius environment]({{< ref "environments-concept" >}})
 - [kubectl CLI](https://kubernetes.io/docs/tasks/tools/)
 - [Installation of Dapr](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/) 
 - [Visual Studio Code](https://code.visualstudio.com/) (recommended)
@@ -81,13 +81,13 @@ Begin by creating a new file named `dapr.bicep` with a Radius application:
 
 {{< rad file="snippets/2-dapr-redis.bicep" embed=true marker="//BACKEND" replace-key-container="//CONTAINER" replace-value-container="container: {...}">}}
 
-2. Add Redis container configured with [Dapr state store]({{< ref dapr-resources >}}):
+2. Add Redis container configured with [Dapr state store]({{< ref "dapr-resources#building-blocks" >}}):
 
 {{< rad file="snippets/2-dapr-redis.bicep" embed=true marker="//REDIS">}}
 
 ## Step 4: Connect `backend` and Dapr to Redis
 
-1. Add a [Dapr HTTP route]({{< ref dapr-http >}}) resource to enable other services to invoke `backend` through Dapr service invocation:
+1. Add a [Dapr HTTP route]({{< ref dapr-schema >}}) resource to enable other services to invoke `backend` through Dapr service invocation:
 
 {{< rad file="snippets/3-dapr-route.bicep" embed=true marker="//ROUTE_BACK">}}
 
