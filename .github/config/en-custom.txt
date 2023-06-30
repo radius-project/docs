@@ -420,3 +420,5 @@ gg
 kubernetesMetadata
 daprSidecar
 manualScaling
+httpGet
+tcp
