@@ -3,7 +3,9 @@ $(document).ready(function() {
         type: "GET",
         url: "/.auth/me",
         success: function(data) {
-            window.clarity("identity", data[0].user_id);
+            if (data[0] && data[0].user_id) {
+                window.clarity("identity", data[0].user_id);
+            }
         }
     });
 });
