@@ -2,7 +2,8 @@
 {{ $tags := .Get "tag" | default false }}
 
 {{ if $tags}}
-{{ $pages := where site.RegularPages "Params.categories" (printf "%s" $categories) }}
+{{ $pages := where site.Pages "Params.categories" (printf "%s" $categories) }}
+
 {{ $pages = where $pages "Params.tags" "intersect" (slice $tags ) }}
          <div class="card-pane">   
             &nbsp;

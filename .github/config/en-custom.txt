@@ -422,3 +422,4 @@ daprSidecar
 manualScaling
 httpGet
 tcp
+BucketName

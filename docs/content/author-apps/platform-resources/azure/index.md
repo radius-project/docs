@@ -4,7 +4,7 @@ title: "Microsoft Azure resources"
 linkTitle: "Microsoft Azure"
 description: "Deploy and connect to Azure resources in your application"
 weight: 800
-categories: "Concept"
+categories: "Overview"
 tags: ["Azure"]
 ---
 
