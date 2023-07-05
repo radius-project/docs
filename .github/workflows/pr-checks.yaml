@@ -11,7 +11,10 @@ jobs:
     steps:
       - name: Check for do-not-merge label
         run: |
-          if grep -q "do-not-merge" ${{ github.event.pull_request.labels }}; then
-            echo "Error: PR contains do-not-merge label"
-            exit 1
-          fi
+          for label in "${{ github.event.pull_request.labels }}"; do
+            if [[ "$label" == *"do-not-merge"* ]]; then
+              echo "Error: PR contains do-not-merge label"
+              exit 1
+            fi
+          done
+          
