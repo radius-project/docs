@@ -15,7 +15,7 @@ Teams [describe their application]({{< ref appmodel-concept >}}) services and re
 <img src="app-diagram.png" alt="Screenshot of a Radius applications diagram" style="width:100%" >
 {{< /card >}}
 {{< card header="**Portable**" >}}
-Radius applications and tooling are agnostic of platform, services, and infrastructure. 
+Radius azpplications and tooling are agnostic of platform, services, and infrastructure. 
 <table style="max-width:600px;margin-top:10%">
   <tr>
   </tr>
