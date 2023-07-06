@@ -1,31 +1,35 @@
-//APP
+//BACKEND
 import radius as radius
 
+@description('Specifies the environment for resources.')
 param environment string
 
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
-  name: 'dapr-quickstart'
+  name: 'dapr'
   properties: {
     environment: environment
   }
 }
-//APP
 
-//BACKEND
+// The backend container that is connected to the Dapr state store
 resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'backend'
   properties: {
     application: app.id
     container: {
+      // This image is where the app's backend code lives
       image: 'radius.azurecr.io/quickstarts/dapr-backend:edge'
       ports: {
         orders: {
           containerPort: 3000
-          provides: backendRoute.id
         }
       }
     }
-    //EXTENSIONS
+    connections: {
+      orders: {
+        source: stateStore.id
+      }
+    }
     extensions: [
       {
         kind: 'daprSidecar'
@@ -33,30 +37,19 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
         appPort: 3000
       }
     ]
-    //EXTENSIONS
   }
 }
-//BACKEND
 
-//ROUTE_BACK
-resource backendRoute 'Applications.Link/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
-  name: 'backend-route'
-  properties: {
-    environment: environment
-    application: app.id
-    appId: 'backend'
-  }
-}
-//ROUTE_BACK
-
-//REDIS
+@description('Specifies Kubernetes namespace for redis.')
 param namespace string = 'default'
+
+// The Dapr state store that is connected to the backend container
 resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' = {
   name: 'statestore'
   properties: {
     environment: environment
     application: app.id
-    mode: 'values'
+    resourceProvisioning: 'manual'
     type: 'state.redis'
     version: 'v1'
     metadata: {
@@ -71,6 +64,7 @@ import kubernetes as kubernetes{
   namespace: namespace
 }
 
+// The Redis statefulset and service that is used by the Dapr state store
 resource statefulset 'apps/StatefulSet@v1' = {
   metadata: {
     name: 'redis'
@@ -133,4 +127,53 @@ resource service 'core/Service@v1' = {
     }
   }
 }
-//REDIS
+//BACKEND
+
+//FRONTEND
+// The frontend container that serves the application UI
+resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'frontend'
+  properties: {
+    application: app.id
+    container: {
+      // This image is where the app's frontend code lives
+      image: 'radius.azurecr.io/quickstarts/dapr-frontend:edge'
+      ports: {
+        ui: {
+          containerPort: 80
+          provides: frontendRoute.id
+        }
+      }
+    }
+    // The extension to configure Dapr on the container, which is used to invoke the backend
+    extensions: [
+      {
+        kind: 'daprSidecar'
+        appId: 'frontend'
+      }
+    ]
+  }
+}
+
+// The frontend route that is used by the gateway
+resource frontendRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
+  name: 'frontend-route'
+  properties: {
+    application: app.id
+  }
+}
+
+// The gateway that provides a public endpoint and routes traffic to the frontend container
+resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
+  name: 'gateway'
+  properties: {
+    application: app.id
+    routes: [
+      {
+        path: '/'
+        destination: frontendRoute.id
+      }
+    ]
+  }
+}
+//FRONTEND
