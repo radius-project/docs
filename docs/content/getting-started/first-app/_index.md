@@ -153,7 +153,7 @@ Next, update your container definition to include `connections` inside `properti
 
 The code you just added creates a connection between the container and the database. Based on this connection, Radius will define environment variables in the container that tell the container how to connect. You will view these in the next step.
 
-The finished `app.bicep` should like this:
+Your updated `app.bicep` will look like this:
 
 {{< rad file="snippets/app-with-redis.bicep" embed=true >}}
 
