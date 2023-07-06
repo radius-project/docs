@@ -15,6 +15,9 @@ on:
 env:
   ACTION_LINK: '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
 
+concurrency:
+  group: spellcheck-${{ github.ref }}-${{ github.event.pull_request.number || github.sha }}
+
 jobs:
   spellcheck:
     name: Spellcheck
