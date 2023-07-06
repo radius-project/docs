@@ -1,0 +1,17 @@
+name: PR Checks
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, labeled, unlabeled]
+
+jobs:
+  check-do-not-merge-tag:
+    name: Check for do-not-merge tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for do-not-merge label
+        uses: mheap/github-action-required-labels@v5
+        with:
+            labels: "do-not-merge"
+            mode: exactly
+            count: 0
