@@ -41,9 +41,16 @@ jobs:
       if: failure()
       uses: marocchino/sticky-pull-request-comment@v2
       with:
+        header: spellcheck
         recreate: true
         message: |
           ## :x: Spellcheck Failed
           There are spelling errors in your PR. Visit [the workflow output](${{ env.ACTION_LINK }}) to see what words are failing.
           ### Adding new words
           If you are adding a new custom word refer to the [docs guide](https://docs.radapp.dev/contributing/docs/#spelling)
+    - name: Clear GitHub comment on success
+      uses: marocchino/sticky-pull-request-comment@v2
+      continue-on-error: true
+      with:
+        header: spellcheck
+        delete: true
