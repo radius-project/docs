@@ -6,19 +6,14 @@ on:
     branches:
       - v*.*
       - edge
-    paths:
-      - 'docs/**'
-      - '.github/workflows/spellcheck.yaml'
-      - '.github/config/**'
   pull_request:
     types: [opened, synchronize, reopened]
     branches:
       - v*.*
       - edge
-    paths:
-      - 'docs/**'
-      - '.github/workflows/spellcheck.yaml'
-      - '.github/config/**'
+
+env:
+  ACTION_LINK: '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
 
 jobs:
   build:
@@ -31,3 +26,19 @@ jobs:
       uses: rojopolis/spellcheck-github-actions@0.27.0
       with:
         config_path: .github/config/.pyspelling.yml
+    - name: Post GitHub workkflow output on failure
+      if: failure()
+      run: |
+        echo "## Spellcheck Failed" >> $GITHUB_STEP_SUMMARY
+        echo "There are spelling errors in your PR. Visit [the workflow output](${{ env.ACTION_LINK }}) to see what words are failing." >> $GITHUB_STEP_SUMMARY
+        echo "### Adding new words" >> $GITHUB_STEP_SUMMARY
+        echo "If you are adding a new custom word refer to the [docs guide](https://docs.radapp.dev/contributing/docs/#spelling)" >> $GITHUB_STEP_SUMMARY
+    - name: Post GitHub comment on failure
+      if: failure()
+      uses: peter-evans/create-or-update-comment@v3
+      with:
+        body: |
+          ## Spellcheck Failed
+          There are spelling errors in your PR. Visit [the workflow output](${{ env.ACTION_LINK }}) to see what words are failing.
+          ### Adding new words
+          If you are adding a new custom word refer to the [docs guide](https://docs.radapp.dev/contributing/docs/#spelling)
