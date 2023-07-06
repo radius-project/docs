@@ -26,7 +26,7 @@ From the [eShop repo](https://github.com/dotnet-architecture/eShopOnContainers#a
 
 ### Deployment today
 
-[Deploying eShop without Project Radius](https://github.com/dotnet-architecture/eShopOnContainers/tree/dev/deploy/k8s) requires deploying a cluster and the backing infrastructure, configuring multiple CLIs and tools, running deployment scripts, and manually copying/pasting credentials and endpoints.
+[Deploying eShop without Radius](https://github.com/dotnet-architecture/eShopOnContainers/tree/dev/deploy/k8s) requires deploying a cluster and the backing infrastructure, configuring multiple CLIs and tools, running deployment scripts, and manually copying/pasting credentials and endpoints.
 > <img src="deploy.png" alt="Screenshot of the list of steps to deploy eShop" width=250 >
 
 eShop provides instructions to [deploy to Azure](https://github.com/dotnet-architecture/eShopOnContainers/wiki/Deploying-Azure-resources) or to [deploy to an AKS cluster](https://github.com/dotnet-architecture/eShopOnContainers/wiki/Deploy-to-Azure-Kubernetes-Service-(AKS)) (and even to [deploy to AKS using ARM/Bicep templates](https://github.com/Azure/bicep/tree/main/docs/examples/101/aks)).  
@@ -34,7 +34,7 @@ Once the cluster and infrastructure resources are deployed, you can [deploy the 
 
 ## Adding Radius
 
-Adding Project Radius to the eShop on containers application allows teams to:
+Adding Radius to the eShop on containers application allows teams to:
 
 - Define the entire collection of microservices and backing infrastructure as a single application
 - Easily manage configuration and credentials between infrastructure and services, all within the app model

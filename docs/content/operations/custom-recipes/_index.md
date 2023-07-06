@@ -8,7 +8,7 @@ categories: "How-To"
 tags: ["recipes"]
 ---
 
-Recipes enable a **separation of concerns** between infrastructure teams and developers by **automating infrastructure deployment**.
+Recipes enable a **separation of concerns** between infrastructure operators and developers by **automating infrastructure deployment**.
 
 Learn more in the Recipes overview page:
 

@@ -8,10 +8,6 @@ weight: 300
 
 `Container` provides an abstraction for a container workload that can be run on any platform Radius supports.
 
-## Platform resources
-
-Containers are hosted by Kubernetes as the container runtime today, regardless of which platform the application is deployed into. We plan to support additional container runtimes in the future.
-
 ## Resource format
 
 {{< rad file="snippets/container.bicep" embed=true marker="//CONTAINER" >}}
@@ -35,11 +31,9 @@ Containers are hosted by Kubernetes as the container runtime today, regardless o
 
 ### Container
 
-Details on what to run and how to run it are defined in the `container` property:
-
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| image | y | The registry and image to download and run in your container. | `'myregistry/myimage:tag'`
+| image | y | The registry and image to download and run in your container. Follows the format `<registry-hostname>:<port>/<image-name>:<tag>` where registry hostname is optional and defaults to the Docker public registry, port is optional and defaults to 443, tag is optional and defaults to `latest`.| `myregistry.azurecr.io/myimage:latest`
 | env | n | A list of environment variables to be set for the container. | `'ENV_VAR': 'value'`
 | command | n | Entrypoint array. Overrides the container image's ENTRYPOINT. | `['/bin/sh']`
 | args | n | Arguments to the entrypoint. Overrides the container image's CMD. | `['-c', 'while true; do echo hello; sleep 10;done']`
@@ -62,12 +56,6 @@ The ports offered by the container are  defined in the `ports` section.
 
 #### Volumes
 
-The volumes mounted to the container, either ephemeral or persistent, are defined in the `volumes` section.
-
-Ephemeral volumes have the same lifecycle as the container, being deployed and deleted with the container. They create an empty directory on the host and mount it to the container.
-
-Persistent volumes have lifecycles that are separate from the container. Containers can mount these persistent volumes and restart without losing data. Persistent volumes can also be useful for storing data that needs to be accessed by multiple containers.
-
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | name | y | A name key for the volume. | `tempstore`
@@ -78,14 +66,6 @@ Persistent volumes have lifecycles that are separate from the container. Contain
 | rbac | n | The role-based access control level when kind is 'persistent'. Allowed values are `'read'` and `'write'`. Defaults to 'read'. | `'read'`
 
 #### Readiness probe
-
-Readiness probes detect when a container begins reporting it is ready to receive traffic, such as after loading a large configuration file that may take a couple seconds to process.
-There are three types of probes available, `httpGet`, `tcp` and `exec`. For an `httpGet` probe, an HTTP GET request at the specified endpoint will be used to probe the application. If a success code is returned, the probe passes. If no code or an error code is returned, the probe fails, and the container won't receive any requests after a specified number of failures.
-Any code greater than or equal to 200 and less than 400 indicates success. Any other code indicates failure.
-
-For a `tcp` probe, the specified container port is probed to be listening. If not, the probe fails.
-
-For an `exec` probe, a command is run within the container. A return code of 0 indicates a success and the probe succeeds. Any other return indicates a failure, and the container doesn't receive any requests after a specified number of failures.
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
@@ -99,14 +79,6 @@ For an `exec` probe, a command is run within the container. A return code of 0 i
 
 #### Liveness probe
 
-Liveness probes detect when a container is in a broken state, restarting the container to return it to a healthy state.
-There are three types of probes available, `httpGet`, `tcp` and `exec`. For an `httpGet` probe, an HTTP GET request at the specified endpoint will be used to probe the application. If a success code is returned, the probe passes. If no code or an error code is returned, the probe fails, and the container won't receive any requests after a specified number of failures.
-Any code greater than or equal to 200 and less than 400 indicates success. Any other code indicates failure.
-
-For a `tcp` probe, the specified container port is probed to be listening. If not, the probe fails.
-
-For an `exec` probe, a command is run within the container. A return code of 0 indicates a success and the probe succeeds. Any other return indicates a failure, and the container doesn't receive any requests after a specified number of failures.
-
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | kind | y | Type of liveness check, `httpGet` or `tcp` or `exec`. | `httpGet`
@@ -118,8 +90,6 @@ For an `exec` probe, a command is run within the container. A return code of 0 i
 | periodSeconds | n | Interval for the liveness probe in seconds. | `5`
 
 ### Connections
-
-Connections define how a container connects to [other resources]({{< ref resource-schema >}}).
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
@@ -142,8 +112,55 @@ Extensions define additional capabilities and configuration for a container.
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| kind | y | The type of resource you are connecting to. | `mongo.com/MongoDB`
+| kind | y | The kind of extension being used. | `kubernetesMetadataextension`
 
 Additional properties are available and required depending on the 'kind' of the extension.
 
-## Sub-types
+#### kubernetesMetadata
+
+The [Kubernetes Metadata extension]({{< ref "/operations/platforms/kubernetes/kubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius application. For examples refer to the extension overview page.
+
+##### Properties
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| kind | y | The kind of extension being used. Must be 'kubernetesMetadata' | `kubernetesMetadata` |
+| [labels](#labels)| n | The Kubernetes labels to be set on the application and its resources | [See below](#labels)|
+| [annotations](#annotations) | n | The Kubernetes annotations to set on your application and its resources  | [See below](#annotations)|
+
+###### labels
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| user defined label key | y | The key and value of the label to be set on the application and its resources.|`'team.name': 'frontend'`
+
+###### annotations
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| user defined annotation key | y | The key and value of the annotation to be set on the application and its resources.| `'app.io/port': '8081'` |
+
+#### daprSidecar
+
+The `daprSidecar` extensions adds and configures a [Dapr](https://dapr.io) sidecar to your application.
+
+##### Properties
+
+| Property | Required | Description | Example |
+|----------|:--------:|-------------|---------|
+| kind | y | The kind of extension. | `daprSidecar`
+| appId | n | The appId of the Dapr sidecar. | `backend` |
+| appPort | n | The port your service exposes to Dapr | `3500`
+| config | n | The configuration to use for the Dapr sidecar |
+
+#### manualScaling
+
+The `manualScaling` extension configures the number of replicas of a compute instance (such as a container) to run.
+
+##### Properties
+
+| Property | Required | Description | Example |
+|----------|:--------:|-------------|---------|
+| kind | y | The kind of extension. | `manualScaling`
+| replicas | Y | The number of replicas to run | `5` |
+

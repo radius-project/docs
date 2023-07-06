@@ -32,20 +32,10 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
     extensions: [
       {
         kind: 'daprSidecar'
-        provides: backendRoute.id
         appId: 'backend'
         appPort: 3000
       }
     ]
-  }
-}
-
-resource backendRoute 'Applications.Link/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
-  name: 'backend-route'
-  properties: {
-    environment: environment
-    application: app.id
-    appId: 'backend'
   }
 }
 
@@ -55,16 +45,14 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
     application: app.id
     container: {
       image: 'radius.azurecr.io/quickstarts/dapr-frontend:edge'
+      env: {
+        CONNECTION_BACKEND_APPID: 'backend'
+      }
       ports: {
         ui: {
           containerPort: 80
           provides: frontendRoute.id
         }
-      }
-    }
-    connections: {
-      backend: {
-        source: backendRoute.id
       }
     }
     extensions: [
@@ -121,7 +109,17 @@ resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview
   properties: {
     environment: environment
     application: app.id
-    mode: 'resource'
-    resource: account::tableServices::table.id
+    resourceProvisioning: 'manual'
+    resources: [
+      { id: account.id }
+      { id: account::tableServices::table.id }
+    ]
+    metadata: {
+      accountName: account.name
+      accountKey: account.listKeys().keys[0].value
+      tableName: account::tableServices::table.name
+    }
+    type: 'state.azure.tablestorage'
+    version: 'v1'
   }
 }

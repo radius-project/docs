@@ -5,7 +5,7 @@ import json
 from bs4 import BeautifulSoup
 from algoliasearch.search_client import SearchClient
 
-url = "radapp.dev"
+url = "docs.radapp.dev"
 if len(sys.argv) > 1:
     starting_directory = os.path.join(os.getcwd(), str(sys.argv[1])) 
 else:
@@ -26,7 +26,7 @@ rankings = {
     "Concepts": 100,
     "Getting started": 0,
     "Developer guides": 200,
-    "Administrator guides": 300,
+    "Operator guides": 300,
     "Reference": 400,
     "Contributing": 500,
     "Home": 600

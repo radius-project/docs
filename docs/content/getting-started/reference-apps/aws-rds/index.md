@@ -15,7 +15,7 @@ This reference app will show you:
 
 ## Prerequisites
 
-- [Complete the getting started guide for AWS up to Step 2]({{< ref quickstart-aws >}})
+- [Complete the getting started guide for AWS up to Step 2]({{< ref quickstart-aws-s3 >}})
 
 ## Step 1: Create a Bicep file which uses AWS RDS
 

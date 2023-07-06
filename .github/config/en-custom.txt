@@ -6,6 +6,7 @@ APIs
 APPBASE
 args
 aspell
+azurecr
 Analytics
 Async
 Async
@@ -26,6 +27,7 @@ Codespace
 Codespaces
 CosmosDB
 CreateOrUpdate
+Datastores
 DDD
 DNS
 DaemonSet
@@ -36,6 +38,7 @@ Dockerfiles
 Docsy
 DocumentDB
 EKS
+eksClusterName
 entrypoint
 EOF
 Extensibility
@@ -57,6 +60,7 @@ IoT
 JSON
 JSON
 KeyVault
+Kinesis
 Kubernetes
 ListSecret
 Liveness
@@ -80,6 +84,7 @@ PARAMS
 PYTHONAPP
 PowerShell
 Pre
+PubSub
 ProjectRadius
 Quickstart
 Quickstarts
@@ -87,6 +92,7 @@ RBAC
 RabbitMQ
 ResourceDeploymentClient
 Rollout
+SaaS
 SDKs
 SNI
 SQL
@@ -137,6 +143,7 @@ cas
 centric
 cli
 clusterName
+codebase
 codespace
 codespaces
 codetab
@@ -151,7 +158,6 @@ cosmosAccount
 cosmosdb
 customizations
 dapr
-daprInvokeHttpRoutes
 daprPubSubBrokers
 daprSecretStores
 daprStateStores
@@ -291,6 +297,7 @@ rabbitmq
 radapp
 radiuspublic
 rbac
+rediscaches
 readinessProbe
 redis
 redisCaches
@@ -304,6 +311,8 @@ rollout
 rp
 runtime
 runtimes
+scalable
+scalability
 schemas
 secretstore
 secretstores
@@ -312,6 +321,7 @@ serverless
 serverless
 servicebus
 serviceName
+sharded
 shortcode
 shortcodes
 shortname
@@ -361,6 +371,7 @@ wi
 workingDir
 workspaceTypes
 workspaces
+walkthrough
 yaml
 yml
 zsh
@@ -402,3 +413,13 @@ valueFrom
 tls
 minimumProtocolVersion
 certificateFrom
+preloaded
+SRG
+ePMKNy
+gg
+kubernetesMetadata
+daprSidecar
+manualScaling
+httpGet
+tcp
+BucketName

@@ -19,14 +19,6 @@ A [Dapr extension]({{< ref dapr-extension >}}) on the `backend` resource can be 
 
 The `extensions` section is used to configure cross-cutting behaviors of components. Since Dapr is not part of the standard definition of a container, it can be added via a extension. Extensions have a `kind` so that they can be strongly typed.
 
-## Add Dapr Invoke Route
-
-In order for other services to invoke `backend` through Dapr service invocation, a [Dapr Route]({{< ref dapr-http >}}) is required.
-
-Add a [Dapr HTTP route]({{< ref dapr-http >}}) resource to the app, and update the `orders` port definition to provide route:
-
-{{< rad file="snippets/invoke.bicep" embed=true marker="//SAMPLE" replace-key-extensions="//EXTENSIONS" replace-value-extensions="extensions: [...]" >}}
-
 ## Add Dapr statestore
 
 Now that the backend is configured with Dapr, we need to define a state store to save information about orders.
@@ -60,7 +52,7 @@ Add a [`connection`]({{< ref "appmodel-concept" >}}) from `backend` to the `orde
 
 Adding a connection to the state store also [configures environment variables]({{< ref "dapr-statestore#provided-data" >}}) inside the the `statestore` component.
 
-With the connection name of `statestore` and a statestore name of `orders`, Project Radius will inject information related to the state store using the environment variable `CONNECTION_ORDERS_COMPONENTNAME`. The application code inside `backend` uses this environment variable to access the state store name and avoid hardcoding.
+With the connection name of `statestore` and a statestore name of `orders`, Radius will inject information related to the state store using the environment variable `CONNECTION_ORDERS_COMPONENTNAME`. The application code inside `backend` uses this environment variable to access the state store name and avoid hardcoding.
 
 ```js
 const stateStoreName = process.env.CONNECTION_ORDERS_COMPONENTNAME;

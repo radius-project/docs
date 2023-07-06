@@ -3,16 +3,27 @@ type: docs
 title: "RabbitMQ message broker link"
 linkTitle: "RabbitMQ"
 description: "Learn how to use a RabbitMQ link in your application"
+categories: "Schema"
 ---
+
+## Overview
 
 The `rabbitmq.com/MessageQueue` link offers a [RabbitMQ message broker](https://www.rabbitmq.com/).
 
 ## Resource format
 
-{{< tabs Values >}}
+{{< tabs Recipe Manual >}}
 
 {{< codetab >}}
-{{< rad file="snippets/rabbitmq-values.bicep" embed=true marker="//SAMPLE" >}}
+
+{{< rad file="snippets/rabbitmq-recipe.bicep" embed=true marker="//SAMPLE" >}}
+
+{{< /codetab >}}
+
+{{< codetab >}}
+
+{{< rad file="snippets/rabbitmq-manual.bicep" embed=true marker="//SAMPLE" >}}
+
 {{< /codetab >}}
 
 {{< /tabs >}}
@@ -31,9 +42,24 @@ The `rabbitmq.com/MessageQueue` link offers a [RabbitMQ message broker](https://
 |------|:--------:|-------------|---------|
 | application | n | The ID of the application resource this resource belongs to. | `app.id`
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
-| mode | y | Specifies how to build the Link resource. Options are to build automatically via 'recipe' or build manually via 'values'. Selection determines which set of fields to additionally require. | `recipe`
+| [resourceProvisioning](#resource-provisioning) | n | Specifies how the underlying service/resource is provisioned and managed. Options are to provision automatically via 'recipe' or provision manually via 'manual'. Selection determines which set of fields to additionally require. Defaults to 'recipe'. | `manual`
+| [recipe](#recipe) | n | Configuration for the Recipe which will deploy the backing infrastructure. | [See below](#recipe)
+| [resources](#resources)  | n | An array of IDs of the underlying resources for the link. | [See below](#resources)
 | queue | y | The name of the queue. | `'orders'` |
 | [secrets](#secrets)  | y | Configuration used to manually specify a RabbitMQ container or other service providing a RabbitMQ Queue. | See [secrets](#secrets) below.
+
+#### Recipe
+
+| Property | Required | Description | Example(s) |
+|------|:--------:|-------------|---------|
+| name | n | Specifies the name of the Recipe that should be deployed. If not set, the name defaults to `default`. | `name: 'azure-prod'`
+| parameters | n | An object that contains a list of parameters to set on the Recipe. | `{ port: '10040' }`
+
+#### Resources
+
+| Property | Required | Description | Example(s) |
+|----------|:--------:|-------------|------------|
+| id | n |  Resource ID of the supporting resource. |`queue.id`
 
 #### Secrets
 
@@ -43,21 +69,19 @@ Secrets are used when defining a RabbitMQ link with a container or external serv
 |----------|-------------|---------|
 | connectionString | The connection string to the Rabbit MQ Message Queue. Write only | `'amqp://${username}:${password}@${rmqContainer.properties.hostname}:${rmqContainer.properties.port}'`
 
-## Methods
+### Methods
 
 | Property | Description | Example |
 |----------|-------------|---------|
 | `connectionString()` | Returns the RabbitMQ connection string used to connect to the resource. | `amqp://guest:***@rabbitmq.svc.local.cluster:5672` |
 
-## Connections
+## Resource provisioning
 
-[Services]({{< ref container >}}) can define [connections]({{< ref appmodel-concept >}}) to links using the `connections` property. This allows the service to access properties of the link and contributes to visualization and health experiences.
+### Provision with a Recipe
 
-### Environment variables
+[Recipes]({{< ref custom-recipes >}}) automate infrastructure provisioning using approved templates.
+When no Recipe configuration is set Radius will use the Recipe registered as the **default** in the environment for the given resource. Otherwise, a Recipe name and parameters can optionally be set.
 
-Connections to the RabbitMQ link result in the following environment variables being set on your service:
+### Provision manually
 
-| Variable | Description |
-|----------|-------------|
-| `CONNECTION_<CONNECTION-NAME>-QUEUE` | The queue name. |
-| `CONNECTION_<CONNECTION-NAME>-CONNECTIONSTRING` | The connection string of the RabbitMQ. |
+If you want to manually manage your infrastructure provisioning outside of Recipes, you can set `resourceProvisioning` to `'manual'` and provide all necessary parameters and values and values that enable Radius to deploy or connect to the desired infrastructure.

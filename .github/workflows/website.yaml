@@ -1,4 +1,4 @@
-name: Project Radius Website
+name: Radius Website
 
 on:
   workflow_dispatch:
@@ -6,19 +6,11 @@ on:
     branches:
       - edge
       - v*.*
-    paths:
-      - 'docs/**'
-      - '.github/workflows/website.yaml'
-      - '.github/scripts/**'
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
       - edge
       - v*.*
-    paths:
-      - 'docs/**'
-      - '.github/workflows/website.yaml'
-      - '.github/scripts/**'
 
 jobs:
   build:
@@ -158,6 +150,22 @@ jobs:
           api_location: "site/" 
           output_location: ""
           skip_app_build: true
+      - name: Find SWA Comment
+        uses: peter-evans/find-comment@v2
+        id: fc
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: 'Azure Static Web Apps:'
+          direction: last
+      - name: Update SWA Comment
+        if: steps.fc.outputs.comment-id != ''
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          body: |
+            
+            **Password**: `Radiu$1234`
 
   close_pr_site:
     name: Close PR Staging Site

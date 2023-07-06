@@ -37,20 +37,10 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
     extensions: [
       {
         kind: 'daprSidecar'
-        provides: backendRoute.id
         appId: 'backend'
         appPort: 3000
       }
     ]
-  }
-}
-
-resource backendRoute 'Applications.Link/daprInvokeHttpRoutes@2022-03-15-privatepreview' = {
-  name: 'backend-route'
-  properties: {
-    environment: environment
-    application: app.id
-    appId: 'backend'
   }
 }
 
@@ -60,16 +50,14 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
     application: app.id
     container: {
       image: 'radius.azurecr.io/quickstarts/dapr-frontend:edge'
+      env: {
+        CONNECTION_BACKEND_APPID: 'backend'
+      }
       ports: {
         ui: {
           containerPort: 80
           provides: frontendRoute.id
         }
-      }
-    }
-    connections: {
-      backend: {
-        source: backendRoute.id
       }
     }
     extensions: [
@@ -106,7 +94,7 @@ resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview
   properties: {
     environment: environment
     application: app.id
-    mode: 'values'
+    resourceProvisioning: 'manual'
     type: 'state.redis'
     version: 'v1'
     metadata: {
