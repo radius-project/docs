@@ -16,7 +16,7 @@ env:
   ACTION_LINK: '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
 
 jobs:
-  build:
+  spellcheck:
     name: Spellcheck
     runs-on: ubuntu-latest
     steps:
