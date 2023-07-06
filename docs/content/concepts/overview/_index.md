@@ -27,7 +27,7 @@ At the heart of Radius is a new **application resource**, with an accompanying s
 
 <img alt="Diagram showing modeling an app with Radius" src="cloud-apps-radius.png" width="600px" />
 
-These new resources form the [**Radius app model**]({{< ref appmodel-concept >}}), which allow you to:
+These new resources form the [**Radius app model**]({{< ref application-graph>}}), which allow you to:
 
 - Visualize the entire application, including its dependencies and relationships
 - Investigate cross-app health and diagnostics, including dependencies and connections
@@ -88,4 +88,4 @@ As teams onboard to Radius and begin deploying across platforms, the tooling and
 
 Now that you have an overview of Radius, learn more about the Radius app model:
 
-{{< button text="Learn about the Radius application model" page="appmodel-concept" size="btn-lg" color="success" >}}
+{{< button text="Learn about the Radius application model" page="application-graph" size="btn-lg" color="success" >}}

@@ -19,7 +19,7 @@ You can view and download the source code in the [samples repo](https://github.c
 
 ## Containers
 
-This Radius application will have two [containers]({{< ref appmodel-concept >}}):
+This Radius application will have two [containers]({{< ref application-graph>}}):
 
 - A frontend UI for users to place orders. Written with .NET Blazor.
 - A backend order processing microservice. Written in Node.JS.

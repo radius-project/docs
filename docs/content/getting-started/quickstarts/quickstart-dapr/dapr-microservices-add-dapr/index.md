@@ -42,9 +42,9 @@ You can choose between a Redis container or Azure Table Storage
 
 Radius captures both logical relationships and related operational details. Examples of this include: wiring up connection strings, granting permissions, or restarting components when a dependency changes.
 
-The [`connections` property]({{< ref "appmodel-concept" >}}) is used to configure relationships between from a service to another resource.
+The [`connections` property]({{< ref "application-graph" >}}) is used to configure relationships between from a service to another resource.
 
-Add a [`connection`]({{< ref "appmodel-concept" >}}) from `backend` to the `orders` state store. This declares the _intention_ from the `backend` container to communicate with the `statestore` resource
+Add a [`connection`]({{< ref "application-graph" >}}) from `backend` to the `orders` state store. This declares the _intention_ from the `backend` container to communicate with the `statestore` resource
 
 {{< rad file="snippets/connection.bicep" embed=true marker="//BACKEND" replace-key-container="//CONTAINER" replace-value-container="container: {...}" replace-key-extensions="//EXTENSIONS" replace-value-extensions="extensions: [...]" >}}
 

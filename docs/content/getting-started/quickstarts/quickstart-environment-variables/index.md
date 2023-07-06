@@ -59,7 +59,7 @@ Next, add to `app.bicep` a [Mongo link]({{< ref links-resources >}}), leveraging
 
 ## Step 5: Connect to the Mongo Link
 
-Connections from a container to a link result in environment variables for connection information [automatically being set on the container]({{< ref "appmodel-concept#injected-values" >}}). Update your container definition to add a connection to the new Mongo link:
+Connections from a container to a link result in environment variables for connection information automatically being set on the container. Update your container definition to add a connection to the new Mongo link:
 
 {{< rad file="snippets/3-app.bicep" embed=true marker="//CONTAINER" >}}
 
