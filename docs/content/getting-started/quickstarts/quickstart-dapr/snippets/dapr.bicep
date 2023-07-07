@@ -141,7 +141,6 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
       ports: {
         ui: {
           containerPort: 80
-          provides: frontendRoute.id
         }
       }
     }

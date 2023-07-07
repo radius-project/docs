@@ -19,7 +19,7 @@ This quickstart will teach you:
 ## Prerequisites
 
 - [Radius CLI]({{< ref "getting-started" >}})
-- [Radius environment]({{< ref "environments-concept" >}})
+- [Radius environment]({{< ref "operations/environments/overview" >}})
 - [kubectl CLI](https://kubernetes.io/docs/tasks/tools/)
 - [Kubernetes cluster]({{< ref "supported-clusters" >}})
    - Ensure that your cluster creation and Radius installation are configured to enable public endpoint override (e.g. instructions for [k3d here]({{< ref "supported-clusters#tabs-0-k3d" >}}))
@@ -81,7 +81,7 @@ Begin by creating a new file named `dapr.bicep` with a Radius application that c
 
 1. Press CTRL+C to terminate the port-forward
 
-## Step 3: Define `frontend` container with route and gateway
+## Step 3: Define `frontend` container
 
 Add a `frontend` [container]({{< ref container >}}) which will serve as the application's user interface.
 
@@ -109,7 +109,7 @@ Add a `frontend` [container]({{< ref container >}}) which will serve as the appl
 
 ## Step 5. Test your application
 
-1. Navigate to the endpoint (e.g. [http://localhost:8081](http://localhost:8081)) in your browser to view and interact with the application:
+1. In your browser, navigate to the endpoint (e.g. [http://localhost:8081](http://localhost:8081)) automatically provided by Radius to view and interact with the application:
 
    <img src="frontend.png" alt="Screenshot of frontend application" width=500 >
 
@@ -136,4 +136,6 @@ Add a `frontend` [container]({{< ref container >}}) which will serve as the appl
   - [Dapr documentation](https://docs.dapr.io/)
   - [Dapr quickstarts](https://github.com/dapr/quickstarts/tree/v1.0.0/hello-world)
 
-<br>{{< button text="Try another quickstart" page="quickstarts" >}}
+<br>
+
+{{< button text="Try another quickstart" page="quickstarts" >}}
