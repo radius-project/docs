@@ -104,12 +104,7 @@ Add a `frontend` [container]({{< ref container >}}) which will serve as the appl
       dapr            Applications.Core/applications
       backend         Applications.Core/containers
       frontend        Applications.Core/containers
-      gateway         Applications.Core/gateways
-      frontend-route  Applications.Core/httpRoutes
       statestore      Applications.Link/daprStateStores
-   
-   Public Endpoints:
-      gateway         Applications.Core/gateways http://localhost:8081
    ```
 
 ## Step 5. Test your application
