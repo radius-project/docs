@@ -19,7 +19,7 @@
     {{ end }}
     {{ $editURL := printf "%s/edit/%s" $gh_repo $gh_repo_path }}
     {{ $createURL := printf "%s/edit/%s" $gh_repo $gh_repo_path }}
-    {{ $issuesURL := printf "%s/issues/new?title=%s" $gh_repo (safeURL $.Title )}}
+    {{ $issuesURL := printf "%s/issues/new/choose" $gh_repo }}
     {{ $newPageStub := resources.Get "stubs/new-page-template.md" }}
     {{ $newPageQS := querify "value" $newPageStub.Content "filename" "change-me.md" | safeURL }}
     {{ $newPageURL := printf "%s/new/%s?%s"  $gh_repo $gh_repo_path $newPageQS }}
@@ -27,7 +27,7 @@
     <a href="{{ $editURL }}" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
     <a href="{{ $issuesURL }}" target="_blank"><i class="fab fa-github fa-fw"></i> New docs issue</a>
     {{ if $gh_project_repo }}
-      {{ $project_issueURL := printf "%s/issues/new" $gh_project_repo }}
+      {{ $project_issueURL := printf "%s/issues/new/choose" $gh_project_repo }}
       <a href="{{ $project_issueURL }}" target="_blank"><i class="fas fa-tasks fa-fw"></i> New project issue</a>
     {{ end }}
 

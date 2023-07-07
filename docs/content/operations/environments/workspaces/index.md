@@ -1,10 +1,10 @@
 ---
 type: docs
-title: "Radius workspaces"
+title: "Overview: Radius workspaces"
 linkTitle: "Workspaces"
 description: "Learn how to handle multiple Radius platforms and environments with workspaces"
-weight: 100
-categories: "How-To"
+weight: 200
+categories: "Overview"
 ---
 
 Workspaces allow you to manage multiple Radius platforms and environments using a local configuration file. You can easily define and switch between workspaces to deploy and manage applications across local, test, and production environments.

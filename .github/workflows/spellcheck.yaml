@@ -6,22 +6,20 @@ on:
     branches:
       - v*.*
       - edge
-    paths:
-      - 'docs/**'
-      - '.github/workflows/spellcheck.yaml'
-      - '.github/config/**'
   pull_request:
     types: [opened, synchronize, reopened]
     branches:
       - v*.*
       - edge
-    paths:
-      - 'docs/**'
-      - '.github/workflows/spellcheck.yaml'
-      - '.github/config/**'
+
+env:
+  ACTION_LINK: '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
+
+concurrency:
+  group: spellcheck-${{ github.ref }}-${{ github.event.pull_request.number || github.sha }}
 
 jobs:
-  build:
+  spellcheck:
     name: Spellcheck
     runs-on: ubuntu-latest
     steps:
@@ -31,3 +29,31 @@ jobs:
       uses: rojopolis/spellcheck-github-actions@0.27.0
       with:
         config_path: .github/config/.pyspelling.yml
+    - name: Post GitHub workkflow output on failure
+      if: failure()
+      run: |
+        echo "## :x: Spellcheck Failed" >> $GITHUB_STEP_SUMMARY
+        echo "There are spelling errors in your PR. Visit [the workflow output](${{ env.ACTION_LINK }}) to see what words are failing." >> $GITHUB_STEP_SUMMARY
+        echo "### Adding new words" >> $GITHUB_STEP_SUMMARY
+        echo "If you are adding a new custom word refer to the [docs guide](https://docs.radapp.dev/contributing/docs/#spelling)" >> $GITHUB_STEP_SUMMARY
+    - name: Post GitHub workflow output on success
+      run: |
+        echo "## :white_check_mark: Spellcheck Passed" >> $GITHUB_STEP_SUMMARY
+        echo "There are no spelling errors in your PR." >> $GITHUB_STEP_SUMMARY
+    - name: Post GitHub comment on failure
+      if: failure()
+      uses: marocchino/sticky-pull-request-comment@v2
+      with:
+        header: spellcheck
+        recreate: true
+        message: |
+          ## :x: Spellcheck Failed
+          There are spelling errors in your PR. Visit [the workflow output](${{ env.ACTION_LINK }}) to see what words are failing.
+          ### Adding new words
+          If you are adding a new custom word refer to the [docs guide](https://docs.radapp.dev/contributing/docs/#spelling)
+    - name: Clear GitHub comment on success
+      uses: marocchino/sticky-pull-request-comment@v2
+      continue-on-error: true
+      with:
+        header: spellcheck
+        delete: true
