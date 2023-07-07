@@ -155,25 +155,4 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   }
 }
 
-// The frontend route that is used by the gateway
-resource frontendRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
-  name: 'frontend-route'
-  properties: {
-    application: app.id
-  }
-}
-
-// The gateway that provides a public endpoint and routes traffic to the frontend container
-resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
-  name: 'gateway'
-  properties: {
-    application: app.id
-    routes: [
-      {
-        path: '/'
-        destination: frontendRoute.id
-      }
-    ]
-  }
-}
 //FRONTEND
