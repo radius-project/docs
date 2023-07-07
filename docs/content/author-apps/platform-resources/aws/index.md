@@ -4,7 +4,7 @@ title: "AWS resources"
 linkTitle: "AWS"
 description: "Deploy and connect to AWS resources in your application"
 weight: 900
-categories: "Concept"
+categories: "Overview"
 tags: ["AWS"]
 ---
 
