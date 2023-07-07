@@ -109,13 +109,6 @@ Add a `frontend` [container]({{< ref container >}}) which will serve as the appl
 
 ## Step 5. Test your application
 
-1. Fetch the public endpoint that has been made available to your application automatically by the [`Gateway`]({{< ref "gateway#hostname-generation">}}):
-
-   ```sh
-   Public Endpoints:
-      gateway         Applications.Core/gateways http://localhost:8081
-   ```
-
 1. Navigate to the endpoint (e.g. [http://localhost:8081](http://localhost:8081)) in your browser to view and interact with the application:
 
    <img src="frontend.png" alt="Screenshot of frontend application" width=500 >
