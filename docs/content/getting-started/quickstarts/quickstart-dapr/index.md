@@ -83,7 +83,7 @@ Begin by creating a new file named `dapr.bicep` with a Radius application that c
 
 ## Step 3: Define `frontend` container with route and gateway
 
-Add a `frontend` [container]({{< ref container >}}) which will serve as the application's frontend, along with an [HttpRoute]({{< ref httproute >}}) and [Gateway]({{< ref gateway >}}) to expose the application UI on a public endpoint:
+Add a `frontend` [container]({{< ref container >}}) which will serve as the application's user interface.
 
 {{< rad file="snippets/dapr.bicep" embed=true marker="//FRONTEND" >}}
 
