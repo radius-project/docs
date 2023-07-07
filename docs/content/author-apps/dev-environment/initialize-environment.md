@@ -25,7 +25,7 @@ Radius development environments enable you to quickly get started with Radius an
 
 ## How-to: Initialize a new dev environment
 
-1. Initialize a new [Radius environment]{{(< ref "operations/environments/overview">)}} with `rad init --dev` command:
+1. Initialize a new [Radius environment]({{< ref "operations/environments/overview">}}) with `rad init --dev` command:
    ```bash
    rad init --dev
    ```

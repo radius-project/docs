@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Overview: Application networking"
-linkTitle: "Network communication"
+linkTitle: "Application networking"
 description: "Learn how to add networking to your Radius application"
 weight: 100
 categories: "Overview"
