@@ -42,4 +42,4 @@ Radius allows the eShop on Dapr application to:
 
 {{< button text="View eShop reference app in samples" githubRepo="samples" githubPath="reference-apps/eshop-dapr" color="success" size="btn-lg" >}}
 
-*Visit the [GitHub docs]({{< ref github >}}) if you need access to the organization*
+*Fill out [this form](https://aka.ms/ProjectRadius/GitHubAccess) if you need access to the organization*

@@ -13,7 +13,7 @@ Use a free [GitHub Codespace](https://github.com/features/codespaces) to test ou
 
 <a class="btn btn-primary" href="https://aka.ms/ProjectRadius/Codespace" role="button" target="_blank">Launch a new Codespace</a>
 
-_Visit the [GitHub docs]({{< ref github >}}) if you need access to the organization._
+_Fill out [this form](https://aka.ms/ProjectRadius/GitHubAccess) if you need access to the organization._
 {{< /alert >}}
 
 ## Install `rad` CLI

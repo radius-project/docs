@@ -42,4 +42,4 @@ Adding Radius to the eShop on containers application allows teams to:
 
 {{< button text="View eShop reference app in samples" githubRepo="samples" githubPath="reference-apps/eshop" color="success" size="btn-lg" >}}
 
-*Visit the [GitHub docs]({{< ref github >}}) if you need access to the organization*
+*Fill out [this form](https://aka.ms/ProjectRadius/GitHubAccess) if you need access to the organization*
