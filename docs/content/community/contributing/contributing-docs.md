@@ -3,7 +3,7 @@ type: docs
 title: "Contributing to Radius documentation"
 linkTitle: "Docs"
 description: "How to contribute to the Radius documentation"
-weight: 200
+weight: 300
 slug: "docs"
 ---
 

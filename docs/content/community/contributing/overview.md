@@ -1,10 +1,9 @@
 ---
 type: docs
-title: "Contributing to Radius"
-linkTitle: "Contributing"
-description: "Guides and requirements for contributing to Radius"
-weight: 80
-no_list: true
+title: "Contributing to Radius overview"
+linkTitle: "Overview"
+description: "Learn how to contribute to Radius"
+weight: 100
 ---
 
 We welcome contributions to the Radius! Check  out  the following table to learn where and how you can contribute:
@@ -17,3 +16,11 @@ We welcome contributions to the Radius! Check  out  the following table to learn
 | **Radius Control Plane** | Implements operations on the application model as a sequence of resource management operations | [project-radius/radius](https://github.com/project-radius/radius/tree/main/docs/contributing/contributing-code) |
 | **Templates** | Deployable starter templates for getting up and running with Radius | [project-radius/templates](https://github.com/project-radius/templates) |
 | **Docs** | Documentation for Radius | [Contributing to docs]({{< ref contributing-docs >}}) |
+
+## GitHub organization
+
+Radius is a community-driven project that lives on GitHub within the [Radius organization](https://github.com/project-radius).
+
+### Access
+
+Visit https://aka.ms/ProjectRadius/GitHubAccess to request access to the Radius GitHub organization.

@@ -3,7 +3,7 @@ type: docs
 title: "Frequently asked questions"
 linkTitle: "FAQ"
 description: "Commonly asked questions about best practices"
-weight: 999
+weight: 300
 ---
 
 ## Applications

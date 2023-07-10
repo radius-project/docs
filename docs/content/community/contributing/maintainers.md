@@ -1,16 +1,18 @@
 ---
 type: docs
-title: "Maintaining Radius docs"
-linkTitle: "Docs"
-weight: 200
-description: "Learn about the Radius docs maintenance process"
+title: "Maintainer guides for Radius"
+linkTitle: "Maintainers"
+description: "Guides and requirements for Radius maintainers"
+weight: 999
 ---
+
+## Docs repo
 
 In this guide, you’ll learn how to perform routine Radius docs maintainer and approver responsibilities. In order to successfully accomplish these tasks, you need either approver or maintainer status in the [`project-radius/docs`](https://github.com/project-radius/docs) repo. 
 
 To learn how to contribute to Radius docs, review the [Contributor guide]({{< ref contributing-docs >}}).
 
-## Branch guidance
+### Branch guidance
 
 The Radius docs handles branching differently than most code repositories. Instead of a `main` branch, every branch is labeled to match the major and minor version of a runtime release, plus an `edge` branch for in-flight work. For example, the `v1.0` branch contains the docs for the `v1.0` release. The `edge` branch contains the latest in-flight work.
 

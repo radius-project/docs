@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "Radius Community"
-linkTitle: "Community"
+title: "Radius Community Overview"
+linkTitle: "Overview"
 description: "Information about the Radius community"
-weight: 85
+weight: 100
 ---
 
 Welcome to the Radius community. We are currently in a private release phase which is open to Microsoft FTEs and select partners. The team is working on a public preview release which will be announced on this page.
@@ -40,8 +40,8 @@ To present a specific topic on the next Radius community call start by filling o
 
 ## GitHub Issues & repositories
 
-GitHub access is optional and not required to try out and run Radius. If you would like to directly file Issues and have access to the source code, please contact your Radius Core Team contact.
+GitHub access is optional and not required to try out and run Radius. If you would like to directly file Issues and have access to the source code, refer to the [GitHub organization docs]({{< ref "community/contributing/overview" >}}).
 
 ## How can I get involved?
 
-One of the easiest ways to contribute is to participate in discussions at community engagements or the Teams channel. We are always seeking feedback from. Suggestions around improving the product and docs are always welcome.
+Visit the [Radius contribution docs]({{< ref contributing >}}) for more information on how to contribute to Radius.
