@@ -15,9 +15,9 @@ This guide will show you how to integrate Radius with cert-manager and Let's Enc
 
 - [rad CLI]({{< ref getting-started >}})
 - [kubectl CLI](https://kubernetes.io/docs/tasks/tools/)
-- Domain name + DNS A-record
-   - In order to setup TLS communication to Radius you will need to make sure you have a domain name and DNS A-record pointing to your Kubernetes cluster's IP address. This is required for Let's Encrypt to issue a certificate and for traffic to be routed to your application.
-   - If running Radius on an Azure Kubernetes Service (AKS) cluster you can use a [DNS label](https://learn.microsoft.com/azure/virtual-network/ip-services/public-ip-addresses#dns-name-label) to create a DNS A-record pointing to your cluster. Refer to the [tips and tricks](#using-an-azure-dns-label) section for more information.
+- Domain name + DNS A-record: In order to setup TLS communication to Radius you will need to make sure you have a domain name and DNS A-record pointing to your Kubernetes cluster's IP address. This is required for Let's Encrypt to issue a certificate and for traffic to be routed to your application.
+   - If running Radius on an Azure Kubernetes Service (AKS) cluster you can optionally use a [DNS label](https://learn.microsoft.com/azure/virtual-network/ip-services/public-ip-addresses#dns-name-label) to create a DNS A-record pointing to your cluster. Refer to the [tips and tricks](#using-an-azure-dns-label) section for more information.
+   - If running Radius on an Elastic Kubernetes Service (EKS) cluster you can optionally leverage [Application Load Balancer](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html) for a hosted DNS name and record.
 
 ## Step 1: Initialize a Radius environment
 
