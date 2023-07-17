@@ -8,13 +8,13 @@ weight: 200
 
 ## Radius applications
 
-Radius adds a new [application resource]({{< ref "/author-apps/application" >}}) which app teams can use to define their entire application. This includes all the compute, data, and infrastructure that makes up an application. However, instead of defining a list of resources, Radius applications are defined as a graph of resources and relationships.
+Radius offers an [application resource]({{< ref "/author-apps/application" >}}) which teams can use to define and deploy their entire application, including all of the compute, relationships, and infrastructure within in. Since Radius applications are defined as a graph of relationships between deployed resources, it enables more advanced visualizations than simply a list of resources.
 
 <img src="application.png" alt="A diagram showing an application and all it's resources" width=400px >
 
 ## Graphs are better than lists
 
-Within a Radius application developers can express both the resources (_containers, databases, message queues, etc._), as well as all the relationships between them. This forms the Radius application graph.
+Within an application deployed with Radius, developers can express both the resources (_containers, databases, message queues, etc._), as well as all the relationships between them. This forms the Radius application graph. This graph is a powerful, because it allows Radius to understand the relationships between resources, and automate the deployment and configuration of your application. Plus, it allows you to visualize your application in a way that is more intuitive than a list of resources.
 
 <img src="list-to-graph.png" alt="A diagram showing the move from a set of infrastructure lists to a graph of resources" width=600px >
 
@@ -77,6 +77,6 @@ GET /planes/radius/local/resourceGroups/default/providers/Applications.Core/cont
 
 ## Next step
 
-Now that you have an understanding of the Radius app graph, learn how you can deploy Radius application to prepared landing zones with Radius Environments:
+Now that you have an understanding of the Radius app graph, learn how you can deploy Radius applications to prepared landing zones with Radius Environments:
 
 {{< button text="Radius Environments" page="environments-concept" color="success" >}}
