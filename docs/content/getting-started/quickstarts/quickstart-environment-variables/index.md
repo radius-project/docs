@@ -17,7 +17,7 @@ This quickstart will teach you:
 ## Prerequisites
 
 - [Radius CLI]({{< ref "getting-started" >}})
-- [Radius environment]({{< ref "operations/environments" >}})
+- [Radius environment]({{< ref "operations/environments/overview" >}})
 
 ## Step 1: Model an app and container
 
