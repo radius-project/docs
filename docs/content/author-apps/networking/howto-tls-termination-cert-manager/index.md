@@ -101,7 +101,7 @@ Once the deployment is complete the public endpoint of your application will be 
 
 ### Using an Azure DNS label
 
-If you are running Radius on an Azure Kubernetes Service (AKS) cluster you can use a [DNS label](https://learn.microsoft.com/azure/virtual-network/ip-services/public-ip-addresses#dns-name-label) to create a DNS A-record pointing to your cluster. This is useful if you don't have a domain name or don't want to use a subdomain foor your dev/test environments.
+If you are running Radius on an Azure Kubernetes Service (AKS) cluster you can use a [DNS label](https://learn.microsoft.com/azure/virtual-network/ip-services/public-ip-addresses#dns-name-label) to create a DNS A-record pointing to your cluster. This is useful if you don't have a domain name or don't want to use a subdomain for your dev/test environments.
 
 To setup a DNS label for your AKS cluster:
 
