@@ -60,9 +60,14 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
     container: {
       // This image is where the app's frontend code lives
       image: 'radius.azurecr.io/quickstarts/dapr-frontend:edge'
+      env: {
+      // An environment variable to tell the frontend container where to find the backend
+      CONNECTION_BACKEND_APPID: 'backend'
+      }
+      // The frontend container exposes port 8080, which is used to serve the UI
       ports: {
         ui: {
-          containerPort: 80
+          containerPort: 8080
         }
       }
     }

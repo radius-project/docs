@@ -22,7 +22,6 @@ This quickstart will teach you:
 - [Radius environment]({{< ref "operations/environments/overview" >}})
 - [kubectl CLI](https://kubernetes.io/docs/tasks/tools/)
 - [Kubernetes cluster]({{< ref "supported-clusters" >}})
-   <!-- - Ensure that your cluster creation and Radius installation are configured to enable public endpoint override (e.g. instructions for [k3d here]({{< ref "supported-clusters#tabs-0-k3d" >}})) -->
 - [Dapr installation into your cluster](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/)
 - [Visual Studio Code](https://code.visualstudio.com/) (recommended)
   - The [Radius VSCode extension]({{< ref "getting-started" >}}) is highly recommended to provide syntax highlighting, completion, and linting
@@ -34,7 +33,7 @@ Begin by creating a new file named `dapr.bicep` with a Radius application that c
 
 {{< rad file="snippets/dapr.bicep" embed=true marker="//BACKEND" >}}
 
-## Step 2: Deploy the backend application
+## Step 2: Deploy the `backend` application
 
 1. Deploy the application's `backend` container and Dapr state store:
 
@@ -66,37 +65,23 @@ Begin by creating a new file named `dapr.bicep` with a Radius application that c
     statestore        applications.link/daprstatestores
    ```
 
-1. To test the Dapr state store, open a local tunnel on port 3000:
-
-   ```sh
-   rad resource expose containers backend --application dapr --port 3000
-   ```
-
-1. Visit the the URL [http://localhost:3000/order](http://localhost:3000/order) in your browser. You should see the following message, which indicates that the `backend` container is able to communicate with the Dapr state store:
-
-   ```json
-   {"message":"no orders yet"}
-   ```
-
-1. Press CTRL+C to terminate the port-forward
-
-## Step 3: Define `frontend` container
+## Step 3: Define the `frontend` container
 
 Add a `frontend` [container]({{< ref container >}}) which will serve as the application's user interface.
 
 {{< rad file="snippets/dapr.bicep" embed=true marker="//FRONTEND" >}}
 
-## Step 4. Deploy the frontend application
+## Step 4. Deploy and run the `frontend` application
 
-1. Deploy and run the application:
+1. Use Radius to deploy and run the application with a single command:
 
    ```sh
    rad run dapr.bicep
    ```
 
-1. Your console should now display deployment logs, which you may check to confirm the application was successfully deployed:
+1. Your console should output a series deployment logs, which you may check to confirm the application was successfully deployed:
 
-   ```sh
+   ```
    Deployment Complete
 
    Resources:
@@ -108,20 +93,7 @@ Add a `frontend` [container]({{< ref container >}}) which will serve as the appl
 
 ## Step 5. Test your application
 
-1. Run the following command in a new terminal window to get the `frontend` endpoint that was automatically provided by Radius:
-
-   ```sh
-   rad app status -a dapr
-   ```
-
-   ```sh
-   APPLICATION       RESOURCES
-   dapr              3
-   GATEWAY           ENDPOINT
-   gateway           <PUBLIC_ENDPOINT>
-   ```
-
-1. In your browser, navigate to the endpoint (e.g. [http://localhost:8081](http://localhost:8081)) to view and interact with your application:
+In your browser, navigate to the endpoint (e.g. [http://localhost:8080](http://localhost:8080)) to view and interact with your application:
 
    <img src="frontend.png" alt="Screenshot of frontend application" width=500 >
 
