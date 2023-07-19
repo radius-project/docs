@@ -89,4 +89,4 @@ The [Kubernetes Metadata extension]({{< ref "/operations/platforms/kubernetes/ku
 
 ## Further reading
 
-- [Radius environments]({{< ref "operations/environments" >}})
+- [Radius environments]({{< ref "operations/environments/overview" >}})
