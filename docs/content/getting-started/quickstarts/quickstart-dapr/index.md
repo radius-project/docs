@@ -114,12 +114,6 @@ In your browser, navigate to the endpoint (e.g. [http://localhost:8080](http://l
    rad app delete -a dapr
    ```
 
-1. Delete the Redis Kubernetes resources:
-
-   ```bash
-   kubectl delete statefulset,service redis
-   ```
-
 ## Next steps
 
 - If you'd like to try another tutorial with your existing environment, go back to the [Radius quickstarts]({{< ref quickstarts >}}) page.
