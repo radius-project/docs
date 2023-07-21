@@ -15,7 +15,7 @@ This quickstart will teach you:
 - How to use Radius to deploy a Dapr microservices sample application for an online shop
 - How [Dapr and Radius]({{< ref dapr-resources >}}) seamlessly work together
 
-For more details on the app and access to the source code, visit the `quickstarts/dapr` directory in the [samples repo](https://github.com/project-radius/samples). _For access to the project-radius GitHub org fill out [this form](https://aka.ms/ProjectRadius/GitHubAccess)._
+For more details on the app and access to the source code, visit the `quickstarts/dapr` directory in the [samples repo](https://github.com/project-radius/samples). _For access to the project-radius GitHub org, please complete and submit [this form](https://aka.ms/ProjectRadius/GitHubAccess)._
 
 ## Prerequisites
 
@@ -38,31 +38,38 @@ Begin by creating a new file named `dapr.bicep` with a Radius application that c
 1. Deploy the application's `backend` container and Dapr state store:
 
    ```sh
-   rad deploy dapr.bicep
+   rad run dapr.bicep
    ```
 
-1. You can confirm all the resources were deployed by running:
+1. You can confirm all the resources were deployed by looking for `dapr`, `backend`, and `statestore` resources in the console logs:
+   ```
+   Deployment Complete
+
+   Resources:
+    dapr            Applications.Core/applications
+    backend         Applications.Core/containers
+    statestore      Applications.Link/daprStateStores
+   ```
+
+1. The `rad run` command automatically sets up port forwarding. Visit the the URL [http://localhost:3000/order](http://localhost:3000/order) in your browser. You should see the following message, which confirms the container is able to communicate with the state store:
+
+   ```
+   {"message":"no orders yet"}
+   ```
+
+1. Press CTRL+C to terminate the port-forward.
+
+1. Confirm that the Dapr Redis statestore was successfully created:
 
    ```sh
-   rad resource list containers --application dapr
+   dapr components -k -A
    ```
 
-   and:
-
-   ```sh
-   rad resource list daprstatestores --application dapr
-   ```
-
-   You should see both `backend` and `statestore` components in your `dapr` application:
+   You should see the following output:
 
    ```
-    RESOURCE      TYPE
-    backend       applications.core/containers
-   ```
-
-   ```
-    RESOURCE        TYPE
-    statestore      applications.link/daprstatestores
+   NAMESPACE      NAME         TYPE          VERSION  SCOPES  CREATED               AGE  
+   default-dapr   statestore   state.redis   v1               2023-07-21 16:04.27   21m  
    ```
 
 ## Step 3: Define the `frontend` container
@@ -79,7 +86,7 @@ Add a `frontend` [container]({{< ref container >}}) which will serve as the appl
    rad run dapr.bicep
    ```
 
-1. Your console should output a series deployment logs, which you may check to confirm the application was successfully deployed:
+1. Your console should output a series deployment logs, which you may check to confirm the `frontend` container was successfully deployed:
 
    ```
    Deployment Complete
