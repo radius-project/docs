@@ -14,20 +14,20 @@ This quickstart will teach you:
 
 - How to use Radius to deploy a Dapr microservices sample application for an online shop
 - How [Dapr and Radius]({{< ref dapr-resources >}}) seamlessly work together
-- To see more details of the app and access the source code, visit the `quickstarts/dapr` directory in the [samples repo](https://github.com/project-radius/samples)
+
+For more details on the app and access to the source code, visit the `quickstarts/dapr` directory in the [samples repo](https://github.com/project-radius/samples). _For access to the project-radius GitHub org fill out [this form](https://aka.ms/ProjectRadius/GitHubAccess)._
 
 ## Prerequisites
 
+- [Kubernetes cluster]({{< ref "supported-clusters" >}})
 - [Radius CLI]({{< ref "getting-started" >}})
 - [Radius environment]({{< ref "operations/environments/overview" >}})
-- [kubectl CLI](https://kubernetes.io/docs/tasks/tools/)
-- [Kubernetes cluster]({{< ref "supported-clusters" >}})
-- [Dapr installation into your cluster](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/)
+- [Dapr installed on your Kubernetes cluster](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/)
 - [Visual Studio Code](https://code.visualstudio.com/) (recommended)
   - The [Radius VSCode extension]({{< ref "getting-started" >}}) is highly recommended to provide syntax highlighting, completion, and linting
   - Although not recommended, you can also complete this quickstart with any basic text editor
 
-## Step 1: Define the application `backend` container and Dapr state store resources
+## Step 1: Define the application, `backend` container, and Dapr state store
 
 Begin by creating a new file named `dapr.bicep` with a Radius application that consists of a `backend` container and Dapr state store with Redis:
 
@@ -61,8 +61,8 @@ Begin by creating a new file named `dapr.bicep` with a Radius application that c
    ```
 
    ```
-    RESOURCE      TYPE
-    statestore        applications.link/daprstatestores
+    RESOURCE        TYPE
+    statestore      applications.link/daprstatestores
    ```
 
 ## Step 3: Define the `frontend` container
