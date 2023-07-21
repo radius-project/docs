@@ -1,10 +1,10 @@
 ---
 type: docs
-title: "Radius workspaces"
+title: "Overview: Radius workspaces"
 linkTitle: "Workspaces"
 description: "Learn how to handle multiple Radius platforms and environments with workspaces"
 weight: 200
-categories: "How-To"
+categories: "Overview"
 ---
 
 Workspaces allow you to manage multiple Radius platforms and environments using a local configuration file. You can easily define and switch between workspaces to deploy and manage applications across local, test, and production environments.
@@ -141,8 +141,3 @@ When you have multiple environments initialized for different purposes like stag
         scope: /planes/radius/local/resourceGroups/staging
     ```
 1. You can now deploy applications to both staging and prod using [`rad deploy`]({{< ref rad_deploy >}}), specifying the `-w` flag:
-
-    ```sh 
-    rad deploy -w staging
-    ```
-    This will deploy the applications to the staging environment.

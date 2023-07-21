@@ -1,11 +1,11 @@
 ---
 type: docs
-title: "Overview: Cloud providers"
+title: "How-To: Setup Cloud providers"
 linkTitle: "Cloud providers"
 description: "Deploy across clouds and platforms with Radius cloud providers"
 weight: 300
 categories: "How-To"
-tags: ["AWS", "Azure"]
+tags: ["AWS","Azure"]
 ---
 
 Radius cloud providers allow you to deploy and connect to cloud resources across various cloud platforms. For example, you can use the Radius Azure provider to run your application's services in your Kubernetes cluster, while deploying Azure resources to a specified Azure subscription and resource group.
@@ -38,7 +38,7 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
 
 #### Add a cloud provider when initializing an environment
 
-1. Initialize a new [environment]({{< ref "operations/environments" >}}) with `rad init`
+1. Initialize a new [environment]({{< ref "operations/environments/overview" >}}) with `rad init`
 1. Select the Kubernetes cluster to install Radius into. Enter an environment name and base Kubernetes namespace to deploy the apps into.
 1. Select "yes" to add a cloud provider and select Azure as the cloud provider
 1. Specify your Azure subscription and resource group
@@ -83,7 +83,7 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
 
 #### Add a cloud provider when initializing an environment
 
-1. Initialize a new [environment]({{< ref "operations/environments" >}}) with `rad init`
+1. Initialize a new [environment]({{< ref "operations/environments/overview" >}}) with `rad init`
 1. Select the Kubernetes cluster to install Radius into. Enter an environment name and base Kubernetes namespace to deploy the apps into.
 1. Select "yes" to add a cloud provider and select AWS as the cloud provider
 

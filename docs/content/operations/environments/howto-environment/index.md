@@ -8,11 +8,26 @@ categories: "How-To"
 tags: ["environments"]
 ---
 
+When setting up a Radius Environment you can use the RAD CLI for an easy interactive option or an advanced manual option.
+
+For more information on what is deployed and created during a Radius Environment creation see the [Radius Environment overview]({{< ref environments-concept >}}).
+
 ## Pre-requisites
 
-Begin by ensuring you are using a compatible [Kubernetes cluster]({{< ref "/operations/platforms/kubernetes" >}})
+- Install the [rad CLI]({{< ref getting-started >}})
+- Setup a supported [Kubernetes cluster]({{< ref "/operations/platforms/kubernetes" >}})
 
-   *Visit the [Kubernetes platform docs]({{< ref "/operations/platforms/kubernetes" >}}) for a list of supported clusters and specific cluster requirements.*
+## Create a Radius Environment(Interactive)
+
+//
+I'm thinkin we might be better off modeling this page like the https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/ page, where there is an easy (CLI) method and an advanced (Helm) option.
+
+For this I'm thinking we have the easy, interactive option and then the advanced manual option with the cloud providers within it
+//
+
+
+
+## Create a Radius Environment(Advanced)
 
 {{< tabs "Interactive" "Manual" >}}
 
