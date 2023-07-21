@@ -62,7 +62,7 @@ iwr -useb "https://get.radapp.dev/tools/rad/install.ps1" | iex
 
 You may need to refresh your $PATH environment variable to access `rad`:
 ```powershell
-$Env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")
+$Env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")
 ```
 {{< /latest >}}
 {{< edge >}}
