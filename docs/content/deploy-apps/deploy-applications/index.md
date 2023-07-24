@@ -8,9 +8,9 @@ categories: "Overview"
 tags: ["deployments"]
 ---
 
-## Deploy a Radius applications
+## Deploy a Radius application
 
-Once you have [Authored an application]({{< ref author-apps >}}), you can deploy it to an environment via rad CLI using the [`rad deploy`]({{< ref rad_deploy>}})
+Once you have [authored an application]({{< ref author-apps >}}), you can deploy it to an environment via rad CLI using the [`rad deploy`]({{< ref rad_deploy>}})
 
 ```bash
  rad deploy app.bicep
@@ -26,6 +26,8 @@ You can also deploy an application with parameters using the [`rad deploy`]({{< 
  ```
 
  This will deploy the application to the created Radius environment injecting the parameters into the application.
+
+ You can find more examples of deploying applications with parameters [here]({{< ref "rad_deploy#examples" >}}).
 
 
 ## Run an application
