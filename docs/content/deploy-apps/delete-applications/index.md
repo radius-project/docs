@@ -3,7 +3,7 @@ type: docs
 title: "Overview: Deleting applications from a Radius environment"
 linkTitle: "Delete applications"
 description: "Learn how to delete a Radius application"
-weight: 200
+weight: 300
 categories: "Overview"
 tags: ["deletion"]
 ---
@@ -28,7 +28,7 @@ You can delete a Radius application from the environment using the [`rad app del
  
  You can find more examples on deleting applications [here]({{< ref "rad_application_delete#examples" >}}).
 
-## Delete Cloud Resources
+## Delete Cloud resources
 
 For Azure, delete the deployed Azure resources from the Azure portal or the Azure CLI . For AWS, delete the deployed AWS resources from the AWS console or the AWS CLI.
 
