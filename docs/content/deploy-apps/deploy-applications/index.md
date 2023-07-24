@@ -56,4 +56,4 @@ You can run an application locally using the `rad run` command.
  rad run app.bicep
  ```
 
- This will run your application locally by creating a port-forward from localhost to the port in the container and streams the logs to the console
+ This will run your application locally by creating a port-forward from localhost to the port in the container and streams the logs to the console.
