@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Overview: Deploying applications into a radius environment"
+title: "Overview: Deploying applications into a Radius environment"
 linkTitle: "Deploy applications"
 description: "Learn how to deploy a Radius application"
 weight: 200
