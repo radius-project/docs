@@ -423,3 +423,4 @@ manualScaling
 httpGet
 tcp
 BucketName
+Balancer

@@ -15,6 +15,9 @@ This guide will show you how to integrate Radius with cert-manager and Let's Enc
 
 - [rad CLI]({{< ref getting-started >}})
 - [kubectl CLI](https://kubernetes.io/docs/tasks/tools/)
+- Domain name + DNS A-record: In order to setup TLS communication to Radius you will need to make sure you have a domain name and DNS A-record pointing to your Kubernetes cluster's IP address. This is required for Let's Encrypt to issue a certificate and for traffic to be routed to your application.
+   - If running Radius on an Azure Kubernetes Service (AKS) cluster you can optionally use a [DNS label](https://learn.microsoft.com/azure/virtual-network/ip-services/public-ip-addresses#dns-name-label) to create a DNS A-record pointing to your cluster. Refer to the [tips and tricks](#using-an-azure-dns-label) section for more information.
+   - If running Radius on an Elastic Kubernetes Service (EKS) cluster you can optionally leverage [Application Load Balancer](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html) for a hosted DNS name and record.
 
 ## Step 1: Initialize a Radius environment
 
@@ -23,6 +26,7 @@ Begin by running `rad init` to initialize the Radius environment.
 ```sh
 rad init
 ```
+
 ## Step 2: Set up domain
 
 You'll next need a DNS record to point to your Kubernetes cluster and service in order to issue the certificate and allow traffic to your application.
@@ -92,3 +96,17 @@ rad deploy app.bicep
 Once the deployment is complete the public endpoint of your application will be printed. Navigate to this public endpoint to access the application via HTTPS. You can view the certificate to see it has a Let's Encrypt issuer:
 
 <img src="certificate.png" alt="Screenshot of the certificate information showing a Lets Encrypt issuer" width=700 />
+
+## Tips and tricks
+
+### Using an Azure DNS label
+
+If you are running Radius on an Azure Kubernetes Service (AKS) cluster you can use a [DNS label](https://learn.microsoft.com/azure/virtual-network/ip-services/public-ip-addresses#dns-name-label) to create a DNS A-record pointing to your cluster. This is useful if you don't have a domain name or don't want to use a subdomain for your dev/test environments.
+
+To setup a DNS label for your AKS cluster:
+
+1. Open the Azure portal to the subscription where your AKS cluster is deployed.
+1. Open the resource group, prefixed with `MC_`, that contains your AKS cluster. (_i.e. `MC_myrg-mycluster_westus3`_)
+1. Select the Public IP address prefixed with `kubernetes-` (_i.e. `kubernetes-a6925d5f55dfa41419c3c93648dbb30a`_)
+1. Select 'Configuration' and add a DNS name label. Click save to create the DNS A-record.
+1. Update your Radius gateway to use the DNS label as the `fullyQualifiedHostname` value.
