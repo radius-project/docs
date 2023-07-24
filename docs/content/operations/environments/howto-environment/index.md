@@ -19,20 +19,6 @@ For more information on what is deployed and created during a Radius Environment
 
 ## Create a Radius Environment(Interactive)
 
-//
-I'm thinkin we might be better off modeling this page like the https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/ page, where there is an easy (CLI) method and an advanced (Helm) option.
-
-For this I'm thinking we have the easy, interactive option and then the advanced manual option with the cloud providers within it
-//
-
-
-
-## Create a Radius Environment(Advanced)
-
-{{< tabs "Interactive" "Manual" >}}
-
-{{% codetab %}}
-
 1. Initialize a new environment with `rad init` command:
    ```bash
    rad init
@@ -43,29 +29,24 @@ For this I'm thinking we have the easy, interactive option and then the advanced
    - **Azure provider** (optional) - Allows you to [deploy and manage Azure resources]({{< ref "providers#azure-provider" >}})
    - **AWS provider** (optional) - Allows you to [deploy and manage AWS resources]({{< ref "providers#aws-provider" >}})
    - **Environment name** - The name of the environment to create
-1. Let the rad CLI run the following tasks:
-   1. **Install Radius** - Radius installs the [control plane services]({{< ref architecture-concept >}}) in the `radius-system` namespace
-   2. **Create the environment** - An environment resource is created in the Radius control plane. It maps to a Kubernetes namespace.
-   3. **Add the Azure Cloud Provider** - The Azure cloud provider configuration is saved in the Radius control plane
-   4. **Add the AWS Cloud Provider** - The AWS cloud provider configuration is saved in the Radius control plane
 
    You should see the following output:
 
-   ```bash
-   Initializing Radius...                     
+      ```bash
+      Initializing Radius...                     
 
-   ✅ Install Radius v0.21                  
-      - Kubernetes cluster: k3d-k3s-default   
-      - Kubernetes namespace: radius-system   
-   ✅ Create new environment default          
-      - Kubernetes namespace: default         
-   ✅ Scaffold application samples            
-   ✅ Update local configuration              
+      ✅ Install Radius v0.21                  
+         - Kubernetes cluster: k3d-k3s-default   
+         - Kubernetes namespace: radius-system   
+      ✅ Create new environment default          
+         - Kubernetes namespace: default         
+      ✅ Scaffold application samples            
+      ✅ Update local configuration              
 
-   Initialization complete! Have a RAD time 😎
-   ```
+      Initialization complete! Have a RAD time 😎
+      ```
 
-2. Verify the initialization by running:
+1. Verify the initialization by running:
    ```bash
    kubectl get deployments -n radius-system
    ```
@@ -85,10 +66,7 @@ For this I'm thinking we have the easy, interactive option and then the advanced
    ```bash
    rad env list
    ```
-
-{{% /codetab %}}
-
-{{% codetab %}}
+## Create a Radius Environment(Advanced)
 
 1. Install Radius onto a Kubernetes cluster:
 
@@ -99,18 +77,21 @@ For this I'm thinking we have the easy, interactive option and then the advanced
     ```bash
     rad install kubernetes
     ```
-2. Create a new Radius resource group:
+
+1. Create a new Radius resource group:
     Radius resource groups are used to organize Radius resources, such as applications, environments, links, and routes. For more information visit [Radius resource groups]({{< ref groups >}}).
     For more information on the command visit [`rad group create`]({{< ref rad_group_create >}})
     ```bash
     rad group create myGroup
     ```
-4. Create your Radius Environment and pass it your Kubernetes namespace:
+
+1. Create your Radius Environment and pass it your Kubernetes namespace:
     ```bash
     rad env create myEnvironment --namespace my-namespace --group myGroup
     ```
     For more information on the command visit [`rad env create`]({{< ref rad_env_create >}})
-5. Verify the initialization by running:
+
+1. Verify the initialization by running:
    ```bash
    kubectl get deployments -n radius-system
    ```
@@ -130,10 +111,9 @@ For this I'm thinking we have the easy, interactive option and then the advanced
    ```bash
    rad env list --group myGroup
    ```
-{{% /codetab %}}
-{{< /tabs >}}
 
-## Configure cloud providers (optional)
+
+### Configure cloud providers (optional)
 
 Setting up a [cloud provider]({{<ref providers>}}) allows you to deploy and manage resources from either Azure or AWS as part of your Radius Application.
 
