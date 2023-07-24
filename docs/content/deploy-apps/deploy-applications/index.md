@@ -29,7 +29,6 @@ You can also deploy an application with parameters using the [`rad deploy`]({{< 
 
  You can find more examples of deploying applications with parameters [here]({{< ref "rad_deploy#examples" >}}).
 
-
 ## Run an application
 
 You can run an application locally using the [`rad run`]({{< ref rad_run >}}) command. command. 
