@@ -1,23 +1,23 @@
 ---
 type: docs
 title: "How-To: Initialize Radius Environments"
-linkTitle: "How-To: Radius Environments"
-description: "How-To: Initialize Radius Environments"
+linkTitle: "How-To: Environments"
+description: "Learn how to create Radius environments"
 weight: 100
 categories: "How-To"
 tags: ["environments"]
 ---
 
-When setting up a Radius Environment you can use the RAD CLI for an easy interactive option or an advanced manual option.
+Radius environments are prepared landing zones for applications that contain configuration and Recipes. To learn more visit the [environments overview]({{< ref "/operations/environments/overview" >}}) page.
 
-For more information on what is deployed and created during a Radius Environment creation see the [Radius Environment overview]({{< ref environments-concept >}}).
+Radius environments can be setup with the rad CLI via two paths: interactive or manual.
 
 ## Pre-requisites
 
 - Install the [rad CLI]({{< ref getting-started >}})
 - Setup a supported [Kubernetes cluster]({{< ref "/operations/platforms/kubernetes" >}})
 
-## Create a Radius Environment(Interactive)
+## Create an environment interactively
 
 1. Initialize a new environment with `rad init` command:
    ```bash
@@ -46,7 +46,7 @@ For more information on what is deployed and created during a Radius Environment
       Initialization complete! Have a RAD time 😎
       ```
 
-1. Verify the initialization by running:
+1. Verify the Radius services were installed by running:
    ```bash
    kubectl get deployments -n radius-system
    ```
@@ -61,35 +61,79 @@ For more information on what is deployed and created during a Radius Environment
    contour-contour   1/1     1            1           2m33s
    ```
 
-   You can also use [`rad env list`]({{< ref rad_env_list.md >}}) to see if the created environment gets listed:
+1. Verify an environment was created with [`rad env show`]({{< ref rad_env_show.md >}}):
 
    ```bash
-   rad env list
+   rad env show -o json
    ```
-## Create a Radius Environment(Advanced)
+
+   You should see your new environment:
+
+   ```
+   {
+     "id": "/planes/radius/local/resourcegroups/default/providers/Applications.Core/environments/default",
+     "location": "global",
+     "name": "default",
+     "properties": {
+       "compute": {
+         "kind": "kubernetes",
+         "namespace": "default"
+       },
+       "provisioningState": "Succeeded",
+       "recipes": {
+         "Applications.Link/daprStateStores": {
+           "default": {
+             "templateKind": "bicep",
+             "templatePath": "radius.azurecr.io/recipes/local-dev/daprstatestores:0.21"
+           }
+         },
+         "Applications.Link/mongoDatabases": {
+           "default": {
+             "templateKind": "bicep",
+             "templatePath": "radius.azurecr.io/recipes/local-dev/mongodatabases:0.21"
+           }
+         },
+         "Applications.Link/redisCaches": {
+           "default": {
+             "templateKind": "bicep",
+             "templatePath": "radius.azurecr.io/recipes/local-dev/rediscaches:0.21"
+           }
+         }
+       }
+     },
+     "systemData": {},
+     "tags": {},
+     "type": "Applications.Core/environments"
+   }
+   ```
+
+## Create an environment manually (advanced)
+
+Radius can also be installed and an environment created with manual rad CLI commands. This is useful for pipelines or scripts that need to install and manage Radius.
 
 1. Install Radius onto a Kubernetes cluster:
 
-    Use the following command to target your desired Kubernetes cluster.
+    Run [`rad install kubernetes`]({{< ref rad_install_kubernetes >}}) to install Radius into your default Kubernetes context and cluster:
 
-    For a list of all the supported command options visit [rad install kubernetes]({{< ref rad_install_kubernetes >}})
 
     ```bash
     rad install kubernetes
     ```
 
 1. Create a new Radius resource group:
-    Radius resource groups are used to organize Radius resources, such as applications, environments, links, and routes. For more information visit [Radius resource groups]({{< ref groups >}}).
-    For more information on the command visit [`rad group create`]({{< ref rad_group_create >}})
+    [Radius resource groups]({{< ref groups >}}) are used to organize Radius resources such as applications, environments, links, and routes. Run [`rad group create`]({{< ref rad_group_create >}}) to create a new resource group:
     ```bash
     rad group create myGroup
     ```
 
-1. Create your Radius Environment and pass it your Kubernetes namespace:
-    ```bash
-    rad env create myEnvironment --namespace my-namespace --group myGroup
-    ```
-    For more information on the command visit [`rad env create`]({{< ref rad_env_create >}})
+1. Create your Radius environment:
+   
+   Run [`rad env create`]({{< ref rad_env_create >}}) to create a new environment in your resource group. Specify the `--namespace` flag to select the Kubernetes namespace to deploy resources into:
+   
+   ```bash
+   rad env create myEnvironment --group myGroup --namespace my-namespace
+   ```
+
 
 1. Verify the initialization by running:
    ```bash
@@ -111,9 +155,7 @@ For more information on what is deployed and created during a Radius Environment
    ```bash
    rad env list --group myGroup
    ```
-
-
-### Configure cloud providers (optional)
+## Configure cloud providers
 
 Setting up a [cloud provider]({{<ref providers>}}) allows you to deploy and manage resources from either Azure or AWS as part of your Radius Application.
 
@@ -127,15 +169,13 @@ Setting up a [cloud provider]({{<ref providers>}}) allows you to deploy and mana
 
 ### Configuration steps
 
-1. Update your Radius Environment with your Azure subscription ID and Azure resource group:
+1. Use [`rad env update`]({{< ref rad_env_update >}}) to update your Radius Environment with your Azure subscription ID and Azure resource group:
 
     ```bash
     rad env update myEnvironment --azure-subscription-id myAzureSubscriptionId --azure-resource-group  myAzureResourceGroup
     ```
 
-    For more information on the command visit [`rad env update`]({{< ref rad_env_update >}})
-
-2. Create a Service Principal without a role assignment and obtain your `appId`, `displayName`, `password`, and `tenant` information.
+2. Run `az ad sp create-for-rbac` to create a Service Principal without a role assignment and obtain your `appId`, `displayName`, `password`, and `tenant` information.
 
    ```bash
    {
@@ -145,15 +185,13 @@ Setting up a [cloud provider]({{<ref providers>}}) allows you to deploy and mana
    "tenant": "****"
    }
    ```
-   For more information on `az ad sp create-for-rbac` visit the [Azure docs](https://learn.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac).
 
-3. Add the Azure service principal to your Radius installation:
+
+3. Use [`rad credential register azure`]({{< ref rad_credential_register_azure >}}) to add the Azure service principal to your Radius installation:
     ```bash
     rad credential register azure --client-id myClientId  --client-secret myClientSecret  --tenant-id myTenantId
     ```
     Radius will use the provided service principal for all interactions with Azure, including Bicep and Recipe deployments.
-
-    For more information on the command visit [`rad credential register azure`]({{< ref rad_credential_register_azure >}}).
 
 {{% /codetab %}}
 {{% codetab %}}
