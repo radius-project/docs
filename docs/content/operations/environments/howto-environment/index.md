@@ -80,25 +80,7 @@ Radius environments can be setup with the rad CLI via two paths: interactive or 
          "namespace": "default"
        },
        "provisioningState": "Succeeded",
-       "recipes": {
-         "Applications.Link/daprStateStores": {
-           "default": {
-             "templateKind": "bicep",
-             "templatePath": "radius.azurecr.io/recipes/local-dev/daprstatestores:0.21"
-           }
-         },
-         "Applications.Link/mongoDatabases": {
-           "default": {
-             "templateKind": "bicep",
-             "templatePath": "radius.azurecr.io/recipes/local-dev/mongodatabases:0.21"
-           }
-         },
-         "Applications.Link/redisCaches": {
-           "default": {
-             "templateKind": "bicep",
-             "templatePath": "radius.azurecr.io/recipes/local-dev/rediscaches:0.21"
-           }
-         }
+       "recipes": {}
        }
      },
      "systemData": {},
