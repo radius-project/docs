@@ -4,7 +4,6 @@ title: "Quickstart: Dapr Microservices"
 linkTitle: "Dapr microservices"
 description: "Learn Radius by authoring templates and deploying a Dapr application"
 weight: 300
-no_list: true
 slug: "dapr"
 categories: "Quickstart"
 tags : ["Dapr"]
@@ -59,7 +58,7 @@ Begin by creating a new file named `dapr.bicep` with a Radius application that c
 
 1. Press CTRL+C to terminate the port-forward.
 
-1. Confirm that the Dapr Redis statestore was successfully created:
+1. A [local-dev Recipe]({{< ref recipes >}}) was run during application deployment to automatically create a lightweight Redis container plus a Dapr component configuration. Confirm that the Dapr Redis statestore was successfully created:
 
    ```sh
    dapr components -k -A
@@ -108,7 +107,7 @@ In your browser, navigate to the endpoint (e.g. [http://localhost:8080](http://l
 
 1. Press CTRL+C to terminate the `rad run` log console
 
-1. Run `rad app delete` to cleanup your Radius application, container, and link:
+1. Run `rad app delete` to cleanup your Radius application, containers, and Dapr statestore. The Recipe resources (_Redis container and Dapr component_) are also automatically cleaned up.
 
    ```bash
    rad app delete -a dapr
