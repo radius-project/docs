@@ -8,7 +8,7 @@ weight: 200
 
 ## Radius applications
 
-Radius offers an [application resource]({{< ref "/author-apps/application" >}}) which teams can use to define and deploy their entire application, including all of the compute, relationships, and infrastructure within in. Since Radius applications are defined as a graph of relationships between deployed resources, it enables more advanced visualizations than simply a list of resources.
+Radius offers an [application resource]({{< ref "/author-apps/application" >}}) which teams can use to define and deploy their entire application, including all of the compute, relationships, and infrastructure that make up the application. Since the graph of relationships between deployed resources is much more descriptive than a basic list of resources, the Radius application graph can automate complex deployment tasks and enable rich visualization experiences.
 
 <img src="application.png" alt="A diagram showing an application and all it's resources" width=400px >
 
