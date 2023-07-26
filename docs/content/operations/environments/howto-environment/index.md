@@ -3,7 +3,7 @@ type: docs
 title: "How-To: Initialize Radius Environments"
 linkTitle: "How-To: Environments"
 description: "Learn how to create Radius environments"
-weight: 100
+weight: 200
 categories: "How-To"
 tags: ["environments"]
 ---
