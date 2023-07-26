@@ -135,13 +135,13 @@ Note that no Recipe name is specified with 'db', so it will be using the default
 
    <img src="todoapp.png" width="700px" alt="screenshot of the todo application">
  
-## Step 4: Use Azure recipes in your application
+## Step 4: Use Azure/AWS recipes in your application
 
-This step requires an Azure subscription to deploy cloud resources, which will incur costs. You will need to add the [Azure cloud provider]({{< ref providers >}}) to your environment in order to deploy Azure resources and leverage Azure Recipes.
+This step requires an Azure subscription or an AWS account to deploy cloud resources, which will incur costs. You will need to add the [Azure /AWS cloud provider]({{< ref providers >}}) to your environment in order to deploy Azure resources and leverage Azure Recipes.
 
 {{< button text="Add a cloud provider" page="providers#configure-a-cloud-provider" newtab="true" >}}
 
-{{< tabs Azure >}}
+{{< tabs Azure AWS>}}
 {{% codetab %}}
 
 1. Delete your existing Redis cache, which we will redeploy with an Azure resource:
@@ -186,8 +186,6 @@ This step requires an Azure subscription to deploy cloud resources, which will i
       db              Applications.Link/redisCaches
    ```
 
-{{% /codetab %}}
-{{< /tabs >}}
 
 5. Use the az CLI to see your newly deployed Azure Cache for Redis:
 
@@ -202,6 +200,64 @@ This step requires an Azure subscription to deploy cloud resources, which will i
      "cache-goqoxgqkw2ogw"
    ]
    ```
+
+{{% /codetab %}}
+
+{{% codetab %}}
+
+> *You can run this only on an EKS cluster. Make sure that the each of the Subnets in your EKS cluster Subnet Group are within the [list of supported MemoryDB availability zones](https://docs.aws.amazon.com/memorydb/latest/devguide/subnetgroups.html)*
+
+1. Delete your existing Redis cache, which we will redeploy with an AWS resource:
+
+   ```bash
+   rad resource delete rediscaches db
+   ```
+
+1. Register the Recipe to your Radius Environment:
+
+   ```bash
+   rad recipe register aws --environment default --template-kind bicep --template-path radius.azurecr.io/recipes/rediscaches/aws:1.0 --link-type Applications.Link/redisCaches --template-kind bicep
+   ```
+
+1. Update your db resource to use the `aws` Recipe, instead of the default Recipe:
+
+   {{< rad file="snippets/app-aws.bicep" marker="//DB" embed=true >}}
+
+   Update the recipe name to `aws` to use the Amazon MemoryDB for Redis and pass the `eksClusterName` as parameter to the recipe.
+
+   > *Note: Passing the `eksClusterName` during the registration of the Recipe is a temporary additional step as Radius builds up AWS support.*
+
+1. Deploy your application to your environment:
+
+   ```bash
+   rad deploy ./app.bicep --parameters eksClusterName=YOUR_EKS_CLUSTER_NAME
+   ```
+
+   Make sure to replace `YOUR_EKS_CLUSTER_NAME` with your EKS cluster name.
+
+   This will deploy the application into your environment and launch the container resource for the frontend website. This operation may take some time, since it is deploying a MemoryDB resource to AWS. You should see the following resources deployed at the end of `rad deploy`:
+
+   ```
+   Building ./app.bicep...
+   Deploying template './app.bicep' for application 'recipes' and environment 'default' from workspace 'default'...
+
+   Deployment In Progress... 
+
+   Completed            webapp          Applications.Core/applications
+   Completed            db              Applications.Link/redisCaches
+   Completed            frontend        Applications.Core/containers
+
+   Deployment Complete
+
+   Resources:
+      webapp          Applications.Core/applications
+      frontend        Applications.Core/containers
+      db              Applications.Link/redisCaches
+   ```
+
+{{% /codetab %}}
+
+{{< /tabs >}}
 
 6. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose>}})
 
