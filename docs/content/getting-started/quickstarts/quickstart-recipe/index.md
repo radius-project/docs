@@ -216,26 +216,23 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 1. Register the Recipe to your Radius Environment:
 
    ```bash
-   rad recipe register aws --environment default --template-kind bicep --template-path radius.azurecr.io/recipes/rediscaches/aws:1.0 --link-type Applications.Link/redisCaches --template-kind bicep
+   rad recipe register aws --environment default --template-kind bicep --template-path radius.azurecr.io/recipes/rediscaches/aws:1.0 --link-type Applications.Link/redisCaches --parameters eksClusterName=YOUR_EKS_CLUSTER_NAME
    ```
+   > *Note: Passing the `eksClusterName` during the registration of the Recipe is a temporary additional step as Radius builds up AWS support.*
 
 1. Update your db resource to use the `aws` Recipe, instead of the default Recipe:
 
    {{< rad file="snippets/app-aws.bicep" marker="//DB" embed=true >}}
 
-   Update the recipe name to `aws` to use the Amazon MemoryDB for Redis and pass the `eksClusterName` as parameter to the recipe.
-
-   > *Note: Passing the `eksClusterName` during the registration of the Recipe is a temporary additional step as Radius builds up AWS support.*
+   Update the recipe name to `aws` to use the Amazon MemoryDB for Redis.
 
 1. Deploy your application to your environment:
 
    ```bash
-   rad deploy ./app.bicep --parameters eksClusterName=YOUR_EKS_CLUSTER_NAME
+   rad deploy ./app.bicep 
    ```
 
-   Make sure to replace `YOUR_EKS_CLUSTER_NAME` with your EKS cluster name.
-
-   This will deploy the application into your environment and launch the container resource for the frontend website. This operation may take some time, since it is deploying a MemoryDB resource to AWS. You should see the following resources deployed at the end of `rad deploy`:
+   This operation may take some time, as the ‘aws’ Recipe is deploying an AWS MemoryDB for Redis resource in your AWS account. Once complete, you should see:
 
    ```
    Building ./app.bicep...
@@ -268,11 +265,12 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 
 ## Step 5: Cleanup your environment
 
-You can use the rad CLI to [delete your environment]({{< ref rad_env_delete.md >}}) and all the Radius resources running on your cluster:
+1. You can use the rad CLI to [delete your environment]({{< ref rad_env_delete.md >}}) and all the       Radius resources running on your cluster:
    
-```bash
-rad env delete default --yes
-```
+   ```bash
+   rad env delete default --yes
+   ```
+1. Delete the Azure Redis cache via the Azure CLI or the Azure portal, and the AWS Memory DB for Redis via the AWS CLI or the AWS console.
 
 ## Next steps
 

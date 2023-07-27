@@ -18,9 +18,6 @@ resource db 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
     recipe: {
       // Name a specific recipe to use
       name: 'aws'
-      parameters: {
-        eksClusterName: eksClusterName
-      }
     }
   }
 }
