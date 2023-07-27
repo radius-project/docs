@@ -137,7 +137,7 @@ Note that no Recipe name is specified with 'db', so it will be using the default
  
 ## Step 4: Use Azure/AWS recipes in your application
 
-This step requires an Azure subscription or an AWS account to deploy cloud resources, which will incur costs. You will need to add the [Azure /AWS cloud provider]({{< ref providers >}}) to your environment in order to deploy Azure resources and leverage Azure Recipes.
+This step requires an Azure subscription or an AWS account to deploy cloud resources, which will incur costs. You will need to add the [Azure/AWS cloud provider]({{< ref providers >}}) to your environment in order to deploy Azure resources and leverage Azure Recipes.
 
 {{< button text="Add a cloud provider" page="providers#configure-a-cloud-provider" newtab="true" >}}
 
