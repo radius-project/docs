@@ -10,7 +10,7 @@ tags: ["deployments"]
 
 ## Run an application
 
-Once you have [modeled an application]({{< ref author-apps >}}), you can run an application using the [`rad run`]({{< ref rad_run >}}) command. command. 
+Once you have [modeled an application]({{< ref author-apps >}}), you can run an application using the [`rad run`]({{< ref rad_run >}}) command.
 
 ```bash
  rad run app.bicep
