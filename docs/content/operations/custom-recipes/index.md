@@ -71,13 +71,22 @@ You can also manually link resources via the `values` output of a Recipe. This c
 ```bicep
 // ....resources defined above
 
-output values object = {
+output result object = {
   resources: [
     // ID via reference (Azure/AWS)
     resource1.id
     // ID via manual entry (Kubernetes)
     '/planes/kubernetes/local/namespaces/${deployment.metadata.namespace}/providers/apps/Deployment/${deployment.metadata.name}'
   ]
+  values: {
+    host: azureCache.properties.hostName
+    port: azureCache.properties.port
+  }
+  secrets: {
+    connectionString: 'redis://${azureCache.properties.hostName}:${azureCache.properties.port}'
+    #disable-next-line outputs-should-not-contain-secrets
+    password: azureCache.listKeys().primaryKey
+  }
 }
 ```
 
