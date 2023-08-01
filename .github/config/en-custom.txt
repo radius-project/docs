@@ -424,3 +424,6 @@ httpGet
 tcp
 BucketName
 Balancer
+authSource
+mongodb
+MYCONNECTION
