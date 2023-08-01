@@ -75,9 +75,9 @@ The use cases for connections are flexible, and include features like:
 
 ### Injected values
 
-When a connection between two resources is declared, Radius injects resource related information into environment variables that are then used to access the respective resource without having to hardcode URIs, connection strings, secrets, etc. into your application code. This is a form of *cloud-native service discovery* and makes it easy for you to decouple your application code from the environment where its deployed.
+When a connection between two resources is declared, Radius injects resource related information into environment variables that are then used to access the respective resource without having to hard code URIs, connection strings, secrets, etc. into your application code. This is a form of *cloud-native service discovery* and makes it easy for you to decouple your application code from the environment where its deployed.
 
-These environment variables follow a naming convention that makes their use predictable. The naming pattern is derived from the name given to the connection and its type, which determines what values are required. This way the code that needs to read the values gets to define how they are named. For exammple, adding a connection called `myconnection` that connects to a MongoDB resource would result in the following environment variables being injected:
+These environment variables follow a naming convention that makes their use predictable. The naming pattern is derived from the name given to the connection and its type, which determines what values are required. This way the code that needs to read the values gets to define how they are named. For example, adding a connection called `myconnection` that connects to a MongoDB resource would result in the following environment variables being injected:
 
 ```bash
 # the connection string to the resource, e.g. 'mongodb://mongo:27017/mongo?authSource=admin'
