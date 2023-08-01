@@ -26,10 +26,10 @@ This quickstart will provide an overview of how to:
 
 ## Step 1: Initialize Radius 
 
-Begin by running `rad init`. Make sure to configure an Azure cloud provider:
+Begin by running [`rad init --full`]({{< ref rad_init >}}). Make sure to configure an Azure cloud provider:
 
 ```bash
-rad init
+rad init --full
 ```
 
 ## Step 2: Define a Radius environment

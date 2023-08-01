@@ -108,16 +108,16 @@ When you have multiple environments initialized for different purposes like stag
     rad workspace create kubernetes staging
     ```
     Radius writes the workspace details to your local configuration file (`~/.rad/config.yaml` on Linux and macOS, `%USERPROFILE%\.rad\config.yaml` on Windows).
-1. Initialize a Radius environment in your staging workspace via `rad init`:
+1. Initialize a Radius environment in your staging workspace via [`rad init --full`]({{< ref rad_init >}}):
 
     ```sh 
-    rad init
+    rad init --full
     ```
     Name your environment 'staging' when prompted.
 1. Create another workspace named `production`:
 
     ```sh 
-    rad init kubernetes
+    rad init
     ```
     Name your environment 'production' when prompted.
 1. Verify your `config.yaml` file. It should show both `staging` and `production` workspaces, with your environments:
