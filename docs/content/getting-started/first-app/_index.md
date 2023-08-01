@@ -70,7 +70,7 @@ cd first-app
 Initialize Radius. For this example, accept all the default options (press ENTER to confirm): 
 
 ```bash
-rad init --dev
+rad init
 ```
 
 Example output:
