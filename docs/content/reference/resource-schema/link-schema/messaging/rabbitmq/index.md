@@ -45,7 +45,8 @@ The `rabbitmq.com/MessageQueue` link offers a [RabbitMQ message broker](https://
 | [resourceProvisioning](#resource-provisioning) | n | Specifies how the underlying service/resource is provisioned and managed. Options are to provision automatically via 'recipe' or provision manually via 'manual'. Selection determines which set of fields to additionally require. Defaults to 'recipe'. | `manual`
 | host | n | The hostname of the RabbitMQ instance. | `rabbitmq.hello.com`
 | port | n | The port of the RabbitMQ instance. Defaults to 5672. | `5672`
-| vHost | n | The vHost of the RabbitMQ instance. | `vHost`
+| vHost | n | The RabbitMQ virtual host (vHost) the client will connect to. Defaults to no vHost. | `vHost`
+| tls | n | Specifies whether to use SSL when connecting to the RabbitMQ instance. | `tls`
 | username | n | Username to use when connecting to the target rabbitM. | `'myusername'`
 | [recipe](#recipe) | n | Configuration for the Recipe which will deploy the backing infrastructure. | [See below](#recipe)
 | [resources](#resources)  | n | An array of IDs of the underlying resources for the link. | [See below](#resources)
