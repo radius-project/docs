@@ -47,7 +47,7 @@ The `rabbitmq.com/MessageQueue` link offers a [RabbitMQ message broker](https://
 | port | n | The port of the RabbitMQ instance. Defaults to 5672. | `5672`
 | vHost | n | The RabbitMQ virtual host (vHost) the client will connect to. Defaults to no vHost. | `vHost`
 | tls | n | Specifies whether to use SSL when connecting to the RabbitMQ instance. | `tls`
-| username | n | Username to use when connecting to the target rabbitM. | `'myusername'`
+| username | n | Username to use when connecting to the target rabbitMQ. | `'myusername'`
 | [recipe](#recipe) | n | Configuration for the Recipe which will deploy the backing infrastructure. | [See below](#recipe)
 | [resources](#resources)  | n | An array of IDs of the underlying resources for the link. | [See below](#resources)
 | queue | y | The name of the queue. | `'orders'` |
