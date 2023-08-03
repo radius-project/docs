@@ -15,7 +15,7 @@ param rmqUsername string
 @secure()
 param rmqPassword string
 param rmqHost string
-param rmqPort string
+param rmqPort int
 param vHost string
 
 resource rabbitmq 'Applications.Link/rabbitmqMessageQueues@2022-03-15-privatepreview' = {
