@@ -103,7 +103,7 @@ Next, download the latest `rad` CLI release and setup your workspace:
     - name: Initialize Radius environment
       run: |
         ./rad group create default
-        ./rad workspace create default --group default
+        ./rad workspace create kubernetes default --group default
         ./rad env create temp
         ./rad env switch temp
 ```
