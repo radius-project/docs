@@ -19,9 +19,9 @@ Radius environments can be setup with the rad CLI via two paths: interactive or 
 
 ## Create an environment interactively
 
-1. Initialize a new environment with `rad init` command:
+1. Initialize a new environment with [`rad init --full`]({{< ref rad_init >}}):
    ```bash
-   rad init
+   rad init --full
    ```
 
 1. Follow the prompts, specifying:
@@ -170,7 +170,7 @@ Radius can also be installed and an environment created with manual rad CLI comm
 
 ## Configure cloud providers
 
-Setting up a [cloud provider]({{<ref providers>}}) allows you to deploy and manage resources from either Azure or AWS as part of your Radius Application.
+Setting up a [cloud provider]({{< ref providers >}}) allows you to deploy and manage resources from either Azure or AWS as part of your Radius Application.
 
 {{< tabs Azure AWS >}}
 
