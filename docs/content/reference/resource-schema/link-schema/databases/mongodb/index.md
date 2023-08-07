@@ -92,3 +92,14 @@ Parameters can also optionally be specified for the Recipe.
 ### Provision manually
 
 If you want to manually manage your infrastructure provisioning outside of Recipes, you can set `resourceProvisioning` to `'manual'` and provide all necessary parameters and values in order for Radius to be able to deploy/connect to the desired infrastructure.
+
+## Environment variables for connections
+
+Other Radius resources, such as [containers]({{< ref "container" >}}), may connect to a MongoDB resource via [connections]({{< ref "application-graph#connections-and-injected-values" >}}). When a connection to MongoDB is declared, Radius injects values into environment variables that are then used to access the connected MongoDB resource:
+
+| Environment variable | Description | Example(s) |
+|----------------------|-------------|------------|
+| CONNECTION_MYCONNECTION_DATABASE | Name of the target Mongo database | `mongodb-prod` |
+| CONNECTION_MYCONNECTION_USERNAME | Username for the target Mongo database | `myusername` |
+| CONNECTION_MYCONNECTION_PASSWORD | Password for the target Mongo database | `mypassword` |
+| CONNECTION_MYCONNECTION_CONNECTIONSTRING | Connection string for the target Mongo database | `https://mymongo.cluster.svc.local,password=*****,....` |

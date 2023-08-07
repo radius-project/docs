@@ -91,3 +91,13 @@ When no Recipe configuration is set, Radius will use the currently registered Re
 ### Provision manually
 
 If you want to manually manage your infrastructure provisioning without the use of Recipes, you can set `resourceProvisioning` to `'manual'` and provide all necessary parameters and values that enable Radius to deploy or connect to the desired infrastructure.
+
+## Environment variables for connections
+
+Other Radius resources, such as [containers]({{< ref "container" >}}), may connect to a Redis resource via [connections]({{< ref "application-graph#connections-and-injected-values" >}}). When a connection to Redis is declared, Radius injects values into environment variables that are then used to access the connected Redis resource:
+
+| Environment variable | Description | Example(s) |
+|----------------------|-------------|------------|
+| CONNECTION_MYCONNECTION_USERNAME | The username for the Redis cache. | `admin` |
+| CONNECTION_MYCONNECTION_CONNECTIONSTRING | The connection string for the Redis cache. | `https://mycache.redis.cache.windows.net,password=*****,....` |
+| CONNECTION_MYCONNECTION_PASSWORD | The password for the Redis cache. | `mypassword` |

@@ -81,3 +81,15 @@ When no Recipe configuration is set Radius will use the Recipe registered as the
 ### Provision manually
 
 If you want to manually manage your infrastructure provisioning outside of Recipes, you can set `resourceProvisioning` to `'manual'` and provide all necessary parameters and values and values that enable Radius to deploy or connect to the desired infrastructure.
+
+## Environment variables for connections
+
+Other Radius resources, such as [containers]({{< ref "container" >}}), may connect to a Azure SQL resource via [connections]({{< ref "application-graph#connections-and-injected-values" >}}). When a connection to Azure SQL is declared, Radius injects values into environment variables that are then used to access the connected Azure SQL resource:
+
+| Environment variable | Description | Example(s) |
+|----------------------|-------------|------------|
+| CONNECTION_MYCONNECTION_DATABASE | The name of the target Azure SQL database. | `mydatabase` |
+| CONNECTION_MYCONNECTION_SERVER | The fully qualified domain name of the target Azure SQL server. | `sql.hello.com` |
+| CONNECTION_MYCONNECTION_USERNAME | The username for the target Azure SQL database. | `admin` |
+| CONNECTION_MYCONNECTION_PASSWORD | The password for the target Azure SQL database. | `mypassword` |
+| CONNECTION_MYCONNECTION_CONNECTIONSTRING | The connection string for the target Azure SQL database. | `https://mysqlserver.cluster.svc.local,password=*****,....` |

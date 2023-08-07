@@ -72,7 +72,7 @@ Refer to the probes section of the [container resource schema]({{< ref "containe
 
 Connections enable communication between your container and other resources, such as databases, message queues, and other services. A connection injects information about the resource you connect to as environment variables. This could be connection strings, access keys, password or other information needed for communication between the container and the resource it connects to. It also enables you to configure the RBAC permissions for the container to access the resource.
 
-Refer to the [connections schema] for containers({{< ref "container-schema#connections" >}}) for more details.
+Refer to the [connections schema for containers]({{< ref "container-schema#connections" >}}) for more details.
 
 ### Extensions
 

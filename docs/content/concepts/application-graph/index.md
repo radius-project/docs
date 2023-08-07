@@ -26,7 +26,7 @@ For example, if you want a container to read from an Azure Storage Account witho
 
 <img src="graph-automation.png" alt="A diagram showing a connection from a Radius container to an Azure storage account resulting in managed identities, role-based access control, and CSI drivers." width=600px >
 
-### Injected values
+### Connections and injected values
 
 The mechanism behind this automated application deployment is injected values into environment variables. When a connection between two resources is declared, Radius injects resource related information into environment variables that are then used to access the respective resource without having to hard code URIs, connection strings, access keys, or anything that application code needs to successfully communicate. Refer to the [reference documentation]({{< ref resource-schema >}}) of each resource for more information.
 
