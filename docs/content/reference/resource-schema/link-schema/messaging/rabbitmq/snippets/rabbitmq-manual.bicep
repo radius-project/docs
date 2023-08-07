@@ -15,7 +15,8 @@ param rmqUsername string
 @secure()
 param rmqPassword string
 param rmqHost string
-param rmqPort string
+param rmqPort int
+param vHost string
 
 resource rabbitmq 'Applications.Link/rabbitmqMessageQueues@2022-03-15-privatepreview' = {
   name: 'rabbitmq'
@@ -24,8 +25,12 @@ resource rabbitmq 'Applications.Link/rabbitmqMessageQueues@2022-03-15-privatepre
     application: app.id
     resourceProvisioning: 'manual'
     queue: 'radius-queue'
+    host: rmqHost
+    port: rmqPort
+    vHost: vHost
+    username: rmqUsername
     secrets: {
-      connectionString: 'amqp://${rmqUsername}:${rmqPassword}@${rmqHost}:${rmqPort}'
+      password: rmqPassword
     }
   }
 }

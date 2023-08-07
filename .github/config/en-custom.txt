@@ -424,3 +424,7 @@ httpGet
 tcp
 BucketName
 Balancer
+vHost
+URI
+uri
+rabbitMQ
