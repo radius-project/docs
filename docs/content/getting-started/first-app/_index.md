@@ -108,7 +108,7 @@ In addition to starting Radius services in your Kubernetes cluster, this initial
 
 ## 4. Run the app
 
-Use the below command to run the app in your environment:
+Use the below command to run the app in your environment, then access the application by opening [http://localhost:3000](http://localhost:3000) in a browser. If you are using codespaces, you can get the demo app url from the ports tab in VSCode.
 
 ```bash
 rad run app.bicep
@@ -119,8 +119,6 @@ This command:
 - Runs the application in your Kubernetes cluster
 - Creates a port-forward from localhost to port 3000 inside the container so you can navigate to the app's frontend UI
 - Streams container logs to your terminal
-
-Access the application by opening [http://localhost:3000](http://localhost:3000) in a browser. If you are using codespaces, you can get the demo app url from the ports tab in VSCode.
 
 <img src="./demo-screenshot.png" alt="Screenshot of the demo container" width=400>
 <br /><br />
@@ -141,17 +139,13 @@ In this step you will:
 
 Open `app.bicep` in your editor and get ready to edit the file.
 
-First add some new code to `app.bicep` by pasting in the content below:
+First add some new code to `app.bicep` by pasting in the content below at the end of the file. This code creates a Redis Cache resource and specifies that it should be created by a Recipe.
 
 {{< rad file="snippets/app-with-redis-snippets.bicep" embed=true marker="//REDIS" >}}
 
-The code you just added creates a Redis Cache resource and specifies that it should be created by a Recipe.
-
-Next, update your container definition to include `connections` inside `properties`:
+Next, update your container definition to include `connections` inside `properties`. This code creates a connection between the container and the database. Based on this connection, Radius will inject environment variables into the container that inform the container how to connect. You will view these in the next step.
 
 {{< rad file="snippets/app-with-redis-snippets.bicep" embed=true marker="//CONTAINER" >}}
-
-The code you just added creates a connection between the container and the database. Based on this connection, Radius will define environment variables in the container that tell the container how to connect. You will view these in the next step.
 
 Your updated `app.bicep` will look like this:
 
@@ -159,13 +153,13 @@ Your updated `app.bicep` will look like this:
 
 ## 6. Rerun the application with a database
 
-Use below command to run the updated application again:
+Use the command below to run the updated application again, then open the browser to [http://localhost:3000](http://localhost:3000). If you are using codespaces, you can get the demo app url from the ports tab in VSCode.
 
 ```sh
 rad run app.bicep
 ```
 
-Open the browser to [http://localhost:3000](http://localhost:3000) and you should see that the environment variables have changed. The `demo` container now has connection information for Redis (`CONNECTION_REDIS_HOST`, `CONNECTION_REDIS_PORT`). If you are using codespaces, you can get the demo app url from the ports tab in VSCode.
+You should see that the environment variables have changed. The `demo` container now has connection information for Redis (`CONNECTION_REDIS_HOST`, `CONNECTION_REDIS_PORT`).
 
 <img src="./demo-with-redis-screenshot.png" alt="Screenshot of the demo container" width=500>
 <br /><br />
