@@ -16,7 +16,7 @@ Once you have [authored an application]({{< ref author-apps >}}), you can run an
  rad run app.bicep
  ```
 
- This will deploy the application to your environment, create port-forwards for all container ports, and stream container logs to the console.
+This will deploy the application to your environment, create port-forwards for all container ports, and stream container logs to the console.
 
 ## Deploy an application
 
