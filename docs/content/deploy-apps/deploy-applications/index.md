@@ -10,7 +10,7 @@ tags: ["deployments"]
 
 ## Run an application
 
-Once you have [modeled an application]({{< ref author-apps >}}), you can run an application using the [`rad run`]({{< ref rad_run >}}) command.
+Once you have [authored an application]({{< ref author-apps >}}), you can run an application using the [`rad run`]({{< ref rad_run >}}) command.
 
 ```bash
  rad run app.bicep
@@ -18,18 +18,18 @@ Once you have [modeled an application]({{< ref author-apps >}}), you can run an 
 
  This will deploy the application to your environment, create port-forwards for all container ports, and stream container logs to the console.
 
-## Deploy a Radius application
+## Deploy an application
 
-Once you have [modeled an application]({{< ref author-apps >}}), you can deploy it to an environment via rad CLI using the [`rad deploy`]({{< ref rad_deploy>}})
+An application can be deployed to an environment with [`rad deploy`]({{< ref rad_deploy>}}):
 
 ```bash
  rad deploy app.bicep
  ```
  This will deploy the application to the created Radius environment.
 
-### Deploying applications with parameters (optional)
+### Parameters
 
-You can also deploy an application with parameters using the [`rad deploy`]({{< ref rad_deploy>}}) command. 
+Parameters can be included as part of `rad run` or `rad deploy` via the `-p/--parameters` flag:
 
 ```bash
  rad deploy app.bicep -p param1=value1 -p param2=value2
