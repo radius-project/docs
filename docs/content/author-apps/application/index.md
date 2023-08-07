@@ -5,7 +5,7 @@ linkTitle: "Application"
 description: "Learn how to model your application and its services in Radius"
 weight: 100
 categories: "Overview"
-tags: ["application"]
+tags: ["applications"]
 ---
 
 ## Overview
