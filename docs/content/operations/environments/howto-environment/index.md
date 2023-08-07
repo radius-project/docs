@@ -35,7 +35,7 @@ Radius environments can be setup with the rad CLI via two paths: interactive or 
       ```bash
       Initializing Radius...                     
 
-      ✅ Install Radius v0.21                  
+      ✅ Install Radius v0.xx                  
          - Kubernetes cluster: k3d-k3s-default   
          - Kubernetes namespace: radius-system   
       ✅ Create new environment default          
@@ -102,11 +102,28 @@ Radius can also be installed and an environment created with manual rad CLI comm
     rad install kubernetes
     ```
 
-1. Create a new Radius resource group:
-    [Radius resource groups]({{< ref groups >}}) are used to organize Radius resources such as applications, environments, links, and routes. Run [`rad group create`]({{< ref rad_group_create >}}) to create a new resource group:
+    You should see the following message:
+
     ```bash
-    rad group create myGroup
+    Installing Radius version xxxx to namespace: radius-system...
     ```
+
+1. Create a new Radius resource group:
+
+   [Radius resource groups]({{< ref groups >}}) are used to organize Radius resources such as applications, environments, links, and routes. Run [`rad group create`]({{< ref rad_group_create >}}) to create a new resource group:
+
+   ```bash
+    rad group create myGroup
+   ```
+
+   You should see the following message:
+
+   ```bash
+    creating resource group "myGroup" in workspace ""...
+
+    resource group "myGroup" created
+   ```
+
 
 1. Create your Radius environment:
    
@@ -116,6 +133,12 @@ Radius can also be installed and an environment created with manual rad CLI comm
    rad env create myEnvironment --group myGroup --namespace my-namespace
    ```
 
+   You should see your Radius environment being created and linked to your resource group:
+
+   ```bash
+   Creating Environment...
+   Successfully created environment "myEnvironment" in resource group "myGroup"
+   ```
 
 1. Verify the initialization by running:
    ```bash
@@ -124,7 +147,7 @@ Radius can also be installed and an environment created with manual rad CLI comm
 
    You should see:
 
-   ```
+   ```bash
    NAME              READY   UP-TO-DATE   AVAILABLE   AGE
    ucp               1/1     1            1           2m56s
    appcore-rp        1/1     1            1           2m56s
@@ -137,6 +160,14 @@ Radius can also be installed and an environment created with manual rad CLI comm
    ```bash
    rad env list --group myGroup
    ```
+
+   You should see:
+
+   ```bash
+   NAME
+   myEnvironment
+   ```
+
 ## Configure cloud providers
 
 Setting up a [cloud provider]({{<ref providers>}}) allows you to deploy and manage resources from either Azure or AWS as part of your Radius Application.
@@ -194,10 +225,10 @@ Setting up a [cloud provider]({{<ref providers>}}) allows you to deploy and mana
    eksctl create cluster --name my-cluster --region=us-west-2 --zones=us-west-2a,us-west-2b,us-west-2c
    ```
 
-   > Note: If you are using an existing cluster, you can skip this step. However, make sure that the each of the Subnets in your EKS cluster Subnet Group are within the [list of supported MemoryDB availability zones](https://docs.aws.amazon.com/memorydb/latest/devguide/subnetgroups.html). If your cluster includes Subnets outside of a supported MemoryDB availability zone, or if using your own custom subnets, supply them as part of the deployment file as the following:   
+   > Note: If using your own custom subnets, supply them as part of the deployment file as the following:   
 
    ```bash
-   rad deploy ./app.bicep --parameters eksClusterName=YOUR_EKS_CLUSTER_NAME
+   rad deploy ./myApp.bicep --parameters eksClusterName=YOUR_EKS_CLUSTER_NAME
    ```
 
 2. Update your Radius Environment with your AWS region and AWS account ID:
