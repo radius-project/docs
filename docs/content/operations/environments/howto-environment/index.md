@@ -32,10 +32,10 @@ Radius environments can be setup with the rad CLI via two paths: interactive or 
 
    You should see the following output:
 
-      ```bash
+      ```
       Initializing Radius...                     
 
-      ✅ Install Radius v0.xx                  
+      ✅ Install Radius v{{< param chart_version >}}               
          - Kubernetes cluster: k3d-k3s-default   
          - Kubernetes namespace: radius-system   
       ✅ Create new environment default          
@@ -104,8 +104,8 @@ Radius can also be installed and an environment created with manual rad CLI comm
 
     You should see the following message:
 
-    ```bash
-    Installing Radius version xxxx to namespace: radius-system...
+    ```
+    Installing Radius version 2134e8e to namespace: radius-system...
     ```
 
 1. Create a new Radius resource group:
@@ -118,7 +118,7 @@ Radius can also be installed and an environment created with manual rad CLI comm
 
    You should see the following message:
 
-   ```bash
+   ```
     creating resource group "myGroup" in workspace ""...
 
     resource group "myGroup" created
@@ -135,7 +135,7 @@ Radius can also be installed and an environment created with manual rad CLI comm
 
    You should see your Radius environment being created and linked to your resource group:
 
-   ```bash
+   ```
    Creating Environment...
    Successfully created environment "myEnvironment" in resource group "myGroup"
    ```
@@ -147,7 +147,7 @@ Radius can also be installed and an environment created with manual rad CLI comm
 
    You should see:
 
-   ```bash
+   ```
    NAME              READY   UP-TO-DATE   AVAILABLE   AGE
    ucp               1/1     1            1           2m56s
    appcore-rp        1/1     1            1           2m56s
@@ -163,12 +163,12 @@ Radius can also be installed and an environment created with manual rad CLI comm
 
    You should see:
 
-   ```bash
+   ```
    NAME
    myEnvironment
    ```
 
-## Configure cloud providers
+### Configure cloud providers
 
 Setting up a [cloud provider]({{< ref providers >}}) allows you to deploy and manage resources from either Azure or AWS as part of your Radius Application.
 
@@ -176,11 +176,11 @@ Setting up a [cloud provider]({{< ref providers >}}) allows you to deploy and ma
 
 {{% codetab %}}
 
-### Pre-requisites
+#### Pre-requisites
 
 - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/what-is-azure-cli)
 
-### Configuration steps
+#### Configuration steps
 
 1. Use [`rad env update`]({{< ref rad_env_update >}}) to update your Radius Environment with your Azure subscription ID and Azure resource group:
 
@@ -190,7 +190,7 @@ Setting up a [cloud provider]({{< ref providers >}}) allows you to deploy and ma
 
 2. Run `az ad sp create-for-rbac` to create a Service Principal without a role assignment and obtain your `appId`, `displayName`, `password`, and `tenant` information.
 
-   ```bash
+   ```
    {
    "appId": "****",
    "displayName": "****",
