@@ -36,8 +36,8 @@ workspaces:
 
 ## Default location
 
-- **macOS/Linux:** `~/.radius/config.yaml`
-- **Windows:** `%USERPROFILE%\.radius\config.yaml`
+- **macOS/Linux:** `~/.rad/config.yaml`
+- **Windows:** `%USERPROFILE%.rad\config.yaml`
 
 ## Schema
 
