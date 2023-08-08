@@ -45,8 +45,8 @@ This application showcases how Radius can use a user-manged Azure SQL Database.
 | [resourceProvisioning](#resource-provisioning) | n | Specifies how the underlying service/resource is provisioned and managed. Options are to provision automatically via 'recipe' or provision manually via 'manual'. Selection determines which set of fields to additionally require. Defaults to 'recipe'. | `manual`
 | [recipe](#recipe) | n | Configuration for the Recipe which will deploy the backing infrastructure. | [See below](#recipe)
 | [resources](#resources)  | n | An array of IDs of the underlying resources for the link. | [See below](#resources)
-| server | n | The fully qualified domain name of the SQL server. | `sql.hello.com`
-| database | n | The name of the SQL database. | `5000`
+| server | n | The fully qualified domain name of the SQL server. | `mydatabase.database.windows.net`
+| database | n | The name of the SQL database. | `mydatabase`
 | port | n | The SQL database port. | `1433`
 | username | n | The username for the SQL database. | `'myusername'`
 | [secrets](#secrets) | n | Secrets used when building the link from values. | [See below](#secrets)
@@ -55,8 +55,8 @@ This application showcases how Radius can use a user-manged Azure SQL Database.
 
 | Property | Required | Description | Example(s) |
 |----------|:--------:|-------------|------------|
-| connectionString | n | The connection string for the SQL database. Write only. | `'https://mysqlserver.cluster.svc.local,password=*****,....'`
-| password | n | The password for the SQL database. Write only. | `'mypassword'`
+| connectionString | n | The connection string for the SQL database. Write only. | `Server=<server>.mysql.database.azure.com;Port=<port>;Database=<database>;UID=<username>;PWD=<password>`
+| password | n | The password for the SQL database. Write only. | `mypassword`
 
 #### Recipe
 
@@ -84,12 +84,13 @@ If you want to manually manage your infrastructure provisioning outside of Recip
 
 ## Environment variables for connections
 
-Other Radius resources, such as [containers]({{< ref "container" >}}), may connect to a Azure SQL resource via [connections]({{< ref "application-graph#connections-and-injected-values" >}}). When a connection to Azure SQL is declared, Radius injects values into environment variables that are then used to access the connected Azure SQL resource:
+Other Radius resources, such as [containers]({{< ref "container" >}}), may connect to a Azure SQL resource via [connections]({{< ref "application-graph#connections-and-injected-values" >}}). When a connection to Azure SQL named, for example, `myconnection` is declared, Radius injects values into environment variables that are then used to access the connected Azure SQL resource:
 
-| Environment variable | Description | Example(s) |
-|----------------------|-------------|------------|
-| CONNECTION_MYCONNECTION_DATABASE | The name of the target Azure SQL database. | `mydatabase` |
-| CONNECTION_MYCONNECTION_SERVER | The fully qualified domain name of the target Azure SQL server. | `sql.hello.com` |
-| CONNECTION_MYCONNECTION_USERNAME | The username for the target Azure SQL database. | `admin` |
-| CONNECTION_MYCONNECTION_PASSWORD | The password for the target Azure SQL database. | `mypassword` |
-| CONNECTION_MYCONNECTION_CONNECTIONSTRING | The connection string for the target Azure SQL database. | `https://mysqlserver.cluster.svc.local,password=*****,....` |
+| Environment variable | Example(s) |
+|----------------------|------------|
+| CONNECTION_MYCONNECTION_DATABASE | `mydatabase` |
+| CONNECTION_MYCONNECTION_SERVER | `mydatabase.database.windows.net` |
+| CONNECTION_MYCONNECTION_PORT | `1433` |
+| CONNECTION_MYCONNECTION_USERNAME | `myusername` |
+| CONNECTION_MYCONNECTION_PASSWORD | `mypassword` |
+| CONNECTION_MYCONNECTION_CONNECTIONSTRING | `Server=<server>.mysql.database.azure.com;Port=<port>;Database=<database>;UID=<username>;PWD=<password>` |

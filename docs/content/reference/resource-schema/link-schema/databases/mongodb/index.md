@@ -45,7 +45,7 @@ The `mongodb.com/MongoDatabase` link is a [portable link]({{< ref links-resource
 | [recipe](#recipe) | n | Configuration for the Recipe which will deploy the backing infrastructure. | [See below](#recipe)
 | [resources](#resources) | n | An array of resources which underlay this resource. For example, an Azure CosmosDB database ID if the MongoDB resource is leveraging CosmosDB. | [See below](#resources)
 | database | n | Database name of the target MongoDB | `mongodb-prod`
-| host | n | The MongoDB host name. | `mongo.hello.com`
+| host | n | The MongoDB host name. | `mongodb://mongodb0.example.com:4242`
 | port | n | The MongoDB port. | `4242`
 | username | n | The username for the MongoDB. | `'myusername'`
 | [secrets](#secrets) | n | Secrets used when building the link from values. | [See below](#secrets)
@@ -67,8 +67,8 @@ The `mongodb.com/MongoDatabase` link is a [portable link]({{< ref links-resource
 
 | Property | Required | Description | Example(s) |
 |----------|:--------:|-------------|------------|
-| connectionString | n | The connection string for the MongoDb. Write only. | `'https://mymongo.cluster.svc.local,password=*****,....'`
-| password | n | The password for the MongoDB. Write only. | `'mypassword'`
+| connectionString | n | The connection string for the MongoDb. Write only. | `mongodb://[username:password@]host1[:port1][,...hostN[:portN]][/[defaultauthdb][?options]]`
+| password | n | The password for the MongoDB. Write only. | `mypassword`
 
 ### Methods
 
@@ -95,11 +95,13 @@ If you want to manually manage your infrastructure provisioning outside of Recip
 
 ## Environment variables for connections
 
-Other Radius resources, such as [containers]({{< ref "container" >}}), may connect to a MongoDB resource via [connections]({{< ref "application-graph#connections-and-injected-values" >}}). When a connection to MongoDB is declared, Radius injects values into environment variables that are then used to access the connected MongoDB resource:
+Other Radius resources, such as [containers]({{< ref "container" >}}), may connect to a MongoDB resource via [connections]({{< ref "application-graph#connections-and-injected-values" >}}). When a connection to MongoDB named, for example, `myconnection` is declared, Radius injects values into environment variables that are then used to access the connected MongoDB resource:
 
-| Environment variable | Description | Example(s) |
-|----------------------|-------------|------------|
-| CONNECTION_MYCONNECTION_DATABASE | Name of the target Mongo database | `mongodb-prod` |
-| CONNECTION_MYCONNECTION_USERNAME | Username for the target Mongo database | `myusername` |
-| CONNECTION_MYCONNECTION_PASSWORD | Password for the target Mongo database | `mypassword` |
-| CONNECTION_MYCONNECTION_CONNECTIONSTRING | Connection string for the target Mongo database | `https://mymongo.cluster.svc.local,password=*****,....` |
+| Environment variable | Example(s) |
+|----------------------|------------|
+| CONNECTION_MYCONNECTION_HOST | `mongodb://mongodb0.example.com:4242` |
+| CONNECTION_MYCONNECTION_PORT | `4242` |
+| CONNECTION_MYCONNECTION_DATABASE | `mongodb-prod` |
+| CONNECTION_MYCONNECTION_USERNAME | `myusername` |
+| CONNECTION_MYCONNECTION_PASSWORD | `mypassword` |
+| CONNECTION_MYCONNECTION_CONNECTIONSTRING | `mongodb://[username:password@]host1[:port1][,...hostN[:portN]][/[defaultauthdb][?options]]` |

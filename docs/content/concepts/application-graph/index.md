@@ -28,9 +28,11 @@ For example, if you want a container to read from an Azure Storage Account witho
 
 ### Connections and injected values
 
-The mechanism behind this automated application deployment is injected values into environment variables. When a connection between two resources is declared, Radius injects resource related information into environment variables that are then used to access the respective resource without having to hard code URIs, connection strings, access keys, or anything that application code needs to successfully communicate. Refer to the [reference documentation]({{< ref resource-schema >}}) of each resource for more information.
+When a connection between two resources is declared, Radius injects resource related information into environment variables that are then used to access the respective resource without having to hard code URIs, connection strings, access keys, or anything that application code needs to successfully communicate.
 
-These environment variables follow a naming convention that makes their use predictable. The naming pattern is derived from the connection name and resource type, which determines what values are required. This way the code that needs to read the values gets to define how they are named. For example, adding a connection called `myconnection` that connects to a MongoDB resource would result in the following environment variables being injected:
+These environment variables follow a naming convention that makes their use predictable. The naming pattern is derived from the connection name and resource type, which determines what values are required. This way the code that needs to read the values gets to define how they are named. Refer to the [reference documentation]({{< ref resource-schema >}}) of each resource for more information. 
+
+For example, adding a connection called `myconnection` that connects to a MongoDB resource would result in the following environment variables being injected:
 
 ```sh
 # the connection string to the resource

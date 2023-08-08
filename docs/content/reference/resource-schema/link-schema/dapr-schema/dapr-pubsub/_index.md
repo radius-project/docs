@@ -77,3 +77,11 @@ Parameters can also optionally be specified for the Recipe.
 ### Provision manually
 
 If you want to manually manage your infrastructure provisioning outside of Recipes, you can set `resourceProvisioning` to `'manual'` and specify `type`, `metadata`, and `version` for the Dapr component. These values must match the schema of the intended [Dapr component](https://docs.dapr.io/reference/components-reference/supported-pubsub/).
+
+## Environment variables for connections
+
+Other Radius resources, such as [containers]({{< ref "container" >}}), may connect to a Dapr pub/sub resource via [connections]({{< ref "application-graph#connections-and-injected-values" >}}). When a connection to Dapr pub/sub named, for example, `myconnection` is declared, Radius injects values into environment variables that are then used to access the connected Dapr pub/sub resource:
+
+| Environment variable | Example(s) |
+|----------------------|------------|
+| CONNECTION_MYCONNECTION_COMPONENTNAME | `myapp-mypubsub` |

@@ -88,11 +88,15 @@ If you want to manually manage your infrastructure provisioning outside of Recip
 
 ## Environment variables for connections
 
-Other Radius resources, such as [containers]({{< ref "container" >}}), may connect to a RabbitMQ resource via [connections]({{< ref "application-graph#connections-and-injected-values" >}}). When a connection to RabbitMQ is declared, Radius injects values into environment variables that are then used to access the connected RabbitMQ resource:
+Other Radius resources, such as [containers]({{< ref "container" >}}), may connect to a RabbitMQ resource via [connections]({{< ref "application-graph#connections-and-injected-values" >}}). When a connection to RabbitMQ named, for example, `myconnection` is declared, Radius injects values into environment variables that are then used to access the connected RabbitMQ resource:
 
-| Environment variable | Description | Example(s) |
-|----------------------|-------------|------------|
-| CONNECTION_MYCONNECTION_QUEUE | The name of the target RabbitMQ queue. | `'orders'` |
-| CONNECTION_MYCONNECTION_USERNAME | The username for the target RabbitMQ queue. | `'guest'` |
-| CONNECTION_MYCONNECTION_CONNECTIONSTRING | The connection string to the target RabbitMQ queue. | `'amqp://guest:***@rabbitmq.svc.local.cluster:5672'` |
-| CONNECTION_MYCONNECTION_PASSWORD | The password for the target RabbitMQ queue. | `'password'` |
+| Environment variable | Example(s) |
+|----------------------|------------|
+| CONNECTION_MYCONNECTION_QUEUE | `'orders'` |
+| CONNECTION_MYCONNECTION_HOST | `'rabbitmq.svc.local.cluster'` |
+| CONNECTION_MYCONNECTION_PORT | `'5672'` |
+| CONNECTION_MYCONNECTION_VHOST | `'qa1'` | <!-- [Title](https://www.rabbitmq.com/vhosts.html) -->
+| CONNECTION_MYCONNECTION_USERNAME | `'guest'` |
+| CONNECTION_MYCONNECTION_TLS | `'true'` |
+| CONNECTION_MYCONNECTION_CONNECTIONSTRING | `'amqp://${username}:${password}@${rmqContainer.properties.hostname}:${rmqContainer.properties.port}'` |
+| CONNECTION_MYCONNECTION_PASSWORD | `'password'` |
