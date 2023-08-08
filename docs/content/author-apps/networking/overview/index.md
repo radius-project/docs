@@ -23,11 +23,19 @@ Refer to the [HTTP Route schema]({{< ref httproute >}}) for more information on 
 
 A gateway can optionally be added for external users to access the Route.
 
+## DNS Service Discovery
+
+`DNS Service Discovery`, or `DNS-SD`, is another way of defining HTTP communication between two [services]({{< ref container >}}). It can define one-way and cycles of communication between services. `DNS-SD` differs from `HttpRoute` by not having to define an intermediary resource for connection.
+
+<img src="networking-cycles.png" style="width:400px" alt="Diagram of Radius service-to-service networking with cycles" /><br />
+
+A gateway can optionally be added for external users to access the service.
+
 ## Gateways
 
 `Gateway` defines how requests are routed to different resources, and also provides the ability to expose traffic to the internet. Conceptually, gateways allow you to have a single point of entry for  traffic in your application, whether it be internal or external traffic.
 
-`Gateway` in Radius are split into two main pieces; the `Gateway` resource itself, which defines which port and protocol to listen on, and Route(s) which define the rules for routing traffic to different resources.
+`Gateway` in Radius are split into two main pieces; the `Gateway` resource itself, which defines which port and protocol to listen on, and Route(s) which define the rules for routing traffic to different resources. Both `DNS-SD` and `HttpRoute` are supported by `Gateway`.
 
 <img src="networking-gateways.png" style="width:400px" alt="Diagram of Radius gateways" /><br />
 
@@ -51,6 +59,16 @@ To set up SSL passthrough, set `tls.sslPassthrough` to `true` on the gateway, an
 
 {{< codetab >}}
 {{< rad file="snippets/networking.bicep" embed=true >}}
+{{< /codetab >}}
+
+{{< /tabs >}}
+
+### DNS-SD routing
+
+{{< tabs Bicep >}}
+
+{{< codetab >}}
+{{< rad file="snippets/dns-networking.bicep" embed=true >}}
 {{< /codetab >}}
 
 {{< /tabs >}}
