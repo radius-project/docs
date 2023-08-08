@@ -72,6 +72,7 @@ Get up and running with a GitHub Codespace in seconds. This will give you a full
 
    ```sh
    cd themes
+   cd docsy
    npm install
    cd ..
    ```
