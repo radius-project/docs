@@ -55,7 +55,7 @@ This application showcases how Radius can use a user-manged Azure SQL Database.
 
 | Property | Required | Description | Example(s) |
 |----------|:--------:|-------------|------------|
-| connectionString | n | The connection string for the SQL database. Write only. | `Server=<server>.mysql.database.azure.com;Port=<port>;Database=<database>;UID=<username>;PWD=<password>`
+| connectionString | n | The connection string for the SQL database. Write only. | `Server=tcp:<database-server-name>.database.windows.net,1433;Initial Catalog=<database-name>...`
 | password | n | The password for the SQL database. Write only. | `mypassword`
 
 #### Recipe
@@ -93,4 +93,4 @@ Other Radius resources, such as [containers]({{< ref "container" >}}), may conne
 | CONNECTION_MYCONNECTION_PORT | `1433` |
 | CONNECTION_MYCONNECTION_USERNAME | `myusername` |
 | CONNECTION_MYCONNECTION_PASSWORD | `mypassword` |
-| CONNECTION_MYCONNECTION_CONNECTIONSTRING | `Server=<server>.mysql.database.azure.com;Port=<port>;Database=<database>;UID=<username>;PWD=<password>` |
+| CONNECTION_MYCONNECTION_CONNECTIONSTRING | `Server=tcp:<database-server-name>.database.windows.net,1433;Initial Catalog=<database-name>...` |
