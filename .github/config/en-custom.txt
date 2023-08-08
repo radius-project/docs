@@ -428,3 +428,4 @@ Balancer
 authSource
 mongodb
 MYCONNECTION
+VHOST
