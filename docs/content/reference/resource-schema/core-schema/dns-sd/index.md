@@ -1,33 +1,36 @@
 ---
 type: docs
-title: "Container service"
-linkTitle: "Container"
-description: "Learn how to add a container to your Radius application"
-weight: 300
+title: "DNS Service Discovery"
+linkTitle: "DNS Service Discovery"
+description: "Learn how to define HTTP communication between services with DNS Service Discovery"
+weight: 400
 ---
 
-`Container` provides an abstraction for a container workload that can be run on any platform Radius supports.
+## Consuming Container
 
-## Resource format
+{{< rad file="snippets/dns-connection.bicep" embed=true marker="//OUTBOUND" >}}
 
-{{< rad file="snippets/container.bicep" embed=true marker="//CONTAINER" >}}
+## Providing Container
+
+{{< rad file="snippets/dns-connection.bicep" embed=true marker="//INBOUND" >}}
+
+In this scenario, the frontend container is consuming a service provided by the backend container. The backend container is providing a service simply by exposing a `containerPort`. The frontend is connected to the backend via `DNS Service Discovery`.
 
 ### Top-level
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| name | y | The name of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `frontend`
+| name | y | The name of your container resource. Standard for container creation. | `'frontend'`
 | location | y | The location of your resource. See [common values]({{< ref "resource-schema.md#common-values" >}}) for more information. | `global`
 | [properties](#properties) | y | Properties of the resource. | [See below](#properties)
 
 ### Properties
 
-| Key  | Required | Description | Example |
-|------|:--------:|-------------|---------|
-| application | y | The ID of the application resource this container belongs to. | `app.id`
-| [container](#container) | y | Container configuration. | [See below](#container)
-| [connections](#connections) | n | List of connections to other resources. | [See below](#connections)
-| [extensions](#extensions) | n | List of extensions on the container. | [See below](#extensions)
+| Property | Description | Example |
+|----------|-------------|-------------|
+| application | The ID of the application resource this resource belongs to. | `app.id`
+| [container](#container) | Container configuration. | [See below](#container)
+| [connections](#connections) | List of connections to other resources. | [See below](#connections)
 
 ### Container
 
@@ -56,17 +59,6 @@ The ports offered by the container are  defined in the `ports` section.
 | port | n | Only needs to be set when a value different from containerPort is desired to be exposed. | `6544`
 | scheme | n | Used to build URLs for DNS generation, defaults to `http` or `https` based on port value. | `http`
 
-#### Volumes
-
-| Key  | Required | Description | Example |
-|------|:--------:|-------------|---------|
-| name | y | A name key for the volume. | `tempstore`
-| kind | y | The type of volume, either `ephemeral` or `persistent`. | `ephemeral`
-| mountPath | y | The container path to mount the volume to. | `\tmp\mystore`
-| managedStore | y* | The backing storage medium to use when kind is 'ephemeral'. Either `disk` or `memory`. | `memory`
-| source | y* | A volume resource to mount when kind is 'persistent'. | `myvolume.id`
-| rbac | n | The role-based access control level when kind is 'persistent'. Allowed values are `'read'` and `'write'`. Defaults to 'read'. | `'read'`
-
 #### Readiness probe
 
 | Key  | Required | Description | Example |
@@ -91,12 +83,23 @@ The ports offered by the container are  defined in the `ports` section.
 | failureThreshold | n | Threshold number of times the probe fails after which a failure would be reported. | `5`
 | periodSeconds | n | Interval for the liveness probe in seconds. | `5`
 
+#### Volumes
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| name | y | A name key for the volume. | `tempstore`
+| kind | y | The type of volume, either `ephemeral` or `persistent`. | `ephemeral`
+| mountPath | y | The container path to mount the volume to. | `\tmp\mystore`
+| managedStore | y* | The backing storage medium to use when kind is 'ephemeral'. Either `disk` or `memory`. | `memory`
+| source | y* | A volume resource to mount when kind is 'persistent'. | `myvolume.id`
+| rbac | n | The role-based access control level when kind is 'persistent'. Allowed values are `'read'` and `'write'`. Defaults to 'read'. | `'read'`
+
 ### Connections
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| name | y | A name key for the port. | `inventory`
-| source | y | The id of the link or resource the container is connecting to. | `db.id`
+| name | y | A name key for the port. | `backend`
+| source | y | The id (HttpRoute) or URL (DNS Service Discovery) of the link or resource the container is connecting to. | `db.id`, `'http://backend:3000'`
 | [iam](#iam) | n | Identity and access management (IAM) roles to set on the target resource. | [See below](#iam)
 
 #### IAM
@@ -107,62 +110,3 @@ Identity and access management (IAM) roles to set on the target resource.
 |------|:--------:|-------------|---------|
 | kind | y | Type of IAM role. Only `azure` supported today | `'azure'`
 | roles | y | The list IAM roles to set on the target resource. | `'Owner'`
-
-### Extensions
-
-Extensions define additional capabilities and configuration for a container.
-
-| Key  | Required | Description | Example |
-|------|:--------:|-------------|---------|
-| kind | y | The kind of extension being used. | `kubernetesMetadataextension`
-
-Additional properties are available and required depending on the 'kind' of the extension.
-
-#### kubernetesMetadata
-
-The [Kubernetes Metadata extension]({{< ref "/operations/platforms/kubernetes/kubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius application. For examples refer to the extension overview page.
-
-##### Properties
-
-| Key  | Required | Description | Example |
-|------|:--------:|-------------|---------|
-| kind | y | The kind of extension being used. Must be 'kubernetesMetadata' | `kubernetesMetadata` |
-| [labels](#labels)| n | The Kubernetes labels to be set on the application and its resources | [See below](#labels)|
-| [annotations](#annotations) | n | The Kubernetes annotations to set on your application and its resources  | [See below](#annotations)|
-
-###### labels
-
-| Key  | Required | Description | Example |
-|------|:--------:|-------------|---------|
-| user defined label key | y | The key and value of the label to be set on the application and its resources.|`'team.name': 'frontend'`
-
-###### annotations
-
-| Key  | Required | Description | Example |
-|------|:--------:|-------------|---------|
-| user defined annotation key | y | The key and value of the annotation to be set on the application and its resources.| `'app.io/port': '8081'` |
-
-#### daprSidecar
-
-The `daprSidecar` extensions adds and configures a [Dapr](https://dapr.io) sidecar to your application.
-
-##### Properties
-
-| Property | Required | Description | Example |
-|----------|:--------:|-------------|---------|
-| kind | y | The kind of extension. | `daprSidecar`
-| appId | n | The appId of the Dapr sidecar. | `backend` |
-| appPort | n | The port your service exposes to Dapr | `3500`
-| config | n | The configuration to use for the Dapr sidecar |
-
-#### manualScaling
-
-The `manualScaling` extension configures the number of replicas of a compute instance (such as a container) to run.
-
-##### Properties
-
-| Property | Required | Description | Example |
-|----------|:--------:|-------------|---------|
-| kind | y | The kind of extension. | `manualScaling`
-| replicas | Y | The number of replicas to run | `5` |
-

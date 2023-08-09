@@ -19,6 +19,8 @@ Radius networking resources allow you to model:
 
 <img src="dns-connection.png" style="width:600px" alt="Diagram of Radius service-to-service networking DNS service discovery" /><br />
 
+Refer to the [DNS Service Discovery schema]({{< ref dns-sd >}}) for more information on how to model HTTP routes.
+
 A gateway can optionally be added for external users to access the service.
 
 ## HTTP Routes (advanced)
