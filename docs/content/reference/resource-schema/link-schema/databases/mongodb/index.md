@@ -45,7 +45,7 @@ The `mongodb.com/MongoDatabase` link is a [portable link]({{< ref links-resource
 | [recipe](#recipe) | n | Configuration for the Recipe which will deploy the backing infrastructure. | [See below](#recipe)
 | [resources](#resources) | n | An array of resources which underlay this resource. For example, an Azure CosmosDB database ID if the MongoDB resource is leveraging CosmosDB. | [See below](#resources)
 | database | n | Database name of the target MongoDB | `mongodb-prod`
-| host | n | The MongoDB host name. | `mongodb://mongodb0.example.com:4242`
+| host | n | The MongoDB host name. | `mongodb0.example.com`
 | port | n | The MongoDB port. | `4242`
 | username | n | The username for the MongoDB. | `'myusername'`
 | [secrets](#secrets) | n | Secrets used when building the link from values. | [See below](#secrets)
@@ -67,7 +67,7 @@ The `mongodb.com/MongoDatabase` link is a [portable link]({{< ref links-resource
 
 | Property | Required | Description | Example(s) |
 |----------|:--------:|-------------|------------|
-| connectionString | n | The connection string for the MongoDb. Write only. | `mongodb://[username:password@]host1[:port1][,...hostN[:portN]][/[defaultauthdb][?options]]`
+| connectionString | n | The connection string for the MongoDb. Write only. | `mongodb://myDBReader:D1fficultP%40ssw0rd@mongodb0.example.com:4242/?authSource=admin`
 | password | n | The password for the MongoDB. Write only. | `mypassword`
 
 ### Methods
@@ -99,9 +99,9 @@ Other Radius resources, such as [containers]({{< ref "container" >}}), may conne
 
 | Environment variable | Example(s) |
 |----------------------|------------|
-| CONNECTION_MYCONNECTION_HOST | `mongodb://mongodb0.example.com:4242` |
+| CONNECTION_MYCONNECTION_HOST | `mongodb0.example.com` |
 | CONNECTION_MYCONNECTION_PORT | `4242` |
 | CONNECTION_MYCONNECTION_DATABASE | `mongodb-prod` |
 | CONNECTION_MYCONNECTION_USERNAME | `myusername` |
 | CONNECTION_MYCONNECTION_PASSWORD | `mypassword` |
-| CONNECTION_MYCONNECTION_CONNECTIONSTRING | `mongodb://[username:password@]host1[:port1][,...hostN[:portN]][/[defaultauthdb][?options]]` |
+| CONNECTION_MYCONNECTION_CONNECTIONSTRING | `mongodb://myDBReader:D1fficultP%40ssw0rd@mongodb0.example.com:4242/?authSource=admin` |

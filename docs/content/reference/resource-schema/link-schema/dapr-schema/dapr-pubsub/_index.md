@@ -49,7 +49,7 @@ An `Applications.Link/daprPubSubBrokers` resource represents a [Dapr pub/sub](ht
 | type | n | The Dapr component type. Set only when resourceProvisioning is 'manual'. | `pubsub.kafka` |
 | metadata | n | Metadata object for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-pubsub/). Set only when resourceProvisioning is 'manual'. | `{ brokers: kafkaRoute.properties.url }` |
 | version | n | The version of the Dapr component. See [Dapr components](https://docs.dapr.io/reference/components-reference/supported-pubsub/) for available versions. Set only when resourceProvisioning is 'manual'. | `v1` |
-| componentName | n | _(read-only)_ The name of the Dapr component that is generated and applied to the underlying system. Used by the Dapr SDKs or APIs to access the Dapr component. | `myapp-mypubsub` |
+| componentName | n | _(read-only)_ The name of the Dapr component that is generated and applied to the underlying system. Used by the Dapr SDKs or APIs to access the Dapr component. | `mypubsub` |
 
 #### Recipe
 
