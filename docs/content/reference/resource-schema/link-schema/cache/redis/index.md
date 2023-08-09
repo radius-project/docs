@@ -104,4 +104,4 @@ Other Radius resources, such as [containers]({{< ref "container" >}}), may conne
 | CONNECTION_MYCONNECTION_USERNAME | `admin` |
 | CONNECTION_MYCONNECTION_CONNECTIONSTRING | `contoso5.redis.cache.windows.net,ssl=true,password=...` |
 | CONNECTION_MYCONNECTION_PASSWORD | `mypassword` |
-| CONNECTION_MYCONNECTION_URL | `redis://username:password@localhost:6380/0?ssl=true` |
+| CONNECTION_MYCONNECTION_URL | `rediss://username:password@localhost:6380/0` |

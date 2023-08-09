@@ -84,4 +84,4 @@ Other Radius resources, such as [containers]({{< ref "container" >}}), may conne
 
 | Environment variable | Example(s) |
 |----------------------|------------|
-| CONNECTION_MYCONNECTION_COMPONENTNAME | `myapp-mypubsub` |
+| CONNECTION_MYCONNECTION_COMPONENTNAME | `mypubsub` |
