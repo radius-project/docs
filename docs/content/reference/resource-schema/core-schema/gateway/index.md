@@ -29,12 +29,12 @@ weight: 401
 
 #### Routes
 
-You can define a list of routes, each representing a connection to a service. Specifying a route opens the destination [HTTP Route]({{< ref httproute >}}) to the internet.
+You can define a list of routes, each representing a connection to a service. Specifying a route opens the destination [HTTP Route]({{< ref httproute >}}) or container URL via [DNS Service Discovery]({{< ref dns-sd >}}) to the internet.
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | path | y* | The path to match the incoming request path on. Not required when `tls.sslPassthrough` is set to `'true'`. | `'/service'`
-| destination | y | The [HttpRoute]({{< ref httproute >}}) to direct traffic to when the path is matched. | `route.id`
+| destination | y | The [HttpRoute]({{< ref httproute >}}) or container URL via [DNS Service Discovery]({{< ref dns-sd >}}) to direct traffic to when the path is matched. | `route.id`, `'http://backend:8080'`
 | replacePrefix | n | The prefix to replace in the incoming request path that is sent to the destination route. | `'/'`
 
 #### Hostname

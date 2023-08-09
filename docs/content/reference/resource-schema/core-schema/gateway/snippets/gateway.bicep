@@ -29,7 +29,7 @@ resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
       }
       {
         path: '/backend'
-        destination: backendroute.id
+        destination: 'https://backend:8080'
       }
     ]
     tls: {
@@ -63,15 +63,6 @@ resource frontendroute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' 
 }
 //FRONTENDROUTE
 
-//BACKENDROUTE
-resource backendroute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
-  name: 'backendroute'
-  properties: {
-    application: app.id
-  }
-}
-//BACKENDROUTE
-
 //FRONTEND
 resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'frontend'
@@ -85,13 +76,10 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
           provides: frontendroute.id
         }
       }
-      env: {
-        BACKEND_URL: backendroute.properties.url
-      }
     }
     connections: {
       backend: {
-        source: backendroute.id
+        source: 'https://backend:8080'
       }
     }
   }
@@ -108,7 +96,6 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
       ports: {
         http: {
           containerPort: 8080
-          provides: backendroute.id
         }
       }
     }
