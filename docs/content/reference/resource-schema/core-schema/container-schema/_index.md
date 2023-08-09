@@ -96,7 +96,7 @@ The ports offered by the container are  defined in the `ports` section.
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | name | y | A name key for the port. | `inventory`
-| source | y | The id of the link or resource the container is connecting to. | `db.id`
+| source | y | The id (HttpRoute) or URL (DNS Service Discovery) of the link or resource the container is connecting to. | `db.id`, `'http://backend:3000'`
 | [iam](#iam) | n | Identity and access management (IAM) roles to set on the target resource. | [See below](#iam)
 
 #### IAM

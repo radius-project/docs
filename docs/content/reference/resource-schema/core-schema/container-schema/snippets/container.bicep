@@ -4,6 +4,11 @@ param environment string
 
 param azureStorage string
 
+param location string = 'global'
+
+param magpieimage string
+
+
 resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
   name: 'myapp'
   properties: {
@@ -30,7 +35,6 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
         http: {
           containerPort: 80
           protocol: 'TCP'
-          provides: http.id
         }
       }
       volumes: {
@@ -68,6 +72,9 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
     connections: {
       inventory: {
         source: db.id
+      }
+      backend: {
+        source: 'http://backend:3434'
       }
       azureStorage: {
         source: azureStorage
@@ -111,5 +118,21 @@ resource db 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
   properties: {
     environment: environment
     application: app.id
+  }
+}
+
+resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+  name: 'backend'
+  location: location
+  properties: {
+    application: app.id
+    container: {
+      image: magpieimage
+      ports: {
+        web: {
+          containerPort: 3434
+        }
+      }
+    }
   }
 }
