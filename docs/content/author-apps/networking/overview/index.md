@@ -15,7 +15,9 @@ Radius networking resources allow you to model:
 
 ## DNS Service Discovery
 
-`DNS Service Discovery`, or `DNS-SD`, is another way of defining HTTP communication between two [services]({{< ref container >}}). It can define one-way and cycles of communication between services. `DNS-SD` differs from `HttpRoute` by not having to define an intermediary resource for connection.
+`DNS Service Discovery`, or `DNS-SD`, allows you to define HTTP communication between two [Radius containers]({{< ref container >}}). It can define both one-way and cycles of communication between containers.
+
+You can also reference any non-Radius Kubernetes services if needed.
 
 <img src="dns-connection.png" style="width:600px" alt="Diagram of Radius service-to-service networking DNS service discovery" /><br />
 
