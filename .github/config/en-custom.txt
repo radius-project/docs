@@ -34,6 +34,7 @@ DaemonSet
 Dapr
 Dapr's
 Deployable
+dns
 Dockerfiles
 Docsy
 DocumentDB
