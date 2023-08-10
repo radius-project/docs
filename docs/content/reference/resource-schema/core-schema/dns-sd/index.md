@@ -6,13 +6,13 @@ description: "Learn how to define HTTP communication between services with DNS S
 weight: 400
 ---
 
-## Consuming Container
-
-{{< rad file="snippets/dns-connection.bicep" embed=true marker="//OUTBOUND" >}}
-
 ## Providing Container
 
 {{< rad file="snippets/dns-connection.bicep" embed=true marker="//INBOUND" >}}
+
+## Consuming Container
+
+{{< rad file="snippets/dns-connection.bicep" embed=true marker="//OUTBOUND" >}}
 
 In this scenario, the frontend container is consuming a service provided by the backend container. The backend container is providing a service simply by exposing a `containerPort`. The frontend is connected to the backend via `DNS Service Discovery`.
 
