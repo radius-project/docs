@@ -3,7 +3,7 @@ type: docs
 title: "How-To: Setup a development environment"
 linkTitle: "Developer environments"
 description: "Learn how to initialize a new Radius development environment"
-weight: 200
+weight: 100
 categories: "How-To"
 tags: ["environments"]
 ---
@@ -25,9 +25,9 @@ Radius development environments enable you to quickly get started with Radius an
 
 ## How-to: Initialize a new dev environment
 
-1. Initialize a new [Radius environment]({{< ref "operations/environments/overview">}}) with `rad init --dev` command:
+1. Initialize a new [Radius environment]({{< ref "operations/environments/overview">}}) with `rad init` command:
    ```bash
-   rad init --dev
+   rad init
    ```
    
    Select `Yes` to setup the app.bicep in the current directory
