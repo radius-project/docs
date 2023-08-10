@@ -53,7 +53,7 @@ The ports offered by the container are  defined in the `ports` section.
 | containerPort | y | The port the container exposes. | `80`
 | protocol | n | The protocol the container exposes. Options are 'TCP' and 'UCP'. | `'TCP'`
 | provides | n | The id of the [Route]({{< ref networking >}}) the container provides. | `http.id`
-| port | n | Only needs to be set when a value different from containerPort is desired to be exposed. | `6544`
+| port | n | The port number exposed to other services to consume. Defaults to the port specified in `containerPort`. | `6544`
 | scheme | n | Specified what protocol is offered on this port. Used to build URLs for DNS generation. Defaults to 'http' when `port` is set to 80 and to `https` when `port` is set to 443. | `'http'`
 
 #### Volumes
