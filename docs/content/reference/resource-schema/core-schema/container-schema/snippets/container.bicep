@@ -119,7 +119,6 @@ resource db 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
 
 resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'backend'
-  location: location
   properties: {
     application: app.id
     container: {
