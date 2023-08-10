@@ -15,19 +15,6 @@ This guide offers the quickest way to get started using Radius. You'll walk thro
 ## 1. Have your Kubernetes cluster handy
 
 Radius runs inside [Kubernetes]({{< ref "/operations/platforms/kubernetes" >}}). However you run Kubernetes, get a cluster ready.
-
-{{< tabs "Codespaces" "Kubernetes Cluster" >}}
-
-{{% codetab %}}
-Use [Codespaces](https://github.com/features/codespaces) to launch a pre-configured container with Radius installation on a k3d cluster
-
-<a class="btn btn-primary" href="https://aka.ms/ProjectRadius/Codespace" role="button" target="_blank">Launch a new Codespace</a>
-
-_Visit the [GitHub docs]({{< ref github >}}) if you need access to the organization._
-{{% /codetab %}}
-
-{{% codetab %}}
-
 > *If you don't have a preferred way to create Kubernetes clusters, you could try using [k3d](https://k3d.io/), which runs a minimal Kubernetes distribution in Docker.*
 
 Ensure your cluster is set as your current context:
@@ -35,12 +22,8 @@ Ensure your cluster is set as your current context:
 ```bash
 kubectl config current-context
 ```
-{{% /codetab %}}
-
-{{< /tabs >}}
 
 ## 2. Install Radius CLI
-> Skip this step if you are using codespaces as the containers are already pre-configured with Radius installation
 
 {{< tabs MacOS "Linux/WSL" "Windows PowerShell" >}}
 
@@ -108,7 +91,7 @@ In addition to starting Radius services in your Kubernetes cluster, this initial
 
 ## 4. Run the app
 
-Use the below command to run the app in your environment, then access the application by opening [http://localhost:3000](http://localhost:3000) in a browser. If you are using codespaces, you can get the demo app url from the ports tab in VSCode.
+Use the below command to run the app in your environment, then access the application by opening [http://localhost:3000](http://localhost:3000) in a browser.
 
 ```bash
 rad run app.bicep
@@ -153,7 +136,7 @@ Your updated `app.bicep` will look like this:
 
 ## 6. Rerun the application with a database
 
-Use the command below to run the updated application again, then open the browser to [http://localhost:3000](http://localhost:3000). If you are using codespaces, you can get the demo app url from the ports tab in VSCode.
+Use the command below to run the updated application again, then open the browser to [http://localhost:3000](http://localhost:3000).
 
 ```sh
 rad run app.bicep
