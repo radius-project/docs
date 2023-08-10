@@ -4,7 +4,6 @@ param environment string
 
 param azureStorage string
 
-param location string = 'global'
 
 param magpieimage string
 
