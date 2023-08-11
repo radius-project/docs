@@ -104,7 +104,7 @@ Radius does not currently support direct connections to AWS resources, but it is
 
 ### What Azure services does Radius support? 
 
-Radius applications can include any non-compute Azure service, with support for direct connections and managed identities. <!--See the [connections page]({{< ref application-graph>}}) for more details.--> Compute services (Web Apps, Container Apps, App Service, Functions, Logic Apps, and others) will be added in a future release. 
+Radius applications can include any non-compute Azure service, with support for direct connections and managed identities. Compute services (Web Apps, Container Apps, App Service, Functions, Logic Apps, and others) will be added in a future release. 
 
 ### Does Radius support Google Cloud Platform (GCP)? 
 
