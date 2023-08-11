@@ -2,7 +2,7 @@
 type: docs
 title: "How-To: Author a Radius Recipe"
 linkTitle: "How-To: Author a Radius Recipe"
-weight: 200
+weight: 20
 description: "How-To: Author a Radius Recipe"
 categories: ["How-To"]
 tags: ["Recipes"]

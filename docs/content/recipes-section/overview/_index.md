@@ -3,7 +3,7 @@ type: docs
 title: "Recipe Overview"
 linkTitle: "Recipe Overview"
 description: "Learn how Radius Recipes fit into the app development landscape and it's long-term vision"
-weight: 100
+weight: 10
 categories: "Concept"
 tags: ["Recipes"]
 slug: recipes
