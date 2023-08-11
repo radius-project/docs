@@ -3,7 +3,7 @@ type: docs
 title: "How-To: Setup a development environment"
 linkTitle: "Developer environments"
 description: "Learn how to initialize a new Radius development environment"
-weight: 200
+weight: 100
 categories: "How-To"
 tags: ["environments"]
 ---

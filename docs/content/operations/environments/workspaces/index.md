@@ -141,8 +141,3 @@ When you have multiple environments initialized for different purposes like stag
         scope: /planes/radius/local/resourceGroups/staging
     ```
 1. You can now deploy applications to both staging and prod using [`rad deploy`]({{< ref rad_deploy >}}), specifying the `-w` flag:
-
-    ```sh 
-    rad deploy -w staging
-    ```
-    This will deploy the applications to the staging environment.
