@@ -428,3 +428,6 @@ vHost
 URI
 uri
 rabbitMQ
+GCP
+Fargate
+untyped
