@@ -46,7 +46,7 @@ You can reference the [`context` section below](#context-parameter-properties) f
 
 {{% codetab %}}
 
-{{< rad file="snippets/recipe.tf" embed=truemarker="//RESOURCE" >}}
+{{< rad file="snippets/recipe.tf" embed=true marker="//RESOURCE" >}}
 
 {{% /codetab %}}
 
@@ -69,7 +69,7 @@ You can create any [parameter type supported by Bicep](https://learn.microsoft.c
 
 {{% codetab %}}
 
-{{< rad file="snippets/recipe.tf" embed=truemarker="//PARAM" >}}
+{{< rad file="snippets/recipe.tf" embed=true marker="//PARAM" >}}
 
 {{% /codetab %}}
 
@@ -98,7 +98,7 @@ _Note: Secure output parameters is in development. For now, you can use `#disabl
 
 {{% codetab %}}
 
-{{< rad file="snippets/recipe.tf" embed=truemarker="//OUTPUT" >}}
+{{< rad file="snippets/recipe.tf" embed=true marker="//OUTPUT" >}}
 
 {{% /codetab %}}
 

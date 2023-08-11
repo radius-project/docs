@@ -422,6 +422,7 @@ daprSidecar
 manualScaling
 httpGet
 tcp
+tf
 BucketName
 Balancer
 vHost
