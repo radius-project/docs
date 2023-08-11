@@ -3,7 +3,7 @@ type: docs
 title: "Contributing to Radius"
 linkTitle: "Contributing"
 description: "Guides and requirements for contributing to Radius"
-weight: 80
+weight: 90
 no_list: true
 ---
 

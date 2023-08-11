@@ -1,11 +1,11 @@
 ---
 type: docs
-title: "Radius Recipes"
-linkTitle: "Recipes"
-description: "Automate infrastructure deployment for your resources with Radius recipes"
+title: "Recipe Overview"
+linkTitle: "Recipe Overview"
+description: "Learn how Radius Recipes fit into the app development landscape and it's long-term vision"
 weight: 700
 categories: "Concept"
-tags: ["recipes"]
+tags: ["Recipes"]
 slug: recipes
 ---
 
@@ -15,11 +15,11 @@ Recipes enable a **separation of concerns** between infrastructure operators and
 
 <img src="recipes.png" alt="Diagram showing developers adding Redis to their app and operators adding a Recipe that Redis should deploy an Azure Cache for Redis" width=700px >
 
-## Capabilities
+## Features
 
-### Select the Recipe that meets your needs
+### Flexibility and portability of infrastructure
 
-Recipes can be used in any environment, from dev to prod. You can run a default recipe registered in your environment or select the specific Recipe you want to run. To run a default recipe, simply add the resource you want to your app and omit the Recipe name:
+Recipes can be used in any environment, from dev environments to prod environments. You can run a default recipe registered in your environment or select the specific Recipe you want to run. To run a default recipe, simply add the resource you want to your app and omit the Recipe name:
 
 {{< rad file="snippets/recipe-link-example.bicep" embed=true marker="//DEFAULT" >}} 
 
@@ -29,9 +29,16 @@ If you want to use a specific Recipe, you can specify the Recipe name in the `re
 
 Use [**rad recipe list**]({{< ref rad_recipe_list >}}) to view the Recipes available to you in your environment.
 
-### Use community "dev" Recipes
+```bash
+usr$ rad recipe list
 
-Radius environments make it easy to get up and running with Recipes instantly. When you run [`rad init`]({{< ref rad_init >}}) you get a set of containerized dev Recipes pre-registered in your environment. These Recipes are designed to help you get started quickly with Recipes using lightweight containers. You can use these Recipes to test your app locally, or deploy them to a dev environment.
+NAME      TYPE                                     TEMPLATE KIND  TEMPLATE VERSION  TEMPLATE
+default   Applications.Link/redisCaches            bicep                            radius.azurecr.io/recipes/local-dev/rediscaches:latest
+```
+
+### Community provided Recipes
+
+Radius environments make it easy to get up and running with Recipes instantly. When you run [`rad init -full`]({{< ref rad_init >}}) you get a set of containerized dev Recipes pre-registered in your environment. These Recipes are designed to help you get started quickly with Recipes using lightweight containers. You can use these Recipes to test your app locally, or deploy them to a dev environment.
 
 ### Customize with parameters
 
@@ -41,9 +48,18 @@ Recipes can be customized with parameters, allowing developers to fine-tune infr
 
 You can use [**rad recipe show**]({{< ref rad_recipe_show >}}) to view the parameters available to you in a Recipe.
 
+```bash
+TODO
+```
+
 ### Author custom Recipes
 
-It's easy to author and register your own Recipes which define how to deploy and configure infrastructure that meets your organization's needs. See the [custom Recipes guide]({{< ref custom-recipes >}}) for more information.
+It's easy to author and register your own Recipes which define how to deploy and configure infrastructure that meets your organization's needs. See the [How-To: Author Recipes]({{< ref "/recipes-section/howto-author-recipes" >}}) page for more information.
+
+| Infrastructure as Code Languages | Recipe Support |
+|---------------------| ------------|
+| [Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/) | ✅ |
+| [Terraform](https://developer.hashicorp.com/terraform/docs) | ✅ |
 
 ## Supported resources
 
@@ -60,6 +76,7 @@ Recipes currently support the following resources. Support for additional resour
 | [`Applications.Link/daprSecretStore`]({{< ref dapr-secretstore >}}) |
 | [`Applications.Link/extenders`]({{< ref extender >}}) |
 
+
 ## Infrastructure linking
 
 When you use a Recipe to deploy infrastructure (_e.g. Azure, AWS resources_), that infrastructure can be linked and tracked as part of the Recipe-enabled resource. This means you can inspect what infrastructure supports the resource. Use [`rad resource show -o json`]({{< ref rad_resource_show >}}) to view this information.
@@ -70,5 +87,3 @@ The lifecycle of Recipe infrastructure is tied to the resource calling the Recip
 
 ## Further Reading
 
-- [Author custom recipes]({{< ref custom-recipes >}})
-- [`rad recipe` CLI reference]({{< ref rad_recipe >}})

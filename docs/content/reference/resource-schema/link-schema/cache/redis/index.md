@@ -85,7 +85,7 @@ The following methods are available on the Redis link:
 
 ### Provision with a Recipe
 
-[Recipes]({{< ref custom-recipes >}}) automate infrastructure provisioning using approved templates.
+[Recipes]({{< ref "/recipes-section/howto-author-recipes" >}}) automate infrastructure provisioning using approved templates.
 When no Recipe configuration is set, Radius will use the currently registered Recipe as the **default** in the environment for the given resource. Otherwise, a Recipe name and parameters can optionally be set to override this default.
 
 ### Provision manually

@@ -21,9 +21,9 @@ This quickstart will teach you:
 
 ## Overview
 
-[Recipes]({{< ref "/author-apps/recipes">}}) enable a separation of concerns between infrastructure teams and developers by automating infrastructure deployment. Developers define _what_ they need (_Redis, Mongo, etc._), and operators define _how_ it will be deployed (_Azure/AWS/Kubernetes infrastructure_).
+[Recipes]({{< ref "/recipes-section/overview" >}}) enable a separation of concerns between infrastructure teams and developers by automating infrastructure deployment. Developers define _what_ they need (_Redis, Mongo, etc._), and operators define _how_ it will be deployed (_Azure/AWS/Kubernetes infrastructure_).
 
-{{< button text="Learn more about Recipes here" page="/author-apps/recipes" newtab="true" >}}
+{{< button text="Learn more about Recipes here" page="/recipes-section/overview" newtab="true" >}}
 
 ## Application overview
 
@@ -65,7 +65,7 @@ Developers don't need to specify what cloud resources they're using in their app
    ```
 
    {{< alert title="💡 Dev Recipes" color="info" >}}
-   Dev environments are preloaded with [`dev` Recipes]({{< ref "/author-apps/recipes#use-community-dev-recipes" >}}), a set of Recipes that allow you to quickly get up and running with lightweight containerized infrastructure. In this quickstart, the dev Redis Recipe deploys a lightweight Redis container into your Kubernetes cluster.
+   Dev environments are preloaded with [`dev` Recipes]({{< ref "/recipes-section/overview#community-provided-recipes" >}}), a set of Recipes that allow you to quickly get up and running with lightweight containerized infrastructure. In this quickstart, the dev Redis Recipe deploys a lightweight Redis container into your Kubernetes cluster.
 
    When a Recipe is named "default" it will be used by default when deploying resources when a Recipe is not specified.
    {{< /alert >}}
@@ -220,4 +220,5 @@ rad env delete default --yes
 
 ## Next steps
 
-- To learn how to create your own custom Recipe visit our [administrator guide]({{< ref custom-recipes.md >}})
+- To learn how to create your own custom Recipe visit our [administrator guide]({{< ref "/recipes-section/howto-author-recipes"
+ >}})
