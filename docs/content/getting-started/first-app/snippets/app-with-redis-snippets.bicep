@@ -17,13 +17,11 @@ resource demo 'Applications.Core/containers@2022-03-15-privatepreview' = {
         }
       }
     }
-    //CONNECTION
     connections: {
       redis: {
         source: db.id
       }
     }
-    //CONNECTION
   }
 }
 //CONTAINER
