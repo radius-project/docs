@@ -423,6 +423,8 @@ manualScaling
 httpGet
 tcp
 tf
+howto
+usr
 BucketName
 Balancer
 vHost
