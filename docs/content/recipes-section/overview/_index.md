@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Recipe Overview"
-linkTitle: "Recipe Overview"
+title: "Overview"
+linkTitle: "Overview"
 description: "Learn how Radius Recipes fit into the app development landscape and it's long-term vision"
 weight: 10
 categories: "Concept"
