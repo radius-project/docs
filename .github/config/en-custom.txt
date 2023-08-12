@@ -424,8 +424,12 @@ manualScaling
 httpGet
 tcp
 BucketName
+roadmap
 Balancer
 vHost
 URI
 uri
 rabbitMQ
+azureCache
+listKeys
+primaryKey
