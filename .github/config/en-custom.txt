@@ -425,3 +425,7 @@ tcp
 BucketName
 roadmap
 Balancer
+linenos
+linenostart
+markdownConfig
+hl
