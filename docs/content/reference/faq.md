@@ -51,7 +51,7 @@ Recipes support any resource that can be modeled in Bicep, or that has an applic
 
 Recipes currently support the set of Radius portable resources: Redis, Mongo, RabbitMQ, SQL, Dapr State Stores, Dapr Secret Stores, Dapr Pub/Sub, the untyped extender resource, and more to come in the future. See the [Radius resource schema]({{< ref resource-schema >}}) for more details. Additional support for other resources (Azure, AWS, etc.) will come in a future release. Stay tuned for updates. 
 
-### Do developers need contributor or owner access to a cloud provider account (Azure subscription, AWS account, etc.) to leverage Radius Recipes? 
+### Do developers need contributor or owner access to a cloud provider (Azure subscription, AWS account, etc.) to leverage Radius Recipes? 
 
 No. Recipes are deployed on-behalf-of the Radius environment so developers do not need any write access to an Azure subscription, resource group, or AWS account. This allows a least-privilege access model to cloud resources and for IT operators to only allow approved IaC templates to be deployed to their cloud environments. 
 
