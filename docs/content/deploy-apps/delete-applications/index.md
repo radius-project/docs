@@ -27,7 +27,7 @@ A [deployed application]({{< ref deploy-apps >}}) in a Radius environment.
   
 2. Delete the Cloud/Platform resources
 
-    To avoid incurring costs, please make sure to manually delete the cloud/platform resources provisioned by Radius.
+    AWS, Azure, Kubernetes, and any other cloud/platform resources that were deployed alongside your Radius application and not as part of a Recipe need to be deleted as a separate step.
 
     {{< tabs Azure AWS Kubernetes >}}
 
