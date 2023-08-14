@@ -9,6 +9,7 @@ tags: ["delete"]
 ---
 
 ## Pre-requisites
+
 A [deployed application]({{< ref deploy-apps >}}) in a Radius environment.
 
 ## How-to: Delete a  application
