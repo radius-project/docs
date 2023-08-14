@@ -143,7 +143,7 @@ Your updated `app.bicep` will look like this:
 
 ## 6. Rerun the application with a database
 
-Use `rad run` to run the updated application again:
+Make sure to save the changes in your `app.bicep` file, then use `rad run` to run the updated application again:
 
 ```sh
 rad run app.bicep

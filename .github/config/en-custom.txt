@@ -250,6 +250,7 @@ mongodbDatabases
 mountPath
 mux
 myaccount
+myGroup
 myapp
 mycluster
 mydb
@@ -423,11 +424,15 @@ manualScaling
 httpGet
 tcp
 BucketName
+roadmap
 Balancer
 vHost
 URI
 uri
 rabbitMQ
+azureCache
+listKeys
+primaryKey
 GCP
 Fargate
 untyped
