@@ -25,12 +25,6 @@ A [deployed application]({{< ref deploy-apps >}}) in a Radius environment.
     1. All the resources created by Radius on the Kubernetes cluster under the 'default-<appname>' namespace
     2. All the resources provisioned by Recipes
   
-    This will not delete the following resources from the default Radius environment
-    
-    1. Any resources already provisioned by the user outside of Radius (e.g. manually created resources)
-    2. Any cloud/platform resources provisioned by Radius (e.g. Azure/AWS/Kubernetes resources)
-    
-
 2. Delete the Cloud/Platform resources
 
     To avoid incurring costs, please make sure to manually delete the cloud/platform resources provisioned by Radius.
