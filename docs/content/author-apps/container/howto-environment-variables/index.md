@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "Quickstart: Environment Variables"
-linkTitle: "Environment variables"
+title: "How-To: Set environment variables on a container"
+linkTitle: "How-To: Env vars"
 description: "Learn how to set environment variables manually and through connections"
 weight: 100
 slug: "environment-variables"
-categories: "Quickstart"
+categories: "How-To"
 tags: ["containers"]
 ---
 
-This quickstart will teach you:
+This how-to guide will teach you:
 
 1. How to set environment variables manually
 1. How to set environment variables through connections

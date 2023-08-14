@@ -17,7 +17,7 @@ This reference app will show you:
 
 ## Prerequisites
 
-- [Complete the getting started guide for AWS up to Step 2]({{< ref quickstart-aws-s3 >}})
+- [Complete the getting started guide for AWS up to Step 2]({{< ref howto-aws-resources >}})
 
 ## Step 1: Create a Bicep file which uses AWS Simple Queue Service (SQS)
 
@@ -37,7 +37,7 @@ This application models two http services: (1) `producer` and (2) `consumer` tha
     rad deploy ./app.bicep -p aws_access_key_id=$AWS_ACCESS_KEY_ID -p aws_secret_access_key=$AWS_SECRET_ACCESS_KEY -p aws_region=$AWS_REGION -p queue_name='queue'
     ```
 
-    The access key, secret key, and region can be the same values you used in the [AWS Quickstart]({{< ref quickstart-aws-s3 >}}). These are used so the container we are deploying can connect to AWS. The AWS SQS Queue name must follow the [`Queue name` conventions](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-queues.html).
+    The access key, secret key, and region can be the same values you used in the [AWS How-To guide]({{< ref howto-aws-resources >}}). These are used so the container we are deploying can connect to AWS. The AWS SQS Queue name must follow the [`Queue name` conventions](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-queues.html).
 
 1. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose >}}):
 

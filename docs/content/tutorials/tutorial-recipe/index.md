@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "Quickstart: Deploy Recipes in your Radius Application"
+title: "How-To: Deploy Recipes in your Radius Application"
 linkTitle: "Recipes"
 description: "Learn how to use Radius Recipes within your application"
 weight: 500
 slug: "recipes"
-categories: "Quickstart"
+categories: "How-To"
 tags : ["recipes"]
 ---
 
-This quickstart will teach you:
+This how-to guide will teach you:
 
 * How to use “dev” Recipes in your Radius Environment to quickly run with containerized infrastructure.
 * How to deploy your own Recipes in your Radius Environment to leverage cloud resources.
@@ -65,7 +65,7 @@ Developers don't need to specify what cloud resources they're using in their app
    ```
 
    {{< alert title="💡 Dev Recipes" color="info" >}}
-   Dev environments are preloaded with [`dev` Recipes]({{< ref "/author-apps/recipes#use-community-dev-recipes" >}}), a set of Recipes that allow you to quickly get up and running with lightweight containerized infrastructure. In this quickstart, the dev Redis Recipe deploys a lightweight Redis container into your Kubernetes cluster.
+   Dev environments are preloaded with [`dev` Recipes]({{< ref "/author-apps/recipes#use-community-dev-recipes" >}}), a set of Recipes that allow you to quickly get up and running with lightweight containerized infrastructure. In This how-to guide, the dev Redis Recipe deploys a lightweight Redis container into your Kubernetes cluster.
 
    When a Recipe is named "default" it will be used by default when deploying resources when a Recipe is not specified.
    {{< /alert >}}

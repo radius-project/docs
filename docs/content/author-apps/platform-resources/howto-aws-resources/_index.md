@@ -1,14 +1,14 @@
 ---
 type: docs
-title: "Quickstart: Deploy AWS resources"
+title: "How-To: Deploy AWS resources"
 linkTitle: "Deploy AWS resources"
 description: "Learn about how to add AWS resources to your application and deploy them with Radius"
-categories: "Quickstart"
+categories: "How-To"
 tags: ["AWS"]
 
 ---
 
-This quickstart will show you:
+This how-to guide will show you:
 
 - How to model an AWS S3 resource in Bicep
 - How to use a sample application to interact with AWS S3 bucket

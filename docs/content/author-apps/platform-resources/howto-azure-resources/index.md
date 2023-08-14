@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "Quickstart: Connect a container to an Azure resource"
+title: "How-To: Connect a container to an Azure resource"
 linkTitle: "Connect to Azure resources"
 description: "Learn how to connect a container to an Azure resource with managed identities and RBAC" 
 weight: 600
 slug: 'azure-connection'
-categories: "Quickstart"
+categories: "How-To"
 tags: ["Azure","containers"]
 ---
 
-This quickstart will provide an overview of how to:
+This how-to guide will provide an overview of how to:
 
 - Setup a Radius environment with an identity provider
 - Define a connection to an Azure resource with Azure AD role-based access control (RBAC) assignments

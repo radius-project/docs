@@ -96,5 +96,4 @@ The `daprSidecar` extensions adds and configures a [Dapr](https://dapr.io) sidec
 
 ## Further reading
 
-{{< categorizeby category="Quickstart" tag="containers" >}}
 {{< categorizeby category="How-To" tag="containers" >}}

@@ -86,8 +86,6 @@ PowerShell
 Pre
 PubSub
 ProjectRadius
-Quickstart
-Quickstarts
 RBAC
 RabbitMQ
 ResourceDeploymentClient
@@ -291,8 +289,6 @@ publickey
 publicEndpointOverride
 pubsub
 px
-quickstart
-quickstarts
 rabbitMQMessageQueues
 rabbitmq
 radapp

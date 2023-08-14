@@ -1,20 +1,20 @@
 ---
 type: docs
-title: "Quickstart: Dapr Microservices"
+title: "How-To: Dapr Microservices"
 linkTitle: "Dapr microservices"
 description: "Learn Radius by authoring templates and deploying a Dapr application"
 weight: 300
 slug: "dapr"
-categories: "Quickstart"
+categories: "How-To"
 tags : ["Dapr"]
 ---
 
-This quickstart will teach you:
+This how-to guide will teach you:
 
 - How to use Radius to deploy a Dapr microservices sample application for an online shop
 - How [Dapr and Radius]({{< ref dapr-resources >}}) seamlessly work together
 
-For more details on the app and access to the source code, visit the `quickstarts/dapr` directory in the [samples repo](https://github.com/project-radius/samples). _For access to the project-radius GitHub org, please complete and submit [this form](https://aka.ms/ProjectRadius/GitHubAccess)._
+For more details on the app and access to the source code, visit the `tutorials/dapr` directory in the [samples repo](https://github.com/project-radius/samples). _For access to the project-radius GitHub org, please complete and submit [this form](https://aka.ms/ProjectRadius/GitHubAccess)._
 
 ## Prerequisites
 
@@ -24,7 +24,7 @@ For more details on the app and access to the source code, visit the `quickstart
 - [Dapr installed on your Kubernetes cluster](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/)
 - [Visual Studio Code](https://code.visualstudio.com/) (recommended)
   - The [Radius VSCode extension]({{< ref "getting-started" >}}) is highly recommended to provide syntax highlighting, completion, and linting
-  - Although not recommended, you can also complete this quickstart with any basic text editor
+  - Although not recommended, you can also complete This how-to guide with any basic text editor
 
 ## Step 1: Define the application, `backend` container, and Dapr state store
 
@@ -115,11 +115,11 @@ In your browser, navigate to the endpoint (e.g. [http://localhost:8080](http://l
 
 ## Next steps
 
-- If you'd like to try another tutorial with your existing environment, go back to the [Radius quickstarts]({{< ref quickstarts >}}) page.
+- If you'd like to try another tutorial with your existing environment, go back to the [Radius tutorials]({{< ref tutorials >}}) page.
 - Related links for Dapr:
   - [Dapr documentation](https://docs.dapr.io/)
   - [Dapr quickstarts](https://github.com/dapr/quickstarts/tree/v1.0.0/hello-world)
 
 <br>
 
-{{< button text="Try another quickstart" page="quickstarts" >}}
+{{< button text="Try another tutorial" page="tutorials" >}}

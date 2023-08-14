@@ -165,4 +165,4 @@ It's easy to build on the default app and add more resources to the app.
 To delete your app, see [rad app delete]({{< ref rad_application_delete >}}).
 
 <br>
-{{< button text="Next step: Radius Quickstarts" page="getting-started/quickstarts" >}}
+{{< button text="Next step: Radius Tutorials" page="tutorials" >}}

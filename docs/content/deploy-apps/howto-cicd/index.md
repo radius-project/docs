@@ -1,10 +1,10 @@
 ---
 type: docs
-title: "Quickstart: Github Actions CI/CD integration"
-linkTitle: "GitHub Actions CI/CD"
-description: "Learn about adding your Radius apps to your deployment pipelines" 
+title: "How-To: Deploy an application with Github Actions"
+linkTitle: "How-To: GitHub Actions"
+description: "Learn about adding your Radius apps to your deployment pipelines with GitHub Actions" 
 weight: 300
-categories: "Quickstart"
+categories: "How-To"
 tags: ["CI/CD"]
 ---
 

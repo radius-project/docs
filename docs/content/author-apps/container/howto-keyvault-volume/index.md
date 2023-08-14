@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "Quickstart: Mount an Azure Key Vault as a volume to a container"
+title: "How-To: Mount an Azure Key Vault as a volume to a container"
 linkTitle: "Persistent Key Vault volume"
 description: "Learn how to mount an Azure Key Vault as a volume to a container" 
 weight: 700
 slug: 'volume-keyvault'
-categories: "Quickstart"
+categories: "How-To"
 tags: ["Azure","containers"]
 ---
 
-This quickstart will provide an overview of how to:
+This how-to guide will provide an overview of how to:
 
 - Setup a Radius environment with an identity provider
 - Define a connection to an Azure resource with Azure AD role-based access control (RBAC) assignments

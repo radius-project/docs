@@ -112,16 +112,15 @@ The docs pipeline uses [aspell](http://aspell.net/) to check for spelling mistak
 - Determine the category or the type of doc you are contributing.
    - **Concept** - A concept doc is a high-level overview of the project or an area of the project.
    - **Overview** - A overview page documents a specific feature or capability of the project, with information on what the feature is and additional context and links on how to use it.
-   - **Quickstart** - A quickstart guide is a short step-by-step guide to help the reader quickly learn something and achieve a specific goal in 5-10 mins.
    - **Reference app** - A reference app-doc is for running an application sample or an example of using the project or a particular feature.
-   - **How-To** - A how-to guide is an elaborate step-by-step guide to help the reader achieve a specific goal. It should provide the reader with an in-depth understanding of what the feature does. While Quickstart is a subset of How-To, they can be differentiated by the time to achieve a specific goal.
+   - **How-To** - A how-to guide is an elaborate step-by-step guide to help the reader achieve a specific goal. It should provide the reader with an in-depth understanding of what the feature does.
 
 ### Contributing a new Concept doc
 
 - Ensure the doc is in the correct place in the hierarchy.
 - Ensure the reader can understand why they should care about the project or the concept. What problems does it help them solve?
 - Provide a link to the overview page of the feature that justifies the concept(s)
-- Also provide the reader with related links if needed (this can be other quickstarts, "how-to", samples for reference)
+- Also provide the reader with related links if needed (this can be other how-to guides, samples for reference)
 - Set the `category` as `Concept` in [Hugo front-matter](#front-matter).
 
 ### Contributing a new Overview doc
@@ -130,16 +129,8 @@ The docs pipeline uses [aspell](http://aspell.net/) to check for spelling mistak
 - Ensure the reader can understand why they should care about the feature and what it enables them to do. 
 - If applicable, ensure the doc references the reference spec document.
 - If applicable, ensure the doc is consistent with any related concepts or specs in terms of names, parameters, and terminology. Update both the concept, spec, and the doc as needed. Avoid repeating the spec. The idea is to give the reader more information and background on the capability so that they can try this out. 
-- Provide a link to the spec in the [Reference]({{<ref reference >}}) section and provide the reader with related links (this can be other quickstarts, "how-to", samples for reference )
+- Provide a link to the spec in the [Reference]({{<ref reference >}}) section and provide the reader with related links (this can be other how-to guides, samples for reference )
 - Set the `category` as `Overview` in [Hugo front-matter](#front-matter).
-
-### Contributing a new Quickstart
-
-- Make sure the guide stays within 5-6 steps.
-- Include code/sample/config snippets that can be easily copied and pasted.
-- Do not assume the reader is using a specific environment unless the article itself is specific to an environment. This includes OS (Windows/Linux/MacOS), deployment target (Kubernetes, IoT, etc.), or programming language. If instructions vary between operating systems, provide guidance for all.-
-- Do not explain all the jargon or features of the quickstart references, provide the reader with related links and next steps (this can be other "how-to", samples for reference, or related concepts).
-- Set the `category` as `Quickstart` in [Hugo front-matter](#front-matter).
 
 ### Contributing a new How-To guide
 
@@ -210,7 +201,6 @@ Front-matter should be completed with all fields including type, title, linkTitl
 - `categories` should be one of the following:
     - Concept
     - Overview
-    - Quickstart
     - Reference application
     - How-To
 - `tags` should be a comma-separated list of metadata tags.
@@ -581,15 +571,15 @@ By default, buttons are padded with new lines below the button. To remove these 
 You can use the `categorizeby` shortcode to pull and organize content by either categories and tags. This is useful when you want to categorize content by tags and the type of the document
 
 ```
-{{ categorizeby category="Quickstart" tag= "containers" }}
+{{ categorizeby category="How-To" tag= "containers" }}
 ```
 
-This categorizes and lists all the docs that has both "quickstart" as the category and "container" as the tag.
+This categorizes and lists all the docs that has both "How-To" as the category and "container" as the tag.
 
 ```
-{{ categorizeby category="Quickstart" }}
+{{ categorizeby category="How-To" }}
 ```
-This categorizes and lists all the docs that are quickstart by the available tags.
+This categorizes and lists all the docs that are How-To by the available tags.
 
 ### References
 

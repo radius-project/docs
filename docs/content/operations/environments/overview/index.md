@@ -41,8 +41,6 @@ Supported identity providers:
 
 - [Azure AD workload identity](https://azure.github.io/azure-workload-identity/docs/introduction.html)
 
-Visit the Azure direct connection quickstart for more information. (coming soon)
-
 ## CLI commands
 
 The following commands let you interact with Radius environments:

@@ -182,6 +182,6 @@ Visual Studio Code offers the best authoring experience for Radius and Bicep. Do
 | Guides | Description  |
 | --- | ----------- |
 | [Run your first app]({{< ref first-app >}}) | Take a tour of Radius by running your first app |
-| [Quickstarts]({{< ref quickstarts >}}) | Learn about Radius topics via quickstart guides, complete with code samples |
+| [Tutorials]({{< ref tutorials >}}) | Learn about Radius via guided tutorial, complete with code samples |
 | [Reference Applications]({{< ref reference-apps >}}) | See how full applications are modeled in Radius |
 | [Supported Languages]({{< ref supported-languages >}}) | Learn how to model apps using various IaC tools |

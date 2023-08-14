@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "Quickstart: Mount a volume to a container"
+title: "How-To: Mount a volume to a container"
 linkTitle: "Volume mounts"
 description: "Learn how to mount a volume to a container" 
 weight: 200
 slug: 'volumes'
-categories: "Quickstart"
+categories: "How-To"
 tags: ["containers"]
 ---
 
-This quickstart will provide an overview of how to:
+This how-to guide will provide an overview of how to:
 
 - Mount an ephemeral (short-lived) volume to a container
 
