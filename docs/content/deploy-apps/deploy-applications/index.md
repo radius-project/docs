@@ -38,3 +38,4 @@ Parameters can be included as part of `rad run` or `rad deploy` via the `-p/--pa
  This will deploy the application to the created Radius environment injecting the parameters into the application.
 
  You can find more examples of deploying applications with parameters [here]({{< ref "rad_deploy#examples" >}}).
+ 
