@@ -29,9 +29,9 @@ If you want to use a specific Recipe, you can specify the Recipe name in the `re
 
 Use [**rad recipe list**]({{< ref rad_recipe_list >}}) to view the Recipes available to you in your environment.
 
-### Use community "dev" Recipes
+### Use lightweight "local-dev" Recipes
 
-Radius environments make it easy to get up and running with Recipes instantly. When you run [`rad init`]({{< ref rad_init >}}) you get a set of containerized dev Recipes pre-registered in your environment. These Recipes are designed to help you get started quickly with Recipes using lightweight containers. You can use these Recipes to test your app locally, or deploy them to a dev environment.
+Radius environments make it easy to get up and running with Recipes instantly. When you run [`rad init`]({{< ref rad_init >}}) you get a set of containerized local-dev Recipes pre-registered in your environment. These Recipes are designed to help you get started quickly with Recipes using lightweight containers. You can use these Recipes to test your app locally, or deploy them to a dev environment.
 
 ### Customize with parameters
 

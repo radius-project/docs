@@ -10,7 +10,7 @@ tags: ["applications"]
 
 ## Overview
 
-An [application]({{< ref appmodel-concept >}}) is the primary resource that contains all of your services and relationships.
+An [application]({{< ref application-graph>}}) is the primary resource that contains all of your services and relationships.
 
 ## Extensions
 

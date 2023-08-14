@@ -66,20 +66,9 @@ Linking is done automatically for any new Azure or AWS resource ([_Kubernetes co
 
 [Bicep `existing`](https://learn.microsoft.com/azure/azure-resource-manager/bicep/existing-resource) resources are not currently linked as part of Recipe-enabled resources, meaning you won't see them in the definition of the resource and they aren't [deleted later on](#infrastructure-lifecycle), unlike new resources.
 
-You can also manually link resources via the `values` output of a Recipe. This can be used for Kubernetes resources, [which aren't currently linked automatically]({{< ref "faq#why-do-i-need-to-manually-output-a-kubernetes-ucp-id-as-part-of-my-bicep-recipe" >}}). To link a resource to a Recipe-enabled resource, add its ID to an array of resource IDs:
+You can also manually link resources via the `result` output of a Recipe. This can be used for Kubernetes resources, [which aren't currently linked automatically]({{< ref "faq#why-do-i-need-to-manually-output-a-kubernetes-ucp-id-as-part-of-my-bicep-recipe" >}}). To link a resource to a Recipe-enabled resource, add its ID to an array of resource IDs:
 
-```bicep
-// ....resources defined above
-
-output values object = {
-  resources: [
-    // ID via reference (Azure/AWS)
-    resource1.id
-    // ID via manual entry (Kubernetes)
-    '/planes/kubernetes/local/namespaces/${deployment.metadata.namespace}/providers/apps/Deployment/${deployment.metadata.name}'
-  ]
-}
-```
+{{< rad file="snippets/recipe-outputs.bicep" embed=true marker="//OUTVALUES" >}}
 
 ### Step 5: Store your template in a Bicep registry
 
