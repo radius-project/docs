@@ -37,14 +37,16 @@ A [deployed application]({{< ref deploy-apps >}}) in a Radius environment.
 
     {{% /codetab %}}
 
-    AWS resources can be deleted via the [AWS console](https://aws.amazon.com/console/) or the [AWS CLI](https://docs.aws.amazon.com/cli/latest/reference/cloudcontrol/delete-resource.html).
-
     {{% codetab %}}
+
+    AWS resources can be deleted via the [AWS console](https://aws.amazon.com/console/) or the [AWS CLI](https://docs.aws.amazon.com/cli/latest/reference/cloudcontrol/delete-resource.html).
 
     {{% /codetab %}}
 
+    {{% codetab %}}
+
     Kubernetes resources can be deleted via [kubectl delete](https://kubernetes.io/docs/reference/kubectl/cheatsheet/#deleting-resources).
     
-    {{% codetab %}}
+    {{% /codetab %}}
 
  
