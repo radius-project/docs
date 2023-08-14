@@ -12,35 +12,35 @@ tags: ["delete"]
 
 A [deployed application]({{< ref deploy-apps >}}) in a Radius environment.
 
-## How-to: Delete a  application
+## Step 1: Delete the Radius application from the environment 
 
-1. You can delete a Radius application from the environment using the [`rad app delete`]({{< ref rad_application_delete >}}) command.
+You can delete the Radius application using the [`rad app delete`]({{< ref rad_application_delete >}}) command.
 
-    ```bash
-    rad app delete <appname>
-    ```
+```bash
+rad app delete <appname>
+```
 
-    This will delete the following resources from the default Radius environment
+This will delete the following resources from the default Radius environment
     
-    1. All the resources created by Radius on the Kubernetes cluster under the 'default-<appname>' namespace
-    2. All the resources provisioned by Recipes
+1. All the resources created by Radius on the Kubernetes cluster under the `default-<app-name>` namespace
+2. All the resources provisioned by Recipes
 
-2. Delete any cloud/platform resources
+## Step 2: Delete any cloud/platform resources
 
-    AWS, Azure, Kubernetes, and any other cloud/platform resources that were deployed alongside your Radius application and not as part of a Recipe or referenced as `existing` resource in your Radius application need to be deleted as a separate step.
+AWS, Azure, Kubernetes, and any other cloud/platform resources that were deployed alongside your Radius application and not as part of a Recipe or referenced as `existing` resource in your Radius application need to be deleted as a separate step.
 
-    {{< tabs Azure AWS Kubernetes >}}
+{{< tabs Azure AWS Kubernetes >}}
 
-    {{% codetab %}}
-    Azure resources can be deleted via the [Azure portal](https://portal.azure.com/) or the [Azure CLI](https://learn.microsoft.com/cli/azure/resource?view=azure-cli-latest#az-resource-delete)
-    {{% /codetab %}}
+{{% codetab %}}
+Azure resources can be deleted via the [Azure portal](https://portal.azure.com/) or the [Azure CLI](https://learn.microsoft.com/cli/azure/resource?view=azure-cli-latest#az-resource-delete).
+{{% /codetab %}}
 
-    {{% codetab %}}
-    AWS resources can be deleted via the [AWS console](https://aws.amazon.com/console/) or the [AWS CLI](https://docs.aws.amazon.com/cli/latest/reference/cloudcontrol/delete-resource.html).
-    {{% /codetab %}}
+{{% codetab %}}
+ AWS resources can be deleted via the [AWS console](https://aws.amazon.com/console/) or the [AWS CLI](https://docs.aws.amazon.com/cli/latest/reference/cloudcontrol/delete-resource.html).
+{{% /codetab %}}
 
-    {{% codetab %}}
-    Kubernetes resources can be deleted via [kubectl delete](https://kubernetes.io/docs/reference/kubectl/cheatsheet/#deleting-resources).
-    {{% /codetab %}}
+{{% codetab %}}
+Kubernetes resources can be deleted via [kubectl delete](https://kubernetes.io/docs/reference/kubectl/cheatsheet/#deleting-resources).
+{{% /codetab %}}
 
  
