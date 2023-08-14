@@ -104,5 +104,5 @@ Other Radius resources, such as [containers]({{< ref "container" >}}), may conne
 | CONNECTION_MYCONNECTION_VHOST | `'qa1'` | <!-- [Title](https://www.rabbitmq.com/vhosts.html) -->
 | CONNECTION_MYCONNECTION_USERNAME | `'guest'` |
 | CONNECTION_MYCONNECTION_TLS | `'true'` |
-| CONNECTION_MYCONNECTION_CONNECTIONSTRING | `'amqp://${username}:${password}@${rmqContainer.properties.hostname}:${rmqContainer.properties.port}'` |
+| CONNECTION_MYCONNECTION_URI | `'amqp://${username}:${password}@${rmqContainer.properties.hostname}:${rmqContainer.properties.port}'` |
 | CONNECTION_MYCONNECTION_PASSWORD | `'password'` |

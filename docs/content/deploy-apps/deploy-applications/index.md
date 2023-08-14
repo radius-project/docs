@@ -8,6 +8,14 @@ categories: "Overview"
 tags: ["deployments"]
 ---
 
+## Automate your application deployment
+
+Because Radius has all the relationships and requirements of an application, it can be deployed and configured automatically. Developers no longer need to specify all the identity, networking, or other configuration that is normally required, and operators don’t need to write custom deployment scripts.
+
+For example, if you want a container to read from an Azure Storage Account without using Radius, this normally requires creating managed identities, RBAC roles, identity federation, Kubernetes service accounts, and more. With Radius, developers can define a single [connection]({{< ref "container#connections" >}}) from their container to a Storage Account, and Radius sets up all the required configuration automatically.
+
+<img src="graph-automation.png" alt="A diagram showing a connection from a Radius container to an Azure storage account resulting in managed identities, role-based access control, and CSI drivers." width=600px >
+
 ## Run an application
 
 Once you have [authored an application]({{< ref author-apps >}}), you can run an application using the [`rad run`]({{< ref rad_run >}}) command.
