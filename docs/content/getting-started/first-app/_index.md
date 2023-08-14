@@ -122,7 +122,7 @@ In this step you will:
 
 Open `app.bicep` in your editor and get ready to edit the file.
 
-First add some new code to `app.bicep` by pasting in the content below at the end of the file. This code creates a Redis Cache resource and specifies that it should be created by a Recipe.
+First add some new code to `app.bicep` by pasting in the content below at the end of the file. This code creates a Redis Cache using a Radius Recipe:
 
 {{< rad file="snippets/app-with-redis-snippets.bicep" embed=true marker="//REDIS" >}}
 
