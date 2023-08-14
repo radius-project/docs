@@ -25,7 +25,7 @@ A [deployed application]({{< ref deploy-apps >}}) in a Radius environment.
     1. All the resources created by Radius on the Kubernetes cluster under the 'default-<appname>' namespace
     2. All the resources provisioned by Recipes
   
-2. Delete the Cloud/Platform resources
+2. Delete any cloud/platform resources
 
     AWS, Azure, Kubernetes, and any other cloud/platform resources that were deployed alongside your Radius application and not as part of a Recipe need to be deleted as a separate step.
 
@@ -33,7 +33,7 @@ A [deployed application]({{< ref deploy-apps >}}) in a Radius environment.
 
     {{% codetab %}}
 
-    For Azure, delete the deployed Azure resources from the [Azure portal](https://portal.azure.com/) or the [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/resource?view=azure-cli-latest#az-resource-delete)
+    Azure resources can be deleted via the [Azure portal](https://portal.azure.com/) or the [Azure CLI](https://learn.microsoft.com/cli/azure/resource?view=azure-cli-latest#az-resource-delete)
 
     {{% /codetab %}}
 
