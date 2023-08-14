@@ -37,7 +37,7 @@ A [deployed application]({{< ref deploy-apps >}}) in a Radius environment.
 
     {{% /codetab %}}
 
-    For AWS, delete the deployed AWS resources from the [AWS console](https://aws.amazon.com/console/) or the [AWS CLI](https://docs.aws.amazon.com/cli/latest/reference/cloudcontrol/delete-resource.html).
+    AWS resources can be deleted via the [AWS console](https://aws.amazon.com/console/) or the [AWS CLI](https://docs.aws.amazon.com/cli/latest/reference/cloudcontrol/delete-resource.html).
 
     {{% codetab %}}
 
