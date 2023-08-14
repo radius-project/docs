@@ -17,7 +17,7 @@ A [deployed application]({{< ref deploy-apps >}}) in a Radius environment.
 1. You can delete a Radius application from the environment using the [`rad app delete`]({{< ref rad_application_delete >}}) command.
 
     ```bash
-    rad app delete app.bicep
+    rad app delete <appname>
     ```
 
     This will delete the following resources from the default Radius environment
