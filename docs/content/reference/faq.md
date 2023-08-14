@@ -26,8 +26,6 @@ For core application source code, Radius supports any language as long as it is 
 
 For Radius application and environment definitions, Radius currently only supports Bicep. Terraform is on our backlog and is being investigated. Stay tuned for updates. 
 
-For Recipes, Radius supports both Bicep and Terraform. Recipe templates can be mixed and matched, and may differ from the application definition. For example, a developer may define their application in Bicep, while the Recipe templates for infrastructure are written in Terraform by IT ops. Additional Recipe languages are being investigated and will be added in a future release.
-
 ## Environments
 
 ### Can I connect to an existing environment?
@@ -45,7 +43,7 @@ Users can employ multiple environments for isolation and organization, for examp
 
 ### What resources can Recipes deploy? 
 
-Recipes support any resource that can be modeled in Bicep, or that has an applicable Terraform provider. Radius can use any Terraform provider. 
+Recipes support any resource that can be modeled in Bicep. Terraform support is on our backlog and is being investigated. Stay tuned for updates.
 
 ### What resources do Recipes support?
 
