@@ -425,3 +425,6 @@ tcp
 BucketName
 roadmap
 Balancer
+azureCache
+listKeys
+primaryKey
