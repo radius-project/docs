@@ -1,9 +1,9 @@
 ---
 type: docs
 title: "How-To: Mount a volume to a container"
-linkTitle: "Volume mounts"
+linkTitle: "How-To: Volumes"
 description: "Learn how to mount a volume to a container" 
-weight: 200
+weight: 300
 slug: 'volumes'
 categories: "How-To"
 tags: ["containers"]

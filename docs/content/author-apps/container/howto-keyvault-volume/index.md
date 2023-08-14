@@ -1,9 +1,9 @@
 ---
 type: docs
 title: "How-To: Mount an Azure Key Vault as a volume to a container"
-linkTitle: "Persistent Key Vault volume"
+linkTitle: "How-To: Mount a Key Vault"
 description: "Learn how to mount an Azure Key Vault as a volume to a container" 
-weight: 700
+weight: 400
 slug: 'volume-keyvault'
 categories: "How-To"
 tags: ["Azure","containers"]

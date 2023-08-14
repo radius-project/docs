@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "Containerized workloads"
-linkTitle: "Containers"
-description: "Model and run container workloads in your Radius application"
-weight: 300
+title: "Overview: Radius containers"
+linkTitle: "Overview"
+description: "Learn how to model and run container workloads in your Radius application"
+weight: 100
 categories: "Overview"
 tags: ["containers"]
 ---

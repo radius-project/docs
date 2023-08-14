@@ -3,7 +3,7 @@ type: docs
 title: "How-To: Set environment variables on a container"
 linkTitle: "How-To: Env vars"
 description: "Learn how to set environment variables manually and through connections"
-weight: 100
+weight: 200
 slug: "environment-variables"
 categories: "How-To"
 tags: ["containers"]

@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To: Connect a container to an Azure resource"
-linkTitle: "Connect to Azure resources"
+linkTitle: "How-To: Use Azure resources"
 description: "Learn how to connect a container to an Azure resource with managed identities and RBAC" 
 weight: 600
 slug: 'azure-connection'

@@ -1,9 +1,9 @@
 ---
 type: docs
 title: "AWS resources"
-linkTitle: "AWS"
+linkTitle: "Overview: AWS"
 description: "Deploy and connect to AWS resources in your application"
-weight: 900
+weight: 100
 categories: "Overview"
 tags: ["AWS"]
 ---
