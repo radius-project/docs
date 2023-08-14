@@ -139,7 +139,7 @@ The code you just added creates a connection between the container and the datab
 
 Your updated `app.bicep` will look like this:
 
-{{< rad file="snippets/app-with-redis.bicep" embed=true >}}
+{{< rad file="snippets/app-with-redis.bicep" embed=true markdownConfig="{linenos=table}" >}}
 
 ## 6. Rerun the application with a database
 
