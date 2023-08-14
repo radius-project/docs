@@ -425,6 +425,9 @@ tcp
 BucketName
 roadmap
 Balancer
+azureCache
+listKeys
+primaryKey
 authSource
 mongodb
 MYCONNECTION
