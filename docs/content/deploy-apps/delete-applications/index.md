@@ -43,7 +43,7 @@ A [deployed application]({{< ref deploy-apps >}}) in a Radius environment.
 
     {{% /codetab %}}
 
-    For Kubernetes, you can use the [kubectl delete](https://kubernetes.io/docs/reference/kubectl/cheatsheet/#deleting-resources) to delete the platform Kubernetes resources.
+    Kubernetes resources can be deleted via [kubectl delete](https://kubernetes.io/docs/reference/kubectl/cheatsheet/#deleting-resources).
     
     {{% codetab %}}
  
