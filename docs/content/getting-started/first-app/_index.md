@@ -85,7 +85,7 @@ Created ".rad/rad.yaml"
 
 In addition to starting Radius services in your Kubernetes cluster, this initialization command creates a default application (`app.bicep`) as your starting point. It contains a single container definition (`demo`). 
 
-{{< rad file="snippets/app.bicep" embed=true >}}
+{{< rad file="snippets/app.bicep" embed=true markdownConfig="{linenos=table,linenostart=1}" >}}
 
 > This file will run the `radius.azurecr.io/tutorial/webapp` image. This image is published by the Radius team to a public registry, you do not need to create it.
 
@@ -124,15 +124,15 @@ Open `app.bicep` in your editor and get ready to edit the file.
 
 First add some new code to `app.bicep` by pasting in the content below at the end of the file. This code creates a Redis Cache using a Radius Recipe:
 
-{{< rad file="snippets/app-with-redis-snippets.bicep" embed=true marker="//REDIS" >}}
+{{< rad file="snippets/app-with-redis-snippets.bicep" embed=true marker="//REDIS" markdownConfig="{linenos=table,linenostart=21}" >}}
 
 Next, update your container definition to include `connections` inside `properties`. This code creates a connection between the container and the database. Based on this connection, Radius will inject environment variables into the container that inform the container how to connect. You will view these in the next step.
 
-{{< rad file="snippets/app-with-redis-snippets.bicep" embed=true marker="//CONTAINER" >}}
+{{< rad file="snippets/app-with-redis-snippets.bicep" embed=true marker="//CONNECTION" markdownConfig="{linenos=table,hl_lines=[\"13-17\"],linenostart=7}" >}}
 
 Your updated `app.bicep` will look like this:
 
-{{< rad file="snippets/app-with-redis.bicep" embed=true >}}
+{{< rad file="snippets/app-with-redis.bicep" embed=true markdownConfig="{linenos=table}" >}}
 
 ## 6. Rerun the application with a database
 

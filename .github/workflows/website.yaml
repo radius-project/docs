@@ -21,6 +21,7 @@ jobs:
       GOVER: '^1.17'
       TUTORIAL_PATH: './docs/content/user-guides/tutorials/'
       CODE_ZIP_PATH: './docs/static/tutorial/'
+      HUGO_VERSION: 0.117.0
       HUGO_ENV: production
       SWA_BASE: 'wonderful-plant-020417a1e'
     steps:
@@ -48,7 +49,7 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2.5.0
         with:
-          hugo-version: 0.102.3
+          hugo-version: ${{ env.HUGO_VERSION }}
           extended: true
       - name: Setup Docsy
         run: |
