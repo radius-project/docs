@@ -429,3 +429,5 @@ rabbitMQ
 azureCache
 listKeys
 primaryKey
+quickstart
+quickstarts
