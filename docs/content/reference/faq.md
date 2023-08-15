@@ -90,15 +90,13 @@ Yes. Bicep files can contain both Radius resources and Azure resources. Everythi
 
 ## Resources
 
-### Can I modify a resource after it’s been deployed?
+### Can I modify a resource after it's been deployed?
 
-Yes. You will need to modify the resource definition in your .bicep file’s application definition and re-deploy the application.
+Yes. You will need to modify the resource definition in your .bicep file's application definition and re-deploy the application.
 
 ### What AWS services does Radius support 
 
-Radius applications can include any non-compute AWS service that is also supported by the AWS cloud control API. Compute services (Lambda, Fargate, etc.) will be added in a future release. 
-
-Radius does not currently support direct connections to AWS resources, but it is on the backlog. Stay tuned for updates. 
+Radius applications can include AWS services that are also supported by the AWS cloud control API. See the [AWS resource library]({{< ref "author-apps/platform-resources/aws#resource-library" >}}) for the complete list of supported AWS resources. Radius does not currently support direct connections to AWS resources, but it is on the backlog. Stay tuned for updates. 
 
 ### What Azure services does Radius support? 
 
@@ -106,7 +104,7 @@ Radius applications can include any non-compute Azure service, with support for 
 
 ### Does Radius support Google Cloud Platform (GCP)? 
 
-Partially, yes. Radius Recipes can include GCP resources, as long as they provide an API that matches one of the Radius portable resources (SQL, Mongo, Redis, etc.). Radius does not yet support direct connections or identity integration with GCP resources. 
+Not yet, but it is on the backlog. Stay tuned for updates.
 
 ### Does Radius support Dapr? 
 
