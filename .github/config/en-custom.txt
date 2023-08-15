@@ -433,3 +433,9 @@ rabbitMQ
 azureCache
 listKeys
 primaryKey
+mygroup
+Kubeconfig
+unregister
+Unregisters
+br
+myregistry
