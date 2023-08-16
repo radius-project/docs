@@ -433,3 +433,6 @@ rabbitMQ
 azureCache
 listKeys
 primaryKey
+GCP
+Fargate
+untyped
