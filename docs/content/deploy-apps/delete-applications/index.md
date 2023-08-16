@@ -14,20 +14,20 @@ A [deployed application]({{< ref deploy-apps >}}) in a Radius environment.
 
 ## Step 1: Delete the Radius application from the environment 
 
-You can delete the Radius application using the [`rad app delete`]({{< ref rad_application_delete >}}) command.
+You can delete the Radius application using the [`rad app delete`]({{< ref rad_application_delete >}}) command:
 
 ```bash
 rad app delete <appname>
 ```
 
-This will delete the following resources from the default Radius environment
+This will delete the following resources from the Radius environment
     
-1. All the resources created by Radius on the Kubernetes cluster under the `default-<app-name>` namespace
+1. All the resources created by Radius on the Kubernetes cluster under the `<namespace-name>-<app-name>` namespace
 2. All the resources provisioned by Recipes
 
 ## Step 2: Delete any cloud/platform resources
 
-AWS, Azure, Kubernetes, and any other cloud/platform resources that were deployed alongside your Radius application and not as part of a Recipe or referenced as `existing` resource in your Radius application need to be deleted as a separate step.
+AWS, Azure, Kubernetes, and any other cloud/platform resources that were deployed alongside your Radius application and not as part of a Recipe need to be deleted as a separate step.
 
 {{< tabs Azure AWS Kubernetes >}}
 
