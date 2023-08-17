@@ -1,9 +1,11 @@
 {{ $file := .Get "file" }}
 {{ $filePath := (path.Join $.Page.File.Dir $file ) }}
 {{ $fileContents := $filePath | readFile }}
-{{ $lang := "Bicep" }}
+{{ $lang := .Get "lang" | default "bicep" }}
 {{ $embed := .Get "embed" | default false }}
 {{ $download := .Get "download" | default false }}
+{{ $markdownConfig := .Get "markdownConfig" | default "" }}
+
 {{ if $download }}
 <a class="btn btn-primary btn-sm" href={{ print $file }} download>Download Bicep file</a>
 <br /><br />
@@ -23,5 +25,5 @@
         {{ $fileContents = replaceRE $regex $replaceWith $fileContents}}
     {{ end }}
 {{ end }}
-{{ (print "```" $lang "\n" $fileContents "\n```") | markdownify }}
+{{ (print "```" $lang $markdownConfig "\n" $fileContents "\n```") | markdownify }}
 {{ end }}

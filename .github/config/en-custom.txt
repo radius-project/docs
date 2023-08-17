@@ -430,6 +430,10 @@ vHost
 URI
 uri
 rabbitMQ
+linenos
+linenostart
+markdownConfig
+hl
 azureCache
 listKeys
 primaryKey
