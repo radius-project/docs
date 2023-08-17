@@ -148,4 +148,4 @@ When you have multiple environments initialized for different purposes workspace
         /providers/applications.core/environments/myworkspace
         scope: /planes/radius/local/resourceGroups/myworkspace
     ```
-1. You can now deploy applications to both myworkspace and prod using [`rad deploy`]({{< ref rad_deploy >}}), specifying the `-w` flag.
+1. You can now deploy applications to both myworkspace and yourworkspace using [`rad deploy`]({{< ref rad_deploy >}}), specifying the `-w` flag.
