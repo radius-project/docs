@@ -91,3 +91,18 @@ When no Recipe configuration is set Radius will use the Recipe registered as the
 ### Provision manually
 
 If you want to manually manage your infrastructure provisioning outside of Recipes, you can set `resourceProvisioning` to `'manual'` and provide all necessary parameters and values and values that enable Radius to deploy or connect to the desired infrastructure.
+
+## Environment variables for connections
+
+Other Radius resources, such as [containers]({{< ref "container" >}}), may connect to a RabbitMQ resource via [connections]({{< ref "application-graph#connections-and-injected-values" >}}). When a connection to RabbitMQ named, for example, `myconnection` is declared, Radius injects values into environment variables that are then used to access the connected RabbitMQ resource:
+
+| Environment variable | Example(s) |
+|----------------------|------------|
+| CONNECTION_MYCONNECTION_QUEUE | `'orders'` |
+| CONNECTION_MYCONNECTION_HOST | `'rabbitmq.svc.local.cluster'` |
+| CONNECTION_MYCONNECTION_PORT | `'5672'` |
+| CONNECTION_MYCONNECTION_VHOST | `'qa1'` | <!-- [Title](https://www.rabbitmq.com/vhosts.html) -->
+| CONNECTION_MYCONNECTION_USERNAME | `'guest'` |
+| CONNECTION_MYCONNECTION_TLS | `'true'` |
+| CONNECTION_MYCONNECTION_URI | `'amqp://${username}:${password}@${rmqContainer.properties.hostname}:${rmqContainer.properties.port}'` |
+| CONNECTION_MYCONNECTION_PASSWORD | `'password'` |

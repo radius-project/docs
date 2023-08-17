@@ -68,7 +68,7 @@ The `redislabs.com/Redis` link is a [portable link]({{< ref links-resources >}})
 
 | Property | Required | Description | Example(s) |
 |----------|:--------:|-------------|------------|
-| connectionString | n | The connection string for the Redis cache. Write only. | `https://mycache.redis.cache.windows.net,password=*****,....`
+| connectionString | n | The connection string for the Redis cache. Write only. | `contoso5.redis.cache.windows.net,ssl=true,password=...`
 | password | n | The password for the Redis cache. Write only. | `mypassword`
 | url | n | The connection URL for the Redis cache. Set automatically based on the values provided for `host`, `port`, `username`, and `password`. Can be explicitly set to override default behavior. Write only. | `redis://username:password@localhost:6380/0?ssl=true` |
 
@@ -91,3 +91,17 @@ When no Recipe configuration is set, Radius will use the currently registered Re
 ### Provision manually
 
 If you want to manually manage your infrastructure provisioning without the use of Recipes, you can set `resourceProvisioning` to `'manual'` and provide all necessary parameters and values that enable Radius to deploy or connect to the desired infrastructure.
+
+## Environment variables for connections
+
+Other Radius resources, such as [containers]({{< ref "container" >}}), may connect to a Redis resource via [connections]({{< ref "application-graph#connections-and-injected-values" >}}). When a connection to Redis named, for example, `myconnection` is declared, Radius injects values into environment variables that are then used to access the connected Redis resource:
+
+| Environment variable | Example(s) |
+|----------------------|------------|
+| CONNECTION_MYCONNECTION_HOST | `mycache.redis.cache.windows.net` |
+| CONNECTION_MYCONNECTION_PORT | `6379` |
+| CONNECTION_MYCONNECTION_TLS | `true` |
+| CONNECTION_MYCONNECTION_USERNAME | `admin` |
+| CONNECTION_MYCONNECTION_CONNECTIONSTRING | `contoso5.redis.cache.windows.net,ssl=true,password=...` |
+| CONNECTION_MYCONNECTION_PASSWORD | `mypassword` |
+| CONNECTION_MYCONNECTION_URL | `rediss://username:password@localhost:6380/0` |

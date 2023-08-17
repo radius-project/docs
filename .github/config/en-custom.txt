@@ -446,3 +446,7 @@ myregistry
 GCP
 Fargate
 untyped
+authSource
+mongodb
+MYCONNECTION
+VHOST

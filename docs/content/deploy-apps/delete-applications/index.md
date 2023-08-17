@@ -43,4 +43,4 @@ Azure resources can be deleted via the [Azure portal](https://portal.azure.com/)
 Kubernetes resources can be deleted via [kubectl delete](https://kubernetes.io/docs/reference/kubectl/cheatsheet/#deleting-resources).
 {{% /codetab %}}
 
- 
+{{< /tabs >}}
