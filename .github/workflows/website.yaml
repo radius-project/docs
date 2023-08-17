@@ -21,6 +21,7 @@ jobs:
       GOVER: '^1.17'
       TUTORIAL_PATH: './docs/content/user-guides/tutorials/'
       CODE_ZIP_PATH: './docs/static/tutorial/'
+      HUGO_VERSION: 0.117.0
       HUGO_ENV: production
       SWA_BASE: 'wonderful-plant-020417a1e'
     steps:
@@ -48,7 +49,7 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2.5.0
         with:
-          hugo-version: 0.102.3
+          hugo-version: ${{ env.HUGO_VERSION }}
           extended: true
       - name: Setup Docsy
         run: |
@@ -122,6 +123,7 @@ jobs:
             --username ${{ secrets.AZURE_SP_TESTS_APPID }} \
             --password ${{ secrets.AZURE_SP_TESTS_PASSWORD }} \
             --tenant ${{ secrets.AZURE_SP_TESTS_TENANTID }}
+          az account set --subscription ${{ vars.ENV_APPSERVICE_SUBSCRIPTIONID }}
       - name: Deploy to WebApp
         uses: Azure/webapps-deploy@v2
         with:
@@ -153,13 +155,14 @@ jobs:
       - name: Find SWA Comment
         uses: peter-evans/find-comment@v2
         id: fc
+        if: github.event_name == 'pull_request'
         with:
           issue-number: ${{ github.event.pull_request.number }}
           comment-author: 'github-actions[bot]'
           body-includes: 'Azure Static Web Apps:'
           direction: last
       - name: Update SWA Comment
-        if: steps.fc.outputs.comment-id != ''
+        if: github.event_name == 'pull_request' && steps.fc.outputs.comment-id != ''
         uses: peter-evans/create-or-update-comment@v3
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}

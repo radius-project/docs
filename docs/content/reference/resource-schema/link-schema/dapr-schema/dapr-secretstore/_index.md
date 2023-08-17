@@ -75,3 +75,11 @@ When no Recipe configuration is set Radius will use the Recipe registered as the
 ### Provision manually
 
 If you want to manually manage your infrastructure provisioning outside of Recipes, you can set `resourceProvisioning` to `'manual'` and provide all necessary parameters and values the enable Radius to deploy or connect to the desired infrastructure.
+
+## Environment variables for connections
+
+Other Radius resources, such as [containers]({{< ref "container" >}}), may connect to a Dapr secret store resource via [connections]({{< ref "application-graph#connections-and-injected-values" >}}). When a connection to Dapr secret store named, for example, `myconnection` is declared, Radius injects values into environment variables that are then used to access the connected Dapr secret store resource:
+
+| Environment variable | Example(s) |
+|----------------------|------------|
+| CONNECTION_MYCONNECTION_COMPONENTNAME | `mysecretstore` |

@@ -80,7 +80,7 @@ This creates a container that will be deployed to your Kubernetes cluster. This 
    > Replace `<AWS_ACCESS_KEY_ID>` and `<AWS_SECRET_ACCESS_KEY>` with the values obtained from the previous step.
 
    {{% alert title="Warning" color="warning" %}}It is always recommended to have separate IAM credentials for your container to communicate with S3 or any other data store. 
-   Radius is currently working on supporting [direct connections]({{< ref "appmodel-concept#adding-connections" >}}) to AWS resources so that your container can automatically communicate with the data store securely without having to manage separate credentials for data plane operations{{% /alert %}}
+   Radius is currently working on supporting direct connections to AWS resources so that your container can automatically communicate with the data store securely without having to manage separate credentials for data plane operations{{% /alert %}}
 
 1. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose >}}):
 
