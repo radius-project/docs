@@ -14,7 +14,7 @@ Radius offers an [application resource]({{< ref "/author-apps/application" >}}) 
 
 ## Graphs are better than lists
 
-Within an application deployed with Radius, developers can express both the resources (_containers, databases, message queues, etc._), as well as all the relationships between them. This forms the Radius application graph. This graph is powerful because it allows Radius to understand the relationships between resources, and automate the deployment and configuration of your application. Plus, it allows you to visualize your application in a way that is more intuitive than a list of resources.
+Within an application deployed with Radius, developers can express both the resources (_containers, databases, message queues, etc._), as well as all the relationships between them. This forms the Radius application graph. This graph is powerful because it allows Radius to understand the relationships between resources, simplifying the [deployment]({{< ref "deploy-applications" >}}) and [configuration]({{< ref "application" >}}) of your application. Plus, it allows you to visualize your application in a way that is more intuitive than a list of resources.
 
 <img src="list-to-graph.png" alt="A diagram showing the move from a set of infrastructure lists to a graph of resources" width=600px >
 
