@@ -15,8 +15,7 @@ This guide offers the quickest way to get started using Radius. You'll walk thro
 ## 1. Have your Kubernetes cluster handy
 
 Radius runs inside [Kubernetes]({{< ref "/operations/platforms/kubernetes" >}}). However you run Kubernetes, get a cluster ready.
-
-> *If you don't have a preferred way to create Kubernetes clusters, you might try using [k3d](https://k3d.io/), which runs a minimal Kubernetes distribution in Docker.*
+> *If you don't have a preferred way to create Kubernetes clusters, you could try using [k3d](https://k3d.io/), which runs a minimal Kubernetes distribution in Docker.*
 
 Ensure your cluster is set as your current context:
 
@@ -70,7 +69,7 @@ cd first-app
 Initialize Radius. For this example, accept all the default options (press ENTER to confirm): 
 
 ```bash
-rad init --dev
+rad init
 ```
 
 Example output:
@@ -86,13 +85,13 @@ Created ".rad/rad.yaml"
 
 In addition to starting Radius services in your Kubernetes cluster, this initialization command creates a default application (`app.bicep`) as your starting point. It contains a single container definition (`demo`). 
 
-{{< rad file="snippets/app.bicep" embed=true >}}
+{{< rad file="snippets/app.bicep" embed=true markdownConfig="{linenos=table,linenostart=1}" >}}
 
 > This file will run the `radius.azurecr.io/tutorial/webapp` image. This image is published by the Radius team to a public registry, you do not need to create it.
 
 ## 4. Run the app
 
-Use the `rad run` command to run the app in your environment:
+Use the below command to run the app in your environment, then access the application by opening [http://localhost:3000](http://localhost:3000) in a browser.
 
 ```bash
 rad run app.bicep
@@ -103,8 +102,6 @@ This command:
 - Runs the application in your Kubernetes cluster
 - Creates a port-forward from localhost to port 3000 inside the container so you can navigate to the app's frontend UI
 - Streams container logs to your terminal
-
-Access the application by opening [http://localhost:3000](http://localhost:3000) in a browser:
 
 <img src="./demo-screenshot.png" alt="Screenshot of the demo container" width=400>
 <br /><br />
@@ -125,36 +122,35 @@ In this step you will:
 
 Open `app.bicep` in your editor and get ready to edit the file.
 
-First add some new code to `app.bicep` by pasting in the content below:
+First add some new code to `app.bicep` by pasting in the content below at the end of the file. This code creates a Redis Cache using a Radius Recipe:
 
-{{< rad file="snippets/app-with-redis-snippets.bicep" embed=true marker="//REDIS" >}}
+{{< rad file="snippets/app-with-redis-snippets.bicep" embed=true marker="//REDIS" markdownConfig="{linenos=table,linenostart=21}" >}}
 
-The code you just added creates a Redis Cache resource and specifies that it should be created by a Recipe.
+Next, update your container definition to include `connections` inside `properties`. This code creates a connection between the container and the database. Based on this connection, Radius will [inject environment variables]({{< ref "container#connections" >}}) into the container that inform the container how to connect. You will view these in the next step.
 
-Next, add this code to the container definition inside `properties`:
-
-{{< rad file="snippets/app-with-redis-snippets.bicep" embed=true marker="//CONNECTION" >}}
-
-The code you just added creates a connection between the container and the database. Based on this connection, Radius will define environment variables in the container that tell the container how to connect. You will view these in the next step.
+{{< rad file="snippets/app-with-redis-snippets.bicep" embed=true marker="//CONNECTION" markdownConfig="{linenos=table,hl_lines=[\"13-17\"],linenostart=7}" >}}
 
 Your updated `app.bicep` will look like this:
 
-{{< rad file="snippets/app-with-redis.bicep" embed=true >}}
+{{< rad file="snippets/app-with-redis.bicep" embed=true markdownConfig="{linenos=table}" >}}
 
 ## 6. Rerun the application with a database
 
-Make sure to save the changes in your `app.bicep` file, then use `rad run` to run the updated application again:
+Use the command below to run the updated application again, then open the browser to [http://localhost:3000](http://localhost:3000).
 
 ```sh
 rad run app.bicep
 ```
 
-Open the browser to [http://localhost:3000](http://localhost:3000) and you should see that the environment variables have changed. The `demo` container now has connection information for Redis (`CONNECTION_REDIS_HOST`, `CONNECTION_REDIS_PORT`).
+You should see that the environment variables have changed. The `demo` container now has connection information for Redis (`CONNECTION_REDIS_HOST`, `CONNECTION_REDIS_PORT`).
 
-<img src="./demo-with-redis-screenshot.png" alt="Screenshot of the demo container" width=400>
+<img src="./demo-with-redis-screenshot.png" alt="Screenshot of the demo container" width=500>
 <br /><br />
 
-Navigate to the TODO page and test out the application. Using the TODO page will update the saved state in Redis.
+Navigate to the TODO List tab and test out the application. Using the TODO page will update the saved state in Redis.
+
+<img src="./demo-with-todolist.png" alt="Screenshot of the todolist" width=500>
+<br /><br />
 
 Press CTRL+C when you are finished with the website.
 

@@ -46,7 +46,7 @@ Developers don't need to specify what cloud resources they're using in their app
 2. Initialize a new dev environment:
 
    ```bash
-   rad init --dev
+   rad init
    ```
 
    **Select 'Yes' when prompted to create an application.**
@@ -74,7 +74,7 @@ Developers don't need to specify what cloud resources they're using in their app
 
 Update `app.bicep` with the following set of resources:
 
-> app.bicep was created automatically when you ran `rad init --dev`
+> app.bicep was created automatically when you ran `rad init`
 
 {{< rad file="snippets/app.bicep" embed=true >}}
 

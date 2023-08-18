@@ -14,17 +14,9 @@ Radius offers an [application resource]({{< ref "/author-apps/application" >}}) 
 
 ## Graphs are better than lists
 
-Within an application deployed with Radius, developers can express both the resources (_containers, databases, message queues, etc._), as well as all the relationships between them. This forms the Radius application graph. This graph is powerful because it allows Radius to understand the relationships between resources, and automate the deployment and configuration of your application. Plus, it allows you to visualize your application in a way that is more intuitive than a list of resources.
+Within an application deployed with Radius, developers can express both the resources (_containers, databases, message queues, etc._), as well as all the relationships between them. This forms the Radius application graph. This graph is powerful because it allows Radius to understand the relationships between resources, simplifying the [deployment]({{< ref "deploy-applications" >}}) and [configuration]({{< ref "application" >}}) of your application. Plus, it allows you to visualize your application in a way that is more intuitive than a list of resources.
 
 <img src="list-to-graph.png" alt="A diagram showing the move from a set of infrastructure lists to a graph of resources" width=600px >
-
-## Automate your application deployment
-
-Because Radius now has all the relationships and requirements of an application, it can be deployed and configured automatically. Developers no longer need to specify all the identity, networking, or other configuration that is normally required, and operators don’t need to write custom deployment scripts.
-
-For example, if you want a container to read from an Azure Storage Account without using Radius, this normally requires creating managed identities, RBAC roles, identity federation, Kubernetes service accounts, and more. With Radius, developers can define a single connection from their container to a Storage Account, and Radius sets up all the required configuration automatically.
-
-<img src="graph-automation.png" alt="A diagram showing a connection from a Radius container to an Azure storage account resulting in managed identities, role-based access control, and CSI drivers." width=600px >
 
 ## Self-documenting applications
 

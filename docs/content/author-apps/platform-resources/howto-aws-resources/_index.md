@@ -36,10 +36,10 @@ eksctl create cluster --name <my-cluster> --region=<my-region>
 
 Create a [Radius environment]({{< ref "/operations/environments" >}}) where you will deploy your application.
 
-Use the `rad init` command to initialize a new environment into your current kubectl context:
+Run [`rad init --full`]({{< ref rad_init >}}) to initialize a new environment into your current kubectl context:
 
 ```bash
-rad init
+rad init --full
 ```
 
 Follow the prompts to install the [control plane services]({{< ref architecture-concept >}}), create an [environment resource]({{< ref "operations/environments" >}}), and create a [local workspace]({{< ref workspaces >}}). You will be asked for:
