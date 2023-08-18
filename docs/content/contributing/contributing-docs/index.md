@@ -9,11 +9,17 @@ slug: "docs"
 
 The Radius docs are built on [Hugo](https://gohugo.io) with the [Docsy](https://docsy.dev) theme. GitHub Actions are used to build and deploy the docs upon each PR.
 
-## Docs environment
+Radius uses the [Diátaxis framework](https://diataxis.fr/) for its documentation:
 
-### GitHub Codespace
+<img src="diataxis.png" alt="Diagram showing the diataxis framework" width=800px >
 
-Get up and running with a GitHub Codespace in seconds. This will give you a fully configured environment with all the tools you need to build the docs.
+Follow the guidance on this page to learn how to get started, how to contribute, and how to use the Diátaxis framework to create new docs.
+
+## Setup your docs environment
+
+### GitHub Codespace (easiest)
+
+It's easy to get up and running with a GitHub Codespace. This will give you a fully configured environment with all the tools you need to build the docs, all in your browser.
 
 {{< button link="https://github.com/codespaces/new?hide_repo_select=true&repo=421982809" text="Create codespace" >}}
 
@@ -46,29 +52,25 @@ Get up and running with a GitHub Codespace in seconds. This will give you a full
 3. Generate CLI docs:
 
    ```sh
-   cd radius
+   pushd radius
    go run ./cmd/docgen/main.go ../docs/docs/content/reference/cli
+   popd
    ```
 
-4. Change to docs directory:
+4. Update submodules:
 
    ```sh
-   cd ../docs/docs
-   ```
-
-5. Update submodules:
-
-   ```sh
+   cd docs
    git submodule update --init --recursive
    ```
 
-6. Install npm packages:
+5. Install npm packages:
 
    ```sh
    npm install
    ```
 
-7. Initialize the docsy theme:
+6. Initialize the docsy theme:
 
    ```sh
    cd themes/docsy
@@ -87,7 +89,57 @@ Get up and running with a GitHub Codespace in seconds. This will give you a full
 
 3. Navigate to `http://localhost:1313/`
 
-## Style and tone
+## Types of docs
+
+There are 5 types of docs in Radius:
+
+1. **Concept** - A concept doc is a high-level overview of the project or an area of the project.
+2. **Overview** - A overview page documents a specific feature or capability of the project, with information on what the feature is and additional context and links on how to use it.
+3. **How-To** - A how-to guide is a step-by-step guide to help the reader achieve a specific task. It assumes the reader has a basic understanding of the project and its concepts. For more information on how-to guides, see [Diátaxis](https://diataxis.fr/how-to-guides/).
+4. **Reference** - A reference doc is a detailed description of a specific feature or capability of the project. It assumes the reader has a basic understanding of the project and its concepts. For more information on reference docs, see [Diátaxis](https://diataxis.fr/reference/).
+
+Overall:
+
+- Avoid creating new sections where possible, there is a good chance a proper place in the docs hierarchy already exists.
+- Make sure to include a complete [Hugo front-matter](#front-matter).
+- Determine the [type of doc](#types-of-docs) you are contributing
+
+### Concept docs
+
+Visit [Diátaxis](https://diataxis.fr/explanation/) for more information on explanatory documentation that helps the user understand the project or a specific area of the project.
+
+- Ensure the reader can understand why they should care about the project or the concept. What problems does it help them solve?
+- Provide a link to the overview page of the feature that justifies the concept(s)
+- Provide the reader with related links if needed (this can be other concepts, overviews, how-to guides, or references)
+- Set the `category` as `Concept` in [Hugo front-matter](#front-matter).
+
+### Overview docs
+
+Visit [Diátaxis](https://diataxis.fr/explanation/) for more information on explanatory documentation that helps the user understand the project or a specific area of the project.
+
+- Ensure the reader can understand why they should care about the feature and what it enables them to do. 
+- If applicable, ensure the doc references the reference spec document.
+- If applicable, ensure the doc is consistent with any related concepts or specs in terms of names, parameters, and terminology. Update both the concept, spec, and the doc as needed. Avoid repeating the spec. The idea is to give the reader more information and background on the capability so that they can try this out. 
+- Provide the reader with related links if needed (this can be other concepts, overviews, how-to guides, or references)
+- Set the `category` as `Overview` in [Hugo front-matter](#front-matter).
+
+### How-To guides
+
+Visit [Diátaxis](https://diataxis.fr/how-to-guides/) for more information on how-to documentation that helps the user accomplish a specific task.
+- Do not assume the reader is using a specific environment unless the article itself is specific to an environment. This includes OS (Windows/Linux/MacOS), deployment target (Kubernetes, IoT, etc.), or programming language. If instructions vary between operating systems, provide guidance for all.
+- Include code/sample/config snippets that can be easily copied and pasted.
+- Provide the reader with related links if needed (this can be other concepts, overviews, how-to guides, or references)
+- Set the `category` as `How To` in [Hugo front-matter](#front-matter).
+
+### Reference docs
+
+Visit [Diátaxis](https://diataxis.fr/reference/) for more information on reference documentation that helps the user understand the details of a specific feature or capability of the project.
+
+Reference docs should be auto-generated from source-code whenever possible. Please contact the maintainers if you need to add a new reference doc, or open an Issue to discuss.
+
+## Writing styles and tips
+
+### Style and tone
 
 These conventions should be followed throughout all Radius documentation to ensure a consistent experience across all docs.
 
@@ -100,71 +152,13 @@ These conventions should be followed throughout all Radius documentation to ensu
 |**Assume a new developer audience**|Some obvious steps can seem hard. E.g. Now set an environment variable Radius to a value X. It is better to give the reader the explicit command to do this, rather than having them figure this out.| 
 |**Use present tense**|Avoid sentences like "this command will install redis", which implies the action is in the future. Instead, use "This command installs redis" which is in the present tense. |
 
-## Spelling
+### Spelling
 
 The docs pipeline uses [aspell](http://aspell.net/) to check for spelling mistakes. If you need to add a new custom word to the allow-list, update `.github/config/en-custom.txt`.
 
-## Contributing a new docs page
-
-- Make sure the documentation you are writing is in the correct place in the hierarchy.
-- Avoid creating new sections where possible, there is a good chance a proper place in the docs hierarchy already exists.
-- Make sure to include a complete [Hugo front-matter](#front-matter).
-- Determine the category or the type of doc you are contributing.
-   - **Concept** - A concept doc is a high-level overview of the project or an area of the project.
-   - **Overview** - A overview page documents a specific feature or capability of the project, with information on what the feature is and additional context and links on how to use it.
-   - **Quickstart** - A quickstart guide is a short step-by-step guide to help the reader quickly learn something and achieve a specific goal in 5-10 mins.
-   - **Reference app** - A reference app-doc is for running an application sample or an example of using the project or a particular feature.
-   - **How-To** - A how-to guide is an elaborate step-by-step guide to help the reader achieve a specific goal. It should provide the reader with an in-depth understanding of what the feature does. While Quickstart is a subset of How-To, they can be differentiated by the time to achieve a specific goal.
-
-### Contributing a new Concept doc
-
-- Ensure the doc is in the correct place in the hierarchy.
-- Ensure the reader can understand why they should care about the project or the concept. What problems does it help them solve?
-- Provide a link to the overview page of the feature that justifies the concept(s)
-- Also provide the reader with related links if needed (this can be other quickstarts, "how-to", samples for reference)
-- Set the `category` as `Concept` in [Hugo front-matter](#front-matter).
-
-### Contributing a new Overview doc
-
-- Ensure the doc is in the correct place in the hierarchy.
-- Ensure the reader can understand why they should care about the feature and what it enables them to do. 
-- If applicable, ensure the doc references the reference spec document.
-- If applicable, ensure the doc is consistent with any related concepts or specs in terms of names, parameters, and terminology. Update both the concept, spec, and the doc as needed. Avoid repeating the spec. The idea is to give the reader more information and background on the capability so that they can try this out. 
-- Provide a link to the spec in the [Reference]({{<ref reference >}}) section and provide the reader with related links (this can be other quickstarts, "how-to", samples for reference )
-- Set the `category` as `Overview` in [Hugo front-matter](#front-matter).
-
-### Contributing a new Quickstart
-
-- Make sure the guide stays within 5-6 steps.
-- Include code/sample/config snippets that can be easily copied and pasted.
-- Do not assume the reader is using a specific environment unless the article itself is specific to an environment. This includes OS (Windows/Linux/MacOS), deployment target (Kubernetes, IoT, etc.), or programming language. If instructions vary between operating systems, provide guidance for all.-
-- Do not explain all the jargon or features of the quickstart references, provide the reader with related links and next steps (this can be other "how-to", samples for reference, or related concepts).
-- Set the `category` as `Quickstart` in [Hugo front-matter](#front-matter).
-
-### Contributing a new How-To guide
-
-- Sub directory naming - the directory name should be descriptive and if referring to a specific component or concept should begin with the relevant name. Example *pubsub-namespaces*.
-- Do not assume the reader is using a specific environment unless the article itself is specific to an environment. This includes OS (Windows/Linux/MacOS), deployment target (Kubernetes, IoT, etc.), or programming language. If instructions vary between operating systems, provide guidance for all.
-- Include code/sample/config snippets that can be easily copied and pasted.
-- At the end of the article, provide the reader with related links and next steps (this can be other relevant "how-to", samples for reference or related concepts).
-- Set the `category` as `How To` in [Hugo front-matter](#front-matter).
-
-### Contributing a new Reference application
-
-- Ensure the doc has enough instructions to run the sample
-- Add the architecture diagram of the application sample if possible 
-- Make sure the sample code is added to [radius samples](https://github.com/project-radius/samples)
-- Set the `category` as `Reference app` in [Hugo front-matter](#front-matter).
-
-## Requirements for radius.dev
+## Tips and tricks
 
 Any contribution must ensure not to break the website build. The way Hugo builds the website requires following the below guidance.
-
-### Files and folder names
-
-File and folder names should be globally unique.
-    - `\service-invocation`
-    - `service-invocation-overview.md`
 
 ### Front-matter
 
