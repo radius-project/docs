@@ -12,7 +12,7 @@ tags : ["Dapr"]
 This how-to guide will teach you:
 
 - How to use Radius to deploy a Dapr microservices sample application for an online shop
-- How [Dapr and Radius]({{< ref dapr-resources >}}) seamlessly work together
+- How [Dapr and Radius]({{< ref "/author-apps/dapr" >}}) seamlessly work together
 
 For more details on the app and access to the source code, visit the `tutorials/dapr` directory in the [samples repo](https://github.com/project-radius/samples). _For access to the project-radius GitHub org, please complete and submit [this form](https://aka.ms/ProjectRadius/GitHubAccess)._
 
@@ -20,7 +20,7 @@ For more details on the app and access to the source code, visit the `tutorials/
 
 - [Kubernetes cluster]({{< ref "supported-clusters" >}})
 - [Radius CLI]({{< ref "getting-started" >}})
-- [Radius environment]({{< ref "operations/environments/overview" >}})
+- [Radius environment]({{< ref "deploy-apps/environments/overview" >}})
 - [Dapr installed on your Kubernetes cluster](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/)
 - [Visual Studio Code](https://code.visualstudio.com/) (recommended)
   - The [Radius VSCode extension]({{< ref "getting-started" >}}) is highly recommended to provide syntax highlighting, completion, and linting
@@ -58,7 +58,7 @@ Begin by creating a new file named `dapr.bicep` with a Radius application that c
 
 1. Press CTRL+C to terminate the port-forward.
 
-1. A [local-dev Recipe]({{< ref "author-apps/recipes" >}}) was run during application deployment to automatically create a lightweight Redis container plus a Dapr component configuration. Confirm that the Dapr Redis statestore was successfully created:
+1. A [local-dev Recipe]({{< ref "recipes/overview" >}}) was run during application deployment to automatically create a lightweight Redis container plus a Dapr component configuration. Confirm that the Dapr Redis statestore was successfully created:
 
    ```sh
    dapr components -k -A
@@ -73,7 +73,7 @@ Begin by creating a new file named `dapr.bicep` with a Radius application that c
 
 ## Step 3: Define the `frontend` container
 
-Add a `frontend` [container]({{< ref container >}}) which will serve as the application's user interface.
+Add a `frontend` [container]({{< ref "/author-apps/containers" >}}) which will serve as the application's user interface.
 
 {{< rad file="snippets/dapr.bicep" embed=true marker="//FRONTEND" >}}
 

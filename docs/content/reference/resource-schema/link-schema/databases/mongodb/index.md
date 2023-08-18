@@ -7,7 +7,7 @@ description: "Learn how to use a MongoDB link in your application"
 
 ## Overview
 
-The `mongodb.com/MongoDatabase` link is a [portable link]({{< ref links-resources >}}) which represents a Mongo Database.
+The `mongodb.com/MongoDatabase` link is a [portable link]({{< ref portable-resources >}}) which represents a Mongo Database.
 
 ## Resource format
 
@@ -84,7 +84,7 @@ The following methods are available on the MongoDB link:
 
 ### Provision with a Recipe
 
-[Recipes]({{< ref "/author-apps/recipes" >}}) automate infrastructure provisioning using approved templates.
+[Recipes]({{< ref "/recipes/overview" >}}) automate infrastructure provisioning using approved templates.
 You can specify a Recipe name that is registered in the environment or omit the name and use the "default" Recipe.
 
 Parameters can also optionally be specified for the Recipe.
@@ -95,7 +95,7 @@ If you want to manually manage your infrastructure provisioning outside of Recip
 
 ## Environment variables for connections
 
-Other Radius resources, such as [containers]({{< ref "container" >}}), may connect to a MongoDB resource via [connections]({{< ref "application-graph#connections-and-injected-values" >}}). When a connection to MongoDB named, for example, `myconnection` is declared, Radius injects values into environment variables that are then used to access the connected MongoDB resource:
+Other Radius resources, such as [containers]({{< ref "/author-apps/containers" >}}), may connect to a MongoDB resource via [connections]({{< ref "application-graph#connections-and-injected-values" >}}). When a connection to MongoDB named, for example, `myconnection` is declared, Radius injects values into environment variables that are then used to access the connected MongoDB resource:
 
 | Environment variable | Example(s) |
 |----------------------|------------|

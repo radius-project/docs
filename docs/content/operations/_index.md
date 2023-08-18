@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Operating application environments"
-linkTitle: "Operating environments"
-description: "Learn about operating Radius environments and apps"
-weight: 50
+title: "Environment operations guides"
+linkTitle: "Operations guides"
+description: "Learn how to deploy and operate Radius environments"
+weight: 70
 ---

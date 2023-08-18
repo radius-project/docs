@@ -85,7 +85,7 @@ Secrets are used when defining a RabbitMQ link with a container or external serv
 
 ### Provision with a Recipe
 
-[Recipes]({{< ref custom-recipes >}}) automate infrastructure provisioning using approved templates.
+[Recipes]({{< ref howto-author-recipes >}}) automate infrastructure provisioning using approved templates.
 When no Recipe configuration is set Radius will use the Recipe registered as the **default** in the environment for the given resource. Otherwise, a Recipe name and parameters can optionally be set.
 
 ### Provision manually
@@ -94,7 +94,7 @@ If you want to manually manage your infrastructure provisioning outside of Recip
 
 ## Environment variables for connections
 
-Other Radius resources, such as [containers]({{< ref "container" >}}), may connect to a RabbitMQ resource via [connections]({{< ref "application-graph#connections-and-injected-values" >}}). When a connection to RabbitMQ named, for example, `myconnection` is declared, Radius injects values into environment variables that are then used to access the connected RabbitMQ resource:
+Other Radius resources, such as [containers]({{< ref "/author-apps/containers" >}}), may connect to a RabbitMQ resource via [connections]({{< ref "application-graph#connections-and-injected-values" >}}). When a connection to RabbitMQ named, for example, `myconnection` is declared, Radius injects values into environment variables that are then used to access the connected RabbitMQ resource:
 
 | Environment variable | Example(s) |
 |----------------------|------------|

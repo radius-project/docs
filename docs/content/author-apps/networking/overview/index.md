@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Overview: Application networking"
-linkTitle: "Application networking"
+linkTitle: "Overview: Networking"
 description: "Learn how to add networking to your Radius application"
 weight: 100
 categories: "Overview"
@@ -15,7 +15,7 @@ Radius networking resources allow you to model:
 
 ## HTTP Routes
 
-An `HttpRoute` resources defines HTTP communication between two [services]({{< ref container >}}). They can be used to define both one-way communication, as well as cycles of communication between services.
+An `HttpRoute` resources defines HTTP communication between two [services]({{< ref "/author-apps/containers" >}}). They can be used to define both one-way communication, as well as cycles of communication between services.
 
 <img src="networking-cycles.png" style="width:400px" alt="Diagram of Radius service-to-service networking with cycles" /><br />
 
@@ -42,36 +42,3 @@ Gateways support TLS termination. This allows incoming encrypted traffic to be d
 A gateway can be configured to passthrough encrypted SSL traffic to an HTTP route and container. This is useful for applications that already have SSL termination configured, and do not want to terminate SSL at the gateway.
 
 To set up SSL passthrough, set `tls.sslPassthrough` to `true` on the gateway, and set a single route with no `path` defined (just `destination`).
-
-## Example
-
-### Path-based HTTP routing
-
-{{< tabs Bicep >}}
-
-{{< codetab >}}
-{{< rad file="snippets/networking.bicep" embed=true >}}
-{{< /codetab >}}
-
-{{< /tabs >}}
-
-### TLS termination
-
-{{< tabs Bicep >}}
-
-{{< codetab >}}
-{{< rad file="snippets/networking-tlstermination.bicep" embed=true marker="//GATEWAY" >}}
-{{< /codetab >}}
-
-{{< /tabs >}}
-
-
-### SSL Passthrough
-
-{{< tabs Bicep >}}
-
-{{< codetab >}}
-{{< rad file="snippets/networking-sslpassthrough.bicep" embed=true marker="//GATEWAY" >}}
-{{< /codetab >}}
-
-{{< /tabs >}}

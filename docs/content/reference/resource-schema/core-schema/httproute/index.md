@@ -34,7 +34,7 @@ The following example shows two containers, one providing an HttpRoute and the o
 
 ### Providing container
 
-Once an HttpRoute is defined, you can provide it from a [container]({{< ref container >}}) by using the `provides` property:
+Once an HttpRoute is defined, you can provide it from a [container]({{< ref "/author-apps/containers" >}}) by using the `provides` property:
 
 {{< rad file="snippets/httproute.bicep" embed=true marker="//BACKEND" >}}
 
