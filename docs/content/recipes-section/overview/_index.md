@@ -17,9 +17,9 @@ Recipes enable a **separation of concerns** between infrastructure operators and
 
 ## Features
 
-### Flexibility and portability of infrastructure
+### Add portability with interchangeable templates
 
-Recipes can be used in any environment, from dev environments to prod environments. You can run a default recipe registered in your environment or select the specific Recipe you want to run. To run a default recipe, simply add the resource you want to your app and omit the Recipe name:
+Recipes can be used in any environment, from dev to prod. You can run a default recipe registered in your environment or select the specific Recipe you want to run. To run a default recipe, simply add the resource you want to your app and omit the Recipe name:
 
 {{< rad file="snippets/recipe-link-example.bicep" embed=true marker="//DEFAULT" >}} 
 
