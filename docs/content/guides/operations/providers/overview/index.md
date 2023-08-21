@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Overview: Cloud providers"
-linkTitle: "Overview: Cloud providers"
+linkTitle: "Overview"
 description: "Deploy across clouds and platforms with Radius cloud providers"
 weight: 100
 categories: "Overview"

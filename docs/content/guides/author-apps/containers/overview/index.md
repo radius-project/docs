@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Overview: Radius containers"
-linkTitle: "Overview: Containers"
+linkTitle: "Overview"
 description: "Learn how to model and run container workloads in your Radius application"
 weight: 100
 categories: "Overview"

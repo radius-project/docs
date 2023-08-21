@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Overview: Contributing to Radius"
-linkTitle: "Overview: Contributing"
+linkTitle: "Overview"
 description: "Guides and requirements for contributing to Radius"
 weight: 100
 ---

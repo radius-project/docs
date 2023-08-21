@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Overview: Radius Recipes"
-linkTitle: "Overview: Recipes"
+linkTitle: "Overview"
 description: "Learn how to automate infrastructure deployment for your resources with Radius recipes"
 weight: 100
 categories: "Overview"

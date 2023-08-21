@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Microsoft Azure resources"
-linkTitle: "Overview: Azure"
+linkTitle: "Overview"
 description: "Deploy and connect to Azure resources in your application"
 weight: 500
 categories: "Overview"

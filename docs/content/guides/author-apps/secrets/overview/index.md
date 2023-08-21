@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Overview: Secrets management"
-linkTitle: "Overview: Secrets"
+linkTitle: "Overview"
 description: "Learn how to create and reference secrets in your Radius application"
 weight: 500
 categories: "Overview"

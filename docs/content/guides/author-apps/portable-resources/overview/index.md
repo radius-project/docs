@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Overview: Radius Links"
-linkTitle: "Overview: Links"
+linkTitle: "Overview"
 description: "Add links to your Radius application for infrastructure portability"
 weight: 600
 categories: "Overview"

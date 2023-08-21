@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Overview: Radius applications"
-linkTitle: "Overview: Applications"
+linkTitle: "Overview"
 description: "Learn about Radius applications"
 weight: 100
 categories: "Overview"
