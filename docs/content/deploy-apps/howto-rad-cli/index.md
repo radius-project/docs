@@ -93,10 +93,3 @@ PowerShell for Cloud Shell is currently not supported.
 > You may be prompted for your sudo password during installation, as the installer places the `rad` binary under `/usr/local/bin`. If you are unable to sudo you can install the rad CLI to another directory by setting the `RADIUS_INSTALL_DIR` environment variable with your intended install path. Make sure you add this to your path ([Unix](https://www.howtogeek.com/658904/how-to-add-a-directory-to-your-path-in-linux/), [Windows](https://windowsloop.com/how-to-add-to-windows-path/)) if you wish to reference it via `rad`, like in the docs.
 
 Verify the rad CLI is installed correctly by running `rad`.
-
-## Learn Radius
-
-| Guides | Description  |
-| --- | ----------- |
-| [Run your first app]({{< ref getting-started >}}) | Take a tour of Radius by running your first app |
-| [Tutorials]({{< ref tutorials >}}) | Learn about Radius via guided tutorial, complete with code samples |
