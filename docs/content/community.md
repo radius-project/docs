@@ -3,7 +3,7 @@ type: docs
 title: "Radius Community"
 linkTitle: "Community"
 description: "Information about the Radius community"
-weight: 80
+weight: 90
 ---
 
 Welcome to the Radius community. We are currently in a private release phase which is open to Microsoft FTEs and select partners. The team is working on a public preview release which will be announced on this page.
