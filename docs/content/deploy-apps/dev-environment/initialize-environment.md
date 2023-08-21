@@ -10,7 +10,7 @@ tags: ["environments"]
 
 ## Overview 
 
-Radius development environments enable you to quickly get started with Radius and begin writing new applications. Dev environments come preloaded with a set of development [recipes]({{< ref "/recipes-section/overview" >}}) with lightweight containers for commonly used resources such as Redis and Mongo, helping you get up and running instantly.
+Radius development environments enable you to quickly get started with Radius and begin writing new applications. Dev environments come preloaded with a set of development [recipes]({{< ref "/recipe-section/overview" >}}) with lightweight containers for commonly used resources such as Redis and Mongo, helping you get up and running instantly.
 
 ## Pre-requisites
 

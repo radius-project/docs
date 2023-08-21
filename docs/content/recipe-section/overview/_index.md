@@ -43,7 +43,7 @@ You can use [**rad recipe show**]({{< ref rad_recipe_show >}}) to view the param
 
 ### Author custom Recipes
 
-It's easy to author and register your own Recipes which define how to deploy and configure infrastructure that meets your organization's needs. See the [How-To: Author Recipes]({{< ref "/recipes-section/howto-author-recipes" >}}) page for more information.
+It's easy to author and register your own Recipes which define how to deploy and configure infrastructure that meets your organization's needs. See the [How-To: Author Recipes](#) page for more information.
 
 
 ## Supported resources
