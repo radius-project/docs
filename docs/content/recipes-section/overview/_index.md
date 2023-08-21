@@ -48,18 +48,10 @@ Recipes can be customized with parameters, allowing developers to fine-tune infr
 
 You can use [**rad recipe show**]({{< ref rad_recipe_show >}}) to view the parameters available to you in a Recipe.
 
-```bash
-TODO
-```
-
 ### Author custom Recipes
 
 It's easy to author and register your own Recipes which define how to deploy and configure infrastructure that meets your organization's needs. See the [How-To: Author Recipes]({{< ref "/recipes-section/howto-author-recipes" >}}) page for more information.
 
-| Infrastructure as Code Languages | Recipe Support |
-|---------------------| ------------|
-| [Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/) | ✅ |
-| [Terraform](https://developer.hashicorp.com/terraform/docs) | ✅ |
 
 ## Supported resources
 
