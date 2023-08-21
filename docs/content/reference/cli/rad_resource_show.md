@@ -1,6 +1,6 @@
 ---
 type: docs
-date: 2023-08-21T17:33:25Z
+date: 2023-08-21T18:45:41Z
 title: "rad resource show CLI reference"
 linkTitle: "rad resource show"
 slug: rad_resource_show

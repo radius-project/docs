@@ -1,6 +1,6 @@
 ---
 type: docs
-date: 2023-08-21T17:33:25Z
+date: 2023-08-21T18:45:41Z
 title: "rad env switch CLI reference"
 linkTitle: "rad env switch"
 slug: rad_env_switch

@@ -1,6 +1,6 @@
 ---
 type: docs
-date: 2023-08-21T17:33:25Z
+date: 2023-08-21T18:45:41Z
 title: "rad completion CLI reference"
 linkTitle: "rad completion"
 slug: rad_completion
