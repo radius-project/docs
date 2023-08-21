@@ -1,6 +1,6 @@
 ---
 type: docs
-date: 2023-08-21T17:33:25Z
+date: 2023-08-21T18:18:36Z
 title: "rad bicep publish CLI reference"
 linkTitle: "rad bicep publish"
 slug: rad_bicep_publish

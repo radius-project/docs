@@ -1,6 +1,6 @@
 ---
 type: docs
-date: 2023-08-21T17:33:25Z
+date: 2023-08-21T18:18:36Z
 title: "rad env create CLI reference"
 linkTitle: "rad env create"
 slug: rad_env_create

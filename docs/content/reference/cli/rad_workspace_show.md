@@ -1,6 +1,6 @@
 ---
 type: docs
-date: 2023-08-21T17:33:25Z
+date: 2023-08-21T18:18:36Z
 title: "rad workspace show CLI reference"
 linkTitle: "rad workspace show"
 slug: rad_workspace_show
