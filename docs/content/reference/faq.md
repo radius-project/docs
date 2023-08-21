@@ -22,9 +22,23 @@ Open-source Radius requires that you self-host and run your own Radius instance 
 
 ### What languages does Radius support? 
 
-For core application source code, Radius supports any language as long as it is containerized. 
+#### Core application source code
 
-For Radius application and environment definitions, Radius currently only supports Bicep. Terraform is on our backlog and is being investigated. Stay tuned for updates. 
+Radius supports any language as long as it is containerized. 
+
+#### Radius Application and Radius Environment definitions
+
+| Infrastructure as Code Languages | Radius Support |
+|---------------------| ------------|
+| [Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/) | ✅ |
+| [Terraform](https://developer.hashicorp.com/terraform/docs) | ⏳ |
+
+#### Radius Recipes
+
+| Infrastructure as Code Languages | Radius Support |
+|---------------------| ------------|
+| [Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/) | ✅ |
+| [Terraform](https://developer.hashicorp.com/terraform/docs) | ✅ |
 
 ## Environments
 
@@ -43,7 +57,7 @@ Users can employ multiple environments for isolation and organization, for examp
 
 ### What resources can Recipes deploy? 
 
-Recipes support any resource that can be modeled in Bicep. Terraform support is on our backlog and is being investigated. Stay tuned for updates.
+Radius Recipes support any resources that can be modeled in Bicep or that has an applicable Terraform provider. Radius can use any Terraform provider. 
 
 ### What resources do Recipes support?
 
@@ -104,7 +118,7 @@ Radius applications can include any non-compute Azure service, with support for 
 
 ### Does Radius support Google Cloud Platform (GCP)? 
 
-Not yet, but it is on the backlog. Stay tuned for updates.
+Partially, yes. Radius Recipes can include GCP resources, as long as they provide an API that matches one of the Radius portable resources (SQL, Mongo, Redis, etc.). Radius does not yet support direct connections or identity integration with GCP resources.
 
 ### Does Radius support Dapr? 
 
