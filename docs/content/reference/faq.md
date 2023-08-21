@@ -96,7 +96,7 @@ Yes. You will need to modify the resource definition in your .bicep file's appli
 
 ### What AWS services does Radius support 
 
-Radius applications can include AWS services that are also supported by the AWS cloud control API. See the [AWS resource library]({{< ref "author-apps/aws/overview#resource-library" >}}) for the complete list of supported AWS resources. Radius does not currently support direct connections to AWS resources, but it is on the backlog. Stay tuned for updates. 
+Radius applications can include AWS services that are also supported by the AWS cloud control API. See the [AWS resource library]({{< ref "/guides/author-apps/aws/overview#resource-library" >}}) for the complete list of supported AWS resources. Radius does not currently support direct connections to AWS resources, but it is on the backlog. Stay tuned for updates. 
 
 ### What Azure services does Radius support? 
 

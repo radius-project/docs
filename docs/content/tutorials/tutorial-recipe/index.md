@@ -17,17 +17,17 @@ This how-to guide will teach you:
 ## Prerequisites
 
 - Install the [rad CLI]({{< ref getting-started >}})
-- Setup a supported [Kubernetes cluster]({{< ref "/operations/kubernetes" >}})
+- Setup a supported [Kubernetes cluster]({{< ref "guides/operations/kubernetes" >}})
 
 ## Overview
 
-[Recipes]({{< ref "/recipes/overview">}}) enable a separation of concerns between infrastructure teams and developers by automating infrastructure deployment. Developers define _what_ they need (_Redis, Mongo, etc._), and operators define _how_ it will be deployed (_Azure/AWS/Kubernetes infrastructure_).
+[Recipes]({{< ref "guides/recipes/overview">}}) enable a separation of concerns between infrastructure teams and developers by automating infrastructure deployment. Developers define _what_ they need (_Redis, Mongo, etc._), and operators define _how_ it will be deployed (_Azure/AWS/Kubernetes infrastructure_).
 
-{{< button text="Learn more about Recipes here" page="/recipes/overview" newtab="true" >}}
+{{< button text="Learn more about Recipes here" page="/guides/recipes/overview" newtab="true" >}}
 
 ## Application overview
 
-This application is a simple to-do list which stores and visualizes to-do items. It consists of a frontend [container]({{< ref "/author-apps/containers" >}}) and a backend [Redis Cache]({{< ref redis >}}).
+This application is a simple to-do list which stores and visualizes to-do items. It consists of a frontend [container]({{< ref "guides/author-apps/containers" >}}) and a backend [Redis Cache]({{< ref redis >}}).
 
 <img src="recipe-quickstart-diagram.png" alt="Screenshot of the todoapp with Kubernetes, Azure and AWS Redis Cache options" style="width:500px" >
 
@@ -65,7 +65,7 @@ Developers don't need to specify what cloud resources they're using in their app
    ```
 
    {{< alert title="💡 Dev Recipes" color="info" >}}
-   Dev environments are preloaded with [`dev` Recipes]({{< ref "/recipes/overview#use-community-dev-recipes" >}}), a set of Recipes that allow you to quickly get up and running with lightweight containerized infrastructure. In This how-to guide, the dev Redis Recipe deploys a lightweight Redis container into your Kubernetes cluster.
+   Dev environments are preloaded with [`dev` Recipes]({{< ref "guides/recipes/overview#use-community-dev-recipes" >}}), a set of Recipes that allow you to quickly get up and running with lightweight containerized infrastructure. In This how-to guide, the dev Redis Recipe deploys a lightweight Redis container into your Kubernetes cluster.
 
    When a Recipe is named "default" it will be used by default when deploying resources when a Recipe is not specified.
    {{< /alert >}}

@@ -14,7 +14,7 @@ The `daprSidecar` extensions adds and configures a [Dapr](https://dapr.io) sidec
 
 ## Extension format
 
-In this example a [container]({{< ref "/author-apps/containers" >}}) adds a Dapr extension to add a Dapr sidecar:
+In this example a [container]({{< ref "guides/author-apps/containers" >}}) adds a Dapr extension to add a Dapr sidecar:
 
 {{< rad file="snippets/dapr.bicep" embed=true marker="//SAMPLE" replace-key-run="//CONTAINER" replace-value-run="container: {...}" >}}
 

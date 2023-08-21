@@ -94,7 +94,7 @@ If you want to manually manage your infrastructure provisioning without the use 
 
 ## Environment variables for connections
 
-Other Radius resources, such as [containers]({{< ref "/author-apps/containers" >}}), may connect to a Redis resource via [connections]({{< ref "application-graph#connections-and-injected-values" >}}). When a connection to Redis named, for example, `myconnection` is declared, Radius injects values into environment variables that are then used to access the connected Redis resource:
+Other Radius resources, such as [containers]({{< ref "guides/author-apps/containers" >}}), may connect to a Redis resource via [connections]({{< ref "application-graph#connections-and-injected-values" >}}). When a connection to Redis named, for example, `myconnection` is declared, Radius injects values into environment variables that are then used to access the connected Redis resource:
 
 | Environment variable | Example(s) |
 |----------------------|------------|

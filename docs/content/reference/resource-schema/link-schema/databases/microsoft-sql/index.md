@@ -84,7 +84,7 @@ If you want to manually manage your infrastructure provisioning outside of Recip
 
 ## Environment variables for connections
 
-Other Radius resources, such as [containers]({{< ref "/author-apps/containers" >}}), may connect to a Azure SQL resource via [connections]({{< ref "application-graph#connections-and-injected-values" >}}). When a connection to Azure SQL named, for example, `myconnection` is declared, Radius injects values into environment variables that are then used to access the connected Azure SQL resource:
+Other Radius resources, such as [containers]({{< ref "guides/author-apps/containers" >}}), may connect to a Azure SQL resource via [connections]({{< ref "application-graph#connections-and-injected-values" >}}). When a connection to Azure SQL named, for example, `myconnection` is declared, Radius injects values into environment variables that are then used to access the connected Azure SQL resource:
 
 | Environment variable | Example(s) |
 |----------------------|------------|

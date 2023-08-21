@@ -8,13 +8,13 @@ weight: 200
 
 ## Radius applications
 
-Radius offers an [application resource]({{< ref "/author-apps/application" >}}) which teams can use to define and deploy their entire application, including all of the compute, relationships, and infrastructure that make up the application. Since the graph of relationships between deployed resources is much more descriptive than a basic list of resources, the Radius application graph can automate complex deployment tasks and enable rich visualization experiences.
+Radius offers an [application resource]({{< ref "guides/author-apps/application" >}}) which teams can use to define and deploy their entire application, including all of the compute, relationships, and infrastructure that make up the application. Since the graph of relationships between deployed resources is much more descriptive than a basic list of resources, the Radius application graph can automate complex deployment tasks and enable rich visualization experiences.
 
 <img src="application.png" alt="A diagram showing an application and all it's resources" width=400px >
 
 ## Graphs are better than lists
 
-Within an application deployed with Radius, developers can express both the resources (_containers, databases, message queues, etc._), as well as all the relationships between them. This forms the Radius application graph. This graph is powerful because it allows Radius to understand the relationships between resources, simplifying the [deployment]({{< ref "deploy-apps" >}}) and [configuration]({{< ref "application" >}}) of your application. Plus, it allows you to visualize your application in a way that is more intuitive than a list of resources.
+Within an application deployed with Radius, developers can express both the resources (_containers, databases, message queues, etc._), as well as all the relationships between them. This forms the Radius application graph. This graph is powerful because it allows Radius to understand the relationships between resources, simplifying the [deployment]({{< ref "/guides/deploy-apps" >}}) and [configuration]({{< ref "application" >}}) of your application. Plus, it allows you to visualize your application in a way that is more intuitive than a list of resources.
 
 <img src="list-to-graph.png" alt="A diagram showing the move from a set of infrastructure lists to a graph of resources" width=600px >
 
