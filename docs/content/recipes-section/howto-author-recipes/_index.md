@@ -23,10 +23,10 @@ Below is a list of all the current IaC Radius Recipes support for templating.
 
 | Infrastructure as Code Languages | Recipe Support |
 |---------------------| ------------|
-| [Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/) | ✅ |
+| [Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/) | ✅ |
 | [Terraform](https://developer.hashicorp.com/terraform/docs) | ✅ |
 
-### Step 2: Author a template
+### Step 2: Author a Recipe template
 
 Recipes need to be generalized templates, as multiple resources can run each Recipe. The resources inside of a Recipe cannot interfere or overwrite each other. To make sure you don't accidentally overwrite or corrupt your infrastructure, you will want to make sure **each resource in your Recipe contains unique names**.
 
@@ -34,7 +34,6 @@ Additionally, every time an application is deployed, Recipes are re-evaluated an
 
 To make naming easy, a `context` parameter is automatically injected into your template. It contains information about the backing resource which you can use to generate unique and repeatable names. For example, you can use `context.resource.id` to generate a unique and repeatable name:
 
-You can reference the [`context` section below](#context-parameter-properties) for more information on available properties.
 
 {{< tabs "Bicep" "Terraform" >}}
 
@@ -46,7 +45,7 @@ You can reference the [`context` section below](#context-parameter-properties) f
 
 {{% codetab %}}
 
-{{< rad file="snippets/recipe.tf" embed=true marker="//RESOURCE" >}}
+{{< rad file="snippets/recipe.tf" embed=true marker="//RESOURCE" lang="terraform" >}}
 
 {{% /codetab %}}
 
