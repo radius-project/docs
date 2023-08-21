@@ -22,7 +22,7 @@ Environments provide a grouping structure for applications and the resources the
 
 In many small to medium-sized organizations, a full stack developer might write application code, author the Radius app definition, and create the Radius environment. In larger orgs, there may be separate teams of central operations and developers, where the central teams build environment templates which development teams leverage and deploy to. The separation of an app from an environment makes a separation of concerns possible.
 
-With Radius environments, central operations and IT teams can define and share environments with development teams for them to deploy applications into. Ops teams can focus on configuring the compute, dependencies, networking, and other infrastructure concerns through [Recipes({{< ref "/recipes-section/overview" >}}), while developers focus on the business and application concerns. This allows each team to focus on what matters most to them, without needing to become experts in every aspect of the infrastructure and application.
+With Radius environments, central operations and IT teams can define and share environments with development teams for them to deploy applications into. Ops teams can focus on configuring the compute, dependencies, networking, and other infrastructure concerns through [Recipes({{< ref "/recipe-section/overview" >}}), while developers focus on the business and application concerns. This allows each team to focus on what matters most to them, without needing to become experts in every aspect of the infrastructure and application.
 
 ### Developer productivity
 
