@@ -29,7 +29,7 @@ jobs:
         id: parse_release_channel
         run: |
           # CHANNEL is the major and minor version of the VERSION_NUMBER (e.g. 0.1)
-          CHANNEL="$(echo $VERSION_NUMBER | cut -d '.' -f 1,2)"
+          CHANNEL="$(echo ${{ inputs.version }} | cut -d '.' -f 1,2)"
           echo "channel=$CHANNEL" >> $GITHUB_OUTPUT
       - name: Release docs
         run: |
@@ -40,5 +40,5 @@ jobs:
           --method PATCH \
           -H "Accept: application/vnd.github+json" \
           -H "X-GitHub-Api-Version: 2022-11-28" \
-          /repos/project-radius/radius \
+          /repos/project-radius/docs \
           -f default_branch='v${{ steps.parse_release_channel.outputs.channel }}'
