@@ -76,7 +76,6 @@ Recipes currently support the following resources. Support for additional resour
 | [`Applications.Link/daprSecretStore`]({{< ref dapr-secretstore >}}) |
 | [`Applications.Link/extenders`]({{< ref extender >}}) |
 
-
 ## Infrastructure linking
 
 When you use a Recipe to deploy infrastructure (_e.g. Azure, AWS resources_), that infrastructure can be linked and tracked as part of the Recipe-enabled resource. This means you can inspect what infrastructure supports the resource. Use [`rad resource show -o json`]({{< ref rad_resource_show >}}) to view this information.
