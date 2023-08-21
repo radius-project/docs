@@ -448,3 +448,5 @@ authSource
 mongodb
 MYCONNECTION
 VHOST
+Diátaxis
+yourworkspace
