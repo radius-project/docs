@@ -21,7 +21,7 @@ This quickstart will teach you:
 
 ## Overview
 
-[Recipes({{< ref "/recipes-section/overview" >}}) enable a separation of concerns between infrastructure teams and developers by automating infrastructure deployment. Developers define _what_ they need (_Redis, Mongo, etc._), and operators define _how_ it will be deployed (_Azure/AWS/Kubernetes infrastructure_).
+[Recipes({{< ref "/recipe-section/overview" >}}) enable a separation of concerns between infrastructure teams and developers by automating infrastructure deployment. Developers define _what_ they need (_Redis, Mongo, etc._), and operators define _how_ it will be deployed (_Azure/AWS/Kubernetes infrastructure_).
 
 {{< button text="Learn more about Recipes here" page="/author-apps/recipes" newtab="true" >}}
 

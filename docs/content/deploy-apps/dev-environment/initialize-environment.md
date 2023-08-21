@@ -74,7 +74,7 @@ Radius development environments enable you to quickly get started with Radius an
    default   Applications.Link/mongoDatabases  bicep          radius.azurecr.io/recipes/dev/mongodatabases:latest
    default   Applications.Link/redisCaches     bicep          radius.azurecr.io/recipes/dev/rediscaches:latest
    ``` 
-   You can follow the [recipes]({{< ref "/recipes-section/overview" >}}) documentation to learn more about the recipes and how to use them in your application.
+   You can follow the [recipes]({{< ref "/recipe-section/overview" >}}) documentation to learn more about the recipes and how to use them in your application.
 
 ## Resource schema 
 
