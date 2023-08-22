@@ -8,7 +8,7 @@ categories: "Schema"
 
 ## Overview
 
-The `redislabs.com/Redis` link is a [portable link]({{< ref links-resources >}}) which can be deployed to any platform Radius supports.
+The `redislabs.com/Redis` link is a [portable link]({{< ref portable-resources >}}) which can be deployed to any platform Radius supports.
 
 ## Resource format
 
@@ -85,7 +85,7 @@ The following methods are available on the Redis link:
 
 ### Provision with a Recipe
 
-[Recipes]({{< ref custom-recipes >}}) automate infrastructure provisioning using approved templates.
+[Recipes]({{< ref howto-author-recipes >}}) automate infrastructure provisioning using approved templates.
 When no Recipe configuration is set, Radius will use the currently registered Recipe as the **default** in the environment for the given resource. Otherwise, a Recipe name and parameters can optionally be set to override this default.
 
 ### Provision manually
@@ -94,7 +94,7 @@ If you want to manually manage your infrastructure provisioning without the use 
 
 ## Environment variables for connections
 
-Other Radius resources, such as [containers]({{< ref "container" >}}), may connect to a Redis resource via [connections]({{< ref "application-graph#connections-and-injected-values" >}}). When a connection to Redis named, for example, `myconnection` is declared, Radius injects values into environment variables that are then used to access the connected Redis resource:
+Other Radius resources, such as [containers]({{< ref "guides/author-apps/containers" >}}), may connect to a Redis resource via [connections]({{< ref "application-graph#connections-and-injected-values" >}}). When a connection to Redis named, for example, `myconnection` is declared, Radius injects values into environment variables that are then used to access the connected Redis resource:
 
 | Environment variable | Example(s) |
 |----------------------|------------|

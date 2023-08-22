@@ -40,7 +40,7 @@ The Kubernetes namespace extension allows you to customize how all of the resour
 
 ##### kubernetesMetadata
 
-The [Kubernetes Metadata extension]({{< ref "/operations/platforms/kubernetes/kubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius application. For examples, please refer to the extension overview page.
+The [Kubernetes Metadata extension]({{< ref "guides/operations/kubernetes/kubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius application. For examples, please refer to the extension overview page.
 
 ###### Properties
 
