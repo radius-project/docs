@@ -47,7 +47,7 @@ Teams can offload the complexity of wiring-up applications and let Radius employ
       <a href="{{< ref networking >}}"><img src="network-logo.svg" alt="Networking logo" style="width:40%"></a>
     </td>
     <td style="width:25%;text-align:center">
-      <a href="{{< ref dapr-resources >}}"><img src="dapr-logo.svg" alt="Dapr logo" style="width:40%"></a>
+      <a href="{{< ref "guides/author-apps/dapr" >}}"><img src="dapr-logo.svg" alt="Dapr logo" style="width:40%"></a>
     </td>
   </tr>
   </table>
