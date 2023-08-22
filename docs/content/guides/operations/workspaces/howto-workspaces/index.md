@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To: Use Radius workspaces"
-linkTitle: "How-To: Workspaces"
+linkTitle: "Use Workspaces"
 description: "Learn how to handle multiple Radius platforms and environments with workspaces"
 weight: 300
 categories: "Overview"

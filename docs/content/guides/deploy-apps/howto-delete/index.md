@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To: Delete an application from a Radius environment"
-linkTitle: "How-To: Delete apps"
+linkTitle: "Delete apps"
 description: "Learn how to delete a Radius application"
 weight: 400
 categories: "How-To"

@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To: Deploy an application with Github Actions"
-linkTitle: "How-To: GitHub Actions"
+linkTitle: "Deploy with GitHub Actions"
 description: "Learn about adding your Radius apps to your deployment pipelines with GitHub Actions" 
 weight: 500
 categories: "How-To"

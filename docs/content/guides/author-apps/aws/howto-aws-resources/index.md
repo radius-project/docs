@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To: Deploy AWS resources"
-linkTitle: "How-To: Use AWS resources"
+linkTitle: "Deploy AWS resources"
 description: "Learn about how to add AWS resources to your application and deploy them with Radius"
 categories: "How-To"
 tags: ["AWS"]

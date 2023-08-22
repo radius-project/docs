@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To: Setup Cloud providers"
-linkTitle: "How-To: Setup providers"
+linkTitle: "Setup Cloud providers"
 description: "Deploy across clouds and platforms with Radius cloud providers"
 weight: 200
 categories: "How-To"

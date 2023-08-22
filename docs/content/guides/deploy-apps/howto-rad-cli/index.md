@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To: Install the rad CLI"
-linkTitle: "How-To: rad CLI"
+linkTitle: "Install rad CLI"
 description: "Learn how to install the rad CLI on your local machine"
 weight: 100
 categories: "How-To"
