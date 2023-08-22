@@ -450,3 +450,4 @@ MYCONNECTION
 VHOST
 Diátaxis
 yourworkspace
+howto
