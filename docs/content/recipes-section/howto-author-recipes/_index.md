@@ -68,7 +68,7 @@ You can create any [parameter type supported by Bicep](https://learn.microsoft.c
 
 {{% codetab %}}
 
-{{< rad file="snippets/recipe.tf" embed=true marker="//PARAM" >}}
+{{< rad file="snippets/recipe.tf" embed=true marker="//PARAM" lang="terraform" >}}
 
 {{% /codetab %}}
 
@@ -79,7 +79,7 @@ You can create any [parameter type supported by Bicep](https://learn.microsoft.c
 
 Once you have defined your backing infrastructure, you will need to output it from your IaC template so it can be "wired-up" to the resource that called the Recipe.
 
-Simply define an object that matches the schema of the resource calling the Recipe. For example, for an `Application.Link/redisCaches` resource, a Recipe would output:
+Define an object that matches the schema of the resource calling the Recipe. For example, for an `Application.Link/redisCaches` resource, a Recipe would output:
 
 {{< tabs "Bicep" "Terraform" >}}
 
@@ -97,7 +97,7 @@ _Note: Secure output parameters is in development. For now, you can use `#disabl
 
 {{% codetab %}}
 
-{{< rad file="snippets/recipe.tf" embed=true marker="//OUTPUT" >}}
+{{< rad file="snippets/recipe.tf" embed=true marker="//OUTPUT" lang="terraform" >}}
 
 {{% /codetab %}}
 
@@ -160,7 +160,7 @@ rad bicep publish --file myrecipe.bicep --target br:myregistry.azurecr.io/recipe
 
 {{% codetab %}}
 
-Radius recommends following the [Terraform module publishing docs](https://developer.hashicorp.com/terraform/registry/modules/publish) as a guide to setup a GitHub repository where you can store your Terraform modules.
+Follow the [Terraform module publishing docs](https://developer.hashicorp.com/terraform/registry/modules/publish) to setup and publish a Terraform module to a Terraform registry.
 
 {{% /codetab %}}
 
