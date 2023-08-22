@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To: Mount a volume to a container"
-linkTitle: "How-To: Volumes"
+linkTitle: "Mount a volume"
 description: "Learn how to mount a volume to a container" 
 weight: 500
 slug: 'volumes'

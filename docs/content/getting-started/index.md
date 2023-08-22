@@ -126,7 +126,7 @@ First add some new code to `app.bicep` by pasting in the content below at the en
 
 {{< rad file="snippets/app-with-redis-snippets.bicep" embed=true marker="//REDIS" markdownConfig="{linenos=table,linenostart=21}" >}}
 
-Next, update your container definition to include `connections` inside `properties`. This code creates a connection between the container and the database. Based on this connection, Radius will [inject environment variables]({{< ref "/guides/author-apps/containers#connections" >}}) into the container that inform the container how to connect. You will view these in the next step.
+Next, update your container definition to include `connections` inside `properties`. This code creates a connection between the container and the database. Based on this connection, Radius will [inject environment variables]({{< ref "/guides/author-apps/containers/overview#connections" >}}) into the container that inform the container how to connect. You will view these in the next step.
 
 {{< rad file="snippets/app-with-redis-snippets.bicep" embed=true marker="//CONNECTION" markdownConfig="{linenos=table,hl_lines=[\"13-17\"],linenostart=7}" >}}
 

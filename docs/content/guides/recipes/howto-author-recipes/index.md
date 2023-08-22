@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To: Author Custom Radius Recipes"
-linkTitle: "How-To: Author Recipes"
+linkTitle: "Author Recipes"
 description: "Learn how to author custom Recipe templates to automate infrastructure deployment"
 weight: 500
 categories: "How-To"

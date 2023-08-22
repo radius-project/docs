@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To: Mount an Azure Key Vault as a volume to a container"
-linkTitle: "How-To: Mount a Key Vault"
+linkTitle: "Mount a Key Vault"
 description: "Learn how to mount an Azure Key Vault as a volume to a container" 
 weight: 600
 slug: 'volume-keyvault'

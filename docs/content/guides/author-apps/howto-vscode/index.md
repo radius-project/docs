@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To: Install the Radius-Bicep VSCode extension"
-linkTitle: "How-To: VS Code"
+linkTitle: "Install VS Code extension"
 description: "Learn how to use Radius in Visual Studio Code"
 weight: 150
 categories: "How-To"
