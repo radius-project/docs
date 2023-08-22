@@ -53,6 +53,11 @@ VERSION_STRING_REPLACEMENT="version = \"${CHANNEL_VERSION}\""
 awk -v REPLACEMENT="${VERSION_STRING_REPLACEMENT}" '{gsub(/version = \"edge\"/, REPLACEMENT); print}' docs/config.toml > docs/config.toml.tmp
 mv docs/config.toml.tmp docs/config.toml
 
+# In docs/config.toml, change github_branch to CHANNEL_VERSION instead of edge
+GITHUB_BRANCH_STRING_REPLACEMENT="github_branch = \"${CHANNEL_VERSION}\""
+awk -v REPLACEMENT="${GITHUB_BRANCH_STRING_REPLACEMENT}" '{gsub(/github_branch = \"edge\"/, REPLACEMENT); print}' docs/config.toml > docs/config.toml.tmp
+mv docs/config.toml.tmp docs/config.toml
+
 # In docs/config.toml, change chart_version (Helm chart) to VERSION_NUMBER
 CHART_VERSION_STRING_REPLACEMENT="chart_version = \"${VERSION_NUMBER}\""
 awk -v REPLACEMENT="${CHART_VERSION_STRING_REPLACEMENT}" '{gsub(/chart_version = \"[^\n]+\"/, REPLACEMENT); print}' docs/config.toml > docs/config.toml.tmp
