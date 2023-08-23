@@ -22,7 +22,9 @@ This how-to guide will show you:
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
     - Configure your CLI with [`aws configure`](https://docs.aws.amazon.com/cli/latest/reference/configure/index.html), specifying your configuration values
 - [eksctl CLI](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
-- [kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/)  
+- [kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 
+- [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-radius-bicep-extension" >}})
 
 ## Step 1: Create an EKS Cluster
 
@@ -98,10 +100,30 @@ This creates a container that will be deployed to your Kubernetes cluster. This 
 
 2. Cleanup AWS Resources - AWS resources are not deleted when deleting a Radius environment, so make sure to delete all resources created in this reference app to prevent additional charges. You can delete these resources in the AWS Console or via the AWS CLI. Instructions to delete an AWS S3 Bucket are available [here](https://docs.aws.amazon.com/AmazonS3/latest/userguide/delete-bucket.html).
 
+## Troubleshooting
+
+If you hit errors while deploying the application, please follow the steps below to troubleshoot:
+
+1. Check if the AWS credentials are valid. Login to the AWS console and check if the IAM access key and secret access key are valid and not expired.
+
+2. Look at the control plane logs to see if there are any errors. You can use the following command to view the logs:
+
+     ```bash
+     rad debug-logs
+     ```
+    Inspect the UCP logs to see if there are any errors  
+
+If you have issues with the sample application, where the container doesn't connect with the S3 bucket, please follow the steps below to troubleshoot:
+
+1. Use the below command to inspect logs from container:
+
+    ```bash
+    rad resource logs containers frontend -a s3app
+    ```
+Also please make sure to [open an Issue](https://github.com/project-radius/radius/issues/new?assignees=&labels=kind%2Fbug&template=bug.md&title=%3CBUG+TITLE%3E) if you encounter a generic `Internal server error` message or an error message that is not self-serviceable, so we can address the root error not being forwarded to the user.
+
 ## Further Reading
 
 {{< categorizeby category="Overview" tag="AWS" >}}
 
 {{< categorizeby category="How-To" tag="AWS" >}}
-
-{{< categorizeby category="Reference application" tag="AWS" >}}
