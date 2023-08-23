@@ -300,6 +300,7 @@ readinessProbe
 redis
 redisCaches
 redoc
+resourceGroup
 replacePrefix
 repo
 resourceGroupName
