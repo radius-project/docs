@@ -16,5 +16,5 @@ Radius cloud providers allow you to deploy and connect to cloud resources across
 
 | Provider | Description |
 |----------|-------------|
-| [Microsoft Azure](#azure-provider) | Deploy and connect to Azure resources |
-| [Amazon Web Services](#aws-provider) | Deploy and connect to AWS resources |
+| [Microsoft Azure]({{< ref howto-cloud-providers >}}) | Deploy and connect to Azure resources |
+| [Amazon Web Services]({{< ref howto-cloud-providers >}}) | Deploy and connect to AWS resources |

@@ -30,8 +30,8 @@ You can optionally configure cloud providers allow you to deploy and connect to 
 
 | Provider | Description |
 |----------|-------------|
-| [Microsoft Azure]({{< ref "providers#azure-provider" >}}) | Deploy and connect to Azure resources |
-| [Amazon Web Services]({{< ref "providers#aws-provider" >}}) | Deploy and connect to AWS resources |
+| Microsoft Azure | Deploy and connect to Azure resources |
+| Amazon Web Services | Deploy and connect to AWS resources |
 
 ### External identity provider
 
@@ -117,8 +117,8 @@ The following example shows an environment configured with Kubernetes as the tar
    ```
 1. Follow the prompts, specifying:
    - **Namespace** - The Kubernetes namespace where your application containers and networking resources will be deployed (different than the Radius control-plane namespace, `radius-system`)
-   - **Azure provider** (optional) - Allows you to [deploy and manage Azure resources]({{< ref "providers#azure-provider" >}})
-   - **AWS provider** (optional) - Allows you to [deploy and manage AWS resources]({{< ref "providers#aws-provider" >}})
+   - **Azure provider** (optional) - Allows you to [deploy and manage Azure resources]({{< ref "guides/operations/providers/howto-cloud-providers" >}})
+   - **AWS provider** (optional) - Allows you to [deploy and manage AWS resources]({{< ref "guides/operations/providers/howto-cloud-providers" >}})
    - **Environment name** - The name of the environment to create
 1. Let the rad CLI run the following tasks:
    1. **Install Radius** - Radius installs the [control plane services]({{< ref architecture-concept >}}) in the `radius-system` namespace

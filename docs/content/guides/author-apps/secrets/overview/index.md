@@ -28,7 +28,7 @@ Here is an example of using a Secret Store to reference secrets stores in an exi
 
 ## Using Secret Stores
 
-Secret Stores can currently be used for TLS certificates with [Radius Gateways]({{< ref "networking#gateways" >}}).
+Secret Stores can currently be used for TLS certificates with [Radius Gateways]({{< ref "guides/author-apps/networking/overview#gateways" >}}).
 
 Additional use-cases will be added in upcoming releases.
 
