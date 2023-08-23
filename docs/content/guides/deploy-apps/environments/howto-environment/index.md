@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To: Initialize Radius Environments"
-linkTitle: "How-To: Environments"
+linkTitle: "Initialize Environments"
 description: "Learn how to create Radius environments"
 weight: 200
 categories: "How-To"
@@ -79,8 +79,8 @@ Radius environments can be setup with the rad CLI via two paths: interactive or 
 
 1. Follow the prompts, specifying:
    - **Namespace** - The Kubernetes namespace where your application containers and networking resources will be deployed (different than the Radius control-plane namespace, `radius-system`)
-   - **Azure provider** (optional) - Allows you to [deploy and manage Azure resources]({{< ref "providers#azure-provider" >}})
-   - **AWS provider** (optional) - Allows you to [deploy and manage AWS resources]({{< ref "providers#aws-provider" >}})
+   - **Azure provider** (optional) - Allows you to [deploy and manage Azure resources]({{< ref "/guides/operations/providers/howto-cloud-providers" >}})
+   - **AWS provider** (optional) - Allows you to [deploy and manage AWS resources]({{< ref "/guides/operations/providers/howto-cloud-providers" >}})
    - **Environment name** - The name of the environment to create
 
    You should see the following output:
