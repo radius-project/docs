@@ -1,8 +1,8 @@
 ---
 type: docs
 title: "How-To: Author a Radius Recipe"
-linkTitle: "How-To: Author a Radius Recipe"
-description: "This guide will show you how to use your infrastructure as code language to author and publish a custom Recipe template, letting you define how infrastructure should be deployed and configured within your environment."
+linkTitle: "Author a Radius Recipe"
+description: "Learn how to author and register a custom Recipe template to automate infrastructure provisioning"
 weight: 500
 categories: "How-To"
 tags: ["recipes"]
@@ -46,11 +46,11 @@ _Note: For Kubernetes resources you'll have to make sure to import your cluster 
 
 {{% codetab %}}
 
-Radius allows users to follow Terraform best practices and declare the `context` parameter in a `variable.tf` file as such:
+Add the `context` parameter to your `variable.tf` file:
 
 {{< rad file="snippets/redis-kubernetes-variables.tf" embed=true marker="//CONTEXT" lang="terraform" >}}
 
-The `main.tf` file where your resource declaration lives will reference the object as the following:
+Within `main.tf` use the `context` variable to name and configure resources:
 
 {{< rad file="snippets/redis-kubernetes-main.tf" embed=true marker="//RESOURCE" lang="terraform" >}}
 
@@ -80,7 +80,7 @@ You can create any [parameter type supported by Bicep](https://learn.microsoft.c
 
 {{% codetab %}}
 
-You can create any [parameter type supported by Terraform](https://developer.hashicorp.com/terraform/language/values/variables):
+You can create any [variable type supported by Terraform](https://developer.hashicorp.com/terraform/language/values/variables):
 
 {{< rad file="snippets/redis-kubernetes-variables.tf" embed=true marker="//PARAMETERS" lang="terraform" >}}
 
@@ -96,7 +96,7 @@ The `main.tf` file where your resource declaration lives will reference the para
 
 Once you have defined your backing infrastructure, you will need to output it from your IaC template so it can be "wired-up" to the resource that called the Recipe.
 
-Radius Recipes require you to name your output object `result`, using the output object, you can pass back information about your infrastructure.
+Radius Recipes require you to output a `result` object that contains the applicable data fields, secrets, and resource IDs.
 
 When you output a `result` object, all of the individual properties will be directly mapped to the resource calling the Recipe. This allows you to have the most control over the resource being created within the application.
 
