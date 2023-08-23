@@ -64,6 +64,7 @@ Kinesis
 Kubernetes
 ListSecret
 Liveness
+lang
 MONGOMODULE
 MQ
 MacOS
@@ -348,6 +349,8 @@ th
 tlstermination
 toc
 todo
+tf
+terraform
 traceId
 ubuntu
 ui
