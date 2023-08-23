@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Overview: Deploying applications into a Radius environment"
-linkTitle: "Using rad-cli"
+linkTitle: "Deploy via CLI"
 description: "Learn how to deploy a Radius application"
 weight: 100
 categories: "Overview"
