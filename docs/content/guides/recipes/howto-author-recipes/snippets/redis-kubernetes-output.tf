@@ -9,12 +9,12 @@ output "result" {
     ]
     //LINKING
     values = {
-      host = "test-host"
-      port = 1234
-      username = "test-username"
+      host = "${kubernetes_service.metadata.name}.${kubernetes_service.metadata.namespace}.svc.cluster.local"
+      port = kubernetes_service.spec.port[0].port
+      username = var.username
     }
     secrets = {
-      password = "test-password"
+      password = var.password
     }
     sensitive = true
   }

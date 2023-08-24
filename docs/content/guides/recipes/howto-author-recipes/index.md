@@ -15,16 +15,7 @@ Before you get started, you'll need to make sure you have the following tools an
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [Radius initialized with `rad init`]({{< ref getting-started >}})
 
-### Step 1: Select an Infrastructure as Code language
-
-Below is a list of all the current IaC Radius Recipes support for templating.
-
-| Infrastructure as Code Languages | Recipe Support |
-|---------------------| ------------|
-| [Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/) | ✅ |
-| [Terraform](https://developer.hashicorp.com/terraform/docs) | ✅ |
-
-### Step 2: Author a Recipe template
+### Step 1: Author a Recipe template
 
 Recipes need to be generalized templates, as multiple resources can run each Recipe. The resources inside of a Recipe cannot interfere or overwrite each other. To make sure you don't accidentally overwrite or corrupt your infrastructure, you will want to make sure **each resource in your Recipe contains unique names**.
 
@@ -38,10 +29,6 @@ To make naming easy, a `context` parameter is automatically injected into your t
 
 {{< rad file="snippets/redis-kubernetes.bicep" embed=true marker="//RESOURCE" >}}
 
-_Note: For Kubernetes resources you'll have to make sure to import your cluster namespace as such:_
-
-{{< rad file="snippets/redis-kubernetes.bicep" embed=true marker="//KUBERNETES" >}}
-
 {{% /codetab %}}
 
 {{% codetab %}}
@@ -54,17 +41,13 @@ Within `main.tf` use the `context` variable to name and configure resources:
 
 {{< rad file="snippets/redis-kubernetes-main.tf" embed=true marker="//RESOURCE" lang="terraform" >}}
 
-The provider information will also live inside of the `main.tf` file as such:
-
-{{< rad file="snippets/redis-kubernetes-main.tf" embed=true marker="//PROVIDER" lang="terraform" >}}
-
 {{% /codetab %}}
 
 {{< /tabs >}}
 
 You can reference the [`context` section below](#context-parameter-properties) for more information on available properties.
 
-### Step 3: Add parameters for Recipe customization (optional)
+### Step 2: Add parameters for Recipe customization (optional)
 
 You can optionally choose to add parameters to your Recipe to allow developers or operators to specify additional configuration. Parameters can be set both when a Recipe is added to an environment by an operator, or by a developer when the Recipe is called.
 
@@ -84,15 +67,11 @@ You can create any [variable type supported by Terraform](https://developer.hash
 
 {{< rad file="snippets/redis-kubernetes-variables.tf" embed=true marker="//PARAMETERS" lang="terraform" >}}
 
-The `main.tf` file where your resource declaration lives will reference the parameter as the following:
-
-{{< rad file="snippets/redis-kubernetes-main.tf" embed=true marker="//PARAM" lang="terraform" >}}
-
 {{% /codetab %}}
 
 {{< /tabs >}}
 
-### Step 4: Output the target infrastructure
+### Step 3: Output the target infrastructure
 
 Once you have defined your backing infrastructure, you will need to output it from your IaC template so it can be "wired-up" to the resource that called the Recipe.
 
@@ -150,7 +129,7 @@ To manually link resources for Kubernetes in Terraform your `output.tf` file sho
 
 {{< /tabs >}}
 
-### Step 5: Store your template in a Bicep registry
+### Step 4: Store your template in a Bicep registry
 
 {{< tabs "Bicep" "Terraform" >}}
 
@@ -176,7 +155,7 @@ Follow the [Terraform module publishing docs](https://developer.hashicorp.com/te
 
 {{< /tabs >}}
 
-### Step 6: Register your Recipe with your environment
+### Step 5: Register your Recipe with your environment
 
 Now that your Recipe template has been stored, you can add it your Radius environment to be used by developers. This allows you to mix-and-match templates for each of your environments such as dev, canary, and prod.
 
@@ -215,81 +194,6 @@ rad recipe register myrecipe --environment myenv --template-kind terraform --tem
 ### Done
 
 You can now use your custom Recipe with its accompanying resource. Visit the [Recipe developer guide]({{< ref "/guides/recipes/overview" >}}) for more information.
-
-## `context` parameter properties
-
-In the following tables, "resource" refers to the resource "calling" the Recipe. For example, if you were to create a Recipe for an `Applications.Link/redisCaches` resource, the "resource" would be the instance of the redisCaches that is calling the Recipe.
-
-| Key | Type | Description |
-|-----|------|-------------|
-| [`resource`](#resource) | object | Represents the resource metadata of the deploying recipe resource.
-| [`application`](#application) | object | Represents environment resource metadata.
-| [`environment`](#environment) | object | Represents environment resource metadata.
-| [`azure`](#runtime) | object | Represents Azure provider scope. metadata.
-| [`aws`](#runtime) | object | Represents AWS provider scope metadata.
-
-### resource
-
-| Key | Type | Description | Example |
-|-----|------|-------------|---------|
-| `name` | string | The resource name of the application | `myredis`
-| `id` | string | The ID of the resource | `/planes/radius/resourceGroups/myrg/Applications.Link/redisCaches/myredis`
-| `type` | string | The type of the resource calling this recipe | `Applications.Link/redisCaches`
-
-### application
-
-| Key | Type | Description | Example |
-|-----|------|-------------|---------|
-| `name` | string | The resource name of the application | `myapp`
-| `id` | string | The resource ID of the application | `/planes/radius/resourceGroups/myrg/Applications.Core/applications/myapp`
-
-### environment
-
-| Key | Type | Description | Example |
-|-----|------|-------------|---------|
-| `name` | string | The resource name of the environment | `myenv`
-| `id` | string | The resource ID of the environment | `/planes/radius/resourceGroups/myrg/Applications.Core/environments/myenv`
-
-### runtime
-
-| Key | Type | Description |
-|-----|------|-------------|
-| [`kubernetes`](#kubernetes) | object | An object with details of the underlying Kubernetes cluster, if configured on the environment
-
-#### kubernetes
-
-| Key | Type | Description |
-|-----|------|-------------|
-| `namespace` | string | Set to the application's namespace when the resource is application-scoped, and set to the environment's namespace when the resource is environment scoped.
-| `environmentNamespace` | string | Set to the environment's namespace.
-
-### azure
-
-| Key | Type | Description |
-|-----|------|-------------|
-| [`resourceGroup`](#resourceGroup) | object | An object with details of the Azure Resource Group provider information, if configured on the environment
-| [`subscription`](#subscription) | object | An object with details of the Azure Subscription provider information, if configured on the environment
-
-#### resourceGroup
-
-| Key | Type | Description |
-|-----|------|-------------|
-| `name` | string | The resource group name.
-| `id` | string | Represents fully qualified resource group name.
-
-#### subscription
-
-| Key | Type | Description |
-|-----|------|-------------|
-| `subscriptionId` | string | The ID of the subscription.
-| `id` | string | Represents fully qualified subscription ID.
-
-### aws
-
-| Key | Type | Description |
-|-----|------|-------------|
-| [`region`] | string | Represents the region of the AWS account.
-| [`account`] | string | Represents the account id of the AWS account.
 
 ## Further reading
 

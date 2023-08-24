@@ -90,7 +90,7 @@ output result object = {
   //LINKING
   values: {
     host: '${svc.metadata.name}.${svc.metadata.namespace}.svc.cluster.local'
-    port: 6379 
+    port: svc.spec.ports[0].port 
     username: username
   }
   secrets: {

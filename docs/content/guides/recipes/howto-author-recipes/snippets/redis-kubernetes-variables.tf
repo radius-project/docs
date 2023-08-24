@@ -5,6 +5,20 @@ variable "port" {
   type = number
   default = 6379
 }
+
+variable "username" {
+  description = "The username that is used to connect to a Redis server."
+
+  type = string
+  default = "username"
+}
+
+variable "password" {
+  description = "The password that is used to connect to a Redis server."
+
+  type = string
+  default = "password"
+}
 //PARAMETERS
 
 //CONTEXT
