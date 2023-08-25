@@ -219,17 +219,4 @@ Radius can also be installed and an environment created with manual rad CLI comm
    ```
    NAME
    myEnvironment
-   ``
-
-### Pre-requisites
-
-- Make sure you have an [AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account) and an [IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html)
-    - [Create an IAM AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) and copy the AWS Access Key ID and the AWS Secret Access Key to a secure location for use later. If you have already created an Access Key pair, you can use that instead.
-- Make sure you can create or already have a [EKS cluster](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) in order to deploy AWS resources, for more information on how Radius handles EKS clusters see [supported clusters]({{< ref supported-clusters >}}).
-
-### Configuration steps
-
-
-## Next steps
-
-- Learn about [Radius Workspaces]({{< ref workspaces >}})
+   ```
