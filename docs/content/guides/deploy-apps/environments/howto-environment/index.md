@@ -220,3 +220,7 @@ Radius can also be installed and an environment created with manual rad CLI comm
    NAME
    myEnvironment
    ```
+
+## Next steps 
+
+Follow the [cloud provider guides]({{< ref providers >}}) to configure cloud providers for your environment to deploy and manage cloud resources
