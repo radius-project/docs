@@ -25,8 +25,9 @@ The `context` object is automatically injected to Bicep templates when a Recipe 
 | [`resource`](#resource) | object | Represents the resource metadata of the deploying recipe resource.
 | [`application`](#application) | object | Represents environment resource metadata.
 | [`environment`](#environment) | object | Represents environment resource metadata.
-| [`azure`](#runtime) | object | Represents Azure provider scope. metadata.
-| [`aws`](#runtime) | object | Represents AWS provider scope metadata.
+| [`runtime`](#runtime)	| object | An object containing information on the underlying runtime. 
+| [`azure`](#azure) | object | Represents Azure provider scope. metadata.
+| [`aws`](#aws) | object | Represents AWS provider scope metadata.
 
 ### resource
 
