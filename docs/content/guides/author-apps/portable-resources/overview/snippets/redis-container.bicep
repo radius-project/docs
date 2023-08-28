@@ -30,9 +30,9 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' existing
   name: 'myapp'
 }
 
-//LINK
-resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
-  name: 'myredis-link'
+//PORTABLE RESOURCE
+resource redis 'Applications.Datastores/redisCaches@2022-03-15-privatepreview' = {
+  name: 'myrediscache'
   properties: {
     environment: environment
     application: app.id
@@ -45,7 +45,7 @@ resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
     }
   }
 }
-//LINK
+//PORTABLE RESOURCE
 //CONTAINER
 resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'mycontainer'

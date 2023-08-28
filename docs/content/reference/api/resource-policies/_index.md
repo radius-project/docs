@@ -47,24 +47,30 @@ Each resource type controller decides whether it will retry to process the opera
 | Applications.Core/gateways | PUT/PATCH/DELETE | Asynchronous | default | default |
 | Applications.Core/httpRoutes | LIST/GET | Synchronous | default | |
 | Applications.Core/httpRoutes | PUT/PATCH/DELETE | Asynchronous | default | default |
+| Applications.Core/extenders | LIST/GET/PUT/PATCH/DELETE | Synchronous | default | |
+| Applications.Core/extenders | POST ListSecret | Synchronous | default | |
 
-#### Applications.Link resource provider
+#### Applications.Dapr resource providers
 
 | Resource Type  | Operation | API Type | Server Timeout (Seconds) | Async Operation retry condition|
 |------|:--------:|-------------|---------|------------|
-| Applications.Link/daprPubSubBrokers | LIST/GET/PUT/PATCH/DELETE | Synchronous | default | |
-| Applications.Link/daprPubSubBrokers | POST ListSecret | Synchronous | default | |
-| Applications.Link/daprSecretStores | LIST/GET/PUT/PATCH/DELETE | Synchronous | default | |
-| Applications.Link/daprSecretStores | POST ListSecret | Synchronous | default | |
-| Applications.Link/daprStateStores | LIST/GET/PUT/PATCH/DELETE | Synchronous | default | |
-| Applications.Link/daprStateStores | POST ListSecret | Synchronous | default | |
-| Applications.Link/extenders | LIST/GET/PUT/PATCH/DELETE | Synchronous | default | |
-| Applications.Link/extenders | POST ListSecret | Synchronous | default | |
-| Applications.Link/mongoDatabases | LIST/GET/PUT/PATCH/DELETE | Synchronous | default | |
-| Applications.Link/mongoDatabases | POST ListSecret | Synchronous | default | |
-| Applications.Link/rabbitMQMessageQueues | LIST/GET/PUT/PATCH/DELETE | Synchronous | default | |
-| Applications.Link/rabbitMQMessageQueues | POST ListSecret | Synchronous | default | |
-| Applications.Link/redisCaches | LIST/GET/PUT/PATCH/DELETE | Synchronous | default | |
-| Applications.Link/redisCaches | POST ListSecret | Synchronous | default | |
-| Applications.Link/sqlDatabases | LIST/GET/PUT/PATCH/DELETE | Synchronous | default | |
-| Applications.Link/sqlDatabases | POST ListSecret | Synchronous | default | |
+| Applications.Dapr/pubSubBrokers | LIST/GET/PUT/PATCH/DELETE | Synchronous | default | |
+| Applications.Dapr/pubSubBrokers | POST ListSecret | Synchronous | default | |
+| Applications.Dapr/secretStores | LIST/GET/PUT/PATCH/DELETE | Synchronous | default | |
+| Applications.Dapr/secretStores | POST ListSecret | Synchronous | default | |
+| Applications.Dapr/stateStores | LIST/GET/PUT/PATCH/DELETE | Synchronous | default | |
+| Applications.Dapr/stateStores | POST ListSecret | Synchronous | default | |
+
+
+#### Applications.Datastores resource providers
+
+| Resource Type  | Operation | API Type | Server Timeout (Seconds) | Async Operation retry condition|
+|------|:--------:|-------------|---------|------------|
+| Applications.Datastores/mongoDatabases | LIST/GET/PUT/PATCH/DELETE | Synchronous | default | |
+| Applications.Datastores/mongoDatabases | POST ListSecret | Synchronous | default | |
+| Applications.Datastores/rabbitMQMessageQueues | LIST/GET/PUT/PATCH/DELETE | Synchronous | default | |
+| Applications.Datastores/rabbitMQMessageQueues | POST ListSecret | Synchronous | default | |
+| Applications.Datastores/redisCaches | LIST/GET/PUT/PATCH/DELETE | Synchronous | default | |
+| Applications.Datastores/redisCaches | POST ListSecret | Synchronous | default | |
+| Applications.Datastores/sqlDatabases | LIST/GET/PUT/PATCH/DELETE | Synchronous | default | |
+| Applications.Datastores/sqlDatabases | POST ListSecret | Synchronous | default | |

@@ -52,7 +52,7 @@ When you output a `values` object, all of the individual properties will be dire
 
 #### Properties
 
-Simply define an object that matches the schema of the resource calling the Recipe. For example, for an `Application.Link/redisCaches` resource, a Recipe would output:
+Simply define an object that matches the schema of the resource calling the Recipe. For example, for an `Application.Datastores/redisCaches` resource, a Recipe would output:
 
 {{< rad file="snippets/recipe.bicep" embed=true marker="//OUTVALUES" >}}
 
@@ -94,7 +94,7 @@ Recipes can be added via the rad CLI or an environment Bicep definition:
 
 {{% codetab %}}
 ```bash
-rad recipe register myrecipe --environment myenv --template-kind bicep --template-path myregistry.azurecr.io/recipes/myrecipe:v1 --link-type Applications.Link/redisCaches
+rad recipe register myrecipe --environment myenv --template-kind bicep --template-path myregistry.azurecr.io/recipes/myrecipe:v1 --link-type Applications.Datastores/redisCaches
 ```
 {{% /codetab %}}
 {{% codetab %}}
@@ -110,7 +110,7 @@ You can now use your custom recipe in its accompanying resource. Visit the [Reci
 
 ## `context` parameter properties
 
-In the following tables, "resource" refers to the resource "calling" the Recipe. For example, if you were to create a Recipe for an `Applications.Link/redisCaches` resource, the "resource" would be the instance of the redisCaches that is calling the Recipe.
+In the following tables, "resource" refers to the resource "calling" the Recipe. For example, if you were to create a Recipe for an `Applications.Datastores/redisCaches` resource, the "resource" would be the instance of the redisCaches that is calling the Recipe.
 
 | Key | Type | Description |
 |-----|------|-------------|
@@ -124,8 +124,8 @@ In the following tables, "resource" refers to the resource "calling" the Recipe.
 | Key | Type | Description | Example |
 |-----|------|-------------|---------|
 | `name` | string | The resource name of the application | `myredis`
-| `id` | string | The ID of the resource | `/planes/radius/resourceGroups/myrg/Applications.Link/redisCaches/myredis`
-| `type` | string | The type of the resource calling this recipe | `Applications.Link/redisCaches`
+| `id` | string | The ID of the resource | `/planes/radius/resourceGroups/myrg/Applications.Datastores/redisCaches/myredis`
+| `type` | string | The type of the resource calling this recipe | `Applications.Datastores/redisCaches`
 
 ### application
 

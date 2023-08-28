@@ -47,7 +47,7 @@ Begin by creating a new file named `dapr.bicep` with a Radius application that c
    Resources:
     dapr            Applications.Core/applications
     backend         Applications.Core/containers
-    statestore      Applications.Link/daprStateStores
+    statestore      Applications.Dapr/stateStores
    ```
 
 1. The `rad run` command automatically sets up port forwarding. Visit the the URL [http://localhost:3000/order](http://localhost:3000/order) in your browser. You should see the following message, which confirms the container is able to communicate with the state store:
@@ -94,7 +94,7 @@ Add a `frontend` [container]({{< ref "guides/author-apps/containers" >}}) which 
       dapr            Applications.Core/applications
       backend         Applications.Core/containers
       frontend        Applications.Core/containers
-      statestore      Applications.Link/daprStateStores
+      statestore      Applications.Dapr/stateStores
    ```
 
 ## Step 5. Test your application

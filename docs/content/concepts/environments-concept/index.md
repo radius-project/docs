@@ -56,10 +56,10 @@ In this example there are two teams within an organization: a central operations
 A typical workflow for this team structure would look like:
 
 1. The ops team initializes a new environment, configured with a compute runtime setup with networking, identity, diagnostics, and other configuration that matches their org's requirements.
-1. The developer authors a Radius application template, including containers for their services, links for their infrastructure, and routes/gateways for their networking.
+1. The developer authors a Radius application template, including containers for their services, portable resources for their infrastructure, and routes/gateways for their networking.
 1. The developer deploys the app template to the Radius environment
    - The app's containers automatically run on the container runtime
-   - The link automatically configures security best practices and injects connection information into the consuming container
+   - The resource automatically configures security best practices and injects connection information into the consuming container
 
 When the developer deploys their application, these org-level concerns are automatically wired up based on the environment. Developers don't have to think about credentials or how networking is configured, enabling them to focus on their applications instead.
 

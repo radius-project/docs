@@ -65,8 +65,8 @@ Radius environments can be setup with the rad CLI via two paths: interactive or 
    ```
    ```
    NAME      TYPE                              TEMPLATE KIND  TEMPLATE
-   default   Applications.Link/mongoDatabases  bicep          radius.azurecr.io/recipes/dev/mongodatabases:latest
-   default   Applications.Link/redisCaches     bicep          radius.azurecr.io/recipes/dev/rediscaches:latest
+   default   Applications.Datastores/mongoDatabases  bicep          radius.azurecr.io/recipes/dev/mongodatabases:latest
+   default   Applications.Datastores/redisCaches     bicep          radius.azurecr.io/recipes/dev/rediscaches:latest
    ``` 
    You can follow the [recipes]({{< ref "/guides/recipes/overview" >}}) documentation to learn more about the recipes and how to use them in your application.
 
@@ -163,7 +163,7 @@ Radius can also be installed and an environment created with manual rad CLI comm
 
 1. Create a new Radius resource group:
 
-   [Radius resource groups]({{< ref groups >}}) are used to organize Radius resources such as applications, environments, links, and routes. Run [`rad group create`]({{< ref rad_group_create >}}) to create a new resource group:
+   [Radius resource groups]({{< ref groups >}}) are used to organize Radius resources such as applications, environments, portable resources, and routes. Run [`rad group create`]({{< ref rad_group_create >}}) to create a new resource group:
 
    ```bash
     rad group create myGroup
