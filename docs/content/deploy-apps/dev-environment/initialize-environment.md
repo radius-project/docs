@@ -35,7 +35,7 @@ Radius development environments enable you to quickly get started with Radius an
    ```
    Initializing Radius...                                                
                                                                       
-   🕔 Install Radius 0.21                                             
+   🕔 Install Radius {{< param version >}}                                            
       - Kubernetes cluster: kind
       - Kubernetes namespace: radius-system                              
    ⏳ Create new environment default                                     
