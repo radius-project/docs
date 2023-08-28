@@ -1,28 +1,20 @@
 ---
 type: docs
-title: "Recipe context object schema"
+title: "Reference: Recipe context object schema"
 linkTitle: "Recipe context object schema"
 description: "Learn how to use the Recipe context object in your Recipe templates"
-categories: "Schema"
+categories: "Reference"
 ---
 
-## Overview
+The `context` object is automatically injected to Bicep templates when a Recipe is run. It contains information about the runtime, environment, application, and resource from which the Recipe was run. This enables you to author templates that can be used as Recipes. For more information visit the [Recipe authoring how-to guide]({{< ref howto-author-recipes >}}).
 
-In the following tables, "resource" refers to the resource "calling" the Recipe. For example, if you were to create a Recipe for an `Applications.Link/redisCaches` resource, the "resource" would be the instance of the redisCaches that is calling the Recipe.
+## Usage
 
-## Resource format
-
-{{< tabs Bicep Terraform >}}
+{{< tabs Bicep >}}
 
 {{< codetab >}}
 
 {{< rad file="snippets/recipe.bicep" embed=true >}}
-
-{{< /codetab >}}
-
-{{< codetab >}}
-
-{{< rad file="snippets/recipe.tf" embed=true >}}
 
 {{< /codetab >}}
 
@@ -40,22 +32,22 @@ In the following tables, "resource" refers to the resource "calling" the Recipe.
 
 | Key | Type | Description | Example |
 |-----|------|-------------|---------|
-| `name` | string | The resource name of the application | `myredis`
-| `id` | string | The ID of the resource | `/planes/radius/resourceGroups/myrg/Applications.Link/redisCaches/myredis`
+| `name` | string | The name of the resource calling this Recipe | `myredis`
+| `id` | string | The ID of the resource calling this Recipe | `/planes/radius/resourceGroups/myrg/Applications.Link/redisCaches/myredis`
 | `type` | string | The type of the resource calling this recipe | `Applications.Link/redisCaches`
 
 ### application
 
 | Key | Type | Description | Example |
 |-----|------|-------------|---------|
-| `name` | string | The resource name of the application | `myapp`
+| `name` | string | The name of the application | `myapp`
 | `id` | string | The resource ID of the application | `/planes/radius/resourceGroups/myrg/Applications.Core/applications/myapp`
 
 ### environment
 
 | Key | Type | Description | Example |
 |-----|------|-------------|---------|
-| `name` | string | The resource name of the environment | `myenv`
+| `name` | string | The name of the environment | `myenv`
 | `id` | string | The resource ID of the environment | `/planes/radius/resourceGroups/myrg/Applications.Core/environments/myenv`
 
 ### runtime
