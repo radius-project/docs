@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "How-To: Configure Azure provider"
+title: "How-To: Configure the Azure cloud provider"
 linkTitle: "Configure Azure provider"
 description: "Learn how to configure the Azure provider for your Radius environment"
 weight: 200
@@ -8,14 +8,16 @@ categories: "How-To"
 tags: ["Azure"]
 ---
 
-The Azure provider allows you to deploy and connect to Azure resources from a self-hosted Radius environment. 
+The Azure provider allows you to deploy and connect to Azure resources from a self-hosted Radius environment. It can be configured:
+- [Interactively via `rad init`](#interactive-configuration)
+- [Manually via `rad env update` and `rad credential register`](#manual-configuration)
 
 ## Prerequisites
 
 - [Azure subscription](https://azure.com)
 - [az CLI](https://aka.ms/azcli)
 
-## Configure an Azure provider when initializing an environment interactively
+## Interactive configuration
 
 1. Initialize a new environment with [`rad init --full`]({{< ref rad_init >}}):
    ```bash
@@ -55,7 +57,7 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
       Initialization complete! Have a RAD time 😎
       ```
    
-## Configure an Azure provider manually
+## Manual configuration
 
 1. Use [`rad env update`]({{< ref rad_env_update >}}) to update your Radius Environment with your Azure subscription ID and Azure resource group:
 

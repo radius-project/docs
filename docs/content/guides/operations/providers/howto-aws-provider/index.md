@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "How-To: Configure AWS Cloud provider"
+title: "How-To: Configure the AWS cloud provider"
 linkTitle: "Configure AWS provider"
 description: "Learn how to configure the AWS provider for your Radius environment"
 weight: 300
@@ -8,7 +8,9 @@ categories: "How-To"
 tags: ["AWS"]
 ---
 
-The AWS provider allows you to deploy and connect to AWS resources from a Radius environment on an EKS cluster. 
+The AWS provider allows you to deploy and connect to AWS resources from a Radius environment on an EKS cluster. It can be configured:
+- [Interactively via `rad init`](#interactive-configuration)
+- [Manually via `rad env update` and `rad credential register`](#manual-configuration)
 
 ## Prerequisites
 
@@ -16,7 +18,7 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
 - [AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account) and an [IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html)
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
-## Configure an AWS provider when initializing an environment interactively
+## Interactive configuration
 
 1. Initialize a new environment with [`rad init --full`]({{< ref rad_init >}}):
    ```bash
@@ -46,7 +48,7 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
       Initialization complete! Have a RAD time 😎
       ```
 
-## Configure an AWS provider manually
+## Manual configuration
 
 1. Update your Radius Environment with your AWS region and AWS account ID:
     ```bash

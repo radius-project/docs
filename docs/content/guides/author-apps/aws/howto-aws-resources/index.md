@@ -49,7 +49,7 @@ Follow the prompts to install the [control plane services]({{< ref architecture-
 - **Namespace** - When an application is deployed, this is the namespace where your containers and other Kubernetes resources will be run. By default, this will be in the `default` namespace.
 {{% alert title="💡 About namespaces" color="success" %}} When you initialize a Radius Kubernetes environment, Radius installs the control plane resources within    the `radius-system` namespace in your cluster, separate from your applications. The namespace specified in this step will be used for your application deployments.
 {{% /alert %}}
-- **Add AWS provider** - An [AWS cloud provider]({{< ref "/guides/operations/providers/howto-AWS-provider" >}}) allows you to deploy and manage AWS resources as part of your application. Enter 'y' and follow the instructions. Provide a valid AWS region and the values obtained for IAM Access Key ID and IAM Secret Access Keys.
+- **Add AWS provider** - An [AWS cloud provider]({{< ref "/guides/operations/providers/howto-aws-provider" >}}) allows you to deploy and manage AWS resources as part of your application. Enter 'y' and follow the instructions. Provide a valid AWS region and the values obtained for IAM Access Key ID and IAM Secret Access Keys.
 - **Environment name** - The name of the environment to create. You can specify any name with lowercase letters, such as `myawsenv`.
 
 ## Step 3: Create a Bicep file to model AWS Simple Storage Service (S3)
