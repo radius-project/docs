@@ -12,7 +12,7 @@ terraform {
 //RESOURCE
 resource "kubernetes_deployment" "redis" {
   metadata {
-    name = var.redis_cache_name
+    name = "redis-${sha512(var.context.resource.id)}"
     namespace = var.context.runtime.kubernetes.namespace
     labels = {
       app = "redis"
@@ -50,7 +50,7 @@ resource "kubernetes_deployment" "redis" {
 
 resource "kubernetes_service" "redis" {
   metadata {
-    name = var.redis_cache_name
+    name = "redis-${sha512(var.context.resource.id)}"
     namespace = var.context.runtime.kubernetes.namespace
   }
 
