@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Reference: Recipe context object schema"
-linkTitle: "Recipe context object schema"
+linkTitle: "Recipe context"
 description: "Learn how to use the Recipe context object in your Recipe templates"
 categories: "Reference"
 ---
@@ -23,10 +23,10 @@ The `context` object is automatically injected to Bicep templates when a Recipe 
 | Key | Type | Description |
 |-----|------|-------------|
 | [`resource`](#resource) | object | Represents the resource metadata of the deploying recipe resource.
-| [`application`](#application) | object | Represents environment resource metadata.
-| [`environment`](#environment) | object | Represents environment resource metadata.
+| [`application`](#application) | object | Represents application metadata.
+| [`environment`](#environment) | object | Represents environment metadata.
 | [`runtime`](#runtime)	| object | An object containing information on the underlying runtime. 
-| [`azure`](#azure) | object | Represents Azure provider scope. metadata.
+| [`azure`](#azure) | object | Represents Azure provider scope metadata.
 | [`aws`](#aws) | object | Represents AWS provider scope metadata.
 
 ### resource
@@ -76,18 +76,18 @@ The `context` object is automatically injected to Bicep templates when a Recipe 
 | Key | Type | Description |
 |-----|------|-------------|
 | `name` | string | The resource group name.
-| `id` | string | Represents fully qualified resource group name.
+| `id` | string | Represents fully qualified resource group id.
 
 #### subscription
 
 | Key | Type | Description |
 |-----|------|-------------|
-| `subscriptionId` | string | The ID of the subscription.
-| `id` | string | Represents fully qualified subscription ID.
+| `subscriptionId` | string | The GUID of the subscription.
+| `id` | string | Represents fully qualified subscription id.
 
 ### aws
 
 | Key | Type | Description |
 |-----|------|-------------|
-| [`region`] | string | Represents the region of the AWS account.
+| [`region`] | string | Represents the region where AWS resources are deployed.
 | [`account`] | string | Represents the account id of the AWS account.
