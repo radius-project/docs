@@ -105,7 +105,7 @@ _Note: Secure output parameters is in development. For now, you can use `#disabl
 
 You also need to make sure to **link** your infrastructure resources, so Radius can delete them later on when the resource is deleted.
 
-Linking is done automatically for any new Azure or AWS resource ([_Kubernetes coming soon_]({{< ref "faq#why-do-i-need-to-manually-output-a-kubernetes-ucp-id-as-part-of-my-bicep-recipe" >}})) defined in a Recipe. Radius inspects [the output of the deployment](https://learn.microsoft.com/rest/api/resources/deployments/get#resourcereference) and links any created resources.
+Linking is done automatically for Bicep Recipes for any new Azure or AWS resource ([_Kubernetes coming soon_]({{< ref "faq#why-do-i-need-to-manually-output-a-kubernetes-ucp-id-as-part-of-my-bicep-recipe" >}})). Radius inspects [the output of the Bicep deployment](https://learn.microsoft.com/rest/api/resources/deployments/get#resourcereference) and links any created resources.
 
 {{< tabs "Bicep" "Terraform" >}}
 
@@ -178,7 +178,7 @@ rad recipe register myrecipe --environment myenv --template-kind bicep --templat
 The template path value should represent the source path found in your Terraform module registry.
 
 ```bash
-rad recipe register myrecipe --environment myenv --template-kind terraform --template-path user/recipes/myrecipe --link-type Applications.Link/redisCaches --template-version "1.1.0"
+rad recipe register myrecipe --environment myenv --link-type Applications.Link/redisCaches --template-kind terraform --template-path user/recipes/myrecipe --template-version "1.1.0"
 ```
 
 {{% /codetab %}}
