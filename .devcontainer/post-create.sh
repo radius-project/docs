@@ -4,7 +4,7 @@
 git submodule update --init --recursive
 
 # Clone radius repo
-git clone https://github.com/project-radius/radius.git
+git clone https://github.com/radius-project/radius.git
 
 # Install dependencies
 pushd ./docs
