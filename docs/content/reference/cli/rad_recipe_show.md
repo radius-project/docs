@@ -57,5 +57,5 @@ rad recipe show redis-dev --group dev --environment dev
 
 ### SEE ALSO
 
-* [rad recipe]({{< ref rad_recipe.md >}})	 - Manage link recipes
+* [rad recipe]({{< ref rad_recipe.md >}})	 - Manage recipes
 
