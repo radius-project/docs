@@ -45,8 +45,8 @@ It's easy to get up and running with a GitHub Codespace. This will give you a fu
 2. Clone this repository and the radius repository
 
    ```sh
-   git clone https://github.com/project-radius/radius.git
-   git clone https://github.com/project-radius/docs.git
+   git clone https://github.com/radius-project/radius.git
+   git clone https://github.com/radius-project/docs.git
    ```
 
 3. Generate CLI docs:
