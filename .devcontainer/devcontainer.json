@@ -19,7 +19,7 @@
 	"customizations": {
 		"codespaces": {
 			"repositories": {
-				"project-radius/radius": {
+				"radius-project/radius": {
 					"permissions": {
 						"contents": "read"
 					}
