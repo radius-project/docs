@@ -37,7 +37,7 @@ Add the `context` parameter to your `variable.tf` file:
 
 {{< rad file="snippets/redis-kubernetes-variables.tf" embed=true marker="//CONTEXT" lang="terraform" >}}
 
-Within `main.tf` use the `context` variable to name and configure resources:
+Within `main.tf` use the `context` variable to name and configure your resources metadata as:
 
 {{< rad file="snippets/redis-kubernetes-main.tf" embed=true marker="//RESOURCE" lang="terraform" >}}
 

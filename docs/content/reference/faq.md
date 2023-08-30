@@ -22,18 +22,18 @@ Open-source Radius requires that you self-host and run your own Radius instance 
 
 ### What languages does Radius support? 
 
-- **Core application source code**
+#### Core application source code
 
 Radius supports any language as long as it is containerized. 
 
-- **Radius Application and Radius Environment definitions**
+#### Radius Application and Radius Environment definitions
 
 | Infrastructure as Code Languages | Radius Support |
 |---------------------| ------------|
 | [Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/) | ✅ |
 | [Terraform](https://developer.hashicorp.com/terraform/docs) | ⏳ |
 
-- **Radius Recipes**
+#### Radius Recipes
 
 | Infrastructure as Code Languages | Radius Support |
 |---------------------| ------------|
