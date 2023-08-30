@@ -118,7 +118,7 @@ Radius applications can include any non-compute Azure service, with support for 
 
 ### Does Radius support Google Cloud Platform (GCP)? 
 
-Partially, yes. Radius Recipes can include GCP resources, as long as they provide an API that matches one of the Radius portable resources (SQL, Mongo, Redis, etc.). Radius does not yet support direct connections or identity integration with GCP resources.
+Not yet, but it is on the backlog. Stay tuned for updates.
 
 ### Does Radius support Dapr? 
 
