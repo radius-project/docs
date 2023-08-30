@@ -30,7 +30,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' existing
   name: 'myapp'
 }
 
-//PORTABLE RESOURCE
+//PORTABLERESOURCE
 resource redis 'Applications.Datastores/redisCaches@2022-03-15-privatepreview' = {
   name: 'myrediscache'
   properties: {
@@ -45,7 +45,7 @@ resource redis 'Applications.Datastores/redisCaches@2022-03-15-privatepreview' =
     }
   }
 }
-//PORTABLE RESOURCE
+//PORTABLERESOURCE
 //CONTAINER
 resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
   name: 'mycontainer'

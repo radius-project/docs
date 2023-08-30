@@ -6,4 +6,4 @@ description: "Detailed reference documentation on the Applications.Datastores/re
 slug: "redisCaches"
 ---
 
-{{< redoc "swagger/specification/applications/resource-manager/Applications.Datastores/preview/2022-03-15-privatepreview/redisCaches.json" >}}
+{{< redoc "swagger/specification/applications/resource-manager/Applications.Datastores/preview/2022-03-15-privatepreview/openapi.json" >}}

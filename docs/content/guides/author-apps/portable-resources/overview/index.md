@@ -31,7 +31,7 @@ In this example Redis is provided by a Kubernetes Pod:
 
 A Redis cache can be configured with properties from the Kubernetes Pod:
 
-{{< rad file="snippets/redis-container.bicep" embed=true marker="//Portable Resource" >}}
+{{< rad file="snippets/redis-container.bicep" embed=true marker="//PORTABLERESOURCE" >}}
 
 {{< /codetab >}}
 
@@ -46,7 +46,7 @@ In this example Redis is provided by an Azure Cache for Redis:
 
 A Redis cache can be configured with an Azure resource:
 
-{{< rad file="snippets/redis-azure.bicep" embed=true marker="//Portable Resource" >}}
+{{< rad file="snippets/redis-azure.bicep" embed=true marker="//PORTABLERESOURCE" >}}
 
 {{< /codetab >}}
 

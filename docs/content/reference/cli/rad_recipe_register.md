@@ -44,7 +44,7 @@ rad recipe register cosmosdb -e env_name -w workspace --template-kind bicep --te
   -e, --environment string        The environment name
   -g, --group string              The resource group name
   -h, --help                      help for register
-      --link-type string          specify the type of the portable resource this recipe can be consumed by
+      --link-type string          specify the type of the resource this recipe can be consumed by
   -o, --output string             output format (supported formats are json, table) (default "table")
   -p, --parameters stringArray    Specify parameters for the deployment
       --template-kind string      specify the kind for the template provided by the recipe.

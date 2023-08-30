@@ -456,3 +456,4 @@ howto
 pubSubBrokers
 rabbitmqQueues
 stateStores
+PortableResource

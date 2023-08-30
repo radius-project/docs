@@ -6,4 +6,4 @@ description: "Detailed reference documentation on the Applications.Dapr/secretSt
 slug: "secretStores"
 ---
 
-{{< redoc "swagger/specification/applications/resource-manager/Applications.Dapr/preview/2022-03-15-privatepreview/secretStores.json" >}}
+{{< redoc "swagger/specification/applications/resource-manager/Applications.Dapr/preview/2022-03-15-privatepreview/openapi.json" >}}
