@@ -29,12 +29,12 @@ Radius environments can be setup with the rad CLI via two paths: interactive or 
    ```
    Initializing Radius...                                                
                                                                       
-   🕔 Install Radius 0.21                                             
+   🕔 Install Radius {{< param version >}}                                             
       - Kubernetes cluster: kind
       - Kubernetes namespace: radius-system                              
    ⏳ Create new environment default                                     
       - Kubernetes namespace: default                                    
-      - Recipe pack: dev                                                 
+      - Recipe pack: local-dev                                                 
    ⏳ Scaffold application                                          
    ⏳ Update local configuration                                                 
    ```                                             
