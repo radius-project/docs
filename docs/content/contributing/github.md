@@ -14,8 +14,8 @@ Visit https://aka.ms/ProjectRadius/GitHubAccess to request access to the Radius 
 
 ## Source code
 
-The source code for Radius is available on GitHub within the [radius repo](https://github.com/project-radius/radius).
+The source code for Radius is available on GitHub within the [radius repo](https://github.com/radius-project/radius).
 
-Documentation is housed at https://github.com/project-radius/docs.
+Documentation is housed at https://github.com/radius-project/docs.
 
-Samples are location at https://github.com/project-radius/samples.
+Samples are location at https://github.com/radius-project/samples.

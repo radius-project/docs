@@ -68,10 +68,10 @@ chart_version = "0.24.0"
 algolia_docsearch = true
 
 # GitHub Information
-github_repo = "https://github.com/project-radius/docs"
+github_repo = "https://github.com/radius-project/docs"
 github_subdir = "docs"
 github_branch = "v0.24"
-github_project_repo = "https://github.com/project-radius/radius"
+github_project_repo = "https://github.com/radius-project/radius"
 
 # Versioning
 version_menu = "Releases"

@@ -14,7 +14,7 @@ This quickstart will teach you:
 - How to use Radius to deploy a Dapr microservices sample application for an online shop
 - How [Dapr and Radius]({{< ref dapr-resources >}}) seamlessly work together
 
-For more details on the app and access to the source code, visit the `quickstarts/dapr` directory in the [samples repo](https://github.com/project-radius/samples). _For access to the project-radius GitHub org, please complete and submit [this form](https://aka.ms/ProjectRadius/GitHubAccess)._
+For more details on the app and access to the source code, visit the `quickstarts/dapr` directory in the [samples repo](https://github.com/radius-project/samples). _For access to the project-radius GitHub org, please complete and submit [this form](https://aka.ms/ProjectRadius/GitHubAccess)._
 
 ## Prerequisites
 
