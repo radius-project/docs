@@ -79,8 +79,8 @@ Radius environments can be setup with the rad CLI via two paths: interactive or 
 
 1. Follow the prompts, specifying:
    - **Namespace** - The Kubernetes namespace where your application containers and networking resources will be deployed (different than the Radius control-plane namespace, `radius-system`)
-   - **Azure provider** (optional) - Allows you to [deploy and manage Azure resources]({{< ref "/guides/operations/providers/howto-cloud-providers" >}})
-   - **AWS provider** (optional) - Allows you to [deploy and manage AWS resources]({{< ref "/guides/operations/providers/howto-cloud-providers" >}})
+   - **Azure provider** (optional) - Allows you to [deploy and manage Azure resources]({{< ref "/guides/operations/providers/howto-azure-provider" >}})
+   - **AWS provider** (optional) - Allows you to [deploy and manage AWS resources]({{< ref "/guides/operations/providers/howto-aws-provider" >}})
    - **Environment name** - The name of the environment to create
 
    You should see the following output:
@@ -222,68 +222,6 @@ Radius can also be installed and an environment created with manual rad CLI comm
    myEnvironment
    ```
 
-### Configure cloud providers
+## Next steps 
 
-Setting up a [cloud provider]({{< ref providers >}}) allows you to deploy and manage resources from either Azure or AWS as part of your Radius Application.
-
-{{< tabs Azure AWS >}}
-
-{{% codetab %}}
-
-#### Pre-requisites
-
-- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/what-is-azure-cli)
-
-#### Configuration steps
-
-1. Use [`rad env update`]({{< ref rad_env_update >}}) to update your Radius Environment with your Azure subscription ID and Azure resource group:
-
-    ```bash
-    rad env update myEnvironment --azure-subscription-id myAzureSubscriptionId --azure-resource-group  myAzureResourceGroup
-    ```
-
-2. Run `az ad sp create-for-rbac` to create a Service Principal without a role assignment and obtain your `appId`, `displayName`, `password`, and `tenant` information.
-
-   ```
-   {
-   "appId": "****",
-   "displayName": "****",
-   "password": "****",
-   "tenant": "****"
-   }
-   ```
-
-
-3. Use [`rad credential register azure`]({{< ref rad_credential_register_azure >}}) to add the Azure service principal to your Radius installation:
-    ```bash
-    rad credential register azure --client-id myClientId  --client-secret myClientSecret  --tenant-id myTenantId
-    ```
-    Radius will use the provided service principal for all interactions with Azure, including Bicep and Recipe deployments.
-
-{{% /codetab %}}
-{{% codetab %}}
-
-### Pre-requisites
-
-- Make sure you have an [AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account) and an [IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html)
-    - [Create an IAM AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) and copy the AWS Access Key ID and the AWS Secret Access Key to a secure location for use later. If you have already created an Access Key pair, you can use that instead.
-- Make sure you can create or already have a [EKS cluster](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) in order to deploy AWS resources, for more information on how Radius handles EKS clusters see [supported clusters]({{< ref supported-clusters >}}).
-
-### Configuration steps
-
-1. Update your Radius Environment with your AWS region and AWS account ID:
-    ```bash
-    rad env update myEnvironment --aws-region myAwsRegion --aws-account-id myAwsAccountId
-    ```
-    This command updates the configuration of an environment for properties that are able to be changed. For more information visit [`rad env update`]({{< ref rad_env_update >}})
-2. Add your AWS cloud provider credentials:
-    ```bash
-    rad credential register aws --access-key-id myAccessKeyId --secret-access-key mySecretAccessKey
-    ```
-    For more information on the command arguments visit [`rad credential register aws`]({{< ref rad_credential_register_aws >}})
-{{% /codetab %}}
-{{< /tabs >}}
-
-## Next steps
-
-- Learn about [Radius Workspaces]({{< ref workspaces >}})
+Follow the [cloud provider guides]({{< ref providers >}}) to configure cloud providers for your environment to deploy and manage cloud resources
