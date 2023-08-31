@@ -26,5 +26,5 @@ Please reference the docs or Radius issue that this pull request addresses:
 
 Fixes: #[issue number]
 or
-Fixes: https://github.com/project-radius/radius/issues/[issue number]
+Fixes: https://github.com/radius-project/radius/issues/[issue number]
 -->

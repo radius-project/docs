@@ -18,7 +18,7 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
 
 ## Resource library
 
-{{< button text="AWS resource library" link="https://github.com/project-radius/bicep-types-aws/blob/main/artifacts/bicep/index.md" newtab="true" >}}
+{{< button text="AWS resource library" link="https://github.com/radius-project/bicep-types-aws/blob/main/artifacts/bicep/index.md" newtab="true" >}}
 > *If you don't have access to the Bicep-types-aws github repo, please visit https://aka.ms/ProjectRadius/GitHubAccess to request access to the Radius GitHub organization.*
 
 ## Example
