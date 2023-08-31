@@ -81,7 +81,7 @@ When you output a `result` object, all of the individual properties will be dire
 
 #### Resource definition
 
-Simply define an object that matches the schema of the resource calling the Recipe. For example, for an `Application.Datastores/redisCaches` resource, a Recipe would output:
+Simply define an object that matches the schema of the resource calling the Recipe.
 
 You also need to make sure to **link** your infrastructure resources, so Radius can delete them later on when the resource is deleted.
 
