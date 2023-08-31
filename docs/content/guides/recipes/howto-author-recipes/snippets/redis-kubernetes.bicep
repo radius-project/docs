@@ -1,9 +1,7 @@
-//KUBERNETES
 import kubernetes as kubernetes {
   kubeConfig: ''
   namespace: context.runtime.kubernetes.namespace
 }
-//KUBERNETES
 
 //PARAMETERS
 @description('The port number that is used to connect to a Redis server.')
@@ -67,13 +65,11 @@ resource svc 'core/Service@v1' = {
       app: 'redis'
       resource: context.resource.name
     }
-    //PARAM
     ports: [
       {
         port: port
       }
     ]
-    //PARAM
   }
 }
 //RESOURCE

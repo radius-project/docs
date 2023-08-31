@@ -71,7 +71,7 @@ You can create any [variable type supported by Terraform](https://developer.hash
 
 {{< /tabs >}}
 
-### Step 3: Output the target infrastructure
+### Step 3: Output the required values
 
 Once you have defined your backing infrastructure, you will need to output it from your IaC template so it can be "wired-up" to the resource that called the Recipe.
 
@@ -81,7 +81,7 @@ When you output a `result` object, all of the individual properties will be dire
 
 #### Resource definition
 
-Simply define an object that matches the schema of the resource calling the Recipe. For example, for an `Application.Link/redisCaches` resource, a Recipe would output:
+Simply define an object that matches the schema of the resource calling the Recipe. For example, for an `Application.Datastores/redisCaches` resource, a Recipe would output:
 
 You also need to make sure to **link** your infrastructure resources, so Radius can delete them later on when the resource is deleted.
 
