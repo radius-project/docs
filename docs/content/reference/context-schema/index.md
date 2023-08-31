@@ -4,6 +4,7 @@ title: "Reference: Recipe context object schema"
 linkTitle: "Recipe context"
 description: "Learn how to use the Recipe context object in your Recipe templates"
 categories: "Reference"
+weight: 800
 ---
 
 The `context` object is automatically injected to Bicep templates when a Recipe is run. It contains information about the runtime, environment, application, and resource from which the Recipe was run. This enables you to author templates that can be used as Recipes. For more information visit the [Recipe authoring how-to guide]({{< ref howto-author-recipes >}}).
