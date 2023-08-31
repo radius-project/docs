@@ -90,6 +90,7 @@ ProjectRadius
 RBAC
 RabbitMQ
 ResourceDeploymentClient
+resourceGroup
 Rollout
 SaaS
 SDKs
