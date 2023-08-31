@@ -49,7 +49,7 @@ tag = "tags"
 [[menu.main]]
     name = "GitHub"
     weight = 40
-    url = "https://github.com/project-radius"
+    url = "https://github.com/radius-project"
     pre = "<i class='fab fa-github'></i>"
 [[menu.main]]
     name = "Discord"
