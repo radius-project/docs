@@ -48,6 +48,7 @@ FTEs
 GKE
 GOAPP
 GitHubAccess
+GUID
 Hostname
 html
 HttpRoute
