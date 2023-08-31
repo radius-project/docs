@@ -10,7 +10,7 @@
 {{ $version := .Site.Params.version }}
 
 {{- if $page -}}{{- $link = ref . $page -}}{{- end -}}
-{{- if $githubRepo -}}{{- $link = (printf "https://github.com/project-radius/%s/tree/%s/%s" $githubRepo $version $githubPath) -}}{{- end -}}
+{{- if $githubRepo -}}{{- $link = (printf "https://github.com/radius-project/%s/tree/%s/%s" $githubRepo $version $githubPath) -}}{{- end -}}
 
 <a class="btn {{ $size }} btn-{{ $color }}" href="{{ $link }}" role="button" {{- if eq $newtab "true" -}}target="_blank"{{- end -}}>{{ $text }}</a>
 {{- if eq $newline "true" -}}

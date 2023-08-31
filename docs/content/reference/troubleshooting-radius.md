@@ -14,7 +14,7 @@ tags: ["troubleshooting"]
 
 If you receive an error saying Visual Studio or another application is not authorized to clone the Radius repo and you need to re-authorize the app, follow these steps:
 
-1. Open a browser to https://github.com/project-radius/radius
+1. Open a browser to https://github.com/radius-project/radius
 1. Select your profile and click on Settings
 1. Select Applications from the left navbar
 1. Select the Authorized OAuth Apps tab
@@ -44,7 +44,7 @@ To troubleshoot the Radius control-plane, you can use the command [`rad debug-lo
    ```
 
 
-2. In these log files, look for the text "panic", "error", or "Exception" in the logs, and if you find it inspect the error message. Also please open an issue at [project-radius/radius](https://github.com/project-radius/radius/issues/new?assignees=&labels=kind%2Fbug&template=bug.md&title=%3CBUG+TITLE%3E) with the details of your error and if possible, how to recreate. Please ensure that no sensitive information is in the logs prior to attaching them to an issue.
+2. In these log files, look for the text "panic", "error", or "Exception" in the logs, and if you find it inspect the error message. Also please open an issue at [radius-project/radius](https://github.com/radius-project/radius/issues/new?assignees=&labels=kind%2Fbug&template=bug.md&title=%3CBUG+TITLE%3E) with the details of your error and if possible, how to recreate. Please ensure that no sensitive information is in the logs prior to attaching them to an issue.
 
 > Visit https://aka.ms/ProjectRadius/GitHubAccess if you need access to the repo to open a bug.
 
@@ -90,4 +90,4 @@ ErrorCode: AuthorizationFailed
 
 This tells us the service principal that was configured with the Azure cloud provider was not properly configured on the target resource group. You can now add your service principal to your resource group and try your deployment again.
 
-Also please make sure to [open an Issue](https://github.com/project-radius/radius/issues/new?assignees=&labels=kind%2Fbug&template=bug.md&title=%3CBUG+TITLE%3E) if you encounter a generic `Internal server error` message, so we can address the root error not being forwarded to the user.
+Also please make sure to [open an Issue](https://github.com/radius-project/radius/issues/new?assignees=&labels=kind%2Fbug&template=bug.md&title=%3CBUG+TITLE%3E) if you encounter a generic `Internal server error` message, so we can address the root error not being forwarded to the user.

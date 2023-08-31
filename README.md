@@ -12,7 +12,7 @@ The [Docsy theme](https://docsy.dev) is used to style the generated site.
 
 ### Auto-generated docs
 
-The [rad CLI](https://github.com/project-radius/radius/tree/main/cmd/rad) reference docs are auto-generated via [Cobra doc gen](https://github.com/spf13/cobra/tree/master/doc).
+The [rad CLI](https://github.com/radius-project/radius/tree/main/cmd/rad) reference docs are auto-generated via [Cobra doc gen](https://github.com/spf13/cobra/tree/master/doc).
 
 ## 👨‍💻 Contributing
 

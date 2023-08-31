@@ -8,12 +8,12 @@ description: "Details on the rad recipe Radius CLI command"
 ---
 ## rad recipe
 
-Manage link recipes
+Manage recipes
 
 ### Synopsis
 
-Manage link recipes
-		Link recipes automate the deployment of infrastructure and configuration of links.
+Manage recipes
+		Recipes automate the deployment of infrastructure and configuration of portable resources.
 
 ### Options
 
