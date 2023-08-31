@@ -120,7 +120,7 @@ If you have issues with the sample application, where the container doesn't conn
     ```bash
     rad resource logs containers frontend -a s3app
     ```
-Also please make sure to [open an Issue](https://github.com/project-radius/radius/issues/new?assignees=&labels=kind%2Fbug&template=bug.md&title=%3CBUG+TITLE%3E) if you encounter a generic `Internal server error` message or an error message that is not self-serviceable, so we can address the root error not being forwarded to the user.
+Also please make sure to [open an Issue](https://github.com/radius-project/radius/issues/new?assignees=&labels=kind%2Fbug&template=bug.md&title=%3CBUG+TITLE%3E) if you encounter a generic `Internal server error` message or an error message that is not self-serviceable, so we can address the root error not being forwarded to the user.
 
 ## Further Reading
 
