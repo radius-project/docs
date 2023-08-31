@@ -6,7 +6,7 @@ weight: 200
 description: "Learn about the Radius docs maintenance process"
 ---
 
-In this guide, you’ll learn how to perform routine Radius docs maintainer and approver responsibilities. In order to successfully accomplish these tasks, you need either approver or maintainer status in the [`radius-project/docs`](https://github.com/radius-project/docs) repo. 
+In this guide, you’ll learn how to perform routine Radius docs maintainer and approver responsibilities. In order to successfully accomplish these tasks, you need either approver or maintainer status in the [`project-radius/docs`](https://github.com/project-radius/docs) repo. 
 
 To learn how to contribute to Radius docs, review the [Contributor guide]({{< ref contributing-docs >}}).
 
