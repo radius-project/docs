@@ -57,7 +57,7 @@ Users can employ multiple environments for isolation and organization, for examp
 
 ### What resources can Recipes deploy? 
 
-Radius Recipes support any resources that can be modeled in Bicep or that has an applicable Terraform provider. Radius can use any Terraform provider. 
+Radius Recipes support any resources that can be modeled in Bicep, or the AWS, Azure, and Kubernetes Terraform providers. Additional Terraform providers will be offered in an upcoming release.
 
 ### What resources do Recipes support?
 
