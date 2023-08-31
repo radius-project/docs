@@ -76,14 +76,12 @@ resource svc 'core/Service@v1' = {
 
 //OUTPUT
 output result object = {
-  //LINKING
   // This workaround is needed because the deployment engine omits Kubernetes resources from its output.
   // Once this gap is addressed, users won't need to do this.
   resources: [
     '/planes/kubernetes/local/namespaces/${svc.metadata.namespace}/providers/core/Service/${svc.metadata.name}'
     '/planes/kubernetes/local/namespaces/${redis.metadata.namespace}/providers/apps/Deployment/${redis.metadata.name}'
   ]
-  //LINKING
   values: {
     host: '${svc.metadata.name}.${svc.metadata.namespace}.svc.cluster.local'
     port: svc.spec.ports[0].port 
