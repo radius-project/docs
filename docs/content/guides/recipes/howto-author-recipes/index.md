@@ -79,29 +79,9 @@ Radius Recipes require you to output a `result` object that contains the applica
 
 When you output a `result` object, all of the individual properties will be directly mapped to the resource calling the Recipe. This allows you to have the most control over the resource being created within the application.
 
-#### Properties
+#### Resource definition
 
 Simply define an object that matches the schema of the resource calling the Recipe. For example, for an `Application.Link/redisCaches` resource, a Recipe would output:
-
-{{< tabs "Bicep" "Terraform" >}}
-
-{{% codetab %}}
-
-{{< rad file="snippets/redis-kubernetes.bicep" embed=true marker="//OUTPUT" >}}
-
-_Note: Secure output parameters is in development. For now, you can use `#disable-next-line outputs-should-not-contain-secrets` to bypass the linter._
-
-{{% /codetab %}}
-
-{{% codetab %}}
-
-{{< rad file="snippets/redis-kubernetes-output.tf" embed=true lang="terraform" >}}
-
-{{% /codetab %}}
-
-{{< /tabs >}}
-
-#### Linking
 
 You also need to make sure to **link** your infrastructure resources, so Radius can delete them later on when the resource is deleted.
 
@@ -115,15 +95,15 @@ Linking is done automatically for Bicep Recipes for any new Azure or AWS resourc
 
 You can also manually link resources via the `result` output of a Recipe. This can be used for Kubernetes resources, [which aren't currently linked automatically]({{< ref "faq#why-do-i-need-to-manually-output-a-kubernetes-ucp-id-as-part-of-my-bicep-recipe" >}}). To link a resource to a Recipe-enabled resource, add its ID to an array of resource IDs:
 
-{{< rad file="snippets/redis-kubernetes.bicep" embed=true marker="//LINKING" >}}
+{{< rad file="snippets/redis-kubernetes.bicep" embed=true marker="//OUTPUT" >}}
+
+_Note: Secure output parameters is in development. For now, you can use `#disable-next-line outputs-should-not-contain-secrets` to bypass the linter._
 
 {{% /codetab %}}
 
 {{% codetab %}}
 
-To manually link resources for Kubernetes in Terraform your `output.tf` file should contain the following lines:
-
-{{< rad file="snippets/redis-kubernetes-output.tf" embed=true marker="//LINKING" lang="terraform" >}}
+{{< rad file="snippets/redis-kubernetes-output.tf" embed=true lang="terraform" >}}
 
 {{% /codetab %}}
 
