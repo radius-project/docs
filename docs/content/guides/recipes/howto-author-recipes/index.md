@@ -25,7 +25,7 @@ Begin by creating your Bicep or Terraform template. Ensure that the resource nam
 
 {{% codetab %}}
 
-Create `app.bicep` ands use the `context` parameter for naming and namespace configuration:
+Create `app.bicep` and use the `context` parameter for naming and namespace configuration:
 
 {{< rad file="snippets/redis-kubernetes.bicep" embed=true marker="//RESOURCE" >}}
 
