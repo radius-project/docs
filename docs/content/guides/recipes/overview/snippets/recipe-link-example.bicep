@@ -4,7 +4,7 @@ param application string
 
 //BASIC
 resource redis 'Applications.Datastores/redisCaches@2022-03-15-privatepreview'= {
-  name: 'mylink'
+  name: 'myresource'
   properties: {
     environment: environment
     application: application
