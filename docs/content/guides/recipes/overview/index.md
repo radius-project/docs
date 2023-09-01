@@ -14,6 +14,13 @@ Recipes enable a **separation of concerns** between infrastructure operators and
 
 ## Capabilities
 
+### Support for multiple IaC languages
+
+| Infrastructure as Code Languages | Recipe Support |
+|---------------------| ------------|
+| [Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/) | ✅ |
+| [Terraform](https://developer.hashicorp.com/terraform/docs) | ✅ |
+
 ### Select the Recipe that meets your needs
 
 Recipes can be used in any environment, from dev to prod. You can run a default recipe registered in your environment or select the specific Recipe you want to run. To run a default recipe, simply add the resource you want to your app and omit the Recipe name:
