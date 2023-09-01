@@ -37,6 +37,7 @@ weight: 300
 | env | n | A list of environment variables to be set for the container. | `'ENV_VAR': 'value'`
 | command | n | Entrypoint array. Overrides the container image's ENTRYPOINT. | `['/bin/sh']`
 | args | n | Arguments to the entrypoint. Overrides the container image's CMD. | `['-c', 'while true; do echo hello; sleep 10;done']`
+| imagePullPolicy | n | How to pull images. Defaults to the runtime's default behavior. For Kubernetes behavior refer to https://kubernetes.io/docs/concepts/containers/images/#required-image-pull | `'Always'`
 | workingDir | n | Working directory for the container. | `'/app'`
 | [ports](#ports) | n | Ports the container provides | [See below](#ports).
 | [readinessProbe](#readiness-probe) | n | Readiness probe configuration. | [See below](#readiness-probe).

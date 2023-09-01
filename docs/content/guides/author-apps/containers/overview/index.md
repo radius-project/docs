@@ -18,7 +18,7 @@ Containers are run on the same Kubernetes cluster as your [Radius installation](
 
 ## Capabilities
 
-Radius containers enables you to specify the image for the container, the image pull policy, the ports the container provides and consumes, the environment variables to set, the volumes to mount, and the probes to run.
+Radius containers enables you to specify the image for the container, the ports the container provides and consumes, the environment variables to set, the volumes to mount, and the probes to run.
 
 Additionally you can customize the behavior of the containers with the help of [extensions](#extensions).
 
@@ -27,10 +27,6 @@ Additionally you can customize the behavior of the containers with the help of [
 An image can be specified for your container workload to pull and run. Refer to the [container reference docs]({{< ref container-schema >}}) for more information on image requirements.
 
 If you want to pull the container image from a private container register, you need to allow access from your Kubernetes cluster. Follow the documentation to [configure private container registries access]({{< ref "guides/operations/kubernetes/supported-clusters#configure-container-registry-access" >}}).
-
-### ImagePullPolicy
-
-If the user specifies a policy, that will be applied to the underlying container. If this field is not specified, Radius uses the runtime-defined default behavior. For example, the default Kubernetes behavior for the pull policy is [Kubernetes image pull policy](https://kubernetes.io/docs/concepts/containers/images/#required-image-pull).
 
 ### Ports
 
