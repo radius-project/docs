@@ -1,103 +1,149 @@
 ---
 type: docs
-title: "How-To: Author Custom Radius Recipes"
-linkTitle: "Author Recipes"
-description: "Learn how to author custom Recipe templates to automate infrastructure deployment"
+title: "How-To: Author a Radius Recipe"
+linkTitle: "Author a Radius Recipe"
+description: "Learn how to author and register a custom Recipe template to automate infrastructure provisioning"
 weight: 500
 categories: "How-To"
 tags: ["recipes"]
 ---
 
-Recipes enable a **separation of concerns** between infrastructure operators and developers by **automating infrastructure deployment**.
+### Prerequisites
 
-Learn more in the Recipes overview page:
+Before you get started, you'll need to make sure you have the following tools and resources:
 
-{{< button page="/guides/recipes/overview" text="Recipes overview" newline=false >}}
+- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+- [Radius initialized with `rad init`]({{< ref getting-started >}})
 
-## Author a custom Recipe
+### Step 1: Author a Recipe template
 
-This page will describe how to author and publish a custom Recipe template, letting you define how infrastructure should be deployed and configured within your environment.
+Begin by creating your Bicep or Terraform template. Ensure that the resource name(s) are **unique** and **repeatable**, so they don't overlap when used by multiple applications.
 
-### Step 1: Select an Infrastructure as Code language
+> To make naming easy, a [`context` parameter]({{< ref context-schema >}}) is automatically injected into your template. It contains metadata about the backing app/environment which you can use to generate unique and repeatable names.
 
-Today, Recipes only support the Bicep IaC language. Your custom Recipe template will begin with a new Bicep file, which will contain all of the resources you want to automatically deploy for each resource that runs the Recipe.
+{{< tabs "Bicep" "Terraform" >}}
 
-### Step 2: Ensure your resource names are **unique** and **repeatable**
+{{% codetab %}}
 
-Recipes need to be generalized templates, as multiple resources can run each Recipe. The resources inside of a Recipe cannot interfere or overwrite each other. To make sure you don't accidentally overwrite or corrupt your infrastructure, you will want to make sure **each resource in your Recipe contains unique names**.
+Create `app.bicep` ands use the `context` parameter for naming and namespace configuration:
 
-Additionally, every time an application is deployed, Recipes are re-evaluated and re-deployed. Because IaC languages like Bicep are idempotent, if there are no changes to the template, then nothing is changed. To make sure Recipes can be re-run, **each resource needs a repeatable name that is the same every time it is deployed**.
+{{< rad file="snippets/redis-kubernetes.bicep" embed=true marker="//RESOURCE" >}}
 
-To make naming easy, a `context` parameter is automatically injected into your template. It contains information about the backing resource which you can use to generate unique and repeatable names. For example, you can use `context.resource.id` to generate a unique and repeatable name:
+{{% /codetab %}}
 
-{{< rad file="snippets/recipe.bicep" embed=true marker="//RESOURCE" >}}
+{{% codetab %}}
 
-You can reference the [`context` section below](#context-parameter-properties) for more information on available properties.
+Add the `context` parameter to your `variable.tf` file:
 
-### Step 3: Add parameters for Recipe customization (optional)
+{{< rad file="snippets/redis-kubernetes-variables.tf" embed=true marker="//CONTEXT" lang="terraform" >}}
 
-You can optionally choose to add parameters to your Recipe to allow developers or operators to specify additional configuration. Parameters can be set both when a Recipe is added to an environment by an operator, or by a developer when the Recipe is called.
+Update `main.tf` to use `context` for naming and namespace configuration:
+
+{{< rad file="snippets/redis-kubernetes-main.tf" embed=true marker="//RESOURCE" lang="terraform" >}}
+
+{{% /codetab %}}
+
+{{< /tabs >}}
+
+### Step 2: Add parameters/variables for Recipe customization (optional)
+
+You can optionally add parameters/variables to your Recipe to allow developers and/or operators to customize the Recipe for an application/environment. Parameters can be set both when a Recipe is added to an environment by an operator, or by a developer when the Recipe is called.
+
+{{< tabs "Bicep" "Terraform" >}}
+
+{{% codetab %}}
 
 You can create any [parameter type supported by Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/parameters):
 
-{{< rad file="snippets/recipe-params.bicep" embed=true marker="//RESOURCE" >}}
+{{< rad file="snippets/redis-kubernetes.bicep" embed=true marker="//PARAMETERS" >}}
 
-### Step 4: Output the target infrastructure
-
-Once you have defined your backing infrastructure, you will need to output it from your IaC template so it can be "wired-up" to the resource that called the Recipe.
-
-Using the `values` output parameter, you can pass back information about your infrastructure.
-
-When you output a `values` object, all of the individual properties will be directly mapped to the resource calling the Recipe. This allows you that most control over the resource being created within the application.
-
-#### Properties
-
-Simply define an object that matches the schema of the resource calling the Recipe. For example, for an `Application.Link/redisCaches` resource, a Recipe would output:
-
-{{< rad file="snippets/recipe.bicep" embed=true marker="//OUTVALUES" >}}
-
-_Note: Secure output parameters is in development. For now, you can use `#disable-next-line outputs-should-not-contain-secrets` to bypass the linter._
-
-#### Linking
-
-You also need to make sure to **link** your infrastructure resources, so Radius can delete them later on when the resource is deleted.
-
-Linking is done automatically for any new Azure or AWS resource ([_Kubernetes coming soon_]({{< ref "faq#why-do-i-need-to-manually-output-a-kubernetes-ucp-id-as-part-of-my-bicep-recipe" >}})) defined in a Bicep Recipe. Radius inspects [the output of the deployment](https://learn.microsoft.com/rest/api/resources/deployments/get#resourcereference) and links any created resources.
-
-[Bicep `existing`](https://learn.microsoft.com/azure/azure-resource-manager/bicep/existing-resource) resources are not currently linked as part of Recipe-enabled resources, meaning you won't see them in the definition of the resource and they aren't [deleted later on](#infrastructure-lifecycle), unlike new resources.
-
-You can also manually link resources via the `result` output of a Recipe. This can be used for Kubernetes resources, [which aren't currently linked automatically]({{< ref "faq#why-do-i-need-to-manually-output-a-kubernetes-ucp-id-as-part-of-my-bicep-recipe" >}}). To link a resource to a Recipe-enabled resource, add its ID to an array of resource IDs:
-
-{{< rad file="snippets/recipe-outputs.bicep" embed=true marker="//OUTVALUES" >}}
-
-### Step 5: Store your template in a Bicep registry
-
-Recipes leverage [Bicep registries](https://learn.microsoft.com/azure/azure-resource-manager/bicep/private-module-registry) for template storage. Once you've authored a Recipe, you can publish it to your preferred OCI-compliant registry.
-
-For private registries, make sure the cloud provider configured in your Radius environment has pull permissions for your container registry.
-
-Recipes can be published via the rad CLI:
-
-```bash
-rad bicep publish --file myrecipe.bicep --target br:myregistry.azurecr.io/recipes/myrecipe:v1
-```
-
-### Step 6: Register your Recipe with your environment
-
-Now that your Recipe Bicep template has been stored within your Bicep registry, you can add it your Radius environment to be used by developers. This allows you to mix-and-match templates for each of your environments such as dev, canary, and prod.
-
-Recipes now support a default experience, where you can register a Recipe under the name `default` within an environment. Developers can then call the Recipe without specifying a name, and Radius will automatically use the `default` Recipe. If you want to register a Recipe that is not the default, you can specify a custom name.
-
-Recipes can be added via the rad CLI or an environment Bicep definition:
-
-{{< tabs "rad CLI" "Bicep environment" >}}
-
-{{% codetab %}}
-```bash
-rad recipe register myrecipe --environment myenv --template-kind bicep --template-path myregistry.azurecr.io/recipes/myrecipe:v1 --link-type Applications.Link/redisCaches
-```
 {{% /codetab %}}
+
 {{% codetab %}}
+
+You can create any [variable type supported by Terraform](https://developer.hashicorp.com/terraform/language/values/variables):
+
+{{< rad file="snippets/redis-kubernetes-variables.tf" embed=true marker="//PARAMETERS" lang="terraform" >}}
+
+{{% /codetab %}}
+
+{{< /tabs >}}
+
+### Step 3: Output the result
+
+Once you have defined your IaC template you will need to output a `result` object with the values, secrets, and resources that the target resource requires. This is how Radius "wires up" the Recipe.
+
+The `result` object must include:
+- **`values`**: The fields that the target resource requires. (_username, host, port, etc._)
+- **`secrets`**: The fields that the target resource requires, but should be treated as secrets. (_password, connectionString, etc._)
+- **`resources`**: The [UCP ID(s)]({{< ref "api-concept#resource-ids" >}}) of the resources providing the backing service. Used by UCP to track dependencies and manage deletion.
+
+{{< tabs "Bicep" "Terraform" >}}
+
+{{% codetab %}}
+
+Resources are populated automatically for Bicep Recipes for any new Azure or AWS resource ([_Kubernetes coming soon_]({{< ref "faq#why-do-i-need-to-manually-output-a-kubernetes-ucp-id-as-part-of-my-bicep-recipe" >}})). For now, make sure to include the UCP ID of any Kubernetes resources your Recipe creates.
+
+{{< rad file="snippets/redis-kubernetes.bicep" embed=true marker="//OUTPUT" >}}
+
+{{% /codetab %}}
+
+{{% codetab %}}
+
+{{< rad file="snippets/redis-kubernetes-output.tf" embed=true lang="terraform" >}}
+
+{{% /codetab %}}
+
+{{< /tabs >}}
+
+### Step 4: Store your template
+
+{{< tabs "Bicep" "Terraform" >}}
+
+{{% codetab %}}
+
+Recipes leverage [Bicep registries](https://learn.microsoft.com/azure/azure-resource-manager/bicep/private-module-registry) for template storage. Once you've authored a Recipe, you can publish it to your preferred OCI-compliant registry with [`rad bicep publish`]({{< ref rad_bicep_publish >}}):
+
+```bash
+rad bicep publish --file myrecipe.bicep --target br:myregistry.azurecr.io/recipes/myrecipe:1.1.0
+```
+
+{{% /codetab %}}
+
+{{% codetab %}}
+
+Follow the [Terraform module publishing docs](https://developer.hashicorp.com/terraform/registry/modules/publish) to setup and publish a Terraform module to a Terraform registry.
+
+{{% /codetab %}}
+
+{{< /tabs >}}
+
+### Step 5: Register your Recipe with your environment
+
+Now that your Recipe template has been stored, you can add it your Radius environment to be used by developers. This allows you to mix-and-match templates for each of your environments such as dev, canary, and prod.
+
+{{< tabs "rad CLI - Bicep" "rad CLI - Terraform" "Bicep environment" >}}
+
+{{% codetab %}}
+
+```bash
+rad recipe register myrecipe --environment myenv --link-type Applications.Datastores/redisCaches --template-kind bicep --template-path myregistry.azurecr.io/recipes/myrecipe:1.1.0
+```
+
+{{% /codetab %}}
+
+{{% codetab %}}
+
+The template path value should represent the source path found in your Terraform module registry.
+
+```bash
+rad recipe register myrecipe --environment myenv --link-type Applications.Datastores/redisCaches --template-kind terraform --template-path user/recipes/myrecipe --template-version "1.1.0"
+```
+
+{{% /codetab %}}
+
+{{% codetab %}}
+
 {{< rad file="snippets/environment.bicep" embed=true >}}
 
 {{% /codetab %}}
@@ -106,53 +152,7 @@ rad recipe register myrecipe --environment myenv --template-kind bicep --templat
 
 ### Done
 
-You can now use your custom recipe in its accompanying resource. Visit the [Recipe developer guide]({{< ref "/guides/recipes/overview" >}}) for more information.
-
-## `context` parameter properties
-
-In the following tables, "resource" refers to the resource "calling" the Recipe. For example, if you were to create a Recipe for an `Applications.Link/redisCaches` resource, the "resource" would be the instance of the redisCaches that is calling the Recipe.
-
-| Key | Type | Description |
-|-----|------|-------------|
-| [`resource`](#resource) | object | An object containing information on the resource.
-| [`application`](#application) | object | An object containing information on the application the resource belongs to.
-| [`environment`](#environment) | object | An object containing information on the environment the resource belongs to.
-| [`runtime`](#runtime) | object | An object containing information on the underlying runtime.
-
-### resource
-
-| Key | Type | Description | Example |
-|-----|------|-------------|---------|
-| `name` | string | The resource name of the application | `myredis`
-| `id` | string | The ID of the resource | `/planes/radius/resourceGroups/myrg/Applications.Link/redisCaches/myredis`
-| `type` | string | The type of the resource calling this recipe | `Applications.Link/redisCaches`
-
-### application
-
-| Key | Type | Description | Example |
-|-----|------|-------------|---------|
-| `name` | string | The resource name of the application | `myapp`
-| `id` | string | The resource ID of the application | `/planes/radius/resourceGroups/myrg/Applications.Core/applications/myapp`
-
-### environment
-
-| Key | Type | Description | Example |
-|-----|------|-------------|---------|
-| `name` | string | The resource name of the environment | `myenv`
-| `id` | string | The resource ID of the environment | `/planes/radius/resourceGroups/myrg/Applications.Core/environments/myenv`
-
-### runtime
-
-| Key | Type | Description | Example |
-|-----|------|-------------|---------|
-| [`kubernetes`](#kubernetes) | object | An object with details of the underlying Kubernetes cluster, if configured on the environment
-
-#### kubernetes
-
-| Key | Type | Description | Example |
-|-----|------|-------------|---------|
-| `namespace` | string | Set to the application's namespace when the resource is application-scoped, and set to the environment's namespace when the resource is environment scoped.
-| `environmentNamespace` | string | Set to the environment's namespace.
+You can now use your custom Recipe with its accompanying resource. Visit the [Recipe developer guide]({{< ref "/guides/recipes/overview" >}}) for more information.
 
 ## Further reading
 

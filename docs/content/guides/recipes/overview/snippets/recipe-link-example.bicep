@@ -3,8 +3,8 @@ param environment string
 param application string
 
 //BASIC
-resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
-  name: 'mylink'
+resource redis 'Applications.Datastores/redisCaches@2022-03-15-privatepreview'= {
+  name: 'myresource'
   properties: {
     environment: environment
     application: application
@@ -17,7 +17,7 @@ resource redis 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
 
 
 //PARAMETERS
-resource redisParam 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
+resource redisParam 'Applications.Datastores/redisCaches@2022-03-15-privatepreview'= {
   name: 'mylink'
   properties: {
     environment: environment
@@ -33,7 +33,7 @@ resource redisParam 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
 //PARAMETERS
 
 //DEFAULT
-resource redisDefault 'Applications.Link/redisCaches@2022-03-15-privatepreview'= {
+resource redisDefault 'Applications.Datastores/redisCaches@2022-03-15-privatepreview'= {
   name: 'mylink'
   properties: {
     environment: environment
