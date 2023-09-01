@@ -54,7 +54,7 @@ Verify the rad CLI is installed correctly by running `rad version`.
 Example output:
 ```
 RELEASE     VERSION     BICEP       COMMIT
-{{< param chart_version >}}      {{< param version >}}       0.11.13     2e60bfb46de73ec5cc70485d53e67f8eaa914ba7
+{{< param chart_version >}}      {{< param version >}}        0.11.13     2e60bfb46de73ec5cc70485d53e67f8eaa914ba7
 ```
 
 ## 3. Initialize Radius
