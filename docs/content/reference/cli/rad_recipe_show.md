@@ -44,7 +44,7 @@ rad recipe show redis-dev --group dev --environment dev
   -e, --environment string   The environment name
   -g, --group string         The resource group name
   -h, --help                 help for show
-      --link-type string     Specify the type of the resource this recipe can be consumed by
+      --link-type string     Specify the type of the link this recipe can be consumed by
   -o, --output string        output format (supported formats are json, table) (default "table")
   -w, --workspace string     The workspace name
 ```
