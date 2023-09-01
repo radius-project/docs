@@ -109,7 +109,7 @@ _Note: Secure output parameters is in development. For now, you can use `#disabl
 
 {{< /tabs >}}
 
-### Step 4: Store your template in a Bicep registry
+### Step 4: Store your template
 
 {{< tabs "Bicep" "Terraform" >}}
 
