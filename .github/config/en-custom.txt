@@ -463,3 +463,4 @@ stateStores
 PortableResource
 runtime's
 imagePullPolicy
+otelhttp
