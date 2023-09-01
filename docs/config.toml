@@ -1,4 +1,4 @@
-baseURL = "https://docs.radapp.dev/"
+baseURL = "https://edge.docs.radapp.dev/"
 languageCode = "en-us"
 title = "Radius Docs"
 theme =  "docsy"
@@ -49,7 +49,7 @@ tag = "tags"
 [[menu.main]]
     name = "GitHub"
     weight = 40
-    url = "https://github.com/project-radius"
+    url = "https://github.com/radius-project"
     pre = "<i class='fab fa-github'></i>"
 [[menu.main]]
     name = "Discord"
@@ -60,18 +60,18 @@ tag = "tags"
 [params]
 copyright = "Radius"
 
-version = "v0.23"
+version = "edge"
 tag_version = "latest"
-chart_version = "0.23.0"
+chart_version = "0.19.0"
 
 # Algolia Search
 algolia_docsearch = true
 
 # GitHub Information
-github_repo = "https://github.com/project-radius/docs"
+github_repo = "https://github.com/radius-project/docs"
 github_subdir = "docs"
-github_branch = "v0.23"
-github_project_repo = "https://github.com/project-radius/radius"
+github_branch = "edge"
+github_project_repo = "https://github.com/radius-project/radius"
 
 # Versioning
 version_menu = "Releases"

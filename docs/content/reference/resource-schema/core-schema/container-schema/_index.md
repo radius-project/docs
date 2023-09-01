@@ -94,7 +94,7 @@ The ports offered by the container are  defined in the `ports` section.
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | name | y | A name key for the port. | `inventory`
-| source | y | The id of the link or resource the container is connecting to. | `db.id`
+| source | y | The id of the resource the container is connecting to. | `db.id`
 | [iam](#iam) | n | Identity and access management (IAM) roles to set on the target resource. | [See below](#iam)
 
 #### IAM
@@ -118,7 +118,7 @@ Additional properties are available and required depending on the 'kind' of the 
 
 #### kubernetesMetadata
 
-The [Kubernetes Metadata extension]({{< ref "/operations/platforms/kubernetes/kubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius application. For examples refer to the extension overview page.
+The [Kubernetes Metadata extension]({{< ref "guides/operations/kubernetes/kubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius application. For examples refer to the extension overview page.
 
 ##### Properties
 

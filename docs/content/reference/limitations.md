@@ -10,7 +10,7 @@ weight: 998
 
 ### `rad install kubernetes` and `rad init` installs Contour in addition to Radius
 
-Contour is also installed into the `radius-system` namespace to help get you up and running quickly for our quickstarts and tutorial. This is a point-in-time limitation that will be addressed with richer environment customization in a future update.
+Contour is also installed into the `radius-system` namespace to help get you up and running quickly. This is a point-in-time limitation that will be addressed with richer environment customization in a future update.
 
 ## Radius resources
 
