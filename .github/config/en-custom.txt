@@ -48,6 +48,7 @@ FTEs
 GKE
 GOAPP
 GitHubAccess
+GUID
 Hostname
 html
 HttpRoute
@@ -90,6 +91,7 @@ ProjectRadius
 RBAC
 RabbitMQ
 ResourceDeploymentClient
+resourceGroup
 Rollout
 SaaS
 SDKs
