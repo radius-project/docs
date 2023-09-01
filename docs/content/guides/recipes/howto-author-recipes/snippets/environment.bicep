@@ -9,7 +9,7 @@ resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
       namespace: 'default'
     }
     recipes: {
-      'Applications.Link/redisCaches':{
+      'Applications.Datastores/redisCaches':{
         'redis-bicep': {
           templateKind: 'bicep'
           templatePath: 'https://myregistry.azurecr.io/recipes/myrecipe:1.1.0'

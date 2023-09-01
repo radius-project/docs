@@ -61,7 +61,7 @@ Developers don't need to specify what cloud resources they're using in their app
    
    ```
    NAME          TYPE                              TEMPLATE
-   default       Applications.Link/redisCaches     radius.azurecr.io/recipes/dev/rediscaches:v0.21
+   default       Applications.Datastores/redisCaches     radius.azurecr.io/recipes/dev/rediscaches:v0.21
    ```
 
    {{< alert title="💡 Dev Recipes" color="info" >}}
@@ -95,7 +95,7 @@ Note that no Recipe name is specified with 'db', so it will be using the default
 
    Deployment In Progress...
 
-   Completed            db              Applications.Link/redisCaches
+   Completed            db              Applications.Datastores/redisCaches
    Completed            webapp          Applications.Core/applications
    Completed            frontend        Applications.Core/containers
 
@@ -104,7 +104,7 @@ Note that no Recipe name is specified with 'db', so it will be using the default
    Resources:
       webapp          Applications.Core/applications
       frontend        Applications.Core/containers
-      db              Applications.Link/redisCaches
+      db              Applications.Datastores/redisCaches
    ```
 
    Your application is now deployed and running in your Kubernetes cluster.
@@ -153,7 +153,7 @@ This step requires an Azure subscription to deploy cloud resources, which will i
 2. Register the Recipe to your Radius Environment:
 
    ```bash
-   rad recipe register azure --environment default --template-kind bicep --template-path radius.azurecr.io/recipes/azure/rediscaches:{{< param tag_version >}} --link-type Applications.Link/redisCaches 
+   rad recipe register azure --environment default --template-kind bicep --template-path radius.azurecr.io/recipes/azure/rediscaches:{{< param tag_version >}} --link-type Applications.Datastores/redisCaches 
    ```
 
 3. Update your db resource to use the `azure` Recipe, instead of the default Recipe:
@@ -175,7 +175,7 @@ This step requires an Azure subscription to deploy cloud resources, which will i
    Deployment In Progress... 
 
    Completed            webapp          Applications.Core/applications
-   Completed            db              Applications.Link/redisCaches
+   Completed            db              Applications.Datastores/redisCaches
    Completed            frontend        Applications.Core/containers
 
    Deployment Complete
@@ -183,7 +183,7 @@ This step requires an Azure subscription to deploy cloud resources, which will i
    Resources:
       webapp          Applications.Core/applications
       frontend        Applications.Core/containers
-      db              Applications.Link/redisCaches
+      db              Applications.Datastores/redisCaches
    ```
 
 {{% /codetab %}}

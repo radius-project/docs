@@ -6,4 +6,4 @@ description: "Detailed reference documentation on the Applications.Core/applicat
 slug: "applications"
 ---
 
-{{< redoc "swagger/specification/applications/resource-manager/Applications.Core/preview/2022-03-15-privatepreview/applications.json" >}}
+{{< redoc "swagger/specification/applications/resource-manager/Applications.Core/preview/2022-03-15-privatepreview/openapi.json" >}}

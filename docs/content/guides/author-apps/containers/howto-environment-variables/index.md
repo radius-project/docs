@@ -51,15 +51,15 @@ Add an `env` property which will contain a list of environment variables to set.
 
    Here you can see the environment variables `FOO` and `BAZ`, with their accompanying values.
 
-## Step 4: Add a Mongo Link
+## Step 4: Add a Mongo database
 
-Next, add to `app.bicep` a [Mongo link]({{< ref portable-resources >}}), leveraging the default "dev" Recipe:
+Next, add to `app.bicep` a [Mongo database]({{< ref portable-resources >}}), leveraging the default "dev" Recipe:
 
 {{< rad file="snippets/3-app.bicep" embed=true marker="//LINK" >}}
 
-## Step 5: Connect to the Mongo Link
+## Step 5: Connect to the Mongo database
 
-Connections from a container to a link result in environment variables for connection information automatically being set on the container. Update your container definition to add a connection to the new Mongo link:
+Connections from a container to a resource result in environment variables for connection information automatically being set on the container. Update your container definition to add a connection to the new Mongo database:
 
 {{< rad file="snippets/3-app.bicep" embed=true marker="//CONTAINER" >}}
 

@@ -457,3 +457,7 @@ VHOST
 Diátaxis
 yourworkspace
 howto
+pubSubBrokers
+rabbitmqQueues
+stateStores
+PortableResource

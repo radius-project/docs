@@ -7,4 +7,4 @@ slug: "environments"
 
 ---
 
-{{< redoc "swagger/specification/applications/resource-manager/Applications.Core/preview/2022-03-15-privatepreview/environments.json" >}}
+{{< redoc "swagger/specification/applications/resource-manager/Applications.Core/preview/2022-03-15-privatepreview/openapi.json" >}}

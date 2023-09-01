@@ -41,7 +41,7 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 }
 
 // The Dapr state store that is connected to the backend container
-resource stateStore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' = {
+resource stateStore 'Applications.Dapr/stateStores@2022-03-15-privatepreview' = {
   name: 'statestore'
   properties: {
     // Provision Redis Dapr state store automatically via the default Radius Recipe

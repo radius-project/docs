@@ -55,13 +55,13 @@ Model your building blocks as resources:
 
 To interact with a Dapr building block, you need to know the name of the [Dapr component](https://docs.dapr.io/concepts/components-concept/). This name is the same as the name of the building block resource.
 
-For example, if you have a `Applications.Link/daprStateStores` resource named `mystatestore` the Dapr component name will be `mystatestore`. Your code will then interact with this component via `http://localhost:3500/v1.0/state/mystatestore`, or via the Dapr SDKs through the `mystatestore` component name.
+For example, if you have a `Applications.Dapr/stateStores` resource named `mystatestore` the Dapr component name will be `mystatestore`. Your code will then interact with this component via `http://localhost:3500/v1.0/state/mystatestore`, or via the Dapr SDKs through the `mystatestore` component name.
 
 ### Connecting to Dapr building blocks
 
 You can connect to a Dapr building block by manually referencing the resource name or by adding a connection. Connections automatically inject environment variables into your container with the resource name prefixed.
 
-{{< rad file="snippets/dapr-componentname.bicep" embed=true marker="//MARKER" replace-key-ss="//STATESTORE" replace-value-ss="resource statestore 'Applications.Link/daprStateStores@2022-03-15-privatepreview' = {...}" >}}
+{{< rad file="snippets/dapr-componentname.bicep" embed=true marker="//MARKER" replace-key-ss="//STATESTORE" replace-value-ss="resource statestore 'Applications.Dapr/stateStores@2022-03-15-privatepreview' = {...}" >}}
 
 ### Service invocation
 
