@@ -461,3 +461,5 @@ pubSubBrokers
 rabbitmqQueues
 stateStores
 PortableResource
+runtime's
+imagePullPolicy
