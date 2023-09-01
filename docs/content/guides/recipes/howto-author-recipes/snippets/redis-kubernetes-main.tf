@@ -18,29 +18,26 @@ resource "kubernetes_deployment" "redis" {
       app = "redis"
     }
   }
-
   spec {
-    replicas = 1
-
     selector {
       match_labels = {
         app = "redis"
+        resource = var.context.resource.name
       }
     }
-
     template {
       metadata {
         labels = {
           app = "redis"
+          resource = var.context.resource.name
         }
       }
-
       spec {
         container {
           name  = "redis"
-          image = "redis:latest" 
+          image = "redis:6" 
           port {
-            container_port = var.port
+            container_port = 6379
           }
         }
       }
@@ -53,17 +50,16 @@ resource "kubernetes_service" "redis" {
     name = "redis-${sha512(var.context.resource.id)}"
     namespace = var.context.runtime.kubernetes.namespace
   }
-
   spec {
+    type = "ClusterIP"
     selector = {
       app = "redis"
+      resource = var.context.resource.name
     }
-    //PARAM
     port {
-      port        = var.port  # Service port
-      target_port = var.port  # Target port of the Redis deployment
+      port        = var.port
+      target_port = "6379"
     }
-    //PARAM
   }
 }
 //RESOURCE

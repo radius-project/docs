@@ -22,23 +22,11 @@ Open-source Radius requires that you self-host and run your own Radius instance 
 
 ### What languages does Radius support? 
 
-#### Core application source code
+For application code, Radius supports any programming language as long as it is containerized.
 
-Radius supports any language as long as it is containerized. 
+Radius resources (_applications, environments, portable resource_) can be authored in Bicep. See the [Radius resource schema]({{< ref resource-schema >}}) for more details. Additional support for other languages will come in a future release. Stay tuned for updates.
 
-#### Radius Application and Radius Environment definitions
-
-| Infrastructure as Code Languages | Radius Support |
-|---------------------| ------------|
-| [Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/) | ✅ |
-| [Terraform](https://developer.hashicorp.com/terraform/docs) | ⏳ |
-
-#### Radius Recipes
-
-| Infrastructure as Code Languages | Radius Support |
-|---------------------| ------------|
-| [Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/) | ✅ |
-| [Terraform](https://developer.hashicorp.com/terraform/docs) | ✅ |
+Recipes support both Bicep and Terraform. See the [Recipe docs]({{< ref "/guides/recipes/overview" >}}) for more details. Additional support for other languages will come in a future release. Stay tuned for updates.
 
 ## Environments
 

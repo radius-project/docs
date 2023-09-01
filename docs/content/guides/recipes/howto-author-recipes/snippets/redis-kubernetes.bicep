@@ -1,23 +1,17 @@
-import kubernetes as kubernetes {
-  kubeConfig: ''
-  namespace: context.runtime.kubernetes.namespace
-}
-
 //PARAMETERS
-@description('The port number that is used to connect to a Redis server.')
+@description('The port Redis is offered on. Defaults to 6379.')
 param port int = 6379
-
-@description('The username that is used to connect to a Redis server.')
-param username string = 'redis'
-
-@secure()
-@description('The password that is used to connect to a Redis server.')
-param password string = ''
 //PARAMETERS
 
 //RESOURCE
 @description('Radius-provided object containing information about the resource calling the Recipe')
 param context object
+
+// Import Kubernetes resources into Bicep
+import kubernetes as kubernetes {
+  kubeConfig: ''
+  namespace: context.runtime.kubernetes.namespace
+}
 
 resource redis 'apps/Deployment@v1' = {
   metadata: {
@@ -42,12 +36,13 @@ resource redis 'apps/Deployment@v1' = {
         containers: [
           {
             name: 'redis'
-            image: 'redis'
+            image: 'redis:6'
             ports: [
               {
-                containerPort: port
+                containerPort: 6379
               }
             ]
+
           }
         ]
       }
@@ -68,6 +63,7 @@ resource svc 'core/Service@v1' = {
     ports: [
       {
         port: port
+        targetPort: '6379'
       }
     ]
   }
@@ -75,21 +71,22 @@ resource svc 'core/Service@v1' = {
 //RESOURCE
 
 //OUTPUT
+@description('The result of the Recipe. Must match the target resource\'s schema.')
 output result object = {
-  // This workaround is needed because the deployment engine omits Kubernetes resources from its output.
-  // Once this gap is addressed, users won't need to do this.
+  values: {
+    host: '${svc.metadata.name}.${svc.metadata.namespace}.svc.cluster.local'
+    port: svc.spec.ports[0].port 
+    username: ''
+  }
+  secrets: {
+    // Temporarily disable linter until secret outputs are added
+    #disable-next-line outputs-should-not-contain-secrets
+    password: ''
+  }
+  // UCP IDs for the above Kubernetes resources
   resources: [
     '/planes/kubernetes/local/namespaces/${svc.metadata.namespace}/providers/core/Service/${svc.metadata.name}'
     '/planes/kubernetes/local/namespaces/${redis.metadata.namespace}/providers/apps/Deployment/${redis.metadata.name}'
   ]
-  values: {
-    host: '${svc.metadata.name}.${svc.metadata.namespace}.svc.cluster.local'
-    port: svc.spec.ports[0].port 
-    username: username
-  }
-  secrets: {
-    #disable-next-line outputs-should-not-contain-secrets
-    password: password
-  }
 }
 //OUTPUT
