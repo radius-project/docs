@@ -47,7 +47,7 @@ Details on what to run and how to run it are defined in the `container` property
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| \<resource-type\> | y | The type of resource to register Recipes for. | `'Applications.Link/redisCaches'`
+| \<resource-type\> | y | The type of resource to register Recipes for. | `'Applications.Datastores/redisCaches'`
 | recipes | y | The list of Recipes registered to a given resource type | [See below](#recipe-properties)
 
 #### recipe properties

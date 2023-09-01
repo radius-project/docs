@@ -22,9 +22,11 @@ Open-source Radius requires that you self-host and run your own Radius instance 
 
 ### What languages does Radius support? 
 
-For core application source code, Radius supports any language as long as it is containerized. 
+For application code, Radius supports any programming language as long as it is containerized.
 
-For Radius application and environment definitions, Radius currently only supports Bicep. Terraform is on our backlog and is being investigated. Stay tuned for updates. 
+Radius resources (_applications, environments, portable resource_) can be authored in Bicep. See the [Radius resource schema]({{< ref resource-schema >}}) for more details. Additional support for other languages will come in a future release. Stay tuned for updates.
+
+Recipes support both Bicep and Terraform. See the [Recipe docs]({{< ref "/guides/recipes/overview" >}}) for more details. Additional support for other languages will come in a future release. Stay tuned for updates.
 
 ## Environments
 
@@ -43,7 +45,7 @@ Users can employ multiple environments for isolation and organization, for examp
 
 ### What resources can Recipes deploy? 
 
-Recipes support any resource that can be modeled in Bicep. Terraform support is on our backlog and is being investigated. Stay tuned for updates.
+Radius Recipes support any resources that can be modeled in Bicep, or the AWS, Azure, and Kubernetes Terraform providers. Additional Terraform providers will be offered in an upcoming release.
 
 ### What resources do Recipes support?
 

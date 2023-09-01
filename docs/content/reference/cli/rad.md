@@ -34,7 +34,7 @@ Radius CLI
 * [rad group]({{< ref rad_group.md >}})	 - Manage resource groups
 * [rad init]({{< ref rad_init.md >}})	 - Initialize Radius
 * [rad install]({{< ref rad_install.md >}})	 - Installs Radius for a given platform
-* [rad recipe]({{< ref rad_recipe.md >}})	 - Manage link recipes
+* [rad recipe]({{< ref rad_recipe.md >}})	 - Manage recipes
 * [rad resource]({{< ref rad_resource.md >}})	 - Manage resources
 * [rad run]({{< ref rad_run.md >}})	 - Run an application
 * [rad uninstall]({{< ref rad_uninstall.md >}})	 - Uninstall Radius for a specific platform

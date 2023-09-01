@@ -38,7 +38,7 @@ Radius allows the eShop on Dapr application to:
 - Define the entire collection of microservices, backing infrastructure, and connections as a single application in a single language. No more separate templating languages and scripts to glue it all together.
 - Easily manage configuration and credentials between infrastructure and services, all within the app model. No more manually copying/pasting connection strings or secrets.
 - Simplify deployment with Bicep and Azure Resource Manager (ARM). No more custom deployment scripts or workflows.
-- Automatically generate and apply the backing Dapr component configurations from the resources or values provided within the Dapr building block link definitions.
+- Automatically generate and apply the backing Dapr component configurations from the resources or values provided within the Dapr building block resource definitions.
 
 {{< button text="View eShop reference app in samples" githubRepo="samples" githubPath="reference-apps/eshop-dapr" color="success" size="btn-lg" >}}
 

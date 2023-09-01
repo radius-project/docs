@@ -30,7 +30,7 @@ resource demo 'Applications.Core/containers@2022-03-15-privatepreview' = {
 @description('The environment ID of your Radius application. Set automatically by the rad CLI.')
 param environment string
 
-resource db 'Applications.Link/redisCaches@2022-03-15-privatepreview' = {
+resource db 'Applications.Datastores/redisCaches@2022-03-15-privatepreview' = {
   name: 'db'
   properties: {
     application: application

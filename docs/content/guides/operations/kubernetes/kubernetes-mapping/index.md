@@ -30,9 +30,9 @@ The following resources map to Kubernetes objects:
 | [`Applications.Core/containers`]({{< ref container-schema >}}) | `apps/Deployment@v1` |
 | [`Applications.Core/httpRoutes`]({{< ref httproute >}})   | `core/Service@v1` |
 | [`Applications.Core/gateways`]({{< ref gateway >}})     | `projectcontour.io/HTTPProxy@v1` |
-| [`Applications.Link/daprPubSubBrokers`]({{< ref dapr-pubsub >}}) | `dapr.io/Component@v1alpha1` |
-| [`Applications.Link/daprSecretStores`]({{< ref dapr-secretstore >}}) | `dapr.io/Component@v1alpha1` |
-| [`Applications.Link/daprStateStores`]({{< ref dapr-statestore >}}) | `dapr.io/Component@v1alpha1` |
+| [`Applications.Dapr/pubSubBrokers`]({{< ref dapr-pubsub >}}) | `dapr.io/Component@v1alpha1` |
+| [`Applications.Dapr/secretStores`]({{< ref dapr-secretstore >}}) | `dapr.io/Component@v1alpha1` |
+| [`Applications.Dapr/stateStores`]({{< ref dapr-statestore >}}) | `dapr.io/Component@v1alpha1` |
 
 ## Resource naming
 

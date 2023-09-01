@@ -14,7 +14,7 @@ This how-to guide will teach you:
 - How to use Radius to deploy a Dapr microservices sample application for an online shop
 - How [Dapr and Radius]({{< ref "guides/author-apps/dapr" >}}) seamlessly work together
 
-For more details on the app and access to the source code, visit the `tutorials/dapr` directory in the [samples repo](https://github.com/project-radius/samples). _For access to the project-radius GitHub org, please complete and submit [this form](https://aka.ms/ProjectRadius/GitHubAccess)._
+For more details on the app and access to the source code, visit the `tutorials/dapr` directory in the [samples repo](https://github.com/radius-project/samples). _For access to the radius-project GitHub org, please complete and submit [this form](https://aka.ms/ProjectRadius/GitHubAccess)._
 
 ## Prerequisites
 
@@ -47,7 +47,7 @@ Begin by creating a new file named `dapr.bicep` with a Radius application that c
    Resources:
     dapr            Applications.Core/applications
     backend         Applications.Core/containers
-    statestore      Applications.Link/daprStateStores
+    statestore      Applications.Dapr/stateStores
    ```
 
 1. The `rad run` command automatically sets up port forwarding. Visit the the URL [http://localhost:3000/order](http://localhost:3000/order) in your browser. You should see the following message, which confirms the container is able to communicate with the state store:
@@ -94,7 +94,7 @@ Add a `frontend` [container]({{< ref "guides/author-apps/containers" >}}) which 
       dapr            Applications.Core/applications
       backend         Applications.Core/containers
       frontend        Applications.Core/containers
-      statestore      Applications.Link/daprStateStores
+      statestore      Applications.Dapr/stateStores
    ```
 
 ## Step 5. Test your application

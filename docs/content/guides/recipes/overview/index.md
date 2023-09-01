@@ -14,6 +14,13 @@ Recipes enable a **separation of concerns** between infrastructure operators and
 
 ## Capabilities
 
+### Support for multiple IaC languages
+
+| Infrastructure as Code Languages | Recipe Support |
+|---------------------| ------------|
+| [Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/) | ✅ |
+| [Terraform](https://developer.hashicorp.com/terraform/docs) | ✅ |
+
 ### Select the Recipe that meets your needs
 
 Recipes can be used in any environment, from dev to prod. You can run a default recipe registered in your environment or select the specific Recipe you want to run. To run a default recipe, simply add the resource you want to your app and omit the Recipe name:
@@ -48,14 +55,14 @@ Recipes currently support the following resources. Support for additional resour
 
 | Supported resources | 
 |---------------------|
-| [`Applications.Link/redisCaches`]({{< ref redis >}}) | 
-| [`Applications.Link/mongoDatabases`]({{< ref mongodb >}}) |
-| [`Applications.Link/sqlDatabase`]({{< ref microsoft-sql >}}) | 
-| [`Applications.Link/rabbitmqMessageQueues`]({{< ref rabbitmq >}}) |
-| [`Applications.Link/daprStateStores`]({{< ref dapr-statestore >}}) |
-| [`Applications.Link/daprPubSubBrokers`]({{< ref dapr-pubsub >}}) |
-| [`Applications.Link/daprSecretStore`]({{< ref dapr-secretstore >}}) |
-| [`Applications.Link/extenders`]({{< ref extender >}}) |
+| [`Applications.Datastores/redisCaches`]({{< ref redis >}}) | 
+| [`Applications.Datastores/mongoDatabases`]({{< ref mongodb >}}) |
+| [`Applications.Datastores/sqlDatabases]({{< ref microsoft-sql >}}) | 
+| [`Applications.Messaging/rabbitmqQueues`]({{< ref rabbitmq >}}) |
+| [`Applications.Dapr/stateStores`]({{< ref dapr-statestore >}}) |
+| [`Applications.Dapr/pubSubBrokers`]({{< ref dapr-pubsub >}}) |
+| [`Applications.Dapr/secretStores`]({{< ref dapr-secretstore >}}) |
+| [`Applications.Core/extenders`]({{< ref extender >}}) |
 
 ## Infrastructure linking
 

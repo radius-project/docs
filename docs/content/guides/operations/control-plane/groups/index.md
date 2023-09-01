@@ -11,7 +11,7 @@ Resource groups are collections of resources that you can manage as a single uni
 <img src="group-diagram.png" alt="Diagram showing Radius resources inside of a Radius resource group" width=600px />
 
 {{% alert title="Radius vs. Azure Resource Groups" color="primary" %}}
-Note that resource groups in Radius are not the same as [Azure resource groups](https://learn.microsoft.com/azure/azure-resource-manager/management/manage-resource-groups-portal). Azure resource groups are used to organize Azure resources, while Radius resource groups are used to organize Radius resources, such as applications, environments, links, and routes. When you deploy a template that contains both, Radius resources route to the Radius resource group defined in your workspace, and Azure resources route to the Azure resource group defined in your [cloud provider]({{< ref providers >}}).
+Note that resource groups in Radius are not the same as [Azure resource groups](https://learn.microsoft.com/azure/azure-resource-manager/management/manage-resource-groups-portal). Azure resource groups are used to organize Azure resources, while Radius resource groups are used to organize Radius resources, such as applications, environments, portable resources, and routes. When you deploy a template that contains both, Radius resources route to the Radius resource group defined in your workspace, and Azure resources route to the Azure resource group defined in your [cloud provider]({{< ref providers >}}).
 {{% /alert %}}
 
 ## Initialization

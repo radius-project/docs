@@ -23,7 +23,7 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
     }
     connections: {
       myconnection: {
-        source: mongoLink.id
+        source: mongoDatabase.id
       }
     }
   }
@@ -31,8 +31,8 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
 //CONTAINER
 
 //LINK
-resource mongoLink 'Applications.Link/mongoDatabases@2022-03-15-privatepreview' = {
-  name: 'mongo-link'
+resource mongoDatabase 'Applications.Datastores/mongoDatabases@2022-03-15-privatepreview' = {
+  name: 'mongo-db'
   properties: {
     environment: environment
     application: app.id
