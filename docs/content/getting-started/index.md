@@ -53,8 +53,8 @@ Verify the rad CLI is installed correctly by running `rad version`.
 
 Example output:
 ```
-RELEASE   VERSION   BICEP     COMMIT
-0.15.0    v0.15.0   0.11.13   2e60bfb46de73ec5cc70485d53e67f8eaa914ba7
+RELEASE     VERSION     BICEP       COMMIT
+{{< param chart_version >}}      {{< param version >}}       0.11.13     2e60bfb46de73ec5cc70485d53e67f8eaa914ba7
 ```
 
 ## 3. Initialize Radius
@@ -75,12 +75,18 @@ rad init
 Example output:
 
 ```
-✔ k3d-k3s-default
-Setup application in the current directory [Y/n]?:
-Installing Radius version v0.15.0 control plane...
-Creating environment default...
-Successfully wrote configuration to /home/vscode/.rad/config.yaml
-Created ".rad/rad.yaml"
+Initializing Radius...                     
+
+✅ Install Radius {{< param version >}}               
+    - Kubernetes cluster: k3d-k3s-default   
+    - Kubernetes namespace: radius-system   
+✅ Create new environment default          
+    - Kubernetes namespace: default 
+    - Recipe pack: local-dev        
+✅ Scaffold application docs            
+✅ Update local configuration              
+
+Initialization complete! Have a RAD time 😎
 ```
 
 In addition to starting Radius services in your Kubernetes cluster, this initialization command creates a default application (`app.bicep`) as your starting point. It contains a single container definition (`demo`). 
