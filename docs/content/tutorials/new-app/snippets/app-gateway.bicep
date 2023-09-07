@@ -28,8 +28,8 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
       }
     }
     connections: {
-      redis: {
-        source: redis.id
+      mongodb: {
+        source: mongodb.id
       }
       backend: {
         source: 'http://backend:3000'
@@ -39,15 +39,15 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 }
 //CONTAINER
 
-//REDIS
-resource redis 'Applications.Datastores/redisCaches@2022-03-15-privatepreview' = {
-  name: 'redis'
+//MONGO
+resource mongodb 'Applications.Datastores/mongoDatabases@2022-03-15-privatepreview' = {
+  name: 'mongodb'
   properties: {
     environment: environment
     application: app.id
   }
 }
-//REDIS
+//MONGO
 
 //BACKEND
 resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
@@ -55,7 +55,7 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   properties: {
     application: app.id 
     container: {
-      image: 'hello-world:latest'
+      image: 'nginx:latest'
       ports: {
         api: {
           containerPort: 80

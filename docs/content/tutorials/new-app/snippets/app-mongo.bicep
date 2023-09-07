@@ -28,20 +28,20 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
       }
     }
     connections: {
-      redis: {
-        source: redis.id
+      mongodb: {
+        source: mongodb.id
       }
     }
   }
 }
 //CONTAINER
 
-//REDIS
-resource redis 'Applications.Datastores/redisCaches@2022-03-15-privatepreview' = {
-  name: 'redis'
+//MONGO
+resource mongodb 'Applications.Datastores/mongoDatabases@2022-03-15-privatepreview' = {
+  name: 'mongodb'
   properties: {
     environment: environment
     application: app.id
   }
 }
-//REDIS
+//MONGO
