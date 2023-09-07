@@ -27,12 +27,12 @@ rad recipe unregister cosmosdb
 ### Options
 
 ```
-  -e, --environment string   The environment name
-  -g, --group string         The resource group name
-  -h, --help                 help for unregister
-      --link-type string     Specify the type of the link this recipe can be consumed by
-  -o, --output string        output format (supported formats are json, table) (default "table")
-  -w, --workspace string     The workspace name
+  -e, --environment string     The environment name
+  -g, --group string           The resource group name
+  -h, --help                   help for unregister
+  -o, --output string          output format (supported formats are json, table) (default "table")
+      --resource-type string   Specify the type of the portable resource this recipe can be consumed by
+  -w, --workspace string       The workspace name
 ```
 
 ### Options inherited from parent commands

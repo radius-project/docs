@@ -28,13 +28,13 @@ rad recipe register [recipe-name] [flags]
 ```
 
 # Add a recipe to an environment
-rad recipe register cosmosdb -e env_name -w workspace --template-kind bicep --template-path template_path --link-type Applications.Datastores/mongoDatabases
+rad recipe register cosmosdb -e env_name -w workspace --template-kind bicep --template-path template_path --resource-type Applications.Datastores/mongoDatabases
 		
 # Specify a parameter
-rad recipe register cosmosdb -e env_name -w workspace --template-kind bicep --template-path template_path --link-type Applications.Datastores/mongoDatabases --parameters throughput=400
+rad recipe register cosmosdb -e env_name -w workspace --template-kind bicep --template-path template_path --resource-type Applications.Datastores/mongoDatabases --parameters throughput=400
 		
 # specify multiple parameters using a JSON parameter file
-rad recipe register cosmosdb -e env_name -w workspace --template-kind bicep --template-path template_path --link-type Applications.Datastores/mongoDatabases --parameters @myfile.json
+rad recipe register cosmosdb -e env_name -w workspace --template-kind bicep --template-path template_path --resource-type Applications.Datastores/mongoDatabases --parameters @myfile.json
 		
 ```
 
@@ -44,9 +44,9 @@ rad recipe register cosmosdb -e env_name -w workspace --template-kind bicep --te
   -e, --environment string        The environment name
   -g, --group string              The resource group name
   -h, --help                      help for register
-      --link-type string          specify the type of the portable resource this recipe can be consumed by
   -o, --output string             output format (supported formats are json, table) (default "table")
   -p, --parameters stringArray    Specify parameters for the deployment
+      --resource-type string      specify the type of the portable resource this recipe can be consumed by
       --template-kind string      specify the kind for the template provided by the recipe.
       --template-path string      specify the path to the template provided by the recipe.
       --template-version string   specify the version for the terraform module.
