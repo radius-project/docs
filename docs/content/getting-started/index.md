@@ -12,6 +12,8 @@ This guide will show you how to quickly get started with Radius. You'll walk thr
 
 **Estimated time to complete: 10 min**
 
+<img src="diagram.png" alt="Diagram of the application and its resources" width=500px >
+
 ## 1. Have your Kubernetes cluster handy
 
 Radius runs inside [Kubernetes]({{< ref "guides/operations/kubernetes" >}}). However you run Kubernetes, get a cluster ready.
