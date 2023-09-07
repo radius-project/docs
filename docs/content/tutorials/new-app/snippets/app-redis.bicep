@@ -17,7 +17,7 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   properties: {
     application: app.id
     container: {
-      image: 'radius.azurecr.io/tutorial/demo:latest'
+      image: 'radius.azurecr.io/tutorial/demo:edge'
       env: {
         FOO: 'bar'
       }

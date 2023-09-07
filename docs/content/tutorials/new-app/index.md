@@ -15,7 +15,7 @@ categories: "Tutorial"
 
 ## Step 1: Create the application
 
-Radius applications bring together all your resources into a single unit. This makes it easy to deploy, manage, and delete all the "stuff" that makes up your application. Applications can be defined as part of your infrastructure-as-code (IaC) file.
+Radius applications bring together all your resources into a single understanding of what the app is. This makes it easy to deploy, manage, and delete all the "stuff" that makes up your application. Applications can be defined as part of your infrastructure-as-code (IaC) file.
 
 1. Begin by creating a new file named `app.bicep`:
 
@@ -33,7 +33,7 @@ Radius applications bring together all your resources into a single unit. This m
    rad deploy app.bicep
    ```
 
-   You should see your application deployed:
+   You should see your application resource deployed:
 
    ```
    Building .\app.bicep...
@@ -79,14 +79,14 @@ Radius applications bring together all your resources into a single unit. This m
    
    There are a couple of things to note about the application definition:
 
-   1. The `id` property is the fully-qualified resource ID of the application. This value is used to uniquely identify the application in the Radius system.
+   1. The `id` property is the fully-qualified UCP resource ID of the application. This value is used to uniquely identify the application in the Radius system.
    1. The `location` property is the location of the application. For now, all applications are deployed to the `global` location.
    1. The application is part of the 'default' environment. This is the default environment created when you run `rad init`.
-   1. The `status` property contains the `compute` property, which includes where services in the application are deployed. In this case, the application is deployed to a Kubernetes cluster in the `default-myapp` namespace.
+   1. The `status` property contains `compute` information, which includes where services in the application are to be deployed. In this case, the services are deployed into the `default-myapp` Kubernetes namespace, in the same cluster as the Radius installation.
 
 ## Step 2: Create your first container
 
-Now that you have your application defined, you can add resources to it. The first resource we'll add is a container. Containers are the basic building block of Radius applications and are where your code runs.
+Now that you have your application defined you can add resources to it. The first resource we'll add is a container. Containers are the basic building block of Radius applications and are where your code runs.
 
 1. Update your `app.bicep` file with a container named `frontend`. Also add some environment variables:
 
@@ -114,13 +114,13 @@ Now that you have your application defined, you can add resources to it. The fir
    Starting log stream...
    ```
 
-1. Open [localhost:3000](http://localhost:3000) to interact with the frontend container. You should see the container's connections and metadata:
+1. Open [localhost:3000](http://localhost:3000) to interact with the frontend container. You should see the container's connections and metadata. Expand the Environment Variables section to see the environment variables you set in the `app.bicep` file:
 
-    **TODO: Screenshot**
+    <img src="demo-landing.png" alt="Screenshot of the Radius demo container" width=500px >
 
 1. Press CTRL+C to terminate the port-forward and log stream.
 
-## Step 3: Add a dependency
+## Step 3: Add a dependency and a connection
 
 Next, you can add a dependency to your container. Dependencies are outside services/infrastructure that your container interacts with, such as a database, cache, message queue, etc.
 
@@ -130,7 +130,7 @@ Next, you can add a dependency to your container. Dependencies are outside servi
 
 1. Add a connection from your container to the Redis cache:
 
-   {{% rad file="snippets/app-redis.bicep" embed=true marker="//CONTAINER" markdownConfig="{linenos=table,hl_lines=[\"12-17\"],linenostart=13}" %}}
+   {{% rad file="snippets/app-redis.bicep" embed=true marker="//CONTAINER" markdownConfig="{linenos=table,hl_lines=[\"17-21\"],linenostart=13}" %}}
 
 1. Re-run your app with [`rad run`]({{< ref rad_run >}}):
 
@@ -157,13 +157,13 @@ Next, you can add a dependency to your container. Dependencies are outside servi
 
 1. Open [localhost:3000](http://localhost:3000) to interact with the frontend container. You should see the container's connections and metadata, this time with a connection to the Redis cache and new environment variables set:
 
-    **TODO: Screenshot**
+    <img src="demo-landing-connection.png" alt="Screenshot of the Radius demo container" width=500px >
 
 1. Press CTRL+C to terminate the port-forward and log stream.
 
 ## Step 4: Add a second container
 
-In addition to adding dependencies, you can also add additional containers to your application which can interact with each other. This is useful for breaking up your application into smaller, more manageable pieces.
+In addition to dependencies, you can also add additional containers to your application which can interact with each other. This is useful for breaking up your application into smaller, more manageable pieces.
 
 1. Add a second container named `backend` to your `app.bicep` file, specifying the image and port to open to other containers:
 
@@ -171,7 +171,7 @@ In addition to adding dependencies, you can also add additional containers to yo
 
 1. Add a new connection from your `frontend` container to the `backend` container:
 
-   {{% rad file="snippets/app-backend.bicep" embed=true marker="//CONTAINER" markdownConfig="{linenos=table,hl_lines=[\"16-18\"],linenostart=13}" %}}
+   {{% rad file="snippets/app-backend.bicep" embed=true marker="//CONTAINER" markdownConfig="{linenos=table,hl_lines=[\"21-23\"],linenostart=13}" %}}
 
 1. Re-run your app with [`rad run`]({{< ref rad_run >}}):
 
