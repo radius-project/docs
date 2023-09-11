@@ -8,7 +8,7 @@ categories: "Overview"
 tags: ["containers"]
 ---
 
-A Radius container allows you to run a container workload as part of your application. This can be a frontend UI, a backend API, a database, or any other container you need to run.
+A Radius container enables you to run a container workload as part of your application. This can be a frontend UI, a backend API, a database, or any other container you need to run.
 
 <img src="containers-splash.png" alt="Container graphic" width=300px >
 
