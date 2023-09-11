@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Install Radius on Kubernetes"
+title: "How-To: Install Radius on Kubernetes"
 linkTitle: "Installation"
 description: "Learn how to setup Radius on supported Kubernetes clusters"
 weight: 200

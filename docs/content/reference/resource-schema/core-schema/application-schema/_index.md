@@ -31,7 +31,7 @@ Extensions allow you to customize how resources are generated or customized as p
 
 ##### kubernetesNamespace
 
-The Kubernetes namespace extension allows you to customize how all of the resources within your application generate Kubernetes resources. See the [Kubernetes mapping guide]({{< ref kubernetes-mapping >}}) for more information on namespace mapping behavior.
+The Kubernetes namespace extension allows you to customize how all of the resources within your application generate Kubernetes resources. See the [Kubernetes mapping guide]({{< ref "/guides/operations/kubernetes/overview#resource-mapping" >}}) for more information on namespace mapping behavior.
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|

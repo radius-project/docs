@@ -12,7 +12,7 @@ Radius applications are able to connect to and leverage every Azure resource wit
 
 ## Configure an Azure Provider
 
-The Azure provider allows you to deploy and connect to Azure resources from a Radius environment on any of the [supported clusters]({{< ref supported-clusters>}}). To configure an Azure provider, you can follow the documentation [here]({{< ref "/guides/operations/providers/howto-azure-provider" >}}).
+The Azure provider allows you to deploy and connect to Azure resources from a Radius environment on any of the [supported clusters]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}}). To configure an Azure provider, you can follow the documentation [here]({{< ref "/guides/operations/providers/howto-azure-provider" >}}).
 
 ## Resource library
 
