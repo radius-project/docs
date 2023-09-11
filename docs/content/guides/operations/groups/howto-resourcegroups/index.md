@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To: Manage resource groups"
-linkTitle: "Manage resource groups"
+linkTitle: "Manage groups"
 description: "Learn how to manage resource groups in Radius"
 weight: 200
 ---
