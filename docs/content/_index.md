@@ -31,7 +31,7 @@ Radius extends strong existing tools to further streamline the app developer exp
       <a href="{{< ref getting-started >}}"><img src="vscode-logo.png" alt="Visual Studio Code logo" style="width:80%"></a>
     </td>
     <td style="width:50%;text-align:center">
-      <a href="{{< ref bicep >}}" target="_blank"><img src="bicep-logo.png" alt="Bicep logo" style="width:70%"></a>
+      <a href="{https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/}" target="_blank"><img src="bicep-logo.png" alt="Bicep logo" style="width:70%"></a>
     </td>
   </tr>
 </table>

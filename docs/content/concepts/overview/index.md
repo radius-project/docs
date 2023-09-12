@@ -63,7 +63,7 @@ With the Radius app model, teams can easily codify and share pieces of an applic
 
 {{< /tabs >}}
 
-Radius uses the [Bicep language]({{< ref bicep >}}) as its file-format and structure. It offers:
+Radius uses the [Bicep language](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/) as its file-format and structure. It offers:
 
 - A high quality authoring experience with modules, loops, parametrization, and templating
 - ARM Deployment Stacks as the declarative deployment/rollback mechanism
