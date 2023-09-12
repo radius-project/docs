@@ -1,0 +1,4 @@
+{{ $file := .Get "file" }}
+{{ $filePath := (path.Join $.Page.File.Dir $file ) }}
+{{ $fileContents := $filePath | readFile }}
+{{ (print  "\n" $fileContents "\n")| markdownify }}

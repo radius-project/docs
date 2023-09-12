@@ -22,7 +22,7 @@ rad resource list [resourceType] [flags]
 
 ```
 
-	sample list of resourceType: containers, gateways, httpRoutes, pubSubBrokers, extenders, mongoDatabases, rabbitMQMessageQueues, redisCaches, sqlDatabases, stateStores, secretStores
+	sample list of resourceType: containers, gateways, httpRoutes, daprPubSubBrokers, extenders, mongoDatabases, rabbitMQMessageQueues, redisCaches, sqlDatabases, daprStateStores, daprSecretStores
 
 	# list all resources of a specified type in the default environment
 
