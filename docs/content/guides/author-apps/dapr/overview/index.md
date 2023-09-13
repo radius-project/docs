@@ -1,11 +1,10 @@
 ---
 type: docs
-title: "Dapr building blocks"
-linkTitle: "Dapr"
+title: "Overview: Dapr building blocks"
+linkTitle: "Overview"
 description: "Easily leverage Dapr building blocks in your application for code and infrastructure portability"
-weight: 500
-slug: "dapr"
-categories: "Concept"
+weight: 100
+categories: "Overview"
 tags: ["Dapr"]
 ---
 
