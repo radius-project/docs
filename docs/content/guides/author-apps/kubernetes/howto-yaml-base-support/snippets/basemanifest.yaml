@@ -1,0 +1,96 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: manifest-default
+  labels:
+    app: manifest-default
+  annotations:
+    source: base-manifest-test
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: manifest-default
+  template:
+    metadata:
+      labels:
+        app: manifest-default
+    spec:
+      serviceAccountName: manifest-default
+      volumes:
+        - name: secret-vol
+          secret:
+            secretName: manifest-default-secret0
+      containers:
+        - name: manifest-default
+          ports:
+          - containerPort: 80
+            protocol: TCP
+          volumeMounts:
+          - name: secret-vol
+            readOnly: true
+            mountPath: /etc/secret-vol
+          env:
+          - name: TEST_SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: manifest-default-secret1
+                key: secret1
+          - name: TEST_CONFIGMAP_KEY
+            valueFrom:
+              configMapKeyRef:
+                name: manifest-default-config
+                key: TEST_CONFIGMAP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: manifest-default
+  annotations:
+    source: base-manifest-test
+spec:
+  selector:
+    app.kubernetes.io/name: manifest-default
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: manifest-default
+  annotations:
+    source: base-manifest-test
+---
+# Not supported in Radius yet
+apiVersion: v1
+kind: Secret
+metadata:
+  name: manifest-default-secret0
+  annotations:
+    source: base-manifest-test
+type: Opaque
+stringData:
+  'secret0': test-secret-0
+---
+# Not supported in Radius yet
+apiVersion: v1
+kind: Secret
+metadata:
+  name: manifest-default-secret1
+  annotations:
+    source: base-manifest-test
+type: Opaque
+stringData:
+  'secret1': test-secret-1
+---
+# Not supported in Radius yet
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: manifest-default-config
+  annotations:
+    source: base-manifest-test
+data:
+  TEST_CONFIGMAP: test-configmap
