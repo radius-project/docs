@@ -14,6 +14,13 @@ This guide will show you how to quickly get started with Radius for an existing 
 
 <img src="diagram.png" alt="Diagram of the application and its resources" width=500px >
 
+{{% alert title="🚀 Try this tutorial in a Codespace" color="primary" %}}
+Get up and running instantly in a **free** GitHub Codespace with everything you need to run this tutorial. You'll be prompted to sign in to GitHub if you aren't already.
+
+{{< button text="Open in a Codespace" link="https://github.com/codespaces/new?hide_repo_select=true&repo=482051978&skip_quickstart=true&machine=premiumLinux&ref=kubernetes-interop&devcontainer_path=.devcontainer%2Fdevcontainer.json&geo=UsWest" newtab="true" newline="false" >}}
+
+{{% /alert %}}
+
 ## 1. Have your Kubernetes cluster handy
 
 Radius runs inside [Kubernetes]({{< ref "guides/operations/kubernetes" >}}). However you run Kubernetes, get a cluster ready.
@@ -27,7 +34,13 @@ kubectl config current-context
 
 ## 2. Install Radius CLI
 
-{{< tabs MacOS "Linux/WSL" "Windows PowerShell" >}}
+{{< tabs Codespace MacOS "Linux/WSL" "Windows PowerShell" >}}
+
+{{% codetab %}}
+
+The rad CLI is automatically installed in a Codespace. You're all set!
+
+{{% /codetab %}}
 
 {{% codetab %}}
 ```bash
@@ -49,9 +62,13 @@ iwr -useb "https://get.radapp.dev/tools/rad/install.ps1" | iex
 
 {{< /tabs >}}
 
-Visit the [rad CLI]({{< ref howto-rad-cli >}}) page for troubleshooting or additional options.
+> Visit the [rad CLI]({{< ref howto-rad-cli >}}) page for troubleshooting or additional options.
 
-Verify the rad CLI is installed correctly by running `rad version`. 
+Verify the rad CLI is installed correctly by running `rad version`:
+
+```bash
+rad version
+```
 
 Example output:
 ```
@@ -61,19 +78,17 @@ RELEASE     VERSION     BICEP       COMMIT
 
 ## 3. Clone and open the application
 
-{{< tabs "Codespaces" "non-Codespaces" >}}
+{{< tabs "Codespace" "Local machine" >}}
 
 {{% codetab %}}
 
-If you are using codespaces you should already have the application cloned locally. Use the terminal to navigate to the `./demo/` directory:
+If you are using Codespaces you should already have the application cloned locally. Use the terminal to navigate to the `./demo/` directory:
 
 ```bash
 cd ./demo
 ```
 
 {{% /codetab %}}
-
-
 
 {{% codetab %}}
 Use the terminal to clone the `samples` repository locally and navigate to the `./samples/demo` directory:
@@ -169,7 +184,7 @@ helm upgrade demo ./Chart -n demo --install
 
 The output should look similar to the following:
 
-```txt
+```
 > kubectl create namespace demo
 namespace/demo created
 
@@ -196,7 +211,7 @@ kubectl get all -n demo
 
 The output should look similar to the following:
 
-```txt
+```
 > kubectl get all -n demo
 NAME                       READY   STATUS    RESTARTS   AGE
 pod/webapp-79d5dfb99-vhj9g   1/1     Running   0          2m48s
@@ -256,7 +271,7 @@ helm upgrade demo ./Chart -n demo --install
 
 The output should look like:
 
-```txt
+```
 > helm upgrade demo ./Chart -n demo --install
 Release "demo" has been upgraded. Happy Helming!
 NAME: demo
@@ -277,7 +292,7 @@ kubectl get all -n demo
 
 The output should look similar to the following:
 
-```txt
+```
 > kubectl get all -n demo
 NAME                       READY   STATUS    RESTARTS   AGE
 pod/webapp-79d5dfb99-mv6q9   1/1     Running   0          10m
@@ -299,7 +314,7 @@ rad app connections
 
 The output should look like this:
 
-```txt
+```
 > rad app connections
 Displaying application: demo
 
@@ -313,7 +328,7 @@ Resources:
 
 Now Radius has found the Kubernetes `Deployment` running your container and cataloged it as part of the application.
 
-## 5. Add Recipe
+## 6. Add a Recipe
 
 This step will add a database (Redis Cache) to the application.
 
@@ -351,7 +366,7 @@ helm upgrade demo ./Chart -n demo --install
 
 The output should look like:
 
-```txt
+```
 > helm upgrade demo ./Chart -n demo --install
 Release "demo" has been upgraded. Happy Helming!
 NAME: demo
@@ -372,7 +387,7 @@ kubectl get all -n demo
 
 The output should look similar to the following:
 
-```txt
+```
 > kubectl get all -n demo
 
 pod/redis-r5tcrra3d7uh6-7bcd8b8d8d-jmgn4   2/2     Running   0          51s
@@ -405,7 +420,7 @@ rad app connections
 
 The output should look like this:
 
-```txt
+```
 > rad app connections
 Displaying application: demo
 
@@ -433,7 +448,7 @@ kubectl get secret -n demo redis-secret -o yaml
 
 The output should look like the following:
 
-```txt
+```
 >kubectl get secret -n demo redis-secret -o yaml
 apiVersion: v1
 data:
@@ -464,7 +479,7 @@ type: Opaque
 The actual values like `connectionString` are Base64 encoded in this display. The `url` value in this secret is being used by the container to connect to the Redis Cache. For each type of Recipe, Radius stores the useful connection information in a variety of formats for the convenience of application developers.
 
 
-## 6. Add Connection
+## 7. Add a Connection
 
 At this point we have added Radius to our existing container, and used a Recipe to create a Redis Cache. In this step you will use Radius Connections to inject settings into the container instead of explicitly managing a secret.
 
@@ -540,7 +555,7 @@ helm upgrade demo ./Chart -n demo --install
 
 The output should look like:
 
-```txt
+```
 > helm upgrade demo ./Chart -n demo --install
 Release "demo" has been upgraded. Happy Helming!
 NAME: demo
@@ -561,7 +576,7 @@ kubectl get all -n demo
 
 The output should look like:
 
-```txt
+```
 > kubectl get all -n demo
 NAME                                       READY   STATUS    RESTARTS   AGE
 pod/redis-r5tcrra3d7uh6-7bcd8b8d8d-jmgn4   2/2     Running   0          20m
@@ -594,7 +609,7 @@ rad app connections
 
 The output should look like the example below:
 
-```txt
+```
 > rad app connections
 Displaying application: demo
 
@@ -614,7 +629,7 @@ Resources:
 
 ```
 
-## 7. Try it out
+## 8. Try it out
 
 In this step you can access the application and explore its features. Since the container is running inside Kubernetes, you need to run a port-forward to use it locally.
 
