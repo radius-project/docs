@@ -29,7 +29,7 @@ This how-to guide will teach you:
 
 This application is a simple to-do list which stores and visualizes to-do items. It consists of a frontend [container]({{< ref "guides/author-apps/containers" >}}) and a backend [Redis Cache]({{< ref redis >}}).
 
-<img src="recipe-quickstart-diagram.png" alt="Screenshot of the todoapp with Kubernetes, Azure and AWS Redis Cache options" style="width:500px" >
+<img src="recipe-tutorial-diagram.png" alt="Screenshot of the todoapp with Kubernetes, Azure and AWS Redis Cache options" style="width:500px" >
 
 {{< alert title="💡 Portable resources" color="info" >}}
 Developers don't need to specify what cloud resources they're using in their application. Instead, they choose the portable Redis API which can be provided by any cloud provider (or a Docker container). When deployed, a Recipe will select what infrastructure to deploy and run.
@@ -153,7 +153,7 @@ This step requires an Azure subscription to deploy cloud resources, which will i
 2. Register the Recipe to your Radius Environment:
 
    ```bash
-   rad recipe register azure --environment default --template-kind bicep --template-path radius.azurecr.io/recipes/azure/rediscaches:{{< param tag_version >}} --link-type Applications.Datastores/redisCaches 
+   rad recipe register azure --environment default --template-kind bicep --template-path radius.azurecr.io/recipes/azure/rediscaches:{{< param tag_version >}} --resource-type Applications.Datastores/redisCaches 
    ```
 
 3. Update your db resource to use the `azure` Recipe, instead of the default Recipe:
