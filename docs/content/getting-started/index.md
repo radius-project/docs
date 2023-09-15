@@ -111,11 +111,13 @@ This command:
 - Creates a port-forward from localhost to port 3000 inside the container so you can navigate to the app's frontend UI
 - Streams container logs to your terminal
 
-<img src="./demo-screenshot.png" alt="Screenshot of the demo container" width=400>
-<br /><br />
-Congrats! You're running your first Radius app.
+In your browser you should see the demo app:
 
-When you're ready to move on to the next step, use `CTRL+C` to exit the command.
+<img src="./demo-screenshot.png" alt="Screenshot of the demo container" width=600px >
+<br /><br />
+
+Congrats! You're running your first Radius app. When you're ready to move on to the next step, use <kbd>CTRL</kbd>+ <kbd>C</kbd> to exit the command.
+
 
 ## 5. Add Database
 
@@ -150,17 +152,17 @@ Use the command below to run the updated application again, then open the browse
 rad run app.bicep
 ```
 
-You should see that the environment variables have changed. The `demo` container now has connection information for Redis (`CONNECTION_REDIS_HOST`, `CONNECTION_REDIS_PORT`).
+You should see a new connections with new environment variables added. The `demo` container now has connection information for Redis (`CONNECTION_REDIS_HOST`, `CONNECTION_REDIS_PORT`, etc.):
 
-<img src="./demo-with-redis-screenshot.png" alt="Screenshot of the demo container" width=500>
+<img src="./demo-with-redis-screenshot.png" alt="Screenshot of the demo container" width=800px >
 <br /><br />
 
-Navigate to the TODO List tab and test out the application. Using the TODO page will update the saved state in Redis.
+Navigate to the Todo List tab and test out the application. Using the Todo page will update the saved state in Redis:
 
-<img src="./demo-with-todolist.png" alt="Screenshot of the todolist" width=500>
+<img src="./demo-with-todolist.png" alt="Screenshot of the todolist" width=700px >
 <br /><br />
 
-Press CTRL+C when you are finished with the website.
+Press <kbd>CTRL</kbd>+ <kbd>C</kbd> when you are finished with the website.
 
 ## Recap and next steps
 
