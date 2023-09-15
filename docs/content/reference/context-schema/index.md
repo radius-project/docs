@@ -90,5 +90,5 @@ The `context` object is automatically injected to Bicep templates when a Recipe 
 
 | Key | Type | Description |
 |-----|------|-------------|
-| [`region`] | string | Represents the region where AWS resources are deployed.
-| [`account`] | string | Represents the account id of the AWS account.
+| `region` | string | Represents the region where AWS resources are deployed.
+| `account` | string | Represents the account id of the AWS account.
