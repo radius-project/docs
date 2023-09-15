@@ -37,17 +37,9 @@ creating resource group "myGroup" in namespace "default"...
 resource group "myGroup" created
 ```
 
-## Step 3: Set a resource group as the default
+## Step 3: View your resource group
 
-Run [`rad group switch`]({{< ref rad_group_switch >}}) to set a resource group as the default:
-
-```bash
-rad group switch myGroup
-```
-
-## Step 4: View the current resource group
-
-Run [`rad group show`]({{< ref rad_group_show >}}) to view the current resource group:
+Run [`rad group show`]({{< ref rad_group_show >}}) to view the your resource group:
 
 ```bash
 rad group show myGroup
@@ -78,7 +70,17 @@ You should see:
 }
 ```
 
-## Step 5: Delete a resource group
+## Step 4: Set your resource group as the default
+
+Setting a default resource group allows you to run commands like `rad deploy` without specifying the `-g/--group` flag explicitly every time. Run [`rad group switch`]({{< ref rad_group_switch >}}) to set your new resource group as the default:
+
+```bash
+rad group switch myGroup
+```
+
+You can now run `rad deploy` or `rad recipe list` without needing to specify the group.
+
+## Step 5: Delete your resource group
 
 Run [`rad group delete`]({{< ref rad_group_delete >}}) to delete a resource group:
 
