@@ -153,7 +153,7 @@ This step requires an Azure subscription to deploy cloud resources, which will i
 2. Register the Recipe to your Radius Environment:
 
    ```bash
-   rad recipe register azure --environment default --template-kind bicep --template-path radius.azurecr.io/recipes/azure/rediscaches:{{< param tag_version >}} --link-type Applications.Datastores/redisCaches 
+   rad recipe register azure --environment default --template-kind bicep --template-path radius.azurecr.io/recipes/azure/rediscaches:{{< param tag_version >}} --resource-type Applications.Datastores/redisCaches 
    ```
 
 3. Update your db resource to use the `azure` Recipe, instead of the default Recipe:
