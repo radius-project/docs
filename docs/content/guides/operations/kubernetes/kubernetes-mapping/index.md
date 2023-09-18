@@ -3,7 +3,7 @@ type: docs
 title: "Radius resource to Kubernetes object mapping"
 linkTitle: "Resource mapping"
 description: "Learn how Radius resources map to Kubernetes objects"
-weight: 200
+weight: 300
 slug: "resource-mapping"
 categories: "Concept"
 tags: ["Kubernetes"]

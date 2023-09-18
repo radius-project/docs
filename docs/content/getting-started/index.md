@@ -49,7 +49,7 @@ iwr -useb "https://get.radapp.dev/tools/rad/install.ps1" | iex
 
 {{< /tabs >}}
 
-Visit the [rad CLI]({{< ref "installation/overview#install-the-rad-cli" >}}) page for troubleshooting or additional options.
+Visit the [rad CLI]({{< ref howto-rad-cli >}}) page for troubleshooting or additional options.
 
 Verify the rad CLI is installed correctly by running `rad version`. 
 
