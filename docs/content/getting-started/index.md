@@ -6,6 +6,8 @@ weight: 10
 description: "Take a tour of Radius by getting started with your first app"
 aliases:
     - /getting-started/tutorial/
+    - /getting-started/install/
+    - /getting-started/first-app/
 ---
 
 This guide will show you how to quickly get started with Radius. You'll walk through both installing Radius and running your first Radius app.
