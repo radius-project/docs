@@ -23,7 +23,7 @@ rad install kubernetes
 
 ## Step 2: Create a resource group
 
-Use [`rad group create`]({{< ref rad_group_create >}}) to create a resource group:
+Run [`rad group create`]({{< ref rad_group_create >}}) to create a resource group:
 
 ```bash
 rad group create myGroup
