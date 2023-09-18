@@ -127,7 +127,7 @@ Now that your Recipe template has been stored, you can add it your Radius enviro
 {{% codetab %}}
 
 ```bash
-rad recipe register myrecipe --environment myenv --link-type Applications.Datastores/redisCaches --template-kind bicep --template-path myregistry.azurecr.io/recipes/myrecipe:1.1.0
+rad recipe register myrecipe --environment myenv --resource-type Applications.Datastores/redisCaches --template-kind bicep --template-path myregistry.azurecr.io/recipes/myrecipe:1.1.0
 ```
 
 {{% /codetab %}}
@@ -137,7 +137,7 @@ rad recipe register myrecipe --environment myenv --link-type Applications.Datast
 The template path value should represent the source path found in your Terraform module registry.
 
 ```bash
-rad recipe register myrecipe --environment myenv --link-type Applications.Datastores/redisCaches --template-kind terraform --template-path user/recipes/myrecipe --template-version "1.1.0"
+rad recipe register myrecipe --environment myenv --resource-type Applications.Datastores/redisCaches --template-kind terraform --template-path user/recipes/myrecipe --template-version "1.1.0"
 ```
 
 {{% /codetab %}}
