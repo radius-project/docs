@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Resource groups"
-linkTitle: "Resource groups"
-description: "Manage collections of resources with resource groups"
+title: "Overview: Resource groups"
+linkTitle: "Overview"
+description: "Learn how to manage collections of resources with resource groups"
 weight: 100
 ---
 
