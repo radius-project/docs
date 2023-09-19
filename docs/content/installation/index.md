@@ -31,3 +31,5 @@ The Radius control-plane is a set of services that provide the core functionalit
 Visit the [environments how-to guide]({{< ref howto-environment >}}) for more information on how to install the Radius control-plane and create your first Radius environment.
 
 {{< button text="How-To: Init an environment" page="howto-environment" newtab="true" >}}
+
+>If you are looking to upgrade Radius to the latest version, refer to [upgrade Radius on Kubernetes]({{< ref kubernetes-upgrade >}}) for more information.
