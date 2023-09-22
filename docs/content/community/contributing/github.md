@@ -24,7 +24,7 @@ Samples are located at https://github.com/radius-project/samples.
 
 ### Visual Studio not authorized for single sign-on
 
-If you receive an error saying Visual Studio Code or another application is not authorized to clone any of the Radius repos you may need to re-authorize the GitHub app:
+If you receive an error saying Visual Studio Code or another application is not authorized to clone any of the Radius repositories you may need to re-authorize the GitHub app:
 
 1. Open a browser to https://github.com/settings/applications
 1. Find the applicable app and select Revoke
