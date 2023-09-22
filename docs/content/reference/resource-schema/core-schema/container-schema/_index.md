@@ -28,7 +28,7 @@ weight: 300
 | [container](#container) | y | Container configuration. | [See below](#container)
 | [connections](#connections) | n | List of connections to other resources. | [See below](#connections)
 | [extensions](#extensions) | n | List of extensions on the container. | [See below](#extensions)
-| [runtimes](#runtimes) | n | Runtime specific onfigurations for the container. | [See below](#runtimes)
+| [runtimes](#runtimes) | n | Runtime specific configurations for the container. | [See below](#runtimes)
 
 ### Container
 

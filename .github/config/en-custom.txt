@@ -464,3 +464,5 @@ PortableResource
 runtime's
 imagePullPolicy
 otelhttp
+PodSpec
+ConfigMap
