@@ -464,3 +464,8 @@ PortableResource
 runtime's
 imagePullPolicy
 otelhttp
+hashicorp
+HashiCorp
+intellisense
+itemName
+visualstudio
