@@ -152,7 +152,7 @@ Use the command below to run the updated application again, then open the browse
 rad run app.bicep
 ```
 
-You should see a new connections with new environment variables added. The `demo` container now has connection information for Redis (`CONNECTION_REDIS_HOST`, `CONNECTION_REDIS_PORT`, etc.):
+You should see the Radius Connections section with new environment variables added. The `demo` container now has connection information for Redis (`CONNECTION_REDIS_HOST`, `CONNECTION_REDIS_PORT`, etc.):
 
 <img src="./demo-with-redis-screenshot.png" alt="Screenshot of the demo container" width=800px >
 <br /><br />
