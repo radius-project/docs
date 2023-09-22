@@ -20,15 +20,12 @@ Documentation is housed at https://github.com/radius-project/docs.
 
 Samples are located at https://github.com/radius-project/samples.
 
-## Troubleshooting Common Issues
+## Troubleshooting common issues
 
 ### Visual Studio not authorized for single sign-on
 
-If you receive an error saying Visual Studio or another application is not authorized to clone the Radius repo and you need to re-authorize the app, follow these steps:
+If you receive an error saying Visual Studio Code or another application is not authorized to clone any of the Radius repos you may need to re-authorize the GitHub app:
 
-1. Open a browser to https://github.com/radius-project/radius
-1. Select your profile and click on Settings
-1. Select Applications from the left navbar
-1. Select the Authorized OAuth Apps tab
-1. Find the conflicting app and select Revoke
+1. Open a browser to https://github.com/settings/applications
+1. Find the applicable app and select Revoke
 1. Reopen app on local machine and re-auth

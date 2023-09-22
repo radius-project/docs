@@ -10,7 +10,7 @@ tags: ["delete"]
 
 ## Pre-requisites
 
-A [deployed application]({{< ref deploy-apps >}}) in a Radius environment.
+- A [deployed application]({{< ref deploy-apps >}}) in a Radius environment.
 
 ## Step 1: Delete the Radius application from the environment 
 
