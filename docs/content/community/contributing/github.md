@@ -18,7 +18,7 @@ The source code for Radius is available on GitHub within the [radius repo](https
 
 Documentation is housed at https://github.com/radius-project/docs.
 
-Samples are location at https://github.com/radius-project/samples.
+Samples are located at https://github.com/radius-project/samples.
 
 ## Troubleshooting Common Issues
 
