@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Overview: Radius Kubernetes platform"
+title: "Overview: Radius on Kubernetes platform"
 linkTitle: "Overview"
 description: "Learn how Radius can run on Kubernetes"
 weight: 100
@@ -31,7 +31,7 @@ Radius resources, when deployed to a Kubernetes environment, are mapped to one o
 
 ### Namespace mapping
 
-Application-scoped resources are by default generated in a new Kubernetes namespace with the name format `<envNamespace>-<appname>'`. This prevents multiple applications with resources of the same name from conflicting with each other.
+Application-scoped resources are by default generated in a new Kubernetes namespace with the name format `'<envNamespace>-<appname>'`. This prevents multiple applications with resources of the same name from conflicting with each other.
 
 For example, let's take an application named `'myapp'` with a container named `'frontend'`. This application is deployed into an environment configured with with the `'default'` namespace. A Kubernetes Deployment named `'frontend'` is now deployed into the namespace `'default-myapp'`.
 
@@ -39,9 +39,9 @@ If you wish to override the default behavior and specify your own namespace for 
 
 ### Resource naming
 
-Resources that are generated in Kubernetes use the same name as the resource in Radius. For example, a Radius container named 'frontend' will map to a Kubernetes Deployment named 'frontend'. This makes it easy to conceptually map between Radius and Kubernetes resources.
+Resources that are generated in Kubernetes use the same name as the resource in Radius. For example, a Radius container named 'frontend' will map to a Kubernetes Deployment named `'frontend'`. This makes it easy to conceptually map between Radius and Kubernetes resources.
 
-For multiple Radius resources that map to a single Kubernetes resources (_i.e. daprPubSubBrokers, daprSecretStores, and daprStateStores all map to a dapr.io/Component_), when there are collisions in naming Radius has conflict logic to allow the first resource to be deployed, but throw a warning for subsequent resource deployments that have the same name. This prevents Radius resources unintentionally overwriting the same generated resource.
+For multiple Radius resources that map to a single Kubernetes resources (_e.g. daprPubSubBrokers, daprSecretStores, and daprStateStores all map to a dapr.io/Component_) and there are collisions in naming, Radius has conflict logic to allow the first resource to be deployed but will throw a warning for subsequent resource deployments that have the same name. This prevents Radius resources from unintentionally overwriting the same generated resource.
 
 ## Kubernetes metadata
 
