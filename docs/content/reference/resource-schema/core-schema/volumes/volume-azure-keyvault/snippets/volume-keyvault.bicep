@@ -5,7 +5,7 @@ param azLocation string = resourceGroup().location
 
 param environment string
 
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'myapp'
   properties: {
     environment: environment
@@ -27,7 +27,7 @@ resource keyvault 'Microsoft.KeyVault/vaults@2022-07-01' = {
 }
 
 //VOLUME
-resource volume 'Applications.Core/volumes@2022-03-15-privatepreview' = {
+resource volume 'Applications.Core/volumes@2023-10-01-preview' = {
   name: 'myvolume'
   properties: {
     application: app.id

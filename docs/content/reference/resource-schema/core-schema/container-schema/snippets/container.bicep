@@ -4,19 +4,19 @@ param environment string
 
 param azureStorage string
 
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'myapp'
   properties: {
     environment: environment
   }
 }
 
-resource volume 'Applications.Core/volumes@2022-03-15-privatepreview' existing = {
+resource volume 'Applications.Core/volumes@2023-10-01-preview' existing = {
   name: 'myvolume'
 }
 
 //CONTAINER
-resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'frontend'
   properties: {
     application: app.id
@@ -99,14 +99,14 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 }
 //CONTAINER
 
-resource http 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
+resource http 'Applications.Core/httpRoutes@2023-10-01-preview' = {
   name: 'http'
   properties: {
     application: app.id
   }
 }
 
-resource db 'Applications.Datastores/mongoDatabases@2022-03-15-privatepreview' = {
+resource db 'Applications.Datastores/mongoDatabases@2023-10-01-preview' = {
   name: 'database'
   properties: {
     environment: environment

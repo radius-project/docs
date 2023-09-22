@@ -2,14 +2,14 @@ import radius as radius
 
 param environment string
 
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'myapp'
   properties: {
     environment: environment
   }
 }
 
-resource serviceA 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource serviceA 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'service-a'
   properties: {
     application: app.id
@@ -34,21 +34,21 @@ resource serviceA 'Applications.Core/containers@2022-03-15-privatepreview' = {
   }
 }
 
-resource routeAWeb 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
+resource routeAWeb 'Applications.Core/httpRoutes@2023-10-01-preview' = {
   name: 'route-a-web'
   properties: {
     application: app.id
   }
 }
 
-resource routeAApi 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
+resource routeAApi 'Applications.Core/httpRoutes@2023-10-01-preview' = {
   name: 'route-a-api'
   properties: {
     application: app.id
   }
 }
 
-resource serviceB 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource serviceB 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'service-b'
   properties: {
     application: app.id
@@ -69,14 +69,14 @@ resource serviceB 'Applications.Core/containers@2022-03-15-privatepreview' = {
   }
 }
 
-resource routeB 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
+resource routeB 'Applications.Core/httpRoutes@2023-10-01-preview' = {
   name: 'route-b'
   properties: {
     application: app.id
   }
 }
 
-resource internetGateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
+resource internetGateway 'Applications.Core/gateways@2023-10-01-preview' = {
   name: 'internet-gateway'
   properties: {
     application: app.id

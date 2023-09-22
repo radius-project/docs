@@ -6,7 +6,7 @@ param environment string
 @description('The ID of your Radius application. Automatically injected by the rad CLI.')
 param application string
 
-resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'frontend'
   properties: {
     application: application
@@ -23,7 +23,7 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
   }
 }
 
-resource db 'Applications.Datastores/redisCaches@2022-03-15-privatepreview' = {
+resource db 'Applications.Datastores/redisCaches@2023-10-01-preview' = {
   name: 'db'
   properties: {
     environment: environment

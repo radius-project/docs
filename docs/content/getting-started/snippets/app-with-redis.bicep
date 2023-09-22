@@ -4,7 +4,7 @@ import radius as radius
 @description('The app ID of your Radius application. Set automatically by the rad CLI.')
 param application string
 
-resource demo 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource demo 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'demo'
   properties: {
     application: application
@@ -25,7 +25,7 @@ resource demo 'Applications.Core/containers@2022-03-15-privatepreview' = {
 }
 
 param environment string
-resource db 'Applications.Datastores/redisCaches@2022-03-15-privatepreview' = {
+resource db 'Applications.Datastores/redisCaches@2023-10-01-preview' = {
   name: 'db'
   properties: {
     application: application

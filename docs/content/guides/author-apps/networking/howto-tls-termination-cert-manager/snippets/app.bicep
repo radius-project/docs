@@ -3,14 +3,14 @@ import radius as radius
 @description('ID of the Radius environment. Passed in automatically via the rad CLI')
 param environment string
 
-resource demoApplication 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource demoApplication 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'demo-application'
   properties: {
     environment: environment
   }
 }
 
-resource demoSecretStore 'Applications.Core/secretStores@2022-03-15-privatepreview' = {
+resource demoSecretStore 'Applications.Core/secretStores@2023-10-01-preview' = {
   name: 'demo-secretstore'
   properties: {
     application: demoApplication.id
@@ -27,7 +27,7 @@ resource demoSecretStore 'Applications.Core/secretStores@2022-03-15-privateprevi
   }
 }
 
-resource demoGateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
+resource demoGateway 'Applications.Core/gateways@2023-10-01-preview' = {
   name: 'demo-gateway'
   properties: {
     application: demoApplication.id
@@ -47,14 +47,14 @@ resource demoGateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
   }
 }
 
-resource demoRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
+resource demoRoute 'Applications.Core/httpRoutes@2023-10-01-preview' = {
   name: 'demo-route'
   properties: {
     application: demoApplication.id
   }
 }
 
-resource demoContainer 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource demoContainer 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'demo-container'
   properties: {
     application: demoApplication.id
