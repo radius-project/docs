@@ -41,7 +41,7 @@ If you wish to override the default behavior and specify your own namespace for 
 
 Resources that are generated in Kubernetes use the same name as the resource in Radius. For example, a Radius container named 'frontend' will map to a Kubernetes Deployment named `'frontend'`. This makes it easy to conceptually map between Radius and Kubernetes resources.
 
-For multiple Radius resources that map to a single Kubernetes resources (_e.g. daprPubSubBrokers, daprSecretStores, and daprStateStores all map to a dapr.io/Component_) and there are collisions in naming, Radius has conflict logic to allow the first resource to be deployed but will throw a warning for subsequent resource deployments that have the same name. This prevents Radius resources from unintentionally overwriting the same generated resource.
+For multiple Radius resources that map to a single Kubernetes resource (_e.g. daprPubSubBrokers, daprSecretStores, and daprStateStores all map to a dapr.io/Component_) and there are collisions in naming, Radius has conflict logic to allow the first resource to be deployed but will throw a warning for subsequent resource deployments that have the same name. This prevents Radius resources from unintentionally overwriting the same generated resource.
 
 ## Kubernetes metadata
 
