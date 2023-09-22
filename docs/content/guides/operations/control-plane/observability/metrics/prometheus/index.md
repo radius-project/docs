@@ -14,7 +14,7 @@ tags: ["metrics", "observability"]
 
 1. Make sure you have the following pre-requisites:
 
-   - [Supported Kubernetes cluster]({{< ref supported-clusters >}})
+   - [Supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters"  >}})
    - [kubectl](https://kubernetes.io/docs/tasks/tools/)
    - [Helm 3](https://helm.sh/)
    - [Radius control plane installed]({{< ref kubernetes-install >}})

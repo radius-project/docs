@@ -18,7 +18,7 @@ For more details on the app and access to the source code, visit the `tutorials/
 
 ## Prerequisites
 
-- [Kubernetes cluster]({{< ref "supported-clusters" >}})
+- [Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
 - [Radius CLI]({{< ref "getting-started" >}})
 - [Radius environment]({{< ref "/guides/deploy-apps/environments/overview" >}})
 - [Dapr installed on your Kubernetes cluster](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/)
