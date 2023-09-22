@@ -1,6 +1,6 @@
 import radius as radius
 
-resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
+resource env 'Applications.Core/environments@2023-10-01-preview' = {
   name: 'prod'
   properties: {
     compute: {

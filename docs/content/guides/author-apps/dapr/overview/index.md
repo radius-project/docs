@@ -60,7 +60,7 @@ For example, if you have a `Applications.Dapr/stateStores` resource named `mysta
 
 You can connect to a Dapr building block by manually referencing the resource name or by adding a connection. Connections automatically inject environment variables into your container with the resource name prefixed.
 
-{{< rad file="snippets/dapr-componentname.bicep" embed=true marker="//MARKER" replace-key-ss="//STATESTORE" replace-value-ss="resource statestore 'Applications.Dapr/stateStores@2022-03-15-privatepreview' = {...}" >}}
+{{< rad file="snippets/dapr-componentname.bicep" embed=true marker="//MARKER" replace-key-ss="//STATESTORE" replace-value-ss="resource statestore 'Applications.Dapr/stateStores@2023-10-01-preview' = {...}" >}}
 
 ### Service invocation
 
