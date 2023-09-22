@@ -67,11 +67,6 @@ mv docs/config.toml.tmp docs/config.toml
 awk '{gsub(/indexName: '\''radapp-dev-edge'\''/, "indexName: '\''radapp-dev'\''"); print}' docs/layouts/partials/hooks/body-end.html > docs/layouts/partials/hooks/body-end.html.tmp
 mv docs/layouts/partials/hooks/body-end.html.tmp docs/layouts/partials/hooks/body-end.html
 
-# In docs/content/getting-started/install/index.md, update the binary download links with the new version number
-BINARY_STRING_REPLACEMENT=": https:\/\/get\.radapp\.dev\/tools\/rad\/${CHANNEL}\/"
-awk -v REPLACEMENT="${BINARY_STRING_REPLACEMENT}" '{gsub(/: https:\/\/get\.radapp\.dev\/tools\/rad\/[^\/]+\//, REPLACEMENT); print}' docs/content/getting-started/install/index.md > docs/content/getting-started/install/index.md.tmp
-mv docs/content/getting-started/install/index.md.tmp docs/content/getting-started/install/index.md
-
 # Push changes to GitHub
 git add --all
 git commit -m "Update docs for ${VERSION}"
