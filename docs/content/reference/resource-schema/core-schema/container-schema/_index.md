@@ -28,6 +28,7 @@ weight: 300
 | [container](#container) | y | Container configuration. | [See below](#container)
 | [connections](#connections) | n | List of connections to other resources. | [See below](#connections)
 | [extensions](#extensions) | n | List of extensions on the container. | [See below](#extensions)
+| [runtimes](#runtimes) | n | Runtime specific onfigurations for the container. | [See below](#runtimes)
 
 ### Container
 
@@ -165,3 +166,27 @@ The `manualScaling` extension configures the number of replicas of a compute ins
 | kind | y | The kind of extension. | `manualScaling`
 | replicas | Y | The number of replicas to run | `5` |
 
+### Runtimes
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| kubernetes | n | Kubernetes specific configuration for the container. | [See below](#kubernetes)
+
+#### Kubernetes
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| base | n | The base Kubernetes resource manifest on top of which Radius specified properties will be applied. See below for the [supported resource types](#supported-resource-types) | `loadTextContent('manifest/sidecar.yaml')`
+| pod | n | The pod specifications to apply to the Kubernetes resource created by Radius. Any field defined on [PodSpec](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#PodSpec) can be set here. | [`topologySpreadConstraints`](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling)
+
+##### Supported resource types
+
+Radius currently supports the following Kubernetes resource types for the `base` property: 
+
+| Kubernetes Resource Types | number of resources | limitation |
+|----|----|----|
+| Deployment | 1 | Deployment name must match the name of radius container in the app-scoped namespace | 
+| ServiceAccount | 1 | ServiceAccount name must match the name of radius container  in the app-scoped namespace| 
+| Service | 1 | ServiceAccount name must match the name of radius container in the app-scoped namespace |
+| Secrets | multiple | no limitation except in the app-scoped namespace |
+| ConfigMap | multiple config maps | no limitation except in the app-scoped namespace |
