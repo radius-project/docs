@@ -30,14 +30,14 @@ Naming constraints: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_
 ''')
 param databaseIdentifier string
 
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'wordpress-app'
   properties: {
     environment: environment
   }
 }
 
-resource wordpress 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource wordpress 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'wordpress-container'
   properties: {
     application: app.id

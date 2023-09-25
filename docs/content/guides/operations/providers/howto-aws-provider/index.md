@@ -14,7 +14,7 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
 
 ## Prerequisites
 
-- [EKS cluster]({{< ref "guides/operations/kubernetes/supported-clusters" >}})
+- [EKS cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
 - [AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account) and an [IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html)
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
