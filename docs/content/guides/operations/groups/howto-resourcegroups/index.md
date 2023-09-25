@@ -10,7 +10,7 @@ This guide will walk you through the process of managing resource groups in Radi
 
 ## Pre-requisites
 
-- [Supported Kubernetes cluster]({{< ref supported-clusters >}})
+- [Supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
 - [Radius CLI]({{< ref howto-rad-cli >}})
 
 ## Step 1: Ensure Radius is installed

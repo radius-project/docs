@@ -2,14 +2,14 @@ import radius as radius
 
 param environment string
 
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'myapp'
   properties: {
     environment: environment
   }
 }
 
-resource httpRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
+resource httpRoute 'Applications.Core/httpRoutes@2023-10-01-preview' = {
   name: 'http-route'
   properties: {
     application: app.id
@@ -17,7 +17,7 @@ resource httpRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
 }
 
 //GATEWAY
-resource internetGateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
+resource internetGateway 'Applications.Core/gateways@2023-10-01-preview' = {
   name: 'internet-gateway'
   properties: {
     application: app.id

@@ -15,7 +15,7 @@ resource s3 'AWS.S3/Bucket@default' = {
 @description('The environment ID of your Radius application. Set automatically by the rad CLI.')
 param environment string
 
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: 's3app'
   properties: {
     environment: environment
@@ -34,7 +34,7 @@ param aws_secret_access_key string
 param aws_region string = 'us-west-2'
 
 // get a radius container which uses the s3 bucket
-resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'frontend'
   properties: {
     application: app.id

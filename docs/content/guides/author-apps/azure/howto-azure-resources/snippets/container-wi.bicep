@@ -7,7 +7,7 @@ param azLocation string = resourceGroup().location
 @description('Specifies the OIDC issuer URL')
 param oidcIssuer string 
 
-resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
+resource env 'Applications.Core/environments@2023-10-01-preview' = {
   name: 'iam-quickstart'
   properties: {
     compute: {
@@ -29,14 +29,14 @@ resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
 //ENVIRONMENT
 
 //CONTAINER
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'myapp'
   properties: {
     environment: env.id
   }
 }
 
-resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource container 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'mycontainer'
   properties: {
     application: app.id

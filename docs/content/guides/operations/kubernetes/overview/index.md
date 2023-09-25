@@ -1,20 +1,55 @@
 ---
 type: docs
-title: "Supported Kubernetes clusters"
-linkTitle: "Supported clusters"
-description: "Learn how to setup Radius on supported Kubernetes clusters"
+title: "Overview: Radius on Kubernetes platform"
+linkTitle: "Overview"
+description: "Learn how Radius can run on Kubernetes"
 weight: 100
-categories: "How-To"
-tags: ["Kubernetes", "control plane"]
-aliases:
-    - /operations/kubernetes/supported-clusters/
+categories: ["Overview"]
+tags: ["Kubernetes"]
 ---
 
-## Minimum version
+Radius offers a Kubernetes-based platform for hosting the [Radius control plane]({{< ref "/guides/operations/control-plane" >}}) and [Radius environments]({{< ref "/guides/deploy-apps/environments/overview" >}}).
+
+<img src="kubernetes-mapping.png" alt="Diagram showing Radius resources being mapped to Kubernetes objects" width=600px />
+
+## Supported Kubernetes versions
 
 Kubernetes version `1.23.8` or higher is recommended to run Radius.
 
-## Supported clusters
+## Resource mapping
+
+Radius resources, when deployed to a Kubernetes environment, are mapped to one or more Kubernetes objects. The following table describes the mapping between Radius resources and Kubernetes objects:
+
+| Radius resource                  | Kubernetes object |
+|----------------------------------|-------------------|
+| [`Applications.Core/containers`]({{< ref container-schema >}}) | `apps/Deployment@v1` |
+| [`Applications.Core/httpRoutes`]({{< ref httproute >}})   | `core/Service@v1` |
+| [`Applications.Core/gateways`]({{< ref gateway >}})     | `projectcontour.io/HTTPProxy@v1` |
+| [`Applications.Dapr/pubSubBrokers`]({{< ref dapr-pubsub >}}) | `dapr.io/Component@v1alpha1` |
+| [`Applications.Dapr/secretStores`]({{< ref dapr-secretstore >}}) | `dapr.io/Component@v1alpha1` |
+| [`Applications.Dapr/stateStores`]({{< ref dapr-statestore >}}) | `dapr.io/Component@v1alpha1` |
+
+### Namespace mapping
+
+Application-scoped resources are by default generated in a new Kubernetes namespace with the name format `'<envNamespace>-<appname>'`. This prevents multiple applications with resources of the same name from conflicting with each other.
+
+For example, let's take an application named `'myapp'` with a container named `'frontend'`. This application is deployed into an environment configured with with the `'default'` namespace. A Kubernetes Deployment named `'frontend'` is now deployed into the namespace `'default-myapp'`.
+
+If you wish to override the default behavior and specify your own namespace for application resources to be generated into, you can leverage the [`kubernetesNamespace` application extension]({{< ref "application-schema#kubernetesNamespace" >}}). All application-scoped resources will now be deployed into this namespace instead.
+
+### Resource naming
+
+Resources that are generated in Kubernetes use the same name as the resource in Radius. For example, a Radius container named 'frontend' will map to a Kubernetes Deployment named `'frontend'`. This makes it easy to conceptually map between Radius and Kubernetes resources.
+
+For multiple Radius resources that map to a single Kubernetes resource (_e.g. daprPubSubBrokers, daprSecretStores, and daprStateStores all map to a dapr.io/Component_) and there are collisions in naming, Radius has conflict logic to allow the first resource to be deployed but will throw a warning for subsequent resource deployments that have the same name. This prevents Radius resources from unintentionally overwriting the same generated resource.
+
+## Kubernetes metadata
+
+Radius environments, applications, and resources can be annotated/labeled with Kubernetes metadata. Refer to the Kubernetes metadata page for more information:
+
+{{< button text="Kubernetes metadata" page="kubernetes-metadata" >}}
+
+## Supported Kubernetes clusters
 
 The following clusters have been tested and validated to ensure they support all of the features of Radius:
 
