@@ -29,7 +29,7 @@ If your Radius application is unresponsive or does not connect to its dependenci
 rad resource logs containers frontend -a <app_name>
 ```
 
-Also refer to the [connections section]({{< ref "guides/author-apps/containers/overview#connections" >}}) to know about the naming convention of the environment variables and inspect if your application uses the right variables. 
+> Also refer to the [connections section]({{< ref "guides/author-apps/containers/overview#connections" >}}) to know about the naming convention of the environment variables and inspect if your application uses the right variables. 
 
 ## Step 4: Inspect control-plane logs
 
