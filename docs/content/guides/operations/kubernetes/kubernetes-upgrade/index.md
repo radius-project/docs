@@ -3,7 +3,7 @@ type: docs
 title: "How-To: Upgrade Radius on Kubernetes "
 linkTitle: "Upgrade Radius on Kubernetes"
 description: "Learn how to upgrade Radius on Kubernetes"
-weight: 400
+weight: 300
 categories: "How-To"
 ---
 
