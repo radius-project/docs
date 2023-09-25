@@ -3,7 +3,7 @@ param environment string
 param application string
 
 //BASIC
-resource redis 'Applications.Datastores/redisCaches@2022-03-15-privatepreview'= {
+resource redis 'Applications.Datastores/redisCaches@2023-10-01-preview'= {
   name: 'myresource'
   properties: {
     environment: environment
@@ -17,7 +17,7 @@ resource redis 'Applications.Datastores/redisCaches@2022-03-15-privatepreview'= 
 
 
 //PARAMETERS
-resource redisParam 'Applications.Datastores/redisCaches@2022-03-15-privatepreview'= {
+resource redisParam 'Applications.Datastores/redisCaches@2023-10-01-preview'= {
   name: 'myresource'
   properties: {
     environment: environment
@@ -33,7 +33,7 @@ resource redisParam 'Applications.Datastores/redisCaches@2022-03-15-privateprevi
 //PARAMETERS
 
 //DEFAULT
-resource redisDefault 'Applications.Datastores/redisCaches@2022-03-15-privatepreview'= {
+resource redisDefault 'Applications.Datastores/redisCaches@2023-10-01-preview'= {
   name: 'myresource'
   properties: {
     environment: environment

@@ -2,7 +2,7 @@ import radius as radius
 
 param environment string
 
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'myapp'
   properties: {
     environment: environment
@@ -10,7 +10,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 }
 
 //HTTPROUTE
-resource httproute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
+resource httproute 'Applications.Core/httpRoutes@2023-10-01-preview' = {
   name: 'httproute'
   properties: {
     application: app.id
@@ -19,7 +19,7 @@ resource httproute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
 //HTTPROUTE
 
 //FRONTEND
-resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'frontend'
   properties: {
     application: app.id
@@ -39,7 +39,7 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 //FRONTEND
 
 //BACKEND
-resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource backend 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'backend'
   properties: {
     application: app.id

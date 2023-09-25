@@ -4,7 +4,7 @@ param application string
 param environment string
 
 // EXTENDER
-resource twilio 'Applications.Core/extenders@2022-03-15-privatepreview' = {
+resource twilio 'Applications.Core/extenders@2023-10-01-preview' = {
   name: 'twilio'
   properties: {
     application: application
@@ -16,7 +16,7 @@ resource twilio 'Applications.Core/extenders@2022-03-15-privatepreview' = {
 }
 //EXTENDER
 
-resource publisher 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource publisher 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'publisher'
   properties: {
     application: application

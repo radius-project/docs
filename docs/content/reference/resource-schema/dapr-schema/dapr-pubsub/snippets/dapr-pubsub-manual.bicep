@@ -3,14 +3,14 @@ import radius as radius
 @description('The ID of your Radius environment. Automatically injected by the rad CLI.')
 param environment string
 
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'azure-resources-dapr-pubsub-generic'
   properties: {
     environment: environment
   }
 }
 
-resource publisher 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource publisher 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'publisher'
   properties: {
     application: app.id
@@ -25,12 +25,12 @@ resource publisher 'Applications.Core/containers@2022-03-15-privatepreview' = {
   }
 }
 
-resource kafkaRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' existing = {
+resource kafkaRoute 'Applications.Core/httpRoutes@2023-10-01-preview' existing = {
   name: 'kafka-route'
 }
 
 //SAMPLE
-resource pubsub 'Applications.Dapr/pubSubBrokers@2022-03-15-privatepreview' = {
+resource pubsub 'Applications.Dapr/pubSubBrokers@2023-10-01-preview' = {
   name: 'pubsub'
   properties: {
     environment: environment

@@ -3,7 +3,7 @@ import radius as radius
 param environment string
 
 
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'myapp'
   properties: {
     environment: environment
@@ -24,7 +24,7 @@ resource account 'Microsoft.Storage/storageAccounts@2019-06-01' existing = {
 }
 
 // The accompanying Dapr component resource is automatically created for you
-resource stateStore 'Applications.Dapr/stateStores@2022-03-15-privatepreview' = {
+resource stateStore 'Applications.Dapr/stateStores@2023-10-01-preview' = {
   name: 'mystatestore'
   properties: {
     environment: environment
