@@ -20,7 +20,7 @@ Radius containers are portable across container runtimes, allowing you to define
 
 ### Kubernetes
 
-Containers are deployed to the same Kubernetes cluster as your Radius installation, into the namespace that is defined in your application. For more information on how Radius resources map to Kubernetes objects, refer to the [Kubernetes mapping guide]({{< ref "kubernetes-mapping" >}}).
+Containers are deployed to the same Kubernetes cluster as your Radius installation, into the namespace that is defined in your application. For more information on how Radius resources map to Kubernetes objects, refer to the [Kubernetes mapping guide]({{< ref "/guides/operations/kubernetes/overview#resource-mapping" >}}).
 
 ## Container definition
 
