@@ -29,26 +29,7 @@ If your Radius application is unresponsive or does not connect to its dependenci
 rad resource logs containers frontend -a <app_name>
 ```
 
-## Step 3: Inspect environment variables
-
-Check if the environment variables are properly set in your container and if the container is able to connect to the dependencies. Use the below command to list all the env variables set on your container pod:
-
-``` bash
-kubectl exec -n <namespace_name> <pod_name> -- printenv
-```
-
-Your output should look something like below:
-
-```
-....
-CONNECTION_REDIS_PORT=6379
-CONNECTION_REDIS_URL=redis://redis-pnjdlzgljrt74.default-application.svc.cluster.local:6379/0?
-CONNECTION_REDIS_CONNECTIONSTRING=redis-pnjdlzgljrt74.default-application.svc.cluster.local:6379,abortConnect=False
-CONNECTION_REDIS_HOST=redis-pnjdlzgljrt74.default-application.svc.cluster.local
-....
-```
-
-Also refer to the [connections section]({{< ref "guides/author-apps/containers/overview#connections" >}}) to know more about the naming convention and the environment variables that are set for each connection.
+Also refer to the [connections section]({{< ref "guides/author-apps/containers/overview#connections" >}}) to know about the naming convention of the environment variables and inspect if your application uses the right variables. 
 
 ## Step 4: Inspect control-plane logs
 
