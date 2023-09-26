@@ -39,4 +39,4 @@ You can find more examples of deploying applications with parameters [here]({{< 
 
  {{< /tabs >}}
 
- > Follow the [how-to guide]({{< ref troubleshooting-radius >}}) for guidance on troubleshooting your apps
+ > Follow the [how-to guide]({{< ref howto-troubleshootapps >}}) for guidance on troubleshooting your apps
