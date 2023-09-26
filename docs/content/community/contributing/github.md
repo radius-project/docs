@@ -18,4 +18,14 @@ The source code for Radius is available on GitHub within the [radius repo](https
 
 Documentation is housed at https://github.com/radius-project/docs.
 
-Samples are location at https://github.com/radius-project/samples.
+Samples are located at https://github.com/radius-project/samples.
+
+## Troubleshooting common issues
+
+### Visual Studio not authorized for single sign-on
+
+If you receive an error saying Visual Studio Code or another application is not authorized to clone any of the Radius repositories you may need to re-authorize the GitHub app:
+
+1. Open a browser to https://github.com/settings/applications
+1. Find the applicable app and select Revoke
+1. Reopen app on local machine and re-auth

@@ -38,5 +38,5 @@ Parameters can be included as part of `rad deploy` via the `-p/--parameters` fla
 
  {{< /tabs >}}
 
- > Follow the [how-to guide]({{< ref troubleshooting-radius >}}) for guidance on troubleshooting your Radius application
+ > Follow the [how-to guide]({{< ref howto-troubleshootapps >}}) for guidance on troubleshooting your Radius application
 
