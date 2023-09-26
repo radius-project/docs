@@ -11,14 +11,14 @@ param tlscrt string
 @secure()
 param tlskey string
 
-resource httpsApplication 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource httpsApplication 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'https-application'
   properties: {
     environment: environment
   }
 }
 
-resource httpsSecretStore 'Applications.Core/secretStores@2022-03-15-privatepreview' = {
+resource httpsSecretStore 'Applications.Core/secretStores@2023-10-01-preview' = {
   name: 'https-secretstore'
   properties: {
     application: httpsApplication.id
@@ -36,7 +36,7 @@ resource httpsSecretStore 'Applications.Core/secretStores@2022-03-15-privateprev
   }
 }
 
-resource httpsGateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
+resource httpsGateway 'Applications.Core/gateways@2023-10-01-preview' = {
   name: 'https-gateway'
   properties: {
     application: httpsApplication.id
@@ -56,14 +56,14 @@ resource httpsGateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
   }
 }
 
-resource httpsRoute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
+resource httpsRoute 'Applications.Core/httpRoutes@2023-10-01-preview' = {
   name: 'https-route'
   properties: {
     application: httpsApplication.id
   }
 }
 
-resource httpsContainer 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource httpsContainer 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'https-container'
   properties: {
     application: httpsApplication.id

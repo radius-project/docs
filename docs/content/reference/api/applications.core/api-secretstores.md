@@ -6,4 +6,4 @@ description: "Detailed reference documentation on the Applications.Core/secretSt
 slug: "secret-stores"
 ---
 
-{{< redoc "swagger/specification/applications/resource-manager/Applications.Core/preview/2022-03-15-privatepreview/openapi.json" >}}
+{{< redoc "swagger/specification/applications/resource-manager/Applications.Core/preview/2023-10-01-preview/openapi.json" >}}
