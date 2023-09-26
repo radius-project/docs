@@ -28,7 +28,7 @@ Visit [GitHub](https://github.com/Azure/bicep-types-k8s/blob/main/generated/inde
 
 ## Customize Kubernetes configurations
 
-Radius provides a way to apply custom Kubernetes configurations to container resources that are created by Radius. This allows you to make use of Kubernetes configurations or features that are not supported by Radius, yet remain composable with other Radius features like [Connections]({{< ref "guides/author-apps/containers/overview#connections" >}}). Additionaly, it provides a way to migrate your existing Kubernetes applications into Radius without having to rewrite your Kubernetes configurations, while giving you the option to incrementally adopt Radius features over time. The customizations are applied to the container resource via the [`runtimes`]({{< ref "reference/resource-schema/core-schema/container-schema/_index.md#runtimes" >}}) property within the container resource definition.
+Radius provides a way to apply custom Kubernetes configurations to container resources that are created by Radius. This allows you to make use of Kubernetes configurations or features that are not supported by Radius, yet remain composable with other Radius features like [Connections]({{< ref "guides/author-apps/containers/overview#connections" >}}). Additionally, it provides a way to migrate your existing Kubernetes applications into Radius without having to rewrite your Kubernetes configurations, while giving you the option to incrementally adopt Radius features over time. The customizations are applied to the container resource via the [`runtimes`]({{< ref "reference/resource-schema/core-schema/container-schema/_index.md#runtimes" >}}) property within the container resource definition.
 
 ### Base Kubernetes YAML
 
