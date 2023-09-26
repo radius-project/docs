@@ -31,7 +31,7 @@ rad resource logs containers frontend -a <app_name>
 
 > Also refer to the [connections section]({{< ref "guides/author-apps/containers/overview#connections" >}}) to know about the naming convention of the environment variables and inspect if your application uses the right variables. 
 
-## Step 4: Inspect control-plane logs
+## Step 3: Inspect control-plane logs
 
 If you hit errors while deploying the application, look at the control plane logs to see if there are any errors. You can use the following command to view the logs:
 
