@@ -14,7 +14,7 @@ resource account 'Microsoft.Storage/storageAccounts@2019-06-01' existing = {
   }
 }
 
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'myapp'
   properties: {
     environment: environment
@@ -22,7 +22,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 }
 
 //MARKER
-resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource container 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'mycontainer'
   properties: {
     application: app.id
@@ -43,7 +43,7 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
 }
 
 //STATESTORE
-resource statestore 'Applications.Dapr/stateStores@2022-03-15-privatepreview' = {
+resource statestore 'Applications.Dapr/stateStores@2023-10-01-preview' = {
   name: 'mystatestore'
   properties: {
     environment: environment

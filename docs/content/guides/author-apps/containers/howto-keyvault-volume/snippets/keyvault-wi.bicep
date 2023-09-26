@@ -7,7 +7,7 @@ param azLocation string = resourceGroup().location
 @description('Specifies the environment for resources.')
 param oidcIssuer string
 
-resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
+resource env 'Applications.Core/environments@2023-10-01-preview' = {
   name: 'kv-volume-quickstart'
   properties: {
     compute: {
@@ -29,14 +29,14 @@ resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
 //ENVIRONMENT
 
 //APP
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'myapp'
   properties: {
     environment: env.id
   }
 }
 
-resource volume 'Applications.Core/volumes@2022-03-15-privatepreview' = {
+resource volume 'Applications.Core/volumes@2023-10-01-preview' = {
   name: 'myvolume'
   properties: {
     application: app.id
@@ -72,7 +72,7 @@ resource keyvault 'Microsoft.KeyVault/vaults@2021-10-01' = {
 //APP
 
 //CONTAINER
-resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource container 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'mycontainer'
   properties: {
     application: app.id

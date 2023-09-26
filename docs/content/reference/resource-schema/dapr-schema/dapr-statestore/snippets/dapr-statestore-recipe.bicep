@@ -6,7 +6,7 @@ param application string
 @description('The ID of your Radius environment. Automatically injected by the rad CLI.')
 param environment string
 
-resource myapp 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource myapp 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'myapp'
   properties: {
     application: application
@@ -28,7 +28,7 @@ resource myapp 'Applications.Core/containers@2022-03-15-privatepreview' = {
 }
   
 //SAMPLE
-resource statestore 'Applications.Dapr/stateStores@2022-03-15-privatepreview' = {
+resource statestore 'Applications.Dapr/stateStores@2023-10-01-preview' = {
   name: 'statestore'
   properties: {
     environment: environment

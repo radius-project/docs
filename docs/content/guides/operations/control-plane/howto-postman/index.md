@@ -127,7 +127,7 @@ Next, you'll need to get the control plane API endpoint and use Postman to inter
 1. Update your request URL to [list all the Radius environments]({{< ref api-environments >}}) in your resource group (_make sure to update the name of your resource group in the URL. In this example the resource group name is default_):
 
    ```
-   <your-cluster-control-plane>/apis/api.ucp.dev/v1alpha3/planes/radius/local/resourcegroups/default/providers/Applications.Core/environments?api-version=2022-03-15-privatepreview
+   <your-cluster-control-plane>/apis/api.ucp.dev/v1alpha3/planes/radius/local/resourcegroups/default/providers/Applications.Core/environments?api-version=2023-10-01-preview
    ```
 
     You should now see your Radius environment(s):

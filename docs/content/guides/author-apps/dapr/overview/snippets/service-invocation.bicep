@@ -1,12 +1,12 @@
 import radius as rad
 
 
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' existing = {
+resource app 'Applications.Core/applications@2023-10-01-preview' existing = {
   name: 'myapp'
 }
 
 // Backend is being invoked through service invocation
-resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource backend 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'backend'
   properties: {
     application: app.id
@@ -24,7 +24,7 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 
 
 // Frontend invokes backend
-resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'frontend'
   properties: {
     application: app.id
