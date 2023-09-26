@@ -466,3 +466,5 @@ imagePullPolicy
 otelhttp
 PodSpec
 ConfigMap
+CRD
+composable
