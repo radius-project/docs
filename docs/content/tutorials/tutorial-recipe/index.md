@@ -145,7 +145,7 @@ Note that no Recipe name is specified with 'db', so it will be using the default
 
 This step requires an Azure subscription or an AWS account to deploy cloud resources, which will incur costs. You will need to add the [Azure/AWS cloud provider]({{< ref providers >}}) to your environment in order to deploy Azure/AWS resources and leverage Azure Recipes.
 
-{{< tabs Azure AWS>}}
+{{< tabs Azure AWS >}}
 
 {{% codetab %}}
 1. Delete your existing Redis cache, which we will redeploy with an Azure resource:
