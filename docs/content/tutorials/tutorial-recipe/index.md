@@ -237,7 +237,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 1. Register the Recipe to your Radius Environment:
 
    ```bash
-   rad recipe register aws --environment default --template-kind bicep --template-path radius.azurecr.io/recipes/rediscaches/aws:1.0 --link-type Applications.Link/redisCaches --parameters eksClusterName=YOUR_EKS_CLUSTER_NAME
+   rad recipe register aws --environment default --template-kind bicep --template-path radius.azurecr.io/recipes/aws/rediscaches:latest --resource-type Applications.Datastores/redisCaches --parameters eksClusterName=<EKS_CLUSTERNAME>
    ```
    > *Note: Passing the `eksClusterName` during the registration of the Recipe is a temporary additional step as Radius builds up AWS support.*
 
