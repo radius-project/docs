@@ -37,6 +37,7 @@ weight: 300
 | env | n | A list of environment variables to be set for the container. | `'ENV_VAR': 'value'`
 | command | n | Entrypoint array. Overrides the container image's ENTRYPOINT. | `['/bin/sh']`
 | args | n | Arguments to the entrypoint. Overrides the container image's CMD. | `['-c', 'while true; do echo hello; sleep 10;done']`
+| imagePullPolicy | n | How to pull images. Defaults to the runtime's default behavior. For Kubernetes behavior refer to https://kubernetes.io/docs/concepts/containers/images/#required-image-pull | `'Always'`
 | workingDir | n | Working directory for the container. | `'/app'`
 | [ports](#ports) | n | Ports the container provides | [See below](#ports).
 | [readinessProbe](#readiness-probe) | n | Readiness probe configuration. | [See below](#readiness-probe).
@@ -94,7 +95,7 @@ The ports offered by the container are  defined in the `ports` section.
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | name | y | A name key for the port. | `inventory`
-| source | y | The id of the link or resource the container is connecting to. | `db.id`
+| source | y | The id of the resource the container is connecting to. | `db.id`
 | [iam](#iam) | n | Identity and access management (IAM) roles to set on the target resource. | [See below](#iam)
 
 #### IAM
@@ -118,7 +119,7 @@ Additional properties are available and required depending on the 'kind' of the 
 
 #### kubernetesMetadata
 
-The [Kubernetes Metadata extension]({{< ref "/operations/platforms/kubernetes/kubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius application. For examples refer to the extension overview page.
+The [Kubernetes Metadata extension]({{< ref "guides/operations/kubernetes/kubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius application. For examples refer to the extension overview page.
 
 ##### Properties
 

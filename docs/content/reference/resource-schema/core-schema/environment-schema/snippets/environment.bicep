@@ -3,7 +3,7 @@ import radius as rad
 param oidcIssuer string
 
 //ENV
-resource environment 'Applications.Core/environments@2022-03-15-privatepreview' = {
+resource environment 'Applications.Core/environments@2023-10-01-preview' = {
   name: 'myenv'
   properties: {
     compute: {

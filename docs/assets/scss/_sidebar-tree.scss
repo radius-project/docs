@@ -2,9 +2,9 @@
 // Left side navigation
 //
 .td-sidebar-nav {
-    padding-right: 0.5rem;
-    margin-right: -15px;
-    margin-left: -15px;
+    padding-right: 0.1rem;
+    margin-right: -20px;
+    margin-left: -20px;
 
     @include media-breakpoint-up(md) {
         @supports (position: sticky) {
@@ -54,7 +54,7 @@
 
     .td-sidebar-link {
         display: block;
-        padding-bottom: 0.3rem;
+        padding-bottom: 0.15rem;
 
         &__page {
             color: $gray-700;
@@ -62,6 +62,7 @@
     }
 
     a {
+        font-size: .9rem;
         &:hover {
             color: $blue;
             text-decoration: none;
@@ -101,6 +102,7 @@
         color: $td-sidebar-tree-root-color;
         border-bottom: 1px $td-sidebar-tree-root-color solid;
         margin-bottom: 1rem;
+        margin-top: 1rem;
     }
 }
 

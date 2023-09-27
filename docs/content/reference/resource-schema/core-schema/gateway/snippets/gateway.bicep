@@ -2,7 +2,7 @@ import radius as radius
 
 param environment string
 
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'myapp'
   properties: {
     environment: environment
@@ -10,7 +10,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 }
 
 //GATEWAY
-resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
+resource gateway 'Applications.Core/gateways@2023-10-01-preview' = {
   name: 'gateway'
   properties: {
     application: app.id
@@ -45,7 +45,7 @@ resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
 }
 //GATEWAY
 
-resource secretstore 'Applications.Core/secretStores@2022-03-15-privatepreview' = {
+resource secretstore 'Applications.Core/secretStores@2023-10-01-preview' = {
   name: 'secretstore'
   properties: {
     application: app.id
@@ -55,7 +55,7 @@ resource secretstore 'Applications.Core/secretStores@2022-03-15-privatepreview' 
 }
 
 //FRONTENDROUTE
-resource frontendroute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
+resource frontendroute 'Applications.Core/httpRoutes@2023-10-01-preview' = {
   name: 'frontendroute'
   properties: {
     application: app.id
@@ -64,7 +64,7 @@ resource frontendroute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' 
 //FRONTENDROUTE
 
 //BACKENDROUTE
-resource backendroute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
+resource backendroute 'Applications.Core/httpRoutes@2023-10-01-preview' = {
   name: 'backendroute'
   properties: {
     application: app.id
@@ -73,7 +73,7 @@ resource backendroute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' =
 //BACKENDROUTE
 
 //FRONTEND
-resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'frontend'
   properties: {
     application: app.id
@@ -99,7 +99,7 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 //FRONTEND
 
 //BACKEND
-resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource backend 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'backend'
   properties: {
     application: app.id

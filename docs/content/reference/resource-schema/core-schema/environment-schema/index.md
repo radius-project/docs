@@ -47,7 +47,7 @@ Details on what to run and how to run it are defined in the `container` property
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| \<resource-type\> | y | The type of resource to register Recipes for. | `'Applications.Link/redisCaches'`
+| \<resource-type\> | y | The type of resource to register Recipes for. | `'Applications.Datastores/redisCaches'`
 | recipes | y | The list of Recipes registered to a given resource type | [See below](#recipe-properties)
 
 #### recipe properties
@@ -65,7 +65,7 @@ Extensions allow you to customize how resources are generated or customized as p
 
 #### kubernetesMetadata
 
-The [Kubernetes Metadata extension]({{< ref "/operations/platforms/kubernetes/kubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius application. For examples, please refer to the extension overview page.
+The [Kubernetes Metadata extension]({{< ref "guides/operations/kubernetes/kubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius application. For examples, please refer to the extension overview page.
 
 ##### Properties
 
@@ -89,4 +89,4 @@ The [Kubernetes Metadata extension]({{< ref "/operations/platforms/kubernetes/ku
 
 ## Further reading
 
-- [Radius environments]({{< ref "operations/environments/overview" >}})
+- [Radius environments]({{< ref "/guides/deploy-apps/environments/overview" >}})

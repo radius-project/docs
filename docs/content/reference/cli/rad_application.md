@@ -1,0 +1,39 @@
+---
+type: docs
+title: "rad application CLI reference"
+linkTitle: "rad application"
+slug: rad_application
+url: /reference/cli/rad_application/
+description: "Details on the rad application Radius CLI command"
+---
+## rad application
+
+Manage Radius applications
+
+### Synopsis
+
+Manage Radius applications
+
+### Options
+
+```
+  -h, --help   help for application
+```
+
+### Options inherited from parent commands
+
+```
+      --config string   config file (default "$HOME/.rad/config.yaml")
+  -o, --output string   output format (supported formats are json, table) (default "table")
+```
+
+### SEE ALSO
+
+* [rad]({{< ref rad.md >}})	 - Radius CLI
+* [rad application connections]({{< ref rad_application_connections.md >}})	 - Shows the connections for an application.
+* [rad application delete]({{< ref rad_application_delete.md >}})	 - Delete Radius application
+* [rad application list]({{< ref rad_application_list.md >}})	 - List Radius applications
+* [rad application show]({{< ref rad_application_show.md >}})	 - Show Radius application details
+* [rad application status]({{< ref rad_application_status.md >}})	 - Show Radius application status
+* [rad application switch]({{< ref rad_application_switch.md >}})	 - Switch the default Radius application
+
