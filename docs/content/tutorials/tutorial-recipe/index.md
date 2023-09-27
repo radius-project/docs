@@ -78,7 +78,7 @@ When a Recipe is named "default" it will be used by default when deploying resou
 
 ## Step 2: Define your application
 
-Update `app.bicep` with the following set of resources: 
+Update `app.bicep` with the following set of resources:
 
 > app.bicep was created automatically when you ran `rad init`
 
