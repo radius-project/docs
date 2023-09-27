@@ -142,6 +142,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 {{< button text="Add a cloud provider" page="providers#configure-a-cloud-provider" newtab="true" >}}
 
 {{< tabs Azure AWS>}}
+
 {{% codetab %}}
 
 1. Delete your existing Redis cache, which we will redeploy with an Azure resource:
@@ -185,6 +186,9 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
       frontend        Applications.Core/containers
       db              Applications.Datastores/redisCaches
    ```
+{{% /codetab %}}
+
+{{< /tabs >}}
 
 
 5. Use the az CLI to see your newly deployed Azure Cache for Redis:
@@ -200,7 +204,6 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
      "cache-goqoxgqkw2ogw"
    ]
    ```
-
 {{% /codetab %}}
 
 {{% codetab %}}
@@ -255,13 +258,6 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 {{% /codetab %}}
 
 {{< /tabs >}}
-
-6. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose>}})
-
-    ```bash
-    rad resource expose containers frontend -a webapp --port 3000
-    ```
-7. Visit [localhost:3000](http://localhost:3000) in your browser again and interact with your application.
 
 ## Step 5: Cleanup your environment
 
