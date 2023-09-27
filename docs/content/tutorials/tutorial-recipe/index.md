@@ -144,7 +144,6 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 {{< tabs Azure AWS>}}
 
 {{% codetab %}}
-
 1. Delete your existing Redis cache, which we will redeploy with an Azure resource:
 
    ```bash
@@ -186,11 +185,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
       frontend        Applications.Core/containers
       db              Applications.Datastores/redisCaches
    ```
-{{% /codetab %}}
-
-{{< /tabs >}}
-
-
+   
 5. Use the az CLI to see your newly deployed Azure Cache for Redis:
 
    ```bash
