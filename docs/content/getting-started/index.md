@@ -120,7 +120,6 @@ In your browser you should see the demo app:
 
 Congrats! You're running your first Radius app. When you're ready to move on to the next step, use <kbd>CTRL</kbd>+ <kbd>C</kbd> to exit the command.
 
-
 ## 5. Add Database
 
 This step will add a database (Redis Cache) to the application.
@@ -165,6 +164,38 @@ Navigate to the Todo List tab and test out the application. Using the Todo page 
 <br /><br />
 
 Press <kbd>CTRL</kbd>+ <kbd>C</kbd> when you are finished with the website.
+
+## 7. View the application connections
+
+Radius connections are more than just environment variables and configuration. You can also access the "application graph" and understand the connections within your application with the following command:
+
+```bash
+rad app connections
+```
+
+You should see the following output, detailing the connections between the `demo` container and the `db` Redis Cache, along with information about the underlying Kubernetes resources running the app:
+
+```
+Displaying application: demo
+
+Name: demo (Applications.Core/containers)
+Connections:
+  demo -> db (Applications.Datastores/redisCaches)
+Resources:
+  demo (kubernetes: apps/Deployment)
+  demo (kubernetes: core/Secret)
+  demo (kubernetes: core/Service)
+  demo (kubernetes: core/ServiceAccount)
+  demo (kubernetes: rbac.authorization.k8s.io/Role)
+  demo (kubernetes: rbac.authorization.k8s.io/RoleBinding)
+
+Name: db (Applications.Datastores/redisCaches)
+Connections:
+  demo (Applications.Core/containers) -> db
+Resources:
+  redis-r5tcrra3d7uh6 (kubernetes: apps/Deployment)
+  redis-r5tcrra3d7uh6 (kubernetes: core/Service)
+```
 
 ## Recap and next steps
 
