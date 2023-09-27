@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "How-To: Deploy Recipes in your Radius Application"
+title: "Tutorial: Deploy Recipes in your Radius Application"
 linkTitle: "Recipes"
 description: "Learn how to use Radius Recipes within your application"
 weight: 500
@@ -9,17 +9,12 @@ categories: "How-To"
 tags : ["recipes"]
 ---
 
-This how-to guide will teach you:
+This tutorial will teach you the following about recipes
 
 * How to use “dev” Recipes in your Radius Environment to quickly run with containerized infrastructure.
-* How to deploy your own Recipes in your Radius Environment to leverage cloud resources.
+* How to deploy your own Recipes in your Radius Environment to leverage Azure/AWS resources.
 
-## Prerequisites
-
-- Install the [rad CLI]({{< ref getting-started >}})
-- Setup a supported [Kubernetes cluster]({{< ref "guides/operations/kubernetes" >}})
-
-## Overview
+## Recipes overview
 
 [Recipes]({{< ref "guides/recipes/overview">}}) enable a separation of concerns between infrastructure teams and developers by automating infrastructure deployment. Developers define _what_ they need (_Redis, Mongo, etc._), and operators define _how_ it will be deployed (_Azure/AWS/Kubernetes infrastructure_).
 
@@ -34,6 +29,11 @@ This application is a simple to-do list which stores and visualizes to-do items.
 {{< alert title="💡 Portable resources" color="info" >}}
 Developers don't need to specify what cloud resources they're using in their application. Instead, they choose the portable Redis API which can be provided by any cloud provider (or a Docker container). When deployed, a Recipe will select what infrastructure to deploy and run.
 {{< /alert >}}
+
+## Prerequisites
+
+- Install the [rad CLI]({{< ref getting-started >}})
+- Setup a supported [Kubernetes cluster]({{< ref "guides/operations/kubernetes" >}})
 
 ## Step 1: Initialize a Radius environment
 
@@ -57,22 +57,28 @@ Developers don't need to specify what cloud resources they're using in their app
    rad recipe list 
    ```
 
-   You should see a table of available Recipes (_with more to be added soon_):
+   You should see a table of available Recipes:
    
    ```
-   NAME          TYPE                              TEMPLATE
-   default       Applications.Datastores/redisCaches     radius.azurecr.io/recipes/dev/rediscaches:v0.21
+   NAME      TYPE                                    TEMPLATE KIND  TEMPLATE VERSION  TEMPLATE
+   default   Applications.Datastores/sqlDatabases    bicep                            radius.azurecr.io/recipes/local-dev/sqldatabases:latest
+   default   Applications.Messaging/rabbitMQQueues   bicep                            radius.azurecr.io/recipes/local-dev/rabbitmqqueues:latest
+   default   Applications.Dapr/pubSubBrokers         bicep                            radius.azurecr.io/recipes/local-dev/pubsubbrokers:latest
+   default   Applications.Dapr/secretStores          bicep                            radius.azurecr.io/recipes/local-dev/secretstores:latest
+   default   Applications.Dapr/stateStores           bicep                            radius.azurecr.io/recipes/local-dev/statestores:latest
+   default   Applications.Datastores/mongoDatabases  bicep                            radius.azurecr.io/recipes/local-dev/mongodatabases:latest
+   default   Applications.Datastores/redisCaches     bicep                            radius.azurecr.io/recipes/local-dev/rediscaches:latest
    ```
 
-   {{< alert title="💡 Dev Recipes" color="info" >}}
-   Dev environments are preloaded with [`dev` Recipes]({{< ref "guides/recipes/overview#use-community-dev-recipes" >}}), a set of Recipes that allow you to quickly get up and running with lightweight containerized infrastructure. In This how-to guide, the dev Redis Recipe deploys a lightweight Redis container into your Kubernetes cluster.
+{{< alert title="💡 Dev Recipes" color="info" >}}
+Dev environments are preloaded with [`dev` Recipes]({{< ref "guides/recipes/overview#use-community-dev-recipes" >}}), a set of Recipes that allow you to quickly get up and running with lightweight containerized infrastructure. In This how-to guide, the dev Redis Recipe deploys a lightweight Redis container into your Kubernetes cluster.
 
-   When a Recipe is named "default" it will be used by default when deploying resources when a Recipe is not specified.
-   {{< /alert >}}
+When a Recipe is named "default" it will be used by default when deploying resources when a Recipe is not specified.
+{{< /alert >}}
 
 ## Step 2: Define your application
 
-Update `app.bicep` with the following set of resources:
+Update `app.bicep` with the following set of resources: 
 
 > app.bicep was created automatically when you ran `rad init`
 
@@ -112,7 +118,7 @@ Note that no Recipe name is specified with 'db', so it will be using the default
 2. List your Kubernetes Pods to see the infrastructure container deployed by the Recipe:
 
    ```bash
-   kubectl get pods -n default-webapp
+   kubectl get pods -n default-recipes
    ```
 
    You will see your 'frontend' container, along with the Redis cache that was automatically created by the default dev Recipe:
@@ -131,15 +137,13 @@ Note that no Recipe name is specified with 'db', so it will be using the default
 
 4. Visit [`http://localhost:3000`](http://localhost:3000) in your browser.
 
-   You can now see both the environment variables of your container as well as interact with the `Todo App` and add/remove items in it as wanted:
+   You can now see both the environment variables of your container under Radius Connections as well as interact with the `Todo App` and add/remove items in it as wanted:
 
    <img src="todoapp.png" width="700px" alt="screenshot of the todo application">
  
 ## Step 4: Use Azure/AWS recipes in your application
 
-This step requires an Azure subscription or an AWS account to deploy cloud resources, which will incur costs. You will need to add the [Azure/AWS cloud provider]({{< ref providers >}}) to your environment in order to deploy Azure resources and leverage Azure Recipes.
-
-{{< button text="Add a cloud provider" page="providers#configure-a-cloud-provider" newtab="true" >}}
+This step requires an Azure subscription or an AWS account to deploy cloud resources, which will incur costs. You will need to add the [Azure/AWS cloud provider]({{< ref providers >}}) to your environment in order to deploy Azure/AWS resources and leverage Azure Recipes.
 
 {{< tabs Azure AWS>}}
 
@@ -149,6 +153,9 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
    ```bash
    rad resource delete rediscaches db
    ```
+1. Manually add the Azure cloud provider to your Radius environment
+
+   Follow the steps [here]({{< ref "howto-azure-provider#manual-configuration" >}}) to add the Azure cloud provider to your existing environment.
 
 2. Register the Recipe to your Radius Environment:
 
@@ -185,7 +192,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
       frontend        Applications.Core/containers
       db              Applications.Datastores/redisCaches
    ```
-   
+
 5. Use the az CLI to see your newly deployed Azure Cache for Redis:
 
    ```bash
@@ -199,6 +206,18 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
      "cache-goqoxgqkw2ogw"
    ]
    ```
+1. Port-forward the container to your machine with `rad resource expose`:
+
+   ```bash
+   rad resource expose containers frontend --port 3000
+   ```
+
+1. Visit [`http://localhost:3000`](http://localhost:3000) in your browser.
+
+   You can now see environment variables of your container under Radius Connections updated with the details of the Azure Cache for Redis and the Todo app now uses the Azure cache for Redis as the data store 
+
+   <img src="todoapp.png" width="700px" alt="screenshot of the todo application">
+
 {{% /codetab %}}
 
 {{% codetab %}}
@@ -210,6 +229,10 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
    ```bash
    rad resource delete rediscaches db
    ```
+
+1. Manually add the AWS cloud provider to your Radius environment
+
+   Follow the steps [here]({{< ref "howto-aws-provider#manual-configuration" >}}) to add the AWS cloud provider to your existing environment
 
 1. Register the Recipe to your Radius Environment:
 
@@ -250,18 +273,30 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
       db              Applications.Link/redisCaches
    ```
 
+1. Port-forward the container to your machine with `rad resource expose`:
+
+   ```bash
+   rad resource expose containers frontend --port 3000
+   ```
+
+1. Visit [`http://localhost:3000`](http://localhost:3000) in your browser.
+
+   You can now see environment variables of your container under Radius Connections updated with the details of the Amazon Memory Db for Redis and the Todo app now uses the Amazon Memory Db for Redis as the data store 
+
+   <img src="todoapp.png" width="700px" alt="screenshot of the todo application">
+
 {{% /codetab %}}
 
 {{< /tabs >}}
 
+
 ## Step 5: Cleanup your environment
 
-1. You can use the rad CLI to [delete your environment]({{< ref rad_env_delete.md >}}) and all the       Radius resources running on your cluster:
+1. You can use the rad CLI to [delete your environment]({{< ref rad_env_delete.md >}}) and all the  Radius resources running on your cluster:
    
    ```bash
    rad env delete default --yes
    ```
-1. Delete the Azure Redis cache via the Azure CLI or the Azure portal, and the AWS Memory DB for Redis via the AWS CLI or the AWS console.
 
 ## Next steps
 
