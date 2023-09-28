@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Radius: the cloud-native application platform"
+title: "Radius Cloud-Native Application Platform"
 linkTitle: "Home"
-description: "Model, deploy, and manage applications across dev, cloud, edge, and on-prem"
+description: "Radius enables developers and the platform engineers that support them to build cloud-native applications"
 weight: 1
 no_list: true
 ---
