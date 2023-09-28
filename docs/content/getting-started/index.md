@@ -6,6 +6,8 @@ weight: 10
 description: "Take a tour of Radius by getting started with your first app"
 aliases:
     - /getting-started/tutorial/
+    - /getting-started/install/
+    - /getting-started/first-app/
 ---
 
 This guide will show you how to quickly get started with Radius. You'll walk through both installing Radius and running your first Radius app.
@@ -111,11 +113,12 @@ This command:
 - Creates a port-forward from localhost to port 3000 inside the container so you can navigate to the app's frontend UI
 - Streams container logs to your terminal
 
-<img src="./demo-screenshot.png" alt="Screenshot of the demo container" width=400>
-<br /><br />
-Congrats! You're running your first Radius app.
+In your browser you should see the demo app:
 
-When you're ready to move on to the next step, use `CTRL+C` to exit the command.
+<img src="./demo-screenshot.png" alt="Screenshot of the demo container" width=600px >
+<br /><br />
+
+Congrats! You're running your first Radius app. When you're ready to move on to the next step, use <kbd>CTRL</kbd>+ <kbd>C</kbd> to exit the command.
 
 ## 5. Add Database
 
@@ -150,17 +153,49 @@ Use the command below to run the updated application again, then open the browse
 rad run app.bicep
 ```
 
-You should see that the environment variables have changed. The `demo` container now has connection information for Redis (`CONNECTION_REDIS_HOST`, `CONNECTION_REDIS_PORT`).
+You should see the Radius Connections section with new environment variables added. The `demo` container now has connection information for Redis (`CONNECTION_REDIS_HOST`, `CONNECTION_REDIS_PORT`, etc.):
 
-<img src="./demo-with-redis-screenshot.png" alt="Screenshot of the demo container" width=500>
+<img src="./demo-with-redis-screenshot.png" alt="Screenshot of the demo container" width=800px >
 <br /><br />
 
-Navigate to the TODO List tab and test out the application. Using the TODO page will update the saved state in Redis.
+Navigate to the Todo List tab and test out the application. Using the Todo page will update the saved state in Redis:
 
-<img src="./demo-with-todolist.png" alt="Screenshot of the todolist" width=500>
+<img src="./demo-with-todolist.png" alt="Screenshot of the todolist" width=700px >
 <br /><br />
 
-Press CTRL+C when you are finished with the website.
+Press <kbd>CTRL</kbd>+ <kbd>C</kbd> when you are finished with the website.
+
+## 7. View the application connections
+
+Radius connections are more than just environment variables and configuration. You can also access the "application graph" and understand the connections within your application with the following command:
+
+```bash
+rad app connections
+```
+
+You should see the following output, detailing the connections between the `demo` container and the `db` Redis Cache, along with information about the underlying Kubernetes resources running the app:
+
+```
+Displaying application: demo
+
+Name: demo (Applications.Core/containers)
+Connections:
+  demo -> db (Applications.Datastores/redisCaches)
+Resources:
+  demo (kubernetes: apps/Deployment)
+  demo (kubernetes: core/Secret)
+  demo (kubernetes: core/Service)
+  demo (kubernetes: core/ServiceAccount)
+  demo (kubernetes: rbac.authorization.k8s.io/Role)
+  demo (kubernetes: rbac.authorization.k8s.io/RoleBinding)
+
+Name: db (Applications.Datastores/redisCaches)
+Connections:
+  demo (Applications.Core/containers) -> db
+Resources:
+  redis-r5tcrra3d7uh6 (kubernetes: apps/Deployment)
+  redis-r5tcrra3d7uh6 (kubernetes: core/Service)
+```
 
 ## Recap and next steps
 
