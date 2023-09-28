@@ -8,7 +8,7 @@ categories: "Overview"
 tags: ["rad CLI"]
 ---
 
-The rad CLI is a command line interface that allows you to interact with Radius from your local machine. It is the primary way to interact with Radius and is used to create, deploy, and manage your applications, environments, and resources.
+The rad Command Line Interface (CLI) allows you to interact with Radius from your local machine. It is the primary way to interact with Radius and is used to create, deploy, and manage your applications, environments, and resources.
 
 ```bash
 $ rad
@@ -39,7 +39,7 @@ Available Commands:
 
 ## Installation
 
-The rad CLI is distributed as a single binary that can be installed on Linux, macOS, and Windows. Visit the [installation guide]({{< ref howto-rad-cli >}}) to learn how to install the rad CLI on your machine.
+The rad CLI is distributed as a single binary that can be installed on Linux, macOS, and Windows. Visit the [installation guide]({{< ref howto-rad-cli >}}) to learn how to install the rad CLI.
 
 {{< button text="Install rad CLI" page="howto-rad-cli" >}}
 
