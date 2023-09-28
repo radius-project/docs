@@ -469,3 +469,5 @@ HashiCorp
 intellisense
 itemName
 visualstudio
+RoleBinding
+tcrra
