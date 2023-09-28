@@ -10,6 +10,8 @@ Radius supports AWS resource types that are supported by the [AWS Cloud Control 
 
 Following table lists the resource types that are currently supported and the limitations for each of the resource types.
 
+> *If you don't have access to the Bicep-types-aws github repo, please visit https://aka.ms/ProjectRadius/GitHubAccess to request access to the Radius GitHub organization.*
+
 | Resource Type | Notes |
 | ------------- | ----- |
 | **[AWS::ACMPCA::Certificate](https://github.com/radius-project/bicep-types-aws/blob/main/artifacts/bicep/aws/aws.acmpca/default/types.md)** | ⚠ This resource type is non-idempotent. See [here](https://github.com/radius-project/bicep-types-aws/blob/main/docs/reference/limitations.md) for more information. |
