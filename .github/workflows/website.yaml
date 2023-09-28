@@ -63,7 +63,7 @@ jobs:
         run: |
           cd docs
           if [ $GITHUB_EVENT_NAME == 'pull_request' ]; then
-            STAGING_URL="https://${{ vars.ENV_STATICWEBAPP_BASE }}-${{github.event.number }}.3.azurestaticapps.net/"
+            STAGING_URL="https://${{ vars.ENV_STATICWEBAPP_BASE }}-${{github.event.number }}.westus2.3.azurestaticapps.net/"
           fi
           hugo ${STAGING_URL+-b "$STAGING_URL"}
       - name: Upload Hugo artifacts
