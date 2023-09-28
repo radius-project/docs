@@ -5,7 +5,7 @@ linkTitle: "Recipes"
 description: "Learn how to use Radius Recipes within your application"
 weight: 500
 slug: "recipes"
-categories: "How-To"
+categories: "Tutorial"
 tags : ["recipes"]
 ---
 
