@@ -97,7 +97,7 @@ resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
     ]
     runtimes: {
       kubernetes: {
-        base: loadTextContent('sidecar.yaml')
+        base: loadTextContent('base-container.yaml')
         pod: {
           containers: [
             {

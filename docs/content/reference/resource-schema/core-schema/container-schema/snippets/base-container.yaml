@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ctnr-sidecar
+  name: ctnr-base
   labels:
-    app: ctnr-sidecar
+    app: ctnr-base
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ctnr-sidecar
+      app: ctnr-base
   template:
     metadata:
       labels:
-        app: ctnr-sidecar
+        app: ctnr-base
     spec:
       containers:
-        - name: ctnr-sidecar
+        - name: ctnr-base
           image: radiusdev.azurecr.io/magpie:latest
