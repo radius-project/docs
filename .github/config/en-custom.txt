@@ -465,3 +465,10 @@ runtime's
 imagePullPolicy
 otelhttp
 prem
+hashicorp
+HashiCorp
+intellisense
+itemName
+visualstudio
+RoleBinding
+tcrra
