@@ -35,9 +35,9 @@ Visit the [rad CLI how-to guide]({{< ref howto-rad-cli >}}) for more information
 
 ## Step 4: Install the Radius-Bicep VS Code extension
 
-The Radius-Bicep VS Code extension provides a set of tools for working with Bicep files in VS Code. Visit the [VSCode how-to guide]({{< ref howto-vscode >}}) for more information on how to install the Radius-Bicep VS Code extension.
+The Radius-Bicep VS Code extension provides a set of tools for working with Bicep files in VS Code. Visit the [VSCode how-to guide]({{< ref howto-vscode-bicep >}}) for more information on how to install the Radius-Bicep VS Code extension.
 
-{{< button text="How-To: VS Code" page="howto-vscode" newtab="true" >}}
+{{< button text="How-To: VS Code" page="howto-vscode-bicep" newtab="true" >}}
 
 ## Step 5: Initialize the Radius control-plane
 
@@ -46,7 +46,3 @@ The Radius control-plane is a set of services that provide the core functionalit
 Visit the [environments how-to guide]({{< ref howto-environment >}}) for more information on how to install the Radius control-plane and create your first Radius environment.
 
 {{< button text="How-To: Init an environment" page="howto-environment" newtab="true" >}}
-
-
-
-
