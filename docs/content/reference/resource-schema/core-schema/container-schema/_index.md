@@ -176,5 +176,5 @@ The `manualScaling` extension configures the number of replicas of a compute ins
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| base | n | The base Kubernetes resource manifest on top of which Radius specified properties will be applied. Supported resource types are documented [here]({{<ref "guides/author-apps/kubernetes/overview#base-kubernetes-yaml">}}). | `loadTextContent('manifest/sidecar.yaml')`
+| base | n | The base Kubernetes resource manifest on top of which Radius specified properties will be applied. Supported resource types are documented [here]({{<ref "guides/author-apps/containers/overview#base-kubernetes-yaml">}}). | `loadTextContent('manifest/sidecar.yaml')`
 | pod | n | The pod specifications to apply to the Kubernetes resource created by Radius. Any field defined on [PodSpec](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#PodSpec) can be set here. | [`topologySpreadConstraints`](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling)
