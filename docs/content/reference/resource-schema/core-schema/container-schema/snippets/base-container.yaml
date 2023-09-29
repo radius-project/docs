@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ctnr-base
+  name: frontend
   labels:
-    app: ctnr-base
+    app: frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ctnr-base
+      app: frontend
   template:
     metadata:
       labels:
-        app: ctnr-base
+        app: frontend
     spec:
       containers:
-        - name: ctnr-base
+        - name: frontend
           image: radiusdev.azurecr.io/magpie:latest
