@@ -86,7 +86,7 @@ This will be addressed in a future release when we change how the environmentId 
 
 ### Radius Bicep AWS limitations
 
-Some of the [supported AWS resource types](/resource-schema/aws) are 'non-idempotent', this means that this resource type is assigned a primary identifier at deployment time and is currently not supported by Radius Bicep.
+Some of the [AWS resource types](/resource-schema/aws) are 'non-idempotent', this means that this resource type is assigned a primary identifier at deployment time and is currently not supported by Radius Bicep.
 
 We are currently building support for non-idempotent resources in Radius. Please like and comment on this [this issue](https://github.com/radius-project/radius/issues/6227) if you are interested in the same.
 
