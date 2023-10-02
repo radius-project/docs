@@ -29,37 +29,7 @@ kubectl config current-context
 
 ## 2. Install Radius CLI
 
-{{< tabs MacOS "Linux/WSL" "Windows PowerShell" >}}
-
-{{% codetab %}}
-```bash
-curl -fsSL "https://get.radapp.dev/tools/rad/install.sh" | /bin/bash
-```
-{{% /codetab %}}
-
-{{% codetab %}}
-```bash
-wget -q "https://get.radapp.dev/tools/rad/install.sh" -O - | /bin/bash
-```
-{{% /codetab %}}
-
-{{% codetab %}}
-```powershell
-iwr -useb "https://get.radapp.dev/tools/rad/install.ps1" | iex
-```
-{{% /codetab %}}
-
-{{< /tabs >}}
-
-Visit the [rad CLI]({{< ref howto-rad-cli >}}) page for troubleshooting or additional options.
-
-Verify the rad CLI is installed correctly by running `rad version`. 
-
-Example output:
-```
-RELEASE     VERSION     BICEP       COMMIT
-{{< param chart_version >}}      {{< param version >}}        0.11.13     2e60bfb46de73ec5cc70485d53e67f8eaa914ba7
-```
+{{< read file= "/shared-content/installation/rad-cli/install-rad-cli.md" >}}
 
 ## 3. Initialize Radius
 
