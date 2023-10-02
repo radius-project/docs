@@ -36,11 +36,15 @@ if len(sys.argv) != 3:
     sys.exit(1)
 
 # Pass in "source_directory" as input parameter
-# Example: ./docs/snippets/resource-docs/
+# This directory should contain the auto-generated
+# resource markdown files for a given provider (applications, aws, etc.)
+# Example: radius/hack/generated/
 source_directory = sys.argv[1]
 
 # Pass in "target_directory" as input parameter
-# Example: ./docs/content/reference/resources
+# This directory should contain the Hugo content directory
+# This script will generate the pages and directories as needed
+# Example: docs/docs/content/reference/resources
 target_directory = sys.argv[2]
 
 # Get all the directories in the source directory
@@ -105,19 +109,20 @@ for namespace_parent in namespace_parents:
                 target_resource_dir = os.path.join(target_directory, namespace_parent, namespace, api_version, resource_name)
 
                 hugo_content = hugo_template.format('{}/{}@{}'.format(namespace, resource_name, api_version), resource_name, '{}/{}@{}'.format(namespace, resource_name, api_version))
+                hugo_content += "{{< schemaExample >}}\n\n"
 
-                # Check if a Bicep file exists for the resource
-                bicep_file = os.path.join(source_directory, namespace_parent, namespace, api_version, 'examples', resource_name + ".bicep")
-                if os.path.exists(bicep_file):
-                    # Copy Bicep file to target directory
-                    bicep_target_file = os.path.join(target_resource_dir, 'snippets', resource_name + ".bicep")
-                    print("   Bicep example found")
-                    os.makedirs(os.path.dirname(bicep_target_file), exist_ok=True)
-                    os.system("cp {} {}".format(bicep_file, bicep_target_file))
-
-                    bicep_hugo_link = "snippets/{}.bicep".format(resource_name)
-                    hugo_content += "## Example\n\n"
-                    hugo_content += "{{{{< rad file=\"{}\" embed=true marker=""//SNIPPET"" >}}}}\n\n".format(bicep_hugo_link)
+                ## Check if a Bicep file exists for the resource
+                #bicep_file = os.path.join(source_directory, namespace_parent, namespace, api_version, 'examples', resource_name + ".bicep")
+                #if os.path.exists(bicep_file):
+                #    # Copy Bicep file to target directory
+                #    bicep_target_file = os.path.join(target_resource_dir, 'snippets', resource_name + ".bicep")
+                #    print("   Bicep example found")
+                #    os.makedirs(os.path.dirname(bicep_target_file), exist_ok=True)
+                #    os.system("cp {} {}".format(bicep_file, bicep_target_file))
+                #
+                #    bicep_hugo_link = "snippets/{}.bicep".format(resource_name)
+                #    hugo_content += "## Example\n\n"
+                #    hugo_content += "{{{{< rad file=\"{}\" embed=true marker=""//SNIPPET"" >}}}}\n\n".format(bicep_hugo_link)
                 
                 # Add in the resource markdown file
                 markdown_content = open(os.path.join(source_directory, namespace_parent, namespace, api_version, 'docs', resource_markdown_file), 'r').read()
