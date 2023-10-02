@@ -20,8 +20,7 @@
 import os
 import sys
 
-hugo_template = """
----
+hugo_template = """---
 type: docs
 title: "Reference: {}"
 linkTitle: "{}"
