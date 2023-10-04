@@ -12,7 +12,7 @@ The easiest way to get up and runnning with a docs environment is a GitHub codes
 4. Run `npm run start` to run a docs server
 5. Click the `localhost:1313` link in your terminal to open the Codespace tunnel to the page
 
-## Loacl machine
+## Local machine
 
 ### Pre-requisites
 
