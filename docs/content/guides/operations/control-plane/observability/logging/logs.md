@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Control plane logs"
+title: "How-To: Control plane logs"
 linkTitle: "Logs"
 weight: 100
 description: "Use logs to monitor and troubleshoot the control plane."

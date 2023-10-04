@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Kubernetes resources"
+title: "Overview: Kubernetes resources"
 linkTitle: "Overview"
 description: "Deploy and connect to Kubernetes resources in your application"
 weight: 1000
