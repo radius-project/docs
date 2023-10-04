@@ -943,3 +943,7 @@ WirelessGateway
 WorkGroup
 Workgroup
 XRay
+PodSpec
+ConfigMap
+CRD
+composable

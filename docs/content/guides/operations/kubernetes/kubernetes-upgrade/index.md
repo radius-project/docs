@@ -27,14 +27,12 @@ rad uninstall kubernetes
 
 ## Step 3: Install the rad CLI
 
-{{< read file= "/shared-content/radius-installation/rad-cli/install-rad-cli.md" >}}
+{{< read file= "/shared-content/installation/rad-cli/install-rad-cli.md" >}}
 
 ## Step 4: Install the Radius-Bicep VS Code extension
 
-{{< read file= "/shared-content/radius-installation/vscode-bicep/install-vscode-bicep.md" >}}
+{{< read file= "/shared-content/installation/vscode-bicep/install-vscode-bicep.md" >}}
 
 ## Step 5: Initialize the Radius control-plane and the Radius environment
 
-{{< read file= "/shared-content/radius-installation/install-radius/initialize-radius.md" >}}
-
->If you are looking to upgrade Radius to the latest version, refer to [upgrade Radius on Kubernetes]({{< ref kubernetes-upgrade >}}) for more information.
+{{< read file= "/shared-content/installation/install-radius/initialize-radius.md" >}}
