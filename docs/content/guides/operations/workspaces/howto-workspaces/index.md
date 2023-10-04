@@ -4,7 +4,7 @@ title: "How-To: Use Radius workspaces"
 linkTitle: "Use Workspaces"
 description: "Learn how to handle multiple Radius platforms and environments with workspaces"
 weight: 300
-categories: "Overview"
+categories: "How-To"
 ---
 
 ## How-to: Use workspaces to switch between environments
