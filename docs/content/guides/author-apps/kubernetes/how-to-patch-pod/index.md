@@ -3,7 +3,7 @@ type: docs
 title: "How-To: Patch Kubernetes resources using PodSpec"
 linkTitle: "Patch with PodSpec"
 description: "Learn how to patch Kubernetes resources using PodSpec definitions"
-weight: 400
+weight: 300
 slug: 'patch-podspec'
 categories: "How-To"
 tags: ["containers","Kubernetes"]
@@ -11,20 +11,19 @@ tags: ["containers","Kubernetes"]
 
 This how-to guide will provide an overview of how to:
 
-- Mount an ephemeral (short-lived) volume to a container
+- Patch Radius-created Kubernetes resources using [PodSpec](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#PodSpec) definitions
 
 ## Prerequisites
 
 - [rad CLI]({{< ref getting-started >}})
-- [Radius environment]({{< ref "/guides/deploy-apps/environments/overview" >}})
+- [Radius initialized with `rad init`]({{< ref howto-environment >}})
+- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
 ## Step 1: Define an app and a container
 
 Begin by creating a file named `app.bicep` with a Radius application and [container]({{< ref "guides/author-apps/containers" >}}):
 
-{{< rad file="snippets/1-app.bicep" embed=true >}}
-
-The `quickstarts/volumes` container will display the status and contents of the `/tmpdir` directory within the container.
+{{< rad file="snippets/kubernetes-container.bicep" embed=true >}}
 
 ## Step 2: Deploy the app and container
 
@@ -33,47 +32,15 @@ The `quickstarts/volumes` container will display the status and contents of the 
    ```bash
    rad deploy ./app.bicep
    ```
-1. Once complete, port forward to your container with [`rad resource expose`]({{< ref rad_resource_expose >}}):
 
-   ```bash
-   rad resource expose containers mycontainer -a myapp --port 5000
-   ```
-1. You should see a message warning that the directory `/tmpdir` does not exist:
+2. Confirm that a your app with a single container has been deployed:
 
-   <img src="screenshot-error.jpg" width=500px alt="Screeshot of container showing that the tmp directory does not exist">
+   //TODO
 
-## Step 3: Add an ephemeral volume
+## Step 3: Add a PodSpec to the container definition
 
-Within the `container.volume` property, add a new volume named `temp` and configure it as a memory-backed ephemeral volume:
+//TODO
 
-{{< rad file="snippets/2-app.bicep" embed=true marker="//CONTAINER" >}}
+## Step 4: Redeploy the app with the PodSpec
 
-## Redeploy your app and container
-
-1. Redeploy your application to apply the new definition of your container:
-
-   ```bash
-   rad deploy ./app.bicep
-   ```
-
-1. Once complete, port forward to your container with [`rad resource expose`]({{< ref rad_resource_expose >}}):
-
-   ```bash
-   rad resource expose containers mycontainer -a myapp --port 5000
-   ```
-   
-1. Visit [localhost:5000](http://localhost:5000) in your browser. You should see the contents of `/tmpdir`, showing an empty directory.
-
-   <img src="screenshot-empty.jpg" width=500px alt="Screeshot of container showing that the tmp directory has no items">
-1. Press the `Create file` button to generate a new file in the directory, such as `test.txt`:
-
-   <img src="screenshot.jpg" width=400px alt="Screeshot of container showing files being created">
-1. Done! You've now learned how to mount an ephemeral volume
-
-## Cleanup
-
-1. Run the following command to delete your app and container:
-
-   ```bash
-   rad app delete myapp
-   ```
+//TODO

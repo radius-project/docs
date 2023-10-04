@@ -3,7 +3,7 @@ type: docs
 title: "Kubernetes resources"
 linkTitle: "Overview"
 description: "Deploy and connect to Kubernetes resources in your application"
-weight: 1000
+weight: 100
 categories: "Overview"
 tags: ["Kubernetes"]
 ---
