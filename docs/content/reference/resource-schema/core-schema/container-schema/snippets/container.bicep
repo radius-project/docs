@@ -95,6 +95,20 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
         }
       }
     ]
+    runtimes: {
+      kubernetes: {
+        base: loadTextContent('base-container.yaml')
+        pod: {
+          containers: [
+            {
+              name: 'log-collector'
+              image: 'radiusdev.azurecr.io/fluent/fluent-bit:2.1.8'
+            }
+          ]
+          hostNetwork: true
+        }
+      }
+    }
   }
 }
 //CONTAINER
