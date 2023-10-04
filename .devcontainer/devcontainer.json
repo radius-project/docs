@@ -4,10 +4,10 @@
 	"features": {
 		"ghcr.io/devcontainers/features/git:1": {},
 		"ghcr.io/devcontainers/features/go:1": {},
-		//"ghcr.io/devcontainers/features/hugo:1": {
-		//	"version": "0.102.3",
-		//	"extended": true
-		//},
+		"ghcr.io/devcontainers/features/hugo:1": {
+			"version": "0.117.0",
+			"extended": true
+		},
 		"ghcr.io/devcontainers/features/node:1": {}
 	},
 	"remoteUser": "vscode",
