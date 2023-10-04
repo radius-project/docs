@@ -16,10 +16,6 @@ resource container 'Applications.Core/containers@2023-10-01-preview' = {
     application: app.id
     container: {
       image: 'radius.azurecr.io/quickstarts/envvars:edge'
-      env: {
-        FOO: 'BAR'
-        BAZ: app.name
-      }
     }
     connections: {
       myconnection: {
@@ -30,7 +26,7 @@ resource container 'Applications.Core/containers@2023-10-01-preview' = {
 }
 //CONTAINER
 
-//LINK
+//DB
 resource mongoDatabase 'Applications.Datastores/mongoDatabases@2023-10-01-preview' = {
   name: 'mongo-db'
   properties: {
@@ -39,4 +35,4 @@ resource mongoDatabase 'Applications.Datastores/mongoDatabases@2023-10-01-previe
     // Use the "default" Recipe to provision the MongoDB
   }
 }
-//LINK
+//DB

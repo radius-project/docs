@@ -3,7 +3,7 @@ type: docs
 title: "How-To: Set environment variables on a container"
 linkTitle: "Set Env vars"
 description: "Learn how to set environment variables manually and through connections"
-weight: 400
+weight: 300
 slug: "environment-variables"
 categories: "How-To"
 tags: ["containers"]
@@ -11,8 +11,7 @@ tags: ["containers"]
 
 This how-to guide will teach you:
 
-1. How to set environment variables manually
-1. How to set environment variables through connections
+1. How to set environment variables manually on a container
 
 ## Prerequisites
 
@@ -50,34 +49,6 @@ Add an `env` property which will contain a list of environment variables to set.
    <img src="screenshot.jpg" alt="Screenshot of the app printing the environment variables" width=1000px />
 
    Here you can see the environment variables `FOO` and `BAZ`, with their accompanying values.
-
-## Step 4: Add a Mongo database
-
-Next, add to `app.bicep` a [Mongo database]({{< ref portable-resources >}}), leveraging the default "dev" Recipe:
-
-{{< rad file="snippets/3-app.bicep" embed=true marker="//LINK" >}}
-
-## Step 5: Connect to the Mongo database
-
-Connections from a container to a resource result in environment variables for connection information automatically being set on the container. Update your container definition to add a connection to the new Mongo database:
-
-{{< rad file="snippets/3-app.bicep" embed=true marker="//CONTAINER" >}}
-
-## Step 6: Deploy your app
-
-1. Deploy your application to your environment:
-
-   ```bash
-   rad deploy ./app.bicep
-   ```
-1. Port-forward the container to your machine:
-
-    ```bash
-    rad resource expose containers mycontainer -a myapp --port 5000
-    ```
-1. Visit [localhost:5000](http://localhost:5000) in your browser. You should see the following page, now showing injected environment variables:
-
-   <img src="screenshot-all.jpg" alt="Screenshot of the app printing all the environment variables" width=1000px />
 
 ## Cleanup
 
