@@ -52,7 +52,7 @@ Add an `env` property which will contain a list of environment variables to set.
 
 ## Cleanup
 
-Run `rad app delete` to cleanup your Radius application, container, and link:
+Run `rad app delete` to cleanup your Radius application, container, and mongo database:
 
 ```bash
 rad app delete -a myapp

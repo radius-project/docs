@@ -52,7 +52,7 @@ Connections from a container to a resource result in environment variables for c
    
 ## Cleanup
 
-Run `rad app delete` to cleanup your Radius application, container, and link:
+Run `rad app delete` to cleanup your Radius application, container, and mongo database:
 
 ```bash
 rad app delete -a myapp
