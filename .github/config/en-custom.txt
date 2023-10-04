@@ -473,3 +473,5 @@ RoleBinding
 tcrra
 ConfigMap
 PodSpec
+composable
+CRD
