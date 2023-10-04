@@ -99,3 +99,4 @@ sidebar_search_disable = true
 sidebar_menu_foldable = true
 sidebar_menu_truncate = 500
 ul_show = 1
+navbar_logo = true
