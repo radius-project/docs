@@ -22,6 +22,6 @@
     "install": "git submodule update --init --recursive && cd themes/docsy && npm install",
     "postinstall": "hugo-installer --version 0.117.0 --extended",
     "build": "hugo",
-    "server": "hugo server"
+    "start": "hugo server"
   }
 }
