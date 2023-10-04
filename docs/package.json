@@ -21,6 +21,8 @@
   },
   "dependencies": {
     "autoprefixer": "^9.8.6",
+    "exec-bin": "^1.0.0",
+    "hugo-installer": "^4.0.1",
     "postcss-cli": "^7.1.2"
   },
   "scripts": {
