@@ -4,6 +4,7 @@ title: Radius Application Graph
 linkTitle: Application graph
 description: Learn how the Radius application graph allows you to model your entire application
 weight: 200
+toc_hide: true
 ---
 
 ## Radius applications
