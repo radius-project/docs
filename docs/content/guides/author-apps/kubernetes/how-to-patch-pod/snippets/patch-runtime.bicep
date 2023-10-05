@@ -21,7 +21,7 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
         }
       }
     }
-    RUNTIMES
+    // RUNTIMES
     runtimes: {
       kubernetes: {
         pod: {
@@ -35,6 +35,6 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
         }
       }
     }
-    RUNTIMES
+    // RUNTIMES
   }
 }
