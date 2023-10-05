@@ -76,8 +76,8 @@ Name: mongo-db (Applications.Datastores/mongoDatabases)
 Connections:
   mycontainer (Applications.Core/containers) -> mongo-db
 Resources:
-  mongo-55wfttxl53i3m (kubernetes: apps/Deployment)
-  mongo-55wfttxl53i3m (kubernetes: core/Service)
+  mongo-xxx(kubernetes: apps/Deployment)
+  mongo-xxx(kubernetes: core/Service)
 ```
 
 ## Cleanup
