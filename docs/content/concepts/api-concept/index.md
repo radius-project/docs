@@ -4,6 +4,7 @@ title: Radius API
 linkTitle: API
 description: Learn about the Radius API
 weight: 500
+categories: "Concepts"
 ---
 
 ## Overview
