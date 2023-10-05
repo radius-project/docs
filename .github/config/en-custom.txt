@@ -471,3 +471,8 @@ itemName
 visualstudio
 RoleBinding
 tcrra
+ConfigMap
+PodSpec
+composable
+CRD
+nd
