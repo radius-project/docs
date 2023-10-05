@@ -27,7 +27,6 @@ Next, add to `app.bicep` a [Mongo database]({{< ref "portable-resources#overview
 
 {{< rad file="snippets/app-mongodb.bicep" embed=true marker="//DB" >}}
 
-
 ## Step 3: Connect to the Mongo database
 
 Connections from a container to a resource result in environment variables for connection information automatically being set on the container. Update your container definition to add a connection to the new Mongo database:
@@ -50,6 +49,37 @@ Connections from a container to a resource result in environment variables for c
 
    <img src="./connections.png" alt="Screenshot of the app printing all the environment variables" width=1000px />
    
+## Step 5: View the application connections
+
+Radius connections are more than just environment variables and configuration. You can also access the "application graph" and understand the connections within your application with the following command:
+
+```bash
+rad app connections
+```
+
+You should see the following output, detailing the connections between the `mycontainer` and the `db` Mongo database, along with information about the underlying Kubernetes resources running the app:
+
+```
+Displaying application: myapp
+
+Name: mycontainer (Applications.Core/containers)
+Connections:
+  mycontainer -> mongo-db (Applications.Datastores/mongoDatabases)
+Resources:
+  mycontainer (kubernetes: apps/Deployment)
+  mycontainer (kubernetes: core/Secret)
+  mycontainer (kubernetes: core/ServiceAccount)
+  mycontainer (kubernetes: rbac.authorization.k8s.io/Role)
+  mycontainer (kubernetes: rbac.authorization.k8s.io/RoleBinding)
+
+Name: mongo-db (Applications.Datastores/mongoDatabases)
+Connections:
+  mycontainer (Applications.Core/containers) -> mongo-db
+Resources:
+  mongo-55wfttxl53i3m (kubernetes: apps/Deployment)
+  mongo-55wfttxl53i3m (kubernetes: core/Service)
+```
+
 ## Cleanup
 
 Run `rad app delete` to cleanup your Radius application, container, and mongo database:
@@ -57,3 +87,9 @@ Run `rad app delete` to cleanup your Radius application, container, and mongo da
 ```bash
 rad app delete -a myapp
 ```
+
+## Further reading
+
+- [Connections]({{< ref "guides/author-apps/containers#connections" >}})
+- [Container schema]({{< ref container-schema >}})
+
