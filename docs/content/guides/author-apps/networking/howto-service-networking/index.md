@@ -61,7 +61,7 @@ Starting log stream...
 
 ## Step 4: Test the connection
 
-Visit [http://localhost:3000](http://localhost:3000) in your browser. You should see a connection to the backend container, along with the environment variables that have automtically been set on the frontend container:
+Visit [http://localhost:3000](http://localhost:3000) in your browser. You should see a connection to the backend container, along with the environment variables that have automatically been set on the frontend container:
 
 <img src="backend-connection.png" alt="Screenshot of the demo container showing the backend connections" width="600px" >
 
