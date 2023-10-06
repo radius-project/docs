@@ -37,20 +37,13 @@ resource demoGateway 'Applications.Core/gateways@2023-10-01-preview' = {
     routes: [
       {
         path: '/'
-        destination: demoRoute.id
+        destination: 'http://${demoContainer.name}:3000'
       }
     ]
     tls: {
       certificateFrom: demoSecretStore.id
       minimumProtocolVersion: '1.2'
     }
-  }
-}
-
-resource demoRoute 'Applications.Core/httpRoutes@2023-10-01-preview' = {
-  name: 'demo-route'
-  properties: {
-    application: demoApplication.id
   }
 }
 
@@ -63,7 +56,6 @@ resource demoContainer 'Applications.Core/containers@2023-10-01-preview' = {
       ports: {
         web: {
           containerPort: 3000
-          provides: demoRoute.id
         }
       }
     }
