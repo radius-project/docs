@@ -8,11 +8,11 @@ description: "Details on the rad application switch Radius CLI command"
 ---
 ## rad application switch
 
-Switch the default Radius application
+Switch the default Radius Application
 
 ### Synopsis
 
-Switches the default Radius application
+Switches the default Radius Application
 
 ```
 rad application switch [flags]
@@ -41,5 +41,5 @@ rad app switch newApplication
 
 ### SEE ALSO
 
-* [rad application]({{< ref rad_application.md >}})	 - Manage Radius applications
+* [rad application]({{< ref rad_application.md >}})	 - Manage Radius Applications
 

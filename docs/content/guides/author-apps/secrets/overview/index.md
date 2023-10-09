@@ -2,7 +2,7 @@
 type: docs
 title: "Overview: Secrets management"
 linkTitle: "Overview"
-description: "Learn how to create and reference secrets in your Radius application"
+description: "Learn how to create and reference secrets in your Radius Application"
 weight: 500
 categories: "Overview"
 tags: ["secrets"]
@@ -22,7 +22,7 @@ Here is an example for creating a new Secret Store resource and storing a TLS ce
 
 ## Reference an existing Secret Store
 
-Here is an example of using a Secret Store to reference secrets stores in an existing secrets management solution that is external to the Radius application stack. Note that only references to Kubernetes Secrets is currently supported, with more to come in the future.
+Here is an example of using a Secret Store to reference secrets stores in an existing secrets management solution that is external to the Radius Application stack. Note that only references to Kubernetes Secrets is currently supported, with more to come in the future.
 
 {{< rad file="snippets/secretstore.bicep" embed=true marker="//SECRET_STORE_REF" >}}
 

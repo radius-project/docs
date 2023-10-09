@@ -41,5 +41,5 @@ rad env switch newEnvironment
 
 ### SEE ALSO
 
-* [rad env]({{< ref rad_env.md >}})	 - Manage Radius environments
+* [rad env]({{< ref rad_env.md >}})	 - Manage Radius Environments
 

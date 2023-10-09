@@ -8,11 +8,11 @@ description: "Details on the rad application show Radius CLI command"
 ---
 ## rad application show
 
-Show Radius application details
+Show Radius Application details
 
 ### Synopsis
 
-Show Radius application details. Shows the user's default application (if configured) by default.
+Show Radius Application details. Shows the user's default application (if configured) by default.
 
 ```
 rad application show [flags]
@@ -51,5 +51,5 @@ rad app show my-app --group my-group
 
 ### SEE ALSO
 
-* [rad application]({{< ref rad_application.md >}})	 - Manage Radius applications
+* [rad application]({{< ref rad_application.md >}})	 - Manage Radius Applications
 

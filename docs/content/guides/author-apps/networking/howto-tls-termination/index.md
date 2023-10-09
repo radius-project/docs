@@ -19,7 +19,7 @@ This guide will show you:
 - [rad CLI]({{< ref getting-started >}})
 - [Supported Kubernetes cluster]({{< ref kubernetes-install >}})
 
-## Step 1: Initialize a Radius environment
+## Step 1: Initialize a Radius Environment
 
 Begin by running `rad init` to initialize Radius and create an environment:
 

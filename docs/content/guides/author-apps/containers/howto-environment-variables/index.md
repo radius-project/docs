@@ -17,7 +17,7 @@ This how-to guide will teach you:
 ## Prerequisites
 
 - [Radius CLI]({{< ref "getting-started" >}})
-- [Radius environment]({{< ref "/guides/deploy-apps/environments/overview" >}})
+- [Radius Environment]({{< ref "/guides/deploy-apps/environments/overview" >}})
 
 ## Step 1: Model an app and container
 
@@ -81,7 +81,7 @@ Connections from a container to a resource result in environment variables for c
 
 ## Cleanup
 
-Run `rad app delete` to cleanup your Radius application, container, and link:
+Run `rad app delete` to cleanup your Radius Application, container, and link:
 
 ```bash
 rad app delete -a myapp

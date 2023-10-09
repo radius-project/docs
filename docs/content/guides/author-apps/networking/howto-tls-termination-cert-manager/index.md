@@ -19,9 +19,9 @@ This guide will show you how to integrate Radius with cert-manager and Let's Enc
    - If running Radius on an Azure Kubernetes Service (AKS) cluster you can optionally use a [DNS label](https://learn.microsoft.com/azure/virtual-network/ip-services/public-ip-addresses#dns-name-label) to create a DNS A-record pointing to your cluster. Refer to the [tips and tricks](#using-an-azure-dns-label) section for more information.
    - If running Radius on an Elastic Kubernetes Service (EKS) cluster you can optionally leverage [Application Load Balancer](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html) for a hosted DNS name and record.
 
-## Step 1: Initialize a Radius environment
+## Step 1: Initialize a Radius Environment
 
-Begin by running `rad init` to initialize the Radius environment.
+Begin by running `rad init` to initialize the Radius Environment.
 
 ```sh
 rad init
@@ -79,7 +79,7 @@ Here is what your HTTP-01 ACME ClusterIssuer resource should look like:
 
     You may need to wait a minute or two for cert-manager to authorize with Let's Encrypt and create the secret on the cluster. Once this process completes, you should see a secret called `demo-secret` in the default namespace. This secret is managed by cert-manager.
 
-## Step 6: Define a Radius application and gateway
+## Step 6: Define a Radius Application and gateway
 
 Create a file named `app.bicep` with the following contents. Note that we reference the `demo-secret` and reference the Secret Store in the Gateway to enable TLS termination.
 

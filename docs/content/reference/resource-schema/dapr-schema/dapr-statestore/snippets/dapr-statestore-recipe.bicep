@@ -1,9 +1,9 @@
 import radius as radius
 
-@description('The app ID of your Radius application. Set automatically by the rad CLI.')
+@description('The app ID of your Radius Application. Set automatically by the rad CLI.')
 param application string
 
-@description('The ID of your Radius environment. Automatically injected by the rad CLI.')
+@description('The ID of your Radius Environment. Automatically injected by the rad CLI.')
 param environment string
 
 resource myapp 'Applications.Core/containers@2023-10-01-preview' = {

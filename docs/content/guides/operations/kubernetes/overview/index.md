@@ -8,7 +8,7 @@ categories: ["Overview"]
 tags: ["Kubernetes"]
 ---
 
-Radius offers a Kubernetes-based platform for hosting the [Radius control plane]({{< ref "/guides/operations/control-plane" >}}) and [Radius environments]({{< ref "/guides/deploy-apps/environments/overview" >}}).
+Radius offers a Kubernetes-based platform for hosting the [Radius control plane]({{< ref "/guides/operations/control-plane" >}}) and [Radius Environments]({{< ref "/guides/deploy-apps/environments/overview" >}}).
 
 <img src="kubernetes-mapping.png" alt="Diagram showing Radius resources being mapped to Kubernetes objects" width=600px />
 
@@ -45,7 +45,7 @@ For multiple Radius resources that map to a single Kubernetes resource (_e.g. da
 
 ## Kubernetes metadata
 
-Radius environments, applications, and resources can be annotated/labeled with Kubernetes metadata. Refer to the Kubernetes metadata page for more information:
+Radius Environments, applications, and resources can be annotated/labeled with Kubernetes metadata. Refer to the Kubernetes metadata page for more information:
 
 {{< button text="Kubernetes metadata" page="kubernetes-metadata" >}}
 
@@ -56,7 +56,7 @@ The following clusters have been tested and validated to ensure they support all
 {{< tabs AKS k3d kind EKS >}}
 
 {{% codetab %}}
-Azure Kubernetes Service (AKS) clusters are the easiest way to get up and running quickly with a Radius environment. To learn how to setup a cluster visit the [Azure docs](https://docs.microsoft.com/azure/aks/learn/quick-kubernetes-deploy-portal?tabs=azure-cli).
+Azure Kubernetes Service (AKS) clusters are the easiest way to get up and running quickly with a Radius Environment. To learn how to setup a cluster visit the [Azure docs](https://docs.microsoft.com/azure/aks/learn/quick-kubernetes-deploy-portal?tabs=azure-cli).
 
 Note that [AKS-managed AAD](https://docs.microsoft.com/en-us/azure/aks/managed-aad) is not supported currently.
 
@@ -67,7 +67,7 @@ az aks create --subscription mySubscription --resource-group myResourceGroup --n
 az aks get-credentials --subscription mySubscription --resource-group myResourceGroup --name myAKSCluster
 ```
 
-Once deployed and your kubectl context has been set as your default, you can run the following to create a Radius environment and install the control plane:
+Once deployed and your kubectl context has been set as your default, you can run the following to create a Radius Environment and install the control plane:
 
 ```bash
 rad init
@@ -118,7 +118,7 @@ nodes:
     listenAddress: "0.0.0.0"
 ```
 
-Then, create a kind cluster with this config and initialize your Radius environment:
+Then, create a kind cluster with this config and initialize your Radius Environment:
 ```bash
 # Create the kind cluster
 kind create cluster --config kind-config.yaml
@@ -140,7 +140,7 @@ Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service that you can
 eksctl create cluster --name my-cluster --region region-code
 ```
 
-Once deployed and your kubectl context has been set as your default, you can run the following to create a Radius environment and install the control plane:
+Once deployed and your kubectl context has been set as your default, you can run the following to create a Radius Environment and install the control plane:
 
 ```bash
 rad init
