@@ -1,10 +1,10 @@
 ---
 type: docs
-title: "How-To: Control plane logs"
-linkTitle: "Logs"
+title: "Overview: Control plane logs"
+linkTitle: "Overview"
 weight: 100
-description: "Use logs to monitor and troubleshoot the control plane."
-categories: "How-To"
+description: "Learn about Radius logs for monitoring and troubleshooting the control plane."
+categories: "Overview"
 tags: ["logs","troubleshooting", "observability"]
 ---
 
@@ -40,19 +40,19 @@ If you are using the Azure Kubernetes Service, you can use [Azure Monitor for co
 
 Control plane logs contain the following fields:
 
-| Field | Description       | Example |
-|-------|-------------------|---------|
-| `timestamp`  | [ISO8601](https://www.iso.org/iso-8601-date-and-time-format.html) timestamp | `2011-10-05T14:48:00.000Z` |
-| `severity` | Log level. Available levels are info, warn, debug, and error. | `info` |
-| `message`   | Log message | `proxying request target: http://de-api.radius-system:6443` |
-| `name`   | Logging scope | `ucplogger.api` |
-| `caller` | Service logging point | `planes/proxyplane.go:171`
-| `version` | Control plane version | `0.18` |
+| Field         | Description       | Example |
+|---------------|-------------------|---------|
+| `timestamp`   | [ISO8601](https://www.iso.org/iso-8601-date-and-time-format.html) timestamp | `2011-10-05T14:48:00.000Z` |
+| `severity`    | Log level. Available levels are info, warn, debug, and error. | `info` |
+| `message`     | Log message | `proxying request target: http://de-api.radius-system:6443` |
+| `name`        | Logging scope | `ucplogger.api` |
+| `caller`      | Service logging point | `planes/proxyplane.go:171`
+| `version`     | Control plane version | `0.18` |
 | `serviceName` | Name of control plane service | `ucplogger` |
-| `hostName` | Service host name | `ucp-77bc9b4cbb-nmjlz` |
-| `resourceId` | The resourceId being affected, if applicable | `/apis/api.ucp.dev/v1alpha3/planes/deployments/local/resourcegroups/myrg/providers/Microsoft.Resources/deployments/rad-deploy-6c0d37b0-705e-454b-9167-877aa080e656` |
-| `traceId` | [w3c traceId](https://www.w3.org/TR/trace-context/#trace-id). Used to uniquely identify a [distributed trace](https://www.w3.org/TR/trace-context/#dfn-distributed-traces) through a system.  | `d1ba9c7d2326ee1b44eb0b8177ef554f` |
-| `spanId` | [w3c spanId](https://www.w3.org/TR/trace-context/#parent-id) The ID of this request as known by the caller. Also known as `parent-id` in some tracing systems.  | `ce52a91ed3c86c6d` |
+| `hostName`    | Service host name | `ucp-77bc9b4cbb-nmjlz` |
+| `resourceId`  | The resourceId being affected, if applicable | `/apis/api.ucp.dev/v1alpha3/planes/deployments/local/resourcegroups/myrg/providers/Microsoft.Resources/deployments/rad-deploy-6c0d37b0-705e-454b-9167-877aa080e656` |
+| `traceId`     | [w3c traceId](https://www.w3.org/TR/trace-context/#trace-id). Used to uniquely identify a [distributed trace](https://www.w3.org/TR/trace-context/#dfn-distributed-traces) through a system.  | `d1ba9c7d2326ee1b44eb0b8177ef554f` |
+| `spanId`      | [w3c spanId](https://www.w3.org/TR/trace-context/#parent-id) The ID of this request as known by the caller. Also known as `parent-id` in some tracing systems.  | `ce52a91ed3c86c6d` |
 
 #### Example
 
