@@ -8,7 +8,7 @@ categories: "How-To"
 tags: ["recipes"]
 ---
 
-Local development environments created using the rad init command include a set of pre-defined Recipes called [local `dev` Recipes]({{< ref "guides/recipes/overview#use-community-dev-recipes" >}}), which make it easy to use lightweight containerized infrastructure. This guide teaches how to use a local dev recipe to deploy a Redis container to a Kubernetes cluster.
+Local development environments created using the rad init command include a set of pre-defined Recipes called [local `dev` Recipes]({{< ref "guides/recipes/overview#use-community-dev-recipes" >}}), which makes it easy to use lightweight containerized infrastructure. This guide teaches how to use a local dev recipe to deploy a Redis container to a Kubernetes cluster.
 
 ## Prerequisites
 
