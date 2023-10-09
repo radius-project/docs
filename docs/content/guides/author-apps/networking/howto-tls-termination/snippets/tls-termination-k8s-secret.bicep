@@ -35,20 +35,13 @@ resource httpsGateway 'Applications.Core/gateways@2023-10-01-preview' = {
     routes: [
       {
         path: '/'
-        destination: httpsRoute.id
+        destination: 'http://${httpsContainer.name}:3000'
       }
     ]
     tls: {
       certificateFrom: httpsSecretStore.id
       minimumProtocolVersion: '1.2'
     }
-  }
-}
-
-resource httpsRoute 'Applications.Core/httpRoutes@2023-10-01-preview' = {
-  name: 'https-route'
-  properties: {
-    application: httpsApplication.id
   }
 }
 
@@ -61,7 +54,6 @@ resource httpsContainer 'Applications.Core/containers@2023-10-01-preview' = {
       ports: {
         web: {
           containerPort: 3000
-          provides: httpsRoute.id
         }
       }
     }

@@ -54,7 +54,6 @@ The ports offered by the container are  defined in the `ports` section.
 | name | y | A name key for the port. | `http`
 | containerPort | y | The port the container exposes. | `80`
 | protocol | n | The protocol the container exposes. Options are 'TCP' and 'UCP'. | `'TCP'`
-| provides | n | The id of the [Route]({{< ref networking >}}) the container provides. | `http.id`
 
 #### Volumes
 
@@ -96,7 +95,7 @@ The ports offered by the container are  defined in the `ports` section.
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | name | y | A name key for the port. | `inventory`
-| source | y | The id of the resource the container is connecting to. | `db.id`
+| source | y | The id of the resource the container is connecting to. For network connections to other services this is in the form `'[scheme]://[serviceName]:[port]'` | `db.id`, `'http://inventory:8080'`
 | [iam](#iam) | n | Identity and access management (IAM) roles to set on the target resource. | [See below](#iam)
 
 #### IAM
