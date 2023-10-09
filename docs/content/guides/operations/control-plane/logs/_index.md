@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Control plane logging"
-linkTitle: "Logging"
-weight: 100
+linkTitle: "Logs"
+weight: 200
 description: "How to setup logging for the Radius control plane"
 ---
