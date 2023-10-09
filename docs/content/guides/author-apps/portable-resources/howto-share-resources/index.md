@@ -30,8 +30,17 @@ rad deploy app.bicep
 
 You should see the resource deployed into your environment:
 
-```
+```Building .\app.bicep...
+Deploying template '.\app.bicep' into environment 'default' from workspace 'default'...
 
+Deployment In Progress...
+
+...                  shared-cache    Applications.Datastores/redisCaches
+
+Deployment Complete
+
+Resources:
+    shared-cache    Applications.Datastores/redisCaches
 ```
 
 ## Step 3: Verify the resource was deployed
@@ -42,10 +51,42 @@ Run [`rad resource show`]({{< ref rad_resource_show >}}) to verify the resource 
 rad resource show rediscaches shared-cache -o json
 ```
 
-You should see the raw JSON output, including the `outputResources` property which shows the Kubernetes namespace the Redis cache was deployed into. It will match the environment's namespace and not an application's:
+You should see the raw JSON output, including the `outputResources` property which shows the Kubernetes namespace the Redis cache was deployed into. It will match the environment's namespace ('default') and not an application's ('default-app1', 'default-app2'):
 
 ```
-
+{
+  "id": "/planes/radius/local/resourcegroups/default/providers/Applications.Datastores/redisCaches/shared-cache",
+  "location": "global",
+  "name": "shared-cache",
+  "properties": {
+    "application": "",
+    "environment": "/planes/radius/local/resourceGroups/default/providers/applications.core/environments/default",
+    "host": "redis-bvempevrr4ygm.default.svc.cluster.local",
+    "port": 6379,
+    "provisioningState": "Succeeded",
+    "recipe": {
+      "name": "default"
+    },
+    "resourceProvisioning": "recipe",
+    "status": {
+      "outputResources": [
+        {
+          "id": "/planes/kubernetes/local/namespaces/default/providers/core/Service/redis-bvempevrr4ygm",
+          "radiusManaged": true
+        },
+        {
+          "id": "/planes/kubernetes/local/namespaces/default/providers/apps/Deployment/redis-bvempevrr4ygm",
+          "radiusManaged": true
+        }
+      ]
+    },
+    "tls": false,
+    "username": ""
+  },
+  "systemData": {},
+  "tags": {},
+  "type": "Applications.Datastores/redisCaches"
+}
 ```
 
 ## Done
