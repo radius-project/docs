@@ -8,7 +8,7 @@ slug: 'service-networking'
 categories: "How-To"
 ---
 
-This guide will show you how to have two services communicate with each other. In this example, we will have a frontend container that needs to communicate with a backend container.
+This guide will show you how two services can communicate with each other. In this example, we will have a frontend container service that communicates with a backend container service.
 
 <img src="overview.png" alt="Diagram of the frontend talking to the backend over HTTP port 80" width="400px" >
 
@@ -19,15 +19,15 @@ This guide will show you how to have two services communicate with each other. I
 
 ## Step 1: Define the services
 
-First, we need to define the containers in a file named `app.bicep`. We will define two services: `frontend` and `backend`:
+First, define the containers in a file named `app.bicep`. We will define two services: `frontend` and `backend`:
 
 {{< rad file="snippets/1-app.bicep" embed=true markdownConfig="{linenos=table}" >}}
 
-Note that the frontend container doesn't yet have a connection to the backend container. We will add that in the next step.
+Note the frontend container doesn't yet have a connection to the backend container. We will add that in the next step.
 
 ## Step 2: Add a connection
 
-Now that we have defined the services, we can add the connection between them. Add a connection to `frontend`:
+With the services defined, we can now add the connection between them. Add a connection to `frontend`:
 
 {{< rad file="snippets/2-app.bicep" embed=true marker="//FRONTEND" markdownConfig="{linenos=table,hl_lines=[\"14-18\"],linenostart=5}" >}}
 
