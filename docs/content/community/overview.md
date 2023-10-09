@@ -10,7 +10,7 @@ Welcome to the Radius community!
 
 ## Discussions
 
-The best way to interact with the community if via the Radius Discord server:
+The best way to interact with the community is via the Radius Discord server:
 
 {{< button link="https://discord.gg/SRG3ePMKNy" text="Radius Discord" newtab="true" >}}
 
@@ -42,8 +42,8 @@ To present a specific topic on the next Radius community call start by filling o
 
 ## GitHub Issues & repositories
 
-GitHub access is optional and not required to try out and run Radius. If you would like to directly file Issues, have access to source code, or use Codespaces please join https://github.com/radius-project.
+If you would like to file Issues, access the source code, or use Codespaces please visit the [Radius GitHub repo] (https://github.com/radius-project).
 
 ## How can I get involved?
 
-One of the easiest ways to contribute is to participate in discussions at community engagements or via the Discord server referenced above. We are always seeking feedback from. Suggestions around improving the product and docs are always welcome.
+One of the easiest ways to contribute is to participate in discussions at community engagements or via the Discord server referenced above. We are always seeking feedback, especially for suggestions around improving the product and docs.
