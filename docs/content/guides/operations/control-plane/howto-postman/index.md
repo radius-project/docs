@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To: Interact with the Radius API in Postman"
-linkTitle: "How-To: Postman"
+linkTitle: "How-To: Interact with Radius API"
 weight: 500
 description: "How-To: Interact directly with the Radius API using Postman"
 categories: ["How-To"]

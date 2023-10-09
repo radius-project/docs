@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Overview Control plane logs"
+title: "Overview: Control plane logs"
 linkTitle: "Overview"
 weight: 100
 description: "Learn about Radius logs for monitoring and troubleshooting the control plane."
