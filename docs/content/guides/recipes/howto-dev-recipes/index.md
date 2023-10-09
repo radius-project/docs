@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "How-To: Use Local Dev Recipes"
-linkTitle: "Local Dev Recipes"
+title: "How-To: Use local-dev Recipes"
+linkTitle: "local-dev Recipes"
 description: "Learn how to use the pre-built Recipes that come with Radius environment."
 weight: 200
 categories: "How-To"
@@ -29,7 +29,7 @@ Local development environments created using the rad init command include a set 
    rad init
    ```
 
-   **Select 'Yes' when prompted to create an application.**
+   **Select 'No' when prompted to create an application.**
 
 3. Use [`rad recipe list`]({{< ref rad_recipe_list >}}) to view the Recipes in your environment:
 
@@ -49,14 +49,13 @@ Local development environments created using the rad init command include a set 
    default   Applications.Datastores/mongoDatabases  bicep                            radius.azurecr.io/recipes/local-dev/mongodatabases:latest
    default   Applications.Datastores/redisCaches     bicep                            radius.azurecr.io/recipes/local-dev/rediscaches:latest
    ```
+> Visit the [Recipes repo](https://github.com/radius-project/recipes) to learn more about the definition of these local-dev recipe templates.
 
 When a Recipe is named "default" it will be used by default when deploying resources when a Recipe is not specified.
 
 ## Step 2: Define your application
 
-Update `app.bicep` with the following set of resources:
-
-> app.bicep was created automatically when you ran `rad init`
+Create `app.bicep` with the following set of resources:
 
 {{< rad file="snippets/app.bicep" embed=true >}}
 
@@ -67,13 +66,13 @@ Note that no Recipe name is specified with 'db', so it will be using the default
 1. Run [`rad run`]({{< ref rad_run >}}) to deploy your application:
 
    ```bash
-   rad run ./app.bicep
+   rad run ./app.bicep -a local-dev-app
    ```
 
    You should see the following output:
    ```
    Building app.bicep...
-   Deploying template './app.bicep' for application 'recipes' and environment 'default' from workspace 'default'...
+   Deploying template './app.bicep' for application 'local-dev-app' and environment 'default' from workspace 'default'...
 
    Deployment In Progress...
 
@@ -109,4 +108,3 @@ Note that no Recipe name is specified with 'db', so it will be using the default
    frontend-6d447f5994-pnmzv              1/1     Running   0          13m
    redis-ymbjcqyjzwkpg-66fdbf8bb6-brb6q   2/2     Running   0          13m
    ```
-   

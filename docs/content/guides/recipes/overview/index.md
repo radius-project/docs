@@ -57,7 +57,7 @@ Recipes currently support the following resources. Support for additional resour
 |---------------------|
 | [`Applications.Datastores/redisCaches`]({{< ref redis >}}) | 
 | [`Applications.Datastores/mongoDatabases`]({{< ref mongodb >}}) |
-| [`Applications.Datastores/sqlDatabases]({{< ref microsoft-sql >}}) | 
+| [`Applications.Datastores/sqlDatabases`]({{< ref microsoft-sql >}}) | 
 | [`Applications.Messaging/rabbitmqQueues`]({{< ref rabbitmq >}}) |
 | [`Applications.Dapr/stateStores`]({{< ref dapr-statestore >}}) |
 | [`Applications.Dapr/pubSubBrokers`]({{< ref dapr-pubsub >}}) |
