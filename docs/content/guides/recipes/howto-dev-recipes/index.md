@@ -1,0 +1,112 @@
+---
+type: docs
+title: "How-To: Use local dev Recipes"
+linkTitle: "Local dev Recipes"
+description: "Learn how to use the pre-built Recipes that come with Radius environment."
+weight: 200
+categories: "How-To"
+tags: ["recipes"]
+---
+
+Dev environments are preloaded with [`dev` Recipes]({{< ref "guides/recipes/overview#use-community-dev-recipes" >}}), a set of Recipes that allow you to quickly get up and running with lightweight containerized infrastructure. In This how-to guide, the dev Redis Recipe deploys a lightweight Redis container into your Kubernetes cluster.
+
+## Prerequisites
+
+- Setup a supported [Kubernetes cluster]({{< ref "guides/operations/kubernetes" >}})
+- Install rad cli ({{< ref "installation#step-1-install-the-rad-cli" >}})
+
+## Step 1: Initialize a Radius environment
+
+1. Begin in a new directory for your application:
+
+   ```bash
+   mkdir recipes
+   cd recipes
+   ```
+2. Initialize a new dev environment:
+
+   ```bash
+   rad init
+   ```
+
+   **Select 'Yes' when prompted to create an application.**
+
+3. Use [`rad recipe list`]({{< ref rad_recipe_list >}}) to view the Recipes in your environment:
+
+   ```bash
+   rad recipe list 
+   ```
+
+   You should see a table of available Recipes:
+   
+   ```
+   NAME      TYPE                                    TEMPLATE KIND  TEMPLATE VERSION  TEMPLATE
+   default   Applications.Datastores/sqlDatabases    bicep                            radius.azurecr.io/recipes/local-dev/sqldatabases:latest
+   default   Applications.Messaging/rabbitMQQueues   bicep                            radius.azurecr.io/recipes/local-dev/rabbitmqqueues:latest
+   default   Applications.Dapr/pubSubBrokers         bicep                            radius.azurecr.io/recipes/local-dev/pubsubbrokers:latest
+   default   Applications.Dapr/secretStores          bicep                            radius.azurecr.io/recipes/local-dev/secretstores:latest
+   default   Applications.Dapr/stateStores           bicep                            radius.azurecr.io/recipes/local-dev/statestores:latest
+   default   Applications.Datastores/mongoDatabases  bicep                            radius.azurecr.io/recipes/local-dev/mongodatabases:latest
+   default   Applications.Datastores/redisCaches     bicep                            radius.azurecr.io/recipes/local-dev/rediscaches:latest
+   ```
+
+When a Recipe is named "default" it will be used by default when deploying resources when a Recipe is not specified.
+
+## Step 2: Define your application
+
+Update `app.bicep` with the following set of resources:
+
+> app.bicep was created automatically when you ran `rad init`
+
+{{< rad file="snippets/app.bicep" embed=true >}}
+
+Note that no Recipe name is specified with 'db', so it will be using the default redis Recipe in your environment.
+
+## Step 3: Deploy your application
+
+1. Run [`rad run`]({{< ref rad_run >}}) to deploy your application:
+
+   ```bash
+   rad run ./app.bicep
+   ```
+
+   You should see the following output:
+   ```
+   Building app.bicep...
+   Deploying template './app.bicep' for application 'recipes' and environment 'default' from workspace 'default'...
+
+   Deployment In Progress...
+
+   Completed            db              Applications.Datastores/redisCaches
+   Completed            frontend        Applications.Core/containers
+
+   Deployment Complete
+
+   Resources:
+      frontend        Applications.Core/containers
+      db              Applications.Datastores/redisCaches
+
+    Starting log stream...
+   ```
+
+
+   Your application is now deployed and running in your Kubernetes cluster.
+
+1. Visit [`http://localhost:3000`](http://localhost:3000) in your browser.
+
+   You can now see both the environment variables of your container under Radius Connections as well as interact with the `Todo App` and add/remove items in it as wanted:
+
+1. List your Kubernetes Pods to see the infrastructure container deployed by the Recipe:
+
+   ```bash
+   kubectl get pods -n default-recipes
+   ```
+
+   You will see your 'frontend' container, along with the Redis cache that was automatically created by the default dev Recipe:
+
+   ```
+   NAME                                   READY   STATUS    RESTARTS   AGE
+   frontend-6d447f5994-pnmzv              1/1     Running   0          13m
+   redis-ymbjcqyjzwkpg-66fdbf8bb6-brb6q   2/2     Running   0          13m
+   ```
+   
