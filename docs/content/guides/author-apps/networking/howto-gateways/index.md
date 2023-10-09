@@ -2,7 +2,7 @@
 type: docs
 title: "How To: Configure a gateway for routing internet traffic"
 linkTitle: "Gateways"
-description: "Learn about how to expose a service to the internet via a gateway"
+description: "Learn how to expose a service to the internet via a gateway"
 weight: 300
 slug: 'gateways'
 categories: "How-To"
@@ -29,7 +29,7 @@ Next, add a gateway to `app.bicep`, routing traffic to the root path ("/") to th
 
 ## Step 3: Deploy the app
 
-Now deploy the application with [`rad deploy`]({{< ref "rad_run" >}}):
+Deploy the application with [`rad deploy`]({{< ref "rad_run" >}}):
 
 ```bash
 rad deploy app.bicep -a gatewaydemo
