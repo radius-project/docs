@@ -49,6 +49,8 @@
 
         @extend .table-responsive;
 
+        @extend .table-bordered;
+
         @extend .table;
     }
 

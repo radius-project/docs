@@ -1,7 +1,7 @@
 import radius as radius
 
 //ENV
-resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
+resource env 'Applications.Core/environments@2023-10-01-preview' = {
   name: 'myenv'
   properties: {
     compute: {
@@ -22,7 +22,7 @@ resource env 'Applications.Core/environments@2022-03-15-privatepreview' = {
 //ENV
 
 //APP
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'myapp'
   properties: {
     environment: env.id
@@ -46,7 +46,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 //APP
 
 //CONTAINER
-resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'frontend'
   properties: {
     application: app.id

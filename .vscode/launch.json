@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run docs server",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/docs",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run",
+                "start"
+            ],
+            "preLaunchTask": "npm install"
+        },
+        {
+            "name": "Build docs",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/docs",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run",
+                "build"
+            ],
+            "preLaunchTask": "npm ci"
+        }
+    ]
+}

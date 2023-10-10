@@ -2,7 +2,7 @@ import radius as rad
 
 param environment string
 
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'myapp'
   properties: {
     environment: environment
@@ -10,7 +10,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 }
 
 //CONTAINER
-resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource container 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'mycontainer'
   properties: {
     application: app.id
@@ -31,7 +31,7 @@ resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
 //CONTAINER
 
 //LINK
-resource mongoDatabase 'Applications.Datastores/mongoDatabases@2022-03-15-privatepreview' = {
+resource mongoDatabase 'Applications.Datastores/mongoDatabases@2023-10-01-preview' = {
   name: 'mongo-db'
   properties: {
     environment: environment

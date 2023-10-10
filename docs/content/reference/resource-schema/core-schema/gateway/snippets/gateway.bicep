@@ -2,7 +2,7 @@ import radius as radius
 
 param environment string
 
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'myapp'
   properties: {
     environment: environment
@@ -10,7 +10,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 }
 
 //GATEWAY
-resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
+resource gateway 'Applications.Core/gateways@2023-10-01-preview' = {
   name: 'gateway'
   properties: {
     application: app.id
@@ -25,11 +25,11 @@ resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
     routes: [
       {
         path: '/frontend'
-        destination: frontendroute.id
+        destination: 'http://${frontend.name}:3000'
       }
       {
         path: '/backend'
-        destination: backendroute.id
+        destination: 'http://${backend.name}:8080'
       }
     ]
     tls: {
@@ -45,7 +45,7 @@ resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
 }
 //GATEWAY
 
-resource secretstore 'Applications.Core/secretStores@2022-03-15-privatepreview' = {
+resource secretstore 'Applications.Core/secretStores@2023-10-01-preview' = {
   name: 'secretstore'
   properties: {
     application: app.id
@@ -54,26 +54,8 @@ resource secretstore 'Applications.Core/secretStores@2022-03-15-privatepreview' 
   }
 }
 
-//FRONTENDROUTE
-resource frontendroute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
-  name: 'frontendroute'
-  properties: {
-    application: app.id
-  }
-}
-//FRONTENDROUTE
-
-//BACKENDROUTE
-resource backendroute 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
-  name: 'backendroute'
-  properties: {
-    application: app.id
-  }
-}
-//BACKENDROUTE
-
 //FRONTEND
-resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'frontend'
   properties: {
     application: app.id
@@ -82,16 +64,12 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
       ports: {
         http: {
           containerPort: 3000
-          provides: frontendroute.id
         }
-      }
-      env: {
-        BACKEND_URL: backendroute.properties.url
       }
     }
     connections: {
       backend: {
-        source: backendroute.id
+        source: 'http://backend:8080'
       }
     }
   }
@@ -99,7 +77,7 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 //FRONTEND
 
 //BACKEND
-resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource backend 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'backend'
   properties: {
     application: app.id
@@ -108,7 +86,6 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
       ports: {
         http: {
           containerPort: 8080
-          provides: backendroute.id
         }
       }
     }

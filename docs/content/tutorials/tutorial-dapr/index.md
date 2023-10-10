@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "How-To: Dapr Microservices"
+title: "Tutorial: Dapr Microservices"
 linkTitle: "Dapr microservices"
 description: "Learn Radius by authoring templates and deploying a Dapr application"
 weight: 300
 slug: "dapr"
-categories: "How-To"
+categories: "Tutorial"
 tags : ["Dapr"]
 ---
 
-This how-to guide will teach you:
+This tutorial will teach you the following about Dapr:
 
 - How to use Radius to deploy a Dapr microservices sample application for an online shop
 - How [Dapr and Radius]({{< ref "guides/author-apps/dapr" >}}) seamlessly work together
@@ -18,7 +18,7 @@ For more details on the app and access to the source code, visit the `tutorials/
 
 ## Prerequisites
 
-- [Kubernetes cluster]({{< ref "supported-clusters" >}})
+- [Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
 - [Radius CLI]({{< ref "getting-started" >}})
 - [Radius environment]({{< ref "/guides/deploy-apps/environments/overview" >}})
 - [Dapr installed on your Kubernetes cluster](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/)
@@ -85,7 +85,7 @@ Add a `frontend` [container]({{< ref "guides/author-apps/containers" >}}) which 
    rad run dapr.bicep
    ```
 
-1. Your console should output a series deployment logs, which you may check to confirm the `frontend` container was successfully deployed:
+1. Your console should output a series of deployment logs, which you may check to confirm the `frontend` container was successfully deployed:
 
    ```
    Deployment Complete
@@ -115,11 +115,7 @@ In your browser, navigate to the endpoint (e.g. [http://localhost:8080](http://l
 
 ## Next steps
 
-- If you'd like to try another tutorial with your existing environment, go back to the [Radius tutorials]({{< ref tutorials >}}) page.
 - Related links for Dapr:
   - [Dapr documentation](https://docs.dapr.io/)
   - [Dapr quickstarts](https://github.com/dapr/quickstarts/tree/v1.0.0/hello-world)
-
-<br>
-
-{{< button text="Try another tutorial" page="tutorials" >}}
+- If you'd like to try another tutorial with your existing environment, go back to the [Radius tutorials]({{< ref tutorials >}}) page.

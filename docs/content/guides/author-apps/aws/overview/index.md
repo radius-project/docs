@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "AWS resources"
+title: "Overview: AWS resources"
 linkTitle: "Overview"
 description: "Deploy and connect to AWS resources in your application"
 weight: 100
@@ -16,11 +16,6 @@ Radius uses the [AWS Cloud Control API](https://docs.aws.amazon.com/cloudcontrol
 
 The AWS provider allows you to deploy and connect to AWS resources from a Radius environment on an EKS cluster. To configure an AWS provider, you can follow the documentation [here]({{< ref "/guides/operations/providers/howto-aws-provider" >}}).
 
-## Resource library
-
-{{< button text="AWS resource library" link="https://github.com/radius-project/bicep-types-aws/blob/main/artifacts/bicep/index.md" newtab="true" >}}
-> *If you don't have access to the Bicep-types-aws github repo, please visit https://aka.ms/ProjectRadius/GitHubAccess to request access to the Radius GitHub organization.*
-
 ## Example
 
 {{< tabs Bicep >}}
@@ -32,3 +27,7 @@ In the following example, a [Container]({{< ref "guides/author-apps/containers" 
 {{% /codetab %}} 
 
 {{< /tabs >}}
+
+## Resource library
+
+{{< button text="AWS resource library" link="/reference/resource-schema/aws" newtab="true" >}}

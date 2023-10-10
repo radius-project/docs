@@ -4,7 +4,7 @@ title: Overview for Radius
 linkTitle: Overview
 description: Learn how Radius fits into the app development landscape and it's long-term vision
 weight: 100
-categories: "Concept"
+toc_hide: true
 ---
 
 ## Building cloud-native apps is too difficult today

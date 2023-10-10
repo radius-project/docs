@@ -17,14 +17,14 @@ resource cache 'Microsoft.Cache/Redis@2019-07-01' = {
   }
 }
 
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'myapp'
   properties: {
     environment: environment
   }
 }
 
-resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource container 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'mycontainer'
   properties: {
     application: app.id

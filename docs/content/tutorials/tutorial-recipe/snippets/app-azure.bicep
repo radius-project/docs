@@ -7,7 +7,7 @@ param environment string
 param application string
 
 //DB
-resource db 'Applications.Datastores/redisCaches@2022-03-15-privatepreview' = {
+resource db 'Applications.Datastores/redisCaches@2023-10-01-preview' = {
   name: 'db'
   properties: {
     environment: environment
