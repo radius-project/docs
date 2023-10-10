@@ -1,18 +1,12 @@
 import radius as rad
 
-param environment string
-
-resource app 'Applications.Core/applications@2023-10-01-preview' = {
-  name: 'myapp'
-  properties: {
-    environment: environment
-  }
-}
+@description('The app ID of your Radius application. Set automatically by the rad CLI.')
+param application string
 
 resource container 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'mycontainer'
   properties: {
-    application: app.id
+    application: application
     container: {
       image: 'radius.azurecr.io/quickstarts/envvars:edge'
     }

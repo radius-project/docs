@@ -17,13 +17,13 @@ This how-to guide will teach how to connect to your dependencies via [connection
 
 ## Step 1: Model an app and container
 
-Create a new file named `app.bicep` and add an application and a [container]({{< ref "guides/author-apps/containers" >}}):
+Create a new file named `app.bicep` and add a [container]({{< ref "guides/author-apps/containers" >}}):
 
 {{< rad file="snippets/app.bicep" embed=true >}}
 
 ## Step 2: Add a Mongo database as a dependency
 
-Next, add to `app.bicep` a [Mongo database]({{< ref "portable-resources#overview" >}}), leveraging the default "local-dev" Recipe:
+Next, add to `app.bicep` a [Mongo database]({{< ref "/guides/author-apps/portable-resources/overview" >}}), leveraging the default "local-dev" Recipe:
 
 {{< rad file="snippets/app-mongodb.bicep" embed=true marker="//DB" >}}
 
@@ -31,7 +31,7 @@ Next, add to `app.bicep` a [Mongo database]({{< ref "portable-resources#overview
 
 Connections from a container to a resource result in environment variables for connection information automatically being set on the container. Update your container definition to add a connection to the new Mongo database:
 
-{{< rad file="snippets/app-mongodb.bicep" embed=true marker="//CONTAINER" >}}
+{{< rad file="snippets/app-mongodb.bicep" embed=true marker="//CONTAINER" markdownConfig="{linenos=table,hl_lines=[\"8-12\"],linenostart=7}" >}}
 
 ## Step 4: Deploy your app
 
@@ -85,5 +85,5 @@ rad app delete -a myapp
 
 ## Further reading
 
-- [Connections]({{< ref "guides/author-apps/containers#connections" >}})
+- [Connections]({{< ref "guides/author-apps/containers/overview#connections" >}})
 - [Container schema]({{< ref container-schema >}})
