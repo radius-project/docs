@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: manifest-default
+  name: my-microservice
   labels:
-    app: manifest-default
+    app: my-microservice
   annotations:
     source: base-manifest-test
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: manifest-default
+      app: my-microservice
   template:
     metadata:
       labels:
-        app: manifest-default
+        app: my-microservice
     spec:
-      serviceAccountName: manifest-default
+      serviceAccountName: my-microservice
       volumes:
         - name: secret-vol
           secret:
-            secretName: manifest-default-secret0
+            secretName: my-microservice-secret0
       containers:
-        - name: manifest-default
+        - name: my-microservice
           ports:
           - containerPort: 80
             protocol: TCP
@@ -34,23 +34,23 @@ spec:
           - name: TEST_SECRET_KEY
             valueFrom:
               secretKeyRef:
-                name: manifest-default-secret1
+                name: my-microservice-secret1
                 key: secret1
           - name: TEST_CONFIGMAP_KEY
             valueFrom:
               configMapKeyRef:
-                name: manifest-default-config
+                name: my-microservice-config
                 key: TEST_CONFIGMAP
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: manifest-default
+  name: my-microservice
   annotations:
     source: base-manifest-test
 spec:
   selector:
-    app.kubernetes.io/name: manifest-default
+    app.kubernetes.io/name: my-microservice
   ports:
     - protocol: TCP
       port: 3000
@@ -59,7 +59,7 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: manifest-default
+  name: my-microservice
   annotations:
     source: base-manifest-test
 ---
@@ -67,7 +67,7 @@ metadata:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: manifest-default-secret0
+  name: my-microservice-secret0
   annotations:
     source: base-manifest-test
 type: Opaque
@@ -78,7 +78,7 @@ stringData:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: manifest-default-secret1
+  name: my-microservice-secret1
   annotations:
     source: base-manifest-test
 type: Opaque
@@ -89,7 +89,7 @@ stringData:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: manifest-default-config
+  name: my-microservice-config
   annotations:
     source: base-manifest-test
 data:

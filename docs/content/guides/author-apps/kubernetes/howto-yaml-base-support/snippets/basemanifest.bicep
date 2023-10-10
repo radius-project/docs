@@ -13,11 +13,11 @@ param port int = 3000
 param environment string
 
 @description('Specifies the namespace for resources.')
-param namespace string
+param namespace string = 'my-microservice'
 
 //APPLICATION
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
-  name: 'manifest-default'
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
+  name: 'my-microservice'
   location: location
   properties: {
     environment: environment
@@ -35,9 +35,9 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 @description('Loads the Kubernetes base manifest file and turns content into a string.')
 var manifest = loadTextContent('./basemanifest.yaml')
 
-resource container 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource container 'Applications.Core/containers@2023-10-01-preview' = {
   // Name must match with `ServiceAccount`, `Deployment`, and `Service` objects
-  name: 'your-manifest-default-name'
+  name: 'my-microservice'
   location: location
   properties: {
     application: app.id
