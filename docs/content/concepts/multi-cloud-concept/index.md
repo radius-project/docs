@@ -7,11 +7,11 @@ weight: 100
 categories: "Concept"
 ---
 
-## Using multiple cloud providers
+## Organizations are increasingly multi-cloud
 
-Radius is designed to meet customers where they are, integrating with existing best practices while providing new benefits through features like the Radius Application Graph and Radius Environments and Recipes. A majority of enterprises surveyed suggested that they were either using multiple cloud providers or were going to use multiple cloud providers. In short, multi-cloud is a trend that is accelerating in popularity.
+Radius is designed to meet developers, and the platform engineers that support them, where they are, integrating with existing best practices while providing new benefits through features like the Radius Application Graph and Radius Environments and Recipes. We talked to a lot of organizations about their cloud usage, and learned that they were either using multiple cloud providers or were going to use multiple cloud providers. In short, multi-cloud is a trend that is accelerating in popularity.
 
-What does multi-cloud really mean? In talking with a variety of enterprises and cloud native software vendors we found three types of multi-cloud use:
+What does multi-cloud really mean? Throughout the design phase of Radius, we've have many conversations with large enterprises about their usage of the cloud, and in particular about their usage of multiple clouds. We were curious about why enterprises use multiple clouds and what problems they need help solving. In talking with these enterprises and with cloud native software vendors we found three types of multi-cloud use:
 
 1. Multi-cloud enterprise: these enterprises deployed some applications to one cloud provider and other applications to another cloud provider.
 1. Cloud-agnostic applications: these enterprises deploy the same application to different cloud providers.
@@ -19,7 +19,7 @@ What does multi-cloud really mean? In talking with a variety of enterprises and 
 
 The third case, a single application that is running across multiple clouds, was incredibly rare. Enterprises that had experimented with multi-cloud applications cited almost insurmountable challenges with operations, security, and performance management. While Radius can help with these kinds of applications, supporting these kinds of applications was not a design goal for Radius.
 
-Radius was designed to meet the first two types of multi-cloud use.
+Radius is designed to meet the first two types of multi-cloud use.
 
 ### Multi-cloud enterprise
 
@@ -44,8 +44,8 @@ The second way Radius supports cloud-agnostic applications is with Dapr, the Dis
 Radius was designed from the start to support enterprises in implementing their multi-cloud strategy. Enterprises can use cloud vendor technologies, like DynamoDB, or they can build on open source technologies like Redis and Dapr.
 
 ## Open-source
-Many enterprises use open-source technologies as a way of achieving their multi-cloud strategy. Kubernetes adoption is a great example of this trend. Customers building on Kubernetes can leverage their Kubernetes experience, tools, and practices with any cloud provider. 
+Many enterprises use open-source technologies as a way of *achieving* their multi-cloud strategy. Kubernetes adoption is a great example of this trend. Customers building on Kubernetes can leverage their Kubernetes experience, tools, and practices with any cloud provider and they're confident Kubernetes, with it's broad community, will continue to be a multi-cloud technology. 
 
-Radius was designed to be an open-source project from the start as part of the way Radius would support multi-cloud strategies. Open-source can mean different things to different people. For Radius, open-source means that our source code is publicly available. It also means that the Radius project uses an neutral and open governance model to continue the evolution of Radius going forward. 
+Radius was designed to be an open-source project from the start as part of the way Radius would support enterprise multi-cloud strategies. Open-source can mean different things to different people. For Radius, open-source means that our source code is publicly available. It also means that the Radius project uses an neutral and open governance model to continue the evolution of Radius as a multi-cloud technology going forward. 
 
 The Radius team has worked with the Cloud Native Computing Foundation (CNCF) to bring Radius into the CNCF as a new CNCF project. The Radius team is optimistic that Radius will be a success, both in helping enterprises achieve their multi-cloud strategies as well as in bringing powerful concepts, like Environments, Recipes, and the Application Graph, to the broader cloud native community.
