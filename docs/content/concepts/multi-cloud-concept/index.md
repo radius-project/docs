@@ -1,6 +1,6 @@
 ---
 type: docs
-title: Open-source and multi-cloud  
+title: Concept: Open-source and multi-cloud  
 linkTitle: Open-Source and multi-cloud
 description: For many enterprises, their cloud native computing strategy involves using multiple cloud providers. Open source projects, like Kubernetes, help ensure these enterprises achieve their strategy. As a result, Radius was designed to be open-source and multi-cloud from the start. 
 weight: 300
