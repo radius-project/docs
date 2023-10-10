@@ -24,7 +24,7 @@ Begin by creating a file named `app.bicep` with a Radius application and [contai
 
 {{< rad file="snippets/1-app.bicep" embed=true >}}
 
-The `quickstarts/volumes` container will display the status and contents of the `/tmpdir` directory within the container.
+The `samples/volumes` container will display the status and contents of the `/tmpdir` directory within the container.
 
 ## Step 2: Deploy the app and container
 
