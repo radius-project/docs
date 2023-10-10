@@ -32,7 +32,7 @@ param tlskey string
 resource secretstore 'Applications.Core/secretStores@2023-10-01-preview' = {
   name: 'secretstore'
   properties: {
-    application: httpsApplication.id
+    application: application
     type: 'certificate'
     data: {
       'tls.crt': {
