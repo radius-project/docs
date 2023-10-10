@@ -23,7 +23,7 @@ Create a new file named `app.bicep` and add an application and a [container]({{<
 
 ## Step 2: Add a Mongo database as a dependency
 
-Next, add to `app.bicep` a [Mongo database]({{< ref "portable-resources#overview" >}}), leveraging the default "dev" Recipe:
+Next, add to `app.bicep` a [Mongo database]({{< ref "portable-resources#overview" >}}), leveraging the default "local-dev" Recipe:
 
 {{< rad file="snippets/app-mongodb.bicep" embed=true marker="//DB" >}}
 
@@ -35,16 +35,11 @@ Connections from a container to a resource result in environment variables for c
 
 ## Step 4: Deploy your app
 
-1. Deploy your application to your environment:
+1. Run your application in your environment:
 
    ```bash
-   rad deploy ./app.bicep
+   rad run ./app.bicep -a myapp
    ```
-1. Port-forward the container to your machine:
-
-    ```bash
-    rad resource expose containers mycontainer -a myapp --port 5000
-    ```
 1. Visit [localhost:5000](http://localhost:5000) in your browser. You should see the following page, now showing injected environment variables:
 
    <img src="./connections.png" alt="Screenshot of the app printing all the environment variables" width=1000px />
@@ -92,4 +87,3 @@ rad app delete -a myapp
 
 - [Connections]({{< ref "guides/author-apps/containers#connections" >}})
 - [Container schema]({{< ref container-schema >}})
-
