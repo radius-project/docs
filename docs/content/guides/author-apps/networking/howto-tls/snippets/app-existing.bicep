@@ -24,7 +24,7 @@ resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
 resource secretstore 'Applications.Core/secretStores@2023-10-01-preview' = {
   name: 'secretstore'
   properties: {
-    application: httpsApplication.id
+    application: application
     type: 'certificate'
     // Reference the existing tls-certificate Kubernetes secret in the default namespace
     // Change this if your Kubernetes secret is in a different namespace or is named differently
