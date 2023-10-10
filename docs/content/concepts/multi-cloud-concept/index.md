@@ -13,7 +13,7 @@ Radius is designed to meet customers where they are, integrating with existing b
 
 What does multi-cloud really mean? In talking with a variety of enterprises and cloud native software vendors we found three types of multi-cloud use:
 
-1. Multi-cloud enterprise: these enterprises deployed some application to one cloud provider and other applications to another cloud provider.
+1. Multi-cloud enterprise: these enterprises deployed some applications to one cloud provider and other applications to another cloud provider.
 1. Cloud-agnostic applications: these enterprises deploy the same application to different cloud providers.
 1. Multi-cloud application: these enterprises have a single application that is distributed across multiple clouds.
 
