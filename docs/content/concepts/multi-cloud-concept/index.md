@@ -8,6 +8,7 @@ categories: "Concept"
 ---
 
 ## Using multiple cloud providers
+
 Radius is designed to meet customers where they are, integrating with existing best practices while providing new benefits through features like the Radius Application Graph and Radius Environments and Recipes. A majority of enterprises surveyed suggested that they were either using multiple cloud providers or were going to use multiple cloud providers. In short, multi-cloud is a trend that is accelerating in popularity.
 
 What does multi-cloud really mean? In talking with a variety of enterprises and cloud native software vendors we found three types of multi-cloud use:
