@@ -32,6 +32,7 @@ Finally, some enterprises explained that they were multi-cloud due to inertia. T
 Radius was designed with these enterprises in mind. Enterprises can "radify" their applications regardless of cloud provider, enabling these enterprises to use Radius regardless of whether or not the application is using a particular public cloud provider or a private cloud operated by the enterprise itself. Radius applications can use cloud vendor specific technologies, like Amazon's DynamoDB or Azure's Cosmos DB, or they can use open source technologies like Redis. 
 
 ### Cloud-agnostic applications
+
 There were some enterprises that ran the same application in multiple clouds. Often these enterprises had business requirements that required them to use multiple cloud providers. For example, some financial services enterprises had to host their application and any data associated with the application in a particular country or geographic region. The enterprise would need their application to be deployable to whichever cloud provider was available in a specific country or region.
 
 Radius was designed to support this specific use case from the start. We wanted to make it possible for IT teams, platform engineering teams, or cloud center of excellence teams to make decisions about which cloud provider an application would use. We wanted them to be able to make that decision without having an impact on their developers and the application logic those developers were writing. 
