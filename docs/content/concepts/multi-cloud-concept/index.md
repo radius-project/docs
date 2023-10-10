@@ -22,6 +22,7 @@ The third case, a single application that is running across multiple clouds, was
 Radius was designed to meet the first two types of multi-cloud use.
 
 ### Multi-cloud enterprise
+
 The multi-cloud enterprise case was the most common case we encountered. Some enterprises explained that they were multi-cloud due to decentralized decision making, acquisitions, or inertia. For example, some enterprises let individual engineering teams decide which cloud worked best for the type of application they were building. These teams would select a cloud provider for a variety of reasons, such as prior experience with a cloud provider, unique cloud provider features, or the way a particular cloud provider integrated with other tools or practices used by the team.
 
 Some enterprises explained that they were multi-cloud through acquisitions. Their new parent company might have selected a particular cloud provider that is different than their choice. For many customers we spoke with there was little to no requirement to migrate their existing applications from one cloud provider to another cloud provider.
