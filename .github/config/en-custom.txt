@@ -947,3 +947,5 @@ PodSpec
 ConfigMap
 CRD
 composable
+gatewaydemo
+tlsdemo
