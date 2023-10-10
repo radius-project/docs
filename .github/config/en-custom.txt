@@ -18,6 +18,7 @@ ClusterIssuer
 CLI
 CLIs
 CMD
+CNCF
 CQRS
 CRDs
 CRUDL
@@ -39,6 +40,7 @@ Docsy
 DocumentDB
 EKS
 eksClusterName
+ElastiCache
 entrypoint
 EOF
 Extensibility
@@ -88,6 +90,7 @@ PowerShell
 Pre
 PubSub
 ProjectRadius
+radify
 RBAC
 RabbitMQ
 ResourceDeploymentClient
