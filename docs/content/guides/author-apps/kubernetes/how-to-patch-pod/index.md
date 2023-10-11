@@ -23,19 +23,37 @@ This how-to guide will provide an overview of how to:
 
 Begin by creating a file named `app.bicep` with a Radius application and [container]({{< ref "guides/author-apps/containers" >}}):
 
-{{< rad file="snippets/kubernetes-container.bicep" embed=true >}}
+{{< rad file="snippets/patch-container.bicep" embed=true >}}
 
 ## Step 2: Deploy the app and container
 
-1. Deploy your app with the command:
+1. Deploy and run your app with the command:
 
    ```bash
-   rad deploy ./app.bicep
+   rad run ./app.bicep
    ```
 
-2. Confirm that a your app with a single container has been deployed:
+   Once the deployment completes successfully, you should see the following confirmation message along with some system logs:
 
-   //TODO
+   ```
+   Deployment Complete
+
+   Resources:
+      demo            Applications.Core/containers
+   ```
+
+2. In a separate terminal window, run the following command, making sure to specify the Kubernetes namespace to which you deployed your app:
+
+   ```bash
+   kubectl get pods -n <YOUR_KUBERNETES_NAMESPACE> -l app.kubernetes.io/name=demo -o custom-columns=POD:.metadata.name,STATUS:.status.phase,CONTAINER_NAMES:spec.containers[:].name,CONTAINER_IMAGES:spec.containers[:].image
+   ```
+
+   You should see output confirming that a single container named `demo` was deployed and is running in your pod, similar to the following:
+
+   ```
+   POD                    STATUS    CONTAINER_NAMES   CONTAINER_IMAGES
+   demo-df76d886c-9p4gv   Running   demo              radius.azurecr.io/tutorial/webapp:edge
+   ```
 
 ## Step 3: Add a PodSpec to the container definition
 
