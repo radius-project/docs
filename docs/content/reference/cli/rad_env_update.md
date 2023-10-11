@@ -68,5 +68,5 @@ rad env update myenv --clear-aws
 
 ### SEE ALSO
 
-* [rad env]({{< ref rad_env.md >}})	 - Manage Radius environments
+* [rad env]({{< ref rad_env.md >}})	 - Manage Radius Environments
 

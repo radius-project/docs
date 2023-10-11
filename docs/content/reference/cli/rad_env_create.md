@@ -8,12 +8,12 @@ description: "Details on the rad env create Radius CLI command"
 ---
 ## rad env create
 
-Create a new Radius environment
+Create a new Radius Environment
 
 ### Synopsis
 
-Create a new Radius environment
-Radius environments are prepared "landing zones" for Radius applications.
+Create a new Radius Environment
+Radius Environments are prepared "landing zones" for Radius Applications.
 Applications deployed to an environment will inherit the container runtime, configuration, and other settings from the environment.
 
 ```
@@ -45,5 +45,5 @@ rad env create myenv
 
 ### SEE ALSO
 
-* [rad env]({{< ref rad_env.md >}})	 - Manage Radius environments
+* [rad env]({{< ref rad_env.md >}})	 - Manage Radius Environments
 

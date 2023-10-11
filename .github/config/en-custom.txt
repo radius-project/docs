@@ -948,3 +948,5 @@ ConfigMap
 CRD
 composable
 mycontainer
+gatewaydemo
+tlsdemo

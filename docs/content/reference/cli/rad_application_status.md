@@ -8,11 +8,11 @@ description: "Details on the rad application status Radius CLI command"
 ---
 ## rad application status
 
-Show Radius application status
+Show Radius Application status
 
 ### Synopsis
 
-Show Radius application status, such as public endpoints and resource count. Shows details for the user's default application (if configured) by default.
+Show Radius Application status, such as public endpoints and resource count. Shows details for the user's default application (if configured) by default.
 
 ```
 rad application status [flags]
@@ -51,5 +51,5 @@ rad app status my-app --group my-group
 
 ### SEE ALSO
 
-* [rad application]({{< ref rad_application.md >}})	 - Manage Radius applications
+* [rad application]({{< ref rad_application.md >}})	 - Manage Radius Applications
 
