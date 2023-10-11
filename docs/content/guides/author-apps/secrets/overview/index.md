@@ -34,5 +34,4 @@ Additional use-cases will be added in upcoming releases.
 
 ## Further reading
 
-- [How To: TLS termination with your own TLS certificate]({{< ref howto-tls-termination >}})
-- [How To: TLS termination with a certificate from Let's Encrypt]({{< ref howto-tls-termination-cert-manager >}})
+- [How To: gateway TLS termination]({{< ref howto-tls >}})

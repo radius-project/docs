@@ -22,8 +22,7 @@ Radius resources, when deployed to a Kubernetes environment, are mapped to one o
 
 | Radius resource                  | Kubernetes object |
 |----------------------------------|-------------------|
-| [`Applications.Core/containers`]({{< ref container-schema >}}) | `apps/Deployment@v1` |
-| [`Applications.Core/httpRoutes`]({{< ref httproute >}})   | `core/Service@v1` |
+| [`Applications.Core/containers`]({{< ref container-schema >}}) | `apps/Deployment@v1`<br />`core/Service@v1` _(if ports defined)_ |
 | [`Applications.Core/gateways`]({{< ref gateway >}})     | `projectcontour.io/HTTPProxy@v1` |
 | [`Applications.Dapr/pubSubBrokers`]({{< ref dapr-pubsub >}}) | `dapr.io/Component@v1alpha1` |
 | [`Applications.Dapr/secretStores`]({{< ref dapr-secretstore >}}) | `dapr.io/Component@v1alpha1` |
