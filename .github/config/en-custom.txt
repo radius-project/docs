@@ -962,3 +962,12 @@ mongodatabases
 secureString
 btdgzez
 bzmp
+Appi
+ness
+DevOps
+DevSecOps
+learnings
+architected
+customizable
+Gitops
+OSS
