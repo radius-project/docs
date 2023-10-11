@@ -38,6 +38,7 @@ Deployable
 Dockerfiles
 Docsy
 DocumentDB
+dcd
 EKS
 eksClusterName
 entrypoint
@@ -113,6 +114,8 @@ TBD
 TCP
 Terraform
 TLS
+tnvx
+tq
 ToCs
 UCP
 UDP
