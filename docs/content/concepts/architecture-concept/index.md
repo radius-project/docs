@@ -139,7 +139,7 @@ When listing applications using the `rad` CLI:
 {{% /codetab %}}
 
 {{% codetab %}}
-When using Bicep to author and deploy Radius applications:
+When using Bicep to author and deploy Radius Applications:
 
 1. The client compiles the Bicep file to an ARM-JSON template and submits a request for processing as a `Bicep.Deployments/deployments` resource.
 2. UCP receives the request for the `Bicep.Deployments/deployments` Create operation and looks up the internal address for the `Bicep.Deployments` resource provider.
@@ -153,7 +153,7 @@ When using Bicep to author and deploy Radius applications:
 {{% /codetab %}}
 
 {{% codetab %}}
-When using the `tf` CLI to deploy a Radius application using Terraform:
+When using the `tf` CLI to deploy a Radius Application using Terraform:
 
 1. Terraform reads the configuration, loads credentials, parses the file, and instantiates its providers. For each resource in the file:
   a. Terraform asks the appropriate provider to Create or Update the resource. 

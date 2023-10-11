@@ -2,13 +2,13 @@
 type: docs
 title: "How-To: Configure the Azure cloud provider"
 linkTitle: "Configure Azure provider"
-description: "Learn how to configure the Azure provider for your Radius environment"
+description: "Learn how to configure the Azure provider for your Radius Environment"
 weight: 200
 categories: "How-To"
 tags: ["Azure"]
 ---
 
-The Azure provider allows you to deploy and connect to Azure resources from a self-hosted Radius environment. It can be configured:
+The Azure provider allows you to deploy and connect to Azure resources from a self-hosted Radius Environment. It can be configured:
 - [Interactively via `rad init`](#interactive-configuration)
 - [Manually via `rad env update` and `rad credential register`](#manual-configuration)
 

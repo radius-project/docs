@@ -2,13 +2,13 @@
 type: docs
 title: "How-To: Configure the AWS cloud provider"
 linkTitle: "Configure AWS provider"
-description: "Learn how to configure the AWS provider for your Radius environment"
+description: "Learn how to configure the AWS provider for your Radius Environment"
 weight: 300
 categories: "How-To"
 tags: ["AWS"]
 ---
 
-The AWS provider allows you to deploy and connect to AWS resources from a Radius environment on an EKS cluster. It can be configured:
+The AWS provider allows you to deploy and connect to AWS resources from a Radius Environment on an EKS cluster. It can be configured:
 - [Interactively via `rad init`](#interactive-configuration)
 - [Manually via `rad env update` and `rad credential register`](#manual-configuration)
 

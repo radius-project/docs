@@ -8,7 +8,7 @@ categories: "Overview"
 tags: ["VSCode"]
 ---
 
-When using Visual Studio Code with Radius there are a set of extensions you can install to help author, validate, and manage your Radius applications and environments.
+When using Visual Studio Code with Radius there are a set of extensions you can install to help author, validate, and manage your Radius Applications and environments.
 
 ## Radius Bicep extension
 
