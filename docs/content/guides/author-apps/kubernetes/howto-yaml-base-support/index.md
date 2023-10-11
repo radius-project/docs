@@ -36,29 +36,29 @@ You'll need to create a Radius container resource that will consume the informat
 
 {{< rad file="snippets/basemanifest.yaml" embed=true lang="yaml">}}
 
-#### Standardize object names
+### Step 3: Add the Kubernetes base YAML configurations to your Radius application definition
+
+- Standardize object names
 
 Begin by assuring that your `ServiceAccount`, `Deployment`, and `Service` objects found in your Kubernetes base YAML file have the same name as the Radius container resource that lives inside your application-scoped namespace.
 
-#### Container configurations
+- Container configurations
 
 Define your Radius container resource port with the port of your Kubernetes `Service` as well as the image container location that your service is dependent on.
 
-#### Runtime configuration
+- Runtime configuration
 
 Load your Kubernetes YAML file into your Radius container resource through the `properties.runtimes.kubernetes.base` property which expects a string value containing all your Kubernetes data.
 
 {{< rad file="snippets/basemanifest.bicep" embed=true marker="//CONTAINER" >}}
 
-### Done
-
 You can now deploy your Radius Application and verify that your Kubernetes objects are created in the desired namespace. 
 
-#### Deployment
+### Step 4: Deployment
 
 Run `rad deploy app.bicep` and your expected outcome should be:
 
-```bash
+```
 Building app.bicep...
 Deploying template 'app.bicep' into environment 'default' from workspace 'default'...
 
@@ -76,8 +76,8 @@ Resources:
 
 To verify and follow the Kubernetes pod creations run `kubectl get pods -A -w` during your deployment and the following output should be seen:
 
-```bash
-radius-system   controller-585dcd4c9b-5g2c9        1/1     Running            5 (91s ago)     13m
+```
+radius-system     controller-585dcd4c9b-5g2c9        1/1     Running            5 (91s ago)     13m
 my-microservice   my-microservice-5c464f66d4-s7n7w   0/1     Pending            0               0s
 my-microservice   my-microservice-5c464f66d4-s4tq8   0/1     Pending            0               0s
 my-microservice   my-microservice-5c464f66d4-tnvx4   0/1     Pending            0               0s
@@ -88,3 +88,5 @@ my-microservice   my-microservice-5c464f66d4-tnvx4   0/1     Pending            
 ## Further reading
 
 - [Kubernetes authoring resources overview]({{< ref "/guides/author-apps/kubernetes/overview" >}})
+- [Container resource overview]({{< ref "guides/author-apps/containers/overview#kubernetes" >}})
+- [Container resource schema]({{< ref "container-schema#runtimes" >}})
