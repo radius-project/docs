@@ -14,7 +14,7 @@ Currently yes. Today Kubernetes is the only hosting platform for Radius. We are 
 
 ### Can I incrementally adopt, or "try out" Radius?
 
-Yes. Teams can incrementally adopt the Radius platform as they write new applications or add existing applications. Direct connections allow apps with existing platform dependencies (such as Azure and AWS) move to Radius without any code rewrites. Dapr support allows existing Dapr apps to be brought to Radius without any code rewrites as well. Portability and automation can be layered on with Radius portable resources and Recipes. In the future we will add Kubernetes YAML support which enables developers to wrap their existing Kubernetes YAML objects in a Radius container so that they may bring their existing deployments and pods as-is into a Radius application.
+Yes. Teams can incrementally adopt the Radius platform as they write new applications or add existing applications. Direct connections allow apps with existing platform dependencies (such as Azure and AWS) move to Radius without any code rewrites. Dapr support allows existing Dapr apps to be brought to Radius without any code rewrites as well. Portability and automation can be layered on with Radius portable resources and Recipes. In the future we will add Kubernetes YAML support which enables developers to wrap their existing Kubernetes YAML objects in a Radius container so that they may bring their existing deployments and pods as-is into a Radius Application.
 
 ### Do I have to self-host Radius? Is there a managed service for Radius? 
 
@@ -53,7 +53,7 @@ Recipes currently support the set of Radius portable resources: Redis, Mongo, Ra
 
 ### Do developers need contributor or owner access to a cloud provider (Azure subscription, AWS account, etc.) to leverage Radius Recipes? 
 
-No. Recipes are deployed on-behalf-of the Radius environment so developers do not need any write access to an Azure subscription, resource group, or AWS account. This allows a least-privilege access model to cloud resources and for IT operators to only allow approved IaC templates to be deployed to their cloud environments. 
+No. Recipes are deployed on-behalf-of the Radius Environment so developers do not need any write access to an Azure subscription, resource group, or AWS account. This allows a least-privilege access model to cloud resources and for IT operators to only allow approved IaC templates to be deployed to their cloud environments. 
 
 ### Why do I need to manually output a Kubernetes UCP ID as part of my Bicep Recipe?
 
@@ -98,11 +98,11 @@ Yes. You will need to modify the resource definition in your .bicep file's appli
 
 ### What AWS services does Radius support 
 
-Radius applications can include AWS services that are also supported by the AWS cloud control API. See the [AWS resource library]({{< ref "/guides/author-apps/aws/overview#resource-library" >}}) for the complete list of supported AWS resources. Radius does not currently support direct connections to AWS resources, but it is on the backlog. Stay tuned for updates. 
+Radius Applications can include AWS services that are also supported by the AWS cloud control API. See the [AWS resource library]({{< ref "/guides/author-apps/aws/overview#resource-library" >}}) for the complete list of supported AWS resources. Radius does not currently support direct connections to AWS resources, but it is on the backlog. Stay tuned for updates. 
 
 ### What Azure services does Radius support? 
 
-Radius applications can include any non-compute Azure service, with support for direct connections and managed identities. Compute services (Web Apps, Container Apps, App Service, Functions, Logic Apps, and others) will be added in a future release. 
+Radius Applications can include any non-compute Azure service, with support for direct connections and managed identities. Compute services (Web Apps, Container Apps, App Service, Functions, Logic Apps, and others) will be added in a future release. 
 
 ### Does Radius support Google Cloud Platform (GCP)? 
 

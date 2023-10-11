@@ -120,7 +120,7 @@ Follow the [Terraform module publishing docs](https://developer.hashicorp.com/te
 
 ### Step 5: Register your Recipe with your environment
 
-Now that your Recipe template has been stored, you can add it your Radius environment to be used by developers. This allows you to mix-and-match templates for each of your environments such as dev, canary, and prod.
+Now that your Recipe template has been stored, you can add it your Radius Environment to be used by developers. This allows you to mix-and-match templates for each of your environments such as dev, canary, and prod.
 
 {{< tabs "rad CLI - Bicep" "rad CLI - Terraform" "Bicep environment" >}}
 
