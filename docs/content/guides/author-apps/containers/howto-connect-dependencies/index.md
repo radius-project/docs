@@ -15,34 +15,34 @@ This how-to guide will teach how to connect to your dependencies via [connection
 - [Radius CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Radius environment]({{< ref "installation#step-3-initialize-the-radius-control-plane-and-the-radius-environment" >}})
 
-## Step 1: Model an app and container
+## Step 1: View the container definition
 
-Create a new file named `app.bicep` and add a [container]({{< ref "guides/author-apps/containers" >}}):
+Open the `app.bicep` and view the [container]({{< ref "guides/author-apps/containers" >}}):
 
 {{< rad file="snippets/app.bicep" embed=true >}}
 
-## Step 2: Add a Mongo database as a dependency
+## Step 2: Add a Redis cache as a dependency
 
-Next, add to `app.bicep` a [Mongo database]({{< ref "/guides/author-apps/portable-resources/overview" >}}), leveraging the default "local-dev" Recipe:
+Next, add to `app.bicep` a [Redis cache]({{< ref "/guides/author-apps/portable-resources/overview" >}}), leveraging the default "local-dev" Recipe:
 
-{{< rad file="snippets/app-mongodb.bicep" embed=true marker="//DB" >}}
+{{< rad file="snippets/app-with-redis.bicep" embed=true marker="//DB" >}}
 
-## Step 3: Connect to the Mongo database
+## Step 3: Connect to the Redis cache
 
-Connections from a container to a resource result in environment variables for connection information automatically being set on the container. Update your container definition to add a connection to the new Mongo database:
+Connections from a container to a resource result in environment variables for connection information automatically being set on the container. Update your container definition to add a connection to the new Redis cache:
 
-{{< rad file="snippets/app-mongodb.bicep" embed=true marker="//CONTAINER" markdownConfig="{linenos=table,hl_lines=[\"8-12\"],linenostart=7}" >}}
+{{< rad file="snippets/app-with-redis.bicep" embed=true marker="//CONTAINER" markdownConfig="{linenos=table,hl_lines=[\"8-12\"],linenostart=7}" >}}
 
 ## Step 4: Deploy your app
 
 1. Run your application in your environment:
 
    ```bash
-   rad run ./app.bicep -a myapp
+   rad run ./app.bicep 
    ```
-1. Visit [localhost:5000](http://localhost:5000) in your browser. You should see the following page, now showing injected environment variables:
+1. Visit [localhost:3000](http://localhost:3000) in your browser. You should see the following page, now showing injected environment variables:
 
-   <img src="./connections.png" alt="Screenshot of the app printing all the environment variables" width=1000px />
+   <img src="./demo-with-redis-screenshot.png" alt="Screenshot of the demo app with all environment variables" width=1000px />
    
 ## Step 5: View the application connections
 
@@ -52,35 +52,36 @@ Radius connections are more than just environment variables and configuration. Y
 rad app connections
 ```
 
-You should see the following output, detailing the connections between the `mycontainer` and the `db` Mongo database, along with information about the underlying Kubernetes resources running the app:
+You should see the following output, detailing the connections between the `demo` container and the `db` Redis cache, along with information about the underlying Kubernetes resources running the app:
 
 ```
-Displaying application: myapp
+Displaying application: demo
 
-Name: mycontainer (Applications.Core/containers)
+Name: demo (Applications.Core/containers)
 Connections:
-  mycontainer -> mongo-db (Applications.Datastores/mongoDatabases)
+  demo -> db (Applications.Datastores/redisCaches)
 Resources:
-  mycontainer (kubernetes: apps/Deployment)
-  mycontainer (kubernetes: core/Secret)
-  mycontainer (kubernetes: core/ServiceAccount)
-  mycontainer (kubernetes: rbac.authorization.k8s.io/Role)
-  mycontainer (kubernetes: rbac.authorization.k8s.io/RoleBinding)
+  demo (kubernetes: apps/Deployment)
+  demo (kubernetes: core/Secret)
+  demo (kubernetes: core/Service)
+  demo (kubernetes: core/ServiceAccount)
+  demo (kubernetes: rbac.authorization.k8s.io/Role)
+  demo (kubernetes: rbac.authorization.k8s.io/RoleBinding)
 
-Name: mongo-db (Applications.Datastores/mongoDatabases)
+Name: db (Applications.Datastores/redisCaches)
 Connections:
-  mycontainer (Applications.Core/containers) -> mongo-db
+  demo (Applications.Core/containers) -> db
 Resources:
-  mongo-xxx(kubernetes: apps/Deployment)
-  mongo-xxx(kubernetes: core/Service)
+  redis-r5tcrra3d7uh6 (kubernetes: apps/Deployment)
+  redis-r5tcrra3d7uh6 (kubernetes: core/Service)
 ```
 
 ## Cleanup
 
-Run `rad app delete` to cleanup your Radius application, container, and mongo database:
+Run `rad app delete` to cleanup your Radius application, container, and Redis cache:
 
 ```bash
-rad app delete -a myapp
+rad app delete -a demo
 ```
 
 ## Further reading

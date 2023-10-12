@@ -4,11 +4,11 @@ import radius as rad
 param application string
 
 resource container 'Applications.Core/containers@2023-10-01-preview' = {
-  name: 'mycontainer'
+  name: 'demo'
   properties: {
     application: application
     container: {
-      image: 'radius.azurecr.io/quickstarts/envvars:edge'
+      image: 'radius.azurecr.io/samples/demo:latest'
     }
   }
 }
