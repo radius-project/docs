@@ -285,6 +285,8 @@ powershell
 pre
 preconfigured
 privatekey
+privateprevie
+privatepreview
 providerConfig
 publickey
 publicEndpointOverride
@@ -437,6 +439,8 @@ hl
 azureCache
 listKeys
 primaryKey
+quickstart
+quickstarts
 mygroup
 Kubeconfig
 unregister
