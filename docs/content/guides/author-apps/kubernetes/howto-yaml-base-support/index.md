@@ -79,7 +79,7 @@ Resources:
 
 3. Run the following command to verify and follow the Kubernetes pod creations: 
     ```bash
-    kubectl get pods -w
+    kubectl get pods --namespace my-microservice 
     ```
 
 4. Your console output should look similar to:
