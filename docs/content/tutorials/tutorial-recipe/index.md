@@ -9,7 +9,7 @@ categories: "Tutorial"
 tags : ["recipes"]
 ---
 
-This tutorial will teach you the following about recipes
+This tutorial will teach you the following about Recipes
 
 * How to use “dev” Recipes in your Radius Environment to quickly run with containerized infrastructure.
 * How to deploy your own Recipes in your Radius Environment to leverage Azure/AWS resources.
@@ -35,7 +35,7 @@ Developers don't need to specify what cloud resources they're using in their app
 - Install the [rad CLI]({{< ref getting-started >}})
 - Setup a supported [Kubernetes cluster]({{< ref "guides/operations/kubernetes" >}})
 
-## Step 1: Initialize a Radius environment
+## Step 1: Initialize a Radius Environment
 
 1. Begin in a new directory for your application:
 
@@ -153,7 +153,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
    ```bash
    rad resource delete rediscaches db
    ```
-1. Manually add the Azure cloud provider to your Radius environment
+1. Manually add the Azure cloud provider to your Radius Environment
 
    Follow the steps [here]({{< ref "howto-azure-provider#manual-configuration" >}}) to add the Azure cloud provider to your existing environment.
 
@@ -230,7 +230,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
    rad resource delete rediscaches db
    ```
 
-1. Manually add the AWS cloud provider to your Radius environment
+1. Manually add the AWS cloud provider to your Radius Environment
 
    Follow the steps [here]({{< ref "howto-aws-provider#manual-configuration" >}}) to add the AWS cloud provider to your existing environment
 

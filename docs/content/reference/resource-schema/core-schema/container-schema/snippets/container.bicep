@@ -30,7 +30,6 @@ resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
         http: {
           containerPort: 80
           protocol: 'TCP'
-          provides: http.id
         }
       }
       volumes: {
@@ -112,13 +111,6 @@ resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
   }
 }
 //CONTAINER
-
-resource http 'Applications.Core/httpRoutes@2023-10-01-preview' = {
-  name: 'http'
-  properties: {
-    application: app.id
-  }
-}
 
 resource db 'Applications.Datastores/mongoDatabases@2023-10-01-preview' = {
   name: 'database'

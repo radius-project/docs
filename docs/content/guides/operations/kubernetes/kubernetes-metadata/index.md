@@ -41,7 +41,6 @@ You can set labels and annotations on an environment, application, or container 
 Kubernetes metadata can be applied at the environment, application, or container layers. Metadata cascades down from the environment to the application to the containers, gateway and route resources. For example, you can set labels and annotations at an environment level and all containers within the environment will gain these labels and annotation, without the need for an explicit extension on the containers. The following resources will gain the Kubernetes metadata for their [output resources]({{< ref "/guides/operations/kubernetes/overview#resource-mapping" >}}) from labels, annotations set at Environment, Application levels:
 
 - Applications.Core/containers
-- Applications.Core/httpRoutes
 - Applications.Core/gateways
 
 ### Metadata processing order
