@@ -17,13 +17,14 @@ jobs:
     name: Build Hugo Website
     if: github.event.action != 'closed'
     runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.ref_name == 'edge' && 'edge' || 'latest' }}
     env:
       GOVER: '^1.17'
       TUTORIAL_PATH: './docs/content/user-guides/tutorials/'
       CODE_ZIP_PATH: './docs/static/tutorial/'
       HUGO_VERSION: 0.117.0
       HUGO_ENV: production
-      SWA_BASE: 'wonderful-plant-020417a1e'
     steps:
       - name: Checkout docs repo
         uses: actions/checkout@v3
@@ -38,10 +39,6 @@ jobs:
           ref: ${{ env.RELEASE_BRANCH }}
           path: ./radius
           token: ${{ secrets.GH_RAD_CI_BOT_PAT }}
-      - name: Setup Go ${{ env.GOVER }}
-        uses: actions/setup-go@v2
-        with:
-          go-version: ${{ env.GOVER }}
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
@@ -58,29 +55,6 @@ jobs:
           sudo npm install -D --save postcss-cli
           cd themes/docsy
           npm install
-      - name: Restore CLI Docs Cache
-        uses: actions/cache@v3
-        id: cli_cache
-        with:
-          path: |
-            ./docs/content/reference/cli
-          key: ${{ runner.os }}-cli-${{ hashFiles('radius/pkg/cli') }}
-      - name: Restore Go Modules Cache
-        uses: actions/cache@v3
-        if: steps.cli_cache.outputs.cache-hit != 'true'
-        with:
-          path: |
-            ~/.cache/go-build
-            ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ hashFiles('radius/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-
-      - name: Generate CLI Docs
-        run: |
-          if [ ! -f ./docs/content/reference/cli/rad.md ]; then
-            cd radius
-            go run ./cmd/docgen/main.go ../docs/content/reference/cli
-          fi
       - name: Generate Swagger docs
         run : |
           mkdir -p ./docs/static/swagger
@@ -89,7 +63,7 @@ jobs:
         run: |
           cd docs
           if [ $GITHUB_EVENT_NAME == 'pull_request' ]; then
-            STAGING_URL="https://${SWA_BASE}-${{github.event.number}}.westus2.azurestaticapps.net/"
+            STAGING_URL="https://${{ vars.ENV_STATICWEBAPP_BASE }}-${{github.event.number }}.westus2.3.azurestaticapps.net/"
           fi
           hugo ${STAGING_URL+-b "$STAGING_URL"}
       - name: Upload Hugo artifacts
@@ -100,7 +74,7 @@ jobs:
           if-no-files-found: error
   
   deploy:
-    name: Deploy Hugo Website
+    name: Deploy Hugo Website to App Service
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     needs: ['build']
     runs-on: ubuntu-latest
@@ -131,11 +105,13 @@ jobs:
           resource-group-name: ${{ vars.ENV_APPSERVICE_RESOURCEGROUP }}
           package: site/
 
-  open_staging_site:
-    name: Open Staging Site
+  deploy-website:
+    name: Deploy Hugo Website
     needs: ['build']
     runs-on: ubuntu-latest
-    continue-on-error: true
+    environment:
+      name: ${{ github.ref_name == 'edge' && 'edge' || 'latest' }}
+      url: ${{ github.ref_name == 'edge' && 'https://edge.docs.radapp.dev' || 'https://docs.radapp.dev' }}
     steps:
       - name: Download Hugo artifacts
         uses: actions/download-artifact@v3
@@ -145,7 +121,7 @@ jobs:
       - name: Deploy staging site
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.STAGING_DOCS_SITE_TOKEN }}
+          azure_static_web_apps_api_token: ${{ secrets.ENV_STATICWEBAPP_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           app_location: "site/"
@@ -174,12 +150,15 @@ jobs:
     name: Close PR Staging Site
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.ref_name == 'edge' && 'edge' || 'latest' }}
+      url: ${{ github.ref_name == 'edge' && 'https://edge.docs.radapp.dev' || 'https://docs.radapp.dev' }}
     steps:
       - name: Close Pull Request
         id: closepullrequest
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.STAGING_DOCS_SITE_TOKEN }}
+          azure_static_web_apps_api_token: ${{ secrets.ENV_STATICWEBAPP_TOKEN }}
           action: "close"
 
   algolia_index:
