@@ -12,12 +12,15 @@ param port int = 3000
 @description('Specifies the environment for resources.')
 param environment string
 
+@description('Specifies the application for resources.')
+param application string
+
 @description('Specifies the namespace for resources.')
 param namespace string = 'my-microservice'
 
 //APPLICATION
 resource app 'Applications.Core/applications@2023-10-01-preview' = {
-  name: 'my-microservice'
+  name: application
   location: location
   properties: {
     environment: environment

@@ -37,11 +37,11 @@ Note that the names of the Deployments, Services, and Config Maps all must match
 ### Step 3: Add the Kubernetes base YAML configurations to your Radius application definition
 
 
-- Container configurations
+#### Container configurations
 
 Define your Radius container resource port with the port of your Kubernetes `Service` as well as the image container location that your service is dependent on.
 
-- Runtime configuration
+#### Runtime configuration
 
 Load your Kubernetes YAML file into your Radius container resource through the `properties.runtimes.kubernetes.base` property which expects a string value containing all your Kubernetes data.
 
@@ -52,10 +52,10 @@ You can now deploy your Radius Application and verify that your Kubernetes objec
 ### Step 4: Deploy your container
 
 
-1. Deploy your application with the command:
+Deploy your application with the command:
 
     ```bash
-    rad deploy app.bicep -a migrate-demo
+    rad deploy app.bicep -a demo-migrate
     ```
 
 2. Your console output should look similar to:
@@ -76,21 +76,17 @@ Resources:
     my-microservice Applications.Core/containers
 ```
 
-To verify and follow the Kubernetes pod creations run `kubectl get pods -A -w` during your deployment and the following output should be seen:
 
-```
-radius-system     controller-585dcd4c9b-5g2c9        1/1     Running            5 (91s ago)     13m
 3. Run the following command to verify and follow the Kubernetes pod creations: 
     ```bash
-    kubectl get pods -A -w
+    kubectl get pods -w
     ```
-    4. Your console output should look similar to:
+
+4. Your console output should look similar to:
 ```
 radius-system   controller-585dcd4c9b-5g2c9        1/1     Running            5 (91s ago)     13m
 my-microservice   my-microservice-5c464f66d4-s7n7w   0/1     Pending            0               0s
 my-microservice   my-microservice-5c464f66d4-s4tq8   0/1     Pending            0               0s
-my-microservice   my-microservice-5c464f66d4-tnvx4   0/1     Pending            0               0s
-my-microservice   my-microservice-5c464f66d4-s7n7w   0/1     Pending            0               0s
 my-microservice   my-microservice-5c464f66d4-tnvx4   0/1     Pending            0               0s
 ```
 
