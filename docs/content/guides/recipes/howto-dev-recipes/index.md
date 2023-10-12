@@ -12,9 +12,9 @@ Local development environments created by the rad init command include a set of 
 
 ## Prerequisites
 
-- [Setup a supported Kubernetes cluster]({{< ref "guides/operations/kubernetes" >}})
-- [Install rad cli]({{< ref "installation#step-1-install-the-rad-cli" >}})
-
+- [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-radius-bicep-vs-code-extension" >}})
+- [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
 
 ## Step 1: Initialize a Radius environment
 
