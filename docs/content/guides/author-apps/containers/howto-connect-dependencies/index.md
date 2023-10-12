@@ -38,7 +38,7 @@ Connections from a container to a resource result in environment variables for c
 1. Run your application in your environment:
 
    ```bash
-   rad run ./app.bicep 
+   rad run ./app.bicep -a demo
    ```
 1. Visit [localhost:3000](http://localhost:3000) in your browser. You should see the following page, now showing injected environment variables:
 
