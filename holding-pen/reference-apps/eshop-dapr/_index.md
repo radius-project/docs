@@ -40,6 +40,6 @@ Radius allows the eShop on Dapr application to:
 - Simplify deployment with Bicep and Azure Resource Manager (ARM). No more custom deployment scripts or workflows.
 - Automatically generate and apply the backing Dapr component configurations from the resources or values provided within the Dapr building block resource definitions.
 
-{{< button text="View eShop reference app in samples" githubRepo="samples" githubPath="reference-apps/eshop-dapr" color="success" size="btn-lg" >}}
+{{< button text="View eShop reference app in samples" githubRepo="samples" githubPath="samples/eshop-dapr" color="success" size="btn-lg" >}}
 
 *Visit the [GitHub docs]({{< ref github >}}) if you need access to the organization*
