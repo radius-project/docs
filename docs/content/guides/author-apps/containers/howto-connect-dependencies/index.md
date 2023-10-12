@@ -31,7 +31,7 @@ Next, add to `app.bicep` a [Redis cache]({{< ref "/guides/author-apps/portable-r
 
 Connections from a container to a resource result in environment variables for connection information automatically being set on the container. Update your container definition to add a connection to the new Redis cache:
 
-{{< rad file="snippets/app-with-redis.bicep" embed=true marker="//CONTAINER" markdownConfig="{linenos=table,hl_lines=[\"8-12\"],linenostart=7}" >}}
+{{< rad file="snippets/app-with-redis.bicep" embed=true marker="//CONTAINER" markdownConfig="{linenos=table,hl_lines=[\"13-17\"],linenostart=7}" >}}
 
 ## Step 4: Deploy your app
 
