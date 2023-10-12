@@ -24,6 +24,7 @@ resource app 'Applications.Core/applications@2023-10-01-preview' = {
   location: location
   properties: {
     environment: environment
+    application: application
     extensions: [
       {
           kind: 'kubernetesNamespace'
