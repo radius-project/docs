@@ -44,9 +44,9 @@ Connections from a container to a resource result in environment variables for c
 
    <img src="./demo-with-redis-screenshot.png" alt="Screenshot of the demo app with all environment variables" width=1000px />
    
-## Step 5: View the application connections
+## Step 5: View the Application Connections
 
-Radius connections are more than just environment variables and configuration. You can also access the "application graph" and understand the connections within your application with the following command:
+Radius Connections are more than just environment variables and configuration. You can also access the "application graph" and understand the connections within your application with the following command:
 
 ```bash
 rad app connections
