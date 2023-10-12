@@ -25,11 +25,11 @@ resource gateway 'Applications.Core/gateways@2023-10-01-preview' = {
     routes: [
       {
         path: '/frontend'
-        destination: frontendroute.id
+        destination: 'http://${frontend.name}:3000'
       }
       {
         path: '/backend'
-        destination: backendroute.id
+        destination: 'http://${backend.name}:8080'
       }
     ]
     tls: {
@@ -54,24 +54,6 @@ resource secretstore 'Applications.Core/secretStores@2023-10-01-preview' = {
   }
 }
 
-//FRONTENDROUTE
-resource frontendroute 'Applications.Core/httpRoutes@2023-10-01-preview' = {
-  name: 'frontendroute'
-  properties: {
-    application: app.id
-  }
-}
-//FRONTENDROUTE
-
-//BACKENDROUTE
-resource backendroute 'Applications.Core/httpRoutes@2023-10-01-preview' = {
-  name: 'backendroute'
-  properties: {
-    application: app.id
-  }
-}
-//BACKENDROUTE
-
 //FRONTEND
 resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'frontend'
@@ -82,16 +64,12 @@ resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
       ports: {
         http: {
           containerPort: 3000
-          provides: frontendroute.id
         }
-      }
-      env: {
-        BACKEND_URL: backendroute.properties.url
       }
     }
     connections: {
       backend: {
-        source: backendroute.id
+        source: 'http://backend:8080'
       }
     }
   }
@@ -108,7 +86,6 @@ resource backend 'Applications.Core/containers@2023-10-01-preview' = {
       ports: {
         http: {
           containerPort: 8080
-          provides: backendroute.id
         }
       }
     }

@@ -6,7 +6,7 @@ description: "Learn how to manage collections of resources with resource groups"
 weight: 100
 ---
 
-Resource groups are collections of resources that you can manage as a single unit. You can use resource groups to organize your resources when deploying Radius applications.
+Resource groups are collections of resources that you can manage as a single unit. You can use resource groups to organize your resources when deploying Radius Applications.
 
 <img src="group-diagram.png" alt="Diagram showing Radius resources inside of a Radius resource group" width=600px />
 

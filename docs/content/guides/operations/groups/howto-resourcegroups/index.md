@@ -4,6 +4,7 @@ title: "How-To: Manage resource groups"
 linkTitle: "Manage groups"
 description: "Learn how to manage resource groups in Radius"
 weight: 200
+categories: "How-To"
 ---
 
 This guide will walk you through the process of managing resource groups in Radius. For more information on resource groups, see [Resource groups]({{< ref groups >}}).

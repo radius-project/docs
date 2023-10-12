@@ -1,6 +1,6 @@
 import radius as radius
 
-@description('The ID of your Radius environment. Automatically injected by the rad CLI.')
+@description('The ID of your Radius Environment. Automatically injected by the rad CLI.')
 param environment string
 
 resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2022-08-15' existing = {
