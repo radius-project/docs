@@ -1,16 +1,14 @@
 ---
 type: docs
-title: "How-To: Incremental onboard from existing Kubernetes resources"
-linkTitle: "Incremental onboard with YAML"
-description: "Learn how to load a Kubernetes YAML deployment manifest into Radius and have Radius override properties on top of the user-given base resources"
-weight: 200
+title: "How-To: Migrate from existing Kubernetes resources"
+linkTitle: "Migrate from YAML"
+description: "Learn how to migrate to a Radius container from existing Kubernetes YAML"
+weight: 500
 categories: "How-To"
 tags: ["containers","Kubernetes"]
 ---
 
-This guide will provide an overview of how to:
-
-- Incrementally onboard your Kubernetes resources using your Kubernetes [Deployment YAML](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#writing-a-deployment-spec) definitions
+This guide will provide an overview of how to migrate your existing Kubernetes resources from [Kubernetes YAML](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#writing-a-deployment-spec).
 
 ### Prerequisites
 
@@ -30,17 +28,14 @@ Define a Radius Application resource that will contain your Kubernetes resource 
 
 ### Step 2: Define a base Kubernetes YAML file
 
-You'll need to create a Radius container resource that will consume the information found in your Kubernetes base YAML file.
+In a file named `kubernetes.yaml` define all the Kubernetes resources that correspond to the new Radius container.
 
-#### YAML Deployment template
+Note that the names of the Deployments, Services, and Config Maps all must match each other and the name of the new Radius container. Any other resources can be named differently.
 
 {{< rad file="snippets/basemanifest.yaml" embed=true lang="yaml">}}
 
 ### Step 3: Add the Kubernetes base YAML configurations to your Radius application definition
 
-- Standardize object names
-
-Begin by assuring that your `ServiceAccount`, `Deployment`, and `Service` objects found in your Kubernetes base YAML file have the same name as the Radius container resource that lives inside your application-scoped namespace.
 
 - Container configurations
 
@@ -54,13 +49,13 @@ Load your Kubernetes YAML file into your Radius container resource through the `
 
 You can now deploy your Radius Application and verify that your Kubernetes objects are created in the desired namespace. 
 
-### Step 4: Deployment
+### Step 4: Deploy your container
 
 
 1. Deploy your application with the command:
 
     ```bash
-    rad deploy app.bicep
+    rad deploy app.bicep -a migrate-demo
     ```
 
 2. Your console output should look similar to:
@@ -90,7 +85,7 @@ radius-system     controller-585dcd4c9b-5g2c9        1/1     Running            
     kubectl get pods -A -w
     ```
     4. Your console output should look similar to:
-```bash
+```
 radius-system   controller-585dcd4c9b-5g2c9        1/1     Running            5 (91s ago)     13m
 my-microservice   my-microservice-5c464f66d4-s7n7w   0/1     Pending            0               0s
 my-microservice   my-microservice-5c464f66d4-s4tq8   0/1     Pending            0               0s
