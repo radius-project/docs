@@ -8,12 +8,13 @@ categories: "How-To"
 tags: ["recipes"]
 ---
 
-Local development environments created by the rad init command include a set of pre-defined Recipes called [local `dev` Recipes]({{< ref "guides/recipes/overview#use-community-dev-recipes" >}}), to get lightweight containerized infrastructure up and running quickly. This guide teaches how to use a local dev recipe to deploy a Redis container to a Kubernetes cluster.
+Local development environments created by the rad init command include a set of pre-defined Recipes called [`local-dev` Recipes]({{< ref "guides/recipes/overview#use-community-dev-recipes" >}}), to get lightweight containerized infrastructure up and running quickly. This guide teaches how to use a local dev recipe to deploy a Redis container to a Kubernetes cluster.
 
 ## Prerequisites
 
-- Setup a supported [Kubernetes cluster]({{< ref "guides/operations/kubernetes" >}})
-- Install rad cli ({{< ref "installation#step-1-install-the-rad-cli" >}})
+- [Setup a supported Kubernetes cluster]({{< ref "guides/operations/kubernetes" >}})
+- [Install rad cli]({{< ref "installation#step-1-install-the-rad-cli" >}})
+
 
 ## Step 1: Initialize a Radius environment
 
@@ -49,7 +50,7 @@ Local development environments created by the rad init command include a set of 
    default   Applications.Datastores/mongoDatabases  bicep                            radius.azurecr.io/recipes/local-dev/mongodatabases:latest
    default   Applications.Datastores/redisCaches     bicep                            radius.azurecr.io/recipes/local-dev/rediscaches:latest
    ```
-> Visit the [Recipes repo](https://github.com/radius-project/recipes) to learn more about the definition of these local-dev recipe templates.
+> Visit the [Recipes repo](https://github.com/radius-project/recipes) to learn more about the definition of these `local-dev` recipe templates.
 
 When a Recipe is named "default" it will be used automatically when a resource doesn't specify a Recipe name. This makes it easy for applications to fully defer to the Environment for how to manage infrastructure.  
 
