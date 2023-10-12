@@ -11,7 +11,7 @@ tags: ["Azure","containers"]
 
 This how-to guide will provide an overview of how to:
 
-- Setup a Radius environment with an identity provider
+- Setup a Radius Environment with an identity provider
 - Define a connection to an Azure resource with Azure AD role-based access control (RBAC) assignments
 - Leverage Azure managed identities to connect to an Azure resource
 
@@ -31,15 +31,15 @@ Begin by running [`rad init --full`]({{< ref rad_init >}}). Make sure to configu
 rad init --full
 ```
 
-## Step 2: Define a Radius environment 
+## Step 2: Define a Radius Environment 
 
-Create a file named `app.bicep` and define a Radius environment with [identity property]({{< ref "/guides/deploy-apps/environments/overview" >}}) set. This configures your environment to use your Azure AD workload identity installation with your cluster's OIDC endpoint:
+Create a file named `app.bicep` and define a Radius Environment with [identity property]({{< ref "/guides/deploy-apps/environments/overview" >}}) set. This configures your environment to use your Azure AD workload identity installation with your cluster's OIDC endpoint:
 
 {{< rad file="snippets/container-wi.bicep" embed=true marker="//ENVIRONMENT">}}
 
 ## Step 3: Define an app and a container
 
-Add a Radius application, a Radius [container]({{< ref "guides/author-apps/containers" >}}), and an Azure Key Vault to your `app.bicep` file. Note the connection from the container to the Key Vault, with an iam property set for the Azure AD RBAC role:
+Add a Radius Application, a Radius [container]({{< ref "guides/author-apps/containers" >}}), and an Azure Key Vault to your `app.bicep` file. Note the connection from the container to the Key Vault, with an iam property set for the Azure AD RBAC role:
 
 {{< rad file="snippets/container-wi.bicep" embed=true marker="//CONTAINER" >}}
 

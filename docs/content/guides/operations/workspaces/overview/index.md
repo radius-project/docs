@@ -13,7 +13,7 @@ Workspaces allow you to manage multiple Radius platforms and environments using 
 
 ## CLI commands
 
-The following commands let you interact with Radius environments:
+The following commands let you interact with Radius Environments:
 
 {{< tabs create list show delete switch >}}
 
