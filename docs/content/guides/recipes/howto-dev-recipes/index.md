@@ -97,7 +97,7 @@ Note that no Recipe name is specified within 'db', so it will be using the defau
 
    You can now see both the environment variables of your container under Radius Connections as well as interact with the `Todo App` and add/remove items in it as wanted:
 
-1. List your Kubernetes Pods to see the infrastructure container deployed by the Recipe:
+List your Kubernetes Pods to see the infrastructure containers deployed by the Recipe:
 
    ```bash
    kubectl get pods -n default-recipes
