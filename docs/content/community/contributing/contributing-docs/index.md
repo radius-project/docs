@@ -532,10 +532,10 @@ You can also reference pages in your button as well:
 You can link to a GitHub repo and path with the `githubRepo` and `githubPath` parameters:
 
 ```
-{{</* button text="My Button" githubRepo="samples" githubPath="reference-apps" */>}}
+{{</* button text="My Button" githubRepo="samples" githubPath="samples" */>}}
 ```
 
-{{< button text="My Button" githubRepo="samples" githubPath="reference-apps" >}}
+{{< button text="My Button" githubRepo="samples" githubPath="samples" >}}
 
 #### Button colors
 
