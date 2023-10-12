@@ -1002,3 +1002,6 @@ fh
 qd
 vf
 zht
+Elasticache
+FinOps
+SecOps

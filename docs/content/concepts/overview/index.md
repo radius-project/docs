@@ -40,7 +40,7 @@ The result is no longer just a flat list of resources - it's a fully codified ab
 
 ### Drastically reduce infra ops time
 
-[App environments]({{< ref environments-concept >}}) are landing zones for applications. They are the place where you can deploy, manage, and scale your apps.
+[App environments]({{< ref collaboration-concept >}}) are landing zones for applications. They are the place where you can deploy, manage, and scale your apps.
 
 {{< image alt="Diagram showing Radius Environments" src="environments.png" width="600px" >}}
 
