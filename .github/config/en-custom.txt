@@ -947,4 +947,3 @@ PodSpec
 ConfigMap
 CRD
 composable
-gatewaydemo
