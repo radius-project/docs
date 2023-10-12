@@ -43,7 +43,7 @@ To present a specific topic on the next Radius community call start by filling o
 
 ## GitHub Issues & repositories
 
-If you would like to file Issues, access the source code, or use Codespaces please visit the [Radius GitHub repo] (https://github.com/radius-project).
+If you would like to file Issues, access the source code, or use Codespaces please visit the [Radius GitHub repo](https://github.com/radius-project).
 
 ## How can I get involved?
 
