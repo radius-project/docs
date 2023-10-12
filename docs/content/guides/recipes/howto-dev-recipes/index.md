@@ -2,13 +2,13 @@
 type: docs
 title: "How-To: Use local-dev Recipes"
 linkTitle: "local-dev Recipes"
-description: "Learn how to use the pre-built Recipes that come with Radius environment."
+description: "Learn how to use the pre-defined Recipes that makes it easy to run dependencies  in your application."
 weight: 200
 categories: "How-To"
 tags: ["recipes"]
 ---
 
-Local development environments created using the rad init command include a set of pre-defined Recipes called [local `dev` Recipes]({{< ref "guides/recipes/overview#use-community-dev-recipes" >}}), which makes it easy to use lightweight containerized infrastructure. This guide teaches how to use a local dev recipe to deploy a Redis container to a Kubernetes cluster.
+Local development environments created by the rad init command include a set of pre-defined Recipes called [local `dev` Recipes]({{< ref "guides/recipes/overview#use-community-dev-recipes" >}}), to get lightweight containerized infrastructure up and running quickly. This guide teaches how to use a local dev recipe to deploy a Redis container to a Kubernetes cluster.
 
 ## Prerequisites
 
@@ -51,15 +51,15 @@ Local development environments created using the rad init command include a set 
    ```
 > Visit the [Recipes repo](https://github.com/radius-project/recipes) to learn more about the definition of these local-dev recipe templates.
 
-When a Recipe is named "default" it will be used by default when deploying resources when a Recipe is not specified.
+When a Recipe is named "default" it will be used automatically when a resource doesn't specify a Recipe name. This makes it easy for applications to fully defer to the Environment for how to manage infrastructure.  
 
 ## Step 2: Define your application
 
-Create `app.bicep` with the following set of resources:
+Create a file named `app.bicep` with the following set of resources:
 
 {{< rad file="snippets/app.bicep" embed=true >}}
 
-Note that no Recipe name is specified with 'db', so it will be using the default redis Recipe in your environment.
+Note that no Recipe name is specified within 'db', so it will be using the default Recipe for Redis in your environment.
 
 ## Step 3: Deploy your application
 
@@ -88,8 +88,9 @@ Note that no Recipe name is specified with 'db', so it will be using the default
     Starting log stream...
    ```
 
-
    Your application is now deployed and running in your Kubernetes cluster.
+
+## Step 4: Verify Redis containers were deployed
 
 1. Visit [`http://localhost:3000`](http://localhost:3000) in your browser.
 
@@ -101,7 +102,7 @@ Note that no Recipe name is specified with 'db', so it will be using the default
    kubectl get pods -n default-recipes
    ```
 
-   You will see your 'frontend' container, along with the Redis cache that was automatically created by the default dev Recipe:
+   You will see your 'frontend' container, along with the Redis cache that was automatically created by the default local-dev Recipe:
 
    ```
    NAME                                   READY   STATUS    RESTARTS   AGE
