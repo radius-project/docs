@@ -7,6 +7,11 @@ weight: 300
 categories: "How-To"
 ---
 
+## Pre-requisites
+
+- [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
+- [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
+
 ## How-to: Use workspaces to switch between environments
 
 When you have multiple environments initialized for different purposes workspaces enable you to switch between different environments easily. You can create separate workspaces and switch between them as you are working through your deployment lifecycle.
