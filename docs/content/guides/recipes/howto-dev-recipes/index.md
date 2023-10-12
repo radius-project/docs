@@ -8,7 +8,7 @@ categories: "How-To"
 tags: ["recipes"]
 ---
 
-Local development environments created by the rad init command include a set of pre-defined Recipes called [`local-dev` Recipes]({{< ref "guides/recipes/overview#use-community-dev-recipes" >}}), to get lightweight containerized infrastructure up and running quickly. This guide teaches how to use a local dev recipe to deploy a Redis container to a Kubernetes cluster.
+Local development environments created by the rad init command include a set of pre-defined Recipes called [`local-dev` Recipes]({{< ref "guides/recipes/overview##use-lightweight-local-dev-recipes" >}}), to get lightweight containerized infrastructure up and running quickly. This guide teaches how to use a local dev recipe to deploy a Redis container to a Kubernetes cluster.
 
 ## Prerequisites
 
@@ -50,9 +50,9 @@ Local development environments created by the rad init command include a set of 
    default   Applications.Datastores/mongoDatabases  bicep                            radius.azurecr.io/recipes/local-dev/mongodatabases:latest
    default   Applications.Datastores/redisCaches     bicep                            radius.azurecr.io/recipes/local-dev/rediscaches:latest
    ```
-> Visit the [Recipes repo](https://github.com/radius-project/recipes) to learn more about the definition of these `local-dev` recipe templates.
+   > Visit the [Recipes repo](https://github.com/radius-project/recipes) to learn more about the definition of these `local-dev` recipe templates.
 
-When a Recipe is named "default" it will be used automatically when a resource doesn't specify a Recipe name. This makes it easy for applications to fully defer to the Environment for how to manage infrastructure.  
+   When a Recipe is named "default" it will be used automatically when a resource doesn't specify a Recipe name. This makes it easy for applications to fully defer to the Environment for how to manage infrastructure.  
 
 ## Step 2: Define your application
 
@@ -91,13 +91,13 @@ Note that no Recipe name is specified within 'db', so it will be using the defau
 
    Your application is now deployed and running in your Kubernetes cluster.
 
-## Step 4: Verify Redis containers were deployed
+## Step 4: Verify Redis containers are deployed
 
 1. Visit [`http://localhost:3000`](http://localhost:3000) in your browser.
 
    You can now see both the environment variables of your container under Radius Connections as well as interact with the `Todo App` and add/remove items in it as wanted:
 
-List your Kubernetes Pods to see the infrastructure containers deployed by the Recipe:
+1. List your Kubernetes Pods to see the infrastructure containers deployed by the Recipe:
 
    ```bash
    kubectl get pods -n default-recipes
