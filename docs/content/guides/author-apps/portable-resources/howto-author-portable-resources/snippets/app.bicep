@@ -9,7 +9,7 @@ resource container 'Applications.Core/containers@2023-10-01-preview' = {
   properties: {
     application: application
     container: {
-      image: 'radius.azurecr.io/tutorial/webapp:edge'
+      image: 'radius.azurecr.io/samples/demo:latest'
     }
   }
 }

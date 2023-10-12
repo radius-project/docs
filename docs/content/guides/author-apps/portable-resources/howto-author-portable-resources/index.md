@@ -1,20 +1,20 @@
 ---
 type: docs
-title: "How-To: Author a portable resources"
-linkTitle: "Author a portable resource"
+title: "How-To: Author portable resources"
+linkTitle: "Author portable resources"
 description: "Learn how to author portable resources in Radius"
 weight: 200
 categories: "How-To"
 tags: ["portability"]
 ---
 
-This guide will provide an overview of how to author a portable resource for your [Radius Application]({{< ref "/guides/author-apps/application/overview" >}}).
+This guide will teach you how to author a portable resource for your [Radius Application]({{< ref "/guides/author-apps/application/overview" >}}).
 
 ### Prerequisites
 
 Before you get started, you'll need to make sure you have the following tools and resources:
-
-- [Radius initialized with `rad init`]({{< ref getting-started >}})
+- [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
+- [Radius environment]({{< ref "installation#step-3-initialize-the-radius-control-plane-and-the-radius-environment" >}})
 - [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-radius-bicep-extension" >}})
 
 ## Step 1: Define a container resource
