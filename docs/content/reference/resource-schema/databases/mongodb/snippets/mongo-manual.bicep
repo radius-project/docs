@@ -1,6 +1,6 @@
 import radius as radius
 
-@description('The ID of your Radius environment. Automatically injected by the rad CLI.')
+@description('The ID of your Radius Environment. Automatically injected by the rad CLI.')
 param environment string
 
 resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2022-08-15' existing = {
@@ -12,7 +12,7 @@ resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2022-08-15' existi
 
 }
 
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'cosmos-container-usermanaged'
   properties: {
     environment: environment
@@ -20,7 +20,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 }
 
 //MONGO
-resource db 'Applications.Datastores/mongoDatabases@2022-03-15-privatepreview' = {
+resource db 'Applications.Datastores/mongoDatabases@2023-10-01-preview' = {
   name: 'db'
   properties: {
     environment: environment

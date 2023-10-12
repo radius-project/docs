@@ -3,7 +3,7 @@ type: docs
 title: "How-To: Deploy an application with Github Actions"
 linkTitle: "Deploy via GitHub Actions"
 description: "Learn about adding your Radius apps to your deployment pipelines with GitHub Actions" 
-weight: 200
+weight: 300
 categories: "How-To"
 tags: ["CI/CD"]
 ---
@@ -100,7 +100,7 @@ Next, download the latest `rad` CLI release and setup your workspace:
         wget -q "https://get.radapp.dev/tools/rad/install.sh" -O - | /bin/bash
         ./rad bicep download
         ./rad --version
-    - name: Initialize Radius environment
+    - name: Initialize Radius Environment
       run: |
         ./rad group create default
         ./rad workspace create kubernetes default --group default

@@ -2,34 +2,39 @@
 type: docs
 title: "Overview: Application networking"
 linkTitle: "Overview"
-description: "Learn how to add networking to your Radius application"
+description: "Learn how to add networking to your Radius Application"
 weight: 100
 categories: "Overview"
-tags: ["routes","gateways"]
 ---
 
 Radius networking resources allow you to model:
 
-- Communication between a user and a service
 - Communication between services
+- Communication between a user and a service
 
-## HTTP Routes
+<img src="networking.png" alt="Diagram of a gateway with traffic going to a frontend container, which in turn sends traffic to the basket and catalog containers" width="400px">
 
-An `HttpRoute` resources defines HTTP communication between two [services]({{< ref "guides/author-apps/containers" >}}). They can be used to define both one-way communication, as well as cycles of communication between services.
+## Service to service communication
 
-<img src="networking-cycles.png" style="width:400px" alt="Diagram of Radius service-to-service networking with cycles" /><br />
+Radius containers can define connections to other containers, just like they can define connections to dependencies.
 
-Refer to the [HTTP Route schema]({{< ref httproute >}}) for more information on how to model HTTP routes.
+Network connections are defined as strings containing:
 
-A gateway can optionally be added for external users to access the Route.
+- The **scheme** (protocol) of the connection _(http, https, tcp, etc.)_
+- The **target** container/service to connect to _(basket, catalog, etc.)_
+- The **port** to connect to _(80, 443, etc.)_
+
+For example, a frontend container may need to connect to a basket container. The frontend container would define a connection to the basket container, with the scheme `http`, the target `basket`, and the port `3000`. The connection would look like this: `http://basket:3000`.
+
+<img src="network-connection.png" alt="Diagram showing the components of a network connection" width="400px">
+
+For more information on how to do service to service networking, visit the [service networking how-to guide]({{< ref howto-service-networking >}}):
+
+{{< button text="How-To: Service to service networking" page="howto-service-networking" >}}
 
 ## Gateways
 
-`Gateway` defines how requests are routed to different resources, and also provides the ability to expose traffic to the internet. Conceptually, gateways allow you to have a single point of entry for  traffic in your application, whether it be internal or external traffic.
-
-`Gateway` in Radius are split into two main pieces; the `Gateway` resource itself, which defines which port and protocol to listen on, and Route(s) which define the rules for routing traffic to different resources.
-
-<img src="networking-gateways.png" style="width:400px" alt="Diagram of Radius gateways" /><br />
+A `gateway` defines how requests are routed to different resources, and also provides the ability to expose traffic to the internet. Conceptually, gateways allow you to have a single point of entry for traffic in your application, whether it be internal or external.
 
 Refer to the [Gateway schema]({{< ref gateway >}}) for more information on how to model gateways.
 

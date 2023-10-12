@@ -20,6 +20,9 @@ enableGitInfo = true
     source = "content"
     target = "content"
   [[module.mounts]]
+    source = "shared-content"
+    target = "content"
+  [[module.mounts]]
     source = "static"
     target = "static"
   [[module.mounts]]
@@ -59,7 +62,6 @@ tag = "tags"
 
 [params]
 copyright = "Radius"
-
 version = "edge"
 tag_version = "latest"
 chart_version = "0.19.0"
@@ -96,3 +98,4 @@ sidebar_search_disable = true
 sidebar_menu_foldable = true
 sidebar_menu_truncate = 500
 ul_show = 1
+navbar_logo = true

@@ -1,9 +1,9 @@
 import radius as radius
 
-@description('The ID of your Radius environment. Automatically injected by the rad CLI.')
+@description('The ID of your Radius Environment. Automatically injected by the rad CLI.')
 param environment string
 
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'myapp'
   properties: {
     environment: environment
@@ -15,7 +15,7 @@ resource azureRedis 'Microsoft.Cache/redis@2022-06-01' existing = {
 }
 
 //REDIS
-resource redis 'Applications.Datastores/redisCaches@2022-03-15-privatepreview' = {
+resource redis 'Applications.Datastores/redisCaches@2023-10-01-preview' = {
   name: 'redis'
   properties: {
     environment: environment

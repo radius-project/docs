@@ -120,14 +120,14 @@ Follow the [Terraform module publishing docs](https://developer.hashicorp.com/te
 
 ### Step 5: Register your Recipe with your environment
 
-Now that your Recipe template has been stored, you can add it your Radius environment to be used by developers. This allows you to mix-and-match templates for each of your environments such as dev, canary, and prod.
+Now that your Recipe template has been stored, you can add it your Radius Environment to be used by developers. This allows you to mix-and-match templates for each of your environments such as dev, canary, and prod.
 
 {{< tabs "rad CLI - Bicep" "rad CLI - Terraform" "Bicep environment" >}}
 
 {{% codetab %}}
 
 ```bash
-rad recipe register myrecipe --environment myenv --link-type Applications.Datastores/redisCaches --template-kind bicep --template-path myregistry.azurecr.io/recipes/myrecipe:1.1.0
+rad recipe register myrecipe --environment myenv --resource-type Applications.Datastores/redisCaches --template-kind bicep --template-path myregistry.azurecr.io/recipes/myrecipe:1.1.0
 ```
 
 {{% /codetab %}}
@@ -137,7 +137,7 @@ rad recipe register myrecipe --environment myenv --link-type Applications.Datast
 The template path value should represent the source path found in your Terraform module registry.
 
 ```bash
-rad recipe register myrecipe --environment myenv --link-type Applications.Datastores/redisCaches --template-kind terraform --template-path user/recipes/myrecipe --template-version "1.1.0"
+rad recipe register myrecipe --environment myenv --resource-type Applications.Datastores/redisCaches --template-kind terraform --template-path user/recipes/myrecipe --template-version "1.1.0"
 ```
 
 {{% /codetab %}}

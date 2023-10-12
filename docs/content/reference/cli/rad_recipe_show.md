@@ -29,24 +29,24 @@ rad recipe show [recipe-name] [flags]
 ```
 
 # show the details of a recipe
-rad recipe show redis-prod
+rad recipe show redis-prod --resource-type Applications.Datastores/redisCaches
 
 # show the details of a recipe, with a JSON output
-rad recipe show redis-prod --output json
+rad recipe show redis-prod --resource-type Applications.Datastores/redisCaches --output json
 	
 # show the details of a recipe, with a specified environment and group
-rad recipe show redis-dev --group dev --environment dev
+rad recipe show redis-dev --resource-type Applications.Datastores/redisCaches --group dev --environment dev
 ```
 
 ### Options
 
 ```
-  -e, --environment string   The environment name
-  -g, --group string         The resource group name
-  -h, --help                 help for show
-      --link-type string     Specify the type of the link this recipe can be consumed by
-  -o, --output string        output format (supported formats are json, table) (default "table")
-  -w, --workspace string     The workspace name
+  -e, --environment string     The environment name
+  -g, --group string           The resource group name
+  -h, --help                   help for show
+  -o, --output string          output format (supported formats are json, table) (default "table")
+      --resource-type string   Specify the type of the portable resource this recipe can be consumed by
+  -w, --workspace string       The workspace name
 ```
 
 ### Options inherited from parent commands

@@ -1,7 +1,7 @@
 {
-  "name": "radius-docs-hugo",
-  "version": "0.0.1",
-  "description": "Docs site for Radius",
+  "name": "radius-docs",
+  "version": "0.1.0",
+  "description": "Documentation site for Radius",
   "main": "",
   "repository": {
     "type": "git",
@@ -9,11 +9,26 @@
   },
   "author": "",
   "bugs": {
-    "url": "https://github.com/radius-project/radius/issues"
+    "url": "https://github.com/radius-project/docs/issues"
   },
-  "homepage": "https://radius.azurewebapp.net",
+  "license": "Apache-2.0",
+  "homepage": "https://docs.radapp.io",
   "devDependencies": {
     "autoprefixer": "^9.8.6",
+    "exec-bin": "^1.0.0",
+    "hugo-installer": "^4.0.1",
     "postcss-cli": "^7.1.2"
+  },
+  "dependencies": {
+    "autoprefixer": "^9.8.6",
+    "exec-bin": "^1.0.0",
+    "hugo-installer": "^4.0.1",
+    "postcss-cli": "^7.1.2"
+  },
+  "scripts": {
+    "install": "git submodule update --init --recursive && cd themes/docsy && npm install",
+    "postinstall": "hugo-installer --version 0.117.0 --extended",
+    "build": "exec-bin bin/hugo/hugo",
+    "start": "exec-bin bin/hugo/hugo server"
   }
 }

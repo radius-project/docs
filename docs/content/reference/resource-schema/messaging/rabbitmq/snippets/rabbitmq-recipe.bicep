@@ -1,9 +1,9 @@
 import radius as radius
 
-@description('The ID of your Radius environment. Automatically injected by the rad CLI.')
+@description('The ID of your Radius Environment. Automatically injected by the rad CLI.')
 param environment string
 
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'myapp'
   properties: {
     environment: environment
@@ -11,7 +11,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 }
 
 //SAMPLE
-resource rabbitmq 'Applications.Messaging/rabbitmqQueues@2022-03-15-privatepreview' = {
+resource rabbitmq 'Applications.Messaging/rabbitmqQueues@2023-10-01-preview' = {
   name: 'rabbitmq'
   properties: {
     environment: environment

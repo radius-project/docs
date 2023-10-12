@@ -17,7 +17,7 @@ var aws_credential = {
 }
 
 var app_name = 'sqs-sample-app'
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: app_name
   properties: {
     environment: environment
@@ -32,7 +32,7 @@ resource queue 'AWS.SQS/Queue@default' = {
   }
 }
 
-resource producer 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource producer 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'producer'
   properties: {
     application: app.id
@@ -44,12 +44,12 @@ resource producer 'Applications.Core/containers@2022-03-15-privatepreview' = {
         },
         aws_credential
       )
-      image: 'radius.azurecr.io/reference-apps/aws-sqs-sample:edge'
+      image: 'radius.azurecr.io/samples/aws-sqs:latest'
     }
   }
 }
 
-resource consumer 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource consumer 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'consumer'
   properties: {
     application: app.id
@@ -61,7 +61,7 @@ resource consumer 'Applications.Core/containers@2022-03-15-privatepreview' = {
         },
         aws_credential
       )
-      image: 'radius.azurecr.io/reference-apps/aws-sqs-sample:edge'
+      image: 'radius.azurecr.io/samples/aws-sqs:latest'
     }
   }
 }

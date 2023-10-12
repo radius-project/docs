@@ -1,6 +1,6 @@
 import radius as radius
 
-@description('The ID of your Radius environment. Injected automatically by the rad CLI.')
+@description('The ID of your Radius Environment. Injected automatically by the rad CLI.')
 param environment string
 
 @description('The data for your TLS certificate')
@@ -11,7 +11,7 @@ param tlscrt string
 @secure()
 param tlskey string
 
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'corerp-resources-secretstore'
   properties: {
     environment: environment
@@ -19,7 +19,7 @@ resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
 }
 
 //SECRET_STORE_NEW
-resource appCert 'Applications.Core/secretStores@2022-03-15-privatepreview' = {
+resource appCert 'Applications.Core/secretStores@2023-10-01-preview' = {
   name: 'appcert'
   properties:{
     application: app.id
@@ -37,7 +37,7 @@ resource appCert 'Applications.Core/secretStores@2022-03-15-privatepreview' = {
 //SECRET_STORE_NEW
 
 //SECRET_STORE_REF
-resource existingAppCert 'Applications.Core/secretStores@2022-03-15-privatepreview' = {
+resource existingAppCert 'Applications.Core/secretStores@2023-10-01-preview' = {
   name: 'existing-appcert'
   properties:{
     application: app.id
