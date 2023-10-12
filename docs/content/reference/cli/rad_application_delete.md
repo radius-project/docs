@@ -8,11 +8,11 @@ description: "Details on the rad application delete Radius CLI command"
 ---
 ## rad application delete
 
-Delete Radius application
+Delete Radius Application
 
 ### Synopsis
 
-Delete the specified Radius application deployed in the default environment
+Delete the specified Radius Application deployed in the default environment
 
 ```
 rad application delete [flags]
@@ -55,5 +55,5 @@ rad app delete my-app --group my-group
 
 ### SEE ALSO
 
-* [rad application]({{< ref rad_application.md >}})	 - Manage Radius applications
+* [rad application]({{< ref rad_application.md >}})	 - Manage Radius Applications
 

@@ -13,7 +13,7 @@ resource s3 'AWS.S3/Bucket@default' = {
 }
 
 //S3APP
-@description('The environment ID of your Radius application. Set automatically by the rad CLI.')
+@description('The environment ID of your Radius Application. Set automatically by the rad CLI.')
 param environment string
 
 resource app 'Applications.Core/applications@2023-10-01-preview' = {

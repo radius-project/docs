@@ -36,13 +36,13 @@ These new resources form the [**Radius app model**]({{< ref application-graph>}}
 
 The result is no longer just a flat list of resources - it's a fully codified abstraction of how the services and infrastructure relate to each other:
 
-<img alt="Diagram showing Radius application in the Azure portal" src="ui-mockup-basic.png" width="700px" /><br />
+<img alt="Diagram showing Radius Application in the Azure portal" src="ui-mockup-basic.png" width="700px" /><br />
 
 ### Drastically reduce infra ops time
 
 [App environments]({{< ref environments-concept >}}) are landing zones for applications. They are the place where you can deploy, manage, and scale your apps.
 
-<img alt="Diagram showing Radius environments" src="environments.png" width="600px" />
+<img alt="Diagram showing Radius Environments" src="environments.png" width="600px" />
 
 Environments allow you to:
 
@@ -88,4 +88,4 @@ As teams onboard to Radius and begin deploying across platforms, the tooling and
 
 Now that you have an overview of Radius, learn more about the Radius app model:
 
-{{< button text="Learn about the Radius application model" page="application-graph" size="btn-lg" color="success" >}}
+{{< button text="Learn about the Radius Application model" page="application-graph" size="btn-lg" color="success" >}}

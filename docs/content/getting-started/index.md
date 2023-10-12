@@ -137,7 +137,7 @@ Press <kbd>CTRL</kbd>+ <kbd>C</kbd> when you are finished with the website.
 
 ## 7. View the application connections
 
-Radius connections are more than just environment variables and configuration. You can also access the "application graph" and understand the connections within your application with the following command:
+Radius Connections are more than just environment variables and configuration. You can also access the "application graph" and understand the connections within your application with the following command:
 
 ```bash
 rad app connections
