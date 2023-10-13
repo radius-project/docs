@@ -14,8 +14,9 @@ This guide will show you how two services can communicate with each other. In th
 
 ## Prerequisites
 
-- [rad CLI]({{< ref "/guides/tooling/rad-cli/overview" >}})
-- [Radius environment]({{< ref getting-started >}})
+- [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-radius-bicep-vs-code-extension" >}})
+- [Radius environment]({{< ref "installation#step-3-initialize-the-radius-control-plane-and-the-radius-environment" >}})
 
 ## Step 1: Define the services
 
