@@ -1,79 +1,64 @@
 ---
 type: docs
-title: "Tutorial: Create a Radius application"
-linkTitle: "Create an application"
-description: "Dive into Radius to learn how to define, deploy, and manage an application"
+title: "Tutorial: Create a Radius Application"
+linkTitle: "Create a new app"
+description: "Dive into Radius to learn how to define, deploy, and manage a new application"
 weight: 100
 categories: "Tutorial"
 ---
 
-This tutorial will walk you through the basics of creating a new Radius application. You will learn how to:
+This tutorial will teach you the basics of creating a new Radius Application. You will learn how to:
 
-1. Define and deploy a Radius application
+1. Define and deploy a Radius Environment and Application
 1. Add a container to your application and customize that container
 1. Add a Mongo database to your application and connect it to your container
 1. Add a second container and connect it to your first container
 1. Securely expose your application to the internet through a gateway
 
-By the end of the tutorial, you will have created and deployed a new Radius application.
+By the end of the tutorial, you will have created and deployed a new Radius Application.
 
 <img src="diagram.png" alt="Diagram of the application resources and their connections" width=600px >
 
 ## Prerequisites
 
-- [Kubernetes cluster]({{< ref "supported-clusters" >}})
-- [rad CLI]({{< ref howto-rad-cli >}})
+- [Supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview" >}})
+- [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-radius-bicep-vs-code-extension" >}})
 
-## Step 1: Initialize a Radius environment
+## Step 1: Initialize a Radius Environment and Application
 
-Radius environments are where applications are deployed. Environments determine how an application runs on a particular platform (like AWS or Azure). If you don't have one already, initialize a new environment in your favorite Kubernetes cluster with [`rad init`]({{< ref rad_init >}}):
+[Radius Environments]({{< ref "/guides/deploy-apps/environments/overview" >}}) are where applications are deployed. Environments determine how an application runs on a particular platform (_like AWS or Azure_).
 
-```bash
-rad init
-```
-
-## Step 2: Create an application
-
-A Radius application is an Infrastructure as Code (IaC) file wherein you explicitly define all the resources (containers, gateways, cloud services, etc) that make up your application, including how those resources are connected to each other.  Given this explicit and comprehensive application definition, Radius application files make it simple to consistently deploy and manage your application as a single entity.
-
-1. Begin by creating a new file named `app.bicep`:
+1. Begin by creating a new directory for your application:
 
    ```bash
-   touch app.bicep
+   mkdir myapp
+   cd myapp
    ```
 
-1. Open `app.bicep` and add the following code to define a new application named `myapp`:
-
-   {{% rad file="snippets/app.bicep" embed=true %}}
-
-1. Deploy `app.bicep` with [`rad deploy`]({{< ref rad_deploy >}}):
-
+1. Initialize a new Radius Environment with [`rad init`]({{< ref rad_init >}}):
+   
    ```bash
-   rad deploy app.bicep
+   rad init
    ```
 
-   You should see your application resource deployed:
+   When asked if you want to create a new application select "Yes". This will create a new file named `app.bicep` in your directory where your application will be defined.
 
-   ```
-   Building .\app.bicep...
-   Deploying template '.\app.bicep' for application 'myapp' and environment 'default' from workspace 'default'...
+   {{< alert title="💡 Development Environments" color="info" >}}
+   By default `rad init` gets you up and running with a development-focused environment where most of the environment configuration is handled for you, including Recipes (_more on that soon_). If you would like to fully    customize your environment, you can run `rad init --full`
+   {{< /alert >}}
 
-   Deployment In Progress...
+## Step 2: Inspect your Application
 
+Radius Applications are where all your app's resources and relationships come together. Let's take a look at this Radius Application to learn more about it.
 
-   Deployment Complete
-
-   Resources:
-       myapp           Applications.Core/applications
-   ```
-
-1. View the full application definition by running [`rad app show -o json`]({{< ref rad_application_show >}}):
+1. View the full Application definition by running [`rad app show -o json`]({{< ref rad_application_show >}}):
 
    ```bash
    rad app show myapp -o json
    ```
 
-   You will see the full application definition in JSON format:
+   You will see the full App definition in its raw JSON format:
    
    ```
    {
@@ -98,63 +83,148 @@ A Radius application is an Infrastructure as Code (IaC) file wherein you explici
    
    There are a few important things to note about the application definition:
 
-   1. The `id` property is the fully-qualified UCP resource ID of the application. This value is used to uniquely identify the application in the Radius system.
-   1. The `location` property is the location of the application. For now, all applications are deployed to the `global` location.
-   1. The application will be deployed to the 'default' environment, which is created when you run `rad init`.
-   1. The `status` property contains `compute` information, which specifies where services in the application will be deployed. In this case, the services will be deployed into the `default-myapp` Kubernetes namespace (the same cluster where Radius is installed).
+   - **`id`** is the fully-qualified UCP resource ID of the application. This value is used to uniquely identify the application in the Radius system.
+   - **`location`** is the location of the application. For now, all applications are deployed to the `global` location.
+   - **`environment`** specifies where the application will be deployed. In this case, the application will be deployed into the `default` environment that was created by `rad init`.
+   - **`compute`** specifies where running services in the Application will be deployed. In this case, the services will be deployed into the `default-myapp` Kubernetes namespace within the same cluster where Radius is installed.
 
-## Step 3: Create your frontend container
-
-Now that your application is defined, you can add resources to it. The first resource we'll add is a container. Containers are the basic building block of Radius applications and are where your code runs.
-
-1. Update your `app.bicep` file with a container named `frontend`. Also add an environment variable to customize your container:
-
-   {{% rad file="snippets/app-container.bicep" embed=true marker="//CONTAINER" markdownConfig="{linenos=table,linenostart=13}" %}}
-
-1. Run `app.bicep` with [`rad run`]({{< ref rad_run >}}). This will deploy the container, automatically set up port forwarding, and forward the application log output:
+1. Let's take a look inside the Application to see what's deployed. Run [`rad app connections`]({{< ref rad_application_connections >}}) to print the Application's resources and relationships:
 
    ```bash
-   rad run app.bicep --application myapp
+   rad app connections
    ```
+
+   You'll see that nothing has been deployed yet and the app is empty:
+
+   ```
+   Displaying application: myapp
+   
+   (empty)
+   ```
+
+   Let's deploy some resources to start building out the application.
+
+## Step 3: Inspect and deploy `app.bicep`
+
+`app.bicep` will contain all the resources (containers, gateways, cloud services, etc) that make up your application, including how those resources are connected to each other. Given this explicit and comprehensive application definition, Radius Application files make it simple to consistently deploy and manage your application.
+
+1. Open `app.bicep` and see the scaffolded application created by `rad init`:
+
+   {{% rad file="snippets/1-app.bicep" embed=true %}}
+
+1. Deploy `app.bicep` with [`rad deploy`]({{< ref rad_deploy >}}):
+
+   ```bash
+   rad deploy app.bicep
+   ```
+
+   You should see your container deployed:
 
    ```
    Building .\app.bicep...
    Deploying template '.\app.bicep' for application 'myapp' and environment 'default' from workspace 'default'...
-   
+
    Deployment In Progress...
-   
-   
+
+
    Deployment Complete
-   
+
    Resources:
-       myapp           Applications.Core/applications
-       frontend        Applications.Core/containers
-   
-   Starting log stream...
+       demo            Applications.Core/containers
    ```
 
-1. Open [localhost:3000](http://localhost:3000) to interact with the frontend container you just deployed. You will see the container's connections and metadata. Expand the Environment Variables section to see the environment variables you set in the `app.bicep` file:
-
-    <img src="demo-landing.png" alt="Screenshot of the Radius demo container" width=500px >
-
-1. Press CTRL+C to terminate the port-forward and log stream.
-
-## Step 4: Add a dependency and a connection
-
-Next, you can add a dependency to your application. Dependencies are external services or infrastructure your container will interact with, such as a database, cache, message queue, etc.
-
-1. Add a Mongo database to your `app.bicep` file:
-
-   {{% rad file="snippets/app-mongo.bicep" embed=true marker="//MONGO" markdownConfig="{linenos=table,linenostart=27}" %}}
-
-1. Add a connection from your container to the Mongo database:
-
-   {{% rad file="snippets/app-mongo.bicep" embed=true marker="//CONTAINER" markdownConfig="{linenos=table,hl_lines=[\"16-20\"],linenostart=13}" %}}
-
-1. Re-run your app with [`rad run`]({{< ref rad_run >}}):
+1. Run `rad app connections` again to see the container you just deployed:
 
     ```bash
-    rad run app.bicep --application myapp
+    rad app connections
+    ```
+    
+    You should see the container you just deployed, along with the underlying Kubernetes resources that were created to run it:
+    
+    ```
+    Displaying application: myapp
+   
+   Name: demo (Applications.Core/containers)
+   Connections: (none)
+   Resources:
+     demo (kubernetes: apps/Deployment)
+     demo (kubernetes: core/Service)
+     demo (kubernetes: core/ServiceAccount)
+     demo (kubernetes: rbac.authorization.k8s.io/Role)
+     demo (kubernetes: rbac.authorization.k8s.io/RoleBinding)
+    ```
+
+   {{< alert title="💡 Kubernetes mapping" color="info" >}}
+   Radius Environments map how Applications "bind" to a particular platform. Earlier we saw that the Application compute was set to `kubernetes` and the namespace was set to `default-myapp`. This means that the container resources were deployed to the `default-myapp` namespace in the Kubernetes cluster where Radius is installed. Visit the [Kubernetes mapping docs]({{< ref "/guides/operations/kubernetes/overview#resource-mapping" >}}) to learn more.
+   {{< /alert >}}
+    
+## Step 4: Run your application
+
+When working with Radius Applications you will probably want to access container endpoints and view logs. [`rad run`]({{< ref rad_run >}}) makes it simple to deploy your application and automatically set up port-forwarding and log streaming:
+
+```bash
+rad run app.bicep
+```
+
+You should see the container deployed and the port-forward and log stream started:
+
+```
+Building .\app.bicep...
+Deploying template '.\app.bicep' for application 'myapp' and environment 'default' from workspace 'default'...
+
+Deployment In Progress...
+
+..                   demo            Applications.Core/containers
+
+Deployment Complete
+
+Resources:
+    demo            Applications.Core/containers
+
+Starting log stream...
+
+demo-bb9df8798-b68rc › demo
+demo-bb9df8798-b68rc demo Using in-memory store: no connection string found
+demo-bb9df8798-b68rc demo Server is running at http://localhost:3000
+demo-bb9df8798-b68rc demo [port-forward] connected from localhost:3000 -> ::3000
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view the Radius demo container:
+
+<img src="demo-landing.png" alt="Screenshot of the Radius demo container" width=500px >
+
+When you're done press `CTRL + c` to terminate the port-forward and log stream.
+
+## Step 5: Add a database and a connection
+
+In addition to containers, you can add dependencies like Redis caches, Dapr State Stores, Mongo databases, and more.
+
+1. Add a Mongo database and an environment parameter to your `app.bicep` file:
+
+   {{% rad file="snippets/2-app-mongo.bicep" embed=true marker="//MONGO" %}}
+
+   {{< alert title="💡 Radius Recipes" color="info" >}}
+   When you added a Mongo database to your application you didn't need to specify _how or where_ to run the underlying infrastructure. The Radius Environment and its Recipes take care of that for you. Just like how the Radius Environment bound your container to a Kubernetes cluster, it also deploys and binds your Mongo database to underlying infrastructure using [Recipes]({{< ref "/guides/recipes/overview" >}}).
+   {{< /alert >}}
+
+1. To learn about the underlying Recipe that will deploy and manage the Mongo infrastructure run [`rad recipe show`]({{< ref rad_recipe_show >}}):
+
+   ```bash
+   rad recipe show default --resource-type Applications.Datastores/mongoDatabases
+   ```
+
+1. Add a connection from your container to the Mongo database to tell Radius that your container needs to communicate with the Mongo database:
+
+   {{% rad file="snippets/2-app-mongo.bicep" embed=true marker="//CONTAINER" markdownConfig="{hl_lines=[\"16-20\"]}" %}}
+
+   {{< alert title="💡 Radius Connections" color="info" >}}
+   Radius Connections are more than just bookkeeping. They are used to automatically configure access and connection information for your containers. Learn more in the [containers documentation]({{< ref "/guides/author-apps/containers/overview" >}})
+   {{< /alert >}}
+
+1. Re-run your app with [`rad run`]({{< ref rad_run >}}) to deploy the Mongo database and container and start the port-forward and log stream:
+
+    ```bash
+    rad run app.bicep
     ```
 
     ```
