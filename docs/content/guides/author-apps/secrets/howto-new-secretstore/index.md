@@ -17,29 +17,29 @@ Radius leverages the secrets management solution available on the hosting platfo
 
 ## Step 1: Add a Secret Store
 
-Open the `app.bicep` and add a new Secret Store resource or reference an existing secret store. 
+Open the `app.bicep` from the current working directory and add a new Secret Store resource
 
-{{< tabs "New Secret Store" "Existing Secret Store" >}}
-
-{{% codetab %}}
 {{< rad file="snippets/secretstore.bicep" embed=true marker="//SECRET_STORE_NEW" >}}
+
 In this example a new secret store resource is created for storing a TLS certificate in it. 
-{{% /codetab %}}
-
-{{% codetab %}}
-{{< rad file="snippets/secretstore.bicep" embed=true marker="//SECRET_STORE_REF" >}}
-In this example the secret store resource reference secrets stores in an existing secrets management solution that is external to the Radius Application stack. Note that only references to Kubernetes Secrets is currently supported, with more to come in the future.
-{{% /codetab %}}
-
-{{< /tabs >}}
 
 ## Step 2: Deploy the application
 
 Deploy the application with [`rad deploy`]({{< ref "rad_deploy" >}}):
 
 ```bash
-rad deploy app.bicep 
+rad deploy app.bicep -a secretdemo 
 ```
+
+## Step 3: Verify the secrets are deployed 
+
+Use the below command to verify if the secret got deployed 
+
+```
+kubectl get secret -n default-docs
+```
+
+You will find `appcert` of type kubernetes.io/tls automatically created.
 
 ## Further reading
 
