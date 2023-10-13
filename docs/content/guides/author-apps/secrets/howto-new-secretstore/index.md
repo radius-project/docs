@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "How To: Create new or reference an existing Secret Store"
-linkTitle: "Secret Stores"
-description: "Learn how to create new or reference existing Secrets in your Radius Application"
+title: "How To: Create new Secret Store"
+linkTitle: "New Secret Store"
+description: "Learn how to create new secrets in your Radius Application"
 weight: 200
 categories: "How-To"
 tags: ["secrets"]
@@ -12,7 +12,8 @@ Radius leverages the secrets management solution available on the hosting platfo
 
 ## Pre-requisites 
 
-- [rad CLI]({{< ref "/guides/tooling/rad-cli/overview" >}})
+- [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-radius-bicep-vs-code-extension" >}})
 - [Radius environment]({{< ref "installation#step-3-initialize-the-radius-control-plane-and-the-radius-environment" >}})
 
 ## Step 1: Add a Secret Store
@@ -35,11 +36,11 @@ rad deploy app.bicep -a secretdemo
 
 Use the below command to verify if the secret got deployed 
 
-```
+```bash
 kubectl get secret -n default-docs
 ```
 
-You will find `appcert` of type kubernetes.io/tls automatically created.
+You will find `appCert` of type kubernetes.io/tls automatically created.
 
 ## Further reading
 

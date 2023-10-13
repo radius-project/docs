@@ -1,8 +1,9 @@
 import radius as radius
 
-@description('The ID of your Radius Environment. Injected automatically by the rad CLI.')
-param environment string
+@description('The app ID of your Radius Application. Set automatically by the rad CLI.')
+param application string
 
+//SECRET_STORE_REF
 @description('The data for your TLS certificate')
 @secure()
 param tlscrt string
@@ -11,36 +12,10 @@ param tlscrt string
 @secure()
 param tlskey string
 
-resource app 'Applications.Core/applications@2023-10-01-preview' = {
-  name: 'corerp-resources-secretstore'
-  properties: {
-    environment: environment
-  }
-}
-
-//SECRET_STORE_NEW
-resource appCert 'Applications.Core/secretStores@2023-10-01-preview' = {
-  name: 'appcert'
-  properties:{
-    application: app.id
-    type: 'certificate'
-    data: {
-      'tls.key': {
-        value: tlskey
-      }
-      'tls.crt': {
-        value: tlscrt
-      }
-    }
-  }
-}
-//SECRET_STORE_NEW
-
-//SECRET_STORE_REF
 resource existingAppCert 'Applications.Core/secretStores@2023-10-01-preview' = {
   name: 'existing-appcert'
   properties:{
-    application: app.id
+    application: application
     resource: 'secret-app-existing-secret' // Reference to the name of an external Kubernetes secret store
     type: 'certificate' // The type of secret in your resource
     data: {
