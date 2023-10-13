@@ -1,5 +1,16 @@
 The Radius control-plane is a set of services that provide the core functionality of Radius. It is deployed as a set of containers in a Kubernetes cluster.
 
+1. Create a Kubernetes cluster
+
+   Radius runs inside [Kubernetes]({{< ref "guides/operations/kubernetes" >}}). Create one from the [supported k8s clusters]({{< ref "/guides/operations/kubernetes/overview#supported-kubernetes-clusters" >}}) 
+   > *If you don't have a preferred way to create Kubernetes clusters, you could try using [k3d](https://k3d.io/), which runs a minimal Kubernetes distribution in Docker.*
+
+   Ensure your cluster is set as your current context:
+
+   ```bash
+   kubectl config current-context
+   ```
+
 1. Initialize a new [Radius Environment]({{< ref "/guides/deploy-apps/environments/overview">}}) with [`rad init`]({{< ref rad_init >}}):
    ```bash
    rad init
