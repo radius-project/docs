@@ -12,7 +12,8 @@ This how-to guide will teach how to connect to your dependencies via [connection
 
 ## Prerequisites
 
-- [Radius CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
+- [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-radius-bicep-vs-code-extension" >}})
 - [Radius environment]({{< ref "installation#step-3-initialize-the-radius-control-plane-and-the-radius-environment" >}})
 
 ## Step 1: View the container definition
