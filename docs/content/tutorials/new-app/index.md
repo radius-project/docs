@@ -212,13 +212,27 @@ In addition to containers, you can add dependencies like Redis caches, Dapr Stat
    ```bash
    rad recipe show default --resource-type Applications.Datastores/mongoDatabases
    ```
+   
+   You'll see details on the Recipe, including available parameters and defaults:
+
+   ```
+   NAME      TYPE                                    TEMPLATE KIND  TEMPLATE VERSION  TEMPLATE
+   default   Applications.Datastores/mongoDatabases  bicep                            radius.azurecr.io/recipes/local-dev/mongodatabases:latest
+   
+   PARAMETER NAME  TYPE          DEFAULT VALUE   MIN       MAX
+   username        string        admin           -         -
+   password        secureString  Password1234==  -         -
+   database        string                        -         -
+   ```
+
+   If you want to learn more about the Recipe template it's in the [Recipes repo](https://github.com/radius-project/recipes/blob/main/local-dev/mongodatabases.bicep).
 
 1. Add a connection from your container to the Mongo database to tell Radius that your container needs to communicate with the Mongo database:
 
    {{% rad file="snippets/2-app-mongo.bicep" embed=true marker="//CONTAINER" markdownConfig="{hl_lines=[\"16-20\"]}" %}}
 
    {{< alert title="💡 Radius Connections" color="info" >}}
-   Radius Connections are more than just bookkeeping. They are used to automatically configure access and connection information for your containers. Learn more in the [containers documentation]({{< ref "/guides/author-apps/containers/overview" >}})
+   Radius Connections are more than just bookkeeping. They are used to automatically configure access and connection information for your containers. Learn more in the [containers documentation]({{< ref "/guides/author-apps/containers/overview" >}}).
    {{< /alert >}}
 
 1. Re-run your app with [`rad run`]({{< ref rad_run >}}) to deploy the Mongo database and container and start the port-forward and log stream:
@@ -250,22 +264,52 @@ In addition to containers, you can add dependencies like Redis caches, Dapr Stat
 
 1. Press CTRL+C to terminate the port-forward and log stream.
 
-## Step 5: Add a backend container
+1. Run `rad app connections` again to see the new dependency:
+
+    ```bash
+    rad app connections
+    ```
+    
+    You should see the container you just deployed, along with the underlying Kubernetes resources that were created to run it:
+    
+    ```
+    Displaying application: myapp
+    
+    Name: frontend (Applications.Core/containers)
+    Connections:
+      frontend -> mongodb (Applications.Datastores/mongoDatabases)
+    Resources:
+      frontend (kubernetes: apps/Deployment)
+      frontend (kubernetes: core/Secret)
+      frontend (kubernetes: core/Service)
+      frontend (kubernetes: core/ServiceAccount)
+      frontend (kubernetes: rbac.authorization.k8s.io/Role)
+      frontend (kubernetes: rbac.authorization.k8s.io/RoleBinding)
+    
+    Name: mongodb (Applications.Datastores/mongoDatabases)
+    Connections:
+      frontend (Applications.Core/containers) -> mongodb
+    Resources:
+      mongo-bzmp2btdgzez6 (kubernetes: apps/Deployment)
+      mongo-bzmp2btdgzez6 (kubernetes: core/Service)
+   ```
+
+## Step 6: Add a backend container
 
 In addition to dependencies, you can add more containers to make your application code more modular.  Containers can be configured to interact with each other as needed.
 
 1. Add a second container named `backend` to your `app.bicep` file, specifying the image and port to open to other containers:
 
-   {{% rad file="snippets/app-backend.bicep" embed=true marker="//BACKEND" markdownConfig="{linenos=table,linenostart=43}" %}}
+   {{% rad file="snippets/3-app-backend.bicep" embed=true marker="//BACKEND" %}}
 
 1. Add a new connection from your `frontend` container to the `backend` container:
 
-   {{% rad file="snippets/app-backend.bicep" embed=true marker="//CONTAINER" markdownConfig="{linenos=table,hl_lines=[\"20-22\"],linenostart=13}" %}}
+   {{% rad file="snippets/3-app-backend.bicep" embed=true marker="//CONTAINER" markdownConfig="{hl_lines=[\"20-22\"]}" %}}
 
 1. Re-run your app with [`rad run`]({{< ref rad_run >}}):
 
     ```bash
-    rad run app.bicep --application myapp
+    rad run app.bicep
     ```
 
     ```
@@ -278,7 +322,6 @@ In addition to dependencies, you can add more containers to make your applicatio
     Deployment Complete
     
     Resources:
-        myapp           Applications.Core/applications
         frontend        Applications.Core/containers
         backend         Applications.Core/containers
         mongodb         Applications.Datastores/mongoDatabases
@@ -288,17 +331,17 @@ In addition to dependencies, you can add more containers to make your applicatio
 
 1. Open [localhost:3000](http://localhost:3000) to interact with the frontend container. You should see the container's connections and metadata, this time with a connection to the backend container and new environment variables set:
 
-   <img src="demo-landing-backend.png" alt="Screenshot of the demo container with a connection to the backend container">
+   <img src="demo-landing-backend.png" alt="Screenshot of the demo container with a connection to the backend container" width=600px>
 
     Note the environment variables that are set with connection information for the backend container.
 
-## Step 6: Add a gateway
+## Step 7: Add a gateway
 
 Finally, you can add a gateway to your application. Gateways are used to expose your application to the internet. They can expose a single container or multiple containers.
 
 1. Add a gateway to your `app.bicep` file:
 
-   {{% rad file="snippets/app-gateway.bicep" embed=true marker="//GATEWAY" markdownConfig="{linenos=table,linenostart=63}" %}}
+   {{% rad file="snippets/4-app-gateway.bicep" embed=true marker="//GATEWAY" %}}
 
 1. Deploy your app with [`rad deploy`]({{< ref rad_deploy >}}):
 
@@ -316,7 +359,6 @@ Finally, you can add a gateway to your application. Gateways are used to expose 
     Deployment Complete
     
     Resources:
-        myapp           Applications.Core/applications
         frontend        Applications.Core/containers
         backend         Applications.Core/containers
         gateway         Applications.Core/gateways

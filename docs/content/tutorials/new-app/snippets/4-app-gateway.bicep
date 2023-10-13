@@ -1,21 +1,17 @@
 // Import the set of Radius resources (Applications.*) into Bicep
 import radius as radius
 
+@description('The ID of your Radius Application. Set automatically by the rad CLI.')
+param application string
+
 @description('The environment ID of your Radius application. Set automatically by the rad CLI.')
 param environment string
 
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
-  name: 'myapp'
-  properties: {
-    environment: environment
-  }
-}
-
 //CONTAINER
-resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'frontend'
   properties: {
-    application: app.id
+    application: application
     container: {
       image: 'radius.azurecr.io/tutorial/demo:edge'
       env: {
@@ -40,20 +36,20 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 //CONTAINER
 
 //MONGO
-resource mongodb 'Applications.Datastores/mongoDatabases@2022-03-15-privatepreview' = {
+resource mongodb 'Applications.Datastores/mongoDatabases@2023-10-01-preview' = {
   name: 'mongodb'
   properties: {
     environment: environment
-    application: app.id
+    application: application
   }
 }
 //MONGO
 
 //BACKEND
-resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource backend 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'backend'
   properties: {
-    application: app.id 
+    application: application
     container: {
       image: 'nginx:latest'
       ports: {
@@ -67,10 +63,10 @@ resource backend 'Applications.Core/containers@2022-03-15-privatepreview' = {
 //BACKEND
 
 //GATEWAY
-resource gateway 'Applications.Core/gateways@2022-03-15-privatepreview' = {
+resource gateway 'Applications.Core/gateways@2023-10-01-preview' = {
   name: 'gateway'
   properties: {
-    application: app.id
+    application: application
     routes: [
       {
         path: '/'
