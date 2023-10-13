@@ -1,9 +1,9 @@
 import radius as radius
 
-@description('The ID of your Radius Environment. Automatically injected by the rad CLI.')
+@description('The ID of your Radius environment. Automatically injected by the rad CLI.')
 param environment string
 
-@description('The ID of your Radius Application. Automatically injected by the rad CLI.')
+@description('The ID of your Radius application. Automatically injected by the rad CLI.')
 param application string
 
 resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
@@ -11,7 +11,7 @@ resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
   properties: {
     application: application
     container: {
-      image: 'radius.azurecr.io/samples/demo:latest'
+      image: 'radius.azurecr.io/tutorial/webapp:edge'
     }
     connections: {
       // Define a connection to the redis container

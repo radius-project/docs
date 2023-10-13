@@ -18,13 +18,10 @@ For more details on the app and access to the source code, visit the `tutorials/
 
 ## Prerequisites
 
-- [Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
-- [Radius CLI]({{< ref "getting-started" >}})
-- [Radius Environment]({{< ref "/guides/deploy-apps/environments/overview" >}})
+- [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-radius-bicep-vs-code-extension" >}})
+- [Radius environment]({{< ref "installation#step-3-initialize-the-radius-control-plane-and-the-radius-environment" >}})
 - [Dapr installed on your Kubernetes cluster](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/)
-- [Visual Studio Code](https://code.visualstudio.com/) (recommended)
-  - The [Radius VSCode extension]({{< ref "getting-started" >}}) is highly recommended to provide syntax highlighting, completion, and linting
-  - Although not recommended, you can also complete This how-to guide with any basic text editor
 
 ## Step 1: Define the application, `backend` container, and Dapr state store
 

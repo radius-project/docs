@@ -16,6 +16,7 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
 
 - [Azure subscription](https://azure.com)
 - [az CLI](https://aka.ms/azcli)
+- [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 
 ## Interactive configuration
 
