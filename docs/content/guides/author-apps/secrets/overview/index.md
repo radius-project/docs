@@ -22,7 +22,7 @@ Follow the [how-to guide on creating new secret store]({{< ref "/guides/author-a
 ## Reference an existing Secret Store
 
 You can also reference an existing secrets management solution that is external to the Radius Application stack. Note that only references to Kubernetes Secrets is currently supported, with more to come in the future.
-Follow the [how-to guide to reference an existing secret store]({{< ref "/guides/author-apps/secrets/howto-existing -secretstore" >}}) to learn more about referencing an existing Kubernetes secret.
+Follow the [how-to guide to reference an existing secret store]({{< ref "/guides/author-apps/secrets/howto-existing-secretstore" >}}) to learn more about referencing an existing Kubernetes secret.
 
 ## Using Secret Stores
 
