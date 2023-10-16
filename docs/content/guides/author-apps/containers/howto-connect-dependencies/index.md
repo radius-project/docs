@@ -50,7 +50,7 @@ Connections from a container to a resource result in environment variables for c
 Radius Connections are more than just environment variables and configuration. You can also access the "application graph" and understand the connections within your application with the following command:
 
 ```bash
-rad app connections
+rad app connections -a demo
 ```
 
 You should see the following output, detailing the connections between the `demo` container and the `db` Redis cache, along with information about the underlying Kubernetes resources running the app:
