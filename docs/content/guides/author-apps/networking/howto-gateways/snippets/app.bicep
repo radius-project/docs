@@ -4,8 +4,8 @@ import radius as rad
 @description('The application ID being deployed. Injected automtically by the rad CLI')
 param application string
 
-resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
-  name: 'frontend'
+resource demo 'Applications.Core/containers@2023-10-01-preview' = {
+  name: 'demo'
   properties: {
     application: application
     container: {
@@ -28,7 +28,7 @@ resource gateway 'Applications.Core/gateways@2023-10-01-preview' = {
     routes: [
       {
         path: '/'
-        destination: 'http://${frontend.name}:3000'
+        destination: 'http://${demo.name}:3000'
       }
     ]
   }

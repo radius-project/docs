@@ -16,9 +16,9 @@ This guide will walk you through how to setup a gateway for routing internet tra
 - [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-radius-bicep-vs-code-extension" >}})
 - [Radius environment]({{< ref "installation#step-3-initialize-the-radius-control-plane-and-the-radius-environment" >}})
 
-## Step 1: Define a container
+## Step 1: View the container
 
-Begin by defining the service you wish to expose to the internet in a new file named `app.bicep`. This example uses the Radius demo container:
+Begin by defining the service you wish to expose to the internet. Open `app.bicep` in you current working directory. This example uses the Radius demo container:
 
 {{< rad file="snippets/app.bicep" embed=true marker="//FRONTEND" >}}
 
