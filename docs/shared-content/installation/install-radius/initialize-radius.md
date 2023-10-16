@@ -1,4 +1,4 @@
-The Radius control-plane is a set of services that provide the core functionality of Radius. It is deployed as a set of containers in a Kubernetes cluster.
+Initializing Radius installs the Radius control-plane and creates a Radius Environment. The control-plane is a set of services that provide the core functionality of Radius, running in the `radius-system` namespace.
 
 1. Create a Kubernetes cluster
 
