@@ -204,8 +204,10 @@ Front-matter should be completed with all fields including type, title, linkTitl
 - `categories` should be one of the following:
     - Concept
     - Overview
-    - Reference application
+    - Tutorial
     - How-To
+    - Reference
+    - Schema
 - `tags` should be a comma-separated list of metadata tags.
 
 As per the [styling conventions](#styling-conventions), titles should only capitalize the first word and proper nouns, with the exception of "How-To:"

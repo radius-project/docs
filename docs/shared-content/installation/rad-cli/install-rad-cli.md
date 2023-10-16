@@ -1,21 +1,6 @@
 The `rad` CLI manages your applications, resources, and environments. You can install it on your local machine with the following installation scripts:
 
-{{< tabs MacOS "Linux/WSL" "Windows PowerShell" "Cloud Shell" Binaries >}}
-
-{{% codetab %}}
-{{< latest >}}
-```bash
-curl -fsSL "https://get.radapp.dev/tools/rad/install.sh" | /bin/bash
-```
-{{< /latest >}}
-{{< edge >}}
-To install the latest edge version:
-
-```bash
-curl -fsSL "https://radiuspublic.blob.core.windows.net/tools/rad/install.sh" | /bin/bash -s edge
-```
-{{< /edge >}}
-{{% /codetab %}}
+{{< tabs "Linux/WSL" MacOS "Windows PowerShell" "GitHub Codespace" "Azure Cloud Shell" Binaries >}}
 
 {{% codetab %}}
 {{< latest >}}
@@ -28,6 +13,21 @@ To install the latest edge version:
 
 ```bash
 wget -q "https://radiuspublic.blob.core.windows.net/tools/rad/install.sh" -O - | /bin/bash -s edge
+```
+{{< /edge >}}
+{{% /codetab %}}
+
+{{% codetab %}}
+{{< latest >}}
+```bash
+curl -fsSL "https://get.radapp.dev/tools/rad/install.sh" | /bin/bash
+```
+{{< /latest >}}
+{{< edge >}}
+To install the latest edge version:
+
+```bash
+curl -fsSL "https://radiuspublic.blob.core.windows.net/tools/rad/install.sh" | /bin/bash -s edge
 ```
 {{< /edge >}}
 {{% /codetab %}}
@@ -52,6 +52,13 @@ To install the latest edge version:
 $script=iwr -useb  https://radiuspublic.blob.core.windows.net/tools/rad/install.ps1; $block=[ScriptBlock]::Create($script); invoke-command -ScriptBlock $block -ArgumentList edge
 ```
 {{< /edge >}}
+{{% /codetab %}}
+
+{{% codetab %}}
+Radius offers a **free** Codespace option for getting up and running with a Radius environment in seconds:
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/radius-project/samples)
+
 {{% /codetab %}}
 
 {{% codetab %}}
