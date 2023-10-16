@@ -16,7 +16,7 @@ Before you get started, you'll need to make sure you have the following tools an
 
 - [Postman](https://www.postman.com/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-- [Radius environment]({{< ref "installation#step-3-initialize-the-radius-control-plane-and-the-radius-environment" >}})
+- [Radius environment]({{< ref "installation#step-3-initialize-radius" >}})
 
 ### Step 1: Create Kubernetes objects
 
