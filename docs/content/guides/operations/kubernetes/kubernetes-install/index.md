@@ -20,7 +20,7 @@ Use the [`rad install kubernetes` command]({{< ref rad_install_kubernetes >}}) t
 rad install kubernetes
 
 # Install Radius with tracing and public endpoint override
-rad install kubernetes --set global.zipkin.url=http://jaeger-collector.radius-monitoring.svc.cluster.local:9411/api/v2/spans,rp.publicEndpointOverride=localhost:8081`
+rad install kubernetes --set global.zipkin.url=http://jaeger-collector.radius-monitoring.svc.cluster.local:9411/api/v2/spans,rp.publicEndpointOverride=localhost:8081
 ```
 
 ## Install with Helm

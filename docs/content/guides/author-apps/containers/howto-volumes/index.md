@@ -39,7 +39,7 @@ The `samples/volumes` container will display the status and contents of the `/tm
    ```bash
    rad resource expose containers mycontainer -a myapp --port 5000
    ```
-1. You should see a message warning that the directory `/tmpdir` does not exist:
+1. Visit [localhost:5000](http://localhost:5000) in your browser. You should see a message warning that the directory `/tmpdir` does not exist:
 
    <img src="screenshot-error.jpg" width=500px alt="Screeshot of container showing that the tmp directory does not exist">
 
