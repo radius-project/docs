@@ -42,6 +42,7 @@ Kubernetes metadata can be applied at the environment, application, or container
 
 - Applications.Core/containers
 - Applications.Core/gateways
+- Applications.Core/httpRoutes
 
 ### Metadata processing order
 
@@ -57,7 +58,7 @@ In the case where layers have conflicting keys (_i.e. Application and Container 
 
 ## Reserved keys
 
-Certain labels/annotations have special uses to Radius internally and are not allowed to be overridden by user. Labels/Annotations with keys that have a prefix : `radius.dev/` will be ignored during processing.
+Certain labels/annotations have special uses to Radius internally and are not allowed to be overridden by user. Labels/Annotations with keys that have a prefix : `radapp.io/` will be ignored during processing.
 
 ## Extension processing order
 
@@ -93,9 +94,9 @@ Labels:           key1=appValue1
                   key2=containerValue2
                   team.contact.name=Frontend
                   team.contact.alias=frontend-eng
-                  radius.dev/application=myapp
-                  radius.dev/resource=frontend
-                  radius.dev/resource-type=applications.core-containers
+                  radapp.io/application=myapp
+                  radapp.io/resource=frontend
+                  radapp.io/resource-type=applications.core-containers
                   ...
 Annotations:      prometheus.io/port: 9090
                   prometheus.io/scrape: true
@@ -111,9 +112,9 @@ The labels & annotations were set based on the following:
 | `team.key2` | `containerValue2` | Container value overrides application value
 | `team.contact.name` | `Frontend` | Container value overrides application value
 | `team.contact.alias` | `frontend-eng` | Container value overrides application value
-| `radius.dev/application` | `myapp` | Radius-injected label
-| `radius.dev/resource` | `frontend` | Radius-injected label
-| `radius.dev/resource-type` | `applications.core-containers` | Radius-injected label
+| `radapp.io/application` | `myapp` | Radius-injected label
+| `radapp.io/resource` | `frontend` | Radius-injected label
+| `radapp.io/resource-type` | `applications.core-containers` | Radius-injected label
 | **Annotations**
 | `prometheus.io/port` | `9090` | Application annotation is applied
 | `prometheus.io/scrape` | `true `| Application annotation is applied
