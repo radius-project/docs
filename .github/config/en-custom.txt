@@ -479,3 +479,4 @@ PodSpec
 composable
 CRD
 nd
+OSI
