@@ -14,7 +14,7 @@ To install the latest edge version:
 1. Visit the [GitHub Actions runs](https://github.com/radius-project/radius/actions/workflows/build.yaml?query=branch%3Amain+event%3Apush)
 1. Click on the latest successful run
 1. Scroll down to Artifacts and download `rad_cli_release`
-1. Extract the archive/run the applicable binary for your machine
+1. Extract the archive and run the rad binary applicable for your machine
 
 {{< /edge >}}
 {{% /codetab %}}
