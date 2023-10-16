@@ -15,6 +15,7 @@ By default, Radius leverages the hosting platform's secrets management solution 
 ## Pre-requisites 
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
+- [kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 
 - [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-radius-bicep-vs-code-extension" >}})
 - [Radius environment]({{< ref "installation#step-3-initialize-the-radius-control-plane-and-the-radius-environment" >}})
 
@@ -39,7 +40,7 @@ rad deploy app.bicep -a secretdemo
 Use the below command to verify if the secret got deployed 
 
 ```bash
-kubectl get secret -n default-docs
+kubectl get secret -n default-secretdemo
 ```
 
 You will find `appCert` of type kubernetes.io/tls automatically created.

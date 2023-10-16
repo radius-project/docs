@@ -10,19 +10,30 @@ tags: ["secrets"]
 
 ## Pre-requisites 
 
-- [rad CLI]({{< ref "/guides/tooling/rad-cli/overview" >}})
+- [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
+- [kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-radius-bicep-vs-code-extension" >}})
 - [Radius environment]({{< ref "installation#step-3-initialize-the-radius-control-plane-and-the-radius-environment" >}})
-- [Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/) already deployed 
 
-## Step 1: Reference an existing Secret Store
+## Step 1 : Create a Kubernetes secret 
+
+Create a [Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/) with the below command 
+
+```bash
+kubectl create secret generic db-user-pass \
+    --from-literal=username=admin \
+    --from-literal=password='test123'
+```
+
+## Step 2: Reference an existing Secret Store
 
 Open the `app.bicep` from the current working directory and add the secret store resource to reference an existing secret store. 
 
 {{< rad file="snippets/secretstore.bicep" embed=true marker="//SECRET_STORE_REF" >}}
 
-In this example the secret store resource references Kubernetes Secrets of type `certificate`
+In this example the secret store resource references a Kubernetes secret that was created in step 1.
 
-## Step 2: Deploy the application
+## Step 3: Deploy the application
 
 Deploy the application with [`rad deploy`]({{< ref "rad_deploy" >}}):
 
@@ -30,15 +41,13 @@ Deploy the application with [`rad deploy`]({{< ref "rad_deploy" >}}):
 rad deploy app.bicep -a secretdemo
 ```
 
-## Step 3: Verify the secrets are deployed 
+## Step 4: Verify the secrets are deployed 
 
 Use the below command to verify if the secret got deployed 
 
 ```bash
-kubectl get secret -n default-docs
+kubectl get secret -n default
 ```
-
-You will find `appCert` of type kubernetes.io/tls automatically created.
 
 ## Further reading
 
