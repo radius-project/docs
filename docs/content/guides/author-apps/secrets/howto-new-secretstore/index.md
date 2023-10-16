@@ -8,7 +8,9 @@ categories: "How-To"
 tags: ["secrets"]
 ---
 
-Radius leverages the secrets management solution available on the hosting platform to create and store the secret. For example, if you are deploying to Kubernetes, the secret will be created in Kubernetes Secrets.
+Radius secret stores securely manage secrets for your Environment and Application.
+
+By default, Radius leverages the hosting platform's secrets management solution to create and store the secret. For example, if you are deploying to Kubernetes, the secret store will be created as a Kubernetes Secret.
 
 ## Pre-requisites 
 
