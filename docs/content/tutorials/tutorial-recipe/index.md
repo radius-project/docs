@@ -71,8 +71,8 @@ Developers don't need to specify what cloud resources they're using in their app
    default   Applications.Datastores/redisCaches     bicep                            radius.azurecr.io/recipes/local-dev/rediscaches:latest
    ```
 
-{{< alert title="💡 Dev Recipes" color="info" >}}
-Dev environments are preloaded with [`dev` Recipes]({{< ref "guides/recipes/overview#use-community-dev-recipes" >}}), a set of Recipes that allow you to quickly get up and running with lightweight containerized infrastructure. In This how-to guide, the dev Redis Recipe deploys a lightweight Redis container into your Kubernetes cluster.
+{{< alert title="💡 Local-dev Recipes" color="info" >}}
+Dev environments are preloaded with [local-dev Recipes]({{< ref "guides/recipes/overview#use-community-dev-recipes" >}}), a set of Recipes that allow you to quickly get up and running with lightweight containerized infrastructure. In This how-to guide, the dev Redis Recipe deploys a lightweight Redis container into your Kubernetes cluster.
 
 When a Recipe is named "default" it will be used by default when deploying resources when a Recipe is not specified.
 {{< /alert >}}
@@ -122,7 +122,7 @@ Note that no Recipe name is specified with 'db', so it will be using the default
    kubectl get pods -n default-recipes
    ```
 
-   You will see your 'frontend' container, along with the Redis cache that was automatically created by the default dev Recipe:
+   You will see your 'frontend' container, along with the Redis cache that was automatically created by the default local-dev Recipe:
 
    ```
    NAME                                   READY   STATUS    RESTARTS   AGE
