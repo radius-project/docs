@@ -1,9 +1,10 @@
 ---
 type: docs
-title: "Why Radius?"
+title: "Concept: Why Radius?"
 linkTitle: "Why Radius?"
 description: "Describes the motivations for creating Radius."
 weight: 300
+categories: "Concept"
 ---
 
 ## Our starting point
@@ -14,9 +15,9 @@ Most enterprises are not dev-tools experts and as a result they struggle with th
 
 A few common problems rose to the top:
 
-- Applications are more than just Kubernetes: applications developers are tasked with managing applications on Kubernetes and resources in the cloud where complexity is high, and compliance with best-practices is a full-time job.
-- Developers, platform engineers, and  IT operators need to collaborate: to manage the complexity of the cloud, enterprises have specialized disciplines like sec-ops, fin-ops, and cloud centers of excellence. Application developers need to interface with all of these roles, and the tools they use should aid, not impede collaboration.
-- Applications need a industry-standard definition: the IT operators, SREs and other specialists that support an application usually lack context about the architecture. Application developers lack context about the underlying cloud infrastructure. As application developers and IT operators collaborate they need a common understanding and visualization of what an application **is**.
+- **Applications are more than just Kubernetes:** standardizing on Kubernetes has been a successful strategy for most enterprises, but applications developers are tasked with managing applications on Kubernetes along with multiple resources in the cloud. Integrating Kubernetes with cloud services has added additional complexity while making compliance with best-practices almost a full-time job.
+- **Developers, platform engineers, and  IT operators need to collaborate:** to manage the complexity of the cloud, enterprises have specialized disciplines like sec-ops, fin-ops, and cloud centers of excellence. Application developers need to interface with all of these roles, and the tools they use should aid, not impede collaboration.
+- **Applications lack an industry-wide definition:** the IT operators, SREs and other specialists that support an application usually lack context about the architecture. Application developers lack context about the underlying cloud infrastructure. As application developers and IT operators collaborate they need a common understanding and visualization of what an application **is**.
 
 So, we started Radius to address these concerns and provide **our** opinions about how application management should work in today's complex cloud-native landscape. Along the way we came up with the concept of **Appi-ness**: the feeling of satisfaction one has when the application is at the center of every workflow.
 
@@ -44,8 +45,8 @@ We hope that this holistic way of thinking about applications becomes the standa
 
 Many practices and technologies in cloud-native development are a success and don't need to be re-thought. 
 
-- Radius makes it easy for application developers to adopt by supporting your existing containerized code, Dockerfiles, and Helm charts. 
-- We believe that 12-factor is still a great set of ideas and so any 12-factor style application should be easy to use with Radius.
+- Radius makes is easy for application developers to adopt because it supports your existing containerized code, Dockerfiles, and Helm charts. 
+- We believe that [twelve-factor](https://12factor.net/) is still a great set of ideas and so any twelve-factor style application should be easy to use with Radius.
 - We like infrastructure-as-code as for its repeatability and use it for both Recipes and application descriptions. 
 - There are plenty of great CI/CD systems, application delivery pipelines, and Gitops systems out there and Radius can work with any of them.
 
