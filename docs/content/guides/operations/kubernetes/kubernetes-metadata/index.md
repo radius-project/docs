@@ -42,7 +42,6 @@ Kubernetes metadata can be applied at the environment, application, or container
 
 - Applications.Core/containers
 - Applications.Core/gateways
-- Applications.Core/httpRoutes
 
 ### Metadata processing order
 
