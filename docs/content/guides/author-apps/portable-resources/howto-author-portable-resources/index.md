@@ -47,7 +47,7 @@ Find the schema needed for the supported Radius resource by visiting the [Radius
 
 ## Step 3: Accessing your portable resource
 
-Resources all have different schemas with differing requirements when it comes to defining properties or relations between other resources. When it comes to `connections` users can check out the c[container resource schema page]({{< ref "container-schema" >}}) for additional information.
+Resources all have different schemas with differing requirements when it comes to defining properties or relations between other resources. When it comes to `connections` users can check out the [container resource schema page]({{< ref "container-schema" >}}) for additional information.
 
 Define a connection between your container and the Redis Cache in order to track the dependency and set environment variables.
 
