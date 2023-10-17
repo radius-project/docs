@@ -35,6 +35,8 @@ The [radius-resource-provider-dashboard.json](https://get.radapp.dev/tools/grafa
 ### Pre-requisites
 
 - [Setup Prometheus]({{<ref prometheus.md>}}) on your Kubernetes cluster
+- [Helm 3](https://helm.sh/)
+
 
 ### Install Grafana
 

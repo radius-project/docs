@@ -12,6 +12,10 @@ tags: ["tracing", "observability"]
 
 The following steps show you how to configure the [Radius control plane]({{< ref architecture-concept >}}) components to send distributed tracing data to Zipkin running as a container in your Kubernetes cluster and how to view the data.
 
+## Pre-requisites
+
+- [kubectl CLI](https://kubernetes.io/docs/tasks/tools/)
+
 ## Step 1: Install Zipkin on Kubernetes
 
 1. Create the namespace `radius-monitoring`:
