@@ -6,7 +6,7 @@ You can only have one VSCode Bicep extension installed at a time. To build on Ra
 
 1. To install the Radius Bicep extension, search for Radius Bicep in the Extensions tab in VSCode or in the [Visual Studio marketplace](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.rad-vscode-bicep&ssr=false#overview)
 
-      <img src="/installation/vscode-bicep/images/radius-bicep.png" alt="Screenshot of Radius Bicep extension in VSCode Marketplace " width=500>
+      <img src="/installation/vscode-bicep/images/radius-bicep.png" alt="Screenshot of Radius Bicep extension in VSCode Marketplace " width=500px>
 
 2. Select Install
 
