@@ -10,6 +10,11 @@ tags: ["metrics", "observability"]
 
 [Prometheus](https://prometheus.io/) collects and stores metrics as time series data. This guide will show you how to collect Radius control plane metrics to then be visualized and queried.
 
+
+{{% alert color="primary" %}}
+Users may experience issues when running in non-local clusters, please take a look at the official [Prometheus](https://prometheus.io/) docs for help on debugging.
+{{% /alert %}}
+
 ## Install Prometheus on Kubernetes
 
 1. Make sure you have the following pre-requisites:
