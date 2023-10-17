@@ -1,8 +1,8 @@
 ---
 type: docs
 title: "Tutorial: Create a Radius Application"
-linkTitle: "Create a new app"
-description: "Dive into Radius to learn how to define, deploy, and manage a new application"
+linkTitle: "Create a new application"
+description: "Learn how to define, deploy, and manage a new Radius Application"
 weight: 100
 categories: "Tutorial"
 ---
@@ -45,7 +45,7 @@ By the end of the tutorial, you will have created and deployed a new Radius Appl
    When asked if you want to create a new application select "Yes". This will create a new file named `app.bicep` in your directory where your application will be defined.
 
    {{< alert title="💡 Development Environments" color="info" >}}
-   By default `rad init` gets you up and running with a development-focused environment where most of the environment configuration is handled for you, including Recipes (_more on that soon_). If you would like to fully    customize your environment, you can run `rad init --full`
+   By default `rad init` gets you up and running with a local, development-focused environment where most of the environment configuration is handled for you, including Recipes (_more on that soon_). If you would like to fully customize your environment, you can run `rad init --full`
    {{< /alert >}}
 
 ## Step 2: Inspect your Application
@@ -84,9 +84,9 @@ Radius Applications are where all your app's resources and relationships come to
    There are a few important things to note about the application definition:
 
    - **`id`** is the fully-qualified UCP resource ID of the application. This value is used to uniquely identify the application in the Radius system.
-   - **`location`** is the location of the application. For now, all applications are deployed to the `global` location.
-   - **`environment`** specifies where the application will be deployed. In this case, the application will be deployed into the `default` environment that was created by `rad init`.
-   - **`compute`** specifies where running services in the Application will be deployed. In this case, the services will be deployed into the `default-myapp` Kubernetes namespace within the same cluster where Radius is installed.
+   - **`location`** is the _where_ your Application resides. For now, all applications are deployed to the `global` location, which corresponds to the cluster where Radius is running.
+   - **`environment`** specifies the Radius Environment which the Applications "binds" to at deployment. This is what determines where containers should run (_Kubernetes_) and which namespace to deploy into (_prefixed with "default"_). In this case, the application will be deployed into the `default` Environment that was created by `rad init`.
+   - **`compute`** specifies the hosting platform where running services in the Application will run. In this case, the services will be deployed into the `default-myapp` Kubernetes namespace within the same cluster where Radius is installed.
 
 1. Let's take a look inside the Application to see what's deployed. Run [`rad app connections`]({{< ref rad_application_connections >}}) to print the Application's resources and relationships:
 
@@ -106,7 +106,7 @@ Radius Applications are where all your app's resources and relationships come to
 
 ## Step 3: Inspect and deploy `app.bicep`
 
-`app.bicep` will contain all the resources (containers, gateways, cloud services, etc) that make up your application, including how those resources are connected to each other. Given this explicit and comprehensive application definition, Radius Application files make it simple to consistently deploy and manage your application.
+`app.bicep` will define all the resources (containers, gateways, cloud services, etc) that make up your application, including how those resources are connected to each other. Given this explicit and comprehensive application definition, Radius Application files make it simple to consistently deploy and manage your application.
 
 1. Open `app.bicep` and see the scaffolded application created by `rad init`:
 
@@ -155,7 +155,7 @@ Radius Applications are where all your app's resources and relationships come to
     ```
 
    {{< alert title="💡 Kubernetes mapping" color="info" >}}
-   Radius Environments map how Applications "bind" to a particular platform. Earlier we saw that the Application compute was set to `kubernetes` and the namespace was set to `default-myapp`. This means that the container resources were deployed to the `default-myapp` namespace in the Kubernetes cluster where Radius is installed. Visit the [Kubernetes mapping docs]({{< ref "/guides/operations/kubernetes/overview#resource-mapping" >}}) to learn more.
+   Radius Environments map how Applications "bind" to a particular platform. Earlier we saw the Application compute was set to `kubernetes` and the namespace was set to `default-myapp`. This means the container resources were deployed to the `default-myapp` namespace in the Kubernetes cluster where Radius is installed. Visit the [Kubernetes mapping docs]({{< ref "/guides/operations/kubernetes/overview#resource-mapping" >}}) to learn more.
    {{< /alert >}}
     
 ## Step 4: Run your application
@@ -204,7 +204,7 @@ In addition to containers, you can add dependencies like Redis caches, Dapr Stat
    {{% rad file="snippets/2-app-mongo.bicep" embed=true marker="//MONGO" %}}
 
    {{< alert title="💡 Radius Recipes" color="info" >}}
-   When you added a Mongo database to your application you didn't need to specify _how or where_ to run the underlying infrastructure. The Radius Environment and its Recipes take care of that for you. Just like how the Radius Environment bound your container to a Kubernetes cluster, it also deploys and binds your Mongo database to underlying infrastructure using [Recipes]({{< ref "/guides/recipes/overview" >}}).
+   Note that when you added the Mongo database to your application you didn't need to specify _how or where_ to run the underlying infrastructure. The Radius Environment and its Recipes take care of that for you. Just like how the Radius Environment bound your container to a Kubernetes cluster, it also deploys and binds your Mongo database to underlying infrastructure using [Recipes]({{< ref "/guides/recipes/overview" >}}).
    {{< /alert >}}
 
 1. To learn about the underlying Recipe that will deploy and manage the Mongo infrastructure run [`rad recipe show`]({{< ref rad_recipe_show >}}):
@@ -227,12 +227,12 @@ In addition to containers, you can add dependencies like Redis caches, Dapr Stat
 
    If you want to learn more about the Recipe template it's in the [Recipes repo](https://github.com/radius-project/recipes/blob/main/local-dev/mongodatabases.bicep).
 
-1. Add a connection from your container to the Mongo database to tell Radius that your container needs to communicate with the Mongo database:
+1. Add a connection from your container to the Mongo database, which indicates to Radius that your container needs to communicate with the Mongo database:
 
    {{% rad file="snippets/2-app-mongo.bicep" embed=true marker="//CONTAINER" markdownConfig="{hl_lines=[\"16-20\"]}" %}}
 
    {{< alert title="💡 Radius Connections" color="info" >}}
-   Radius Connections are more than just bookkeeping. They are used to automatically configure access and connection information for your containers. Learn more in the [containers documentation]({{< ref "/guides/author-apps/containers/overview" >}}).
+   Radius Connections are more than just bookkeeping. They are used to automatically configure access for your containers. Learn more in the [containers documentation]({{< ref "/guides/author-apps/containers/overview" >}}).
    {{< /alert >}}
 
 1. Re-run your app with [`rad run`]({{< ref rad_run >}}) to deploy the Mongo database and container and start the port-forward and log stream:
@@ -270,7 +270,7 @@ In addition to containers, you can add dependencies like Redis caches, Dapr Stat
     rad app connections
     ```
     
-    You should see the container you just deployed, along with the underlying Kubernetes resources that were created to run it:
+    You should see the container and Mongo database you just deployed, along with the underlying Kubernetes resources that were created to run them:
     
     ```
     Displaying application: myapp
