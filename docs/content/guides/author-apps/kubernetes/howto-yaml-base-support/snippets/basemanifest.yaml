@@ -30,17 +30,6 @@ spec:
           - name: secret-vol
             readOnly: true
             mountPath: /etc/secret-vol
-          env:
-          - name: TEST_SECRET_KEY
-            valueFrom:
-              secretKeyRef:
-                name: my-microservice-secret1
-                key: secret1
-          - name: TEST_CONFIGMAP_KEY
-            valueFrom:
-              configMapKeyRef:
-                name: my-microservice-config
-                key: TEST_CONFIGMAP
 ---
 apiVersion: v1
 kind: Service
