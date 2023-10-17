@@ -80,7 +80,6 @@ PowerShell for Cloud Shell is currently not supported.
 {{% /codetab %}}
 
 {{% codetab %}}
-
 Visit [Radius GitHub releases](https://github.com/radius-project/radius/releases) to select and download a specific version of the rad CLI.
 
 {{% /codetab %}}
