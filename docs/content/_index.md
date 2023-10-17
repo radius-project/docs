@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Radius Cloud-Native Application Platform"
+title: "Radius Documentation"
 linkTitle: "Home"
 description: "Radius enables developers and the platform engineers that support them to build cloud-native applications"
 weight: 1
