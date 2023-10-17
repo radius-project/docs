@@ -42,7 +42,6 @@ resource container 'Applications.Core/containers@2023-10-01-preview' = {
 }
 //CONTAINER
 
-//MANUAL
 resource redis 'apps/Deployment@v1' = {
   metadata: {
     name: 'redis-${uniqueString(application)}'
@@ -111,6 +110,7 @@ resource svc 'core/Service@v1' = {
   }
 }
 
+//MANUAL
 resource portableRedis 'Applications.Datastores/redisCaches@2023-10-01-preview' = {
   name: 'redisCache'
   properties: {
@@ -125,7 +125,7 @@ resource portableRedis 'Applications.Datastores/redisCaches@2023-10-01-preview' 
     }
     ]
     username: 'myusername'
-    host: '${svc.metadata.name}.${svc.metadata.namespace}.svc.cluster.local'
+    host: `mycache.contoso.com`
     port: svc.ports[0].port
   }
 }

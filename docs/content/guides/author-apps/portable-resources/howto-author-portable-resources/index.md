@@ -25,6 +25,8 @@ Create a Bicep file `app.bicep`, add a container resource that will be leveraged
 
 ## Step 2: Define your portable resource
 
+Portable resources provide **abstraction** and **portability** to Radius Applications. Radius currently offers a manual declaration of resources or allows a user to leverage Recipes.
+
 {{< tabs Recipe Manual >}}
 
 {{% codetab %}}
@@ -45,7 +47,9 @@ Find the schema needed for the supported Radius resource by visiting the [Radius
 
 ## Step 3: Accessing your portable resource
 
-Users can leverage their portable resources and establish connections to their container resources by adding accessing properties:
+Resources all have different schemas with differing requirements when it comes to defining properties or relations between other resources. When it comes to `connections` users can check out the c[container resource schema page]({{< ref "container-schema" >}}) for additional information.
+
+Define a connection between your container and the Redis Cache in order to track the dependency and set environment variables.
 
 {{< rad file="snippets/app-redis-manual.bicep" embed=true marker="//CONTAINER" markdownConfig="{linenos=table,hl_lines=[\"19-22\"]}">}}
 
