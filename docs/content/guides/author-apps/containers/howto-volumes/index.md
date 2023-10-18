@@ -15,8 +15,9 @@ This how-to guide will provide an overview of how to:
 
 ## Prerequisites
 
-- [rad CLI]({{< ref getting-started >}})
-- [Radius Environment]({{< ref "/guides/deploy-apps/environments/overview" >}})
+- [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
+- [Radius environment]({{< ref "installation#step-3-initialize-radius" >}})
 
 ## Step 1: Define an app and a container
 
@@ -24,7 +25,7 @@ Begin by creating a file named `app.bicep` with a Radius Application and [contai
 
 {{< rad file="snippets/1-app.bicep" embed=true >}}
 
-The `quickstarts/volumes` container will display the status and contents of the `/tmpdir` directory within the container.
+The `samples/volumes` container will display the status and contents of the `/tmpdir` directory within the container.
 
 ## Step 2: Deploy the app and container
 
@@ -38,7 +39,7 @@ The `quickstarts/volumes` container will display the status and contents of the 
    ```bash
    rad resource expose containers mycontainer -a myapp --port 5000
    ```
-1. You should see a message warning that the directory `/tmpdir` does not exist:
+1. Visit [localhost:5000](http://localhost:5000) in your browser. You should see a message warning that the directory `/tmpdir` does not exist:
 
    <img src="screenshot-error.jpg" width=500px alt="Screeshot of container showing that the tmp directory does not exist">
 

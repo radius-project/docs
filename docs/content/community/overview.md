@@ -39,10 +39,11 @@ To present a specific topic on the next Radius community call start by filling o
 | Thursday July 13th 9:00am Pacific Time (PST) | v0.22 release | - | [Stream](https://microsoft.sharepoint.com/:v:/r/teams/radius/Shared%20Documents/General/Community%20Calls/2023-07-13%20Project%20Radius%20Community%20Call.mp4?csf=1&web=1&e=v30w8D) |
 | Thursday Aug 8th 9:00am Pacific Time (PST) | v0.23 release | - | [Stream](https://microsoft.sharepoint.com/:v:/r/teams/radius/Shared%20Documents/General/Community%20Calls/2023-08-08%20Project%20Radius%20Community%20Call.mp4?csf=1&web=1&e=6Lew1D&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19) |
 | Thursday Aug 31st 9:00am Pacific Time (PST) | v0.24 release | - | [Stream](https://microsoft.sharepoint.com/:v:/r/teams/radius/Shared%20Documents/General/Community%20Calls/2023-08-31%20Radius%20Community%20Call.mp4?csf=1&web=1&e=YBjiMv&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19) |
+| Tuesday, Oct 2nd 9:00am Pacific Time (PST) | v0.25 release | - | [Stream](https://microsoft.sharepoint.com/:v:/r/teams/radius/Shared%20Documents/General/Community%20Calls/2023-10-03%20Radius%20Community%20Call.mp4?csf=1&web=1&e=9iXqbg)
 
 ## GitHub Issues & repositories
 
-If you would like to file Issues, access the source code, or use Codespaces please visit the [Radius GitHub repo] (https://github.com/radius-project).
+If you would like to file Issues, access the source code, or use Codespaces please visit the [Radius GitHub repo](https://github.com/radius-project).
 
 ## How can I get involved?
 

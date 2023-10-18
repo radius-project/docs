@@ -44,8 +44,8 @@ pushd $REPOSITORY
 
 git checkout -B "${CHANNEL_VERSION}"
 
-# In docs/config.toml, change baseURL to https://docs.radapp.dev/ instead of https://edge.docs.radapp.dev/
-awk '{gsub(/baseURL = \"https:\/\/edge\.docs\.radapp.dev\/\"/,"baseURL = \"https:\/\/docs.radapp.dev\/\""); print}' docs/config.toml > docs/config.toml.tmp
+# In docs/config.toml, change baseURL to https://docs.radapp.io/ instead of https://edge.docs.radapp.io/
+awk '{gsub(/baseURL = \"https:\/\/edge\.docs\.radapp.io\/\"/,"baseURL = \"https:\/\/docs.radapp.io\/\""); print}' docs/config.toml > docs/config.toml.tmp
 mv docs/config.toml.tmp docs/config.toml
 
 # In docs/config.toml, change version to VERSION instead of edge

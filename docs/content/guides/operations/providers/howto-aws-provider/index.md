@@ -14,9 +14,8 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
 
 ## Prerequisites
 
-- [EKS cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
 - [AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account) and an [IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html)
-- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+- [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 
 ## Interactive configuration
 
@@ -26,9 +25,9 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
    ```
 
 1. Follow the prompts, specifying:
-   - **Namespace** - The Kubernetes namespace where your application containers and networking resources will be deployed (different than the Radius control-plane namespace, `radius-system`)
-   - **Add an AWS provider** - Enter your IAM credentials and pick a region to deploy your AWS resources to
-   - **Environment name** - The name of the environment to create
+   - **Namespace** - The Kubernetes namespace where your application containers and networking resources will be deployed (different than the Radius control-plane namespace, `radius-system`).
+   - **Add an AWS provider** - Enter your IAM access key and secret key and pick a region to deploy your AWS resources to.
+   - **Environment name** - The name of the environment to create.
 
    You should see the following output:
 

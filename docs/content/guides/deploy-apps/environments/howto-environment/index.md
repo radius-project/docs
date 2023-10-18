@@ -14,8 +14,9 @@ Radius Environments can be setup with the rad CLI via two paths: interactive or 
 
 ## Pre-requisites
 
-- Install the [rad CLI]({{< ref getting-started >}})
-- Setup a supported [Kubernetes cluster]({{< ref "guides/operations/kubernetes" >}})
+- [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
+- [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 
 ## Create a development environment
 

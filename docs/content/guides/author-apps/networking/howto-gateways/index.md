@@ -12,8 +12,9 @@ This guide will walk you through how to setup a gateway for routing internet tra
 
 ## Prerequisites
 
-- [rad CLI]({{< ref "/guides/tooling/rad-cli/overview" >}})
-- [Radius environment]({{< ref "getting-started" >}})
+- [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
+- [Radius environment]({{< ref "installation#step-3-initialize-radius" >}})
 
 ## Step 1: Define a container
 
