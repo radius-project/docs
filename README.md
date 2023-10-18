@@ -1,6 +1,6 @@
 # 📕 Radius documentation
 
-This repo contains the documentation source for https://radapp.dev
+This repo contains the documentation source for https://radapp.io
 
 ## 📦 Framework
 
@@ -16,7 +16,7 @@ The [rad CLI](https://github.com/radius-project/radius/tree/main/cmd/rad) refere
 
 ## 👨‍💻 Contributing
 
-Visit the [docs contribution guide](https://radapp.dev/contributing/contributing-docs/) to learn how to contribute to the docs.
+Visit the [docs contribution guide](https://radapp.io/contributing/contributing-docs/) to learn how to contribute to the docs.
 
 ### Local server
 
@@ -28,11 +28,11 @@ The Radius docs are hosted on Azure App Service.
 
 ### Latest docs
 
-The latest release docs are available at https://radapp.dev
+The latest release docs are available at https://radapp.io
 
 ### Edge docs
 
-Edge docs are available at https://edge.radapp.dev
+Edge docs are available at https://edge.radapp.io
 
 ### Staging docs
 

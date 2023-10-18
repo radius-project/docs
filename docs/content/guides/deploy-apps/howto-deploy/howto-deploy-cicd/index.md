@@ -97,7 +97,7 @@ Next, download the latest `rad` CLI release and setup your workspace:
 ```yml
     - name: Download rad CLI and rad-bicep
       run: |
-        wget -q "https://get.radapp.dev/tools/rad/install.sh" -O - | /bin/bash
+        wget -q "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh" -O - | /bin/bash
         ./rad bicep download
         ./rad --version
     - name: Initialize Radius Environment
