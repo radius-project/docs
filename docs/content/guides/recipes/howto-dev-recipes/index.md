@@ -13,7 +13,7 @@ Local development environments created by the rad init command include a set of 
 ## Prerequisites
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-radius-bicep-vs-code-extension" >}})
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 - [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
 
 ## Step 1: Initialize a Radius environment
@@ -100,7 +100,7 @@ Note that no Recipe name is specified within 'db', so it will be using the defau
 1. List your Kubernetes Pods to see the infrastructure containers deployed by the Recipe:
 
    ```bash
-   kubectl get pods -n default-recipes
+   kubectl get pods -n default-local-dev-app
    ```
 
    You will see your 'frontend' container, along with the Redis cache that was automatically created by the default local-dev Recipe:

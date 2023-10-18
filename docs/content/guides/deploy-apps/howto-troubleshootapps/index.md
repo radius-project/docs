@@ -26,7 +26,7 @@ Refer to [`rad resource expose`]({{< ref rad_resource_expose >}}) for more detai
 If your Radius Application is unresponsive or does not connect to its dependencies, Use the below command to inspect logs from container:
 
 ```bash
-rad resource logs containers frontend -a <app_name>
+rad resource logs containers <container_name> -a <app_name>
 ```
 
 > Also refer to the [connections section]({{< ref "guides/author-apps/containers/overview#connections" >}}) to know about the naming convention of the environment variables and inspect if your application uses the right variables. 

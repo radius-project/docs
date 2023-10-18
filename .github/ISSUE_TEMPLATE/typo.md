@@ -7,7 +7,7 @@ assignees: ''
 ---
 
 **URL of the docs page**
-<!--The URL(s) on docs.radapp.dev where the typo occurs-->
+<!--The URL(s) on docs.radapp.io where the typo occurs-->
 
 **How is it currently worded?**
 <!--Please copy and paste the sentence where the typo occurs-->

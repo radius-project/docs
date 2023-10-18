@@ -1,6 +1,6 @@
 # Radius documentation
 
-This directory contains the files to generate the https://docs.radapp.dev site. Please go there to consume Radius docs. This document will describe how to build Radius docs locally.
+This directory contains the files to generate the https://docs.radapp.io site. Please go there to consume Radius docs. This document will describe how to build Radius docs locally.
 
 ## Codespace
 
