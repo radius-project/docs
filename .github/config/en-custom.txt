@@ -974,3 +974,4 @@ OSS
 SRE
 SREs
 OSI
+ghcr
