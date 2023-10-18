@@ -20,7 +20,7 @@ resource gateway 'Applications.Core/gateways@2023-10-01-preview' = {
       // Results in prefix.appname.PUBLIC_HOSTNAME_OR_IP.nip.io
       prefix: 'prefix'
       // Alternately you can specify your own hostname that you've configured externally
-      fullyQualifiedHostname: 'hostname.radapp.dev'
+      fullyQualifiedHostname: 'hostname.radapp.io'
     }
     routes: [
       {

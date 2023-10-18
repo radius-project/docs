@@ -13,8 +13,8 @@ This how-to guide will teach how to connect to your dependencies via [connection
 ## Prerequisites
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-radius-bicep-vs-code-extension" >}})
-- [Radius environment]({{< ref "installation#step-3-initialize-the-radius-control-plane-and-the-radius-environment" >}})
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
+- [Radius environment]({{< ref "installation#step-3-initialize-radius" >}})
 
 ## Step 1: View the container definition
 
@@ -50,7 +50,7 @@ Connections from a container to a resource result in environment variables for c
 Radius Connections are more than just environment variables and configuration. You can also access the "application graph" and understand the connections within your application with the following command:
 
 ```bash
-rad app connections
+rad app connections -a demo
 ```
 
 You should see the following output, detailing the connections between the `demo` container and the `db` Redis cache, along with information about the underlying Kubernetes resources running the app:

@@ -16,7 +16,7 @@ Before you get started, you'll need to make sure you have the following tools an
 
 - [Postman](https://www.postman.com/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-- [Radius environment]({{< ref "installation#step-3-initialize-the-radius-control-plane-and-the-radius-environment" >}})
+- [Radius environment]({{< ref "installation#step-3-initialize-radius" >}})
 
 ### Step 1: Create Kubernetes objects
 
@@ -100,7 +100,7 @@ Next, you'll need to get the control plane API endpoint and use Postman to inter
 1. Set the URL to the following, which will [retrieve all your resource groups]({{< ref api-ucp >}}):
     
     ```
-    <your-cluster-control-plane>/apis/api.ucp.dev/v1alpha3/planes/radius/local/resourcegroups?api-version=2022-09-01-privatepreview
+    <your-cluster-control-plane>/apis/api.ucp.dev/v1alpha3/planes/radius/local/resourcegroups?api-version=2023-10-01-preview
     ```
 
     <img src="postman-url.png" width=900px alt="Screenshot of Postman with filled out URL" >
