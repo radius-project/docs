@@ -5,30 +5,32 @@ The `rad` CLI manages your applications, resources, and environments. You can in
 {{% codetab %}}
 {{< latest >}}
 ```bash
-wget -q "https://get.radapp.dev/tools/rad/install.sh" -O - | /bin/bash
+wget -q "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh" -O - | /bin/bash
 ```
 {{< /latest >}}
 {{< edge >}}
-To install the latest edge version:
 
-```bash
-wget -q "https://radiuspublic.blob.core.windows.net/tools/rad/install.sh" -O - | /bin/bash -s edge
-```
+1. Visit the [GitHub Actions runs](https://github.com/radius-project/radius/actions/workflows/build.yaml?query=branch%3Amain+event%3Apush)
+1. Click on the latest successful run
+1. Scroll down to Artifacts and download `rad_cli_release`
+1. Extract the archive and run the rad binary applicable for your machine
+
 {{< /edge >}}
 {{% /codetab %}}
 
 {{% codetab %}}
 {{< latest >}}
 ```bash
-curl -fsSL "https://get.radapp.dev/tools/rad/install.sh" | /bin/bash
+curl -fsSL "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh" | /bin/bash
 ```
 {{< /latest >}}
 {{< edge >}}
-To install the latest edge version:
 
-```bash
-curl -fsSL "https://radiuspublic.blob.core.windows.net/tools/rad/install.sh" | /bin/bash -s edge
-```
+1. Visit the [GitHub Actions runs](https://github.com/radius-project/radius/actions/workflows/build.yaml?query=branch%3Amain+event%3Apush)
+1. Click on the latest successful run
+1. Scroll down to Artifacts and download `rad_cli_release`
+1. Extract the archive and run the rad binary applicable for your machine
+
 {{< /edge >}}
 {{% /codetab %}}
 
@@ -37,7 +39,7 @@ curl -fsSL "https://radiuspublic.blob.core.windows.net/tools/rad/install.sh" | /
 Run the following in a PowerShell window:
 
 ```powershell
-iwr -useb "https://get.radapp.dev/tools/rad/install.ps1" | iex
+iwr -useb "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.ps1" | iex
 ```
 
 You may need to refresh your $PATH environment variable to access `rad`:
@@ -46,11 +48,12 @@ $Env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")
 ```
 {{< /latest >}}
 {{< edge >}}
-To install the latest edge version:
 
-```powershell
-$script=iwr -useb  https://radiuspublic.blob.core.windows.net/tools/rad/install.ps1; $block=[ScriptBlock]::Create($script); invoke-command -ScriptBlock $block -ArgumentList edge
-```
+1. Visit the [GitHub Actions runs](https://github.com/radius-project/radius/actions/workflows/build.yaml?query=branch%3Amain+event%3Apush)
+1. Click on the latest successful run
+1. Scroll down to Artifacts and download `rad_cli_release`
+1. Extract the archive and run the rad binary applicable for your machine
+
 {{< /edge >}}
 {{% /codetab %}}
 
@@ -68,7 +71,7 @@ Azure Cloud Shell for bash doesn't have a sudo command, so users are unable to i
 
 ```bash
 export RADIUS_INSTALL_DIR=./
-wget -q "https://get.radapp.dev/tools/rad/install.sh" -O - | /bin/bash
+wget -q "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh" -O - | /bin/bash
 ```
 
 You can now run the rad CLI with `./rad`.
@@ -77,12 +80,8 @@ PowerShell for Cloud Shell is currently not supported.
 {{% /codetab %}}
 
 {{% codetab %}}
-1. Download the `rad` CLI from one of these URLs:
-   - MacOS x64: https://get.radapp.dev/tools/rad/{{< param version >}}/macos-x64/rad
-   - MacOS arm64: https://get.radapp.dev/tools/rad/{{< param version >}}/macos-arm64/rad
-   - Linux x64: https://get.radapp.dev/tools/rad/{{< param version >}}/linux-x64/rad
-   - Windows x64: https://get.radapp.dev/tools/rad/{{< param version >}}/windows-x64/rad.exe
-1. Ensure the user has permission to execute the binary and place it somewhere on your PATH so it can be invoked easily.
+Visit [Radius GitHub releases](https://github.com/radius-project/radius/releases) to select and download a specific version of the rad CLI.
+
 {{% /codetab %}}
 
 {{< /tabs >}}

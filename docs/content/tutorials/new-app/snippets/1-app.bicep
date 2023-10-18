@@ -1,6 +1,7 @@
-import radius as rad
+// Import the set of Radius resources (Applications.*) into Bicep
+import radius as radius
 
-@description('The app ID of your Radius application. Set automatically by the rad CLI.')
+@description('The ID of your Radius Application. Set automatically by the rad CLI.')
 param application string
 
 resource demo 'Applications.Core/containers@2023-10-01-preview' = {
@@ -8,7 +9,7 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
   properties: {
     application: application
     container: {
-      image: 'radius.azurecr.io/samples/demo:latest'
+      image: 'radius.azurecr.io/tutorial/webapp:edge'
       ports: {
         web: {
           containerPort: 3000

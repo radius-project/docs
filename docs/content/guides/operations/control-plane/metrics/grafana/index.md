@@ -16,7 +16,7 @@ There are two example dashboards that you can import into Grafana to quickly get
 
 ### Control plane overview
 
-The [radius-overview-dashboard.json](https://get.radapp.dev/tools/grafana/radius-overview-dashboard.json) template shows Radius and Deployment Engine statuses, including runtime, and server-side health:
+The [radius-overview-dashboard.json](https://raw.githubusercontent.com/radius-project/radius/main/grafana/radius-overview-dashboard.json) template shows Radius and Deployment Engine statuses, including runtime, and server-side health:
 
 <img src="radius-overview-1.png" alt="1st screenshot of the Radius Overview Dashboard" width=1200><br/>
 
@@ -24,7 +24,7 @@ The [radius-overview-dashboard.json](https://get.radapp.dev/tools/grafana/radius
 
 ### Resource provider overview
 
-The [radius-resource-provider-dashboard.json](https://get.radapp.dev/tools/grafana/radius-resource-provider-dashboard.json) template shows Radius Resource Provider status, including runtime, server-side, and operations health:
+The [radius-resource-provider-dashboard.json](https://raw.githubusercontent.com/radius-project/radius/main/grafana/radius-resource-provider-dashboard.json) template shows Radius Resource Provider status, including runtime, server-side, and operations health:
 
 <img src="radius-resource-provider-1.png" alt="1st screenshot of the Radius Resource Provider Dashboard" width=1200><br/>
 
@@ -35,6 +35,8 @@ The [radius-resource-provider-dashboard.json](https://get.radapp.dev/tools/grafa
 ### Pre-requisites
 
 - [Setup Prometheus]({{<ref prometheus.md>}}) on your Kubernetes cluster
+- [Helm 3](https://helm.sh/)
+
 
 ### Install Grafana
 
@@ -133,8 +135,8 @@ Now that Grafana is installed, you need to configure it to use Prometheus as a d
 ### Import dashboards in Grafana
 
 1. Download the Grafana dashboard templates:
-   - [radius-overview-dashboard.json](https://get.radapp.dev/tools/grafana/radius-overview-dashboard.json) 
-   - [radius-resource-provider-dashboard.json](https://get.radapp.dev/tools/grafana/radius-resource-provider-dashboard.json)
+   - [radius-overview-dashboard.json](https://raw.githubusercontent.com/radius-project/radius/main/grafana/radius-overview-dashboard.json) 
+   - [radius-resource-provider-dashboard.json](https://raw.githubusercontent.com/radius-project/radius/main/grafana/radius-resource-provider-dashboard.json)
 1. In the upper left corner of the Grafana home screen, click the "+" option, then "Import", and select your templates.
 1. Select the dashboard that you imported and enjoy!
 
