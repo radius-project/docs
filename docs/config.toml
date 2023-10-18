@@ -1,4 +1,4 @@
-baseURL = "https://docs.radapp.dev/"
+baseURL = "https://docs.radapp.io/"
 languageCode = "en-us"
 title = "Radius Docs"
 theme =  "docsy"
@@ -47,8 +47,13 @@ tag = "tags"
 [[menu.main]]
     name = "Home"
     weight = 10
-    url = "https://radapp.dev"
+    url = "https://radapp.io"
     pre = "<i class='fas fa-home'></i>"
+[[menu.main]]
+    name = "Blog"
+    weight = 20
+    url = "https://blog.radapp.io"
+    pre = "<i class='fas fa-blog'></i>"
 [[menu.main]]
     name = "GitHub"
     weight = 40
@@ -57,7 +62,7 @@ tag = "tags"
 [[menu.main]]
     name = "Discord"
     weight = 90
-    url = "https://discord.gg/SRG3ePMKNy"
+    url = "https://aka.ms/Radius/Discord"
     pre = "<i class='fab fa-discord'></i>"
 
 [params]
@@ -80,11 +85,11 @@ github_project_repo = "https://github.com/radius-project/radius"
 version_menu = "Releases"
 [[params.versions]]
   version = "edge (preview)"
-  url = "https://edge.docs.radapp.dev"
+  url = "https://edge.docs.radapp.io"
 
 [[params.versions]]
   version = "latest"
-  url = "https://docs.radapp.dev"
+  url = "https://docs.radapp.io"
 
 # Markdown Engine - Allow inline html
 [markup]
