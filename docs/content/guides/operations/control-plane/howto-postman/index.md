@@ -1,8 +1,8 @@
 ---
 type: docs
 title: "How-To: Interact with the Radius API in Postman"
-linkTitle: "How-To: Postman"
-weight: 400
+linkTitle: "How-To: Interact with Radius API"
+weight: 500
 description: "How-To: Interact directly with the Radius API using Postman"
 categories: ["How-To"]
 tags: ["Radius API"]
@@ -16,7 +16,7 @@ Before you get started, you'll need to make sure you have the following tools an
 
 - [Postman](https://www.postman.com/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-- [Radius initialized with `rad init`](https://docs.radapp.dev/getting-started/)
+- [Radius environment]({{< ref "installation#step-3-initialize-radius" >}})
 
 ### Step 1: Create Kubernetes objects
 
@@ -100,7 +100,7 @@ Next, you'll need to get the control plane API endpoint and use Postman to inter
 1. Set the URL to the following, which will [retrieve all your resource groups]({{< ref api-ucp >}}):
     
     ```
-    <your-cluster-control-plane>/apis/api.ucp.dev/v1alpha3/planes/radius/local/resourcegroups?api-version=2022-09-01-privatepreview
+    <your-cluster-control-plane>/apis/api.ucp.dev/v1alpha3/planes/radius/local/resourcegroups?api-version=2023-10-01-preview
     ```
 
     <img src="postman-url.png" width=900px alt="Screenshot of Postman with filled out URL" >
@@ -124,13 +124,13 @@ Next, you'll need to get the control plane API endpoint and use Postman to inter
        ]
    }
    ```
-1. Update your request URL to [list all the Radius environments]({{< ref api-environments >}}) in your resource group (_make sure to update the name of your resource group in the URL. In this example the resource group name is default_):
+1. Update your request URL to [list all the Radius Environments]({{< ref api-environments >}}) in your resource group (_make sure to update the name of your resource group in the URL. In this example the resource group name is default_):
 
    ```
-   <your-cluster-control-plane>/apis/api.ucp.dev/v1alpha3/planes/radius/local/resourcegroups/default/providers/Applications.Core/environments?api-version=2022-03-15-privatepreview
+   <your-cluster-control-plane>/apis/api.ucp.dev/v1alpha3/planes/radius/local/resourcegroups/default/providers/Applications.Core/environments?api-version=2023-10-01-preview
    ```
 
-    You should now see your Radius environment(s):
+    You should now see your Radius Environment(s):
 
     ```
     {

@@ -4,6 +4,7 @@ title: Radius API
 linkTitle: API
 description: Learn about the Radius API
 weight: 500
+categories: "Concept"
 ---
 
 ## Overview
@@ -83,7 +84,7 @@ The following tables shows some examples of resource ids from different resource
 
 #### Resource manager: Radius
 
-This example shows a Radius application named `my-app` in the `my-group` resource group, running on the local cluster:
+This example shows a Radius Application named `my-app` in the `my-group` resource group, running on the local cluster:
 
 | Key                | Example                                                                              |
 | ------------------ | ------------------------------------------------------------------------------------ |

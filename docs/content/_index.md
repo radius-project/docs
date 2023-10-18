@@ -1,57 +1,36 @@
 ---
 type: docs
-title: "Radius"
+title: "Radius Documentation"
 linkTitle: "Home"
-description: "Model, deploy, and manage applications across cloud and edge"
+description: "Radius enables developers and the platform engineers that support them to build cloud-native applications"
 weight: 1
+no_list: true
 ---
 
-<div style="max-width: 750px"><div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;"><iframe width=750 height=360 src="https://microsoft.sharepoint.com/teams/radius/_layouts/15/embed.aspx?uniqueID=13a468f0-85a9-44a6-8113-17e4bae571b5" allowfullscreen style="border:none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; height: 100%; max-width: 100%;"></iframe></div></div>
+Welcome to the Radius documentation! Here you'll find everything you need to know about Radius, from getting started to advanced topics.
 
-{{< cardpane >}}
-{{< card header="**App-centric**" >}}
-Teams [describe their application]({{< ref application-graph>}}) services and relationships, rather than just a list of infrastructure.
+{{% alert color="primary" %}}
+<img src="radius-logo.svg" alt="Radius logo" width="400px" /> <br /><br />
+Radius is a cloud native application platform.  It enables developers and IT operators to collaborate on delivering and managing cloud-native applications. With Radius, teams can easily understand their applications and how applications are running environments including dev, cloud, edge, and on-prem. Plus, teams can ensure their application infrastructure meets cost, operations, and security requirements. Open-source and multi-cloud, Radius is the cloud-native application platform for delivering and managing applications anywhere.
 
-<img src="app-diagram.png" alt="Screenshot of a Radius applications diagram" style="width:100%" >
-{{< /card >}}
-{{< card header="**Portable**" >}}
-Radius applications and tooling are agnostic of platform, services, and infrastructure. 
-<table style="max-width:600px;margin-top:10%">
-  <tr>
-  </tr>
-</table>
-{{< /card >}}
-{{< /cardpane >}}
-{{< cardpane >}}
-{{< card header="**Productive**" >}}
-Radius extends strong existing tools to further streamline the app developer experience. 
-<table style="max-width:600px">
-  <tr>
-    <td style="width:50%;text-align:center">
-      <a href="{{< ref getting-started >}}"><img src="vscode-logo.png" alt="Visual Studio Code logo" style="width:80%"></a>
-    </td>
-    <td style="width:50%;text-align:center">
-      <a href="{{< ref bicep >}}" target="_blank"><img src="bicep-logo.png" alt="Bicep logo" style="width:70%"></a>
-    </td>
-  </tr>
-</table>
-{{< /card >}}
-{{< card header="**Intelligent**" >}}
-Teams can offload the complexity of wiring-up applications and let Radius employ best-practices.
-<table style="max-width:600px;margin-top:5%">
-  <tr>
-    <td style="width:25%;text-align:center">
-      <a href="{{< ref application-graph>}}"><img src="connect-logo.svg" alt="Connections logo" style="width:40%"></a>
-    </td>
-    <td style="width:25%;text-align:center">
-      <a href="{{< ref networking >}}"><img src="network-logo.svg" alt="Networking logo" style="width:40%"></a>
-    </td>
-    <td style="width:25%;text-align:center">
-      <a href="{{< ref "guides/author-apps/dapr" >}}"><img src="dapr-logo.svg" alt="Dapr logo" style="width:40%"></a>
-    </td>
-  </tr>
-  </table>
-{{< /card >}}
-{{< /cardpane >}}
+[**Learn more**](https://radapp.io/)
+{{% /alert %}}
 
 {{< button text="Get started with Radius 🚀" page="getting-started" color="success" size="btn-lg" >}}
+
+{{< cardpane >}}
+  {{< card header="**🎓 Tutorials**" footer="[**View available tutorials →**]({{< ref tutorials >}})" >}}
+  Visit the tutorials for guided learning paths to try out Radius and pick up the main concepts. We'll walk you through the steps to get started with Radius and run your first set of apps.
+  {{< /card >}}
+  {{< card header="**📘 How-to guides**" footer="[**Visit how-to guides →**]({{< ref guides >}})" >}}
+  Check out the how-to guides for step-by-step instructions on how to use Radius and its features. We'll walk you through how to accomplish specific tasks when using Radius.
+  {{< /card >}}
+{{< /cardpane >}}
+{{< cardpane >}}
+  {{< card header="**💭 Concepts**" footer="[**Learn the concepts →**]({{< ref tutorials >}})" >}}
+  Learn about the background and concepts behind Radius with in-depth explanations. We'll cover the main concepts and how Radius works, so you have the broader context to deeply understand Radius and use it most effectively.
+  {{< /card >}}
+  {{< card header="**🧾 Reference**" footer="[**Visit reference material →**]({{< ref guides >}})" >}}
+  Refer to detailed information on Radius resources, APIs, FAQs, and more. Reference material is useful for looking up specific information about Radius when you need it.
+  {{< /card >}}
+{{< /cardpane >}}

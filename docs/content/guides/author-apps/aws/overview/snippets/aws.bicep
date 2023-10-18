@@ -23,14 +23,14 @@ resource s3 'AWS.S3/Bucket@default' = {
 }
 
 // get a radius container which uses the s3 bucket
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: 's3app'
   properties: {
     environment: environment
   }
 }
 
-resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
   name: 's3container'
   properties: {
     application: app.id
@@ -41,7 +41,7 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
         AWS_SECRET_ACCESS_KEY: aws_secret_access_key
         AWS_DEFAULT_REGION: aws_region
       }
-      image: 'radius.azurecr.io/reference-apps/aws:edge'
+      image: 'radius.azurecr.io/samples/aws:latest'
     }
   }
 }

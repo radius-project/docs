@@ -3,7 +3,7 @@ type: docs
 title: "How-To: Deploy an application with Github Actions"
 linkTitle: "Deploy via GitHub Actions"
 description: "Learn about adding your Radius apps to your deployment pipelines with GitHub Actions" 
-weight: 200
+weight: 300
 categories: "How-To"
 tags: ["CI/CD"]
 ---
@@ -12,7 +12,7 @@ It's easy to get Radius added to your GitHub Actions deployment pipelines. By le
 
 ## Prerequisites
 
-- Kubernetes cluster (AKS, EKS, GKE, etc.)
+- [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
 - Radius control plane [installed in your cluster]({{< ref kubernetes-install >}})
 - GitHub repo with Actions enabled
 
@@ -97,10 +97,10 @@ Next, download the latest `rad` CLI release and setup your workspace:
 ```yml
     - name: Download rad CLI and rad-bicep
       run: |
-        wget -q "https://get.radapp.dev/tools/rad/install.sh" -O - | /bin/bash
+        wget -q "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh" -O - | /bin/bash
         ./rad bicep download
         ./rad --version
-    - name: Initialize Radius environment
+    - name: Initialize Radius Environment
       run: |
         ./rad group create default
         ./rad workspace create kubernetes default --group default

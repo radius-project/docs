@@ -2,7 +2,7 @@
 type: docs
 title: "Container service"
 linkTitle: "Container"
-description: "Learn how to add a container to your Radius application"
+description: "Learn how to add a container to your Radius Application"
 weight: 300
 ---
 
@@ -28,6 +28,7 @@ weight: 300
 | [container](#container) | y | Container configuration. | [See below](#container)
 | [connections](#connections) | n | List of connections to other resources. | [See below](#connections)
 | [extensions](#extensions) | n | List of extensions on the container. | [See below](#extensions)
+| [runtimes](#runtimes) | n | Runtime specific configurations for the container. | [See below](#runtimes)
 
 ### Container
 
@@ -53,7 +54,6 @@ The ports offered by the container are  defined in the `ports` section.
 | name | y | A name key for the port. | `http`
 | containerPort | y | The port the container exposes. | `80`
 | protocol | n | The protocol the container exposes. Options are 'TCP' and 'UCP'. | `'TCP'`
-| provides | n | The id of the [Route]({{< ref networking >}}) the container provides. | `http.id`
 
 #### Volumes
 
@@ -95,7 +95,7 @@ The ports offered by the container are  defined in the `ports` section.
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | name | y | A name key for the port. | `inventory`
-| source | y | The id of the resource the container is connecting to. | `db.id`
+| source | y | The id of the resource the container is connecting to. For network connections to other services this is in the form `'[scheme]://[serviceName]:[port]'` | `db.id`, `'http://inventory:8080'`
 | [iam](#iam) | n | Identity and access management (IAM) roles to set on the target resource. | [See below](#iam)
 
 #### IAM
@@ -119,7 +119,7 @@ Additional properties are available and required depending on the 'kind' of the 
 
 #### kubernetesMetadata
 
-The [Kubernetes Metadata extension]({{< ref "guides/operations/kubernetes/kubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius application. For examples refer to the extension overview page.
+The [Kubernetes Metadata extension]({{< ref "guides/operations/kubernetes/kubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius Application. For examples refer to the extension overview page.
 
 ##### Properties
 
@@ -165,3 +165,15 @@ The `manualScaling` extension configures the number of replicas of a compute ins
 | kind | y | The kind of extension. | `manualScaling`
 | replicas | Y | The number of replicas to run | `5` |
 
+### Runtimes
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| kubernetes | n | Kubernetes specific configuration for the container. | [See below](#kubernetes)
+
+#### Kubernetes
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| base | n | The base Kubernetes resource manifest on top of which Radius specified properties will be applied. Supported resource types are documented [here]({{<ref "guides/author-apps/containers/overview#base-kubernetes-yaml">}}). | `loadTextContent('manifest/base-container.yaml')`
+| pod | n | The pod specifications to apply to the Kubernetes resource created by Radius. Any field defined on [PodSpec](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#PodSpec) can be set here. | [`topologySpreadConstraints`](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling)

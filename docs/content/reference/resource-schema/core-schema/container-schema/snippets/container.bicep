@@ -4,19 +4,19 @@ param environment string
 
 param azureStorage string
 
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'myapp'
   properties: {
     environment: environment
   }
 }
 
-resource volume 'Applications.Core/volumes@2022-03-15-privatepreview' existing = {
+resource volume 'Applications.Core/volumes@2023-10-01-preview' existing = {
   name: 'myvolume'
 }
 
 //CONTAINER
-resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
+resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'frontend'
   properties: {
     application: app.id
@@ -30,7 +30,6 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
         http: {
           containerPort: 80
           protocol: 'TCP'
-          provides: http.id
         }
       }
       volumes: {
@@ -95,18 +94,25 @@ resource frontend 'Applications.Core/containers@2022-03-15-privatepreview' = {
         }
       }
     ]
+    runtimes: {
+      kubernetes: {
+        base: loadTextContent('base-container.yaml')
+        pod: {
+          containers: [
+            {
+              name: 'log-collector'
+              image: 'radiusdev.azurecr.io/fluent/fluent-bit:2.1.8'
+            }
+          ]
+          hostNetwork: true
+        }
+      }
+    }
   }
 }
 //CONTAINER
 
-resource http 'Applications.Core/httpRoutes@2022-03-15-privatepreview' = {
-  name: 'http'
-  properties: {
-    application: app.id
-  }
-}
-
-resource db 'Applications.Datastores/mongoDatabases@2022-03-15-privatepreview' = {
+resource db 'Applications.Datastores/mongoDatabases@2023-10-01-preview' = {
   name: 'database'
   properties: {
     environment: environment

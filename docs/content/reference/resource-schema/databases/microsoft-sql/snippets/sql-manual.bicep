@@ -1,6 +1,6 @@
 import radius as radius
 
-@description('The ID of your Radius environment. Automatically injected by the rad CLI.')
+@description('The ID of your Radius Environment. Automatically injected by the rad CLI.')
 param environment string
 param username string
 param port int
@@ -8,7 +8,7 @@ param port int
 @secure()
 param password string
 
-resource app 'Applications.Core/applications@2022-03-15-privatepreview' = {
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'cosmos-container'
   properties: {
     environment: environment
@@ -23,7 +23,7 @@ resource sqldb 'Microsoft.Sql/servers@2021-02-01-preview' existing = {
 }
 
 //SQL
-resource db 'Applications.Datastores/sqlDatabases@2022-03-15-privatepreview' = {
+resource db 'Applications.Datastores/sqlDatabases@2023-10-01-preview' = {
   name: 'db'
   properties: {
     environment: environment

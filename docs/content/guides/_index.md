@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Radius user guides"
-linkTitle: "User guides"
-description: "Learn how to use Radius with user guides"
+title: "Radius how-to guides"
+linkTitle: "How-to guides"
+description: "Learn how to use Radius with detailed guides"
 weight: 40
 ---

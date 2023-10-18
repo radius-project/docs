@@ -63,7 +63,7 @@ workspaces:
 | Key | Description | Example |
 |-----|-------------|---------|
 | **context** | The name of the Kubernetes context to use | `DevCluster` |
-| **namespace** | The name of the Kubernetes namespace to use when deploying Radius applications | `default` |
+| **namespace** | The name of the Kubernetes namespace to use when deploying Radius Applications | `default` |
 
 #### providerConfig
 

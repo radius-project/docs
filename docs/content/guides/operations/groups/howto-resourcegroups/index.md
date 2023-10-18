@@ -4,14 +4,15 @@ title: "How-To: Manage resource groups"
 linkTitle: "Manage groups"
 description: "Learn how to manage resource groups in Radius"
 weight: 200
+categories: "How-To"
 ---
 
 This guide will walk you through the process of managing resource groups in Radius. For more information on resource groups, see [Resource groups]({{< ref groups >}}).
 
 ## Pre-requisites
 
-- [Supported Kubernetes cluster]({{< ref supported-clusters >}})
-- [Radius CLI]({{< ref howto-rad-cli >}})
+- [Supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
+- [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 
 ## Step 1: Ensure Radius is installed
 

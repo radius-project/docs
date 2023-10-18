@@ -34,9 +34,9 @@ Create an EKS cluster by using the `eksctl` CLI.
 eksctl create cluster --name <my-cluster> --region=<my-region> 
 ```
 
-## Step 2: Create a Radius environment with the AWS cloud provider
+## Step 2: Create a Radius Environment with the AWS cloud provider
 
-Create a [Radius environment]({{< ref "/guides/deploy-apps/environments/overview" >}}) where you will deploy your application.
+Create a [Radius Environment]({{< ref "/guides/deploy-apps/environments/overview" >}}) where you will deploy your application.
 
 Run [`rad init --full`]({{< ref rad_init >}}) to initialize a new environment into your current kubectl context:
 
@@ -98,7 +98,7 @@ This creates a container that will be deployed to your Kubernetes cluster. This 
 
 1. When you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to delete all Radius resources running on the EKS Cluster.
 
-2. Cleanup AWS Resources - AWS resources are not deleted when deleting a Radius environment, so make sure to delete all resources created in this reference app to prevent additional charges. You can delete these resources in the AWS Console or via the AWS CLI. Instructions to delete an AWS S3 Bucket are available [here](https://docs.aws.amazon.com/AmazonS3/latest/userguide/delete-bucket.html).
+2. Cleanup AWS Resources - AWS resources are not deleted when deleting a Radius Environment, so make sure to delete all resources created in this reference app to prevent additional charges. You can delete these resources in the AWS Console or via the AWS CLI. Instructions to delete an AWS S3 Bucket are available [here](https://docs.aws.amazon.com/AmazonS3/latest/userguide/delete-bucket.html).
 
 ## Troubleshooting
 
@@ -120,7 +120,7 @@ If you have issues with the sample application, where the container doesn't conn
     ```bash
     rad resource logs containers frontend -a s3app
     ```
-Also please make sure to [open an Issue](https://github.com/radius-project/radius/issues/new?assignees=&labels=kind%2Fbug&template=bug.md&title=%3CBUG+TITLE%3E) if you encounter a generic `Internal server error` message or an error message that is not self-serviceable, so we can address the root error not being forwarded to the user.
+Also make sure to [open an Issue](https://github.com/radius-project/radius/issues/new/choose) if you encounter a generic `Internal server error` message or an error message that is not self-serviceable, so we can address the root error not being forwarded to the user.
 
 ## Further Reading
 
