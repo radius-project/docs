@@ -67,7 +67,7 @@ tag = "tags"
 
 [params]
 copyright = "Radius"
-version = "edge"
+version = "v0.26"
 tag_version = "latest"
 chart_version = "0.26.0"
 
