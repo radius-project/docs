@@ -35,7 +35,7 @@ jobs:
         echo "## :x: Spellcheck Failed" >> $GITHUB_STEP_SUMMARY
         echo "There are spelling errors in your PR. Visit [the workflow output](${{ env.ACTION_LINK }}) to see what words are failing." >> $GITHUB_STEP_SUMMARY
         echo "### Adding new words" >> $GITHUB_STEP_SUMMARY
-        echo "If you are adding a new custom word refer to the [docs guide](https://docs.radapp.dev/contributing/docs/#spelling)" >> $GITHUB_STEP_SUMMARY
+        echo "If you are adding a new custom word refer to the [docs guide](https://docs.radapp.io/contributing/docs/#spelling)" >> $GITHUB_STEP_SUMMARY
     - name: Post GitHub workflow output on success
       run: |
         echo "## :white_check_mark: Spellcheck Passed" >> $GITHUB_STEP_SUMMARY
@@ -50,7 +50,7 @@ jobs:
           ## :x: Spellcheck Failed
           There are spelling errors in your PR. Visit [the workflow output](${{ env.ACTION_LINK }}) to see what words are failing.
           ### Adding new words
-          If you are adding a new custom word refer to the [docs guide](https://docs.radapp.dev/contributing/docs/#spelling)
+          If you are adding a new custom word refer to the [docs guide](https://docs.radapp.io/contributing/docs/#spelling)
     - name: Clear GitHub comment on success
       uses: marocchino/sticky-pull-request-comment@v2
       continue-on-error: true
