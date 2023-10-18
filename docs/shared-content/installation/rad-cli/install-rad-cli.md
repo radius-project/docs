@@ -5,7 +5,7 @@ The `rad` CLI manages your applications, resources, and environments. You can in
 {{% codetab %}}
 {{< latest >}}
 ```bash
-wget -q "https://get.radapp.dev/tools/rad/install.sh" -O - | /bin/bash
+wget -q "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh" -O - | /bin/bash
 ```
 {{< /latest >}}
 {{< edge >}}
@@ -21,7 +21,7 @@ wget -q "https://get.radapp.dev/tools/rad/install.sh" -O - | /bin/bash
 {{% codetab %}}
 {{< latest >}}
 ```bash
-curl -fsSL "https://get.radapp.dev/tools/rad/install.sh" | /bin/bash
+curl -fsSL "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh" | /bin/bash
 ```
 {{< /latest >}}
 {{< edge >}}
@@ -39,7 +39,7 @@ curl -fsSL "https://get.radapp.dev/tools/rad/install.sh" | /bin/bash
 Run the following in a PowerShell window:
 
 ```powershell
-iwr -useb "https://get.radapp.dev/tools/rad/install.ps1" | iex
+iwr -useb "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.ps1" | iex
 ```
 
 You may need to refresh your $PATH environment variable to access `rad`:
@@ -71,7 +71,7 @@ Azure Cloud Shell for bash doesn't have a sudo command, so users are unable to i
 
 ```bash
 export RADIUS_INSTALL_DIR=./
-wget -q "https://get.radapp.dev/tools/rad/install.sh" -O - | /bin/bash
+wget -q "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh" -O - | /bin/bash
 ```
 
 You can now run the rad CLI with `./rad`.
