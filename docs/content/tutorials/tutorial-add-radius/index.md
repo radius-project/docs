@@ -236,7 +236,7 @@ You will now add Radius to the Guestbook application's Kubernetes deployment man
 
 ## Step 5: Use Radius to display the state of your application
 
-Now that Radius has been enabled for your application, run this command once again:
+Now that Radius has been enabled for your application, run this command again:
 
 ```bash
 rad app connections -a demo
