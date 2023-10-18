@@ -6,7 +6,7 @@ description: "Learn how to incrementally add Radius to an existing application"
 weight: 600
 slug: "add-radius"
 categories: "Tutorial"
-tags : ["incremental","adoption"]
+tags : ["kubernetes","kubectl"]
 ---
 
 This tutorial will teach you about adding Radius to an existing application using the built-in Kubernetes integration functionality. You will learn how to:
@@ -26,7 +26,7 @@ By the end of this tutorial, you will have deployed an existing Kubernetes appli
 
 ## Overview
 
-As a part of this tutorial you will deploy an existing and containerized Guestbook application originally authored by the Kubernetes community for use in their own tutorials, then add Radius to the deployed application. To incrementally add Radius to an existing application, you will leverage the built-in Kubernetes integration functionality by adding an annotation to the application's Kubernetes deployment manifest. This approach is particularly useful for adding Radius capabilities to applications that are already deployed.
+As a part of this tutorial you will deploy an existing containerized Guestbook application originally authored by the Kubernetes community for use in their own tutorials. You will then add Radius to the deployed application. To incrementally add Radius to an existing application, you will leverage the built-in Kubernetes integration functionality by adding an annotation to the application's Kubernetes deployment manifest. This approach is particularly useful for adding Radius capabilities to applications that are already deployed.
 
 The Guestbook application consists of a web front end along with primary and secondary Redis containers for storage, all deployed with Kubernetes. For more information about the application and access its source code, see the [Kubernetes tutorial](https://kubernetes.io/docs/tutorials/stateless-application/guestbook/) and their [examples repo](https://github.com/kubernetes/examples/tree/master/guestbook).
 
@@ -242,7 +242,7 @@ Now that Radius has been enabled for your application, run this command once aga
 rad app connections -a demo
 ```
 
-You should see now see some output containing information and status of your newly Radified applicaiton, similar to:
+You should see output containing information and status of your newly "radified" application, similar to:
 
 ```
 Displaying application: demo
