@@ -88,7 +88,7 @@ Step 2: Deploy and test the existing Guestbook application using `kubectl`
    kubectl get all -n demo
    ```
 
-   You should see output similar to below, with 5 pods and 3 services succesfully deployed as expected:
+   You should see output similar to below, with 5 pods and 3 services successfully deployed as expected:
 
    ```
    NAME                                 READY   STATUS    RESTARTS   AGE
@@ -273,7 +273,7 @@ This output shows that Radius has detected the three container resources in the 
    kubectl delete -n demo -f ./deploy
    ```
 
-   The ouput should look similar to:
+   The output should look similar to:
 
    ```
    deployment.apps "frontend" deleted
@@ -290,7 +290,7 @@ This output shows that Radius has detected the three container resources in the 
    kubectl delete namespace demo
    ```
 
-   The ouput should look similar to:
+   The output should look similar to:
 
    ```
    namespace "demo" deleted

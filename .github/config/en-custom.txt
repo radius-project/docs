@@ -980,3 +980,7 @@ SRE
 SREs
 OSI
 ghcr
+ClusterIP
+NodePort
+replicaset
+radified
