@@ -15,7 +15,7 @@ resource container 'Applications.Core/containers@2023-10-01-preview' = {
   properties: {
     application: app.id
     container: {
-      image: 'radius.azurecr.io/samples/volumes:latest'
+      image: 'radius.ghcr.io/samples/volumes:latest'
       volumes: {
         tmp: {
           kind: 'ephemeral'

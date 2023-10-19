@@ -217,7 +217,7 @@ In addition to containers, you can add dependencies like Redis caches, Dapr Stat
 
    ```
    NAME      TYPE                                    TEMPLATE KIND  TEMPLATE VERSION  TEMPLATE
-   default   Applications.Datastores/mongoDatabases  bicep                            radius.azurecr.io/recipes/local-dev/mongodatabases:latest
+   default   Applications.Datastores/mongoDatabases  bicep                            radius.ghcr.io/recipes/local-dev/mongodatabases:latest
    
    PARAMETER NAME  TYPE          DEFAULT VALUE   MIN       MAX
    username        string        admin           -         -

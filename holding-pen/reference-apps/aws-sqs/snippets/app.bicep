@@ -44,7 +44,7 @@ resource producer 'Applications.Core/containers@2023-10-01-preview' = {
         },
         aws_credential
       )
-      image: 'radius.azurecr.io/samples/aws-sqs:latest'
+      image: 'radius.ghcr.io/samples/aws-sqs:latest'
     }
   }
 }
@@ -61,7 +61,7 @@ resource consumer 'Applications.Core/containers@2023-10-01-preview' = {
         },
         aws_credential
       )
-      image: 'radius.azurecr.io/samples/aws-sqs:latest'
+      image: 'radius.ghcr.io/samples/aws-sqs:latest'
     }
   }
 }

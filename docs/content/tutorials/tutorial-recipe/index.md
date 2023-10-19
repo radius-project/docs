@@ -62,13 +62,13 @@ Developers don't need to specify what cloud resources they're using in their app
    
    ```
    NAME      TYPE                                    TEMPLATE KIND  TEMPLATE VERSION  TEMPLATE
-   default   Applications.Datastores/sqlDatabases    bicep                            radius.azurecr.io/recipes/local-dev/sqldatabases:latest
-   default   Applications.Messaging/rabbitMQQueues   bicep                            radius.azurecr.io/recipes/local-dev/rabbitmqqueues:latest
-   default   Applications.Dapr/pubSubBrokers         bicep                            radius.azurecr.io/recipes/local-dev/pubsubbrokers:latest
-   default   Applications.Dapr/secretStores          bicep                            radius.azurecr.io/recipes/local-dev/secretstores:latest
-   default   Applications.Dapr/stateStores           bicep                            radius.azurecr.io/recipes/local-dev/statestores:latest
-   default   Applications.Datastores/mongoDatabases  bicep                            radius.azurecr.io/recipes/local-dev/mongodatabases:latest
-   default   Applications.Datastores/redisCaches     bicep                            radius.azurecr.io/recipes/local-dev/rediscaches:latest
+   default   Applications.Datastores/sqlDatabases    bicep                            radius.ghcr.io/recipes/local-dev/sqldatabases:latest
+   default   Applications.Messaging/rabbitMQQueues   bicep                            radius.ghcr.io/recipes/local-dev/rabbitmqqueues:latest
+   default   Applications.Dapr/pubSubBrokers         bicep                            radius.ghcr.io/recipes/local-dev/pubsubbrokers:latest
+   default   Applications.Dapr/secretStores          bicep                            radius.ghcr.io/recipes/local-dev/secretstores:latest
+   default   Applications.Dapr/stateStores           bicep                            radius.ghcr.io/recipes/local-dev/statestores:latest
+   default   Applications.Datastores/mongoDatabases  bicep                            radius.ghcr.io/recipes/local-dev/mongodatabases:latest
+   default   Applications.Datastores/redisCaches     bicep                            radius.ghcr.io/recipes/local-dev/rediscaches:latest
    ```
 
 {{< alert title="💡 local-dev Recipes" color="info" >}}
@@ -161,7 +161,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 2. Register the Recipe to your Radius Environment:
 
    ```bash
-   rad recipe register azure --environment default --template-kind bicep --template-path radius.azurecr.io/recipes/azure/rediscaches:{{< param tag_version >}} --resource-type Applications.Datastores/redisCaches 
+   rad recipe register azure --environment default --template-kind bicep --template-path radius.ghcr.io/recipes/azure/rediscaches:{{< param tag_version >}} --resource-type Applications.Datastores/redisCaches 
    ```
 
 3. Update your db resource to use the `azure` Recipe, instead of the default Recipe:
@@ -238,7 +238,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 1. Register the Recipe to your Radius Environment:
 
    ```bash
-   rad recipe register aws --environment default --template-kind bicep --template-path radius.azurecr.io/recipes/aws/rediscaches:latest --resource-type Applications.Datastores/redisCaches --parameters eksClusterName=<EKS_CLUSTERNAME>
+   rad recipe register aws --environment default --template-kind bicep --template-path radius.ghcr.io/recipes/aws/rediscaches:latest --resource-type Applications.Datastores/redisCaches --parameters eksClusterName=<EKS_CLUSTERNAME>
    ```
    > *Note: Passing the `eksClusterName` during the registration of the Recipe is a temporary additional step as Radius builds up AWS support.*
 

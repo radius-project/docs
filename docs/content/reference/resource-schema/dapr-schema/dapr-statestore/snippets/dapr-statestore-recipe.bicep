@@ -11,7 +11,7 @@ resource myapp 'Applications.Core/containers@2023-10-01-preview' = {
   properties: {
     application: application
     container: {
-      image: 'radius.azurecr.io/magpie:latest'
+      image: 'radius.ghcr.io/magpie:latest'
     }
     connections: {
       statestore: {

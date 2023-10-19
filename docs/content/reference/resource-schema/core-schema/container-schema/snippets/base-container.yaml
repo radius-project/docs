@@ -16,4 +16,4 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: radiusdev.azurecr.io/magpie:latest
+          image: radiusdev.ghcr.io/magpie:latest
