@@ -1,5 +1,5 @@
 {
-    "trailingSlash": "never",
+    "trailingSlash": "always",
     "routes": [
         {
             "route": "/.auth/login/aad",
