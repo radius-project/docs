@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Tutorial: Add Radius to an existing application"
-linkTitle: "Existing applications"
+linkTitle: "Existing application"
 description: "Learn how to incrementally add Radius to an existing application"
 weight: 600
 slug: "add-radius"
