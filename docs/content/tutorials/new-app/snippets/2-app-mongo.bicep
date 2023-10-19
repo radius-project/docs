@@ -5,8 +5,8 @@ import radius as radius
 param application string
 
 //CONTAINER
-resource demo 'Applications.Core/containers@2023-10-01-preview' = {
-  name: 'demo'
+resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
+  name: 'frontend'
   properties: {
     application: application
     container: {

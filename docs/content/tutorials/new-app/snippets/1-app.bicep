@@ -4,8 +4,8 @@ import radius as radius
 @description('The ID of your Radius Application. Set automatically by the rad CLI.')
 param application string
 
-resource demo 'Applications.Core/containers@2023-10-01-preview' = {
-  name: 'demo'
+resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
+  name: 'frontend'
   properties: {
     application: application
     container: {
