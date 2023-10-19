@@ -8,8 +8,8 @@ param application string
 param environment string
 
 //CONTAINER
-resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
-  name: 'frontend'
+resource demo 'Applications.Core/containers@2023-10-01-preview' = {
+  name: 'demo'
   properties: {
     application: application
     container: {
@@ -70,7 +70,7 @@ resource gateway 'Applications.Core/gateways@2023-10-01-preview' = {
     routes: [
       {
         path: '/'
-        destination: 'http://frontend:3000'
+        destination: 'http://demo:3000'
       }
     ]
   }
