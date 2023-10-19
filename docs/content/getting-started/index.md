@@ -14,7 +14,7 @@ This guide will show you how to quickly get started with Radius. You'll walk thr
 
 **Estimated time to complete: 10 min**
 
-<img src="diagram.png" alt="Diagram of the application and its resources" width=500px >
+<img src="/images/diagram.png" alt="Diagram of the application and its resources" width=500px >
 
 {{< alert title="🚀 Run in a <b>free</b> GitHub Codespace" color="primary" >}}
 The Radius getting-started guide can be [run **for free** in a GitHub Codespace](https://github.blog/changelog/2022-11-09-codespaces-for-free-and-pro-accounts/). Visit the following link to get started in seconds:
@@ -91,7 +91,7 @@ This command:
 
 In your browser you should see the demo app:
 
-<img src="./demo-screenshot.png" alt="Screenshot of the demo container" width=600px >
+<img src="/images/demo-screenshot.png" alt="Screenshot of the demo container" width=600px >
 <br /><br />
 
 Congrats! You're running your first Radius app. When you're ready to move on to the next step, use <kbd>CTRL</kbd>+ <kbd>C</kbd> to exit the command.
@@ -131,12 +131,12 @@ rad run app.bicep
 
 You should see the Radius Connections section with new environment variables added. The `demo` container now has connection information for Redis (`CONNECTION_REDIS_HOST`, `CONNECTION_REDIS_PORT`, etc.):
 
-<img src="./demo-with-redis-screenshot.png" alt="Screenshot of the demo container" width=800px >
+<img src="/images/demo-with-redis-screenshot.png" alt="Screenshot of the demo container" width=800px >
 <br /><br />
 
 Navigate to the Todo List tab and test out the application. Using the Todo page will update the saved state in Redis:
 
-<img src="./demo-with-todolist.png" alt="Screenshot of the todolist" width=700px >
+<img src="/images/demo-with-todolist.png" alt="Screenshot of the todolist" width=700px >
 <br /><br />
 
 Press <kbd>CTRL</kbd>+ <kbd>C</kbd> when you are finished with the website.
