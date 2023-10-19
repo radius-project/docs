@@ -982,3 +982,12 @@ OSI
 ghcr
 png
 src
+todoapp
+todolist
+mockup
+diataxis
+appdiagram
+tmp
+jpg
+buildingblocks
+svg

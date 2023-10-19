@@ -60,7 +60,7 @@ Building app.bicep...
 
 Visit the endpoint to interact with the demo Radius container:
 
-{{< image src="demo-screenshot.png" alt="Screenshot of te demo application" width="500px" >}}
+{{< image src="demo-screenshot.png" alt="Screenshot of the demo application" width="500px" >}}
 
 ## Done
 
