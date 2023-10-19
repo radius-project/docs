@@ -41,7 +41,7 @@ The `samples/volumes` container will display the status and contents of the `/tm
    ```
 1. Visit [localhost:5000](http://localhost:5000) in your browser. You should see a message warning that the directory `/tmpdir` does not exist:
 
-   <img src="screenshot-error.jpg" width=500px alt="Screeshot of container showing that the tmp directory does not exist">
+   {{< image src="screenshot-error.jpg" width=500px alt="Screeshot of container showing that the tmp directory does not exist" >}}
 
 ## Step 3: Add an ephemeral volume
 
@@ -65,10 +65,10 @@ Within the `container.volume` property, add a new volume named `temp` and config
    
 1. Visit [localhost:5000](http://localhost:5000) in your browser. You should see the contents of `/tmpdir`, showing an empty directory.
 
-   <img src="screenshot-empty.jpg" width=500px alt="Screeshot of container showing that the tmp directory has no items">
+   {{< image src="screenshot-empty.jpg" width=500px alt="Screeshot of container showing that the tmp directory has no items" >}}
 1. Press the `Create file` button to generate a new file in the directory, such as `test.txt`:
 
-   <img src="screenshot.jpg" width=400px alt="Screeshot of container showing files being created">
+   {{< image src="screenshot.jpg" width=400px alt="Screeshot of container showing files being created" >}}
 1. Done! You've now learned how to mount an ephemeral volume
 
 ## Cleanup

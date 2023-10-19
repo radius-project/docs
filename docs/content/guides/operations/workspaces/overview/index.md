@@ -9,7 +9,7 @@ categories: "Overview"
 
 Workspaces allow you to manage multiple Radius platforms and environments using a local configuration file. You can easily define and switch between workspaces to deploy and manage applications across separate environments.
 
-<img src=workspaces.png alt="Diagram showing a Radius configuration file mapping workspaces to Kubernetes clusters" width=800px />
+{{< image src=workspaces.png alt="Diagram showing a Radius configuration file mapping workspaces to Kubernetes clusters" width=800px >}}
 
 ## CLI commands
 

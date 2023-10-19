@@ -91,7 +91,7 @@ This command:
 
 In your browser you should see the demo app:
 
-<img src="./images/demo-screenshot.png" alt="Screenshot of the demo container" width=600px >
+{{< image src="demo-screenshot.png" alt="Screenshot of the demo container" width=600px >}}
 <br /><br />
 
 Congrats! You're running your first Radius app. When you're ready to move on to the next step, use <kbd>CTRL</kbd>+ <kbd>C</kbd> to exit the command.
@@ -131,12 +131,12 @@ rad run app.bicep
 
 You should see the Radius Connections section with new environment variables added. The `demo` container now has connection information for Redis (`CONNECTION_REDIS_HOST`, `CONNECTION_REDIS_PORT`, etc.):
 
-<img src="./images/demo-with-redis-screenshot.png" alt="Screenshot of the demo container" width=800px >
+{{< image src="demo-with-redis-screenshot.png" alt="Screenshot of the demo container" width=800px >}}
 <br /><br />
 
 Navigate to the Todo List tab and test out the application. Using the Todo page will update the saved state in Redis:
 
-<img src="./images/demo-with-todolist.png" alt="Screenshot of the todolist" width=700px >
+{{< image src="./images/demo-with-todolist.png" alt="Screenshot of the todolist" width=700px >}}
 <br /><br />
 
 Press <kbd>CTRL</kbd>+ <kbd>C</kbd> when you are finished with the website.

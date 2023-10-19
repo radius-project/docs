@@ -13,7 +13,7 @@ This how-to guide will show you:
 - How to model an AWS S3 resource in Bicep
 - How to use a sample application to interact with AWS S3 bucket
 
-   <img src="./s3appdiagram.png" alt="Screenshot of the sample application to interact with s3 bucket " width=400>
+   {{< image src="s3appdiagram.png" alt="Screenshot of the sample application to interact with s3 bucket " width=400 >}}
 
 ## Prerequisites
 
@@ -92,7 +92,7 @@ This creates a container that will be deployed to your Kubernetes cluster. This 
 
 1. Visit [localhost:5234](http://localhost:5234/swagger/index.html) in your browser. This is a swagger doc for the sample application. You can use this to interact with the AWS S3 Bucket you created. For example, you can try to upload a file to the bucket via the `/upload` endpoint.
 
-    <img src="./s3app.png" alt="Screenshot of the sample application to interact with s3 bucket " width=900>
+    {{< image src="s3app.png" alt="Screenshot of the sample application to interact with s3 bucket " width=900 >}}
 
 ## Step 6: Cleanup
 
