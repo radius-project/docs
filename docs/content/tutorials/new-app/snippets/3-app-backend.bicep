@@ -8,8 +8,8 @@ param application string
 param environment string
 
 //CONTAINER
-resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
-  name: 'frontend'
+resource demo 'Applications.Core/containers@2023-10-01-preview' = {
+  name: 'demo'
   properties: {
     application: application
     container: {
