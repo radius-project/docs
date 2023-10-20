@@ -30,6 +30,8 @@ As a part of this tutorial you will deploy an existing containerized Guestbook a
 
 The Guestbook application consists of a web front end along with primary and secondary Redis containers for storage, all deployed with Kubernetes. For more information about the application and access its source code, see the [Kubernetes tutorial](https://kubernetes.io/docs/tutorials/stateless-application/guestbook/) and their [examples repo](https://github.com/kubernetes/examples/tree/master/guestbook).
 
+<img src="./guestbook-app.png" alt="Guestbook application architecture diagram" width=500>
+
 ## Step 1: Set up your environment
 
 1. Clone the Radius samples repo to your local machine:
@@ -147,7 +149,7 @@ Step 2: Deploy and test the existing Guestbook application using `kubectl`
 
 You will now add Radius to the Guestbook application's Kubernetes deployment manifests by making edits to the YAML files in the `deploy` directory. 
 
-1. In each of the YAML files, add the `annotations` property to `metadata`, and then add the `rad.app/enabled: 'true'` annotation. Note that the `'true'` must be surrounded in quotes.
+1. In each of the YAML files that contain a manifest for `Kind: Deployment`, add the `annotations` property to `metadata`, and then add the `rad.app/enabled: 'true'` annotation. Note that the `'true'` must be surrounded in quotes.
 
    ```yaml
    ...
@@ -162,32 +164,49 @@ You will now add Radius to the Guestbook application's Kubernetes deployment man
 
    You should add the annotation to the following files:
       - `deploy/frontend-deployment.yaml`
-      - `deploy/frontend-service.yaml`
       - `deploy/redis-master-deployment.yaml`
-      - `deploy/redis-master-service.yaml`
-      - `deploy/redis-replica-deployment.yaml`
-      - `deploy/redis-replica-service.yaml`
+      - `deploy/redis-replica-deployment.yaml`<br><br>
+
+   > Note: Since Radius does not model Kubernetes Services, you do not need to add the annotation to the YAML files that contain a manifest for `Kind: Service` (e.g. `deploy/frontend-service.yaml`).
 
    <br>As an example, your `deploy/frontend-deployment.yaml` file should look like this:
 
    ```yaml
-   apiVersion: v1
-   kind: Service
+   apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
+   kind: Deployment
    metadata:
-   name: redis-replica
-   labels:
-      app: redis
-      role: replica
-      tier: backend
+   name: frontend
    annotations:
       rad.app/enabled: 'true'
    spec:
-   ports:
-   - port: 6379
    selector:
-      app: redis
-      role: replica
-      tier: backend
+      matchLabels:
+         app: guestbook
+         tier: frontend
+   replicas: 3
+   template:
+      metadata:
+         labels:
+         app: guestbook
+         tier: frontend
+      spec:
+         containers:
+         - name: php-redis
+         image: gcr.io/google-samples/gb-frontend:v4
+         resources:
+            requests:
+               cpu: 100m
+               memory: 100Mi
+         env:
+         - name: GET_HOSTS_FROM
+            value: dns
+            # If your cluster config does not include a dns service, then to
+            # instead access environment variables to find service host
+            # info, comment out the 'value: dns' line above, and uncomment the
+            # line below:
+            # value: env
+         ports:
+         - containerPort: 80
    ```
 
 2. Save your changes to the YAML files.
