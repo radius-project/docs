@@ -12,7 +12,7 @@ resource s3 'AWS.S3/Bucket@default' = {
   }
 }
 
-@description('The environment ID of your Radius application. Set automatically by the rad CLI.')
+@description('The environment ID of your Radius Application. Set automatically by the rad CLI.')
 param environment string
 
 resource app 'Applications.Core/applications@2023-10-01-preview' = {
@@ -45,7 +45,7 @@ resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
         AWS_SECRET_ACCESS_KEY: aws_secret_access_key
         AWS_DEFAULT_REGION: aws_region
       }
-      image: 'radius.azurecr.io/reference-apps/aws:edge'
+      image: 'radius.azurecr.io/samples/aws:latest'
     }
   }
 }

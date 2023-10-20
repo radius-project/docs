@@ -4,8 +4,13 @@ title: "How-To: Use Radius workspaces"
 linkTitle: "Use Workspaces"
 description: "Learn how to handle multiple Radius platforms and environments with workspaces"
 weight: 300
-categories: "Overview"
+categories: "How-To"
 ---
+
+## Pre-requisites
+
+- [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
+- [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 
 ## How-to: Use workspaces to switch between environments
 

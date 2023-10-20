@@ -19,12 +19,15 @@ highlightClass.forEach(element => {
   copyIcon.addEventListener('click', async () => {
     const selection = window.getSelection();
     const range = document.createRange();
-    range.selectNodeContents(element);
+    const codeElements = element.querySelectorAll('code');
+    const codeElement = codeElements.length > 1 ? codeElements[1] : codeElements[0];
+    range.selectNodeContents(codeElement);
     selection.removeAllRanges();
     selection.addRange(range);
+    const text = selection.toString();
 
     try {
-      await navigator.clipboard.writeText(selection.toString());
+      await navigator.clipboard.writeText(text);
       console.log('Text copied to clipboard');
       copyIcon.classList.replace('fa-copy', 'fa-check');
       selection.removeAllRanges();

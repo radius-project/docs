@@ -6,22 +6,22 @@ description: "Information about the Radius community"
 weight: 80
 ---
 
-Welcome to the Radius community. We are currently in a private release phase which is open to Microsoft FTEs and select partners. The team is working on a public preview release which will be announced on this page.
+Welcome to the Radius community!
 
 ## Discussions
 
-The best way to interact with us currently is through Discord over at the Radius Discord server:
+The best way to interact with the community is via the Radius Discord server:
 
 {{< button link="https://discord.gg/SRG3ePMKNy" text="Radius Discord" newtab="true" >}}
 
 ## Community meetings
 
 Every month we host a community meeting to showcase new features, review upcoming milestones, and engage in a Q&A. 
-Anyone from the Radius Private Preview community can participate, present a topic, or host. All are welcome!
+Anyone from the Radius community can participate, present a topic, or host. All are welcome!
 
 ### Meeting link
 
-The meeting link and details are sent out via email. Contact your Radius Core Team contact to be added to the meeting invite.
+The meeting link and details are sent out via email.
 
 ### Present your topic
 
@@ -39,11 +39,12 @@ To present a specific topic on the next Radius community call start by filling o
 | Thursday July 13th 9:00am Pacific Time (PST) | v0.22 release | - | [Stream](https://microsoft.sharepoint.com/:v:/r/teams/radius/Shared%20Documents/General/Community%20Calls/2023-07-13%20Project%20Radius%20Community%20Call.mp4?csf=1&web=1&e=v30w8D) |
 | Thursday Aug 8th 9:00am Pacific Time (PST) | v0.23 release | - | [Stream](https://microsoft.sharepoint.com/:v:/r/teams/radius/Shared%20Documents/General/Community%20Calls/2023-08-08%20Project%20Radius%20Community%20Call.mp4?csf=1&web=1&e=6Lew1D&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19) |
 | Thursday Aug 31st 9:00am Pacific Time (PST) | v0.24 release | - | [Stream](https://microsoft.sharepoint.com/:v:/r/teams/radius/Shared%20Documents/General/Community%20Calls/2023-08-31%20Radius%20Community%20Call.mp4?csf=1&web=1&e=YBjiMv&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19) |
+| Tuesday, Oct 2nd 9:00am Pacific Time (PST) | v0.25 release | - | [Stream](https://microsoft.sharepoint.com/:v:/r/teams/radius/Shared%20Documents/General/Community%20Calls/2023-10-03%20Radius%20Community%20Call.mp4?csf=1&web=1&e=9iXqbg)
 
 ## GitHub Issues & repositories
 
-GitHub access is optional and not required to try out and run Radius. If you would like to directly file Issues and have access to the source code, please contact your Radius Core Team contact.
+If you would like to file Issues, access the source code, or use Codespaces please visit the [Radius GitHub repo](https://github.com/radius-project).
 
 ## How can I get involved?
 
-One of the easiest ways to contribute is to participate in discussions at community engagements or the Teams channel. We are always seeking feedback from. Suggestions around improving the product and docs are always welcome.
+One of the easiest ways to contribute is to participate in discussions at community engagements or via the Discord server referenced above. We are always seeking feedback, especially for suggestions around improving the product and docs.

@@ -9,7 +9,7 @@ categories: "Tutorial"
 tags : ["recipes"]
 ---
 
-This tutorial will teach you the following about recipes
+This tutorial will teach you the following about Recipes
 
 * How to use “dev” Recipes in your Radius Environment to quickly run with containerized infrastructure.
 * How to deploy your own Recipes in your Radius Environment to leverage Azure/AWS resources.
@@ -32,10 +32,11 @@ Developers don't need to specify what cloud resources they're using in their app
 
 ## Prerequisites
 
-- Install the [rad CLI]({{< ref getting-started >}})
-- Setup a supported [Kubernetes cluster]({{< ref "guides/operations/kubernetes" >}})
+- [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
+- [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
 
-## Step 1: Initialize a Radius environment
+## Step 1: Initialize a Radius Environment
 
 1. Begin in a new directory for your application:
 
@@ -70,8 +71,8 @@ Developers don't need to specify what cloud resources they're using in their app
    default   Applications.Datastores/redisCaches     bicep                            radius.azurecr.io/recipes/local-dev/rediscaches:latest
    ```
 
-{{< alert title="💡 Dev Recipes" color="info" >}}
-Dev environments are preloaded with [`dev` Recipes]({{< ref "guides/recipes/overview#use-community-dev-recipes" >}}), a set of Recipes that allow you to quickly get up and running with lightweight containerized infrastructure. In This how-to guide, the dev Redis Recipe deploys a lightweight Redis container into your Kubernetes cluster.
+{{< alert title="💡 local-dev Recipes" color="info" >}}
+Development environments are preloaded with [local-dev Recipes]({{< ref "guides/recipes/overview#use-community-dev-recipes" >}}), a set of Recipes that allow you to quickly get up and running with lightweight containerized infrastructure. In this how-to guide, the local-dev Recipe for Redis deploys a lightweight Redis container into your Kubernetes cluster.
 
 When a Recipe is named "default" it will be used by default when deploying resources when a Recipe is not specified.
 {{< /alert >}}
@@ -121,7 +122,7 @@ Note that no Recipe name is specified with 'db', so it will be using the default
    kubectl get pods -n default-recipes
    ```
 
-   You will see your 'frontend' container, along with the Redis cache that was automatically created by the default dev Recipe:
+   You will see your 'frontend' container, along with the Redis cache that was automatically created by the default local-dev Recipe:
 
    ```
    NAME                                   READY   STATUS    RESTARTS   AGE
@@ -153,7 +154,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
    ```bash
    rad resource delete rediscaches db
    ```
-1. Manually add the Azure cloud provider to your Radius environment
+1. Manually add the Azure cloud provider to your Radius Environment
 
    Follow the steps [here]({{< ref "howto-azure-provider#manual-configuration" >}}) to add the Azure cloud provider to your existing environment.
 
@@ -230,7 +231,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
    rad resource delete rediscaches db
    ```
 
-1. Manually add the AWS cloud provider to your Radius environment
+1. Manually add the AWS cloud provider to your Radius Environment
 
    Follow the steps [here]({{< ref "howto-aws-provider#manual-configuration" >}}) to add the AWS cloud provider to your existing environment
 

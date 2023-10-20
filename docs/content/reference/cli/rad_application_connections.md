@@ -48,5 +48,5 @@ rad app connections my-application
 
 ### SEE ALSO
 
-* [rad application]({{< ref rad_application.md >}})	 - Manage Radius applications
+* [rad application]({{< ref rad_application.md >}})	 - Manage Radius Applications
 

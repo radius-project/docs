@@ -1,6 +1,6 @@
 import radius as radius
 
-@description('The ID of your Radius environment. Injected automatically by the rad CLI.')
+@description('The ID of your Radius Environment. Injected automatically by the rad CLI.')
 param environment string
 
 @description('The data for your TLS certificate')

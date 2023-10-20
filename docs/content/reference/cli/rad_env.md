@@ -8,12 +8,12 @@ description: "Details on the rad env Radius CLI command"
 ---
 ## rad env
 
-Manage Radius environments
+Manage Radius Environments
 
 ### Synopsis
 
-Manage Radius environments
-Radius environments are prepared “landing zones” for Radius applications. Applications deployed to an environment will inherit the container runtime, configuration, and other settings from the environment.
+Manage Radius Environments
+Radius Environments are prepared “landing zones” for Radius Applications. Applications deployed to an environment will inherit the container runtime, configuration, and other settings from the environment.
 
 ### Options
 
@@ -33,7 +33,7 @@ Radius environments are prepared “landing zones” for Radius applications. Ap
 ### SEE ALSO
 
 * [rad]({{< ref rad.md >}})	 - Radius CLI
-* [rad env create]({{< ref rad_env_create.md >}})	 - Create a new Radius environment
+* [rad env create]({{< ref rad_env_create.md >}})	 - Create a new Radius Environment
 * [rad env delete]({{< ref rad_env_delete.md >}})	 - Delete environment
 * [rad env list]({{< ref rad_env_list.md >}})	 - List environments
 * [rad env show]({{< ref rad_env_show.md >}})	 - Show environment details

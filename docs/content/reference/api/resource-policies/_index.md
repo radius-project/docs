@@ -45,8 +45,6 @@ Each resource type controller decides whether it will retry to process the opera
 | Applications.Core/containers | PUT/PATCH/DELETE | Asynchronous | 300 | default |
 | Applications.Core/gateways | LIST/GET | Synchronous | default | |
 | Applications.Core/gateways | PUT/PATCH/DELETE | Asynchronous | default | default |
-| Applications.Core/httpRoutes | LIST/GET | Synchronous | default | |
-| Applications.Core/httpRoutes | PUT/PATCH/DELETE | Asynchronous | default | default |
 | Applications.Core/extenders | LIST/GET/PUT/PATCH/DELETE | Synchronous | default | |
 | Applications.Core/extenders | POST ListSecret | Synchronous | default | |
 

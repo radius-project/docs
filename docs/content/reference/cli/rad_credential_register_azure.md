@@ -18,7 +18,7 @@ This command is intended for scripting or advanced use-cases. See 'rad init' for
 to configure these settings.
 
 Radius will use the provided service principal for all interactions with Azure, including Bicep deployment, 
-Radius environments, and Radius portable resources. 
+Radius Environments, and Radius portable resources. 
 
 Radius will use the provided subscription and resource group as the default target scope for Bicep deployment.
 The provided service principal must have the Contributor or Owner role assigned for the provided resource group
@@ -26,12 +26,12 @@ in order to create or manage resources contained in the group. The resource grou
 calling 'rad credential register azure'.
 
 
-Radius cloud providers enable Radius environments to deploy and integrate with cloud resources (Azure, AWS).
+Radius cloud providers enable Radius Environments to deploy and integrate with cloud resources (Azure, AWS).
 The Radius control-plane stores credentials for use when accessing cloud resources.
 
 Cloud providers are configured per-Radius-installation. Configuration commands will use the current workspace
 or the workspace specified by '--workspace' to configure Radius. Modifications to cloud provider configuration
-or credentials will affect all Radius environments and applications of the affected installation.
+or credentials will affect all Radius Environments and applications of the affected installation.
 
 ```
 rad credential register azure [flags]

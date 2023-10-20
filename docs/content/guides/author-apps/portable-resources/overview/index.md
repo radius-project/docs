@@ -2,7 +2,7 @@
 type: docs
 title: "Overview: Portable Resources"
 linkTitle: "Overview"
-description: "Add portable resources to your Radius application for infrastructure portability"
+description: "Add portable resources to your Radius Application for infrastructure portability"
 weight: 600
 categories: "Overview"
 tags: ["portability"]
@@ -10,7 +10,7 @@ tags: ["portability"]
 
 ## Overview
 
-Portable resources provide **abstraction** and **portability** to Radius applications. This allows development teams to depend on high level resource types and APIs, and let infra teams swap out the underlying resource and configuration.
+Portable resources provide **abstraction** and **portability** to Radius Applications. This allows development teams to depend on high level resource types and APIs, and let infra teams swap out the underlying resource and configuration.
 
 <img src="portable-resources.png" alt="Diagram of portable resources connecting to Azure CosmosDB, AWS MongoDB, and a MongoDB Docker container" width=700px />
 

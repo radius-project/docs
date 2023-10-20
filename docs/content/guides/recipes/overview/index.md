@@ -2,7 +2,7 @@
 type: docs
 title: "Overview: Radius Recipes"
 linkTitle: "Overview"
-description: "Learn how to automate infrastructure deployment for your resources with Radius recipes"
+description: "Learn how to automate infrastructure deployment for your resources with Radius Recipes"
 weight: 100
 categories: "Overview"
 tags: ["recipes"]
@@ -35,7 +35,7 @@ Use [**rad recipe list**]({{< ref rad_recipe_list >}}) to view the Recipes avail
 
 ### Use lightweight "local-dev" Recipes
 
-Radius environments make it easy to get up and running with Recipes instantly. When you run [`rad init`]({{< ref rad_init >}}) you get a set of containerized local-dev Recipes pre-registered in your environment. These Recipes are designed to help you get started quickly with Recipes using lightweight containers. You can use these Recipes to test your app locally, or deploy them to a dev environment.
+Radius Environments make it easy to get up and running with Recipes instantly. When you run [`rad init`]({{< ref rad_init >}}) you get a set of containerized local-dev Recipes pre-registered in your environment. These Recipes are designed to help you get started quickly with Recipes using lightweight containers. You can use these Recipes to test your app locally, or deploy them to a dev environment.
 
 ### Customize with parameters
 
@@ -57,7 +57,7 @@ Recipes currently support the following resources. Support for additional resour
 |---------------------|
 | [`Applications.Datastores/redisCaches`]({{< ref redis >}}) | 
 | [`Applications.Datastores/mongoDatabases`]({{< ref mongodb >}}) |
-| [`Applications.Datastores/sqlDatabases]({{< ref microsoft-sql >}}) | 
+| [`Applications.Datastores/sqlDatabases`]({{< ref microsoft-sql >}}) | 
 | [`Applications.Messaging/rabbitmqQueues`]({{< ref rabbitmq >}}) |
 | [`Applications.Dapr/stateStores`]({{< ref dapr-statestore >}}) |
 | [`Applications.Dapr/pubSubBrokers`]({{< ref dapr-pubsub >}}) |

@@ -2,7 +2,7 @@
 type: docs
 title: "How-To: Troubleshoot applications"
 linkTitle: "Troubleshoot apps"
-description: "Learn how to troubleshoot issues with the Radius application"
+description: "Learn how to troubleshoot issues with the Radius Application"
 weight: 900
 categories: "How-To"
 tags: ["troubleshooting"]
@@ -10,7 +10,7 @@ tags: ["troubleshooting"]
 
 ## Pre-requisites
 
-- A [deployed application]({{< ref deploy-apps >}}) in a Radius environment.
+- A [deployed application]({{< ref deploy-apps >}}) in a Radius Environment.
 
 ## Step 1: Port-forward container to your local machine
 
@@ -23,10 +23,10 @@ Refer to [`rad resource expose`]({{< ref rad_resource_expose >}}) for more detai
 
 ## Step 2: Inspect container logs
 
-If your Radius application is unresponsive or does not connect to its dependencies, Use the below command to inspect logs from container:
+If your Radius Application is unresponsive or does not connect to its dependencies, Use the below command to inspect logs from container:
 
 ```bash
-rad resource logs containers frontend -a <app_name>
+rad resource logs containers <container_name> -a <app_name>
 ```
 
 > Also refer to the [connections section]({{< ref "guides/author-apps/containers/overview#connections" >}}) to know about the naming convention of the environment variables and inspect if your application uses the right variables. 

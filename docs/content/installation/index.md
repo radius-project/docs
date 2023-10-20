@@ -14,11 +14,11 @@ Radius consists of a set of tools and services that together form the Radius pla
 
 {{< read file= "/shared-content/installation/rad-cli/install-rad-cli.md" >}}
 
-## Step 2: Install the Radius-Bicep VS Code extension
+## Step 2: Install the VS Code extension
 
 {{< read file= "/shared-content/installation/vscode-bicep/install-vscode-bicep.md" >}}
 
-## Step 3: Initialize the Radius control-plane and the Radius environment
+## Step 3: Initialize Radius
 
 {{< read file= "/shared-content/installation/install-radius/initialize-radius.md" >}}
 

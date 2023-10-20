@@ -14,7 +14,13 @@ This guide will show you how to quickly get started with Radius. You'll walk thr
 
 **Estimated time to complete: 10 min**
 
-<img src="diagram.png" alt="Diagram of the application and its resources" width=500px >
+{{< image src="diagram.png" alt="Diagram of the application and its resources" width="500px" >}}
+
+{{< alert title="🚀 Run in a <b>free</b> GitHub Codespace" color="primary" >}}
+The Radius getting-started guide can be [run **for free** in a GitHub Codespace](https://github.blog/changelog/2022-11-09-codespaces-for-free-and-pro-accounts/). Visit the following link to get started in seconds:
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/radius-project/samples)
+{{< /alert >}}
 
 ## 1. Have your Kubernetes cluster handy
 
@@ -67,7 +73,7 @@ In addition to starting Radius services in your Kubernetes cluster, this initial
 
 {{< rad file="snippets/app.bicep" embed=true markdownConfig="{linenos=table,linenostart=1}" >}}
 
-> This file will run the `radius.azurecr.io/tutorial/webapp` image. This image is published by the Radius team to a public registry, you do not need to create it.
+> This file will run the `radius.azurecr.io/samples/demo` image. This image is published by the Radius team to a public registry, you do not need to create it.
 
 ## 4. Run the app
 
@@ -137,7 +143,7 @@ Press <kbd>CTRL</kbd>+ <kbd>C</kbd> when you are finished with the website.
 
 ## 7. View the application connections
 
-Radius connections are more than just environment variables and configuration. You can also access the "application graph" and understand the connections within your application with the following command:
+Radius Connections are more than just environment variables and configuration. You can also access the "application graph" and understand the connections within your application with the following command:
 
 ```bash
 rad app connections
