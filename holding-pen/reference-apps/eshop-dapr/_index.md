@@ -14,7 +14,7 @@ The [eShop on Dapr](https://github.com/dotnet-architecture/eShopOnDapr) referenc
 
 ### Architecture
 
-<img src="architecture.png" alt="Architecture diagram of eShop on Dapr" width="900px" ><br />
+<img src="./architecture.png" alt="Architecture diagram of eShop on Dapr" width="900px" ><br />
 
 As the focus of the eShopOnDapr reference application is on Dapr, the original application has been updated. The updated architecture consists of:
 
