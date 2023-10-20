@@ -30,6 +30,5 @@ To verify you've installed the extension, open any file with the .bicep file ext
 
 5. If running on Windows Subsystem for Linux (WSL), make sure to install the extension in WSL as well:
 
-   
    <img src="/installation/vscode-bicep/images/wsl-extension.png" alt="Screenshot of installing a vsix extension in WSL" width=400>
 {{< /edge >}}
