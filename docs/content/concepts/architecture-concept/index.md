@@ -134,7 +134,7 @@ When listing applications using the `rad` CLI:
 3. UCP proxies the HTTP request to the `Applications.Core` resource provider.
 4. The `Applications.Core` resource provider handles the request and responds with the list of applications.
 
-<img src="flow-list-apps.png" alt="Diagram of the API flow described above" width="1000px" >
+<img src="./flow-list-apps.png" alt="Diagram of the API flow described above" width="1000px" >
 
 {{% /codetab %}}
 
@@ -148,7 +148,7 @@ When using Bicep to author and deploy Radius Applications:
   a. The `Bicep.Deployments` resource provider makes a request to UCP to Create/Update the resource.
   b. UCP routes the request to the appropriate resource provider to be handled.
 
-<img src="flow-deploy.png" alt="Diagram of the API flow described above" width="1000px" >
+<img src="./flow-deploy.png" alt="Diagram of the API flow described above" width="1000px" >
 
 {{% /codetab %}}
 
@@ -161,7 +161,7 @@ When using the `tf` CLI to deploy a Radius Application using Terraform:
   c. In the case of a Radius resource the Terraform provider makes a request the Radius API to Create/Update a resource.
   d. UCP routes the request to the appropriate resource provider to be handled.
 
-<img src="flow-terraform.png" alt="Diagram of the API flow described above" width="1000px" >
+<img src="./flow-terraform.png" alt="Diagram of the API flow described above" width="1000px" >
 
 {{% /codetab %}}
 

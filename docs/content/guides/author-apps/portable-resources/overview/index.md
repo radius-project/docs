@@ -12,7 +12,7 @@ tags: ["portability"]
 
 Portable resources provide **abstraction** and **portability** to Radius Applications. This allows development teams to depend on high level resource types and APIs, and let infra teams swap out the underlying resource and configuration.
 
-<img src="portable-resources.png" alt="Diagram of portable resources connecting to Azure CosmosDB, AWS MongoDB, and a MongoDB Docker container" width=700px />
+<img src="./portable-resources.png" alt="Diagram of portable resources connecting to Azure CosmosDB, AWS MongoDB, and a MongoDB Docker container" width=700px />
 
 ## Available resources
 

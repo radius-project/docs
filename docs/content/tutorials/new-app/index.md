@@ -17,7 +17,7 @@ This tutorial will teach you the basics of creating a new Radius Application. Yo
 
 By the end of the tutorial, you will have created and deployed a new Radius Application.
 
-<img src="diagram.png" alt="Diagram of the application resources and their connections" width=600px >
+<img src="./diagram.png" alt="Diagram of the application resources and their connections" width=600px >
 
 ## Prerequisites
 
@@ -191,7 +191,7 @@ demo-bb9df8798-b68rc demo [port-forward] connected from localhost:3000 -> ::3000
 
 Open [http://localhost:3000](http://localhost:3000) to view the Radius demo container:
 
-<img src="demo-landing.png" alt="Screenshot of the Radius demo container" width=500px >
+<img src="./demo-landing.png" alt="Screenshot of the Radius demo container" width=500px >
 
 When you're done press `CTRL + c` to terminate the port-forward and log stream.
 
@@ -260,7 +260,7 @@ In addition to containers, you can add dependencies like Redis caches, Dapr Stat
 
 1. Open [localhost:3000](http://localhost:3000) to interact with the demo container. You should see the container's connections and metadata, this time with a connection to the Mongo database and new environment variables set:
 
-    <img src="demo-landing-connection.png" alt="Screenshot of the Radius demo container" width=500px >
+    <img src="./demo-landing-connection.png" alt="Screenshot of the Radius demo container" width=500px >
 
 1. Press CTRL+C to terminate the port-forward and log stream.
 
@@ -331,7 +331,7 @@ In addition to dependencies, you can add more containers to make your applicatio
 
 1. Open [localhost:3000](http://localhost:3000) to interact with the demo container. You should see the container's connections and metadata, this time with a connection to the backend container and new environment variables set:
 
-   <img src="demo-landing-backend.png" alt="Screenshot of the demo container with a connection to the backend container" width=600px>
+   <img src="./demo-landing-backend.png" alt="Screenshot of the demo container with a connection to the backend container" width=600px>
 
     Note the environment variables that are set with connection information for the backend container.
 

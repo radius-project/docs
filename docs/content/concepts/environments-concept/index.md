@@ -14,7 +14,7 @@ Radius Environments are a prepared landing zone for applications. They contain a
 
 Environments provide a grouping structure for applications and the resources they share. For example, an org might choose to setup separate Radius Environments for staging and production. When appropriate, multiple applications can be deployed into the same environment.
 
-<img src="env-with-apps-example.png" alt="Diagram of multiple Radius Environments deployed to Azure. One environment contains 1 app, the other environment contains multiple apps." width="350px" />
+<img src="./env-with-apps-example.png" alt="Diagram of multiple Radius Environments deployed to Azure. One environment contains 1 app, the other environment contains multiple apps." width="350px" />
 
 ## Concerns that environments manage
 

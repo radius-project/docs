@@ -10,7 +10,7 @@ tags: ["Kubernetes"]
 
 Radius offers a Kubernetes-based platform for hosting the [Radius control plane]({{< ref "/guides/operations/control-plane" >}}) and [Radius Environments]({{< ref "/guides/deploy-apps/environments/overview" >}}).
 
-<img src="kubernetes-mapping.png" alt="Diagram showing Radius resources being mapped to Kubernetes objects" width=600px />
+<img src="./kubernetes-mapping.png" alt="Diagram showing Radius resources being mapped to Kubernetes objects" width=600px />
 
 ## Supported Kubernetes versions
 

@@ -11,7 +11,7 @@ The Radius docs are built on [Hugo](https://gohugo.io) with the [Docsy](https://
 
 Radius uses the [Diátaxis framework](https://diataxis.fr/) for its documentation:
 
-<img src="diataxis.png" alt="Diagram showing the diataxis framework" width=800px >
+<img src="./diataxis.png" alt="Diagram showing the diataxis framework" width=800px >
 
 Follow the guidance on this page to learn how to get started, how to contribute, and how to use the Diátaxis framework to create new docs.
 
@@ -356,17 +356,19 @@ Begin by placing images under `/daprdocs/static/images` with the naming conventi
 Then link to the image using:
 
 ```md
-<img src="/images/[image-filename]" width=1000 alt="Description of image">
+<img src="./images/[image-filename]" width=1000 alt="Description of image">
 ```
 
 >Don't forget to set the alt attribute to keep the docs readable for our visually impaired users.
+
+>Also note that the path to the image you wish to embed must begin with `./` to ensure the image renders properly when the webpage is built.
 
 #### Example
 
 This HTML will display the `radius-overview.png` image on the `overview.md` page:
 
 ```md
-<img src="/images/radius-overview.png" width=1000 alt="Overview diagram of Dapr and its building blocks">
+<img src="./images/radius-overview.png" width=1000 alt="Overview diagram of Dapr and its building blocks">
 ```
 
 ### Alerts
