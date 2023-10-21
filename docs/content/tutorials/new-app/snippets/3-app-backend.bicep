@@ -8,12 +8,12 @@ param application string
 param environment string
 
 //CONTAINER
-resource demo 'Applications.Core/containers@2023-10-01-preview' = {
-  name: 'demo'
+resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
+  name: 'frontend'
   properties: {
     application: application
     container: {
-      image: 'radius.azurecr.io/samples/demo:latest'
+      image: 'radius.azurecr.io/tutorial/demo:edge'
       env: {
         FOO: 'bar'
       }
