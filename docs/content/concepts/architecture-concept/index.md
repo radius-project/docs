@@ -43,7 +43,7 @@ The service that performs this central functionality in Radius is called the Uni
 
 UCP contains functionality for federating with separate resource managers as well as its resource providers. For example UCP can route requests to Azure or AWS to manage resources on those cloud systems. 
 
-UCP is a scalable REST API that can function either with a single global shard or using regional sharding. UCP is based on the design principles of the Azure Resource Manager (ARM) control-plane but generalizes to work across multiple clouds and systems. The UCP codebase is fully open-source and was created from scratch as part of the Radius project. UCP is written in Go.
+UCP is a scalable REST API that can function either with a single global shard or using regional sharing. UCP is based on the design principles of the Azure Resource Manager (ARM) control-plane but generalizes to work across multiple clouds and systems. The UCP codebase is fully open-source and was created from scratch as part of the Radius project. UCP is written in Go.
 
 UCP provides routing and federation with internal and external services:
 
