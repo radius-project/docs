@@ -28,8 +28,9 @@ To verify you've installed the extension, open any file with the .bicep file ext
    ```
    If you're on macOS, make sure to [setup the `code` alias](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line).
 
-5. If running on Windows Subsystem for Linux (WSL), make sure to install the extension in WSL as well:
+3. **Disable the official Bicep extension** if you have it installed. Do not install it if prompted, our custom extension needs to be responsible for handling `.bicep` files and you cannot have both extensions enabled at once.
 
-   
+4. If running on Windows Subsystem for Linux (WSL), make sure to install the extension in WSL as well:
+
    <img src="/installation/vscode-bicep/images/wsl-extension.png" alt="Screenshot of installing a vsix extension in WSL" width=400>
 {{< /edge >}}

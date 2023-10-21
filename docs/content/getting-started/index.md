@@ -14,7 +14,13 @@ This guide will show you how to quickly get started with Radius. You'll walk thr
 
 **Estimated time to complete: 10 min**
 
-<img src="diagram.png" alt="Diagram of the application and its resources" width=500px >
+{{< image src="diagram.png" alt="Diagram of the application and its resources" width="500px" >}}
+
+{{< alert title="🚀 Run in a <b>free</b> GitHub Codespace" color="primary" >}}
+The Radius getting-started guide can be [run **for free** in a GitHub Codespace](https://github.blog/changelog/2022-11-09-codespaces-for-free-and-pro-accounts/). Visit the following link to get started in seconds:
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/radius-project/samples)
+{{< /alert >}}
 
 {{< alert title="🚀 Run in a <b>free</b> GitHub Codespace" color="primary" >}}
 The Radius getting-started guide can be [run **for free** in a GitHub Codespace](https://github.blog/changelog/2022-11-09-codespaces-for-free-and-pro-accounts/). Visit the following link to get started in seconds:

@@ -1,4 +1,4 @@
-baseURL = "https://docs.radapp.io/"
+baseURL = "https://edge.docs.radapp.io/"
 languageCode = "en-us"
 title = "Radius Docs"
 theme =  "docsy"
@@ -67,7 +67,8 @@ tag = "tags"
 
 [params]
 copyright = "Radius"
-version = "v0.26"
+
+version = "edge"
 tag_version = "latest"
 chart_version = "0.26.0"
 
