@@ -41,7 +41,7 @@ resource container 'Applications.Core/containers@2023-10-01-preview' = {
   properties: {
     application: app.id
     container: {
-      image: 'radius.ghcr.io/azure/azure-workload-identity/msal-go:latest'
+      image: 'ghcr.io/azure/azure-workload-identity/msal-go:latest'
       env: {
         KEYVAULT_NAME: keyvault.name
         KEYVAULT_URL: keyvault.properties.vaultUri

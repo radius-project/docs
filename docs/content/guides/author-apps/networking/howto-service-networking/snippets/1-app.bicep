@@ -8,7 +8,7 @@ resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
   properties: {
     application: application
     container: {
-      image: 'radius.ghcr.io/samples/demo:latest'
+      image: 'ghcr.io/radius-project/samples/demo:latest'
       ports: {
         web: {
           containerPort: 3000

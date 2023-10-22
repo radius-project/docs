@@ -27,7 +27,7 @@ rad install kubernetes --set global.zipkin.url=http://jaeger-collector.radius-mo
 
 1. Begin by adding the Radius Helm repository:
    ```bash
-   helm repo add radius https://radius.ghcr.io/helm/v1/repo
+   helm repo add radius https://radius.ghcr.io/helm/v1/repo //TODO
    helm repo update
    ```
 1. Get all available versions:
@@ -47,10 +47,10 @@ rad install kubernetes --set global.zipkin.url=http://jaeger-collector.radius-mo
 | `global.prometheus.enabled` | `true` | Enables Prometheus metrics. Defaults to `true`
 | `global.prometheus.path` | `"/metrics"` | Metrics endpoint
 | `global.prometheus.port` | `9090` | Metrics port
-| `rp.image` | `radius.ghcr.io/appcore-rp` | Location of the Radius resource provider (RP) image
+| `rp.image` | `radius.ghcr.io/appcore-rp` //TODO | Location of the Radius resource provider (RP) image
 | `rp.tag` | `latest` | Tag of the Radius resource provider (RP) image
 |`rp.publicEndpointOverride` | `""` | Public endpoint of the Kubernetes cluster. Overrides the default behavior of automatically detecting the public endpoint.
 | `de.image` | `radius.ghcr.io/deployment-engine` | Location of the Bicep deployment engine (DE) image
 | `de.tag` | `latest` | Tag of the Bicep deployment engine (DE) image
-| `ucp.image` | `radius.ghcr.io/ucpd` | Location of universal control plane (UCP) image
+| `ucp.image` | `ghcr.io/radius-project/ucpd` | Location of universal control plane (UCP) image
 | `ucp.tag` | `latest` | Tag of the universal control plane (UCP) image

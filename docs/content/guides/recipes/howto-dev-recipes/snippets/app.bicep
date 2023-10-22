@@ -11,7 +11,7 @@ resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
   properties: {
     application: application
     container: {
-      image: 'radius.ghcr.io/tutorial/webapp:edge'
+      image: 'ghcr.io/radius-project/tutorial/webapp:edge'
     }
     connections: {
       // Define a connection to the redis container
