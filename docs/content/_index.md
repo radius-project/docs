@@ -10,7 +10,7 @@ no_list: true
 Welcome to the Radius documentation! Here you'll find everything you need to know about Radius, from getting started to advanced topics.
 
 {{% alert color="primary" %}}
-<img src="radius-logo.svg" alt="Radius logo" width="400px" /> <br /><br />
+{{< image src="radius-logo.svg" alt="Radius logo" width="400px" >}} <br /><br />
 Radius is a cloud native application platform.  It enables developers and IT operators to collaborate on delivering and managing cloud-native applications. With Radius, teams can easily understand their applications and how applications are running environments including dev, cloud, edge, and on-prem. Plus, teams can ensure their application infrastructure meets cost, operations, and security requirements. Open-source and multi-cloud, Radius is the cloud-native application platform for delivering and managing applications anywhere.
 
 [**Learn more**](https://radapp.io/)

@@ -20,7 +20,7 @@ Radius Environments can be configured with a container runtime, where Radius [co
 
 A Kubernetes namespace is specified on the environment to tell Radius where to render application resources at deploy time.
 
-<img src=environments.png alt="Diagram showing a Radius Environment mapping to a Kubernetes cluster and namespace" width=800px />
+{{< image src=environments.png alt="Diagram showing a Radius Environment mapping to a Kubernetes cluster and namespace" width=800px >}}
 
 ### Cloud Provider
 
