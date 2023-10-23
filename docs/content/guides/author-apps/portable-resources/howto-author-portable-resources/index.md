@@ -14,8 +14,8 @@ This guide will teach you how to author a portable resource for your [Radius App
 
 Before you get started, you'll need to make sure you have the following tools and resources:
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- [Radius environment]({{< ref "installation#step-3-initialize-the-radius-control-plane-and-the-radius-environment" >}})
-- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-radius-bicep-extension" >}})
+- [Radius environment]({{< ref "installation#step-3-initialize-radius" >}})
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 
 ## Step 1: Define a container resource
 
@@ -25,7 +25,7 @@ Create a Bicep file `app.bicep`, add a container resource that will be leveraged
 
 ## Step 2: Define your portable resource
 
-Portable resources provide **abstraction** and **portability** to Radius Applications. Radius currently offers a manual declaration of resources or allows a user to leverage Recipes.
+Portable resources provide **abstraction** and **portability** to Radius Applications. Radius currently offers options to manually provision the resources or automatically provision them via Recipes.
 
 {{< tabs Recipe Manual >}}
 
@@ -37,9 +37,11 @@ Recipes enable a separation of concerns between infrastructure operators and dev
 
 {{% codetab %}}
 
-Find the schema needed for the supported Radius resource by visiting the [Radius resource schema docs]({{< ref resource-schema >}}). For this example you can follow along and define a RedisCache resource:
+Add a RedisCache resource with the `resourceProvisioning` mode as `manual`. This enables you to configure the underlying Redis resource
 
 {{< rad file="snippets/app-redis-manual.bicep" embed=true marker="//MANUAL" >}}
+
+Refer to the [Redis resource schema] ({{< ref "/resource-schem/cache/redis >}}) for more details.
 
 {{% /codetab %}}
 
@@ -47,9 +49,8 @@ Find the schema needed for the supported Radius resource by visiting the [Radius
 
 ## Step 3: Accessing your portable resource
 
-Resources all have different schemas with differing requirements when it comes to defining properties or relations between other resources. When it comes to `connections` users can check out the [container resource schema page]({{< ref "container-schema" >}}) for additional information.
+You can access the portable resource via [`connections`]({{< ref "guides/author-apps/containers#connections" >}}). Update your container definition to add a connection to the new Redis cache. This results in environment variables for connection information automatically set on the container.
 
-Define a connection between your container and the Redis Cache in order to track the dependency and set environment variables.
 
 {{< rad file="snippets/app-redis-manual.bicep" embed=true marker="//CONTAINER" markdownConfig="{linenos=table,hl_lines=[\"19-22\"]}">}}
 
