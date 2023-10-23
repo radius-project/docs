@@ -143,6 +143,7 @@ jobs:
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.ENV_STATICWEBAPP_TOKEN }}
+          skip_deploy_on_missing_secrets: true
           action: "close"
 
   algolia_index:

@@ -27,7 +27,7 @@ Radius is a cloud native application platform.  It enables developers and IT ope
   {{< /card >}}
 {{< /cardpane >}}
 {{< cardpane >}}
-  {{< card header="**💭 Concepts**" footer="[**Learn the concepts →**]({{< ref tutorials >}})" >}}
+  {{< card header="**💭 Concepts**" footer="[**Learn the concepts →**]({{< ref concepts >}})" >}}
   Learn about the background and concepts behind Radius with in-depth explanations. We'll cover the main concepts and how Radius works, so you have the broader context to deeply understand Radius and use it most effectively.
   {{< /card >}}
   {{< card header="**🧾 Reference**" footer="[**Visit reference material →**]({{< ref guides >}})" >}}
