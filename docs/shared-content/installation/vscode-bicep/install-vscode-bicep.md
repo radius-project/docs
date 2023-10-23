@@ -19,7 +19,7 @@ To verify you've installed the extension, open any file with the .bicep file ext
 4. Extract the archive and Install the `rad-vscode-bicep.vsix` file:
    In VSCode, manually install the extension using the *Install from VSIX* command in the Extensions view command drop-down.
 
-   <img src="/installation/vscode-bicep/images/vsix-install.png" alt="Screenshot of installing a vsix extension" width=400>
+      <img src="/installation/vscode-bicep/images/vsix-install.png" alt="Screenshot of installing a vsix extension" width=400><br>
       
    You can also import this extension on the [command-line](https://code.visualstudio.com/docs/editor/extension-gallery#_install-from-a-vsix) with:
 
@@ -28,6 +28,6 @@ To verify you've installed the extension, open any file with the .bicep file ext
    ```
    If you're on macOS, make sure to [setup the `code` alias](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line).
 
-5. If running on Windows Subsystem for Linux (WSL), make sure to install the extension in WSL as well:
-   <img src="/installation/vscode-bicep/images/wsl-extension.png" alt="Screenshot of installing a vsix extension in WSL" width=400>
+5. If running on Windows Subsystem for Linux (WSL), make sure to install the extension in WSL as well:<br>
+      <img src="/installation/vscode-bicep/images/wsl-extension.png" alt="Screenshot of installing a vsix extension in WSL" width=400>
 {{< /edge >}}
