@@ -42,74 +42,6 @@ resource container 'Applications.Core/containers@2023-10-01-preview' = {
 }
 //CONTAINER
 
-resource redis 'apps/Deployment@v1' = {
-  metadata: {
-    name: 'redis-${uniqueString(application)}'
-  }
-  spec: {
-    selector: {
-      matchLabels: {
-        app: 'redis'
-        resource: portableRedis.name
-      }
-    }
-    template: {
-      metadata: {
-        labels: {
-          app: 'redis'
-          resource: portableRedis.name
-
-          // Label pods with the application name so `rad run` can find the logs.
-          'radapp.io/application': application == null ? '' : application
-        }
-      }
-      spec: {
-        containers: [
-          {
-            // This container is the running redis instance.
-            name: 'redis'
-            image: 'redis'
-            ports: [
-              {
-                containerPort: 6379
-              }
-            ]
-          }
-          {
-            // This container will connect to redis and stream logs to stdout for aid in development.
-            name: 'redis-monitor'
-            image: 'redis'
-            args: [
-              'redis-cli'
-              '-h'
-              'localhost'
-              'MONITOR'
-            ]
-          }
-        ]
-      }
-    }
-  }
-}
-
-resource svc 'core/Service@v1' = {
-  metadata: {
-    name: 'redis-${uniqueString(application)}'
-  }
-  spec: {
-    type: 'ClusterIP'
-    selector: {
-      app: 'redis'
-      resource: portableRedis.name
-    }
-    ports: [
-      {
-        port: 6379
-      }
-    ]
-  }
-}
-
 //MANUAL
 resource portableRedis 'Applications.Datastores/redisCaches@2023-10-01-preview' = {
   name: 'redisCache'
@@ -118,15 +50,18 @@ resource portableRedis 'Applications.Datastores/redisCaches@2023-10-01-preview' 
     application: application
     resourceProvisioning: 'manual'
     resources: [{
-      id: '/planes/kubernetes/local/namespaces/${svc.metadata.namespace}/providers/core/Service/${svc.metadata.name}'
+      id: '/planes/kubernetes/local/namespaces/service-namespace/providers/core/Service/service-name'
     }
     {
-      id: '/planes/kubernetes/local/namespaces/${redis.metadata.namespace}/providers/apps/Deployment/${redis.metadata.name}'
+      id: '/planes/kubernetes/local/namespaces/redis-namespace/providers/apps/Deployment/redis-name'
     }
     ]
     username: 'myusername'
-    host: `mycache.contoso.com`
-    port: svc.ports[0].port
+    host: 'mycache.contoso.com'
+    port: 8080
+    secrets: {
+      password: '******'
+    }
   }
 }
 //MANUAL

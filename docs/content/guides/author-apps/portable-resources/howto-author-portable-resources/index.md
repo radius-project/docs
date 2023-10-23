@@ -41,7 +41,7 @@ Add a RedisCache resource with the `resourceProvisioning` mode as `manual`. This
 
 {{< rad file="snippets/app-redis-manual.bicep" embed=true marker="//MANUAL" >}}
 
-Refer to the [Redis resource schema] ({{< ref "/resource-schem/cache/redis >}}) for more details.
+Refer to the [Redis resource schema] ({{< ref "reference/resource-schema/cache/redis" >}}) for more details.
 
 {{% /codetab %}}
 

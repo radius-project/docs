@@ -301,6 +301,7 @@ radapp
 radiuspublic
 rbac
 rediscaches
+RedisCache
 readinessProbe
 redis
 redisCaches
@@ -616,6 +617,7 @@ ECS
 EFS
 EIP
 EMR
+EMPTYCONTAINER
 EMRContainers
 EMRServerless
 ElastiCache
