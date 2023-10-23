@@ -98,7 +98,7 @@ Add a `frontend` [container]({{< ref "guides/author-apps/containers" >}}) which 
 
 In your browser, navigate to the endpoint (e.g. [http://localhost:8080](http://localhost:8080)) to view and interact with your application:
 
-   <img src="frontend.png" alt="Screenshot of frontend application" width=500 >
+   {{< image src="frontend.png" alt="Screenshot of frontend application" width=500 >}}
 
 ## Cleanup
 

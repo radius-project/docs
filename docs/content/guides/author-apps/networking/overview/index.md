@@ -12,7 +12,7 @@ Radius networking resources allow you to model:
 - Communication between services
 - Communication between a user and a service
 
-<img src="networking.png" alt="Diagram of a gateway with traffic going to a frontend container, which in turn sends traffic to the basket and catalog containers" width="400px">
+{{< image src="networking.png" alt="Diagram of a gateway with traffic going to a frontend container, which in turn sends traffic to the basket and catalog containers" width="400px" >}}
 
 ## Service to service communication
 
@@ -26,7 +26,7 @@ Network connections are defined as strings containing:
 
 For example, a frontend container may need to connect to a basket container. The frontend container would define a connection to the basket container, with the scheme `http`, the target `basket`, and the port `3000`. The connection would look like this: `http://basket:3000`.
 
-<img src="network-connection.png" alt="Diagram showing the components of a network connection" width="400px">
+{{< image src="network-connection.png" alt="Diagram showing the components of a network connection" width="400px" >}}
 
 For more information on how to do service to service networking, visit the [service networking how-to guide]({{< ref howto-service-networking >}}):
 

@@ -24,7 +24,7 @@ This tutorial will teach you the following about Recipes
 
 This application is a simple to-do list which stores and visualizes to-do items. It consists of a frontend [container]({{< ref "guides/author-apps/containers" >}}) and a backend [Redis Cache]({{< ref redis >}}).
 
-<img src="recipe-tutorial-diagram.png" alt="Screenshot of the todoapp with Kubernetes, Azure and AWS Redis Cache options" style="width:500px" >
+{{< image src="recipe-tutorial-diagram.png" alt="Screenshot of the todoapp with Kubernetes, Azure and AWS Redis Cache options" style="width:500px" >}}
 
 {{< alert title="💡 Portable resources" color="info" >}}
 Developers don't need to specify what cloud resources they're using in their application. Instead, they choose the portable Redis API which can be provided by any cloud provider (or a Docker container). When deployed, a Recipe will select what infrastructure to deploy and run.
@@ -140,7 +140,7 @@ Note that no Recipe name is specified with 'db', so it will be using the default
 
    You can now see both the environment variables of your container under Radius Connections as well as interact with the `Todo App` and add/remove items in it as wanted:
 
-   <img src="todoapp.png" width="700px" alt="screenshot of the todo application">
+   {{< image src="todoapp.png" width="700px" alt="screenshot of the todo application" >}}
  
 ## Step 4: Use Azure/AWS recipes in your application
 
@@ -217,7 +217,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 
    You can now see environment variables of your container under Radius Connections updated with the details of the Azure Cache for Redis and the Todo app now uses the Azure cache for Redis as the data store 
 
-   <img src="todoapp.png" width="700px" alt="screenshot of the todo application">
+   {{< image src="todoapp.png" width="700px" alt="screenshot of the todo application" >}}
 
 {{% /codetab %}}
 
@@ -284,7 +284,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 
    You can now see environment variables of your container under Radius Connections updated with the details of the Amazon Memory Db for Redis and the Todo app now uses the Amazon Memory Db for Redis as the data store 
 
-   <img src="todoapp.png" width="700px" alt="screenshot of the todo application">
+   {{< image src="todoapp.png" width="700px" alt="screenshot of the todo application" >}}
 
 {{% /codetab %}}
 

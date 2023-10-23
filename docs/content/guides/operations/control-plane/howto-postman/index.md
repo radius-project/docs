@@ -103,11 +103,11 @@ Next, you'll need to get the control plane API endpoint and use Postman to inter
     <your-cluster-control-plane>/apis/api.ucp.dev/v1alpha3/planes/radius/local/resourcegroups?api-version=2023-10-01-preview
     ```
 
-    <img src="postman-url.png" width=900px alt="Screenshot of Postman with filled out URL" >
+    {{< image src="postman-url.png" width=900px alt="Screenshot of Postman with filled out URL" >}}
     
 1. Open the `Authorization` tab and select `Bearer Token` from the `Type` dropdown. Paste the token you generated in step 2 into the `Token` field:
 
-   <img src="postman-auth.png" width=900px alt="Screenshot of Postman with filled out auth token" >
+   {{< image src="postman-auth.png" width=900px alt="Screenshot of Postman with filled out auth token" >}}
 
 1. Click the `Send` button to send the request. You will now see your resource groups:
 

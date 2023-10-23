@@ -43,7 +43,7 @@ Connections from a container to a resource result in environment variables for c
    ```
 1. Visit [localhost:3000](http://localhost:3000) in your browser. You should see the following page, now showing injected environment variables:
 
-   <img src="./demo-with-redis-screenshot.png" alt="Screenshot of the demo app with all environment variables" width=1000px />
+   {{< image src="./demo-with-redis-screenshot.png" alt="Screenshot of the demo app with all environment variables" width=1000px >}}
    
 ## Step 5: View the Application Connections
 

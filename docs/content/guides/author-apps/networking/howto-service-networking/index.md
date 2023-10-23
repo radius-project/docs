@@ -10,7 +10,7 @@ categories: "How-To"
 
 This guide will show you how two services can communicate with each other. In this example, we will have a frontend container service that communicates with a backend container service.
 
-<img src="overview.png" alt="Diagram of the frontend talking to the backend over HTTP port 80" width="400px" >
+{{< image src="overview.png" alt="Diagram of the frontend talking to the backend over HTTP port 80" width="400px" >}}
 
 ## Prerequisites
 
@@ -64,7 +64,7 @@ Starting log stream...
 
 Visit [http://localhost:3000](http://localhost:3000) in your browser. You should see a connection to the backend container, along with the environment variables that have automatically been set on the frontend container:
 
-<img src="backend-connection.png" alt="Screenshot of the demo container showing the backend connections" width="600px" >
+{{< image src="backend-connection.png" alt="Screenshot of the demo container showing the backend connections" width="600px" >}}
 
 ## Done
 
