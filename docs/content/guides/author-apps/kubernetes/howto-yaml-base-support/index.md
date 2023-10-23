@@ -27,8 +27,6 @@ Note that the names of the Deployments, Services, and Config Maps all must match
 {{< rad file="snippets/basemanifest.yaml" embed=true lang="yaml">}}
 
 ### Step 2: Add the Kubernetes base YAML configurations to your Radius application definition
-
-
 1. Container configurations:
 
     Define your Radius container resource port with the port of your Kubernetes `Service` as well as the image container location that your service is dependent on.
