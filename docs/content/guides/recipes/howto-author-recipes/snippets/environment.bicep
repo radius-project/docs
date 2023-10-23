@@ -12,7 +12,7 @@ resource env 'Applications.Core/environments@2023-10-01-preview' = {
       'Applications.Datastores/redisCaches':{
         'redis-bicep': {
           templateKind: 'bicep'
-          templatePath: 'https://myregistry.ghcr.io/recipes/myrecipe:1.1.0'
+          templatePath: 'https://ghcr.io/USERNAME/recipes/myrecipe:1.1.0'
           // Optionally set parameters for all resources calling this Recipe
           parameters: {
             port: 3000
