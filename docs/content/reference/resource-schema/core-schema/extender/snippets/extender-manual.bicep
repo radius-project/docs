@@ -30,7 +30,7 @@ resource publisher 'Applications.Core/containers@2023-10-01-preview' = {
   properties: {
     application: app.id
     container: {
-      image: 'radius.ghcr.io/magpie:latest'
+      image: 'ghcr.io/radius-project/magpiego:latest'
       env: {
         TWILIO_NUMBER: twilio.properties.fromNumber
         TWILIO_SID: twilio.secrets('accountSid')
