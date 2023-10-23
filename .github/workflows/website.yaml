@@ -38,7 +38,6 @@ jobs:
           repository: radius-project/radius
           ref: ${{ env.RELEASE_BRANCH }}
           path: ./radius
-          token: ${{ secrets.GH_RAD_CI_BOT_PAT }}
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
@@ -122,12 +121,14 @@ jobs:
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.ENV_STATICWEBAPP_TOKEN }}
+          skip_deploy_on_missing_secrets: true
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           app_location: "site/"
           api_location: "site/" 
           output_location: ""
           skip_app_build: true
+
 
   close_pr_site:
     name: Close PR Staging Site
