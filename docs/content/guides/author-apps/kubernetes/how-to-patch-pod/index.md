@@ -27,7 +27,7 @@ Begin by creating a file named `app.bicep` with a Radius application and [contai
 
 ## Step 2: Deploy the app and container
 
-1. Deploy and run your app with the command:
+1. Deploy and run your app, then access the application by opening http://localhost:3000 in a browser.:
 
    ```bash
    rad run ./app.bicep
@@ -40,9 +40,22 @@ Begin by creating a file named `app.bicep` with a Radius application and [contai
 
    Resources:
       demo            Applications.Core/containers
+
+   Starting log stream...
+
+   + demo-df76d886c-sngm8 › demo
+   demo-df76d886c-sngm8 demo Using in-memory store: no connection string found
+   demo-df76d886c-sngm8 demo Server is running at http://localhost:3000
+   demo-df76d886c-sngm8 demo [port-forward] connected from localhost:3000 -> ::3000
    ```
 
-2. In a separate terminal window, run the following command, making sure to specify the Kubernetes namespace to which you deployed your app:
+   In your browser you should see the demo app:
+
+   <img src="./demoapp-howtopatchpod.png" alt="Screenshot of Radius Demo app" width="400"/>
+
+   When you're ready to move on to the next step, use `CTRL` + `C` to exit the command.
+
+2. Run the following command, making sure to specify the Kubernetes namespace to which you deployed your app:
 
    ```bash
    kubectl get pods -n <YOUR_KUBERNETES_NAMESPACE> -l app.kubernetes.io/name=demo -o custom-columns=POD:.metadata.name,STATUS:.status.phase,CONTAINER_NAMES:spec.containers[:].name,CONTAINER_IMAGES:spec.containers[:].image
