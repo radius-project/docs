@@ -12,25 +12,11 @@ Welcome to the Radius community!
 
 The best way to interact with the community is via the Radius Discord server:
 
-{{< button link="https://discord.gg/SRG3ePMKNy" text="Radius Discord" newtab="true" >}}
+{{< button link="https://aka.ms/radius/discord" text="Radius Discord" newtab="true" >}}
 
 ## Community meetings
 
-Every month we host a community meeting to showcase new features, review upcoming milestones, and engage in a Q&A. 
-Anyone from the Radius community can participate, present a topic, or host. All are welcome!
-
-### Meeting link
-
-The meeting link and details are sent out via email.
-
-### Present your topic
-
-To present a specific topic on the next Radius community call start by filling out this short form, [Radius community call presenter sign-up form](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbRw_b7M-8iE1NkIMvs0xAJFFUQlozVThYSzI4OVhRU0E3NlI0U05GNzZFTi4u).
-
-### Calendar
-
-| Date | Topic(s) | Meeting Link | Recording |
-|------|----------|--------------|-----------|
+Every month we host a community meeting to showcase new features, review upcoming milestones, and engage in a Q&A. Anyone from the Radius community can participate, present a topic, or host. All are welcome! For the meeting schedule, links, and more information, visit the Radius [community repo](https://github.com/radius-project/community#community-meetings).
 
 ## GitHub Issues & repositories
 
