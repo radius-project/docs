@@ -37,7 +37,7 @@ Note that the names of the Deployments, Services, and Config Maps all must match
 
     Load your Kubernetes YAML file into your Radius container resource through the `properties.runtimes.kubernetes.base` property which expects a string value containing all your Kubernetes data.
 
-{{< rad file="snippets/basemanifest.bicep" embed=true marker="//CONTAINER" >}}
+    {{< rad file="snippets/basemanifest.bicep" embed=true marker="//CONTAINER" >}}
 
 You can now deploy your Radius Application and verify that your Kubernetes objects are created in the desired namespace. 
 
@@ -57,10 +57,22 @@ You can now deploy your Radius Application and verify that your Kubernetes objec
 3. Your console output should look similar to:
 ```
 radius-system   controller-585dcd4c9b-5g2c9        1/1     Running            5 (91s ago)     13m
-<your-kubernetes-service>   <your-kubernetes-service>-5c464f66d4-s7n7w   0/1     Pending            0               0s
-<your-kubernetes-service>   <your-kubernetes-service>-5c464f66d4-s4tq8   0/1     Pending            0               0s
-<your-kubernetes-service>   <your-kubernetes-service>-5c464f66d4-tnvx4   0/1     Pending            0               0s
+my-microservice my-microservice-5c464f66d4-s7n7w   0/1     Pending            0               0s
+my-microservice my-microservice-5c464f66d4-s4tq8   0/1     Pending            0               0s
+my-microservice my-microservice-5c464f66d4-tnvx4   0/1     Pending            0               0s
 ```
+### Step 4: Clean up
+
+1. Run the following command to delete all Pods, Deployments, and Services in the `my-microservice` namespace:
+
+    ```bash
+    kubectl delete -n my-microservice -f ./deploy
+    ```
+2. Run the following command to delete the `my-microservice` namespace:
+
+    ```bash
+    kubectl delete namespace my-microservice
+    ```
 
 ## Further reading
 
