@@ -8,7 +8,7 @@ weight: 25
 
 Radius consists of a set of tools and services that together form the Radius platform.
 
-<img src="radius.png" alt="Diagram showing rad CLI and VSCode extension on local machine plus the Radius control plane on a Kubernetes cluster" width="600px" >
+{{< image src="radius.png" alt="Diagram showing rad CLI and VSCode extension on local machine plus the Radius control plane on a Kubernetes cluster" width="600px" >}}
 
 ## Step 1: Install the rad CLI
 

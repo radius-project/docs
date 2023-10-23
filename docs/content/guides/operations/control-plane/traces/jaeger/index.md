@@ -60,7 +60,7 @@ The following steps show you how to configure the Radius control plane to send d
 
 2. In your browser, go to [http://localhost:16686](http://localhost:16686) to see the Jaeger UI:
 
-   <img src="jaeger_ui.png" alt="" style="width:100%" >
+   {{< image src="jaeger_ui.png" alt="" style="width:100%" >}}
 
 ## References
 
