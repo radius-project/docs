@@ -32,7 +32,7 @@ The latest release docs are available at https://radapp.io
 
 ### Edge docs
 
-Edge docs are available at [https://edge.radapp.io](https://edge.docs.radapp.io)
+Edge docs are available at https://edge.docs.radapp.io
 
 ### Staging docs
 
