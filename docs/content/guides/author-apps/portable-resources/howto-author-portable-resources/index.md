@@ -10,7 +10,7 @@ tags: ["portability"]
 
 This guide will teach you how to author a portable resource for your [Radius Application]({{< ref "/guides/author-apps/application/overview" >}}).
 
-### Prerequisites
+## Prerequisites
 
 Before you get started, you'll need to make sure you have the following tools and resources:
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
@@ -41,7 +41,7 @@ Add a RedisCache resource with the `resourceProvisioning` mode as `manual`. This
 
 {{< rad file="snippets/app-redis-manual.bicep" embed=true marker="//MANUAL" >}}
 
-Refer to the [Redis resource schema] ({{< ref "reference/resource-schema/cache/redis" >}}) for more details.
+Refer to the [Redis resource schema]({{< ref "reference/resource-schema/cache/redis" >}}) for more details.
 
 {{% /codetab %}}
 
@@ -64,7 +64,7 @@ You can access the portable resource via [`connections`]({{< ref "guides/author-
 
 1. Visit [localhost:3000](http://localhost:3000) in your browser. You should see the following page, now showing injected environment variables:
 
-   <img src="./demo-with-redis-screenshot.png" alt="Screenshot of the demo app with all environment variables" width=1000px />
+   {{< image src="demo-with-redis-screenshot.png" alt="Screenshot of the demo app with all environment variables" width=1000px >}}
 
 ## Cleanup
 
@@ -76,5 +76,5 @@ rad app delete -a demo
 
 ## Further reading
 
-- [Portable resource overview]({{< ref portable-resources >}})
+- [Portable resource overview]({{< ref "/guides/author-apps/portable-resources/overview" >}})
 - [Radius Application overview]({{< ref "/guides/author-apps/application/overview" >}})
