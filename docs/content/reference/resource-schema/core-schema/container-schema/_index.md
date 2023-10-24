@@ -34,7 +34,7 @@ weight: 300
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| image | y | The registry and image to download and run in your container. Follows the format `<registry-hostname>:<port>/<image-name>:<tag>` where registry hostname is optional and defaults to the Docker public registry, port is optional and defaults to 443, tag is optional and defaults to `latest`.| `myregistry.azurecr.io/myimage:latest`
+| image | y | The registry and image to download and run in your container. Follows the format `<registry-hostname>:<port>/<image-name>:<tag>` where registry hostname is optional and defaults to the Docker public registry, port is optional and defaults to 443, tag is optional and defaults to `latest`.| `ghcr.io/USERNAME/myimage:latest`
 | env | n | A list of environment variables to be set for the container. | `'ENV_VAR': 'value'`
 | command | n | Entrypoint array. Overrides the container image's ENTRYPOINT. | `['/bin/sh']`
 | args | n | Arguments to the entrypoint. Overrides the container image's CMD. | `['-c', 'while true; do echo hello; sleep 10;done']`
