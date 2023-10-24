@@ -141,9 +141,7 @@ rad init
     TEST SUITE: None
     ```
 
-    {{< alert title="⚠️ Chart Directory" color="warning" >}}
-    If you see an error message like **Error: path "./Chart" not found** then you are in the wrong directory. Make sure your terminal is in the `./demo` directory of the `samples` repository.
-    {{< /alert >}}
+    {{< alert title="⚠️ Chart Directory" color="warning" >}} If you see an error message like **Error: path "./Chart" not found** then you are in the wrong directory. Make sure your terminal is in the `./demo` directory of the `samples` repository.{{< /alert >}}
 
 3. Run the following command to check if everything is running:
 
@@ -269,9 +267,7 @@ From here you will go through a series of steps to incrementally add more Radius
 
     This means that Radius has found the Kubernetes `Deployment` running your container and cataloged it as part of the application. 
 
-    {{< alert title="💡 Application Name" color="info" >}}
-    Radius will use the Kubernetes namespace as the application name by default. 
-    {{< /alert >}}
+    {{< alert title="💡 Application Name" color="info" >}}Radius will use the Kubernetes namespace as the application name by default. {{< /alert >}}
 
 ## Step 5. Add Recipe
 
@@ -382,9 +378,7 @@ In this step you will:
 
     Look at the status of the `recipe.radapp.io/db` resource. If the status is not `Ready`, then try running the command again after a delay. The status should show as `Ready` when the Recipe has fully-deployed. You can also see additional resources starting with `redis-`. These were created by the Recipe.
 
-    {{< alert title="⚠️ Missing resources" color="warning" >}}
-    If you do not see the additional resources starting with `redis-` then it's likely they are in a different Kubernetes namespace. Run `kubectl get all -A` to see everything.
-    {{< /alert >}}
+    {{< alert title="⚠️ Missing resources" color="warning" >}} If you do not see the additional resources starting with `redis-` then it's likely they are in a different Kubernetes namespace. Run `kubectl get all -A` to see everything.{{< /alert >}}
 
 5. Now that you have added a Recipe, run this command to display the state of the Radius application:
 
