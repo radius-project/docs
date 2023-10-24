@@ -112,9 +112,7 @@ rad init
     - Create the Kubernetes Secret `redis-secret` containing the Redis URL.
     - Install the Helm chart.
 
-    {{< alert title="💡 Redis" color="info" >}}
-    For now you're not going to actually deploy Redis and the URL in this step is fake. You will deploy Redis using a Recipe later in the tutorial that will replace the fake URL contained within `redis-secret` with an actual container and URL.
-    {{< /alert >}}
+    {{< alert title="💡 Redis" color="info" >}} For now you're not going to actually deploy Redis and the URL in this step is fake. You will deploy Redis using a Recipe later in the tutorial that will replace the fake URL contained within `redis-secret` with an actual container and URL.{{< /alert >}}
 
 2. Complete these steps by running the following commands:
 
