@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Tutorial: Use Helm to run your first app"
-linkTitle: "Helm application"
+linkTitle: "Run app using Helm"
 weight: 200
 description: "Take a tour of Radius by updating an existing Helm chart to add Radius support."
 categories: "Tutorial"
