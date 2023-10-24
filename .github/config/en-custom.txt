@@ -19,6 +19,7 @@ ClusterIssuer
 CLI
 CLIs
 CMD
+CNCF
 CQRS
 CRDs
 CRUDL
@@ -41,6 +42,7 @@ DocumentDB
 dcd
 EKS
 eksClusterName
+ElastiCache
 entrypoint
 EOF
 Extensibility
@@ -90,6 +92,7 @@ PowerShell
 Pre
 PubSub
 ProjectRadius
+radify
 RBAC
 RabbitMQ
 ResourceDeploymentClient
@@ -958,6 +961,7 @@ PodSpec
 composable
 CRD
 nd
+OSI
 scaffolded
 bb
 df
@@ -966,6 +970,7 @@ mongodatabases
 secureString
 btdgzez
 bzmp
+Webhook
 Appi
 ness
 DevOps
@@ -979,3 +984,25 @@ SRE
 SREs
 OSI
 ghcr
+png
+src
+todoapp
+todolist
+mockup
+diataxis
+appdiagram
+tmp
+jpg
+buildingblocks
+svg
+ClusterIP
+NodePort
+replicaset
+radified
+cd
+ddgq
+dfc
+fh
+qd
+vf
+zht

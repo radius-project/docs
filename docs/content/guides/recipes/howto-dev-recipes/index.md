@@ -13,7 +13,7 @@ Local development environments created by the rad init command include a set of 
 ## Prerequisites
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-radius-bicep-vs-code-extension" >}})
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 - [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
 
 ## Step 1: Initialize a Radius environment
@@ -42,13 +42,13 @@ Local development environments created by the rad init command include a set of 
    
    ```
    NAME      TYPE                                    TEMPLATE KIND  TEMPLATE VERSION  TEMPLATE
-   default   Applications.Datastores/sqlDatabases    bicep                            radius.azurecr.io/recipes/local-dev/sqldatabases:latest
-   default   Applications.Messaging/rabbitMQQueues   bicep                            radius.azurecr.io/recipes/local-dev/rabbitmqqueues:latest
-   default   Applications.Dapr/pubSubBrokers         bicep                            radius.azurecr.io/recipes/local-dev/pubsubbrokers:latest
-   default   Applications.Dapr/secretStores          bicep                            radius.azurecr.io/recipes/local-dev/secretstores:latest
-   default   Applications.Dapr/stateStores           bicep                            radius.azurecr.io/recipes/local-dev/statestores:latest
-   default   Applications.Datastores/mongoDatabases  bicep                            radius.azurecr.io/recipes/local-dev/mongodatabases:latest
-   default   Applications.Datastores/redisCaches     bicep                            radius.azurecr.io/recipes/local-dev/rediscaches:latest
+   default   Applications.Datastores/sqlDatabases    bicep                            ghcr.io/radius-project/recipes/local-dev/sqldatabases:latest
+   default   Applications.Messaging/rabbitMQQueues   bicep                            ghcr.io/radius-project/recipes/local-dev/rabbitmqqueues:latest
+   default   Applications.Dapr/pubSubBrokers         bicep                            ghcr.io/radius-project/recipes/local-dev/pubsubbrokers:latest
+   default   Applications.Dapr/secretStores          bicep                            ghcr.io/radius-project/recipes/local-dev/secretstores:latest
+   default   Applications.Dapr/stateStores           bicep                            ghcr.io/radius-project/recipes/local-dev/statestores:latest
+   default   Applications.Datastores/mongoDatabases  bicep                            ghcr.io/radius-project/recipes/local-dev/mongodatabases:latest
+   default   Applications.Datastores/redisCaches     bicep                            ghcr.io/radius-project/recipes/local-dev/rediscaches:latest
    ```
    > Visit the [Recipes repo](https://github.com/radius-project/recipes) to learn more about the definition of these `local-dev` recipe templates.
 
@@ -100,7 +100,7 @@ Note that no Recipe name is specified within 'db', so it will be using the defau
 1. List your Kubernetes Pods to see the infrastructure containers deployed by the Recipe:
 
    ```bash
-   kubectl get pods -n default-recipes
+   kubectl get pods -n default-local-dev-app
    ```
 
    You will see your 'frontend' container, along with the Redis cache that was automatically created by the default local-dev Recipe:

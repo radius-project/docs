@@ -19,8 +19,8 @@ For more details on the app and access to the source code, visit the `tutorials/
 ## Prerequisites
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-radius-bicep-vs-code-extension" >}})
-- [Radius environment]({{< ref "installation#step-3-initialize-the-radius-control-plane-and-the-radius-environment" >}})
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
+- [Radius environment]({{< ref "installation#step-3-initialize-radius" >}})
 - [Dapr installed on your Kubernetes cluster](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/)
 
 ## Step 1: Define the application, `backend` container, and Dapr state store
@@ -98,7 +98,7 @@ Add a `frontend` [container]({{< ref "guides/author-apps/containers" >}}) which 
 
 In your browser, navigate to the endpoint (e.g. [http://localhost:8080](http://localhost:8080)) to view and interact with your application:
 
-   <img src="frontend.png" alt="Screenshot of frontend application" width=500 >
+   {{< image src="frontend.png" alt="Screenshot of frontend application" width=500 >}}
 
 ## Cleanup
 

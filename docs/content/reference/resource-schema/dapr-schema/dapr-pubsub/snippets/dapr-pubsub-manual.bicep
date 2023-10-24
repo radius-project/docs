@@ -20,7 +20,7 @@ resource publisher 'Applications.Core/containers@2023-10-01-preview' = {
       }
     }
     container: {
-      image: 'radius.azurecr.io/magpie:latest'
+      image: 'ghcr.io/radius-project/magpiego:latest'
     }
   }
 }

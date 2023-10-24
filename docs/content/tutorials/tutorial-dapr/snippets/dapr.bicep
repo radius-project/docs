@@ -18,7 +18,7 @@ resource backend 'Applications.Core/containers@2023-10-01-preview' = {
     application: app.id
     container: {
       // This image is where the app's backend code lives
-      image: 'radius.azurecr.io/samples/dapr-backend:latest'
+      image: 'ghcr.io/radius-project/samples/dapr-backend:latest'
       ports: {
         orders: {
           containerPort: 3000
@@ -59,7 +59,7 @@ resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
     application: app.id
     container: {
       // This image is where the app's frontend code lives
-      image: 'radius.azurecr.io/samples/dapr-frontend:latest'
+      image: 'ghcr.io/radius-project/samples/dapr-frontend:latest'
       env: {
         // An environment variable to tell the frontend container where to find the backend
         CONNECTION_BACKEND_APPID: 'backend'

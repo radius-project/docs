@@ -18,7 +18,7 @@ The [eShop on Containers](https://github.com/dotnet-architecture/eShopOnContaine
 
 ### Architecture
 
-<img src="architecture.png" alt="Architecture diagram of eShop on containers" width=900 ><br />
+{{< image src="architecture.png" alt="Architecture diagram of eShop on containers" width=900 >}} <br />
 
 eShop on Containers uses a microservice oriented architecture implementation with multiple autonomous microservices (each one owning its own data/db) and implementing different approaches within each microservice (simple CRUD vs. DDD/CQRS patterns). The application uses HTTP as the communication protocol between the client apps and the microservices and supports asynchronous communication for data updates propagation across multiple services based on Integration Events and an Event Bus.
 
@@ -38,6 +38,6 @@ Adding Radius to the eShop on containers application allows teams to:
 - Easily manage configuration and credentials between infrastructure and services, all within the app model
 - Simplify deployment with Bicep and Azure Resource Manager (ARM)
 
-{{< button text="View eShop reference app in samples" githubRepo="samples" githubPath="samples/eshop" color="success" size="btn-lg" >}}
+{{< button text="View eShop sample" githubRepo="samples" githubPath="samples/eshop" color="success" size="btn-lg" >}}
 
 *Visit the [GitHub docs]({{< ref github >}}) if you need access to the organization*
