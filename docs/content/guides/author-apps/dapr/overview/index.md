@@ -20,7 +20,7 @@ Follow the [Dapr installation instructions](https://docs.dapr.io/operations/host
 
 A [Dapr sidecar](https://docs.dapr.io/concepts/dapr-services/sidecar/) allows your services to interact with Dapr building blocks. It is required if your service leverages Dapr.
 
-<img src="dapr-sidecar.png" style="width:600px" alt="Diagram of the Dapr sidecar" /><br />
+{{< image src="dapr-sidecar.png" style="width:600px" alt="Diagram of the Dapr sidecar" >}} <br />
 
 You can easily add the Dapr sidecar to your [Containers]({{< ref "guides/author-apps/containers" >}}) using a Dapr sidecar extension:
 
@@ -38,7 +38,7 @@ Your container can now interact with the sidecar using the Dapr [building block 
 
 Dapr resources make it easy to model and configure [Dapr building block APIs](https://docs.dapr.io/developing-applications/building-blocks/). Simply specify the building block and the backing resource, and Radius will apply the accompanying Dapr component configuration.
 
-<img src="dapr-buildingblocks.png" style="width:1000px" alt="Diagram of all the Dapr building blocks" /><br />
+{{< image src="dapr-buildingblocks.png" style="width:1000px" alt="Diagram of all the Dapr building blocks" >}} <br />
 
 Model your building blocks as resources:
 

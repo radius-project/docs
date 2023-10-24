@@ -102,7 +102,7 @@ Building app.bicep...
 
 Once the deployment is complete you should see a public endpoint displayed at the end. Navigating to this public endpoint should show you your application that is accessed via HTTPS, assuming that you have a valid TLS certificate:
 
-<img src="https-app.png" alt="View TLS certificate" width="400px" />
+{{< image src="https-app.png" alt="View TLS certificate" width="400px" >}}
 
 ## Done
 
