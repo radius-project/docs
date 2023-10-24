@@ -22,7 +22,14 @@ This tutorial will teach you the following about Radius:
 
 ## Step 1. Clone and open the sample code
 
-{{< tabs "Codespace" "Local machine" >}}
+Use the terminal to clone the `samples` repository locally and navigate to the `./samples/demo` directory:
+
+```bash
+git clone https://github.com/radius-project/samples.git
+cd ./samples/samples/demo
+```
+
+<!-- {{< tabs "Codespace" "Local machine" >}}
 
 {{% codetab %}}
 
@@ -35,8 +42,8 @@ Once launched you should already have the application cloned locally. Use the te
 ```bash
 cd ./samples/demo
 ```
-
 {{% /codetab %}}
+
 {{% codetab %}}
 Use the terminal to clone the `samples` repository locally and navigate to the `./samples/demo` directory:
 
@@ -46,18 +53,18 @@ cd ./samples/samples/demo
 ```
 {{% /codetab %}}
 
-{{< /tabs >}}
+{{< /tabs >}} -->
 
 
 ## Step 2. Initialize Radius
 
 Initialize Radius. For this example, answer **NO** when asked whether to set up an application: 
 
+> Select 'No' when prompted to create an application.
+
 ```bash
 rad init
 ```
-
-> Select 'No' when prompted to create an application.
 
 ## Step 3. Understand and deploy the application
 
@@ -192,6 +199,7 @@ From here you will go through a series of steps to incrementally add more Radius
     metadata:
       name: webapp
       namespace: {{ .Release.Namespace }}
+      # Add the following two lines
       annotations:
         radapp.io/enabled: 'true'
     spec:
