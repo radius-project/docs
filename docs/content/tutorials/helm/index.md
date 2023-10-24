@@ -22,14 +22,7 @@ This tutorial will teach you the following about Radius:
 
 ## Step 1. Clone and open the sample code
 
-Use the terminal to clone the `samples` repository locally and navigate to the `./samples/demo` directory:
-
-```bash
-git clone https://github.com/radius-project/samples.git
-cd ./samples/samples/demo
-```
-
-<!-- {{< tabs "Codespace" "Local machine" >}}
+{{< tabs "Codespace" "Local machine" >}}
 
 {{% codetab %}}
 
@@ -53,7 +46,7 @@ cd ./samples/samples/demo
 ```
 {{% /codetab %}}
 
-{{< /tabs >}} -->
+{{< /tabs >}}
 
 
 ## Step 2. Initialize Radius
