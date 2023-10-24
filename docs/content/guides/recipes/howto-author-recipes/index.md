@@ -107,7 +107,7 @@ Resources are populated automatically for Bicep Recipes for any new Azure or AWS
 Recipes leverage [Bicep registries](https://learn.microsoft.com/azure/azure-resource-manager/bicep/private-module-registry) for template storage. Once you've authored a Recipe, you can publish it to your preferred OCI-compliant registry with [`rad bicep publish`]({{< ref rad_bicep_publish >}}):
 
 ```bash
-rad bicep publish --file myrecipe.bicep --target br:myregistry.azurecr.io/recipes/myrecipe:1.1.0
+rad bicep publish --file myrecipe.bicep --target br:ghcr.io/USERNAME/recipes/myrecipe:1.1.0
 ```
 
 {{% /codetab %}}
@@ -129,7 +129,7 @@ Now that your Recipe template has been stored, you can add it your Radius Enviro
 {{% codetab %}}
 
 ```bash
-rad recipe register myrecipe --environment myenv --resource-type Applications.Datastores/redisCaches --template-kind bicep --template-path myregistry.azurecr.io/recipes/myrecipe:1.1.0
+rad recipe register myrecipe --environment myenv --resource-type Applications.Datastores/redisCaches --template-kind bicep --template-path ghcr.io/USERNAME/recipes/myrecipe:1.1.0
 ```
 
 {{% /codetab %}}
