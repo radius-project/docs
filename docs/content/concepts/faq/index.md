@@ -131,6 +131,14 @@ Radius is a platform that not only deploys and manages cloud infrastructure, but
 
 Crossplane CRDs can be used within Radius Recipes to deploy and manage cloud infrastructure if teams want to leverage existing Crossplane investments. Both Bicep and Terraform templates are able to include Kubernetes resources.
 
+### How does Radius compare to Open Application Model (OAM)?
+
+[OAM](https://oam.dev) is a specification for describing applications so that the application description is separated from the details of how the application is deployed onto and managed by the infrastructure.
+
+The key difference between OAM and Radius is that OAM is a spec, whereas Radius is an implementation. The expectation with OAM is that there would be a common  spec and if it was successful, there would be multiple (compatible) implementations of OAM for various platforms. [Kubevela](https://github.com/kubevela/kubevela) is one example of an OAM implementation. 
+
+With Radius we're providing an implementation that's meant to be re-used and hosted in different scenarios. Right now we're focused on Kubernetes. Radius is also taking a more holistic approach with Radius that's bigger than just compute and networking. We're doing more to work with existing tools like Terraform as well that are outside of Kubernetes. Lastly, Radius puts a lot of emphasis on the developer and operator handoff by building features such as Recipes and Environments that bind an application to different cloud providers and runtime platforms.
+
 ### How does Radius compare to Waypoint?
 
 [HCP Waypoint](https://developer.hashicorp.com/hcp/docs/waypoint) is a HashiCorp-managed application deployment platform that simplifies the process of deploying applications into your infrastructure and helps you standardize your deployment process.
