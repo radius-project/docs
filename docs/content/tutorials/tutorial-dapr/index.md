@@ -20,8 +20,25 @@ For more details on the app and access to the source code, visit the `tutorials/
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
-- [Radius environment]({{< ref "installation#step-3-initialize-radius" >}})
+- [Setup a supported Kubernetes cluster](https://docs.radapp.io/guides/operations/kubernetes/overview/#supported-clusters)
 - [Dapr installed on your Kubernetes cluster](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/)
+
+## Step 1: Initialize a Radius Environment
+
+1. Begin in a new directory for your application:
+
+   ```bash
+   mkdir rad-dapr
+   cd rad-dapr
+   ```
+   
+2. Initialize a new dev environment:
+   
+   *Select 'Yes' when prompted to create an application.*
+
+   ```bash
+   rad init
+   ```
 
 ## Step 1: Define the application, `backend` container, and Dapr state store
 
@@ -102,12 +119,12 @@ In your browser, navigate to the endpoint (e.g. [http://localhost:8080](http://l
 
 ## Cleanup
 
-1. Press CTRL+C to terminate the `rad run` log console
+1. Press `CTRL`+`C` to terminate the log console
 
-1. Run `rad app delete` to cleanup your Radius Application, containers, and Dapr statestore. The Recipe resources (_Redis container and Dapr component_) are also automatically cleaned up.
+1. Run the following command to cleanup your Radius Application, containers, and Dapr statestore. The Recipe resources (_Redis container and Dapr component_) are also automatically cleaned up.
 
    ```bash
-   rad app delete -a dapr
+   rad app delete
    ```
 
 ## Next steps
