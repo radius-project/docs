@@ -40,13 +40,13 @@ For more details on the app and access to the source code, visit the `tutorials/
    rad init
    ```
 
-## Step 1: Define the application, `backend` container, and Dapr state store
+## Step 2: Define the application, `backend` container, and Dapr state store
 
 Begin by creating a new file named `dapr.bicep` with a Radius Application that consists of a `backend` container and Dapr state store with Redis:
 
 {{< rad file="snippets/dapr.bicep" embed=true marker="//BACKEND" >}}
 
-## Step 2: Deploy the `backend` application
+## Step 3: Deploy the `backend` application
 
 1. Deploy the application's `backend` container and Dapr state store:
 
@@ -85,13 +85,13 @@ Begin by creating a new file named `dapr.bicep` with a Radius Application that c
    default-dapr   statestore   state.redis   v1               2023-07-21 16:04.27   21m  
    ```
 
-## Step 3: Define the `frontend` container
+## Step 4: Define the `frontend` container
 
 Add a `frontend` [container]({{< ref "guides/author-apps/containers" >}}) which will serve as the application's user interface.
 
 {{< rad file="snippets/dapr.bicep" embed=true marker="//FRONTEND" >}}
 
-## Step 4. Deploy and run the `frontend` application
+## Step 5. Deploy and run the `frontend` application
 
 1. Use Radius to deploy and run the application with a single command:
 
@@ -111,7 +111,7 @@ Add a `frontend` [container]({{< ref "guides/author-apps/containers" >}}) which 
       statestore      Applications.Dapr/stateStores
    ```
 
-## Step 5. Test your application
+## Step 6. Test your application
 
 In your browser, navigate to the endpoint (e.g. [http://localhost:8080](http://localhost:8080)) to view and interact with your application:
 
