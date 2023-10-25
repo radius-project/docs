@@ -28,7 +28,7 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
         source: mongodb.id
       }
       backend: {
-        source: 'http://backend:3000'
+        source: 'http://backend:80'
       }
     }
   }
