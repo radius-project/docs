@@ -26,32 +26,36 @@ Note that the names of the Deployments, Services, and Config Maps all must match
 
 {{< rad file="snippets/basemanifest.yaml" embed=true lang="yaml">}}
 
-### Step 2: Add the Kubernetes base YAML configurations to your Radius application definition
-1. Container configurations:
+### Step 2: Define a Radius container
 
-    Define your Radius container resource port with the port of your Kubernetes `Service` as well as the image container location that your service is dependent on.
+[Radius containers]({{< ref "/guides/author-apps/containers/overview" >}}) represent a containerized workload within your Radius Application. You can define a Radius container and reference your Kubernetes YAML in order to deploy and manage it within Radius.
 
-2. Runtime configuration:
+In a file named "app.bicep" add a new Container resource, specifying:
 
-    Load your Kubernetes YAML file into your Radius container resource through the `properties.runtimes.kubernetes.base` property which expects a string value containing all your Kubernetes data.
+- The container image
+- The port(s) your container exposes
+- The contents of your Kubernetes YAML file
 
-    {{< rad file="snippets/basemanifest.bicep" embed=true marker="//CONTAINER" >}}
 
-You can now deploy your Radius Application and verify that your Kubernetes objects are created in the desired namespace. 
+{{< rad file="snippets/basemanifest.bicep" embed=true marker="//CONTAINER" >}}
 
 ### Step 3: Deploy your container
 
-1. Deploy your application with the command:
+Now that you've defined your Radius Container you can deploy it into your Application.
+
+1. Run [`rad deploy`]({{< ref "rad_deploy" >}}) to deploy your application:
 
     ```bash
     rad deploy -a demo
     ```
 
-2. Run the following command to verify and follow the Kubernetes pod creations: 
-    ```bash
-    kubectl get pods --namespace my-microservice 
-    ```
+2. Run `kubectl get all` to verify the Kubernetes resources were created:
 
+    ```bash
+    kubectl get all -n default-demo
+    ```
+   
+   > Radius deploys app resources into a unique namespace for every app. For more information refer to the [Kubernetes docs]({{< ref "/guides/operations/kubernetes/overview#namespace-mapping" >}}).
 3. Your console output should look similar to:
 ```
 radius-system   controller-585dcd4c9b-5g2c9        1/1     Running            5 (91s ago)     13m
