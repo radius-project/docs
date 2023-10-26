@@ -2,7 +2,7 @@
 {{ $content := .Inner }}
 
 {{ if ne $version "edge" }}
-{{ $content }}
+{{ (print "\n" $content "\n") | markdownify }}
 {{ else }}
-To try out a stable release visit the [latest docs](https://docs.radapp.io).
+{{ (print "\n" "To try out a stable release visit the [latest docs](https://docs.radapp.io)." "\n") | markdownify }}
 {{ end }}
