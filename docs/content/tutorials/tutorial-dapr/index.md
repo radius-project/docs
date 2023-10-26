@@ -20,16 +20,33 @@ For more details on the app and access to the source code, visit the `tutorials/
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
-- [Radius environment]({{< ref "installation#step-3-initialize-radius" >}})
+- [Setup a supported Kubernetes cluster](https://docs.radapp.io/guides/operations/kubernetes/overview/#supported-clusters)
 - [Dapr installed on your Kubernetes cluster](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/)
 
-## Step 1: Define the application, `backend` container, and Dapr state store
+## Step 1: Initialize a Radius Environment
+
+1. Begin in a new directory for your application:
+
+   ```bash
+   mkdir dapr
+   cd dapr
+   ```
+   
+2. Initialize a new dev environment:
+   
+   *Select 'Yes' when prompted to create an application.*
+
+   ```bash
+   rad init
+   ```
+
+## Step 2: Define the application, `backend` container, and Dapr state store
 
 Begin by creating a new file named `dapr.bicep` with a Radius Application that consists of a `backend` container and Dapr state store with Redis:
 
 {{< rad file="snippets/dapr.bicep" embed=true marker="//BACKEND" >}}
 
-## Step 2: Deploy the `backend` application
+## Step 3: Deploy the `backend` application
 
 1. Deploy the application's `backend` container and Dapr state store:
 
@@ -68,13 +85,13 @@ Begin by creating a new file named `dapr.bicep` with a Radius Application that c
    default-dapr   statestore   state.redis   v1               2023-07-21 16:04.27   21m  
    ```
 
-## Step 3: Define the `frontend` container
+## Step 4: Define the `frontend` container
 
 Add a `frontend` [container]({{< ref "guides/author-apps/containers" >}}) which will serve as the application's user interface.
 
 {{< rad file="snippets/dapr.bicep" embed=true marker="//FRONTEND" >}}
 
-## Step 4. Deploy and run the `frontend` application
+## Step 5. Deploy and run the `frontend` application
 
 1. Use Radius to deploy and run the application with a single command:
 
@@ -94,7 +111,7 @@ Add a `frontend` [container]({{< ref "guides/author-apps/containers" >}}) which 
       statestore      Applications.Dapr/stateStores
    ```
 
-## Step 5. Test your application
+## Step 6. Test your application
 
 In your browser, navigate to the endpoint (e.g. [http://localhost:8080](http://localhost:8080)) to view and interact with your application:
 
@@ -102,12 +119,12 @@ In your browser, navigate to the endpoint (e.g. [http://localhost:8080](http://l
 
 ## Cleanup
 
-1. Press CTRL+C to terminate the `rad run` log console
+1. Press `CTRL`+`C` to terminate the log console
 
-1. Run `rad app delete` to cleanup your Radius Application, containers, and Dapr statestore. The Recipe resources (_Redis container and Dapr component_) are also automatically cleaned up.
+1. Run the following command to cleanup your Radius Application, containers, and Dapr statestore. The Recipe resources (_Redis container and Dapr component_) are also automatically cleaned up.
 
    ```bash
-   rad app delete -a dapr
+   rad app delete
    ```
 
 ## Next steps
