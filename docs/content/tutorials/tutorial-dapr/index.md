@@ -28,8 +28,8 @@ For more details on the app and access to the source code, visit the `tutorials/
 1. Begin in a new directory for your application:
 
    ```bash
-   mkdir rad-dapr
-   cd rad-dapr
+   mkdir dapr
+   cd dapr
    ```
    
 2. Initialize a new dev environment:
