@@ -11,7 +11,7 @@ tags: ["metrics", "observability"]
 [Grafana](https://grafana.com/) is an open source visualization and analytics tool that allows you to query, visualize, alert on, and explore your metrics. This guide will show you how to install Grafana and configure it to visualize the Radius control plane metrics from Prometheus.
 
 {{% alert color="primary" %}}
-Users may experience issues when running in non-local clusters, please take a look at the official [Grafana](https://grafana.com/) docs for help on debugging.
+This how-to article has been validated only on a local Kubernetes cluster.  If you test in other configurations and have questions, please review [Grafana](https://grafana.com/).
 {{% /alert %}}
 
 ## Example dashboards

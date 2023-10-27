@@ -12,7 +12,7 @@ tags: ["metrics", "observability"]
 
 
 {{% alert color="primary" %}}
-Users may experience issues when running in non-local clusters, please take a look at the official [Prometheus](https://prometheus.io/) docs for help on debugging.
+This how-to article has been validated only on a local Kubernetes cluster.  If you test in other configurations and have questions, please review [Prometheus](https://prometheus.io/) docs for help on debugging.
 {{% /alert %}}
 
 ## Install Prometheus on Kubernetes
