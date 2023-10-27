@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To: Patch Kubernetes resources using PodSpec"
-linkTitle: "Patch with PodSpec"
+linkTitle: "Patch using PodSpec"
 description: "Learn how to patch Kubernetes resources using PodSpec definitions"
 weight: 300
 slug: 'patch-podspec'
@@ -27,7 +27,7 @@ Begin by creating a file named `app.bicep` with a Radius application and [contai
 
 ## Step 2: Deploy the app and container
 
-1. Deploy and run your app, then access the application by opening http://localhost:3000 in a browser.:
+1. Deploy and run your app:
 
    ```bash
    rad run ./app.bicep
@@ -49,11 +49,11 @@ Begin by creating a file named `app.bicep` with a Radius application and [contai
    demo-df76d886c-sngm8 demo [port-forward] connected from localhost:3000 -> ::3000
    ```
 
-   In your browser you should see the demo app:
+   Access the application by opening [http://localhost:3000](http://localhost:3000) in a browser, where you should see the demo app:
 
-   <img src="./demoapp-howtopatchpod.png" alt="Screenshot of Radius Demo app" width="400"/>
+   <img src="./demoapp-howtopatchpod.png" alt="Screenshot of Radius Demo app" width="600"/>
 
-   When you're ready to move on to the next step, use `CTRL` + `C` to exit the command.
+   <br> When you're ready to move on to the next step, use `CTRL` + `C` to exit the command.
 
 2. Run the following command, making sure to specify the Kubernetes namespace to which you deployed your app:
 
@@ -70,8 +70,64 @@ Begin by creating a file named `app.bicep` with a Radius application and [contai
 
 ## Step 3: Add a PodSpec to the container definition
 
-//TODO
+Add the following [`runtimes`]({{< ref "reference/resource-schema/core-schema/container-schema#runtimes" >}}) under `properties` of the container definition in your `app.bicep` file:
 
-## Step 4: Redeploy the app with the PodSpec
+{{< rad file="snippets/patch-runtime.bicep" embed=true markdownConfig="{linenos=table,hl_lines=[\"16-28\"]}" >}}
 
-//TODO
+> Remember to save your `app.bicep` file after you've made the above changes.
+
+## Step 4: Redeploy your app with the PodSpec added
+
+1. Deploy and run your app again:
+
+   ```bash
+   rad run ./app.bicep
+   ```
+
+   Once the deployment completes successfully, you should see the same deployment completion confirmation message as before, but this time with some system logs from `log-collector` streaming to your console output:
+
+   ```
+   Starting log stream...
+
+   + demo-547d7dc77f-nmqpk › log-collector
+   + demo-547d7dc77f-nmqpk › demo
+   demo-547d7dc77f-nmqpk log-collector Fluent Bit v2.1.8
+   demo-547d7dc77f-nmqpk log-collector * Copyright (C) 2015-2022 The Fluent Bit Authors
+   demo-547d7dc77f-nmqpk log-collector * Fluent Bit is a CNCF sub-project under the umbrella of Fluentd
+   demo-547d7dc77f-nmqpk log-collector * https://fluentbit.io
+   demo-547d7dc77f-nmqpk log-collector
+   ```
+
+   Access the application by opening [http://localhost:3000](http://localhost:3000) in a browser, where you should see the demo app again unchanged from before:
+
+   <img src="./demoapp-howtopatchpod.png" alt="Screenshot of Radius Demo app" width="600"/>
+
+   <br> When you're ready to move on to the next step, use `CTRL` + `C` to exit the command.
+
+2. Run the following command, making sure to specify the Kubernetes namespace to which you deployed your app:
+
+   ```bash
+   kubectl get pods -n <YOUR_KUBERNETES_NAMESPACE> -l app.kubernetes.io/name=demo -o custom-columns=POD:.metadata.name,STATUS:.status.phase,CONTAINER_NAMES:spec.containers[:].name,CONTAINER_IMAGES:spec.containers[:].image
+   ```
+
+   You should now see in the output the original `demo` app container as before, but also an additional `log-collector` container that is running in your pod, similar to the following:
+
+   ```
+   POD                     STATUS    CONTAINER_NAMES      CONTAINER_IMAGES
+   demo-547d7dc77f-nmqpk   Running   log-collector,demo   ghcr.io/radius-project/fluent-bit:2.1.8,radius.azurecr.io/tutorial/webapp:edge
+   ```
+
+   The `log-collector` container was deployed using the PodSpec definition you added to your `app.bicep` file in the `runtimes` property you added, and is now running alongside your original `demo` app container.
+
+## Cleanup
+
+Run the following command to [delete]({{< ref "guides/deploy-apps/howto-delete" >}}) your app and container:
+   
+   ```bash
+   rad app delete
+   ```
+
+## Further reading
+
+- [Kubernetes in Radius containers]({{< ref "guides/author-apps/containers/overview#kubernetes" >}})
+- [PodSpec in Radius containers]({{< ref "reference/resource-schema/core-schema/container-schema#runtimes" >}})
