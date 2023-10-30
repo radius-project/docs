@@ -144,11 +144,17 @@ Radius is a new project that takes what we learned from OAM and focuses more on 
 
 While Radius also is able to model and deploy applications, it also provides an application graph and Recipes to offer an end-to-end platform that is application-focused at every stage. Radius is more than an abstraction and deployment automation. The Radius app graph allows teams to understand their entire application and all the dependencies within it, even after an application is deployed. Recipes are also more than template automation. They provide abstraction + encapsulation so developers never are required to directly interact with cloud infrastructure templates or parameters.
 
-### Does does Radius compare to Tanzu?
+### How does Radius compare to Tanzu?
 
 [Tanzu](https://tanzu.vmware.com/) is a portfolio of products and services for modernizing applications and infrastructure with a common goal: deliver better software to production, continuously.
 
 Radius is an open-source project that provides a platform for modeling and deploying applications. Radius is not a paid product or service. Instead, Radius allows you to host your own Radius environments on your own Kubernetes clusters, and deploy applications to any cloud provider or on-premises infrastructure. Radius also offers Recipes and the Application Graph to allow developers and operators to work together on a common definition of an Application that binds to an Environment, instead of automating lists of infrastructure.
+
+### How does Radius compare to Backstage?
+
+[Backstage](https://backstage.io/) is an open platform for building developer portals. It provides a common way to define and manage services, and a central place for developers to discover and connect to those services.
+
+Radius and the application graph could easily fit into Backstage as a plugin. This is on our backlog and is being explored.
 
 ### How does Radius compare to Azure Deployment Environments?
 
