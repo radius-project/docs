@@ -72,4 +72,4 @@ GET /planes/radius/local/resourceGroups/default/providers/Applications.Core/cont
 
 Now that you have an understanding of the Radius app graph, learn how you can deploy Radius applications to prepared landing zones with Radius Environments:
 
-{{< button text="Radius Environments" page="environments-concept" color="success" >}}
+{{< button text="Radius Environments" page="collaboration-concept" color="success" >}}
