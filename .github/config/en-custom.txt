@@ -1050,3 +1050,12 @@ matchLabels
 plc
 cdf
 dcf
+Tanzu
+Kubevela
+curation
+Waypoint
+Crossplane
+GitOps
+stateful
+DSL
+unopinionated
