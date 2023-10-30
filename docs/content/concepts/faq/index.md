@@ -24,7 +24,7 @@ Open-source Radius requires that you self-host and run your own Radius instance 
 
 For application code, Radius supports any programming language as long as it is containerized.
 
-Radius resources (_applications, environments, portable resource_) can be authored in Bicep. See the [Radius resource schema]({{< ref resource-schema >}}) for more details. Additional support for other languages will come in a future release. Stay tuned for updates.
+Radius resources (_applications, environments, portable resource_) can be authored in Bicep. See the [Radius resource schema]({{< ref resource-schema >}}) for more details. Additional support for other languages (_like Terraform_) is on our backlog.
 
 Recipes support both Bicep and Terraform. See the [Recipe docs]({{< ref "/guides/recipes/overview" >}}) for more details.
 
@@ -35,6 +35,7 @@ Users can employ multiple environments for isolation and organization, for examp
 - Permissions (managed at the Resource Group/Subscription level in Azure)
 - Purpose (dev vs. prod)
 - Difference in hosting (standalone Kubernetes vs Microsoft Azure)
+- Multi-region deployments (deploy an application to multiple regions)
 
 [Workspaces]({{< ref "/guides/operations/workspaces/overview" >}}) can be used to manage multiple environments from one machine.
 
@@ -50,7 +51,7 @@ Radius Recipes support any resources that can be modeled in Bicep, or the AWS, A
 
 ### Can I use any Terraform provider with Recipes?
 
-Yes, however custom provider configuration is not yet supported. It is not recommended to use any Terraform providers that require authentication to a cloud provider (e.g. Oracle, GCP, etc.) as this will require you to store credentials in your Recipe. Support for custom provider configuration is a high priority to address in an upcoming release.
+Terraform Recipes currently support the Azure, AWS, and Kubernetes providers, plus any provider that does not require any credentials or configuration to be passed in (_e.g. Oracle, GCP, etc. are not currently supported_).  Support for provider configuration is a high priority we plan to address in an upcoming release.
 
 ### Do developers need write access to a cloud provider (_Azure subscription, AWS account, etc._) to use Recipes? 
 
@@ -60,7 +61,7 @@ No. Recipes are deployed on-behalf-of the Radius Environment so developers do no
 
 ### What AWS services does Radius support?
 
-Radius Applications can include AWS services that are also supported by the AWS cloud control API. See the [AWS resource library]({{< ref "/guides/author-apps/aws/overview#resource-library" >}}) for the complete list of supported AWS resources. Radius does not currently support direct connections to AWS resources, but it is on the backlog.
+Radius Applications can include AWS services that are also supported by the AWS cloud control API. See the [AWS resource library]({{< ref "/guides/author-apps/aws/overview#resource-library" >}}) for the complete list of supported AWS resources. Connections from a Radius container to an AWS resource are not yet supported. Properties such as hostnames, ports, endpoints, and connection strings need to be manually specified as environment variables. Additional support for Connections to AWS resources is on our backlog.
 
 ### What Azure services does Radius support? 
 
@@ -109,7 +110,7 @@ Radius currently uses a temporary fork of Bicep to add support for the Radius re
 
 [Terraform](https://www.terraform.io/) is a tool for building, changing, and versioning infrastructure safely and efficiently. Terraform is a great tool for deploying infrastructure, but doesn't provide a way to model an entire application and the dependencies between services and infrastructure, or act as an abstraction layer for multiple cloud providers.
 
-Teams looking to leverage existing Terraform templates can use [Recipes]({{< ref "/guides/recipes/overview" >}}) to manage infrastructure provisioning, with the application defined in Bicep. The ability to define Radius applications in Terraform in addition to Bicep is on the roadmap.
+Teams looking to leverage existing Terraform modules can use [Recipes]({{< ref "/guides/recipes/overview" >}}) to manage infrastructure provisioning, with the application defined in Bicep. The ability to define Radius applications in Terraform in addition to Bicep is on the roadmap.
 
 ### How does Radius compare to Dapr?
 
@@ -119,25 +120,23 @@ Radius provides [built-in Dapr support]({{< ref "/guides/author-apps/dapr" >}}) 
 
 ### How does Radius compare to Acorn?
 
-[Acorn](https://www.acorn.io/) is a simple application deployment framework built on Kubernetes. Developers can author Acornfiles which describe their application and deploy locally and move to production without having to switch tools or technology stacks.
+[Acorn](https://www.acorn.io/) is a cloud platform to build and share applications ("acorns"). It provides a dev environment with the ability to move to cloud environments as part of a paid service.
 
-Radius also provides a simple authoring experience for developers, but it also manages cloud infrastructure via Recipes and is built to target non-Kubernetes platforms in the future. Radius is focused on teams of developers plus operators, providing each with the tools they need to be productive and secure.
+Radius is an open-source project that allows you to model, deploy, and manage applications across multiple cloud providers. Radius is not a hosting platform and is not a paid service. Instead, Radius allows you to host your own Radius environments on your own Kubernetes clusters, and deploy applications to any cloud provider or on-premises infrastructure. Radius also offers Recipes and the Application Graph to allow developers and operators to work together on an application.
 
 ### How does Radius compare to Crossplane?
 
-[Crossplane](https://crossplane.io/) is an open source Kubernetes add-on that extends any cluster with the ability to provision and manage cloud infrastructure, services, and applications using kubectl, GitOps, or any tool that works with the Kubernetes API.
+[Crossplane](https://crossplane.io/) is an open source Kubernetes add-on that extends any cluster with the ability to provision and manage cloud infrastructure, services, and applications using kubectl, GitOps, or any tool that works with the Kubernetes API. As Radius is unopinionated about how infrastructure is deployed through Recipes, Crossplane could be used within a Recipe. Both Bicep and Terraform modules are able to include Kubernetes resources and Crossplane CRDs.
 
-Radius is a platform that not only deploys and manages cloud infrastructure, but also provides a way to model and deploy an entire application and its dependencies. Teams can understand their entire application and all the dependencies within it using the Radius app graph, and deploy infrastructure that's secure by default using Recipes.
-
-Crossplane CRDs can be used within Radius Recipes to deploy and manage cloud infrastructure if teams want to leverage existing Crossplane investments. Both Bicep and Terraform templates are able to include Kubernetes resources.
+Once deployed, Crossplane-managed infrastructure can be included in a Radius application and queried via the Radius application graph.
 
 ### How does Radius compare to Open Application Model (OAM)?
 
-[OAM](https://oam.dev) is a specification for describing applications so that the application description is separated from the details of how the application is deployed onto and managed by the infrastructure.
+[OAM](https://oam.dev) is a specification for describing applications so that the application description is separated from the details of how the application is deployed onto and managed by the infrastructure. It originated from the Azure Incubations team from which Radius also originated.
 
-The key difference between OAM and Radius is that OAM is a spec, whereas Radius is an implementation. The expectation with OAM is that there would be a common  spec and if it was successful, there would be multiple (compatible) implementations of OAM for various platforms. [Kubevela](https://github.com/kubevela/kubevela) is one example of an OAM implementation. 
+The key difference between OAM and Radius is that OAM is a spec, whereas Radius is an implementation. The expectation with OAM is that there would be a common spec and if it was successful, there would be multiple (compatible) implementations of OAM for various platforms. [Kubevela](https://github.com/kubevela/kubevela) is one example of an OAM implementation.
 
-With Radius we're providing an implementation that's meant to be re-used and hosted in different scenarios. Right now we're focused on Kubernetes. Radius is also taking a more holistic approach with Radius that's bigger than just compute and networking. We're doing more to work with existing tools like Terraform as well that are outside of Kubernetes. Lastly, Radius puts a lot of emphasis on the developer and operator handoff by building features such as Recipes and Environments that bind an application to different cloud providers and runtime platforms.
+Radius is a new project that takes what we learned from OAM and focuses more on the hosting platforms and the developer/operator experience, not just the spec. With Radius we're providing an implementation that's meant to be re-used and hosted in different scenarios. Right now we're focused on Kubernetes. Radius is also taking a more holistic approach with Radius that's bigger than just compute and networking. We're doing more to work with existing tools like Terraform as well that are outside of Kubernetes. Lastly, Radius puts a lot of emphasis on the developer and operator handoff by building features such as Recipes and Environments that bind an application to different cloud providers and runtime platforms.
 
 ### How does Radius compare to Waypoint?
 
@@ -149,7 +148,7 @@ While Radius also is able to model and deploy applications, it also provides an 
 
 [Tanzu](https://tanzu.vmware.com/) is a portfolio of products and services for modernizing applications and infrastructure with a common goal: deliver better software to production, continuously.
 
-Radius is an open-source project that also provides a platform for modeling and deploying applications. Radius acts as an abstraction that allows developers to focus on their application and not the underlying infrastructure. Together with Environments and Recipes, Radius allows applications to bind to any cloud or on-premises infrastructure without a developer needing to directly work with infrastructure templates or parameters. Radius also provides a way to model dependencies and connections between services and infrastructure which can be queried and visualized after deployment.
+Radius is an open-source project that provides a platform for modeling and deploying applications. Radius acts as an abstraction that allows developers to focus on their application and not the underlying infrastructure. Together with Environments and Recipes, Radius allows applications to bind to any cloud or on-premises infrastructure without a developer needing to directly work with infrastructure templates or parameters. Radius also provides a way to model dependencies and connections between services and infrastructure which can be queried and visualized after deployment.
 
 ### How does Radius compare to Azure Deployment Environments?
 
@@ -158,7 +157,7 @@ Radius is an open-source project that also provides a platform for modeling and 
 Radius Recipes provide a similar experience for developers to deploy and manage infrastructure, but with a few key differences:
 
 - Recipes are defined on a per-resource basis instead of per-environment. This allows developers to "mix and match" resources in any combination and swap out the backing Recipe depending on which environment they are targeting.
-- Recipes support both Bicep and Terraform, allowing operators to leverage existing Terraform templates and modules.
+- Recipes support both Bicep and Terraform, allowing operators to leverage existing Terraform modules.
 - Recipes support both Azure and AWS, allowing operators to manage infrastructure across multiple cloud providers.
 
 ### How does Radius compare to Azure Arc?
