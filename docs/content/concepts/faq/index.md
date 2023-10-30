@@ -148,7 +148,7 @@ While Radius also is able to model and deploy applications, it also provides an 
 
 [Tanzu](https://tanzu.vmware.com/) is a portfolio of products and services for modernizing applications and infrastructure with a common goal: deliver better software to production, continuously.
 
-Radius is an open-source project that provides a platform for modeling and deploying applications. Radius acts as an abstraction that allows developers to focus on their application and not the underlying infrastructure. Together with Environments and Recipes, Radius allows applications to bind to any cloud or on-premises infrastructure without a developer needing to directly work with infrastructure templates or parameters. Radius also provides a way to model dependencies and connections between services and infrastructure which can be queried and visualized after deployment.
+Radius is an open-source project that provides a platform for modeling and deploying applications. Radius is not a paid product or service. Instead, Radius allows you to host your own Radius environments on your own Kubernetes clusters, and deploy applications to any cloud provider or on-premises infrastructure. Radius also offers Recipes and the Application Graph to allow developers and operators to work together on a common definition of an Application that binds to an Environment, instead of automating lists of infrastructure.
 
 ### How does Radius compare to Azure Deployment Environments?
 
