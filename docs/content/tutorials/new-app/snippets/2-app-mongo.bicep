@@ -10,7 +10,7 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
   properties: {
     application: application
     container: {
-      image: 'radius.azurecr.io/tutorial/demo:edge'
+      image: 'ghcr.io/radius-project/samples/tutorial/demo:edge'
       env: {
         FOO: 'bar'
       }

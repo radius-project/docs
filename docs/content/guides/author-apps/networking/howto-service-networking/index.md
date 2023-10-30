@@ -10,13 +10,13 @@ categories: "How-To"
 
 This guide will show you how two services can communicate with each other. In this example, we will have a frontend container service that communicates with a backend container service.
 
-<img src="overview.png" alt="Diagram of the frontend talking to the backend over HTTP port 80" width="400px" >
+{{< image src="overview.png" alt="Diagram of the frontend talking to the backend over HTTP port 80" width="400px" >}}
 
 ## Prerequisites
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-radius-bicep-vs-code-extension" >}})
-- [Radius environment]({{< ref "installation#step-3-initialize-the-radius-control-plane-and-the-radius-environment" >}})
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
+- [Radius environment]({{< ref "installation#step-3-initialize-radius" >}})
 
 ## Step 1: Define the services
 
@@ -64,7 +64,7 @@ Starting log stream...
 
 Visit [http://localhost:3000](http://localhost:3000) in your browser. You should see a connection to the backend container, along with the environment variables that have automatically been set on the frontend container:
 
-<img src="backend-connection.png" alt="Screenshot of the demo container showing the backend connections" width="600px" >
+{{< image src="backend-connection.png" alt="Screenshot of the demo container showing the backend connections" width="600px" >}}
 
 ## Done
 

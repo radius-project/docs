@@ -12,6 +12,10 @@ tags: ["tracing", "observability"]
 
 The following steps show you how to configure the Radius control plane to send distributed tracing data to Jaeger running as a container in your Kubernetes cluster and how to view the data.
 
+## Pre-requisites
+
+- [kubectl CLI](https://kubernetes.io/docs/tasks/tools/)
+
 ## Step 1: Install Jaeger on Kubernetes
 
 1. Create the namespace `radius-monitoring`:
@@ -56,7 +60,7 @@ The following steps show you how to configure the Radius control plane to send d
 
 2. In your browser, go to [http://localhost:16686](http://localhost:16686) to see the Jaeger UI:
 
-   <img src="jaeger_ui.png" alt="" style="width:100%" >
+   {{< image src="jaeger_ui.png" alt="" style="width:100%" >}}
 
 ## References
 

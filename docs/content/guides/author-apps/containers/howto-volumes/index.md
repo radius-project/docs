@@ -16,8 +16,8 @@ This how-to guide will provide an overview of how to:
 ## Prerequisites
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-radius-bicep-vs-code-extension" >}})
-- [Radius environment]({{< ref "installation#step-3-initialize-the-radius-control-plane-and-the-radius-environment" >}})
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
+- [Radius environment]({{< ref "installation#step-3-initialize-radius" >}})
 
 ## Step 1: Define an app and a container
 
@@ -39,9 +39,9 @@ The `samples/volumes` container will display the status and contents of the `/tm
    ```bash
    rad resource expose containers mycontainer -a myapp --port 5000
    ```
-1. You should see a message warning that the directory `/tmpdir` does not exist:
+1. Visit [localhost:5000](http://localhost:5000) in your browser. You should see a message warning that the directory `/tmpdir` does not exist:
 
-   <img src="screenshot-error.jpg" width=500px alt="Screeshot of container showing that the tmp directory does not exist">
+   {{< image src="screenshot-error.jpg" width=500px alt="Screenshot of container showing that the tmp directory does not exist" >}}
 
 ## Step 3: Add an ephemeral volume
 
@@ -65,10 +65,10 @@ Within the `container.volume` property, add a new volume named `temp` and config
    
 1. Visit [localhost:5000](http://localhost:5000) in your browser. You should see the contents of `/tmpdir`, showing an empty directory.
 
-   <img src="screenshot-empty.jpg" width=500px alt="Screeshot of container showing that the tmp directory has no items">
+   {{< image src="screenshot-empty.jpg" width=500px alt="Screenshot of container showing that the tmp directory has no items" >}}
 1. Press the `Create file` button to generate a new file in the directory, such as `test.txt`:
 
-   <img src="screenshot.jpg" width=400px alt="Screeshot of container showing files being created">
+   {{< image src="screenshot.jpg" width=400px alt="Screenshot of container showing files being created" >}}
 1. Done! You've now learned how to mount an ephemeral volume
 
 ## Cleanup

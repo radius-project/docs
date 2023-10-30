@@ -26,8 +26,8 @@ rad bicep publish [flags]
 
 ```
 
-# Publish a Bicep file to an Azure container registry
-rad bicep publish --file ./redis-test.bicep --target br:myregistry.azurecr.io/redis-test:v1
+# Publish a Bicep file to a container registry
+rad bicep publish --file ./redis-test.bicep --target br:ghcr.io/myregistry/redis-test:v1
 		
 ```
 

@@ -5,7 +5,7 @@ import json
 from bs4 import BeautifulSoup
 from algoliasearch.search_client import SearchClient
 
-url = "docs.radapp.dev"
+url = "docs.radapp.io"
 if len(sys.argv) > 1:
     starting_directory = os.path.join(os.getcwd(), str(sys.argv[1])) 
 else:

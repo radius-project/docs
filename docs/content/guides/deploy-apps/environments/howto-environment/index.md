@@ -16,7 +16,7 @@ Radius Environments can be setup with the rad CLI via two paths: interactive or 
 
 - [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-radius-bicep-vs-code-extension" >}})
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 
 ## Create a development environment
 
@@ -66,8 +66,8 @@ Radius Environments can be setup with the rad CLI via two paths: interactive or 
    ```
    ```
    NAME      TYPE                              TEMPLATE KIND  TEMPLATE
-   default   Applications.Datastores/mongoDatabases  bicep          radius.azurecr.io/recipes/dev/mongodatabases:latest
-   default   Applications.Datastores/redisCaches     bicep          radius.azurecr.io/recipes/dev/rediscaches:latest
+   default   Applications.Datastores/mongoDatabases  bicep          ghcr.io/radius-project/recipes/local-dev/mongodatabases:latest
+   default   Applications.Datastores/redisCaches     bicep          ghcr.io/radius-project/recipes/local-dev/rediscaches:latest
    ``` 
    You can follow the [Recipes]({{< ref "/guides/recipes/overview" >}}) documentation to learn more about the Recipes and how to use them in your application.
 

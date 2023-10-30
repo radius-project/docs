@@ -13,8 +13,8 @@ This guide will walk you through how to setup a gateway for routing internet tra
 ## Prerequisites
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-radius-bicep-vs-code-extension" >}})
-- [Radius environment]({{< ref "installation#step-3-initialize-the-radius-control-plane-and-the-radius-environment" >}})
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
+- [Radius environment]({{< ref "installation#step-3-initialize-radius" >}})
 
 ## Step 1: Define a container
 
@@ -60,7 +60,7 @@ Building app.bicep...
 
 Visit the endpoint to interact with the demo Radius container:
 
-<img src="demo-screenshot.png" alt="Screenshot of te demo application" width="500px" >
+{{< image src="demo-screenshot.png" alt="Screenshot of the demo application" width="500px" >}}
 
 ## Done
 

@@ -10,7 +10,7 @@ tags: ["containers"]
 
 A Radius container enables you to run a container workload as part of your application across different platforms and runtimes. Your container can be a frontend UI, a backend API, a database, or any other container you need to run as part of your app. Plus, with Radius Connections, you can easily connect your container to other resources in your application, such as databases, message queues, and more and automatically configure your container with identity, secrets, and other configuration.
 
-<img src="containers-splash.png" alt="Container graphic" width=300px >
+{{< image src="containers-splash.png" alt="Container graphic" width=300px >}}
 
 > Adding a container and want to jump to the reference docs? Check out the [container resource schema]({{< ref "container-schema" >}}).
 

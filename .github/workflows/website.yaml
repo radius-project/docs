@@ -80,7 +80,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: ${{ github.ref_name == 'edge' && 'edge' || 'latest' }}
-      url: ${{ github.ref_name == 'edge' && 'https://edge.docs.radapp.dev' || 'https://docs.radapp.dev' }}
+      url: ${{ github.ref_name == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io' }}
     steps:
       - name: Checkout docs repo
         uses: actions/checkout@v3
@@ -111,7 +111,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: ${{ github.ref_name == 'edge' && 'edge' || 'latest' }}
-      url: ${{ github.ref_name == 'edge' && 'https://edge.docs.radapp.dev' || 'https://docs.radapp.dev' }}
+      url: ${{ github.ref_name == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io' }}
     steps:
       - name: Download Hugo artifacts
         uses: actions/download-artifact@v3
@@ -152,7 +152,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: ${{ github.ref_name == 'edge' && 'edge' || 'latest' }}
-      url: ${{ github.ref_name == 'edge' && 'https://edge.docs.radapp.dev' || 'https://docs.radapp.dev' }}
+      url: ${{ github.ref_name == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io' }}
     steps:
       - name: Close Pull Request
         id: closepullrequest
