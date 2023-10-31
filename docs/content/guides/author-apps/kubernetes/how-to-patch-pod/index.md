@@ -19,9 +19,9 @@ This how-to guide will provide an overview of how to:
 - [Radius initialized with `rad init`]({{< ref howto-environment >}})
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
-## Step 1: Define an app and a container
+## Step 1: Define a container
 
-Begin by creating a file named `app.bicep` with a Radius application and [container]({{< ref "guides/author-apps/containers" >}}):
+Begin by creating a file named `app.bicep` with a Radius [container]({{< ref "guides/author-apps/containers" >}}):
 
 {{< rad file="snippets/patch-container.bicep" embed=true >}}
 
@@ -30,7 +30,7 @@ Begin by creating a file named `app.bicep` with a Radius application and [contai
 1. Deploy and run your app:
 
    ```bash
-   rad run ./app.bicep
+   rad run ./app.bicep -a demo
    ```
 
    Once the deployment completes successfully, you should see the following confirmation message along with some system logs:
@@ -65,12 +65,12 @@ Begin by creating a file named `app.bicep` with a Radius application and [contai
 
    ```
    POD                    STATUS    CONTAINER_NAMES   CONTAINER_IMAGES
-   demo-df76d886c-9p4gv   Running   demo              radius.azurecr.io/tutorial/webapp:edge
+   demo-df76d886c-9p4gv   Running   demo              ghcr.io/radius-project/samples/demo:latest
    ```
 
 ## Step 3: Add a PodSpec to the container definition
 
-Add the following [`runtimes`]({{< ref "reference/resource-schema/core-schema/container-schema#runtimes" >}}) under `properties` of the container definition in your `app.bicep` file:
+Add the following [`runtimes`]({{< ref "reference/resource-schema/core-schema/container-schema#runtimes" >}}) configuration to the container definition in your `app.bicep` file. This allows you to punch through the Radius abstraction and directly apply any part of the Kubernetes PodSpec. In this example you're adding an additional sidecar container:
 
 {{< rad file="snippets/patch-runtime.bicep" embed=true markdownConfig="{linenos=table,hl_lines=[\"16-28\"]}" >}}
 
@@ -81,7 +81,7 @@ Add the following [`runtimes`]({{< ref "reference/resource-schema/core-schema/co
 1. Deploy and run your app again:
 
    ```bash
-   rad run ./app.bicep
+   rad run ./app.bicep -a demo
    ```
 
    Once the deployment completes successfully, you should see the same deployment completion confirmation message as before, but this time with some system logs from `log-collector` streaming to your console output:
@@ -124,7 +124,7 @@ Add the following [`runtimes`]({{< ref "reference/resource-schema/core-schema/co
 Run the following command to [delete]({{< ref "guides/deploy-apps/howto-delete" >}}) your app and container:
    
    ```bash
-   rad app delete
+   rad app delete demo
    ```
 
 ## Further reading
