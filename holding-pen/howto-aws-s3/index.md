@@ -10,8 +10,10 @@ weight: 200
 
 This how-to guide will show you:
 
-- How to model an AWS Dynamo DB table in Bicep
-- How to deploy an AWS resource in Radius
+- How to model an AWS S3 resource in Bicep
+- How to use a sample application to interact with AWS S3 bucket
+
+   {{< image src="s3appdiagram.png" alt="Screenshot of the sample application to interact with s3 bucket " width=400 >}}
 
 ## Prerequisites
 
@@ -50,55 +52,53 @@ Follow the prompts to install the [control plane services]({{< ref architecture-
 - **Add AWS provider** - An [AWS cloud provider]({{< ref "/guides/operations/providers/howto-aws-provider" >}}) allows you to deploy and manage AWS resources as part of your application. Enter 'y' and follow the instructions. Provide a valid AWS region and the values obtained for IAM Access Key ID and IAM Secret Access Keys.
 - **Environment name** - The name of the environment to create. You can specify any name with lowercase letters, such as `myawsenv`.
 
-## Step 3: Create a Bicep file to model AWS Dynamo DB table
+## Step 3: Create a Bicep file to model AWS Simple Storage Service (S3)
 
-Create a new file called `dynamodb.bicep` and add the following bicep code to model a Dynamodb Table
+Create a new file called `app.bicep` and add the following bicep code to model an AWS S3 Bucket:
 
-{{< rad file="snippets/dynamodb.bicep" embed=true >}}
+{{< rad file="snippets/s3.bicep" embed=true >}}
 
 Radius uses the [AWS Cloud Control API](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/what-is-cloudcontrolapi.html) to interact with AWS resources. This means that you can model your AWS resources in Bicep and Radius will be able to deploy and manage them. You can find the list of supported AWS resources in the [AWS resource library]({{< ref "guides/author-apps/aws/overview#resource-library" >}}).
 
-## Step 5: Deploy the db to your environment
+## Step 4: Add a Radius container to interact with the AWS S3 Bucket
 
-1. Deploy the db to your environment using the below command:
+Open the `app.bicep` and append the following Radius resources:
+
+{{< rad file="snippets/s3app.bicep" embed=true marker="//S3APP" >}}
+
+Your final `app.bicep` file should look like this
+
+{{< rad file="snippets/app.bicep" embed=true >}}
+
+This creates a container that will be deployed to your Kubernetes cluster. This container will interact with the AWS S3 Bucket you created in the previous step.
+
+## Step 5: Deploy the application
+
+1. Deploy your application to your environment:
 
    ```bash
-   rad deploy ./dynamodb.bicep
+   rad deploy ./app.bicep -p aws_access_key_id=<AWS_ACCESS_KEY_ID> -p aws_secret_access_key=<AWS_SECRET_ACCESS_KEY>
    ```
-    This will deploy the AWS Dynamo DB table to your environment. 
+   > Replace `<AWS_ACCESS_KEY_ID>` and `<AWS_SECRET_ACCESS_KEY>` with the values obtained from the previous step.
 
-    ```
-    Building dynamodb.bicep...
-    Deploying template 'dynamodb.bicep' into environment 'aws' from workspace 'default'...
+   {{% alert title="Warning" color="warning" %}}It is always recommended to have separate IAM credentials for your container to communicate with S3 or any other data store. 
+   Radius is currently working on supporting direct connections to AWS resources so that your container can automatically communicate with the data store securely without having to manage separate credentials for data plane operations{{% /alert %}}
 
-    Deployment In Progress...
+1. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose >}}):
 
-    .                    demotable       AWS.DynamoDB/GlobalTable
-
-    Deployment Complete
-
-    Resources:
-        demotable       AWS.DynamoDB/GlobalTable
+    ```bash
+    rad resource expose containers frontend -a s3app --port 5234
     ```
 
-2. Verify that the AWS Dynamo DB table has been created via AWS Console / CLI
+1. Visit [localhost:5234](http://localhost:5234/swagger/index.html) in your browser. This is a swagger doc for the sample application. You can use this to interact with the AWS S3 Bucket you created. For example, you can try to upload a file to the bucket via the `/upload` endpoint.
+
+    {{< image src="s3app.png" alt="Screenshot of the sample application to interact with s3 bucket " width=900 >}}
 
 ## Step 6: Cleanup
 
 1. When you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to delete all Radius resources running on the EKS Cluster.
 
-2. Cleanup AWS Resources - AWS resources are not deleted when deleting a Radius Environment, so make sure to delete all resources created in this reference app to prevent additional charges. You can delete these resources in the AWS Console or via the AWS CLI. 
-
-   ```bash
-   aws dynamodb delete-table --table-name demotable
-   ```
-
-## Further Reading
-
-For further reference to examples of a sample Radius application that uses AWS resources, refer to the following tutorials:
-
-1. [Deploy Recipes in your Radius Application]({{< ref "/tutorials/tutorial-recipe" >}})
-2. [eShop on containers]({{< ref "/tutorials/eshop" >}})
+2. Cleanup AWS Resources - AWS resources are not deleted when deleting a Radius Environment, so make sure to delete all resources created in this reference app to prevent additional charges. You can delete these resources in the AWS Console or via the AWS CLI. Instructions to delete an AWS S3 Bucket are available [here](https://docs.aws.amazon.com/AmazonS3/latest/userguide/delete-bucket.html).
 
 ## Troubleshooting
 
@@ -118,6 +118,12 @@ If you have issues with the sample application, where the container doesn't conn
 1. Use the below command to inspect logs from container:
 
     ```bash
-    rad resource logs containers frontend -a <appname>
+    rad resource logs containers frontend -a s3app
     ```
 Also make sure to [open an Issue](https://github.com/radius-project/radius/issues/new/choose) if you encounter a generic `Internal server error` message or an error message that is not self-serviceable, so we can address the root error not being forwarded to the user.
+
+## Further Reading
+
+{{< categorizeby category="Overview" tag="AWS" >}}
+
+{{< categorizeby category="How-To" tag="AWS" >}}
