@@ -74,7 +74,7 @@ Begin by creating a file named `app.bicep` with a Radius [container]({{< ref "gu
 
 Add the following [`runtimes`]({{< ref "reference/resource-schema/core-schema/container-schema#runtimes" >}}) configuration to the container definition in your `app.bicep` file. This allows you to punch through the Radius abstraction and directly apply any part of the Kubernetes PodSpec. In this example you're adding an additional sidecar container:
 
-{{< rad file="snippets/patch-runtime.bicep" embed=true markdownConfig="{linenos=table,hl_lines=[\"18-30\"]}" >}}
+{{< rad file="snippets/patch-runtime.bicep" embed=true markdownConfig="{linenos=table,hl_lines=[\"21-37\"]}" >}}
 
 > Remember to save your `app.bicep` file after you've made the above changes.
 
