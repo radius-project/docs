@@ -9,6 +9,8 @@ matrix:
     - .github/config/en-custom.txt
   pipeline:
   - pyspelling.filters.markdown:
+      markdown_extensions:
+      - markdown.extensions.fenced_code
   - pyspelling.filters.html:
       comments: false
       ignores:
