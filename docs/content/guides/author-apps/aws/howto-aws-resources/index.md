@@ -10,7 +10,7 @@ weight: 200
 
 This how-to guide will show you:
 
-- How to model an AWS Dynamo DB table in Bicep
+- How to model an AWS DynamoDB table in Bicep
 - How to deploy an AWS resource in Radius
 
 ## Prerequisites
@@ -50,9 +50,9 @@ Follow the prompts to install the [control plane services]({{< ref architecture-
 - **Add AWS provider** - An [AWS cloud provider]({{< ref "/guides/operations/providers/howto-aws-provider" >}}) allows you to deploy and manage AWS resources as part of your application. Enter 'y' and follow the instructions. Provide a valid AWS region and the values obtained for IAM Access Key ID and IAM Secret Access Keys.
 - **Environment name** - The name of the environment to create. You can specify any name with lowercase letters, such as `myawsenv`.
 
-## Step 3: Create a Bicep file to model AWS Dynamo DB table
+## Step 3: Create a Bicep file to model AWS DynamoDB table
 
-Create a new file called `dynamodb.bicep` and add the following bicep code to model a Dynamodb Table
+Create a new file called `dynamodb.bicep` and add the following bicep code to model a DynamoDB table
 
 {{< rad file="snippets/dynamodb.bicep" embed=true >}}
 
@@ -81,7 +81,7 @@ Radius uses the [AWS Cloud Control API](https://docs.aws.amazon.com/cloudcontrol
         demotable       AWS.DynamoDB/GlobalTable
     ```
 
-2. Verify that the AWS Dynamo DB table has been created via AWS Console / CLI
+2. Verify that the AWS DynamoDB table has been created via AWS Console / CLI
 
 ## Step 6: Cleanup
 
