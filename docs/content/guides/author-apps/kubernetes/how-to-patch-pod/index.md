@@ -39,6 +39,7 @@ Begin by creating a file named `app.bicep` with a Radius [container]({{< ref "gu
    Deployment Complete
 
    Resources:
+      demo            Applications.Core/applications
       demo            Applications.Core/containers
 
    Starting log stream...
@@ -55,10 +56,11 @@ Begin by creating a file named `app.bicep` with a Radius [container]({{< ref "gu
 
    <br> When you're ready to move on to the next step, use `CTRL` + `C` to exit the command.
 
-2. Run the following command, making sure to specify the Kubernetes namespace to which you deployed your app:
+2. Run the command below, which will list the pods in your Kubernetes cluster, using the `-o` flag to specify the relevant information to output:
+
 
    ```bash
-   kubectl get pods -n <YOUR_KUBERNETES_NAMESPACE> -l app.kubernetes.io/name=demo -o custom-columns=POD:.metadata.name,STATUS:.status.phase,CONTAINER_NAMES:spec.containers[:].name,CONTAINER_IMAGES:spec.containers[:].image
+   kubectl get pods -A -l app.kubernetes.io/name=demo -o custom-columns=POD:.metadata.name,STATUS:.status.phase,CONTAINER_NAMES:spec.containers[:].name,CONTAINER_IMAGES:spec.containers[:].image
    ```
 
    You should see output confirming that a single container named `demo` was deployed and is running in your pod, similar to the following:
@@ -72,7 +74,7 @@ Begin by creating a file named `app.bicep` with a Radius [container]({{< ref "gu
 
 Add the following [`runtimes`]({{< ref "reference/resource-schema/core-schema/container-schema#runtimes" >}}) configuration to the container definition in your `app.bicep` file. This allows you to punch through the Radius abstraction and directly apply any part of the Kubernetes PodSpec. In this example you're adding an additional sidecar container:
 
-{{< rad file="snippets/patch-runtime.bicep" embed=true markdownConfig="{linenos=table,hl_lines=[\"16-28\"]}" >}}
+{{< rad file="snippets/patch-runtime.bicep" embed=true markdownConfig="{linenos=table,hl_lines=[\"18-30\"]}" >}}
 
 > Remember to save your `app.bicep` file after you've made the above changes.
 
@@ -104,18 +106,20 @@ Add the following [`runtimes`]({{< ref "reference/resource-schema/core-schema/co
 
    <br> When you're ready to move on to the next step, use `CTRL` + `C` to exit the command.
 
-2. Run the following command, making sure to specify the Kubernetes namespace to which you deployed your app:
+2. Run the command below, which will list the pods in your Kubernetes cluster, using the `-o` flag to specify the relevant information to output:
 
    ```bash
-   kubectl get pods -n <YOUR_KUBERNETES_NAMESPACE> -l app.kubernetes.io/name=demo -o custom-columns=POD:.metadata.name,STATUS:.status.phase,CONTAINER_NAMES:spec.containers[:].name,CONTAINER_IMAGES:spec.containers[:].image
+   kubectl get pods -A -l app.kubernetes.io/name=demo -o custom-columns=POD:.metadata.name,STATUS:.status.phase,CONTAINER_NAMES:spec.containers[:].name,CONTAINER_IMAGES:spec.containers[:].image
    ```
 
    You should now see in the output the original `demo` app container as before, but also an additional `log-collector` container that is running in your pod, similar to the following:
 
    ```
    POD                     STATUS    CONTAINER_NAMES      CONTAINER_IMAGES
-   demo-547d7dc77f-nmqpk   Running   log-collector,demo   ghcr.io/radius-project/fluent-bit:2.1.8,radius.azurecr.io/tutorial/webapp:edge
+   demo-547d7dc77f-nmqpk   Running   log-collector,demo   ghcr.io/radius-project/fluent-bit:2.1.8,radius.azurecr.io/tutorial/webapp:latest
    ```
+
+   Note that you might see old pods with a state of `Terminating` in the output - this is normal and you should see them disappear once the redeployment completes cleaning up the old resources.
 
    The `log-collector` container was deployed using the PodSpec definition you added to your `app.bicep` file in the `runtimes` property you added, and is now running alongside your original `demo` app container.
 
