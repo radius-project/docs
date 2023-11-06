@@ -42,7 +42,7 @@ Radius currently supports the following Kubernetes resource types for the `base`
 
 ##### Pod patching
 
-You can also "patch" the Kubernetes containers created and deployed by Radius using [PodSpec](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#PodSpec) definitions. This allows for setting Kubernetes-specific configurations, as well as overriding Radius behaviors, which means that you may access all Kubernetes Pod features, even if they are not supported by Radius. <!-- For more information on how to patch Kubernetes pods, refer to the [Kubernetes pod patching guide]("guides/author-apps/kubernetes/how-to-patch-pod"). -->
+You can also "patch" the Kubernetes containers created and deployed by Radius using [PodSpec](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#PodSpec) definitions. This allows for setting Kubernetes-specific configurations, as well as overriding Radius behaviors, which means that you may access all Kubernetes Pod features, even if they are not supported by Radius. For more information on how to patch Kubernetes pods, refer to the [Kubernetes pod patching guide]({{< ref "guides/author-apps/kubernetes/how-to-patch-pod" >}}).
 
 ## Container definition
 

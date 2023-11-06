@@ -1006,3 +1006,11 @@ fh
 qd
 vf
 zht
+Elasticache
+FinOps
+SecOps
+podspec
+sngm
+nmqpk
+fluentbit
+nmqpk
