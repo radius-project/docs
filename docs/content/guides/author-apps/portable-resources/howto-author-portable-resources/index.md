@@ -47,7 +47,7 @@ Refer to the [Redis resource schema]({{< ref "reference/resource-schema/cache/re
 
 {{< /tabs >}}
 
-## Step 3: Accessing your portable resource
+## Step 3: Access your portable resources
 
 You can access the portable resource via [`connections`]({{< ref "guides/author-apps/containers#connections" >}}). Update your container definition to add a connection to the new Redis cache. This results in environment variables for connection information automatically set on the container.
 

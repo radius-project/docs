@@ -1,10 +1,5 @@
 import radius as radius
 
-import kubernetes as kubernetes {
-  kubeConfig: ''
-  namespace: namespace
-}
-
 @description('Specifies the environment for resources.')
 param environment string
 
@@ -49,13 +44,6 @@ resource portableRedis 'Applications.Datastores/redisCaches@2023-10-01-preview' 
     environment: environment
     application: application
     resourceProvisioning: 'manual'
-    resources: [{
-      id: '/planes/kubernetes/local/namespaces/service-namespace/providers/core/Service/service-name'
-    }
-    {
-      id: '/planes/kubernetes/local/namespaces/redis-namespace/providers/apps/Deployment/redis-name'
-    }
-    ]
     username: 'myusername'
     host: 'mycache.contoso.com'
     port: 8080
