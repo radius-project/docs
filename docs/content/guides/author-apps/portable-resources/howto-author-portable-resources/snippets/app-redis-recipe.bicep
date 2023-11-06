@@ -30,27 +30,33 @@ resource container 'Applications.Core/containers@2023-10-01-preview' = {
     }
     connections: {
       redis: {
-        source: portableRedis.id
+        source: recipeRedis.id
       }
     }
   }
 }
 //CONTAINER
 
-//MANUAL
-resource portableRedis 'Applications.Datastores/redisCaches@2023-10-01-preview' = {
-  name: 'redisCache'
+//Recipe
+resource recipeRedis 'Applications.Datastores/redisCaches@2023-10-01-preview'= {
+  name: 'myresource'
   properties: {
     environment: environment
     application: application
-    resourceProvisioning: 'manual'
-    username: 'myusername'
-    host: 'mycache.contoso.com'
-    port: 8080
-    secrets: {
-      password: '******'
+  }
+}
+//Recipe
+
+//RecipeSpecified
+resource redis 'Applications.Datastores/redisCaches@2023-10-01-preview'= {
+  name: 'myresource'
+  properties: {
+    environment: environment
+    application: application
+    recipe: {
+      name: 'azure-prod'
     }
   }
 }
-//MANUAL
+//RecipeSpecified
 

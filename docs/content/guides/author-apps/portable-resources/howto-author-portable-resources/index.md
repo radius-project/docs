@@ -31,7 +31,15 @@ Portable resources provide **abstraction** and **portability** to Radius Applica
 
 {{% codetab %}}
 
-Recipes enable a separation of concerns between infrastructure operators and developers by automating infrastructure deployment. To learn more visit the [Recipes overview]({{< ref "/guides/recipes/overview" >}})
+Recipes enable a separation of concerns between infrastructure operators and developers by automating infrastructure deployment. To learn more visit the [Recipes overview]({{< ref "/guides/recipes/overview" >}}). You can run a default recipe registered in your environment or select the specific Recipe you want to run. 
+
+#### Default Recipe
+
+{{< rad file="snippets/app-redis-recipe.bicep" embed=true marker="//Recipe" >}}
+
+#### Specifying a Recipe by name
+
+{{< rad file="snippets/app-redis-manual.bicep" embed=true marker="//RecipeSpecified" >}}
 
 {{% /codetab %}}
 
