@@ -105,3 +105,8 @@ sidebar_menu_foldable = true
 sidebar_menu_truncate = 500
 ul_show = 1
 navbar_logo = true
+
+[params.ui.feedback]
+enable = true
+yes = '<b>Glad to hear it!</b> Please <a href="https://github.com/dapr/docs/issues/new/choose">tell us how we can improve</a>.'
+no = '<b>Sorry to hear that.</b> Please <a href="https://github.com/dapr/docs/issues/new/choose">tell us how we can improve</a>.'
