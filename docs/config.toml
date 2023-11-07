@@ -108,5 +108,5 @@ navbar_logo = true
 
 [params.ui.feedback]
 enable = true
-yes = '<b>Glad to hear it!</b> Please feel free to <a href="https://github.com/radius-project/radius">star our repo</a> and join our  <a href="https://aka.ms/radius/discord">Discord server</a> to stay up to date with the project. If you would like to also contribute a suggestion visit <a href="https://github.com/radius-project/docs/issues/new/choose"> and tell us how we can improve</a>.'
+yes = '<b>Glad to hear it!</b> Please feel free to <a href="https://github.com/radius-project/radius">star our repo</a> and join our  <a href="https://aka.ms/radius/discord">Discord server</a> to stay up to date with the project.'
 no = '<b>Sorry to hear that.</b> If you would like to also contribute a suggestion visit <a href="https://github.com/radius-project/docs/issues/new/choose"> and tell us how we can improve</a>. Please feel free to <a href="https://github.com/radius-project/radius">star our repo</a> and join our  <a href="https://aka.ms/radius/discord">Discord server</a> to stay up to date with the project.'
