@@ -18,13 +18,13 @@ Usage:
   rad [command]
 
 Available Commands:
-  application Manage Radius applications
+  application Manage Radius Applications
   bicep       Manage bicep compiler
   completion  Generates shell completion scripts
   credential  Manage cloud provider credential for a Radius installation.
   debug-logs  Capture logs from Radius control plane for debugging and diagnostics.
   deploy      Deploy a template
-  env         Manage Radius environments
+  env         Manage Radius Environments
   group       Manage resource groups
   help        Help about any command
   init        Initialize Radius

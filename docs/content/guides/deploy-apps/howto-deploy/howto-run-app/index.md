@@ -9,7 +9,7 @@ tags: ["deployments"]
 ---
 
 ## Pre-requisites 
-- [An authored Radius application]({{< ref author-apps >}})
+- [An authored Radius Application]({{< ref author-apps >}})
 
 ## Step 1: Run an application
 
@@ -32,7 +32,7 @@ Parameters can be included as part of `rad run` via the `-p/--parameters` flag:
  rad run app.bicep -p param1=value1 -p param2=value2
 ```
 
-This will deploy the application to the created Radius environment injecting the parameters into the application.
+This will deploy the application to the created Radius Environment injecting the parameters into the application.
 
 You can find more examples of deploying applications with parameters [here]({{< ref "rad_run#examples" >}}).
 {{% /codetab %}}

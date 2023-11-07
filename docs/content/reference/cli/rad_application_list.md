@@ -8,11 +8,11 @@ description: "Details on the rad application list Radius CLI command"
 ---
 ## rad application list
 
-List Radius applications
+List Radius Applications
 
 ### Synopsis
 
-Lists Radius applications deployed in the resource group associated with the default environment
+Lists Radius Applications deployed in the resource group associated with the default environment
 
 ```
 rad application list [flags]
@@ -47,5 +47,5 @@ rad app list --group my-group
 
 ### SEE ALSO
 
-* [rad application]({{< ref rad_application.md >}})	 - Manage Radius applications
+* [rad application]({{< ref rad_application.md >}})	 - Manage Radius Applications
 

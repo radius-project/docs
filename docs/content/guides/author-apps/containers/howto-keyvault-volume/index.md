@@ -11,14 +11,15 @@ tags: ["Azure","containers"]
 
 This how-to guide will provide an overview of how to:
 
-- Setup a Radius environment with an identity provider
+- Setup a Radius Environment with an identity provider
 - Define a connection to an Azure resource with Azure AD role-based access control (RBAC) assignments
 - Leverage Azure managed identities to connect to an Azure resource
 - Mount a Key vault as a volume to a container
 
 ## Prerequisites
 
-- [rad CLI]({{< ref getting-started >}})
+- [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 - [Supported Kubernetes cluster]({{< ref "guides/operations/kubernetes" >}})
 - [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed on your cluster
 - [Azure Keyvault Provider](https://azure.github.io/secrets-store-csi-driver-provider-azure/docs/getting-started/installation/)
@@ -32,15 +33,15 @@ Begin by running [`rad init --full`]({{< ref rad_init >}}). Make sure to configu
 rad init --full
 ```
 
-## Step 2: Define a Radius environment
+## Step 2: Define a Radius Environment
 
-Create a file named `app.bicep` and define a Radius environment with the identity property set:
+Create a file named `app.bicep` and define a Radius Environment with the identity property set:
 
 {{< rad file="snippets/keyvault-wi.bicep" embed=true marker="//ENVIRONMENT">}}
 
 ## Step 3: Define an app, Key  Vault, and volume
 
-Add a Radius application, an Azure Key Vault, and a Radius volume which uses the Key Vault to your `app.bicep` file:
+Add a Radius Application, an Azure Key Vault, and a Radius volume which uses the Key Vault to your `app.bicep` file:
 
 {{< rad file="snippets/keyvault-wi.bicep" embed=true marker="//APP" >}}
 

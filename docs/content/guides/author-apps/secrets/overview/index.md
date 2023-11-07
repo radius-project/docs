@@ -2,8 +2,8 @@
 type: docs
 title: "Overview: Secrets management"
 linkTitle: "Overview"
-description: "Learn how to create and reference secrets in your Radius application"
-weight: 500
+description: "Learn how to create and reference secrets in your Radius Application"
+weight: 100
 categories: "Overview"
 tags: ["secrets"]
 ---
@@ -14,17 +14,14 @@ Sensitive data, such as TLS certificates, tokens, passwords, and keys that serve
 
 An independent resource with its own lifecycle, a Radius Secret Store ensures that data is persisted across container restarts or mounts and can interact directly with the Radius Application Model. For instance, an Applications.Core/gateways resource can use this resource to store a TLS certificate and reference it.
 
-## Create a new Secret Store
+## Create a new Secret Store 
 
-Here is an example for creating a new Secret Store resource and storing a TLS certificate in it. Radius leverages the secrets management solution available on the hosting platform to create and store the secret. For example, if you are deploying to Kubernetes, the secret will be created in Kubernetes Secrets.
-
-{{< rad file="snippets/secretstore.bicep" embed=true marker="//SECRET_STORE_NEW" >}}
+Radius leverages the secrets management solution available on the hosting platform to create and store the secret. For example, if you are deploying to Kubernetes, the secret will be created in Kubernetes Secrets.
+Follow the [how-to guide on creating new secret store]({{< ref "/guides/author-apps/secrets/howto-new-secretstore" >}}) to learn more about creating a new secret store resource and storing a TLS certificate in it.
 
 ## Reference an existing Secret Store
 
-Here is an example of using a Secret Store to reference secrets stores in an existing secrets management solution that is external to the Radius application stack. Note that only references to Kubernetes Secrets is currently supported, with more to come in the future.
-
-{{< rad file="snippets/secretstore.bicep" embed=true marker="//SECRET_STORE_REF" >}}
+You can also reference an existing secrets management solution that is external to the Radius Application stack. Note that only references to Kubernetes Secrets is currently supported, with more to come in the future.
 
 ## Using Secret Stores
 
@@ -34,5 +31,4 @@ Additional use-cases will be added in upcoming releases.
 
 ## Further reading
 
-- [How To: TLS termination with your own TLS certificate]({{< ref howto-tls-termination >}})
-- [How To: TLS termination with a certificate from Let's Encrypt]({{< ref howto-tls-termination-cert-manager >}})
+- [How To: gateway TLS termination]({{< ref howto-tls >}})

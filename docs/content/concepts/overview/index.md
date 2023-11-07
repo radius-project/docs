@@ -13,7 +13,7 @@ App teams today struggle to model and deploy their applications. Complex archite
 
 Apps today are modeled and deployed with Dockerfiles, Kubernetes CRDs, Helm charts, and infrastructure-as-code templates, with scripts to glue it all together. Plus, the range of infrastructure types (cloud, on-premises, serverless) can double or triple the work as teams figure out how to move apps between platforms.
 
-<img alt="Diagram showing all of the technologies needed to model an application today" src="cloud-apps-today.png" width="600px" />
+{{< image alt="Diagram showing all of the technologies needed to model an application today" src="cloud-apps-today.png" width="600px" >}}
 
 Once deployed, teams don't have a way to view and manage apps holistically. Instead, they're drowning in lists of disjointed resources.
 
@@ -25,7 +25,7 @@ What's missing is a way to collapse the entire concept of an application into a 
 
 At the heart of Radius is a new **application resource**, with an accompanying set of resources and abstractions to describe your app's requirements and capabilities. 
 
-<img alt="Diagram showing modeling an app with Radius" src="cloud-apps-radius.png" width="600px" />
+{{< image alt="Diagram showing modeling an app with Radius" src="cloud-apps-radius.png" width="600px" >}}
 
 These new resources form the [**Radius app model**]({{< ref application-graph>}}), which allow you to:
 
@@ -36,13 +36,13 @@ These new resources form the [**Radius app model**]({{< ref application-graph>}}
 
 The result is no longer just a flat list of resources - it's a fully codified abstraction of how the services and infrastructure relate to each other:
 
-<img alt="Diagram showing Radius application in the Azure portal" src="ui-mockup-basic.png" width="700px" /><br />
+{{< image alt="Diagram showing Radius Application in the Azure portal" src="ui-mockup-basic.png" width="700px" >}}<br />
 
 ### Drastically reduce infra ops time
 
-[App environments]({{< ref environments-concept >}}) are landing zones for applications. They are the place where you can deploy, manage, and scale your apps.
+[App environments]({{< ref collaboration-concept >}}) are landing zones for applications. They are the place where you can deploy, manage, and scale your apps.
 
-<img alt="Diagram showing Radius environments" src="environments.png" width="600px" />
+{{< image alt="Diagram showing Radius Environments" src="environments.png" width="600px" >}}
 
 Environments allow you to:
 
@@ -74,7 +74,7 @@ Radius uses the [Bicep language]({{< ref bicep >}}) as its file-format and struc
 
 Radius aims to support all hosting platform types - from hyperscale cloud, to self-hosted Kubernetes on the edge, to IoT and edge devices.
 
-<img alt="Diagram showing Radius platforms" src="platforms.png" width="800px" />
+{{< image alt="Diagram showing Radius platforms" src="platforms.png" width="800px" >}}
 
 ### Application portability
 
@@ -88,4 +88,4 @@ As teams onboard to Radius and begin deploying across platforms, the tooling and
 
 Now that you have an overview of Radius, learn more about the Radius app model:
 
-{{< button text="Learn about the Radius application model" page="application-graph" size="btn-lg" color="success" >}}
+{{< button text="Learn about the Radius Application model" page="application-graph" size="btn-lg" color="success" >}}

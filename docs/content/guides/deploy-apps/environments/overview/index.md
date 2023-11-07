@@ -1,14 +1,14 @@
 ---
 type: docs
-title: "Overview: Radius environments"
+title: "Overview: Radius Environments"
 linkTitle: "Overview"
-description: "Learn about Radius environments and how to interact with them"
+description: "Learn about Radius Environments and how to interact with them"
 weight: 100
 categories: "Overview"
 tags: ["environments"]
 ---
 
-Radius environments are prepared "landing zones" for Radius applications. Applications deployed to an environment will inherit the container runtime, configuration, and other settings from the environment. Stay tuned for additional environment capabilities coming soon.
+Radius Environments are prepared "landing zones" for Radius Applications. Applications deployed to an environment will inherit the container runtime, configuration, and other settings from the environment. Stay tuned for additional environment capabilities coming soon.
 
 ## Configuration
 
@@ -16,11 +16,11 @@ The following configuration options are available for environments:
 
 ### Container runtime
 
-Radius environments can be configured with a container runtime, where Radius [containers]({{< ref "guides/author-apps/containers" >}}) will be run, along with [gateways and routes]({{< ref networking >}}).
+Radius Environments can be configured with a container runtime, where Radius [containers]({{< ref "guides/author-apps/containers" >}}) will be run, along with [gateways and routes]({{< ref networking >}}).
 
 A Kubernetes namespace is specified on the environment to tell Radius where to render application resources at deploy time.
 
-<img src=environments.png alt="Diagram showing a Radius environment mapping to a Kubernetes cluster and namespace" width=800px />
+{{< image src=environments.png alt="Diagram showing a Radius Environment mapping to a Kubernetes cluster and namespace" width=800px >}}
 
 ### Cloud Provider
 
@@ -43,7 +43,7 @@ Supported identity providers:
 
 ## CLI commands
 
-The following commands let you interact with Radius environments:
+The following commands let you interact with Radius Environments:
 
 {{< tabs init list show delete switch >}}
 

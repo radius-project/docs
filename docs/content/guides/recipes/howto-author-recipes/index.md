@@ -12,8 +12,10 @@ tags: ["recipes"]
 
 Before you get started, you'll need to make sure you have the following tools and resources:
 
+- [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
+- [Radius environment]({{< ref "installation#step-3-initialize-radius" >}})
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-- [Radius initialized with `rad init`]({{< ref getting-started >}})
 
 ### Step 1: Author a Recipe template
 
@@ -105,7 +107,7 @@ Resources are populated automatically for Bicep Recipes for any new Azure or AWS
 Recipes leverage [Bicep registries](https://learn.microsoft.com/azure/azure-resource-manager/bicep/private-module-registry) for template storage. Once you've authored a Recipe, you can publish it to your preferred OCI-compliant registry with [`rad bicep publish`]({{< ref rad_bicep_publish >}}):
 
 ```bash
-rad bicep publish --file myrecipe.bicep --target br:myregistry.azurecr.io/recipes/myrecipe:1.1.0
+rad bicep publish --file myrecipe.bicep --target br:ghcr.io/USERNAME/recipes/myrecipe:1.1.0
 ```
 
 {{% /codetab %}}
@@ -120,14 +122,14 @@ Follow the [Terraform module publishing docs](https://developer.hashicorp.com/te
 
 ### Step 5: Register your Recipe with your environment
 
-Now that your Recipe template has been stored, you can add it your Radius environment to be used by developers. This allows you to mix-and-match templates for each of your environments such as dev, canary, and prod.
+Now that your Recipe template has been stored, you can add it your Radius Environment to be used by developers. This allows you to mix-and-match templates for each of your environments such as dev, canary, and prod.
 
 {{< tabs "rad CLI - Bicep" "rad CLI - Terraform" "Bicep environment" >}}
 
 {{% codetab %}}
 
 ```bash
-rad recipe register myrecipe --environment myenv --resource-type Applications.Datastores/redisCaches --template-kind bicep --template-path myregistry.azurecr.io/recipes/myrecipe:1.1.0
+rad recipe register myrecipe --environment myenv --resource-type Applications.Datastores/redisCaches --template-kind bicep --template-path ghcr.io/USERNAME/recipes/myrecipe:1.1.0
 ```
 
 {{% /codetab %}}

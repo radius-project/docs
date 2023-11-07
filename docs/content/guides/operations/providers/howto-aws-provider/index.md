@@ -2,21 +2,20 @@
 type: docs
 title: "How-To: Configure the AWS cloud provider"
 linkTitle: "Configure AWS provider"
-description: "Learn how to configure the AWS provider for your Radius environment"
+description: "Learn how to configure the AWS provider for your Radius Environment"
 weight: 300
 categories: "How-To"
 tags: ["AWS"]
 ---
 
-The AWS provider allows you to deploy and connect to AWS resources from a Radius environment on an EKS cluster. It can be configured:
+The AWS provider allows you to deploy and connect to AWS resources from a Radius Environment on an EKS cluster. It can be configured:
 - [Interactively via `rad init`](#interactive-configuration)
 - [Manually via `rad env update` and `rad credential register`](#manual-configuration)
 
 ## Prerequisites
 
-- [EKS cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
 - [AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account) and an [IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html)
-- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+- [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 
 ## Interactive configuration
 
@@ -26,9 +25,9 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
    ```
 
 1. Follow the prompts, specifying:
-   - **Namespace** - The Kubernetes namespace where your application containers and networking resources will be deployed (different than the Radius control-plane namespace, `radius-system`)
-   - **Add an AWS provider** - Enter your IAM credentials and pick a region to deploy your AWS resources to
-   - **Environment name** - The name of the environment to create
+   - **Namespace** - The Kubernetes namespace where your application containers and networking resources will be deployed (different than the Radius control-plane namespace, `radius-system`).
+   - **Add an AWS provider** - Enter your IAM access key and secret key and pick a region to deploy your AWS resources to.
+   - **Environment name** - The name of the environment to create.
 
    You should see the following output:
 

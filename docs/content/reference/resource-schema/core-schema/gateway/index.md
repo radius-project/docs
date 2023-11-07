@@ -29,12 +29,10 @@ weight: 401
 
 #### Routes
 
-You can define a list of routes, each representing a connection to a service. Specifying a route opens the destination [HTTP Route]({{< ref httproute >}}) to the internet.
-
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | path | y* | The path to match the incoming request path on. Not required when `tls.sslPassthrough` is set to `'true'`. | `'/service'`
-| destination | y | The [HttpRoute]({{< ref httproute >}}) to direct traffic to when the path is matched. | `route.id`
+| destination | y | The service to route traffic to, in the form `'[scheme]://[serviceName]:[port]'` | `'http://backend:80'`
 | replacePrefix | n | The prefix to replace in the incoming request path that is sent to the destination route. | `'/'`
 
 #### Hostname
@@ -51,7 +49,7 @@ You can define hostname information for how to access your application. See [bel
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | sslPassthrough | n | Configures the gateway to passthrough encrypted SSL traffic to an HTTP route and container. Requires a single route to be set with no 'path' defined (just destination). With sslPassthrough set to `true`, the gateway can only support SNI routing. Path based routing cannot be supported. Defaults to 'false'. | `true`
-| hostname | n | The hostname for TLS termination. | `'hostname.radapp.dev'`
+| hostname | n | The hostname for TLS termination. | `'hostname.radapp.io'`
 | certificateFrom | n | The Radius Secret Store resource ID that holds the TLS certificate data for TLS termination. | `secretstore.id`
 | minimumProtocolVersion | n | The minimum TLS protocol to support for TLS termination. | `'1.2'`
 

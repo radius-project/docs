@@ -10,7 +10,7 @@ tags: ["logs","observability"]
 
 ## Prerequisites
 
-- [Supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters"  >}})
+- [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [Helm 3](https://helm.sh/)
 
@@ -52,7 +52,12 @@ tags: ["logs","observability"]
 5. Ensure that Elastic Search and Kibana are running in your Kubernetes cluster
 
     ```bash
-    $ kubectl get pods -n radius-monitoring
+    kubectl get pods -n radius-monitoring
+    ```
+
+    You should see:
+
+    ```
     NAME                            READY   STATUS    RESTARTS   AGE
     elasticsearch-master-0          1/1     Running   0          6m58s
     kibana-kibana-95bc54b89-zqdrk   1/1     Running   0          4m21s
@@ -78,7 +83,12 @@ tags: ["logs","observability"]
 2. Ensure that Fluentd is running as a daemonset. The number of Fluentd instances should be the same as the number of cluster nodes. In the example below, there is only one node in the cluster:
 
     ```bash
-    $ kubectl get pods -n kube-system -w
+    kubectl get pods -n kube-system -w
+    ```
+
+    You should see:
+
+    ```
     NAME                          READY   STATUS    RESTARTS   AGE
     coredns-6955765f44-cxjxk      1/1     Running   0          4m41s
     coredns-6955765f44-jlskv      1/1     Running   0          4m41s
@@ -105,46 +115,51 @@ _Note: There is a small delay for Elastic Search to index the logs that Fluentd 
 1. Port-forward from localhost to `svc/kibana-kibana`
 
     ```bash
-    $ kubectl port-forward svc/kibana-kibana 5601 -n radius-monitoring
+    kubectl port-forward svc/kibana-kibana 5601 -n radius-monitoring
+    ```
+    
+    You should see:
+   
+    ```
     Forwarding from 127.0.0.1:5601 -> 5601
     Forwarding from [::1]:5601 -> 5601
     Handling connection for 5601
     Handling connection for 5601
     ```
 
-2. Browse to `http://localhost:5601`
+1. Browse to `http://localhost:5601`
 
-3. Expand the drop-down menu and click **Management → Stack Management**
+2. Expand the drop-down menu and click **Management → Stack Management**
 
     ![Stack Management item under Kibana Management menu options](kibana-1.png)
 
-4. On the Stack Management page, select **Data → Index Management** and wait until `radius-*` is indexed.
+3. On the Stack Management page, select **Data → Index Management** and wait until `radius-*` is indexed.
 
     ![Index Management view on Kibana Stack Management page](kibana-2.png)
 
-5. Once `radius-*` is indexed, click on **Kibana → Index Patterns** and then the **Create index pattern** button.
+4. Once `radius-*` is indexed, click on **Kibana → Index Patterns** and then the **Create index pattern** button.
 
     ![Kibana create index pattern button](kibana-3.png)
 
-6. Define a new index pattern by typing `radius*` into the **Index Pattern name** field, then click the **Next step** button to continue.
+5. Define a new index pattern by typing `radius*` into the **Index Pattern name** field, then click the **Next step** button to continue.
 
     ![Kibana define an index pattern page](kibana-4.png)
 
-7. Configure the primary time field to use with the new index pattern by selecting the `@timestamp` option from the **Time field** drop-down. Click the **Create index pattern** button to complete creation of the index pattern.
+6. Configure the primary time field to use with the new index pattern by selecting the `@timestamp` option from the **Time field** drop-down. Click the **Create index pattern** button to complete creation of the index pattern.
 
     ![Kibana configure settings page for creating an index pattern](kibana-5.png)
 
-8. The newly created index pattern should be shown. Confirm that the fields of interest such as `scope`, `type`, `app_id`, `level`, etc. are being indexed by using the search box in the **Fields** tab.
+7. The newly created index pattern should be shown. Confirm that the fields of interest such as `scope`, `type`, `app_id`, `level`, etc. are being indexed by using the search box in the **Fields** tab.
 
     _Note: If you cannot find the indexed field, please wait. The time it takes to search across all indexed fields depends on the volume of data and size of the resource that the elastic search is running on._
 
     ![View of created Kibana index pattern](kibana-6.png)
 
-9. To explore the indexed data, expand the drop-down menu and click **Analytics → Discover**.
+8. To explore the indexed data, expand the drop-down menu and click **Analytics → Discover**.
 
     ![Discover item under Kibana Analytics menu options](kibana-7.png)
 
-10. In the search box, type in a query string such as `scope:*` and click the **Refresh** button to view the results.
+9. In the search box, type in a query string such as `scope:*` and click the **Refresh** button to view the results.
 
     _Note: This can take a long time. The time it takes to return all results depends on the volume of data and size of the resource that the elastic search is running on._
 

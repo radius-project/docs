@@ -2,24 +2,25 @@
 type: docs
 title: "How-To: Initialize Radius Environments"
 linkTitle: "Initialize Environments"
-description: "Learn how to create Radius environments"
+description: "Learn how to create Radius Environments"
 weight: 200
 categories: "How-To"
 tags: ["environments"]
 ---
 
-Radius environments are prepared landing zones for applications that contain configuration and Recipes. To learn more visit the [environments overview]({{< ref "/guides/deploy-apps/environments/overview" >}}) page.
+Radius Environments are prepared landing zones for applications that contain configuration and Recipes. To learn more visit the [environments overview]({{< ref "/guides/deploy-apps/environments/overview" >}}) page.
 
-Radius environments can be setup with the rad CLI via two paths: interactive or manual.
+Radius Environments can be setup with the rad CLI via two paths: interactive or manual.
 
 ## Pre-requisites
 
-- Install the [rad CLI]({{< ref getting-started >}})
-- Setup a supported [Kubernetes cluster]({{< ref "guides/operations/kubernetes" >}})
+- [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
+- [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 
 ## Create a development environment
 
-1. Initialize a new [Radius environment]({{< ref "/guides/deploy-apps/environments/overview">}}) with [`rad init`]({{< ref rad_init >}}):
+1. Initialize a new [Radius Environment]({{< ref "/guides/deploy-apps/environments/overview">}}) with [`rad init`]({{< ref rad_init >}}):
    ```bash
    rad init
    ```
@@ -59,16 +60,16 @@ Radius environments can be setup with the rad CLI via two paths: interactive or 
    ```bash
    rad env list
    ```
-3. Use `rad recipe list` to see the list of available recipes:
+3. Use `rad recipe list` to see the list of available Recipes:
    ```bash
    rad recipe list
    ```
    ```
    NAME      TYPE                              TEMPLATE KIND  TEMPLATE
-   default   Applications.Datastores/mongoDatabases  bicep          radius.azurecr.io/recipes/dev/mongodatabases:latest
-   default   Applications.Datastores/redisCaches     bicep          radius.azurecr.io/recipes/dev/rediscaches:latest
+   default   Applications.Datastores/mongoDatabases  bicep          ghcr.io/radius-project/recipes/local-dev/mongodatabases:latest
+   default   Applications.Datastores/redisCaches     bicep          ghcr.io/radius-project/recipes/local-dev/rediscaches:latest
    ``` 
-   You can follow the [recipes]({{< ref "/guides/recipes/overview" >}}) documentation to learn more about the recipes and how to use them in your application.
+   You can follow the [Recipes]({{< ref "/guides/recipes/overview" >}}) documentation to learn more about the Recipes and how to use them in your application.
 
 ## Create an environment interactively
 
@@ -179,7 +180,7 @@ Radius can also be installed and an environment created with manual rad CLI comm
    ```
 
 
-1. Create your Radius environment:
+1. Create your Radius Environment:
    
    Run [`rad env create`]({{< ref rad_env_create >}}) to create a new environment in your resource group. Specify the `--namespace` flag to select the Kubernetes namespace to deploy resources into:
    
@@ -187,7 +188,7 @@ Radius can also be installed and an environment created with manual rad CLI comm
    rad env create myEnvironment --group myGroup --namespace my-namespace
    ```
 
-   You should see your Radius environment being created and linked to your resource group:
+   You should see your Radius Environment being created and linked to your resource group:
 
    ```
    Creating Environment...

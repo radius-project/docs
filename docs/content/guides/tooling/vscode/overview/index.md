@@ -8,13 +8,13 @@ categories: "Overview"
 tags: ["VSCode"]
 ---
 
-When using Visual Studio Code with Radius there are a set of extensions you can install to help author, validate, and manage your Radius applications and environments.
+When using Visual Studio Code with Radius there are a set of extensions you can install to help author, validate, and manage your Radius Applications and environments.
 
 ## Radius Bicep extension
 
 The Radius Bicep extension provides formatting, intellisense, and validation for Bicep templates.
 
-<img src="vscode-bicep.png" alt="Screenshot of the Radius Bicep extension showing available Radius resource types" width=600px >
+{{< image src="vscode-bicep.png" alt="Screenshot of the Radius Bicep extension showing available Radius resource types" width=600px >}}
 <br /><br/>
 
 {{< button text="Radius Bicep guide" page="howto-vscode-bicep" >}}

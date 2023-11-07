@@ -134,12 +134,12 @@ When listing applications using the `rad` CLI:
 3. UCP proxies the HTTP request to the `Applications.Core` resource provider.
 4. The `Applications.Core` resource provider handles the request and responds with the list of applications.
 
-<img src="flow-list-apps.png" alt="Diagram of the API flow described above" width="1000px" >
+{{< image src="flow-list-apps.png" alt="Diagram of the API flow described above" width="1000px" >}}
 
 {{% /codetab %}}
 
 {{% codetab %}}
-When using Bicep to author and deploy Radius applications:
+When using Bicep to author and deploy Radius Applications:
 
 1. The client compiles the Bicep file to an ARM-JSON template and submits a request for processing as a `Bicep.Deployments/deployments` resource.
 2. UCP receives the request for the `Bicep.Deployments/deployments` Create operation and looks up the internal address for the `Bicep.Deployments` resource provider.
@@ -148,12 +148,12 @@ When using Bicep to author and deploy Radius applications:
   a. The `Bicep.Deployments` resource provider makes a request to UCP to Create/Update the resource.
   b. UCP routes the request to the appropriate resource provider to be handled.
 
-<img src="flow-deploy.png" alt="Diagram of the API flow described above" width="1000px" >
+{{< image src="flow-deploy.png" alt="Diagram of the API flow described above" width="1000px" >}}
 
 {{% /codetab %}}
 
 {{% codetab %}}
-When using the `tf` CLI to deploy a Radius application using Terraform:
+When using the `tf` CLI to deploy a Radius Application using Terraform:
 
 1. Terraform reads the configuration, loads credentials, parses the file, and instantiates its providers. For each resource in the file:
   a. Terraform asks the appropriate provider to Create or Update the resource. 
@@ -161,7 +161,7 @@ When using the `tf` CLI to deploy a Radius application using Terraform:
   c. In the case of a Radius resource the Terraform provider makes a request the Radius API to Create/Update a resource.
   d. UCP routes the request to the appropriate resource provider to be handled.
 
-<img src="flow-terraform.png" alt="Diagram of the API flow described above" width="1000px" >
+{{< image src="flow-terraform.png" alt="Diagram of the API flow described above" width="1000px" >}}
 
 {{% /codetab %}}
 

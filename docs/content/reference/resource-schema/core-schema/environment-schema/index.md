@@ -56,7 +56,7 @@ Details on what to run and how to run it are defined in the `container` property
 |------|:--------:|-------------|---------|
 | \<recipe-name\> | y | The name of the Recipe. Must be unique within the resource-type. | `myrecipe`
 | templateKind | y | Format of the template provided by the recipe. Allowed values: bicep | `'bicep'`
-| templatePath | y | The path to the Recipe contents. For Bicep Recipes this is a Bicep module registry address. | `'mycr.azurecr.io/recipes/myrecipe:1.0'`
+| templatePath | y | The path to the Recipe contents. For Bicep Recipes this is a Bicep module registry address. | `'ghcr.io/USERNAME/recipes/myrecipe:1.0'`
 | parameters | n | A list of parameters to set on the Recipe for every Recipe usage and deployment. Can be overridden by the resource calling the Recipe. | `capacity: 1`
 
 ### extensions
@@ -65,7 +65,7 @@ Extensions allow you to customize how resources are generated or customized as p
 
 #### kubernetesMetadata
 
-The [Kubernetes Metadata extension]({{< ref "guides/operations/kubernetes/kubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius application. For examples, please refer to the extension overview page.
+The [Kubernetes Metadata extension]({{< ref "guides/operations/kubernetes/kubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius Application. For examples, please refer to the extension overview page.
 
 ##### Properties
 
@@ -89,4 +89,4 @@ The [Kubernetes Metadata extension]({{< ref "guides/operations/kubernetes/kubern
 
 ## Further reading
 
-- [Radius environments]({{< ref "/guides/deploy-apps/environments/overview" >}})
+- [Radius Environments]({{< ref "/guides/deploy-apps/environments/overview" >}})

@@ -13,7 +13,7 @@ This how-to guide will show you:
 - How to model an AWS S3 resource in Bicep
 - How to use a sample application to interact with AWS S3 bucket
 
-   <img src="./s3appdiagram.png" alt="Screenshot of the sample application to interact with s3 bucket " width=400>
+   {{< image src="s3appdiagram.png" alt="Screenshot of the sample application to interact with s3 bucket " width=400 >}}
 
 ## Prerequisites
 
@@ -34,9 +34,9 @@ Create an EKS cluster by using the `eksctl` CLI.
 eksctl create cluster --name <my-cluster> --region=<my-region> 
 ```
 
-## Step 2: Create a Radius environment with the AWS cloud provider
+## Step 2: Create a Radius Environment with the AWS cloud provider
 
-Create a [Radius environment]({{< ref "/guides/deploy-apps/environments/overview" >}}) where you will deploy your application.
+Create a [Radius Environment]({{< ref "/guides/deploy-apps/environments/overview" >}}) where you will deploy your application.
 
 Run [`rad init --full`]({{< ref rad_init >}}) to initialize a new environment into your current kubectl context:
 
@@ -92,13 +92,13 @@ This creates a container that will be deployed to your Kubernetes cluster. This 
 
 1. Visit [localhost:5234](http://localhost:5234/swagger/index.html) in your browser. This is a swagger doc for the sample application. You can use this to interact with the AWS S3 Bucket you created. For example, you can try to upload a file to the bucket via the `/upload` endpoint.
 
-    <img src="./s3app.png" alt="Screenshot of the sample application to interact with s3 bucket " width=900>
+    {{< image src="s3app.png" alt="Screenshot of the sample application to interact with s3 bucket " width=900 >}}
 
 ## Step 6: Cleanup
 
 1. When you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to delete all Radius resources running on the EKS Cluster.
 
-2. Cleanup AWS Resources - AWS resources are not deleted when deleting a Radius environment, so make sure to delete all resources created in this reference app to prevent additional charges. You can delete these resources in the AWS Console or via the AWS CLI. Instructions to delete an AWS S3 Bucket are available [here](https://docs.aws.amazon.com/AmazonS3/latest/userguide/delete-bucket.html).
+2. Cleanup AWS Resources - AWS resources are not deleted when deleting a Radius Environment, so make sure to delete all resources created in this reference app to prevent additional charges. You can delete these resources in the AWS Console or via the AWS CLI. Instructions to delete an AWS S3 Bucket are available [here](https://docs.aws.amazon.com/AmazonS3/latest/userguide/delete-bucket.html).
 
 ## Troubleshooting
 

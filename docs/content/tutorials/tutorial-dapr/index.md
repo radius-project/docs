@@ -18,17 +18,14 @@ For more details on the app and access to the source code, visit the `tutorials/
 
 ## Prerequisites
 
-- [Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
-- [Radius CLI]({{< ref "getting-started" >}})
-- [Radius environment]({{< ref "/guides/deploy-apps/environments/overview" >}})
+- [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
+- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
+- [Radius environment]({{< ref "installation#step-3-initialize-radius" >}})
 - [Dapr installed on your Kubernetes cluster](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/)
-- [Visual Studio Code](https://code.visualstudio.com/) (recommended)
-  - The [Radius VSCode extension]({{< ref "getting-started" >}}) is highly recommended to provide syntax highlighting, completion, and linting
-  - Although not recommended, you can also complete This how-to guide with any basic text editor
 
 ## Step 1: Define the application, `backend` container, and Dapr state store
 
-Begin by creating a new file named `dapr.bicep` with a Radius application that consists of a `backend` container and Dapr state store with Redis:
+Begin by creating a new file named `dapr.bicep` with a Radius Application that consists of a `backend` container and Dapr state store with Redis:
 
 {{< rad file="snippets/dapr.bicep" embed=true marker="//BACKEND" >}}
 
@@ -101,13 +98,13 @@ Add a `frontend` [container]({{< ref "guides/author-apps/containers" >}}) which 
 
 In your browser, navigate to the endpoint (e.g. [http://localhost:8080](http://localhost:8080)) to view and interact with your application:
 
-   <img src="frontend.png" alt="Screenshot of frontend application" width=500 >
+   {{< image src="frontend.png" alt="Screenshot of frontend application" width=500 >}}
 
 ## Cleanup
 
 1. Press CTRL+C to terminate the `rad run` log console
 
-1. Run `rad app delete` to cleanup your Radius application, containers, and Dapr statestore. The Recipe resources (_Redis container and Dapr component_) are also automatically cleaned up.
+1. Run `rad app delete` to cleanup your Radius Application, containers, and Dapr statestore. The Recipe resources (_Redis container and Dapr component_) are also automatically cleaned up.
 
    ```bash
    rad app delete -a dapr

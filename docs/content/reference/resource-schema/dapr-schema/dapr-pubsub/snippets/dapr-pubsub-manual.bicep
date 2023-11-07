@@ -1,6 +1,6 @@
 import radius as radius
 
-@description('The ID of your Radius environment. Automatically injected by the rad CLI.')
+@description('The ID of your Radius Environment. Automatically injected by the rad CLI.')
 param environment string
 
 resource app 'Applications.Core/applications@2023-10-01-preview' = {
@@ -20,13 +20,9 @@ resource publisher 'Applications.Core/containers@2023-10-01-preview' = {
       }
     }
     container: {
-      image: 'radius.azurecr.io/magpie:latest'
+      image: 'ghcr.io/radius-project/magpiego:latest'
     }
   }
-}
-
-resource kafkaRoute 'Applications.Core/httpRoutes@2023-10-01-preview' existing = {
-  name: 'kafka-route'
 }
 
 //SAMPLE
@@ -36,12 +32,9 @@ resource pubsub 'Applications.Dapr/pubSubBrokers@2023-10-01-preview' = {
     environment: environment
     application: app.id
     resourceProvisioning: 'manual'
-    resources: [
-      { id: kafkaRoute.id }
-    ]
     type: 'pubsub.kafka'
     metadata: {
-      brokers: kafkaRoute.properties.url
+      brokers: '<KAFKA-URL>'
       authRequired: false
       consumeRetryInternal: 1024
     }

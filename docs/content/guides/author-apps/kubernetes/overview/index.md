@@ -3,12 +3,12 @@ type: docs
 title: "Overview: Kubernetes resources"
 linkTitle: "Overview"
 description: "Deploy and connect to Kubernetes resources in your application"
-weight: 1000
+weight: 100
 categories: "Overview"
 tags: ["Kubernetes"]
 ---
 
-Radius applications are able to connect to and leverage Kubernetes resources.
+Radius Applications are able to connect to and leverage Kubernetes resources.
 
 ## Resource library
 
