@@ -310,6 +310,7 @@ resourceGroup
 replacePrefix
 repo
 resourceGroupName
+RecipeSpecified
 resourceId
 resourcegroup
 rollout
