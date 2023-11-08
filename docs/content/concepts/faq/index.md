@@ -79,7 +79,7 @@ Yes. Radius has first-class support for [Dapr building blocks]({{< ref "/guides/
 
 ### How does Radius compare to Kubernetes?
 
-[Kubernetes](https://kubernetes.io/) is an open-source system for automating deployment, scaling, and management of containerized applications and custom resources. =
+[Kubernetes](https://kubernetes.io/) is an open-source system for automating deployment, scaling, and management of containerized applications and custom resources.
 
 Radius leverages Kubernetes in two ways:
 
