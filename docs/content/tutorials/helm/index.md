@@ -11,7 +11,8 @@ tags : ["kubernetes", "helm"]
 This tutorial will teach you the following about Radius:
 
 * How to use update a Helm chart to include its resources in a Radius application
-* How to use features like Recipes and Connections within Kubernetes YAML or Helm.
+* How to use features like Recipes and Connections within Kubernetes YAML or Helm
+
 <img src="diagram.png" alt="Diagram of the application and its resources" width="500px" >
 
 ## Prerequisites
