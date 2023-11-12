@@ -64,7 +64,7 @@ The common structure of a resource id is the following:
 
 ### Root scope 
 
-A hierarchical set of key-value pairs that identify the original of the resource. Root scopes answer questions like: 
+A hierarchical set of key-value pairs that identify the origin of the resource. Root scopes answer questions like: 
 
 - *"What cloud is this resource from?"*
 - *"What cloud account contains this resource?"*
