@@ -41,6 +41,10 @@ Supported identity providers:
 
 - [Azure AD workload identity](https://azure.github.io/azure-workload-identity/docs/introduction.html)
 
+### Simulated environments
+
+You can optionally designate an environment as "simulated". When enabled, a simulated environment will not deploy any output any resources or run any Recipes when an application is deployed. This is useful for dry runs or testing.
+
 ## CLI commands
 
 The following commands let you interact with Radius Environments:
