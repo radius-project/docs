@@ -16,10 +16,10 @@ Recipes enable a **separation of concerns** between infrastructure operators and
 
 ### Support for multiple IaC languages
 
-| Language | Supported sources |
-|----------|-------------------|
-| [Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/) | [OCI registries](https://opencontainers.org/) |
-| [Terraform](https://developer.hashicorp.com/terraform/docs) | [Public Terraform registries](https://registry.terraform.io/) |
+| Language | Supported sources | Notes |
+|----------|-------------------|-------|
+| [Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/) | [OCI registries](https://opencontainers.org/) | Supports Azure, AWS, and Kubernetes
+| [Terraform](https://developer.hashicorp.com/terraform/docs) | [Public Terraform registries](https://registry.terraform.io/) | Supports Azure, AWS, and Kubernetes providers<br />Other providers not yet configurable
 
 ### Select the Recipe that meets your needs
 
