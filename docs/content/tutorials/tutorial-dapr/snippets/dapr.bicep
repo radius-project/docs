@@ -4,18 +4,14 @@ import radius as radius
 @description('Specifies the environment for resources.')
 param environment string
 
-resource app 'Applications.Core/applications@2023-10-01-preview' = {
-  name: 'dapr'
-  properties: {
-    environment: environment
-  }
-}
+@description('The ID of your Radius Application. Automatically injected by the rad CLI.')
+param application string
 
 // The backend container that is connected to the Dapr state store
 resource backend 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'backend'
   properties: {
-    application: app.id
+    application: application
     container: {
       // This image is where the app's backend code lives
       image: 'ghcr.io/radius-project/samples/dapr-backend:latest'
@@ -46,7 +42,7 @@ resource stateStore 'Applications.Dapr/stateStores@2023-10-01-preview' = {
   properties: {
     // Provision Redis Dapr state store automatically via the default Radius Recipe
     environment: environment
-    application: app.id
+    application: application
   }
 }
 //BACKEND
@@ -56,13 +52,15 @@ resource stateStore 'Applications.Dapr/stateStores@2023-10-01-preview' = {
 resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'frontend'
   properties: {
-    application: app.id
+    application: application
     container: {
       // This image is where the app's frontend code lives
       image: 'ghcr.io/radius-project/samples/dapr-frontend:latest'
       env: {
         // An environment variable to tell the frontend container where to find the backend
         CONNECTION_BACKEND_APPID: 'backend'
+        // An environment variable to override the default port that .NET Core listens on
+        ASPNETCORE_URLS: 'http://*:8080'
       }
       // The frontend container exposes port 8080, which is used to serve the UI
       ports: {
