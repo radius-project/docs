@@ -60,4 +60,11 @@ To access the auto-injected value, specify an `environment` string parameter in 
 param environment string
 ```
 
+### Supported cloud providers
+
+| Cloud Providers | Resource support |
+|---------------------| ------------|
+| [AWS]({{< ref "/reference/resource-schema/aws" >}}) | ✅ |
+| [Azure]({{< ref "/guides/author-apps/azure/overview" >}}) | ✅ |
+
 ## Resource categories
