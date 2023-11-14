@@ -19,7 +19,7 @@ weight: 400
 - [Microsoft’s Radius and the future of cloud-native development - InfoWorld Oct 26,2023](https://www.infoworld.com/article/3709448/microsofts-radius-and-the-future-of-cloud-native-development.html)
 - [Microsoft Azure introduces Radius, an open-source development platform for multi-cloud computing - ZDNET Oct 27,2023](https://www.zdnet.com/article/microsoft-azure-introduces-radius-an-open-source-development-platform-for-multi-cloud-computing/)
 
-## Presentations
+## Videos
 
 - [Mark Russinovich at the Linux Foundation Member Summit](https://aka.ms/radius-lfms)
 - [Introducing Radius - Open at Microsoft ](https://www.youtube.com/watch?v=mT_NWFnYn0A)
