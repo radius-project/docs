@@ -22,12 +22,6 @@ The Radius getting-started guide can be [run **for free** in a GitHub Codespace]
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/radius-project/samples)
 {{< /alert >}}
 
-{{< alert title="🚀 Run in a <b>free</b> GitHub Codespace" color="primary" >}}
-The Radius getting-started guide can be [run **for free** in a GitHub Codespace](https://github.blog/changelog/2022-11-09-codespaces-for-free-and-pro-accounts/). Visit the following link to get started in seconds:
-
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/radius-project/samples)
-{{< /alert >}}
-
 ## 1. Have your Kubernetes cluster handy
 
 Radius runs inside [Kubernetes]({{< ref "guides/operations/kubernetes" >}}). However you run Kubernetes, get a cluster ready.
