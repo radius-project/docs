@@ -1204,3 +1204,4 @@ IdentitySettingKind
 KubernetesMetadataExtensionLabels
 outputResources
 SecretStore
+plainHTTP
