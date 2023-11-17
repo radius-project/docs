@@ -46,6 +46,7 @@ rad recipe register cosmosdb -e env_name -w workspace --template-kind bicep --te
   -h, --help                      help for register
   -o, --output string             output format (supported formats are json, table) (default "table")
   -p, --parameters stringArray    Specify parameters for the deployment
+      --plain-http                Connect to the Bicep registry using HTTP (not-HTTPS). This should be used when the registry is known not to support HTTPS, for example in a locally-hosted registry. Defaults to false (use HTTPS/TLS).
       --resource-type string      specify the type of the portable resource this recipe can be consumed by
       --template-kind string      specify the kind for the template provided by the recipe.
       --template-path string      specify the path to the template provided by the recipe.
