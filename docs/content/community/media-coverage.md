@@ -26,7 +26,7 @@ Ongoing blog posts can be found at [Radius Blog](https://blog.radapp.io)
 
 | Article Title | Media Source | Date |
 | ------------- | ------------ | ---- |
-|[ Microsoft launches Radius, an open-source application platform for the cloud-native era](https://techcrunch.com/2023/10/18/microsoft-launches-radius-an-open-source-application-platform-for-the-cloud/)| Techcrunch | Oct 18,2023 |
-|[Microsoft Reimagines Modern Application Deployment With Radius Platform](https://www.forbes.com/sites/janakirammsv/2023/10/23/microsoft-reimagines-modern-application-deployment-with-radius-platform/?sh=6a78a37c76d7)| Forbes | Oct 23,2023 |
+|[ Microsoft launches Radius, an open-source application platform for the cloud-native era](https://techcrunch.com/2023/10/18/microsoft-launches-radius-an-open-source-application-platform-for-the-cloud/)| TechCrunch | Oct 18,2023 |
+|[Microsoft reimagines Modern Application Deployment With Radius Platform](https://www.forbes.com/sites/janakirammsv/2023/10/23/microsoft-reimagines-modern-application-deployment-with-radius-platform/?sh=6a78a37c76d7)| Forbes | Oct 23,2023 |
 |[Microsoft’s Radius and the future of cloud-native development](https://www.infoworld.com/article/3709448/microsofts-radius-and-the-future-of-cloud-native-development.html)| InfoWorld | Oct 26,2023 |
 |[Microsoft Azure introduces Radius, an open-source development platform for multi-cloud computing](https://www.zdnet.com/article/microsoft-azure-introduces-radius-an-open-source-development-platform-for-multi-cloud-computing/)| ZDNET | Oct 27,2023 |
