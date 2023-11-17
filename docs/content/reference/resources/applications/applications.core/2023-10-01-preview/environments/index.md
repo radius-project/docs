@@ -200,6 +200,7 @@ description: "Detailed reference documentation for applications.core/environment
 
 | Property | Type | Description |
 |----------|------|-------------|
+| **plainHTTP** | bool | Connect to the Bicep registry using HTTP (not-HTTPS). This should be used when the registry is known not to support HTTPS, for example in a locally-hosted registry. Defaults to false (use HTTPS/TLS). |
 | **templateKind** | 'bicep' | Discriminator property for RecipeProperties. <br />_(required)_ |
 
 #### TerraformRecipeProperties
