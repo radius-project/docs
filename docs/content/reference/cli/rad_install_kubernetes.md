@@ -36,16 +36,20 @@ rad install kubernetes --kubecontext mycluster
 # Install Radius with overrides in the current Kubernetes context
 rad install kubernetes --set key=value
 
+# Install Radius with the intermediate root CA certificate in the current Kubernetes context
+rad install kubernetes --set-file global.rootCA.cert=/path/to/rootCA.crt
+
 ```
 
 ### Options
 
 ```
-      --chart string         Specify a file path to a helm chart to install Radius from
-  -h, --help                 help for kubernetes
-      --kubecontext string   The Kubernetes context to use, will use the default if unset
-      --reinstall            Specify to force reinstallation of Radius
-      --set stringArray      Set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
+      --chart string           Specify a file path to a helm chart to install Radius from
+  -h, --help                   help for kubernetes
+      --kubecontext string     The Kubernetes context to use, will use the default if unset
+      --reinstall              Specify to force reinstallation of Radius
+      --set stringArray        Set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
+      --set-file stringArray   Set values from files on the command line (can specify multiple or separate files with commas: key1=filename1,key2=filename2)
 ```
 
 ### Options inherited from parent commands
