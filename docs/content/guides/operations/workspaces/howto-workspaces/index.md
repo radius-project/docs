@@ -20,32 +20,32 @@ When you have multiple environments initialized for different purposes workspace
    ```sh
    rad install kubernetes
    ```
-1. Create a resource group named `myworkspace` using [`rad group create`]({{< ref rad_group_create >}}):
+2. Create a resource group named `mygroup` using [`rad group create`]({{< ref rad_group_create >}}):
    ```sh
-   rad group create myworkspace
+   rad group create mygroup
    ```
-1. Create an environment named `myworkspace` using [`rad env create`]({{< ref rad_env_create >}}):
+3. Create an environment named `myenvironment` using [`rad env create`]({{< ref rad_env_create >}}):
    ```sh
-   rad env create myworkspace
+   rad env create myenvironment
    ```
-1. Create a workspace named `myworkspace` using [`rad workspace create`]({{< ref rad_workspace_create >}}):
+4. Create a workspace named `myworkspace` using [`rad workspace create`]({{< ref rad_workspace_create >}}):
     ```sh
-    rad workspace create kubernetes myworkspace --group myworkspace --environment myworkspace
+    rad workspace create kubernetes myworkspace --group mygroup --environment myenvironment
     ```
     Radius writes the workspace details to your local configuration file (`~/.rad/config.yaml` on Linux and macOS, `%USERPROFILE%\.rad\config.yaml` on Windows).
-1. Create another resource group named `yourworkspace` using [`rad group create`]({{< ref rad_group_create >}}):
+5. Create another resource group named `yourgroup` using [`rad group create`]({{< ref rad_group_create >}}):
    ```sh
-   rad group create yourworkspace
+   rad group create yourgroup
    ```
-1. Create an environment named `yourworkspace` using [`rad env create`]({{< ref rad_env_create >}}):
+6. Create an environment named `yourenvironment` using [`rad env create`]({{< ref rad_env_create >}}):
    ```sh
-   rad env create yourworkspace
+   rad env create yourenvironment
    ```
-1. Create a workspace named `yourworkspace` using [`rad workspace create`]({{< ref rad_workspace_create >}}):
+7. Create a workspace named `yourworkspace` using [`rad workspace create`]({{< ref rad_workspace_create >}}):
     ```sh
-    rad workspace create kubernetes yourworkspace --group yourworkspace --environment yourworkspace
+    rad workspace create kubernetes yourworkspace --group yourgroup --environment yourenvironment
     ```
-1. Verify your `config.yaml` file. It should show both `myworkspace` and `yourworkspace` workspaces, with your environments:
+8. Verify your `config.yaml` file. It should show both `myworkspace` and `yourworkspace` workspaces, with your environments:
     ```yaml
     workspaces:
     default: yourworkspace
@@ -54,15 +54,13 @@ When you have multiple environments initialized for different purposes workspace
         connection:
           context: mycluster
           kind: kubernetes
-        environment: /planes/radius/local/resourcegroups/yourworkspace
-        /providers/applications.core/environments/yourworkspace
-        scope: /planes/radius/local/resourceGroups/yourworkspace
+        environment: /planes/radius/local/resourcegroups/yourgroup/providers/applications.core/environments/yourenvironment
+        scope: /planes/radius/local/resourceGroups/yourgroup
       myworkspace:
         connection:
           context: mycluster
           kind: kubernetes
-        environment: /planes/radius/local/resourcegroups/myworkspace
-        /providers/applications.core/environments/myworkspace
-        scope: /planes/radius/local/resourceGroups/myworkspace
+        environment: /planes/radius/local/resourcegroups/mygroup/providers/applications.core/environments/myenvironment
+        scope: /planes/radius/local/resourceGroups/mygroup
     ```
-1. You can now deploy applications to both myworkspace and yourworkspace using [`rad deploy`]({{< ref rad_deploy >}}), specifying the `-w` flag.
+9. You can now deploy applications to both myworkspace and yourworkspace using [`rad deploy`]({{< ref rad_deploy >}}), specifying the `-w` flag.

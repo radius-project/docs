@@ -126,7 +126,7 @@ Radius is an open-source project that allows you to model, deploy, and manage ap
 
 ### How does Radius compare to Crossplane?
 
-[Crossplane](https://crossplane.io/) is an open source Kubernetes add-on that extends any cluster with the ability to provision and manage cloud infrastructure, services, and applications using kubectl, GitOps, or any tool that works with the Kubernetes API. As Radius is unopinionated about how infrastructure is deployed through Recipes, Crossplane could be used within a Recipe. Both Bicep and Terraform modules are able to include Kubernetes resources and Crossplane CRDs.
+[Crossplane](https://crossplane.io/) is an open-source Kubernetes add-on that extends any cluster with the ability to provision and manage cloud infrastructure, services, and applications using kubectl, GitOps, or any tool that works with the Kubernetes API. As Radius is unopinionated about how infrastructure is deployed through Recipes, Crossplane could be used within a Recipe. Both Bicep and Terraform modules are able to include Kubernetes resources and Crossplane CRDs.
 
 Once deployed, Crossplane-managed infrastructure can be included in a Radius application and queried via the Radius application graph.
 
