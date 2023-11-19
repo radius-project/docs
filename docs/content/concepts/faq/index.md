@@ -96,8 +96,6 @@ Radius was built to provide a platform for modeling and deploying an entire appl
 
 Teams looking to leverage existing Helm charts can use the [Radius annotations and Recipe CRD](#TODO) to add Radius capabilities to their existing application. With just a few annotations, you can add the power of the Radius app graph, connections, and Recipes to your existing Helm chart.
 
-Teams building or migrating applications on Radius can use Bicep to model their application and deploy to Kubernetes today, as well as future platforms, including serverless platforms.
-
 ### How does Radius compare to Bicep?
 
 [Bicep](https://github.com/Azure/bicep) is a Domain Specific Language (DSL) for deploying infrastructure declaratively. Radius leverages Bicep as one of its supported languages for defining applications and Recipes.
@@ -105,6 +103,8 @@ Teams building or migrating applications on Radius can use Bicep to model their 
 Similar to how you can define Azure resources in Bicep, you can define Radius resources in Bicep.
 
 Radius currently uses a temporary fork of Bicep to add support for the Radius resources, but work is underway to merge extensibility support into the main Bicep repo and eliminate the need for a fork.
+
+Teams building or migrating applications on Radius can use Bicep to model their application and deploy to Kubernetes today, as well as future platforms, including serverless platforms.
 
 ### How does Radius compare to Terraform?
 
