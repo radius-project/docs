@@ -55,16 +55,16 @@ rad init
 Example output:
 
 ```
-Initializing Radius...                     
+Initializing Radius...
 
-✅ Install Radius {{< param version >}}               
-    - Kubernetes cluster: k3d-k3s-default   
-    - Kubernetes namespace: radius-system   
-✅ Create new environment default          
-    - Kubernetes namespace: default 
-    - Recipe pack: local-dev        
-✅ Scaffold application docs            
-✅ Update local configuration              
+✅ Install Radius {{< param version >}}
+    - Kubernetes cluster: k3d-k3s-default
+    - Kubernetes namespace: radius-system
+✅ Create new environment default
+    - Kubernetes namespace: default
+    - Recipe pack: local-dev
+✅ Scaffold application docs
+✅ Update local configuration
 
 Initialization complete! Have a RAD time 😎
 ```

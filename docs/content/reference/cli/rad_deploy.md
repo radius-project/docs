@@ -13,25 +13,22 @@ Deploy a template
 ### Synopsis
 
 Deploy a Bicep or ARM template
-	
+
 	The deploy command compiles a Bicep or ARM template and deploys it to your default environment (unless otherwise specified).
-		
+
 	You can combine Radius types as as well as other types that are available in Bicep such as Azure resources. See
 	the Radius documentation for information about describing your application and resources with Bicep.
-	
+
 	You can specify parameters using the '--parameter' flag ('-p' for short). Parameters can be passed as:
-	
+
 	- A file containing multiple parameters using the ARM JSON parameter format (see below)
 	- A file containing a single value in JSON format
 	- A key-value-pair passed in the command line
-	
+
 	When passing multiple parameters in a single file, use the format described here:
-	
-		https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/parameter-files
-	
-	You can specify parameters using multiple sources. Parameters can be overridden based on the 
-	order the are provided. Parameters appearing later in the argument list will override those defined earlier.
-	
+	https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/parameter-files
+
+	You can specify parameters using multiple sources. Parameters can be overridden based on the	order they are provided. Parameters appearing later in the argument list will override those defined earlier.
 
 ```
 rad deploy [file] [flags]
@@ -94,4 +91,3 @@ rad deploy myapp.bicep --parameters @myfile.json --parameters version=latest
 ### SEE ALSO
 
 * [rad]({{< ref rad.md >}})	 - Radius CLI
-

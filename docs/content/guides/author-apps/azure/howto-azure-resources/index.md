@@ -2,7 +2,7 @@
 type: docs
 title: "How-To: Connect a container to an Azure resource"
 linkTitle: "Deploy Azure resources"
-description: "Learn how to connect a container to an Azure resource with managed identities and RBAC" 
+description: "Learn how to connect a container to an Azure resource with managed identities and RBAC"
 weight: 600
 slug: 'azure-connection'
 categories: "How-To"
@@ -24,7 +24,7 @@ The steps below will showcase a "rad-ified" version of the existing [Azure AD wo
 - [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
 - [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed in your cluster, including the [Mutating Admission Webhook](https://azure.github.io/azure-workload-identity/docs/installation/mutating-admission-webhook.html)
 
-## Step 1: Initialize Radius 
+## Step 1: Initialize Radius
 
 Begin by running [`rad init --full`]({{< ref rad_init >}}). Make sure to configure an Azure cloud provider:
 
@@ -32,7 +32,7 @@ Begin by running [`rad init --full`]({{< ref rad_init >}}). Make sure to configu
 rad init --full
 ```
 
-## Step 2: Define a Radius Environment 
+## Step 2: Define a Radius Environment
 
 Create a file named `app.bicep` and define a Radius Environment with [identity property]({{< ref "/guides/deploy-apps/environments/overview" >}}) set. This configures your environment to use your Azure AD workload identity installation with your cluster's OIDC endpoint:
 

@@ -32,17 +32,17 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
    You should see the following output:
 
       ```
-      Initializing Radius...                     
+      Initializing Radius...
 
-      ✅ Install Radius {{< param version >}}               
-         - Kubernetes cluster: k3d-k3s-default   
-         - Kubernetes namespace: radius-system 
-         - AWS IAM access key ID: ****  
-      ✅ Create new environment default          
-         - Kubernetes namespace: default 
-         - AWS: account ***** and region: us-west-2        
-      ✅ Scaffold application samples            
-      ✅ Update local configuration              
+      ✅ Install Radius {{< param version >}}
+         - Kubernetes cluster: k3d-k3s-default
+         - Kubernetes namespace: radius-system
+         - AWS IAM access key ID: ****
+      ✅ Create new environment default
+         - Kubernetes namespace: default
+         - AWS: account ***** and region: us-west-2
+      ✅ Scaffold application samples
+      ✅ Update local configuration
 
       Initialization complete! Have a RAD time 😎
       ```

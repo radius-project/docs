@@ -15,7 +15,7 @@ Run an application
 Run an application specified by a Bicep or ARM template
 	
 The run command compiles a Bicep or ARM template and runs it in your default environment (unless otherwise specified). It also automatically port-forwards container ports and streams container logs to a user's terminal.
-		
+
 The run command accepts the same parameters as the 'rad deploy' command. See the 'rad deploy' help for more information.
 	
 

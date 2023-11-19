@@ -37,7 +37,7 @@ By the end of the tutorial, you will have created and deployed a new Radius Appl
    ```
 
 1. Initialize a new Radius Environment with [`rad init`]({{< ref rad_init >}}):
-   
+
    ```bash
    rad init
    ```
@@ -59,7 +59,7 @@ Radius Applications are where all your app's resources and relationships come to
    ```
 
    You will see the full App definition in its raw JSON format:
-   
+
    ```
    {
      "id": "/planes/radius/local/resourcegroups/default/providers/Applications.Core/applications/myapp",
@@ -80,7 +80,7 @@ Radius Applications are where all your app's resources and relationships come to
      "type": "Applications.Core/applications"
    }
    ```
-   
+
    There are a few important things to note about the application definition:
 
    - **`id`** is the fully-qualified UCP resource ID of the application. This value is used to uniquely identify the application in the Radius system.
@@ -98,7 +98,7 @@ Radius Applications are where all your app's resources and relationships come to
 
    ```
    Displaying application: myapp
-   
+
    (empty)
    ```
 
@@ -112,7 +112,7 @@ Radius Applications are where all your app's resources and relationships come to
 
    {{% rad file="snippets/1-app.bicep" embed=true %}}
 
-1. Deploy `app.bicep` with [`rad deploy`]({{< ref rad_deploy >}}):
+2. Deploy `app.bicep` with [`rad deploy`]({{< ref rad_deploy >}}):
 
    ```bash
    rad deploy app.bicep
@@ -126,24 +126,23 @@ Radius Applications are where all your app's resources and relationships come to
 
    Deployment In Progress...
 
-
    Deployment Complete
 
    Resources:
        demo            Applications.Core/containers
    ```
 
-1. Run `rad app connections` again to see the container you just deployed:
+3. Run `rad app connections` again to see the container you just deployed:
 
     ```bash
     rad app connections
     ```
-    
+
     You should see the container you just deployed, along with the underlying Kubernetes resources that were created to run it:
-    
+
     ```
     Displaying application: myapp
-   
+
    Name: demo (Applications.Core/containers)
    Connections: (none)
    Resources:
@@ -157,7 +156,7 @@ Radius Applications are where all your app's resources and relationships come to
    {{< alert title="💡 Kubernetes mapping" color="info" >}}
    Radius Environments map how Applications "bind" to a particular platform. Earlier we saw the Application compute was set to `kubernetes` and the namespace was set to `default-myapp`. This means the container resources were deployed to the `default-myapp` namespace in the Kubernetes cluster where Radius is installed. Visit the [Kubernetes mapping docs]({{< ref "/guides/operations/kubernetes/overview#resource-mapping" >}}) to learn more.
    {{< /alert >}}
-    
+
 ## Step 4: Run your application
 
 When working with Radius Applications you will probably want to access container endpoints and view logs. [`rad run`]({{< ref rad_run >}}) makes it simple to deploy your application and automatically set up port-forwarding and log streaming:
@@ -207,18 +206,18 @@ In addition to containers, you can add dependencies like Redis caches, Dapr Stat
    Note that when you added the Mongo database to your application you didn't need to specify _how or where_ to run the underlying infrastructure. The Radius Environment and its Recipes take care of that for you. Just like how the Radius Environment bound your container to a Kubernetes cluster, it also deploys and binds your Mongo database to underlying infrastructure using [Recipes]({{< ref "/guides/recipes/overview" >}}).
    {{< /alert >}}
 
-1. To learn about the underlying Recipe that will deploy and manage the Mongo infrastructure run [`rad recipe show`]({{< ref rad_recipe_show >}}):
+2. To learn about the underlying Recipe that will deploy and manage the Mongo infrastructure run [`rad recipe show`]({{< ref rad_recipe_show >}}):
 
    ```bash
    rad recipe show default --resource-type Applications.Datastores/mongoDatabases
    ```
-   
+
    You'll see details on the Recipe, including available parameters and defaults:
 
    ```
    NAME      TYPE                                    TEMPLATE KIND  TEMPLATE VERSION  TEMPLATE
    default   Applications.Datastores/mongoDatabases  bicep                            ghcr.io/radius-project/recipes/local-dev/mongodatabases:latest
-   
+
    PARAMETER NAME  TYPE          DEFAULT VALUE   MIN       MAX
    username        string        admin           -         -
    password        secureString  Password1234==  -         -
@@ -227,7 +226,7 @@ In addition to containers, you can add dependencies like Redis caches, Dapr Stat
 
    If you want to learn more about the Recipe template it's in the [Recipes repo](https://github.com/radius-project/recipes/blob/main/local-dev/mongodatabases.bicep).
 
-1. Add a connection from your container to the Mongo database, which indicates to Radius that your container needs to communicate with the Mongo database:
+3. Add a connection from your container to the Mongo database, which indicates to Radius that your container needs to communicate with the Mongo database:
 
    {{% rad file="snippets/2-app-mongo.bicep" embed=true marker="//CONTAINER" markdownConfig="{hl_lines=[\"16-20\"]}" %}}
 
@@ -235,7 +234,7 @@ In addition to containers, you can add dependencies like Redis caches, Dapr Stat
    Radius Connections are more than just bookkeeping. They are used to automatically configure access for your containers. Learn more in the [containers documentation]({{< ref "/guides/author-apps/containers/overview" >}}).
    {{< /alert >}}
 
-1. Re-run your app with [`rad run`]({{< ref rad_run >}}) to deploy the Mongo database and container and start the port-forward and log stream:
+4. Re-run your app with [`rad run`]({{< ref rad_run >}}) to deploy the Mongo database and container and start the port-forward and log stream:
 
     ```bash
     rad run app.bicep
@@ -244,37 +243,36 @@ In addition to containers, you can add dependencies like Redis caches, Dapr Stat
     ```
     Building .\app.bicep...
     Deploying template '.\app.bicep' for application 'myapp' and environment 'default' from workspace 'default'...
-    
+
     Deployment In Progress...
-    
-    
+
     Deployment Complete
-    
+
     Resources:
         myapp           Applications.Core/applications
         demo            Applications.Core/containers
         mongodb         Applications.Datastores/mongoDatabases
-    
+
     Starting log stream...
     ```
 
-1. Open [localhost:3000](http://localhost:3000) to interact with the demo container. You should see the container's connections and metadata, this time with a connection to the Mongo database and new environment variables set:
+5. Open [localhost:3000](http://localhost:3000) to interact with the demo container. You should see the container's connections and metadata, this time with a connection to the Mongo database and new environment variables set:
 
     {{< image src="demo-landing-connection.png" alt="Screenshot of the Radius demo container" width=500px >}}
 
-1. Press CTRL+C to terminate the port-forward and log stream.
+6. Press CTRL+C to terminate the port-forward and log stream.
 
-1. Run `rad app connections` again to see the new dependency:
+7. Run `rad app connections` again to see the new dependency:
 
     ```bash
     rad app connections
     ```
-    
+
     You should see the container and Mongo database you just deployed, along with the underlying Kubernetes resources that were created to run them:
-    
+
     ```
     Displaying application: myapp
-    
+
     Name: demo (Applications.Core/containers)
     Connections:
       demo -> mongodb (Applications.Datastores/mongoDatabases)
@@ -285,7 +283,7 @@ In addition to containers, you can add dependencies like Redis caches, Dapr Stat
       demo (kubernetes: core/ServiceAccount)
       demo (kubernetes: rbac.authorization.k8s.io/Role)
       demo (kubernetes: rbac.authorization.k8s.io/RoleBinding)
-    
+
     Name: mongodb (Applications.Datastores/mongoDatabases)
     Connections:
       demo (Applications.Core/containers) -> mongodb
@@ -302,11 +300,11 @@ In addition to dependencies, you can add more containers to make your applicatio
 
    {{% rad file="snippets/3-app-backend.bicep" embed=true marker="//BACKEND" %}}
 
-1. Add a new connection from your `demo` container to the `backend` container:
+2. Add a new connection from your `demo` container to the `backend` container:
 
    {{% rad file="snippets/3-app-backend.bicep" embed=true marker="//CONTAINER" markdownConfig="{hl_lines=[\"20-22\"]}" %}}
 
-1. Re-run your app with [`rad run`]({{< ref rad_run >}}):
+3. Re-run your app with [`rad run`]({{< ref rad_run >}}):
 
     ```bash
     rad run app.bicep
@@ -315,21 +313,20 @@ In addition to dependencies, you can add more containers to make your applicatio
     ```
     Building .\app.bicep...
     Deploying template '.\app.bicep' for application 'myapp' and environment 'default' from workspace 'default'...
-    
+
     Deployment In Progress...
-    
-    
+
     Deployment Complete
-    
+
     Resources:
         demo            Applications.Core/containers
         backend         Applications.Core/containers
         mongodb         Applications.Datastores/mongoDatabases
-    
+
     Starting log stream...
     ```
 
-1. Open [localhost:3000](http://localhost:3000) to interact with the demo container. You should see the container's connections and metadata, this time with a connection to the backend container and new environment variables set:
+4. Open [localhost:3000](http://localhost:3000) to interact with the demo container. You should see the container's connections and metadata, this time with a connection to the backend container and new environment variables set:
 
    {{< image src="demo-landing-backend.png" alt="Screenshot of the demo container with a connection to the backend container" width=600px >}}
 
@@ -343,7 +340,7 @@ Finally, you can add a gateway to your application. Gateways are used to expose 
 
    {{% rad file="snippets/4-app-gateway.bicep" embed=true marker="//GATEWAY" %}}
 
-1. Deploy your app with [`rad deploy`]({{< ref rad_deploy >}}):
+2. Deploy your app with [`rad deploy`]({{< ref rad_deploy >}}):
 
     ```bash
     rad deploy app.bicep
@@ -352,25 +349,24 @@ Finally, you can add a gateway to your application. Gateways are used to expose 
     ```
     Building .\app.bicep...
     Deploying template '.\app.bicep' for application 'myapp' and environment 'default' from workspace 'default'...
-    
+
     Deployment In Progress...
-    
-    
+
     Deployment Complete
-    
+
     Resources:
         demo            Applications.Core/containers
         backend         Applications.Core/containers
         gateway         Applications.Core/gateways
         mongodb         Applications.Datastores/mongoDatabases
-    
+
     Public Endpoints:
         gateway         Applications.Core/gateways http://localhost
     ```
 
-1. Open the gateway URL in your browser. Unlike before, you are connecting to the gateway instead of directly to the container. You will see the same container connections and metadata as before.
+3. Open the gateway URL in your browser. Unlike before, you are connecting to the gateway instead of directly to the container. You will see the same container connections and metadata as before.
 
-1. Done! You've successfully created your first Radius application.
+4. Done! You've successfully created your first Radius application.
 
 ## Next steps
 

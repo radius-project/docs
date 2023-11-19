@@ -126,7 +126,7 @@ Add the following [`runtimes`]({{< ref "reference/resource-schema/core-schema/co
 ## Cleanup
 
 Run the following command to [delete]({{< ref "guides/deploy-apps/howto-delete" >}}) your app and container:
-   
+
    ```bash
    rad app delete demo
    ```

@@ -29,7 +29,7 @@ When you have multiple environments initialized for different purposes workspace
    rad env create myworkspace
    ```
 1. Create a workspace named `myworkspace` using [`rad workspace create`]({{< ref rad_workspace_create >}}):
-    ```sh 
+    ```sh
     rad workspace create kubernetes myworkspace --group myworkspace --environment myworkspace
     ```
     Radius writes the workspace details to your local configuration file (`~/.rad/config.yaml` on Linux and macOS, `%USERPROFILE%\.rad\config.yaml` on Windows).
@@ -42,7 +42,7 @@ When you have multiple environments initialized for different purposes workspace
    rad env create yourworkspace
    ```
 1. Create a workspace named `yourworkspace` using [`rad workspace create`]({{< ref rad_workspace_create >}}):
-    ```sh 
+    ```sh
     rad workspace create kubernetes yourworkspace --group yourworkspace --environment yourworkspace
     ```
 1. Verify your `config.yaml` file. It should show both `myworkspace` and `yourworkspace` workspaces, with your environments:

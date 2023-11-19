@@ -38,6 +38,6 @@ If you hit errors while deploying the application, look at the control plane log
 ```bash
 rad debug-logs
 ```
-Inspect the UCP and DE logs to see if there are any errors  
+Inspect the UCP and DE logs to see if there are any errors. 
 
 >Also make sure to [open an Issue](https://github.com/radius-project/radius/issues/new/choose) if you encounter a generic `Internal server error` message or an error message that is not self-serviceable, so we can address the root error not being forwarded to the user.

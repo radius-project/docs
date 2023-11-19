@@ -12,7 +12,7 @@ tags: ["delete"]
 
 - A [deployed application]({{< ref deploy-apps >}}) in a Radius Environment.
 
-## Step 1: Delete the Radius Application from the environment 
+## Step 1: Delete the Radius Application from the environment
 
 You can delete the Radius Application using the [`rad app delete`]({{< ref rad_application_delete >}}) command:
 
@@ -21,7 +21,7 @@ rad app delete <appname>
 ```
 
 This will delete the following resources from the Radius Environment
-    
+
 1. All the resources created by Radius on the Kubernetes cluster under the `<namespace-name>-<app-name>` namespace
 2. All the resources provisioned by Recipes
 

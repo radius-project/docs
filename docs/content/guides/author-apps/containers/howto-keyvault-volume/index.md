@@ -2,7 +2,7 @@
 type: docs
 title: "How-To: Mount an Azure Key Vault as a volume to a container"
 linkTitle: "Mount a Key Vault"
-description: "Learn how to mount an Azure Key Vault as a volume to a container" 
+description: "Learn how to mount an Azure Key Vault as a volume to a container"
 weight: 600
 slug: 'volume-keyvault'
 categories: "How-To"
@@ -25,7 +25,7 @@ This how-to guide will provide an overview of how to:
 - [Azure Keyvault Provider](https://azure.github.io/secrets-store-csi-driver-provider-azure/docs/getting-started/installation/)
    - The above installation will also install the required [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation.html)
 
-## Step 1: Initialize Radius 
+## Step 1: Initialize Radius
 
 Begin by running [`rad init --full`]({{< ref rad_init >}}). Make sure to configure an Azure cloud provider:
 
@@ -82,5 +82,5 @@ rad deploy ./app.bicep -p oidcIssuer=<OIDC_ISSUER_URL>
    ```bash
    rad app delete myapp --yes
    ```
-   
+
 2. Delete the deployed Azure Key Vault via the Azure portal or the Azure CLI

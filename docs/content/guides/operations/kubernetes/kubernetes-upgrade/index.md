@@ -9,12 +9,12 @@ categories: "How-To"
 
 Radius does not offer backward compatibility with previous releases. Breaking changes may happen between releases and we recommend doing a fresh installation of the latest version of Radius after every release.
 
-## Step 1 : Delete any existing Radius Environments 
+## Step 1 : Delete any existing Radius Environments
 
 To delete any existing Radius Environments, run the following command:
 
 ```bash
-rad env delete 
+rad env delete
 ```
 
 ## Step 2: Uninstall the existing Radius control-plane

@@ -35,11 +35,11 @@ Local development environments created by the rad init command include a set of 
 3. Use [`rad recipe list`]({{< ref rad_recipe_list >}}) to view the Recipes in your environment:
 
    ```bash
-   rad recipe list 
+   rad recipe list
    ```
 
    You should see a table of available Recipes:
-   
+
    ```
    NAME      TYPE                                    TEMPLATE KIND  TEMPLATE VERSION  TEMPLATE
    default   Applications.Datastores/sqlDatabases    bicep                            ghcr.io/radius-project/recipes/local-dev/sqldatabases:latest
@@ -52,7 +52,7 @@ Local development environments created by the rad init command include a set of 
    ```
    > Visit the [Recipes repo](https://github.com/radius-project/recipes) to learn more about the definition of these `local-dev` recipe templates.
 
-   When a Recipe is named "default" it will be used automatically when a resource doesn't specify a Recipe name. This makes it easy for applications to fully defer to the Environment for how to manage infrastructure.  
+   When a Recipe is named "default" it will be used automatically when a resource doesn't specify a Recipe name. This makes it easy for applications to fully defer to the Environment for how to manage infrastructure.
 
 ## Step 2: Define your application
 

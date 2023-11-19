@@ -43,21 +43,21 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
    You should see the following output:
 
       ```
-      Initializing Radius...                     
+      Initializing Radius...
 
-      ✅ Install Radius {{< param version >}}               
-         - Kubernetes cluster: k3d-k3s-default   
-         - Kubernetes namespace: radius-system 
-         - Azure service principal: ****  
-      ✅ Create new environment default          
-         - Kubernetes namespace: default 
-         - Azure: subscription ***** and resource group ***        
-      ✅ Scaffold application samples            
-      ✅ Update local configuration              
+      ✅ Install Radius {{< param version >}}
+         - Kubernetes cluster: k3d-k3s-default
+         - Kubernetes namespace: radius-system
+         - Azure service principal: ****
+      ✅ Create new environment default
+         - Kubernetes namespace: default
+         - Azure: subscription ***** and resource group ***
+      ✅ Scaffold application samples
+      ✅ Update local configuration
 
       Initialization complete! Have a RAD time 😎
       ```
-   
+
 ## Manual configuration
 
 1. Use [`rad env update`]({{< ref rad_env_update >}}) to update your Radius Environment with your Azure subscription ID and Azure resource group:

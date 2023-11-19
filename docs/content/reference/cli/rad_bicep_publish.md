@@ -16,7 +16,6 @@ Publish a Bicep file to an OCI registry.
 This command compiles and publishes a local Bicep file to a remote Open Container Initiative (OCI) registry, such as Azure Container Registry, Docker Hub, or GitHub Container Registry, to later be used as a Bicep registry or for Radius Recipes.
 Before publishing, it is expected the user runs docker login (or similar command) and has the proper permission to push to the target OCI registry.
 For more information on Bicep modules visit https://learn.microsoft.com/azure/azure-resource-manager/bicep/modules
-		
 
 ```
 rad bicep publish [flags]
@@ -25,10 +24,8 @@ rad bicep publish [flags]
 ### Examples
 
 ```
-
 # Publish a Bicep file to a container registry
 rad bicep publish --file ./redis-test.bicep --target br:ghcr.io/myregistry/redis-test:v1
-		
 ```
 
 ### Options

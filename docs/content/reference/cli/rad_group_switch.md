@@ -17,7 +17,7 @@ Switch default resource group scope
 	Radius workspaces contain a resource group scope, where Radius Applications and resources are deployed by default. The switch command changes the default scope of the workspace to the specified resource group name.
 	
 	Resource groups are used to organize and manage Radius resources. They often contain resources that share a common lifecycle or unit of deployment.
-			
+
 	Note that these resource groups are separate from the Azure cloud provider and Azure resource groups configured with the cloud provider.
 
 ```

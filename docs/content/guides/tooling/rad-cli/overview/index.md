@@ -63,7 +63,7 @@ export RADIUS_INSTALL_DIR=~/
 By default, the rad CLI installation script installs the rad CLI to `%LOCALAPPDATA%\radius\rad.exe`
 
 {{% /codetab %}}
-    
+
 {{< /tabs >}}
 
 ### Configuration location
@@ -79,7 +79,7 @@ The rad CLI stores configuration under `~/.rad`
 {{% codetab %}}
 The rad CLI stores configuration under `%USERPROFILE%\rad`
 {{% /codetab %}}
-    
+
 {{< /tabs >}}
 
 

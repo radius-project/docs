@@ -14,10 +14,9 @@ Add a recipe to an environment.
 
 Add a recipe to an environment.
 You can specify parameters using the '--parameter' flag ('-p' for short). Parameters can be passed as:
-		
+
 - A file containing a single value in JSON format
 - A key-value-pair passed in the command line
-		
 
 ```
 rad recipe register [recipe-name] [flags]
@@ -26,16 +25,14 @@ rad recipe register [recipe-name] [flags]
 ### Examples
 
 ```
-
 # Add a recipe to an environment
 rad recipe register cosmosdb -e env_name -w workspace --template-kind bicep --template-path template_path --resource-type Applications.Datastores/mongoDatabases
-		
+
 # Specify a parameter
 rad recipe register cosmosdb -e env_name -w workspace --template-kind bicep --template-path template_path --resource-type Applications.Datastores/mongoDatabases --parameters throughput=400
-		
+
 # specify multiple parameters using a JSON parameter file
 rad recipe register cosmosdb -e env_name -w workspace --template-kind bicep --template-path template_path --resource-type Applications.Datastores/mongoDatabases --parameters @myfile.json
-		
 ```
 
 ### Options

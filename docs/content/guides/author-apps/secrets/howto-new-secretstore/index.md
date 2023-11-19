@@ -12,10 +12,10 @@ Radius secret stores securely manage secrets for your Environment and Applicatio
 
 By default, Radius leverages the hosting platform's secrets management solution to create and store the secret. For example, if you are deploying to Kubernetes, the secret store will be created as a Kubernetes Secret.
 
-## Pre-requisites 
+## Pre-requisites
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- [kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 
+- [kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-radius-bicep-vs-code-extension" >}})
 - [Radius environment]({{< ref "installation#step-3-initialize-the-radius-control-plane-and-the-radius-environment" >}})
 
@@ -32,12 +32,12 @@ In this example a new secret store resource is created for storing a TLS certifi
 Deploy the application with [`rad deploy`]({{< ref "rad_deploy" >}}):
 
 ```bash
-rad deploy app.bicep -a secretdemo 
+rad deploy app.bicep -a secretdemo
 ```
 
-## Step 3: Verify the secrets are deployed 
+## Step 3: Verify the secrets are deployed
 
-Use the below command to verify if the secret got deployed 
+Use the below command to verify if the secret got deployed
 
 ```bash
 kubectl get secret -n default-secretdemo

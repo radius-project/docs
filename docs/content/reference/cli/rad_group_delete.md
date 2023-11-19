@@ -13,7 +13,7 @@ Delete a resource group
 ### Synopsis
 
 Delete a resource group. 
-		
+
 		Delete a resource group if it is empty. If not empty, delete the contents and try again
 
 ```

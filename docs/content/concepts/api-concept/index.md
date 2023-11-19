@@ -62,7 +62,7 @@ The common structure of a resource id is the following:
 {rootScope}/{resourceNamespace}/{resourceType}/{resourceName}
 ```
 
-### Root scope 
+### Root scope
 
 A hierarchical set of key-value pairs that identify the origin of the resource. Root scopes answer questions like: 
 

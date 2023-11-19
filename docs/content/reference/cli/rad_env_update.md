@@ -15,10 +15,10 @@ Update environment configuration
 Update environment configuration
 	
 This command updates the configuration of an environment for properties that are able to be changed.
-		
+
 Properties that can be updated include:
 - providers (Azure, AWS)
-		  
+
 All other properties require the environment to be deleted and recreated.
 
 

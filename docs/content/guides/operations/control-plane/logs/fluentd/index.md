@@ -96,7 +96,7 @@ tags: ["logs","observability"]
     fluentd-sdrld                 1/1     Running   0          14s
     ```
 
-## Install Radius control plane 
+## Install Radius control plane
 
 Visit the [Kubernetes docs]({{< ref "guides/operations/kubernetes" >}}) to learn how to install the Radius control plane. By default, Radius has JSON logging enabled.
 
@@ -117,9 +117,9 @@ _Note: There is a small delay for Elastic Search to index the logs that Fluentd 
     ```bash
     kubectl port-forward svc/kibana-kibana 5601 -n radius-monitoring
     ```
-    
+
     You should see:
-   
+
     ```
     Forwarding from 127.0.0.1:5601 -> 5601
     Forwarding from [::1]:5601 -> 5601

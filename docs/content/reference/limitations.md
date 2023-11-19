@@ -39,7 +39,7 @@ See [app name constraints]({{< ref "resource-schema.md#common-values" >}}) for m
 ### Application and resource names are lower-cased after deployment
 
 After deploying an application with application name `AppNAME` and container name `CONTAINERname`, casing information about the casing is lost, resulting in names to be lower-cased. The result is:
-  
+
 ```bash
 rad application list
 RESOURCE           TYPE

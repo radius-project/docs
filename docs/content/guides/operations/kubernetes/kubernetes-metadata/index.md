@@ -65,7 +65,7 @@ Other extensions may set Kubernetes metadata. For example, the `daprSidecar` ext
 
 The order in which extensions are executed is as follows, from first to last:
 
-1. Dapr sidecar extension 
+1. Dapr sidecar extension
 1. Manual scale extension
 1. Kubernetes metadata extension
 

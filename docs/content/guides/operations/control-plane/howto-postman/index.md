@@ -73,7 +73,7 @@ Now that you have created the necessary Kubernetes objects, you can generate a t
 1. Run the following command to generate a token for the `postman-account` service account:
 
     ```bash
-    kubectl create token postman-account -n radius-system 
+    kubectl create token postman-account -n radius-system
     ```
 
     This will create a token with the default expiration time of 1 hour. If you want to set a different expiration time, you can use the `--duration` flag to specify a duration in seconds (up to 48 hours).
@@ -98,13 +98,13 @@ Next, you'll need to get the control plane API endpoint and use Postman to inter
 1. Open Postman and create a new request
 1. Set the method to `GET`
 1. Set the URL to the following, which will [retrieve all your resource groups]({{< ref api-ucp >}}):
-    
+
     ```
     <your-cluster-control-plane>/apis/api.ucp.dev/v1alpha3/planes/radius/local/resourcegroups?api-version=2023-10-01-preview
     ```
 
     {{< image src="postman-url.png" width=900px alt="Screenshot of Postman with filled out URL" >}}
-    
+
 1. Open the `Authorization` tab and select `Bearer Token` from the `Type` dropdown. Paste the token you generated in step 2 into the `Token` field:
 
    {{< image src="postman-auth.png" width=900px alt="Screenshot of Postman with filled out auth token" >}}

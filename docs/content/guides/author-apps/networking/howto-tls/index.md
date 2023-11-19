@@ -2,7 +2,7 @@
 type: docs
 title: "How To: Add TLS termination to a gateway"
 linkTitle: "HTTPS/TLS"
-description: "Learn how to deploy HTTPS-enabled application with a TLS certificate" 
+description: "Learn how to deploy HTTPS-enabled application with a TLS certificate"
 weight: 400
 slug: 'tls'
 categories: "How-To"

@@ -344,7 +344,6 @@ resource app 'radius.dev/Application@v1alpha1' = {
       //BINDINGS
       connections: {
         backend: {
-          
           source: other.id
         }
       }
@@ -591,7 +590,7 @@ By default, buttons are padded with new lines below the button. To remove these 
 {{< button text="Previous" link="https://example.com" newline="false" >}}
 {{< button text="Next" link="https://example.com" >}}
 
-#### Categorize content 
+#### Categorize content
 
 You can use the `categorizeby` shortcode to pull and organize content by either categories and tags. This is useful when you want to categorize content by tags and the type of the document
 

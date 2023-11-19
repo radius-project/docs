@@ -135,7 +135,7 @@ Now that Grafana is installed, you need to configure it to use Prometheus as a d
 ### Import dashboards in Grafana
 
 1. Download the Grafana dashboard templates:
-   - [radius-overview-dashboard.json](https://raw.githubusercontent.com/radius-project/radius/main/grafana/radius-overview-dashboard.json) 
+   - [radius-overview-dashboard.json](https://raw.githubusercontent.com/radius-project/radius/main/grafana/radius-overview-dashboard.json)
    - [radius-resource-provider-dashboard.json](https://raw.githubusercontent.com/radius-project/radius/main/grafana/radius-resource-provider-dashboard.json)
 1. In the upper left corner of the Grafana home screen, click the "+" option, then "Import", and select your templates.
 1. Select the dashboard that you imported and enjoy!

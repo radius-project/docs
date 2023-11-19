@@ -1,6 +1,6 @@
 ---
 type: docs
-title: Overview for Radius 
+title: Overview for Radius
 linkTitle: Overview
 description: Learn how Radius fits into the app development landscape and it's long-term vision
 weight: 100
@@ -11,7 +11,7 @@ toc_hide: true
 
 App teams today struggle to model and deploy their applications. Complex architectures, cross-platform portability requirements, and org-level best-practices all make it difficult to not only model and deploy, but also maintain and troubleshoot large applications.
 
-Apps today are modeled and deployed with Dockerfiles, Kubernetes CRDs, Helm charts, and infrastructure-as-code templates, with scripts to glue it all together. Plus, the range of infrastructure types (cloud, on-premises, serverless) can double or triple the work as teams figure out how to move apps between platforms.
+Apps today are modeled and deployed with Dockerfiles, Kubernetes custom resources (CRDs), Helm charts, and infrastructure-as-code templates, with scripts to glue it all together. Plus, the range of infrastructure types (cloud, on-premises, serverless) can double or triple the work as teams figure out how to move apps between platforms.
 
 {{< image alt="Diagram showing all of the technologies needed to model an application today" src="cloud-apps-today.png" width="600px" >}}
 

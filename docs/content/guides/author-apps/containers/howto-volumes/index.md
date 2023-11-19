@@ -2,7 +2,7 @@
 type: docs
 title: "How-To: Mount a volume to a container"
 linkTitle: "Mount a volume"
-description: "Learn how to mount a volume to a container" 
+description: "Learn how to mount a volume to a container"
 weight: 500
 slug: 'volumes'
 categories: "How-To"
@@ -62,7 +62,7 @@ Within the `container.volume` property, add a new volume named `temp` and config
    ```bash
    rad resource expose containers mycontainer -a myapp --port 5000
    ```
-   
+
 1. Visit [localhost:5000](http://localhost:5000) in your browser. You should see the contents of `/tmpdir`, showing an empty directory.
 
    {{< image src="screenshot-empty.jpg" width=500px alt="Screenshot of container showing that the tmp directory has no items" >}}

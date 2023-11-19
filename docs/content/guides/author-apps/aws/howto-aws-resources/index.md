@@ -22,7 +22,7 @@ This how-to guide will show you:
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
     - Configure your CLI with [`aws configure`](https://docs.aws.amazon.com/cli/latest/reference/configure/index.html), specifying your configuration values
 - [eksctl CLI](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
-- [kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 
+- [kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-radius-bicep-extension" >}})
 
@@ -31,7 +31,7 @@ This how-to guide will show you:
 Create an EKS cluster by using the `eksctl` CLI. 
 
 ```bash
-eksctl create cluster --name <my-cluster> --region=<my-region> 
+eksctl create cluster --name <my-cluster> --region=<my-region>
 ```
 
 ## Step 2: Create a Radius Environment with the AWS cloud provider
@@ -111,7 +111,7 @@ If you hit errors while deploying the application, please follow the steps below
      ```bash
      rad debug-logs
      ```
-    Inspect the UCP logs to see if there are any errors  
+    Inspect the UCP logs to see if there are any errors.
 
 If you have issues with the sample application, where the container doesn't connect with the S3 bucket, please follow the steps below to troubleshoot:
 

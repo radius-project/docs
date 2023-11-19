@@ -8,7 +8,7 @@ categories: "How-To"
 tags: ["deployments"]
 ---
 
-## Pre-requisites 
+## Pre-requisites
 - [An authored Radius Application]({{< ref author-apps >}})
 
 ## Step 1 : Deploy an application into a Radius Environment

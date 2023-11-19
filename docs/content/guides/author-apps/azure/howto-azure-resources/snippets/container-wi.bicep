@@ -5,7 +5,7 @@ import radius as radius
 param azLocation string = resourceGroup().location
 
 @description('Specifies the OIDC issuer URL')
-param oidcIssuer string 
+param oidcIssuer string
 
 resource env 'Applications.Core/environments@2023-10-01-preview' = {
   name: 'iam-quickstart'

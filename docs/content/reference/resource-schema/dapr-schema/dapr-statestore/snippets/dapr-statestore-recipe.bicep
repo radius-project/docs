@@ -26,7 +26,7 @@ resource myapp 'Applications.Core/containers@2023-10-01-preview' = {
     ]
   }
 }
-  
+
 //SAMPLE
 resource statestore 'Applications.Dapr/stateStores@2023-10-01-preview' = {
   name: 'statestore'

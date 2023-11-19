@@ -6,7 +6,7 @@ description: "Learn about the supported AWS resource types in Radius"
 categories: "Schema"
 ---
 
-Radius supports AWS resource types that are supported by the [AWS Cloud Control API](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/what-is-cloudcontrolapi.html) 
+Radius supports AWS resource types that are supported by the [AWS Cloud Control API](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/what-is-cloudcontrolapi.html)
 
 Following table lists the resource types that are currently supported and the limitations for each of the resource types.
 
@@ -620,7 +620,7 @@ description: "Learn about the supported AWS resource types in Radius"
 categories: "Schema"
 ---
 
-Radius supports AWS resource types that are supported by the [AWS Cloud Control API](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/what-is-cloudcontrolapi.html) 
+Radius supports AWS resource types that are supported by the [AWS Cloud Control API](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/what-is-cloudcontrolapi.html)
 
 Following table lists the resource types that are currently supported and the limitations for each of the resource types.
 

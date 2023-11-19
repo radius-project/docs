@@ -15,17 +15,14 @@ Manage workspaces
 Manage workspaces
 		Workspaces allow you to manage multiple Radius platforms and environments using a local configuration file. 
 		You can easily define and switch between workspaces to deploy and manage applications across local, test, and production environments.
-		
 
 ### Examples
 
 ```
-
 # Create workspace with no default resource group or environment set
 rad workspace create kubernetes myworkspace --context kind-kind
 # Create workspace with default resource group and environment set
 rad workspace create kubernetes myworkspace --context kind-kind --group myrg --environment myenv
-
 ```
 
 ### Options

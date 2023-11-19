@@ -32,9 +32,9 @@ For more details on the app and access to the source code, visit the `tutorials/
    mkdir dapr
    cd dapr
    ```
-   
+
 2. Initialize a new dev environment:
-   
+
    *Select 'Yes' when prompted to create an application.*
 
    ```bash
@@ -82,8 +82,8 @@ Begin by creating a new file named `dapr.bicep` with a Radius Application that c
    You should see the following output:
 
    ```
-   NAMESPACE      NAME         TYPE          VERSION  SCOPES  CREATED               AGE  
-   default-dapr   statestore   state.redis   v1               2023-07-21 16:04.27   21m  
+   NAMESPACE      NAME         TYPE          VERSION  SCOPES  CREATED               AGE
+   default-dapr   statestore   state.redis   v1               2023-07-21 16:04.27   21m
    ```
 
 ## Step 4: Define the `frontend` container

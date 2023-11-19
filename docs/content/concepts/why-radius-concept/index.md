@@ -9,7 +9,7 @@ categories: "Concept"
 
 ## Our starting point
 
-We started Radius to simplify and improve upon tools application developers use to deploy and manage applications. Our initial goal was just to create a platform for deployment that developers would love but, as we talked to more cloud customers, we realized almost every enterprise is creating a custom internal developer platform to standardize the way they deploy and manage cloud-native applications
+We started Radius to simplify and improve upon tools application developers use to deploy and manage applications. Our initial goal was just to create a platform for deployment that developers would love but, as we talked to more cloud customers, we realized almost every enterprise is creating a custom internal developer platform to standardize the way they deploy and manage cloud-native applications.
 
 Most enterprises are not dev-tools experts and as a result they struggle with the cost and complexity of building a home-grown solution. If we could provide an open-source solution that solved these problems for enterprises we could have a big impact.
 

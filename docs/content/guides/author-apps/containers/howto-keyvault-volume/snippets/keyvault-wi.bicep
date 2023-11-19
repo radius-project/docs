@@ -84,10 +84,9 @@ resource container 'Applications.Core/containers@2023-10-01-preview' = {
         volkv: {
           kind: 'persistent'
           source: volume.id
-          mountPath: '/var/secrets' 
+          mountPath: '/var/secrets'
         }
       }
-      
     }
   }
 }

@@ -34,7 +34,7 @@ rad resource show [resourceType] [resourceName] [flags]
 	rad resource show containers orders --application icecream-store
 	
 	# show details of a specified resource in an application (shorthand flag)
-	rad resource show containers orders -a icecream-store 
+	rad resource show containers orders -a icecream-store
 	
 ```
 
