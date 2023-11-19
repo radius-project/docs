@@ -20,7 +20,7 @@ To verify you've installed the extension, open any file with the .bicep file ext
    In VSCode, manually install the extension using the *Install from VSIX* command in the Extensions view command drop-down.
 
       <img src="/installation/vscode-bicep/images/vsix-install.png" alt="Screenshot of installing a vsix extension" width=400><br>
-      
+
    You can also import this extension on the [command-line](https://code.visualstudio.com/docs/editor/extension-gallery#_install-from-a-vsix) with:
 
    ```bash

@@ -5,7 +5,7 @@
 {{ $pages := where site.Pages "Params.categories" (printf "%s" $categories) }}
 
 {{ $pages = where $pages "Params.tags" "intersect" (slice $tags ) }}
-         <div class="card-pane">   
+         <div class="card-pane">
             &nbsp;
             <div class="card">
                 <div class="card-body">
@@ -32,7 +32,7 @@
                                     <p class="card-text"><li hugo-nav="{{ .RelPermalink}}"><a href="{{ .Permalink}}">{{ .Title }}</a></li></p>
                                 {{ end }}
                             {{ end }}
-                    </div> 
+                    </div>
                 </div>
             </div>
         {{end}}
