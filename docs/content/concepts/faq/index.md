@@ -92,7 +92,7 @@ While Radius only supports Kubernetes today, it is architected to support other 
 
 [Helm](https://helm.sh/) is a package manager for Kubernetes that allows you to define, install, and upgrade Kubernetes applications. Helm is a great tool for deploying Kubernetes objects, but doesn't provide a way to model dependencies between services and infrastructure, or to define and manage infrastructure-as-code. It also only supports Kubernetes as a targeted platform.
 
-Radius was built to provide a platform for modeling and deploying an entire application, as cloud-native applications are more than just Kubernetes. They include cloud infrastructure, running services, the underlying platforms, and all the connections between them.
+Radius is built to provide a platform for modeling and deploying an entire application, as cloud-native applications are more than just Kubernetes. They include cloud infrastructure, running services, the underlying platforms, and all the connections between them.
 
 Teams looking to leverage existing Helm charts can use the [Radius annotations and Recipe CRD](#TODO) to add Radius capabilities to their existing application. With just a few annotations, you can add the power of the Radius app graph, connections, and Recipes to your existing Helm chart.
 
