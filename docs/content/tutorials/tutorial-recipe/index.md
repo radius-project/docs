@@ -103,13 +103,11 @@ Note that no Recipe name is specified with 'db', so it will be using the default
    Deployment In Progress...
 
    Completed            db              Applications.Datastores/redisCaches
-   Completed            webapp          Applications.Core/applications
    Completed            frontend        Applications.Core/containers
 
    Deployment Complete
 
    Resources:
-      webapp          Applications.Core/applications
       frontend        Applications.Core/containers
       db              Applications.Datastores/redisCaches
    ```
