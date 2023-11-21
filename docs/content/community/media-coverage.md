@@ -19,8 +19,11 @@ Ongoing blog posts can be found at [Radius Blog](https://blog.radapp.io)
 
 | Video | Event | Date |
 | ----- | ----- | ---- |
-|[Mark Russinovich at the Linux Foundation Member Summit](https://aka.ms/radius-lfms)|Linux Foundation Member Summit | Oct 24,2023 |
+|[ Brendan Burns and Mark Russinovich at Ignite about Radius](https://www.youtube.com/watch?v=gaG77PiYv5w&ab_channel=MicrosoftIgnite)| Microsoft Ignite | Nov 17,2023 |
 |[Introducing Radius - Open at Microsoft ](https://www.youtube.com/watch?v=mT_NWFnYn0A)| Open at Microsoft | Nov 7,2023 |
+|[Mark Russinovich at the Linux Foundation Member Summit](https://aka.ms/radius-lfms)|Linux Foundation Member Summit | Oct 24,2023 |
+
+
 
 ## Press articles
 
