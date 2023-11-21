@@ -10,8 +10,8 @@ weight: 400
 
 | Blog Title | Source | Date |
 | ---------- | ------ | ---- |
-|[Radius Launch Oct 2023 - The Microsoft Azure Incubations Team launches Radius, a new open application platform for the cloud](https://azure.microsoft.com/en-us/blog/the-microsoft-azure-incubations-team-launches-radius-a-new-open-application-platform-for-the-cloud/)|Microsoft Azure Blog|Oct 18,2023|
-|[Microsoft Open Source Blog Oct 2023 - Enabling developer collaboration with Radius](https://cloudblogs.microsoft.com/opensource/2023/10/18/enabling-developer-collaboration-with-radius/)|Microsoft Open Source Blog|Oct 18,2023|
+|[The Microsoft Azure Incubations Team launches Radius, a new open application platform for the cloud](https://azure.microsoft.com/en-us/blog/the-microsoft-azure-incubations-team-launches-radius-a-new-open-application-platform-for-the-cloud/)|Microsoft Azure Blog|Oct 18,2023|
+|[Enabling developer collaboration with Radius](https://cloudblogs.microsoft.com/opensource/2023/10/18/enabling-developer-collaboration-with-radius/)|Microsoft Open Source Blog|Oct 18,2023|
 
 Ongoing blog posts can be found at [Radius Blog](https://blog.radapp.io)
 
