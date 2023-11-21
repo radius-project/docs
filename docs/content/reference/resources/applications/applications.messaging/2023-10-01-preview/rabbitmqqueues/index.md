@@ -41,7 +41,7 @@ description: "Detailed reference documentation for applications.messaging/rabbit
 | **environment** | string | Fully qualified resource ID for the environment that the portable resource is linked to <br />_(required)_ |
 | **host** | string | The hostname of the RabbitMQ instance |
 | **port** | int | The port of the RabbitMQ instance. Defaults to 5672 |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the portable resource at the time the operation was called <br />_(read-only)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(read-only)_ |
 | **queue** | string | The name of the queue |
 | **recipe** | [Recipe](#recipe) | The recipe used to automatically deploy underlying infrastructure for a portable resource |
 | **resourceProvisioning** | 'manual' | 'recipe' | Specifies how the underlying service/resource is provisioned and managed. Available values are 'recipe', where Radius manages the lifecycle of the resource through a Recipe, and 'manual', where a user manages the resource and provides the values. |

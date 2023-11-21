@@ -30,11 +30,11 @@ description: "Detailed reference documentation for applications.core/gateways@20
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **application** | string | Fully qualified resource ID for the application that the portable resource is consumed by <br />_(required)_ |
-| **environment** | string | Fully qualified resource ID for the environment that the portable resource is linked to (if applicable) |
+| **application** | string | Fully qualified resource ID for the application <br />_(required)_ |
+| **environment** | string | Fully qualified resource ID for the environment that the application is linked to |
 | **hostname** | [GatewayHostname](#gatewayhostname) | Declare hostname information for the Gateway. Leaving the hostname empty auto-assigns one: mygateway.myapp.PUBLICHOSTNAMEORIP.nip.io. |
 | **internal** | bool | Sets Gateway to not be exposed externally (no public IP address associated). Defaults to false (exposed to internet). |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the portable resource at the time the operation was called <br />_(read-only)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(read-only)_ |
 | **routes** | [GatewayRoute](#gatewayroute)[] | Routes attached to this Gateway <br />_(required)_ |
 | **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(read-only)_ |
 | **tls** | [GatewayTls](#gatewaytls) | TLS configuration definition for Gateway resource. |

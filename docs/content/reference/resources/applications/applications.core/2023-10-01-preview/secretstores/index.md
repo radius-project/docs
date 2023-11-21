@@ -37,10 +37,10 @@ description: "Detailed reference documentation for applications.core/secretstore
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **application** | string | Fully qualified resource ID for the application that the portable resource is consumed by <br />_(required)_ |
+| **application** | string | Fully qualified resource ID for the application <br />_(required)_ |
 | **data** | [SecretStorePropertiesData](#secretstorepropertiesdata) | An object to represent key-value type secrets <br />_(required)_ |
-| **environment** | string | Fully qualified resource ID for the environment that the portable resource is linked to (if applicable) |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the portable resource at the time the operation was called <br />_(read-only)_ |
+| **environment** | string | Fully qualified resource ID for the environment that the application is linked to |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(read-only)_ |
 | **resource** | string | The resource id of external secret store. |
 | **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(read-only)_ |
 | **type** | 'certificate' | 'generic' | The type of SecretStore data |

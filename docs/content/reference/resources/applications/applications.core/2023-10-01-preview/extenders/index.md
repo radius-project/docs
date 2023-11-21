@@ -39,7 +39,7 @@ description: "Detailed reference documentation for applications.core/extenders@2
 |----------|------|-------------|
 | **application** | string | Fully qualified resource ID for the application that the portable resource is consumed by (if applicable) |
 | **environment** | string | Fully qualified resource ID for the environment that the portable resource is linked to <br />_(required)_ |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the portable resource at the time the operation was called <br />_(read-only)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(read-only)_ |
 | **recipe** | [Recipe](#recipe) | The recipe used to automatically deploy underlying infrastructure for a portable resource |
 | **resourceProvisioning** | 'manual' | 'recipe' | Specifies how the underlying service/resource is provisioned and managed. Available values are 'recipe', where Radius manages the lifecycle of the resource through a Recipe, and 'manual', where a user manages the resource and provides the values. |
 | **secrets** | any | Any object |
