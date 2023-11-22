@@ -3,7 +3,7 @@ type: docs
 title: "Radius Community"
 linkTitle: "Overview"
 description: "Information about the Radius community"
-weight: 80
+weight: 100
 ---
 
 Welcome to the Radius community!
@@ -25,3 +25,7 @@ If you would like to file Issues, access the source code, or use Codespaces plea
 ## How can I get involved?
 
 One of the easiest ways to contribute is to participate in discussions at community engagements or via the Discord server referenced above. We are always seeking feedback, especially for suggestions around improving the product and docs.
+
+## Press and media coverage
+
+Visit the [press and media coverage docs]({{< ref media-coverage >}}) for a list of press articles, blog posts, presentations, and other coverage of Radius.
