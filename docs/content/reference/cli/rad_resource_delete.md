@@ -22,10 +22,10 @@ rad resource delete [resourceType] [resourceName] [flags]
 
 ```
 
-		sample list of resourceType: containers, gateways, httpRoutes, daprPubSubBrokers, extenders, mongoDatabases, rabbitMQMessageQueues, redisCaches, sqlDatabases, daprStateStores, daprSecretStores
-		
-		# Delete a container named orders
-		rad resource delete containers orders
+  sample list of resourceType: containers, gateways, httpRoutes, daprPubSubBrokers, extenders, mongoDatabases, rabbitMQMessageQueues, redisCaches, sqlDatabases, daprStateStores, daprSecretStores
+  
+  # Delete a container named orders
+  rad resource delete containers orders
 ```
 
 ### Options
@@ -47,5 +47,4 @@ rad resource delete [resourceType] [resourceName] [flags]
 
 ### SEE ALSO
 
-* [rad resource]({{< ref rad_resource.md >}})	 - Manage resources
-
+* [rad resource]({{< ref rad_resource.md >}}) - Manage resources

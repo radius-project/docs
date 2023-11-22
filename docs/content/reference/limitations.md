@@ -39,7 +39,7 @@ See [app name constraints]({{< ref "resource-schema.md#common-values" >}}) for m
 ### Application and resource names are lower-cased after deployment
 
 After deploying an application with application name `AppNAME` and container name `CONTAINERname`, casing information about the casing is lost, resulting in names to be lower-cased. The result is:
-  
+
 ```bash
 rad application list
 RESOURCE           TYPE
@@ -118,5 +118,3 @@ Some of the [AWS resource types](/resource-schema/aws) are 'non-idempotent', thi
 We are currently building support for non-idempotent resources in Radius. Please like and comment on this [this issue](https://github.com/radius-project/radius/issues/6227) if you are interested in the same.
 
 As a workaround, you can try using [Terraform Recipes]({{< ref "/guides/recipes/overview" >}}) to deploy and manage those non-idempotent resource types.
-
-

@@ -31,10 +31,9 @@ Manage resources
 
 ### SEE ALSO
 
-* [rad]({{< ref rad.md >}})	 - Radius CLI
-* [rad resource delete]({{< ref rad_resource_delete.md >}})	 - Delete a Radius resource
-* [rad resource expose]({{< ref rad_resource_expose.md >}})	 - Exposes a resource for network traffic
-* [rad resource list]({{< ref rad_resource_list.md >}})	 - Lists resources
-* [rad resource logs]({{< ref rad_resource_logs.md >}})	 - Read logs from a running containers resource
-* [rad resource show]({{< ref rad_resource_show.md >}})	 - Show Radius resource details
-
+* [rad]({{< ref rad.md >}}) - Radius CLI
+* [rad resource delete]({{< ref rad_resource_delete.md >}}) - Delete a Radius resource
+* [rad resource expose]({{< ref rad_resource_expose.md >}}) - Exposes a resource for network traffic
+* [rad resource list]({{< ref rad_resource_list.md >}}) - Lists resources
+* [rad resource logs]({{< ref rad_resource_logs.md >}}) - Read logs from a running containers resource
+* [rad resource show]({{< ref rad_resource_show.md >}}) - Show Radius resource details

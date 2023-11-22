@@ -13,10 +13,10 @@ Create a workspace
 ### Synopsis
 
 Create a workspace.
-		
+  
 Available workspaceTypes: kubernetes
 
-Workspaces allow you to manage multiple Radius platforms and environments using a local configuration file. 
+Workspaces allow you to manage multiple Radius platforms and environments using a local configuration file.
 
 You can easily define and switch between workspaces to deploy and manage applications across local, test, and production environments.
 
@@ -54,5 +54,4 @@ rad workspace create kubernetes
 
 ### SEE ALSO
 
-* [rad workspace]({{< ref rad_workspace.md >}})	 - Manage workspaces
-
+* [rad workspace]({{< ref rad_workspace.md >}}) - Manage workspaces

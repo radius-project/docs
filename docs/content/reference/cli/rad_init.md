@@ -12,7 +12,6 @@ Initialize Radius
 
 ### Synopsis
 
-
 Interactively install the Radius control-plane and setup an environment.
 
 If an environment already exists, 'rad init' will prompt the user to use the existing environment or create a new one.
@@ -21,7 +20,6 @@ By default, 'rad init' will optimize for a developer-focused environment with an
 
 Specifying the '--full' flag will cause 'rad init' to prompt the user for all available configuration options such as Kubernetes context, environment name, and cloud providers. This is useful for fully customizing your environment.
 
-
 ```
 rad init [flags]
 ```
@@ -29,13 +27,11 @@ rad init [flags]
 ### Examples
 
 ```
-
 ## Create a new development environment named "default"
 rad init
 
 ## Prompt the user for all available options to create a new environment
 rad init --full
-
 ```
 
 ### Options
@@ -54,5 +50,4 @@ rad init --full
 
 ### SEE ALSO
 
-* [rad]({{< ref rad.md >}})	 - Radius CLI
-
+* [rad]({{< ref rad.md >}}) - Radius CLI

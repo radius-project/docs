@@ -52,5 +52,4 @@ rad resource expose --application icecream-store containers orders --port 5000 -
 
 ### SEE ALSO
 
-* [rad resource]({{< ref rad_resource.md >}})	 - Manage resources
-
+* [rad resource]({{< ref rad_resource.md >}}) - Manage resources

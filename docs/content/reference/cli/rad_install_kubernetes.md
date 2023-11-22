@@ -15,10 +15,9 @@ Installs Radius onto a kubernetes cluster
 Install Radius in a Kubernetes cluster using the Radius Helm chart.
 By default 'rad install kubernetes' will install Radius with the version matching the rad CLI version.
 
-Radius will be installed in the 'radius-system' namespace. For more information visit https://docs.radapp.io/concepts/architecture/
+Radius will be installed in the 'radius-system' namespace. For more information visit <https://docs.radapp.io/concepts/architecture/>
 
-Overrides can be set by specifying Helm chart values with the '--set' flag. For more information visit https://docs.radapp.io/operations/platforms/kubernetes/install/.
-
+Overrides can be set by specifying Helm chart values with the '--set' flag. For more information visit <https://docs.radapp.io/operations/platforms/kubernetes/install/>.
 
 ```
 rad install kubernetes [flags]
@@ -57,5 +56,4 @@ rad install kubernetes --set key=value
 
 ### SEE ALSO
 
-* [rad install]({{< ref rad_install.md >}})	 - Installs Radius for a given platform
-
+* [rad install]({{< ref rad_install.md >}}) - Installs Radius for a given platform

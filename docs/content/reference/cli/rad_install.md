@@ -29,6 +29,5 @@ Installs Radius for a given platform
 
 ### SEE ALSO
 
-* [rad]({{< ref rad.md >}})	 - Radius CLI
-* [rad install kubernetes]({{< ref rad_install_kubernetes.md >}})	 - Installs Radius onto a kubernetes cluster
-
+* [rad]({{< ref rad.md >}}) - Radius CLI
+* [rad install kubernetes]({{< ref rad_install_kubernetes.md >}}) - Installs Radius onto a kubernetes cluster

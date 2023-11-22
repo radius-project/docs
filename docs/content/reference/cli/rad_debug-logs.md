@@ -13,11 +13,10 @@ Capture logs from Radius control plane for debugging and diagnostics.
 ### Synopsis
 
 Capture logs from Radius control plane for debugging and diagnostics.
-	
+ 
 Creates a ZIP file of logs in the current directory.
 
 WARNING Please inspect all logs before sending feedback to confirm no private information is included.
-
 
 ```
 rad debug-logs [flags]
@@ -39,5 +38,4 @@ rad debug-logs [flags]
 
 ### SEE ALSO
 
-* [rad]({{< ref rad.md >}})	 - Radius CLI
-
+* [rad]({{< ref rad.md >}}) - Radius CLI

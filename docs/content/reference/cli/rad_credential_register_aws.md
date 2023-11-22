@@ -17,8 +17,7 @@ Register (Add or update) AWS cloud provider credential for a Radius installation
 This command is intended for scripting or advanced use-cases. See 'rad init' for a user-friendly way
 to configure these settings.
 
-Radius will use the provided IAM credential for all interactions with AWS. 
-
+Radius will use the provided IAM credential for all interactions with AWS.
 
 Radius cloud providers enable Radius Environments to deploy and integrate with cloud resources (Azure, AWS).
 The Radius control-plane stores credentials for use when accessing cloud resources.
@@ -58,5 +57,4 @@ rad credential register aws --access-key-id <access-key-id> --secret-access-key 
 
 ### SEE ALSO
 
-* [rad credential register]({{< ref rad_credential_register.md >}})	 - Register(Add or update) cloud provider credential for a Radius installation.
-
+* [rad credential register]({{< ref rad_credential_register.md >}}) - Register(Add or update) cloud provider credential for a Radius installation.

@@ -30,5 +30,4 @@ rad version [flags]
 
 ### SEE ALSO
 
-* [rad]({{< ref rad.md >}})	 - Radius CLI
-
+* [rad]({{< ref rad.md >}}) - Radius CLI

@@ -53,5 +53,4 @@ rad credential unregister aws
 
 ### SEE ALSO
 
-* [rad credential]({{< ref rad_credential.md >}})	 - Manage cloud provider credential for a Radius installation.
-
+* [rad credential]({{< ref rad_credential.md >}}) - Manage cloud provider credential for a Radius installation.

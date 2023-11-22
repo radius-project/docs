@@ -62,5 +62,4 @@ rad resource logs containers orders --application icecream-store --container dap
 
 ### SEE ALSO
 
-* [rad resource]({{< ref rad_resource.md >}})	 - Manage resources
-
+* [rad resource]({{< ref rad_resource.md >}}) - Manage resources

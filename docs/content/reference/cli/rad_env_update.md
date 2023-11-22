@@ -13,14 +13,14 @@ Update environment configuration
 ### Synopsis
 
 Update environment configuration
-	
-This command updates the configuration of an environment for properties that are able to be changed.
-		
-Properties that can be updated include:
-- providers (Azure, AWS)
-		  
-All other properties require the environment to be deleted and recreated.
 
+This command updates the configuration of an environment for properties that are able to be changed.
+  
+Properties that can be updated include:
+
+- providers (Azure, AWS)
+
+All other properties require the environment to be deleted and recreated.
 
 ```
 rad env update [environment] [flags]
@@ -68,5 +68,4 @@ rad env update myenv --clear-aws
 
 ### SEE ALSO
 
-* [rad env]({{< ref rad_env.md >}})	 - Manage Radius Environments
-
+- [rad env]({{< ref rad_env.md >}}) - Manage Radius Environments

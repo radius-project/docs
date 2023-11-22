@@ -45,5 +45,4 @@ rad workspace delete my-workspace
 
 ### SEE ALSO
 
-* [rad workspace]({{< ref rad_workspace.md >}})	 - Manage workspaces
-
+* [rad workspace]({{< ref rad_workspace.md >}}) - Manage workspaces

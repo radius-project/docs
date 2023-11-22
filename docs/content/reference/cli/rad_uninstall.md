@@ -29,6 +29,5 @@ Uninstall Radius for a specific platform
 
 ### SEE ALSO
 
-* [rad]({{< ref rad.md >}})	 - Radius CLI
-* [rad uninstall kubernetes]({{< ref rad_uninstall_kubernetes.md >}})	 - Uninstall Radius from a Kubernetes cluster
-
+* [rad]({{< ref rad.md >}})  - Radius CLI
+* [rad uninstall kubernetes]({{< ref rad_uninstall_kubernetes.md >}})  - Uninstall Radius from a Kubernetes cluster

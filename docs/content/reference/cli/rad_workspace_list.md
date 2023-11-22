@@ -41,5 +41,4 @@ rad workspace list
 
 ### SEE ALSO
 
-* [rad workspace]({{< ref rad_workspace.md >}})	 - Manage workspaces
-
+* [rad workspace]({{< ref rad_workspace.md >}}) - Manage workspaces

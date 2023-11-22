@@ -29,5 +29,4 @@ rad completion bash [flags]
 
 ### SEE ALSO
 
-* [rad completion]({{< ref rad_completion.md >}})	 - Generates shell completion scripts
-
+* [rad completion]({{< ref rad_completion.md >}}) - Generates shell completion scripts

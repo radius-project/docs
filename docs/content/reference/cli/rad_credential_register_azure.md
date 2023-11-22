@@ -17,14 +17,12 @@ Register (Add or update) Azure cloud provider credential for a Radius installati
 This command is intended for scripting or advanced use-cases. See 'rad init' for a user-friendly way
 to configure these settings.
 
-Radius will use the provided service principal for all interactions with Azure, including Bicep deployment, 
-Radius Environments, and Radius portable resources. 
+Radius will use the provided service principal for all interactions with Azure, including Bicep deployment, Radius Environments, and Radius portable resources.
 
 Radius will use the provided subscription and resource group as the default target scope for Bicep deployment.
 The provided service principal must have the Contributor or Owner role assigned for the provided resource group
 in order to create or manage resources contained in the group. The resource group should be created before
 calling 'rad credential register azure'.
-
 
 Radius cloud providers enable Radius Environments to deploy and integrate with cloud resources (Azure, AWS).
 The Radius control-plane stores credentials for use when accessing cloud resources.
@@ -65,5 +63,4 @@ rad credential register azure --client-id <client id/app id> --client-secret <cl
 
 ### SEE ALSO
 
-* [rad credential register]({{< ref rad_credential_register.md >}})	 - Register(Add or update) cloud provider credential for a Radius installation.
-
+- [rad credential register]({{< ref rad_credential_register.md >}}) - Register(Add or update) cloud provider credential for a Radius installation.

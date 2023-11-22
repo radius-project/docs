@@ -13,18 +13,16 @@ Manage resource groups
 ### Synopsis
 
 Manage resource groups
-		
+
 Resource groups are used to organize and manage Radius resources. They often contain resources that share a common lifecycle or unit of deployment.
 
 A Radius Application and its resources can span one or more resource groups, and do not have to be in the same resource group as the Radius Environment into which it's being deployed into.
 
 Note that these resource groups are separate from the Azure cloud provider and Azure resource groups configured with the cloud provider.
 
-
 ### Examples
 
 ```
-
 # List resource groups in default workspace
 rad group list
 
@@ -36,7 +34,6 @@ rad group delete prod
 
 # Show details of resource group in default workspace
 rad group show dev
-
 ```
 
 ### Options
@@ -54,10 +51,9 @@ rad group show dev
 
 ### SEE ALSO
 
-* [rad]({{< ref rad.md >}})	 - Radius CLI
-* [rad group create]({{< ref rad_group_create.md >}})	 - Create a new resource group
-* [rad group delete]({{< ref rad_group_delete.md >}})	 - Delete a resource group
-* [rad group list]({{< ref rad_group_list.md >}})	 - List resource groups within current/specified workspace
-* [rad group show]({{< ref rad_group_show.md >}})	 - Show the details of a resource group
-* [rad group switch]({{< ref rad_group_switch.md >}})	 - Switch default resource group scope
-
+* [rad]({{< ref rad.md >}}) - Radius CLI
+* [rad group create]({{< ref rad_group_create.md >}}) - Create a new resource group
+* [rad group delete]({{< ref rad_group_delete.md >}})  - Delete a resource group
+* [rad group list]({{< ref rad_group_list.md >}}) - List resource groups within current/specified workspace
+* [rad group show]({{< ref rad_group_show.md >}}) - Show the details of a resource group
+* [rad group switch]({{< ref rad_group_switch.md >}}) - Switch default resource group scope

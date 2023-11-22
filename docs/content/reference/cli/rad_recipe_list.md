@@ -42,5 +42,4 @@ rad recipe list
 
 ### SEE ALSO
 
-* [rad recipe]({{< ref rad_recipe.md >}})	 - Manage recipes
-
+* [rad recipe]({{< ref rad_recipe.md >}}) - Manage recipes
