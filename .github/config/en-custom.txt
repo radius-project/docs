@@ -883,6 +883,8 @@ SiteToSiteVpnAttachment
 SlackChannelConfiguration
 SlackWorkspaceConfiguration
 SpotFleet
+manualLink
+manualLinkTarget
 StackSet
 StateMachine
 StaticIp
