@@ -30,13 +30,13 @@ description: "Detailed reference documentation for applications.core/containers@
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **application** | string | Fully qualified resource ID for the application that the portable resource is consumed by <br />_(required)_ |
+| **application** | string | Fully qualified resource ID for the application <br />_(required)_ |
 | **connections** | [ContainerPropertiesConnections](#containerpropertiesconnections) | Specifies a connection to another resource. |
 | **container** | [Container](#container) | Definition of a container <br />_(required)_ |
-| **environment** | string | Fully qualified resource ID for the environment that the portable resource is linked to (if applicable) |
+| **environment** | string | Fully qualified resource ID for the environment that the application is linked to |
 | **extensions** | [Extension](#extension)[] | Extensions spec of the resource |
 | **identity** | [IdentitySettings](#identitysettings) | IdentitySettings is the external identity setting. |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the portable resource at the time the operation was called <br />_(read-only)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(read-only)_ |
 | **resourceProvisioning** | 'internal' | 'manual' | Specifies how the underlying service/resource is provisioned and managed. Available values are 'internal', where Radius manages the lifecycle of the resource internally, and 'manual', where a user manages the resource. |
 | **resources** | [ResourceReference](#resourcereference)[] | A collection of references to resources associated with the container |
 | **restartPolicy** | 'Always' | 'Never' | 'OnFailure' | Restart policy for the container |
