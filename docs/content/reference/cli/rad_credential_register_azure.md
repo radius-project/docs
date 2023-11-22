@@ -63,4 +63,4 @@ rad credential register azure --client-id <client id/app id> --client-secret <cl
 
 ### SEE ALSO
 
-- [rad credential register]({{< ref rad_credential_register.md >}}) - Register(Add or update) cloud provider credential for a Radius installation.
+* [rad credential register]({{< ref rad_credential_register.md >}}) - Register(Add or update) cloud provider credential for a Radius installation.

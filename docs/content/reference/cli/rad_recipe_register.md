@@ -60,4 +60,4 @@ rad recipe register cosmosdb -e env_name -w workspace --template-kind bicep --te
 
 ### SEE ALSO
 
-- [rad recipe]({{< ref rad_recipe.md >}}) - Manage recipes
+* [rad recipe]({{< ref rad_recipe.md >}}) - Manage recipes

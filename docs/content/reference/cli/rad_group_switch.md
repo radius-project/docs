@@ -47,4 +47,4 @@ rad group switch rgprod -w wsprod
 
 ### SEE ALSO
 
-- [rad group]({{< ref rad_group.md >}}) - Manage resource groups
+* [rad group]({{< ref rad_group.md >}}) - Manage resource groups

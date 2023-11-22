@@ -90,4 +90,4 @@ rad deploy myapp.bicep --parameters @myfile.json --parameters version=latest
 
 ### SEE ALSO
 
-- [rad]({{< ref rad.md >}}) - Radius CLI
+* [rad]({{< ref rad.md >}}) - Radius CLI
