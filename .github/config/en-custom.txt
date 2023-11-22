@@ -883,6 +883,8 @@ SiteToSiteVpnAttachment
 SlackChannelConfiguration
 SlackWorkspaceConfiguration
 SpotFleet
+manualLink
+manualLinkTarget
 StackSet
 StateMachine
 StaticIp
@@ -1070,3 +1072,8 @@ unopinionated
 Incubations
 HCP
 Backstage
+Russinovich
+InfoWorld
+reimagines
+TechCrunch
+ZDNET
