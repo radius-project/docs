@@ -58,7 +58,6 @@ Begin by creating a file named `app.bicep` with a Radius [container]({{< ref "gu
 
 2. Run the command below, which will list the pods in your Kubernetes cluster, using the `-o` flag to specify the relevant information to output:
 
-
    ```bash
    kubectl get pods -A -l app.kubernetes.io/name=demo -o custom-columns=POD:.metadata.name,STATUS:.status.phase,CONTAINER_NAMES:spec.containers[:].name,CONTAINER_IMAGES:spec.containers[:].image
    ```
@@ -126,7 +125,7 @@ Add the following [`runtimes`]({{< ref "reference/resource-schema/core-schema/co
 ## Cleanup
 
 Run the following command to [delete]({{< ref "guides/deploy-apps/howto-delete" >}}) your app and container:
-   
+
    ```bash
    rad app delete demo
    ```

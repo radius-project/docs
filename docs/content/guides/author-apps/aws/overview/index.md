@@ -21,10 +21,10 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
 {{< tabs Bicep >}}
 
 {{% codetab %}}
-In the following example, a [Container]({{< ref "guides/author-apps/containers" >}}) is connecting to an S3 bucket. 
+In the following example, a [Container]({{< ref "guides/author-apps/containers" >}}) is connecting to an S3 bucket.
 
 {{< rad file="snippets/aws.bicep" embed=true >}}
-{{% /codetab %}} 
+{{% /codetab %}}
 
 {{< /tabs >}}
 

@@ -55,11 +55,11 @@ Developers don't need to specify what cloud resources they're using in their app
 3. Use [`rad recipe list`]({{< ref rad_recipe_list >}}) to view the Recipes in your environment:
 
    ```bash
-   rad recipe list 
+   rad recipe list
    ```
 
    You should see a table of available Recipes:
-   
+
    ```
    NAME      TYPE                                    TEMPLATE KIND  TEMPLATE VERSION  TEMPLATE
    default   Applications.Datastores/sqlDatabases    bicep                            ghcr.io/radius-project/recipes/local-dev/sqldatabases:latest
@@ -103,13 +103,11 @@ Note that no Recipe name is specified with 'db', so it will be using the default
    Deployment In Progress...
 
    Completed            db              Applications.Datastores/redisCaches
-   Completed            webapp          Applications.Core/applications
    Completed            frontend        Applications.Core/containers
 
    Deployment Complete
 
    Resources:
-      webapp          Applications.Core/applications
       frontend        Applications.Core/containers
       db              Applications.Datastores/redisCaches
    ```
@@ -161,7 +159,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 2. Register the Recipe to your Radius Environment:
 
    ```bash
-   rad recipe register azure --environment default --template-kind bicep --template-path ghcr.io/radius-project/recipes/azure/rediscaches:{{< param tag_version >}} --resource-type Applications.Datastores/redisCaches 
+   rad recipe register azure --environment default --template-kind bicep --template-path ghcr.io/radius-project/recipes/azure/rediscaches:{{< param tag_version >}} --resource-type Applications.Datastores/redisCaches
    ```
 
 3. Update your db resource to use the `azure` Recipe, instead of the default Recipe:
@@ -171,7 +169,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 4. Redeploy your application to your environment:
 
    ```bash
-   rad deploy ./app.bicep 
+   rad deploy ./app.bicep
    ```
 
    This operation may take some time, as the 'azure' Recipe is deploying an Azure Cache for Redis resource into your Azure subscription. Once complete, you should see:
@@ -182,14 +180,12 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 
    Deployment In Progress... 
 
-   Completed            webapp          Applications.Core/applications
    Completed            db              Applications.Datastores/redisCaches
    Completed            frontend        Applications.Core/containers
 
    Deployment Complete
 
    Resources:
-      webapp          Applications.Core/applications
       frontend        Applications.Core/containers
       db              Applications.Datastores/redisCaches
    ```
@@ -197,7 +193,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 5. Use the az CLI to see your newly deployed Azure Cache for Redis:
 
    ```bash
-   az redis list --subscription "My Subscription" --query "[].name" 
+   az redis list --subscription "My Subscription" --query "[].name"
    ```
 
    You should see the name of your Redis cache, which is prefixed `cache`:
@@ -215,7 +211,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 
 1. Visit [`http://localhost:3000`](http://localhost:3000) in your browser.
 
-   You can now see environment variables of your container under Radius Connections updated with the details of the Azure Cache for Redis and the Todo app now uses the Azure cache for Redis as the data store 
+   You can now see environment variables of your container under Radius Connections updated with the details of the Azure Cache for Redis, and the Todo app now uses the Azure cache for Redis as the data store.
 
    {{< image src="todoapp.png" width="700px" alt="screenshot of the todo application" >}}
 
@@ -251,7 +247,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 1. Deploy your application to your environment:
 
    ```bash
-   rad deploy ./app.bicep 
+   rad deploy ./app.bicep
    ```
 
    This operation may take some time, as the ‘aws’ Recipe is deploying an AWS MemoryDB for Redis resource in your AWS account. Once complete, you should see:
@@ -262,14 +258,12 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 
    Deployment In Progress... 
 
-   Completed            webapp          Applications.Core/applications
    Completed            db              Applications.Link/redisCaches
    Completed            frontend        Applications.Core/containers
 
    Deployment Complete
 
    Resources:
-      webapp          Applications.Core/applications
       frontend        Applications.Core/containers
       db              Applications.Link/redisCaches
    ```
@@ -282,7 +276,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 
 1. Visit [`http://localhost:3000`](http://localhost:3000) in your browser.
 
-   You can now see environment variables of your container under Radius Connections updated with the details of the Amazon Memory Db for Redis and the Todo app now uses the Amazon Memory Db for Redis as the data store 
+   You can now see environment variables of your container under Radius Connections updated with the details of the Amazon Memory Db for Redis, and the Todo app now uses the Amazon Memory Db for Redis as the data store.
 
    {{< image src="todoapp.png" width="700px" alt="screenshot of the todo application" >}}
 
@@ -290,11 +284,10 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 
 {{< /tabs >}}
 
-
 ## Step 5: Cleanup your environment
 
 1. You can use the rad CLI to [delete your environment]({{< ref rad_env_delete.md >}}) and all the  Radius resources running on your cluster:
-   
+
    ```bash
    rad env delete default --yes
    ```

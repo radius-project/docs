@@ -5,7 +5,7 @@ import radius as radius
 param azLocation string = resourceGroup().location
 
 @description('Specifies the OIDC issuer URL')
-param oidcIssuer string 
+param oidcIssuer string
 
 resource env 'Applications.Core/environments@2023-10-01-preview' = {
   name: 'iam-quickstart'
@@ -68,7 +68,7 @@ resource keyvault 'Microsoft.KeyVault/vaults@2021-10-01' = {
   properties: {
     enabledForTemplateDeployment: true
     tenantId: subscription().tenantId
-    enableRbacAuthorization:true
+    enableRbacAuthorization: true
     sku: {
       name: 'standard'
       family: 'A'

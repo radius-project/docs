@@ -9,6 +9,7 @@ tags: ["AWS"]
 ---
 
 The AWS provider allows you to deploy and connect to AWS resources from a Radius Environment on an EKS cluster. It can be configured:
+
 - [Interactively via `rad init`](#interactive-configuration)
 - [Manually via `rad env update` and `rad credential register`](#manual-configuration)
 
@@ -20,6 +21,7 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
 ## Interactive configuration
 
 1. Initialize a new environment with [`rad init --full`]({{< ref rad_init >}}):
+
    ```bash
    rad init --full
    ```
@@ -32,17 +34,17 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
    You should see the following output:
 
       ```
-      Initializing Radius...                     
+      Initializing Radius...
 
-      ✅ Install Radius {{< param version >}}               
-         - Kubernetes cluster: k3d-k3s-default   
-         - Kubernetes namespace: radius-system 
-         - AWS IAM access key ID: ****  
-      ✅ Create new environment default          
-         - Kubernetes namespace: default 
-         - AWS: account ***** and region: us-west-2        
-      ✅ Scaffold application samples            
-      ✅ Update local configuration              
+      ✅ Install Radius {{< param version >}}
+         - Kubernetes cluster: k3d-k3s-default
+         - Kubernetes namespace: radius-system
+         - AWS IAM access key ID: ****
+      ✅ Create new environment default
+         - Kubernetes namespace: default
+         - AWS: account ***** and region: us-west-2
+      ✅ Scaffold application samples
+      ✅ Update local configuration
 
       Initialization complete! Have a RAD time 😎
       ```
@@ -50,13 +52,17 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
 ## Manual configuration
 
 1. Update your Radius Environment with your AWS region and AWS account ID:
+
     ```bash
     rad env update myEnvironment --aws-region myAwsRegion --aws-account-id myAwsAccountId
     ```
+
     This command updates the configuration of an environment for properties that are able to be changed. For more information visit [`rad env update`]({{< ref rad_env_update >}})
 
 2. Add your AWS cloud provider credentials:
+
     ```bash
     rad credential register aws --access-key-id myAccessKeyId --secret-access-key mySecretAccessKey
     ```
+
     For more information on the command arguments visit [`rad credential register aws`]({{< ref rad_credential_register_aws >}})

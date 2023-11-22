@@ -146,6 +146,7 @@ Visit [Diátaxis](https://diataxis.fr/explanation/) for more information on expl
 ### How-To guides
 
 Visit [Diátaxis](https://diataxis.fr/how-to-guides/) for more information on how-to documentation that helps the user accomplish a specific task.
+
 - Do not assume the reader is using a specific environment unless the article itself is specific to an environment. This includes OS (Windows/Linux/MacOS), deployment target (Kubernetes, IoT, etc.), or programming language. If instructions vary between operating systems, provide guidance for all.
 - Include code/sample/config snippets that can be easily copied and pasted.
 - Provide the reader with related links if needed (this can be other concepts, overviews, how-to guides, or references)
@@ -344,7 +345,6 @@ resource app 'radius.dev/Application@v1alpha1' = {
       //BINDINGS
       connections: {
         backend: {
-          
           source: other.id
         }
       }
@@ -591,7 +591,7 @@ By default, buttons are padded with new lines below the button. To remove these 
 {{< button text="Previous" link="https://example.com" newline="false" >}}
 {{< button text="Next" link="https://example.com" >}}
 
-#### Categorize content 
+#### Categorize content
 
 You can use the `categorizeby` shortcode to pull and organize content by either categories and tags. This is useful when you want to categorize content by tags and the type of the document
 
