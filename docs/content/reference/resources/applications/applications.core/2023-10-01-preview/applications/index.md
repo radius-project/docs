@@ -30,9 +30,9 @@ description: "Detailed reference documentation for applications.core/application
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **environment** | string | Fully qualified resource ID for the environment that the portable resource is linked to <br />_(required)_ |
+| **environment** | string | Fully qualified resource ID for the environment that the application is linked to <br />_(required)_ |
 | **extensions** | [Extension](#extension)[] | The application extension. |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the portable resource at the time the operation was called <br />_(read-only)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(read-only)_ |
 | **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(read-only)_ |
 
 ### Extension
