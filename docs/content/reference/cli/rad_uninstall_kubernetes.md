@@ -44,4 +44,5 @@ rad uninstall kubernetes --kubecontext my-kubecontext
 
 ### SEE ALSO
 
-* [rad uninstall]({{< ref rad_uninstall.md >}}) - Uninstall Radius for a specific platform
+* [rad uninstall]({{< ref rad_uninstall.md >}})	 - Uninstall Radius for a specific platform
+

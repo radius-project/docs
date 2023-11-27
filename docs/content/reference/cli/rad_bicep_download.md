@@ -33,4 +33,5 @@ rad bicep download [flags]
 
 ### SEE ALSO
 
-* [rad bicep]({{< ref rad_bicep.md >}}) - Manage bicep compiler
+* [rad bicep]({{< ref rad_bicep.md >}})	 - Manage bicep compiler
+

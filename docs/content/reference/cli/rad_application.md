@@ -29,10 +29,11 @@ Manage Radius Applications
 
 ### SEE ALSO
 
-* [rad]({{< ref rad.md >}}) - Radius CLI
-* [rad application connections]({{< ref rad_application_connections.md >}}) - Shows the connections for an application.
-* [rad application delete]({{< ref rad_application_delete.md >}}) - Delete Radius Application
-* [rad application list]({{< ref rad_application_list.md >}}) - List Radius Applications
-* [rad application show]({{< ref rad_application_show.md >}}) - Show Radius Application details
-* [rad application status]({{< ref rad_application_status.md >}}) - Show Radius Application status
-* [rad application switch]({{< ref rad_application_switch.md >}}) - Switch the default Radius Application
+* [rad]({{< ref rad.md >}})	 - Radius CLI
+* [rad application connections]({{< ref rad_application_connections.md >}})	 - Shows the connections for an application.
+* [rad application delete]({{< ref rad_application_delete.md >}})	 - Delete Radius Application
+* [rad application list]({{< ref rad_application_list.md >}})	 - List Radius Applications
+* [rad application show]({{< ref rad_application_show.md >}})	 - Show Radius Application details
+* [rad application status]({{< ref rad_application_status.md >}})	 - Show Radius Application status
+* [rad application switch]({{< ref rad_application_switch.md >}})	 - Switch the default Radius Application
+

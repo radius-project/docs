@@ -21,19 +21,21 @@ rad resource show [resourceType] [resourceName] [flags]
 ### Examples
 
 ```
-sample list of resourceType: containers, gateways, httpRoutes, daprPubSubBrokers, extenders, mongoDatabases, rabbitMQMessageQueues, redisCaches, sqlDatabases, daprStateStores, daprSecretStores
 
-# show details of a specified resource in the default environment
+	sample list of resourceType: containers, gateways, httpRoutes, daprPubSubBrokers, extenders, mongoDatabases, rabbitMQMessageQueues, redisCaches, sqlDatabases, daprStateStores, daprSecretStores
 
-rad resource show containers orders
-rad resource show gateways orders_gateways
-rad resource show httpRoutes orders_routes
+	# show details of a specified resource in the default environment
 
-# show details of a specified resource in an application
-rad resource show containers orders --application icecream-store
+	rad resource show containers orders
+	rad resource show gateways orders_gateways
+	rad resource show httpRoutes orders_routes
 
-# show details of a specified resource in an application (shorthand flag)
-rad resource show containers orders -a icecream-store 
+	# show details of a specified resource in an application
+	rad resource show containers orders --application icecream-store
+	
+	# show details of a specified resource in an application (shorthand flag)
+	rad resource show containers orders -a icecream-store 
+	
 ```
 
 ### Options
@@ -54,4 +56,5 @@ rad resource show containers orders -a icecream-store
 
 ### SEE ALSO
 
-* [rad resource]({{< ref rad_resource.md >}}) - Manage resources
+* [rad resource]({{< ref rad_resource.md >}})	 - Manage resources
+

@@ -20,6 +20,7 @@ A Radius Application and its resources can span one or more resource groups, and
 
 Note that these resource groups are separate from the Azure cloud provider and Azure resource groups configured with the cloud provider.
 
+
 ```
 rad group show resourcegroupname [flags]
 ```
@@ -47,4 +48,5 @@ rad group show rgprod
 
 ### SEE ALSO
 
-* [rad group]({{< ref rad_group.md >}}) - Manage resource groups
+* [rad group]({{< ref rad_group.md >}})	 - Manage resource groups
+

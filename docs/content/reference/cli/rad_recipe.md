@@ -13,8 +13,7 @@ Manage recipes
 ### Synopsis
 
 Manage recipes
-
-  Recipes automate the deployment of infrastructure and configuration of portable resources.
+		Recipes automate the deployment of infrastructure and configuration of portable resources.
 
 ### Options
 
@@ -33,8 +32,9 @@ Manage recipes
 
 ### SEE ALSO
 
-* [rad]({{< ref rad.md >}}) - Radius CLI
-* [rad recipe list]({{< ref rad_recipe_list.md >}}) - List recipes
-* [rad recipe register]({{< ref rad_recipe_register.md >}}) - Add a recipe to an environment.
-* [rad recipe show]({{< ref rad_recipe_show.md >}}) - Show recipe details
-* [rad recipe unregister]({{< ref rad_recipe_unregister.md >}}) - Unregister a recipe from an environment
+* [rad]({{< ref rad.md >}})	 - Radius CLI
+* [rad recipe list]({{< ref rad_recipe_list.md >}})	 - List recipes
+* [rad recipe register]({{< ref rad_recipe_register.md >}})	 - Add a recipe to an environment.
+* [rad recipe show]({{< ref rad_recipe_show.md >}})	 - Show recipe details
+* [rad recipe unregister]({{< ref rad_recipe_unregister.md >}})	 - Unregister a recipe from an environment
+
