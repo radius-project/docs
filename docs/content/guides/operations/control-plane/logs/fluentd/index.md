@@ -22,14 +22,14 @@ tags: ["logs","observability"]
     kubectl create namespace radius-monitoring
     ```
 
-2. Add the helm repo for Elastic Search
+1. Add the helm repo for Elastic Search
 
     ```bash
     helm repo add elastic https://helm.elastic.co
     helm repo update
     ```
 
-3. Install Elastic Search using Helm
+1. Install Elastic Search using Helm
 
     _By default, the chart creates three replicas which must be on different nodes. If your cluster has fewer than 3 nodes, specify a smaller number of replicas with the `--set replicas=1` flag:_
 
@@ -43,13 +43,13 @@ tags: ["logs","observability"]
     helm install elasticsearch elastic/elasticsearch --version 7.17.3 -n radius-monitoring --set persistence.enabled=false,replicas=1
     ```
 
-4. Install Kibana
+1. Install Kibana
 
     ```bash
     helm install kibana elastic/kibana --version 7.17.3 -n radius-monitoring
     ```
 
-5. Ensure that Elastic Search and Kibana are running in your Kubernetes cluster
+1. Ensure that Elastic Search and Kibana are running in your Kubernetes cluster
 
     ```bash
     kubectl get pods -n radius-monitoring
@@ -80,7 +80,7 @@ tags: ["logs","observability"]
     kubectl apply -f ./fluentd-radius-with-rbac.yaml
     ```
 
-2. Ensure that Fluentd is running as a daemonset. The number of Fluentd instances should be the same as the number of cluster nodes. In the example below, there is only one node in the cluster:
+1. Ensure that Fluentd is running as a daemonset. The number of Fluentd instances should be the same as the number of cluster nodes. In the example below, there is only one node in the cluster:
 
     ```bash
     kubectl get pods -n kube-system -w
@@ -96,7 +96,7 @@ tags: ["logs","observability"]
     fluentd-sdrld                 1/1     Running   0          14s
     ```
 
-## Install Radius control plane 
+## Install Radius control plane
 
 Visit the [Kubernetes docs]({{< ref "guides/operations/kubernetes" >}}) to learn how to install the Radius control plane. By default, Radius has JSON logging enabled.
 
@@ -117,9 +117,9 @@ _Note: There is a small delay for Elastic Search to index the logs that Fluentd 
     ```bash
     kubectl port-forward svc/kibana-kibana 5601 -n radius-monitoring
     ```
-    
+
     You should see:
-   
+
     ```
     Forwarding from 127.0.0.1:5601 -> 5601
     Forwarding from [::1]:5601 -> 5601
@@ -129,37 +129,37 @@ _Note: There is a small delay for Elastic Search to index the logs that Fluentd 
 
 1. Browse to `http://localhost:5601`
 
-2. Expand the drop-down menu and click **Management → Stack Management**
+1. Expand the drop-down menu and click **Management → Stack Management**
 
     ![Stack Management item under Kibana Management menu options](kibana-1.png)
 
-3. On the Stack Management page, select **Data → Index Management** and wait until `radius-*` is indexed.
+1. On the Stack Management page, select **Data → Index Management** and wait until `radius-*` is indexed.
 
     ![Index Management view on Kibana Stack Management page](kibana-2.png)
 
-4. Once `radius-*` is indexed, click on **Kibana → Index Patterns** and then the **Create index pattern** button.
+1. Once `radius-*` is indexed, click on **Kibana → Index Patterns** and then the **Create index pattern** button.
 
     ![Kibana create index pattern button](kibana-3.png)
 
-5. Define a new index pattern by typing `radius*` into the **Index Pattern name** field, then click the **Next step** button to continue.
+1. Define a new index pattern by typing `radius*` into the **Index Pattern name** field, then click the **Next step** button to continue.
 
     ![Kibana define an index pattern page](kibana-4.png)
 
-6. Configure the primary time field to use with the new index pattern by selecting the `@timestamp` option from the **Time field** drop-down. Click the **Create index pattern** button to complete creation of the index pattern.
+1. Configure the primary time field to use with the new index pattern by selecting the `@timestamp` option from the **Time field** drop-down. Click the **Create index pattern** button to complete creation of the index pattern.
 
     ![Kibana configure settings page for creating an index pattern](kibana-5.png)
 
-7. The newly created index pattern should be shown. Confirm that the fields of interest such as `scope`, `type`, `app_id`, `level`, etc. are being indexed by using the search box in the **Fields** tab.
+1. The newly created index pattern should be shown. Confirm that the fields of interest such as `scope`, `type`, `app_id`, `level`, etc. are being indexed by using the search box in the **Fields** tab.
 
     _Note: If you cannot find the indexed field, please wait. The time it takes to search across all indexed fields depends on the volume of data and size of the resource that the elastic search is running on._
 
     ![View of created Kibana index pattern](kibana-6.png)
 
-8. To explore the indexed data, expand the drop-down menu and click **Analytics → Discover**.
+1. To explore the indexed data, expand the drop-down menu and click **Analytics → Discover**.
 
     ![Discover item under Kibana Analytics menu options](kibana-7.png)
 
-9. In the search box, type in a query string such as `scope:*` and click the **Refresh** button to view the results.
+1. In the search box, type in a query string such as `scope:*` and click the **Refresh** button to view the results.
 
     _Note: This can take a long time. The time it takes to return all results depends on the volume of data and size of the resource that the elastic search is running on._
 
@@ -167,7 +167,7 @@ _Note: There is a small delay for Elastic Search to index the logs that Fluentd 
 
 ## References
 
-* [Fluentd for Kubernetes](https://docs.fluentd.org/v/0.12/articles/kubernetes-fluentd)
-* [Elastic search helm chart](https://github.com/elastic/helm-charts/tree/master/elasticsearch)
-* [Kibana helm chart](https://github.com/elastic/helm-charts/tree/master/kibana)
-* [Kibana Query Language](https://www.elastic.co/guide/en/kibana/current/kuery-query.html)
+- [Fluentd for Kubernetes](https://docs.fluentd.org/v/0.12/articles/kubernetes-fluentd)
+- [Elastic search helm chart](https://github.com/elastic/helm-charts/tree/master/elasticsearch)
+- [Kibana helm chart](https://github.com/elastic/helm-charts/tree/master/kibana)
+- [Kibana Query Language](https://www.elastic.co/guide/en/kibana/current/kuery-query.html)

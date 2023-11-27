@@ -26,7 +26,7 @@ eShop on Containers uses a microservice oriented architecture implementation wit
 
 [Deploying eShop without Radius](https://github.com/dotnet-architecture/eShopOnContainers/tree/dev/deploy/k8s) requires deploying a cluster and the backing infrastructure, configuring multiple CLIs and tools, running deployment scripts, and manually copying/pasting credentials and endpoints.
 
-eShop provides instructions to [deploy to Azure](https://github.com/dotnet-architecture/eShopOnContainers/wiki/Deploying-Azure-resources) or to [deploy to an AKS cluster](https://github.com/dotnet-architecture/eShopOnContainers/wiki/Deploy-to-Azure-Kubernetes-Service-(AKS)) (and even to [deploy to AKS using ARM/Bicep templates](https://github.com/Azure/bicep/tree/main/docs/examples/101/aks)).  
+eShop provides instructions to [deploy to Azure](https://github.com/dotnet-architecture/eShopOnContainers/wiki/Deploying-Azure-resources) or to [deploy to an AKS cluster](https://github.com/dotnet-architecture/eShopOnContainers/wiki/Deploy-to-Azure-Kubernetes-Service-(AKS)) (and even to [deploy to AKS using ARM/Bicep templates](https://github.com/Azure/bicep/tree/main/docs/examples/101/aks)).
 
 Once the cluster and infrastructure resources are deployed, you can [deploy the eShop application using Helm charts and PowerShell](https://github.com/dotnet-architecture/eShopOnContainers/wiki/Deploy-to-Azure-Kubernetes-Service-(AKS)#install-eshoponcontainers-using-helm).
 
