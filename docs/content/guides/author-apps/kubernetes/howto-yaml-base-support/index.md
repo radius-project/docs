@@ -30,14 +30,16 @@ Note that the names of the Deployments, Services, and Config Maps all must match
 
 [Radius containers]({{< ref "/guides/author-apps/containers/overview" >}}) represent a containerized workload within your Radius Application. You can define a Radius container and reference your Kubernetes YAML in order to deploy and manage it within Radius.
 
-In a file named "app.bicep" add a new Container resource, specifying:
+In a file named "app.bicep" add any missing parameter that isn't found in your manifest file in your new Container resource. This could range from anything like a new such as:
 
-- The container image
+- The container image path
 - The port(s) your container exposes
 - The contents of your Kubernetes YAML file
 
 
 {{< rad file="snippets/basemanifest.bicep" embed=true marker="//CONTAINER" >}}
+
+> Radius will override any values found in your Kubernetes manifest file if it finds a value for the same paramater in your `app.bicep` file otherwise it wil use the value and only fill in the gaps in your manifest. However if you define a parameter such as  image name in the different container like sidecar, container renderer will not override the image location.
 
 ### Step 3: Deploy your container
 
@@ -58,22 +60,25 @@ Now that you've defined your Radius Container you can deploy it into your Applic
    > Radius deploys app resources into a unique namespace for every app. For more information refer to the [Kubernetes docs]({{< ref "/guides/operations/kubernetes/overview#namespace-mapping" >}}).
 3. Your console output should look similar to:
 ```
-radius-system   controller-585dcd4c9b-5g2c9        1/1     Running            5 (91s ago)     13m
-my-microservice my-microservice-5c464f66d4-s7n7w   0/1     Pending            0               0s
-my-microservice my-microservice-5c464f66d4-s4tq8   0/1     Pending            0               0s
-my-microservice my-microservice-5c464f66d4-tnvx4   0/1     Pending            0               0s
+NAME                                   READY   STATUS    RESTARTS   AGE
+pod/my-microservice-795545bf79-glbhw   1/1     Running   0          21s
+
+NAME                      TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/my-microservice   ClusterIP   10.43.177.210   <none>        3000/TCP   18s
+
+NAME                              READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/my-microservice   1/1     1            1           2m41s
+
+NAME                                         DESIRED   CURRENT   READY   AGE
+replicaset.apps/my-microservice-795545bf79   1         1         1       21s
+replicaset.apps/my-microservice-96dc8569d    0         0         0       2m41s
 ```
 ### Step 4: Clean up
 
-1. Run the following command to delete all Pods, Deployments, and Services in the `my-microservice` namespace:
+1. Run the following command to delete all Pods, Deployments, and Services in the `my-microservice` namespace and the associated Radius Application:
 
-    ```bash
-    kubectl delete -n my-microservice -f ./deploy
     ```
-2. Run the following command to delete the `my-microservice` namespace:
-
-    ```bash
-    kubectl delete namespace my-microservice
+    rad app delete -a demo
     ```
 
 ## Further reading

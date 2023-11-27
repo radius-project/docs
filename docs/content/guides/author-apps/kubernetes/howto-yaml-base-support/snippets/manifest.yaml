@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-microservice # Required for Radius validation
+  labels:
+    app: my-microservice # Radius will perform a synthetic validation but a hard requirement
+spec:
+  selector:
+  template:
+    spec:
+      containers:
+        - name: my-microservice
