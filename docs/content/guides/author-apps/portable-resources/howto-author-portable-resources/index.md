@@ -17,13 +17,7 @@ Before you get started, you'll need to make sure you have the following tools an
 - [Radius environment]({{< ref "installation#step-3-initialize-radius" >}})
 - [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 
-## Step 1: Define a container resource
-
-Create a Bicep file `app.bicep`, add a container resource that will be leveraged by your portable resource later:
-
-{{< rad file="snippets/app.bicep" embed=true marker="//EMPTYCONTAINER" >}}
-
-## Step 2: Define your portable resource
+## Step 1: Choose how to define your portable resource
 
 Portable resources provide **abstraction** and **portability** to Radius Applications. Radius currently offers options to manually provision the resources or automatically provision them via Recipes.
 
@@ -31,15 +25,11 @@ Portable resources provide **abstraction** and **portability** to Radius Applica
 
 {{% codetab %}}
 
-Recipes enable a separation of concerns between infrastructure operators and developers by automating infrastructure deployment. To learn more visit the [Recipes overview]({{< ref "/guides/recipes/overview" >}}). You can run a default recipe registered in your environment or select the specific Recipe you want to run. 
-
-#### Default Recipe
+Recipes enable a separation of concerns between infrastructure operators and developers by automating infrastructure deployment. You can run a default recipe registered in your environment or select the specific Recipe you want to run. 
 
 {{< rad file="snippets/app-redis-recipe.bicep" embed=true marker="//Recipe" >}}
 
-#### Specifying a Recipe by name
-
-{{< rad file="snippets/app-redis-manual.bicep" embed=true marker="//RecipeSpecified" >}}
+ To learn more visit the [Recipes overview]({{< ref "/guides/recipes/overview" >}}).
 
 {{% /codetab %}}
 
@@ -54,6 +44,12 @@ Refer to the [Redis resource schema]({{< ref "reference/resource-schema/cache/re
 {{% /codetab %}}
 
 {{< /tabs >}}
+
+## Step 2: Define a container resource
+
+In your Bicep file `app.bicep`, add a container resource that will be leveraged by your portable resource later:
+
+{{< rad file="snippets/app.bicep" embed=true marker="//EMPTYCONTAINER" >}}
 
 ## Step 3: Access your portable resources
 
