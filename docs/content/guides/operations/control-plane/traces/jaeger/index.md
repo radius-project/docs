@@ -55,7 +55,7 @@ The following steps show you how to configure the Radius control plane to send d
 1. Port forward the Jaeger service to your local machine:
 
    ```bash
-   kubectl port-forward svc/tracing 16686 -n radius-monitoring 
+   kubectl port-forward svc/tracing 16686 -n radius-monitoring
    ```
 
 2. In your browser, go to [http://localhost:16686](http://localhost:16686) to see the Jaeger UI:

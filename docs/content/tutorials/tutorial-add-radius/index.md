@@ -49,24 +49,24 @@ The Guestbook application consists of a web front end along with primary and sec
    > The `kubernetes/guestbook` directory contains the Kubernetes YAML manifest files for their Guestbook sample application, copied directly from the [Kubernetes examples repo](https://github.com/kubernetes/examples/tree/master/guestbook).
 
 3. Initialize Radius
-   
+
    Run this command to initialize Radius. For this example, answer **NO** when asked whether to set up an application: 
 
    ```bash
    rad init
    ```
-   
+
    You should see output similar to:
 
    ```
-   Initializing Radius...                     
-   ✅ Install Radius {{< param version >}}               
-      - Kubernetes cluster: k3d-k3s-default   
-      - Kubernetes namespace: radius-system   
-   ✅ Create new environment default          
-      - Kubernetes namespace: default 
-      - Recipe pack: local-dev        
-   ✅ Update local configuration              
+   Initializing Radius...
+   ✅ Install Radius {{< param version >}}
+      - Kubernetes cluster: k3d-k3s-default
+      - Kubernetes namespace: radius-system
+   ✅ Create new environment default
+      - Kubernetes namespace: default
+      - Recipe pack: local-dev
+   ✅ Update local configuration
    Initialization complete! Have a RAD time 😎
    ```
 
@@ -222,7 +222,7 @@ You will now add Radius to the Guestbook application's Kubernetes deployment man
 2. Verify that the application successfully deployed:
 
    ```bash
-   kubectl get deployments -n demo; 
+   kubectl get deployments -n demo
    kubectl get services -n demo
    ```
 

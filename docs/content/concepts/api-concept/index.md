@@ -27,10 +27,10 @@ In the example provided, the virtual machine is the **resource** and the API pro
 
 Resource providers sometimes provide operations in addition to the CRUDL operations that are specific to the type of resource. For a virtual machine, a resource provider might provide additional operations like:
 
- - Rebooting a virtual machine
- - Restoring a virtual machine from backup
+- Rebooting a virtual machine
+- Restoring a virtual machine from backup
 
-As a result the set of operations is sometimes written as **CRUDL+**, meaning that a resource provider must implement the **CRUDL** operations at a minimum and sometimes more. 
+As a result the set of operations is sometimes written as **CRUDL+**, meaning that a resource provider must implement the **CRUDL** operations at a minimum and sometimes more.
 
 Resources have a type (in the programming sense) and a means of being identified (name or id). For example an AWS virtual machine's type would be `AWS::EC2::Instance` and might have a generated name like `i-0123456789abcdef`. The name must be provided to operations like Update so that the resource provider can identify which resource to update. The name and type can also be combined with additional context to form a unique identifier. For example on AWS the virtual machine name would be combined with the user's account id and the selected region to form a unique identifier called an [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html). These identifiers are useful because they provide a universal way to identify which resource is being named.
 
@@ -38,11 +38,11 @@ A resource could be anything that's useful to manage through an API. For example
 
 ## Principles for the Radius API
 
-Radius provides a general resource manager that can manage cloud or on-premises resources as well as opinionated support cloud-native application concerns like containers and databases. Such an API needs to be powerful, flexible, and extensible enough to communicate with a variety of existing systems that were created by different organizations. 
+Radius provides a general resource manager that can manage cloud or on-premises resources as well as opinionated support cloud-native application concerns like containers and databases. Such an API needs to be powerful, flexible, and extensible enough to communicate with a variety of existing systems that were created by different organizations.
 
 The design of the Radius API incorporates the following principles:
 
-- Universal addressing: every resource has a unique identifier called a resource id. 
+- Universal addressing: every resource has a unique identifier called a resource id.
 - CRUDL+ lifecycle: resources their functionality through a common set of HTTP contracts in a consistent way.
 - Federation based on metadata: rather that duplicate the functionality of existing resource managers, Radius delegates functionality to external APIs and is powered by the metadata of those APIs.
 
@@ -62,9 +62,9 @@ The common structure of a resource id is the following:
 {rootScope}/{resourceNamespace}/{resourceType}/{resourceName}
 ```
 
-### Root scope 
+### Root scope
 
-A hierarchical set of key-value pairs that identify the origin of the resource. Root scopes answer questions like: 
+A hierarchical set of key-value pairs that identify the origin of the resource. Root scopes answer questions like:
 
 - *"What cloud is this resource from?"*
 - *"What cloud account contains this resource?"*

@@ -38,7 +38,7 @@ Radius Applications are more than just client-side configuration and automation,
 
 {{< image src="app-graph.png" alt="Diagram of the application graph" width=500px >}}
 
-## Resource schema 
+## Resource schema
 
 Refer to the [application schema docs]({{< ref application-schema >}}) for more information on how to define an application.
 

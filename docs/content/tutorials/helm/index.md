@@ -112,7 +112,7 @@ rad init
 
     ```bash
     kubectl create namespace demo
-    kubectl create secret generic --namespace demo --from-literal=url=redis://fake-server redis-secret 
+    kubectl create secret generic --namespace demo --from-literal=url=redis://fake-server redis-secret
     helm upgrade demo ./Chart -n demo --install
     ```
 
@@ -122,7 +122,7 @@ rad init
     > kubectl create namespace demo
     namespace/demo created
 
-    > kubectl create secret generic --namespace demo --from-literal=url=redis://fake-server redis-secret 
+    > kubectl create secret generic --namespace demo --from-literal=url=redis://fake-server redis-secret
     secret/redis-secret created
 
     > helm upgrade demo ./Chart -n demo --install
@@ -297,7 +297,7 @@ In this step you will:
 
     {{< alert title="💡 Recipes" color="info" >}}
     Radius includes Recipes for local development when you use `rad init`. These [**local-dev**](https://github.com/radius-project/recipes/tree/main/local-dev) Recipes run popular OSS technologies as containerized infrastructure without requiring a cloud account.
-    
+
     In a production environment you can substitute recipes that will create cloud or on-premises dependencies instead.
     {{< /alert >}}
 

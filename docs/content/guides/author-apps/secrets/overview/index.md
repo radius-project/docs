@@ -14,7 +14,7 @@ Sensitive data, such as TLS certificates, tokens, passwords, and keys that serve
 
 An independent resource with its own lifecycle, a Radius Secret Store ensures that data is persisted across container restarts or mounts and can interact directly with the Radius Application Model. For instance, an Applications.Core/gateways resource can use this resource to store a TLS certificate and reference it.
 
-## Create a new Secret Store 
+## Create a new Secret Store
 
 Radius leverages the secrets management solution available on the hosting platform to create and store the secret. For example, if you are deploying to Kubernetes, the secret will be created in Kubernetes Secrets.
 Follow the [how-to guide on creating new secret store]({{< ref "/guides/author-apps/secrets/howto-new-secretstore" >}}) to learn more about creating a new secret store resource and storing a TLS certificate in it.

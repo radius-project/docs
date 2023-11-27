@@ -37,7 +37,6 @@ The [radius-resource-provider-dashboard.json](https://raw.githubusercontent.com/
 - [Setup Prometheus]({{<ref prometheus.md>}}) on your Kubernetes cluster
 - [Helm 3](https://helm.sh/)
 
-
 ### Install Grafana
 
 1. Add the Grafana Helm repo:
@@ -72,6 +71,7 @@ The [radius-resource-provider-dashboard.json](https://raw.githubusercontent.com/
    ```bash
    kubectl get pods -n radius-monitoring
    ```
+
    You should see something similar to the following:
 
    ```
@@ -135,13 +135,13 @@ Now that Grafana is installed, you need to configure it to use Prometheus as a d
 ### Import dashboards in Grafana
 
 1. Download the Grafana dashboard templates:
-   - [radius-overview-dashboard.json](https://raw.githubusercontent.com/radius-project/radius/main/grafana/radius-overview-dashboard.json) 
+   - [radius-overview-dashboard.json](https://raw.githubusercontent.com/radius-project/radius/main/grafana/radius-overview-dashboard.json)
    - [radius-resource-provider-dashboard.json](https://raw.githubusercontent.com/radius-project/radius/main/grafana/radius-resource-provider-dashboard.json)
 1. In the upper left corner of the Grafana home screen, click the "+" option, then "Import", and select your templates.
 1. Select the dashboard that you imported and enjoy!
 
 ## References
 
-* [Prometheus Installation](https://github.com/prometheus-community/helm-charts)
-* [Prometheus on Kubernetes](https://github.com/coreos/kube-prometheus)
-* [Prometheus Query Language](https://prometheus.io/docs/prometheus/latest/querying/basics/)
+- [Prometheus Installation](https://github.com/prometheus-community/helm-charts)
+- [Prometheus on Kubernetes](https://github.com/coreos/kube-prometheus)
+- [Prometheus Query Language](https://prometheus.io/docs/prometheus/latest/querying/basics/)

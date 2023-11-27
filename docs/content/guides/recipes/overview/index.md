@@ -25,7 +25,7 @@ Recipes enable a **separation of concerns** between IT operators and developers 
 
 Recipes can be used in any environment, from dev to prod. You can run a default recipe registered in your environment or select the specific Recipe you want to run. To run a default recipe, simply add the resource you want to your app and omit the Recipe name:
 
-{{< rad file="snippets/recipe-link-example.bicep" embed=true marker="//DEFAULT" >}} 
+{{< rad file="snippets/recipe-link-example.bicep" embed=true marker="//DEFAULT" >}}
 
 If you want to use a specific Recipe, you can specify the Recipe name in the `recipe` parameter:
 
@@ -53,11 +53,11 @@ It's easy to author and register your own Recipes which define how to deploy and
 
 Recipes currently support the following resources. Support for additional resources is actively being worked on.
 
-| Supported resources | 
+| Supported resources |
 |---------------------|
-| [`Applications.Datastores/redisCaches`]({{< ref redis >}}) | 
+| [`Applications.Datastores/redisCaches`]({{< ref redis >}}) |
 | [`Applications.Datastores/mongoDatabases`]({{< ref mongodb >}}) |
-| [`Applications.Datastores/sqlDatabases`]({{< ref microsoft-sql >}}) | 
+| [`Applications.Datastores/sqlDatabases`]({{< ref microsoft-sql >}}) |
 | [`Applications.Messaging/rabbitmqQueues`]({{< ref rabbitmq >}}) |
 | [`Applications.Dapr/stateStores`]({{< ref dapr-statestore >}}) |
 | [`Applications.Dapr/pubSubBrokers`]({{< ref dapr-pubsub >}}) |

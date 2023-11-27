@@ -8,7 +8,7 @@ weight: 999
 
 ## General
 
-### Is Kubernetes required to use Radius? 
+### Is Kubernetes required to use Radius?
 
 Currently yes. Although Radius is architected to run on any platform, today Kubernetes is the only hosting platform for Radius for the Radius control-plane and for containerized workloads. In the future, we plan to support other hosting platforms for serverless platforms.
 
@@ -16,11 +16,11 @@ Currently yes. Although Radius is architected to run on any platform, today Kube
 
 Yes. The easiest way to add Radius to an existing application is through [Radius annotations](#TODO). Simply add the annotations to your existing Helm chart or Kubernetes YAML and you can use the Radius app graph, connections, and Recipes. [Try the tutorial](#TODO) to learn more.
 
-### Do I have to self-host Radius? Is there a managed service for Radius? 
+### Do I have to self-host Radius? Is there a managed service for Radius?
 
 Open-source Radius requires that you self-host and run your own Radius instance in your Kubernetes cluster. In the future, we hope for providers to include Radius as a part of their managed service offerings.
 
-### What languages does Radius support? 
+### What languages does Radius support?
 
 For application code, Radius supports any programming language as long as it is containerized.
 
@@ -45,7 +45,7 @@ Users can employ multiple environments for isolation and organization, for examp
 
 Recipes currently support the set of [Radius portable resources]({{< ref "/guides/author-apps/portable-resources/overview" >}}): Redis, Mongo, RabbitMQ, SQL, Dapr State Stores, Dapr Secret Stores, Dapr Pub/Sub, and the untyped extender resource. Additional support for other resources (_Azure, AWS, etc._) will come in a future release.
 
-### What infrastructure can Recipes deploy? 
+### What infrastructure can Recipes deploy?
 
 Radius Recipes support any resources that can be modeled in Bicep, or the AWS, Azure, and Kubernetes Terraform providers.
 
@@ -53,9 +53,9 @@ Radius Recipes support any resources that can be modeled in Bicep, or the AWS, A
 
 Terraform Recipes currently support the Azure, AWS, and Kubernetes providers, plus any provider that does not require any credentials or configuration to be passed in (_e.g. Oracle, GCP, etc. are not currently supported_).  Support for provider configuration is a high priority we plan to address in an upcoming release.
 
-### Do developers need write access to a cloud provider (_Azure subscription, AWS account, etc._) to use Recipes? 
+### Do developers need write access to a cloud provider (_Azure subscription, AWS account, etc._) to use Recipes?
 
-No. Recipes are deployed on-behalf-of the Radius Environment so developers do not need any write access to an Azure subscription, resource group, or AWS account. This allows a least-privilege access model to cloud resources and for IT operators to only allow approved IaC templates to be deployed to their cloud environments. 
+No. Recipes are deployed on-behalf-of the Radius Environment so developers do not need any write access to an Azure subscription, resource group, or AWS account. This allows a least-privilege access model to cloud resources and for IT operators to only allow approved IaC templates to be deployed to their cloud environments.
 
 ## Cloud/platform support
 
@@ -63,17 +63,17 @@ No. Recipes are deployed on-behalf-of the Radius Environment so developers do no
 
 Radius Applications can include AWS services that are also supported by the AWS cloud control API. See the [AWS resource library]({{< ref "/guides/author-apps/aws/overview#resource-library" >}}) for the complete list of supported AWS resources. Connections from a Radius container to an AWS resource are not yet supported. Properties such as hostnames, ports, endpoints, and connection strings need to be manually specified as environment variables. Additional support for Connections to AWS resources is on our backlog.
 
-### What Azure services does Radius support? 
+### What Azure services does Radius support?
 
 Radius Applications can include any Azure service, with support for direct connections and managed identities. Compute services (Web Apps, Container Apps, App Service, Functions, Logic Apps, and others) can be deployed but cannot currently declare connections to other resources.
 
-### Does Radius support Google Cloud Platform (GCP)? 
+### Does Radius support Google Cloud Platform (GCP)?
 
 Not yet, but it is on the backlog.
 
-### Does Radius support Dapr? 
+### Does Radius support Dapr?
 
-Yes. Radius has first-class support for [Dapr building blocks]({{< ref "/guides/author-apps/dapr" >}}) such as state stores, secret stores, and pub/sub brokers. Developers can add Dapr resources to their applications and operators can define Recipes that deploy and manage the underlying infrastructure. 
+Yes. Radius has first-class support for [Dapr building blocks]({{< ref "/guides/author-apps/dapr" >}}) such as state stores, secret stores, and pub/sub brokers. Developers can add Dapr resources to their applications and operators can define Recipes that deploy and manage the underlying infrastructure.
 
 ## Comparison to other tools
 
