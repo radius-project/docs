@@ -112,7 +112,7 @@ Radius Applications are where all your app's resources and relationships come to
 
    {{% rad file="snippets/1-app.bicep" embed=true %}}
 
-2. Deploy `app.bicep` with [`rad deploy`]({{< ref rad_deploy >}}):
+1. Deploy `app.bicep` with [`rad deploy`]({{< ref rad_deploy >}}):
 
    ```bash
    rad deploy app.bicep
@@ -132,7 +132,7 @@ Radius Applications are where all your app's resources and relationships come to
        demo            Applications.Core/containers
    ```
 
-3. Run `rad app connections` again to see the container you just deployed:
+1. Run `rad app connections` again to see the container you just deployed:
 
     ```bash
     rad app connections
@@ -206,7 +206,7 @@ In addition to containers, you can add dependencies like Redis caches, Dapr Stat
    Note that when you added the Mongo database to your application you didn't need to specify _how or where_ to run the underlying infrastructure. The Radius Environment and its Recipes take care of that for you. Just like how the Radius Environment bound your container to a Kubernetes cluster, it also deploys and binds your Mongo database to underlying infrastructure using [Recipes]({{< ref "/guides/recipes/overview" >}}).
    {{< /alert >}}
 
-2. To learn about the underlying Recipe that will deploy and manage the Mongo infrastructure run [`rad recipe show`]({{< ref rad_recipe_show >}}):
+1. To learn about the underlying Recipe that will deploy and manage the Mongo infrastructure run [`rad recipe show`]({{< ref rad_recipe_show >}}):
 
    ```bash
    rad recipe show default --resource-type Applications.Datastores/mongoDatabases
@@ -226,7 +226,7 @@ In addition to containers, you can add dependencies like Redis caches, Dapr Stat
 
    If you want to learn more about the Recipe template it's in the [Recipes repo](https://github.com/radius-project/recipes/blob/main/local-dev/mongodatabases.bicep).
 
-3. Add a connection from your container to the Mongo database, which indicates to Radius that your container needs to communicate with the Mongo database:
+1. Add a connection from your container to the Mongo database, which indicates to Radius that your container needs to communicate with the Mongo database:
 
    {{% rad file="snippets/2-app-mongo.bicep" embed=true marker="//CONTAINER" markdownConfig="{hl_lines=[\"16-20\"]}" %}}
 
@@ -234,7 +234,7 @@ In addition to containers, you can add dependencies like Redis caches, Dapr Stat
    Radius Connections are more than just bookkeeping. They are used to automatically configure access for your containers. Learn more in the [containers documentation]({{< ref "/guides/author-apps/containers/overview" >}}).
    {{< /alert >}}
 
-4. Re-run your app with [`rad run`]({{< ref rad_run >}}) to deploy the Mongo database and container and start the port-forward and log stream:
+1. Re-run your app with [`rad run`]({{< ref rad_run >}}) to deploy the Mongo database and container and start the port-forward and log stream:
 
     ```bash
     rad run app.bicep
@@ -256,13 +256,13 @@ In addition to containers, you can add dependencies like Redis caches, Dapr Stat
     Starting log stream...
     ```
 
-5. Open [localhost:3000](http://localhost:3000) to interact with the demo container. You should see the container's connections and metadata, this time with a connection to the Mongo database and new environment variables set:
+1. Open [localhost:3000](http://localhost:3000) to interact with the demo container. You should see the container's connections and metadata, this time with a connection to the Mongo database and new environment variables set:
 
     {{< image src="demo-landing-connection.png" alt="Screenshot of the Radius demo container" width=500px >}}
 
-6. Press CTRL+C to terminate the port-forward and log stream.
+1. Press CTRL+C to terminate the port-forward and log stream.
 
-7. Run `rad app connections` again to see the new dependency:
+1. Run `rad app connections` again to see the new dependency:
 
     ```bash
     rad app connections
@@ -300,11 +300,11 @@ In addition to dependencies, you can add more containers to make your applicatio
 
    {{% rad file="snippets/3-app-backend.bicep" embed=true marker="//BACKEND" %}}
 
-2. Add a new connection from your `demo` container to the `backend` container:
+1. Add a new connection from your `demo` container to the `backend` container:
 
    {{% rad file="snippets/3-app-backend.bicep" embed=true marker="//CONTAINER" markdownConfig="{hl_lines=[\"20-22\"]}" %}}
 
-3. Re-run your app with [`rad run`]({{< ref rad_run >}}):
+1. Re-run your app with [`rad run`]({{< ref rad_run >}}):
 
     ```bash
     rad run app.bicep
@@ -326,7 +326,7 @@ In addition to dependencies, you can add more containers to make your applicatio
     Starting log stream...
     ```
 
-4. Open [localhost:3000](http://localhost:3000) to interact with the demo container. You should see the container's connections and metadata, this time with a connection to the backend container and new environment variables set:
+1. Open [localhost:3000](http://localhost:3000) to interact with the demo container. You should see the container's connections and metadata, this time with a connection to the backend container and new environment variables set:
 
    {{< image src="demo-landing-backend.png" alt="Screenshot of the demo container with a connection to the backend container" width=600px >}}
 
@@ -340,7 +340,7 @@ Finally, you can add a gateway to your application. Gateways are used to expose 
 
    {{% rad file="snippets/4-app-gateway.bicep" embed=true marker="//GATEWAY" %}}
 
-2. Deploy your app with [`rad deploy`]({{< ref rad_deploy >}}):
+1. Deploy your app with [`rad deploy`]({{< ref rad_deploy >}}):
 
     ```bash
     rad deploy app.bicep
@@ -364,9 +364,9 @@ Finally, you can add a gateway to your application. Gateways are used to expose 
         gateway         Applications.Core/gateways http://localhost
     ```
 
-3. Open the gateway URL in your browser. Unlike before, you are connecting to the gateway instead of directly to the container. You will see the same container connections and metadata as before.
+1. Open the gateway URL in your browser. Unlike before, you are connecting to the gateway instead of directly to the container. You will see the same container connections and metadata as before.
 
-4. Done! You've successfully created your first Radius application.
+1. Done! You've successfully created your first Radius application.
 
 ## Next steps
 
