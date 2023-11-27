@@ -59,7 +59,7 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
 
     This command updates the configuration of an environment for properties that are able to be changed. For more information visit [`rad env update`]({{< ref rad_env_update >}})
 
-2. Add your AWS cloud provider credentials:
+1. Add your AWS cloud provider credentials:
 
     ```bash
     rad credential register aws --access-key-id myAccessKeyId --secret-access-key mySecretAccessKey

@@ -26,10 +26,10 @@ It's easy to get up and running with a GitHub Codespace. This will give you a fu
 > Note the `postCreateCommand` may take up to 3 minutes to complete after the codespace is created to complete.
 
 1. Start Codespace
-2. Wait for `postCreateCommand` to complete
-3. Run `cd docs` to enter the hugo site directory
-4. Run `hugo server` to start the local server
-5. Click on the link in the terminal to open the docs in your browser
+1. Wait for `postCreateCommand` to complete
+1. Run `cd docs` to enter the hugo site directory
+1. Run `hugo server` to start the local server
+1. Click on the link in the terminal to open the docs in your browser
 
 ### Local machine
 
@@ -42,14 +42,14 @@ It's easy to get up and running with a GitHub Codespace. This will give you a fu
 ### Environment setup
 
 1. Ensure pre-requisites are installed
-2. Clone this repository and the radius repository
+1. Clone this repository and the radius repository
 
    ```sh
    git clone https://github.com/radius-project/radius.git
    git clone https://github.com/radius-project/docs.git
    ```
 
-3. Generate CLI docs:
+1. Generate CLI docs:
 
    ```sh
    pushd radius
@@ -57,20 +57,20 @@ It's easy to get up and running with a GitHub Codespace. This will give you a fu
    popd
    ```
 
-4. Update submodules:
+1. Update submodules:
 
    ```sh
    cd docs
    git submodule update --init --recursive
    ```
 
-5. Install npm packages:
+1. Install npm packages:
 
    ```sh
    npm install
    ```
 
-6. Initialize the docsy theme:
+1. Initialize the docsy theme:
 
    ```sh
    cd themes/docsy
@@ -81,13 +81,13 @@ It's easy to get up and running with a GitHub Codespace. This will give you a fu
 ### Run local server
 
 1. Make sure you're still in the `docs` directory
-2. Run
+1. Run
 
    ```sh
    hugo server
    ```
 
-3. Navigate to `http://localhost:1313/`
+1. Navigate to `http://localhost:1313/`
 
 ## Developer Certificate of Origin
 
@@ -114,9 +114,9 @@ Visual Studio Code has a setting, `git.alwaysSignOff` to automatically add a Sig
 There are 5 types of docs in Radius:
 
 1. **Concept** - A concept doc is a high-level overview of the project or an area of the project.
-2. **Overview** - A overview page documents a specific feature or capability of the project, with information on what the feature is and additional context and links on how to use it.
-3. **How-To** - A how-to guide is a step-by-step guide to help the reader achieve a specific task. It assumes the reader has a basic understanding of the project and its concepts. For more information on how-to guides, see [Diátaxis](https://diataxis.fr/how-to-guides/).
-4. **Reference** - A reference doc is a detailed description of a specific feature or capability of the project. It assumes the reader has a basic understanding of the project and its concepts. For more information on reference docs, see [Diátaxis](https://diataxis.fr/reference/).
+1. **Overview** - A overview page documents a specific feature or capability of the project, with information on what the feature is and additional context and links on how to use it.
+1. **How-To** - A how-to guide is a step-by-step guide to help the reader achieve a specific task. It assumes the reader has a basic understanding of the project and its concepts. For more information on how-to guides, see [Diátaxis](https://diataxis.fr/how-to-guides/).
+1. **Reference** - A reference doc is a detailed description of a specific feature or capability of the project. It assumes the reader has a basic understanding of the project and its concepts. For more information on reference docs, see [Diátaxis](https://diataxis.fr/reference/).
 
 Overall:
 
@@ -176,6 +176,18 @@ These conventions should be followed throughout all Radius documentation to ensu
 ### Spelling
 
 The docs pipeline uses [aspell](http://aspell.net/) to check for spelling mistakes. If you need to add a new custom word to the allow-list, update `.github/config/en-custom.txt`.
+
+### Numbering
+
+All numbered lists use `1.` as the number, regardless of the order. The list numbers are then incremented automatically during the build process of the docs.
+
+#### Example
+
+```md
+1. This is the second step, and will be displayed with a 2 in the docs.
+1. This is the third step, and will be displayed with a 3.
+1. This is the first step of a process.
+```
 
 ## Tips and tricks
 

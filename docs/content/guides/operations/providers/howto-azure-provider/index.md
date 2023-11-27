@@ -70,7 +70,7 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
     rad env update myEnvironment --azure-subscription-id myAzureSubscriptionId --azure-resource-group  myAzureResourceGroup
     ```
 
-2. Run `az ad sp create-for-rbac` to create a Service Principal without a role assignment and obtain your `appId`, `displayName`, `password`, and `tenant` information.
+1. Run `az ad sp create-for-rbac` to create a Service Principal without a role assignment and obtain your `appId`, `displayName`, `password`, and `tenant` information.
 
    ```
    {
@@ -81,7 +81,8 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
    }
    ```
 
-3. Use [`rad credential register azure`]({{< ref rad_credential_register_azure >}}) to add the Azure service principal to your Radius installation:
+
+1. Use [`rad credential register azure`]({{< ref rad_credential_register_azure >}}) to add the Azure service principal to your Radius installation:
 
     ```bash
     rad credential register azure --client-id myClientId  --client-secret myClientSecret  --tenant-id myTenantId

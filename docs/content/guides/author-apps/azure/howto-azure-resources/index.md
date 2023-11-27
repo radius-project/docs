@@ -60,7 +60,7 @@ rad deploy ./app.bicep -p oidcIssuer=<OIDC_ISSUER_URL>
    rad resource logs containers mycontainer -a myapp
    ```
 
-2. You should see the contents of the secret from your Key Vault:
+1. You should see the contents of the secret from your Key Vault:
 
    ```txt
    [myapp-mycontainer-79c54bd7c7-tgdpn] I1108 18:39:53.636314       1 main.go:33] "successfully got secret" secret="supersecret"
@@ -76,4 +76,4 @@ rad deploy ./app.bicep -p oidcIssuer=<OIDC_ISSUER_URL>
    rad app delete myapp --yes
    ```
 
-2. Delete the deployed Azure Key Vault via the Azure portal or the Azure CLI
+1. Delete the deployed Azure Key Vault via the Azure portal or the Azure CLI

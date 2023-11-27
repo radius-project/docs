@@ -23,7 +23,7 @@ rad app delete <appname>
 This will delete the following resources from the Radius Environment
 
 1. All the resources created by Radius on the Kubernetes cluster under the `<namespace-name>-<app-name>` namespace
-2. All the resources provisioned by Recipes
+1. All the resources provisioned by Recipes
 
 ## Step 2: Delete any cloud/platform resources
 
