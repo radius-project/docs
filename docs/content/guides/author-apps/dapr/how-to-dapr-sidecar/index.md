@@ -21,9 +21,7 @@ This how-to guide will provide an overview of how to:
 
 ## Step 1: Define a container
 
-Begin by creating a file named `app.bicep` with a Radius [container]({{< ref "guides/author-apps/containers" >}}):
-
-{{< rad file="snippets/app.bicep" embed=true >}}
+Begin by creating a file named `app.bicep` with a Radius [container]({{< ref "guides/author-apps/containers" >}})
 
 ## Step 2: Define the Dapr sidecar extension
 
@@ -42,18 +40,37 @@ You'll need the following information `appId`, `appPort` and any additional `con
 1. Deploy and run your app:
 
    ```bash
-   rad run ./app.bicep -a demo
+   rad deploy ./app.bicep -a demo
    ```
+
+   Your console output should look similar to:
+
+   ```
+   Building ./app.bicep...
+   Deploying template './app.bicep' for application 'demo' and environment 'default' from workspace 'default'...
+
+   Deployment In Progress... 
+
+   ...                  backend         Applications.Core/containers
+
+   Deployment Complete
+
+   Resources:
+      backend         Applications.Core/containers
+   ```
+
+You've now deployed a Radius container with an extension connection to a Dapr sidecar!
 
 ## Cleanup
 
 Run the following command to [delete]({{< ref "guides/deploy-apps/howto-delete" >}}) your app and container:
    
    ```bash
-   rad app delete demo
+   rad app delete -a demo
    ```
 
 ## Further reading
 
+- [Radius Dapr tutorial]({{< ref "tutorials/tutorial-dapr" >}})
 - [Dapr in Radius containers]({{< ref "guides/author-apps/containers/overview#kubernetes" >}})
 - [Dapr sidecar schema]({{< ref "reference/resource-schema/dapr-schema/extension/" >}})

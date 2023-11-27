@@ -1,24 +1,26 @@
 import radius as radius
 
-@description('Specifies the environment for resources.')
-param environment string
+@description('The ID of your Radius Application. Automatically injected by the rad CLI.')
+param application string
 
-resource app 'Applications.Core/applications@2023-10-01-preview' = {
-  name: 'demo'
+// The backend container that runs the Dapr sidecar
+resource backend 'Applications.Core/containers@2023-10-01-preview' = {
+  name: 'backend'
   properties: {
-    environment: environment
-  }
-}
-
-resource demo 'Applications.Core/containers@2023-10-01-preview' = {
-  name: 'demo'
-  properties: {
-    application: app.id
-    container: {...}
+    application: application
+    container: {
+      // This image is where the app's backend code lives
+      image: 'ghcr.io/radius-project/samples/dapr-backend:latest'
+      ports: {
+        orders: {
+          containerPort: 3000
+        }
+      }
+    }
     extensions: [
       {
         kind: 'daprSidecar'
-        appId: 'demo'
+        appId: 'backend'
         appPort: 3000
       }
     ]
