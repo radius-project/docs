@@ -7,7 +7,7 @@ param environment string
 param bucket string = 'mybucket'
 
 @secure()
-param aws_access_key_id string 
+param aws_access_key_id string
 
 @secure()
 param aws_secret_access_key string

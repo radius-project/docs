@@ -16,8 +16,8 @@ This guide will show you how to add TLS and HTTPS to an application with a gatew
 - [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 - [Radius environment]({{< ref "installation#step-3-initialize-radius" >}})
 - Domain name + DNS A-record pointing to your Kubernetes cluster
-   - If running Radius on an Azure Kubernetes Service (AKS) cluster you can optionally use a [DNS label](https://learn.microsoft.com/azure/virtual-network/ip-services/public-ip-addresses#dns-name-label) to create a DNS A-record pointing to your cluster.
-   - If running Radius on an Elastic Kubernetes Service (EKS) cluster you can optionally leverage an [Application Load Balancer](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html) for a hosted DNS name and record.
+  - If running Radius on an Azure Kubernetes Service (AKS) cluster you can optionally use a [DNS label](https://learn.microsoft.com/azure/virtual-network/ip-services/public-ip-addresses#dns-name-label) to create a DNS A-record pointing to your cluster.
+  - If running Radius on an Elastic Kubernetes Service (EKS) cluster you can optionally leverage an [Application Load Balancer](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html) for a hosted DNS name and record.
 
 ## Step 1: Define a container
 
@@ -36,7 +36,6 @@ TLS certificates need to be referenced via a Radius [secret store]({{< ref "/gui
 {{< alert title="Managing certificates in Kubernetes" color="info" >}}
 [cert-manager](https://cert-manager.io/docs/) is a great way to manage certificates in Kubernetes and make them available as a Kubernetes secret. This example uses a Kubernetes secret that was setup by cert-manager
 {{< /alert >}}
-
 
 {{< rad file="snippets/app-existing.bicep" marker="//SECRETS" embed=true >}}
 
@@ -65,6 +64,7 @@ Now that your certificate data is ready add a gateway and reference the secret s
 ```sh
 rad deploy app.bicep -a tlsdemo
 ```
+
 {{% /codetab %}}
 
 {{% codetab %}}
@@ -72,6 +72,7 @@ rad deploy app.bicep -a tlsdemo
 ```sh
 rad deploy app.bicep -a tlsdemo -p tlscrt=<base64-encoded TLS certificate> -p tlskey=<base64-encoded TLS certificate private key>
 ```
+
 {{% /codetab %}}
 
 {{< /tabs >}}

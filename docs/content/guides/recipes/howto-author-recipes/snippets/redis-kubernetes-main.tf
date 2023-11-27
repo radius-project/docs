@@ -35,7 +35,7 @@ resource "kubernetes_deployment" "redis" {
       spec {
         container {
           name  = "redis"
-          image = "redis:6" 
+          image = "redis:6"
           port {
             container_port = 6379
           }

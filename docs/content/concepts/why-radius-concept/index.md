@@ -43,11 +43,11 @@ We hope that this holistic way of thinking about applications becomes the standa
 
 ## What we're not rethinking
 
-Many practices and technologies in cloud-native development are a success and don't need to be re-thought. 
+Many practices and technologies in cloud-native development are a success and don't need to be re-thought.
 
-- Radius makes is easy for application developers to adopt because it supports your existing containerized code, Dockerfiles, and Helm charts. 
+- Radius makes is easy for application developers to adopt because it supports your existing containerized code, Dockerfiles, and Helm charts.
 - We believe that [twelve-factor](https://12factor.net/) is still a great set of ideas and so any twelve-factor style application should be easy to use with Radius.
-- We like infrastructure-as-code as for its repeatability and use it for both Recipes and application descriptions. 
+- We like infrastructure-as-code as for its repeatability and use it for both Recipes and application descriptions.
 - There are plenty of great CI/CD systems, application delivery pipelines, and Gitops systems out there and Radius can work with any of them.
 
 ## Open-source from the start

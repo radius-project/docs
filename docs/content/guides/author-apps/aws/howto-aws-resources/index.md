@@ -13,25 +13,25 @@ This how-to guide will show you:
 - How to model an AWS S3 resource in Bicep
 - How to use a sample application to interact with AWS S3 bucket
 
-   {{< image src="s3appdiagram.png" alt="Screenshot of the sample application to interact with s3 bucket " width=400 >}}
+{{< image src="s3appdiagram.png" alt="Screenshot of the sample application to interact with s3 bucket " width=400 >}}
 
 ## Prerequisites
 
 - Make sure you have an [AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account) and an [IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html)
-    - [Create an IAM AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) and copy the AWS Access Key ID and the AWS Secret Access Key to a secure location for use later. If you have already created an Access Key pair, you can use that instead.
+  - [Create an IAM AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) and copy the AWS Access Key ID and the AWS Secret Access Key to a secure location for use later. If you have already created an Access Key pair, you can use that instead.
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-    - Configure your CLI with [`aws configure`](https://docs.aws.amazon.com/cli/latest/reference/configure/index.html), specifying your configuration values
+  - Configure your CLI with [`aws configure`](https://docs.aws.amazon.com/cli/latest/reference/configure/index.html), specifying your configuration values
 - [eksctl CLI](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
-- [kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 
+- [kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-radius-bicep-extension" >}})
 
 ## Step 1: Create an EKS Cluster
 
-Create an EKS cluster by using the `eksctl` CLI. 
+Create an EKS cluster by using the `eksctl` CLI.
 
 ```bash
-eksctl create cluster --name <my-cluster> --region=<my-region> 
+eksctl create cluster --name <my-cluster> --region=<my-region>
 ```
 
 ## Step 2: Create a Radius Environment with the AWS cloud provider
@@ -79,9 +79,10 @@ This creates a container that will be deployed to your Kubernetes cluster. This 
    ```bash
    rad deploy ./app.bicep -p aws_access_key_id=<AWS_ACCESS_KEY_ID> -p aws_secret_access_key=<AWS_SECRET_ACCESS_KEY>
    ```
+
    > Replace `<AWS_ACCESS_KEY_ID>` and `<AWS_SECRET_ACCESS_KEY>` with the values obtained from the previous step.
 
-   {{% alert title="Warning" color="warning" %}}It is always recommended to have separate IAM credentials for your container to communicate with S3 or any other data store. 
+   {{% alert title="Warning" color="warning" %}}It is always recommended to have separate IAM credentials for your container to communicate with S3 or any other data store.
    Radius is currently working on supporting direct connections to AWS resources so that your container can automatically communicate with the data store securely without having to manage separate credentials for data plane operations{{% /alert %}}
 
 1. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose >}}):
@@ -111,6 +112,7 @@ If you hit errors while deploying the application, please follow the steps below
      ```bash
      rad debug-logs
      ```
+
     Inspect the UCP logs to see if there are any errors  
 
 If you have issues with the sample application, where the container doesn't connect with the S3 bucket, please follow the steps below to troubleshoot:
@@ -120,6 +122,7 @@ If you have issues with the sample application, where the container doesn't conn
     ```bash
     rad resource logs containers frontend -a s3app
     ```
+
 Also make sure to [open an Issue](https://github.com/radius-project/radius/issues/new/choose) if you encounter a generic `Internal server error` message or an error message that is not self-serviceable, so we can address the root error not being forwarded to the user.
 
 ## Further Reading

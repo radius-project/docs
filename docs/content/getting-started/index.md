@@ -46,7 +46,7 @@ mkdir first-app
 cd first-app
 ```
 
-Initialize Radius. For this example, accept all the default options (press ENTER to confirm): 
+Initialize Radius. For this example, accept all the default options (press ENTER to confirm):
 
 ```bash
 rad init
@@ -55,21 +55,21 @@ rad init
 Example output:
 
 ```
-Initializing Radius...                     
+Initializing Radius...
 
-✅ Install Radius {{< param version >}}               
-    - Kubernetes cluster: k3d-k3s-default   
-    - Kubernetes namespace: radius-system   
-✅ Create new environment default          
-    - Kubernetes namespace: default 
-    - Recipe pack: local-dev        
-✅ Scaffold application docs            
-✅ Update local configuration              
+✅ Install Radius {{< param version >}}
+    - Kubernetes cluster: k3d-k3s-default
+    - Kubernetes namespace: radius-system
+✅ Create new environment default
+    - Kubernetes namespace: default
+    - Recipe pack: local-dev
+✅ Scaffold application docs
+✅ Update local configuration
 
 Initialization complete! Have a RAD time 😎
 ```
 
-In addition to starting Radius services in your Kubernetes cluster, this initialization command creates a default application (`app.bicep`) as your starting point. It contains a single container definition (`demo`). 
+In addition to starting Radius services in your Kubernetes cluster, this initialization command creates a default application (`app.bicep`) as your starting point. It contains a single container definition (`demo`).
 
 {{< rad file="snippets/app.bicep" embed=true markdownConfig="{linenos=table,linenostart=1}" >}}
 
@@ -175,7 +175,7 @@ Resources:
 
 ## Recap and next steps
 
-It's easy to build on the default app and add more resources to the app. 
+It's easy to build on the default app and add more resources to the app.
 
 To delete your app, see [rad app delete]({{< ref rad_application_delete >}}).
 
