@@ -56,6 +56,33 @@ When running `rad env show`, the `lastmodifiedat` and `createdat` fields display
 
 This will be addressed in an upcoming release.
 
+## Recipes
+
+### Kubernetes Bicep resources require manual UCP ID output
+
+The Bicep deployment engine currently does not output Kubernetes resource (UCP) IDs upon completion, meaning Recipes cannot automatically link a Recipe-enabled resource to the underlying infrastructure. This also means Kubernetes resources are not automatically cleaned up when a Recipe-enabled resource is deleted.
+
+To fix this, you can manually build and output UCP IDs, which will cause the infrastructure to be linked to the resource:
+
+```bicep
+import kubernetes as k8s {
+  kubeConfig: ''
+  namespace: 'default'
+}
+
+resource deployment 'apps/Deployment@v1' = {...}
+
+resource service 'core/Service@v1' = {...}
+
+output values object = {
+  resources: [
+    // Manually build UCP IDs (/planes/<PLANE>/local/namespaces/<NAMESPACE>/providers/<GROUP>/<TYPE>/<NAME>)
+    '/planes/kubernetes/local/namespaces/${deployment.metadata.namespace}/providers/apps/Deployment/${deployment.metadata.name}'
+    '/planes/kubernetes/local/namespaces/${service.metadata.namespace}/providers/core/Service/${service.metadata.name}'
+  ]
+}
+```
+
 ## Bicep & Deployment Engine
 
 ### Currently using a forked version of Bicep

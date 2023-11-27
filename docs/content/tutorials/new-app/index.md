@@ -252,13 +252,13 @@ In addition to containers, you can add dependencies like Redis caches, Dapr Stat
     
     Resources:
         myapp           Applications.Core/applications
-        frontend        Applications.Core/containers
+        demo            Applications.Core/containers
         mongodb         Applications.Datastores/mongoDatabases
     
     Starting log stream...
     ```
 
-1. Open [localhost:3000](http://localhost:3000) to interact with the frontend container. You should see the container's connections and metadata, this time with a connection to the Mongo database and new environment variables set:
+1. Open [localhost:3000](http://localhost:3000) to interact with the demo container. You should see the container's connections and metadata, this time with a connection to the Mongo database and new environment variables set:
 
     {{< image src="demo-landing-connection.png" alt="Screenshot of the Radius demo container" width=500px >}}
 
@@ -275,20 +275,20 @@ In addition to containers, you can add dependencies like Redis caches, Dapr Stat
     ```
     Displaying application: myapp
     
-    Name: frontend (Applications.Core/containers)
+    Name: demo (Applications.Core/containers)
     Connections:
-      frontend -> mongodb (Applications.Datastores/mongoDatabases)
+      demo -> mongodb (Applications.Datastores/mongoDatabases)
     Resources:
-      frontend (kubernetes: apps/Deployment)
-      frontend (kubernetes: core/Secret)
-      frontend (kubernetes: core/Service)
-      frontend (kubernetes: core/ServiceAccount)
-      frontend (kubernetes: rbac.authorization.k8s.io/Role)
-      frontend (kubernetes: rbac.authorization.k8s.io/RoleBinding)
+      demo (kubernetes: apps/Deployment)
+      demo (kubernetes: core/Secret)
+      demo (kubernetes: core/Service)
+      demo (kubernetes: core/ServiceAccount)
+      demo (kubernetes: rbac.authorization.k8s.io/Role)
+      demo (kubernetes: rbac.authorization.k8s.io/RoleBinding)
     
     Name: mongodb (Applications.Datastores/mongoDatabases)
     Connections:
-      frontend (Applications.Core/containers) -> mongodb
+      demo (Applications.Core/containers) -> mongodb
     Resources:
       mongo-bzmp2btdgzez6 (kubernetes: apps/Deployment)
       mongo-bzmp2btdgzez6 (kubernetes: core/Service)
@@ -302,7 +302,7 @@ In addition to dependencies, you can add more containers to make your applicatio
 
    {{% rad file="snippets/3-app-backend.bicep" embed=true marker="//BACKEND" %}}
 
-1. Add a new connection from your `frontend` container to the `backend` container:
+1. Add a new connection from your `demo` container to the `backend` container:
 
    {{% rad file="snippets/3-app-backend.bicep" embed=true marker="//CONTAINER" markdownConfig="{hl_lines=[\"20-22\"]}" %}}
 
@@ -322,14 +322,14 @@ In addition to dependencies, you can add more containers to make your applicatio
     Deployment Complete
     
     Resources:
-        frontend        Applications.Core/containers
+        demo            Applications.Core/containers
         backend         Applications.Core/containers
         mongodb         Applications.Datastores/mongoDatabases
     
     Starting log stream...
     ```
 
-1. Open [localhost:3000](http://localhost:3000) to interact with the frontend container. You should see the container's connections and metadata, this time with a connection to the backend container and new environment variables set:
+1. Open [localhost:3000](http://localhost:3000) to interact with the demo container. You should see the container's connections and metadata, this time with a connection to the backend container and new environment variables set:
 
    {{< image src="demo-landing-backend.png" alt="Screenshot of the demo container with a connection to the backend container" width=600px >}}
 
@@ -359,7 +359,7 @@ Finally, you can add a gateway to your application. Gateways are used to expose 
     Deployment Complete
     
     Resources:
-        frontend        Applications.Core/containers
+        demo            Applications.Core/containers
         backend         Applications.Core/containers
         gateway         Applications.Core/gateways
         mongodb         Applications.Datastores/mongoDatabases
