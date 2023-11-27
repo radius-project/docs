@@ -8,8 +8,8 @@ param application string
 param environment string
 
 //CONTAINER
-resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
-  name: 'frontend'
+resource demo 'Applications.Core/containers@2023-10-01-preview' = {
+  name: 'demo'
   properties: {
     application: application
     container: {
@@ -28,7 +28,7 @@ resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
         source: mongodb.id
       }
       backend: {
-        source: 'http://backend:3000'
+        source: 'http://backend:80'
       }
     }
   }
