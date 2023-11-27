@@ -40,7 +40,7 @@ Radius Environments can be setup with the rad CLI via two paths: interactive or 
    ⏳ Update local configuration                                                 
    ```                                             
 
-2. Verify the initialization by running:
+1. Verify the initialization by running:
    ```bash
    kubectl get deployments -n radius-system
    ```
@@ -60,7 +60,7 @@ Radius Environments can be setup with the rad CLI via two paths: interactive or 
    ```bash
    rad env list
    ```
-3. Use `rad recipe list` to see the list of available Recipes:
+1. Use `rad recipe list` to see the list of available Recipes:
    ```bash
    rad recipe list
    ```

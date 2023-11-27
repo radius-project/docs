@@ -84,7 +84,7 @@ Yes. Radius has first-class support for [Dapr building blocks]({{< ref "/guides/
 Radius leverages Kubernetes in two ways:
 
 1. As a hosting platform for the Radius control-plane
-2. As a runtime for containerized workloads
+1. As a runtime for containerized workloads
 
 While Radius only supports Kubernetes today, it is architected to support other hosting platforms in the future, including serverless platforms. Radius is not a Kubernetes controller and the primary user experience is not through CRDs. Instead, Radius Applications are an abstraction layer on top of Kubernetes and other cloud platforms.
 

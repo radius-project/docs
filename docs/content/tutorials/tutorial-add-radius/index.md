@@ -40,7 +40,7 @@ The Guestbook application consists of a web front end along with primary and sec
    git clone https://github.com/radius-project/samples.git
    ```
 
-2. Navigate to the `samples/kubernetes/guestbook` directory:
+1. Navigate to the `samples/kubernetes/guestbook` directory:
 
    ```bash
    cd samples/kubernetes/guestbook
@@ -48,7 +48,7 @@ The Guestbook application consists of a web front end along with primary and sec
 
    > The `kubernetes/guestbook` directory contains the Kubernetes YAML manifest files for their Guestbook sample application, copied directly from the [Kubernetes examples repo](https://github.com/kubernetes/examples/tree/master/guestbook).
 
-3. Initialize Radius
+1. Initialize Radius
    
    Run this command to initialize Radius. For this example, answer **NO** when asked whether to set up an application: 
 
@@ -78,13 +78,13 @@ Step 2: Deploy and test the existing Guestbook application using `kubectl`
    kubectl create namespace demo
    ```
 
-2. Create and deploy the Guestbook application to the `demo` namespace:
+1. Create and deploy the Guestbook application to the `demo` namespace:
 
    ```bash
    kubectl apply -n demo -f ./deploy
    ```
 
-3. Verify that the application successfully deployed:
+1. Verify that the application successfully deployed:
 
    ```bash
    kubectl get all -n demo
@@ -117,7 +117,7 @@ Step 2: Deploy and test the existing Guestbook application using `kubectl`
    replicaset.apps/frontend-77dfc58d7c        3         3         3       10s
    ```
 
-4. Validate that the application is running as expected:
+1. Validate that the application is running as expected:
 
    Run this command to port forward the Guestbook application to port `8080` on your local machine:
 
@@ -131,7 +131,7 @@ Step 2: Deploy and test the existing Guestbook application using `kubectl`
 
    Terminate the port forwarding process by pressing `CTRL+C` in your terminal.
 
-5. Confirm that Radius has not yet been added:
+1. Confirm that Radius has not yet been added:
 
    Run this command to view the state of your application using Radius:
 
@@ -209,7 +209,7 @@ You will now add Radius to the Guestbook application's Kubernetes deployment man
          - containerPort: 80
    ```
 
-2. Save your changes to the YAML files.
+1. Save your changes to the YAML files.
 
 ## Step 4: Deploy and test the updated Guestbook application using `kubectl`
 
@@ -219,7 +219,7 @@ You will now add Radius to the Guestbook application's Kubernetes deployment man
    kubectl apply -n demo -f ./deploy
    ```
 
-2. Verify that the application successfully deployed:
+1. Verify that the application successfully deployed:
 
    ```bash
    kubectl get deployments -n demo; 
@@ -239,7 +239,7 @@ You will now add Radius to the Guestbook application's Kubernetes deployment man
    redis-replica   ClusterIP   10.43.118.183   <none>        6379/TCP       10m
    ```
 
-3. Validate that the application is running as expected:
+1. Validate that the application is running as expected:
 
    Once again, run this command to port forward the Guestbook application to port `8080` on your local machine:
 
@@ -303,7 +303,7 @@ This output shows that Radius has detected the three container resources in the 
    service "redis-replica" deleted
    ```
 
-2. Run the following command to delete the `demo` namespace:
+1. Run the following command to delete the `demo` namespace:
 
    ```bash
    kubectl delete namespace demo

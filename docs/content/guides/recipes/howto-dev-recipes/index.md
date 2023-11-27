@@ -24,7 +24,7 @@ Local development environments created by the rad init command include a set of 
    mkdir recipes
    cd recipes
    ```
-2. Initialize a new dev environment:
+1. Initialize a new dev environment:
 
    ```bash
    rad init
@@ -32,7 +32,7 @@ Local development environments created by the rad init command include a set of 
 
    **Select 'No' when prompted to create an application.**
 
-3. Use [`rad recipe list`]({{< ref rad_recipe_list >}}) to view the Recipes in your environment:
+1. Use [`rad recipe list`]({{< ref rad_recipe_list >}}) to view the Recipes in your environment:
 
    ```bash
    rad recipe list 

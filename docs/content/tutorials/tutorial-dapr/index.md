@@ -33,7 +33,7 @@ For more details on the app and access to the source code, visit the `tutorials/
    cd dapr
    ```
    
-2. Initialize a new dev environment:
+1. Initialize a new dev environment:
    
    *Select 'Yes' when prompted to create an application.*
 

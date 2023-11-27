@@ -56,7 +56,7 @@ Begin by creating a file named `app.bicep` with a Radius [container]({{< ref "gu
 
    <br> When you're ready to move on to the next step, use `CTRL` + `C` to exit the command.
 
-2. Run the command below, which will list the pods in your Kubernetes cluster, using the `-o` flag to specify the relevant information to output:
+1. Run the command below, which will list the pods in your Kubernetes cluster, using the `-o` flag to specify the relevant information to output:
 
 
    ```bash
@@ -106,7 +106,7 @@ Add the following [`runtimes`]({{< ref "reference/resource-schema/core-schema/co
 
    <br> When you're ready to move on to the next step, use `CTRL` + `C` to exit the command.
 
-2. Run the command below, which will list the pods in your Kubernetes cluster, using the `-o` flag to specify the relevant information to output:
+1. Run the command below, which will list the pods in your Kubernetes cluster, using the `-o` flag to specify the relevant information to output:
 
    ```bash
    kubectl get pods -A -l app.kubernetes.io/name=demo -o custom-columns=POD:.metadata.name,STATUS:.status.phase,CONTAINER_NAMES:spec.containers[:].name,CONTAINER_IMAGES:spec.containers[:].image

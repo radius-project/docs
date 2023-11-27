@@ -108,7 +108,7 @@ rad init
 
     {{< alert title="💡 Redis" color="info" >}} For now you're not going to actually deploy Redis and the URL in this step is fake. You will deploy Redis using a Recipe later in the tutorial that will replace the fake URL contained within `redis-secret` with an actual container and URL.{{< /alert >}}
 
-2. Complete these steps by running the following commands:
+1. Complete these steps by running the following commands:
 
     ```bash
     kubectl create namespace demo
@@ -137,7 +137,7 @@ rad init
 
     {{< alert title="⚠️ Chart Directory" color="warning" >}} If you see an error message like **Error: path "./Chart" not found** then you are in the wrong directory. Make sure your terminal is in the `./demo` directory of the `samples` repository.{{< /alert >}}
 
-3. Run the following command to check if everything is running:
+1. Run the following command to check if everything is running:
 
     ```bash
     kubectl get all -n demo
@@ -198,7 +198,7 @@ From here you will go through a series of steps to incrementally add more Radius
 
     Adding the `radapp.io/enabled: 'true'` annotation enables Radius for the deployment.
 
-2. Save the file after you have made the edits and deploy the application again using Helm. Since the namespace and secret have already been created, we only need to run the `helm` command.
+1. Save the file after you have made the edits and deploy the application again using Helm. Since the namespace and secret have already been created, we only need to run the `helm` command.
 
     ```bash
     helm upgrade demo ./Chart -n demo --install
@@ -219,7 +219,7 @@ From here you will go through a series of steps to incrementally add more Radius
 
     You should confirm that your output contains `REVISION: 2`, that means that the changes were applied.
 
-3. Run the following command to confirm that everything is running:
+1. Run the following command to confirm that everything is running:
 
     ```bash
     kubectl get all -n demo
@@ -241,7 +241,7 @@ From here you will go through a series of steps to incrementally add more Radius
 
     Notice that the `AGE` of `pod/webapp-...` reflects the time of your **first** deployment. Enabling Radius for an application does not change any of its behaviors, so Kubernetes did not need to restart the container.
 
-4. Now that Radius has been enabled, run this command to display the state of the Radius application:
+1. Now that Radius has been enabled, run this command to display the state of the Radius application:
 
     ```bash
     rad app graph -a demo -g default-demo
@@ -301,7 +301,7 @@ In this step you will:
     In a production environment you can substitute recipes that will create cloud or on-premises dependencies instead.
     {{< /alert >}}
 
-2. Make sure the `app.yaml` file from `./demo/Chart/templates/app.yaml` is open in your editor. At the bottom of the file add the following text, including the `---`:
+1. Make sure the `app.yaml` file from `./demo/Chart/templates/app.yaml` is open in your editor. At the bottom of the file add the following text, including the `---`:
 
     ```yaml
     ---
@@ -320,7 +320,7 @@ In this step you will:
     - The `.spec.type` field defines the type of resource to create. `Applications.Datastores/redisCaches` is the type for a Redis Cache.
     - The `.spec.secretName` field tells Radius where to store connection information. This is optional, and should be used to interoperate with other Kubernetes technologies that read from secrets. This tutorial example uses the secret to populate an environment variable.
 
-3. Save the file after you have made the edits and deploy the application again using Helm. Since the namespace and secret have already been created, you only need to run the `helm` command.
+1. Save the file after you have made the edits and deploy the application again using Helm. Since the namespace and secret have already been created, you only need to run the `helm` command.
 
     ```bash
     helm upgrade demo ./Chart -n demo --install
@@ -341,7 +341,7 @@ In this step you will:
 
     This time you should see `REVISION: 3`.
 
-4. Now that you are using a Recipe, you should see more resources running in Kubernetes. Run the following command:
+1. Now that you are using a Recipe, you should see more resources running in Kubernetes. Run the following command:
 
     ```bash
     kubectl get all -n demo
@@ -374,7 +374,7 @@ In this step you will:
 
     {{< alert title="⚠️ Missing resources" color="warning" >}} If you do not see the additional resources starting with `redis-` then it's likely they are in a different Kubernetes namespace. Run `kubectl get all -A` to see everything.{{< /alert >}}
 
-5. Now that you have added a Recipe, run this command to display the state of the Radius application:
+1. Now that you have added a Recipe, run this command to display the state of the Radius application:
 
     ```bash
     rad app graph -a demo -g default-demo
@@ -406,7 +406,7 @@ In this step you will:
 
     The Redis Cache created by the recipe is visible as part of the application. You can also see the `Resources` created in Kubernetes that make up the Redis Cache. In a previous step you saw these listed by `kubectl`. Since Radius deployed the Recipe, it knows that these resources *logically* are part of the Redis Cache in the application.
 
-6. You can also see the contents of `redis-secret` as created by Radius. Run the following command:
+1. You can also see the contents of `redis-secret` as created by Radius. Run the following command:
 
     ```bash
     kubectl get secret -n demo redis-secret -o yaml
@@ -476,7 +476,7 @@ Make sure the `app.yaml` file from `./demo/Chart/templates/app.yaml` is open in 
 
     Since you're using a connection called `redis`, Radius will automatically define the `CONNECTION_REDIS_URL` environment variable. The prefix of `CONNECTION_REDIS_` will be combined with each of the settings that you could see in the `redis-secret` secret in the previous step.
 
-2. You can remove the manual definition of `CONNECTION_REDIS_URL` from `app.yaml` since Radius will provide it automatically. Find the `env` property and delete all of its contents. You can also remove `.spec.secretName` from the `Recipe`.
+1. You can remove the manual definition of `CONNECTION_REDIS_URL` from `app.yaml` since Radius will provide it automatically. Find the `env` property and delete all of its contents. You can also remove `.spec.secretName` from the `Recipe`.
 
     The final contents of `app.yaml` should look like:
 
@@ -513,7 +513,7 @@ Make sure the `app.yaml` file from `./demo/Chart/templates/app.yaml` is open in 
       type: Applications.Datastores/redisCaches
     ```
 
-3. Save the file after you have made the edits and deploy the application again using Helm.
+1. Save the file after you have made the edits and deploy the application again using Helm.
 
     ```bash
     helm upgrade demo ./Chart -n demo --install
@@ -567,7 +567,7 @@ Make sure the `app.yaml` file from `./demo/Chart/templates/app.yaml` is open in 
 
     Depending on the timing you may see pods in the `Terminating` state. This is normal as old replicas take some time to shut down.
 
-4. Check the Radius status again. Now Radius is aware of the connection from `webapp->db`:
+1. Check the Radius status again. Now Radius is aware of the connection from `webapp->db`:
 
     ```bash
     rad app graph -a demo -g default-demo
@@ -614,7 +614,7 @@ In this step you can access the application and explore its features. Since the 
 
     You can use the homepage to view information about the container and its settings.
 
-2. Navigate to the ToDo List tab and test out the application. Using the ToDo page will update the saved state in Redis.
+1. Navigate to the ToDo List tab and test out the application. Using the ToDo page will update the saved state in Redis.
 
     <img src="./demo-with-todolist.png" alt="Screenshot of the todolist" width=500>
     <br /><br />
