@@ -35,5 +35,4 @@ Manage Radius Applications
 * [rad application list]({{< ref rad_application_list.md >}})	 - List Radius Applications
 * [rad application show]({{< ref rad_application_show.md >}})	 - Show Radius Application details
 * [rad application status]({{< ref rad_application_status.md >}})	 - Show Radius Application status
-* [rad application switch]({{< ref rad_application_switch.md >}})	 - Switch the default Radius Application
 

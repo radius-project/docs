@@ -30,11 +30,11 @@ description: "Detailed reference documentation for applications.core/httproutes@
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **application** | string | Fully qualified resource ID for the application that the portable resource is consumed by <br />_(required)_ |
-| **environment** | string | Fully qualified resource ID for the environment that the portable resource is linked to (if applicable) |
+| **application** | string | Fully qualified resource ID for the application <br />_(required)_ |
+| **environment** | string | Fully qualified resource ID for the environment that the application is linked to |
 | **hostname** | string | The internal hostname accepting traffic for the HTTP Route. Readonly. |
 | **port** | int | The port number for the HTTP Route. Defaults to 80. Readonly. |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the portable resource at the time the operation was called <br />_(read-only)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(read-only)_ |
 | **scheme** | string | The scheme used for traffic. Readonly. <br />_(read-only)_ |
 | **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(read-only)_ |
 | **url** | string | A stable URL that that can be used to route traffic to a resource. Readonly. <br />_(read-only)_ |

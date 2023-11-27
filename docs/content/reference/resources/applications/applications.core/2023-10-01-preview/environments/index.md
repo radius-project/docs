@@ -33,7 +33,7 @@ description: "Detailed reference documentation for applications.core/environment
 | **compute** | [EnvironmentCompute](#environmentcompute) | Represents backing compute resource <br />_(required)_ |
 | **extensions** | [Extension](#extension)[] | The environment extension. |
 | **providers** | [Providers](#providers) | The Cloud providers configuration |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the portable resource at the time the operation was called <br />_(read-only)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(read-only)_ |
 | **recipes** | [EnvironmentPropertiesRecipes](#environmentpropertiesrecipes) | Specifies Recipes linked to the Environment. |
 | **simulated** | bool | Simulated environment. |
 
@@ -200,6 +200,7 @@ description: "Detailed reference documentation for applications.core/environment
 
 | Property | Type | Description |
 |----------|------|-------------|
+| **plainHTTP** | bool | Connect to the Bicep registry using HTTP (not-HTTPS). This should be used when the registry is known not to support HTTPS, for example in a locally-hosted registry. Defaults to false (use HTTPS/TLS). |
 | **templateKind** | 'bicep' | Discriminator property for RecipeProperties. <br />_(required)_ |
 
 #### TerraformRecipeProperties
