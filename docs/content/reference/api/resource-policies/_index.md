@@ -59,7 +59,6 @@ Each resource type controller decides whether it will retry to process the opera
 | Applications.Dapr/stateStores | LIST/GET/PUT/PATCH/DELETE | Synchronous | default | |
 | Applications.Dapr/stateStores | POST ListSecret | Synchronous | default | |
 
-
 #### Applications.Datastores resource providers
 
 | Resource Type  | Operation | API Type | Server Timeout (Seconds) | Async Operation retry condition|
