@@ -6,7 +6,7 @@ description: "Learn how to use extenders in an application"
 weight: 300
 ---
 
-This guide will walk you though how to use extenders in an application to model any resource.
+This guide will walk you through how to use extenders in an application to model any resource.
 
 ## Prerequisites
 
@@ -36,7 +36,7 @@ Add a container to your `app.bicep` file, accessing the extender's properties an
 
 ## Step 4: Deploy the app
 
-Run `app.bicep` with [`rad run`]({{< ref rad_run >}}):
+Deploy and [run]({{< ref rad_run >}}) the app using the following command:
 
 ```bash
 rad run app.bicep -a demo

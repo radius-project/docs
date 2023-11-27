@@ -6,7 +6,7 @@ description: "Learn how to model and deploy your own resource types in Radius"
 weight: 100
 ---
 
-When the types built into Radius aren't enough, you can model and deploy your own resource types. Currently, Radius supports an untyped "extender" resource which allows you to pass in any property or secret.
+When you have a need for types beyond those currently built into Radius, you can model and deploy your own resource types. Currently, Radius supports an untyped "extender" resource which allows you to pass in any property or secret.
 
 ## Extenders
 
