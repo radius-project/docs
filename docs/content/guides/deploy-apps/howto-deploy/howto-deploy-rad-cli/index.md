@@ -8,7 +8,8 @@ categories: "How-To"
 tags: ["deployments"]
 ---
 
-## Pre-requisites 
+## Pre-requisites
+
 - [An authored Radius Application]({{< ref author-apps >}})
 
 ## Step 1 : Deploy an application into a Radius Environment
@@ -21,6 +22,7 @@ An application can be deployed to an environment with [`rad deploy`]({{< ref rad
 ```bash
  rad deploy app.bicep
  ```
+
  This will deploy the application to the created Radius Environment.
  {{% /codetab %}}
 
@@ -39,4 +41,3 @@ Parameters can be included as part of `rad deploy` via the `-p/--parameters` fla
  {{< /tabs >}}
 
  > Follow the [how-to guide]({{< ref howto-troubleshootapps >}}) for guidance on troubleshooting your Radius Application
-

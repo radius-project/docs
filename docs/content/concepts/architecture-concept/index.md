@@ -43,7 +43,7 @@ The service that performs this central functionality in Radius is called the Uni
 
 UCP contains functionality for federating with separate resource managers as well as its resource providers. For example UCP can route requests to Azure or AWS to manage resources on those cloud systems. 
 
-UCP is a scalable REST API that can function either with a single global shard or using regional sharing. UCP is based on the design principles of the Azure Resource Manager (ARM) control-plane but generalizes to work across multiple clouds and systems. The UCP codebase is fully open-source and was created from scratch as part of the Radius project. UCP is written in Go.
+UCP is a scalable REST API that can function either with a single global shard or using regional sharding. UCP is based on the design principles of the Azure Resource Manager (ARM) control-plane but generalizes to work across multiple clouds and systems. The UCP codebase is fully open-source and was created from scratch as part of the Radius project. UCP is written in Go.
 
 UCP provides routing and federation with internal and external services:
 
@@ -130,9 +130,9 @@ This section describes example tasks that can be performed with Radius and how t
 When listing applications using the `rad` CLI:
 
 1. The client sends an HTTP request to the Radius API requesting the list of applications.
-2. UCP receives the request for the `Applications.Core/applications` List operation and looks up the internal address for the `Applications.Core` resource provider.
-3. UCP proxies the HTTP request to the `Applications.Core` resource provider.
-4. The `Applications.Core` resource provider handles the request and responds with the list of applications.
+1. UCP receives the request for the `Applications.Core/applications` List operation and looks up the internal address for the `Applications.Core` resource provider.
+1. UCP proxies the HTTP request to the `Applications.Core` resource provider.
+1. The `Applications.Core` resource provider handles the request and responds with the list of applications.
 
 {{< image src="flow-list-apps.png" alt="Diagram of the API flow described above" width="1000px" >}}
 
@@ -142,9 +142,9 @@ When listing applications using the `rad` CLI:
 When using Bicep to author and deploy Radius Applications:
 
 1. The client compiles the Bicep file to an ARM-JSON template and submits a request for processing as a `Bicep.Deployments/deployments` resource.
-2. UCP receives the request for the `Bicep.Deployments/deployments` Create operation and looks up the internal address for the `Bicep.Deployments` resource provider.
-3. UCP proxies the HTTP request to the `Bicep.Deployments` resource provider.
-4. The `Bicep.Deployments` resource provider processes the ARM-JSON template. For each resource in the template:
+1. UCP receives the request for the `Bicep.Deployments/deployments` Create operation and looks up the internal address for the `Bicep.Deployments` resource provider.
+1. UCP proxies the HTTP request to the `Bicep.Deployments` resource provider.
+1. The `Bicep.Deployments` resource provider processes the ARM-JSON template. For each resource in the template:
   a. The `Bicep.Deployments` resource provider makes a request to UCP to Create/Update the resource.
   b. UCP routes the request to the appropriate resource provider to be handled.
 

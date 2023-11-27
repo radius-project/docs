@@ -7,10 +7,10 @@ This directory contains the files to generate the https://docs.radapp.io site. P
 The easiest way to get up and runnning with a docs environment is a GitHub codespace.
 
 1. Open codespace
-2. Ensure postCreate script has completed (takes ~2 minutes)
-3. Run `cd docs` to change into the docs directory
-4. Run `npm run start` to run a docs server
-5. Click the `localhost:1313` link in your terminal to open the Codespace tunnel to the page
+1. Ensure postCreate script has completed (takes ~2 minutes)
+1. Run `cd docs` to change into the docs directory
+1. Run `npm run start` to run a docs server
+1. Click the `localhost:1313` link in your terminal to open the Codespace tunnel to the page
 
 ## Local machine
 
