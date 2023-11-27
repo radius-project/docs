@@ -73,4 +73,4 @@ Run the following command to [delete]({{< ref "guides/deploy-apps/howto-delete" 
 
 - [Radius Dapr tutorial]({{< ref "tutorials/tutorial-dapr" >}})
 - [Dapr in Radius containers]({{< ref "guides/author-apps/containers/overview#kubernetes" >}})
-- [Dapr sidecar schema]({{< ref "reference/resource-schema/dapr-schema/extension/" >}})
+- [Dapr sidecar schema]({{< ref "reference/resource-schema/dapr-schema/dapr-extension" >}})
