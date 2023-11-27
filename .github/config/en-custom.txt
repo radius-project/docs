@@ -1077,3 +1077,4 @@ InfoWorld
 reimagines
 TechCrunch
 ZDNET
+Newstrail
