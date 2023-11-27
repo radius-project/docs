@@ -47,4 +47,5 @@ rad app list --group my-group
 
 ### SEE ALSO
 
-* [rad application]({{< ref rad_application.md >}}) - Manage Radius Applications
+* [rad application]({{< ref rad_application.md >}})	 - Manage Radius Applications
+

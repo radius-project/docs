@@ -12,9 +12,9 @@ Delete a resource group
 
 ### Synopsis
 
-Delete a resource group.
-
-  Delete a resource group if it is empty. If not empty, delete the contents and try again
+Delete a resource group. 
+		
+		Delete a resource group if it is empty. If not empty, delete the contents and try again
 
 ```
 rad group delete resourcegroupname [flags]
@@ -44,4 +44,5 @@ rad group delete rgprod
 
 ### SEE ALSO
 
-* [rad group]({{< ref rad_group.md >}}) - Manage resource groups
+* [rad group]({{< ref rad_group.md >}})	 - Manage resource groups
+

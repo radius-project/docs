@@ -32,10 +32,11 @@ Radius Environments are prepared “landing zones” for Radius Applications. Ap
 
 ### SEE ALSO
 
-* [rad]({{< ref rad.md >}}) - Radius CLI
-* [rad env create]({{< ref rad_env_create.md >}}) - Create a new Radius Environment
-* [rad env delete]({{< ref rad_env_delete.md >}}) - Delete environment
-* [rad env list]({{< ref rad_env_list.md >}}) - List environments
-* [rad env show]({{< ref rad_env_show.md >}}) - Show environment details
-* [rad env switch]({{< ref rad_env_switch.md >}}) - Switch the current environment
-* [rad env update]({{< ref rad_env_update.md >}}) - Update environment configuration
+* [rad]({{< ref rad.md >}})	 - Radius CLI
+* [rad env create]({{< ref rad_env_create.md >}})	 - Create a new Radius Environment
+* [rad env delete]({{< ref rad_env_delete.md >}})	 - Delete environment
+* [rad env list]({{< ref rad_env_list.md >}})	 - List environments
+* [rad env show]({{< ref rad_env_show.md >}})	 - Show environment details
+* [rad env switch]({{< ref rad_env_switch.md >}})	 - Switch the current environment
+* [rad env update]({{< ref rad_env_update.md >}})	 - Update environment configuration
+

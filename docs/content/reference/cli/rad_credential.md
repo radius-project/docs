@@ -24,6 +24,7 @@ or credentials will affect all Radius Environments and applications of the affec
 ### Examples
 
 ```
+
 # List configured cloud providers credential
 rad credential list
 
@@ -41,6 +42,7 @@ rad credential show aws
 rad credential unregister azure
 # Delete AWS cloud provider configuration
 rad credential unregister aws
+
 ```
 
 ### Options
@@ -58,8 +60,9 @@ rad credential unregister aws
 
 ### SEE ALSO
 
-* [rad]({{< ref rad.md >}}) - Radius CLI
-* [rad credential list]({{< ref rad_credential_list.md >}}) - List configured cloud provider credentials
-* [rad credential register]({{< ref rad_credential_register.md >}}) - Register(Add or update) cloud provider credential for a Radius installation.
-* [rad credential show]({{< ref rad_credential_show.md >}}) - Show details of a configured cloud provider credential
-* [rad credential unregister]({{< ref rad_credential_unregister.md >}}) - Unregisters a configured cloud provider credential from the Radius installation
+* [rad]({{< ref rad.md >}})	 - Radius CLI
+* [rad credential list]({{< ref rad_credential_list.md >}})	 - List configured cloud provider credentials
+* [rad credential register]({{< ref rad_credential_register.md >}})	 - Register(Add or update) cloud provider credential for a Radius installation.
+* [rad credential show]({{< ref rad_credential_show.md >}})	 - Show details of a configured cloud provider credential
+* [rad credential unregister]({{< ref rad_credential_unregister.md >}})	 - Unregisters a configured cloud provider credential from the Radius installation
+

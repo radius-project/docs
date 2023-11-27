@@ -30,7 +30,8 @@ Deploy a Bicep or ARM template
 		https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/parameter-files
 	
 	You can specify parameters using multiple sources. Parameters can be overridden based on the 
-	order the are provided. Parameters appearing later in the argument list will override those defined earlier.	
+	order the are provided. Parameters appearing later in the argument list will override those defined earlier.
+	
 
 ```
 rad deploy [file] [flags]
@@ -39,6 +40,7 @@ rad deploy [file] [flags]
 ### Examples
 
 ```
+
 # deploy a Bicep template
 rad deploy myapp.bicep
 
@@ -68,6 +70,7 @@ rad deploy myapp.bicep --parameters @myfile.json
 
 # specify parameters from multiple sources
 rad deploy myapp.bicep --parameters @myfile.json --parameters version=latest
+
 ```
 
 ### Options
@@ -90,4 +93,5 @@ rad deploy myapp.bicep --parameters @myfile.json --parameters version=latest
 
 ### SEE ALSO
 
-* [rad]({{< ref rad.md >}}) - Radius CLI
+* [rad]({{< ref rad.md >}})	 - Radius CLI
+

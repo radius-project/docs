@@ -8,7 +8,7 @@ description: "Details on the rad completion powershell Radius CLI command"
 ---
 ## rad completion powershell
 
-Generates PowerShell completion scripts
+Generates powershell completion scripts
 
 ```
 rad completion powershell [flags]
@@ -29,4 +29,5 @@ rad completion powershell [flags]
 
 ### SEE ALSO
 
-* [rad completion]({{< ref rad_completion.md >}}) - Generates shell completion scripts
+* [rad completion]({{< ref rad_completion.md >}})	 - Generates shell completion scripts
+

@@ -24,10 +24,12 @@ or credentials will affect all Radius Environments and applications of the affec
 ### Examples
 
 ```
+
 # Register (Add or update) cloud provider credential for Azure with service principal authentication
-rad credential register azure --client-id <client id> --client-secret <client secret> --tenant-id <tenant id>  
+rad credential register azure --client-id <client id> --client-secret <client secret> --tenant-id <tenant id> 	
 # Register (Add or Update) cloud provider credential for AWS with IAM authentication
-rad credential register aws --access-key-id <access-key-id> --secret-access-key <secret-access-key> 
+rad credential register aws --access-key-id <access-key-id> --secret-access-key <secret-access-key>	
+
 ```
 
 ### Options
@@ -45,6 +47,7 @@ rad credential register aws --access-key-id <access-key-id> --secret-access-key 
 
 ### SEE ALSO
 
-* [rad credential]({{< ref rad_credential.md >}}) - Manage cloud provider credential for a Radius installation.
-* [rad credential register aws]({{< ref rad_credential_register_aws.md >}}) - Register (Add or update) AWS cloud provider credential for a Radius installation.
-* [rad credential register azure]({{< ref rad_credential_register_azure.md >}}) - Register (Add or update) Azure cloud provider credential for a Radius installation.
+* [rad credential]({{< ref rad_credential.md >}})	 - Manage cloud provider credential for a Radius installation.
+* [rad credential register aws]({{< ref rad_credential_register_aws.md >}})	 - Register (Add or update) AWS cloud provider credential for a Radius installation.
+* [rad credential register azure]({{< ref rad_credential_register_azure.md >}})	 - Register (Add or update) Azure cloud provider credential for a Radius installation.
+

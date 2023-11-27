@@ -21,19 +21,21 @@ rad resource list [resourceType] [flags]
 ### Examples
 
 ```
-sample list of resourceType: containers, gateways, httpRoutes, pubSubBrokers, extenders, mongoDatabases, rabbitMQMessageQueues, redisCaches, sqlDatabases, stateStores, secretStores
 
-# list all resources of a specified type in the default environment
+	sample list of resourceType: containers, gateways, httpRoutes, pubSubBrokers, extenders, mongoDatabases, rabbitMQMessageQueues, redisCaches, sqlDatabases, stateStores, secretStores
 
-rad resource list containers
-rad resource list gateways
-rad resource list httpRoutes
+	# list all resources of a specified type in the default environment
 
-# list all resources of a specified type in an application
-rad resource list containers --application icecream-store
+	rad resource list containers
+	rad resource list gateways
+	rad resource list httpRoutes
 
-# list all resources of a specified type in an application (shorthand flag)
-rad resource list containers -a icecream-store
+	# list all resources of a specified type in an application
+	rad resource list containers --application icecream-store
+	
+	# list all resources of a specified type in an application (shorthand flag)
+	rad resource list containers -a icecream-store
+	
 ```
 
 ### Options
@@ -54,4 +56,5 @@ rad resource list containers -a icecream-store
 
 ### SEE ALSO
 
-* [rad resource]({{< ref rad_resource.md >}}) - Manage resources
+* [rad resource]({{< ref rad_resource.md >}})	 - Manage resources
+
