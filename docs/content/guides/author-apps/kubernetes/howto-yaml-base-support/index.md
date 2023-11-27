@@ -39,7 +39,7 @@ In a file named "app.bicep" add any missing parameter that isn't found in your m
 
 {{< rad file="snippets/basemanifest.bicep" embed=true marker="//CONTAINER" >}}
 
-> Radius will override any values found in your Kubernetes manifest file if it finds a value for the same paramater in your `app.bicep` file otherwise it wil use the value and only fill in the gaps in your manifest. However if you define a parameter such as  image name in the different container like sidecar, container renderer will not override the image location.
+> Radius will override any values found in your Kubernetes manifest file if it finds a value for the same parameter in your `app.bicep` file otherwise it will use the value and only fill in the gaps in your manifest. However if you define a parameter such as  image name in the different container like sidecar, container renderer will not override the image location.
 
 ### Step 3: Deploy your container
 
