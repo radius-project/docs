@@ -3,7 +3,7 @@ type: docs
 title: "Concept: Why Radius?"
 linkTitle: "Why Radius?"
 description: "Describes the motivations for creating Radius."
-weight: 300
+weight: 100
 categories: "Concept"
 ---
 
