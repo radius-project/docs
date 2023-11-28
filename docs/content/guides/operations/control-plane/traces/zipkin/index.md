@@ -8,7 +8,7 @@ categories: "How-To"
 tags: ["tracing", "observability"]
 ---
 
-[Zipkin](https://zipkin.io/) is an open source distributed tracing system. It helps gather timing data needed to troubleshoot latency problems in microservice architectures. It manages both the collection and lookup of this data.
+[Zipkin](https://zipkin.io/) is an open-source distributed tracing system. It helps gather timing data needed to troubleshoot latency problems in microservice architectures. It manages both the collection and lookup of this data.
 
 The following steps show you how to configure the [Radius control plane]({{< ref architecture-concept >}}) components to send distributed tracing data to Zipkin running as a container in your Kubernetes cluster and how to view the data.
 
