@@ -23,6 +23,14 @@ rad install kubernetes
 rad install kubernetes --set global.zipkin.url=http://jaeger-collector.radius-monitoring.svc.cluster.local:9411/api/v2/spans,rp.publicEndpointOverride=localhost:8081
 ```
 
+### Use your own root certificate authority certificate
+
+Many enterprises leverage intermediate root certificate authorities (CAs) to enhance security and control over outgoing traffic originating from their employees' machines, particularly when using a firewall or proxy solution. For example, some enterprises may choose to issue CAs per org and control the traffic per org. In this setup, when Radius attempts to connect to an external endpoint, such as Azure or AWS, traffic is blocked by the firewall. You may optionally use`--set-file` when installing Radius to inject your root CA certificates into Radius:
+
+```bash
+rad install kubernetes --set-file global.rootCA.cert=/etc/ssl/your-root-ca.crt
+```
+
 ## Install with Helm
 
 1. Begin by adding the Radius Helm repository:
@@ -47,6 +55,7 @@ rad install kubernetes --set global.zipkin.url=http://jaeger-collector.radius-mo
 | `global.prometheus.enabled` | `true` | Enables Prometheus metrics. Defaults to `true`
 | `global.prometheus.path` | `"/metrics"` | Metrics endpoint
 | `global.prometheus.port` | `9090` | Metrics port
+| `global.rootCA.cert` | | Root CA certificate which will be injected to Radius containers. Use `--set-file global.rootCA.cert=[cert file]`
 | `rp.image` | `ghcr.io/radius-project/applications-rp:latest` //TODO | Location of the Radius resource provider (RP) image
 | `rp.tag` | `latest` | Tag of the Radius resource provider (RP) image
 |`rp.publicEndpointOverride` | `""` | Public endpoint of the Kubernetes cluster. Overrides the default behavior of automatically detecting the public endpoint.
