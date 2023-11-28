@@ -25,7 +25,7 @@ rad install kubernetes --set global.zipkin.url=http://jaeger-collector.radius-mo
 
 ### Use your own root certificate authority certificate
 
-Many enterprises leverage intermediate root certificate authorities (CAs) to enhance security and control over outgoing traffic originating from their employees' machines, particularly when using a firewall or proxy solution. In this setup, when Radius attempts to connect to an external endpoint, such as Azure or AWS, traffic is blocked by the firewall. You may optionally use`--set-file` when installing Radius to inject your root CA certificates into Radius:
+Many enterprises leverage intermediate root certificate authorities (CAs) to enhance security and control over outgoing traffic originating from their employees' machines, particularly when using a firewall or proxy solution. For example, some enterprises may choose to issue CAs per org and control the traffic per org. In this setup, when Radius attempts to connect to an external endpoint, such as Azure or AWS, traffic is blocked by the firewall. You may optionally use`--set-file` when installing Radius to inject your root CA certificates into Radius:
 
 ```bash
 rad install kubernetes --set-file global.rootCA.cert=/etc/ssl/your-root-ca.crt
