@@ -179,3 +179,11 @@ While there isn't direct support for targeting Azure Arc for Radius containers t
 [Azure Container Apps](https://azure.microsoft.com/products/container-apps/) is a service that allows developers to deploy containerized applications to Azure without managing any infrastructure.
 
 While Radius only supports Kubernetes today, it is architected to support other hosting platforms in the future, including serverless platforms such as Azure Container Apps. Serverless support is on our roadmap.
+
+### How does Radius compare to .NET Aspire?
+
+[.NET Aspire](https://learn.microsoft.com/dotnet/aspire/get-started/aspire-overview) is an opinionated, cloud ready stack for building .NET applications. .NET Aspire is delivered through a collection of NuGet packages that handle specific cloud-native concerns, and is very focused on the inner loop experience.
+
+Where .NET Aspire is focused on the .NET experience from moving from local development with a debugger to the cloud, Radius is focused on the entire application, including infrastructure, services, and connections between them. Radius is also not opinionated about the application runtime, and supports any containerized application. Radius also doesn't seek to solve running applications locally as processes.
+
+Long term we would like to see Radius and .NET Aspire work together to provide a great experience for .NET developers building cloud native applications, but there is currently no integration between the two.
