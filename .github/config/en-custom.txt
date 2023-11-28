@@ -957,7 +957,6 @@ tlsdemo
 ConfigMap
 PodSpec
 composable
-CRD
 nd
 OSI
 scaffolded

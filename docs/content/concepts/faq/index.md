@@ -86,7 +86,7 @@ Radius leverages Kubernetes in two ways:
 1. As a hosting platform for the Radius control-plane
 1. As a runtime for containerized workloads
 
-While Radius only supports Kubernetes today, it is architected to support other hosting platforms in the future, including serverless platforms. Radius is not a Kubernetes controller and the primary user experience is not through CRDs. Instead, Radius Applications are an abstraction layer on top of Kubernetes and other cloud platforms.
+While Radius only supports Kubernetes today, it is architected to support other hosting platforms in the future, including serverless platforms. Radius is not a Kubernetes controller and the primary user experience is not through custom resources (CRDs). Instead, Radius Applications are an abstraction layer on top of Kubernetes and other cloud platforms.
 
 ### How does Radius compare to Helm?
 
