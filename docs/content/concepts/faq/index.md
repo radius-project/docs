@@ -184,6 +184,4 @@ While Radius only supports Kubernetes today, it is architected to support other 
 
 [.NET Aspire](https://learn.microsoft.com/dotnet/aspire/get-started/aspire-overview) is an opinionated, cloud ready stack for building .NET applications. .NET Aspire is delivered through a collection of NuGet packages that provide a batteries-included experience for building cloud-native applications as well as tools and IDE integration.
 
-Where .NET Aspire is focused on the .NET experience from moving from local development with a debugger to the cloud, Radius is focused on the entire application, including infrastructure, services, and connections between them. Radius is also not opinionated about the application runtime, and supports any containerized application. Radius also doesn't seek to solve running applications locally as processes.
-
-Long term we would like to see Radius and .NET Aspire work together to provide a great experience for .NET developers building cloud native applications, but there is currently no integration between the two.
+Where .NET Aspire is focused on the .NET experience from moving from local development with a debugger to the cloud, Radius is not opinionated about the application runtime and doesn't seek to solve running applications locally as processes. Radius also offers tools for developers and operators to collaborate on an application throughout its lifecycle, such as the application graph and Recipes.
