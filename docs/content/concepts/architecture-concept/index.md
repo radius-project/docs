@@ -82,7 +82,7 @@ All of Radius' core concepts are expressed using resources:
 
 All of these resources can be manipulated using the CRUDL+ operations that the resource providers provide. Since the functionality is implemented as part of the API any number of tools can have access to this functionality.
 
-The `Applications.*` resource providers are fully-open source and were created as part of the Radius project. The `Applications.Core` and `Applications.*` resource providers are written in Go.
+The `Applications.*` resource providers are fully open-source and were created as part of the Radius project. The `Applications.Core` and `Applications.*` resource providers are written in Go.
 
 #### Bicep Deployments Resource Provider
 
