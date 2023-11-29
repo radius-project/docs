@@ -15,6 +15,7 @@ Azure
 Blazor
 basemanifest
 renderer
+CAs
 clusterissuer
 ClusterIssuer
 CLI
@@ -60,6 +61,7 @@ HttpRoute
 HttpRoutes
 Kibana
 IAM
+IAMs
 IaC
 InternalServerError
 IoT
