@@ -46,8 +46,8 @@ resource volume 'Applications.Core/volumes@2023-10-01-preview' = {
         name: 'cert1'              // required
         version: '1'               // optional, defaults to latest version
         alias: 'certificatealias'  // optional, defaults to certificate name (mycertificate)
-        encoding: 'base64'         // optional, defaults to utf-8
-        certType: 'privatekey'     // optional, defaults to utf-8
+        encoding: 'base64'         // optional, defaults to utf-8, only available when value is privatekey
+        value: 'privatekey'        // required
         format: 'pem'              // optional, defaults to pfx
       }
     }

@@ -30,7 +30,7 @@ rad workspace init kubernetes
 [rad workspace list]({{< ref rad_workspace_list >}}) lists all of the workspaces in your configuration file:
 
 ```bash
-rad workspacae list
+rad workspace list
 ```
 
 {{% /codetab %}}

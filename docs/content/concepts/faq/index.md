@@ -86,7 +86,7 @@ Radius leverages Kubernetes in two ways:
 1. As a hosting platform for the Radius control-plane
 1. As a runtime for containerized workloads
 
-While Radius only supports Kubernetes today, it is architected to support other hosting platforms in the future, including serverless platforms. Radius is not a Kubernetes controller and the primary user experience is not through CRDs. Instead, Radius Applications are an abstraction layer on top of Kubernetes and other cloud platforms.
+While Radius only supports Kubernetes today, it is architected to support other hosting platforms in the future, including serverless platforms. Radius is not a Kubernetes controller and the primary user experience is not through custom resources (CRDs). Instead, Radius Applications are an abstraction layer on top of Kubernetes and other cloud platforms.
 
 ### How does Radius compare to Helm?
 
@@ -96,8 +96,6 @@ Radius was built to provide a platform for modeling and deploying an entire appl
 
 Teams looking to leverage existing Helm charts can use the [Radius annotations and Recipe CRD](#TODO) to add Radius capabilities to their existing application. With just a few annotations, you can add the power of the Radius app graph, connections, and Recipes to your existing Helm chart.
 
-Teams building or migrating applications on Radius can use Bicep to model their application and deploy to Kubernetes today, as well as future platforms, including serverless platforms.
-
 ### How does Radius compare to Bicep?
 
 [Bicep](https://github.com/Azure/bicep) is a Domain Specific Language (DSL) for deploying infrastructure declaratively. Radius leverages Bicep as one of its supported languages for defining applications and Recipes.
@@ -105,6 +103,8 @@ Teams building or migrating applications on Radius can use Bicep to model their 
 Similar to how you can define Azure resources in Bicep, you can define Radius resources in Bicep.
 
 Radius currently uses a temporary fork of Bicep to add support for the Radius resources, but work is underway to merge extensibility support into the main Bicep repo and eliminate the need for a fork.
+
+Teams building or migrating applications on Radius can use Bicep to model their application and deploy to Kubernetes today, as well as future platforms, including serverless platforms.
 
 ### How does Radius compare to Terraform?
 
@@ -126,7 +126,7 @@ Radius is an open-source project that allows you to model, deploy, and manage ap
 
 ### How does Radius compare to Crossplane?
 
-[Crossplane](https://crossplane.io/) is an open source Kubernetes add-on that extends any cluster with the ability to provision and manage cloud infrastructure, services, and applications using kubectl, GitOps, or any tool that works with the Kubernetes API. As Radius is unopinionated about how infrastructure is deployed through Recipes, Crossplane could be used within a Recipe. Both Bicep and Terraform modules are able to include Kubernetes resources and Crossplane CRDs.
+[Crossplane](https://crossplane.io/) is an open-source Kubernetes add-on that extends any cluster with the ability to provision and manage cloud infrastructure, services, and applications using kubectl, GitOps, or any tool that works with the Kubernetes API. As Radius is unopinionated about how infrastructure is deployed through Recipes, Crossplane could be used within a Recipe. Both Bicep and Terraform modules are able to include Kubernetes resources and Crossplane CRDs.
 
 Once deployed, Crossplane-managed infrastructure can be included in a Radius application and queried via the Radius application graph.
 
@@ -179,3 +179,9 @@ While there isn't direct support for targeting Azure Arc for Radius containers t
 [Azure Container Apps](https://azure.microsoft.com/products/container-apps/) is a service that allows developers to deploy containerized applications to Azure without managing any infrastructure.
 
 While Radius only supports Kubernetes today, it is architected to support other hosting platforms in the future, including serverless platforms such as Azure Container Apps. Serverless support is on our roadmap.
+
+### How does Radius compare to .NET Aspire?
+
+[.NET Aspire](https://learn.microsoft.com/dotnet/aspire/get-started/aspire-overview) is an opinionated, cloud ready stack for building .NET applications. .NET Aspire is delivered through a collection of NuGet packages that provide a batteries-included experience for building cloud-native applications as well as tools and IDE integration.
+
+Where .NET Aspire is focused on the .NET experience from moving from local development with a debugger to the cloud, Radius is not opinionated about the application runtime and doesn't seek to solve running applications locally as processes. Radius also offers tools for developers and operators to collaborate on an application throughout its lifecycle, such as the application graph and Recipes.

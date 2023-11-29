@@ -957,7 +957,6 @@ tlsdemo
 ConfigMap
 PodSpec
 composable
-CRD
 nd
 OSI
 scaffolded
@@ -1080,3 +1079,4 @@ ZDNET
 Newstrail
 postgresql
 natively
+NuGet
