@@ -49,14 +49,13 @@ Refer to the [Redis resource schema]({{< ref "reference/resource-schema/cache/re
 
 In your Bicep file `app.bicep`, add a container resource that will be leveraged by your portable resource later:
 
-{{< rad file="snippets/app.bicep" embed=true marker="//EMPTYCONTAINER" >}}
+{{< rad file="snippets/app.bicep" embed=true >}}
 
 ## Step 3: Access your portable resources
 
 You can access the portable resource via [`connections`]({{< ref "guides/author-apps/containers#connections" >}}). Update your container definition to add a connection to the new Redis cache. This results in environment variables for connection information automatically set on the container.
 
-
-{{< rad file="snippets/app-redis-manual.bicep" embed=true marker="//CONTAINER" markdownConfig="{linenos=table,hl_lines=[\"19-22\"]}">}}
+{{< rad file="snippets/app-redis-manual.bicep" embed=true >}}
 
 ## Step 4: Deploy your app
 

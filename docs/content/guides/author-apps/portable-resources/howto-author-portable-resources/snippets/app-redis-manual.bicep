@@ -6,9 +6,6 @@ param environment string
 @description('Specifies the application for resources.')
 param application string
 
-@description('Specifies the namespace for resources.')
-param namespace string
-
 //CONTAINER
 resource container 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'demo'
