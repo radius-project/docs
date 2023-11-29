@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To: Add a Dapr sidecar to Radius"
-linkTitle: "Add a Dapr sidecar to Radius"
+linkTitle: "Add a Dapr sidecar"
 description: "Learn how to add a Dapr sidecar to your Radius container in order to interact with Dapr building blocks"
 weight: 100
 categories: "How-To"
