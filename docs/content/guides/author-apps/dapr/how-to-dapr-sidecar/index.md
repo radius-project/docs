@@ -2,7 +2,7 @@
 type: docs
 title: "How-To: Add a Dapr sidecar to Radius"
 linkTitle: "Add a Dapr sidecar to Radius"
-description: "Easily leverage a Dapr sidecar blocks in your application for code and infrastructure portability"
+description: "Learn how to add a Dapr sidecar to your Radius container in order to interact with Dapr building blocks"
 weight: 100
 categories: "How-To"
 tags: ["Dapr"]
@@ -10,7 +10,7 @@ tags: ["Dapr"]
 
 This how-to guide will provide an overview of how to:
 
-- Leverage a [Dapr sidecar](https://docs.dapr.io/concepts/dapr-services/sidecar/) with your Radius Application
+- Add a [Dapr sidecar](https://docs.dapr.io/concepts/dapr-services/sidecar/) to your Radius container
 
 ## Prerequisites
 
@@ -23,7 +23,7 @@ This how-to guide will provide an overview of how to:
 
 Begin by creating a file named `app.bicep` with a Radius [container]({{< ref "guides/author-apps/containers" >}})
 
-## Step 2: Define the Dapr sidecar extension
+## Step 2: Add the Dapr sidecar extension
 
 Make sure your current Dapr sidecar process is running inside a Kubernetes cluster:
 
