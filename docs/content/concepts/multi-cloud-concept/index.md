@@ -2,7 +2,7 @@
 type: docs
 title: "Concept: Open-source and multi-cloud"
 linkTitle: Open-source and multi-cloud
-description: For many enterprises, their cloud native computing strategy involves using multiple cloud providers. Open source projects, like Kubernetes, help ensure these enterprises achieve their strategy. As a result, Radius was designed to be open-source and multi-cloud from the start. 
+description: For many enterprises, their cloud native computing strategy involves using multiple cloud providers. Open-source projects, like Kubernetes, help ensure these enterprises achieve their strategy. As a result, Radius was designed to be open-source and multi-cloud from the start. 
 weight: 100
 categories: "Concept"
 ---
@@ -29,7 +29,7 @@ Some enterprises explained that they were multi-cloud through acquisitions. Thei
 
 Finally, some enterprises explained that they were multi-cloud due to inertia. They had started with one cloud provider, but later, switched to using a different provider as their primary choice for new applications. Like the acquisition case above, there was no requirement to move existing applications to the new cloud provider. 
 
-Radius was designed with these enterprises in mind. Enterprises can "radify" their applications regardless of cloud provider, enabling these enterprises to use Radius regardless of whether or not the application is using a particular public cloud provider or a private cloud operated by the enterprise itself. Radius applications can use cloud vendor specific technologies, like Amazon's DynamoDB or Azure's Cosmos DB, or they can use open source technologies like Redis. 
+Radius was designed with these enterprises in mind. Enterprises can "radify" their applications regardless of cloud provider, enabling these enterprises to use Radius regardless of whether or not the application is using a particular public cloud provider or a private cloud operated by the enterprise itself. Radius applications can use cloud vendor specific technologies, like Amazon's DynamoDB or Azure's Cosmos DB, or they can use open-source technologies like Redis. 
 
 ### Cloud-agnostic applications
 
@@ -37,11 +37,11 @@ There were some enterprises that ran the same application in multiple clouds. Of
 
 Radius was designed to support this specific use case from the start. We wanted to make it possible for IT teams, platform engineering teams, or cloud center of excellence teams to make decisions about which cloud provider an application would use. We wanted them to be able to make that decision without having an impact on their developers and the application logic those developers were writing. 
 
-Radius supports cloud-agnostic applications in two ways. First, enterprises can use open source technologies in their applications. For example, developers that need a cache might use a Redis cache in their application. The platform engineering team would build Radius Recipes that, depending on the cloud provider, would use a different underlying Redis compatible service. This might mean using Azure Cache for Redis when deploying to Azure or Amazon ElastiCache for Redis on AWS. The developer's application logic and deployment assets like Helm charts should be the same, regardless of which cloud they're using.
+Radius supports cloud-agnostic applications in two ways. First, enterprises can use open-source technologies in their applications. For example, developers that need a cache might use a Redis cache in their application. The platform engineering team would build Radius Recipes that, depending on the cloud provider, would use a different underlying Redis compatible service. This might mean using Azure Cache for Redis when deploying to Azure or Amazon ElastiCache for Redis on AWS. The developer's application logic and deployment assets like Helm charts should be the same, regardless of which cloud they're using.
 
 The second way Radius supports cloud-agnostic applications is with [Dapr, the Distributed Application Runtime](https://dapr.io). Dapr provides developers with APIs that abstract away the complexity of common challenges developers encounter regularly when building cloud native applications. These API building blocks abstract away services that provide state management, secrets management, or publish and subscribe systems. Developers can write to Dapr and platform engineering teams can use Radius to provide the underlying infrastructure for these Dapr based applications. For example, a Dapr application that's persisting state could use Azure Blob Storage or Amazon DynamoDB as the underlying state store depending on which cloud provider was used to host the application.
 
-Radius was designed from the start to support enterprises in implementing their multi-cloud strategy. Enterprises can use cloud vendor technologies, like DynamoDB, or they can build on open source technologies like Redis and Dapr.
+Radius was designed from the start to support enterprises in implementing their multi-cloud strategy. Enterprises can use cloud vendor technologies, like DynamoDB, or they can build on open-source technologies like Redis and Dapr.
 
 ## Open-source
 Many enterprises use open-source technologies as a way of *achieving* their multi-cloud strategy. Kubernetes adoption is a great example of this trend. Customers building on Kubernetes can leverage their Kubernetes experience, tools, and practices with any cloud provider and they're confident Kubernetes, with it's broad community, will continue to be a multi-cloud technology. 

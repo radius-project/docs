@@ -883,6 +883,8 @@ SiteToSiteVpnAttachment
 SlackChannelConfiguration
 SlackWorkspaceConfiguration
 SpotFleet
+manualLink
+manualLinkTarget
 StackSet
 StateMachine
 StaticIp
@@ -955,7 +957,6 @@ tlsdemo
 ConfigMap
 PodSpec
 composable
-CRD
 nd
 OSI
 scaffolded
@@ -1070,3 +1071,10 @@ unopinionated
 Incubations
 HCP
 Backstage
+Russinovich
+InfoWorld
+reimagines
+TechCrunch
+ZDNET
+Newstrail
+NuGet

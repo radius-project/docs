@@ -8,7 +8,7 @@ categories: "How-To"
 tags: ["tracing", "observability"]
 ---
 
-[Zipkin](https://zipkin.io/) is an open source distributed tracing system. It helps gather timing data needed to troubleshoot latency problems in microservice architectures. It manages both the collection and lookup of this data.
+[Zipkin](https://zipkin.io/) is an open-source distributed tracing system. It helps gather timing data needed to troubleshoot latency problems in microservice architectures. It manages both the collection and lookup of this data.
 
 The following steps show you how to configure the [Radius control plane]({{< ref architecture-concept >}}) components to send distributed tracing data to Zipkin running as a container in your Kubernetes cluster and how to view the data.
 
@@ -24,7 +24,7 @@ The following steps show you how to configure the [Radius control plane]({{< ref
    kubectl create namespace radius-monitoring
    ```
 
-2. Deploy the Zipkin deployment and service:
+1. Deploy the Zipkin deployment and service:
 
    ```bash
    kubectl create deployment zipkin --image openzipkin/zipkin -n radius-monitoring
@@ -52,11 +52,11 @@ The following steps show you how to configure the [Radius control plane]({{< ref
    kubectl port-forward svc/zipkin 9411:9411 -n radius-monitoring
    ```
 
-2. In your browser, go to [http://localhost:9411](http://localhost:9411) to see the Zipkin UI and run a query:
+1. In your browser, go to [http://localhost:9411](http://localhost:9411) to see the Zipkin UI and run a query:
 
    {{< image src="zipkin_ui.png" alt="" style="width:100%" >}}
 
-3. Done! You can now use the Zipkin UI to view tracing data for your Radius control plane.
+1. Done! You can now use the Zipkin UI to view tracing data for your Radius control plane.
 
 ## References
 

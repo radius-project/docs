@@ -22,12 +22,6 @@ The Radius getting-started guide can be [run **for free** in a GitHub Codespace]
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/radius-project/samples)
 {{< /alert >}}
 
-{{< alert title="🚀 Run in a <b>free</b> GitHub Codespace" color="primary" >}}
-The Radius getting-started guide can be [run **for free** in a GitHub Codespace](https://github.blog/changelog/2022-11-09-codespaces-for-free-and-pro-accounts/). Visit the following link to get started in seconds:
-
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/radius-project/samples)
-{{< /alert >}}
-
 ## 1. Have your Kubernetes cluster handy
 
 Radius runs inside [Kubernetes]({{< ref "guides/operations/kubernetes" >}}). However you run Kubernetes, get a cluster ready.
@@ -52,7 +46,7 @@ mkdir first-app
 cd first-app
 ```
 
-Initialize Radius. For this example, accept all the default options (press ENTER to confirm): 
+Initialize Radius. For this example, accept all the default options (press ENTER to confirm):
 
 ```bash
 rad init
@@ -61,21 +55,21 @@ rad init
 Example output:
 
 ```
-Initializing Radius...                     
+Initializing Radius...
 
-✅ Install Radius {{< param version >}}               
-    - Kubernetes cluster: k3d-k3s-default   
-    - Kubernetes namespace: radius-system   
-✅ Create new environment default          
-    - Kubernetes namespace: default 
-    - Recipe pack: local-dev        
-✅ Scaffold application docs            
-✅ Update local configuration              
+✅ Install Radius {{< param version >}}
+    - Kubernetes cluster: k3d-k3s-default
+    - Kubernetes namespace: radius-system
+✅ Create new environment default
+    - Kubernetes namespace: default
+    - Recipe pack: local-dev
+✅ Scaffold application docs
+✅ Update local configuration
 
 Initialization complete! Have a RAD time 😎
 ```
 
-In addition to starting Radius services in your Kubernetes cluster, this initialization command creates a default application (`app.bicep`) as your starting point. It contains a single container definition (`demo`). 
+In addition to starting Radius services in your Kubernetes cluster, this initialization command creates a default application (`app.bicep`) as your starting point. It contains a single container definition (`demo`).
 
 {{< rad file="snippets/app.bicep" embed=true markdownConfig="{linenos=table,linenostart=1}" >}}
 
@@ -181,7 +175,7 @@ Resources:
 
 ## Recap and next steps
 
-It's easy to build on the default app and add more resources to the app. 
+It's easy to build on the default app and add more resources to the app.
 
 To delete your app, see [rad app delete]({{< ref rad_application_delete >}}).
 
