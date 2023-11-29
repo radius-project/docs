@@ -8,7 +8,7 @@ categories: "How-To"
 tags: ["containers","Kubernetes"]
 ---
 
-This guide will provide an overview of how to migrate your existing Kubernetes resources from [Kubernetes YAML](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#writing-a-deployment-spec).
+This guide will provide an overview of how to migrate your existing Kubernetes resources from [Kubernetes YAML](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#writing-a-deployment-spec). 
 
 ### Prerequisites
 
