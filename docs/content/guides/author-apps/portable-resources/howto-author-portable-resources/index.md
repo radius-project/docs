@@ -55,7 +55,15 @@ In your Bicep file `app.bicep`, add a container resource that will be leveraged 
 
 You can access the portable resource via [`connections`]({{< ref "guides/author-apps/containers#connections" >}}). Update your container definition to add a connection to the new Redis cache. This results in environment variables for connection information automatically set on the container.
 
+In addition, you can manually access properties and set environment variables based on your portable resource values.
+
+#### Manual
+
 {{< rad file="snippets/app-redis-manual.bicep" embed=true >}}
+
+#### Recipe
+
+{{< rad file="snippets/app-redis-recipe.bicep" embed=true >}}
 
 ## Step 4: Deploy your app
 

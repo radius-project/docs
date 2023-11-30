@@ -6,9 +6,6 @@ param environment string
 @description('Specifies the application for resources.')
 param application string
 
-@description('Specifies the namespace for resources.')
-param namespace string
-
 //CONTAINER
 resource container 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'demo'
@@ -16,6 +13,9 @@ resource container 'Applications.Core/containers@2023-10-01-preview' = {
     application: application
     container: {
       image: 'ghcr.io/radius-project/samples/demo:latest'
+      env: {
+        connectionString: recipeRedis.connectionString()
+      }
       ports: {
         web: {
           containerPort: 3000
@@ -46,17 +46,4 @@ resource recipeRedis 'Applications.Datastores/redisCaches@2023-10-01-preview'= {
   }
 }
 //Recipe
-
-//RecipeSpecified
-resource redis 'Applications.Datastores/redisCaches@2023-10-01-preview'= {
-  name: 'myresource'
-  properties: {
-    environment: environment
-    application: application
-    recipe: {
-      name: 'azure-prod'
-    }
-  }
-}
-//RecipeSpecified
 
