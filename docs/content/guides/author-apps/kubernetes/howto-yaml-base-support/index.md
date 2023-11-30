@@ -30,16 +30,14 @@ In a file named `kubernetes.yaml` define all the Kubernetes resources that corre
 
 [Radius containers]({{< ref "/guides/author-apps/containers/overview" >}}) represent a containerized workload within your Radius Application. You can define a Radius container and reference your Kubernetes YAML in order to deploy and manage it within Radius.
 
-In a file named "app.bicep" add any missing parameter that isn't found in your manifest file in your new Container resource. This could range from anything like a new such as:
+In a file named "app.bicep" add any missing parameter that isn't found in your manifest file. This could range from anything like a new such as:
 
 - The container image path
 - The port(s) your container exposes
-- The contents of your Kubernetes YAML file
-
 
 {{< rad file="snippets/basemanifest.bicep" embed=true marker="//CONTAINER" >}}
 
-> Radius will override any values found in your Kubernetes manifest file if it finds a value for the same parameter in your `app.bicep` file otherwise it will use the value and only fill in the gaps in your manifest. However if you define a parameter such as  image name in the different container like sidecar, container renderer will not override the image location.
+> Radius will override any parameters found in your Kubernetes manifest file if it finds a value for the same parameter in your `app.bicep` file otherwise it will use the parameter values found. However if you define a parameter such as  image name in the different container like sidecar, the container renderer will not override the image location.
 
 ### Step 3: Deploy your container
 
