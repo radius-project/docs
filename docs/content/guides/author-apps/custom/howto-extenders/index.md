@@ -6,7 +6,7 @@ description: "Learn how to use extenders in an application"
 weight: 300
 ---
 
-This guide will walk you through how to use an [extender]({{< ref "/guides/author-apps/custom/overview#extenders >}}) in an application to model resources beyond those currently built into Radius. These might be abstractions or resources unique to your organization, or resources that don't yet have a native Radius type.
+This guide will walk you through how to use an [extender]({{< ref "/guides/author-apps/custom/overview#extenders" >}}) in an application to model resources beyond those currently built into Radius. These might be abstractions or resources unique to your organization, or resources that don't yet have a native Radius type.
 
 ## Prerequisites
 
