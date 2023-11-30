@@ -16,7 +16,6 @@ This how-to guide will provide an overview of how to:
 
 - [rad CLI]({{< ref getting-started >}})
 - [Radius initialized with `rad init`]({{< ref howto-environment >}})
-- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [Dapr](https://docs.dapr.io/getting-started/install-dapr-cli/)
 - [Dapr initialized in a Kubernetes cluster `dapr init -k`](https://docs.dapr.io/getting-started/install-dapr-selfhost/)
 
@@ -26,15 +25,16 @@ Begin by creating a file named `app.bicep` with a Radius [container]({{< ref "gu
 
 ## Step 2: Define the Dapr sidecar extension
 
-Make sure your current Dapr sidecar process is running inside a Kubernetes cluster:
-
-    ```
-    daprd --app-id myapp
-    ```
-
 You'll need the following information `appId`, `appPort` and any additional `config` properties can be defined inside of your Radius container definition.
 
 {{< rad file="snippets/app-sidecar.bicep" embed=true >}}
+
+You'll be able to run `dapr list -k` to list all Dapr pods in your Kubernetes cluster. The console output should look similar to:
+
+```
+NAMESPACE      APP ID    APP PORT  AGE  CREATED              
+default-demo  backend  3000      29s  2023-11-30 21:52.59
+```
 
 ## Step 3: Deploy the Radius Application
 
