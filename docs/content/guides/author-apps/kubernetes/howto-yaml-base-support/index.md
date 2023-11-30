@@ -1,8 +1,8 @@
 ---
 type: docs
 title: "How-To: Migrate from existing Kubernetes resources"
-linkTitle: "Migrate from YAML"
-description: "Learn how to migrate to a Radius container from existing Kubernetes YAML"
+linkTitle: "Migrate using Kubernetes YAML"
+description: "Learn how to migrate to a Radius container using existing Kubernetes YAML configurations"
 weight: 500
 categories: "How-To"
 tags: ["containers","Kubernetes"]
@@ -22,7 +22,7 @@ Before you get started, you'll need to make sure you have the following tools an
 
 In a file named `kubernetes.yaml` define all the Kubernetes resources that correspond to the new Radius container.
 
-Note that the names of the Deployments, Services, and Config Maps all must match each other and the name of the new Radius container. Any other resources can be named differently.
+> Note that the names of the Deployments, Services, and Config Maps all must match each other and the name of the new Radius container. Any other resources can be named differently.
 
 {{< rad file="snippets/basemanifest.yaml" embed=true lang="yaml">}}
 
@@ -57,7 +57,8 @@ Now that you've defined your Radius Container you can deploy it into your Applic
     kubectl get all -n default-demo
     ```
    
-   > Radius deploys app resources into a unique namespace for every app. For more information refer to the [Kubernetes docs]({{< ref "/guides/operations/kubernetes/overview#namespace-mapping" >}}).
+   > Radius deploys app resources into a unique namespace for every app. For more information refer to the [Kubernetes guide]({{< ref "/guides/operations/kubernetes/overview#namespace-mapping" >}}).
+ 
 3. Your console output should look similar to:
 ```
 NAME                                   READY   STATUS    RESTARTS   AGE
@@ -72,8 +73,6 @@ deployment.apps/my-microservice   1/1     1            1           2m41s
 NAME                                         DESIRED   CURRENT   READY   AGE
 replicaset.apps/my-microservice-795545bf79   1         1         1       21s
 replicaset.apps/my-microservice-96dc8569d    0         0         0       2m41s
-```
-### Step 4: Clean up
 
 1. Run the following command to delete all Pods, Deployments, and Services in the `my-microservice` namespace and the associated Radius Application:
 
