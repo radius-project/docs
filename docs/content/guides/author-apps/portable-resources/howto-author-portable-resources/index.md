@@ -48,7 +48,7 @@ You can also manually manage your infrastructure and use a portable resource to 
 
 ## Step 2: Add a container
 
-In your Bicep file `app.bicep`, add a container resource that will connect to the Redis cache. Note the connection to the Redis cache automatically injects connection-related enivronment variables into the container. Optionally, you can also manually access properties and set environment variables based on your portable resource values.
+In your Bicep file `app.bicep`, add a container resource that will connect to the Redis cache. Note the connection to the Redis cache automatically injects connection-related environment variables into the container. Optionally, you can also manually access properties and set environment variables based on your portable resource values.
 
 {{< rad file="snippets/app-redis-manual.bicep" embed=true marker="//CONTAINER" >}}
 
