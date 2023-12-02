@@ -13,59 +13,46 @@ This guide will teach you how to author a portable resource for your [Radius App
 ## Prerequisites
 
 Before you get started, you'll need to make sure you have the following tools and resources:
+
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Radius environment]({{< ref "installation#step-3-initialize-radius" >}})
 - [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 
-## Step 1: Choose how to define your portable resource
+## Step 1: Add a portable resource
 
-Portable resources provide **abstraction** and **portability** to Radius Applications. Radius currently offers options to manually provision the resources or automatically provision them via Recipes.
+Portable resources provide **abstraction** and **portability** to Radius Applications. Radius currently offers options to manually provision the resources or automatically provision them via Recipes:
 
 {{< tabs Recipe Manual >}}
 
 {{% codetab %}}
 
-Recipes enable a separation of concerns between infrastructure operators and developers by automating infrastructure deployment. You can run a default recipe registered in your environment or select the specific Recipe you want to run. 
+Recipes handle infrastructure provisioning for you. You can use a Recipe to provision a Redis cache, using your environment's default Recipe.
 
-{{< rad file="snippets/app-redis-recipe.bicep" embed=true marker="//Recipe" >}}
+Create a file named `app.bicep` and paste the following:
 
- To learn more visit the [Recipes overview]({{< ref "/guides/recipes/overview" >}}).
+{{< rad file="snippets/app-redis-recipe.bicep" embed=true marker="//RECIPE" >}}
+
+To learn more about Recipes visit the [Recipes overview page]({{< ref "/guides/recipes/overview" >}}).
 
 {{% /codetab %}}
 
 {{% codetab %}}
 
-Add a RedisCache resource with the `resourceProvisioning` mode as `manual`. This enables you to configure the underlying Redis resource
+You can also manually manage your infrastructure and use a portable resource to abstract the details. Create a file named `app.bicep` and paste the following:
 
 {{< rad file="snippets/app-redis-manual.bicep" embed=true marker="//MANUAL" >}}
-
-Refer to the [Redis resource schema]({{< ref "reference/resource-schema/cache/redis" >}}) for more details.
 
 {{% /codetab %}}
 
 {{< /tabs >}}
 
-## Step 2: Define a container resource
+## Step 2: Add a container
 
-In your Bicep file `app.bicep`, add a container resource that will be leveraged by your portable resource later:
+In your Bicep file `app.bicep`, add a container resource that will connect to the Redis cache. Note the connection to the Redis cache automatically injects connection-related enivronment variables into the container. Optionally, you can also manually access properties and set environment variables based on your portable resource values.
 
-{{< rad file="snippets/app.bicep" embed=true >}}
+{{< rad file="snippets/app-redis-manual.bicep" embed=true marker="//CONTAINER" >}}
 
-## Step 3: Access your portable resources
-
-You can access the portable resource via [`connections`]({{< ref "guides/author-apps/containers#connections" >}}). Update your container definition to add a connection to the new Redis cache. This results in environment variables for connection information automatically set on the container.
-
-In addition, you can manually access properties and set environment variables based on your portable resource values.
-
-#### Manual
-
-{{< rad file="snippets/app-redis-manual.bicep" embed=true >}}
-
-#### Recipe
-
-{{< rad file="snippets/app-redis-recipe.bicep" embed=true >}}
-
-## Step 4: Deploy your app
+## Step 3: Deploy the app
 
 1. Run your application in your environment:
 
