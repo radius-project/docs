@@ -3,7 +3,7 @@ type: docs
 title: "Overview: Portable Resources"
 linkTitle: "Overview"
 description: "Add portable resources to your Radius Application for infrastructure portability"
-weight: 600
+weight: 100
 categories: "Overview"
 tags: ["portability"]
 ---
