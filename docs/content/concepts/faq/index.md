@@ -179,3 +179,7 @@ While there isn't direct support for targeting Azure Arc for Radius containers t
 [Azure Container Apps](https://azure.microsoft.com/products/container-apps/) is a service that allows developers to deploy containerized applications to Azure without managing any infrastructure.
 
 While Radius only supports Kubernetes today, it is architected to support other hosting platforms in the future, including serverless platforms such as Azure Container Apps. Serverless support is on our roadmap.
+
+### How does Radius compare to Azure Developer CLI (azd)?
+
+The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) is an open-source tool that provides developer-friendly commands to simplify the process of building, deploying, and managing Azure resources. While both azd and Radius are geared towards the development and deployment workflows, the most apparent difference is that azd can be only be used to manage Azure resources, whereas Radius supports multiple cloud providers. Radius also introduces a way to model (and not just deploy) entire applications and automate these through [Recipes]({{< ref "guides/recipes/overview">}}), which allows for complete [separation of concerns]({{< ref "collaboration-concept" >}}) between operators and developers. With azd, even though developers may leverage CLI templates to deploy infrastructure, they still need to understand the underlying infrastructure and how to connect to it.
