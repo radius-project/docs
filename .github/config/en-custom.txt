@@ -1210,3 +1210,4 @@ KubernetesMetadataExtensionLabels
 outputResources
 SecretStore
 plainHTTP
+azd
