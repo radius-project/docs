@@ -186,12 +186,6 @@ While Radius only supports Kubernetes today, it is architected to support other 
 
 Where .NET Aspire is focused on the .NET experience from moving from local development with a debugger to the cloud, Radius is not opinionated about the application runtime and doesn't seek to solve running applications locally as processes. Radius also offers tools for developers and operators to collaborate on an application throughout its lifecycle, such as the application graph and Recipes.
 
-### How does Radius compare to .NET Aspire?
-
-[.NET Aspire](https://learn.microsoft.com/dotnet/aspire/get-started/aspire-overview) is an opinionated, cloud ready stack for building .NET applications. .NET Aspire is delivered through a collection of NuGet packages that provide a batteries-included experience for building cloud-native applications as well as tools and IDE integration.
-
-Where .NET Aspire is focused on the .NET experience from moving from local development with a debugger to the cloud, Radius is not opinionated about the application runtime and doesn't seek to solve running applications locally as processes. Radius also offers tools for developers and operators to collaborate on an application throughout its lifecycle, such as the application graph and Recipes.
-
 ### How does Radius compare to Azure Developer CLI (azd)?
 
 The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) is an open-source tool that provides developer-friendly commands to simplify the process of building, deploying, and managing Azure resources. While both azd and Radius are geared towards the development and deployment workflows, the most apparent difference is that azd can be only be used to manage Azure resources, whereas Radius supports multiple cloud providers. Radius also introduces a way to model (and not just deploy) entire applications and automate these through [Recipes]({{< ref "guides/recipes/overview">}}), which allows for complete [separation of concerns]({{< ref "collaboration-concept" >}}) between operators and developers. With azd, even though developers may leverage CLI templates to deploy infrastructure, they still need to understand the underlying infrastructure and how to connect to it.
