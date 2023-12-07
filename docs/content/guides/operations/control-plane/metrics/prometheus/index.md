@@ -25,7 +25,7 @@ tags: ["metrics", "observability"]
    kubectl create namespace radius-monitoring
    ```
 
-2. Install Prometheus into your monitoring namespace:
+1. Install Prometheus into your monitoring namespace:
 
    ```bash
    helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
@@ -39,7 +39,7 @@ tags: ["metrics", "observability"]
    helm install radius-prom prometheus-community/prometheus -n radius-monitoring --set alertmanager.persistentVolume.enable=false --set pushgateway.persistentVolume.enabled=false --set server.persistentVolume.enabled=false
    ```
 
-3. Validate your Prometheus installation:
+1. Validate your Prometheus installation:
 
    ```bash
    kubectl get pods -n radius-monitoring

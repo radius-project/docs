@@ -888,6 +888,8 @@ SiteToSiteVpnAttachment
 SlackChannelConfiguration
 SlackWorkspaceConfiguration
 SpotFleet
+manualLink
+manualLinkTarget
 StackSet
 StateMachine
 StaticIp
@@ -960,7 +962,6 @@ tlsdemo
 ConfigMap
 PodSpec
 composable
-CRD
 nd
 OSI
 scaffolded
@@ -1211,3 +1212,12 @@ outputResources
 SecretStore
 plainHTTP
 azd
+Russinovich
+InfoWorld
+reimagines
+TechCrunch
+ZDNET
+Newstrail
+postgresql
+natively
+NuGet

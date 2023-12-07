@@ -75,7 +75,7 @@ resource svc 'core/Service@v1' = {
 output result object = {
   values: {
     host: '${svc.metadata.name}.${svc.metadata.namespace}.svc.cluster.local'
-    port: svc.spec.ports[0].port 
+    port: svc.spec.ports[0].port
     username: ''
   }
   secrets: {

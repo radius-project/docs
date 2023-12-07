@@ -29,7 +29,7 @@ Our philosophy is to be inclusive when considering what is *part of the applicat
 
 ## Developers and platform engineers need to collaborate
 
-Enterprises are creating specialized roles and initiatives to improve their speed, efficiency, and security when adopting the cloud. Platform engineering is an emerging discipline that's combining a product mindset with learnings from DevOps and DevSecOps teams to create internal development platforms. When successful, platform engineers deliver a set of tools that provide sufficient automation, tracking, governance, and observability that guide development teams naturally fall “into the pit of success.” Often these endeavors can come up a little short, looking like a set of repository templates, cloud resource templates, and a software catalog for application developers to use. Unfortunately, the tools and assets that are frequently used don't encourage collaboration between developers and the platform engineers supporting those developers. Platform engineering is new as a discipline, and the patterns that will make enterprises successful long-term are still emerging.
+Enterprises are creating specialized roles and initiatives to improve their speed, efficiency, and security when adopting the cloud. Platform engineering is an emerging discipline that's combining a product mindset with learnings from DevOps and DevSecOps teams to create internal development platforms. When successful, platform engineers deliver a set of tools that provide sufficient automation, tracking, governance, and observability that guide development teams to naturally fall into "the pit of success." Often these endeavors can come up a little short, looking like a set of repository templates, cloud resource templates, and a software catalog for application developers to use. Unfortunately, the tools and assets that are frequently used don't encourage collaboration between developers and the platform engineers supporting those developers. Platform engineering is new as a discipline, and the patterns that will make enterprises successful long-term are still emerging.
 
 Radius provides concepts like Environments and Recipes that support a separation of concerns. Platform engineers can create repository templates with CI/CD pipelines and starter code for deployment. IT operators can deploy and govern the Environments where those pipelines deploy applications. Cloud and security experts can provide the Recipes used to create and update cloud resources. Developers are only responsible for describing the requirements and architecture of the application, understanding which environments to use, and choosing dependencies from the supported set of Recipes.
 
@@ -43,11 +43,11 @@ We hope that this holistic way of thinking about applications becomes the standa
 
 ## What we're not rethinking
 
-Many practices and technologies in cloud-native development are a success and don't need to be re-thought. 
+Many practices and technologies in cloud-native development are a success and don't need to be re-thought.
 
-- Radius makes is easy for application developers to adopt because it supports your existing containerized code, Dockerfiles, and Helm charts. 
+- Radius makes is easy for application developers to adopt because it supports your existing containerized code, Dockerfiles, and Helm charts.
 - We believe that [twelve-factor](https://12factor.net/) is still a great set of ideas and so any twelve-factor style application should be easy to use with Radius.
-- We like infrastructure-as-code as for its repeatability and use it for both Recipes and application descriptions. 
+- We like infrastructure-as-code as for its repeatability and use it for both Recipes and application descriptions.
 - There are plenty of great CI/CD systems, application delivery pipelines, and Gitops systems out there and Radius can work with any of them.
 
 ## Open-source from the start
