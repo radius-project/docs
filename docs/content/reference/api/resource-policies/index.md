@@ -33,7 +33,7 @@ The default timeout times are listed below but be aware that the asynchronous ti
 Each resource type controller decides whether it will retry to process the operation when it fails, but the current async operation controller immediately marks any errors as a `Failed` operation except for the following scenario:
 
 - Panic happens while processing the async operation by code defect (retry once, then mark the operation Failed)
-- RP process exits by unexpected process crashes (such as node failure, memory leak) and redeploying Radius. (retry once , then mark the operation Failed)
+- Resource provider process exits by unexpected process crashes (such as node failure, memory leak) and redeploying Radius. (retry once , then mark the operation Failed)
 
 #### Applications.Core resource provider
 
@@ -58,7 +58,6 @@ Each resource type controller decides whether it will retry to process the opera
 | Applications.Dapr/secretStores | POST ListSecret | Synchronous | default | |
 | Applications.Dapr/stateStores | LIST/GET/PUT/PATCH/DELETE | Synchronous | default | |
 | Applications.Dapr/stateStores | POST ListSecret | Synchronous | default | |
-
 
 #### Applications.Datastores resource providers
 

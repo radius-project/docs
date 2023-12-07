@@ -31,7 +31,7 @@ resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
       }
     }
     //CONTAINER
-    // Connect container to database 
+    // Connect container to database
     connections: {
       itemstore: {
         source: databaseId

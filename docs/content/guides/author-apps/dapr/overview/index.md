@@ -10,7 +10,7 @@ tags: ["Dapr"]
 
 Radius offers first-class support for the [Dapr](https://dapr.io) runtime and building blocks to make it easy to make your code fully portable across code and infrastructure. Simply drop in your Dapr building blocks as resources and Radius will automatically configure and apply the accompanying Dapr configuration.
 
-## Installation 
+## Installation
 
 Follow the [Dapr installation instructions](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/) to install Dapr in your Kubernetes cluster. Once installed, you can begin adding Dapr sidecars and building blocks.
 
