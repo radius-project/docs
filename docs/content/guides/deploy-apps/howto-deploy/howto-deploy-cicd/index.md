@@ -2,7 +2,7 @@
 type: docs
 title: "How-To: Deploy an application with Github Actions"
 linkTitle: "Deploy via GitHub Actions"
-description: "Learn about adding your Radius apps to your deployment pipelines with GitHub Actions" 
+description: "Learn about adding your Radius apps to your deployment pipelines with GitHub Actions"
 weight: 300
 categories: "How-To"
 tags: ["CI/CD"]
@@ -71,6 +71,7 @@ Ensure the service principal created above has the proper RBAC assignment to dow
     - name: Configure kubectl context
       run: az aks get-credentials --name ${CLUSTER} --resource-group ${RESOURCE_GROUP} --subscription ${SUBSCRIPTION_ID}
 ```
+
 {{% /codetab %}}
 
 {{% codetab %}}

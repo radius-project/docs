@@ -2,7 +2,7 @@
 type: docs
 title: "How-To: Connect a container to an Azure resource"
 linkTitle: "Deploy Azure resources"
-description: "Learn how to connect a container to an Azure resource with managed identities and RBAC" 
+description: "Learn how to connect a container to an Azure resource with managed identities and RBAC"
 weight: 600
 slug: 'azure-connection'
 categories: "How-To"
@@ -24,7 +24,7 @@ The steps below will showcase a "rad-ified" version of the existing [Azure AD wo
 - [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
 - [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed in your cluster, including the [Mutating Admission Webhook](https://azure.github.io/azure-workload-identity/docs/installation/mutating-admission-webhook.html)
 
-## Step 1: Initialize Radius 
+## Step 1: Initialize Radius
 
 Begin by running [`rad init --full`]({{< ref rad_init >}}). Make sure to configure an Azure cloud provider:
 
@@ -32,7 +32,7 @@ Begin by running [`rad init --full`]({{< ref rad_init >}}). Make sure to configu
 rad init --full
 ```
 
-## Step 2: Define a Radius Environment 
+## Step 2: Define a Radius Environment
 
 Create a file named `app.bicep` and define a Radius Environment with [identity property]({{< ref "/guides/deploy-apps/environments/overview" >}}) set. This configures your environment to use your Azure AD workload identity installation with your cluster's OIDC endpoint:
 
@@ -60,7 +60,7 @@ rad deploy ./app.bicep -p oidcIssuer=<OIDC_ISSUER_URL>
    rad resource logs containers mycontainer -a myapp
    ```
 
-2. You should see the contents of the secret from your Key Vault:
+1. You should see the contents of the secret from your Key Vault:
 
    ```txt
    [myapp-mycontainer-79c54bd7c7-tgdpn] I1108 18:39:53.636314       1 main.go:33] "successfully got secret" secret="supersecret"
@@ -76,4 +76,4 @@ rad deploy ./app.bicep -p oidcIssuer=<OIDC_ISSUER_URL>
    rad app delete myapp --yes
    ```
 
-2. Delete the deployed Azure Key Vault via the Azure portal or the Azure CLI
+1. Delete the deployed Azure Key Vault via the Azure portal or the Azure CLI
