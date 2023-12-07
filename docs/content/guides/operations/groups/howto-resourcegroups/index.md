@@ -49,7 +49,7 @@ rad group show myGroup
 You should see:
 
 ```
-ID                                            NAME                
+ID                                            NAME
 /planes/radius/local/resourcegroups/myGroup   myGroup
 ```
 

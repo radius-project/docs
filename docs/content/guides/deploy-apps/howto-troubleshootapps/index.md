@@ -19,6 +19,7 @@ Use the below command to port-forward the container to your local machine. This 
 ```bash
 rad resource expose containers <container_name> -a <app_name> --port <port_number>
 ```
+
 Refer to [`rad resource expose`]({{< ref rad_resource_expose >}}) for more details on the command.
 
 ## Step 2: Inspect container logs
@@ -29,7 +30,7 @@ If your Radius Application is unresponsive or does not connect to its dependenci
 rad resource logs containers <container_name> -a <app_name>
 ```
 
-> Also refer to the [connections section]({{< ref "guides/author-apps/containers/overview#connections" >}}) to know about the naming convention of the environment variables and inspect if your application uses the right variables. 
+> Also refer to the [connections section]({{< ref "guides/author-apps/containers/overview#connections" >}}) to know about the naming convention of the environment variables and inspect if your application uses the right variables.
 
 ## Step 3: Inspect control-plane logs
 
@@ -38,6 +39,7 @@ If you hit errors while deploying the application, look at the control plane log
 ```bash
 rad debug-logs
 ```
-Inspect the UCP and DE logs to see if there are any errors  
+
+Inspect the UCP and DE logs to see if there are any errors.
 
 >Also make sure to [open an Issue](https://github.com/radius-project/radius/issues/new/choose) if you encounter a generic `Internal server error` message or an error message that is not self-serviceable, so we can address the root error not being forwarded to the user.

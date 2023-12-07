@@ -2,7 +2,7 @@
 type: docs
 title: "How-To: Mount an Azure Key Vault as a volume to a container"
 linkTitle: "Mount a Key Vault"
-description: "Learn how to mount an Azure Key Vault as a volume to a container" 
+description: "Learn how to mount an Azure Key Vault as a volume to a container"
 weight: 600
 slug: 'volume-keyvault'
 categories: "How-To"
@@ -23,9 +23,9 @@ This how-to guide will provide an overview of how to:
 - [Supported Kubernetes cluster]({{< ref "guides/operations/kubernetes" >}})
 - [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed on your cluster
 - [Azure Keyvault Provider](https://azure.github.io/secrets-store-csi-driver-provider-azure/docs/getting-started/installation/)
-   - The above installation will also install the required [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation.html)
+  - The above installation will also install the required [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation.html)
 
-## Step 1: Initialize Radius 
+## Step 1: Initialize Radius
 
 Begin by running [`rad init --full`]({{< ref rad_init >}}). Make sure to configure an Azure cloud provider:
 
@@ -67,13 +67,13 @@ rad deploy ./app.bicep -p oidcIssuer=<OIDC_ISSUER_URL>
    rad resource logs containers mycontainer -a myapp
    ```
 
-2. You should see the contents of the `/var/secrets` mount path defined in your `app.bicep` file:
+1. You should see the contents of the `/var/secrets` mount path defined in your `app.bicep` file:
 
    ```
    [myapp-mycontainer-d8b4fc44-qrhnn] secret context : supersecret
    ```
 
-   Note: You might need to wait 1-2 minutes for the pods and identities to be set up completely. Retry in a few minutes if you are unable to view the secret contents. 
+   Note: You might need to wait 1-2 minutes for the pods and identities to be set up completely. Retry in a few minutes if you are unable to view the secret contents.
 
 ## Cleanup
 
@@ -83,4 +83,4 @@ rad deploy ./app.bicep -p oidcIssuer=<OIDC_ISSUER_URL>
    rad app delete myapp --yes
    ```
    
-2. Delete the deployed Azure Key Vault via the Azure portal or the Azure CLI
+1. Delete the deployed Azure Key Vault via the Azure portal or the Azure CLI

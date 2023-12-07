@@ -23,14 +23,16 @@ The following commands let you interact with Radius Environments:
 ```bash
 rad workspace init kubernetes
 ```
+
 {{% /codetab %}}
 
 {{% codetab %}}
 [rad workspace list]({{< ref rad_workspace_list >}}) lists all of the workspaces in your configuration file:
 
 ```bash
-rad workspacae list
+rad workspace list
 ```
+
 {{% /codetab %}}
 
 {{% codetab %}}
@@ -39,6 +41,7 @@ rad workspacae list
 ```bash
 rad workspace show
 ```
+
 {{% /codetab %}}
 
 {{% codetab %}}
@@ -47,6 +50,7 @@ rad workspace show
 ```bash
 rad workspace delete -w myenv
 ```
+
 {{% /codetab %}}
 
 {{% codetab %}}
@@ -55,6 +59,7 @@ rad workspace delete -w myenv
 ```bash
 rad env switch -e myenv
 ```
+
 {{% /codetab %}}
 
 {{< /tabs >}}

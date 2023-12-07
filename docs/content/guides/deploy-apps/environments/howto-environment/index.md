@@ -24,23 +24,23 @@ Radius Environments can be setup with the rad CLI via two paths: interactive or 
    ```bash
    rad init
    ```
-   
+
    Select `Yes` to setup the app.bicep in the current directory
 
    ```
-   Initializing Radius...                                                
-                                                                      
-   🕔 Install Radius {{< param version >}}                                             
-      - Kubernetes cluster: kind
-      - Kubernetes namespace: radius-system                              
-   ⏳ Create new environment default                                     
-      - Kubernetes namespace: default                                    
-      - Recipe pack: local-dev                                                 
-   ⏳ Scaffold application                                          
-   ⏳ Update local configuration                                                 
-   ```                                             
+   Initializing Radius...
 
-2. Verify the initialization by running:
+   🕔 Install Radius {{< param version >}}
+      - Kubernetes cluster: kind
+      - Kubernetes namespace: radius-system
+   ⏳ Create new environment default
+      - Kubernetes namespace: default
+      - Recipe pack: local-dev
+   ⏳ Scaffold application
+   ⏳ Update local configuration
+   ```
+
+1. Verify the initialization by running:
    ```bash
    kubectl get deployments -n radius-system
    ```
@@ -56,24 +56,27 @@ Radius Environments can be setup with the rad CLI via two paths: interactive or 
    ```
 
    You can also use [`rad env list`]({{< ref rad_env_list.md >}}) to view your environment:
-   
+
    ```bash
    rad env list
    ```
-3. Use `rad recipe list` to see the list of available Recipes:
+1. Use `rad recipe list` to see the list of available Recipes:
    ```bash
    rad recipe list
    ```
+
    ```
    NAME      TYPE                              TEMPLATE KIND  TEMPLATE
    default   Applications.Datastores/mongoDatabases  bicep          ghcr.io/radius-project/recipes/local-dev/mongodatabases:latest
    default   Applications.Datastores/redisCaches     bicep          ghcr.io/radius-project/recipes/local-dev/rediscaches:latest
-   ``` 
+   ```
+
    You can follow the [Recipes]({{< ref "/guides/recipes/overview" >}}) documentation to learn more about the Recipes and how to use them in your application.
 
 ## Create an environment interactively
 
 1. Initialize a new environment with [`rad init --full`]({{< ref rad_init >}}):
+
    ```bash
    rad init --full
    ```
@@ -87,21 +90,22 @@ Radius Environments can be setup with the rad CLI via two paths: interactive or 
    You should see the following output:
 
       ```
-      Initializing Radius...                     
+      Initializing Radius...
 
-      ✅ Install Radius {{< param version >}}               
-         - Kubernetes cluster: k3d-k3s-default   
-         - Kubernetes namespace: radius-system   
-      ✅ Create new environment default          
-         - Kubernetes namespace: default 
-         - Recipe pack: dev        
-      ✅ Scaffold application samples            
-      ✅ Update local configuration              
+      ✅ Install Radius {{< param version >}}
+         - Kubernetes cluster: k3d-k3s-default
+         - Kubernetes namespace: radius-system
+      ✅ Create new environment default
+         - Kubernetes namespace: default
+         - Recipe pack: dev
+      ✅ Scaffold application samples
+      ✅ Update local configuration
 
       Initialization complete! Have a RAD time 😎
       ```
 
 1. Verify the Radius services were installed by running:
+
    ```bash
    kubectl get deployments -n radius-system
    ```
@@ -152,7 +156,6 @@ Radius can also be installed and an environment created with manual rad CLI comm
 
     Run [`rad install kubernetes`]({{< ref rad_install_kubernetes >}}) to install Radius into your default Kubernetes context and cluster:
 
-
     ```bash
     rad install kubernetes
     ```
@@ -181,9 +184,9 @@ Radius can also be installed and an environment created with manual rad CLI comm
 
 
 1. Create your Radius Environment:
-   
+
    Run [`rad env create`]({{< ref rad_env_create >}}) to create a new environment in your resource group. Specify the `--namespace` flag to select the Kubernetes namespace to deploy resources into:
-   
+
    ```bash
    rad env create myEnvironment --group myGroup --namespace my-namespace
    ```
@@ -223,6 +226,6 @@ Radius can also be installed and an environment created with manual rad CLI comm
    myEnvironment
    ```
 
-## Next steps 
+## Next steps
 
-Follow the [cloud provider guides]({{< ref providers >}}) to configure cloud providers for your environment to deploy and manage cloud resources
+Follow the [cloud provider guides]({{< ref providers >}}) to configure cloud providers for your environment to deploy and manage cloud resources.
