@@ -29,4 +29,4 @@ The following portable resources are available to use within your application:
 
 ## Reference
 
-Refer to the [API reference docs]({{< ref api >}}) to learn more about the Radius API and the available portable resources plus their schema
+Refer to the [API reference docs]({{< ref "/concepts/technical/api" >}}) to learn more about the Radius API and the available portable resources plus their schema

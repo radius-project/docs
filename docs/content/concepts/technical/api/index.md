@@ -1,10 +1,12 @@
 ---
 type: docs
 title: Radius API
-linkTitle: API
+linkTitle: Radius API
 description: Learn about the Radius API
-weight: 500
+weight: 200
 categories: "Concept"
+aliases:
+  - /concepts/api-concept/
 ---
 
 ## Overview

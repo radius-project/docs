@@ -8,7 +8,11 @@ categories: "Overview"
 tags: ["environments"]
 ---
 
-Radius Environments are prepared "landing zones" for Radius Applications. Applications deployed to an environment will inherit the container runtime, configuration, and other settings from the environment. Stay tuned for additional environment capabilities coming soon.
+## What is an environment?
+
+Radius Environments are prepared "landing zones" for Radius Applications. Applications deployed to an environment will inherit the container runtime, configuration, Recipes, and other settings from the environment.
+
+Environments are server-side resources that exist within the Radius control-plane. You can use the Radius API and [rad CLI](#cli-commands) to interact with your installation's environments.
 
 ## Configuration
 
@@ -16,22 +20,18 @@ The following configuration options are available for environments:
 
 ### Container runtime
 
-Radius Environments can be configured with a container runtime, where Radius [containers]({{< ref "guides/author-apps/containers" >}}) will be run, along with [gateways and routes]({{< ref networking >}}).
+Radius Environments can be configured with a container runtime, where Radius [containers]({{< ref "guides/author-apps/containers" >}}) will be deployed. Currently, only Kubernetes clusters are supported for container runtimes.
 
-A Kubernetes namespace is specified on the environment to tell Radius where to render application resources at deploy time.
+A Kubernetes namespace is specified on the environment to tell Radius where to render environment-scoped resources. For example, a shared database deployed to an environment will be deployed to the namespace specified on the environment. Application-scoped resources will be deployed into a new namespace for each application, in the format `<environment-namespace>-<application-name>`. For example, if an application named `myapp` is deployed to an environment with the namespace `default`, the application-scoped resources will be deployed to the namespace `default-myapp`.
 
-{{< image src=environments.png alt="Diagram showing a Radius Environment mapping to a Kubernetes cluster and namespace" width=800px >}}
-
-### Cloud Provider
+### Cloud provider
 
 You can optionally configure cloud providers allow you to deploy and connect to cloud resources across various cloud platforms. For example, you can use the Radius Azure provider to run your application's services in your Kubernetes cluster, while deploying Azure resources to a specified Azure subscription and resource group. More information on setting up a cloud provider can be found in the [providers]({{< ref providers >}}) section.
 
 #### Supported cloud providers
 
-| Provider | Description |
-|----------|-------------|
-| Microsoft Azure | Deploy and connect to Azure resources |
-| Amazon Web Services | Deploy and connect to AWS resources |
+- Microsoft Azure
+- Amazon Web Services
 
 ### External identity provider
 
@@ -99,8 +99,8 @@ Visit the [environment schema page]({{< ref environment-schema >}}) to learn mor
 
 {{< button page="environment-schema" text="Schema" >}}
 
-## Example
+## Managing multiple environments
 
-The following example shows an environment configured with Kubernetes as the target runtime. The `default` namespace designates where to render application resources.
+If you are working with multiple environments, you can use [workspaces]({{< ref "/guides/operations/workspaces/overview" >}}) to manage them. Workspaces allow you to switch between different sets of environments, and can be used to manage different environments for different projects.
 
-{{< rad file="snippets/environment.bicep" embed=true marker="//ENV" >}}
+{{< button page="/guides/operations/workspaces/overview" text="Workspaces" >}}

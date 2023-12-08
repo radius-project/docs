@@ -1,10 +1,12 @@
 ---
 type: docs
-title: "Concept: Why Radius?"
-linkTitle: "Why Radius?"
-description: "Describes the motivations for creating Radius."
+title: "Introduction: Why did we create Radius?"
+linkTitle: "Introduction"
+description: "Learn about why we created Radius and how it can help you"
 weight: 100
 categories: "Concept"
+aliases:
+  - /concepts/why-radius-concept/
 ---
 
 ## Our starting point
