@@ -49,7 +49,7 @@ $Env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")
 To install the latest edge release, first install the oras CLI: https://oras.land/docs/installation
 Then, run the following in a PowerShell window to install the rad CLI:
 ```powershell
-$script=iwr -useb  https://radiuspublic.blob.core.windows.net/tools/rad/install.ps1; $block=[ScriptBlock]::Create($script); invoke-command -ScriptBlock $block -ArgumentList edge
+$script=iwr -useb "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.ps1"; $block=[ScriptBlock]::Create($script); invoke-command -ScriptBlock $block -ArgumentList edge
 ```
 {{< /edge >}}
 {{% /codetab %}}
