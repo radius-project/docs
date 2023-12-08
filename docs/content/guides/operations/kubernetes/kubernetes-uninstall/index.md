@@ -10,7 +10,7 @@ tags: ["Kubernetes"]
 
 ## Prerequisites
 
-- [Radius installed on Kubernetes cluster]({{< ref /guides/operations/kubernetes/kubernetes-install >}})
+- [Radius installed on Kubernetes cluster]({{< ref "guides/operations/kubernetes/kubernetes-install" >}})
 
 ## Step 1: Uninstall the Radius control-plane from your kubernetes cluster
 
