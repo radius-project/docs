@@ -65,7 +65,7 @@ Other extensions may set Kubernetes metadata. For example, the `daprSidecar` ext
 
 The order in which extensions are executed is as follows, from first to last:
 
-1. Dapr sidecar extension 
+1. Dapr sidecar extension
 1. Manual scale extension
 1. Kubernetes metadata extension
 
@@ -116,4 +116,4 @@ The labels & annotations were set based on the following:
 | `radapp.io/resource-type` | `applications.core-containers` | Radius-injected label
 | **Annotations**
 | `prometheus.io/port` | `9090` | Application annotation is applied
-| `prometheus.io/scrape` | `true `| Application annotation is applied
+| `prometheus.io/scrape` | `true`| Application annotation is applied

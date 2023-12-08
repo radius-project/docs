@@ -303,6 +303,7 @@ radapp
 radiuspublic
 rbac
 rediscaches
+RedisCache
 readinessProbe
 redis
 redisCaches
@@ -311,6 +312,7 @@ resourceGroup
 replacePrefix
 repo
 resourceGroupName
+RecipeSpecified
 resourceId
 resourcegroup
 rollout
@@ -618,6 +620,7 @@ ECS
 EFS
 EIP
 EMR
+EMPTYCONTAINER
 EMRContainers
 EMRServerless
 ElastiCache
@@ -885,6 +888,8 @@ SiteToSiteVpnAttachment
 SlackChannelConfiguration
 SlackWorkspaceConfiguration
 SpotFleet
+manualLink
+manualLinkTarget
 StackSet
 StateMachine
 StaticIp
@@ -957,7 +962,6 @@ tlsdemo
 ConfigMap
 PodSpec
 composable
-CRD
 nd
 OSI
 scaffolded
@@ -1207,3 +1211,13 @@ KubernetesMetadataExtensionLabels
 outputResources
 SecretStore
 plainHTTP
+azd
+Russinovich
+InfoWorld
+reimagines
+TechCrunch
+ZDNET
+Newstrail
+postgresql
+natively
+NuGet
