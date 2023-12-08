@@ -173,11 +173,20 @@ Resources:
   redis-r5tcrra3d7uh6 (kubernetes: core/Service)
 ```
 
-## Recap and next steps
+## 8. Cleanup
 
-It's easy to build on the default app and add more resources to the app.
+To delete your app, run the [rad app delete]({{< ref rad_application_delete >}}) command to cleanup the app and its resources, including the Recipe resources:
 
-To delete your app, see [rad app delete]({{< ref rad_application_delete >}}).
+```bash
+rad app delete demo -y
+```
+
+## Next steps
+
+Now that you've run your first Radius app, you can learn more about Radius by reading the following guides:
+
+- [Tutorials]({{< ref tutorials >}}) - Learn how to build and deploy a variety of applications with Radius
+- [Technical walkthrough]({{< ref "/concepts/technical/walkthrough" >}}) - Learn how this demo worked under the hood
 
 <br>
 {{< button text="Next step: Radius Tutorials" page="tutorials" >}}
