@@ -100,7 +100,7 @@ Congrats, you're running your first Radius app! When you're ready to move on to 
 
 In this step you will add a database (Redis Cache) to the application by:
 
-- Add Redis to the application using a [Recipe]({{< ref "guides/recipes/overview" >}}) .
+- Adding a Redis Cache using a [Radius Recipe]({{< ref "guides/recipes/overview" >}}).
 - Adding a connection from the `demo` container to the Redis cache, which automatically sets environment variables with connection information.
 
 Begin by opening `app.bicep` in your editor and get ready to edit the file.
