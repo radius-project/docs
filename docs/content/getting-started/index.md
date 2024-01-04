@@ -77,7 +77,7 @@ In addition to starting Radius services in your Kubernetes cluster, this initial
 
 ## 4. Run the app
 
-Use the below command to run the app in your environment, then access the application by opening [http://localhost:3000](http://localhost:3000) in a browser.
+Use the below command to run the app in your environment:
 
 ```bash
 rad run app.bicep
@@ -89,22 +89,18 @@ This command:
 - Creates a port-forward from localhost to port 3000 inside the container so you can navigate to the app's frontend UI
 - Streams container logs to your terminal
 
-In your browser you should see the demo app:
+Once the sample application is running, you can access it by opening [http://localhost:3000](http://localhost:3000) in a browser:
 
 {{< image src="demo-screenshot.png" alt="Screenshot of the demo container" width=600px >}}
 <br /><br />
 
-Congrats! You're running your first Radius app. When you're ready to move on to the next step, use <kbd>CTRL</kbd>+ <kbd>C</kbd> to exit the command.
+Congrats, you're running your first Radius app! When you're ready to move on to the next step, use <kbd>CTRL</kbd>+ <kbd>C</kbd> to terminate the application.
 
 ## 5. Add Database
 
-This step will add a database (Redis Cache) to the application.
+This step will add a database (Redis Cache) to the application, you will:
 
-You can create a Redis Cache using [Recipes]({{< ref "guides/recipes/overview" >}}) provided by Radius. The Radius community provides Recipes for running commonly used application dependencies, including Redis.
-
-In this step you will:
-
-- Add Redis to the application using a Recipe.
+- Add Redis to the application using a [Recipe]({{< ref "guides/recipes/overview" >}}) .
 - Connect to Redis from the `demo` container using environment variables that Radius automatically sets.
 
 Open `app.bicep` in your editor and get ready to edit the file.
