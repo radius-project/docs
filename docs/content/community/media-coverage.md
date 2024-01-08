@@ -27,6 +27,7 @@ Ongoing blog posts can be found at [Radius Blog](https://blog.radapp.io)
 
 | Article Title | Media Source | Date |
 |---------------|--------------|------|
+| [On Microsoft’s Radius, and building bridges between infra, dev and ops](https://gigaom.com/2024/01/05/on-microsofts-radius-and-building-bridges-between-infra-dev-and-ops/) | GigaOm | Jan 5, 2024 |
 | [Microsoft Azure’s Cloud-Native Advances: Innovations and Future Outlook](https://www.newstrail.com/microsoft-azures/) | Newstrail | Nov 23, 2023 |
 | [Microsoft Azure introduces Radius, an open-source development platform for multi-cloud computing](https://www.zdnet.com/article/microsoft-azure-introduces-radius-an-open-source-development-platform-for-multi-cloud-computing/)| ZDNET | Oct 27, 2023 |
 | [Microsoft’s Radius and the future of cloud-native development](https://www.infoworld.com/article/3709448/microsofts-radius-and-the-future-of-cloud-native-development.html)| InfoWorld | Oct 26, 2023 |
