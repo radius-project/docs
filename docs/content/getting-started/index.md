@@ -77,7 +77,7 @@ In addition to starting Radius services in your Kubernetes cluster, this initial
 
 ## 4. Run the app
 
-Use the below command to run the app in your environment:
+Use the below command to run the app in your environment, then access the application by opening [http://localhost:3000](http://localhost:3000) in a browser.
 
 ```bash
 rad run app.bicep
@@ -89,21 +89,25 @@ This command:
 - Creates a port-forward from localhost to port 3000 inside the container so you can navigate to the app's frontend UI
 - Streams container logs to your terminal
 
-Once the sample application is running, you can access it by opening [http://localhost:3000](http://localhost:3000) in a browser:
+In your browser you should see the demo app:
 
 {{< image src="demo-screenshot.png" alt="Screenshot of the demo container" width=600px >}}
 <br /><br />
 
-Congrats, you're running your first Radius app! When you're ready to move on to the next step, use <kbd>CTRL</kbd>+ <kbd>C</kbd> to terminate the application.
+Congrats! You're running your first Radius app. When you're ready to move on to the next step, use <kbd>CTRL</kbd>+ <kbd>C</kbd> to exit the command.
 
 ## 5. Add Database
 
-In this step you will add a database (Redis Cache) to the application by:
+his step will add a database (Redis Cache) to the application.
 
-- Adding a Redis Cache using a [Radius Recipe]({{< ref "guides/recipes/overview" >}}).
-- Adding a connection from the `demo` container to the Redis cache, which automatically sets environment variables with connection information.
+You can create a Redis Cache using [Recipes]({{< ref "guides/recipes/overview" >}}) provided by Radius. The Radius community provides Recipes for running commonly used application dependencies, including Redis.
 
-Begin by opening `app.bicep` in your editor and get ready to edit the file.
+In this step you will:
+
+- Add Redis to the application using a Recipe.
+- Connect to Redis from the `demo` container using environment variables that Radius automatically sets.
+
+Open `app.bicep` in your editor and get ready to edit the file.
 
 First add some new code to `app.bicep` by pasting in the content below at the end of the file. This code creates a Redis Cache using a Radius Recipe:
 
