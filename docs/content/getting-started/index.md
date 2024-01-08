@@ -98,7 +98,7 @@ Congrats! You're running your first Radius app. When you're ready to move on to 
 
 ## 5. Add Database
 
-his step will add a database (Redis Cache) to the application.
+This step will add a database (Redis Cache) to the application.
 
 You can create a Redis Cache using [Recipes]({{< ref "guides/recipes/overview" >}}) provided by Radius. The Radius community provides Recipes for running commonly used application dependencies, including Redis.
 
