@@ -19,7 +19,7 @@ Recipes enable a **separation of concerns** between IT operators and developers 
 | Language | Supported sources | Notes |
 |----------|-------------------|-------|
 | [Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/) | [OCI registries](https://opencontainers.org/) | Supports Azure, AWS, and Kubernetes
-| [Terraform](https://developer.hashicorp.com/terraform/docs) | [Public accessible module sources](https://developer.hashicorp.com/terraform/language/modules/sources) | Supports Azure, AWS, and Kubernetes providers<br />Other providers not yet configurable
+| [Terraform](https://developer.hashicorp.com/terraform/docs) | [Public module sources](https://developer.hashicorp.com/terraform/language/modules/sources)<br />Private modules not yet configurable | Supports Azure, AWS, and Kubernetes providers<br />Other providers not yet configurable
 
 ### Select the Recipe that meets your needs
 
