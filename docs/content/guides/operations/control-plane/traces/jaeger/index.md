@@ -8,7 +8,7 @@ categories: "How-To"
 tags: ["tracing", "observability"]
 ---
 
-[Jaeger](https://www.jaegertracing.io/) is an open source distributed tracing system. It helps gather timing data needed to troubleshoot latency problems in microservice architectures. It manages both the collection and lookup of this data.
+[Jaeger](https://www.jaegertracing.io/) is an open-source distributed tracing system. It helps gather timing data needed to troubleshoot latency problems in microservice architectures. It manages both the collection and lookup of this data.
 
 The following steps show you how to configure the Radius control plane to send distributed tracing data to Jaeger running as a container in your Kubernetes cluster and how to view the data.
 
@@ -24,17 +24,17 @@ The following steps show you how to configure the Radius control plane to send d
    kubectl create namespace radius-monitoring
    ```
 
-2. Create the file `jaeger.yaml`, and paste the following YAML:
+1. Create the file `jaeger.yaml`, and paste the following YAML:
 
    {{< button text="Download jaeger.yaml" link="jaeger.yaml" >}}
 
-3. Install Jaeger:
+1. Install Jaeger:
 
    ```bash
    kubectl apply -f jaeger.yaml
    ```
 
-4. Wait for Jaeger to be up and running
+1. Wait for Jaeger to be up and running
 
    ```bash
    kubectl wait deploy --selector app=jaeger --for=condition=available -n radius-monitoring
@@ -55,10 +55,10 @@ The following steps show you how to configure the Radius control plane to send d
 1. Port forward the Jaeger service to your local machine:
 
    ```bash
-   kubectl port-forward svc/tracing 16686 -n radius-monitoring 
+   kubectl port-forward svc/tracing 16686 -n radius-monitoring
    ```
 
-2. In your browser, go to [http://localhost:16686](http://localhost:16686) to see the Jaeger UI:
+1. In your browser, go to [http://localhost:16686](http://localhost:16686) to see the Jaeger UI:
 
    {{< image src="jaeger_ui.png" alt="" style="width:100%" >}}
 

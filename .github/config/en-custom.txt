@@ -894,6 +894,8 @@ SiteToSiteVpnAttachment
 SlackChannelConfiguration
 SlackWorkspaceConfiguration
 SpotFleet
+manualLink
+manualLinkTarget
 StackSet
 StateMachine
 StaticIp
@@ -966,7 +968,6 @@ tlsdemo
 ConfigMap
 PodSpec
 composable
-CRD
 nd
 OSI
 scaffolded
@@ -1215,5 +1216,17 @@ IdentitySettingKind
 KubernetesMetadataExtensionLabels
 outputResources
 SecretStore
+plainHttp
 plainHTTP
 azd
+Russinovich
+InfoWorld
+reimagines
+TechCrunch
+ZDNET
+Newstrail
+postgresql
+natively
+NuGet
+KubeVela
+GigaOm

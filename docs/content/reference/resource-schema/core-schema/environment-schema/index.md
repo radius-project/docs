@@ -24,6 +24,7 @@ weight: 000
 |------|:--------:|-------------|---------|
 | [compute](#compute) | y | Container runtime configuration. | [See below](#compute)
 | [recipes](#recipes) | n | Recipes registered to the environment | [See below](#recipes)
+| simulated | n | When enabled, a simulated environment will not deploy any output resources or run any Recipes when an application is deployed. This is useful for dry runs or testing. Defaults to `false`. | `true`
 
 ### compute
 

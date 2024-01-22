@@ -16,7 +16,7 @@ resource gateway 'Applications.Core/gateways@2023-10-01-preview' = {
     application: app.id
     hostname: {
       // Omitting hostname properties results in gatewayname.appname.PUBLIC_HOSTNAME_OR_IP.nip.io
-      
+
       // Results in prefix.appname.PUBLIC_HOSTNAME_OR_IP.nip.io
       prefix: 'prefix'
       // Alternately you can specify your own hostname that you've configured externally

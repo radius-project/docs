@@ -27,10 +27,10 @@ In the example provided, the virtual machine is the **resource** and the API pro
 
 Resource providers sometimes provide operations in addition to the CRUDL operations that are specific to the type of resource. For a virtual machine, a resource provider might provide additional operations like:
 
- - Rebooting a virtual machine
- - Restoring a virtual machine from backup
+- Rebooting a virtual machine
+- Restoring a virtual machine from backup
 
-As a result the set of operations is sometimes written as **CRUDL+**, meaning that a resource provider must implement the **CRUDL** operations at a minimum and sometimes more. 
+As a result the set of operations is sometimes written as **CRUDL+**, meaning that a resource provider must implement the **CRUDL** operations at a minimum and sometimes more.
 
 Resources have a type (in the programming sense) and a means of being identified (name or id). For example an AWS virtual machine's type would be `AWS::EC2::Instance` and might have a generated name like `i-0123456789abcdef`. The name must be provided to operations like Update so that the resource provider can identify which resource to update. The name and type can also be combined with additional context to form a unique identifier. For example on AWS the virtual machine name would be combined with the user's account id and the selected region to form a unique identifier called an [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html). These identifiers are useful because they provide a universal way to identify which resource is being named.
 
@@ -38,11 +38,11 @@ A resource could be anything that's useful to manage through an API. For example
 
 ## Principles for the Radius API
 
-Radius provides a general resource manager that can manage cloud or on-premises resources as well as opinionated support cloud-native application concerns like containers and databases. Such an API needs to be powerful, flexible, and extensible enough to communicate with a variety of existing systems that were created by different organizations. 
+Radius provides a general resource manager that can manage cloud or on-premises resources as well as opinionated support cloud-native application concerns like containers and databases. Such an API needs to be powerful, flexible, and extensible enough to communicate with a variety of existing systems that were created by different organizations.
 
 The design of the Radius API incorporates the following principles:
 
-- Universal addressing: every resource has a unique identifier called a resource id. 
+- Universal addressing: every resource has a unique identifier called a resource id.
 - CRUDL+ lifecycle: resources their functionality through a common set of HTTP contracts in a consistent way.
 - Federation based on metadata: rather that duplicate the functionality of existing resource managers, Radius delegates functionality to external APIs and is powered by the metadata of those APIs.
 
@@ -59,12 +59,12 @@ Each resource in Radius has a unique identifier called a resource id. Resource i
 The common structure of a resource id is the following:
 
 ```txt
-{rootScope}/{resourceNamespace}/{resourceType}/{resourceName}
+{rootScope}/providers/{resourceNamespace}/{resourceType}/{resourceName}
 ```
 
-### Root scope 
+### Root scope
 
-A hierarchical set of key-value pairs that identify the origin of the resource. Root scopes answer questions like: 
+A hierarchical set of key-value pairs that identify the origin of the resource. Root scopes answer questions like:
 
 - *"What cloud is this resource from?"*
 - *"What cloud account contains this resource?"*
@@ -86,34 +86,34 @@ The following tables shows some examples of resource ids from different resource
 
 This example shows a Radius Application named `my-app` in the `my-group` resource group, running on the local cluster:
 
-| Key                | Example                                                                              |
-| ------------------ | ------------------------------------------------------------------------------------ |
-| **Root scope**     | `/planes/radius/local/resourceGroups/my-group`                                       |
-| **Namespace/Type** | `Applications.Core/applications`                                                     |
-| **Name**           | `my-app`                                                                             |
-| **Resource id**    | `/planes/radius/local/resourceGroups/my-group/Applications.Core/applications/my-app` |
+| Key                | Example                                                                                        |
+| ------------------ | ---------------------------------------------------------------------------------------------- |
+| **Root scope**     | `/planes/radius/local/resourceGroups/my-group`                                                 |
+| **Namespace/Type** | `Applications.Core/applications`                                                               |
+| **Name**           | `my-app`                                                                                       |
+| **Resource id**    | `/planes/radius/local/resourceGroups/my-group/providers/Applications.Core/applications/my-app` |
 
 #### Resource manager: AWS
 
 This example shows an AWS Kinesis Stream named `my-stream` in the `0123456789` account, running in the `us-west-2` region:
 
-| Key                | Example                                                                               |
-| ------------------ | ------------------------------------------------------------------------------------- |
-| **Root scope**     | `/planes/aws/aws/accounts/01234556789/regions/us-west-2`                              |
-| **Namespace/Type** | `AWS.Kinesis/Stream`                                                                  |
-| **Name**           | `my-stream`                                                                           |
-| **Resource id**    | `/planes/aws/aws/accounts/01234556789/regions/us-west-2/AWS.Kinesis/Stream/my-stream` |
+| Key                | Example                                                                                         |
+| ------------------ | ----------------------------------------------------------------------------------------------- |
+| **Root scope**     | `/planes/aws/aws/accounts/01234556789/regions/us-west-2`                                        |
+| **Namespace/Type** | `AWS.Kinesis/Stream`                                                                            |
+| **Name**           | `my-stream`                                                                                     |
+| **Resource id**    | `/planes/aws/aws/accounts/01234556789/regions/us-west-2/providers/AWS.Kinesis/Stream/my-stream` |
 
 #### Resource manager: Azure
 
 This example shows an Azure Storage Account named `myaccount` in the `00000000-0000-0000-0000-000000000000` subscription and `my-group` Azure resource group:
 
-| Key                | Example                                                                                                                                           |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Root scope**     | `/planes/azure/azurecloud/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-group`                                             |
-| **Namespace/Type** | `Microsoft.Storage/storageAccounts`                                                                                                               |
-| **Name**           | `myaccount`                                                                                                                                       |
-| **Resource id**    | `/planes/azure/azurecloud/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-group/Microsoft.Storage/storageAccounts/myaccount` |
+| Key                | Example                                                                                                                                                     |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Root scope**     | `/planes/azure/azurecloud/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-group`                                                       |
+| **Namespace/Type** | `Microsoft.Storage/storageAccounts`                                                                                                                         |
+| **Name**           | `myaccount`                                                                                                                                                 |
+| **Resource id**    | `/planes/azure/azurecloud/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-group/providers/Microsoft.Storage/storageAccounts/myaccount` |
 
 ## Resource lifecycle
 
@@ -121,12 +121,12 @@ The lifecycle of a resource is modeled using the HTTP methods that best match ea
 
 This section includes an example based on the Radius `Applications.Core/applications` type which represents a cloud-native application.
 
-| Operation     | HTTP Method | URL                                                |
-| ------------- | ----------- | -------------------------------------------------- |
-| List          | GET         | `{rootScope}/Applications.Core/applications`       |
-| Read          | GET         | `{rootScope}/Applications.Core/applictions/my-app` |
-| Create/Update | PUT         | `{rootScope}/Applications.Core/applictions/my-app` |
-| Delete        | DELETE      | `{rootScope}/Applications.Core/applictions/my-app` |
+| Operation     | HTTP Method | URL                                                          |
+| ------------- | ----------- | ------------------------------------------------------------ |
+| List          | GET         | `{rootScope}/providers/Applications.Core/applications`       |
+| Read          | GET         | `{rootScope}/providers/Applications.Core/applictions/my-app` |
+| Create/Update | PUT         | `{rootScope}/providers/Applications.Core/applictions/my-app` |
+| Delete        | DELETE      | `{rootScope}/providers/Applications.Core/applictions/my-app` |
 
 The example above demonstrates the CRUDL lifecycle APIs of a resource, all resource types provided by Radius follow this pattern.
 

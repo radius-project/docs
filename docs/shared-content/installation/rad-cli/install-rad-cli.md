@@ -9,12 +9,11 @@ wget -q "https://raw.githubusercontent.com/radius-project/radius/main/deploy/ins
 ```
 {{< /latest >}}
 {{< edge >}}
-
-1. Visit the [GitHub Actions runs](https://github.com/radius-project/radius/actions/workflows/build.yaml?query=branch%3Amain+event%3Apush)
-1. Click on the latest successful run
-1. Scroll down to Artifacts and download `rad_cli_release`
-1. Extract the archive and run the rad binary applicable for your machine
-
+To install the latest edge release, first install the oras CLI: https://oras.land/docs/installation
+Then, run the following command to install the rad CLI:
+```bash
+wget -q "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh" -O - | /bin/bash -s edge
+```
 {{< /edge >}}
 {{% /codetab %}}
 
@@ -25,12 +24,11 @@ curl -fsSL "https://raw.githubusercontent.com/radius-project/radius/main/deploy/
 ```
 {{< /latest >}}
 {{< edge >}}
-
-1. Visit the [GitHub Actions runs](https://github.com/radius-project/radius/actions/workflows/build.yaml?query=branch%3Amain+event%3Apush)
-1. Click on the latest successful run
-1. Scroll down to Artifacts and download `rad_cli_release`
-1. Extract the archive and run the rad binary applicable for your machine
-
+To install the latest edge release, first install the oras CLI: https://oras.land/docs/installation
+Then, run the following command to install the rad CLI:
+```bash
+curl -fsSL "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh" | /bin/bash -s edge
+```
 {{< /edge >}}
 {{% /codetab %}}
 
@@ -48,12 +46,11 @@ $Env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")
 ```
 {{< /latest >}}
 {{< edge >}}
-
-1. Visit the [GitHub Actions runs](https://github.com/radius-project/radius/actions/workflows/build.yaml?query=branch%3Amain+event%3Apush)
-1. Click on the latest successful run
-1. Scroll down to Artifacts and download `rad_cli_release`
-1. Extract the archive and run the rad binary applicable for your machine
-
+To install the latest edge release, first install the oras CLI: https://oras.land/docs/installation
+Then, run the following in a PowerShell window to install the rad CLI:
+```powershell
+$script=iwr -useb "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.ps1"; $block=[ScriptBlock]::Create($script); invoke-command -ScriptBlock $block -ArgumentList edge
+```
 {{< /edge >}}
 {{% /codetab %}}
 
