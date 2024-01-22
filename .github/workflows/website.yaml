@@ -62,7 +62,8 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           # Within docs/config.toml, replace the line that starts with "github_branch" with "github_branch: $GITHUB_HEAD_REF"
-          sed -i "s/github_branch = .*/github_branch = \"$GITHUB_HEAD_REF\"/" docs/config.toml
+          awk -v branch="$GITHUB_HEAD_REF" '/^github_branch/ { print "github_branch: " branch; next }1' ./docs/config.toml > ./docs/config.toml.tmp
+          mv ./docs/config.toml.tmp ./docs/config.toml
       - name: Build Hugo Site
         run: |
           cd docs
