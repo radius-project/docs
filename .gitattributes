@@ -6,3 +6,9 @@
 
 # images are binary
 *.png binary
+
+# MS Office documents are binary
+*.pptx binary
+*.potx binary
+*.docx binary
+*.dotx binary
