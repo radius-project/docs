@@ -19,7 +19,7 @@ We welcome community members giving presentations on Radius and spreading the wo
 
 We offer a template PowerPoint file to get started:
 
-{{< button text="Download the Radius Presentation Deck" link="https://github.com/radius-project/docs/raw/{{< param github_branch >}}/presentation-pack/Radius.potx" newtab="true" >}}
+<a class="btn btn-primary" href="https://github.com/radius-project/docs/raw/{{< param github_branch >}}/presentation-pack/Radius.potx" role="button" target="_blank">Download the Radius PowerPoint template</a>
 
 ## Previous presentations
 
