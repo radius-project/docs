@@ -19,7 +19,7 @@ description: "Detailed reference documentation for applications.core/extenders@2
 | **id** | string | The resource id <br />_(read-only, deploy-time constant)_ |
 | **location** | string | The geo-location where the resource lives <br />_(required)_ |
 | **name** | string | The resource name <br />_(required, deploy-time constant)_ |
-| **properties** | [ExtenderProperties](#extenderproperties) | ExtenderResource portable resource properties |
+| **properties** | [ExtenderProperties](#extenderproperties) | ExtenderResource portable resource properties <br />_(required)_ |
 | **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(read-only)_ |
 | **tags** | [TrackedResourceTags](#trackedresourcetags) | Resource tags. |
 | **type** | 'Applications.Core/extenders' | The resource type <br />_(read-only, deploy-time constant)_ |
