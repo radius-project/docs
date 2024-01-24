@@ -186,7 +186,6 @@ rad app delete demo -y
 Now that you've run your first Radius app, you can learn more about Radius by reading the following guides:
 
 - [Tutorials]({{< ref tutorials >}}) - Learn how to build and deploy a variety of applications with Radius
-- [Technical walkthrough]({{< ref "/concepts/technical/walkthrough" >}}) - Learn how this demo worked under the hood
 
 <br>
 {{< button text="Next step: Radius Tutorials" page="tutorials" >}}
