@@ -1210,6 +1210,7 @@ IdentitySettingKind
 KubernetesMetadataExtensionLabels
 outputResources
 SecretStore
+plainHttp
 plainHTTP
 azd
 Russinovich
@@ -1221,3 +1222,5 @@ Newstrail
 postgresql
 natively
 NuGet
+KubeVela
+GigaOm
