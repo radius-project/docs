@@ -19,7 +19,7 @@ description: "Detailed reference documentation for applications.core/secretstore
 | **id** | string | The resource id <br />_(read-only, deploy-time constant)_ |
 | **location** | string | The geo-location where the resource lives <br />_(required)_ |
 | **name** | string | The resource name <br />_(required, deploy-time constant)_ |
-| **properties** | [SecretStoreProperties](#secretstoreproperties) | The properties of SecretStore |
+| **properties** | [SecretStoreProperties](#secretstoreproperties) | The properties of SecretStore <br />_(required)_ |
 | **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(read-only)_ |
 | **tags** | [TrackedResourceTags](#trackedresourcetags) | Resource tags. |
 | **type** | 'Applications.Core/secretStores' | The resource type <br />_(read-only, deploy-time constant)_ |
