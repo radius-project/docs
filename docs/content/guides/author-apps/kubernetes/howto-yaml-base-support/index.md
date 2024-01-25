@@ -2,13 +2,16 @@
 type: docs
 title: "How-To: Migrate from existing Kubernetes resources"
 linkTitle: "Migrate using Kubernetes YAML"
-description: "Learn how to migrate to a Radius container using existing Kubernetes YAML configurations"
+description: "Learn how to migrate resources to Radius using existing Kubernetes YAML configurations"
 weight: 500
 categories: "How-To"
 tags: ["containers","Kubernetes"]
 ---
 
-This guide will provide an overview of how to migrate your existing Kubernetes resources from [Kubernetes YAML](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#writing-a-deployment-spec). 
+This guide will provide an overview of how to: 
+
+- Migrate your existing Kubernetes applications and resources using [Kubernetes YAML](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#writing-a-deployment-spec)
+- Apply Kubernetes-specific configurations to your application resources using Radius
 
 ### Prerequisites
 
