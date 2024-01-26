@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "How-To: Migrate from existing Kubernetes resources"
-linkTitle: "Migrate using Kubernetes YAML"
-description: "Learn how to migrate resources to Radius using existing Kubernetes YAML configurations"
+title: "How-To: Apply property overrides on Kubernetes resources using Radius"
+linkTitle: "Override properties using base YAML"
+description: "Learn how to apply property overrides on Kubernetes resources using Radius and existing Kubernetes YAML manifests."
 weight: 500
 categories: "How-To"
 tags: ["containers","Kubernetes"]
@@ -10,79 +10,92 @@ tags: ["containers","Kubernetes"]
 
 This guide will provide an overview of how to: 
 
-- Migrate your existing Kubernetes applications and resources using [Kubernetes YAML](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#writing-a-deployment-spec)
-- Apply Kubernetes-specific configurations to your application resources using Radius
+- Use Radius to apply property overrides on top of a given Kubernetes resource using its base [Kubernetes YAML](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#writing-a-deployment-spec) manifest.
+- Migrate your existing Kubernetes resource to Radius using its base [Kubernetes YAML](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#writing-a-deployment-spec) manifest.
 
-### Prerequisites
-
-Before you get started, you'll need to make sure you have the following tools and resources:
+## Prerequisites
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [rad CLI]({{< ref getting-started >}})
 - [Radius initialized with `rad init`]({{< ref howto-environment >}})
 
-### Step 1: Define a base Kubernetes YAML file
+## Step 1: Define a base Kubernetes YAML file
 
-In a file named `kubernetes.yaml` define all the Kubernetes resources that correspond to the new Radius container.
+Begin by creating a file named `manifest.yaml` which defines a Kubernetes application named `base-yaml-app` that includes a Deployment with a single container named `log-collector`:
 
-> Note that the names of the Deployments, Services, and Config Maps all must match each other and the name of the new Radius container. Any other resources can be named differently.
+{{< rad file="snippets/manifest.yaml" embed=true lang="yaml">}}
 
-{{< rad file="snippets/basemanifest.yaml" embed=true lang="yaml">}}
+## Step 2: Define a Radius application
 
-### Step 2: Define a Radius container
+Create another file named `app.bicep` which defines a Radius application named `base-yaml-app` along with a container named `base-yaml-app`. Additionally, include a `runtimes` property that references the `manifest.yaml` file as the base Kubernetes YAML manifest on top of which Radius will apply the properties defined in `app.bicep`.
 
-[Radius containers]({{< ref "/guides/author-apps/containers/overview" >}}) represent a containerized workload within your Radius Application. You can define a Radius container and reference your Kubernetes YAML in order to deploy and manage it within Radius.
+{{< rad file="snippets/app.bicep" embed=true >}}
 
-In a file named "app.bicep" add any missing parameter that isn't found in your manifest file. This could range from anything like a new such as:
+> **Note**: the names of the Kubernetes Deployment and the Radius container match each other. For more information on namespace and resource name matching, refer to the [containers overview guide]({{< ref "guides/author-apps/containers/overview#base-kubernetes-yaml" >}}).
 
-- The container image path
-- The port(s) your container exposes
+## Step 3: Deploy the application and containers
 
-{{< rad file="snippets/basemanifest.bicep" embed=true marker="//CONTAINER" >}}
+Ensure that your `manifest.yaml` and `app.bicep` files are in the same directory, then deploy your application:
 
-> Radius will override any parameters found in your Kubernetes manifest file if it finds a value for the same parameter in your `app.bicep` file otherwise it will use the parameter values found. However if you define a parameter such as  image name in the different container like sidecar, the container renderer will not override the image location.
-
-### Step 3: Deploy your container
-
-Now that you've defined your Radius Container you can deploy it into your Application.
-
-1. Run [`rad deploy`]({{< ref "rad_deploy" >}}) to deploy your application:
-
-    ```bash
-    rad deploy -a demo
-    ```
-
-2. Run `kubectl get all` to verify the Kubernetes resources were created:
-
-    ```bash
-    kubectl get all -n default-demo
-    ```
-   
-   > Radius deploys app resources into a unique namespace for every app. For more information refer to the [Kubernetes guide]({{< ref "/guides/operations/kubernetes/overview#namespace-mapping" >}}).
- 
-3. Your console output should look similar to:
+```bash
+rad deploy app.bicep
 ```
-NAME                                   READY   STATUS    RESTARTS   AGE
-pod/my-microservice-795545bf79-glbhw   1/1     Running   0          21s
 
-NAME                      TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
-service/my-microservice   ClusterIP   10.43.177.210   <none>        3000/TCP   18s
+> **Note**: in the deployment, Radius will override any parameters in the base Kubernetes YAML manifest (i.e. `manifest.yaml` file) with any values specified in the Radius application definition (i.e. `app.bicep` file) for the same parameters.
 
-NAME                              READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/my-microservice   1/1     1            1           2m41s
+Once the deployment completes successfully, you should see the following confirmation message:
 
-NAME                                         DESIRED   CURRENT   READY   AGE
-replicaset.apps/my-microservice-795545bf79   1         1         1       21s
-replicaset.apps/my-microservice-96dc8569d    0         0         0       2m41s
+```
+Deployment In Progress... 
 
-1. Run the following command to delete all Pods, Deployments, and Services in the `my-microservice` namespace and the associated Radius Application:
+Completed            base-yaml-app   Applications.Core/applications
+...                  base-yaml-app   Applications.Core/containers
 
-    ```
-    rad app delete -a demo
-    ```
+Deployment Complete
+
+Resources:
+    base-yaml-app   Applications.Core/applications
+    base-yaml-app   Applications.Core/containers
+```
+
+## Step 4: Verify the deployment
+
+Run the command below, which uses `grep` to filter for information to verify that both `log-collector` (which was defined in your base Kubernetes YAML manifest) and `base-yaml-app` (which was defined in your Radius application) containers were deployed successfully:
+
+```bash
+kubectl describe pods -n base-yaml-app | grep -A6 -E 'log-collector:|base-yaml-app:'
+```
+
+Your console output should look similar to:
+
+```
+log-collector:
+    Container ID:   containerd://86b06b000889d3d35a10d0996aee89989f9edbad2ad00a29a29eb647b49c4bf2
+    Image:          ghcr.io/radius-project/fluent-bit:2.1.8
+    Image ID:       ghcr.io/radius-project/fluent-bit@sha256:1c8bdb90eb65902a65b7cd32126a621690dc36128fef78951775afbe37dfa01f
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+--
+  base-yaml-app:
+    Container ID:   containerd://fb5eebe5e0ad45569235c6d6e5fc14f56e2738e213725fa3bf3078587ef8e7aa
+    Image:          ghcr.io/radius-project/magpiego:latest
+    Image ID:       ghcr.io/radius-project/magpiego@sha256:cb980dd7acde3edb7173a0f82c3cbcb0addfadd16daef80d8589fa2e067faf3c
+    Port:           3000/TCP
+    Host Port:      0/TCP
+    State:          Running
+```
+
+## Clean up
+
+Run the following command to [delete]({{< ref "guides/deploy-apps/howto-delete" >}}) your app and containers:
+
+```bash
+rad app delete base-yaml-app
+```
 
 ## Further reading
 
-- [Kubernetes authoring resources overview]({{< ref "/guides/author-apps/kubernetes/overview" >}})
-- [Container resource overview]({{< ref "guides/author-apps/containers/overview#kubernetes" >}})
+- [Kubernetes in Radius containers]({{< ref "guides/author-apps/containers/overview#kubernetes" >}})
+- [PodSpec in Radius containers]({{< ref "reference/resource-schema/core-schema/container-schema#runtimes" >}})
 - [Container resource schema]({{< ref "container-schema#runtimes" >}})

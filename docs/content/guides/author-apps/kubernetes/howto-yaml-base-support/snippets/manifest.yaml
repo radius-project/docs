@@ -1,12 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-microservice # Required for Radius validation
+  name: base-yaml-app
   labels:
-    app: my-microservice # Radius will perform a synthetic validation but a hard requirement
+    app: base-yaml-app
+  annotations:
+    source: base-yaml-test
 spec:
+  replicas: 1
   selector:
+    matchLabels:
+      app: base-yaml-app
   template:
+    metadata:
+      labels:
+        app: base-yaml-app
     spec:
       containers:
-        - name: my-microservice
+        - name: log-collector
+          image: ghcr.io/radius-project/fluent-bit:2.1.8

@@ -1,27 +1,38 @@
 import radius as radius
 
-@description('The app ID of your Radius Application. Set automatically by the rad CLI.')
-param application string
+@description('Specifies the environment for resources.')
+param environment string
 
-//CONTAINER
-@description('Loads the Kubernetes base manifest file and turns content into a string.')
-var manifest = loadTextContent('./manifest.yaml')
+resource app 'Applications.Core/applications@2023-10-01-preview' = {
+  name: 'base-yaml-app'
+  properties: {
+    environment: environment
+    extensions: [
+      {
+          kind: 'kubernetesNamespace'
+          namespace: 'base-yaml-app'
+      }
+    ]
+  }
+}
 
 resource container 'Applications.Core/containers@2023-10-01-preview' = {
-  // Name must match with `ServiceAccount`, `Deployment`, and `Service` objects
-  name: 'my-microservice'
+  name: 'base-yaml-app'
   properties: {
-    application: application
+    application: app.id
     container: {
-      // Points to your container image
-      image: 'ghcr.io/radius-project/samples/demo:latest'
+      image: 'ghcr.io/radius-project/magpiego:latest'
+      ports: {
+        web: {
+          containerPort: 3000
+        }
+      }
     }
     connections: {}
     runtimes: {
       kubernetes: {
-        base: manifest
+        base: loadTextContent('./manifest.yaml')
       }
     }
   }
 }
-//CONTAINER
