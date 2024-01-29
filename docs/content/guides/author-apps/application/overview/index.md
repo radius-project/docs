@@ -34,7 +34,7 @@ The [Kubernetes Metadata extension]({{< ref "guides/operations/kubernetes/kubern
 
 ## Query and understand your application with the Radius Application Graph
 
-Radius Applications are more than just client-side configuration and automation, they also provide a server-side graph of your application. This graph can be queried and used to understand your application, and can be used to power other Radius features and custom tooling. Refer to the [API concept docs]({{< ref "api-concept" >}}) and [Postman How-To guide]({{< ref "guides/operations/control-plane/howto-postman" >}}) for more information on how to query the application graph.
+Radius Applications are more than just client-side configuration and automation, they also provide a server-side graph of your application. This graph can be queried and used to understand your application, and can be used to power other Radius features and custom tooling. Refer to the [API concept docs]({{< ref "/concepts/technical/api" >}}) and [Postman How-To guide]({{< ref "guides/operations/control-plane/howto-postman" >}}) for more information on how to query the application graph.
 
 {{< image src="app-graph.png" alt="Diagram of the application graph" width=500px >}}
 

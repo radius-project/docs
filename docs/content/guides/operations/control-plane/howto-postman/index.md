@@ -158,4 +158,4 @@ Next, you'll need to get the control plane API endpoint and use Postman to inter
 
 ## Next step: Explore the Radius API
 
-Now that you have successfully authenticated to the Radius API and interacted with resources, you can explore the API using the [Radius API reference]({{< ref api >}}).
+Now that you have successfully authenticated to the Radius API and interacted with resources, you can explore the API using the [Radius API reference]({{< ref "/concepts/technical/api" >}}).

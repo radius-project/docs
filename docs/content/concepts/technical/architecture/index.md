@@ -3,10 +3,12 @@ type: docs
 title: Radius architecture
 linkTitle: Architecture
 description: Learn about the architecture of the Radius API and services
-weight: 600
+weight: 100
 categories: "Concept"
 tags: ["control plane"]
 slug: 'architecture'
+aliases:
+  - /concepts/architecture-concept/
 ---
 
 ## Overview
@@ -15,7 +17,7 @@ Radius provides an HTTP-based API and supporting tools that can deploy and manag
 
 This page serves as documentation about the overall architecture of Radius to help educate contributors to the project or any user who wants a deeper understanding of the system and its capabilities.
 
-**Prerequisite:** Read the [API docs]({{< ref api-concept >}}) to understand the terminology and structure of the Radius API.
+**Prerequisite:** Read the [API docs]({{< ref "/concepts/technical/api" >}}) to understand the terminology and structure of the Radius API.
 
 ## Design motivations for Radius
 

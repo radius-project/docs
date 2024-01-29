@@ -1,10 +1,11 @@
 ---
 type: docs
 title: "Concept: Collaboration in Radius"
-linkTitle: "Collaboration"
+linkTitle: "Dev + ops collaboration"
 description: "Learn how Radius Environments and Recipes support collaboration between platform engineers, application developers, and IT operators."
 weight: 300
-slug: collaboration
+aliases:
+  - /concepts/collaboration-concept/
 ---
 
 ## What we heard
