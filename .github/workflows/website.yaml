@@ -58,6 +58,11 @@ jobs:
         run : |
           mkdir -p ./docs/static/swagger
           cp -r ./radius/swagger ./docs/static/
+      - name: Override git_branch for PR
+        if: github.event_name == 'pull_request'
+        run: |
+          # Within docs/config.toml, replace the line that starts with "github_branch" with "github_branch: $GITHUB_HEAD_REF"
+          sed -i "s|github_branch = .*|github_branch = \"$GITHUB_HEAD_REF\"|" docs/config.toml
       - name: Build Hugo Site
         run: |
           cd docs
