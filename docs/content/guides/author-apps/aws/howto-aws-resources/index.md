@@ -44,7 +44,7 @@ Run [`rad init --full`]({{< ref rad_init >}}) to initialize a new environment in
 rad init --full
 ```
 
-Follow the prompts to install the [control plane services]({{< ref architecture-concept >}}), create an [environment resource]({{< ref "/guides/deploy-apps/environments" >}}), and create a [local workspace]({{< ref workspaces >}}). You will be asked for:
+Follow the prompts to install the [control plane services]({{< ref "/concepts/technical/architecture" >}}), create an [environment resource]({{< ref "/guides/deploy-apps/environments" >}}), and create a [local workspace]({{< ref workspaces >}}). You will be asked for:
 
 - **Namespace** - When an application is deployed, this is the namespace where your containers and other Kubernetes resources will be run. By default, this will be in the `default` namespace.
 {{% alert title="💡 About namespaces" color="success" %}} When you initialize a Radius Kubernetes environment, Radius installs the control plane resources within    the `radius-system` namespace in your cluster, separate from your applications. The namespace specified in this step will be used for your application deployments.

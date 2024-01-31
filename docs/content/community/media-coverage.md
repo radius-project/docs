@@ -3,7 +3,7 @@ type: docs
 title: "Radius press coverage and media links"
 linkTitle: "Press/media coverage"
 description: "Learn about Radius through press articles, blog posts, presentation and other coverage of Radius"
-weight: 400
+weight: 500
 ---
 
 ## Blog posts
@@ -13,15 +13,17 @@ weight: 400
 | [The Microsoft Azure Incubations Team launches Radius, a new open application platform for the cloud](https://azure.microsoft.com/en-us/blog/the-microsoft-azure-incubations-team-launches-radius-a-new-open-application-platform-for-the-cloud/) | Microsoft Azure Blog | Oct 18, 2023 |
 | [Enabling developer collaboration with Radius](https://cloudblogs.microsoft.com/opensource/2023/10/18/enabling-developer-collaboration-with-radius/) | Microsoft Open Source Blog | Oct 18, 2023 |
 
-Ongoing blog posts can be found at [Radius Blog](https://blog.radapp.io)
+Ongoing blog posts can be found at [Radius Blog](https://blog.radapp.io).
 
-## Videos
+## Presentations
 
 | Video | Event | Date |
 |-------|-------|------|
 | [Brendan Burns and Mark Russinovich at Ignite about Radius](https://www.youtube.com/watch?v=gaG77PiYv5w&ab_channel=MicrosoftIgnite)| Microsoft Ignite | Nov 17, 2023 |
 | [Introducing Radius - Open at Microsoft ](https://www.youtube.com/watch?v=mT_NWFnYn0A)| Open at Microsoft | Nov 7, 2023 |
 | [Mark Russinovich at the Linux Foundation Member Summit](https://aka.ms/radius-lfms)|Linux Foundation Member Summit | Oct 24, 2023 |
+
+Want to give you own presentation? Check out the [Give a Radius Presentation]({{< ref presentations >}}) page.
 
 ## Press articles
 

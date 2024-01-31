@@ -3,7 +3,7 @@ type: docs
 title: "How-To: Set Kubernetes metadata"
 linkTitle: "Kubernetes metadata"
 description: "Learn how to configure Kubernetes labels and annotations for generated objects"
-weight: 400
+weight: 500
 categories: "How-To"
 tags: ["containers","Kubernetes","applications","environments"]
 ---

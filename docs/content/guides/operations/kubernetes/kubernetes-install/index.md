@@ -11,6 +11,12 @@ slug: 'install'
 
 Radius handles the deployment and management of environments, applications, and other resources with components that are installed into the Kubernetes cluster.
 
+## Prerequisites
+
+- [Kubernetes cluster]({{< ref "guides/operations/kubernetes/overview#supported-kubernetes-clusters" >}})
+- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+- [rad CLI]({{< ref howto-rad-cli >}})
+
 ## Install with the rad CLI
 
 Use the [`rad install kubernetes` command]({{< ref rad_install_kubernetes >}}) to install Radius into the `radius-system` namespace on your Kubernetes cluster. You can optionally use the `--set` flag to customize the installation with [Helm configuration options](#helm-configuration-options):

@@ -78,7 +78,7 @@ Once you have defined your IaC template you will need to output a `result` objec
 The `result` object must include:
 - **`values`**: The fields that the target resource requires. (_username, host, port, etc._)
 - **`secrets`**: The fields that the target resource requires, but should be treated as secrets. (_password, connectionString, etc._)
-- **`resources`**: The [UCP ID(s)]({{< ref "api-concept#resource-ids" >}}) of the resources providing the backing service. Used by UCP to track dependencies and manage deletion.
+- **`resources`**: The [UCP ID(s)]({{< ref "/concepts/technical/api#resource-ids" >}}) of the resources providing the backing service. Used by UCP to track dependencies and manage deletion.
 
 {{< tabs "Bicep" "Terraform" >}}
 
