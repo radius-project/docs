@@ -61,7 +61,7 @@ rad workspace delete -w myenv
 [rad workspace switch]({{< ref rad_workspace_switch >}}) switches the default workspace:
 
 ```bash
-rad env switch -e myenv
+rad workspace switch -w myworkspace
 ```
 
 {{% /codetab %}}
