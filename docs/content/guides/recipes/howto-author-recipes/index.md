@@ -39,11 +39,11 @@ Add the `context` parameter to your `variable.tf` file:
 
 {{< rad file="snippets/redis-kubernetes-variables.tf" embed=true marker="//CONTEXT" lang="terraform" >}}
 
-Update `main.tf` to use `context` for naming and namespace configuration:
+Ensure that your `main.tf` has a defined `required_providers` in order to ensure that credentials and the correct resource provider is detected by Radius:
 
-{{< alert title="Authoring for AWS" color="primary" >}}
-AWS users are required to define their \`required_providers.aws\` property with their \`main.tf\` in order to access AWS credentials.
-{{< /alert >}}
+{{< rad file="snippets/redis-kubernetes-main.tf" embed=true marker="//PROVIDER" lang="terraform" >}}
+
+Update `main.tf` to use `context` for naming and namespace configuration:
 
 {{< rad file="snippets/redis-kubernetes-main.tf" embed=true marker="//RESOURCE" lang="terraform" >}}
 
