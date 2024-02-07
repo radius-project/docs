@@ -39,7 +39,7 @@ Add the `context` parameter to your `variable.tf` file:
 
 {{< rad file="snippets/redis-kubernetes-variables.tf" embed=true marker="//CONTEXT" lang="terraform" >}}
 
-Ensure that your `main.tf` contains:
+Ensure that your `main.tf` has:
 
 - Defined `required_providers` in order to guarantee that your credentials and the correct resource provider is detected by Radius
 - Utilizes the `context` parameter for naming and namespace configuration :
