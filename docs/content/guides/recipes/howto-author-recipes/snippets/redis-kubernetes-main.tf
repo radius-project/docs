@@ -1,4 +1,3 @@
-//PROVIDER
 terraform {
   required_providers {
     kubernetes = {
@@ -7,9 +6,7 @@ terraform {
     }
   }
 }
-//PROVIDER
 
-//RESOURCE
 resource "kubernetes_deployment" "redis" {
   metadata {
     name = "redis-${sha512(var.context.resource.id)}"
@@ -62,4 +59,3 @@ resource "kubernetes_service" "redis" {
     }
   }
 }
-//RESOURCE
