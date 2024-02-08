@@ -34,6 +34,12 @@ As a workaround do not use underscores in resource names. Additional validation 
 
 See [app name constraints]({{< ref "resource-schema.md#common-values" >}}) for more information.
 
+### Gateway resources and container resources cannot share names names
+
+Deploying a Radius Application that contains a gateway resource and a container resource that share a name will result in an error being thrown during the deployment process.
+
+As a workaround users can just name the respective resources differently.
+
 ## rad CLI
 
 ### Application and resource names are lower-cased after deployment
