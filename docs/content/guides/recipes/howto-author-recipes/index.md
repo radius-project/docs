@@ -39,9 +39,12 @@ Add the `context` parameter to your `variable.tf` file:
 
 {{< rad file="snippets/redis-kubernetes-variables.tf" embed=true marker="//CONTEXT" lang="terraform" >}}
 
-Update `main.tf` to use `context` for naming and namespace configuration:
+Ensure that your `main.tf` has:
 
-{{< rad file="snippets/redis-kubernetes-main.tf" embed=true marker="//RESOURCE" lang="terraform" >}}
+- Defined `required_providers` for any providers you leverage in your module. This allows Radius to inject configuration and credentials.
+- Utilizes the `context` parameter for naming and namespace configuration. This ensures your resources don't unintentionally collide with other uses of the Recipe.
+
+{{< rad file="snippets/redis-kubernetes-main.tf" embed=true lang="terraform" >}}
 
 {{% /codetab %}}
 
