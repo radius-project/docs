@@ -39,5 +39,3 @@ Adding Radius to the eShop on containers application allows teams to:
 - Simplify deployment with Bicep and Azure Resource Manager (ARM)
 
 {{< button text="View eShop sample" githubRepo="samples" githubPath="samples/eshop" color="success" size="btn-lg" >}}
-
-*Visit the [GitHub docs]({{< ref github >}}) if you need access to the organization*

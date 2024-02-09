@@ -1,9 +1,9 @@
 ---
 type: docs
 title: "Radius Community"
-linkTitle: "Overview"
+linkTitle: "Community"
 description: "Information about the Radius community"
-weight: 100
+weight: 200
 ---
 
 Welcome to the Radius community!
@@ -17,10 +17,6 @@ The best way to interact with the community is via the Radius Discord server:
 ## Community meetings
 
 Every month we host a community meeting to showcase new features, review upcoming milestones, and engage in a Q&A. Anyone from the Radius community can participate, present a topic, or host. All are welcome! For the meeting schedule, links, and more information, visit the Radius [community repo](https://github.com/radius-project/community#community-meetings).
-
-## GitHub Issues & repositories
-
-If you would like to file Issues, access the source code, or use Codespaces please visit the [Radius GitHub repo](https://github.com/radius-project).
 
 ## How can I get involved?
 
