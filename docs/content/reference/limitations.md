@@ -38,7 +38,7 @@ See [app name constraints]({{< ref "resource-schema.md#common-values" >}}) for m
 
 Deploying a Radius Application that contains a gateway resource and a container resource that share a name will result in an error being thrown during the deployment process.
 
-As a workaround users can just name the respective resources differently.
+As a workaround make sure to use distinct names for both containers and gateways.
 
 ## rad CLI
 
