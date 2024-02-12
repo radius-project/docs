@@ -22,6 +22,8 @@ Every month we host a community meeting to showcase new features, review upcomin
 
 One of the easiest ways to contribute is to participate in discussions at community engagements or via the Discord server referenced above. We are always seeking feedback, especially for suggestions around improving the product and docs.
 
+If you are interested in contributing to the Radius project, please visit the [Contributing to Radius]({{< ref contributing >}}) page for more information.
+
 ## Press and media coverage
 
 Visit the [press and media coverage docs]({{< ref media-coverage >}}) for a list of press articles, blog posts, presentations, and other coverage of Radius.

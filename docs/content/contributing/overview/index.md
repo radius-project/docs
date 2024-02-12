@@ -34,7 +34,7 @@ Check out the following table to learn where and how you can contribute:
 
 ### Troubleshooting common issues
 
-### Visual Studio not authorized for single sign-on
+#### Visual Studio not authorized for single sign-on
 
 If you receive an error saying Visual Studio Code or another application is not authorized to clone any of the Radius repositories you may need to re-authorize the GitHub app:
 
