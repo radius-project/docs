@@ -36,7 +36,7 @@ See [app name constraints]({{< ref "resource-schema.md#common-values" >}}) for m
 
 ### Gateway resources and container resources cannot share names
 
-Deploying a Radius Application that contains a gateway resource and a container resource that share a name will result in an error being thrown during the deployment process.
+Deploying a Radius Application that contains a gateway resource and a container resource that share a name will result in an error being thrown during deployment. For example, when attempting to name a container and a gateway something like "foo", you'll get an error messaging similar to:
 
 ```
 Error - Type: IncludeError, Status: True, Reason: RootIncludesRoot, Message: root httpproxy cannot include another root httpproxy
