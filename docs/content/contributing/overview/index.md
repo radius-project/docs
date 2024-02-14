@@ -30,7 +30,7 @@ Check out the following table to learn where and how you can contribute:
 | **Docs** | Documentation for Radius | [[Contributing to docs]]({{< ref contributing-docs>}})|
 | **Recipes** | Commonly used [Recipe](https://docs.radapp.io/recipes) templates for Radius Environments | [radius-project/recipes](https://github.com/radius-project/recipes/blob/main/CONTRIBUTING.md) |(https://github.com/radius-project/recipes/blob/main/CONTRIBUTING.md) |
 | **Dashboard** | The frontend experience for Radius |[radius-project/dashboard](https://github.com/radius-project/dashboard/blob/main/CONTRIBUTING.md) |
-| **Bicep** |  Language and tools which includes the application model as a set of types which will eventually be merged with https://github.com/azure/bicep | [radius-project/bicep](https://github.com/radius-project/bicep/blob/radius-compiler/CONTRIBUTING.md) |
+| **Bicep** |  Temporary fork of the [Bicep repo](https://github.com/azure/bicep) used to inject the Radius types into the Bicep language. Contains both the Bicep CLI and the Bicep VS Code extension. | [radius-project/bicep](https://github.com/radius-project/bicep/blob/radius-compiler/CONTRIBUTING.md) |
 
 ### Troubleshooting common issues
 
