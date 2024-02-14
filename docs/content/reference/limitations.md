@@ -34,6 +34,16 @@ As a workaround do not use underscores in resource names. Additional validation 
 
 See [app name constraints]({{< ref "resource-schema.md#common-values" >}}) for more information.
 
+### Gateway resources and container resources cannot share names
+
+Deploying a Radius Application that contains a gateway resource and a container resource that share a name will result in an error being thrown during deployment. For example, when attempting to name a container and a gateway something like "foo", you'll get an error messaging similar to:
+
+```
+Error - Type: IncludeError, Status: True, Reason: RootIncludesRoot, Message: root httpproxy cannot include another root httpproxy
+```
+
+As a workaround make sure to use distinct names for both containers and gateways.
+
 ## rad CLI
 
 ### Application and resource names are lower-cased after deployment
