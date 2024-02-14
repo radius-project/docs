@@ -2,7 +2,7 @@
 type: docs
 title: "How-To: Maintain the Radius docs"
 linkTitle: "Maintain docs"
-weight: 20
+weight: 200
 description: "Learn about the Radius docs maintenance process"
 ---
 

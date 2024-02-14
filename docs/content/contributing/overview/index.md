@@ -20,6 +20,8 @@ If you would like to file Issues, access the source code, or use Codespaces plea
 
 To quickly get started with contributing to code on Radius, here are some identified [good-first-issues](https://aka.ms/radius-first-issues) that you can `/assign` to yourself and start contributing. 
 
+<a class="btn btn-primary" href="https://aka.ms/radius-first-issues" role="button" target="_blank">good-first-issues</a>
+
 ### Contributing to Radius
 
 Check out the following table to learn where and how you can contribute:
@@ -27,17 +29,8 @@ Check out the following table to learn where and how you can contribute:
 | Repository | Description | Contribution guides |
 |------------|-------------|---------------------|
 | **Radius** | Main repository that contains source code for [`rad` CLI]((https://github.com/radius-project/radius/blob/main/docs/contributing/contributing-code/contributing-code-cli/running-rad-cli.md)), [control plane]((https://github.com/radius-project/radius/blob/main/docs/contributing/contributing-code/contributing-code-control-plane/README.md)) and other components of Radius | [radius-project/radius](https://github.com/radius-project/radius/blob/main/CONTRIBUTING.md)|
-| **Docs** | Documentation for Radius | [[Contributing to docs]]({{< ref contributing-docs>}})|
+| **Docs** | Documentation for Radius | [radius-project/docs]({{< ref contributing-docs>}})|
 | **Recipes** | Commonly used [Recipe](https://docs.radapp.io/recipes) templates for Radius Environments | [radius-project/recipes](https://github.com/radius-project/recipes/blob/main/CONTRIBUTING.md) |(https://github.com/radius-project/recipes/blob/main/CONTRIBUTING.md) |
 | **Dashboard** | The frontend experience for Radius |[radius-project/dashboard](https://github.com/radius-project/dashboard/blob/main/CONTRIBUTING.md) |
 | **Bicep** |  Language and tools which includes the application model as a set of types which will eventually be merged with https://github.com/azure/bicep | [radius-project/bicep](https://github.com/radius-project/bicep/blob/radius-compiler/CONTRIBUTING.md) |
-
-### Troubleshooting common issues
-
-#### Visual Studio not authorized for single sign-on
-
-If you receive an error saying Visual Studio Code or another application is not authorized to clone any of the Radius repositories you may need to re-authorize the GitHub app:
-
-1. Open a browser to https://github.com/settings/applications
-1. Find the applicable app and select Revoke
-1. Reopen app on local machine and re-auth
+| **Samples** | Sample code and templates for Radius | [radius-project/samples](https://github.com/radius-project/samples)|

@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Radius Community"
-linkTitle: "Community"
+linkTitle: "Overview"
 description: "Information about the Radius community"
 weight: 200
 ---
