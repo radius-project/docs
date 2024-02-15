@@ -18,7 +18,7 @@ Kubernetes version `1.23.8` or higher is recommended to run Radius.
 
 ## Resource mapping
 
-Radius resources, when deployed to a Kubernetes environment, are mapped to one or more Kubernetes objects. The following table describes the mapping between Radius resources and Kubernetes objects:
+Radius resources, when deployed to a Kubernetes environment, are mapped to one or more Kubernetes objects.If a connection is established between Radius resources they are stored as Secret objects if they are Radius automatically-configured values and regular Kubernetes objects if they are manually configured by a user. The following table describes the mapping between Radius resources and Kubernetes objects:
 
 | Radius resource                  | Kubernetes object |
 |----------------------------------|-------------------|
