@@ -98,7 +98,7 @@ Run the following command to delete your app and container:
 rad app delete -a demo
 ```
 
-## Further reaading
+## Further reading
 
 - [Dapr state management](https://docs.dapr.io/developing-applications/building-blocks/state-management/)
 - [Dapr state store resource schema]({{< ref dapr-statestore >}})
