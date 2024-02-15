@@ -8,7 +8,6 @@ categories: "How-To"
 tags: ["Dapr"]
 ---
 
-
 This how-to guide will provide an overview of how to:
 
 - Leverage a [Dapr building block](https://docs.dapr.io/developing-applications/building-blocks/) with your Radius Application
