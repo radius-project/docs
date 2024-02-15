@@ -8,10 +8,6 @@ categories: "How-To"
 tags: ["Dapr"]
 ---
 
--Add a Dapr state store resource
--Add a connection from the container to the statestore
--Deploy the application
--Use the Dapr CLI or kubectl CLI to "prove what just happened"
 
 This how-to guide will provide an overview of how to:
 
