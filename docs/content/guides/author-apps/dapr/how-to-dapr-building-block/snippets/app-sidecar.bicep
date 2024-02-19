@@ -6,7 +6,6 @@ param application string
 @description('The ID of your Radius environment. Set automatically by the rad CLI.')
 param environment string
 
-//CONTAINER
 resource demo 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'demo'
   properties: {
@@ -32,21 +31,5 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
         appPort: 3000
       }
     ]
-     connections: {
-      redis: {
-        source: stateStore.id
-      }
-    }
   }
 }
-//CONTAINER
-
-//STATESTORE
-resource stateStore 'Applications.Dapr/stateStores@2023-10-01-preview' = {
-  name: 'statestore'
-  properties: {
-    environment: environment
-    application: application
-  }
-}
-//STATESTORE
