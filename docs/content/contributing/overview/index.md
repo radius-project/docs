@@ -4,6 +4,7 @@ title: "Overview: Contributing to Radius"
 linkTitle: "Overview"
 description: "Guides and requirements for contributing to Radius"
 weight: 100
+aliases  : ["/community/contributing/overview"]
 ---
 
 We welcome contributions to Radius! Contributions can come in different ways such as engaging with the community, contributing code, or improving the documentation. This page provides an overview of the different ways you can contribute to Radius.
@@ -33,13 +34,3 @@ Check out the following table to learn where and how you can contribute:
 | **Recipes** | Commonly used [Recipe](https://docs.radapp.io/recipes) templates for Radius Environments | [radius-project/recipes](https://github.com/radius-project/recipes/blob/main/CONTRIBUTING.md) |(https://github.com/radius-project/recipes/blob/main/CONTRIBUTING.md) |
 | **Dashboard** | The frontend experience for Radius |[radius-project/dashboard](https://github.com/radius-project/dashboard/blob/main/CONTRIBUTING.md) |
 | **Bicep** |  Temporary fork of the [Bicep repo](https://github.com/azure/bicep) used to inject the Radius types into the Bicep language. Contains both the Bicep CLI and the Bicep VS Code extension. | [radius-project/bicep](https://github.com/radius-project/bicep/blob/radius-compiler/CONTRIBUTING.md) |
-
-### Troubleshooting common issues
-
-#### Visual Studio not authorized for single sign-on
-
-If you receive an error saying Visual Studio Code or another application is not authorized to clone any of the Radius repositories you may need to re-authorize the GitHub app:
-
-1. Open a browser to https://github.com/settings/applications
-1. Find the applicable app and select Revoke
-1. Reopen app on local machine and re-auth
