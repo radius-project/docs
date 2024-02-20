@@ -3,7 +3,7 @@ type: docs
 title: "Radius Community"
 linkTitle: "Overview"
 description: "Information about the Radius community"
-weight: 200
+weight: 100
 ---
 
 Welcome to the Radius community!
