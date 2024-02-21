@@ -1,0 +1,23 @@
+name: Notify Discord on PR Merge
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  notify-discord:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Send message to Discord
+      uses: rjstone/discord-webhook-notify@v1
+      with:
+        title: "Radius Documentation Update"
+        severity: info
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        description: |
+          Hi there! The Radius Documentation has been updated. Check out the recent changes:
+          [View Recent Commits](https://github.com/jasonviviano/project/commits/main/)
+          [View Recent PRs](https://github.com/jasonviviano/project/pulls)
