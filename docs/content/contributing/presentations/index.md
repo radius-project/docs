@@ -4,6 +4,7 @@ title: "Give a Radius presentation"
 linkTitle: "Presentations"
 description: "Learn how to give a Radius presentation, with downloadable slides and assets"
 weight: 400
+aliases  : ["/community/presentations/"]
 ---
 
 We welcome community members giving presentations on Radius and spreading the word about all the awesome Radius features!
