@@ -3,7 +3,7 @@ type: docs
 title: "Radius press coverage and media links"
 linkTitle: "Press/media coverage"
 description: "Learn about Radius through press articles, blog posts, presentation and other coverage of Radius"
-weight: 500
+weight: 200
 ---
 
 ## Blog posts

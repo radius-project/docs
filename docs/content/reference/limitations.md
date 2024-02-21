@@ -128,3 +128,13 @@ Some of the [AWS resource types](/resource-schema/aws) are 'non-idempotent', thi
 We are currently building support for non-idempotent resources in Radius. Please like and comment on this [this issue](https://github.com/radius-project/radius/issues/6227) if you are interested in the same.
 
 As a workaround, you can try using [Terraform Recipes]({{< ref "/guides/recipes/overview" >}}) to deploy and manage those non-idempotent resource types.
+
+## GitHub
+
+### Visual Studio not authorized for single sign-on
+
+If you receive an error saying Visual Studio Code or another application is not authorized to clone any of the Radius repositories you may need to re-authorize the GitHub app:
+
+1. Open a browser to https://github.com/settings/applications
+1. Find the applicable app and select Revoke
+1. Reopen app on local machine and re-auth
