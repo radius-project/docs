@@ -3,8 +3,8 @@ type: docs
 title: "How-To: Contribute to the Radius documentation"
 linkTitle: "Contribute to docs"
 description: "How to contribute to the Radius documentation"
-weight: 200
-slug: "docs"
+weight: 100
+aliases  : ["/community/contributing/docs/"]
 ---
 
 The Radius docs are built on [Hugo](https://gohugo.io) with the [Docsy](https://docsy.dev) theme. GitHub Actions are used to build and deploy the docs upon each PR.

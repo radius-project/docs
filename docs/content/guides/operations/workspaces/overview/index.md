@@ -82,20 +82,12 @@ workspaces:
         kind: kubernetes
       environment: /planes/radius/local/resourcegroups/dev/providers/applications.core/environments/dev
       scope: /planes/radius/local/resourceGroups/dev
-      providerConfig:
-        azure:
-          subscriptionid: DEV-SUBID
-          resourcegroup: Dev
     prod:
       connection:
         context: ProdCluster
         kind: kubernetes
       environment: /planes/radius/local/resourcegroups/prod/providers/applications.core/environments/prod
       scope: /planes/radius/local/resourceGroups/prod
-      providerConfig:
-        azure:
-          subscriptionid: PROD-SUBID
-          resourcegroup: Prod
 ```
 
 ## Schema
