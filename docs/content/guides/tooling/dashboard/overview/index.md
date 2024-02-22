@@ -17,15 +17,15 @@ Key features of the Radius Dashboard currently include:
 - _Recipes directory_: A listing of all the Radius [Recipes]({{< ref "guides/recipes/overview" >}}) available to the user for a given environment.
 
 {{< alert title="Dashboard installation" color="warning" >}}
-The Radius Dashboard is installed by default as a part of your Radius initialization and deployment. To opt-out of installing the dashboard, you can use the `--TODO` flag when running `rad init`, `rad deploy`, or `rad run`. See more instructions in the [CLI reference documentation]({{< ref "/reference/cli" >}}).
+The Radius Dashboard is installed by default as a part of your Radius initialization and deployment. To opt-out of installing the dashboard, you can use the `--set dashboard.enabled=false` flag when running `rad install kubernetes`. See more instructions in the [CLI reference documentation]({{< ref "/reference/cli" >}}).
 {{< /alert >}}
 
-When you run your application with the `rad run` command, Radius creates a port-forward from `localhost` to port `TODO` inside the container that you may use to access your Radius Dashboard.
+When you run your application with the `rad run` command, Radius creates a port-forward from `localhost` to port `7007` inside the container that you may use to access your Radius Dashboard.
 
 Alternatively, you can manually create a port-forward from `localhost` to the port number of your choice to provide access to your Radius Dashboard:
 
 ```bash
-kubectl port-forward svc/TODO 3000:80
+kubectl port-forward --namespace=radius-system svc/dashboard 7007:80
 ```
 
 {{< image src="dashboard-home.png" alt="screenshot of an example Radius Dashboard home page" width=800 >}}
