@@ -88,10 +88,10 @@ Radius Applications are where all your app's resources and relationships come to
    - **`environment`** specifies the Radius Environment which the Applications "binds" to at deployment. This is what determines where containers should run (_Kubernetes_) and which namespace to deploy into (_prefixed with "default"_). In this case, the application will be deployed into the `default` Environment that was created by `rad init`.
    - **`compute`** specifies the hosting platform where running services in the Application will run. In this case, the services will be deployed into the `default-myapp` Kubernetes namespace within the same cluster where Radius is installed.
 
-1. Let's take a look inside the Application to see what's deployed. Run [`rad app graph`]({{< ref rad_application_graph >}}) to print the Application's resources and relationships:
+1. Let's take a look inside the Application to see what's deployed. Run [`rad app connections`]({{< ref rad_application_connections >}}) to print the Application's resources and relationships:
 
    ```bash
-   rad app graph
+   rad app connections
    ```
 
    You'll see that nothing has been deployed yet and the app is empty:
@@ -132,10 +132,10 @@ Radius Applications are where all your app's resources and relationships come to
        demo            Applications.Core/containers
    ```
 
-1. Run `rad app graph` again to see the container you just deployed:
+1. Run `rad app connections` again to see the container you just deployed:
 
     ```bash
-    rad app graph
+    rad app connections
     ```
 
     You should see the container you just deployed, along with the underlying Kubernetes resources that were created to run it:
@@ -262,10 +262,10 @@ In addition to containers, you can add dependencies like Redis caches, Dapr Stat
 
 1. Press CTRL+C to terminate the port-forward and log stream.
 
-1. Run `rad app graph` again to see the new dependency:
+1. Run `rad app connections` again to see the new dependency:
 
     ```bash
-    rad app graph
+    rad app connections
     ```
 
     You should see the container and Mongo database you just deployed, along with the underlying Kubernetes resources that were created to run them:

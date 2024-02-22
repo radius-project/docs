@@ -1,32 +1,32 @@
 ---
 type: docs
-title: "rad application graph CLI reference"
-linkTitle: "rad application graph"
-slug: rad_application_graph
-url: /reference/cli/rad_application_graph/
-description: "Details on the rad application graph Radius CLI command"
+title: "rad application connections CLI reference"
+linkTitle: "rad application connections"
+slug: rad_application_connections
+url: /reference/cli/rad_application_connections/
+description: "Details on the rad application connections Radius CLI command"
 ---
-## rad application graph
+## rad application connections
 
-Shows the application graph and connections for an application.
+Shows the connections for an application.
 
 ### Synopsis
 
-Shows the application graph and connections for an application
+Shows the connections for an application
 
 ```
-rad application graph [flags]
+rad application connections [flags]
 ```
 
 ### Examples
 
 ```
 
-# Show application graph for current application
-rad app graph
+# Show connections for current application
+rad app connections
 
-# Show application graph for specified application
-rad app graph my-application
+# Show connections for specified application
+rad app connections my-application
 ```
 
 ### Options
