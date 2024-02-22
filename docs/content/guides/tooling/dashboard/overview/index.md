@@ -32,6 +32,6 @@ kubectl port-forward svc/TODO 3000:80
 
 ## Reference documentation
 
-Visit the [API reference documentation]({{< ref "concepts/technical/api" >}}) to learn more about the underlying [Radius Application Graph]({{< ref "guides/author-apps/application/overview#query-and-understand-your-application-with-the-radius-application-graph" >}}) on which the dashboard visualizations are built.
+Visit the [API reference documentation]({{< ref "concepts/technical/api" >}}) to learn more about the underlying [Radius Application Graph]({{< ref "guides/author-apps/application/overview#query-and-understand-your-application-with-the-radius-application-graph" >}}) data on which the dashboard visualizations are built.
 
 {{< button text="API reference" page="concepts/technical/api" >}}
