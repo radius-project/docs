@@ -136,7 +136,7 @@ Step 2: Deploy and test the existing Guestbook application using `kubectl`
    Run this command to view the state of your application using Radius:
 
    ```bash
-   rad app connections -a demo
+   rad app graph -a demo -g default-demo
    ```
 
    Since you have not yet added Radius to the application, the `rad` CLI will not recognize your `demo` application and you should see a message in the output similar to:
@@ -175,9 +175,9 @@ You will now add Radius to the Guestbook application's Kubernetes deployment man
    apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
    kind: Deployment
    metadata:
-   name: frontend
-   annotations:
-      rad.app/enabled: 'true'
+      name: frontend
+      annotations:
+         rad.app/enabled: 'true'
    spec:
    selector:
       matchLabels:
@@ -192,7 +192,7 @@ You will now add Radius to the Guestbook application's Kubernetes deployment man
       spec:
          containers:
          - name: php-redis
-         image: gcr.io/google-samples/gb-frontend:v4
+         image: ghcr.io/radius-project/gb-frontend:v4
          resources:
             requests:
                cpu: 100m
@@ -258,7 +258,7 @@ You will now add Radius to the Guestbook application's Kubernetes deployment man
 Now that Radius has been enabled for your application, run this command again:
 
 ```bash
-rad app connections -a demo
+rad app graph -a demo -g default-demo
 ```
 
 You should see output containing information and status of your newly "radified" application, similar to:
