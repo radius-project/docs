@@ -142,7 +142,9 @@ Step 2: Deploy and test the existing Guestbook application using `kubectl`
    Since you have not yet added Radius to the application, the `rad` CLI will not recognize your `demo` application and you should see a message in the output similar to:
 
    ```
-   Application "demo" does not exist or has been deleted.
+   Displaying application: demo
+   
+   (empty)
    ```
 
 ## Step 3: Add Radius to the Guestbook application
@@ -192,7 +194,7 @@ You will now add Radius to the Guestbook application's Kubernetes deployment man
       spec:
          containers:
          - name: php-redis
-         image: ghcr.io/radius-project/gb-frontend:v4
+         image: ghcr.io/radius-project/samples/gb-frontend:v4
          resources:
             requests:
                cpu: 100m
