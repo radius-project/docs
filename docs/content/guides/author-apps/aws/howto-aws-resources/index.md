@@ -127,6 +127,4 @@ Also make sure to [open an Issue](https://github.com/radius-project/radius/issue
 
 ## Further Reading
 
-{{< categorizeby category="Overview" tag="AWS" >}}
-
-{{< categorizeby category="How-To" tag="AWS" >}}
+- [Supported AWS resource types]({{< ref "/reference/resource-schema/aws" >}})
