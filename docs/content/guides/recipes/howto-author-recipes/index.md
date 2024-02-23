@@ -159,6 +159,8 @@ rad recipe register myrecipe --environment myenv --resource-type Applications.Da
 
 You can now use your custom Recipe with its accompanying resource in your application. 
 
+> Note that if your Recipe is registered with the name "default", you do not need to provide a Recipe name in your application, as it will automatically pick up the default Recipe.
+
 {{< rad file="snippets/redis.bicep" embed=true marker="//REDIS" >}}
 
 ## Further reading
