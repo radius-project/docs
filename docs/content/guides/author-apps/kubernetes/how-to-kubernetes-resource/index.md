@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To: Use a Kubernetes resources in your application"
-linkTitle: "Use a Kubernetes resources in your application"
+linkTitle: "Add resources in your application"
 description: "Learn how to use a Kubernetes resources in your application"
 weight: 200
 categories: "How-To"
@@ -18,26 +18,27 @@ This how-to guide will provide an overview of how to:
 - [Radius initialized with `rad init`]({{< ref howto-environment >}})
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
-## Step 1: Start with a container
-
-Begin by creating a file named `app.bicep` with a Radius [container]({{< ref "guides/author-apps/containers" >}}):
-
-{{< rad file="snippets/app.bicep" embed=true >}}
-
-## Step 2: Define the Kubernetes provider
+## Step 1: Define the Kubernetes provider
 
 At the top of your Bicep file, import the `kubernetes` provider and add its configuration. The `namespace` property determines where to deploy Kubernetes resources by default. The `kubeConfig` property is not currently used and can remain as an empty string (`''`):
+
 `kubeConfig` is leveraged by Radius for information needed to build connections with the user's remote Kubernetes clusters:
 
 {{< rad file="snippets/app-kubernetes.bicep" embed=true marker="//KUBERNETES" >}}
 
-## Step 3:  Add a Kubernetes secret resource
+## Step 2:  Add a Kubernetes secret resource
 
 Add a [Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/) to your `app.bicep` file. This secret will contain a small amount of sensitive data such as a password, a token, or a key:
 
-{{< rad file="snippets/app-kubernetes.bicep" embed=true marker="//APPLICATION" >}}
+{{< rad file="snippets/app-kubernetes.bicep" embed=true marker="//SECRET" >}}
 
 > Refer to the [Kubernetes overview page]({{< ref "/guides/author-apps/kubernetes/overview#resource-library" >}}) for additional information about available types.
+
+## Step 3: Add a container and use the secret you just defined
+
+Add a  Radius [container]({{< ref "guides/author-apps/containers" >}}) to your application:
+
+{{< rad file="snippets/app-kubernetes.bicep" embed=true marker="//APPLICATION" >}}
 
 ## Step 4: Deploy your Radius Application
 
@@ -65,38 +66,47 @@ Resources:
 Starting log stream...
 ```
 
-Navigate to the `Container Metadata` tab and the `Environment variables` section, there will be row dedicated to your Kubernetes secret object:
+Navigate to the `Container Metadata` tab and the `Environment variables` section which are located near the bottom of the Radius demo webpage, there will be row dedicated to your Kubernetes secret object:
 
-<img src="./demo-secret-object.png" alt="Screenshot of Radius Demo app `Environment variables section`" width="600"/>
+{{< image src="demo-secret-object.png" alt="Screenshot of Radius Demo app `Environment variables section" width="700px" >}}
 
-Users can also prove the deployed Kubernetes secret was created by using `kubectl`, and running the following command with your specific pod name:
+You can also prove the deployed Kubernetes secret was created by using `kubectl`, and running the following command with your specific secret name:
 
 ```bash
-kubectl describe pod demo-xxxx-xxxx -n default-demo
+kubectl describe secret my-secret  -n default-demo
 ```
 
 Your console output should contain the following section:
 
 ```
-Containers:
-  demo:
-    Container ID:   containerd://xxxxxx
-    Image:          ghcr.io/radius-project/xxxxxx
-    Image ID:       ghcr.io/radius-project/xxxxx
-    Port:           3000/TCP
-    Host Port:      0/TCP
-    State:          Running
-      Started:      Mon, 19 Feb 2024 18:30:03 +0000
-    Ready:          True
-    Restart Count:  0
-    Environment:
-      SECRET:  my-secret-value
-    Mounts:
+Name:         my-secret
+Namespace:    default-demo
+Labels:       <none>
+Annotations:  <none>
+
+Type:  Opaque
+
+Data
+====
+key:            15 bytes
+my-secret-key:  15 bytes
 ```
 
 ## Cleanup
 
-To delete your Kubernetes resources created you'll need to run the following command:
+To delete your Radius specific Kubernetes resources you'll need to run:
+
+```bash
+rad app delete -a demo
+```
+
+Your console output should look similar to:
+
+```
+Application demo deleted
+```
+
+Once your Radius Application has been deleted you can delete the remaining Kubernetes resources you created by running:
 
 ```bash
 kubectl delete all --all -n default-demo

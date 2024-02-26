@@ -1,9 +1,6 @@
-// Import the set of Radius resources (Applications.*) into Bicep
-import radius as radius
-
 //KUBERNETES
 @description('Specifies Kubernetes namespace for the user.')
-param namespace string = 'default'
+param namespace string = 'default-demo'
 
 import kubernetes as kubernetes{
   kubeConfig: ''
@@ -11,10 +8,13 @@ import kubernetes as kubernetes{
 }
 //KUBERNETES
 
+//APPLICATION
+// Import the set of Radius resources (Applications.*) into Bicep
+import radius as radius
+
 @description('The app ID of your Radius Application. Set automatically by the rad CLI.')
 param application string
 
-//APPLICATION
 resource demo 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'demo'
   properties: {
@@ -32,13 +32,15 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
     }
   }
 }
+//APPLICATION
 
+//SECRET
 resource secret 'core/Secret@v1' = {
   metadata: {
     name: 'my-secret'
   }
   stringData: {
-    key: 'my-secret-value'
+    'my-secret-key': 'my-secret-value'
   }
 }
-//APPLICATION
+//SECRET
