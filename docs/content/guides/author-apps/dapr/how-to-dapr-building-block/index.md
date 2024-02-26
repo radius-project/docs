@@ -85,7 +85,6 @@ dapr components --namespace "default-demo" -k
 The console output should similar to:
 
 ```
-⚠  In future releases, this command will only query the "default" namespace by default. Please use the --namespace flag for a specific namespace, or the --all-namespaces (-A) flag for all namespaces.
 NAMESPACE     NAME        TYPE         VERSION  SCOPES  CREATED              AGE  
 default-demo  statestore  state.redis  v1               2024-02-19 17:13.20  2m   
 ```
