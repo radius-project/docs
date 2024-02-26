@@ -18,12 +18,6 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
           containerPort: 3000
         }
       }
-      livenessProbe: {
-        kind: 'httpGet'
-        containerPort: 3000
-        path: '/healthz'
-        initialDelaySeconds: 10
-      }
     }
     extensions: [
       {
