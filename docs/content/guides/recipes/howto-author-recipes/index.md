@@ -155,9 +155,13 @@ rad recipe register myrecipe --environment myenv --resource-type Applications.Da
 
 {{< /tabs >}}
 
-### Done
+### Step 6 : Use the custom recipe in your application
 
-You can now use your custom Recipe with its accompanying resource. Visit the [Recipe developer guide]({{< ref "/guides/recipes/overview" >}}) for more information.
+You can now use your custom Recipe with its accompanying resource in your application. 
+
+> Note that if your Recipe is registered with the name "default", you do not need to provide a Recipe name in your application, as it will automatically pick up the default Recipe.
+
+{{< rad file="snippets/redis.bicep" embed=true marker="//REDIS" >}}
 
 ## Further reading
 
