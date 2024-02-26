@@ -26,18 +26,18 @@ Begin by creating a file named `app.bicep` with a Radius [container]({{< ref "gu
 
 ## Step 2: Define the Kubernetes provider
 
-Add the following import statement and define your Kubernetes [`namespace` property]({{< ref "/guides/operations/kubernetes/overview#namespace-mapping" >}}) as well as the [`kubeConfig` property](https://kubernetes.io/docs/reference/config-api/kubeconfig.v1/). The 
+At the top of your Bicep file, import the `kubernetes` provider and add its configuration. The `namespace` property determines where to deploy Kubernetes resources by default. The `kubeConfig` property is not currently used and can remain as an empty string (`''`):
 `kubeConfig` is leveraged by Radius for information needed to build connections with the user's remote Kubernetes clusters:
 
 {{< rad file="snippets/app-kubernetes.bicep" embed=true marker="//KUBERNETES" >}}
 
 ## Step 3:  Add a Kubernetes secret resource
 
-A [Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/) is an object that contains a small amount of sensitive data such as a password, a token, or a key. To leverage it in a Radius Application you simply need to define the it as a resource and establish its usage in your container resource:
+Add a [Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/) to your `app.bicep` file. This secret will contain a small amount of sensitive data such as a password, a token, or a key:
 
 {{< rad file="snippets/app-kubernetes.bicep" embed=true marker="//APPLICATION" >}}
 
-> Note to see a list of all available Kubernetes resources visit the [Kubernetes overview page]({{< ref "/guides/author-apps/kubernetes/overview#resource-library" >}})
+> Refer to the [Kubernetes overview page]({{< ref "/guides/author-apps/kubernetes/overview#resource-library" >}}) for additional information about available types.
 
 ## Step 4: Deploy your Radius Application
 
