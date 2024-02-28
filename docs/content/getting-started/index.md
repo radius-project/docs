@@ -96,9 +96,9 @@ In your browser you should see the demo app:
 {{< image src="demo-screenshot.png" alt="Screenshot of the demo container" width=600px >}}
 <br>
 
-Access your Radius Dashboard by opening [http://localhost:7007](http://localhost:7007) in a browser. In your browser, you should see the Radius Dashboard, which includes visualizations of the application graph, environments, and recipes:
+Access your Radius Dashboard by opening [http://localhost:7007](http://localhost:7007/resources/default/Applications.Core/applications/demo/application) in a browser. In your browser, you should see the Radius Dashboard, which includes visualizations of the application graph, environments, and recipes:
 
-{{< image src="demo-dashboard-home.png" alt="screenshot of an example Radius Dashboard home page" width=800 >}}
+{{< image src="demo-dashboard-appgraph.png" alt="screenshot of an example Radius Dashboard home page" width=800 >}}
 <br><br>
 
 > Congrats! You're running your first Radius app. <br> When you're ready to move on to the next step, use <kbd>CTRL</kbd>+ <kbd>C</kbd> to exit the command.
@@ -146,9 +146,9 @@ Navigate to the Todo List tab and test out the application. Using the Todo page 
 {{< image src="demo-with-todolist.png" alt="Screenshot of the todolist" width=700px >}}
 <br /><br />
 
-Access your Radius Dashboard again by opening [http://localhost:7007](http://localhost:7007) in a browser and navigate to the `APP GRAPH` link for your demo application. You should see a visualization of the application graph for your `demo` app, including the connection to the `db` Redis Cache:
+Access your Radius Dashboard again by opening [http://localhost:7007](http://localhost:7007/resources/default/Applications.Core/applications/demo/application) in a browser. You should see a visualization of the application graph for your `demo` app, including the connection to the `db` Redis Cache:
 
-{{< image src="demo-dashboard-app-graph.png" alt="screenshot of an example Radius Dashboard home page" width=800 >}}
+{{< image src="demo-dashboard-appgraph-db.png" alt="screenshot of an example Radius Dashboard home page" width=800 >}}
 <br><br>
 
 > Press <kbd>CTRL</kbd>+ <kbd>C</kbd> when you are finished with the websites.
