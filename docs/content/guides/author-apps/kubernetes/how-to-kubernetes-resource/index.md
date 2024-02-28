@@ -66,7 +66,7 @@ Resources:
 Starting log stream...
 ```
 
-Navigate to the `Container Metadata` tab and the `Environment variables` section which are located near the bottom of the Radius demo webpage, there will be row dedicated to your Kubernetes secret object:
+Open [http://localhost:3000](http://localhost:3000) to view the Radius demo container. Then navigate to the `Container Metadata` tab and the `Environment variables` section which are located near the bottom of the Radius demo webpage, there will be row dedicated to your Kubernetes secret object:
 
 {{< image src="demo-secret-object.png" alt="Screenshot of Radius Demo app `Environment variables section" width="700px" >}}
 
