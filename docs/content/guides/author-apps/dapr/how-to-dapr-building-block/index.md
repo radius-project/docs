@@ -69,7 +69,7 @@ Resources:
 Starting log stream...
 ```
 
-Your demo application should contain the following connection information:
+Open [http://localhost:3000](http://localhost:3000) to view the Radius demo container. Which should contain the following connection information:
 
 {{< image src="app-statestore.png" alt="Screenshot of the demo Redis connection" width=700px >}}
 
@@ -103,6 +103,6 @@ rad app delete -a demo
 
 ## Further reading
 
-- [Dapr state management](https://docs.dapr.io/developing-applications/building-blocks/state-management/)
-- [Dapr state store resource schema]({{< ref dapr-statestore >}})
+- [Dapr building blocks](https://docs.dapr.io/concepts/building-blocks-concept/)
+- [Dapr resource schemas]({{< ref dapr-schema >}})
 

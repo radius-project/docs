@@ -26,7 +26,7 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
         appPort: 3000
       }
     ]
-     connections: {
+    connections: {
       redis: {
         source: stateStore.id
       }
