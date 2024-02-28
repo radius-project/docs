@@ -28,11 +28,11 @@ Begin by creating a file named `app.bicep` with a defined Radius container and a
 
 ## Step 2: Add a Dapr state store resource
 
-Now add a Dapr state store resource, which models a [Dapr state store component](https://docs.dapr.io/developing-applications/building-blocks/state-management/state-management-overview/). The Dapr state store resource in this example is defined in a pre-defined Recipe from the Radius [`local-dev` Recipes pack]({{< ref "guides/recipes/overview##use-lightweight-local-dev-recipes" >}}):
+Now add a Dapr state store resource, which models a [Dapr state store component](https://docs.dapr.io/developing-applications/building-blocks/state-management/state-management-overview/). The underlying infrastructure and Dapr component configuration are deployed via a [`local-dev` Recipe]({{< ref "guides/recipes/overview##use-lightweight-local-dev-recipes" >}}), which leverages a lightweight Redis container:
 
 {{< rad file="./snippets/app-statestore.bicep" embed=true marker="//STATESTORE" >}}
 
-> Note the template configurations can be found in the [Radius Recipe repo](https://github.com/radius-project/recipes/tree/main).
+> Visit the [Radius Recipe repo](https://github.com/radius-project/recipes/blob/main/local-dev/statestores.bicep) to learn more about `local-dev` Recipes and view the Dapr State Store Recipe used in this guide.
 
 ## Step 3: Add a connection from the container resource to the Dapr state store resource
 
@@ -91,7 +91,7 @@ default-demo  statestore  state.redis  v1               2024-02-19 17:13.20  2m
 
 ## Done
 
-You've successfully deployed a Radius container with a Dapr sidecar and a Dapr statestore in the form of a Redis Cache!
+You've successfully deployed a Radius container with a Dapr sidecar along with a Dapr State Store. With the combination of Radius + Dapr, both your application's code and it's definition are now platform neutral.
 
 ## Cleanup
 

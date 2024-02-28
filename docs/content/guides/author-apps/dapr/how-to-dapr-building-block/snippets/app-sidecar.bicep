@@ -3,7 +3,7 @@ import radius as radius
 @description('The ID of your Radius Application. Automatically injected by the rad CLI.')
 param application string
 
-@description('The ID of your Radius environment. Set automatically by the rad CLI.')
+@description('The ID of your Radius environment. Automatically injected by the rad CLI.')
 param environment string
 
 resource demo 'Applications.Core/containers@2023-10-01-preview' = {
