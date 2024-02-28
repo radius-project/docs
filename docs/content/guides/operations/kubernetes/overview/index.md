@@ -20,9 +20,10 @@ Kubernetes version `1.23.8` or higher is recommended to run Radius.
 
 Radius resources, when deployed to a Kubernetes environment, are mapped to one or more Kubernetes objects. The following table describes the mapping between Radius resources and Kubernetes objects:
 
-| Radius resource                  | Kubernetes object |
+| Radius resources/configurations | Kubernetes object |
 |----------------------------------|-------------------|
-| [`Applications.Core/containers`]({{< ref container-schema >}}) | `apps/Deployment@v1`<br /> <br /> `core/Service@v1` _(if ports defined)_ <br /> <br /> The `connections` property allows users to declare a connection between two resources, which Radius uses to inject resource related information into environment variables. This information is stored in a Kubernetes secret object if it is automatically-configured data and a non-secret Kubernetes object if its manually configured data. They are then used to access the respective resource information without having to hard code URIs, connection strings, access keys, or anything that an application code needs to successfully communicate. |
+| [`Applications.Core/containers`]({{< ref container-schema >}}) | `apps/Deployment@v1`<br /> <br /> `core/Service@v1` _(if ports defined)_ |
+| [`Applications.Core/containers.connections`]({{< ref "container-schema#properties" >}}) | `core/Secret@v1` <br /> Mounted to the container as an environment variable, visit the [connections guide]({{< ref howto-connect-dependencies >}}) to learn more|
 | [`Applications.Core/gateways`]({{< ref gateway >}})     | `projectcontour.io/HTTPProxy@v1` |
 | [`Applications.Dapr/pubSubBrokers`]({{< ref dapr-pubsub >}}) | `dapr.io/Component@v1alpha1` |
 | [`Applications.Dapr/secretStores`]({{< ref dapr-secretstore >}}) | `dapr.io/Component@v1alpha1` |
