@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To: Use a Kubernetes resources in your application"
-linkTitle: "Add resources in your application"
+linkTitle: "Add Kubernetes resources"
 description: "Learn how to use a Kubernetes resources in your application"
 weight: 200
 categories: "How-To"
@@ -20,9 +20,9 @@ This how-to guide will provide an overview of how to:
 
 ## Step 1: Define the Kubernetes provider
 
-At the top of your Bicep file, import the `kubernetes` provider and add its configuration. The `namespace` property determines where to deploy Kubernetes resources by default. The `kubeConfig` property is not currently used and can remain as an empty string (`''`):
-
-`kubeConfig` is leveraged by Radius for information needed to build connections with the user's remote Kubernetes clusters:
+Begin by creating a new file named `app.bicep`. At the top of your file, import the `kubernetes` provider and add its configuration. This allows you to define and deploy Kubernetes resources within Bicep.
+- The `namespace` property determines where to deploy Kubernetes resources by default.
+- The `kubeConfig` property is not currently used and can remain as an empty string (`''`):
 
 {{< rad file="snippets/app-kubernetes.bicep" embed=true marker="//KUBERNETES" >}}
 
@@ -100,12 +100,6 @@ To delete your Radius specific Kubernetes resources you'll need to run:
 rad app delete -a demo
 ```
 
-Your console output should look similar to:
-
-```
-Application demo deleted
-```
-
 Once your Radius Application has been deleted you can delete the remaining Kubernetes resources you created by running:
 
 ```bash
@@ -121,7 +115,7 @@ deployment.apps "demo" deleted
 replicaset.apps "demo-74794c5b55" deleted
 ```
 
-> Note in most cases you'll be able to run [`rad app delete`]({{< ref rad_application_delete >}}) however Radius does not currently delete Kubernetes resources.
+> [`rad app delete`]({{< ref rad_application_delete >}}) does not delete non-Radius resources that are not directly part of a Radius Application, such as Kubernetes resources. These resources require an additional cleanup step.
 
 ## Further reading
 
