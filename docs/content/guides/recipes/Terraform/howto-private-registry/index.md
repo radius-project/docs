@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "How-To: Setup a private registry for your Terraform Radius Recipes"
-linkTitle: "Setup a private registry"
+title: "How-To: Set up a private registry for your Terraform Radius Recipes"
+linkTitle: "Set up a private registry"
 description: "Learn how to configure your Radius Environment to leverage your private registry as storage for your custom Recipe templates"
 weight: 500
 categories: "How-To"
@@ -10,7 +10,7 @@ tags: ["recipes", "terraform"]
 
 This how-to guide will provide an overview of how to:
 
-- Configure a Radius Environment that leverages a [Radius secret store]({{< ref secretstore >}}) to register a [private Git registry](https://developer.hashicorp.com/terraform/registry/private) for your Recipe templates.
+- Configure a Radius Environment that leverages a [Radius secret store]({{< ref secretstore >}}) to register a [private Terraform registry](https://developer.hashicorp.com/terraform/registry/private) for your Recipe templates.
 
 ### Prerequisites
 
