@@ -23,8 +23,9 @@ resource env 'Applications.Core/environments@2023-10-01-preview' = {
           }          
         }
       }
-    }
 //ENV
+    }
+
 
 //RECIPE
     recipes: {      
@@ -36,9 +37,9 @@ resource env 'Applications.Core/environments@2023-10-01-preview' = {
           }
       }
     }
+  //RECIPE
  }
 }
-//RECIPE
 
 //SECRETSTORE
 resource secretStoreGithub 'Applications.Core/secretStores@2023-10-01-preview' = {
