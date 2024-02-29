@@ -24,17 +24,31 @@ Before you get started, you'll need to make sure you have the following tools an
 
 Radius provides support for defining Kubernetes Secrets as Bicep resources, through the Radius Secret Store. Users have the option to both leverage an existing Kubernetes Secret or define a new Kubernetes Secret in the resource, see the [Radius Secret Store schema]({{< ref secretstore >}}) for more information.
 
+
+
 Create a Bicep file `env.bicep` and define your resource:
 
 {{< rad file="snippets/env.bicep" embed=true marker="//SECRETSTORE" >}}
 
-## Step 2: Define your Radius Recipe configurations
+> Note the property `pat` is a required property that refers to your personal access token, while `username` can be optional.
+
+## Step 2: Define your Radius Recipe
+
+Define your Radius Recipe, keep in mind that your `templatePath` should contain a `git::` prefix as per [Terraform requirements](https://developer.hashicorp.com/terraform/language/modules/sources#generic-git-repository).
+
+{{< rad file="snippets/env.bicep" embed=true marker="//RECIPE" >}}
+
+
+## Step 3: Define your Radius Recipe configurations
 
 Radius provides a property `recipeConfig` which allows users to setup specific Git module sources for your Terraform Radius Recipes. Define this property in your Radius Environment resource, visit the [Radius Environment schema]({{< ref environment-schema >}}) page for more information.
 
 {{< rad file="snippets/env.bicep" embed=true marker="//ENV" >}}
 
-## Step 3: Deploy your Radius Environment
+> Note the keys listed inside of the `pat` property should match your path name to the secret store.
+
+
+## Step 4: Deploy your Radius Environment
 
 Deploy your new Radius Environment:
 
