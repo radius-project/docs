@@ -32,7 +32,7 @@ description: "Detailed reference documentation for applications.core/environment
 |----------|------|-------------|
 | **compute** | [EnvironmentCompute](#environmentcompute) | Represents backing compute resource <br />_(required)_ |
 | **extensions** | [Extension](#extension)[] | The environment extension. |
-| **providers** | [Providers](#providers) | The Cloud providers configuration |
+| **providers** | [Providers](#providers) | The Cloud providers configuration. |
 | **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(read-only)_ |
 | **recipeConfig** | [RecipeConfigProperties](#recipeconfigproperties) | Configuration for Recipes. Defines how each type of Recipe should be configured and run. |
 | **recipes** | [EnvironmentPropertiesRecipes](#environmentpropertiesrecipes) | Specifies Recipes linked to the Environment. |
@@ -145,8 +145,8 @@ description: "Detailed reference documentation for applications.core/environment
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **aws** | [ProvidersAws](#providersaws) | The AWS cloud provider definition |
-| **azure** | [ProvidersAzure](#providersazure) | The Azure cloud provider definition |
+| **aws** | [ProvidersAws](#providersaws) | The AWS cloud provider definition. |
+| **azure** | [ProvidersAzure](#providersazure) | The Azure cloud provider definition. |
 
 ### ProvidersAws
 
@@ -154,7 +154,7 @@ description: "Detailed reference documentation for applications.core/environment
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **scope** | string | Target scope for AWS resources to be deployed into.  For example: '/planes/aws/aws/accounts/000000000000/regions/us-west-2' <br />_(required)_ |
+| **scope** | string | Target scope for AWS resources to be deployed into.  For example: '/planes/aws/aws/accounts/000000000000/regions/us-west-2'. <br />_(required)_ |
 
 ### ProvidersAzure
 
@@ -162,7 +162,7 @@ description: "Detailed reference documentation for applications.core/environment
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **scope** | string | Target scope for Azure resources to be deployed into.  For example: '/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testGroup' <br />_(required)_ |
+| **scope** | string | Target scope for Azure resources to be deployed into.  For example: '/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testGroup'. <br />_(required)_ |
 
 ### RecipeConfigProperties
 
@@ -170,7 +170,18 @@ description: "Detailed reference documentation for applications.core/environment
 
 | Property | Type | Description |
 |----------|------|-------------|
+| **env** | [EnvironmentVariables](#environmentvariables) | The environment variables injected during Terraform Recipe execution for the recipes in the environment. |
 | **terraform** | [TerraformConfigProperties](#terraformconfigproperties) | Configuration for Terraform Recipes. Controls how Terraform plans and applies templates as part of Recipe deployment. |
+
+### EnvironmentVariables
+
+#### Properties
+
+* **none**
+
+#### Additional Properties
+
+* **Additional Properties Type**: string
 
 ### TerraformConfigProperties
 
@@ -179,6 +190,7 @@ description: "Detailed reference documentation for applications.core/environment
 | Property | Type | Description |
 |----------|------|-------------|
 | **authentication** | [AuthConfig](#authconfig) | Authentication information used to access private Terraform module sources. Supported module sources: Git. |
+| **providers** | [TerraformConfigPropertiesProviders](#terraformconfigpropertiesproviders) | Configuration for Terraform Recipe Providers. Controls how Terraform interacts with cloud providers, SaaS providers, and other APIs. For more information, please see: https://developer.hashicorp.com/terraform/language/providers/configuration. |
 
 ### AuthConfig
 
@@ -213,6 +225,26 @@ description: "Detailed reference documentation for applications.core/environment
 | Property | Type | Description |
 |----------|------|-------------|
 | **secret** | string | The ID of an Applications.Core/SecretStore resource containing the Git platform personal access token (PAT). The secret store must have a secret named 'pat', containing the PAT value. A secret named 'username' is optional, containing the username associated with the pat. By default no username is specified. |
+
+### TerraformConfigPropertiesProviders
+
+#### Properties
+
+* **none**
+
+#### Additional Properties
+
+* **Additional Properties Type**: [ProviderConfigProperties](#providerconfigproperties)[]
+
+### ProviderConfigProperties
+
+#### Properties
+
+* **none**
+
+#### Additional Properties
+
+* **Additional Properties Type**: any
 
 ### EnvironmentPropertiesRecipes
 
