@@ -34,6 +34,16 @@ As a workaround do not use underscores in resource names. Additional validation 
 
 See [app name constraints]({{< ref "resource-schema.md#common-values" >}}) for more information.
 
+### Gateway resources and container resources cannot share names
+
+Deploying a Radius Application that contains a gateway resource and a container resource that share a name will result in an error being thrown during deployment. For example, when attempting to name a container and a gateway something like "foo", you'll get an error messaging similar to:
+
+```
+Error - Type: IncludeError, Status: True, Reason: RootIncludesRoot, Message: root httpproxy cannot include another root httpproxy
+```
+
+As a workaround make sure to use distinct names for both containers and gateways.
+
 ## rad CLI
 
 ### Application and resource names are lower-cased after deployment
@@ -118,3 +128,13 @@ Some of the [AWS resource types](/resource-schema/aws) are 'non-idempotent', thi
 We are currently building support for non-idempotent resources in Radius. Please like and comment on this [this issue](https://github.com/radius-project/radius/issues/6227) if you are interested in the same.
 
 As a workaround, you can try using [Terraform Recipes]({{< ref "/guides/recipes/overview" >}}) to deploy and manage those non-idempotent resource types.
+
+## GitHub
+
+### Visual Studio not authorized for single sign-on
+
+If you receive an error saying Visual Studio Code or another application is not authorized to clone any of the Radius repositories you may need to re-authorize the GitHub app:
+
+1. Open a browser to https://github.com/settings/applications
+1. Find the applicable app and select Revoke
+1. Reopen app on local machine and re-auth
