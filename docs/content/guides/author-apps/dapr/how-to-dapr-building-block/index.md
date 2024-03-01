@@ -39,8 +39,6 @@ Now add a Dapr state store resource, which models a [Dapr state store component]
 Update your container resource with a connection to the Dapr state store. This will inject important connection information (the component name) into the container's environment variables:
 
 {{< rad file="./snippets/app-statestore.bicep" embed=true marker="//CONTAINER" >}}
-
-
 ## Step 3: Deploy the application
 
 Run your application with the `rad` CLI:
@@ -72,8 +70,6 @@ Starting log stream...
 Open [http://localhost:3000](http://localhost:3000) to view the Radius demo container. Which should contain the following connection information:
 
 {{< image src="app-statestore.png" alt="Screenshot of the demo Redis connection" width=700px >}}
-
-
 ## Step 4: Verify the Dapr statestore
 
 Run the command below to see all the pods running in your Kubernetes cluster:
