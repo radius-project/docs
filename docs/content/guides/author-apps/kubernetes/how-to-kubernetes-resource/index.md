@@ -36,7 +36,7 @@ Add a [Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secr
 
 ## Step 3: Add a container and use the secret you just defined
 
-Add a  Radius [container]({{< ref "guides/author-apps/containers" >}}) to your application:
+Add a Radius [container]({{< ref "guides/author-apps/containers" >}}) to your application:
 
 {{< rad file="snippets/app-kubernetes.bicep" embed=true marker="//APPLICATION" >}}
 
