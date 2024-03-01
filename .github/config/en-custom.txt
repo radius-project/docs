@@ -1226,3 +1226,11 @@ KubeVela
 GigaOm
 potx
 href
+RecipeConfigProperties
+recipeConfig
+TerraformConfigProperties
+AuthConfig
+GitAuthConfig
+GitAuthConfigPat
+SecretConfig
+appgraph

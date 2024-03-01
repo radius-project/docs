@@ -34,6 +34,7 @@ description: "Detailed reference documentation for applications.core/environment
 | **extensions** | [Extension](#extension)[] | The environment extension. |
 | **providers** | [Providers](#providers) | The Cloud providers configuration |
 | **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(read-only)_ |
+| **recipeConfig** | [RecipeConfigProperties](#recipeconfigproperties) | Configuration for Recipes. Defines how each type of Recipe should be configured and run. |
 | **recipes** | [EnvironmentPropertiesRecipes](#environmentpropertiesrecipes) | Specifies Recipes linked to the Environment. |
 | **simulated** | bool | Simulated environment. |
 
@@ -162,6 +163,56 @@ description: "Detailed reference documentation for applications.core/environment
 | Property | Type | Description |
 |----------|------|-------------|
 | **scope** | string | Target scope for Azure resources to be deployed into.  For example: '/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testGroup' <br />_(required)_ |
+
+### RecipeConfigProperties
+
+#### Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| **terraform** | [TerraformConfigProperties](#terraformconfigproperties) | Configuration for Terraform Recipes. Controls how Terraform plans and applies templates as part of Recipe deployment. |
+
+### TerraformConfigProperties
+
+#### Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| **authentication** | [AuthConfig](#authconfig) | Authentication information used to access private Terraform module sources. Supported module sources: Git. |
+
+### AuthConfig
+
+#### Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| **git** | [GitAuthConfig](#gitauthconfig) | Authentication information used to access private Terraform modules from Git repository sources. |
+
+### GitAuthConfig
+
+#### Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| **pat** | [GitAuthConfigPat](#gitauthconfigpat) | Personal Access Token (PAT) configuration used to authenticate to Git platforms. |
+
+### GitAuthConfigPat
+
+#### Properties
+
+* **none**
+
+#### Additional Properties
+
+* **Additional Properties Type**: [SecretConfig](#secretconfig)
+
+### SecretConfig
+
+#### Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| **secret** | string | The ID of an Applications.Core/SecretStore resource containing the Git platform personal access token (PAT). The secret store must have a secret named 'pat', containing the PAT value. A secret named 'username' is optional, containing the username associated with the pat. By default no username is specified. |
 
 ### EnvironmentPropertiesRecipes
 

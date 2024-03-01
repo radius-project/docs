@@ -87,14 +87,21 @@ This command:
 
 - Runs the application in your Kubernetes cluster
 - Creates a port-forward from localhost to port 3000 inside the container so you can navigate to the app's frontend UI
+- Creates a port-forward from localhost to port 7007 inside the container so you can navigate to your Radius Dashboard
 - Streams container logs to your terminal
 
+<br>
 In your browser you should see the demo app:
 
 {{< image src="demo-screenshot.png" alt="Screenshot of the demo container" width=600px >}}
-<br /><br />
+<br>
 
-Congrats! You're running your first Radius app. When you're ready to move on to the next step, use <kbd>CTRL</kbd>+ <kbd>C</kbd> to exit the command.
+Access your Radius Dashboard by opening [http://localhost:7007](http://localhost:7007/resources/default/Applications.Core/applications/demo/application) in a browser. In your browser, you should see the Radius Dashboard, which includes visualizations of the application graph, environments, and recipes:
+
+{{< image src="demo-dashboard-appgraph.png" alt="screenshot of an example Radius Dashboard home page" width=800 >}}
+<br><br>
+
+> Congrats! You're running your first Radius app. <br> When you're ready to move on to the next step, use <kbd>CTRL</kbd>+ <kbd>C</kbd> to exit the command.
 
 ## 5. Add Database
 
@@ -136,17 +143,22 @@ You should see the Radius Connections section with new environment variables add
 
 Navigate to the Todo List tab and test out the application. Using the Todo page will update the saved state in Redis:
 
-{{< image src="./images/demo-with-todolist.png" alt="Screenshot of the todolist" width=700px >}}
+{{< image src="demo-with-todolist.png" alt="Screenshot of the todolist" width=700px >}}
 <br /><br />
 
-Press <kbd>CTRL</kbd>+ <kbd>C</kbd> when you are finished with the website.
+Access your Radius Dashboard again by opening [http://localhost:7007](http://localhost:7007/resources/default/Applications.Core/applications/demo/application) in a browser. You should see a visualization of the application graph for your `demo` app, including the connection to the `db` Redis Cache:
 
-## 7. View the application connections
+{{< image src="demo-dashboard-appgraph-db.png" alt="screenshot of an example Radius Dashboard home page" width=800 >}}
+<br><br>
+
+> Press <kbd>CTRL</kbd>+ <kbd>C</kbd> when you are finished with the websites.
+
+## 7. View the application graph
 
 Radius Connections are more than just environment variables and configuration. You can also access the "application graph" and understand the connections within your application with the following command:
 
 ```bash
-rad app connections
+rad app graph
 ```
 
 You should see the following output, detailing the connections between the `demo` container and the `db` Redis Cache, along with information about the underlying Kubernetes resources running the app:
