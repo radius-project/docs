@@ -1,16 +1,16 @@
 ---
 type: docs
-title: "How-To: Set up a private registry for your Terraform Radius Recipes"
-linkTitle: "Set up a private registry"
-description: "Learn how to configure your Radius Environment to leverage your private registry as storage for your custom Recipe templates"
+title: "How-To: Pull Terraform modules from private git repositories"
+linkTitle: "Private git repos"
+description: "Learn how to setup your Radius environment to pull Terraform Recipe templates from a private git repository."
 weight: 500
 categories: "How-To"
 tags: ["recipes", "terraform"]
 ---
 
-This how-to guide will provide an overview of how to:
+This how-to guide will describe how to:
 
-- Configure a Radius Environment that leverages a [Radius secret store]({{< ref secretstore >}}) to register a [private Terraform registry](https://developer.hashicorp.com/terraform/registry/private) for your Recipe templates.
+- Configure a Radius Environment to be able to pull Terraform Recipe templates from a private git repository.
 
 ### Prerequisites
 
@@ -22,9 +22,7 @@ Before you get started, you'll need to make sure you have the following tools an
 
 ### Step 1: Define a secret store resource
 
-Radius provides support for defining Kubernetes Secrets as Bicep resources, through the Radius Secret Store. Users have the option to both leverage an existing Kubernetes Secret or define a new Kubernetes Secret in the resource, see the [Radius Secret Store schema]({{< ref secretstore >}}) for more information.
-
-
+Begin by configuring a [Radius Secret Store]({{< ref secretstore >}}) with the personal access token or username + password you previously created, which has access to your private git repository.
 
 Create a Bicep file `env.bicep` and define your resource:
 
