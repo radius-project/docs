@@ -63,7 +63,7 @@ rad deploy ./env.bicep
 You can delete a Radius Environment by running the following command:
 
 ```
-rad env delete prod
+rad env delete my-env
 ```
 
 ## Further reading
