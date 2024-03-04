@@ -90,7 +90,7 @@ Refer to the probes section of the [container resource schema]({{< ref "containe
 
 ## Connections
 
-When a connection between two resources is declared, Radius injects resource related information into environment variables that are then used to access the respective resource without having to hard code URIs, connection strings, access keys, or anything that application code needs to successfully communicate.
+When a connection is declared from a container to another Radius resource, Radius injects environment variables with connection information to make it easy to access the target resource. These variables can be used by your code to access the resource without manually hard-coding or mounting URIs, connection strings, access keys, or other values. Connection information is securely managed by the Radius Environment, ensuring it is stored and mounted correctly.
 
 These environment variables follow a naming convention that makes their use predictable. The naming pattern is derived from the connection name and resource type, which determines what values are required. This way the code that needs to read the values gets to define how they are named. Refer to the [reference documentation]({{< ref resource-schema >}}) of each resource for more information.
 
