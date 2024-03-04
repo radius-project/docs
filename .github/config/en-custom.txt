@@ -311,6 +311,7 @@ redoc
 resourceGroup
 replacePrefix
 repo
+repos
 resourceGroupName
 RecipeSpecified
 resourceId

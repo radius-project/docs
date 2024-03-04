@@ -19,32 +19,31 @@ Before you get started, you'll need to make sure you have the following tools an
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+- A [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#about-personal-access-tokens) for your Git repository.
 
-### Step 1: Define a secret store resource
+## Step 1: Define a secret store resource
 
 Begin by configuring a [Radius Secret Store]({{< ref secretstore >}}) with the personal access token or username + password you previously created, which has access to your private git repository.
 
-Create a Bicep file `env.bicep` and define your resource:
+Create a Bicep file `env.bicep`, import Radius and  define your resource:
 
 {{< rad file="snippets/env.bicep" embed=true marker="//SECRETSTORE" >}}
 
 > Note the property `pat` is a required property that refers to your personal access token, while `username` can be optional.
 
-## Step 2: Define your Radius Recipe
+## Step 2: Define your Radius Recipe configurations
 
-Define your Radius Recipe, keep in mind that your `templatePath` should contain a `git::` prefix as per [Terraform requirements](https://developer.hashicorp.com/terraform/language/modules/sources#generic-git-repository).
-
-{{< rad file="snippets/env.bicep" embed=true marker="//RECIPE" >}}
-
-
-## Step 3: Define your Radius Recipe configurations
-
-Radius provides a property `recipeConfig` which allows users to setup specific Git module sources for your Terraform Radius Recipes. Define this property in your Radius Environment resource, visit the [Radius Environment schema]({{< ref environment-schema >}}) page for more information.
+Radius provides a property `recipeConfig` which allows users to setup specific Git module sources for your Terraform Radius Recipes. In your `env.bicep` file define this property in your Radius Environment resource, visit the [Radius Environment schema]({{< ref environment-schema >}}) page for more information.
 
 {{< rad file="snippets/env.bicep" embed=true marker="//ENV" >}}
 
 > Note the keys listed inside of the `pat` property should match your path name to the secret store.
 
+## Step 3: Define your Radius Recipe
+
+Define your Radius Recipe inside your [Radius Environment resource]({{< ref environment-schema >}}) in your `env.bicep` file, keep in mind that your `templatePath` should contain a `git::` prefix as per [Terraform requirements](https://developer.hashicorp.com/terraform/language/modules/sources#generic-git-repository).
+
+{{< rad file="snippets/env.bicep" embed=true marker="//RECIPE" >}}
 
 ## Step 4: Deploy your Radius Environment
 
