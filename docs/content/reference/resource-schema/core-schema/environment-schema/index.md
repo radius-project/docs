@@ -51,7 +51,7 @@ Details on what to run and how to run it are defined in the `container` property
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | terraform | y | Configuration for Terraform Recipes. Controls how Terraform plans and applies templates as part of Recipe deployment. | [See below](#terraform-properties)
-| env | n | Environment variables injected during Terraform Recipe execution for the recipes in the environment. | [TODO](#TODO)
+| env | n | Environment variables injected during Terraform Recipe execution for the recipes in the environment. | [See below](#env-properties)
 
 #### terraform properties
 
@@ -71,6 +71,12 @@ Details on what to run and how to run it are defined in the `container` property
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | secret | y | The ID of an Applications.Core/SecretStore resource containing the Git platform personal access token (PAT). The secret store must have a secret named 'pat', containing the PAT value. A secret named 'username' is optional, containing the username associated with the pat. By default no username is specified. | For more information refer to the [Terraform documentation](https://developer.hashicorp.com/terraform/language/providers/configuration).
+
+#### env properties
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| \<user-defined key-value pairs\> | n | User-defined environment variables. | `'env_var_1'`: `'env_value_1'`
 
 ### recipes
 
