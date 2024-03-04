@@ -58,7 +58,7 @@ Details on what to run and how to run it are defined in the `container` property
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | authentication | y | Authentication information used to access private Terraform module sources. Supported module sources: Git. | [See below](#authentication-properties)
-| providers | n | Configuration for Terraform Recipe Providers. Controls how Terraform interacts with cloud providers, SaaS providers, and other APIs. | For more information, please see: [https://developer.hashicorp.com/terraform/language/providers/configuration](https://developer.hashicorp.com/terraform/language/providers/configuration).
+| providers | n | Configuration for Terraform Recipe Providers. Controls how Terraform interacts with cloud providers, SaaS providers, and other APIs. | For more information refer to the [Terraform documentation](https://developer.hashicorp.com/terraform/language/providers/configuration).
 
 ##### authentication properties
 
@@ -70,7 +70,7 @@ Details on what to run and how to run it are defined in the `container` property
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| secret | y | The ID of an Applications.Core/SecretStore resource containing the Git platform personal access token (PAT). The secret store must have a secret named 'pat', containing the PAT value. A secret named 'username' is optional, containing the username associated with the pat. By default no username is specified. | For more information, please see: [https://developer.hashicorp.com/terraform/language/providers/configuration](https://developer.hashicorp.com/terraform/language/providers/configuration).
+| secret | y | The ID of an Applications.Core/SecretStore resource containing the Git platform personal access token (PAT). The secret store must have a secret named 'pat', containing the PAT value. A secret named 'username' is optional, containing the username associated with the pat. By default no username is specified. | For more information refer to the [Terraform documentation](https://developer.hashicorp.com/terraform/language/providers/configuration).
 
 ### recipes
 
