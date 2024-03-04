@@ -29,7 +29,7 @@ Create a Bicep file `env.bicep`, import Radius, and  define your resource:
 
 {{< rad file="snippets/env.bicep" embed=true marker="//SECRETSTORE" >}}
 
-> Note the property `pat` is a required property that refers to your personal access token, while `username` is an optional field you can specify if your git platform requires a username.
+> Note the property `pat` is a required secret key that refers to your personal access token, while `username` is an optional key you can specify if your git platform requires a username.
 
 ## Step 2: Configure Terraform Recipe git authentication
 
