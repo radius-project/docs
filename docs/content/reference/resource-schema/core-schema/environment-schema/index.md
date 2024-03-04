@@ -50,21 +50,21 @@ Details on what to run and how to run it are defined in the `container` property
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| terraform | y | Configuration for Terraform Recipes. Controls how Terraform plans and applies templates as part of Recipe deployment. | [See below](#terraform)
-| env | n | Environment variables injected during Terraform Recipe execution for the recipes in the environment. | [See below](#env)
+| terraform | y | Configuration for Terraform Recipes. Controls how Terraform plans and applies templates as part of Recipe deployment. | [See below](#terraform-properties)
+| env | n | Environment variables injected during Terraform Recipe execution for the recipes in the environment. | [TODO](#TODO)
 
 #### terraform properties
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| authentication | y | Authentication information used to access private Terraform module sources. Supported module sources: Git. | [See below](#authentication)
+| authentication | y | Authentication information used to access private Terraform module sources. Supported module sources: Git. | [See below](#authentication-properties)
 | providers | n | Configuration for Terraform Recipe Providers. Controls how Terraform interacts with cloud providers, SaaS providers, and other APIs. | For more information, please see: [https://developer.hashicorp.com/terraform/language/providers/configuration](https://developer.hashicorp.com/terraform/language/providers/configuration).
 
 ##### authentication properties
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| pat | y | Personal Access Token (PAT) configuration used to authenticate to Git platforms. | [See below](#secret)
+| pat | y | Personal Access Token (PAT) configuration used to authenticate to Git platforms. | [See below](#pat-properties)
 
 ##### pat properties
 
