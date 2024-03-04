@@ -40,6 +40,15 @@ resource env 'Applications.Core/environments@2023-10-01-preview' = {
         }
       }
     }
+    recipes: {
+      'Applications.Datastores/redisCaches': {
+        default: {
+          templateKind: 'terraform'
+          // Git template path
+          templatePath:'git::https//github.com/my-org/my-repo'
+        }
+      }
+    }
   }
 }
 //ENV

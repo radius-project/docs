@@ -19,10 +19,11 @@ Before you get started, you'll need to make sure you have the following tools an
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+- [Radius initialized with `rad init`]({{< ref howto-environment >}})
 
 ## Step 1: Create a personal access token
 
-Create a personal access token, this can be from [GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#about-personal-access-tokens), [GitLab](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html) or any other Git platform.
+Create a personal access token, this can be from [GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#about-personal-access-tokens), [GitLab](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html), [Azure DevOps](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows) or any other Git platform.
 
 The PAT should have access to read the files inside the specific private repository.
 
@@ -34,7 +35,7 @@ Create a Bicep file `env.bicep`, import Radius, and  define your resource:
 
 {{< rad file="snippets/env.bicep" embed=true marker="//SECRETSTORE" >}}
 
-> Note the property `pat` is a required secret key that refers to your personal access token, while `username` is an optional key you can specify if your git platform requires a username.
+> Note the property `pat` is a required key that refers to your personal access token, while `username` is an optional key you can specify if your git platform requires a username.
 
 ## Step 3: Configure Terraform Recipe git authentication
 
@@ -42,21 +43,25 @@ Create a Bicep file `env.bicep`, import Radius, and  define your resource:
 
 In your `env.bicep` file add an Environment resource, along with Recipe configuration which leverages the previously defined secret store for git authentication.
 
-{{< rad file="snippets/env.bicep" embed=true marker="//ENV" markdownConfig="{linenos=table,hl_lines=[\"9-22\"],linenostart=30}" >}}
+{{< rad file="snippets/env.bicep" embed=true marker="//ENV" >}}
 
 ## Step 4: Add a Terraform Recipe
 
 Update your Environment with a Terraform Recipe, pointing to your private git repository. Note that your `templatePath` should contain a `git::` prefix, per the [Terraform module documentation](https://developer.hashicorp.com/terraform/language/modules/sources#generic-git-repository).
 
-{{< rad file="snippets/env.bicep" embed=true marker="//ENV" markdownConfig="{linenos=table,hl_lines=[\"23-30\"],linenostart=30}" >}}
+{{< rad file="snippets/env-complete.bicep" embed=true marker="//ENV" markdownConfig="{linenos=table,hl_lines=[\"23-30\"],linenostart=30}" >}}
 
 ## Step 5: Deploy your Radius Environment
 
 Deploy your new Radius Environment:
 
 ```
-rad deploy ./env.bicep
+rad deploy ./env.bicep -p pat=******
 ```
+
+## Done
+
+Your Radius Environment is now ready to utilize your Radius Recipes stored inside your private registry. For more information on Radius Recipes visit the [Recipes overview page]({{< ref "/guides/recipes/overview" >}}).
 
 ## Cleanup
 
