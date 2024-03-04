@@ -25,23 +25,25 @@ Before you get started, you'll need to make sure you have the following tools an
 
 Begin by configuring a [Radius Secret Store]({{< ref secretstore >}}) with the personal access token or username + password you previously created, which has access to your private git repository.
 
-Create a Bicep file `env.bicep`, import Radius and  define your resource:
+Create a Bicep file `env.bicep`, import Radius, and  define your resource:
 
 {{< rad file="snippets/env.bicep" embed=true marker="//SECRETSTORE" >}}
 
-> Note the property `pat` is a required property that refers to your personal access token, while `username` can be optional.
+> Note the property `pat` is a required property that refers to your personal access token, while `username` is an optional field you can specify if your git platform requires a username.
 
-## Step 2: Define your Radius Recipe configurations
+## Step 2: Configure Terraform Recipe git authentication
 
-Radius provides a property `recipeConfig` which allows users to setup specific Git module sources for your Terraform Radius Recipes. In your `env.bicep` file define this property in your Radius Environment resource, visit the [Radius Environment schema]({{< ref environment-schema >}}) page for more information.
+`recipeConfig` allows you to configure how Recipes should be setup and run. One available option is to specify git credentials for pulling Terraform Recipes from git sources. For more information refer to the [Radius Environment schema]({{< ref environment-schema >}}) page.
+
+In your `env.bicep` file add an Environment resource, along with Recipe configuration which leverages the previously defined secret store for git authentication.
 
 {{< rad file="snippets/env.bicep" embed=true marker="//ENV" >}}
 
 > Note the keys listed inside of the `pat` property should match your path name to the secret store.
 
-## Step 3: Define your Radius Recipe
+## Step 3: Add a Terraform Recipe
 
-Define your Radius Recipe inside your [Radius Environment resource]({{< ref environment-schema >}}) in your `env.bicep` file, keep in mind that your `templatePath` should contain a `git::` prefix as per [Terraform requirements](https://developer.hashicorp.com/terraform/language/modules/sources#generic-git-repository).
+Update your Environment with a Terraform Recipe, pointing to your private git repository. Note that your `templatePath` should contain a `git::` prefix, per the [Terraform module documentation](https://developer.hashicorp.com/terraform/language/modules/sources#generic-git-repository).
 
 {{< rad file="snippets/env.bicep" embed=true marker="//RECIPE" >}}
 

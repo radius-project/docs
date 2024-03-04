@@ -6,11 +6,11 @@ resource secretStoreGithub 'Applications.Core/secretStores@2023-10-01-preview' =
   properties:{
     type: 'generic'
     data: {
-      // Required key value
+      // Required value, refers to the personal access token or password of the git platform
       pat: {
         value: '<my-access-token>'
       }
-      // Optional key value
+      // Optional value, refers to the username of the git platform
       username: {
         value: '<my-username>'
       }
@@ -25,16 +25,14 @@ resource env 'Applications.Core/environments@2023-10-01-preview' = {
   properties: {
     compute: {
       kind: 'kubernetes'
-      resourceId: 'self'
       namespace: 'default'
     }
     recipeConfig: {
       terraform: {
         authentication:{
           git:{  
-            // PAT is a required key value, personal access token
             pat:{
-              // secretStore ID
+              // The hostname of your git platform, such as 'dev.azure.com' or 'github.com'
               'dev.azure.com':{
                 secret: secretStoreGithub.id
               }
