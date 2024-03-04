@@ -22,6 +22,10 @@ We offer a template PowerPoint file to get started:
 1. Next, review the docs to make sure you understand the [concepts]({{< ref concepts >}}).
 1. Use the Radius [getting started guide]({{< ref getting-started >}}) and [samples repo](https://github.com/radius-project/samples) to show demos of how to use Radius.
 
-## Previous presentations
+## Other resources
 
-Refer to the [Radius press coverage and media links]({{< ref media-coverage >}}) page for a list of previous presentations.
+- [Radius Homepage​](https://radapp.io)​ is starting point for all things Radius
+- To view code and file issues​, visit the [radius-project](https://github.com/radius-project) in GitHub
+- To read the latest blog posts on Radius​, visit [Blog](https://blog.radapp.io) ​
+- Refer to the [Radius press coverage and media links]({{< ref media-coverage >}}) page for a list of previous presentations.
+- Visit the [feature roadmap for Radius](https://aka.ms/radius-roadmap) for updates on what's coming next.
