@@ -20,9 +20,10 @@ Kubernetes version `1.23.8` or higher is recommended to run Radius.
 
 Radius resources, when deployed to a Kubernetes environment, are mapped to one or more Kubernetes objects. The following table describes the mapping between Radius resources and Kubernetes objects:
 
-| Radius resource                  | Kubernetes object |
+| Radius resource/configuration | Kubernetes object |
 |----------------------------------|-------------------|
-| [`Applications.Core/containers`]({{< ref container-schema >}}) | `apps/Deployment@v1`<br />`core/Service@v1` _(if ports defined)_ |
+| [`Applications.Core/containers`]({{< ref container-schema >}}) | `apps/Deployment@v1`<br /> <br /> `core/Service@v1` _(if ports defined)_ |
+| `Applications.Core/containers` connections | `core/Secret@v1` <br /> Mounted to the container as environment variables. Refer to the [connections guide]({{< ref howto-connect-dependencies >}}) to learn more. |
 | [`Applications.Core/gateways`]({{< ref gateway >}})     | `projectcontour.io/HTTPProxy@v1` |
 | [`Applications.Dapr/pubSubBrokers`]({{< ref dapr-pubsub >}}) | `dapr.io/Component@v1alpha1` |
 | [`Applications.Dapr/secretStores`]({{< ref dapr-secretstore >}}) | `dapr.io/Component@v1alpha1` |
