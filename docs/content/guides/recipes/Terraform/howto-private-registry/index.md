@@ -51,7 +51,7 @@ In your `env.bicep` file add an Environment resource, along with Recipe configur
 
 Update your Environment with a Terraform Recipe, pointing to your private git repository. Note that your `templatePath` should contain a `git::` prefix, per the [Terraform module documentation](https://developer.hashicorp.com/terraform/language/modules/sources#generic-git-repository).
 
-{{< rad file="snippets/env-complete.bicep" embed=true marker="//ENV" markdownConfig="{linenos=table,hl_lines=[\"23-30\"],linenostart=30}" >}}
+{{< rad file="snippets/env-complete.bicep" embed=true marker="//ENV" markdownConfig="{linenos=table,hl_lines=[\"23-31\"],linenostart=30}" >}}
 
 ## Step 5: Deploy your Radius Environment
 
