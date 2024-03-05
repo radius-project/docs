@@ -23,19 +23,21 @@ Before you get started, you'll need to make sure you have the following tools an
 
 ## Step 1: Create a personal access token
 
-Create a personal access token, this can be from [GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#about-personal-access-tokens), [GitLab](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html), [Azure DevOps](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows) or any other Git platform.
+Create a personal access token, this can be from [GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#about-personal-access-tokens), [GitLab](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html), [Azure DevOps](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows), or any other Git platform.
 
 The PAT should have access to read the files inside the specific private repository.
 
 ## Step 2: Define a secret store resource
 
-Begin by configuring a [Radius Secret Store]({{< ref secretstore >}}) with the personal access token or username + password you previously created, which has access to your private git repository.
+Configure a [Radius Secret Store]({{< ref "/guides/author-apps/secrets/overview" >}}) with the personal access token or username + password you previously created, which has access to your private git repository.
+
+> While this example shows a Radius-managed secret store where Radius creates the underlying secrets infrastructure, you can also bring your own existing secrets. Refer to the [secrets documentation]({{< ref "/guides/author-apps/secrets/overview" >}}) for more information.
 
 Create a Bicep file `env.bicep`, import Radius, and  define your resource:
 
 {{< rad file="snippets/env.bicep" embed=true marker="//SECRETSTORE" >}}
 
-> Note the property `pat` is a required key that refers to your personal access token, while `username` is an optional key you can specify if your git platform requires a username.
+> The property `pat` is required and refers to your personal access token or password, while `username` is optional and refers to a username, if your git platform requires one.
 
 ## Step 3: Configure Terraform Recipe git authentication
 
