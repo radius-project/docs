@@ -23,8 +23,10 @@ weight: 000
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | [compute](#compute) | y | Container runtime configuration. | [See below](#compute)
+| [recipeConfig](#recipeconfig) | n | Configuration for Recipes. Defines how each type of Recipe should be configured and run. | [See below](#recipeconfig) 
 | [recipes](#recipes) | n | Recipes registered to the environment | [See below](#recipes)
 | simulated | n | When enabled, a simulated environment will not deploy any output resources or run any Recipes when an application is deployed. This is useful for dry runs or testing. Defaults to `false`. | `true`
+| [extensions](#extensions) | n | The environment extension. | [See below](#extensions)
 
 ### compute
 
@@ -43,6 +45,38 @@ Details on what to run and how to run it are defined in the `container` property
 |------|:--------:|-------------|---------|
 | kind | y | The kind of identity. 'azure.com.workload' is currently only supported. | `'azure.com.workload'` |
 | oidcIssuer | n | The [OIDC issuer URL](https://azure.github.io/azure-workload-identity/docs/installation/self-managed-clusters/oidc-issuer.html) for your Kubernetes cluster. | `'{IssuerURL}/.well-known/openid-configuration'` |
+
+### recipeConfig
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| terraform | y | Configuration for Terraform Recipes. Controls how Terraform plans and applies templates as part of Recipe deployment. | [See below](#terraform-properties)
+| env | n | Environment variables injected during Terraform Recipe execution for the recipes in the environment. | [See below](#env-properties)
+
+#### terraform properties
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| authentication | y | Authentication information used to access private Terraform module sources. Supported module sources: Git. | [See below](#authentication-properties)
+| providers | n | Configuration for Terraform Recipe Providers. Controls how Terraform interacts with cloud providers, SaaS providers, and other APIs. | For more information refer to the [Terraform documentation](https://developer.hashicorp.com/terraform/language/providers/configuration).
+
+##### authentication properties
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| pat | y | Personal Access Token (PAT) configuration used to authenticate to Git platforms. | [See below](#pat-properties)
+
+##### pat properties
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| secret | y | The ID of an Applications.Core/SecretStore resource containing the Git platform personal access token (PAT). The secret store must have a secret named 'pat', containing the PAT value. A secret named 'username' is optional, containing the username associated with the pat. By default no username is specified. | For more information refer to the [Terraform documentation](https://developer.hashicorp.com/terraform/language/providers/configuration).
+
+#### env properties
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| \<user-defined key-value pairs\> | n | User-defined environment variables. | `'env_var_1'`: `'env_value_1'`
 
 ### recipes
 
