@@ -29,7 +29,7 @@ The PAT should have access to read the files inside the specific private reposit
 
 ## Step 2: Define a secret store resource
 
-Configure a [Radius Secret Store]({{< ref "/guides/author-apps/secrets/overview" >}}) with the personal access token or username + password you previously created, which has access to your private git repository. Define a the namespace for the cluster that will contain your [Kubernetes Secret](https://kubernetes.io/docs/concepts/configuration/secret/) with the `resource` property. 
+Configure a [Radius Secret Store]({{< ref "/guides/author-apps/secrets/overview" >}}) with the personal access token or username + password you previously created, which has access to your private git repository. Define the namespace for the cluster that will contain your [Kubernetes Secret](https://kubernetes.io/docs/concepts/configuration/secret/) with the `resource` property. 
 
 > While this example shows a Radius-managed secret store where Radius creates the underlying secrets infrastructure, you can also bring your own existing secrets. Refer to the [secrets documentation]({{< ref "/guides/author-apps/secrets/overview" >}}) for more information.
 
