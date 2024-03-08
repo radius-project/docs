@@ -8,6 +8,7 @@ param pat string
 resource secretStoreGit 'Applications.Core/secretStores@2023-10-01-preview' = {
   name: 'my-git-secret-store'
   properties: {
+    resource: 'my-secret-namespace/github'
     type: 'generic'
     data: {
       pat: {
