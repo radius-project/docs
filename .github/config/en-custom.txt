@@ -235,6 +235,7 @@ lifecycles
 linkTitle
 linter
 linux
+lineNos
 liveness
 livenessProbe
 localWorkspace
@@ -311,6 +312,7 @@ redoc
 resourceGroup
 replacePrefix
 repo
+repos
 resourceGroupName
 RecipeSpecified
 resourceId
@@ -981,6 +983,7 @@ learnings
 architected
 customizable
 Gitops
+GitLab
 OSS
 SRE
 SREs
