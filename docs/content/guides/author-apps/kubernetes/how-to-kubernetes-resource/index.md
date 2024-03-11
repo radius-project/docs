@@ -88,7 +88,6 @@ Type:  Opaque
 
 Data
 ====
-key:            15 bytes
 my-secret-key:  15 bytes
 ```
 
