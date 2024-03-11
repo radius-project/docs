@@ -29,7 +29,7 @@ Note that only Kubernetes Secrets are currently supported with more to come in t
 
 | Key | Required | Description | Example |
 |----------|:--------:|-------------|---------|
-| application | y | The ID of the application resource this resource belongs to. | `app.id` |
+| application | n | The ID of the application resource this resource belongs to. | `app.id` |
 | resource | n | Reference to the backing secret store resource, required only if valueFrom specifies referenced secret name. | `namespace/secretName` |
 | type | y | The type of secret in your resource. | `'certificate'`
 | [data](#data) | y | An object to represent key-value type secrets. | [See below](#data)
