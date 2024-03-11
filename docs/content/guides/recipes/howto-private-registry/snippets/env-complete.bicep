@@ -8,6 +8,7 @@ param pat string
 resource secretStoreGit 'Applications.Core/secretStores@2023-10-01-preview' = {
   name: 'my-git-secret-store'
   properties: {
+    resource: 'my-secret-namespace/github'
     type: 'generic'
     data: {
       pat: {
@@ -45,7 +46,7 @@ resource env 'Applications.Core/environments@2023-10-01-preview' = {
         default: {
           templateKind: 'terraform'
           // Git template path
-          templatePath:'git::https//github.com/my-org/my-repo'
+          templatePath:'git::https://github.com/my-org/my-repo'
         }
       }
     }
