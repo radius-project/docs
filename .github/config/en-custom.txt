@@ -1236,3 +1236,6 @@ GitAuthConfig
 GitAuthConfigPat
 SecretConfig
 appgraph
+EnvironmentVariables
+TerraformConfigPropertiesProviders
+ProviderConfigProperties
