@@ -235,6 +235,7 @@ lifecycles
 linkTitle
 linter
 linux
+lineNos
 liveness
 livenessProbe
 localWorkspace
