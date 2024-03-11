@@ -100,19 +100,16 @@ To delete your Radius specific Kubernetes resources you'll need to run:
 rad app delete -a demo
 ```
 
-Once your Radius Application has been deleted you can delete the remaining Kubernetes resources you created by running:
+Once your Radius Application has been deleted you can delete the Kubernetes Secret:
 
 ```bash
-kubectl delete all --all -n default-demo
+kubectl delete secret my-secret -n default-demo
 ```
 
 Your console output should look similar to:
 
 ```
-pod "demo-74794c5b55-jw4db" deleted
-service "demo" deleted
-deployment.apps "demo" deleted
-replicaset.apps "demo-74794c5b55" deleted
+secret "my-secret" deleted
 ```
 
 > [`rad app delete`]({{< ref rad_application_delete >}}) does not delete non-Radius resources that are not directly part of a Radius Application, such as Kubernetes resources. These resources require an additional cleanup step.
