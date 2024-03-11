@@ -65,8 +65,6 @@ rad deploy ./env.bicep -p pat=******
 
 Your Radius Environment is now ready to utilize your Radius Recipes stored inside your private registry. For more information on Radius Recipes visit the [Recipes overview page]({{< ref "/guides/recipes/overview" >}}).
 
-> Note currently there's a bug preventing the usage of `rad recipe show` for Radius Recipes registered from private registries, see the [Radius limitations page]({{< ref "limitations#terraform-private-registries" >}}) for more info.
-
 ## Cleanup
 
 You can delete a Radius Environment by running the following command:
