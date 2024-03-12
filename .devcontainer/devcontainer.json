@@ -14,7 +14,6 @@
 	"settings": {
 		"terminal.integrated.defaultProfile.linux": "bash"
 	},
-	"onCreateCommand": "bash ./.devcontainer/on-create.sh",
 	"postCreateCommand": "bash .devcontainer/post-create.sh",
 	"customizations": {
 		"codespaces": {
@@ -31,7 +30,7 @@
 			"settings": {},
 			"extensions": [
 				"GitHub.copilot",
-				"/tmp/rad-vscode-bicep.vsix"
+				"ms-azuretools.rad-vscode-bicep"
 			]
 		  }
 	}, 
