@@ -53,6 +53,11 @@ VERSION_STRING_REPLACEMENT="version = \"${CHANNEL_VERSION}\""
 awk -v REPLACEMENT="${VERSION_STRING_REPLACEMENT}" '{gsub(/version = \"edge\"/, REPLACEMENT); print}' docs/config.toml > docs/config.toml.tmp
 mv docs/config.toml.tmp docs/config.toml
 
+# In docs/config.toml, change version to VERSION instead of latest
+VERSION_STRING_REPLACEMENT="version = \"${CHANNEL_VERSION}\""
+awk -v REPLACEMENT="${VERSION_STRING_REPLACEMENT}" '{gsub(/version = \"latest\"/, REPLACEMENT); print}' docs/config.toml > docs/config.toml.tmp
+mv docs/config.toml.tmp docs/config.toml
+
 # In docs/config.toml, change github_branch to CHANNEL_VERSION instead of edge
 GITHUB_BRANCH_STRING_REPLACEMENT="github_branch = \"${CHANNEL_VERSION}\""
 awk -v REPLACEMENT="${GITHUB_BRANCH_STRING_REPLACEMENT}" '{gsub(/github_branch = \"edge\"/, REPLACEMENT); print}' docs/config.toml > docs/config.toml.tmp
