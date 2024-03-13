@@ -16,7 +16,7 @@
 
 set -xe
 
-VERSION_NUMBER=$1 # (e.g. 0.1.0)
+VERSION_NUMBER='0.33'
 REPOSITORY="docs"
 
 if [[ -z "$VERSION_NUMBER" ]]; then
@@ -55,7 +55,7 @@ mv docs/config.toml.tmp docs/config.toml
 
 # In docs/config.toml, change version to VERSION instead of latest
 VERSION_STRING_REPLACEMENT="version = \"${CHANNEL_VERSION}\""
-awk -v REPLACEMENT="${VERSION_STRING_REPLACEMENT}" '{gsub(/version = \"latest\"/, REPLACEMENT); print}' docs/config.toml > docs/config.toml.tmp
+awk -v REPLACEMENT="${VERSION_STRING_REPLACEMENT}" '{gsub(/^[ \t]*version = "latest"/, REPLACEMENT); print}' docs/config.toml > docs/config.toml.tmp
 mv docs/config.toml.tmp docs/config.toml
 
 # In docs/config.toml, change github_branch to CHANNEL_VERSION instead of edge
