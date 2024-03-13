@@ -16,7 +16,7 @@
 
 set -xe
 
-VERSION_NUMBER='0.33'
+VERSION_NUMBER=$1 # (e.g. 0.1.0)
 REPOSITORY="docs"
 
 if [[ -z "$VERSION_NUMBER" ]]; then
