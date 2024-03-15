@@ -151,7 +151,7 @@ Step 2: Deploy and test the existing Guestbook application using `kubectl`
 
 You will now add Radius to the Guestbook application's Kubernetes deployment manifests by making edits to the YAML files in the `deploy` directory. 
 
-1. In each of the YAML files that contain a manifest for `Kind: Deployment`, add the `annotations` property to `metadata`, and then add the `rad.app/enabled: 'true'` annotation. Note that the `'true'` must be surrounded in quotes.
+1. In each of the YAML files that contain a manifest for `Kind: Deployment`, add the `annotations` property to `metadata`, and then add the `radapp.io/enabled: 'true'` annotation. Note that the `'true'` must be surrounded in quotes.
 
    ```yaml
    ...
@@ -179,7 +179,7 @@ You will now add Radius to the Guestbook application's Kubernetes deployment man
    metadata:
       name: frontend
       annotations:
-         rad.app/enabled: 'true'
+         radapp.io/enabled: 'true'
    spec:
    selector:
       matchLabels:
