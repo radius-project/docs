@@ -53,7 +53,7 @@ VERSION_STRING_REPLACEMENT="version = \"${CHANNEL_VERSION}\""
 awk -v REPLACEMENT="${VERSION_STRING_REPLACEMENT}" '{gsub(/version = \"edge\"/, REPLACEMENT); print}' docs/config.toml > docs/config.toml.tmp
 mv docs/config.toml.tmp docs/config.toml
 
-# In docs/config.toml, change version to VERSION instead of latest
+# In docs/config.toml, change version to VERSION instead of latest or older version
 VERSION_STRING_REPLACEMENT="version = \"${CHANNEL_VERSION}\""
 awk -v REPLACEMENT="${VERSION_STRING_REPLACEMENT}" '{gsub(/^[ \t]*version = "(latest|v.*)"/, REPLACEMENT); print}' docs/config.toml > docs/config.toml.tmp
 mv docs/config.toml.tmp docs/config.toml
