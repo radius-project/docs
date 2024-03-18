@@ -12,6 +12,10 @@ on:
       - edge
       - v*.*
 
+permissions:
+  id-token: write # Required for requesting the JWT
+  contents: read  # Required for actions/checkout
+
 jobs:
   build:
     name: Build Hugo Website
