@@ -56,6 +56,8 @@ mv docs/config.toml.tmp docs/config.toml
 # In docs/config.toml, change version to CHANNEL_VERSION instead of latest or older version
 DOC_VERSION_STRING_REPLACEMENT="version = \"${CHANNEL_VERSION}\""
 sed -i.bak -E "s/^( *)[ \t]*version = \"(latest|v.*)\"/\1${DOC_VERSION_STRING_REPLACEMENT}/" docs/config.toml
+# Delete the backup file
+rm docs/config.toml.bak
 
 # In docs/config.toml, change github_branch to CHANNEL_VERSION instead of edge
 GITHUB_BRANCH_STRING_REPLACEMENT="github_branch = \"${CHANNEL_VERSION}\""
