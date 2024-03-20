@@ -55,8 +55,7 @@ mv docs/config.toml.tmp docs/config.toml
 
 # In docs/config.toml, change version to CHANNEL_VERSION instead of latest or older version
 DOC_VERSION_STRING_REPLACEMENT="version = \"${CHANNEL_VERSION}\""
-awk -v REPLACEMENT="${DOC_VERSION_STRING_REPLACEMENT}" '{gsub(/^[ \t]*version = "(latest|v.*)"/, REPLACEMENT); print}' docs/config.toml > docs/config.toml.tmp
-mv docs/config.toml.tmp docs/config.toml
+sed -i.bak -E "s/^( *)[ \t]*version = \"(latest|v.*)\"/\1${DOC_VERSION_STRING_REPLACEMENT}/" docs/config.toml
 
 # In docs/config.toml, change github_branch to CHANNEL_VERSION instead of edge
 GITHUB_BRANCH_STRING_REPLACEMENT="github_branch = \"${CHANNEL_VERSION}\""
