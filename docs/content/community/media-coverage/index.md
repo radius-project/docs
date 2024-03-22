@@ -23,7 +23,7 @@ Ongoing blog posts can be found at [Radius Blog](https://blog.radapp.io).
 | [Introducing Radius - Open at Microsoft ](https://www.youtube.com/watch?v=mT_NWFnYn0A)| Open at Microsoft | Nov 7, 2023 |
 | [Mark Russinovich at the Linux Foundation Member Summit](https://aka.ms/radius-lfms)|Linux Foundation Member Summit | Oct 24, 2023 |
 
-Want to give you own presentation? Check out the [Give a Radius Presentation]({{< ref presentations >}}) page.
+Want to give your own presentation? Check out the [Give a Radius Presentation]({{< ref presentations >}}) page.
 
 ## Press articles
 
