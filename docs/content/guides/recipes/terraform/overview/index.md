@@ -23,5 +23,6 @@ Radius Recipes can leverage any Terraform provider allowing users to interact wi
 ## Further Reading
 
 - [Author custom recipes]({{< ref howto-author-recipes >}})
+- [Register a Recipe from a private registry]({{< ref "/guides/recipes/terraform/howto-private-registry" >}})
 - [`rad recipe` CLI reference]({{< ref rad_recipe >}})
 - [Recipes overview]({{< ref "/guides/recipes/overview" >}})
