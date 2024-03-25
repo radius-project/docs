@@ -93,6 +93,10 @@ output values object = {
 }
 ```
 
+### Terraform private registries
+
+Currently users cannot run `rad recipe show` on Radius Recipes registered inside of private git registries and will experience an error in the CLI.
+
 ## Bicep & Deployment Engine
 
 ### Currently using a forked version of Bicep
