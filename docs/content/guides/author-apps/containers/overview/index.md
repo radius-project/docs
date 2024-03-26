@@ -28,7 +28,7 @@ Radius provides a way to apply custom Kubernetes configurations to container res
 
 ##### Base Kubernetes YAML
 
-You can provide a Kubernetes YAML definition as a base or foundation upon which Radius will build your containers, enabling you to incrementally adopting Radius by starting with your existing YAML definition and use applying Radius customizations on top. The provided YAML is fully passed through to Kubernetes when Radius creates the container resource, which means that you may even provide a definition for a custom resources (CRD) that Radius has no visibility into. <!-- For more information on how to onboard existing Kubernetes resources into Radius, refer to the [base Kubernetes YAML guide]("guides/author-apps/kubernetes/how-to-yaml-base-support"). -->
+You can provide a Kubernetes YAML definition as a base or foundation upon which Radius will build your containers, enabling you to incrementally adopting Radius by starting with your existing YAML definition and use applying Radius customizations on top. The provided YAML is fully passed through to Kubernetes when Radius creates the container resource, which means that you may even provide a definition for a custom resources (CRD) that Radius has no visibility into. For more information on how to onboard existing Kubernetes resources into Radius, refer to the [base Kubernetes YAML guide]("guides/author-apps/kubernetes/how-to-yaml-base-support").
 
 Radius currently supports the following Kubernetes resource types for the `base` property:
 

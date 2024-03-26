@@ -13,6 +13,9 @@ Async
 AWSSimpleQueueService
 Azure
 Blazor
+glbhw
+basemanifest
+renderer
 CAs
 clusterissuer
 ClusterIssuer
@@ -39,6 +42,7 @@ Deployable
 Dockerfiles
 Docsy
 DocumentDB
+dcd
 EKS
 eksClusterName
 ElastiCache
@@ -117,6 +121,8 @@ TBD
 TCP
 Terraform
 TLS
+tnvx
+tq
 ToCs
 UCP
 UDP
