@@ -22,7 +22,8 @@ jobs:
     if: github.event.action != 'closed'
     runs-on: ubuntu-latest
     environment:
-      name: ${{ github.ref_name == 'edge' && 'edge' || 'latest' }}
+      # If a PR into edge, use 'edge'. If a PR into anywhere else, use 'latest'. If a push, use the branch name.
+      name: ${{ github.event_name == 'pull_request' && (github.base_ref == 'edge' && 'edge' || 'latest') || github.ref_name }}
     env:
       GOVER: '^1.17'
       TUTORIAL_PATH: './docs/content/user-guides/tutorials/'
@@ -87,6 +88,7 @@ jobs:
     needs: ['build']
     runs-on: ubuntu-latest
     environment:
+      # If push to edge, use 'edge'. If push to anywhere else, use 'latest'.
       name: ${{ github.ref_name == 'edge' && 'edge' || 'latest' }}
       url: ${{ github.ref_name == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io' }}
     steps:
@@ -117,8 +119,10 @@ jobs:
     needs: ['build']
     runs-on: ubuntu-latest
     environment:
-      name: ${{ github.ref_name == 'edge' && 'edge' || 'latest' }}
-      url: ${{ github.ref_name == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io' }}
+      # If a PR into edge, use 'edge'. If a PR into anywhere else, use 'latest'. If a push, use the branch name.
+      name: ${{ github.event_name == 'pull_request' && (github.base_ref == 'edge' && 'edge' || 'latest') || github.ref_name }}
+      # If a push to edge, use the edge URL. If a push to anywhere else, use the latest URL. If a PR, blank.
+      url: ${{ github.event_name == 'pull_request' && '' || (github.ref_name == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io') }}
     steps:
       - name: Download Hugo artifacts
         uses: actions/download-artifact@v3
@@ -142,8 +146,9 @@ jobs:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
     environment:
-      name: ${{ github.ref_name == 'edge' && 'edge' || 'latest' }}
-      url: ${{ github.ref_name == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io' }}
+      # If a PR into edge, use 'edge'. If a PR into anywhere else, use 'latest'.
+      name: ${{ github.base_ref == 'edge' && 'edge' || 'latest' }}
+      url:  ${{ github.base_ref == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io' }}
     steps:
       - name: Close Pull Request
         id: closepullrequest
@@ -159,6 +164,7 @@ jobs:
     needs: ['build', 'deploy']
     runs-on: ubuntu-latest
     environment:
+      # If push to edge, use 'edge'. If push to anywhere else, use 'latest'.
       name: ${{ github.ref_name == 'edge' && 'edge' || 'latest' }}
     env:
       ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_API_APPID }}
