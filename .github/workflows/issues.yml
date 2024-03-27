@@ -30,7 +30,7 @@ jobs:
         run:
           # The resource ID for Azure DevOps is always 499b84ac-1321-427f-aa17-267ca6975798
           # https://learn.microsoft.com/azure/devops/integrate/get-started/authentication/service-principal-managed-identity
-          $accessToken = az account get-access-token --resource 499b84ac-1321-427f-aa17-267ca6975798 --query "accessToken" --output tsv
+          accessToken=$(az account get-access-token --resource 499b84ac-1321-427f-aa17-267ca6975798 --query "accessToken" --output tsv)
           echo "##[set-output name=ado_token;]$accessToken"
       - name: Sync issue to Azure DevOps
         uses: danhellem/github-actions-issue-to-work-item@v2.2
