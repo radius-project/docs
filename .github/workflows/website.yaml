@@ -119,8 +119,8 @@ jobs:
     needs: ['build']
     runs-on: ubuntu-latest
     environment:
-      # If a PR into edge, use 'edge'. If a PR into anywhere else, use 'latest'. If a push, use the branch name.
-      name: ${{ github.event_name == 'pull_request' && (github.base_ref == 'edge' && 'edge' || 'latest') || github.ref_name }}
+      # If a PR or push into edge, use 'edge'. If a PR or push into anywhere else, use 'latest'.
+      name: ${{ github.event_name == 'pull_request' && (github.base_ref == 'edge' && 'edge' || 'latest') || (github.ref_name == 'edge' && 'edge' || 'latest') }}
       # If a push to edge, use the edge URL. If a push to anywhere else, use the latest URL. If a PR, blank.
       url: ${{ github.event_name == 'pull_request' && '' || (github.ref_name == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io') }}
     steps:
