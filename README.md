@@ -16,7 +16,7 @@ The [rad CLI](https://github.com/radius-project/radius/tree/main/cmd/rad) refere
 
 ## 👨‍💻 Contributing
 
-Visit the [docs contribution guide](https://radapp.io/contributing/contributing-docs/) to learn how to contribute to the docs.
+Visit the [docs contribution guide](https://docs.radapp.io/community/contributing/docs/) to learn how to contribute to the docs.
 
 ### Local server
 

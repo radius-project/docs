@@ -39,9 +39,12 @@ Add the `context` parameter to your `variable.tf` file:
 
 {{< rad file="snippets/redis-kubernetes-variables.tf" embed=true marker="//CONTEXT" lang="terraform" >}}
 
-Update `main.tf` to use `context` for naming and namespace configuration:
+Ensure that your `main.tf` has:
 
-{{< rad file="snippets/redis-kubernetes-main.tf" embed=true marker="//RESOURCE" lang="terraform" >}}
+- Defined `required_providers` for any providers you leverage in your module. This allows Radius to inject configuration and credentials.
+- Utilizes the `context` parameter for naming and namespace configuration. This ensures your resources don't unintentionally collide with other uses of the Recipe.
+
+{{< rad file="snippets/redis-kubernetes-main.tf" embed=true lang="terraform" >}}
 
 {{% /codetab %}}
 
@@ -78,7 +81,7 @@ Once you have defined your IaC template you will need to output a `result` objec
 The `result` object must include:
 - **`values`**: The fields that the target resource requires. (_username, host, port, etc._)
 - **`secrets`**: The fields that the target resource requires, but should be treated as secrets. (_password, connectionString, etc._)
-- **`resources`**: The [UCP ID(s)]({{< ref "api-concept#resource-ids" >}}) of the resources providing the backing service. Used by UCP to track dependencies and manage deletion.
+- **`resources`**: The [UCP ID(s)]({{< ref "/concepts/technical/api#resource-ids" >}}) of the resources providing the backing service. Used by UCP to track dependencies and manage deletion.
 
 {{< tabs "Bicep" "Terraform" >}}
 
@@ -152,9 +155,13 @@ rad recipe register myrecipe --environment myenv --resource-type Applications.Da
 
 {{< /tabs >}}
 
-### Done
+### Step 6 : Use the custom recipe in your application
 
-You can now use your custom Recipe with its accompanying resource. Visit the [Recipe developer guide]({{< ref "/guides/recipes/overview" >}}) for more information.
+You can now use your custom Recipe with its accompanying resource in your application. 
+
+> Note that if your Recipe is registered with the name "default", you do not need to provide a Recipe name in your application, as it will automatically pick up the default Recipe.
+
+{{< rad file="snippets/redis.bicep" embed=true marker="//REDIS" >}}
 
 ## Further reading
 

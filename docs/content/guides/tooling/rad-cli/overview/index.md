@@ -43,7 +43,7 @@ The rad CLI is distributed as a single binary that can be installed on Linux, ma
 
 {{< button text="Install rad CLI" page="howto-rad-cli" >}}
 
-### Binary location
+## Binary location
 
 {{< tabs "macOS/Linux/WSL" "Windows" >}}
 
@@ -66,9 +66,9 @@ By default, the rad CLI installation script installs the rad CLI to `%LOCALAPPDA
 
 {{< /tabs >}}
 
-### Configuration location
+## Configuration
 
-The rad CLI stores workspaces, the rad-Bicep compiler, and other configuration under the `rad` directory.
+The rad CLI stores its configuration, the rad-Bicep compiler, and other configuration under the `rad` directory.
 
 {{< tabs "macOS/Linux/WSL" "Windows" >}}
 
@@ -77,10 +77,22 @@ The rad CLI stores configuration under `~/.rad`
 {{% /codetab %}}
 
 {{% codetab %}}
-The rad CLI stores configuration under `%USERPROFILE%\rad`
+The rad CLI stores configuration under `%USERPROFILE%\.rad`
 {{% /codetab %}}
 
 {{< /tabs >}}
+
+### `config.yaml` file
+
+The rad CLI stores its configuration in a YAML file named `config.yaml` under the `rad` directory. This file contains [workspaces]({{< ref "/guides/operations/workspaces/overview" >}}), which point to your cluster, your default [resource group]({{< ref "/guides/operations/groups/overview" >}}), and your default [environment]({{< ref "/guides/deploy-apps/environments/overview" >}}).
+
+When the rad CLI runs commands, it will use the configuration in the `config.yaml` file to determine which cluster, resource group, and environment to target and use.
+
+For more information, refer to the [`config.yaml` reference documentation]({{< ref "/reference/config" >}}).
+
+### `rad-bicep` compiler
+
+The rad CLI uses the rad-bicep compiler to compile Bicep files to JSON templates. The rad-bicep compiler is stored as `/bin/rad-bicep` within your configuration directory.
 
 ## Reference documentation
 

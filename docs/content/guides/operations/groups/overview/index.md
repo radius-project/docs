@@ -68,6 +68,6 @@ rad group switch mygroup
 
 ## Additional information
 
-- [Radius API]({{< ref api-concept >}})
-- [Radius architecture]({{< ref architecture-concept >}})
+- [Radius API]({{< ref "/concepts/technical/api" >}})
+- [Radius architecture]({{< ref "/concepts/technical/architecture" >}})
 - [rad CLI reference]({{< ref rad_group >}})

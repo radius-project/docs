@@ -7,9 +7,13 @@ weight: 200
 categories: "Overview"
 ---
 
-Workspaces allow you to manage multiple Radius platforms and environments using a local configuration file. You can easily define and switch between workspaces to deploy and manage applications across separate environments.
+## What are workspaces?
+
+Workspaces allow you to manage multiple Radius [environments]({{< ref "/guides/deploy-apps/environments/Overview" >}}) using a local, client-side, configuration file. You can easily define and switch between workspaces to deploy and manage applications across separate environments.
 
 {{< image src=workspaces.png alt="Diagram showing a Radius configuration file mapping workspaces to Kubernetes clusters" width=800px >}}
+
+The [`config.yaml`]({{< ref "/reference/config" >}}) file in your local Radius directory contains workspace entries that point to a Radius platform and environment.
 
 ## CLI commands
 
@@ -57,7 +61,7 @@ rad workspace delete -w myenv
 [rad workspace switch]({{< ref rad_workspace_switch >}}) switches the default workspace:
 
 ```bash
-rad env switch -e myenv
+rad workspace switch -w myworkspace
 ```
 
 {{% /codetab %}}
@@ -78,20 +82,12 @@ workspaces:
         kind: kubernetes
       environment: /planes/radius/local/resourcegroups/dev/providers/applications.core/environments/dev
       scope: /planes/radius/local/resourceGroups/dev
-      providerConfig:
-        azure:
-          subscriptionid: DEV-SUBID
-          resourcegroup: Dev
     prod:
       connection:
         context: ProdCluster
         kind: kubernetes
       environment: /planes/radius/local/resourcegroups/prod/providers/applications.core/environments/prod
       scope: /planes/radius/local/resourceGroups/prod
-      providerConfig:
-        azure:
-          subscriptionid: PROD-SUBID
-          resourcegroup: Prod
 ```
 
 ## Schema

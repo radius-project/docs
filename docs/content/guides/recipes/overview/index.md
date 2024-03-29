@@ -19,7 +19,7 @@ Recipes enable a **separation of concerns** between IT operators and developers 
 | Language | Supported sources | Notes |
 |----------|-------------------|-------|
 | [Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/) | [OCI registries](https://opencontainers.org/) | Supports Azure, AWS, and Kubernetes
-| [Terraform](https://developer.hashicorp.com/terraform/docs) | [Public Terraform registries](https://registry.terraform.io/) | Supports Azure, AWS, and Kubernetes providers<br />Other providers not yet configurable
+| [Terraform](https://developer.hashicorp.com/terraform/docs) | [Public module sources](https://developer.hashicorp.com/terraform/language/modules/sources)<br />Private modules not yet configurable | Supports Azure, AWS, and Kubernetes providers<br />Other providers not yet configurable
 
 ### Select the Recipe that meets your needs
 
@@ -51,18 +51,7 @@ It's easy to author and register your own Recipes which define how to deploy and
 
 ## Supported resources
 
-Recipes currently support the following resources. Support for additional resources is actively being worked on.
-
-| Supported resources |
-|---------------------|
-| [`Applications.Datastores/redisCaches`]({{< ref redis >}}) |
-| [`Applications.Datastores/mongoDatabases`]({{< ref mongodb >}}) |
-| [`Applications.Datastores/sqlDatabases`]({{< ref microsoft-sql >}}) |
-| [`Applications.Messaging/rabbitmqQueues`]({{< ref rabbitmq >}}) |
-| [`Applications.Dapr/stateStores`]({{< ref dapr-statestore >}}) |
-| [`Applications.Dapr/pubSubBrokers`]({{< ref dapr-pubsub >}}) |
-| [`Applications.Dapr/secretStores`]({{< ref dapr-secretstore >}}) |
-| [`Applications.Core/extenders`]({{< ref extender >}}) |
+Recipes support all of the available portable resources listed [here]({{< ref "/guides/author-apps/portable-resources/overview" >}}).
 
 ## Infrastructure linking
 
