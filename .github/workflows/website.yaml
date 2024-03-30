@@ -32,23 +32,23 @@ jobs:
       HUGO_ENV: production
     steps:
       - name: Checkout docs repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: true
       - name: Parse release version and set environment variables
         run: python ./.github/scripts/get_docs_version.py
       - name: Checkout radius repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: radius-project/radius
           ref: ${{ env.RELEASE_BRANCH }}
           path: ./radius
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: '14'
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2.5.0
+        uses: peaceiris/actions-hugo@v2.6.0
         with:
           hugo-version: ${{ env.HUGO_VERSION }}
           extended: true
@@ -76,7 +76,7 @@ jobs:
           fi
           hugo ${STAGING_URL+-b "$STAGING_URL"}
       - name: Upload Hugo artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: hugo_build
           path: ./docs/public/
@@ -93,11 +93,11 @@ jobs:
       url: ${{ github.ref_name == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io' }}
     steps:
       - name: Checkout docs repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: false
       - name: Download Hugo artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: hugo_build
           path: site/
@@ -108,7 +108,7 @@ jobs:
           tenant-id: ${{ secrets.AZURE_SP_TESTS_TENANTID }}
           subscription-id: ${{ vars.ENV_APPSERVICE_SUBSCRIPTIONID }}
       - name: Deploy to WebApp
-        uses: Azure/webapps-deploy@v2
+        uses: Azure/webapps-deploy@v3
         with:
           app-name: ${{ vars.ENV_APPSERVICE_NAME }}
           resource-group-name: ${{ vars.ENV_APPSERVICE_RESOURCEGROUP }}
@@ -125,7 +125,7 @@ jobs:
       url: ${{ github.event_name == 'pull_request' && '' || (github.ref_name == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io') }}
     steps:
       - name: Download Hugo artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: hugo_build
           path: site/
@@ -172,11 +172,11 @@ jobs:
       ALGOLIA_INDEX_NAME: ${{ secrets.ENV_ALGOLIA_INDEXNAME }}
     steps:
       - name: Checkout docs repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           submodules: false
       - name: Download Hugo artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: hugo_build
           path: site/

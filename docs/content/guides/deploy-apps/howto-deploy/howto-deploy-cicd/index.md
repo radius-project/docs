@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check out repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     - name: Setup kubectl
       uses: azure/setup-kubectl@v1
 ```
@@ -65,7 +65,7 @@ Ensure the service principal created above has the proper RBAC assignment to dow
 
 ```yml
     - name: az Login
-      uses: azure/login@v1
+      uses: azure/login@v2
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     - name: Configure kubectl context
