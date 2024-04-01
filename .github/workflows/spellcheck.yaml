@@ -24,9 +24,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout docs
-      uses: actions/checkout@master
+      uses: actions/checkout@v4
     - name: Spellcheck
-      uses: rojopolis/spellcheck-github-actions@0.27.0
+      uses: rojopolis/spellcheck-github-actions@0.36.0
       with:
         config_path: .github/config/.pyspelling.yml
     - name: Post GitHub workkflow output on failure
