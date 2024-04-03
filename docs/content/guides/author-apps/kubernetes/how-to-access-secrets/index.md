@@ -97,10 +97,26 @@ kubectl get pods -n dev-demo
 ```
 
 Then, exec into the pod and check the environment variable (substitute the pod name with the one you got from the previous command):
-    
+
+{{< tabs "macOS/Linux/WSL" "Windows" >}}
+
+{{% codetab %}}
+
 ```bash
 kubectl -n dev-demo exec demo-d64cc4d6d-xjnjz -- env | grep MY_SECRET
 ```
+
+{{% /codetab %}}
+
+{{% codetab %}}
+
+```powershell
+kubectl -n dev-demo exec demo-d64cc4d6d-xjnjz -- env | findstr MY_SECRET
+```
+
+{{% /codetab %}}
+
+{{< /tabs >}}
 
 ## Cleanup
 
