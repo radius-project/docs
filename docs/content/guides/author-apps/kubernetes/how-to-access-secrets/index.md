@@ -20,11 +20,15 @@ This how-to guide will provide an overview of how to:
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
 ## Step 1: Define a container
+
 Begin by creating a file named `app.bicep` with a Radius [container]({{< ref "guides/author-apps/containers" >}}):
 
 {{< rad file="snippets/secrets-container.bicep" embed=true >}}
 
 ## Step 2: Deploy the app and container
+
+Run this command to deploy the app and container:
+
 ```bash
 rad run ./app.bicep -a demo
 ```
@@ -80,7 +84,7 @@ kubectl get secrets -n dev-demo
 
 Patch the secret into the container by adding the following `runtimes` block to the `container` resource in your `app.bicep` file:
 
-{{< rad file="snippets/secrets-patch.bicep" embed=true >}}
+{{< rad file="snippets/secrets-patch.bicep" embed=true markdownConfig="{linenos=table,hl_lines=[\"25-60\"]}" >}}
 
 ## Step 5: Redeploy the app and container
 
@@ -90,11 +94,12 @@ Redeploy and run your app:
 rad app deploy demo
 ```
 
-Once the deployment completes successfully, you should see the environment variable in the container:
-First, get the pod name:
+Once the deployment completes successfully, you should see the environment variable in the container.
+
+To validate this, first get the pod name:
+
 ```bash
 kubectl get pods -n dev-demo
-```
 
 Then, exec into the pod and check the environment variable (substitute the pod name with the one you got from the previous command):
 
