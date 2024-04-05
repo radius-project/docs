@@ -35,7 +35,7 @@ rad run ./app.bicep -a demo
 
 Once the deployment completes successfully, you should see the following confirmation message along with some system logs:
 
-```bash
+```
 Building app.bicep...
 Deploying template 'app.bicep' for application 'demo' and environment 'dev' from workspace 'dev'...
 
@@ -65,7 +65,11 @@ Verify the pod is running:
 ```bash
 kubectl get pods -n dev-demo
 ```
-
+You should see the following output in your console:
+```
+NAME                    READY   STATUS    RESTARTS   AGE
+demo-7d94db59f6-k7dfb   1/1     Running   0          62s
+```
 ## Step 3: Create a secret
 
 Create a secret in your Kubernetes cluster using the following command:
@@ -100,6 +104,13 @@ To validate this, first get the pod name:
 
 ```bash
 kubectl get pods -n dev-demo
+```
+
+You should see the following output in your console, with the pod name:
+```
+NAME                    READY   STATUS    RESTARTS   AGE
+demo-d64cc4d6d-xjnjz   1/1     Running   0          62s
+```
 
 Then, exec into the pod and check the environment variable (substitute the pod name with the one you got from the previous command):
 
