@@ -70,6 +70,7 @@ You should see the following output in your console:
 NAME                    READY   STATUS    RESTARTS   AGE
 demo-7d94db59f6-k7dfb   1/1     Running   0          62s
 ```
+
 ## Step 3: Create a secret
 
 Create a secret in your Kubernetes cluster using the following command:
