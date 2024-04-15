@@ -17,6 +17,8 @@ jobs:
         with:
           token: ${{ secrets.GH_RAD_CI_BOT_PAT }}
           ref: edge
+          # https://github.com/actions/checkout/issues/125#issuecomment-570254411
+          fetch-depth: 0
       - name: Configure git
         run: |
           git config --global user.email "radiuscoreteam@service.microsoft.com"
@@ -35,9 +37,6 @@ jobs:
       - name: Upmerge docs
         run: |
           export SOURCE_BRANCH=${{ inputs.version }}
-          git fetch
-          git fetch origin
-          git status
           git diff origin/$SOURCE_BRANCH
           echo "Upmerging docs from $SOURCE_BRANCH to edge"
           git fetch origin $SOURCE_BRANCH
