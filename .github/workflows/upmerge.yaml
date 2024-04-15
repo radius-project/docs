@@ -2,6 +2,10 @@ name: Upmerge docs to edge
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'v0.32'
+        required: true
 
 jobs:
   upmerge:
@@ -23,9 +27,17 @@ jobs:
           export RAND=$(openssl rand -hex 2)
           echo "BRANCH_NAME=upmerge/$DATE-$RAND" >> $GITHUB_ENV
           git checkout -b upmerge/$DATE-$RAND
+      # - name: Upmerge docs
+      #   run: |
+      #     export SOURCE_BRANCH=$(basename ${{ github.ref }})
+      #     echo "Upmerging docs from $SOURCE_BRANCH to edge"
+      #     git fetch origin $SOURCE_BRANCH
+      #     git merge --no-commit origin/$SOURCE_BRANCH
+      #     git commit -m "Upmerge to edge"
+      #     git push --set-upstream origin $BRANCH_NAME
       - name: Upmerge docs
         run: |
-          export SOURCE_BRANCH=$(basename ${{ github.ref }})
+          export SOURCE_BRANCH=${{ inputs.version } }}
           echo "Upmerging docs from $SOURCE_BRANCH to edge"
           git fetch origin $SOURCE_BRANCH
           git merge --no-commit origin/$SOURCE_BRANCH
