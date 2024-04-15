@@ -1,4 +1,4 @@
-name: Upmerge samples to edge
+name: Upmerge docs to edge
 
 on:
   workflow_dispatch:
@@ -35,7 +35,7 @@ jobs:
       - name: Upmerge docs
         run: |
           export SOURCE_BRANCH=${{ inputs.version }}
-          echo "Upmerging samples from $SOURCE_BRANCH to edge"
+          echo "Upmerging docs from $SOURCE_BRANCH to edge"
           git fetch origin $SOURCE_BRANCH
           git merge --no-commit origin/$SOURCE_BRANCH --allow-unrelated-histories
       - name: Commit changes
