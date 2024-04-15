@@ -25,7 +25,6 @@ jobs:
           echo "Upmerging docs from $SOURCE_BRANCH to edge"
           git fetch origin $SOURCE_BRANCH
           git merge --no-commit origin/$SOURCE_BRANCH
-          git reset HEAD docs/config.toml docs/layouts/partials/hooks/body-end.html
       - name: Commit changes
         run: |
           git commit -m "Upmerge to edge"
