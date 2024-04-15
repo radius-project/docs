@@ -35,9 +35,13 @@ jobs:
       - name: Upmerge docs
         run: |
           export SOURCE_BRANCH=${{ inputs.version }}
+          git fetch
+          git fetch origin
+          git status
+          git diff origin/$SOURCE_BRANCH
           echo "Upmerging docs from $SOURCE_BRANCH to edge"
           git fetch origin $SOURCE_BRANCH
-          git merge --no-commit origin/$SOURCE_BRANCH --allow-unrelated-histories
+          git merge --no-commit origin/$SOURCE_BRANCH
       - name: Commit changes
         run: |
           git commit -m "Upmerge to edge"
