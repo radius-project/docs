@@ -1,7 +1,13 @@
-name: Upmerge docs to edge
+name: Upmerge samples to edge
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Branch name (e.g. v0.32)'
+        required: true
+        default: ''
+        type: string
 
 jobs:
   upmerge:
@@ -17,12 +23,19 @@ jobs:
           git config --global user.name "Radius CI Bot"
       - name: Create new branch
         run: |
-          export DATE=$(date +%Y-%m-%d) >> $GITHUB_ENV
-          git checkout -b upmerge/$DATE
+          export DATE=$(date +%Y-%m-%d)
+          export RAND=$(openssl rand -hex 2)
+          git checkout -b upmerge/$DATE-$RAND
+      # - name: Upmerge docs
+      #   run: |
+      #     export SOURCE_BRANCH=$(basename ${{ github.ref }})
+      #     echo "Upmerging samples from $SOURCE_BRANCH to edge"
+      #     git fetch origin $SOURCE_BRANCH
+      #     git merge --no-commit origin/$SOURCE_BRANCH
       - name: Upmerge docs
         run: |
-          export SOURCE_BRANCH=$(basename ${{ github.ref }})
-          echo "Upmerging docs from $SOURCE_BRANCH to edge"
+          export SOURCE_BRANCH=${{ inputs.version }}
+          echo "Upmerging samples from $SOURCE_BRANCH to edge"
           git fetch origin $SOURCE_BRANCH
           git merge --no-commit origin/$SOURCE_BRANCH
       - name: Commit changes
