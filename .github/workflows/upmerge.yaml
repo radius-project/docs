@@ -37,7 +37,7 @@ jobs:
           export SOURCE_BRANCH=${{ inputs.version }}
           echo "Upmerging samples from $SOURCE_BRANCH to edge"
           git fetch origin $SOURCE_BRANCH
-          git merge --no-commit origin/$SOURCE_BRANCH
+          git merge --no-commit origin/$SOURCE_BRANCH --allow-unrelated-histories
       - name: Commit changes
         run: |
           git commit -m "Upmerge to edge"
