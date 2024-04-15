@@ -11,6 +11,7 @@ on:
 
 jobs:
   upmerge:
+    name: Upmerge docs to edge
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -27,7 +28,7 @@ jobs:
         run: |
           export DATE=$(date +%Y-%m-%d)
           export RAND=$(openssl rand -hex 2)
-          echo "BRANCH_NAME=upmerge/$DATE-$RAND"
+          echo "BRANCH_NAME=upmerge/$DATE-$RAND" >> $GITHUB_ENV
           git checkout -b upmerge/$BRANCH_NAME
       # - name: Upmerge docs
       #   run: |
