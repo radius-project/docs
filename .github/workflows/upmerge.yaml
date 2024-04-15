@@ -29,7 +29,7 @@ jobs:
           export DATE=$(date +%Y-%m-%d)
           export RAND=$(openssl rand -hex 2)
           echo "BRANCH_NAME=upmerge/$DATE-$RAND" >> $GITHUB_ENV
-          git checkout -b upmerge/$BRANCH_NAME
+          git checkout -b upmerge/$DATE-$RAND"
       # - name: Upmerge docs
       #   run: |
       #     export SOURCE_BRANCH=$(basename ${{ github.ref }})
