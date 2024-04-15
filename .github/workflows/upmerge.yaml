@@ -33,18 +33,18 @@ jobs:
       #     echo "Upmerging docs from $SOURCE_BRANCH to edge"
       #     git fetch origin $SOURCE_BRANCH
       #     git merge --no-commit origin/$SOURCE_BRANCH
+      #     git reset HEAD docs/config.toml docs/layouts/partials/hooks/body-end.html
       #     git commit -m "Upmerge to edge"
       #     git push --set-upstream origin $BRANCH_NAME
-      #     git reset HEAD docs/config.toml docs/layouts/partials/hooks/body-end.html
       - name: Upmerge docs
         run: |
           export SOURCE_BRANCH=${{ inputs.version }}
           echo "Upmerging docs from $SOURCE_BRANCH to edge"
           git fetch origin $SOURCE_BRANCH
           git merge --no-commit origin/$SOURCE_BRANCH
+          git reset HEAD docs/config.toml docs/layouts/partials/hooks/body-end.html
           git commit -m "Upmerge to edge"
           git push --set-upstream origin $BRANCH_NAME
-          git reset HEAD docs/config.toml docs/layouts/partials/hooks/body-end.html
       - name: Create pull request
         env:
           GITHUB_TOKEN: ${{ secrets.GH_RAD_CI_BOT_PAT}}
