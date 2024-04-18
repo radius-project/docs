@@ -171,7 +171,6 @@ description: "Detailed reference documentation for applications.core/containers@
 | **containerPort** | int | The listening port number <br />_(required)_ |
 | **port** | int | Specifies the port that will be exposed by this container. Must be set when value different from containerPort is desired |
 | **protocol** | 'TCP' | 'UDP' | The protocol in use by the port |
-| **provides** | string | Specifies a route provided by this port |
 | **scheme** | string | Specifies the URL scheme of the communication protocol. Consumers can use the scheme to construct a URL. The value defaults to 'http' or 'https' depending on the port value |
 
 ### ContainerVolumes
