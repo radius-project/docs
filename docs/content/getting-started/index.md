@@ -190,7 +190,7 @@ Resources:
 To delete your app, run the [rad app delete]({{< ref rad_application_delete >}}) command to cleanup the app and its resources, including the Recipe resources:
 
 ```bash
-rad app delete -y
+rad app delete first-app -y
 ```
 
 ## Next steps
