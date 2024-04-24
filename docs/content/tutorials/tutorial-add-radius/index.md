@@ -321,4 +321,5 @@ This output shows that Radius has detected the three container resources in the 
 
 - To learn more about authoring Radius applications, visit the [Authoring applications guide]({{< ref "guides/author-apps" >}})
 - To learn more about deploying applications using Radius, visit the [Deploying applications guide]({{< ref "guides/deploy-apps" >}})
+- To learn more about using the [Radius Connections]({{< ref "guides/author-apps/containers/overview#connections" >}}) annotations to connect your containers and resources, visit the [Radius Helm tutorial]({{< ref "tutorials/helm#step-6-add-connection" >}})
 - To learn more about Radius Recipes, visit the [Recipes guide]({{< ref "guides/recipes" >}})
