@@ -67,7 +67,6 @@ tag = "tags"
 
 [params]
 copyright = "Radius"
-
 version = "v0.33"
 tag_version = "latest"
 chart_version = "0.33.0"
