@@ -22,13 +22,12 @@ rad resource show [resourceType] [resourceName] [flags]
 
 ```
 
-	sample list of resourceType: containers, gateways, httpRoutes, daprPubSubBrokers, extenders, mongoDatabases, rabbitMQMessageQueues, redisCaches, sqlDatabases, daprStateStores, daprSecretStores
+	sample list of resourceType: containers, gateways, daprPubSubBrokers, extenders, mongoDatabases, rabbitMQMessageQueues, redisCaches, sqlDatabases, daprStateStores, daprSecretStores
 
 	# show details of a specified resource in the default environment
 
 	rad resource show containers orders
 	rad resource show gateways orders_gateways
-	rad resource show httpRoutes orders_routes
 
 	# show details of a specified resource in an application
 	rad resource show containers orders --application icecream-store

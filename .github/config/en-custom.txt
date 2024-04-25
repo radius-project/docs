@@ -13,6 +13,8 @@ Async
 AWSSimpleQueueService
 Azure
 Blazor
+Bitbucket
+Gitlab
 CAs
 clusterissuer
 ClusterIssuer

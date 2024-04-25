@@ -5,6 +5,7 @@ linkTitle: "Private git repos"
 description: "Learn how to setup your Radius environment to pull Terraform Recipe templates from a private git repository."
 weight: 500
 categories: "How-To"
+aliases  : ["/guides/recipes/terraform/howto-private-registry"]
 tags: ["recipes", "terraform"]
 ---
 
