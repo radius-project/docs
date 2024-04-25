@@ -192,11 +192,12 @@ From here you will go through a series of steps to incrementally add more Radius
       # Add the following two lines
       annotations:
         radapp.io/enabled: 'true'
+        radapp.io/environment: '{{ .Values.environment }}'
     spec:
     ...
     ```
 
-    Adding the `radapp.io/enabled: 'true'` annotation enables Radius for the deployment.
+    Adding the `radapp.io/enabled: 'true'` annotation enables Radius for the deployment. The `radapp.io/environment` annotation is optional and is used to set the environment for the application. If not specified, Radius will use the default environment.
 
 1. Save the file after you have made the edits and deploy the application again using Helm. Since the namespace and secret have already been created, we only need to run the `helm` command.
 
@@ -246,6 +247,7 @@ From here you will go through a series of steps to incrementally add more Radius
     ```bash
     rad app graph -a demo -g default-demo
     ```
+    where `-a demo` specifies the application name and `-g default-demo` specifies the resource group name. [Resource groups]({{< ref "guides/operations/groups/overview" >}}) are a way to organize resources in Radius.
 
     The output should look like this:
 
@@ -311,6 +313,7 @@ In this step you will:
       name: db
       namespace: {{ .Release.Namespace }}
     spec:
+      environment: '{{ .Values.environment }}'
       type: Applications.Datastores/redisCaches
       secretName: redis-secret
     ```
@@ -462,6 +465,7 @@ Make sure the `app.yaml` file from `./demo/Chart/templates/app.yaml` is open in 
       namespace: {{ .Release.Namespace }}
       annotations:
         radapp.io/enabled: 'true'
+        radapp.io/environment: '{{ .Values.environment }}'
         radapp.io/connection-redis: 'db'
     spec:
     ...
@@ -488,6 +492,7 @@ Make sure the `app.yaml` file from `./demo/Chart/templates/app.yaml` is open in 
       namespace: {{ .Release.Namespace }}
       annotations:
         radapp.io/enabled: 'true'
+        radapp.io/environment: '{{ .Values.environment }}'
         radapp.io/connection-redis: 'db'
     spec:
       selector:
@@ -510,6 +515,7 @@ Make sure the `app.yaml` file from `./demo/Chart/templates/app.yaml` is open in 
       name: db
       namespace: {{ .Release.Namespace }}
     spec:
+      environment: '{{ .Values.environment }}'
       type: Applications.Datastores/redisCaches
     ```
 
