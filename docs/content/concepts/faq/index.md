@@ -14,7 +14,7 @@ Currently yes. Although Radius is architected to run on any platform, today Kube
 
 ### Can I incrementally adopt, or "try out" Radius?
 
-Yes. The easiest way to add Radius to an existing application is through [Radius annotations](#TODO). Simply add the annotations to your existing Helm chart or Kubernetes YAML and you can use the Radius app graph, connections, and Recipes. [Try the tutorial](#TODO) to learn more.
+Yes. The easiest way to add Radius to an existing application is through [Radius annotations]({{< ref "/tutorials/tutorial-add-radius#step-3-add-radius-to-the-guestbook-application" >}}). Simply add the annotations to your existing Helm chart or Kubernetes YAML and you can use the Radius app graph, connections, and Recipes. [Try the tutorial]({{< ref "/tutorials/tutorial-add-radius" >}}) to learn more.
 
 ### Do I have to self-host Radius? Is there a managed service for Radius?
 
