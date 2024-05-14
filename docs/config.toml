@@ -66,8 +66,7 @@ tag = "tags"
     pre = "<i class='fab fa-discord'></i>"
 
 [params]
-copyright = "The Radius Authors"
-trademark = "The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our [Trademark Usage](https://linuxfoundation.org/trademark-usage/) page."
+copyright = "The Radius Authors. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see the https://linuxfoundation.org/trademark-usage/ page."
 version = "v0.33"
 tag_version = "latest"
 chart_version = "0.33.0"
