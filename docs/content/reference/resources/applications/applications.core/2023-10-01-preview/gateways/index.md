@@ -56,6 +56,7 @@ description: "Detailed reference documentation for applications.core/gateways@20
 | Property | Type | Description |
 |----------|------|-------------|
 | **destination** | string | The URL or id of the service to route to. Ex - 'http://myservice'. |
+| **enableWebsockets** | bool | Enables websocket support for the route. Defaults to false. |
 | **path** | string | The path to match the incoming request path on. Ex - /myservice. |
 | **replacePrefix** | string | Optionally update the prefix when sending the request to the service. Ex - replacePrefix: '/' and path: '/myservice' will transform '/myservice/myroute' to '/myroute' |
 
