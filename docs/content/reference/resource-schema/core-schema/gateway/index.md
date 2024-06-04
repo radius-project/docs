@@ -34,6 +34,7 @@ weight: 401
 | path | y* | The path to match the incoming request path on. Not required when `tls.sslPassthrough` is set to `'true'`. | `'/service'`
 | destination | y | The service to route traffic to, in the form `'[scheme]://[serviceName]:[port]'` | `'http://backend:80'`
 | replacePrefix | n | The prefix to replace in the incoming request path that is sent to the destination route. | `'/'`
+| enableWebsockets | n | Enables websocket support for the route. Defaults to false. | `true`
 
 #### Hostname
 

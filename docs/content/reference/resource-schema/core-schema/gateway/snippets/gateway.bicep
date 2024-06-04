@@ -30,6 +30,9 @@ resource gateway 'Applications.Core/gateways@2023-10-01-preview' = {
       {
         path: '/backend'
         destination: 'http://${backend.name}:8080'
+
+        // Enable websocket support for the route (default: false)
+        enableWebsockets: true
       }
     ]
     tls: {
