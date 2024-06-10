@@ -164,7 +164,7 @@ Visit the [Kubernetes docs](https://kubernetes.io/docs/tasks/configure-pod-conta
 Visit the [Azure docs](https://docs.microsoft.com/azure/aks/cluster-container-registry-integration?tabs=azure-cli)to learn how to configure access to an ACR registry.
 
 ```bash
-az aks update --name myAKSCluster -resource-group myResourceGroup --subscription mySubscription --attach-acr <acr-name>
+az aks update --name myAKSCluster --resource-group myResourceGroup --subscription mySubscription --attach-acr <acr-name>
 ```
 
 {{% /codetab %}}
