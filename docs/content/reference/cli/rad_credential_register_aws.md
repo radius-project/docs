@@ -58,5 +58,5 @@ rad credential register aws --access-key-id <access-key-id> --secret-access-key 
 
 ### SEE ALSO
 
-* [rad credential register]({{< ref rad_credential_register.md >}})	 - Register(Add or update) cloud provider credential for a Radius installation.
+* [rad credential register]({{< ref rad_credential_register.md >}})	 - Register (Add or update) cloud provider credential for a Radius installation.
 
