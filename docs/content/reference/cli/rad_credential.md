@@ -29,7 +29,9 @@ or credentials will affect all Radius Environments and applications of the affec
 rad credential list
 
 # Register (Add or Update) cloud provider credential for Azure with service principal authentication
-rad credential register azure --client-id <client id> --client-secret <client secret> --tenant-id <tenant id>
+rad credential register azure sp --client-id <client id> --client-secret <client secret> --tenant-id <tenant id>
+# Register (Add or Update) cloud provider credential for Azure with workload identity authentication
+rad credential register azure wi --client-id <client id> --tenant-id <tenant id>
 # Register (Add or Update) cloud provider credential for AWS with IAM authentication
 rad credential register aws --access-key-id <access-key-id> --secret-access-key <secret-access-key>
 
@@ -62,7 +64,7 @@ rad credential unregister aws
 
 * [rad]({{< ref rad.md >}})	 - Radius CLI
 * [rad credential list]({{< ref rad_credential_list.md >}})	 - List configured cloud provider credentials
-* [rad credential register]({{< ref rad_credential_register.md >}})	 - Register(Add or update) cloud provider credential for a Radius installation.
+* [rad credential register]({{< ref rad_credential_register.md >}})	 - Register (Add or update) cloud provider credential for a Radius installation.
 * [rad credential show]({{< ref rad_credential_show.md >}})	 - Show details of a configured cloud provider credential
 * [rad credential unregister]({{< ref rad_credential_unregister.md >}})	 - Unregisters a configured cloud provider credential from the Radius installation
 
