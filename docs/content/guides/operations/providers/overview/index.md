@@ -12,9 +12,10 @@ Radius cloud providers allow you to deploy and connect to cloud resources across
 
 {{< image src="providers-overview.png" alt="Diagram of cloud resources getting forwarded to cloud platforms upon deployment" width="800px" >}}
 
-## Supported cloud providers
+## Supported cloud providers and identities
 
-| Provider | Description |
-|----------|-------------|
-| [Microsoft Azure]({{< ref howto-azure-provider >}}) | Deploy and connect to Azure resources |
-| [Amazon Web Services]({{< ref howto-aws-provider >}}) | Deploy and connect to AWS resources |
+| Provider | Identity | Description |
+|----------|----------|-------------|
+| [Microsoft Azure]({{< ref azure-provider >}}) | [Service Principal](https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals?tabs=browser) | Deploy and connect to Azure resources using Service Principal |
+| | [Workload Identity](https://learn.microsoft.com/en-us/entra/workload-id/workload-identities-overview) | Deploy and connect to Azure resources using Workload Identity |
+| [Amazon Web Services]({{< ref aws-provider >}}) | [IAM access Key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) | Deploy and connect to AWS resources using IAM Access Key |

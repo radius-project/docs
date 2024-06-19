@@ -154,7 +154,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
    ```
 1. Manually add the Azure cloud provider to your Radius Environment
 
-   Follow the steps [here]({{< ref "howto-azure-provider#manual-configuration" >}}) to add the Azure cloud provider to your existing environment.
+   Follow the how-to-guides [here]({{< ref "azure-provider" >}}) to add the Azure cloud provider to your existing environment.
 
 1. Register the Recipe to your Radius Environment:
 
@@ -229,7 +229,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 
 1. Manually add the AWS cloud provider to your Radius Environment
 
-   Follow the steps [here]({{< ref "howto-aws-provider#manual-configuration" >}}) to add the AWS cloud provider to your existing environment
+   Follow the steps [here]({{< ref "aws-provider" >}}) to add the AWS cloud provider to your existing environment
 
 1. Register the Recipe to your Radius Environment:
 
