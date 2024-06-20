@@ -22,7 +22,7 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
   - You will need the cluster's OIDC Issuer URL. [AKS Example](https://azure.github.io/azure-workload-identity/docs/installation/managed-clusters.html#azure-kubernetes-service-aks)
 - [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed in your cluster, including the [Mutating Admission Webhook](https://azure.github.io/azure-workload-identity/docs/installation/mutating-admission-webhook.html)
 
-## Setup the Azure Workload Identity
+## Setup the Azure Workload Identity for Radius
 
 To authorize Radius with Azure using Azure workload identity, you should set up an Entra ID Application with access to your resource group and 3 federated credentials (one for each of the Radius services). The 3 federated credentials should be created with the Kubernetes ServiceAccounts for each of the Radius services (applications-rp, bicep-de, and ucp) and the OIDC Issuer for your Kubernetes cluster.
 
