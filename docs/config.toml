@@ -1,4 +1,4 @@
-baseURL = "https://docs.radapp.io/"
+baseURL = "https://edge.radapp.io/"
 languageCode = "en-us"
 title = "Radius Docs"
 theme =  "docsy"
