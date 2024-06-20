@@ -22,78 +22,13 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
   - You will need the cluster's OIDC Issuer URL. [AKS Example](https://azure.github.io/azure-workload-identity/docs/installation/managed-clusters.html#azure-kubernetes-service-aks)
 - [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed in your cluster, including the [Mutating Admission Webhook](https://azure.github.io/azure-workload-identity/docs/installation/mutating-admission-webhook.html)
 
-## Setup
+## Setup the Azure Workload Identity
 
-To authorize Radius with Azure using Azure workload identity, you should set up an Entra ID Application with access to your resource group of choosing and 3 federated credentials (one for each of the Radius services). The 3 federated credentials should be created with the Kubernetes ServiceAccounts for each of the Radius services (applications-rp, bicep-de, and ucp) and the OIDC Issuer for your Kubernetes cluster.
+To authorize Radius with Azure using Azure workload identity, you should set up an Entra ID Application with access to your resource group and 3 federated credentials (one for each of the Radius services). The 3 federated credentials should be created with the Kubernetes ServiceAccounts for each of the Radius services (applications-rp, bicep-de, and ucp) and the OIDC Issuer for your Kubernetes cluster.
 
 Below is an example script that will create an Entra ID Application and set up the federated credentials necessary for Radius to authenticate with Azure using Azure workload identity.
 
-### install-radius-azwi.sh
-```sh
-if [ "$#" -ne 4 ]; then
-    echo "Usage: $0 <K8S_CLUSTER_NAME> <AZURE_RESOURCE_GROUP> <AZURE_SUBSCRIPTION_ID> <OIDC_ISSUER_URL>"
-    exit 1
-fi
-
-export K8S_CLUSTER_NAME=$1
-export AZURE_RESOURCE_GROUP=$2
-export AZURE_SUBSCRIPTION_ID=$3
-export SERVICE_ACCOUNT_ISSUER=$4
-
-# Create the Entra ID Application
-export APPLICATION_NAME="${K8S_CLUSTER_NAME}-radius-app"
-az ad app create --display-name "${APPLICATION_NAME}"
-
-# Get the client ID and object ID of the application
-export APPLICATION_CLIENT_ID="$(az ad app list --display-name "${APPLICATION_NAME}" --query [].appId -o tsv)"
-export APPLICATION_OBJECT_ID="$(az ad app show --id "${APPLICATION_CLIENT_ID}" --query id -otsv)"
-
-# Create the applications-rp federated credential for the application
-cat <<EOF > params-applications-rp.json
-{
-  "name": "radius-applications-rp",
-  "issuer": "${SERVICE_ACCOUNT_ISSUER}",
-  "subject": "system:serviceaccount:radius-system:applications-rp",
-  "description": "Kubernetes service account federated credential for applications-rp",
-  "audiences": [
-    "api://AzureADTokenExchange"
-  ]
-}
-EOF
-az ad app federated-credential create --id "${APPLICATION_OBJECT_ID}" --parameters @params-applications-rp.json
-
-# Create the bicep-de federated credential for the application
-cat <<EOF > params-bicep-de.json
-{
-  "name": "radius-bicep-de",
-  "issuer": "${SERVICE_ACCOUNT_ISSUER}",
-  "subject": "system:serviceaccount:radius-system:bicep-de",
-  "description": "Kubernetes service account federated credential for bicep-de",
-  "audiences": [
-    "api://AzureADTokenExchange"
-  ]
-}
-EOF
-az ad app federated-credential create --id "${APPLICATION_OBJECT_ID}" --parameters @params-bicep-de.json
-
-# Create the ucp federated credential for the application
-cat <<EOF > params-ucp.json
-{
-  "name": "radius-ucp",
-  "issuer": "${SERVICE_ACCOUNT_ISSUER}",
-  "subject": "system:serviceaccount:radius-system:ucp",
-  "description": "Kubernetes service account federated credential for ucp",
-  "audiences": [
-    "api://AzureADTokenExchange"
-  ]
-}
-EOF
-az ad app federated-credential create --id "${APPLICATION_OBJECT_ID}" --parameters @params-ucp.json
-
-# Set the permissions for the application
-az ad sp create --id ${APPLICATION_CLIENT_ID}
-az role assignment create --assignee "${APPLICATION_CLIENT_ID}" --role "Owner" --scope "/subscriptions/${AZURE_SUBSCRIPTION_ID}/resourceGroups/${AZURE_RESOURCE_GROUP}"
-```
+{{< rad file="snippets/install-radius-azwi.sh" embed=true >}}
 
 Now that the setup is complete, you can now install Radius with Azure workload identity enabled.
 
