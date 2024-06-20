@@ -69,7 +69,6 @@ Now that the setup is complete, you can now install Radius with Azure workload i
 
 ## Manual configuration
 
-
 1. Use [`rad install kubernetes`]({{< ref rad_install_kubernetes >}}) to install Radius with Azure workload identity enabled:
 
     ```bash
