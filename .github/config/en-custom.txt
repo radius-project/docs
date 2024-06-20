@@ -1242,3 +1242,6 @@ appgraph
 EnvironmentVariables
 TerraformConfigPropertiesProviders
 ProviderConfigProperties
+enableWebsockets
+websocket
+sp
