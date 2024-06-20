@@ -69,7 +69,7 @@ tag = "tags"
 copyright = "The Radius Authors. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see the https://linuxfoundation.org/trademark-usage/ page."
 version = "edge"
 tag_version = "latest"
-chart_version = "0.34.0"
+chart_version = "0.26.0"
 
 # Algolia Search
 algolia_docsearch = true
