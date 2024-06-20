@@ -21,39 +21,25 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
 - [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
   - You will need the cluster's OIDC Issuer URL. [AKS Example](https://azure.github.io/azure-workload-identity/docs/installation/managed-clusters.html#azure-kubernetes-service-aks)
 - [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed in your cluster, including the [Mutating Admission Webhook](https://azure.github.io/azure-workload-identity/docs/installation/mutating-admission-webhook.html)
-- [Entra ID Application Registration with federated credentials]()
 
 ## Setup
 
+To authorize Radius with Azure using Azure workload identity, you should set up an Entra ID Application with access to your resource group of choosing and 3 federated credentials (one for each of the Radius services). Below is an example script that will create an Entra ID Application and set up the federated credentials necessary for Radius to authenticate with Azure using Azure workload identity.
+
 ### install-radius-azwi.sh
 ```sh
-if [ "$#" -ne 3 ]; then
-    echo "Usage: $0 <AKS_CLUSTER_NAME> <AZURE_RESOURCE_GROUP> <AZURE_SUBSCRIPTION_ID>"
+if [ "$#" -ne 4 ]; then
+    echo "Usage: $0 <K8S_CLUSTER_NAME> <AZURE_RESOURCE_GROUP> <AZURE_SUBSCRIPTION_ID> <OIDC_ISSUER_URL>"
     exit 1
 fi
 
-export AKS_CLUSTER_NAME=$1
+export K8S_CLUSTER_NAME=$1
 export AZURE_RESOURCE_GROUP=$2
 export AZURE_SUBSCRIPTION_ID=$3
-
-# Prereqs: az CLI, AKS cluster with OIDC issuer enabled
-# az extension add --name aks-preview
-# az aks update -g "${AZURE_RESOURCE_GROUP}" -n "${AKS_CLUSTER_NAME}" --enable-oidc-issuer
-
-
-export AZURE_TENANT_ID="$(az account show -s "${AZURE_SUBSCRIPTION_ID}" --query tenantId -otsv)"
-helm repo add azure-workload-identity https://azure.github.io/azure-workload-identity/charts
-helm repo update
-helm install workload-identity-webhook azure-workload-identity/workload-identity-webhook \
-   --namespace azure-workload-identity-system \
-   --create-namespace \
-   --set azureTenantID="${AZURE_TENANT_ID}"
-
-# Get the OIDC issuer URL for the AKS cluster
-export SERVICE_ACCOUNT_ISSUER=$(az aks show --resource-group "${AZURE_RESOURCE_GROUP}" --name "${AKS_CLUSTER_NAME}" --query "oidcIssuerProfile.issuerUrl" -otsv)
+export SERVICE_ACCOUNT_ISSUER=$4
 
 # Create the Entra ID Application
-export APPLICATION_NAME="${AKS_CLUSTER_NAME}-radius-app"
+export APPLICATION_NAME="${K8S_CLUSTER_NAME}-radius-app"
 az ad app create --display-name "${APPLICATION_NAME}"
 
 # Get the client ID and object ID of the application
@@ -105,8 +91,9 @@ az ad app federated-credential create --id "${APPLICATION_OBJECT_ID}" --paramete
 # Set the permissions for the application
 az ad sp create --id ${APPLICATION_CLIENT_ID}
 az role assignment create --assignee "${APPLICATION_CLIENT_ID}" --role "Owner" --scope "/subscriptions/${AZURE_SUBSCRIPTION_ID}/resourceGroups/${AZURE_RESOURCE_GROUP}"
-
 ```
+
+Now that the setup is complete, you can now install Radius with Azure workload identity enabled.
 
 ## Interactive configuration
 
