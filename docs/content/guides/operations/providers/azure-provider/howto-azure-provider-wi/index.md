@@ -24,7 +24,9 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
 
 ## Setup
 
-To authorize Radius with Azure using Azure workload identity, you should set up an Entra ID Application with access to your resource group of choosing and 3 federated credentials (one for each of the Radius services). Below is an example script that will create an Entra ID Application and set up the federated credentials necessary for Radius to authenticate with Azure using Azure workload identity.
+To authorize Radius with Azure using Azure workload identity, you should set up an Entra ID Application with access to your resource group of choosing and 3 federated credentials (one for each of the Radius services). The 3 federated credentials should be created with the Kubernetes ServiceAccounts for each of the Radius services (applications-rp, bicep-de, and ucp) and the OIDC Issuer for your Kubernetes cluster.
+
+Below is an example script that will create an Entra ID Application and set up the federated credentials necessary for Radius to authenticate with Azure using Azure workload identity.
 
 ### install-radius-azwi.sh
 ```sh
