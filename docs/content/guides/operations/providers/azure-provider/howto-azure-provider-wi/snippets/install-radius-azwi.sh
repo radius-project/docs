@@ -1,4 +1,3 @@
-```sh
 if [ "$#" -ne 4 ]; then
     echo "Usage: $0 <K8S_CLUSTER_NAME> <AZURE_RESOURCE_GROUP> <AZURE_SUBSCRIPTION_ID> <OIDC_ISSUER_URL>"
     exit 1
@@ -62,4 +61,3 @@ az ad app federated-credential create --id "${APPLICATION_OBJECT_ID}" --paramete
 # Set the permissions for the application
 az ad sp create --id ${APPLICATION_CLIENT_ID}
 az role assignment create --assignee "${APPLICATION_CLIENT_ID}" --role "Owner" --scope "/subscriptions/${AZURE_SUBSCRIPTION_ID}/resourceGroups/${AZURE_RESOURCE_GROUP}"
-```
