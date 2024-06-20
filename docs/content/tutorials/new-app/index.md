@@ -132,10 +132,10 @@ Radius Applications are where all your app's resources and relationships come to
        demo            Applications.Core/containers
    ```
 
-1. Run `rad app connections` again to see the container you just deployed:
+1. Run `rad app graph` again to see the container you just deployed:
 
     ```bash
-    rad app connections
+    rad app graph
     ```
 
     You should see the container you just deployed, along with the underlying Kubernetes resources that were created to run it:
@@ -262,10 +262,10 @@ In addition to containers, you can add dependencies like Redis caches, Dapr Stat
 
 1. Press CTRL+C to terminate the port-forward and log stream.
 
-1. Run `rad app connections` again to see the new dependency:
+1. Run `rad app graph` again to see the new dependency:
 
     ```bash
-    rad app connections
+    rad app graph
     ```
 
     You should see the container and Mongo database you just deployed, along with the underlying Kubernetes resources that were created to run them:
