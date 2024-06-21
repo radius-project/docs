@@ -1247,3 +1247,4 @@ websocket
 sp
 azwi
 Entra 
+ServiceAccounts
