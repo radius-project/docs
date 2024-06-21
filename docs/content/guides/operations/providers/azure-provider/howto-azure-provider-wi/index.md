@@ -28,7 +28,7 @@ To authorize Radius to connect to Azure using Azure workload identity, you shoul
 
 Below is an example script that will create an Entra ID Application and set up the federated credentials necessary for Radius to authenticate with Azure using Azure workload identity.
 
-{{< rad file="snippets/install-radius-azwi.sh" embed=true >}}
+{{< rad file="snippets/install-radius-azwi.sh" embed=true lang=bash >}}
 
 Now that the setup is complete, you can now install Radius with Azure workload identity enabled.
 
