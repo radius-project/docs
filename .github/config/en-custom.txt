@@ -1246,5 +1246,5 @@ enableWebsockets
 websocket
 sp
 azwi
-Entra 
+Entra
 ServiceAccounts
