@@ -31,7 +31,7 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
    - **Namespace** - The Kubernetes namespace where your application containers and networking resources will be deployed (different than the Radius control-plane namespace, `radius-system`)
    - **Add an Azure provider** 
       1. Pick the subscription and resource group to deploy your Azure resources to
-      2. Select the service principal option
+      2. Select the "Service Principal" option
       3. Run `az ad sp create-for-rbac` to create a Service Principal without a role assignment and obtain your `appId`, `displayName`, `password`, and `tenant` information.
 
       ```
