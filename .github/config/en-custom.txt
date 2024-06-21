@@ -1245,3 +1245,6 @@ ProviderConfigProperties
 enableWebsockets
 websocket
 sp
+azwi
+Entra
+ServiceAccounts

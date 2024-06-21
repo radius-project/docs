@@ -14,7 +14,7 @@ Radius uses the [AWS Cloud Control API](https://docs.aws.amazon.com/cloudcontrol
 
 ## Configure an AWS Provider
 
-The AWS provider allows you to deploy and connect to AWS resources from a Radius Environment on an EKS cluster. To configure an AWS provider, you can follow the documentation [here]({{< ref "/guides/operations/providers/howto-aws-provider" >}}).
+The AWS provider allows you to deploy and connect to AWS resources from a Radius Environment on an EKS cluster. To configure an AWS provider, you can follow the documentation [here]({{< ref "/guides/operations/providers/aws-provider" >}}).
 
 ## Example
 

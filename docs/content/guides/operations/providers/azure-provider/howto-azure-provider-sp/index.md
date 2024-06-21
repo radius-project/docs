@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "How-To: Configure the Azure cloud provider"
-linkTitle: "Configure Azure provider"
-description: "Learn how to configure the Azure provider for your Radius Environment"
-weight: 200
+title: "How-To: Configure the Azure cloud provider with Service Principal"
+linkTitle: "Azure provider with Service Principal"
+description: "Learn how to configure the Azure provider with Service Principal for your Radius Environment"
+weight: 100
 categories: "How-To"
 tags: ["Azure"]
 ---
@@ -29,8 +29,10 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
 
 1. Follow the prompts, specifying:
    - **Namespace** - The Kubernetes namespace where your application containers and networking resources will be deployed (different than the Radius control-plane namespace, `radius-system`)
-   - **Add an Azure provider** - Pick the subscription and resource group to deploy your Azure resources to
-      Run `az ad sp create-for-rbac` to create a Service Principal without a role assignment and obtain your `appId`, `displayName`, `password`, and `tenant` information.
+   - **Add an Azure provider** 
+      1. Pick the subscription and resource group to deploy your Azure resources to
+      2. Select the "Service Principal" option
+      3. Run `az ad sp create-for-rbac` to create a Service Principal without a role assignment and obtain your `appId`, `displayName`, `password`, and `tenant` information.
 
       ```
          {
@@ -85,7 +87,7 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
 1. Use [`rad credential register azure`]({{< ref rad_credential_register_azure >}}) to add the Azure service principal to your Radius installation:
 
     ```bash
-    rad credential register azure --client-id myClientId  --client-secret myClientSecret  --tenant-id myTenantId
+    rad credential register azure sp --client-id myClientId  --client-secret myClientSecret  --tenant-id myTenantId
     ```
 
     Radius will use the provided service principal for all interactions with Azure, including Bicep and Recipe deployments.

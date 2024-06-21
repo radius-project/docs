@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "How-To: Configure the AWS cloud provider"
-linkTitle: "Configure AWS provider"
-description: "Learn how to configure the AWS provider for your Radius Environment"
+title: "How-To: Configure the AWS cloud provider with IAM Access key"
+linkTitle: "AWS provider with IAM Access key"
+description: "Learn how to configure the AWS provider with IAM Access key for your Radius Environment"
 weight: 300
 categories: "How-To"
 tags: ["AWS"]
