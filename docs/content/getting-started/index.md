@@ -69,11 +69,25 @@ Initializing Radius...
 Initialization complete! Have a RAD time 😎
 ```
 
-In addition to starting Radius services in your Kubernetes cluster, this initialization command creates a default application (`app.bicep`) as your starting point. It contains a single container definition (`demo`).
+In addition to starting Radius services in your Kubernetes cluster, this initialization command creates a default application (`app.bicep`) as your starting point. It contains a single container definition (`demo`). 
 
 {{< rad file="snippets/app.bicep" embed=true markdownConfig="{linenos=table,linenostart=1}" >}}
 
-> This file will run the `ghcr.io/radius-project/samples/demo:latest` image. This image is published by the Radius team to a public registry, you do not need to create it.
+> This file will run the `ghcr.io/radius-project/samples/demo:latest` image. This image is published by the Radius team to a public registry, you do not need to create it. `rad init` also creates a `bicepconfig.json` file in your application's directory that has the necessary setup to use Radius with the official Bicep compiler. 
+
+```json
+{
+	"experimentalFeaturesEnabled": {
+		"extensibility": true,
+		"extensionRegistry": true,
+		"dynamicTypeLoading": true
+	},
+	"extensions": {
+		"radius": "br:biceptypes.azurecr.io/radius:<release-version>",
+		"aws": "br:biceptypes.azurecr.io/aws:<release-version>"
+	}
+}
+```
 
 ## 4. Run the app
 

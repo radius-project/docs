@@ -1,4 +1,4 @@
-import radius as rad
+extension radius
 
 @description('The Azure region to deploy Azure resource(s) into. Defaults to the region of the target Azure resource group.')
 param azLocation string = resourceGroup().location

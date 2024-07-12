@@ -95,16 +95,6 @@ output values object = {
 
 ## Bicep & Deployment Engine
 
-### Currently using a forked version of Bicep
-
-Radius is currently using a forked version of Bicep compiler to support Radius specific features. This is a point-in-time limitation that will be addressed in the future as the Radius team works with the Bicep team and the community to upstream the extensibility updates. This results in the following limitations:
-
-- The "Bicep" VS Code extension must be disabled in favor of the "Radius Bicep" extension
-- The forked Bicep compiler will be out of date compared to the most recent Bicep public build
-- `az bicep` and `bicep` are not supported with Radius. Use `rad deploy` instead.
-
-To use the forked build of Bicep directly, you can reference `~/.rad/bin/rad-bicep` (Linux/macOS) or `%HOMEPATH%\.rad\bin\rad-bicep.exe` (Windows).
-
 ### `environment()` Bicep function collides with `param environment string`
 
 We currently use `param environment string` to pass in the Radius environmentId into your Bicep template. This collides with the Bicep `environment()` function.
@@ -112,7 +102,7 @@ We currently use `param environment string` to pass in the Radius environmentId 
 To access `environment()`, prefix it with `az.`. For example:
 
 ```bicep
-import radius as rad
+extension radius
 
 param environment string
 
@@ -121,9 +111,9 @@ var stgSuffixes = az.environment().suffixes.storage
 
 This will be addressed in a future release when we change how the environmentId is passed into the file.
 
-### Radius Bicep AWS limitations
+### Bicep AWS limitations
 
-Some of the [AWS resource types](/resource-schema/aws) are 'non-idempotent', this means that this resource type is assigned a primary identifier at deployment time and is currently not supported by Radius Bicep.
+Some of the [AWS resource types](/resource-schema/aws) are 'non-idempotent', this means that this resource type is assigned a primary identifier at deployment time and is currently not supported by Bicep.
 
 We are currently building support for non-idempotent resources in Radius. Please like and comment on this [this issue](https://github.com/radius-project/radius/issues/6227) if you are interested in the same.
 

@@ -8,7 +8,7 @@ param port int = 6379
 param context object
 
 // Import Kubernetes resources into Bicep
-import kubernetes as kubernetes {
+extension kubernetes {
   kubeConfig: ''
   namespace: context.runtime.kubernetes.namespace
 }

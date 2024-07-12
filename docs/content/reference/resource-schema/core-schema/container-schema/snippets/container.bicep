@@ -1,4 +1,4 @@
-import radius as radius
+extension radius
 
 param environment string
 
@@ -24,7 +24,7 @@ resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
       image: 'registry/container:tag'
       env:{
         DEPLOYMENT_ENV: 'prod'
-        DB_CONNECTION: db.connectionString()
+        DB_CONNECTION: db.listSecrets().connectionString
       }
       ports: {
         http: {

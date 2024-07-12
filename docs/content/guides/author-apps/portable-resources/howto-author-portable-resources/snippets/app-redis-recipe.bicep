@@ -1,5 +1,5 @@
 //RECIPE
-import radius as radius
+extension radius
 
 @description('Specifies the environment for resources.')
 param environment string

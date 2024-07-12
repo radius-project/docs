@@ -28,6 +28,22 @@ Make sure you have the following files checked into your repository under `iac/`
 
 {{< rad file="snippets/app.bicep" embed="true" >}}
 
+### `bicepconfig.json` 
+
+```json
+{
+	"experimentalFeaturesEnabled": {
+		"extensibility": true,
+		"extensionRegistry": true,
+		"dynamicTypeLoading": true
+	},
+	"extensions": {
+		"radius": "br:biceptypes.azurecr.io/radius:<release-version>",
+		"aws": "br:biceptypes.azurecr.io/aws:<release-version>"
+	}
+}
+```
+
 ## Step 2: Create your workflow file
 
 Create a new file named `deploy-radius.yml` under `.github/workflows/` and paste the following:

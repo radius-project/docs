@@ -1260,6 +1260,7 @@ postgresenvSecrets
 RecipeConfigPropertiesEnvSecrets
 SecretReference
 ProviderConfigPropertiesSecrets
+upstreamed
 irsa
 postgres
 ReadOnly

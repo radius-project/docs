@@ -10,19 +10,19 @@ tags: ["VSCode"]
 
 When using Visual Studio Code with Radius there are a set of extensions you can install to help author, validate, and manage your Radius Applications and environments.
 
-## Radius Bicep extension
+## Bicep extension
 
-The Radius Bicep extension provides formatting, intellisense, and validation for Bicep templates.
+The Bicep extension provides formatting, intellisense, and validation for Bicep templates.
 
-{{< image src="vscode-bicep.png" alt="Screenshot of the Radius Bicep extension showing available Radius resource types" width=600px >}}
+{{< image src="vscode-bicep.png" alt="Screenshot of the Bicep extension showing available Radius resource types" width=600px >}}
 <br /><br/>
 
-{{< button text="Radius Bicep guide" page="howto-vscode-bicep" >}}
+{{< button text="Bicep guide" page="howto-vscode-bicep" >}}
 
 {{< alert title="Note" color="secondary" >}}
-The Radius Bicep extension is a temporary extension that exists to model Radius and AWS resource types. Radius Bicep extension will be deprecated once we upstream our extensibility updates to the official Bicep. Stay tuned for updates.
 
-**The Radius Bicep extension is not compatible with the official Bicep extension.** If you have the official Bicep extension installed you will need to disable or uninstall it before installing the Radius Bicep extension.
+
+**The official Bicep extension is not compatible with the Radius Bicep extension.** Previously, Radius made use of the Radius Bicep extension, a temporary extension used to model Radius and AWS resource types. The Radius Bicep extension has been deprecated and we have upstreamed our extensibility updates to the official Bicep. If you have the Radius Bicep extension installed you will need to disable or uninstall it before installing the Bicep extension. 
 {{< /alert >}}
 
 ## Terraform extension

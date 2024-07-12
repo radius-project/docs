@@ -1,5 +1,5 @@
 //SECRETSTORE
-import radius as radius
+extension radius
 
 @description('Required value, refers to the personal access token or password of the git platform')
 @secure()

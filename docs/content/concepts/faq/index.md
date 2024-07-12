@@ -102,7 +102,7 @@ Teams looking to leverage existing Helm charts can use the [Radius annotations a
 
 Similar to how you can define Azure resources in Bicep, you can define Radius resources in Bicep.
 
-Radius currently uses a temporary fork of Bicep to add support for the Radius resources, but work is underway to merge extensibility support into the main Bicep repo and eliminate the need for a fork.
+Radius uses Bicep to add support for Radius resources.  We previously used a temporary fork of Bicep, but have since deprecated it in favor of the main Bicep repo.
 
 Teams building or migrating applications on Radius can use Bicep to model their application and deploy to Kubernetes today, as well as future platforms, including serverless platforms.
 

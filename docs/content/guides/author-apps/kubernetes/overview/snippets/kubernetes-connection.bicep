@@ -1,8 +1,8 @@
-import kubernetes as kubernetes {
+extension kubernetes {
   kubeConfig: ''
   namespace: 'default'
 }
-import radius as radius
+extension radius
 
 param environment string
 

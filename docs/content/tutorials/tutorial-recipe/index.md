@@ -33,7 +33,7 @@ Developers don't need to specify what cloud resources they're using in their app
 ## Prerequisites
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
+- [Bicep VSCode extension and Bicep configuration file]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 - [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
 
 ## Step 1: Initialize a Radius Environment

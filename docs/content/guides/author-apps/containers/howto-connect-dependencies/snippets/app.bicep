@@ -1,4 +1,4 @@
-import radius as rad
+extension radius
 
 @description('The app ID of your Radius application. Set automatically by the rad CLI.')
 param application string

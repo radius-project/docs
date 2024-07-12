@@ -19,7 +19,7 @@ For more details on the app and access to the source code, visit the `samples/da
 ## Prerequisites
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
+- [Bicep VSCode extension and Bicep configuration file]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 - [Radius environment]({{< ref "installation#step-3-initialize-radius" >}})
 - [Setup a supported Kubernetes cluster](https://docs.radapp.io/guides/operations/kubernetes/overview/#supported-clusters)
 - [Dapr installed on your Kubernetes cluster](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/)

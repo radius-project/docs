@@ -11,7 +11,7 @@ This guide will walk you through how to use an [extender]({{< ref "/guides/autho
 ## Prerequisites
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
+- [Bicep VSCode extension and Bicep configuration file]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 - [Radius environment]({{< ref "installation#step-3-initialize-radius" >}})
 
 ## Step 1: Register an extender Recipe

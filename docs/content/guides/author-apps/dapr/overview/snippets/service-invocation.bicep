@@ -1,4 +1,4 @@
-import radius as rad
+extension radius
 
 
 resource app 'Applications.Core/applications@2023-10-01-preview' existing = {

@@ -1,4 +1,4 @@
-import radius as rad
+extension radius
 
 @description('The ID of your Radius environment. Set automatically by the rad CLI.')
 param environment string

@@ -19,7 +19,7 @@ This how-to guide will provide an overview of how to:
 ## Prerequisites
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
+- [Bicep VSCode extension and Bicep configuration file]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 - [Supported Kubernetes cluster]({{< ref "guides/operations/kubernetes" >}})
 - [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed on your cluster
 - [Azure Keyvault Provider](https://azure.github.io/secrets-store-csi-driver-provider-azure/docs/getting-started/installation/)
@@ -59,7 +59,7 @@ Deploy your app, specifying the OIDC issuer URL. To retrieve the OIDC issuer URL
 rad deploy ./app.bicep -p oidcIssuer=<OIDC_ISSUER_URL>
 ```
 
-## Step 5: Verify access to the mounted Azure Key Vault
+## Step 6: Verify access to the mounted Azure Key Vault
 
 1. Once deployment completes, read the logs from your running container resource:
 

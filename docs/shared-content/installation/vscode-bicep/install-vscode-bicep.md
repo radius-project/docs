@@ -1,33 +1,26 @@
-Visual Studio Code offers the best authoring experience for Radius and Bicep. Download and install the Radius Bicep extension to easily author and validate Bicep templates:
+Visual Studio Code offers the best authoring experience for Radius and Bicep. Download and install the Bicep extension to easily author and validate Bicep templates:
 
-{{< alert title="Disable the official Bicep extension" color="warning" >}}
-You can only have one VSCode Bicep extension installed at a time. To build on Radius, you will need to uninstall the official Bicep and use only the Radius Bicep extension.
+{{< alert title="Enable the official Bicep extension" color="warning" >}}
+We previously released a version of the official Bicep extension specific to Radius called the Radius Bicep extension. We have since updated Radius to be compatible with the official Bicep extension. You can only have one VSCode Bicep extension installed at a time to build on Radius. If you have the Radius Bicep extension installed, you will need to uninstall it and use only the official Bicep extension.
 {{< /alert >}}
 {{< latest >}}
-1. To install the Radius Bicep extension, search for Radius Bicep in the Extensions tab in VSCode or in the [Visual Studio marketplace](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.rad-vscode-bicep&ssr=false#overview)
+1. To install the Bicep extension, refer to their [installation documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/install#visual-studio-code-and-bicep-extension)
 
-      <img src="/installation/vscode-bicep/images/radius-bicep.png" alt="Screenshot of Radius Bicep extension in VSCode Marketplace " width=500px><br></br>
+1. Create a `bicepconfig.json` in your application's directory
 
-1. Select Install
+In order to use the features provided by the Bicep extension with Radius, certain properties need to be defined. These are defined in a `bicepconfig.json` file that lives in your application's directory. `release-version` should correspond to the current release version in the form of `major.minor` (e.g. `0.36`).
 
-To verify you've installed the extension, open any file with the .bicep file extension and start [authoring Radius application]({{< ref author-apps >}}) to verify the auto-complete and other validation features.
+```json
+{
+	"experimentalFeaturesEnabled": {
+		"extensibility": true,
+		"extensionRegistry": true,
+		"dynamicTypeLoading": true
+	},
+	"extensions": {
+		"radius": "br:biceptypes.azurecr.io/radius:<release-version>",
+		"aws": "br:biceptypes.azurecr.io/aws:<release-version>"
+	}
+}
+```
 {{< /latest >}}
-{{< edge >}}
-1. Visit the [GitHub Actions runs](https://github.com/radius-project/bicep/actions/workflows/radius-build.yml?query=event%3Apush+branch%3Abicep-extensibility)
-1. Click on the latest successful run
-1. Scroll down to Artifacts and download `release`
-1. Extract the archive and Install the `rad-vscode-bicep.vsix` file:
-   In VSCode, manually install the extension using the *Install from VSIX* command in the Extensions view command drop-down.
-
-      <img src="/installation/vscode-bicep/images/vsix-install.png" alt="Screenshot of installing a vsix extension" width=400><br>
-
-   You can also import this extension on the [command-line](https://code.visualstudio.com/docs/editor/extension-gallery#_install-from-a-vsix) with:
-
-   ```bash
-   code --install-extension rad-vscode-bicep.vsix
-   ```
-   If you're on macOS, make sure to [setup the `code` alias](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line).
-
-1. If running on Windows Subsystem for Linux (WSL), make sure to install the extension in WSL as well:<br>
-      <img src="/installation/vscode-bicep/images/wsl-extension.png" alt="Screenshot of installing a vsix extension in WSL" width=400>
-{{< /edge >}}

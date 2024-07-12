@@ -2,7 +2,7 @@
 @description('Specifies Kubernetes namespace for the user.')
 param namespace string = 'default-demo'
 
-import kubernetes as kubernetes{
+extension kubernetes{
   kubeConfig: ''
   namespace: namespace
 }
@@ -10,7 +10,7 @@ import kubernetes as kubernetes{
 
 //APPLICATION
 // Import the set of Radius resources (Applications.*) into Bicep
-import radius as radius
+extension radius
 
 @description('The app ID of your Radius Application. Set automatically by the rad CLI.')
 param application string
