@@ -16,10 +16,12 @@ Recipes enable a **separation of concerns** between IT operators and developers 
 
 ### Support for multiple IaC languages
 
+Radius Recipes are designed to be pluggable across Infrastructure as Code (IaC) languages and currently supports Bicep and Terraform, with more to come in the future. This allows you to use the IaC language that best fits your needs and environment:
+
 | Language | Supported sources | Notes |
 |----------|-------------------|-------|
-| [Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/) | [OCI registries](https://opencontainers.org/) | Supports Azure, AWS, and Kubernetes
-| [Terraform](https://developer.hashicorp.com/terraform/docs) | [Public module sources](https://developer.hashicorp.com/terraform/language/modules/sources)<br />Private modules not yet configurable | Supports Azure, AWS, and Kubernetes providers<br />Other providers not yet configurable
+| [Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/) | [OCI registries](https://opencontainers.org/) | Supports Azure, AWS, and Kubernetes |
+| [Terraform](https://developer.hashicorp.com/terraform/docs) | [Public](https://developer.hashicorp.com/terraform/language/modules/sources) and [private]({{< ref "guides/recipes/terraform/howto-private-registry" >}}) module sources | Supports Azure, AWS, Kubernetes, and any other Terraform provider |
 
 ### Select the Recipe that meets your needs
 
