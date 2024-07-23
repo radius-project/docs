@@ -171,6 +171,7 @@ description: "Detailed reference documentation for applications.core/environment
 | Property | Type | Description |
 |----------|------|-------------|
 | **env** | [EnvironmentVariables](#environmentvariables) | The environment variables injected during Terraform Recipe execution for the recipes in the environment. |
+| **envSecrets** | [RecipeConfigPropertiesEnvSecrets](#recipeconfigpropertiesenvsecrets) | Environment variables containing sensitive information can be stored as secrets. The secrets are stored in Applications.Core/SecretStores resource. |
 | **terraform** | [TerraformConfigProperties](#terraformconfigproperties) | Configuration for Terraform Recipes. Controls how Terraform plans and applies templates as part of Recipe deployment. |
 
 ### EnvironmentVariables
@@ -182,6 +183,25 @@ description: "Detailed reference documentation for applications.core/environment
 #### Additional Properties
 
 * **Additional Properties Type**: string
+
+### RecipeConfigPropertiesEnvSecrets
+
+#### Properties
+
+* **none**
+
+#### Additional Properties
+
+* **Additional Properties Type**: [SecretReference](#secretreference)
+
+### SecretReference
+
+#### Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| **key** | string | The key for the secret in the secret store. <br />_(required)_ |
+| **source** | string | The ID of an Applications.Core/SecretStore resource containing sensitive data required for recipe execution. <br />_(required)_ |
 
 ### TerraformConfigProperties
 
@@ -240,11 +260,22 @@ description: "Detailed reference documentation for applications.core/environment
 
 #### Properties
 
+| Property | Type | Description |
+|----------|------|-------------|
+| **secrets** | [ProviderConfigPropertiesSecrets](#providerconfigpropertiessecrets) | Sensitive data in provider configuration can be stored as secrets. The secrets are stored in Applications.Core/SecretStores resource. |
+#### Additional Properties
+
+* **Additional Properties Type**: any
+
+### ProviderConfigPropertiesSecrets
+
+#### Properties
+
 * **none**
 
 #### Additional Properties
 
-* **Additional Properties Type**: any
+* **Additional Properties Type**: [SecretReference](#secretreference)
 
 ### EnvironmentPropertiesRecipes
 
