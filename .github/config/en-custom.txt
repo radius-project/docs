@@ -1251,6 +1251,10 @@ ServiceAccounts
 pluggable
 envSecrets
 RecipeConfigPropertiesEnvSecrets
+ProviderConfigPropertiesSecrets
+SecretReference
+envSecrets
+RecipeConfigPropertiesEnvSecrets
 SecretReference
 ProviderConfigPropertiesSecrets
 irsa
