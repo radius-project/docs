@@ -1249,6 +1249,11 @@ azwi
 Entra
 ServiceAccounts
 pluggable
+envSecrets
+RecipeConfigPropertiesEnvSecrets
+ProviderConfigPropertiesSecrets
+SecretReference
+v0.36
 cyrilgdn
 secretStore
 postgreSQL
