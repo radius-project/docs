@@ -13,7 +13,7 @@ terraform {
 
 variable "context" {
   description = "This variable contains Radius recipe context."
-  type = any
+  type        = any
 }
 
 variable "password" {
@@ -79,11 +79,11 @@ resource "kubernetes_service" "postgres" {
 }
 
 resource "time_sleep" "wait_20_seconds" {
-  depends_on = [kubernetes_service.postgres]
+  depends_on      = [kubernetes_service.postgres]
   create_duration = "20s"
 }
 
-resource postgresql_database "pg_db_test" {
+resource "postgresql_database" "pg_db_test" {
   depends_on = [time_sleep.wait_20_seconds]
-  name = "pg_db_test"
+  name       = "pg_db_test"
 }

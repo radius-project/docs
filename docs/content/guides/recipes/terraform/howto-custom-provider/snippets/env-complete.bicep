@@ -36,26 +36,26 @@ resource env 'Applications.Core/environments@2023-10-01-preview' = {
       namespace: 'my-namespace'
     }
     recipeConfig: {
-      terraform:{
-        providers:{
-          postgresql:[{
-            sslmode: 'disable'
-            port: 5432
-            secrets: {
-              username: {
-                source: pgsSecretStore.id
-                key: username
+      terraform: {
+        providers: {
+          postgresql: [ {
+              sslmode: 'disable'
+              port: 5432
+              secrets: {
+                username: {
+                  source: pgsSecretStore.id
+                  key: username
+                }
+                password: {
+                  source: pgsSecretStore.id
+                  key: password
+                }
               }
-              password: {
-                source: pgsSecretStore.id
-                key: password
-              }
-            }
-          }]
+            } ]
         }
       }
       env: {
-          PGHOST: 'postgres.corerp-resources-terraform-pg-app.svc.cluster.local'
+        PGHOST: 'postgres.corerp-resources-terraform-pg-app.svc.cluster.local'
       }
     }
     recipes: {
@@ -63,7 +63,7 @@ resource env 'Applications.Core/environments@2023-10-01-preview' = {
         defaultpostgres: {
           templateKind: 'terraform'
           // Recipe template path
-          templatePath:'git::https://github.com/my-org/my-repo'
+          templatePath: 'git::https://github.com/my-org/my-repo'
         }
       }
     }
