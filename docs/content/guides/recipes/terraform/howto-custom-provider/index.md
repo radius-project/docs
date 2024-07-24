@@ -2,7 +2,7 @@
 type: docs
 title: "How-To: Configure custom Terraform Providers"
 linkTitle: "Custom Terraform Providers"
-description: "Learn how to setup your Radius environment with custom Terraform Providers and deploy Recipes."
+description: "Learn how to setup your Radius Environment with custom Terraform Providers and deploy Recipes."
 weight: 500
 categories: "How-To"
 aliases  : ["/guides/recipes/terraform/howto-custom-provider"]
@@ -11,7 +11,7 @@ tags: ["recipes", "terraform"]
 
 This how-to guide will describe how to:
 
-- Configure a custom [Terraform provider](https://registry.terraform.io/browse/providers) in a Radius environment.
+- Configure a custom [Terraform provider](https://registry.terraform.io/browse/providers) in a Radius Environment.
 - Configure credentials to authenticate into the Terraform provider.
 - Consume the Terraform modules from a custom Terraform provider and use it in a Terraform recipe.
 
@@ -53,7 +53,7 @@ Create a Terraform recipe which deploys a PostgreSQL database instance using cus
 
 {{< rad file="snippets/postgres.tf" embed=true marker="//ENV" >}}
 
-## Step 4: Add a Terraform Recipe to the environment
+## Step 4: Add a Terraform Recipe to the Environment
 
 Update your Environment with the Terraform Recipe. 
 
