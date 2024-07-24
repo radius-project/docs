@@ -1,18 +1,25 @@
 //SECRETSTORE
 import radius as radius
 
-@description('Required value, refers to the personal access token or password of the git platform')
+@description('username for postgres db')
 @secure()
-param pat string
+param username string
 
-resource secretStoreGit 'Applications.Core/secretStores@2023-10-01-preview' = {
-  name: 'my-git-secret-store'
+@description('password for postgres db')
+@secure()
+param password string
+
+resource pgsSecretStore 'Applications.Core/secretStores@2023-10-01-preview' = {
+  name: 'my-secret-store'
   properties: {
-    resource: 'my-secret-namespace/github'
+    resource: 'my-secret-namespace/my-secret-store'
     type: 'generic'
     data: {
-      pat: {
-        value: pat 
+      username: {
+        value: username
+      }
+      password: {
+        value: password
       }
     }
   }
@@ -25,27 +32,37 @@ resource env 'Applications.Core/environments@2023-10-01-preview' = {
   properties: {
     compute: {
       kind: 'kubernetes'
+      resourceId: 'self'
       namespace: 'my-namespace'
     }
     recipeConfig: {
-      terraform: {
-        authentication: {
-          git: {
-            pat: {
-              // The hostname of your git platform, such as 'dev.azure.com' or 'github.com'
-              'github.com':{
-                secret: secretStoreGit.id
+      terraform:{
+        providers:{
+          postgresql:[{
+            sslmode: 'disable'
+            port: 5432
+            secrets: {
+              username: {
+                source: pgsSecretStore.id
+                key: username
+              }
+              password: {
+                source: pgsSecretStore.id
+                key: password
               }
             }
-          }
+          }]
         }
+      }
+      env: {
+          PGHOST: 'postgres.corerp-resources-terraform-pg-app.svc.cluster.local'
       }
     }
     recipes: {
-      'Applications.Datastores/redisCaches': {
-        default: {
+      'Applications.Core/extenders': {
+        defaultpostgres: {
           templateKind: 'terraform'
-          // Git template path
+          // Recipe template path
           templatePath:'git::https://github.com/my-org/my-repo'
         }
       }

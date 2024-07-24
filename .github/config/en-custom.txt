@@ -1249,3 +1249,7 @@ azwi
 Entra
 ServiceAccounts
 pluggable
+cyrilgdn
+secretStore
+postgreSQL
+postgres
