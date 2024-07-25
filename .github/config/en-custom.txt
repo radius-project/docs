@@ -1253,7 +1253,10 @@ envSecrets
 RecipeConfigPropertiesEnvSecrets
 ProviderConfigPropertiesSecrets
 SecretReference
-envSecrets
+cyrilgdn
+secretStore
+postgreSQL
+postgresenvSecrets
 RecipeConfigPropertiesEnvSecrets
 SecretReference
 ProviderConfigPropertiesSecrets
