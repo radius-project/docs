@@ -57,7 +57,7 @@ Create a Terraform recipe which deploys a PostgreSQL database instance using cus
 
 Update your Environment with the Terraform Recipe. 
 
-{{< rad file="snippets/env-complete.bicep" embed=true marker="//ENV" markdownConfig="{linenos=table,hl_lines=[\"22-30\"],linenostart=30,lineNos=false}" >}}
+{{< rad file="snippets/env-complete.bicep" embed=true marker="//ENV" markdownConfig="{linenos=table,hl_lines=[\"32-40\"],linenostart=30,lineNos=false}" >}}
 
 ## Step 5: Deploy your Radius Environment
 
