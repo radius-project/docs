@@ -75,10 +75,10 @@ The Bicep deployment engine currently does not output Kubernetes resource (UCP) 
 To fix this, you can manually build and output UCP IDs, which will cause the infrastructure to be linked to the resource:
 
 ```bicep
-import kubernetes as k8s {
+extension kubernetes with {
   kubeConfig: ''
   namespace: 'default'
-}
+}  as k8s
 
 resource deployment 'apps/Deployment@v1' = {...}
 

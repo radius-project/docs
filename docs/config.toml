@@ -1,4 +1,4 @@
-baseURL = "https://docs.radapp.io/"
+baseURL = "https://edge.docs.radapp.io/"
 languageCode = "en-us"
 title = "Radius Docs"
 theme =  "docsy"
@@ -67,9 +67,9 @@ tag = "tags"
 
 [params]
 copyright = "The Radius Authors. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see the https://linuxfoundation.org/trademark-usage/ page."
-version = "v0.35"
+version = "edge"
 tag_version = "latest"
-chart_version = "0.35.0"
+chart_version = "0.26.0"
 
 # Algolia Search
 algolia_docsearch = true
@@ -77,7 +77,7 @@ algolia_docsearch = true
 # GitHub Information
 github_repo = "https://github.com/radius-project/docs"
 github_subdir = "docs"
-github_branch = "v0.35"
+github_branch = "edge"
 github_project_repo = "https://github.com/radius-project/radius"
 
 # Versioning

@@ -73,7 +73,7 @@ In addition to starting Radius services in your Kubernetes cluster, this initial
 
 {{< rad file="snippets/app.bicep" embed=true markdownConfig="{linenos=table,linenostart=1}" >}}
 
-> This file will run the `ghcr.io/radius-project/samples/demo:latest` image. This image is published by the Radius team to a public registry, you do not need to create it. `rad init` also creates a `bicepconfig.json` file in your application's directory that has the necessary setup to use Radius with the official Bicep compiler. 
+> This file will run the `ghcr.io/radius-project/samples/demo:latest` image. This image is published by the Radius team to a public registry, you do not need to create it. `rad init` also creates a `bicepconfig.json` file in your application's directory that has the necessary setup to use Radius with the official Bicep compiler. The "radius" extension contains the schema information for all Radius-maintained resources, and the "aws" extension contains the schema information for AWS resources. These are enabled by default in the `bicepconfig.json` so that you can use all Radius and AWS resources. 
 
 ```json
 {

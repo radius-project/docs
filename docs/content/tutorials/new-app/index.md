@@ -23,7 +23,7 @@ By the end of the tutorial, you will have created and deployed a new Radius Appl
 
 - [Supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview" >}})
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- [Bicep VSCode extension and Bicep configuration file]({{< ref "installation#step-2-install-the-radius-bicep-vs-code-extension" >}})
+- [Bicep VSCode extension and Bicep configuration file]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 
 ## Step 1: Initialize a Radius Environment and Application
 
