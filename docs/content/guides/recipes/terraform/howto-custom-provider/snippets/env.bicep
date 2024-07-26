@@ -21,6 +21,9 @@ resource pgsSecretStore 'Applications.Core/secretStores@2023-10-01-preview' = {
       password: {
         value: password
       }
+      host: {
+        value: 'my-postgres-host'
+      }
     }
   }
 }
@@ -55,7 +58,13 @@ resource env 'Applications.Core/environments@2023-10-01-preview' = {
         }
       }
       env: {
-        PGHOST: 'postgres.corerp-resources-terraform-pg-app.svc.cluster.local'
+        PGPORT: '5432'
+      }
+      envSecrets: {
+        PGHOST: {
+          source: pgsSecretStore.id
+          key: 'host'
+        }
       }
     }
   }
