@@ -43,7 +43,7 @@ Create a Bicep file `env.bicep` with the secretStore resource:
 
 `recipeConfig/terraform/providers` allows you to setup configurations for one or multiple Terraform Providers. For more information refer to the [Radius Environment schema]({{< ref environment-schema >}}) page.
 
-In your `env.bicep` file add an Environment resource, along with Recipe configuration which leverages properties from the previously defined secret store. In this example you're also passing in `host` and `port` as environment variables to highlight use cases where, depending on provider configuration requirements, users can pass environment variables as plain text and as secret values to the Terraform recipes runtime.
+In your `env.bicep` file add an Environment resource, along with Recipe configuration which leverages properties from the previously defined secret store. In this example you're also passing in `host` and `port` as environment variables to highlight use cases where, depending on provider configuration requirements, users can pass environment variables as plain text and as secret values in `envSecrets` block to the Terraform recipes runtime.
 
 {{< rad file="snippets/env.bicep" embed=true marker="//ENV" >}}
 
