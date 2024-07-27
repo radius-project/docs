@@ -43,7 +43,6 @@ resource env 'Applications.Core/environments@2023-10-01-preview' = {
         providers: {
           postgresql: [ {
               sslmode: 'disable'
-              port: 5432
               secrets: {
                 username: {
                   source: pgsSecretStore.id
