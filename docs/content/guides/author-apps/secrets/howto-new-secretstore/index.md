@@ -16,7 +16,7 @@ By default, Radius leverages the hosting platform's secrets management solution 
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-- [Bicep VSCode extension and Bicep configuration file]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
+- [Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 - [Radius environment]({{< ref "installation#step-3-initialize-the-radius-control-plane-and-the-radius-environment" >}})
 
 ## Step 1: Add a Secret Store

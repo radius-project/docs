@@ -5,22 +5,4 @@ We previously released a version of the official Bicep extension specific to Rad
 {{< /alert >}}
 {{< latest >}}
 1. To install the Bicep extension, refer to their [installation documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/install#visual-studio-code-and-bicep-extension)
-
-1. Create a `bicepconfig.json` in your application's directory
-
-In order to use the features provided by the Bicep extension with Radius, certain properties need to be defined. These are defined in a `bicepconfig.json` file that lives in your application's directory. `release-version` should correspond to the current release version in the form of `major.minor` (e.g. `0.36`).
-
-```json
-{
-	"experimentalFeaturesEnabled": {
-		"extensibility": true,
-		"extensionRegistry": true,
-		"dynamicTypeLoading": true
-	},
-	"extensions": {
-		"radius": "br:biceptypes.azurecr.io/radius:<release-version>",
-		"aws": "br:biceptypes.azurecr.io/aws:<release-version>"
-	}
-}
-```
 {{< /latest >}}

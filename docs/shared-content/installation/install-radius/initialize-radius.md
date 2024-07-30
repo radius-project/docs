@@ -17,7 +17,7 @@ Initializing Radius installs the Radius control-plane and creates a Radius Envir
    rad init
    ```
 
-   Select `Yes` to setup the application in the current directory. This will create `app.bicep` and `bicepconfig.json` files
+   Select `Yes` to setup the application in the current directory. This will create `app.bicep` and [`bicepconfig.json`]({{< ref "/shared-content/installation/bicepconfig/generate-bicep-config.md" >}}) files
 
    ```
    Initializing Radius...

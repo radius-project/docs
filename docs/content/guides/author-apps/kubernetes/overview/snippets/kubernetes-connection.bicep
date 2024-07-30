@@ -1,4 +1,4 @@
-extension kubernetes {
+extension kubernetes with {
   kubeConfig: ''
   namespace: 'default'
 }

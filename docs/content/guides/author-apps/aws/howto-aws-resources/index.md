@@ -24,7 +24,8 @@ This how-to guide will show you:
 - [eksctl CLI](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
 - [kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- [Bicep VSCode extension and Bicep configuration file]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
+- [Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
+- [`bicepconfig.json`]({{< ref "/shared-content/installation/bicepconfig/generate-bicep-config.md" >}}) file in your application's directory
 
 ## Step 1: Create an EKS Cluster
 

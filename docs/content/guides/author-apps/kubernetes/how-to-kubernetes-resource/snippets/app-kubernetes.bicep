@@ -2,7 +2,7 @@
 @description('Specifies Kubernetes namespace for the user.')
 param namespace string = 'default-demo'
 
-extension kubernetes{
+extension kubernetes with {
   kubeConfig: ''
   namespace: namespace
 }

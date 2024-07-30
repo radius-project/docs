@@ -28,7 +28,7 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
         POSTGRESQL_HOST: extender.properties.host
         POSTGRESQL_PORT: extender.properties.port
         POSTGRESQL_USERNAME: extender.properties.username
-        POSTGRESQL_PASSWORD: extender.secrets('password')
+        POSTGRESQL_PASSWORD: extender.listSecrets().password
       }
       ports: {
         web: {

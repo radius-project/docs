@@ -23,7 +23,7 @@ By the end of the tutorial, you will have created and deployed a new Radius Appl
 
 - [Supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview" >}})
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- [Bicep VSCode extension and Bicep configuration file]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
+- [Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 
 ## Step 1: Initialize a Radius Environment and Application
 
@@ -42,7 +42,7 @@ By the end of the tutorial, you will have created and deployed a new Radius Appl
    rad init
    ```
 
-   When asked if you want to create a new application select "Yes". This will create a new file named `app.bicep` in your directory where your application will be defined. It will also create `bicepconfig.json` file that will contain the necessary setup to use Radius types with Bicep. 
+   When asked if you want to create a new application select "Yes". This will create a new file named `app.bicep` in your directory where your application will be defined. It will also create a [`bicepconfig.json`]({{< ref "/shared-content/installation/bicepconfig/generate-bicep-config.md" >}}) file that will contain the necessary setup to use Radius types with Bicep. 
 
    {{< alert title="💡 Development Environments" color="info" >}}
    By default `rad init` gets you up and running with a local, development-focused environment where most of the environment configuration is handled for you, including Recipes (_more on that soon_). If you would like to fully customize your environment, you can run `rad init --full`

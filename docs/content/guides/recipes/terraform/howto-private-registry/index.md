@@ -18,7 +18,7 @@ This how-to guide will describe how to:
 Before you get started, you'll need to make sure you have the following tools and resources:
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- [Bicep VSCode extension and Bicep configuration file]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
+- [Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [Radius initialized with `rad init`]({{< ref howto-environment >}})
 

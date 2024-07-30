@@ -20,6 +20,10 @@ on:
     branches:
       - edge
       - v*
+  push:
+    branches:
+      - edge
+      - v*
 jobs:
   build:
     name: Validate Bicep Code
@@ -27,9 +31,9 @@ jobs:
     steps:
     - name: Setup and verify bicep CLI
       run: |
-        curl -Lo bicep https://github.com/Azure/bicep/releases/latest/download/bicep-linux-x64
-        chmod +x ./bicep
-        bicep --version
+        curl -Lo rad-bicep https://github.com/Azure/bicep/releases/latest/download/bicep-linux-x64
+        chmod +x ./rad-bicep
+        ./rad-bicep --version
     - name: Check out repo
       uses: actions/checkout@v4
     - name: Verify Bicep files

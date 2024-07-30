@@ -16,7 +16,7 @@ Radius Environments can be setup with the rad CLI via two paths: interactive or 
 
 - [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- [Bicep VSCode extension and Bicep configuration file]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
+- [Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 
 ## Create a development environment
 
@@ -25,7 +25,7 @@ Radius Environments can be setup with the rad CLI via two paths: interactive or 
    rad init
    ```
 
-   Select `Yes` to setup the application in the current directory. This will create `app.bicep` and `bicepconfig.json` files
+   Select `Yes` to setup the application in the current directory. This will create `app.bicep` and [`bicepconfig.json`]({{< ref "/shared-content/installation/bicepconfig/generate-bicep-config.md" >}}) files
 
    ```
    Initializing Radius...

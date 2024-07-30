@@ -6,10 +6,10 @@ num_workers = 5
 
 # set the bicep binary name based on the OS
 if os.name == 'nt':
-    bicep_bin = 'bicep.exe'
+    bicep_bin = 'rad-bicep.exe'
     home_path = os.environ['USERPROFILE']
 else:
-    bicep_bin = 'bicep'
+    bicep_bin = 'rad-bicep'
     home_path = os.environ['HOME']
 
 # set the default Bicep path based on the runner
@@ -45,9 +45,9 @@ def validate_file(f):
     )
     stderr = result.stderr.decode("utf-8")
     exitcode = result.returncode
-
+  
     warning_prefix = "WARNING: The following experimental Bicep features"
-    if stderr.startswith(warning_prefix):
+    if stderr.startswith(warning_prefix) and "Error" not in stderr:
         stderr = ""
         exitcode = 0
 
