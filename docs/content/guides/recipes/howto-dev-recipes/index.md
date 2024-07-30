@@ -14,7 +14,7 @@ Local development environments created by the rad init command include a set of 
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
-- [`bicepconfig.json`]({{< ref "/shared-content/installation/bicepconfig/generate-bicep-config.md" >}})
+- [`bicepconfig.json`]({{< ref "/shared-content/installation/bicepconfig/generate-bicep-config/index" >}})
 - [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
 
 ## Step 1: Initialize a Radius environment

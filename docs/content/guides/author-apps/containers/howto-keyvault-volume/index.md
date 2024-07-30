@@ -20,7 +20,7 @@ This how-to guide will provide an overview of how to:
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
-- [`bicepconfig.json`]({{< ref "/shared-content/installation/bicepconfig/generate-bicep-config.md" >}})
+- [`bicepconfig.json`]({{< ref "/shared-content/installation/bicepconfig/generate-bicep-config/index" >}})
 - [Supported Kubernetes cluster]({{< ref "guides/operations/kubernetes" >}})
 - [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed on your cluster
 - [Azure Keyvault Provider](https://azure.github.io/secrets-store-csi-driver-provider-azure/docs/getting-started/installation/)

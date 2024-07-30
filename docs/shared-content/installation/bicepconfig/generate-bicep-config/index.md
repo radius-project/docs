@@ -1,3 +1,14 @@
+---
+type: docs
+title: "Bicep configuration file"
+linkTitle: "Bicep configuration"
+description: "Setup the Bicep configuration file with Radius-managed types"
+weight: 200
+categories: "Overview"
+tags: ["Bicep"]
+---
+
+
 In order to use the features provided by the official Bicep compiler with Radius, certain configurations need to be defined. These are defined in a `bicepconfig.json` file that lives in your application's directory. There are two ways to generate a `bicepconfig.json` with Radius. 
 
 ## Option 1: Generate a `bicepconfig.json` using Radius
