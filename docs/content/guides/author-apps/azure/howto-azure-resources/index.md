@@ -21,7 +21,7 @@ The steps below will showcase a "rad-ified" version of the existing [Azure AD wo
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
-- [`bicepconfig.json`]({{< ref "/shared-content/installation/bicepconfig/generate-bicep-config/index" >}})
+- [`bicepconfig.json`]({{< ref "/guides/tooling/bicepconfig/overview" >}})
 - [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
 - [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed in your cluster, including the [Mutating Admission Webhook](https://azure.github.io/azure-workload-identity/docs/installation/mutating-admission-webhook.html)
 

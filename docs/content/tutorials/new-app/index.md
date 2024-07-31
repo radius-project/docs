@@ -42,7 +42,7 @@ By the end of the tutorial, you will have created and deployed a new Radius Appl
    rad init
    ```
 
-   When asked if you want to create a new application select "Yes". This will create a new file named `app.bicep` in your directory where your application will be defined. It will also create a [`bicepconfig.json`]({{< ref "/shared-content/installation/bicepconfig/generate-bicep-config/index" >}}) file that will contain the necessary setup to use Radius types with Bicep. 
+   When asked if you want to create a new application select "Yes". This will create a new file named `app.bicep` in your directory where your application will be defined. It will also create a [`bicepconfig.json`]({{< ref "/guides/tooling/bicepconfig/overview" >}}) file that will contain the necessary setup to use Radius types with Bicep. 
 
    {{< alert title="💡 Development Environments" color="info" >}}
    By default `rad init` gets you up and running with a local, development-focused environment where most of the environment configuration is handled for you, including Recipes (_more on that soon_). If you would like to fully customize your environment, you can run `rad init --full`
