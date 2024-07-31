@@ -23,7 +23,7 @@ mkdir first-app
 cd first-app
 ```
 
-Initialize Radius. Select `Yes` when asked to setup application in the current directory. This will automatically generate `bicepconfig.json` with the correct setup in your application's directory. 
+Initialize Radius. Select `Yes` when asked to setup application in the current directory. This will automatically generate a `bicepconfig.json` with the correct setup in your application's directory. 
 
 ```bash
 rad init
@@ -47,4 +47,4 @@ rad init
 }
 ```
 
-These configurations allow Bicep to consume and use Radius-managed types stored in an OCI registry. There are two extensions that are enabled by default in the `bicepconfig.json` so that you can use Radius and AWS resources. The "radius" extension contains the schema information for all Radius-maintained resources, and the "aws" extension contains the schema information for AWS resources. 
+A `bicepconfig.json` file is required to use Radius with the official Bicep compiler but you can optionally add any other settings that are relevant to your application. These configurations allow Bicep to consume and use Radius-managed types stored in an OCI registry. There are two extensions that are enabled by default in the `bicepconfig.json` so that you can use Radius and AWS resources. The "radius" extension contains the schema information for all Radius-maintained resources, and the "aws" extension contains the schema information for AWS resources. 
