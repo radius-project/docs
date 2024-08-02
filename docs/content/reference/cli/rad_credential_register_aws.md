@@ -14,12 +14,6 @@ Register (Add or update) AWS cloud provider credential for a Radius installation
 
 Register (Add or update) AWS cloud provider credential for a Radius installation..
 
-This command is intended for scripting or advanced use-cases. See 'rad init' for a user-friendly way
-to configure these settings.
-
-Radius will use the provided IAM credential for all interactions with AWS. 
-
-
 Radius cloud providers enable Radius Environments to deploy and integrate with cloud resources (Azure, AWS).
 The Radius control-plane stores credentials for use when accessing cloud resources.
 
@@ -27,36 +21,33 @@ Cloud providers are configured per-Radius-installation. Configuration commands w
 or the workspace specified by '--workspace' to configure Radius. Modifications to cloud provider configuration
 or credentials will affect all Radius Environments and applications of the affected installation.
 
-```
-rad credential register aws [flags]
-```
-
 ### Examples
 
 ```
 
-# Register (Add or update) cloud provider credential for AWS with IAM authentication
-rad credential register aws --access-key-id <access-key-id> --secret-access-key <secret-access-key>
+# Register (Add or update) cloud provider credential for AWS with access key authentication.
+rad credential register aws access-key --access-key-id <access-key-id> --secret-access-key <secret-access-key>
+# Register (Add or update) cloud provider credential for AWS with IRSA.
+rad credential register aws irsa --iam-role <roleARN>
 
 ```
 
 ### Options
 
 ```
-      --access-key-id string       The AWS IAM access key id.
-  -h, --help                       help for aws
-  -o, --output string              output format (supported formats are json, table) (default "table")
-      --secret-access-key string   The AWS IAM secret access key.
-  -w, --workspace string           The workspace name
+  -h, --help   help for aws
 ```
 
 ### Options inherited from parent commands
 
 ```
       --config string   config file (default "$HOME/.rad/config.yaml")
+  -o, --output string   output format (supported formats are json, table) (default "table")
 ```
 
 ### SEE ALSO
 
 * [rad credential register]({{< ref rad_credential_register.md >}})	 - Register (Add or update) cloud provider credential for a Radius installation.
+* [rad credential register aws access-key]({{< ref rad_credential_register_aws_access-key.md >}})	 - Register (Add or update) AWS cloud provider credential for a Radius installation.
+* [rad credential register aws irsa]({{< ref rad_credential_register_aws_irsa.md >}})	 - Register (Add or update) AWS cloud provider credential for a Radius installation.
 
