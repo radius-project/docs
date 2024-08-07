@@ -23,7 +23,7 @@ mkdir first-app
 cd first-app
 ```
 
-Initialize Radius. Select `Yes` when asked to setup application in the current directory. This will automatically generate a `bicepconfig.json` with the correct setup in your application's directory. 
+1. Initialize Radius. Select `Yes` when asked to setup application in the current directory.  
 
 ```bash
 rad init
