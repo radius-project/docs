@@ -2,7 +2,7 @@
 type: docs
 title: "Overview: Bicep configuration"
 linkTitle: "Overview"
-description: "Setup the Bicep configuration file with Radius-managed types"
+description: "Setup the Bicep configuration file to author and deploy Radius-managed types"
 weight: 100
 categories: "Overview"
 tags: ["Bicep", "bicepconfig"]
