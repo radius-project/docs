@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Overview: Bicep configuration file"
+title: "Overview: Bicep configuration"
 linkTitle: "Overview"
 description: "Setup the Bicep configuration file with Radius-managed types"
 weight: 100
