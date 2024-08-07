@@ -29,6 +29,8 @@ cd first-app
 rad init
 ```
 
+This will automatically generate a `bicepconfig.json` with the correct setup in your application's directory.
+
 ## Option 2: Manually create a `bicepconfig.json` 
 
 1. Create a `bicepconfig.json` in your application's directory. `release-version` should correspond to the current release version in the form of `major.minor` (e.g. `0.36`). 
