@@ -86,7 +86,7 @@ softwareupdate --install-rosetta --agree-to-license
 Next, use the following commands to create a new cluster and install the Radius control plane, along with a new environment:
 
 ```bash
-k3d cluster create -p "8081:80@loadbalancer" --k3s-arg "--disable=traefik@server:0"
+k3d cluster create -p "8081:80@loadbalancer" --k3s-arg "--disable=traefik@server:*" --k3s-arg "--disable=servicelb@server:*"
 rad install kubernetes --set rp.publicEndpointOverride=localhost:8081
 rad init
 ```
