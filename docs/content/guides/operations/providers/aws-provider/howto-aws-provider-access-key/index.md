@@ -62,7 +62,7 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
 1. Add your AWS cloud provider credentials:
 
     ```bash
-    rad credential register aws --access-key-id myAccessKeyId --secret-access-key mySecretAccessKey
+    rad credential register aws access-key --access-key-id myAccessKeyId --secret-access-key mySecretAccessKey
     ```
 
-    For more information on the command arguments visit [`rad credential register aws`]({{< ref rad_credential_register_aws >}})
+    For more information on the command arguments visit [`rad credential register aws access-key`]({{< rad_credential_register_aws_access-key >}})
