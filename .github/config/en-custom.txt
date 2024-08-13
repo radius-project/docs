@@ -1262,6 +1262,8 @@ SecretReference
 ProviderConfigPropertiesSecrets
 upstreamed
 irsa
+bicepconfig
+Bicepconfig
 postgres
 ReadOnly
 DeployTimeConstant
