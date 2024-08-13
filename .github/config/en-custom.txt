@@ -1263,3 +1263,5 @@ SecretReference
 ProviderConfigPropertiesSecrets
 irsa
 postgres
+ReadOnly
+DeployTimeConstant
