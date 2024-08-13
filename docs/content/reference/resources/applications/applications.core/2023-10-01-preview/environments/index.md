@@ -15,14 +15,14 @@ description: "Detailed reference documentation for applications.core/environment
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **apiVersion** | '2023-10-01-preview' | The resource api version <br />_(read-only, deploy-time constant)_ |
-| **id** | string | The resource id <br />_(read-only, deploy-time constant)_ |
-| **location** | string | The geo-location where the resource lives <br />_(required)_ |
-| **name** | string | The resource name <br />_(required, deploy-time constant)_ |
-| **properties** | [EnvironmentProperties](#environmentproperties) | Environment properties <br />_(required)_ |
-| **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(read-only)_ |
+| **apiVersion** | '2023-10-01-preview' | The resource api version <br />_(ReadOnly, DeployTimeConstant)_ |
+| **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
+| **location** | string | The geo-location where the resource lives |
+| **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
+| **properties** | [EnvironmentProperties](#environmentproperties) | Environment properties <br />_(Required)_ |
+| **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(ReadOnly)_ |
 | **tags** | [TrackedResourceTags](#trackedresourcetags) | Resource tags. |
-| **type** | 'Applications.Core/environments' | The resource type <br />_(read-only, deploy-time constant)_ |
+| **type** | 'Applications.Core/environments' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
 
 ### EnvironmentProperties
 
@@ -30,10 +30,10 @@ description: "Detailed reference documentation for applications.core/environment
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **compute** | [EnvironmentCompute](#environmentcompute) | Represents backing compute resource <br />_(required)_ |
+| **compute** | [EnvironmentCompute](#environmentcompute) | Represents backing compute resource <br />_(Required)_ |
 | **extensions** | [Extension](#extension)[] | The environment extension. |
 | **providers** | [Providers](#providers) | The Cloud providers configuration. |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(read-only)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
 | **recipeConfig** | [RecipeConfigProperties](#recipeconfigproperties) | Configuration for Recipes. Defines how each type of Recipe should be configured and run. |
 | **recipes** | [EnvironmentPropertiesRecipes](#environmentpropertiesrecipes) | Specifies Recipes linked to the Environment. |
 | **simulated** | bool | Simulated environment. |
@@ -55,8 +55,8 @@ description: "Detailed reference documentation for applications.core/environment
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'kubernetes' | Discriminator property for EnvironmentCompute. <br />_(required)_ |
-| **namespace** | string | The namespace to use for the environment. <br />_(required)_ |
+| **kind** | 'kubernetes' | Discriminator property for EnvironmentCompute. <br />_(Required)_ |
+| **namespace** | string | The namespace to use for the environment. <br />_(Required)_ |
 
 
 ### IdentitySettings
@@ -65,7 +65,7 @@ description: "Detailed reference documentation for applications.core/environment
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'azure.com.workload' | 'undefined' | IdentitySettingKind is the kind of supported external identity setting <br />_(required)_ |
+| **kind** | 'azure.com.workload' | 'undefined' | IdentitySettingKind is the kind of supported external identity setting <br />_(Required)_ |
 | **oidcIssuer** | string | The URI for your compute platform's OIDC issuer |
 | **resource** | string | The resource ID of the provisioned identity |
 
@@ -84,10 +84,10 @@ description: "Detailed reference documentation for applications.core/environment
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **appId** | string | The Dapr appId. Specifies the identifier used by Dapr for service invocation. <br />_(required)_ |
+| **appId** | string | The Dapr appId. Specifies the identifier used by Dapr for service invocation. <br />_(Required)_ |
 | **appPort** | int | The Dapr appPort. Specifies the internal listening port for the application to handle requests from the Dapr sidecar. |
 | **config** | string | Specifies the Dapr configuration to use for the resource. |
-| **kind** | 'daprSidecar' | Discriminator property for Extension. <br />_(required)_ |
+| **kind** | 'daprSidecar' | Discriminator property for Extension. <br />_(Required)_ |
 | **protocol** | 'grpc' | 'http' | The Dapr sidecar extension protocol |
 
 #### KubernetesMetadataExtension
@@ -97,7 +97,7 @@ description: "Detailed reference documentation for applications.core/environment
 | Property | Type | Description |
 |----------|------|-------------|
 | **annotations** | [KubernetesMetadataExtensionAnnotations](#kubernetesmetadataextensionannotations) | Annotations to be applied to the Kubernetes resources output by the resource |
-| **kind** | 'kubernetesMetadata' | Discriminator property for Extension. <br />_(required)_ |
+| **kind** | 'kubernetesMetadata' | Discriminator property for Extension. <br />_(Required)_ |
 | **labels** | [KubernetesMetadataExtensionLabels](#kubernetesmetadataextensionlabels) | Labels to be applied to the Kubernetes resources output by the resource |
 
 #### KubernetesNamespaceExtension
@@ -106,8 +106,8 @@ description: "Detailed reference documentation for applications.core/environment
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'kubernetesNamespace' | Discriminator property for Extension. <br />_(required)_ |
-| **namespace** | string | The namespace of the application environment. <br />_(required)_ |
+| **kind** | 'kubernetesNamespace' | Discriminator property for Extension. <br />_(Required)_ |
+| **namespace** | string | The namespace of the application environment. <br />_(Required)_ |
 
 #### ManualScalingExtension
 
@@ -115,8 +115,8 @@ description: "Detailed reference documentation for applications.core/environment
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'manualScaling' | Discriminator property for Extension. <br />_(required)_ |
-| **replicas** | int | Replica count. <br />_(required)_ |
+| **kind** | 'manualScaling' | Discriminator property for Extension. <br />_(Required)_ |
+| **replicas** | int | Replica count. <br />_(Required)_ |
 
 
 ### KubernetesMetadataExtensionAnnotations
@@ -154,7 +154,7 @@ description: "Detailed reference documentation for applications.core/environment
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **scope** | string | Target scope for AWS resources to be deployed into.  For example: '/planes/aws/aws/accounts/000000000000/regions/us-west-2'. <br />_(required)_ |
+| **scope** | string | Target scope for AWS resources to be deployed into.  For example: '/planes/aws/aws/accounts/000000000000/regions/us-west-2'. <br />_(Required)_ |
 
 ### ProvidersAzure
 
@@ -162,7 +162,7 @@ description: "Detailed reference documentation for applications.core/environment
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **scope** | string | Target scope for Azure resources to be deployed into.  For example: '/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testGroup'. <br />_(required)_ |
+| **scope** | string | Target scope for Azure resources to be deployed into.  For example: '/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testGroup'. <br />_(Required)_ |
 
 ### RecipeConfigProperties
 
@@ -200,8 +200,8 @@ description: "Detailed reference documentation for applications.core/environment
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **key** | string | The key for the secret in the secret store. <br />_(required)_ |
-| **source** | string | The ID of an Applications.Core/SecretStore resource containing sensitive data required for recipe execution. <br />_(required)_ |
+| **key** | string | The key for the secret in the secret store. <br />_(Required)_ |
+| **source** | string | The ID of an Applications.Core/SecretStore resource containing sensitive data required for recipe execution. <br />_(Required)_ |
 
 ### TerraformConfigProperties
 
@@ -306,7 +306,7 @@ description: "Detailed reference documentation for applications.core/environment
 | Property | Type | Description |
 |----------|------|-------------|
 | **parameters** | any | Any object |
-| **templatePath** | string | Path to the template provided by the recipe. Currently only link to Azure Container Registry is supported. <br />_(required)_ |
+| **templatePath** | string | Path to the template provided by the recipe. Currently only link to Azure Container Registry is supported. <br />_(Required)_ |
 
 #### BicepRecipeProperties
 
@@ -315,7 +315,7 @@ description: "Detailed reference documentation for applications.core/environment
 | Property | Type | Description |
 |----------|------|-------------|
 | **plainHttp** | bool | Connect to the Bicep registry using HTTP (not-HTTPS). This should be used when the registry is known not to support HTTPS, for example in a locally-hosted registry. Defaults to false (use HTTPS/TLS). |
-| **templateKind** | 'bicep' | Discriminator property for RecipeProperties. <br />_(required)_ |
+| **templateKind** | 'bicep' | Discriminator property for RecipeProperties. <br />_(Required)_ |
 
 #### TerraformRecipeProperties
 
@@ -323,7 +323,7 @@ description: "Detailed reference documentation for applications.core/environment
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **templateKind** | 'terraform' | Discriminator property for RecipeProperties. <br />_(required)_ |
+| **templateKind** | 'terraform' | Discriminator property for RecipeProperties. <br />_(Required)_ |
 | **templateVersion** | string | Version of the template to deploy. For Terraform recipes using a module registry this is required, but must be omitted for other module sources. |
 
 

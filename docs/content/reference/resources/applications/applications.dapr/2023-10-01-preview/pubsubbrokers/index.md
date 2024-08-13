@@ -15,14 +15,14 @@ description: "Detailed reference documentation for applications.dapr/pubsubbroke
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **apiVersion** | '2023-10-01-preview' | The resource api version <br />_(read-only, deploy-time constant)_ |
-| **id** | string | The resource id <br />_(read-only, deploy-time constant)_ |
-| **location** | string | The geo-location where the resource lives <br />_(required)_ |
-| **name** | string | The resource name <br />_(required, deploy-time constant)_ |
-| **properties** | [DaprPubSubBrokerProperties](#daprpubsubbrokerproperties) | Dapr PubSubBroker portable resource properties <br />_(required)_ |
-| **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(read-only)_ |
+| **apiVersion** | '2023-10-01-preview' | The resource api version <br />_(ReadOnly, DeployTimeConstant)_ |
+| **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
+| **location** | string | The geo-location where the resource lives |
+| **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
+| **properties** | [DaprPubSubBrokerProperties](#daprpubsubbrokerproperties) | Dapr PubSubBroker portable resource properties <br />_(Required)_ |
+| **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(ReadOnly)_ |
 | **tags** | [TrackedResourceTags](#trackedresourcetags) | Resource tags. |
-| **type** | 'Applications.Dapr/pubSubBrokers' | The resource type <br />_(read-only, deploy-time constant)_ |
+| **type** | 'Applications.Dapr/pubSubBrokers' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
 
 ### DaprPubSubBrokerProperties
 
@@ -31,14 +31,14 @@ description: "Detailed reference documentation for applications.dapr/pubsubbroke
 | Property | Type | Description |
 |----------|------|-------------|
 | **application** | string | Fully qualified resource ID for the application that the portable resource is consumed by (if applicable) |
-| **componentName** | string | The name of the Dapr component object. Use this value in your code when interacting with the Dapr client to use the Dapr component. <br />_(read-only)_ |
-| **environment** | string | Fully qualified resource ID for the environment that the portable resource is linked to <br />_(required)_ |
+| **componentName** | string | The name of the Dapr component object. Use this value in your code when interacting with the Dapr client to use the Dapr component. <br />_(ReadOnly)_ |
+| **environment** | string | Fully qualified resource ID for the environment that the portable resource is linked to <br />_(Required)_ |
 | **metadata** | any | Any object |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(read-only)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
 | **recipe** | [Recipe](#recipe) | The recipe used to automatically deploy underlying infrastructure for a portable resource |
 | **resourceProvisioning** | 'manual' | 'recipe' | Specifies how the underlying service/resource is provisioned and managed. Available values are 'recipe', where Radius manages the lifecycle of the resource through a Recipe, and 'manual', where a user manages the resource and provides the values. |
 | **resources** | [ResourceReference](#resourcereference)[] | A collection of references to resources associated with the pubSubBroker |
-| **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(read-only)_ |
+| **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
 | **type** | string | Dapr component type which must matches the format used by Dapr Kubernetes configuration format |
 | **version** | string | Dapr component version |
 
@@ -48,7 +48,7 @@ description: "Detailed reference documentation for applications.dapr/pubsubbroke
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **name** | string | The name of the recipe within the environment to use <br />_(required)_ |
+| **name** | string | The name of the recipe within the environment to use <br />_(Required)_ |
 | **parameters** | any | Any object |
 
 ### ResourceReference
@@ -57,7 +57,7 @@ description: "Detailed reference documentation for applications.dapr/pubsubbroke
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **id** | string | Resource id of an existing resource <br />_(required)_ |
+| **id** | string | Resource id of an existing resource <br />_(Required)_ |
 
 ### ResourceStatus
 
@@ -67,7 +67,7 @@ description: "Detailed reference documentation for applications.dapr/pubsubbroke
 |----------|------|-------------|
 | **compute** | [EnvironmentCompute](#environmentcompute) | Represents backing compute resource |
 | **outputResources** | [OutputResource](#outputresource)[] | Properties of an output resource |
-| **recipe** | [RecipeStatus](#recipestatus) | Recipe status at deployment time for a resource. <br />_(read-only)_ |
+| **recipe** | [RecipeStatus](#recipestatus) | Recipe status at deployment time for a resource. <br />_(ReadOnly)_ |
 
 ### EnvironmentCompute
 
@@ -86,8 +86,8 @@ description: "Detailed reference documentation for applications.dapr/pubsubbroke
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'kubernetes' | Discriminator property for EnvironmentCompute. <br />_(required)_ |
-| **namespace** | string | The namespace to use for the environment. <br />_(required)_ |
+| **kind** | 'kubernetes' | Discriminator property for EnvironmentCompute. <br />_(Required)_ |
+| **namespace** | string | The namespace to use for the environment. <br />_(Required)_ |
 
 
 ### IdentitySettings
@@ -96,7 +96,7 @@ description: "Detailed reference documentation for applications.dapr/pubsubbroke
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'azure.com.workload' | 'undefined' | IdentitySettingKind is the kind of supported external identity setting <br />_(required)_ |
+| **kind** | 'azure.com.workload' | 'undefined' | IdentitySettingKind is the kind of supported external identity setting <br />_(Required)_ |
 | **oidcIssuer** | string | The URI for your compute platform's OIDC issuer |
 | **resource** | string | The resource ID of the provisioned identity |
 
@@ -116,8 +116,8 @@ description: "Detailed reference documentation for applications.dapr/pubsubbroke
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **templateKind** | string | TemplateKind is the kind of the recipe template used by the portable resource upon deployment. <br />_(required)_ |
-| **templatePath** | string | TemplatePath is the path of the recipe consumed by the portable resource upon deployment. <br />_(required)_ |
+| **templateKind** | string | TemplateKind is the kind of the recipe template used by the portable resource upon deployment. <br />_(Required)_ |
+| **templatePath** | string | TemplatePath is the path of the recipe consumed by the portable resource upon deployment. <br />_(Required)_ |
 | **templateVersion** | string | TemplateVersion is the version number of the template. |
 
 ### SystemData
