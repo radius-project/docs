@@ -1251,6 +1251,14 @@ ServiceAccounts
 pluggable
 envSecrets
 RecipeConfigPropertiesEnvSecrets
+ProviderConfigPropertiesSecrets
+SecretReference
+cyrilgdn
+secretStore
+postgreSQL
+postgresenvSecrets
+RecipeConfigPropertiesEnvSecrets
 SecretReference
 ProviderConfigPropertiesSecrets
 irsa
+postgres
