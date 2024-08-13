@@ -1261,3 +1261,4 @@ RecipeConfigPropertiesEnvSecrets
 SecretReference
 ProviderConfigPropertiesSecrets
 irsa
+postgres
