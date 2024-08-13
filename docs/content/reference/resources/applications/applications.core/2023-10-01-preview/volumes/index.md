@@ -15,14 +15,14 @@ description: "Detailed reference documentation for applications.core/volumes@202
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **apiVersion** | '2023-10-01-preview' | The resource api version <br />_(read-only, deploy-time constant)_ |
-| **id** | string | The resource id <br />_(read-only, deploy-time constant)_ |
-| **location** | string | The geo-location where the resource lives <br />_(required)_ |
-| **name** | string | The resource name <br />_(required, deploy-time constant)_ |
-| **properties** | [VolumeProperties](#volumeproperties) | Volume properties <br />_(required)_ |
-| **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(read-only)_ |
+| **apiVersion** | '2023-10-01-preview' | The resource api version <br />_(ReadOnly, DeployTimeConstant)_ |
+| **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
+| **location** | string | The geo-location where the resource lives |
+| **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
+| **properties** | [VolumeProperties](#volumeproperties) | Volume properties <br />_(Required)_ |
+| **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(ReadOnly)_ |
 | **tags** | [TrackedResourceTags](#trackedresourcetags) | Resource tags. |
-| **type** | 'Applications.Core/volumes' | The resource type <br />_(read-only, deploy-time constant)_ |
+| **type** | 'Applications.Core/volumes' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
 
 ### VolumeProperties
 
@@ -32,10 +32,10 @@ description: "Detailed reference documentation for applications.core/volumes@202
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **application** | string | Fully qualified resource ID for the application <br />_(required)_ |
+| **application** | string | Fully qualified resource ID for the application <br />_(Required)_ |
 | **environment** | string | Fully qualified resource ID for the environment that the application is linked to |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(read-only)_ |
-| **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(read-only)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
 
 #### AzureKeyVaultVolumeProperties
 
@@ -45,8 +45,8 @@ description: "Detailed reference documentation for applications.core/volumes@202
 |----------|------|-------------|
 | **certificates** | [AzureKeyVaultVolumePropertiesCertificates](#azurekeyvaultvolumepropertiescertificates) | The KeyVault certificates that this volume exposes |
 | **keys** | [AzureKeyVaultVolumePropertiesKeys](#azurekeyvaultvolumepropertieskeys) | The KeyVault keys that this volume exposes |
-| **kind** | 'azure.com.keyvault' | Discriminator property for VolumeProperties. <br />_(required)_ |
-| **resource** | string | The ID of the keyvault to use for this volume resource <br />_(required)_ |
+| **kind** | 'azure.com.keyvault' | Discriminator property for VolumeProperties. <br />_(Required)_ |
+| **resource** | string | The ID of the keyvault to use for this volume resource <br />_(Required)_ |
 | **secrets** | [AzureKeyVaultVolumePropertiesSecrets](#azurekeyvaultvolumepropertiessecrets) | The KeyVault secrets that this volume exposes |
 
 
@@ -58,7 +58,7 @@ description: "Detailed reference documentation for applications.core/volumes@202
 |----------|------|-------------|
 | **compute** | [EnvironmentCompute](#environmentcompute) | Represents backing compute resource |
 | **outputResources** | [OutputResource](#outputresource)[] | Properties of an output resource |
-| **recipe** | [RecipeStatus](#recipestatus) | Recipe status at deployment time for a resource. <br />_(read-only)_ |
+| **recipe** | [RecipeStatus](#recipestatus) | Recipe status at deployment time for a resource. <br />_(ReadOnly)_ |
 
 ### EnvironmentCompute
 
@@ -77,8 +77,8 @@ description: "Detailed reference documentation for applications.core/volumes@202
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'kubernetes' | Discriminator property for EnvironmentCompute. <br />_(required)_ |
-| **namespace** | string | The namespace to use for the environment. <br />_(required)_ |
+| **kind** | 'kubernetes' | Discriminator property for EnvironmentCompute. <br />_(Required)_ |
+| **namespace** | string | The namespace to use for the environment. <br />_(Required)_ |
 
 
 ### IdentitySettings
@@ -87,7 +87,7 @@ description: "Detailed reference documentation for applications.core/volumes@202
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'azure.com.workload' | 'undefined' | IdentitySettingKind is the kind of supported external identity setting <br />_(required)_ |
+| **kind** | 'azure.com.workload' | 'undefined' | IdentitySettingKind is the kind of supported external identity setting <br />_(Required)_ |
 | **oidcIssuer** | string | The URI for your compute platform's OIDC issuer |
 | **resource** | string | The resource ID of the provisioned identity |
 
@@ -107,8 +107,8 @@ description: "Detailed reference documentation for applications.core/volumes@202
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **templateKind** | string | TemplateKind is the kind of the recipe template used by the portable resource upon deployment. <br />_(required)_ |
-| **templatePath** | string | TemplatePath is the path of the recipe consumed by the portable resource upon deployment. <br />_(required)_ |
+| **templateKind** | string | TemplateKind is the kind of the recipe template used by the portable resource upon deployment. <br />_(Required)_ |
+| **templatePath** | string | TemplatePath is the path of the recipe consumed by the portable resource upon deployment. <br />_(Required)_ |
 | **templateVersion** | string | TemplateVersion is the version number of the template. |
 
 ### AzureKeyVaultVolumePropertiesCertificates
@@ -131,7 +131,7 @@ description: "Detailed reference documentation for applications.core/volumes@202
 | **certType** | 'certificate' | 'privatekey' | 'publickey' | Represents certificate types |
 | **encoding** | 'base64' | 'hex' | 'utf-8' | Represents secret encodings |
 | **format** | 'pem' | 'pfx' | Represents certificate formats |
-| **name** | string | The name of the certificate <br />_(required)_ |
+| **name** | string | The name of the certificate <br />_(Required)_ |
 | **version** | string | Certificate version |
 
 ### AzureKeyVaultVolumePropertiesKeys
@@ -151,7 +151,7 @@ description: "Detailed reference documentation for applications.core/volumes@202
 | Property | Type | Description |
 |----------|------|-------------|
 | **alias** | string | File name when written to disk |
-| **name** | string | The name of the key <br />_(required)_ |
+| **name** | string | The name of the key <br />_(Required)_ |
 | **version** | string | Key version |
 
 ### AzureKeyVaultVolumePropertiesSecrets
@@ -172,7 +172,7 @@ description: "Detailed reference documentation for applications.core/volumes@202
 |----------|------|-------------|
 | **alias** | string | File name when written to disk |
 | **encoding** | 'base64' | 'hex' | 'utf-8' | Represents secret encodings |
-| **name** | string | The name of the secret <br />_(required)_ |
+| **name** | string | The name of the secret <br />_(Required)_ |
 | **version** | string | secret version |
 
 ### SystemData

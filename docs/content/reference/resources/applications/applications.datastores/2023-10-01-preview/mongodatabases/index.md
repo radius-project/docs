@@ -15,21 +15,14 @@ description: "Detailed reference documentation for applications.datastores/mongo
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **apiVersion** | '2023-10-01-preview' | The resource api version <br />_(read-only, deploy-time constant)_ |
-| **id** | string | The resource id <br />_(read-only, deploy-time constant)_ |
-| **location** | string | The geo-location where the resource lives <br />_(required)_ |
-| **name** | string | The resource name <br />_(required, deploy-time constant)_ |
-| **properties** | [MongoDatabaseProperties](#mongodatabaseproperties) | MongoDatabase portable resource properties <br />_(required)_ |
-| **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(read-only)_ |
+| **apiVersion** | '2023-10-01-preview' | The resource api version <br />_(ReadOnly, DeployTimeConstant)_ |
+| **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
+| **location** | string | The geo-location where the resource lives |
+| **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
+| **properties** | [MongoDatabaseProperties](#mongodatabaseproperties) | MongoDatabase portable resource properties <br />_(Required)_ |
+| **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(ReadOnly)_ |
 | **tags** | [TrackedResourceTags](#trackedresourcetags) | Resource tags. |
-| **type** | 'Applications.Datastores/mongoDatabases' | The resource type <br />_(read-only, deploy-time constant)_ |
-
-### Function listSecrets (Applications.Datastores/mongoDatabases@2023-10-01-preview)
-
-* **Resource**: Applications.Datastores/mongoDatabases
-* **ApiVersion**: 2023-10-01-preview
-* **Input**: any
-* **Output**: [MongoDatabaseListSecretsResult](#mongodatabaselistsecretsresult)
+| **type** | 'Applications.Datastores/mongoDatabases' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
 
 ### MongoDatabaseProperties
 
@@ -39,15 +32,15 @@ description: "Detailed reference documentation for applications.datastores/mongo
 |----------|------|-------------|
 | **application** | string | Fully qualified resource ID for the application that the portable resource is consumed by (if applicable) |
 | **database** | string | Database name of the target Mongo database |
-| **environment** | string | Fully qualified resource ID for the environment that the portable resource is linked to <br />_(required)_ |
+| **environment** | string | Fully qualified resource ID for the environment that the portable resource is linked to <br />_(Required)_ |
 | **host** | string | Host name of the target Mongo database |
 | **port** | int | Port value of the target Mongo database |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(read-only)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
 | **recipe** | [Recipe](#recipe) | The recipe used to automatically deploy underlying infrastructure for a portable resource |
 | **resourceProvisioning** | 'manual' | 'recipe' | Specifies how the underlying service/resource is provisioned and managed. Available values are 'recipe', where Radius manages the lifecycle of the resource through a Recipe, and 'manual', where a user manages the resource and provides the values. |
 | **resources** | [ResourceReference](#resourcereference)[] | List of the resource IDs that support the MongoDB resource |
 | **secrets** | [MongoDatabaseSecrets](#mongodatabasesecrets) | The secret values for the given MongoDatabase resource |
-| **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(read-only)_ |
+| **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
 | **username** | string | Username to use when connecting to the target Mongo database |
 
 ### Recipe
@@ -56,7 +49,7 @@ description: "Detailed reference documentation for applications.datastores/mongo
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **name** | string | The name of the recipe within the environment to use <br />_(required)_ |
+| **name** | string | The name of the recipe within the environment to use <br />_(Required)_ |
 | **parameters** | any | Any object |
 
 ### ResourceReference
@@ -65,7 +58,7 @@ description: "Detailed reference documentation for applications.datastores/mongo
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **id** | string | Resource id of an existing resource <br />_(required)_ |
+| **id** | string | Resource id of an existing resource <br />_(Required)_ |
 
 ### MongoDatabaseSecrets
 
@@ -84,7 +77,7 @@ description: "Detailed reference documentation for applications.datastores/mongo
 |----------|------|-------------|
 | **compute** | [EnvironmentCompute](#environmentcompute) | Represents backing compute resource |
 | **outputResources** | [OutputResource](#outputresource)[] | Properties of an output resource |
-| **recipe** | [RecipeStatus](#recipestatus) | Recipe status at deployment time for a resource. <br />_(read-only)_ |
+| **recipe** | [RecipeStatus](#recipestatus) | Recipe status at deployment time for a resource. <br />_(ReadOnly)_ |
 
 ### EnvironmentCompute
 
@@ -103,8 +96,8 @@ description: "Detailed reference documentation for applications.datastores/mongo
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'kubernetes' | Discriminator property for EnvironmentCompute. <br />_(required)_ |
-| **namespace** | string | The namespace to use for the environment. <br />_(required)_ |
+| **kind** | 'kubernetes' | Discriminator property for EnvironmentCompute. <br />_(Required)_ |
+| **namespace** | string | The namespace to use for the environment. <br />_(Required)_ |
 
 
 ### IdentitySettings
@@ -113,7 +106,7 @@ description: "Detailed reference documentation for applications.datastores/mongo
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'azure.com.workload' | 'undefined' | IdentitySettingKind is the kind of supported external identity setting <br />_(required)_ |
+| **kind** | 'azure.com.workload' | 'undefined' | IdentitySettingKind is the kind of supported external identity setting <br />_(Required)_ |
 | **oidcIssuer** | string | The URI for your compute platform's OIDC issuer |
 | **resource** | string | The resource ID of the provisioned identity |
 
@@ -133,8 +126,8 @@ description: "Detailed reference documentation for applications.datastores/mongo
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **templateKind** | string | TemplateKind is the kind of the recipe template used by the portable resource upon deployment. <br />_(required)_ |
-| **templatePath** | string | TemplatePath is the path of the recipe consumed by the portable resource upon deployment. <br />_(required)_ |
+| **templateKind** | string | TemplateKind is the kind of the recipe template used by the portable resource upon deployment. <br />_(Required)_ |
+| **templatePath** | string | TemplatePath is the path of the recipe consumed by the portable resource upon deployment. <br />_(Required)_ |
 | **templateVersion** | string | TemplateVersion is the version number of the template. |
 
 ### SystemData
@@ -159,13 +152,4 @@ description: "Detailed reference documentation for applications.datastores/mongo
 #### Additional Properties
 
 * **Additional Properties Type**: string
-
-### MongoDatabaseListSecretsResult
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **connectionString** | string | Connection string used to connect to the target Mongo database <br />_(read-only)_ |
-| **password** | string | Password to use when connecting to the target Mongo database <br />_(read-only)_ |
 
