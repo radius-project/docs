@@ -14,7 +14,6 @@ Local development environments created by the rad init command include a set of 
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
-- [`bicepconfig.json`]({{< ref "/guides/tooling/bicepconfig/overview" >}})
 - [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
 
 ## Step 1: Initialize a Radius environment
@@ -56,7 +55,13 @@ Local development environments created by the rad init command include a set of 
 
    When a Recipe is named "default" it will be used automatically when a resource doesn't specify a Recipe name. This makes it easy for applications to fully defer to the Environment for how to manage infrastructure.  
 
-## Step 2: Define your application
+## Step 2: Create a `bicepconfig.json` in your application's directory 
+
+{{< read file= "/shared-content/installation/bicepconfig/manual.md" >}}
+
+More information on how to setup a `bicepconfig.json` can be found [here]({{< ref "/guides/tooling/bicepconfig/overview" >}})
+
+## Step 3: Define your application
 
 Create a file named `app.bicep` with the following set of resources:
 
@@ -64,7 +69,7 @@ Create a file named `app.bicep` with the following set of resources:
 
 Note that no Recipe name is specified within 'db', so it will be using the default Recipe for Redis in your environment.
 
-## Step 3: Deploy your application
+## Step 4: Deploy your application
 
 1. Run [`rad run`]({{< ref rad_run >}}) to deploy your application:
 
@@ -94,7 +99,7 @@ Note that no Recipe name is specified within 'db', so it will be using the defau
 
    Your application is now deployed and running in your Kubernetes cluster.
 
-## Step 4: Verify Redis containers are deployed
+## Step 5: Verify Redis containers are deployed
 
 1. Visit [`http://localhost:3000`](http://localhost:3000) in your browser.
 
