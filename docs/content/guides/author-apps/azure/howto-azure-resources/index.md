@@ -21,7 +21,6 @@ The steps below will showcase a "rad-ified" version of the existing [Azure AD wo
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
-- [`bicepconfig.json`]({{< ref "/guides/tooling/bicepconfig/overview" >}})
 - [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
 - [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed in your cluster, including the [Mutating Admission Webhook](https://azure.github.io/azure-workload-identity/docs/installation/mutating-admission-webhook.html)
 
@@ -33,19 +32,25 @@ Begin by running [`rad init --full`]({{< ref rad_init >}}). Make sure to configu
 rad init --full
 ```
 
-## Step 2: Define a Radius Environment
+## Step 2: Create a `bicepconfig.json` in your application's directory 
+
+{{< read file= "/shared-content/installation/bicepconfig/manual.md" >}}
+
+More information on how to setup a `bicepconfig.json` can be found [here]({{< ref "/guides/tooling/bicepconfig/overview" >}})
+
+## Step 3: Define a Radius Environment
 
 Create a file named `app.bicep` and define a Radius Environment with [identity property]({{< ref "/guides/deploy-apps/environments/overview" >}}) set. This configures your environment to use your Azure AD workload identity installation with your cluster's OIDC endpoint:
 
 {{< rad file="snippets/container-wi.bicep" embed=true marker="//ENVIRONMENT">}}
 
-## Step 3: Define an app and a container
+## Step 4: Define an app and a container
 
 Add a Radius Application, a Radius [container]({{< ref "guides/author-apps/containers" >}}), and an Azure Key Vault to your `app.bicep` file. Note the connection from the container to the Key Vault, with an iam property set for the Azure AD RBAC role:
 
 {{< rad file="snippets/container-wi.bicep" embed=true marker="//CONTAINER" >}}
 
-## Step 4: Deploy the app and container
+## Step 5: Deploy the app and container
 
 Deploy your app by specifying the OIDC issuer URL. To retrieve the OIDC issuer URL, follow the [Azure Workload Identity installation guide](https://azure.github.io/azure-workload-identity/docs/installation.html).
 
@@ -53,7 +58,7 @@ Deploy your app by specifying the OIDC issuer URL. To retrieve the OIDC issuer U
 rad deploy ./app.bicep -p oidcIssuer=<OIDC_ISSUER_URL>
 ```
 
-## Step 5: Verify access to the Key Vault
+## Step 6: Verify access to the Key Vault
 
 1. Once deployment completes, read the logs from your running container resource:
 

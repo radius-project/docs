@@ -25,7 +25,6 @@ This how-to guide will show you:
 - [kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
-- [`bicepconfig.json`]({{< ref "/guides/tooling/bicepconfig/overview" >}}) file in your application's directory
 
 ## Step 1: Create an EKS Cluster
 
@@ -53,7 +52,13 @@ Follow the prompts to install the [control plane services]({{< ref "/concepts/te
 - **Add AWS provider** - An [AWS cloud provider]({{< ref "/guides/operations/providers/aws-provider" >}}) allows you to deploy and manage AWS resources as part of your application. Follow the how-to guides to [configure the AWS provider]({{< ref "/guides/operations/providers/aws-provider/howto-aws-provider" >}}) with the preferred identity.
 - **Environment name** - The name of the environment to create. You can specify any name with lowercase letters, such as `myawsenv`.
 
-## Step 3: Create a Bicep file to model AWS Simple Storage Service (S3)
+## Step 3: Create a `bicepconfig.json` in your application's directory 
+
+{{< read file= "/shared-content/installation/bicepconfig/manual.md" >}}
+
+More information on how to setup a `bicepconfig.json` can be found [here]({{< ref "/guides/tooling/bicepconfig/overview" >}})
+
+## Step 4: Create a Bicep file to model AWS Simple Storage Service (S3)
 
 Create a new file called `app.bicep` and add the following bicep code to model an AWS S3 Bucket:
 
@@ -61,7 +66,7 @@ Create a new file called `app.bicep` and add the following bicep code to model a
 
 Radius uses the [AWS Cloud Control API](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/what-is-cloudcontrolapi.html) to interact with AWS resources. This means that you can model your AWS resources in Bicep and Radius will be able to deploy and manage them. You can find the list of supported AWS resources in the [AWS resource library]({{< ref "guides/author-apps/aws/overview#resource-library" >}}).
 
-## Step 4: Add a Radius container to interact with the AWS S3 Bucket
+## Step 5: Add a Radius container to interact with the AWS S3 Bucket
 
 Open the `app.bicep` and append the following Radius resources:
 
@@ -73,7 +78,7 @@ Your final `app.bicep` file should look like this
 
 This creates a container that will be deployed to your Kubernetes cluster. This container will interact with the AWS S3 Bucket you created in the previous step.
 
-## Step 5: Deploy the application
+## Step 6: Deploy the application
 
 1. Deploy your application to your environment:
 
@@ -96,7 +101,7 @@ This creates a container that will be deployed to your Kubernetes cluster. This 
 
     {{< image src="s3app.png" alt="Screenshot of the sample application to interact with s3 bucket " width=900 >}}
 
-## Step 6: Cleanup
+## Step 7: Cleanup
 
 1. When you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to delete all Radius resources running on the EKS Cluster.
 
