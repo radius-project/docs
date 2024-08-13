@@ -32,6 +32,8 @@ Begin by running [`rad init --full`]({{< ref rad_init >}}). Make sure to configu
 rad init --full
 ```
 
+Select 'No' when asked to setup application in the current directory. 
+
 ## Step 2: Create a `bicepconfig.json` in your application's directory 
 
 {{< read file= "/shared-content/installation/bicepconfig/manual.md" >}}

@@ -1,3 +1,4 @@
+// The bicepconfig.json file is needed so the bicep files in the repo can be compiled with the correct setup
 {
 	"experimentalFeaturesEnabled": {
 		"extensibility": true,

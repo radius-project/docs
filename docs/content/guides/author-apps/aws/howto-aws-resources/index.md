@@ -52,6 +52,8 @@ Follow the prompts to install the [control plane services]({{< ref "/concepts/te
 - **Add AWS provider** - An [AWS cloud provider]({{< ref "/guides/operations/providers/aws-provider" >}}) allows you to deploy and manage AWS resources as part of your application. Follow the how-to guides to [configure the AWS provider]({{< ref "/guides/operations/providers/aws-provider/howto-aws-provider" >}}) with the preferred identity.
 - **Environment name** - The name of the environment to create. You can specify any name with lowercase letters, such as `myawsenv`.
 
+Select 'No' when asked to setup application in the current directory. 
+
 ## Step 3: Create a `bicepconfig.json` in your application's directory 
 
 {{< read file= "/shared-content/installation/bicepconfig/manual.md" >}}
