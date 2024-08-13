@@ -15,14 +15,14 @@ description: "Detailed reference documentation for applications.core/gateways@20
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **apiVersion** | '2023-10-01-preview' | The resource api version <br />_(read-only, deploy-time constant)_ |
-| **id** | string | The resource id <br />_(read-only, deploy-time constant)_ |
-| **location** | string | The geo-location where the resource lives <br />_(required)_ |
-| **name** | string | The resource name <br />_(required, deploy-time constant)_ |
-| **properties** | [GatewayProperties](#gatewayproperties) | Gateway properties <br />_(required)_ |
-| **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(read-only)_ |
+| **apiVersion** | '2023-10-01-preview' | The resource api version <br />_(ReadOnly, DeployTimeConstant)_ |
+| **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
+| **location** | string | The geo-location where the resource lives |
+| **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
+| **properties** | [GatewayProperties](#gatewayproperties) | Gateway properties <br />_(Required)_ |
+| **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(ReadOnly)_ |
 | **tags** | [TrackedResourceTags](#trackedresourcetags) | Resource tags. |
-| **type** | 'Applications.Core/gateways' | The resource type <br />_(read-only, deploy-time constant)_ |
+| **type** | 'Applications.Core/gateways' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
 
 ### GatewayProperties
 
@@ -30,15 +30,15 @@ description: "Detailed reference documentation for applications.core/gateways@20
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **application** | string | Fully qualified resource ID for the application <br />_(required)_ |
+| **application** | string | Fully qualified resource ID for the application <br />_(Required)_ |
 | **environment** | string | Fully qualified resource ID for the environment that the application is linked to |
 | **hostname** | [GatewayHostname](#gatewayhostname) | Declare hostname information for the Gateway. Leaving the hostname empty auto-assigns one: mygateway.myapp.PUBLICHOSTNAMEORIP.nip.io. |
 | **internal** | bool | Sets Gateway to not be exposed externally (no public IP address associated). Defaults to false (exposed to internet). |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(read-only)_ |
-| **routes** | [GatewayRoute](#gatewayroute)[] | Routes attached to this Gateway <br />_(required)_ |
-| **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(read-only)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **routes** | [GatewayRoute](#gatewayroute)[] | Routes attached to this Gateway <br />_(Required)_ |
+| **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
 | **tls** | [GatewayTls](#gatewaytls) | TLS configuration definition for Gateway resource. |
-| **url** | string | URL of the gateway resource. Readonly <br />_(read-only)_ |
+| **url** | string | URL of the gateway resource. Readonly <br />_(ReadOnly)_ |
 
 ### GatewayHostname
 
@@ -68,7 +68,7 @@ description: "Detailed reference documentation for applications.core/gateways@20
 |----------|------|-------------|
 | **compute** | [EnvironmentCompute](#environmentcompute) | Represents backing compute resource |
 | **outputResources** | [OutputResource](#outputresource)[] | Properties of an output resource |
-| **recipe** | [RecipeStatus](#recipestatus) | Recipe status at deployment time for a resource. <br />_(read-only)_ |
+| **recipe** | [RecipeStatus](#recipestatus) | Recipe status at deployment time for a resource. <br />_(ReadOnly)_ |
 
 ### EnvironmentCompute
 
@@ -87,8 +87,8 @@ description: "Detailed reference documentation for applications.core/gateways@20
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'kubernetes' | Discriminator property for EnvironmentCompute. <br />_(required)_ |
-| **namespace** | string | The namespace to use for the environment. <br />_(required)_ |
+| **kind** | 'kubernetes' | Discriminator property for EnvironmentCompute. <br />_(Required)_ |
+| **namespace** | string | The namespace to use for the environment. <br />_(Required)_ |
 
 
 ### IdentitySettings
@@ -97,7 +97,7 @@ description: "Detailed reference documentation for applications.core/gateways@20
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'azure.com.workload' | 'undefined' | IdentitySettingKind is the kind of supported external identity setting <br />_(required)_ |
+| **kind** | 'azure.com.workload' | 'undefined' | IdentitySettingKind is the kind of supported external identity setting <br />_(Required)_ |
 | **oidcIssuer** | string | The URI for your compute platform's OIDC issuer |
 | **resource** | string | The resource ID of the provisioned identity |
 
@@ -117,8 +117,8 @@ description: "Detailed reference documentation for applications.core/gateways@20
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **templateKind** | string | TemplateKind is the kind of the recipe template used by the portable resource upon deployment. <br />_(required)_ |
-| **templatePath** | string | TemplatePath is the path of the recipe consumed by the portable resource upon deployment. <br />_(required)_ |
+| **templateKind** | string | TemplateKind is the kind of the recipe template used by the portable resource upon deployment. <br />_(Required)_ |
+| **templatePath** | string | TemplatePath is the path of the recipe consumed by the portable resource upon deployment. <br />_(Required)_ |
 | **templateVersion** | string | TemplateVersion is the version number of the template. |
 
 ### GatewayTls
