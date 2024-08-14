@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Bicep configuration file"
-linkTitle: "Bicepconfig"
+linkTitle: "Bicep config"
 description: "Documentation on the Bicep configuration file"
-weight: 100
+weight: 300
 ---

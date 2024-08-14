@@ -8,14 +8,26 @@ categories: "Overview"
 tags: ["Bicep"]
 ---
 
-In order to use the features provided by the official Bicep compiler with Radius, certain configurations need to be defined. These are defined in a `bicepconfig.json` file that lives in your application's directory. There are two ways to generate a `bicepconfig.json` with Radius. 
+To use the features provided by the official Bicep compiler with Radius, certain configurations need to be defined. These are defined in a `bicepconfig.json` file that lives in your application's directory. 
 
-## Option 1: Automatically generate a `bicepconfig.json` via `rad init`
+## What is a `bicepconfig.json`?
+
+The `bicepconfig.json` allows Bicep compiler to consume and use Radius-managed types stored in an OCI registry. There are two extensions that are enabled by default in the `bicepconfig.json` so that you can use Radius and AWS resources. The "radius" extension contains the schema information for all Radius-maintained resources, and the "aws" extension contains the schema information for AWS resources. You can optionally add any other settings that are relevant to your application. There are two ways to generate a `bicepconfig.json` with Radius. 
+
+
+## Automatically generate a `bicepconfig.json` via `rad init`
 
 {{< read file= "/shared-content/installation/bicepconfig/rad-init.md" >}}
 
-## Option 2: Manually create a `bicepconfig.json` 
+## Manually create a `bicepconfig.json` 
 
 {{< read file= "/shared-content/installation/bicepconfig/manual.md" >}}
 
-These configurations allow Bicep to consume and use Radius-managed types stored in an OCI registry. There are two extensions that are enabled by default in the `bicepconfig.json` so that you can use Radius and AWS resources. The "radius" extension contains the schema information for all Radius-maintained resources, and the "aws" extension contains the schema information for AWS resources. You can optionally add any other settings that are relevant to your application.
+## Author and deploy Radius-managed types
+
+{{< alert title="Replace import statements with extension" color="warning" >}} Radius is now merged with the official Bicep. If you have bicep files with `import radius as radius` statements please replace them with `extension radius` to use Radius-managed types .
+{{< /alert >}}
+
+Once you have a `bicepconfig.json` file in your application's directory, you can author and deploy Radius-managed types. 
+
+{{< rad file="snippets/app.bicep" embed=true >}}
