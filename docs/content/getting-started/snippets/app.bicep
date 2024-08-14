@@ -5,7 +5,7 @@ import radius as radius
 param application string
 
 resource demo 'Applications.Core/containers@2023-10-01-preview' = {
-  name: 'demo'
+  name: demo
   properties: {
     application: application
     container: {
