@@ -1254,3 +1254,4 @@ RecipeConfigPropertiesEnvSecrets
 SecretReference
 ProviderConfigPropertiesSecrets
 irsa
+roleARN
