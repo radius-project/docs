@@ -92,7 +92,7 @@ For more information, refer to the [`config.yaml` reference documentation]({{< r
 
 ### `rad-bicep` compiler
 
-The rad CLI uses the rad-bicep compiler to compile Bicep files to JSON templates. The rad-bicep compiler is stored as `/bin/rad-bicep` within your configuration directory.
+The rad CLI uses the Bicep compiler to compile Bicep files to JSON templates. The Bicep compiler is stored as `/bin/rad-bicep` within your configuration directory.
 
 ## Reference documentation
 

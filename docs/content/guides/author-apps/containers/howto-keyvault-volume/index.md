@@ -19,7 +19,7 @@ This how-to guide will provide an overview of how to:
 ## Prerequisites
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
+- [Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 - [Supported Kubernetes cluster]({{< ref "guides/operations/kubernetes" >}})
 - [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed on your cluster
 - [Azure Keyvault Provider](https://azure.github.io/secrets-store-csi-driver-provider-azure/docs/getting-started/installation/)
@@ -33,25 +33,33 @@ Begin by running [`rad init --full`]({{< ref rad_init >}}). Make sure to configu
 rad init --full
 ```
 
-## Step 2: Define a Radius Environment
+Select 'No' when asked to setup application in the current directory. 
+
+## Step 2: Create a `bicepconfig.json` in your application's directory 
+
+{{< read file= "/shared-content/installation/bicepconfig/manual.md" >}}
+
+More information on how to setup a `bicepconfig.json` can be found [here]({{< ref "/guides/tooling/bicepconfig/overview" >}})
+
+## Step 3: Define a Radius Environment
 
 Create a file named `app.bicep` and define a Radius Environment with the identity property set:
 
 {{< rad file="snippets/keyvault-wi.bicep" embed=true marker="//ENVIRONMENT">}}
 
-## Step 3: Define an app, Key  Vault, and volume
+## Step 4: Define an app, Key  Vault, and volume
 
 Add a Radius Application, an Azure Key Vault, and a Radius volume which uses the Key Vault to your `app.bicep` file:
 
 {{< rad file="snippets/keyvault-wi.bicep" embed=true marker="//APP" >}}
 
-## Step 4: Define an app, Key  Vault, and volume
+## Step 5: Define an app, Key  Vault, and volume
 
 Now add a Radius [container]({{< ref "guides/author-apps/containers" >}}) with a volume mount for the Radius volume:
 
 {{< rad file="snippets/keyvault-wi.bicep" embed=true marker="//CONTAINER" >}}
 
-## Step 5: Deploy the app
+## Step 6: Deploy the app
 
 Deploy your app, specifying the OIDC issuer URL. To retrieve the OIDC issuer URL, follow the [Azure Workload Identity installation guide](https://azure.github.io/azure-workload-identity/docs/installation.html).
 
@@ -59,7 +67,7 @@ Deploy your app, specifying the OIDC issuer URL. To retrieve the OIDC issuer URL
 rad deploy ./app.bicep -p oidcIssuer=<OIDC_ISSUER_URL>
 ```
 
-## Step 5: Verify access to the mounted Azure Key Vault
+## Step 7: Verify access to the mounted Azure Key Vault
 
 1. Once deployment completes, read the logs from your running container resource:
 

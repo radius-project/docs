@@ -1,6 +1,6 @@
-import aws as aws
+extension aws
 
-import radius as radius
+extension radius
 
 param environment string
 

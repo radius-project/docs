@@ -1,5 +1,5 @@
 //SECRETSTORE
-import radius as radius
+extension radius
 
 @description('username for PostgreSQL db')
 @secure()

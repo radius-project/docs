@@ -1,4 +1,4 @@
-import radius as radius
+extension radius
 
 resource env 'Applications.Core/environments@2023-10-01-preview' = {
   name: 'prod'

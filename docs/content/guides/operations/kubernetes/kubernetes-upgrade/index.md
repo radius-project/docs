@@ -29,7 +29,7 @@ rad uninstall kubernetes
 
 {{< read file= "/shared-content/installation/rad-cli/install-rad-cli.md" >}}
 
-## Step 4: Install the Radius-Bicep VS Code extension
+## Step 4: Install the Bicep VS Code extension
 
 {{< read file= "/shared-content/installation/vscode-bicep/install-vscode-bicep.md" >}}
 

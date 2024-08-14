@@ -1,5 +1,5 @@
 // Import the set of Radius resources (Applications.*) into Bicep
-import radius as radius
+extension radius
 
 @description('The ID of your Radius Application. Set automatically by the rad CLI.')
 param application string
