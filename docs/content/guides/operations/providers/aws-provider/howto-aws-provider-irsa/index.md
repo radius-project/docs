@@ -97,10 +97,10 @@ To associate an IAM role with a Kubernetes service account Create an IAM role an
         - Kubernetes cluster: k3d-k3s-default
         - Kubernetes namespace: radius-system
         - AWS credential: IRSA
-        - IAM Role ARN: arn:aws:iam::{{<aws-account-id>}}:role/radius-role-new
+        - IAM Role ARN: arn:aws:iam::myAccountID:role/radius-role-new
     ✅ Create new environment default
         - Kubernetes namespace: default
-        - AWS: account {{< aws-account-id >}} and region us-east-2
+        - AWS: account myAccountID and region us-east-2
     ✅ Update local configuration
 
         Initialization complete! Have a RAD time 😎
