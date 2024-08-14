@@ -12,7 +12,7 @@ To use the features provided by the official Bicep compiler with Radius, certain
 
 ## What is a `bicepconfig.json`?
 
-The `bicepconfig.json` allows Bicep compiler to consume and use Radius-types stored in an OCI registry. There are two extensions that are enabled by default in the `bicepconfig.json` so that you can use Radius and AWS resources. The "radius" extension contains the schema information for all Radius-maintained resources, and the "aws" extension contains the schema information for AWS resources. You can optionally add any other settings that are relevant to your application. There are two ways to generate a `bicepconfig.json` with Radius. 
+The `bicepconfig.json` allows the Bicep compiler to consume and use Radius-types stored in an OCI registry. There are two extensions that are enabled by default in the `bicepconfig.json` so that you can use Radius and AWS resources. The "radius" extension contains the schema information for all Radius-maintained resources, and the "aws" extension contains the schema information for AWS resources. You can optionally add any other settings that are relevant to your application. There are two ways to generate a `bicepconfig.json` with Radius. 
 
 ## Automatically generate a `bicepconfig.json` via `rad init`
 
