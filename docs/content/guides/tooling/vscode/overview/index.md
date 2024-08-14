@@ -11,7 +11,7 @@ tags: ["VSCode"]
 When using Visual Studio Code with Radius there are a set of extensions you can install to help author, validate, and manage your Radius Applications and environments.
 
 {{< alert title="Disable the Radius Bicep extension" color="warning" >}}
-**The official Bicep extension is not compatible with the Radius Bicep extension.** Previously, Radius made use of the Radius Bicep extension, a temporary extension used to model Radius and AWS resource types. The Radius Bicep extension has been deprecated and we have upstreamed our extensibility updates to the official Bicep. If you have the Radius Bicep extension installed you will need to disable or uninstall it before installing the Bicep extension. 
+Previously, Radius made use of the Radius Bicep extension, a temporary extension used to model Radius and AWS resource types. The Radius Bicep extension has been deprecated and we have upstreamed our extensibility updates to the official Bicep. If you have the Radius Bicep extension installed you will need to disable or uninstall it before installing the Bicep extension. 
 {{< /alert >}}
 
 ## Bicep extension
