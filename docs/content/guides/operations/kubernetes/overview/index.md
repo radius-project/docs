@@ -83,10 +83,21 @@ First, ensure that memory resource is 8GB or more in `Resource` setting of `Pref
 softwareupdate --install-rosetta --agree-to-license
 ```
 
-Next, use the following commands to create a new cluster and install the Radius control plane, along with a new environment:
+Use the following command to create a new cluster. and install the Radius control plane, along with a new environment: 
+
+- The first parameter adds a port mapping which routes traffic from the local machine into the cluster. 
+- The second parameter disables [`traefik`](https://k3d.io/v5.1.0/usage/k3s/#traefik) pods because Radius provides an ingress controller.
+- The third parameter disables the [k3d internal load balancer](https://k3d.io/v5.1.0/usage/k3s/#servicelb-klipper-lb).
+
+The `rad install` command is configured to route localhost traffic on port 8081 into the cluster.
 
 ```bash
-k3d cluster create -p "8081:80@loadbalancer" --k3s-arg "--disable=traefik@server:0"
+k3d cluster create -p "8081:80@loadbalancer" --k3s-arg "--disable=traefik@server:*" --k3s-arg "--disable=servicelb@server:*"
+```
+
+Next, install the Radius control plane, along with a new environment. The `rad install` command below adds a parameter to override the default public endpoint so that Radius knows that traffic from the local machine will enter the pod on port 8081:
+
+```bash
 rad install kubernetes --set rp.publicEndpointOverride=localhost:8081
 rad init
 ```

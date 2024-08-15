@@ -1,4 +1,4 @@
-import radius as radius
+extension radius
 
 param application string
 param environment string
@@ -24,8 +24,8 @@ resource publisher 'Applications.Core/containers@2023-10-01-preview' = {
       image: 'ghcr.io/radius-project/magpiego:latest'
       env: {
         TWILIO_NUMBER: twilio.properties.fromNumber
-        TWILIO_SID: twilio.secrets('accountSid')
-        TWILIO_ACCOUNT: twilio.secrets('authToken')
+        TWILIO_SID: twilio.listSecrets().accountSid
+        TWILIO_ACCOUNT: twilio.listSecrets().authToken
       }
     }
   }

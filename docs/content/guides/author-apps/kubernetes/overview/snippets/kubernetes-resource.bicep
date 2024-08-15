@@ -1,4 +1,4 @@
-import kubernetes as kubernetes {
+extension kubernetes with {
   kubeConfig: '****'
   namespace: 'default'
 }

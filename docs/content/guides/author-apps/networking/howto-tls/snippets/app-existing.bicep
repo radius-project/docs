@@ -1,5 +1,5 @@
 //FRONTEND
-import radius as rad
+extension radius
 
 @description('The application ID being deployed. Injected automtically by the rad CLI')
 param application string

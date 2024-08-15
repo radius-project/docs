@@ -439,6 +439,7 @@ tcp
 BucketName
 roadmap
 Balancer
+balancer
 vHost
 URI
 uri
@@ -1260,8 +1261,11 @@ postgresenvSecrets
 RecipeConfigPropertiesEnvSecrets
 SecretReference
 ProviderConfigPropertiesSecrets
+upstreamed
 irsa
 roleARN
+bicepconfig
+Bicepconfig
 postgres
 ReadOnly
 DeployTimeConstant
