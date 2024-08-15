@@ -32,7 +32,7 @@ To associate an IAM role with a Kubernetes service account Create an IAM role an
 {{< image src="./create-role.png" width=500 alt="Screenshot of Create Role page in AWS portal" >}}
 - Select `Trusted entity type` as `Web Identity` and `Identity Provider` as the cluster OIDC url.
 {{< image src="./select-trust-entity.png" width=500 alt="Screenshot of options to pass while selecting trust entity." >}}
-- Select the policy to attach to your new role.
+- Select the created IAM policy to attach to your new role.
 - Add `Role Name` and create role using the default trust policy.
 - Update the Trust Policy to match to the below format.
     ```
@@ -69,6 +69,7 @@ To associate an IAM role with a Kubernetes service account Create an IAM role an
         ]
     }
     ```
+Now that the setup is complete, you can now install Radius with AWS IRSA enabled.
 
 ## Interactive configuration
 
@@ -81,11 +82,12 @@ To associate an IAM role with a Kubernetes service account Create an IAM role an
 1. Follow the prompts, specifying:
    - **Namespace** - The Kubernetes namespace where your application containers and networking resources will be deployed (different than the Radius control-plane namespace, `radius-system`)
    - **Add an AWS provider** 
-        1. Enter IAM Role ARN.
+        1. Select the "IRSA" option
+        2. Enter IAM Role ARN.
             Find the ARN from the role created in the setup step.
             {{< image src="./get-role-arn.png" width=500 alt="Screenshot of role details to get role ARN." >}}
-        2. Confirm the AWS account ID or provide the account ID you would like to use.
-        3. Select a region to deploy your AWS resources to.
+        3. Confirm the AWS account ID or provide the account ID you would like to use.
+        4. Select a region to deploy your AWS resources to.
    - **Environment name** - The name of the environment to create
 
    You should see the following output:

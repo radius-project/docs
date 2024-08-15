@@ -30,9 +30,10 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
 1. Follow the prompts, specifying:
    - **Namespace** - The Kubernetes namespace where your application containers and networking resources will be deployed (different than the Radius control-plane namespace, `radius-system`).
    - **Add an AWS provider**
-      1. Enter IAM access key and secret key.
-      2. Confirm the AWS account ID or provide the account ID you would like to use.
-      3. Select a region to deploy your AWS resources to.
+      1. Select the "Access Key" option
+      2. Enter IAM access key and secret key.
+      3. Confirm the AWS account ID or provide the account ID you would like to use.
+      4. Select a region to deploy your AWS resources to.
    - **Environment name** - The name of the environment to create.
 
    You should see the following output:
