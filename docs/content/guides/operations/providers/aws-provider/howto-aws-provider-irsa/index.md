@@ -26,7 +26,6 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
 ## Setup the AWS IAM Roles for Service Accounts(IRSA) for Radius
 
 To authorize Radius to connect to AWS using AWS IAM Roles for Service Accounts(IRSA), you should assign IAM roles to Kubernetes service accounts.
-
 To associate an IAM role with a Kubernetes service account Create an IAM role and associate it with a Kubernetes service account.
 - Go to Identity and Access Management (IAM) on AWS portal and create a new role.
 {{< image src="./create-role.png" width=500 alt="Screenshot of Create Role page in AWS portal" >}}
@@ -69,7 +68,7 @@ To associate an IAM role with a Kubernetes service account Create an IAM role an
         ]
     }
     ```
-Now that the setup is complete, you can now install Radius with AWS IRSA enabled.
+Now that the setup is complete, you can install Radius with AWS IRSA enabled.
 
 ## Interactive configuration
 
