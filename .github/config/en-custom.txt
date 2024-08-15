@@ -1263,6 +1263,7 @@ SecretReference
 ProviderConfigPropertiesSecrets
 upstreamed
 irsa
+roleARN
 bicepconfig
 Bicepconfig
 postgres

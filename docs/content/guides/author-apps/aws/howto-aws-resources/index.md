@@ -49,7 +49,7 @@ Follow the prompts to install the [control plane services]({{< ref "/concepts/te
 - **Namespace** - When an application is deployed, this is the namespace where your containers and other Kubernetes resources will be run. By default, this will be in the `default` namespace.
 {{% alert title="💡 About namespaces" color="success" %}} When you initialize a Radius Kubernetes environment, Radius installs the control plane resources within    the `radius-system` namespace in your cluster, separate from your applications. The namespace specified in this step will be used for your application deployments.
 {{% /alert %}}
-- **Add AWS provider** - An [AWS cloud provider]({{< ref "/guides/operations/providers/aws-provider" >}}) allows you to deploy and manage AWS resources as part of your application. Follow the how-to guides to [configure the AWS provider]({{< ref "/guides/operations/providers/aws-provider/howto-aws-provider" >}}) with the preferred identity.
+- **Add AWS provider** - An [AWS cloud provider]({{< ref "/guides/operations/providers/aws-provider" >}}) allows you to deploy and manage AWS resources as part of your application. Follow the how-to guides to [configure the AWS provider]({{< ref "/guides/operations/providers/aws-provider/howto-aws-provider-access-key" >}}) with the preferred identity.
 - **Environment name** - The name of the environment to create. You can specify any name with lowercase letters, such as `myawsenv`.
 
 Select 'No' when asked to setup application in the current directory. 

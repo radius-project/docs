@@ -3,7 +3,7 @@ type: docs
 title: "How-To: Configure the AWS cloud provider with IAM Access key"
 linkTitle: "AWS provider with IAM Access key"
 description: "Learn how to configure the AWS provider with IAM Access key for your Radius Environment"
-weight: 300
+weight: 100
 categories: "How-To"
 tags: ["AWS"]
 ---
@@ -16,6 +16,7 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
 ## Prerequisites
 
 - [AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account) and an [IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html)
+- [Setup AWS CLI with your AWS credentials. ](https://docs.aws.amazon.com/cli/latest/reference/configure/)
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 
 ## Interactive configuration
@@ -28,7 +29,11 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
 
 1. Follow the prompts, specifying:
    - **Namespace** - The Kubernetes namespace where your application containers and networking resources will be deployed (different than the Radius control-plane namespace, `radius-system`).
-   - **Add an AWS provider** - Enter your IAM access key and secret key and pick a region to deploy your AWS resources to.
+   - **Add an AWS provider**
+      1. Select the "Access Key" option
+      2. Enter IAM access key and secret key.
+      3. Confirm the AWS account ID or provide the account ID you would like to use.
+      4. Select a region to deploy your AWS resources to.
    - **Environment name** - The name of the environment to create.
 
    You should see the following output:
@@ -62,7 +67,7 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
 1. Add your AWS cloud provider credentials:
 
     ```bash
-    rad credential register aws --access-key-id myAccessKeyId --secret-access-key mySecretAccessKey
+    rad credential register aws access-key --access-key-id myAccessKeyId --secret-access-key mySecretAccessKey
     ```
 
-    For more information on the command arguments visit [`rad credential register aws`]({{< ref rad_credential_register_aws >}})
+    For more information on the command arguments visit [`rad credential register aws access-key`]({{< ref rad_credential_register_aws_access-key >}})
