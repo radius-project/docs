@@ -25,11 +25,11 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
 
 ## Setup the AWS IAM Roles for Service Accounts(IRSA) for Radius
 
-To authorize Radius to connect to AWS using AWS IAM Roles for Service Accounts(IRSA), you should assign IAM roles to Kubernetes service accounts.
-To associate an IAM role with a Kubernetes service account Create an IAM role and associate it with a Kubernetes service account.
+To authorize Radius to connect to AWS using AWS IAM Roles for Service Accounts(IRSA), you should assign IAM roles to Kubernetes service accounts.To associate an IAM role with a Kubernetes service account Create an IAM role and associate it with a Kubernetes service account.
+
 - Go to Identity and Access Management (IAM) on AWS portal and create a new role.
 
-{{< image src="create-role.png" width=1000px alt="Screenshot of Create Role page in AWS portal" >}}
+{{< image src="create-role.png" width=700px alt="Screenshot of Create Role page in AWS portal" >}}
 
 - Select `Trusted entity type` as `Web Identity` and `Identity Provider` as the cluster OIDC url.
 
@@ -86,10 +86,9 @@ Now that the setup is complete, you can install Radius with AWS IRSA enabled.
    - **Namespace** - The Kubernetes namespace where your application containers and networking resources will be deployed (different than the Radius control-plane namespace, `radius-system`)
    - **Add an AWS provider** 
         1. Select the "IRSA" option
-        2. Enter IAM Role ARN.
-            Find the ARN from the role created in the setup step.
+        2. Enter IAM Role ARN.Find the ARN from the role created in the setup step.
          
-               {{< image src="get-role-arn.png" width=500px alt="Screenshot of role details to get role ARN." >}}
+               {{< image src="get-role-arn.png" width=700px alt="Screenshot of role details to get role ARN." >}}
                
         3. Confirm the AWS account ID or provide the account ID you would like to use.
         4. Select a region to deploy your AWS resources to.
