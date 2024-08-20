@@ -19,7 +19,7 @@ This guide will show you how to quickly get started with Radius. You'll walk thr
 ## 1. Have your Kubernetes cluster handy
 
 Radius runs inside [Kubernetes]({{< ref "guides/operations/kubernetes" >}}). However you run Kubernetes, get a cluster ready.
-> *If you don't have a preferred way to create Kubernetes clusters, you could try using k3d with the recommended [configuration]({{< ref "guides/operations/kubernetes/overview##supported-kubernetes-clusters" >}}), which runs a minimal Kubernetes distribution in Docker.*
+> *If you don't have a preferred way to create Kubernetes clusters, you could try using [k3d](https://k3d.io/), which runs a minimal Kubernetes distribution in Docker. Make sure to apply the [recommended configuration]({{< ref "guides/operations/kubernetes/overview##supported-kubernetes-clusters" >}})*
 
 Ensure your cluster is set as your current context:
 
