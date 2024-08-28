@@ -27,7 +27,9 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
         }
       }
       env: {
-        SECRET: base64ToString(secret.data['my-secret-key'])
+        SECRET: {
+          value: base64ToString(secret.data['my-secret-key'])
+        }
       }
     }
   }

@@ -29,7 +29,9 @@ resource container 'Applications.Core/containers@2023-10-01-preview' = {
     container: {
       image: 'nginx:latest'
       env: {
-        SECRET: base64ToString(secret.data.key)
+        SECRET: {
+          value: base64ToString(secret.data.key)
+        }
       }
     }
   }

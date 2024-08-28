@@ -25,10 +25,18 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
     container: {
       image: 'ghcr.io/radius-project/samples/demo:latest'
       env: {
-        POSTGRESQL_HOST: extender.properties.host
-        POSTGRESQL_PORT: extender.properties.port
-        POSTGRESQL_USERNAME: extender.properties.username
-        POSTGRESQL_PASSWORD: extender.listSecrets().password
+        POSTGRESQL_HOST: {
+          value: extender.properties.host
+        }
+        POSTGRESQL_PORT: {
+          value: extender.properties.port
+        }
+        POSTGRESQL_USERNAME: {
+          value: extender.properties.username
+        }
+        POSTGRESQL_PASSWORD: {
+          value: extender.listSecrets().password
+        }
       }
       ports: {
         web: {
