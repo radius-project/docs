@@ -74,11 +74,9 @@ The `mongodb.com/MongoDatabase` [resource]({{< ref portable-resources >}}) repre
 
 The following methods are available on the Mongo database resource:
 
-| Method | Description |
-|--------|-------------|
-| connectionString() | Get the connection string for the MongoDb. |
-| username() | Get the username for the MongoDB. |
-| password() | Get the password for the MongoDB. |
+| Method | Description | Example |
+|--------|-------------|---------|
+| listSecrets() | Get the [secrets](#secrets) for the MongoDb. | `listSecrets().connectionString` |
 
 ## Resource provisioning
 
