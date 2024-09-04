@@ -51,7 +51,7 @@ resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
           value: aws_secret_access_key
         }
         AWS_DEFAULT_REGION: {
-          vaue: aws_region
+          value: aws_region
         }
       }
       image: 'ghcr.io/radius-project/samples/aws:latest'
