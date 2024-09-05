@@ -24,11 +24,11 @@ The `bicepconfig.json` allows the Bicep compiler to consume and use Radius-types
 
 ## Author and deploy Radius-types
 
-{{< alert title="Replace import statements with extension" color="warning" >}} Radius is now merged with the official Bicep. If you have bicep files with the following import statements, please replace them as needed.
+{{< alert title="Replace import statements with extension" color="warning" >}} Radius is now merged with the Bicep. If you have bicep files with the following import statements, please replace them as needed.
 
- 1. `import radius as radius` should become `extension radius` to use Radius types 
- 1. `import aws as aws` should become `extension aws` to use AWS types
- 1. `import kubernetes as kubernetes {}` should become `extension kubernetes with {} as kubernetes` to use Kubernetes types
+ 1. Change `import radius as radius` to `extension radius` 
+ 1. Change `import aws as aws` to `extension aws`
+ 1. Change `import kubernetes as kubernetes {}` to `extension kubernetes with {} as kubernetes`
 {{< /alert >}}
 
 Once you have a `bicepconfig.json` file in your application's directory, you can author and deploy Radius-types. 
