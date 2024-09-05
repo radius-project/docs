@@ -36,7 +36,7 @@ description: "Detailed reference documentation for applications.core/secretstore
 | **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
 | **resource** | string | The resource id of external secret store. |
 | **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
-| **type** | 'certificate' | 'generic' | The type of SecretStore data |
+| **type** | 'awsIRSA' | 'azureWorkloadIdentity' | 'basicAuthentication' | 'certificate' | 'generic' | The type of SecretStore data |
 
 ### SecretStorePropertiesData
 
