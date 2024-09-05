@@ -31,9 +31,10 @@ description: "Detailed reference documentation for applications.dapr/statestores
 | Property | Type | Description |
 |----------|------|-------------|
 | **application** | string | Fully qualified resource ID for the application that the portable resource is consumed by (if applicable) |
+| **auth** | [DaprResourceAuth](#daprresourceauth) | Authentication properties for a Dapr component object |
 | **componentName** | string | The name of the Dapr component object. Use this value in your code when interacting with the Dapr client to use the Dapr component. <br />_(ReadOnly)_ |
 | **environment** | string | Fully qualified resource ID for the environment that the portable resource is linked to <br />_(Required)_ |
-| **metadata** | any | Any object |
+| **metadata** | [DaprStateStorePropertiesMetadata](#daprstatestorepropertiesmetadata) | The metadata for Dapr resource which must match the values specified in Dapr component spec |
 | **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
 | **recipe** | [Recipe](#recipe) | The recipe used to automatically deploy underlying infrastructure for a portable resource |
 | **resourceProvisioning** | 'manual' | 'recipe' | Specifies how the underlying service/resource is provisioned and managed. Available values are 'recipe', where Radius manages the lifecycle of the resource through a Recipe, and 'manual', where a user manages the resource and provides the values. |
@@ -41,6 +42,42 @@ description: "Detailed reference documentation for applications.dapr/statestores
 | **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
 | **type** | string | Dapr component type which must matches the format used by Dapr Kubernetes configuration format |
 | **version** | string | Dapr component version |
+
+### DaprResourceAuth
+
+#### Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| **secretStore** | string | Secret store to fetch secrets from |
+
+### DaprStateStorePropertiesMetadata
+
+#### Properties
+
+* **none**
+
+#### Additional Properties
+
+* **Additional Properties Type**: [MetadataValue](#metadatavalue)
+
+### MetadataValue
+
+#### Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| **secretKeyRef** | [MetadataValueFromSecret](#metadatavaluefromsecret) | A reference of a value in a secret store component. |
+| **value** | string | The plain text value of the metadata |
+
+### MetadataValueFromSecret
+
+#### Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| **key** | string | The field to select in the secret value. If the secret value is a string, it should be equal to the secret name <br />_(Required)_ |
+| **name** | string | Secret name in the secret store component <br />_(Required)_ |
 
 ### Recipe
 
