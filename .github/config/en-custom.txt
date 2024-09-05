@@ -1270,3 +1270,16 @@ postgres
 ReadOnly
 DeployTimeConstant
 postgres
+DaprResourceAuth
+DaprPubSubBrokerPropertiesMetadata
+MetadataValue
+MetadataValueFromSecret
+secretKeyRef
+DaprSecretStorePropertiesMetadata
+awsIRSA
+azureWorkloadIdentity
+basicAuthentication
+EnvironmentVariable
+EnvironmentVariableReference
+secretRef
+DaprStateStorePropertiesMetadata
