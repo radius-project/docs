@@ -33,6 +33,7 @@ rad uninstall kubernetes --kubecontext my-kubecontext
 ```
   -h, --help                 help for kubernetes
       --kubecontext string   The Kubernetes context to use, will use the default if unset
+      --purge                Delete all data stored by Radius.
 ```
 
 ### Options inherited from parent commands
