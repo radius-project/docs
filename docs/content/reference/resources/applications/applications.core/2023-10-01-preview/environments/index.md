@@ -170,9 +170,36 @@ description: "Detailed reference documentation for applications.core/environment
 
 | Property | Type | Description |
 |----------|------|-------------|
+| **bicep** | [BicepConfigProperties](#bicepconfigproperties) | Configuration for Bicep Recipes. Controls how Bicep plans and applies templates as part of Recipe deployment. |
 | **env** | [EnvironmentVariables](#environmentvariables) | The environment variables injected during Terraform Recipe execution for the recipes in the environment. |
 | **envSecrets** | [RecipeConfigPropertiesEnvSecrets](#recipeconfigpropertiesenvsecrets) | Environment variables containing sensitive information can be stored as secrets. The secrets are stored in Applications.Core/SecretStores resource. |
 | **terraform** | [TerraformConfigProperties](#terraformconfigproperties) | Configuration for Terraform Recipes. Controls how Terraform plans and applies templates as part of Recipe deployment. |
+
+### BicepConfigProperties
+
+#### Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| **authentication** | [BicepConfigPropertiesAuthentication](#bicepconfigpropertiesauthentication) | Authentication information used to access private bicep registries, which is a map of registry hostname to secret config that contains credential information. |
+
+### BicepConfigPropertiesAuthentication
+
+#### Properties
+
+* **none**
+
+#### Additional Properties
+
+* **Additional Properties Type**: [RegistrySecretConfig](#registrysecretconfig)
+
+### RegistrySecretConfig
+
+#### Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| **secret** | string | The ID of an Applications.Core/SecretStore resource containing credential information used to authenticate private container registry.The keys in the secretstore depends on the type. |
 
 ### EnvironmentVariables
 
