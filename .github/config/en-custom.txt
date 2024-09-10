@@ -1283,3 +1283,7 @@ EnvironmentVariable
 EnvironmentVariableReference
 secretRef
 DaprStateStorePropertiesMetadata
+BicepConfigProperties
+BicepConfigPropertiesAuthentication
+RegistrySecretConfig
+
