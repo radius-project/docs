@@ -59,7 +59,7 @@ The following methods are available on the Extender resource:
 
 | Method | Description |
 |--------|-------------|
-| secrets('SECRET_NAME') | Get the value of a secret. |
+| .listSecrets('SECRET_NAME') | Get the value of a secret. |
 
 ## Resource provisioning
 
