@@ -97,7 +97,33 @@ description: "Detailed reference documentation for applications.core/containers@
 
 #### Additional Properties
 
-* **Additional Properties Type**: string
+* **Additional Properties Type**: [EnvironmentVariable](#environmentvariable)
+
+### EnvironmentVariable
+
+#### Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| **value** | string | The value of the environment variable |
+| **valueFrom** | [EnvironmentVariableReference](#environmentvariablereference) | The reference to the variable |
+
+### EnvironmentVariableReference
+
+#### Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| **secretRef** | [SecretReference](#secretreference) | This secret is used within a recipe. Secrets are encrypted, often have fine-grained access control, auditing and are recommended to be used to hold sensitive data. <br />_(Required)_ |
+
+### SecretReference
+
+#### Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| **key** | string | The key for the secret in the secret store. <br />_(Required)_ |
+| **source** | string | The ID of an Applications.Core/SecretStore resource containing sensitive data required for recipe execution. <br />_(Required)_ |
 
 ### HealthProbeProperties
 
