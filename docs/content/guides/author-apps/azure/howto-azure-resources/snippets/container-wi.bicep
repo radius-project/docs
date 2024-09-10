@@ -43,9 +43,15 @@ resource container 'Applications.Core/containers@2023-10-01-preview' = {
     container: {
       image: 'ghcr.io/azure/azure-workload-identity/msal-go:latest'
       env: {
-        KEYVAULT_NAME: keyvault.name
-        KEYVAULT_URL: keyvault.properties.vaultUri
-        SECRET_NAME: 'mysecret'
+        KEYVAULT_NAME: {
+          value: keyvault.name
+        }
+        KEYVAULT_URL: {
+          value: keyvault.properties.vaultUri
+        }
+        SECRET_NAME: {
+          value: 'mysecret'
+        }
       }
     }
     connections: {

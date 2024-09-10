@@ -49,10 +49,18 @@ resource wordpress 'Applications.Core/containers@2023-10-01-preview' = {
         }
       }
       env: {
-        WORDPRESS_DB_HOST: '${db.properties.Endpoint.Address}:${db.properties.Endpoint.Port}'
-        WORDPRESS_DB_USER: databaseUsername
-        WORDPRESS_DB_PASSWORD: databasePassword
-        WORDPRESS_DB_NAME: databaseName
+        WORDPRESS_DB_HOST: {
+          value: '${db.properties.Endpoint.Address}:${db.properties.Endpoint.Port}'
+        }
+        WORDPRESS_DB_USER: {
+          value: databaseUsername
+        }
+        WORDPRESS_DB_PASSWORD: {
+          value: databasePassword
+        }
+        WORDPRESS_DB_NAME: {
+          value: databaseName
+        }
       }
     }
   }

@@ -30,7 +30,9 @@ resource container 'Applications.Core/containers@2023-10-01-preview' = {
       image: 'myimage'
       env: {
         // Option 1: Manually set component name as an environment variable
-        DAPR_COMPONENTNAME: statestore.name
+        DAPR_COMPONENTNAME: {
+          value: statestore.name
+        }
       }
     }
     connections: {

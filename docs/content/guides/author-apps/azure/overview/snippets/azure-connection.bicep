@@ -31,7 +31,9 @@ resource container 'Applications.Core/containers@2023-10-01-preview' = {
     container: {
       image: 'myimage'
       env: {
-        REDIS_HOST: cache.properties.hostName
+        REDIS_HOST: {
+          value: cache.properties.hostName
+        }
       }
     }
     connections: {
