@@ -56,6 +56,10 @@ rad deploy myapp.bicep --environment production
 # deploy using a specific environment and resource group
 rad deploy myapp.bicep --environment production --group mygroup
 
+# deploy using an environment ID and a resource group. The application will be deployed in mygroup scope, using the specified environment.
+# use this option if the environment is in a different group.
+rad deploy myapp.bicep --environment /planes/radius/local/resourcegroups/prod/providers/Applications.Core/environments/prod --group mygroup
+
 # specify a string parameter
 rad deploy myapp.bicep --parameters version=latest
 
