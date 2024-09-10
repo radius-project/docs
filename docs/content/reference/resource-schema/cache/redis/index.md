@@ -76,10 +76,9 @@ The `redislabs.com/Redis` is a [resource]({{< ref portable-resources >}}) which 
 
 The following methods are available on the Redis cache:
 
-| Method | Description |
-|--------|-------------|
-| connectionString() | Get the connection string for the Redis cache. |
-| password() | Get the password for the Redis cache. |
+| Method | Description | Example |
+|--------|-------------|---------|
+| listSecrets() | Get the [secrets](#secrets) for the Redis cache. | `listSecrets().connectionString` |
 
 ## Resource provisioning
 
