@@ -52,8 +52,7 @@ Deploy your new Radius Environment:
 ```
 rad deploy ./env.bicep
 ```
-{{< image src="env-deploy-output.png" width=700px alt="Screenshot of environment deployment output" >}}
-## Done
+{{< image src="env-deploy-output.png" width=700px alt="Screenshot of environment deployment output" >}}<br>
 
 Your Radius Environment is now ready to utilize your Radius Recipes stored inside your private registry. For more information on Radius Recipes visit the [Recipes overview page]({{< ref "/guides/recipes/overview" >}}).
 
