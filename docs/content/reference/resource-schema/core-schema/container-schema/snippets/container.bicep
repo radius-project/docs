@@ -23,8 +23,12 @@ resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
     container: {
       image: 'registry/container:tag'
       env:{
-        DEPLOYMENT_ENV: 'prod'
-        DB_CONNECTION: db.listSecrets().connectionString
+        DEPLOYMENT_ENV: {
+          value: 'prod'
+        }
+        DB_CONNECTION: {
+          value: db.listSecrets().connectionString
+        }
       }
       ports: {
         http: {

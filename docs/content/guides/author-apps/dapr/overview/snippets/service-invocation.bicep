@@ -32,7 +32,9 @@ resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
       image: 'frontend:latest'
       env: {
         // Configures the appID of the backend service.
-        CONNECTION_BACKEND_APPID: 'backend'
+        CONNECTION_BACKEND_APPID: {
+          value: 'backend'
+        }
       }
     }
     extensions: [

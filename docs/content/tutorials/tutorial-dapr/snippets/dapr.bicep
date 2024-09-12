@@ -58,9 +58,13 @@ resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
       image: 'ghcr.io/radius-project/samples/dapr-frontend:latest'
       env: {
         // An environment variable to tell the frontend container where to find the backend
-        CONNECTION_BACKEND_APPID: 'backend'
+        CONNECTION_BACKEND_APPID: {
+          value: 'backend'
+        }
         // An environment variable to override the default port that .NET Core listens on
-        ASPNETCORE_URLS: 'http://*:8080'
+        ASPNETCORE_URLS: {
+          value: 'http://*:8080'
+        }
       }
       // The frontend container exposes port 8080, which is used to serve the UI
       ports: {

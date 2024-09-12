@@ -32,7 +32,9 @@ resource container 'Applications.Core/containers@2023-10-01-preview' = {
       image: 'ghcr.io/radius-project/samples/demo:latest'
       env: {
         // Manually access Redis connection information
-        REDIS_CONNECTION: redis.listSecrets().connectionString
+        REDIS_CONNECTION: {
+          value: redis.listSecrets().connectionString
+        }
       }
       ports: {
         web: {

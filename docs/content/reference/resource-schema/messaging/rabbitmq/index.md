@@ -79,7 +79,7 @@ Secrets are used when defining a RabbitMQ resource with a container or external 
 
 | Property | Description | Example |
 |----------|-------------|---------|
-| `uri()` | Returns the RabbitMQ uri used to connect to the resource. | `amqp://guest:***@rabbitmq.svc.local.cluster:5672` |
+| listSecrets() | Get the [secrets](#secrets) for the RabbitMQ. | `listSecrets().uri` |
 
 ## Resource provisioning
 

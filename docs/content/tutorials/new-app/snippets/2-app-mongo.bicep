@@ -12,7 +12,9 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
     container: {
       image: 'ghcr.io/radius-project/samples/tutorial/demo:edge'
       env: {
-        FOO: 'bar'
+        FOO: {
+          value: 'bar'
+        }
       }
       ports: {
         web: {
