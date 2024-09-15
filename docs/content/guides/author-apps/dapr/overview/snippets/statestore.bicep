@@ -43,6 +43,7 @@ resource stateStore 'Applications.Dapr/stateStores@2023-10-01-preview' = {
       }
       tableName: {
         value: account::tableServices::table.name
+      }
     }
     type: 'state.azure.tablestorage'
     version: 'v1'
