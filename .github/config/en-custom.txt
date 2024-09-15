@@ -22,6 +22,8 @@ CLI
 CLIs
 CMD
 CNCF
+configurationStore
+configurationStores
 ConfigurationStore
 ConfigurationStores
 CQRS
