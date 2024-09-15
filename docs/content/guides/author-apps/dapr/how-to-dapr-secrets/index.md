@@ -24,7 +24,7 @@ This how-to guide will provide an overview of how to:
 
 Begin by creating a file named app.bicep, which defines a container with a Dapr state store. If you need a detailed explanation on how to do so, refer to the [Add a Dapr building block]({{< ref how-to-dapr-building-block >}}) tutorial.
 
-For this guide, we'll manually provision both a Redis instance and a Dapr State store component. This allows us to specify the Redis username in the Dapr state store, which we will later secure using a Dapr secret store.
+In this guide, you manually provision both a Redis instance and a Dapr state store component. Specify the Redis username in the Dapr state store, which will later be secured using a Dapr Secret Store.
 
 {{< rad file="./snippets/app-statestore.bicep" embed=true >}}
 
@@ -59,7 +59,7 @@ spec:
 
 ## Step 2: Add a Dapr secret store resource and create a secret
 
-Next, we'll secure the Redis username using a Dapr secret store. In your `app.bicep` file, add a Dapr secret store resource. We'll use the [`local-dev` recipe]({{< ref "guides/recipes/overview##use-lightweight-local-dev-recipes" >}}) to deploy the secret store, which will leverage Kubernetes secrets.
+Secure the Redis username using a Dapr Secret Store. In your `app.bicep` file, add a Dapr secret store resource. Use the [`local-dev` recipe]({{< ref "guides/recipes/overview##use-lightweight-local-dev-recipes" >}}) to deploy the secret store, leveraging Kubernetes secrets
 
 {{< rad file="./snippets/app-statestore-secret.bicep" embed=true marker="//SECRETSTORE" >}}
 
