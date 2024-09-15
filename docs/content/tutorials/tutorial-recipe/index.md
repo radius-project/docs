@@ -61,14 +61,15 @@ Developers don't need to specify what cloud resources they're using in their app
    You should see a table of available Recipes:
 
    ```
-   NAME      TYPE                                    TEMPLATE KIND  TEMPLATE VERSION  TEMPLATE
-   default   Applications.Datastores/sqlDatabases    bicep                            ghcr.io/radius-project/recipes/local-dev/sqldatabases:latest
-   default   Applications.Messaging/rabbitMQQueues   bicep                            ghcr.io/radius-project/recipes/local-dev/rabbitmqqueues:latest
-   default   Applications.Dapr/pubSubBrokers         bicep                            ghcr.io/radius-project/recipes/local-dev/pubsubbrokers:latest
-   default   Applications.Dapr/secretStores          bicep                            ghcr.io/radius-project/recipes/local-dev/secretstores:latest
-   default   Applications.Dapr/stateStores           bicep                            ghcr.io/radius-project/recipes/local-dev/statestores:latest
-   default   Applications.Datastores/mongoDatabases  bicep                            ghcr.io/radius-project/recipes/local-dev/mongodatabases:latest
-   default   Applications.Datastores/redisCaches     bicep                            ghcr.io/radius-project/recipes/local-dev/rediscaches:latest
+   NAME      TYPE                                        TEMPLATE KIND  TEMPLATE VERSION  TEMPLATE
+   default   Applications.Datastores/sqlDatabases        bicep                            ghcr.io/radius-project/recipes/local-dev/sqldatabases:latest
+   default   Applications.Messaging/rabbitMQQueues       bicep                            ghcr.io/radius-project/recipes/local-dev/rabbitmqqueues:latest
+   default   Applications.Dapr/pubSubBrokers             bicep                            ghcr.io/radius-project/recipes/local-dev/pubsubbrokers:latest
+   default   Applications.Dapr/secretStores              bicep                            ghcr.io/radius-project/recipes/local-dev/secretstores:latest
+   default   Applications.Dapr/stateStores               bicep                            ghcr.io/radius-project/recipes/local-dev/statestores:latest
+   default   Applications.Datastores/mongoDatabases      bicep                            ghcr.io/radius-project/recipes/local-dev/mongodatabases:latest
+   default   Applications.Datastores/redisCaches         bicep                            ghcr.io/radius-project/recipes/local-dev/rediscaches:latest
+   default   Applications.Datastores/configurationStores bicep                            ghcr.io/radius-project/recipes/local-dev/configurationStores:latest
    ```
 
 {{< alert title="💡 local-dev Recipes" color="info" >}}
