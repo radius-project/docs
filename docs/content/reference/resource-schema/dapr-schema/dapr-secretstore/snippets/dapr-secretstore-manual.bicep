@@ -19,10 +19,18 @@ resource secretstore 'Applications.Dapr/secretStores@2023-10-01-preview' = {
     resourceProvisioning: 'manual'
     type: 'secretstores.azure.keyvault'
     metadata: {
-      vaultName: 'myvault'
-      azureTenantId: '<GUID>'
-      azureClientId: '<GUID>'
-      azureClientSecret: '*****'
+      vaultName: {
+        value: 'myvault'
+      }
+      azureTenantId: {
+        value: '<GUID>'
+      }
+      azureClientId: {
+        value: '<GUID>'
+      }
+      azureClientSecret: {
+        value: '*****'
+      }
     }
     version: 'v1'
   }

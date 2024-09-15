@@ -34,9 +34,15 @@ resource pubsub 'Applications.Dapr/pubSubBrokers@2023-10-01-preview' = {
     resourceProvisioning: 'manual'
     type: 'pubsub.kafka'
     metadata: {
-      brokers: '<KAFKA-URL>'
-      authRequired: false
-      consumeRetryInternal: 1024
+      brokers: {
+        value: '<KAFKA-URL>'
+      }
+      authRequired: {
+        value: false
+      }
+      consumeRetryInternal: {
+        value: 1024
+      }
     }
     version: 'v1'
   }

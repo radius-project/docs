@@ -48,7 +48,7 @@ This resource will automatically create and deploy the Dapr component spec for t
 | [recipe](#recipe) | n | Configuration for the Recipe which will deploy the backing infrastructure. | [See below](#recipe)
 | [resources](#resources)  | n | An array of IDs of the underlying resources. | [See below](#resources)
 | type | n | The Dapr component type. Used when resourceProvisioning is `manual`. | `secretstores.azure.keyvault`
-| metadata | n | Metadata for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-secret-stores/) | `vaultName: 'test'` |
+| metadata | n | Metadata for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-secret-stores/) | `{ vaultName: {value: 'test'} }` |
 | version | n | The version of the Dapr component. See [Dapr components](https://docs.dapr.io/reference/components-reference/supported-secret-stores/) for available versions. | `v1` |
 | componentName | n | _(read-only)_ The name of the Dapr component that is generated and applied to the underlying system. Used by the Dapr SDKs or APIs to access the Dapr component. | `mysecretstore` |
 
