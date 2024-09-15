@@ -22,7 +22,7 @@ This how-to guide will provide an overview of how to:
 
 ## Step 1: Start with a container and a Dapr sidecar
 
-Begin by creating a file named app.bicep, which defines a container with a Dapr state store. If you need a detailled explanation on how to do so, refer to the [Add a Dapr building block]({{< ref how-to-dapr-building-block >}}) tutorial.
+Begin by creating a file named app.bicep, which defines a container with a Dapr state store. If you need a detailed explanation on how to do so, refer to the [Add a Dapr building block]({{< ref how-to-dapr-building-block >}}) tutorial.
 
 For this guide, we'll manually provision both a Redis instance and a Dapr State store component. This allows us to specify the Redis username in the Dapr state store, which we will later secure using a Dapr secret store.
 
