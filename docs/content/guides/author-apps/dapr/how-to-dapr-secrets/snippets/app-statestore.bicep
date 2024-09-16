@@ -32,6 +32,7 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
     }
   }
 }
+
 resource redis 'Applications.Datastores/redisCaches@2023-10-01-preview' = {
   name: 'demo-redis-manual'
   properties: {
