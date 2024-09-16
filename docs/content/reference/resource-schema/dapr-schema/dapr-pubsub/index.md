@@ -47,7 +47,7 @@ An `Applications.Dapr/pubSubBrokers` resource represents a [Dapr pub/sub](https:
 | [recipe](#recipe) | n | Configuration for the Recipe which will deploy the backing infrastructure. | [See below](#recipe)
 | [resources](#resources) | n | An array of resources which underlay this resource. For example, an Azure Service Bus namespace ID if the Dapr Pub/Sub resource is leveraging Service Bus. | [See below](#resources)
 | type | n | The Dapr component type. Set only when resourceProvisioning is 'manual'. | `pubsub.kafka` |
-| metadata | n | Metadata object for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-pubsub/). Set only when resourceProvisioning is 'manual'. | `{ brokers: kafkaRoute.properties.url }` |
+| metadata | n | Metadata object for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-pubsub/). Set only when resourceProvisioning is 'manual'. | `{ brokers: { value: kafkaRoute.properties.url } }` |
 | version | n | The version of the Dapr component. See [Dapr components](https://docs.dapr.io/reference/components-reference/supported-pubsub/) for available versions. Set only when resourceProvisioning is 'manual'. | `v1` |
 | componentName | n | _(read-only)_ The name of the Dapr component that is generated and applied to the underlying system. Used by the Dapr SDKs or APIs to access the Dapr component. | `mypubsub` |
 
