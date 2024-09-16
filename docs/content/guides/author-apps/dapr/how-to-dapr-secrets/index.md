@@ -8,7 +8,7 @@ categories: "How-To"
 tags: ["Dapr"]
 ---
 
-This how-to guide will provide an overview of how to:
+This guide will provide an overview of how to:
 
 - Securely manage secrets in Dapr components using [Dapr secret stores](https://docs.dapr.io/operations/components/setup-secret-store/)
 
@@ -20,9 +20,9 @@ This how-to guide will provide an overview of how to:
 - [Radius local-dev Recipes]({{< ref howto-dev-recipes >}})
 - [Dapr installed on your Kubernetes cluster](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/)
 
-## Step 1: Start with a container and a Dapr sidecar
+## Step 1: Create a container and a Dapr sidecar
 
-Begin by creating a file named app.bicep, which defines a container with a Dapr state store. If you need a detailed explanation on how to do so, refer to the [Add a Dapr building block]({{< ref how-to-dapr-building-block >}}) tutorial.
+Begin by creating a file named `app.bicep`, which defines a container with a Dapr state store. If you need a detailed explanation on how to do so, refer to the [Add a Dapr building block]({{< ref how-to-dapr-building-block >}}) tutorial.
 
 In this guide, you manually provision both a Redis instance and a Dapr state store component. Specify the Redis username in the Dapr state store, which will later be secured using a Dapr Secret Store.
 
