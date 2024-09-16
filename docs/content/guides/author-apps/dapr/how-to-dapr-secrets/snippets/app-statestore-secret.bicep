@@ -6,7 +6,6 @@ param application string
 @description('The ID of your Radius environment. Automatically injected by the rad CLI.')
 param environment string
 
-//CONTAINER
 resource demo 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'demo'
   properties: {
@@ -33,9 +32,7 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
     }
   }
 }
-//CONTAINER
 
-// REDIS
 resource redis 'Applications.Datastores/redisCaches@2023-10-01-preview' = {
   name: 'demo-redis-manual'
   properties: {
@@ -43,9 +40,7 @@ resource redis 'Applications.Datastores/redisCaches@2023-10-01-preview' = {
     application: application
   }
 }
-// REDIS
 
-//STATESTORE
 resource stateStore 'Applications.Dapr/stateStores@2023-10-01-preview' = {
   name: 'demo-statestore'
   properties: {
@@ -73,9 +68,7 @@ resource stateStore 'Applications.Dapr/stateStores@2023-10-01-preview' = {
     }
   }
 }
-//STATESTORE
 
-//SECRETSTORE
 resource secretstore 'Applications.Dapr/secretStores@2023-10-01-preview' = {
   name: 'secretstore'
   properties: {
@@ -83,4 +76,3 @@ resource secretstore 'Applications.Dapr/secretStores@2023-10-01-preview' = {
     application: application
   }
 }
-//SECRETSTORE
