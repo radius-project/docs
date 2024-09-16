@@ -36,7 +36,6 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
 //CONTAINER
 
 // REDIS
-
 resource redis 'Applications.Datastores/redisCaches@2023-10-01-preview' = {
   name: 'demo-redis-manual'
   properties: {
@@ -44,6 +43,7 @@ resource redis 'Applications.Datastores/redisCaches@2023-10-01-preview' = {
     application: application
   }
 }
+// REDIS
 
 //STATESTORE
 resource stateStore 'Applications.Dapr/stateStores@2023-10-01-preview' = {
@@ -84,4 +84,3 @@ resource secretstore 'Applications.Dapr/secretStores@2023-10-01-preview' = {
   }
 }
 //SECRETSTORE
-
