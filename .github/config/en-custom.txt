@@ -1286,4 +1286,7 @@ DaprStateStorePropertiesMetadata
 BicepConfigProperties
 BicepConfigPropertiesAuthentication
 RegistrySecretConfig
+DaprConfigurationStorePropertiesMetadata
+DaprConfigurationStoreProperties
+configurationStores
 
