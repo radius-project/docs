@@ -11,7 +11,7 @@ resource app 'Applications.Core/applications@2023-10-01-preview' = {
 }
 
 //SAMPLE
-resource pubsub 'Applications.Dapr/configurationStores@2023-10-01-preview' = {
+resource configStore 'Applications.Dapr/configurationStores@2023-10-01-preview' = {
   name: 'configstore'
   properties: {
     environment: environment
