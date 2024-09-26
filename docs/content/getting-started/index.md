@@ -25,7 +25,7 @@ The Radius getting-started guide can be [run **for free** in a GitHub Codespace]
 
 ## 1. Have your Kubernetes cluster handy
 
-Radius runs inside [Kubernetes]({{< ref "guides/operations/kubernetes" >}}). However you run Kubernetes, get a cluster ready.
+Radius run inside [Kubernetes]({{< ref "guides/operations/kubernetes" >}}). However you run Kubernetes, get a cluster ready.
 > *If you don't have a preferred way to create Kubernetes clusters, you could try using [k3d](https://k3d.io/), which runs a minimal Kubernetes distribution in Docker. Make sure to apply the [recommended configuration]({{< ref "guides/operations/kubernetes/overview##supported-kubernetes-clusters" >}}).*
 
 Ensure your cluster is set as your current context:
