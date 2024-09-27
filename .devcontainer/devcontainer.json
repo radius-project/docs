@@ -30,7 +30,7 @@
 			"settings": {},
 			"extensions": [
 				"GitHub.copilot",
-				"ms-azuretools.rad-vscode-bicep"
+				"ms-azuretools.vscode-bicep"
 			]
 		  }
 	}, 
