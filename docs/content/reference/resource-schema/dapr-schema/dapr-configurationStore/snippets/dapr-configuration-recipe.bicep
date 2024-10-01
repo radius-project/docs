@@ -18,7 +18,7 @@ resource configStore 'Applications.Dapr/configurationStores@2023-10-01-preview' 
     application: app.id
     recipe: {
       // Name a specific recipe to use
-      name: 'azure-redis'
+      name: 'azure-redis-with-config'
       // Set optional/required parameters (specific to the Recipe)
       parameters: {
         size: 'large'
