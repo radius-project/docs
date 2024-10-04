@@ -22,6 +22,10 @@ CLI
 CLIs
 CMD
 CNCF
+configurationStore
+configurationStores
+ConfigurationStore
+ConfigurationStores
 CQRS
 CRDs
 CRUDL
@@ -166,6 +170,7 @@ cosmosAccount
 cosmosdb
 customizations
 dapr
+daprConfigurationStores
 daprPubSubBrokers
 daprSecretStores
 daprStateStores
