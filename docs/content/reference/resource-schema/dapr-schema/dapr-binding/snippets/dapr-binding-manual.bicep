@@ -39,7 +39,6 @@ resource myapp 'Applications.Core/containers@2023-10-01-preview' = {
   }
 }
 
-
 module redis '../../../../../../test/testrecipes/modules/redis-selfhost.bicep' = {
   name: '${baseName}-redis-deployment'
   params: {
