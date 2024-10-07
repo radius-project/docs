@@ -39,15 +39,6 @@ resource myapp 'Applications.Core/containers@2023-10-01-preview' = {
   }
 }
 
-module redis '../../../../../../test/testrecipes/modules/redis-selfhost.bicep' = {
-  name: '${baseName}-redis-deployment'
-  params: {
-    name: '${baseName}-redis'
-    namespace: namespace
-    application: app.name
-  }
-}
-
 //SAMPLE
 resource binding 'Applications.Dapr/bindings@2023-10-01-preview' = {
   name: 'outredis'
@@ -58,7 +49,7 @@ resource binding 'Applications.Dapr/bindings@2023-10-01-preview' = {
     type: 'bindings.redis'
     metadata: {
       redisHost: {
-        value: '${redis.outputs.host}:${redis.outputs.port}'
+        value: '<REDIS-URL>'
       }
       redisPassword: {
         value: ''
