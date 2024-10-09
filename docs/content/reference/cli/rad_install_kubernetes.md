@@ -39,6 +39,12 @@ rad install kubernetes --set key=value
 # Install Radius with the intermediate root CA certificate in the current Kubernetes context
 rad install kubernetes --set-file global.rootCA.cert=/path/to/rootCA.crt
 
+# Install Radius from radius helmchart
+rad install kubernetes --chart /root/radius/deploy/Chart
+
+# Re-install Radius with latest version
+rad install kubernetes --reinstall
+
 ```
 
 ### Options
@@ -51,6 +57,10 @@ rad install kubernetes --set-file global.rootCA.cert=/path/to/rootCA.crt
       --set stringArray        Set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
       --set-file stringArray   Set values from files on the command line (can specify multiple or separate files with commas: key1=filename1,key2=filename2)
 ```
+
+### Install Radius using Helm
+* Install Radius version from Helmchart repository - [rad install using Helmchart](https://docs.radapp.io/guides/operations/kubernetes/install/#install-with-helm)
+
 
 ### Options inherited from parent commands
 
