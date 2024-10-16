@@ -33,7 +33,7 @@ description: "Detailed reference documentation for applications.core/environment
 | **compute** | [EnvironmentCompute](#environmentcompute) | Represents backing compute resource <br />_(Required)_ |
 | **extensions** | [Extension](#extension)[] | The environment extension. |
 | **providers** | [Providers](#providers) | The Cloud providers configuration. |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
 | **recipeConfig** | [RecipeConfigProperties](#recipeconfigproperties) | Configuration for Recipes. Defines how each type of Recipe should be configured and run. |
 | **recipes** | [EnvironmentPropertiesRecipes](#environmentpropertiesrecipes) | Specifies Recipes linked to the Environment. |
 | **simulated** | bool | Simulated environment. |
