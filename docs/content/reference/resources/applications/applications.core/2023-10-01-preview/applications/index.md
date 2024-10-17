@@ -32,7 +32,7 @@ description: "Detailed reference documentation for applications.core/application
 |----------|------|-------------|
 | **environment** | string | Fully qualified resource ID for the environment that the application is linked to <br />_(Required)_ |
 | **extensions** | [Extension](#extension)[] | The application extension. |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
 | **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
 
 ### Extension
