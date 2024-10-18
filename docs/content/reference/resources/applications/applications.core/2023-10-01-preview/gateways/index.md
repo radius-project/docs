@@ -34,7 +34,7 @@ description: "Detailed reference documentation for applications.core/gateways@20
 | **environment** | string | Fully qualified resource ID for the environment that the application is linked to |
 | **hostname** | [GatewayHostname](#gatewayhostname) | Declare hostname information for the Gateway. Leaving the hostname empty auto-assigns one: mygateway.myapp.PUBLICHOSTNAMEORIP.nip.io. |
 | **internal** | bool | Sets Gateway to not be exposed externally (no public IP address associated). Defaults to false (exposed to internet). |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
 | **routes** | [GatewayRoute](#gatewayroute)[] | Routes attached to this Gateway <br />_(Required)_ |
 | **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
 | **tls** | [GatewayTls](#gatewaytls) | TLS configuration definition for Gateway resource. |
@@ -128,7 +128,7 @@ description: "Detailed reference documentation for applications.core/gateways@20
 | Property | Type | Description |
 |----------|------|-------------|
 | **certificateFrom** | string | The resource id for the secret containing the TLS certificate and key for the gateway. |
-| **minimumProtocolVersion** | '1.2' | '1.3' | Tls Minimum versions for Gateway resource. |
+| **minimumProtocolVersion** | '1.2' | '1.3' | TLS minimum protocol version (defaults to 1.2). |
 | **sslPassthrough** | bool | If true, gateway lets the https traffic sslPassthrough to the backend servers for decryption. |
 
 ### SystemData

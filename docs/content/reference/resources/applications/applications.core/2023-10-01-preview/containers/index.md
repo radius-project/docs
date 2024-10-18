@@ -36,7 +36,7 @@ description: "Detailed reference documentation for applications.core/containers@
 | **environment** | string | Fully qualified resource ID for the environment that the application is linked to |
 | **extensions** | [Extension](#extension)[] | Extensions spec of the resource |
 | **identity** | [IdentitySettings](#identitysettings) | IdentitySettings is the external identity setting. |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
 | **resourceProvisioning** | 'internal' | 'manual' | Specifies how the underlying service/resource is provisioned and managed. Available values are 'internal', where Radius manages the lifecycle of the resource internally, and 'manual', where a user manages the resource. |
 | **resources** | [ResourceReference](#resourcereference)[] | A collection of references to resources associated with the container |
 | **restartPolicy** | 'Always' | 'Never' | 'OnFailure' | Restart policy for the container |
@@ -69,7 +69,7 @@ description: "Detailed reference documentation for applications.core/containers@
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'azure' | The kind of IAM provider to configure <br />_(Required)_ |
+| **kind** | 'azure' | 'string' | The kind of IAM provider to configure <br />_(Required)_ |
 | **roles** | string[] | RBAC permissions to be assigned on the source resource |
 
 ### Container
