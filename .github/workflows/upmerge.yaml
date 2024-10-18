@@ -79,4 +79,4 @@ jobs:
         if: env.NO_CHANGES != 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GH_RAD_CI_BOT_PAT}}
-        run: gh pr create --title "Upmerge to edge" --body "Upmerge to edge (kicked off by @${{ github.triggering_actor }})" --base edge --head $BRANCH_NAME
+        run: gh pr create --title "Upmerge to edge" --body "Upmerge to edge (kicked off by @${{ github.triggering_actor }})" --base edge --head $BRANCH_NAME --signoff

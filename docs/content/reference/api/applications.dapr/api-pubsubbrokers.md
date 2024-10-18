@@ -2,7 +2,7 @@
 type: api
 title: "Applications.Dapr/pubSubBrokers API reference"
 linkTitle: "pubSubBrokers"
-description: "Detailed reference documentation on the Applications.Dapr/mongoDatabases API"
+description: "Detailed reference documentation on the Applications.Dapr/pubSubBrokers API"
 slug: "pubSubBrokers"
 ---
 
