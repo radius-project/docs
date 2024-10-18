@@ -34,7 +34,7 @@ description: "Detailed reference documentation for applications.datastores/redis
 | **environment** | string | Fully qualified resource ID for the environment that the portable resource is linked to <br />_(Required)_ |
 | **host** | string | The host name of the target Redis cache |
 | **port** | int | The port value of the target Redis cache |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
 | **recipe** | [Recipe](#recipe) | The recipe used to automatically deploy underlying infrastructure for a portable resource |
 | **resourceProvisioning** | 'manual' | 'recipe' | Specifies how the underlying service/resource is provisioned and managed. Available values are 'recipe', where Radius manages the lifecycle of the resource through a Recipe, and 'manual', where a user manages the resource and provides the values. |
 | **resources** | [ResourceReference](#resourcereference)[] | List of the resource IDs that support the Redis resource |

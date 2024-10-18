@@ -33,7 +33,7 @@ description: "Detailed reference documentation for applications.core/secretstore
 | **application** | string | Fully qualified resource ID for the application |
 | **data** | [SecretStorePropertiesData](#secretstorepropertiesdata) | An object to represent key-value type secrets <br />_(Required)_ |
 | **environment** | string | Fully qualified resource ID for the environment that the application is linked to |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
 | **resource** | string | The resource id of external secret store. |
 | **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
 | **type** | 'awsIRSA' | 'azureWorkloadIdentity' | 'basicAuthentication' | 'certificate' | 'generic' | The type of SecretStore data |

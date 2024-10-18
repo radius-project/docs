@@ -34,7 +34,7 @@ description: "Detailed reference documentation for applications.core/volumes@202
 |----------|------|-------------|
 | **application** | string | Fully qualified resource ID for the application <br />_(Required)_ |
 | **environment** | string | Fully qualified resource ID for the environment that the application is linked to |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
 | **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
 
 #### AzureKeyVaultVolumeProperties
@@ -129,7 +129,7 @@ description: "Detailed reference documentation for applications.core/volumes@202
 |----------|------|-------------|
 | **alias** | string | File name when written to disk |
 | **certType** | 'certificate' | 'privatekey' | 'publickey' | Represents certificate types |
-| **encoding** | 'base64' | 'hex' | 'utf-8' | Represents secret encodings |
+| **encoding** | 'base64' | 'hex' | 'utf-8' | Encoding format. Default utf-8 |
 | **format** | 'pem' | 'pfx' | Represents certificate formats |
 | **name** | string | The name of the certificate <br />_(Required)_ |
 | **version** | string | Certificate version |
@@ -171,7 +171,7 @@ description: "Detailed reference documentation for applications.core/volumes@202
 | Property | Type | Description |
 |----------|------|-------------|
 | **alias** | string | File name when written to disk |
-| **encoding** | 'base64' | 'hex' | 'utf-8' | Represents secret encodings |
+| **encoding** | 'base64' | 'hex' | 'utf-8' | Encoding format. Default utf-8 |
 | **name** | string | The name of the secret <br />_(Required)_ |
 | **version** | string | secret version |
 
