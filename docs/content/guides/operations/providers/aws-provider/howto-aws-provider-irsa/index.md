@@ -20,7 +20,7 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
   - You will need the cluster's OIDC Issuer URL. [EKS Example](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)
-- [Create an IAM Policy] (https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html)
+- [Create an IAM Policy](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html)
 
 
 ## Setup the AWS IAM Roles for Service Accounts(IRSA) for Radius
