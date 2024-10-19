@@ -45,6 +45,7 @@ This resource will automatically create and deploy the Dapr component spec for t
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | application | n | The ID of the application resource this resource belongs to. | `app.id`
+| [auth](#auth) | n | Authentication information for this component. | [See below](#auth)
 | environment | y | The ID of the environment resource this resource belongs to. | `env.id`
 | [resourceProvisioning](#resource-provisioning) | n | Specifies how the underlying service/resource is provisioned and managed. Options are to provision automatically via 'recipe' or provision manually via 'manual'. Selection determines which set of fields to additionally require. Defaults to 'recipe'. | `manual`
 | [recipe](#recipe) | n | Configuration for the Recipe which will deploy the backing infrastructure. | [See below](#recipe)
@@ -53,6 +54,11 @@ This resource will automatically create and deploy the Dapr component spec for t
 | metadata | n | Metadata for the Dapr component. Schema must match [Dapr component](https://docs.dapr.io/reference/components-reference/supported-state-stores/). Used when `resourceProvisioning` is set to `manual`. | `{ couchbaseURL: {value: 'https://*****' }` |
 | version | n | The version of the Dapr component. See [Dapr components](https://docs.dapr.io/reference/components-reference/supported-state-stores/) for available versions. Used when `resourceProvisioning` is set to `manual`. | `v1` |
 | componentName | n | _(read-only)_ The name of the Dapr component that is generated and applied to the underlying system. Used by the Dapr SDKs or APIs to access the Dapr component. | `mystatestore` |
+
+#### Auth
+| Property | Required | Description | Example(s) |
+|------|:--------:|-------------|---------|
+| secretStore | n | The name of the secret store to retrieve secrets from. | `secretstore.id` |
 
 #### Recipe
 
