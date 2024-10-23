@@ -3,9 +3,7 @@
 ```json
 {
 	"experimentalFeaturesEnabled": {
-		"extensibility": true,
-		"extensionRegistry": true,
-		"dynamicTypeLoading": true
+		"extensibility": true
 	},
 	"extensions": {
 		"radius": "br:biceptypes.azurecr.io/radius:<release-version>",
