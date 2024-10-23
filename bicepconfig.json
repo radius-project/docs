@@ -1,15 +1,10 @@
 // The bicepconfig.json file is needed so the bicep files in the repo can be compiled with the correct setup
 {
 	"experimentalFeaturesEnabled": {
-		"extensibility": true,
-		"extensionRegistry": true,
-		"dynamicTypeLoading": true
+		"extensibility": true
 	},
 	"extensions": {
 		"radius": "br:biceptypes.azurecr.io/radius:latest",
 		"aws": "br:biceptypes.azurecr.io/aws:latest"
-	},
-	"cloud": {
-		"credentialPrecedence": [ "Environment" ]
 	}
 }

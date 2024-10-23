@@ -33,9 +33,7 @@ Make sure you have the following files checked into your repository under `iac/`
 ```json
 {
 	"experimentalFeaturesEnabled": {
-		"extensibility": true,
-		"extensionRegistry": true,
-		"dynamicTypeLoading": true
+		"extensibility": true
 	},
 	"extensions": {
 		"radius": "br:biceptypes.azurecr.io/radius:<release-version>",
