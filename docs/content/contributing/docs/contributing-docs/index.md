@@ -109,6 +109,14 @@ $ git commit -s -m 'This is my commit message'
 
 Visual Studio Code has a setting, `git.alwaysSignOff` to automatically add a Signed-off-by line to commit messages. Search for "sign-off" in VS Code settings to find it and enable it.
 
+## Branch Guidance
+
+The Radius docs handles branching differently than most code repositories. Instead of a main branch, every branch is labeled to match the major and minor version of a runtime release. For the full list visit the Docs repo
+
+Generally, all of your docs updates should point to docs branch for the latest release of Radius. The latest release is the default branch [https://github.com/radius/docs]. For example, if you are fixing a typo, adding notes, or clarifying a point, make your changes into the default Dapr branch.
+
+For any docs changes applicable to a release candidate or a pre-release version of the docs, point your changes into the pre-release branch `edge`. For example, if you are documenting an upcoming change to a Radius feature, make your changes to the pre-release branch `edge`.
+
 ## Types of docs
 
 There are 5 types of docs in Radius:
