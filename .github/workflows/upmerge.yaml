@@ -39,12 +39,16 @@ jobs:
           ref: edge
           # https://github.com/actions/checkout/issues/125#issuecomment-570254411
           fetch-depth: 0
+          persist-credentials: false
       
       - name: Configure git
+        env:
+            GH_TOKEN: ${{ secrets.GH_RAD_CI_BOT_PAT }}
         run: |
           git config --global user.email "radiuscoreteam@service.microsoft.com"
           git config --global user.name "Radius CI Bot"
-      
+          git remote set-url origin https://$GH_TOKEN@github.com/${{ github.repository }}
+
       # Create a new branch from edge. This branch will be used to PR back into edge.
       - name: Create new branch
         run: |
@@ -78,5 +82,5 @@ jobs:
       - name: Create pull request
         if: env.NO_CHANGES != 'true'
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_RAD_CI_BOT_PAT}}
-        run: gh pr create --title "Upmerge to edge" --body "Upmerge to edge (kicked off by @${{ github.triggering_actor }})" --base edge --head $BRANCH_NAME --signoff
+          GH_TOKEN: ${{ secrets.GH_RAD_CI_BOT_PAT }}
+        run: gh pr create --title "Upmerge to edge" --body "Upmerge to edge (kicked off by @${{ github.triggering_actor }})" --base edge --head $BRANCH_NAME
