@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "rad env create CLI reference"
-linkTitle: "rad env create"
-slug: rad_env_create
-url: /reference/cli/rad_env_create/
-description: "Details on the rad env create Radius CLI command"
+title: "rad environment create CLI reference"
+linkTitle: "rad environment create"
+slug: rad_environment_create
+url: /reference/cli/rad_environment_create/
+description: "Details on the rad environment create Radius CLI command"
 ---
-## rad env create
+## rad environment create
 
 Create a new Radius Environment
 
@@ -17,7 +17,7 @@ Radius Environments are prepared "landing zones" for Radius Applications.
 Applications deployed to an environment will inherit the container runtime, configuration, and other settings from the environment.
 
 ```
-rad env create [envName] [flags]
+rad environment create [envName] [flags]
 ```
 
 ### Examples
@@ -45,5 +45,5 @@ rad env create myenv
 
 ### SEE ALSO
 
-* [rad env]({{< ref rad_env.md >}})	 - Manage Radius Environments
+* [rad environment]({{< ref rad_environment.md >}})	 - Manage Radius Environments
 
