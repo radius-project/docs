@@ -33,7 +33,6 @@ rad app graph my-application
 
 ```
   -a, --application string   The application name
-  -e, --environment string   The environment name
   -g, --group string         The resource group name
   -h, --help                 help for graph
   -w, --workspace string     The workspace name
