@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "rad env switch CLI reference"
-linkTitle: "rad env switch"
-slug: rad_env_switch
-url: /reference/cli/rad_env_switch/
-description: "Details on the rad env switch Radius CLI command"
+title: "rad environment switch CLI reference"
+linkTitle: "rad environment switch"
+slug: rad_environment_switch
+url: /reference/cli/rad_environment_switch/
+description: "Details on the rad environment switch Radius CLI command"
 ---
-## rad env switch
+## rad environment switch
 
 Switch the current environment
 
@@ -15,7 +15,7 @@ Switch the current environment
 Switch the current environment
 
 ```
-rad env switch [environment] [flags]
+rad environment switch [environment] [flags]
 ```
 
 ### Examples
@@ -41,5 +41,5 @@ rad env switch newEnvironment
 
 ### SEE ALSO
 
-* [rad env]({{< ref rad_env.md >}})	 - Manage Radius Environments
+* [rad environment]({{< ref rad_environment.md >}})	 - Manage Radius Environments
 
