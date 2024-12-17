@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "rad env show CLI reference"
-linkTitle: "rad env show"
-slug: rad_env_show
-url: /reference/cli/rad_env_show/
-description: "Details on the rad env show Radius CLI command"
+title: "rad environment show CLI reference"
+linkTitle: "rad environment show"
+slug: rad_environment_show
+url: /reference/cli/rad_environment_show/
+description: "Details on the rad environment show Radius CLI command"
 ---
-## rad env show
+## rad environment show
 
 Show environment details
 
@@ -15,7 +15,7 @@ Show environment details
 Show environment details. Shows the user's default environment by default.
 
 ```
-rad env show [flags]
+rad environment show [flags]
 ```
 
 ### Examples
@@ -51,5 +51,5 @@ rad env show my-env --group my-env
 
 ### SEE ALSO
 
-* [rad env]({{< ref rad_env.md >}})	 - Manage Radius Environments
+* [rad environment]({{< ref rad_environment.md >}})	 - Manage Radius Environments
 
