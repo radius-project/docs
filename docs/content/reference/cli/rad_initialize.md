@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "rad init CLI reference"
-linkTitle: "rad init"
-slug: rad_init
-url: /reference/cli/rad_init/
-description: "Details on the rad init Radius CLI command"
+title: "rad initialize CLI reference"
+linkTitle: "rad initialize"
+slug: rad_initialize
+url: /reference/cli/rad_initialize/
+description: "Details on the rad initialize Radius CLI command"
 ---
-## rad init
+## rad initialize
 
 Initialize Radius
 
@@ -23,7 +23,7 @@ Specifying the '--full' flag will cause 'rad init' to prompt the user for all av
 
 
 ```
-rad init [flags]
+rad initialize [flags]
 ```
 
 ### Examples
@@ -42,7 +42,7 @@ rad init --full
 
 ```
       --full            Prompt user for all available configuration options
-  -h, --help            help for init
+  -h, --help            help for initialize
   -o, --output string   output format (supported formats are json, table) (default "table")
 ```
 
