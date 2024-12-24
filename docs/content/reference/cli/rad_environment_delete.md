@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "rad env delete CLI reference"
-linkTitle: "rad env delete"
-slug: rad_env_delete
-url: /reference/cli/rad_env_delete/
-description: "Details on the rad env delete Radius CLI command"
+title: "rad environment delete CLI reference"
+linkTitle: "rad environment delete"
+slug: rad_environment_delete
+url: /reference/cli/rad_environment_delete/
+description: "Details on the rad environment delete Radius CLI command"
 ---
-## rad env delete
+## rad environment delete
 
 Delete environment
 
@@ -15,7 +15,7 @@ Delete environment
 Delete environment. Deletes the user's default environment by default.
 
 ```
-rad env delete [flags]
+rad environment delete [flags]
 ```
 
 ### Examples
@@ -55,5 +55,5 @@ rad env delete my-env --group my-env
 
 ### SEE ALSO
 
-* [rad env]({{< ref rad_env.md >}})	 - Manage Radius Environments
+* [rad environment]({{< ref rad_environment.md >}})	 - Manage Radius Environments
 
