@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "rad env update CLI reference"
-linkTitle: "rad env update"
-slug: rad_env_update
-url: /reference/cli/rad_env_update/
-description: "Details on the rad env update Radius CLI command"
+title: "rad environment update CLI reference"
+linkTitle: "rad environment update"
+slug: rad_environment_update
+url: /reference/cli/rad_environment_update/
+description: "Details on the rad environment update Radius CLI command"
 ---
-## rad env update
+## rad environment update
 
 Update environment configuration
 
@@ -23,7 +23,7 @@ All other properties require the environment to be deleted and recreated.
 
 
 ```
-rad env update [environment] [flags]
+rad environment update [environment] [flags]
 ```
 
 ### Examples
@@ -68,5 +68,5 @@ rad env update myenv --clear-aws
 
 ### SEE ALSO
 
-* [rad env]({{< ref rad_env.md >}})	 - Manage Radius Environments
+* [rad environment]({{< ref rad_environment.md >}})	 - Manage Radius Environments
 

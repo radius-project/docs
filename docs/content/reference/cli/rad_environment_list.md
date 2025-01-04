@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "rad env list CLI reference"
-linkTitle: "rad env list"
-slug: rad_env_list
-url: /reference/cli/rad_env_list/
-description: "Details on the rad env list Radius CLI command"
+title: "rad environment list CLI reference"
+linkTitle: "rad environment list"
+slug: rad_environment_list
+url: /reference/cli/rad_environment_list/
+description: "Details on the rad environment list Radius CLI command"
 ---
-## rad env list
+## rad environment list
 
 List environments
 
@@ -15,7 +15,7 @@ List environments
 List environments using the current, or specified workspace.
 
 ```
-rad env list [flags]
+rad environment list [flags]
 ```
 
 ### Examples
@@ -45,5 +45,5 @@ rad env list
 
 ### SEE ALSO
 
-* [rad env]({{< ref rad_env.md >}})	 - Manage Radius Environments
+* [rad environment]({{< ref rad_environment.md >}})	 - Manage Radius Environments
 
