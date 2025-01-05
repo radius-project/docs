@@ -33,4 +33,5 @@ Manage bicep compiler used by Radius
 * [rad bicep delete]({{< ref rad_bicep_delete.md >}})	 - Delete installed bicep compiler
 * [rad bicep download]({{< ref rad_bicep_download.md >}})	 - Download the bicep compiler
 * [rad bicep publish]({{< ref rad_bicep_publish.md >}})	 - Publish a Bicep file to an OCI registry.
+* [rad bicep publish-extension]({{< ref rad_bicep_publish-extension.md >}})	 - Generate or publish a Bicep extension for a set of resource types.
 
