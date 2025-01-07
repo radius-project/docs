@@ -18,7 +18,7 @@ Resource providers are the entities that implement resource types such as 'Appli
 
 Creating a resource provider defines new resource types that can be used in applications.
 
-Input can be passed in using a file or inline JSON as the second argument. Prefix the input with '@' to indicate a file path.
+Input can be passed in using a JSON or YAML file using the --from-file option.
 
 
 ```
@@ -29,8 +29,11 @@ rad resource-provider create [input] [flags]
 
 ```
 
-# Create a resource provider
+# Create a resource provider from YAML file
 rad resource-provider create --from-file /path/to/input.yaml
+
+# Create a resource provider from JSON file
+rad resource-provider create --from-file /path/to/input.json
 
 ```
 
