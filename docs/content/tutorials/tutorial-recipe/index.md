@@ -287,7 +287,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 
 ## Step 5: Cleanup your environment
 
-1. You can use the rad CLI to [delete your environment]({{< ref rad_env_delete.md >}}) and all the  Radius resources running on your cluster:
+1. You can use the rad CLI to [delete your environment]({{< ref rad_environment_delete.md >}}) and all the  Radius resources running on your cluster:
 
    ```bash
    rad env delete default --yes
