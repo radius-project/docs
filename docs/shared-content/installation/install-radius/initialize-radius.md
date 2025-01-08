@@ -11,7 +11,7 @@ Initializing Radius installs the Radius control-plane and creates a Radius Envir
    kubectl config current-context
    ```
 
-1. Initialize a new [Radius Environment]({{< ref "/guides/deploy-apps/environments/overview">}}) with [`rad init`]({{< ref rad_init >}}):
+1. Initialize a new [Radius Environment]({{< ref "/guides/deploy-apps/environments/overview">}}) with [`rad init`]({{< ref rad_initialize >}}):
 
    ```bash
    rad init
@@ -49,7 +49,7 @@ Initializing Radius installs the Radius control-plane and creates a Radius Envir
    contour-contour           1/1     1            1           46s
    ```
 
-   You can also use [`rad env list`]({{< ref rad_env_list.md >}}) to view your environment:
+   You can also use [`rad env list`]({{< ref rad_environment_list.md >}}) to view your environment:
 
    ```bash
    rad env list
