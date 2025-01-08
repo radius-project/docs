@@ -36,7 +36,7 @@ By the end of the tutorial, you will have created and deployed a new Radius Appl
    cd myapp
    ```
 
-1. Initialize a new Radius Environment with [`rad init`]({{< ref rad_init >}}):
+1. Initialize a new Radius Environment with [`rad init`]({{< ref rad_initialize >}}):
 
    ```bash
    rad init

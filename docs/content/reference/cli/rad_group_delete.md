@@ -14,7 +14,7 @@ Delete a resource group
 
 Delete a resource group. 
 		
-		Delete a resource group if it is empty. If not empty, delete the contents and try again
+Delete a resource group if it is empty. If not empty, delete the contents and try again
 
 ```
 rad group delete resourcegroupname [flags]

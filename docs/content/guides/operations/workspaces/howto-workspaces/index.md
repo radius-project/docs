@@ -28,7 +28,7 @@ When you have multiple environments initialized for different purposes workspace
    rad group create mygroup
    ```
 
-1. Create an environment named `myenvironment` using [`rad env create`]({{< ref rad_env_create >}}):
+1. Create an environment named `myenvironment` using [`rad env create`]({{< ref rad_environment_create >}}):
 
    ```sh
    rad env create myenvironment
@@ -47,7 +47,7 @@ When you have multiple environments initialized for different purposes workspace
    rad group create yourgroup
    ```
 
-1. Create an environment named `yourenvironment` using [`rad env create`]({{< ref rad_env_create >}}):
+1. Create an environment named `yourenvironment` using [`rad env create`]({{< ref rad_environment_create >}}):
 
    ```sh
    rad env create yourenvironment

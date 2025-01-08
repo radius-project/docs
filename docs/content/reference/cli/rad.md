@@ -30,12 +30,14 @@ Radius CLI
 * [rad credential]({{< ref rad_credential.md >}})	 - Manage cloud provider credential for a Radius installation.
 * [rad debug-logs]({{< ref rad_debug-logs.md >}})	 - Capture logs from Radius control plane for debugging and diagnostics.
 * [rad deploy]({{< ref rad_deploy.md >}})	 - Deploy a template
-* [rad env]({{< ref rad_env.md >}})	 - Manage Radius Environments
+* [rad environment]({{< ref rad_environment.md >}})	 - Manage Radius Environments
 * [rad group]({{< ref rad_group.md >}})	 - Manage resource groups
-* [rad init]({{< ref rad_init.md >}})	 - Initialize Radius
+* [rad initialize]({{< ref rad_initialize.md >}})	 - Initialize Radius
 * [rad install]({{< ref rad_install.md >}})	 - Installs Radius for a given platform
 * [rad recipe]({{< ref rad_recipe.md >}})	 - Manage recipes
 * [rad resource]({{< ref rad_resource.md >}})	 - Manage resources
+* [rad resource-provider]({{< ref rad_resource-provider.md >}})	 - Manage resource providers
+* [rad resource-type]({{< ref rad_resource-type.md >}})	 - Manage resource types
 * [rad run]({{< ref rad_run.md >}})	 - Run an application
 * [rad uninstall]({{< ref rad_uninstall.md >}})	 - Uninstall Radius for a specific platform
 * [rad version]({{< ref rad_version.md >}})	 - Prints the versions of the rad cli

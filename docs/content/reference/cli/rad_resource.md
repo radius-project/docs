@@ -32,6 +32,7 @@ Manage resources
 ### SEE ALSO
 
 * [rad]({{< ref rad.md >}})	 - Radius CLI
+* [rad resource create]({{< ref rad_resource_create.md >}})	 - Create or update a resource
 * [rad resource delete]({{< ref rad_resource_delete.md >}})	 - Delete a Radius resource
 * [rad resource expose]({{< ref rad_resource_expose.md >}})	 - Exposes a resource for network traffic
 * [rad resource list]({{< ref rad_resource_list.md >}})	 - Lists resources
