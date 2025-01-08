@@ -60,7 +60,7 @@ rad init
 {{% /codetab %}}
 
 {{% codetab %}}
-[rad env list]({{< ref rad_env_list >}}) lists all of the environments in your [workspace]({{< ref workspaces >}}):
+[rad env list]({{< ref rad_environment_list >}}) lists all of the environments in your [workspace]({{< ref workspaces >}}):
 
 ```bash
 rad env list
@@ -68,7 +68,7 @@ rad env list
 {{% /codetab %}}
 
 {{% codetab %}}
-[rad env show]({{< ref rad_env_show >}}) prints information on the default or specified environment:
+[rad env show]({{< ref rad_environment_show >}}) prints information on the default or specified environment:
 
 ```bash
 rad env show
@@ -76,7 +76,7 @@ rad env show
 {{% /codetab %}}
 
 {{% codetab %}}
-[rad env delete]({{< ref rad_env_delete >}}) deletes the specified environment:
+[rad env delete]({{< ref rad_environment_delete >}}) deletes the specified environment:
 
 ```bash
 rad env delete -e myenv
@@ -84,7 +84,7 @@ rad env delete -e myenv
 {{% /codetab %}}
 
 {{% codetab %}}
-[rad env switch]({{< ref rad_env_switch >}}) switches the default environment:
+[rad env switch]({{< ref rad_environment_switch >}}) switches the default environment:
 
 ```bash
 rad env switch -e myenv

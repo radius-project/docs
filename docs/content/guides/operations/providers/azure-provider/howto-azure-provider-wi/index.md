@@ -34,7 +34,7 @@ Now that the setup is complete, you can now install Radius with Azure workload i
 
 ## Interactive configuration
 
-1. Initialize a new environment with [`rad init --full`]({{< ref rad_init >}}):
+1. Initialize a new environment with [`rad init --full`]({{< ref rad_initialize >}}):
 
    ```bash
    rad init --full
@@ -82,7 +82,7 @@ Now that the setup is complete, you can now install Radius with Azure workload i
     rad env create default
     ```
 
-1. Use [`rad env update`]({{< ref rad_env_update >}}) to update your Radius Environment with your Azure subscription ID and Azure resource group:
+1. Use [`rad env update`]({{< ref rad_environment_update >}}) to update your Radius Environment with your Azure subscription ID and Azure resource group:
 
     ```bash
     rad env update myEnvironment --azure-subscription-id myAzureSubscriptionId --azure-resource-group  myAzureResourceGroup

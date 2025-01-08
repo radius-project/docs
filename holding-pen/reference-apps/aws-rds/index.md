@@ -50,7 +50,7 @@ The setup here ensures that the RDS instance is deployed to the set of subnets a
 ## Cleanup
 
 {{% alert title="Delete environment" color="warning" %}}
-If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to delete all Radius resources running on the EKS Cluster.
+If you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_environment_delete.md >}}) to delete all Radius resources running on the EKS Cluster.
 {{% /alert %}}
 
 {{% alert title="Cleanup AWS Resources" color="warning" %}}
