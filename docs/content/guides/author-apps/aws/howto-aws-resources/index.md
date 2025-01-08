@@ -38,7 +38,7 @@ eksctl create cluster --name <my-cluster> --region=<my-region>
 
 Create a [Radius Environment]({{< ref "/guides/deploy-apps/environments/overview" >}}) where you will deploy your application.
 
-Run [`rad init --full`]({{< ref rad_init >}}) to initialize a new environment into your current kubectl context:
+Run [`rad init --full`]({{< ref rad_initialize >}}) to initialize a new environment into your current kubectl context:
 
 ```bash
 rad init --full
@@ -105,7 +105,7 @@ This creates a container that will be deployed to your Kubernetes cluster. This 
 
 ## Step 7: Cleanup
 
-1. When you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_env_delete.md >}}) to delete all Radius resources running on the EKS Cluster.
+1. When you're done with testing, you can use the rad CLI to [delete an environment]({{< ref rad_environment_delete.md >}}) to delete all Radius resources running on the EKS Cluster.
 
 1. Cleanup AWS Resources - AWS resources are not deleted when deleting a Radius Environment, so make sure to delete all resources created in this reference app to prevent additional charges. You can delete these resources in the AWS Console or via the AWS CLI. Instructions to delete an AWS S3 Bucket are available [here](https://docs.aws.amazon.com/AmazonS3/latest/userguide/delete-bucket.html).
 

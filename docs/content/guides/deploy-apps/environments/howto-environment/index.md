@@ -20,7 +20,7 @@ Radius Environments can be setup with the rad CLI via two paths: interactive or 
 
 ## Create a development environment
 
-1. Initialize a new [Radius Environment]({{< ref "/guides/deploy-apps/environments/overview">}}) with [`rad init`]({{< ref rad_init >}}):
+1. Initialize a new [Radius Environment]({{< ref "/guides/deploy-apps/environments/overview">}}) with [`rad init`]({{< ref rad_initialize >}}):
    ```bash
    rad init
    ```
@@ -55,7 +55,7 @@ Radius Environments can be setup with the rad CLI via two paths: interactive or 
    contour-contour           1/1     1            1           46s
    ```
 
-   You can also use [`rad env list`]({{< ref rad_env_list.md >}}) to view your environment:
+   You can also use [`rad env list`]({{< ref rad_environment_list.md >}}) to view your environment:
 
    ```bash
    rad env list
@@ -75,7 +75,7 @@ Radius Environments can be setup with the rad CLI via two paths: interactive or 
 
 ## Create an environment interactively
 
-1. Initialize a new environment with [`rad init --full`]({{< ref rad_init >}}):
+1. Initialize a new environment with [`rad init --full`]({{< ref rad_initialize >}}):
 
    ```bash
    rad init --full
@@ -120,7 +120,7 @@ Radius Environments can be setup with the rad CLI via two paths: interactive or 
    contour-contour   1/1     1            1           2m33s
    ```
 
-1. Verify an environment was created with [`rad env show`]({{< ref rad_env_show.md >}}):
+1. Verify an environment was created with [`rad env show`]({{< ref rad_environment_show.md >}}):
 
    ```bash
    rad env show -o json
@@ -185,7 +185,7 @@ Radius can also be installed and an environment created with manual rad CLI comm
 
 1. Create your Radius Environment:
 
-   Run [`rad env create`]({{< ref rad_env_create >}}) to create a new environment in your resource group. Specify the `--namespace` flag to select the Kubernetes namespace to deploy resources into:
+   Run [`rad env create`]({{< ref rad_environment_create >}}) to create a new environment in your resource group. Specify the `--namespace` flag to select the Kubernetes namespace to deploy resources into:
 
    ```bash
    rad env create myEnvironment --group myGroup --namespace my-namespace
@@ -213,7 +213,7 @@ Radius can also be installed and an environment created with manual rad CLI comm
    contour-contour   1/1     1            1           2m33s
    ```
 
-   You can also use [`rad env list`]({{< ref rad_env_list.md >}}) to see if the created environment gets listed:
+   You can also use [`rad env list`]({{< ref rad_environment_list.md >}}) to see if the created environment gets listed:
 
    ```bash
    rad env list --group myGroup
