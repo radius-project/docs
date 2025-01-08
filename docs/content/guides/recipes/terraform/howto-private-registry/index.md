@@ -79,4 +79,4 @@ rad env delete my-env
 - [Recipes overview]({{< ref "/guides/recipes/overview" >}})
 - [Radius Environments]({{< ref "/guides/deploy-apps/environments/overview" >}})
 - [`rad recipe CLI reference`]({{< ref rad_recipe >}})
-- [`rad env CLI reference`]({{< ref rad_env >}})
+- [`rad env CLI reference`]({{< ref rad_environment >}})

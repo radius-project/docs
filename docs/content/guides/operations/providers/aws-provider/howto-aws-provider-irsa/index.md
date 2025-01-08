@@ -76,7 +76,7 @@ Now that the setup is complete, you can install Radius with AWS IRSA enabled.
 
 ## Interactive configuration
 
-1. Initialize a new environment with [`rad init --full`]({{< ref rad_init >}}):
+1. Initialize a new environment with [`rad init --full`]({{< ref rad_initialize >}}):
 
    ```bash
    rad init --full
@@ -127,7 +127,7 @@ Now that the setup is complete, you can install Radius with AWS IRSA enabled.
     rad env create default
     ```
 
-1. Use [`rad env update`]({{< ref rad_env_update >}}) to update your Radius Environment with your your AWS region and AWS account ID:
+1. Use [`rad env update`]({{< ref rad_environment_update >}}) to update your Radius Environment with your your AWS region and AWS account ID:
 
     ```bash
     rad env update myEnvironment --aws-region myAwsRegion --aws-account-id myAwsAccountId

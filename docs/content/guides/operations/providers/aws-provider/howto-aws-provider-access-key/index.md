@@ -21,7 +21,7 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
 
 ## Interactive configuration
 
-1. Initialize a new environment with [`rad init --full`]({{< ref rad_init >}}):
+1. Initialize a new environment with [`rad init --full`]({{< ref rad_initialize >}}):
 
    ```bash
    rad init --full
@@ -62,7 +62,7 @@ The AWS provider allows you to deploy and connect to AWS resources from a Radius
     rad env update myEnvironment --aws-region myAwsRegion --aws-account-id myAwsAccountId
     ```
 
-    This command updates the configuration of an environment for properties that are able to be changed. For more information visit [`rad env update`]({{< ref rad_env_update >}})
+    This command updates the configuration of an environment for properties that are able to be changed. For more information visit [`rad env update`]({{< ref rad_environment_update >}})
 
 1. Add your AWS cloud provider credentials:
 
