@@ -49,5 +49,5 @@ rad bicep publish --file ./redis-test.bicep --target br:ghcr.io/myregistry/redis
 
 ### SEE ALSO
 
-* [rad bicep]({{< ref rad_bicep.md >}})	 - Manage bicep compiler
+* [rad bicep]({{< ref rad_bicep.md >}})	 - Handle bicep-specific tasks for Radius
 

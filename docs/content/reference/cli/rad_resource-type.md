@@ -31,6 +31,7 @@ Manage resource types
 ### SEE ALSO
 
 * [rad]({{< ref rad.md >}})	 - Radius CLI
+* [rad resource-type create]({{< ref rad_resource-type_create.md >}})	 - Create or update a resource type
 * [rad resource-type delete]({{< ref rad_resource-type_delete.md >}})	 - Delete resource provider
 * [rad resource-type list]({{< ref rad_resource-type_list.md >}})	 - List resource resource types
 * [rad resource-type show]({{< ref rad_resource-type_show.md >}})	 - Show resource resource type
