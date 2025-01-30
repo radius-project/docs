@@ -8,11 +8,11 @@ description: "Details on the rad bicep Radius CLI command"
 ---
 ## rad bicep
 
-Manage bicep compiler
+Handle bicep-specific tasks for Radius
 
 ### Synopsis
 
-Manage bicep compiler used by Radius
+Handle bicep-specific tasks for Radius
 
 ### Options
 
@@ -32,6 +32,7 @@ Manage bicep compiler used by Radius
 * [rad]({{< ref rad.md >}})	 - Radius CLI
 * [rad bicep delete]({{< ref rad_bicep_delete.md >}})	 - Delete installed bicep compiler
 * [rad bicep download]({{< ref rad_bicep_download.md >}})	 - Download the bicep compiler
+* [rad bicep generate-kubernetes-manifest]({{< ref rad_bicep_generate-kubernetes-manifest.md >}})	 - Generate a DeploymentTemplate Custom Resource.
 * [rad bicep publish]({{< ref rad_bicep_publish.md >}})	 - Publish a Bicep file to an OCI registry.
 * [rad bicep publish-extension]({{< ref rad_bicep_publish-extension.md >}})	 - Generate or publish a Bicep extension for a set of resource types.
 
