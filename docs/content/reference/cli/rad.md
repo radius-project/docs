@@ -25,7 +25,7 @@ Radius CLI
 ### SEE ALSO
 
 * [rad application]({{< ref rad_application.md >}})	 - Manage Radius Applications
-* [rad bicep]({{< ref rad_bicep.md >}})	 - Manage bicep compiler
+* [rad bicep]({{< ref rad_bicep.md >}})	 - Handle bicep-specific tasks for Radius
 * [rad completion]({{< ref rad_completion.md >}})	 - Generates shell completion scripts
 * [rad credential]({{< ref rad_credential.md >}})	 - Manage cloud provider credential for a Radius installation.
 * [rad debug-logs]({{< ref rad_debug-logs.md >}})	 - Capture logs from Radius control plane for debugging and diagnostics.
