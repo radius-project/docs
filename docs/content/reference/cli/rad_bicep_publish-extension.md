@@ -55,5 +55,5 @@ bicep publish-extension ./Example.Provider.yaml --target br:ghcr.io/myregistry/e
 
 ### SEE ALSO
 
-* [rad bicep]({{< ref rad_bicep.md >}})	 - Manage bicep compiler
+* [rad bicep]({{< ref rad_bicep.md >}})	 - Handle bicep-specific tasks for Radius
 
