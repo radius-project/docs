@@ -22,18 +22,18 @@ rad resource list [resourceType] [flags]
 
 ```
 
-sample list of resourceType: containers, gateways, pubSubBrokers, extenders, mongoDatabases, rabbitMQMessageQueues, redisCaches, sqlDatabases, stateStores, secretStores
+sample list of resourceType: Applications.Core/containers, Applications.Core/gateways, Applications.Dapr/daprPubSubBrokers, Applications.Core/extenders, Applications.Datastores/mongoDatabases, Applications.Messaging/rabbitMQMessageQueues, Applications.Datastores/redisCaches, Applications.Datastores/sqlDatabases, Applications.Dapr/daprStateStores, Applications.Dapr/daprSecretStores
 
 # list all resources of a specified type in the default environment
 
-rad resource list containers
-rad resource list gateways
+rad resource list Applications.Core/containers
+rad resource list Applications.Core/gateways
 
 # list all resources of a specified type in an application
-rad resource list containers --application icecream-store
+rad resource list Applications.Core/containers --application icecream-store
 
 # list all resources of a specified type in an application (shorthand flag)
-rad resource list containers -a icecream-store
+rad resource list Applications.Core/containers -a icecream-store
 
 ```
 
