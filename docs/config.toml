@@ -52,7 +52,7 @@ tag = "tags"
 [[menu.main]]
     name = "Blog"
     weight = 20
-    url = "https://blog.radapp.io"
+    url = "https://blog.radapp.io/posts"
     pre = "<i class='fas fa-blog'></i>"
 [[menu.main]]
     name = "GitHub"
