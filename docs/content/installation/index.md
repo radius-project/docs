@@ -10,6 +10,9 @@ Radius consists of a set of tools and services that together form the Radius pla
 
 {{< image src="radius.png" alt="Diagram showing rad CLI and VSCode extension on local machine plus the Radius control plane on a Kubernetes cluster" width="600px" >}}
 
+## Prerequisites
+For edge version, Oras installation is required: https://oras.land/docs/installation.
+
 ## Step 1: Install the rad CLI
 
 {{< read file= "/shared-content/installation/rad-cli/install-rad-cli.md" >}}
