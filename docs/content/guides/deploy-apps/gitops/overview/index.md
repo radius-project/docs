@@ -8,9 +8,13 @@ categories: "Overview"
 tags: ["gitops", "continuous", "delivery" "deployment"]
 ---
 
-Radius integrates seamlessly with GitOps to enhance the continuous deployment and management of cloud-native applications and infrastructure. GitOps is a set of practices that uses Git repositories as the single source of truth for declarative infrastructure and application configurations. By leveraging GitOps tools such as Flux and ArgoCD, Radius provides a robust and efficient way to manage deployments.
+Radius integrates seamlessly with GitOps to enhance the continuous deployment and management of cloud-native applications and infrastructure. Currently, Radius supports [Flux](https://fluxcd.io/), with [ArgoCD](https://argoproj.github.io/cd/) support coming in the future.
 
-### Key Features
+## What is GitOps?
+
+GitOps is a popular set of practices, implemented as popular tools, like [Flux](https://fluxcd.io/) and [ArgoCD](https://argoproj.github.io/cd/), that mitigates these challenges for enterprise application teams that use git for source control and Kubernetes for orchestration of software containers. The core concept of GitOps is to rely on a git repository that serves as a single source of truth: i.e. it contains current declarative descriptions of the required infrastructure for a given production environment. It also contains a description of the workflow required to prevent drift between the repo and the production environment. Using GitOps, developers and operatations can manage applications in production without needing to write custom scripts or maintain complex CD pipelines.
+
+## Key Features
 
 1. **Declarative Configuration**: Radius allows users to define their infrastructure and application configurations declaratively in Git repositories. This ensures that the desired state of the system is version-controlled and easily auditable.
 
@@ -22,17 +26,12 @@ Radius integrates seamlessly with GitOps to enhance the continuous deployment an
 
 5. **Scalability and Flexibility**: Radius's integration with GitOps tools supports scalable and flexible deployment strategies. Whether deploying to a single cluster or multiple clusters across different environments, Radius provides a consistent and reliable deployment process.
 
-### Benefits
+## Benefits
 
 - **Improved Collaboration**: Teams can collaborate more effectively by using Git repositories to manage configurations. Changes can be reviewed, discussed, and approved through standard Git workflows.
 - **Reduced Operational Complexity**: By automating deployments and reconciliations, Radius reduces the operational complexity associated with managing cloud-native applications and infrastructure.
 - **Increased Reliability**: Continuous monitoring and automatic reconciliation ensure that the production environment remains consistent with the desired state, increasing the reliability of deployments.
 
-### Getting Started
+## Getting Started
 
-To get started with Radius and GitOps integration, follow these steps:
-
-1. **Set Up Git Repository**: Create a Git repository to store your declarative configurations for infrastructure and applications.
-2. **Install GitOps Tool**: Install and configure a GitOps tool such as Flux or ArgoCD to manage the continuous deployment process.
-3. **Configure Radius**: Integrate Radius with your GitOps tool by configuring the necessary settings and parameters.
-4. **Deploy and Monitor**: Push your configurations to the Git repository and let the GitOps tool handle the deployment. Use Radius to monitor and manage the state of your production environment.
+To get started with Radius and GitOps integration, check out the [how-to guide for Flux](TODO).
