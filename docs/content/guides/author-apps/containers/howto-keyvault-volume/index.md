@@ -72,7 +72,7 @@ rad deploy ./app.bicep -p oidcIssuer=<OIDC_ISSUER_URL>
 1. Once deployment completes, read the logs from your running container resource:
 
    ```bash
-   rad resource logs containers mycontainer -a myapp
+   rad resource logs Applications.Core/containers mycontainer -a myapp
    ```
 
 1. You should see the contents of the `/var/secrets` mount path defined in your `app.bicep` file:

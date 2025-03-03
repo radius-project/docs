@@ -26,7 +26,7 @@ rad resource expose [type] [resource] [flags]
 ```
 # expose port 80 on the 'orders' resource of the 'icecream-store' application
 # on local port 5000
-rad resource expose --application icecream-store containers orders --port 5000 --remote-port 80
+rad resource expose --application icecream-store Applications.Core/containers orders --port 5000 --remote-port 80
 ```
 
 ### Options

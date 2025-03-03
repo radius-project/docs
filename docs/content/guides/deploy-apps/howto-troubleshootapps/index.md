@@ -17,7 +17,7 @@ tags: ["troubleshooting"]
 Use the below command to port-forward the container to your local machine. This enables you to access the container from your local machine.
 
 ```bash
-rad resource expose containers <container_name> -a <app_name> --port <port_number>
+rad resource expose Applications.Core/containers <container_name> -a <app_name> --port <port_number>
 ```
 
 Refer to [`rad resource expose`]({{< ref rad_resource_expose >}}) for more details on the command.
@@ -27,7 +27,7 @@ Refer to [`rad resource expose`]({{< ref rad_resource_expose >}}) for more detai
 If your Radius Application is unresponsive or does not connect to its dependencies, Use the below command to inspect logs from container:
 
 ```bash
-rad resource logs containers <container_name> -a <app_name>
+rad resource logs Applications.Core/containers <container_name> -a <app_name>
 ```
 
 > Also refer to the [connections section]({{< ref "guides/author-apps/containers/overview#connections" >}}) to know about the naming convention of the environment variables and inspect if your application uses the right variables.
