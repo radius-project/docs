@@ -1295,3 +1295,5 @@ DaprConfigurationStorePropertiesMetadata
 DaprConfigurationStoreProperties
 configurationStores
 configurationstores
+Oras
+oras

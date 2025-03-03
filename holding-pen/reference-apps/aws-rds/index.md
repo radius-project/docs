@@ -39,7 +39,7 @@ The setup here ensures that the RDS instance is deployed to the set of subnets a
 1. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose >}}):
 
     ```bash
-    rad resource expose containers wordpress-container --application wordpress-app --port 8080 --remote-port 80
+    rad resource expose Applications.Core/containers wordpress-container --application wordpress-app --port 8080 --remote-port 80
     ```
 
    Note: the `--remote-port` flag is set because the port exposed by the `wordpress` image is `80`.
