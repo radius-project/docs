@@ -21,11 +21,10 @@ rad resource delete [resourceType] [resourceName] [flags]
 ### Examples
 
 ```
-
-		sample list of resourceType: containers, gateways, daprPubSubBrokers, extenders, mongoDatabases, rabbitMQMessageQueues, redisCaches, sqlDatabases, daprStateStores, daprSecretStores
+    sample list of resourceType: Applications.Core/containers, Applications.Core/gateways, Applications.Dapr/daprPubSubBrokers, Applications.Core/extenders, Applications.Datastores/mongoDatabases, Applications.Messaging/rabbitMQMessageQueues, Applications.Datastores/redisCaches, Applications.Datastores/sqlDatabases, Applications.Dapr/daprStateStores, Applications.Dapr/daprSecretStores
 		
 		# Delete a container named orders
-		rad resource delete containers orders
+		rad resource delete Applications.Core/containers orders
 ```
 
 ### Options

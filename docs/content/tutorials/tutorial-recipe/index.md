@@ -150,7 +150,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 1. Delete your existing Redis cache, which we will redeploy with an Azure resource:
 
    ```bash
-   rad resource delete rediscaches db
+   rad resource delete Applications.Datastores/rediscaches db
    ```
 1. Manually add the Azure cloud provider to your Radius Environment
 
@@ -206,7 +206,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 1. Port-forward the container to your machine with `rad resource expose`:
 
    ```bash
-   rad resource expose containers frontend --port 3000
+   rad resource expose Applications.Core/containers frontend --port 3000
    ```
 
 1. Visit [`http://localhost:3000`](http://localhost:3000) in your browser.
@@ -224,7 +224,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 1. Delete your existing Redis cache, which we will redeploy with an AWS resource:
 
    ```bash
-   rad resource delete rediscaches db
+   rad resource delete Applications.Datastores/rediscaches db
    ```
 
 1. Manually add the AWS cloud provider to your Radius Environment
@@ -271,7 +271,7 @@ This step requires an Azure subscription or an AWS account to deploy cloud resou
 1. Port-forward the container to your machine with `rad resource expose`:
 
    ```bash
-   rad resource expose containers frontend --port 3000
+   rad resource expose Applications.Core/containers frontend --port 3000
    ```
 
 1. Visit [`http://localhost:3000`](http://localhost:3000) in your browser.

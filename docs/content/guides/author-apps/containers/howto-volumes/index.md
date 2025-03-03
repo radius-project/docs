@@ -38,7 +38,7 @@ The `samples/volumes` container will display the status and contents of the `/tm
 1. Once complete, port forward to your container with [`rad resource expose`]({{< ref rad_resource_expose >}}):
 
    ```bash
-   rad resource expose containers mycontainer -a myapp --port 5000
+   rad resource expose Applications.Core/containers mycontainer -a myapp --port 5000
    ```
 
 1. Visit [localhost:5000](http://localhost:5000) in your browser. You should see a message warning that the directory `/tmpdir` does not exist:
@@ -62,7 +62,7 @@ Within the `container.volume` property, add a new volume named `temp` and config
 1. Once complete, port forward to your container with [`rad resource expose`]({{< ref rad_resource_expose >}}):
 
    ```bash
-   rad resource expose containers mycontainer -a myapp --port 5000
+   rad resource expose Applications.Core/containers mycontainer -a myapp --port 5000
    ```
 
 1. Visit [localhost:5000](http://localhost:5000) in your browser. You should see the contents of `/tmpdir`, showing an empty directory.

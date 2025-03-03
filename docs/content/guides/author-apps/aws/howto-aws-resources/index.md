@@ -96,7 +96,7 @@ This creates a container that will be deployed to your Kubernetes cluster. This 
 1. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose >}}):
 
     ```bash
-    rad resource expose containers frontend -a s3app --port 5234
+    rad resource expose Applications.Core/containers frontend -a s3app --port 5234
     ```
 
 1. Visit [localhost:5234](http://localhost:5234/swagger/index.html) in your browser. This is a swagger doc for the sample application. You can use this to interact with the AWS S3 Bucket you created. For example, you can try to upload a file to the bucket via the `/upload` endpoint.
@@ -128,7 +128,7 @@ If you have issues with the sample application, where the container doesn't conn
 1. Use the below command to inspect logs from container:
 
     ```bash
-    rad resource logs containers frontend -a s3app
+    rad resource logs Applications.Core/containers frontend -a s3app
     ```
 
 Also make sure to [open an Issue](https://github.com/radius-project/radius/issues/new/choose) if you encounter a generic `Internal server error` message or an error message that is not self-serviceable, so we can address the root error not being forwarded to the user.
