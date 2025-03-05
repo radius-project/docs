@@ -22,18 +22,18 @@ rad resource show [resourceType] [resourceName] [flags]
 
 ```
 
-sample list of resourceType: containers, gateways, daprPubSubBrokers, extenders, mongoDatabases, rabbitMQMessageQueues, redisCaches, sqlDatabases, daprStateStores, daprSecretStores
+sample list of resourceType: Applications.Core/containers, Applications.Core/gateways, Applications.Dapr/daprPubSubBrokers, Applications.Core/extenders, Applications.Datastores/mongoDatabases, Applications.Messaging/rabbitMQMessageQueues, Applications.Datastores/redisCaches, Applications.Datastores/sqlDatabases, Applications.Dapr/daprStateStores, Applications.Dapr/daprSecretStores
 
 # show details of a specified resource in the default environment
 
-rad resource show containers orders
-rad resource show gateways orders_gateways
+rad resource show applications.core/containers orders
+rad resource show applications.core/gateways orders_gateways
 
 # show details of a specified resource in an application
-rad resource show containers orders --application icecream-store
+rad resource show applications.core/containers orders --application icecream-store
 
 # show details of a specified resource in an application (shorthand flag)
-rad resource show containers orders -a icecream-store 
+rad resource show applications.core/containers orders -a icecream-store 
 
 ```
 

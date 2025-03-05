@@ -42,8 +42,8 @@ This application models two http services: (1) `producer` and (2) `consumer` tha
 1. Port-forward the container to your machine with [`rad resource expose`]({{< ref rad_resource_expose >}}):
 
     ```bash
-    rad resource expose containers producer -a sqs-sample --port 3000 &
-    rad resource expose containers producer -a sqs-sample --port 4000 &
+    rad resource expose Applications.Core/containers producer -a sqs-sample --port 3000 &
+    rad resource expose Applications.Core/containers producer -a sqs-sample --port 4000 &
     ```
 
 1. Visit [localhost:3000/send](http://localhost:3000/send) in your browser, this will send a message to the SQS Queue provisioned in `app.bicep`. 

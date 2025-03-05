@@ -29,16 +29,16 @@ rad resource logs [resource] [flags]
 
 ```
 # read logs from the 'webapp' resource of the current default app
-rad resource logs containers webapp
+rad resource logs Applications.Core/containers webapp
 
 # read logs from the 'orders' resource of the 'icecream-store' application
-rad resource logs containers orders --application icecream-store
+rad resource logs Applications.Core/containers orders --application icecream-store
 
 # stream logs from the 'orders' resource of the 'icecream-store' application
-rad resource logs containers orders --application icecream-store --follow
+rad resource logs Applications.Core/containers orders --application icecream-store --follow
 
 # read logs from the 'daprd' sidecar container of the 'orders' resource of the 'icecream-store' application
-rad resource logs containers orders --application icecream-store --container daprd
+rad resource logs Applications.Core/containers orders --application icecream-store --container daprd
 ```
 
 ### Options
