@@ -15,11 +15,16 @@ These types can be managed using [rad resource-type](docs/content/reference/cli/
 `rad resource-type create` command takes a resource type manifest as input argument. Users define an openAPI schema for their type 
 in this manifest. A sample manifest is shown below:
 
+
+{{< tabs Recipe Manual >}}
+
 {{< codetab >}}
 
 {{< rad file="snippets/postgres.yaml" embed=true marker="//SAMPLE" >}}
 
 {{< /codetab >}}
+
+{{< /tabs >}}
 
 ## Resource type manifest schema
 
