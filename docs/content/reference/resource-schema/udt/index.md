@@ -39,7 +39,7 @@ Manifest file has below keys at the top level:
 
 | Key | Description | Example |
 |-----|-------------|---------|
-| [**name of the resource type**](#resource-type-name) | The namespace in which the resource type is registered | `MyCompany.Resources` |
+| [**resource type name**](#resource-type-name) | The namespace in which the resource type is registered | `MyCompany.Resources` |
 
 ## resource type name
 
@@ -52,7 +52,7 @@ Manifest file has below keys at the top level:
 
 | Key | Description | Example |
 |-----|-------------|---------|
-| [**apiversion name**](#api-version-name) | a specific api version which supports this resource type | `2025-01-01-preview` |
+| [**api version name**](#api-version-name) | a specific api version which supports this resource type | `2025-01-01-preview` |
 
 ## api version name
 
@@ -74,7 +74,6 @@ Manifest file has below keys at the top level:
 
 | Key | Description | Example |
 |-----|-------------|---------|
-| **type**| type of `schema`. This is always object, representing a open API v3 object  |   |
 | [**property name**](#property-name)| A property name. Property names MUST be strings and SHOULD conform to the regular expression: ^[a-zA-Z0-9\.\-_]+$.| logging-verbosity |
 
 ### property name
