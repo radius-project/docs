@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "Overview: User Defined Type Resource schemas"
-linkTitle: "Overview"
+title: "User Defined Type Resource schemas"
+linkTitle: "User Defined Types"
 description: "Schema docs for the resources of user defined type that can comprise a Radius Application"
-categories: "Overview"
+categories: "Schema"
 weight: 100
 ---
 
@@ -16,7 +16,7 @@ These types can be managed using [rad resource-type](docs/content/reference/cli/
 in this manifest. A sample manifest is shown below:
 
 
-{{< tabs Recipe Manual >}}
+{{< tabs "Resource Manifest" >}}
 
 {{< codetab >}}
 
@@ -33,7 +33,7 @@ Manifest file has below keys at the top level:
 | Key | Description | Example |
 |-----|-------------|---------|
 | **name** | The namespace in which the resource type is registered | `MyCompany.Resources` |
-| [**types**](#types) | type-names in the specified namespace. The resource type manifest usually has one type that should be registered. | `postgresDatabases` |
+| [**types**](#types) | type names in the specified namespace. The resource type manifest usually has one type that should be registered. | `postgresDatabases` |
 
 ### types
 
@@ -46,7 +46,7 @@ Manifest file has below keys at the top level:
 | Key | Description | Example |
 |-----|-------------|---------|
 | **description** | Description of the resource type | `A postgreSQL database` |
-| [**apiVersions**](#apiVersions) | api-versions which support this resource type | `2025-01-01-preview` |
+| [**apiVersions**](#apiVersions) | api versions which support this resource type | `2025-01-01-preview` |
 
 ## apiVersions
 
