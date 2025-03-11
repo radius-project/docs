@@ -44,6 +44,14 @@ Error - Type: IncludeError, Status: True, Reason: RootIncludesRoot, Message: roo
 
 As a workaround make sure to use distinct names for both containers and gateways.
 
+### Typos in Radius Resource Type Names
+Deploying a Radius Resources with a typo in the resource type will result in an error being thrown during deployment. For example, when `Application.Core/Extenders` is defined as `Application.Core/Extender` you will get an error messaging similar to:
+```
+Azure deployment failed, please ensure you have configured an Azure provider with your Radius environment: https://docs.radapp.io/guides/operations/providers/azure-provider/
+```
+
+As a workaround make sure to use correct resource type names while defining radius resources.
+
 ## rad CLI
 
 ### Application and resource names are lower-cased after deployment
