@@ -50,7 +50,7 @@ Deploying a Radius Resources with a typo in the resource type or an unsupported 
 Azure deployment failed, please ensure you have configured an Azure provider with your Radius environment: https://docs.radapp.io/guides/operations/providers/azure-provider/
 ```
 
-We are working on making this error clearer. In the meantime, when you see this error please make sure to ensure that the resource type name is correctly specified while defining radius resources in your application/environment bicep file.
+We are working on making this error clearer. In the meantime, when you see this error please ensure that the resource type name is correctly specified in your Radius Application or Environment Bicep file.
 
 ## rad CLI
 
