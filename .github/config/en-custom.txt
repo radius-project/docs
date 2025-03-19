@@ -1297,3 +1297,4 @@ configurationStores
 configurationstores
 Oras
 oras
+DeploymentTemplate
