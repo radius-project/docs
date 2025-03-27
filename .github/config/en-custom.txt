@@ -1298,3 +1298,9 @@ configurationstores
 Oras
 oras
 DeploymentTemplate
+gitops
+ArgoCD
+ArgoCD
+gitops
+auditable
+bicepparam

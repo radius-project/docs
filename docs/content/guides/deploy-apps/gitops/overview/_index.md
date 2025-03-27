@@ -12,7 +12,7 @@ Radius integrates seamlessly with GitOps to enhance the continuous deployment an
 
 ## What is GitOps?
 
-GitOps is a popular set of practices, implemented as popular tools, like [Flux](https://fluxcd.io/) and [ArgoCD](https://argoproj.github.io/cd/), that mitigates these challenges for enterprise application teams that use git for source control and Kubernetes for orchestration of software containers. The core concept of GitOps is to rely on a git repository that serves as a single source of truth: i.e. it contains current declarative descriptions of the required infrastructure for a given production environment. It also contains a description of the workflow required to prevent drift between the repo and the production environment. Using GitOps, developers and operatations can manage applications in production without needing to write custom scripts or maintain complex CD pipelines.
+GitOps is a popular set of practices, implemented as popular tools, like [Flux](https://fluxcd.io/) and [ArgoCD](https://argoproj.github.io/cd/), that mitigates these challenges for enterprise application teams that use git for source control and Kubernetes for orchestration of software containers. The core concept of GitOps is to rely on a git repository that serves as a single source of truth: i.e. it contains current declarative descriptions of the required infrastructure for a given production environment. It also contains a description of the workflow required to prevent drift between the repo and the production environment. Using GitOps, developers and operators can manage applications in production without needing to write custom scripts or maintain complex CD pipelines.
 
 ## GitOps capabilities in Radius
 
