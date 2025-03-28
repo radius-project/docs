@@ -1300,7 +1300,7 @@ oras
 DeploymentTemplate
 gitops
 ArgoCD
-ArgoCD
+argocd
 gitops
 auditable
 bicepparam
