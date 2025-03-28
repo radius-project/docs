@@ -14,8 +14,8 @@ resource todoapp 'Applications.Core/applications@2023-10-01-preview' = {
 }
 
 //CONNECTION
-resource todocontainer 'Applications.Core/containers@2023-10-01-preview' = {
-  name: 'todocontainer'
+resource frontendcontainer 'Applications.Core/containers@2023-10-01-preview' = {
+  name: 'frontendcontainer'
   properties: {
     application: todoapp.id
     container: {
