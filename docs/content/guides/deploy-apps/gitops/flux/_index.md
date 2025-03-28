@@ -15,8 +15,15 @@ With Radius, deployment and management of applications defined in Bicep files ca
 
 Your Git repository should contain the following:
 - Bicep files defining your Radius applications and cloud infrastructure.
-- `radius-config.yaml` file that specifies which Bicep files to deploy and how to configure them.
+- `radius-gitops-config.yaml` file that specifies which Bicep files to deploy and how to configure them (described below).
 - Any other configuration files required for your applications (such as `.bicepparam` or `bicepconfig.json` files).
+
+
+## Radius Configuration
+
+The features necessary for the Radius + Flux integration are included by default in the Radius controller. You can use the `rad` CLI (`rad init`, `rad install kubernetes`) as normal to install the controller in your Kubernetes cluster.
+
+To enable this integration, you need to create a `radius-config.yaml` file in your Git repository. This file specifies the Bicep files to deploy and their parameters.
 
 Here is an example showing all of the options for the `radius-config.yaml` file:
 ```yaml
@@ -29,7 +36,7 @@ config:
                             # the other fields are optional
 ```
 
-## Flux Installation
+## Flux Setup
 
 For this integration, you will need to install the Flux CLI and the Flux source controller in your Kubernetes cluster.
 
@@ -58,7 +65,11 @@ The only required component for this integration is the Flux source controller. 
    For more information on the network policy, see the [Flux documentation](https://fluxcd.io/flux/installation/configuration/optional-components/#network-policies).
    {{< /alert >}}
 
-### Troubleshooting
+### Configure Flux
+
+Now that you have installed the Flux CLI and the source controller, you can use Flux as you do today to manage your Git repository, such as by using the [`flux create source git`](https://fluxcd.io/flux/cmd/flux_create_source_git/) CLI command to associate your Git repository with the Flux source controller.
+
+## Troubleshooting
 
 Behind the scenes, Radius will create a custom resource called `DeploymentTemplate` to represent your Bicep deployment. You can check the status of this resource to see if there are any issues with the deployment:
 
