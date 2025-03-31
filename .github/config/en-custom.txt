@@ -1299,8 +1299,5 @@ Oras
 oras
 DeploymentTemplate
 gitops
-ArgoCD
-argocd
-gitops
 auditable
 bicepparam

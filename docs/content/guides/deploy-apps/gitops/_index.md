@@ -1,8 +1,7 @@
 ---
 type: docs
-title: "Radius and GitOps"
+title: "Radius + GitOps"
 linkTitle: "GitOps"
-description: "Learn about how Radius is integrated with GitOps tools"
-weight: 300
-tags: ["gitops", "continuous", "delivery", "deployment"]
+description: "Learn about how Radius is integrated with GitOps"
+weight: 500
 ---
