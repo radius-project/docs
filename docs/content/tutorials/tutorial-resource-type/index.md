@@ -9,11 +9,11 @@ categories: ["resource-types"]
 
 This tutorial will teach you the following:
 
-1. Create a new resource type in Radius
+1. Define and add a new resource type in Radius
 1. Register a Recipe for the resource type
 1. Deploy the application with the new resource type. 
 
-In this tutorial, we will create the postgreSQL resource type and deploy the todoapp with postgreSQL.
+In this tutorial, we will create the postgreSQL resource type and deploy the sample todoapp with postgreSQL.
 
 {{< image src="todoapp.png" alt="Diagram of the todoapp with postgreSQL" width=600px >}}
 
@@ -42,9 +42,7 @@ In this tutorial, we will create the postgreSQL resource type and deploy the tod
 
 ## Step 2 : Create the resource type in Radius
 
-Radius supports a set of built-in resource types such as containers, gateways and secrets out of the box that you can use in your applications. The definitions of these resource types are managed by Radius. 
-
-To create a new resource type in Radius, you need to define the schema for the resource type and add the resource type to Radius.
+Radius supports a set of built-in resource types such as containers, gateways and secrets out of the box that you can use in your applications. The definitions of these resource types are managed by Radius. To create a new resource type in Radius, you need to define the schema for the resource type and add the resource type to Radius.
 
 In this step we will define the schema for the postgreSQL resource type in `yaml` and add the resource type to Radius.
 
@@ -113,4 +111,4 @@ Use the command below to run the updated application again, then open the browse
 rad run app.bicep
 ```
 
-You should see the Radius Connections section with new environment variables added. The `todoappcontainer` container now has connection information for Redis (`CONNECTION_POSTGRES_HOST`, `CONNECTION_POSTGRES_PORT`, etc.)
+You should see the Radius Connections section with new environment variables added. The `todoappcontainer` container now has connection information for PostgreSQL (`CONNECTION_POSTGRES_HOST`, `CONNECTION_POSTGRES_PORT`, etc.)
