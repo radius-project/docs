@@ -4,7 +4,7 @@ title: "Tutorial: Create a new resource type in Radius"
 linkTitle: "Create resource type"
 description: "Learn how to define and deploy a new resource type in your Radius application"
 weight: 200
-categories: "Tutorial"
+categories: ["resource-types"]
 ---
 
 This tutorial will teach you the following:
