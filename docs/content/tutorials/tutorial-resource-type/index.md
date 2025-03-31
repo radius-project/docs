@@ -99,11 +99,11 @@ The Recipe for the postgreSQLDatabase resource type is registered to the `defaul
 
 1. Add the postgreSQLDatabase resource type in `app.bicep` file
 
-    {{% rad file="snippets/app.bicep" embed=true % marker="//POSTGRES"}}
+    {{% rad file="snippets/app.bicep" embed=true marker="//POSTGRES" %}}
 
 1. Add the container with the connection information for the postgreSQLDatabase resource type
 
-    {{% rad file="snippets/app.bicep" embed=true % marker="//CONNECTIONS"}}
+    {{% rad file="snippets/app.bicep" embed=true marker="//CONNECTIONS" %}}
 
 ## Step 5: Deploy the application
 
