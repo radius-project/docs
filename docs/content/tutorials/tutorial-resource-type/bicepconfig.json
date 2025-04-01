@@ -1,4 +1,4 @@
-// The bicepconfig.json file is needed so the bicep files in the repo can be compiled with the correct setup
+// The bicepconfig.json file is needed so the bicep files for this tutorial can be compiled with the correct setup
 {
 	"experimentalFeaturesEnabled": {
 		"extensibility": true
@@ -6,6 +6,6 @@
 	"extensions": {
 		"radius": "br:biceptypes.azurecr.io/radius:latest",
 		"aws": "br:biceptypes.azurecr.io/aws:latest",
-		"mycompany": "snippets/output.tgz"
+		"mycompany": "snippets/mycompany.tgz"
 	}
 }
