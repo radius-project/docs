@@ -3,7 +3,7 @@ type: docs
 title: "How-To: Set up Radius with Flux"
 linkTitle: "Flux"
 description: "Learn how to set up Radius to work with Flux for GitOps"
-weight: 100
+weight: 200
 categories: "How-To"
 tags: ["gitops", "flux", "continuous", "delivery", "deployment"]
 ---
