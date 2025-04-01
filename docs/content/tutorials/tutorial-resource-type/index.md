@@ -42,7 +42,9 @@ In this tutorial, we will create the postgreSQL resource type and deploy the sam
 
 ## Step 2 : Create the resource type in Radius
 
-Radius supports a set of built-in resource types such as containers, gateways and secrets out of the box that you can use in your applications. The definitions of these resource types are managed by Radius. To create a new resource type in Radius, you need to define the schema for the resource type and create the resource type in Radius. In this step we will define the schema for the postgreSQL resource type in `yaml` and create the resource type to Radius.
+Radius supports a set of built-in resource types such as containers, gateways and secrets out of the box that you can use in your applications. The definitions of these resource types are managed by Radius. To create a new resource type in Radius, you need to define the schema for the resource type and create the resource type in Radius. 
+
+In this step we will define the schema for the postgreSQL resource type in `yaml` and create the resource type to Radius.
 
 1. Create a new file called `postgreSQL.yaml` and add the following content:
 
@@ -87,7 +89,7 @@ Radius supports a set of built-in resource types such as containers, gateways an
         capabilities: ["SupportsRecipes"]
     ```
 
-The `postgreSQL.yaml` file defines the schema for the postgreSQLDatabase resource type. The schema includes the following properties:
+    The `postgreSQL.yaml` file defines the schema for the postgreSQLDatabase resource type. The schema includes the following properties:
 
     - `environment`: The environment in which the resource type is deployed.
     - `application`: The application to which the resource belongs to.
@@ -96,11 +98,10 @@ The `postgreSQL.yaml` file defines the schema for the postgreSQLDatabase resourc
 
 1. Create the resource type using the [rad resource-type]({{< ref rad_resource-type_create >}}) command:
 
-```bash
-rad resource-type create postgreSQLDatabase -f postgreSQL.yaml
-```
-
-The resource type `MyCompany.Resources/postgreSQLDatabase` is created and Radius will now be able to manage this resource type.
+    ```bash
+    rad resource-type create postgreSQLDatabase -f postgreSQL.yaml
+    ```
+    The resource type `MyCompany.Resources/postgreSQLDatabase` is created and Radius will now be able to manage this resource type.
 
 ## Step 3 : Register a Recipe for the new resource type
     
@@ -108,29 +109,29 @@ In this step, we will publish a Recipe for the postgreSQLDatabase resource type 
  
 1. Create a new file called `postgreSQL.bicep` and add the following content:
 
-{{% rad file="snippets/postgreSQL.bicep" embed=true %}}
+    {{% rad file="snippets/postgreSQL.bicep" embed=true %}}
 
 1. Publish the Recipe to the registry
 
-```bash
-rad bicep publish --file postgreSQL.bicep --target br:ghcr.io/mycompany/recipes/postgreSQL:1.0
-```
-The Recipe for the postgreSQLDatabase is published to the registry 
+    ```bash
+    rad bicep publish --file postgreSQL.bicep --target br:ghcr.io/mycompany/recipes/postgreSQL:1.0
+    ```
+    The Recipe for the postgreSQLDatabase is published to the registry 
 
 1. Now register the postgreSQL Recipe to the environment in Radius
 
-```bash
-rad recipe register postgreSQL --environment default --resource-type MyCompany.Resources/postgreSQLDatabase --template-path ghcr.io/mycompany/recipes/postgreSQL:1.0
-```
-The Recipe for the postgreSQLDatabase resource type is registered to the `default` environment in Radius.
+    ```bash
+    rad recipe register postgreSQL --environment default --resource-type MyCompany.Resources/postgreSQLDatabase --template-path ghcr.io/mycompany/recipes/postgreSQL:1.0
+    ```
+    The Recipe for the postgreSQLDatabase resource type is registered to the `default` environment in Radius.
 
 ## Step 4: Model the new resource-type in your application
 
 1. Generate the Bicep extension for the postgreSQLDatabase resource type
 
-```bash
-rad bicep publish-extension -f postgreSQL.yaml --target ./mycompany.gz
-```
+    ```bash
+    rad bicep publish-extension -f postgreSQL.yaml --target ./mycompany.gz
+    ```
 The bicep extension `mycompany` for the postgreSQLDatabase resource type is generated and published thus enabling the user to author the postgreSQLDatabase resource type in Bicep.
 
 Open the `bicepconfig.json` file and add the `mycompany` extension to the `extensions` section.

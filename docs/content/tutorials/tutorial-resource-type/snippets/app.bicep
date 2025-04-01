@@ -1,6 +1,6 @@
 // Import the set of Radius resources (Applications.*) into Bicep
 extension radius
-
+// Import the set of MyCompany resources (MyCompany.*) into Bicep
 extension mycompany
 
 param environment string
@@ -25,7 +25,6 @@ resource frontendcontainer 'Applications.Core/containers@2023-10-01-preview' = {
           containerPort: 3000
         }
       }
-
       env: {
         CONNECTION_POSTGRES_HOST: {
           value: postgres.properties.status.binding.host
