@@ -1298,3 +1298,6 @@ configurationstores
 Oras
 oras
 DeploymentTemplate
+gitops
+auditable
+bicepparam
