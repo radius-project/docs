@@ -1,0 +1,4 @@
+config:
+  - name: app.bicep
+    params: app.bicepparam
+    resourceGroup: default
