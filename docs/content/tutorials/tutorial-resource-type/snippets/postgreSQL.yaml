@@ -10,7 +10,9 @@ types:
               type: string
             application:
               type: string
-              description: The resource ID of the application.
+            capacity:
+             type: string
+             description: The capacity of the resource type. 
             status:
               type: object
               properties:

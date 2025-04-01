@@ -20,6 +20,13 @@ param context object
 @description('Name of the PostgreSQL database. Defaults to the name of the Radius resource.')
 param database string = context.resource.name
 
+@description('Size of the PostgreSQL database')
+@allowed([
+  'S'
+  'M'
+])
+param size string = context.resource.size
+
 @description('PostgreSQL username')
 param user string = 'postgres'
 
@@ -32,10 +39,10 @@ param password string = 'P@ssword1234$$'
 param tag string = '16-alpine'
 
 @description('Memory request for the postgres deployment.')
-param memoryRequest string = '512Mi'
+var memoryRequest = size == 'small' ? '512Mi' : size == 'medium' ? '1Gi' : '2Gi'
 
 @description('Memory limit for the postgres deployment')
-param memoryLimit string = '1024Mi'
+var memoryLimit = size == 'small' ? '1024Mi' : size == 'medium' ? '2Gi' : '4Gi'
 
 extension kubernetes with {
   kubeConfig: ''
