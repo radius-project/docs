@@ -184,9 +184,9 @@ All numbered lists use `1.` as the number, regardless of the order. The list num
 #### Example
 
 ```md
+1. This is the first step of a process.
 1. This is the second step, and will be displayed with a 2 in the docs.
 1. This is the third step, and will be displayed with a 3.
-1. This is the first step of a process.
 ```
 
 ## Tips and tricks
