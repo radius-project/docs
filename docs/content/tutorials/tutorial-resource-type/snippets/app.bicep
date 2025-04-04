@@ -48,7 +48,7 @@ resource frontendcontainer 'Applications.Core/containers@2023-10-01-preview' = {
 //CONNECTION
 
 //POSTGRES
-resource postgres 'MyCompany.Resources/postgreSQLDatabase@2023-10-01-preview' = {
+resource postgres 'MyCompany.Resources/postgreSQL@2023-10-01-preview' = {
   name: 'postgres'
   location: 'global'
   properties: {

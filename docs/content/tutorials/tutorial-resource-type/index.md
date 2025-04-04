@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Tutorial: Create a resource type in Radius"
+title: "Tutorial: Create a Resource Type in Radius"
 linkTitle: "Create resource type"
 description: "Learn how to define and deploy a resource type in your Radius application"
 weight: 200
@@ -9,11 +9,11 @@ categories: ["resource-types"]
 
 This tutorial will teach you the following:
 
-1. Define the schema and create a resource type in Radius
+1. Define and create a resource type in Radius
 1. Register a Recipe for the resource type
-1. Deploy the application with the new resource type. 
+1. Deploy an application using the new resource type 
 
-In this tutorial, we will create a postgreSQL resource type and deploy the sample todoapp with postgreSQL.
+In this tutorial, we will create a PostgreSQL resource type and deploy the sample TodoApp with PostgreSQL.
 
 {{< image src="todoapp.png" alt="Diagram of the todoapp with postgreSQL" width=600px >}}
 
@@ -42,53 +42,17 @@ In this tutorial, we will create a postgreSQL resource type and deploy the sampl
 
 ## Step 2 : Create the resource type in Radius
 
-Radius supports a set of built-in resource types such as containers, gateways and secrets out of the box that you can use in your applications. The schema definitions and deployments of these resource types are managed by Radius.
+Radius supports a set of built-in resource types such as containers, gateways, and secrets out of the box that you can use in your applications. The schema definitions and deployments of these resource types are managed by Radius.
 
-To create a new resource type in Radius, you need to define the schema and create the resource type in Radius, so that Radius can extend the APIs to support the new resource type in your application.
+To create a new resource type in Radius, you need to define the schema so that Radius can extend the APIs to support the new resource type in your application.
 
-In this step we will define the schema for the postgreSQL resource type in `yaml` and create the resource type to Radius.
+In this step, we will define the schema for the PostgreSQL resource type in `YAML` and create the resource type to Radius.
 
-1. Create a new file called `postgreSQL.yaml` and add the following:
+1. Create a new file called `postgres.yaml` and add the following:
+    
+    {{% rad file="snippets/postgres.yaml" lang=YAML embed=true %}}
 
-    ```yaml
-    name: MyCompany.Resources
-    types:
-    postgreSQLDatabase:
-        apiVersions:
-        '2023-10-01-preview':
-            schema: 
-            type: object
-            properties:
-                environment:
-                type: string
-                application:
-                type: string
-                description: The resource ID of the application.
-                status:
-                type: object
-                properties:
-                    binding:
-                    type: object
-                    properties:
-                        database:
-                        type: string
-                        description: The name of the database.
-                        host:
-                        type: string
-                        description: The host name of the database.
-                        port:
-                        type: string
-                        description: The port number of the database.
-                        username:
-                        type: string
-                        description: The username for the database.
-                        password:
-                        type: string
-                        description: The password for the database.
-        capabilities: ["SupportsRecipes"]
-    ```
-
-    This defines the schema for the postgreSQLDatabase resource type. The schema includes the following:
+    This defines the schema for the PostgreSQL resource type. The schema includes the following:
 
     - `name`: The namespace to which the resource type belongs to. This is used to group resource types together.
     - `types`: The resource type name. 
@@ -104,49 +68,48 @@ In this step we will define the schema for the postgreSQL resource type in `yaml
     ```bash
     rad resource-type create postgreSQLDatabase -f postgreSQL.yaml
     ```
-    The resource type `MyCompany.Resources/postgreSQLDatabase` is created and Radius will now be able to manage this resource type.
+    The resource type `MyCompany.Resources/postgreSQL` is created and Radius will now be able to manage this resource type.
 
 ## Step 3 : Register a Recipe for the resource type
 
-[Recipes]({{< ref "guides/recipes/overview" >}}) define how the resource types are deployed. In this step, we will publish a Recipe for the postgreSQLDatabase resource type and register the Recipe to the `default` environment in Radius.
+[Recipes]({{< ref "guides/recipes/overview" >}}) define how resource types are deployed. In this step, we will publish a Recipe for the PostgreSQL resource type and register it to the `default` environment in Radius.
  
 1. Create a new file called `postgreSQL.bicep` and add the following:
 
-    {{% rad file="snippets/postgreSQL.bicep" embed=true %}}
+    {{% rad file="snippets/bicep/postgreSQL.bicep" embed=true %}}
   
-    This defines how the postgreSQLDatabase resource type is deployed.
+    This defines how the PostgreSQL resource type is deployed.
 
-1. Publish the Recipe to a OCI-compliant registry
+1. Publish the Recipe to an OCI-compliant registry
 
     ```bash
     rad bicep publish --file postgreSQL.bicep --target br:ghcr.io/<username>/recipes/postgreSQL:1.0
     ```
-    The Recipe for the postgreSQLDatabase is published to GitHub container registry.
+    The Recipe is published to GitHub container registry.
 
-1. Register the postgreSQL Recipe to the `default` environment in Radius
+1. Register the Recipe to the `default` environment in Radius
 
     ```bash
-    rad recipe register postgreSQL --environment default --resource-type MyCompany.Resources/postgreSQLDatabase --template-kind bicep --template-path ghcr.io/<username>/recipes/postgreSQL:1.0
+    rad recipe register postgreSQL --environment default --resource-type MyCompany.Resources/postgreSQL --template-kind bicep --template-path ghcr.io/<username>/recipes/postgreSQL:1.0
     ```
-    The Recipe for the postgreSQLDatabase resource type is registered to the `default` environment in Radius.
+    The Recipe for the PostgreSQL resource type is registered to the `default` environment in Radius.
 
 1. Verify the Recipe is registered to the `default` environment
 
     ```bash
     rad recipe list
     ```
-    The Recipe for the postgreSQLDatabase resource type is listed in the `default` environment.
 
 ## Step 4: Model the resource-type in your application
 
-In this step, we will generate the Bicep extension for the postgreSQLDatabase resource type so that you can model this new resource-type in Bicep.
+In this step, we will generate the Bicep extension for the PostgreSQL resource type so that you can model this new resource-type in Bicep.
 
 1. Generate the Bicep extension using the [rad bicep publish-extension]({{< ref rad_bicep_publish-extension >}}) command:
 
     ```bash
     rad bicep publish-extension -f postgreSQL.yaml --target ./mycompany.gz
     ```
-    The bicep extension `mycompany` for the postgreSQLDatabase resource type is generated and saved to the `mycompany.gz` file. 
+    The bicep extension `mycompany` is generated and saved to the `mycompany.gz` file. 
 
     Open the `bicepconfig.json` file and add the `mycompany` extension to the `extensions` section.
 
@@ -163,13 +126,13 @@ In this step, we will generate the Bicep extension for the postgreSQLDatabase re
             }
         ```
 
-1. Add the postgreSQLDatabase resource type in `app.bicep` file
+1. Add the postgreSQL resource type in `app.bicep` file
 
-    {{% rad file="snippets/app.bicep" embed=true marker="//POSTGRES" %}}
+    {{% rad file="snippets/app.bicep" marker="//POSTGRES" %}}
 
-1. Add the container with the connection information for the postgreSQLDatabase resource type
+1. Add the container with the connection information for the postgreSQL resource type
 
-    {{% rad file="snippets/app.bicep" embed=true marker="//CONNECTIONS" %}}
+    {{% rad file="snippets/app.bicep" marker="//CONNECTION" %}}
 
 ## Step 5: Deploy the application
 
@@ -181,8 +144,8 @@ rad run app.bicep
 
 You should see the Radius Connections section with new environment variables added. The `todoappcontainer` container now has connection information for PostgreSQL (`CONNECTION_POSTGRES_HOST`, `CONNECTION_POSTGRES_PORT`, etc.)
 
-{{< image src="todoapp_postgres.png" alt="Todoapp with postgreSQL connection" width=600px >}}
+{{< image src="todoapp_postgres.png" alt="Todoapp with postgreSQL connection" width=800px >}}
 
 ## Next steps
 
-In this tutorial, you learned how to create a postgreSQL resource type in Radius and deploy the sample todoapp with the resource types. You can use the same steps to create and deploy other resource types in Radius.
+In this tutorial, you learned how to create a PostgreSQL resource type in Radius and deploy the sample Todoapp with the resource type. You can use the same steps to create and deploy other resource types in Radius.
