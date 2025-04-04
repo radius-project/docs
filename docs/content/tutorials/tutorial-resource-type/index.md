@@ -50,7 +50,7 @@ In this step, we will define the schema for the PostgreSQL resource type in `YAM
 
 1. Create a new file called `postgres.yaml` and add the following:
     
-    {{% rad file="snippets/postgres.yaml" lang=YAML embed=true %}}
+{{% rad file="snippets/postgres.yaml" lang=YAML embed=true %}}
 
     This defines the schema for the PostgreSQL resource type. The schema includes the following:
 
@@ -76,9 +76,9 @@ In this step, we will define the schema for the PostgreSQL resource type in `YAM
  
 1. Create a new file called `postgreSQL.bicep` and add the following:
 
-    {{% rad file="snippets/bicep/postgreSQL.bicep" embed=true %}}
+{{% rad file="snippets/recipes/bicep/postgreSQL.bicep" embed=true %}}
   
-    This defines how the PostgreSQL resource type is deployed.
+This defines how the PostgreSQL resource type is deployed.
 
 1. Publish the Recipe to an OCI-compliant registry
 
@@ -128,11 +128,11 @@ In this step, we will generate the Bicep extension for the PostgreSQL resource t
 
 1. Add the postgreSQL resource type in `app.bicep` file
 
-    {{% rad file="snippets/app.bicep" marker="//POSTGRES" %}}
+{{% rad file="snippets/app.bicep" embed=true marker="//POSTGRES" %}}
 
 1. Add the container with the connection information for the postgreSQL resource type
 
-    {{% rad file="snippets/app.bicep" marker="//CONNECTION" %}}
+{{% rad file="snippets/app.bicep" embed=true marker="//CONNECTION" %}}
 
 ## Step 5: Deploy the application
 
