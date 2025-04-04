@@ -3,50 +3,35 @@ types:
   postgresDatabases:
     description: A postgreSQL database
     apiVersions:
-      '2025-01-01-preview':
+      '2023-10-01-preview':
         schema: 
           type: object
           properties:
-            size:
+            environment:
               type: string
-              description: |
-                The size of database to provision:
-                  - 'S': 0.5 vCPU, 2 GiB memory, 20 GiB storage
-                  - 'M': 1 vCPU, 4 GiB memory, 40 GiB storage
-                  - 'L': 2 vCPU, 8 GiB memory, 60 GiB storage
-                  - 'XL': 4 vCPU, 16 GiB memory, 100 GiB storage
-              enum:
-                - S
-                - M
-                - L
-                - XL
-            logging-verbosity:
+            application:
               type: string
-              description: >
-                The logging level for the database:
-                  - 'TERSE': Not recommended; does not provide guidance on what to do about an error
-                  - 'DEFAULT': Recommended level
-                  - 'VERBOSE': Use only if you plan to actually look up the Postgres source code
-              enum:
-                - TERSE
-                - DEFAULT
-                - VERBOSE
-            connection-string:
-              type: string
-              readOnly: true
-              description: 'Fully qualified string to connect to the resource'
-              env-variable: POSTGRESQL_CONNECTION_STRING
-            credentials:
+              description: The resource ID of the application.
+            status:
               type: object
-              readOnly: true
               properties:
-                username:
-                  type: string
-                  description: 'Username for the database'
-                  env-variable: POSTGRESQL_USERNAME
-                password:
-                  type: string
-                  description: 'Password for the database user'
-                  env-variable: POSTGRESQL_PASSWORD
-          required:
-            - size
+                binding:
+                  type: object
+                  properties:
+                    database:
+                      type: string
+                      description: The name of the database.
+                    host:
+                      type: string
+                      description: The host name of the database.
+                    port:
+                      type: string
+                      description: The port number of the database.
+                    username:
+                      type: string
+                      description: The username for the database.
+                    password:
+                      type: string
+                      description: The password for the database.
+    capabilities: ["SupportsRecipes"]
+            
