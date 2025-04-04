@@ -64,15 +64,15 @@ To create a PostgreSQL resource type in Radius, you must create the resource typ
 
 ## Step 3 : Register a Recipe for the PostgreSQL resource type
 
-[Recipes]({{< ref "/guides/recipes/overview" >}}) define how resource types are deployed. For PostgreSQL resource type, you must create a Recipe that defines how the resource type is deployed. 
+[Recipes]({{< ref "/guides/recipes/overview" >}}) define how resource types are deployed. To deploy the PostgreSQL resource type, you must create a Bicep template and register the template as a Recipe to the Radius environment. 
  
 1. Create a new file called `postgreSQL.bicep` and add the following:
 
    {{% rad file="snippets/recipes/bicep/postgreSQL.bicep" embed=true %}}
   
-This defines how the PostgreSQL resource type is deployed.
+    This defines how the PostgreSQL resource type is deployed.
 
-1. Publish the Recipe to an OCI-compliant registry. The below command publishes the Recipe to GitHub container registry. You can use any OCI-compliant registry. Follow this [how-to-guide]({{< ref "/guides/recipes/howto-private-bicep-registry" >}}) to publish to a private registry.
+1. Publish the Recipe to [GitHub container registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry) using the below command. You can use any OCI-compliant registry. Follow this [how-to-guide]({{< ref "/guides/recipes/howto-private-bicep-registry" >}}) if you want to publish to a private registry.
 
     ```bash
     rad bicep publish --file postgreSQL.bicep --target br:ghcr.io/<username>/recipes/postgreSQL:1.0
@@ -90,6 +90,13 @@ This defines how the PostgreSQL resource type is deployed.
     ```bash
     rad recipe list
     ```
+    You should see the Recipe for the PostgreSQL resource type listed in the output.
+
+    ```bash
+    RECIPE    TYPE                            TEMPLATE KIND  TEMPLATE VERSION TEMPLATE
+    default   MyCompany.Resources/postgreSQL  bicep                            ghcr.io/reshrahim/recipes/postgres:1.0
+    ...
+    ```
 
 ## Step 4: Model the PostgreSQL resource-type in your application
 
@@ -102,7 +109,18 @@ To model the PostgreSQL resource type in your application, you must generate a [
     ```
     The bicep extension `mycompany` is generated and saved to the `mycompany.tgz` file. Open the [`bicepconfig.json`]({{< ref "/guides/tooling/bicepconfig/overview" >}}) file and add the `mycompany` extension to the `extensions` section.
 
-    {{% rad file="snippets/bicepconfig.json" lang=JSON embed=true %}}
+    ```
+    {
+        "experimentalFeaturesEnabled": {
+            "extensibility": true
+        },
+        "extensions": {
+            "radius": "br:biceptypes.azurecr.io/radius:latest",
+            "aws": "br:biceptypes.azurecr.io/aws:latest",
+            "mycompany": "./mycompany.tgz"
+        }
+    }
+    ```
 
 1. Open `app.bicep` and add the `mycompany` extension and the postgreSQL resource type
    
