@@ -100,7 +100,7 @@ To model the PostgreSQL resource type in your application, you must generate a [
     ```bash
     rad bicep publish-extension -f postgreSQL.yaml --target ./mycompany.tgz
     ```
-    The bicep extension `mycompany` is generated and saved to the `mycompany.tgz` file. Open the [`bicepconfig.json`]({{< ref /guides/tooling/bicepconfig/overview/ >}}) file and add the `mycompany` extension to the `extensions` section.
+    The bicep extension `mycompany` is generated and saved to the `mycompany.tgz` file. Open the [`bicepconfig.json`]({{< ref "/guides/tooling/bicepconfig/overview/" >}}) file and add the `mycompany` extension to the `extensions` section.
 
     {{% rad file="snippets/bicepconfig.json" lang=json embed=true %}}
 
