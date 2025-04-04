@@ -5,7 +5,9 @@ extension mycompany
 
 param environment string
 
-resource todoapp 'Applications.Core/applications@2023-10-01-preview' = {
+param application string
+
+resource todolist 'Applications.Core/applications@2023-10-01-preview' = {
   name: 'todoapp'
   location: 'global'
   properties: {
@@ -17,7 +19,7 @@ resource todoapp 'Applications.Core/applications@2023-10-01-preview' = {
 resource frontendcontainer 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'frontendcontainer'
   properties: {
-    application: todoapp.id
+    application: application
     container: {
       image: 'ghcr.io/radius-project/samples/demo:latest'
       ports: {
@@ -26,20 +28,20 @@ resource frontendcontainer 'Applications.Core/containers@2023-10-01-preview' = {
         }
       }
       env: {
-        CONNECTION_POSTGRES_HOST: {
-          value: postgres.properties.status.binding.host
+        CONNECTION_POSTGRESQL_HOST: {
+          value: postgres.properties.host
         }
-        CONNECTION_POSTGRES_PORT: {
-          value: string(postgres.properties.status.binding.port)
+        CONNECTION_POSTGRESQL_PORT: {
+          value: string(postgres.properties.port)
         }
-        CONNECTION_POSTGRES_USERNAME: {
-          value: postgres.properties.status.binding.username
+        CONNECTION_POSTGRESQL_USERNAME: {
+          value: postgres.properties.username
         }
-        CONNECTION_POSTGRES_DATABASE: {
-          value: postgres.properties.status.binding.database
+        CONNECTION_POSTGRESQL_DATABASE: {
+          value: postgres.properties.database
         }
-        CONNECTION_POSTGRES_PASSWORD: {
-          value: postgres.properties.status.binding.password
+        CONNECTION_POSTGRESQL_PASSWORD: {
+          value: postgres.properties.password
         }
       }
     }
@@ -48,11 +50,11 @@ resource frontendcontainer 'Applications.Core/containers@2023-10-01-preview' = {
 //CONNECTION
 
 //POSTGRES
-resource postgres 'MyCompany.Resources/postgreSQL@2023-10-01-preview' = {
+resource postgres 'Applications.Core/postgreSQL@2023-10-01-preview' = {
   name: 'postgres'
   location: 'global'
   properties: {
-    application: todoapp.id
+    application: application
     environment: environment 
   }
 }
