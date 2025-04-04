@@ -64,7 +64,7 @@ To create a PostgreSQL resource type in Radius, you must create the resource typ
 
 ## Step 3 : Register a Recipe for the PostgreSQL resource type
 
-[Recipes]({{< ref "guides/recipes/overview" >}}) define how resource types are deployed. For PostgreSQL resource type, you must create a Recipe that defines how the resource type is deployed. 
+[Recipes]({{< ref "/guides/recipes/overview" >}}) define how resource types are deployed. For PostgreSQL resource type, you must create a Recipe that defines how the resource type is deployed. 
  
 1. Create a new file called `postgreSQL.bicep` and add the following:
 
@@ -72,7 +72,7 @@ To create a PostgreSQL resource type in Radius, you must create the resource typ
   
 This defines how the PostgreSQL resource type is deployed.
 
-1. Publish the Recipe to an OCI-compliant registry. The below command publishes the Recipe to GitHub container registry. You can use any OCI-compliant registry. Follow this [how-to-guide]({{< ref "guides/recipes/howto-private-bicep-registry" >}}) to publish to a private registry.
+1. Publish the Recipe to an OCI-compliant registry. The below command publishes the Recipe to GitHub container registry. You can use any OCI-compliant registry. Follow this [how-to-guide]({{< ref "/guides/recipes/howto-private-bicep-registry" >}}) to publish to a private registry.
 
     ```bash
     rad bicep publish --file postgreSQL.bicep --target br:ghcr.io/<username>/recipes/postgreSQL:1.0
