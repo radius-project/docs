@@ -9,7 +9,7 @@ categories: ["resource-types"]
 
 ## Overview
 
-Radius includes several built-in resource types which developers can use to build applications. These include core resource types such as containers, gateways, and secrets. You can also create your own resource types. This tutorial guides your through creating a PostgreSQL resource and deploying the sample Todo List application with PostgreSQL.
+Radius includes several built-in resource types which developers can use to build applications. These include core resource types such as containers, gateways, and secrets. You can also create your own resource types. This tutorial guides you through creating a PostgreSQL resource and deploying the sample Todo List application with PostgreSQL.
 
 {{< image src="todoapp.png" alt="Diagram of the todoapp with postgreSQL" width=600px >}}
 
@@ -100,17 +100,20 @@ To model the PostgreSQL resource type in your application, you must generate a [
     ```bash
     rad bicep publish-extension -f postgreSQL.yaml --target ./mycompany.tgz
     ```
-    The bicep extension `mycompany` is generated and saved to the `mycompany.tgz` file. Open the [`bicepconfig.json`]({{< ref "/guides/tooling/bicepconfig/overview/" >}}) file and add the `mycompany` extension to the `extensions` section.
+    The bicep extension `mycompany` is generated and saved to the `mycompany.tgz` file. Open the [`bicepconfig.json`]({{< ref "/guides/tooling/bicepconfig/overview" >}}) file and add the `mycompany` extension to the `extensions` section.
 
     {{% rad file="snippets/bicepconfig.json" lang=json embed=true %}}
 
-1. Open `app.bicep` and add the postgreSQL resource type in `app.bicep` file
-
+1. Open `app.bicep` and add the `mycompany` extension and the postgreSQL resource type
+   
+    ```bicep
+    extension mycompany
+    ```
    {{% rad file="snippets/app.bicep" embed=true marker="//POSTGRES" %}}
 
-1. Add the container with the connection information for the postgreSQL resource type
+1. Add the connection information for the postgreSQL resource type to the container as environment variables
 
-   {{% rad file="snippets/app.bicep" embed=true marker="//CONNECTION" %}}
+   {{% rad file="snippets/app.bicep" embed=true marker="//CONTAINER" %}}
 
 ## Step 5: Deploy the application
 
@@ -123,7 +126,6 @@ rad run app.bicep
 You should see the Radius Connections section with new environment variables added. The `todoappcontainer` container now has connection information for PostgreSQL (`CONNECTION_POSTGRESQL_HOST`, `CONNECTION_POSTGRESQL_PORT`, etc.)
 
 {{< image src="todoapp_postgres.png" alt="Todoapp with postgreSQL connection" width=800px >}}
-
 
 ## Next steps
 

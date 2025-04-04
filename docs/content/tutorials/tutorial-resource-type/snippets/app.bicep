@@ -1,4 +1,3 @@
-// Import the set of Radius resources (Applications.*) into Bicep
 extension radius
 // Import the set of MyCompany resources (MyCompany.*) into Bicep
 extension mycompany
@@ -7,17 +6,9 @@ param environment string
 
 param application string
 
-resource todolist 'Applications.Core/applications@2023-10-01-preview' = {
-  name: 'todoapp'
-  location: 'global'
-  properties: {
-    environment: environment
-  }
-}
-
-//CONNECTION
-resource frontendcontainer 'Applications.Core/containers@2023-10-01-preview' = {
-  name: 'frontendcontainer'
+//CONTAINER
+resource demo 'Applications.Core/containers@2023-10-01-preview' = {
+  name: 'demo'
   properties: {
     application: application
     container: {
@@ -27,6 +18,7 @@ resource frontendcontainer 'Applications.Core/containers@2023-10-01-preview' = {
           containerPort: 3000
         }
       }
+      //CONNECTION
       env: {
         CONNECTION_POSTGRESQL_HOST: {
           value: postgres.properties.host
@@ -44,10 +36,11 @@ resource frontendcontainer 'Applications.Core/containers@2023-10-01-preview' = {
           value: postgres.properties.password
         }
       }
+     //CONNECTION
     }
   }
 }
-//CONNECTION
+//CONTAINER
 
 //POSTGRES
 resource postgres 'Applications.Core/postgreSQL@2023-10-01-preview' = {
