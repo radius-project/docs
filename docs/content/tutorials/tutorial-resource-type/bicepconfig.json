@@ -6,6 +6,6 @@
 	"extensions": {
 		"radius": "br:biceptypes.azurecr.io/radius:latest",
 		"aws": "br:biceptypes.azurecr.io/aws:latest",
-		"mycompany": "mycompany.tgz"
+		"mycompany": "./mycompany.tgz"
 	}
 }
