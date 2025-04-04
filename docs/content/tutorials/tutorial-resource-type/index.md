@@ -108,7 +108,7 @@ In this step we will define the schema for the postgreSQL resource type in `yaml
 
 ## Step 3 : Register a Recipe for the resource type
 
-[Recipes]({{< ref recipes >}}) define how the resource types are deployed. In this step, we will publish a Recipe for the postgreSQLDatabase resource type and register the Recipe to the `default` environment in Radius.
+[Recipes]({{< ref "guides/recipes/overview" >}}) define how the resource types are deployed. In this step, we will publish a Recipe for the postgreSQLDatabase resource type and register the Recipe to the `default` environment in Radius.
  
 1. Create a new file called `postgreSQL.bicep` and add the following:
 
