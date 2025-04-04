@@ -40,7 +40,7 @@ In this tutorial, we will create a PostgreSQL resource type and deploy the sampl
    rad init
    ```
 
-## Step 2 : Create the resource type in Radius
+## Step 2 : Create a resource type in Radius
 
 Radius supports a set of built-in resource types such as containers, gateways, and secrets out of the box that you can use in your applications. The schema definitions and deployments of these resource types are managed by Radius.
 
@@ -49,8 +49,9 @@ To create a new resource type in Radius, you need to define the schema so that R
 In this step, we will define the schema for the PostgreSQL resource type in `YAML` and create the resource type to Radius.
 
 1. Create a new file called `postgres.yaml` and add the following:
-    
-{{% rad file="snippets/postgres.yaml" lang=YAML embed=true %}}
+
+   {{% rad file="snippets/app.bicep" embed=true %}}
+   {{% rad file="snippets/postgres.yaml" lang=YAML embed=true %}}
 
     This defines the schema for the PostgreSQL resource type. The schema includes the following:
 
