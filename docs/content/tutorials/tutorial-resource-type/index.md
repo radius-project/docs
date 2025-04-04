@@ -13,7 +13,7 @@ This tutorial will teach you the following:
 1. Register a Recipe for the resource type
 1. Deploy an application using the new resource type 
 
-In this tutorial, we will create a PostgreSQL resource type and deploy the sample TodoApp with PostgreSQL.
+In this tutorial, we will create a PostgreSQL resource type and deploy the sample Todo application with PostgreSQL.
 
 {{< image src="todoapp.png" alt="Diagram of the todoapp with postgreSQL" width=600px >}}
 
@@ -148,4 +148,4 @@ You should see the Radius Connections section with new environment variables add
 
 ## Next steps
 
-In this tutorial, you learned how to create a PostgreSQL resource type in Radius and deploy the sample Todoapp with the resource type. You can use the same steps to create and deploy other resource types in Radius.
+In this tutorial, you learned how to create a PostgreSQL resource type in Radius and deploy the sample Todo application with the resource type. You can use the same steps to create and deploy other resource types in Radius.
