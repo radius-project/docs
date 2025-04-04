@@ -1297,3 +1297,6 @@ configurationStores
 configurationstores
 Oras
 oras
+apiVersions
+openAPI
+zA
