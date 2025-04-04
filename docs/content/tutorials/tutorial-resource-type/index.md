@@ -17,7 +17,7 @@ Radius includes several built-in resource types which developers can use to buil
 
 - [A Kubernetes cluster to host Radius and the Todo List application]({{< ref "/guides/operations/kubernetes/overview" >}})
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- An OCI compliant registry with anonymous access (private OCI container registries are supported with [additional configuration]({{< ref guides/recipes/howto-private-bicep-registry>}}))
+- An OCI compliant registry with anonymous access (private OCI container registries are supported with [additional configuration]({{< ref /guides/recipes/howto-private-bicep-registry>}}))
 - The [Bicep extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}}) for VSCode is recommended for Bicep language support
 
 ## Step 1 : Install Radius and initialize a new environment
