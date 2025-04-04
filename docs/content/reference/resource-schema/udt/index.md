@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "User Defined Type Resource schemas"
-linkTitle: "User Defined Types"
-description: "Schema docs for the resources of an user defined type that can comprise a Radius Application"
+title: "User Defined Resource Type Schema"
+linkTitle: "User Defined Resource Type"
+description: "Schema reference document for a User defined Resource Type"
 categories: "Schema"
 weight: 100
 ---
