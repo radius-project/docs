@@ -43,7 +43,7 @@ To create a PostgreSQL resource type in Radius, you must create the resource typ
 
 1. Create a new file called `postgreSQL.yaml` and add the following:
 
-   {{% rad file="snippets/postgres.yaml" lang=YAML embed=true %}}
+   {{% rad file="snippets/postgreSQL.yaml" lang=YAML embed=true %}}
 
     The PostgreSQL resource type definition includes:
 
@@ -102,7 +102,7 @@ To model the PostgreSQL resource type in your application, you must generate a [
     ```
     The bicep extension `mycompany` is generated and saved to the `mycompany.tgz` file. Open the [`bicepconfig.json`]({{< ref "/guides/tooling/bicepconfig/overview" >}}) file and add the `mycompany` extension to the `extensions` section.
 
-    {{% rad file="snippets/bicepconfig.json" lang=json embed=true %}}
+    {{% rad file="snippets/bicepconfig.json" lang=JSON embed=true %}}
 
 1. Open `app.bicep` and add the `mycompany` extension and the postgreSQL resource type
    
