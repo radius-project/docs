@@ -141,7 +141,7 @@ Use the command below to run the updated application again, then open the browse
 rad run app.bicep
 ```
 
-You should see the Radius Connections section with new environment variables added. The `todoappcontainer` container now has connection information for PostgreSQL (`CONNECTION_POSTGRESQL_HOST`, `CONNECTION_POSTGRESQL_PORT`, etc.)
+You should see the Radius Connections section with new environment variables added. The `demo` container now has connection information for PostgreSQL (`CONNECTION_POSTGRESQL_HOST`, `CONNECTION_POSTGRESQL_PORT`, etc.)
 
 {{< image src=todolist_postgresql.png" alt="Todo List with PostgreSQL connection" width=800px >}}
 
