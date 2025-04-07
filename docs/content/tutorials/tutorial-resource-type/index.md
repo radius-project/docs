@@ -127,7 +127,7 @@ To model the PostgreSQL resource type in your application, you must generate a [
     ```bicep
     extension mycompany
     ```
-   {{% rad file="snippets/app.bicep" embed=true marker="//POSTGRES" %}}
+   {{% rad file="snippets/app.bicep" embed=true marker="//POSTGRESQL" %}}
 
 1. Add the connection information for the postgreSQL resource type to the container as environment variables
 

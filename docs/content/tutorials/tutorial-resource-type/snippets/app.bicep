@@ -3,11 +3,12 @@ extension radius
 // Import the set of MyCompany resources (MyCompany.*) into Bicep
 extension mycompany
 
+@description('The Radius Application ID. Injected automatically by the rad CLI.')
 param application string
 
-//CONNECTION
-resource frontendcontainer 'Applications.Core/containers@2023-10-01-preview' = {
-  name: 'frontendcontainer'
+//CONTAINER
+resource demo 'Applications.Core/containers@2023-10-01-preview' = {
+  name: 'demo'
   properties: {
     application: application
     container: {
@@ -17,37 +18,39 @@ resource frontendcontainer 'Applications.Core/containers@2023-10-01-preview' = {
           containerPort: 3000
         }
       }
+      //CONNECTION
       env: {
-        CONNECTION_POSTGRES_HOST: {
-          value: postgres.properties.status.binding.host
+        CONNECTION_POSTGRESQL_HOST: {
+          value: postgresql.properties.status.binding.host
         }
-        CONNECTION_POSTGRES_PORT: {
-          value: string(postgres.properties.status.binding.port)
+        CONNECTION_POSTGRESQL_PORT: {
+          value: string(postgresql.properties.status.binding.port)
         }
-        CONNECTION_POSTGRES_USERNAME: {
-          value: postgres.properties.status.binding.username
+        CONNECTION_POSTGRESQL_USERNAME: {
+          value: postgresql.properties.status.binding.username
         }
-        CONNECTION_POSTGRES_DATABASE: {
-          value: postgres.properties.status.binding.database
+        CONNECTION_POSTGRESQL_DATABASE: {
+          value: postgresql.properties.status.binding.database
         }
-        CONNECTION_POSTGRES_PASSWORD: {
-          value: postgres.properties.status.binding.password
-        }
+        CONNECTION_POSTGRESQL_PASSWORD: {
+          value: postgresql.properties.status.binding.password
+        }   
       }
     }
   }
 }
-//CONNECTION
+//CONTAINER
 
-//POSTGRES
-resource postgres 'MyCompany.Resources/postgreSQL@2023-10-01-preview' = {
-  name: 'postgres'
+//POSTGRESQL
+resource postgresql 'MyCompany.Resources/postgreSQL@2023-10-01-preview' = {
+  name: 'postgresql'
   location: 'global'
   properties: {
     application: application
   }
 }
-//POSTGRES
+//POSTGRESQL
+
 
 
 
