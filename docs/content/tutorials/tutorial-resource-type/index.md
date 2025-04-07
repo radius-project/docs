@@ -122,7 +122,7 @@ To create a PostgreSQL resource type in Radius, you must create the resource typ
     }
     ```
 
-1. Open `app.bicep` and add the `mycompany` extension and the postgreSQL resource type
+1. Open `app.bicep` and add the `mycompany` extension and the PostgreSQL resource type
    
     ```bicep
     extension mycompany
