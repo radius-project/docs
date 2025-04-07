@@ -100,7 +100,7 @@ To create a PostgreSQL resource type in Radius, you must create the resource typ
 
 ## Step 4: Model the PostgreSQL resource-type in your application
 
-To model the PostgreSQL resource type in your application, you must generate a [Bicep extension](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-extension). Bicep extensions enable you to model and reference resource types that are beyond the scope of Azure. For the core Radius resource types, the Bicep extension is automatically generated and included in the `bicepconfig.json` file.
+[Bicep extensions](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-extension) enable you to model and reference resource types that are beyond the scope of Azure. For the core Radius resource types, the Bicep extension is automatically generated and included in the `bicepconfig.json` file. To model the PostgreSQL resource type in your application, you must generate a Bicep extension and add it to the `bicepconfig.json`
 
 1. Generate the Bicep extension using the [rad bicep publish-extension]({{< ref rad_bicep_publish-extension >}}) command:
 
@@ -122,14 +122,14 @@ To model the PostgreSQL resource type in your application, you must generate a [
     }
     ```
 
-1. Open `app.bicep` and add the `mycompany` extension and the postgreSQL resource type
+1. Open `app.bicep` and add the `mycompany` extension and the PostgreSQL resource type
    
     ```bicep
     extension mycompany
     ```
    {{% rad file="snippets/app.bicep" embed=true marker="//POSTGRESQL" %}}
 
-1. Add the connection information for the postgreSQL resource type to the container as environment variables
+1. Add the connection information for the PostgreSQL resource type to the container as environment variables
 
    {{% rad file="snippets/app.bicep" embed=true marker="//CONTAINER" %}}
 
