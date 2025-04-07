@@ -129,7 +129,7 @@ To create a PostgreSQL resource type in Radius, you must create the resource typ
     ```
    {{% rad file="snippets/app.bicep" embed=true marker="//POSTGRES" %}}
 
-1. Add the connection information for the postgreSQL resource type to the container as environment variables
+1. Add the connection information for the PostgreSQL resource type to the container as environment variables
 
    {{% rad file="snippets/app.bicep" embed=true marker="//CONTAINER" %}}
 
