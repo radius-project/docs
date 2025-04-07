@@ -11,7 +11,7 @@ categories: ["resource-types"]
 
 Radius includes several built-in resource types which developers can use to build applications. These include core resource types such as containers, gateways, and secrets. You can also create your own resource types. This tutorial guides you through creating a PostgreSQL resource and deploying the sample Todo List application with PostgreSQL.
 
-{{< image src="todoapp.png" alt="Diagram of the todoapp with postgreSQL" width=600px >}}
+{{< image src="todolist.png" alt="Diagram of the Todo List with PostgreSQL" width=600px >}}
 
 ## Prerequisites
 
@@ -143,8 +143,5 @@ rad run app.bicep
 
 You should see the Radius Connections section with new environment variables added. The `todoappcontainer` container now has connection information for PostgreSQL (`CONNECTION_POSTGRESQL_HOST`, `CONNECTION_POSTGRESQL_PORT`, etc.)
 
-{{< image src="todoapp_postgres.png" alt="Todoapp with postgreSQL connection" width=800px >}}
+{{< image src=todolist_postgresql.png" alt="Todo List with PostgreSQL connection" width=800px >}}
 
-## Next steps
-
-In this tutorial, you learned how to create a PostgreSQL resource type in Radius and deploy the sample Todo application with the resource type. You can use the same steps to create and deploy other resource types in Radius.
