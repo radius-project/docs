@@ -39,7 +39,7 @@ Radius includes several built-in resource types which developers can use to buil
 
 ## Step 2 : Create a PostgreSQL resource type in Radius
 
-To create a PostgreSQL resource type in Radius, you must create the resource type definition and add the resource type to Radius
+To create a PostgreSQL resource type in Radius, first create the resource type definition then add the resource type to Radius.
 
 1. Create a new file called `postgreSQL.yaml` and add the following:
 
@@ -47,12 +47,12 @@ To create a PostgreSQL resource type in Radius, you must create the resource typ
 
     The PostgreSQL resource type definition includes:
 
-    - `name`: The namespace to which the resource type belongs to. This is used to group resource types together.
-    - `types`: The resource type name. 
-    - `apiVersions`: The API version of the resource type. Must be ``2023-10-01-preview`.
+    - `name`: The namespace of the resource type used to group resource types; must be in the form PrimaryName.SecondaryName
+    - `types`: The resource type name
+    - `apiVersions`: The version of the schema defined below; currently must be `2023-10-01-preview` 
     - `schema`: The schema defines the properties of the resource type.
-        - `environment`: The Radius environment in which the resource type is deployed. This property is set by Radius when the resource is deployed
-        - `application`: The application to which the resource belongs to.
+        - `environment`: The Radius environment in which the resource type is deployed; this property is set by Radius when the resource is deployed
+        - `application`: The application to which the resource belongs to
         - `status`: This is a read-only property that is set by the Recipe that includes connection information to the resource type.
     - `capabilities`: This specifies features of the resource type. The only available option is `SupportsRecipes` which indicates that the resource type can be deployed via a recipe.
 
@@ -94,7 +94,7 @@ To create a PostgreSQL resource type in Radius, you must create the resource typ
 
     ```bash
     RECIPE    TYPE                            TEMPLATE KIND  TEMPLATE VERSION TEMPLATE
-    default   MyCompany.Resources/postgreSQL  bicep                            ghcr.io/reshrahim/recipes/postgres:1.0
+    default   MyCompany.Resources/postgreSQL  bicep                            ghcr.io/username/recipes/postgres:1.0
     ...
     ```
 
