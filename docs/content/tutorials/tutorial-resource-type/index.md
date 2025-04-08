@@ -135,7 +135,7 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
 
 ## Step 5: Deploy the application
 
-Use the command below to run the updated application again, then open the browser to [http://localhost:3000](http://localhost:3000).
+Run the application using `rad run`. The `rad run` command sets up port forwarding to the application. Visit the application at [http://localhost:3000](http://localhost:3000).
 
 ```sh
 rad run app.bicep
