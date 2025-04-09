@@ -121,6 +121,8 @@ output result object = {
     port: port
     database: database
     username: user
+  }
+  secrets: {
     password: password
   } 
 }
