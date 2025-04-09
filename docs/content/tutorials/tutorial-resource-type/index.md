@@ -18,7 +18,7 @@ Radius includes several built-in resource types which developers can use to buil
 - [A Kubernetes cluster to host Radius and the Todo List application]({{< ref "/guides/operations/kubernetes/overview" >}})
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - An OCI compliant registry with anonymous access (private OCI container registries are supported with [additional configuration]({{< ref "/guides/recipes/howto-private-bicep-registry" >}}))
-- The [Bicep extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}}) for VSCode is recommended for Bicep language support
+- The [Bicep extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}}) for VS Code is recommended for Bicep language support
 
 ## Step 1 : Install Radius and initialize a new environment
 
@@ -83,7 +83,6 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
     ```bash
     rad recipe register default --environment default --resource-type MyCompany.Resources/postgreSQL --template-kind bicep --template-path ghcr.io/<username>/recipes/postgreSQL:1.0
     ```
-    The Recipe for the PostgreSQL resource type is registered to the `default` environment in Radius.
 
 1. Verify the Recipe is registered to the `default` environment
 
