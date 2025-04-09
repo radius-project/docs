@@ -6,6 +6,10 @@ extension mycompany
 @description('The Radius Application ID. Injected automatically by the rad CLI.')
 param application string
 
+@description('The Radius environment. Injected automatically by the rad CLI.')
+param environment string
+
+
 //CONTAINER
 resource demo 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'demo'
@@ -32,6 +36,7 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
         CONNECTION_POSTGRESQL_DATABASE: {
           value: postgresql.properties.status.binding.database
         }
+        //This is passed as clear text for demo purposes only. In production, use a secret store.
         CONNECTION_POSTGRESQL_PASSWORD: {
           value: postgresql.properties.status.binding.password
         }   
@@ -47,6 +52,7 @@ resource postgresql 'MyCompany.Resources/postgreSQL@2023-10-01-preview' = {
   location: 'global'
   properties: {
     application: application
+    environment: environment
   }
 }
 //POSTGRESQL
