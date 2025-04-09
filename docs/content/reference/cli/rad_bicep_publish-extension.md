@@ -41,6 +41,7 @@ bicep publish-extension ./Example.Provider.yaml --target br:ghcr.io/myregistry/e
 ### Options
 
 ```
+      --force              Overwrite the target extension if it exists.
   -f, --from-file string   The input file. May be an absolute path or a path relative to the current working directory
   -h, --help               help for publish-extension
       --target string      The destination path file or OCI registry path. OCI registry paths use the format 'br:HOST/PATH:TAG'.
