@@ -56,9 +56,3 @@ resource postgresql 'MyCompany.Resources/postgreSQL@2023-10-01-preview' = {
   }
 }
 //POSTGRESQL
-
-
-
-
-  
-
