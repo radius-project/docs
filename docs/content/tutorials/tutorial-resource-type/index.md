@@ -135,6 +135,10 @@ For the rad CLI and VS Code to recognize the PostgreSQL resource type, a [Bicep 
 
    {{% rad file="snippets/app.bicep" embed=true marker="//CONTAINER" %}}
 
+   {{% alert title="Caution" color="warning" %}}
+   In this example the POSTGRESQL_PASSWORD is stored in as a cleartext property for demo purposes. In production environments, always use secrets to store and reference sensitive information like passwords.
+   {{% /alert %}}
+
 ## Step 5: Run the application
 
 Run the application using `rad run`. The `rad run` command sets up port forwarding to the application. Visit the application at [http://localhost:3000](http://localhost:3000).
