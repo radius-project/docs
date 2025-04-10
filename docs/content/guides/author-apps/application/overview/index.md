@@ -26,11 +26,11 @@ Extensions allow you to customize how resources are generated or customized as p
 
 ### Kubernetes Namespace extension
 
-The Kubernetes namespace extension allows you to customize how all of the resources within your application generate Kubernetes resources. See the [Kubernetes mapping guide]({{< ref "/guides/operations/kubernetes/overview#resource-mapping" >}}) for more information on namespace mapping behavior
+The Kubernetes namespace extension allows you to customize how all of the resources within your application generate Kubernetes resources. See the [Kubernetes mapping guide]({{< ref "/guides/setup-platform/setup-kubernetes/overview#resource-mapping" >}}) for more information on namespace mapping behavior
 
 ### Kubernetes Metadata extension
 
-The [Kubernetes Metadata extension]({{< ref "guides/operations/kubernetes/kubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius Application.
+The [Kubernetes Metadata extension]({{< ref "guides/setup-platform/setup-kubernetes/overviewkubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius Application.
 
 ## Query and understand your application with the Radius Application Graph
 

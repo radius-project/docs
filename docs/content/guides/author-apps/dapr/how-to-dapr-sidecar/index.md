@@ -14,7 +14,7 @@ This how-to guide will provide an overview of how to:
 
 ## Prerequisites
 
-- [Supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-kubernetes-clusters" >}})
+- [Supported Kubernetes cluster]({{< ref "/guides/setup-platform/setup-kubernetes/overview#supported-kubernetes-clusters" >}})
 - [rad CLI]({{< ref getting-started >}})
 - [Dapr CLI](https://docs.dapr.io/getting-started/install-dapr-cli/)
 - [Radius initialized with `rad init`]({{< ref howto-environment >}})

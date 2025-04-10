@@ -10,7 +10,7 @@ tags: ["Kubernetes"]
 
 ## Prerequisites
 
-- [Radius installed on Kubernetes cluster]({{< ref "guides/operations/kubernetes/kubernetes-install" >}})
+- [Radius installed on Kubernetes cluster]({{< ref "guides/setup-platform/setup-kubernetes/overviewkubernetes-install" >}})
 
 ## Step 1: Uninstall the Radius control-plane from your kubernetes cluster
 
@@ -34,4 +34,4 @@ All Radius configuration and data will be removed as part of the namespace. This
 
 ## Step 3: Remove the rad CLI
 
-You can remove the rad CLI by deleting the [ binary ]({{< ref "/guides/tooling/rad-cli/overview#binary-location" >}}) and ~/.rad folder from your machine.
+You can remove the rad CLI by deleting the [ binary ]({{< ref "/guides/install-tools/rad-cli/overview#binary-location" >}}) and ~/.rad folder from your machine.

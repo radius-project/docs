@@ -21,7 +21,7 @@ The steps below will showcase a "rad-ified" version of the existing [Azure AD wo
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
-- [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
+- [Setup a supported Kubernetes cluster]({{< ref "/guides/setup-platform/setup-kubernetes/overview#supported-clusters" >}})
 - [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed in your cluster, including the [Mutating Admission Webhook](https://azure.github.io/azure-workload-identity/docs/installation/mutating-admission-webhook.html)
 
 ## Step 1: Initialize Radius
@@ -38,7 +38,7 @@ Select 'No' when asked to setup application in the current directory.
 
 {{< read file= "/shared-content/installation/bicepconfig/manual.md" >}}
 
-More information on how to setup a `bicepconfig.json` can be found [here]({{< ref "/guides/tooling/bicepconfig/overview" >}})
+More information on how to setup a `bicepconfig.json` can be found [here]({{< ref "/guides/install-tools/bicepconfig/overview" >}})
 
 ## Step 3: Define a Radius Environment
 

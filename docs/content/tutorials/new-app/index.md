@@ -21,7 +21,7 @@ By the end of the tutorial, you will have created and deployed a new Radius Appl
 
 ## Prerequisites
 
-- [Supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview" >}})
+- [Supported Kubernetes cluster]({{< ref "/guides/setup-platform/setup-kubernetes/overview" >}})
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 
@@ -42,7 +42,7 @@ By the end of the tutorial, you will have created and deployed a new Radius Appl
    rad init
    ```
 
-   When asked if you want to create a new application select "Yes". This will create a new file named `app.bicep` in your directory where your application will be defined. It will also create a [`bicepconfig.json`]({{< ref "/guides/tooling/bicepconfig/overview" >}}) file that will contain the necessary setup to use Radius types with Bicep. 
+   When asked if you want to create a new application select "Yes". This will create a new file named `app.bicep` in your directory where your application will be defined. It will also create a [`bicepconfig.json`]({{< ref "/guides/install-tools/bicepconfig/overview" >}}) file that will contain the necessary setup to use Radius types with Bicep. 
 
    {{< alert title="💡 Development Environments" color="info" >}}
    By default `rad init` gets you up and running with a local, development-focused environment where most of the environment configuration is handled for you, including Recipes (_more on that soon_). If you would like to fully customize your environment, you can run `rad init --full`
@@ -154,7 +154,7 @@ Radius Applications are where all your app's resources and relationships come to
     ```
 
    {{< alert title="💡 Kubernetes mapping" color="info" >}}
-   Radius Environments map how Applications "bind" to a particular platform. Earlier we saw the Application compute was set to `kubernetes` and the namespace was set to `default-myapp`. This means the container resources were deployed to the `default-myapp` namespace in the Kubernetes cluster where Radius is installed. Visit the [Kubernetes mapping docs]({{< ref "/guides/operations/kubernetes/overview#resource-mapping" >}}) to learn more.
+   Radius Environments map how Applications "bind" to a particular platform. Earlier we saw the Application compute was set to `kubernetes` and the namespace was set to `default-myapp`. This means the container resources were deployed to the `default-myapp` namespace in the Kubernetes cluster where Radius is installed. Visit the [Kubernetes mapping docs]({{< ref "/guides/setup-platform/setup-kubernetes/overview#resource-mapping" >}}) to learn more.
    {{< /alert >}}
 
 ## Step 4: Run your application

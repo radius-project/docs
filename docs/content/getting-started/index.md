@@ -25,8 +25,8 @@ The Radius getting-started guide can be [run **for free** in a GitHub Codespace]
 
 ## 1. Have your Kubernetes cluster handy
 
-Radius runs inside [Kubernetes]({{< ref "guides/operations/kubernetes" >}}). However you run Kubernetes, get a cluster ready.
-> *If you don't have a preferred way to create Kubernetes clusters, you could try using [k3d](https://k3d.io/), which runs a minimal Kubernetes distribution in Docker. Make sure to apply the [recommended configuration]({{< ref "guides/operations/kubernetes/overview#supported-kubernetes-clusters" >}}).*
+Radius runs inside [Kubernetes]({{< ref "guides/setup-platform/setup-kubernetes/overview" >}}). However you run Kubernetes, get a cluster ready.
+> *If you don't have a preferred way to create Kubernetes clusters, you could try using [k3d](https://k3d.io/), which runs a minimal Kubernetes distribution in Docker. Make sure to apply the [recommended configuration]({{< ref "guides/setup-platform/setup-kubernetes/overview#supported-kubernetes-clusters" >}}).*
 
 Ensure your cluster is set as your current context:
 
@@ -70,7 +70,7 @@ Initializing Radius...
 Initialization complete! Have a RAD time 😎
 ```
 
-In addition to starting Radius services in your Kubernetes cluster, this initialization command creates a default application (`app.bicep`) as your starting point. It contains a single container definition (`demo`). `rad init` also creates a [`bicepconfig.json`]({{< ref "/guides/tooling/bicepconfig/overview" >}}) file in your application's directory that has the necessary setup to use Radius with the official Bicep compiler.
+In addition to starting Radius services in your Kubernetes cluster, this initialization command creates a default application (`app.bicep`) as your starting point. It contains a single container definition (`demo`). `rad init` also creates a [`bicepconfig.json`]({{< ref "/guides/install-tools/bicepconfig/overview" >}}) file in your application's directory that has the necessary setup to use Radius with the official Bicep compiler.
 
 {{< rad file="snippets/app.bicep" embed=true markdownConfig="{linenos=table,linenostart=1}" >}}
 

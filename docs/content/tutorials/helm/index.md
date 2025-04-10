@@ -19,7 +19,7 @@ This tutorial will teach you the following about Radius:
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Helm](https://helm.sh/docs/intro/install/)
-- [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
+- [Setup a supported Kubernetes cluster]({{< ref "/guides/setup-platform/setup-kubernetes/overview#supported-clusters" >}})
 
 ## Step 1. Clone and open the sample code
 
