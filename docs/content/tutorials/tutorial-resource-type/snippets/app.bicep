@@ -36,7 +36,7 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
         CONNECTION_POSTGRESQL_DATABASE: {
           value: postgresql.properties.status.binding.database
         }
-        //This is stored ad passed as cleartext for demo purposes. In production, use a secret store.
+        //This is stored and passed as cleartext for demo purposes. In production, use a secret store.
         CONNECTION_POSTGRESQL_PASSWORD: {
           value: postgresql.properties.status.binding.password
         }   
