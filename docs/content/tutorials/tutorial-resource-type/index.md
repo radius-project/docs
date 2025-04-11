@@ -87,7 +87,7 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
 
 1. Publish the Recipe to an OCI-compliant container registry. 
 
-   {{< tabs LocalRegistry ExternalRegistry >}}{{% codetab %}} 
+   {{< tabs "Local registry" "External registry" >}}{{% codetab %}} 
 The example below publishes to a local registry created with k3d in step 0.
     
 ```bash
@@ -109,7 +109,7 @@ rad bicep publish --file postgreSQL.bicep --target br:localhost:51351/recipes/po
 
 1. Register the Bicep template as the `default` Recipe in the `default` environment (the default environment was created when `rad init` was run)
 
-    {{< tabs LocalRegistry ExternalRegistry >}}{{% codetab %}}
+    {{< tabs "Local registry" "External registry" >}}{{% codetab %}}
 ```bash
 rad recipe register default --environment default --resource-type MyCompany.Resources/postgreSQL --template-kind bicep --template-path reciperegistry:5000/recipes/postgres:latest --plain-http
 ```
