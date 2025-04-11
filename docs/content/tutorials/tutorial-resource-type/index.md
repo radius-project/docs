@@ -97,9 +97,9 @@ rad bicep publish --file postgreSQL.bicep --target br:localhost:51351/recipes/po
 
     {{% codetab %}}
 
-1. Make sure your preferred OCI-compliant container is set up with appropriate permissions to publish and pull Recipes. For example, if you are using GitHub container registry, follow the instructions [here](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry). The easiest option is to authenticate is to generate a Personal Access token (PAT) with read, write and delete access to the package. Follow this [how-to-guide]({{< ref "/guides/recipes/howto-private-bicep-registry" >}}) if you want to publish to a private registry
+1. Make sure your preferred OCI-compliant container is set up with appropriate permissions to publish and pull Recipes. For example, if you are using GitHub container registry, follow the instructions [here](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry). The easiest option to authenticate is to generate a Personal Access token (PAT) with read, write and delete access to the package. Follow this [how-to-guide]({{< ref "/guides/recipes/howto-private-bicep-registry" >}}) if you want to publish to a private registry.
 
-1. Publish the Recipe to the container using the below command. Make sure to replace `<username>` with your GitHub username.
+1. Publish the Recipe to the container registry using the below command. Make sure to replace <host> and <repository> with your container registry.
 
     ```bash
     rad bicep publish --file postgreSQL.bicep --target br:<host>/<repository>/postgresql:latest
