@@ -6,10 +6,6 @@ extension mycompany
 @description('The Radius Application ID. Injected automatically by the rad CLI.')
 param application string
 
-@description('The Radius environment. Injected automatically by the rad CLI.')
-param environment string
-
-
 //CONTAINER
 resource demo 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'demo'
@@ -47,6 +43,7 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
 //CONTAINER
 
 //POSTGRESQL
+param environment string
 resource postgresql 'MyCompany.Resources/postgreSQL@2023-10-01-preview' = {
   name: 'postgresql'
   location: 'global'

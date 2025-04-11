@@ -123,6 +123,7 @@ output result object = {
     username: user
   }
   secrets: {
+    #disable-next-line secure-parameter-default
     password: password
   } 
 }
