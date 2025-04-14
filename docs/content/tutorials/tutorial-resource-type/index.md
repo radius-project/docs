@@ -15,6 +15,9 @@ Radius includes several built-in resource types which developers can use to buil
 
 ## Prerequisites
 
+{{% alert title="Info" color="info" %}}
+If you do not have a preferred way of creating a Kubernetes cluster or a container registry, follow the instructions in step 0 to create a k3d cluster with a local registry. 
+{{% /alert %}}
 - [A Kubernetes cluster to host Radius and the Todo List application]({{< ref "/guides/operations/kubernetes/overview" >}}) 
 - An OCI-compliant container registry with permissions to publish and pull Recipes 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
@@ -22,7 +25,9 @@ Radius includes several built-in resource types which developers can use to buil
 
 ## Step 0: Set up a Kubernetes cluster and local registry
 
-If you do not have preferred way of creating a Kubernetes cluster or a container registry, create a [k3d](https://k3d.io/stable/) cluster with a local registry using the below command:
+>Make sure the required [pre-requisites for setting up a k3d cluster](https://k3d.io/stable/#requirements) are installed.
+
+Create a [k3d](https://k3d.io/stable/) cluster with a local registry using the below command:
 
 ```bash
 k3d cluster create <myclustername> --registry-create reciperegistry:51351
@@ -195,20 +200,25 @@ To clean up the resources created in this tutorial, run the following commands
 1. Delete the application and all resources created by the application
 
     ```bash
-    rad app delete -a todolist
+    rad app delete -application todolist
     ```
 2. Delete the environment
 
     ```bash
-    rad env delete -e default
+    rad env delete -environment default
     ```
 3. Delete the PostgreSQL resource type
 
     ```bash
-    rad resource-type delete postgreSQL
+    rad resource-type delete MyCompany.Resources/postgreSQL
     ```
 4. Uninstall Radius 
 
     ```bash
     rad uninstall kubernetes
+    ```
+5. Delete the k3d cluster if you created one in step 0
+
+    ```bash
+    k3d cluster delete <myclustername>
     ```
