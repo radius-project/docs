@@ -99,7 +99,7 @@ rad bicep publish --file postgreSQL.bicep --target br:localhost:51351/recipes/po
 
 1. Make sure your preferred OCI-compliant container is set up with appropriate permissions to publish and pull Recipes. For example, if you are using GitHub container registry, follow the instructions [here](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry). The easiest option to authenticate is to generate a Personal Access token (PAT) with read, write and delete access to the package. Follow this [how-to-guide]({{< ref "/guides/recipes/howto-private-bicep-registry" >}}) if you want to publish to a private registry.
 
-1. Publish the Recipe to the container registry using the below command. Make sure to replace <host> and <repository> with your container registry.
+1. Publish the Recipe to the container registry using the below command. Make sure to replace `host` and `repository` with your container registry.
 
     ```bash
     rad bicep publish --file postgreSQL.bicep --target br:<host>/<repository>/postgresql:latest
@@ -194,21 +194,21 @@ To clean up the resources created in this tutorial, run the following commands
 
 1. Delete the application and all resources created by the application
 
-```bash
-rad app delete -a todolist
-```
+    ```bash
+    rad app delete -a todolist
+    ```
 2. Delete the environment
 
-```bash
-rad env delete -e default
-```
+    ```bash
+    rad env delete -e default
+    ```
 3. Delete the PostgreSQL resource type
 
-```bash
-rad resource-type delete postgreSQL
-```
+    ```bash
+    rad resource-type delete postgreSQL
+    ```
 4. Uninstall Radius 
 
-```bash
-rad uninstall kubernetes
-```
+    ```bash
+    rad uninstall kubernetes
+    ```
