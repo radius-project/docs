@@ -20,7 +20,7 @@ Radius includes several built-in resource types which developers can use to buil
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - The [Bicep extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}}) for VS Code is recommended for Bicep language support
 
-## Step 0: Set up a Kubernetes cluster and local container registry
+## Step 0: Set up a Kubernetes cluster and local registry
 
 If you do not have preferred way of creating a Kubernetes cluster or a container registry, create a [k3d](https://k3d.io/stable/) cluster with a local registry using the below command:
 
