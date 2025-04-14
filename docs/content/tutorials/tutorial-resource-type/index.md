@@ -188,3 +188,27 @@ You should see the Radius Connections section with new environment variables add
 
 {{< image src=todolist_postgresql.png" alt="Todo List with PostgreSQL connection" width=800px >}}
 
+## Step 6: Clean up
+
+To clean up the resources created in this tutorial, run the following commands
+
+1. Delete the application and all resources created by the application
+
+```bash
+rad app delete -a todolist
+```
+2. Delete the environment
+
+```bash
+rad env delete -e default
+```
+3. Delete the PostgreSQL resource type
+
+```bash
+rad resource-type delete postgreSQL
+```
+4. Uninstall Radius 
+
+```bash
+rad uninstall kubernetes
+```
