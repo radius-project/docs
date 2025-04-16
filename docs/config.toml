@@ -56,12 +56,17 @@ tag = "tags"
     pre = "<i class='fas fa-blog'></i>"
 [[menu.main]]
     name = "GitHub"
-    weight = 40
+    weight = 30
     url = "https://github.com/radius-project"
     pre = "<i class='fab fa-github'></i>"
 [[menu.main]]
+    name = "YouTube"
+    weight = 40
+    url = "https://www.youtube.com/@radapp_io"
+    pre = "<i class='fab fa-youtube'></i>"
+[[menu.main]]
     name = "Discord"
-    weight = 90
+    weight = 50
     url = "https://aka.ms/Radius/Discord"
     pre = "<i class='fab fa-discord'></i>"
 
