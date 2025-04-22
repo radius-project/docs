@@ -9,37 +9,20 @@ categories: ["resource-types"]
 
 ## Overview
 
-Radius includes several built-in resource types which developers can use to build applications. These include core resource types such as containers, gateways, and secrets. You can also create your own resource types. This tutorial guides you through creating a PostgreSQL resource and deploying the sample Todo List application with PostgreSQL.
+Radius includes several built-in resource types which developers can use to build applications. These include core resource types such as containers, gateways, and secrets. You can also create your own resource types. This tutorial guides you through creating a PostgreSQL resource and deploying the sample Todo List application with PostgreSQL. 
+
+Before you begin this tutorial, make sure you have completed the [Getting Started with Radius]({{< ref "getting-started" >}}).
 
 {{< image src="todolist.png" alt="Diagram of the Todo List with PostgreSQL" width=600px >}}
 
 ## Prerequisites
 
-{{% alert title="Info" color="info" %}}
-If you do not have a preferred way of creating a Kubernetes cluster or a container registry, follow the instructions in step 0 to create a k3d cluster with a local registry. 
-{{% /alert %}}
-- [A Kubernetes cluster to host Radius and the Todo List application]({{< ref "/guides/operations/kubernetes/overview" >}}) 
-- An OCI-compliant container registry with permissions to publish and pull Recipes 
+- [A Kubernetes cluster to host Radius and the Todo List application]({{< ref "/guides/operations/kubernetes/overview" >}}). Make sure to follow the instructions under [Supported Kubernetes clusters]({{< ref "/guides/operations/kubernetes/overview#supported-kubernetes-clusters" >}}) 
+- [An OCI-compliant container registry](https://oras.land/docs/compatible_oci_registries/) with permissions to publish and pull Recipes 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - The [Bicep extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}}) for VS Code is recommended for Bicep language support
 
-## Step 0: Set up a Kubernetes cluster and local registry
-
->Make sure the required [pre-requisites for setting up a k3d cluster](https://k3d.io/stable/#requirements) are installed.
-
-Create a [k3d](https://k3d.io/stable/) cluster with a local registry using the below command:
-
-```bash
-k3d cluster create <myclustername> --registry-create reciperegistry:51351
-```
-
 ## Step 1: Install Radius and initialize a new environment
-
-1. Make sure your cluster is set as your current-context
-
-    ```bash
-    kubectl config current-context
-    ```
 
 1. Begin in a new directory for your application:
 
@@ -50,7 +33,7 @@ k3d cluster create <myclustername> --registry-create reciperegistry:51351
 
 1. Initialize a new Radius environment:
 
-   *Select 'Yes' when prompted to setup application in the current directory?*
+   *Select 'No' when prompted to setup application in the current directory?*
 
    ```bash
    rad init
@@ -84,23 +67,13 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
 
 ## Step 3: Register a Recipe for the PostgreSQL resource type
 
-[Recipes]({{< ref "/guides/recipes/overview" >}}) define how resource types are deployed. To deploy the PostgreSQL resource type, you must create a Bicep template and publish it to an OCI registry. Then register the template as a Recipe in the Radius environment. 
+[Recipes]({{< ref "/guides/recipes/overview" >}}) define how resource types are deployed. To deploy the PostgreSQL resource type, you must create a Bicep Template or Terraform module and publish it to an OCI registry. Then register the template as a Recipe in the Radius environment. 
+
+  {{< tabs "Bicep" "Terraform" >}}{{% codetab %}} 
  
 1. Create a new file called `postgreSQL.bicep` and add the following:
 
    {{% rad file="snippets/recipes/bicep/postgreSQL.bicep" embed=true %}}
-
-1. Publish the Recipe to an OCI-compliant container registry. 
-
-   {{< tabs "Local registry" "External registry" >}}{{% codetab %}} 
-The example below publishes to a local registry created with k3d in step 0.
-    
-```bash
-rad bicep publish --file postgreSQL.bicep --target br:localhost:51351/recipes/postgres:latest --plain-http
-```
-    {{% /codetab %}}
-
-    {{% codetab %}}
 
 1. Make sure your preferred OCI-compliant container is set up with appropriate permissions to publish and pull Recipes. For example, if you are using GitHub container registry, follow the instructions [here](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry). The easiest option to authenticate is to generate a Personal Access token (PAT) with read, write and delete access to the package. Follow this [how-to-guide]({{< ref "/guides/recipes/howto-private-bicep-registry" >}}) if you want to publish to a private registry.
 
@@ -109,22 +82,11 @@ rad bicep publish --file postgreSQL.bicep --target br:localhost:51351/recipes/po
     ```bash
     rad bicep publish --file postgreSQL.bicep --target br:<host>/<repository>/postgresql:latest
     ```
-    {{% /codetab %}}
-    {{< /tabs >}}
-
 1. Register the Bicep template as the `default` Recipe in the `default` environment (the default environment was created when `rad init` was run)
 
-    {{< tabs "Local registry" "External registry" >}}{{% codetab %}}
-```bash
-rad recipe register default --environment default --resource-type MyCompany.Resources/postgreSQL --template-kind bicep --template-path reciperegistry:5000/recipes/postgres:latest --plain-http
-```
-   {{% /codetab %}}
-    {{% codetab %}}
-```bash
-rad recipe register default --environment default --resource-type MyCompany.Resources/postgreSQL --template-kind bicep --template-path <host>/<repository>/postgresql:latest
-```
-{{% /codetab %}}
-    {{< /tabs >}}
+    ```bash
+    rad recipe register default --environment default --resource-type MyCompany.Resources/postgreSQL --template-kind bicep --template-path <host>/<repository>/postgresql:latest
+    ```
 1. Verify the Recipe is registered to the `default` environment
 
     ```bash
@@ -137,6 +99,35 @@ rad recipe register default --environment default --resource-type MyCompany.Reso
     default   MyCompany.Resources/postgreSQL  bicep                            ghcr.io/<username>/recipes/postgresql:1.0
     ...
     ```
+{{% /codetab %}}
+
+{{% codetab %}}
+
+1. Create a new file called `main.tf` and add the following:
+
+   {{% rad file="snippets/recipes/terraform/main.tf" embed=true %}}
+
+1. Follow the documentation on [Publish modules](https://developer.hashicorp.com/terraform/registry/modules/publish) to set up and publish a Terraform module to a Terraform registry. If you want to pull Terraform modules from a private registry, follow the how-to-guide on [pulling Terraform modules from a private registry](https://docs.radapp.io/guides/recipes/terraform/howto-private-registry/)
+
+1. Register the Terraform module as the `default` Recipe in the `default` environment (the default environment was created when `rad init` was run)
+
+    ```bash
+    rad recipe register default --environment default --resource-type MyCompany.Resources/postgreSQL --template-kind terraform --template-path git::<path to your module>
+```
+1. Verify the Recipe is registered to the `default` environment
+
+    ```bash
+    rad recipe list
+    ```
+    You should see the Recipe for the PostgreSQL resource type listed in the output.
+
+    ```bash
+    RECIPE    TYPE                            TEMPLATE KIND  TEMPLATE VERSION TEMPLATE
+    default   MyCompany.Resources/postgreSQL  Terraform                       git::<path to your module>
+    ...
+    ```
+    {{% /codetab %}}
+    {{< /tabs >}}
 
 ## Step 4: Generate a Bicep extension
 
@@ -164,16 +155,23 @@ For the rad CLI and VS Code to recognize the PostgreSQL resource type, a [Bicep 
     }
     ```
 
-## Step 5: Add a PostgreSQL database to the Todo List application
+## Step 5: Author the Todo List application with PostgreSQL
 
-1. Open `app.bicep` and add the `mycompany` extension and the PostgreSQL resource type
+1. Create `app.bicep` and add the Todo List application.
+    
+    ```bicep
+    extension radius
+    ```
+   {{% rad file="snippets/app.bicep" embed=true marker="//APP" %}}
+
+1. Add the `mycompany` extension and the PostgreSQL resource type
    
     ```bicep
     extension mycompany
     ```
    {{% rad file="snippets/app.bicep" embed=true marker="//POSTGRESQL" %}}
 
-1. Add the connection from your container to the PostgreSQL resource type as environment variables. Replace the `demo` container with the definition below
+1. Add the `demo` container definition along with the connection to the PostgreSQL resource type as environment variables. 
 
    {{% rad file="snippets/app.bicep" embed=true marker="//CONTAINER" %}}
 
@@ -181,15 +179,18 @@ For the rad CLI and VS Code to recognize the PostgreSQL resource type, a [Bicep 
    In this example the POSTGRESQL_PASSWORD is stored as a cleartext property for demo purposes. In production environments, always use secrets to store and reference sensitive information like passwords.
    {{% /alert %}}
 
+1. Your final `app.bicep` file should look like this:
+
+   {{% rad file="snippets/app.bicep" embed=true %}}
+
 ## Step 5: Run the application
 
-Run the application using `rad run`. The `rad run` command sets up port forwarding to the application. Visit the application at [http://localhost:3000](http://localhost:3000).
+Run the application using `rad run`. The `rad run` command sets up port forwarding to the application. .
 
 ```sh
 rad run app.bicep
 ```
-
-You should see the Radius Connections section with new environment variables added. The `demo` container now has connection information for PostgreSQL (`CONNECTION_POSTGRESQL_HOST`, `CONNECTION_POSTGRESQL_PORT`, etc.)
+Visit the application at [http://localhost:3000](http://localhost:3000).You should see the Radius Connections section with new environment variables added. The `demo` container now has connection information for PostgreSQL (`CONNECTION_POSTGRESQL_HOST`, `CONNECTION_POSTGRESQL_PORT`, etc.)
 
 {{< image src=todolist_postgresql.png" alt="Todo List with PostgreSQL connection" width=800px >}}
 
@@ -216,9 +217,4 @@ To clean up the resources created in this tutorial, run the following commands
 
     ```bash
     rad uninstall kubernetes
-    ```
-5. Delete the k3d cluster if you created one in step 0
-
-    ```bash
-    k3d cluster delete <myclustername>
     ```

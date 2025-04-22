@@ -3,14 +3,32 @@ extension radius
 // Import the set of MyCompany resources (MyCompany.*) into Bicep
 extension mycompany
 
-@description('The Radius Application ID. Injected automatically by the rad CLI.')
-param application string
+//APP
+resource todolist 'Applications.Core/applications@2023-10-01-preview' = {
+  name: 'todolist'
+  properties: {
+    environment: environment
+  }
+}
+//APP
+
+//POSTGRESQL
+param environment string
+resource postgresql 'MyCompany.Resources/postgreSQL@2023-10-01-preview' = {
+  name: 'postgresql'
+  location: 'global'
+  properties: {
+    application: todolist.id
+    environment: environment
+  }
+}
+//POSTGRESQL
 
 //CONTAINER
 resource demo 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'demo'
   properties: {
-    application: application
+    application: todolist.id
     container: {
       image: 'ghcr.io/radius-project/samples/demo:latest'
       ports: {
@@ -42,14 +60,4 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
 }
 //CONTAINER
 
-//POSTGRESQL
-param environment string
-resource postgresql 'MyCompany.Resources/postgreSQL@2023-10-01-preview' = {
-  name: 'postgresql'
-  location: 'global'
-  properties: {
-    application: application
-    environment: environment
-  }
-}
-//POSTGRESQL
+
