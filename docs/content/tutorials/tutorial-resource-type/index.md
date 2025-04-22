@@ -69,8 +69,35 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
 
 [Recipes]({{< ref "/guides/recipes/overview" >}}) define how resource types are deployed. To deploy the PostgreSQL resource type, you must create a Bicep Template or a Terraform module and publish it to a registry. Then register the template or module as a Recipe in the Radius environment. 
 
-  {{< tabs "Bicep" "Terraform" >}}{{% codetab %}} 
+  {{< tabs Terraform Bicep >}}{{% codetab %}} 
 
+1. Create a new file called `main.tf` and add the following:
+
+   {{% rad file="snippets/recipes/terraform/main.tf" embed=true %}}
+   
+   Learn more about Authoring Terraform Modules as Recipes in this [how-to-guide]({{< ref "/guides/recipes/howto-author-recipes" >}}).
+
+1. Follow the documentation on [Publish modules](https://developer.hashicorp.com/terraform/registry/modules/publish) to set up and publish the postgreSQL Terraform module to a Terraform registry. If you want to pull Terraform modules from a private registry, follow the how-to-guide on [pulling Terraform modules from a private registry](https://docs.radapp.io/guides/recipes/terraform/howto-private-registry/)
+
+1. Register the Terraform module as the `default` Recipe in the `default` environment (the default environment was created when `rad init` was run)
+
+    ```bash
+    rad recipe register default --environment default --resource-type MyCompany.Resources/postgreSQL --template-kind terraform --template-path git::<path to your tf module>
+    ```
+1. Verify the Recipe is registered to the `default` environment
+
+    ```bash
+    rad recipe list
+    ```
+    You should see the Recipe for the PostgreSQL resource type listed in the output.
+
+    ```bash
+    RECIPE    TYPE                            TEMPLATE KIND  TEMPLATE VERSION TEMPLATE
+    default   MyCompany.Resources/postgreSQL  terraform                       git::<path to your tf module>
+    ...
+    ```
+{{% /codetab %}}
+{{% codetab %}}
 1. Create a new file called `postgreSQL.bicep` and add the following:
 
    {{% rad file="snippets/recipes/bicep/postgreSQL.bicep" embed=true %}}
@@ -100,38 +127,7 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
     ...
     ```
 {{% /codetab %}}
-
-{{% codetab %}}
-
-1. Create a new file called `main.tf` and add the following:
-
-   {{% rad file="snippets/recipes/terraform/main.tf" embed=true %}}
-   
-   Learn more about Authoring Terraform Modules as Recipes in this [how-to-guide]({{< ref "/guides/recipes/howto-author-recipes" >}}).
-    
-1. Follow the documentation on [Publish Bicep templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/publish-templates) to set up and publish the postgreSQL Bicep template to a container registry. If you want to pull Bicep templates from a private registry, follow the how-to-guide on [pulling Bicep templates from a private registry]({{< ref "/guides/recipes/bicep/howto-private-registry" >}}).
-
-1. Follow the documentation on [Publish modules](https://developer.hashicorp.com/terraform/registry/modules/publish) to set up and publish the postgreSQL Terraform module to a Terraform registry. If you want to pull Terraform modules from a private registry, follow the how-to-guide on [pulling Terraform modules from a private registry](https://docs.radapp.io/guides/recipes/terraform/howto-private-registry/)
-
-1. Register the Terraform module as the `default` Recipe in the `default` environment (the default environment was created when `rad init` was run)
-
-    ```bash
-    rad recipe register default --environment default --resource-type MyCompany.Resources/postgreSQL --template-kind terraform --template-path git::<path to your tf module>
-```
-1. Verify the Recipe is registered to the `default` environment
-
-    ```bash
-    rad recipe list
-    ```
-    You should see the Recipe for the PostgreSQL resource type listed in the output.
-
-    ```bash
-    RECIPE    TYPE                            TEMPLATE KIND  TEMPLATE VERSION TEMPLATE
-    default   MyCompany.Resources/postgreSQL  terraform                       git::<path to your tf module>
-    ...
-    ```
-    {{% /codetab %}}
-    {{< /tabs >}}
+{{< /tabs >}}
 
 ## Step 4: Generate a Bicep extension
 
