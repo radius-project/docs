@@ -9,17 +9,17 @@ categories: ["resource-types"]
 
 ## Overview
 
-Radius includes several built-in resource types which developers can use to build applications. These include core resource types such as containers, gateways, and secrets. You can also create your own resource types. This tutorial guides you through creating a PostgreSQL resource and deploying the sample Todo List application with PostgreSQL. 
-
-Before you begin this tutorial, make sure you have completed the [Getting Started with Radius]({{< ref "getting-started" >}}).
+Radius includes several built-in resource types which developers can use to build applications. These include core resource types such as containers, gateways, and secrets. You can also create your own resource types. This tutorial guides you through creating a PostgreSQL resource and deploying the sample Todo List application with PostgreSQL.
 
 {{< image src="todolist.png" alt="Diagram of the Todo List with PostgreSQL" width=600px >}}
 
 ## Prerequisites
 
-- [A Kubernetes cluster to host Radius and the Todo List application]({{< ref "/guides/operations/kubernetes/overview" >}}). Make sure to follow the instructions under [Supported Kubernetes clusters]({{< ref "/guides/operations/kubernetes/overview#supported-kubernetes-clusters" >}}) 
-- [An OCI-compliant container registry](https://oras.land/docs/compatible_oci_registries/) with permissions to publish and pull Recipes 
+- [A Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview" >}}) to host Radius and the Todo List application. Make sure to follow the instructions under the [Supported Kubernetes clusters]({{< ref "/guides/operations/kubernetes/overview#supported-kubernetes-clusters" >}}). 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
+- Setup a registry to publish and pull the Recipes
+  - If you prefer Bicep as the language to author your Recipe, set up an [OCI-compliant container registry ](https://oras.land/docs/compatible_oci_registries/) with required permissions to publish and pull Recipes.
+  - If you prefer Terraform as the language to author your Recipe, set up a [Terraform registry](https://developer.hashicorp.com/terraform/registry) with required permissions to publish and pull Recipes.
 - The [Bicep extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}}) for VS Code is recommended for Bicep language support
 
 ## Step 1: Install Radius and initialize a new environment
@@ -67,10 +67,10 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
 
 ## Step 3: Register a Recipe for the PostgreSQL resource type
 
-[Recipes]({{< ref "/guides/recipes/overview" >}}) define how resource types are deployed. To deploy the PostgreSQL resource type, you must create a Bicep Template or Terraform module and publish it to an OCI registry. Then register the template as a Recipe in the Radius environment. 
+[Recipes]({{< ref "/guides/recipes/overview" >}}) define how resource types are deployed. To deploy the PostgreSQL resource type, you must create a Bicep Template or a Terraform module and publish it to a registry. Then register the template or module as a Recipe in the Radius environment. 
 
   {{< tabs "Bicep" "Terraform" >}}{{% codetab %}} 
- 
+
 1. Create a new file called `postgreSQL.bicep` and add the following:
 
    {{% rad file="snippets/recipes/bicep/postgreSQL.bicep" embed=true %}}
@@ -107,12 +107,12 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
 
    {{% rad file="snippets/recipes/terraform/main.tf" embed=true %}}
 
-1. Follow the documentation on [Publish modules](https://developer.hashicorp.com/terraform/registry/modules/publish) to set up and publish a Terraform module to a Terraform registry. If you want to pull Terraform modules from a private registry, follow the how-to-guide on [pulling Terraform modules from a private registry](https://docs.radapp.io/guides/recipes/terraform/howto-private-registry/)
+1. Follow the documentation on [Publish modules](https://developer.hashicorp.com/terraform/registry/modules/publish) to set up and publish the postgreSQL Terraform module to a Terraform registry. If you want to pull Terraform modules from a private registry, follow the how-to-guide on [pulling Terraform modules from a private registry](https://docs.radapp.io/guides/recipes/terraform/howto-private-registry/)
 
 1. Register the Terraform module as the `default` Recipe in the `default` environment (the default environment was created when `rad init` was run)
 
     ```bash
-    rad recipe register default --environment default --resource-type MyCompany.Resources/postgreSQL --template-kind terraform --template-path git::<path to your module>
+    rad recipe register default --environment default --resource-type MyCompany.Resources/postgreSQL --template-kind terraform --template-path git::<path to your tf module>
 ```
 1. Verify the Recipe is registered to the `default` environment
 
@@ -123,7 +123,7 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
 
     ```bash
     RECIPE    TYPE                            TEMPLATE KIND  TEMPLATE VERSION TEMPLATE
-    default   MyCompany.Resources/postgreSQL  Terraform                       git::<path to your module>
+    default   MyCompany.Resources/postgreSQL  terraform                       git::<path to your tf module>
     ...
     ```
     {{% /codetab %}}
