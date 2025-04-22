@@ -96,7 +96,7 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
 
     ```bash
     RECIPE    TYPE                            TEMPLATE KIND  TEMPLATE VERSION TEMPLATE
-    default   MyCompany.Resources/postgreSQL  bicep                            ghcr.io/<username>/recipes/postgresql:1.0
+    default   MyCompany.Resources/postgreSQL  bicep                           <host>/<repository>/postgresql:latest
     ...
     ```
 {{% /codetab %}}
@@ -106,6 +106,10 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
 1. Create a new file called `main.tf` and add the following:
 
    {{% rad file="snippets/recipes/terraform/main.tf" embed=true %}}
+   
+   Learn more about Authoring Terraform Modules as Recipes in this [how-to-guide]({{< ref "/guides/recipes/howto-author-recipes" >}}).
+    
+1. Follow the documentation on [Publish Bicep templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/publish-templates) to set up and publish the postgreSQL Bicep template to a container registry. If you want to pull Bicep templates from a private registry, follow the how-to-guide on [pulling Bicep templates from a private registry]({{< ref "/guides/recipes/bicep/howto-private-registry" >}}).
 
 1. Follow the documentation on [Publish modules](https://developer.hashicorp.com/terraform/registry/modules/publish) to set up and publish the postgreSQL Terraform module to a Terraform registry. If you want to pull Terraform modules from a private registry, follow the how-to-guide on [pulling Terraform modules from a private registry](https://docs.radapp.io/guides/recipes/terraform/howto-private-registry/)
 
