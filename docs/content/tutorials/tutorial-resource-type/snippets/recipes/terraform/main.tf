@@ -4,19 +4,7 @@ terraform {
       source  = "hashicorp/kubernetes"
       version = ">= 2.0"
     }
-    postgresql = {
-      source  = "cyrilgdn/postgresql"
-      version = "1.22.0"
-    }
   }
-}
-
-provider "postgresql" {
-  host     = "${kubernetes_service.postgres.metadata[0].name}.${kubernetes_service.postgres.metadata[0].namespace}.svc.cluster.local"
-  port     = 5432
-  username = "postgres"
-  password = random_password.password.result
-  sslmode = "disable"
 }
 
 variable "context" {
@@ -24,16 +12,20 @@ variable "context" {
   type = any
 }
 
-resource "random_password" "password" {
-  length           = 16
-  special          = true
-  override_special = "!#$%&*()-_=+[]{}<>:?"
+locals {
+  uniqueName = var.context.resource.name
+  port     = 5432
+  namespace = var.context.runtime.kubernetes.namespace
 }
 
-resource "kubernetes_deployment" "postgres" {
+resource "random_password" "password" {
+  length           = 16
+}
+
+resource "kubernetes_deployment" "postgresql" {
   metadata {
-    name      = "postgres"
-    namespace = var.context.runtime.kubernetes.namespace
+    name      = local.uniqueName
+    namespace = local.namespace
   }
 
   spec {
@@ -52,16 +44,22 @@ resource "kubernetes_deployment" "postgres" {
 
       spec {
         container {
-          image = "ghcr.io/radius-project/mirror/postgres:latest"
+          image = "postgres:16-alpine"
           name  = "postgres"
-
           env {
             name  = "POSTGRES_PASSWORD"
             value = random_password.password.result
           }
-
+          env {
+            name = "POSTGRES_USER"
+            value = "postgres"
+          }
+          env {
+            name  = "POSTGRES_DB"
+            value = "postgres_db"
+          }
           port {
-            container_port = 5432
+            container_port = local.port
           }
         }
       }
@@ -71,8 +69,8 @@ resource "kubernetes_deployment" "postgres" {
 
 resource "kubernetes_service" "postgres" {
   metadata {
-    name      = "postgres"
-    namespace = var.context.runtime.kubernetes.namespace
+    name      = local.uniqueName
+    namespace = local.namespace
   }
 
   spec {
@@ -81,31 +79,20 @@ resource "kubernetes_service" "postgres" {
     }
 
     port {
-      port        = 5432
-      target_port = 5432
-    }
+      port        = local.port
+      target_port = local.port
+    } 
   }
-}
-
-resource "time_sleep" "wait_180_seconds" {
-  depends_on = [kubernetes_service.postgres]
-  create_duration = "180s"
-}
-
-resource postgresql_database "postgres_db_test" {
-  provider = postgresql
-  depends_on = [time_sleep.wait_180_seconds]
-  name = "postgres_db_test"
 }
 
 output "result" {
   value = {
     values = {
       host = "${kubernetes_service.postgres.metadata[0].name}.${kubernetes_service.postgres.metadata[0].namespace}.svc.cluster.local"
-      port = "5432"
-      database = "postgres_db_test"
+      port = local.port
+      database = "postgres_db"
       username = "postgres"
-      password = "${random_password.password.result}"
+      password = random_password.password.result
     }
   }
 }
