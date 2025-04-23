@@ -188,7 +188,7 @@ For the rad CLI and VS Code to recognize the PostgreSQL resource type, a [Bicep 
 Run the application using `rad run`. The `rad run` command sets up port forwarding to the application. .
 
 ```sh
-rad run app.bicep
+rad run app.bicep -a todolist
 ```
 Visit the application at [http://localhost:3000](http://localhost:3000).You should see the Radius Connections section with new environment variables added. The `demo` container now has connection information for PostgreSQL (`CONNECTION_POSTGRESQL_HOST`, `CONNECTION_POSTGRESQL_PORT`, etc.)
 
