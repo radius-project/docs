@@ -45,6 +45,9 @@ rad install kubernetes --set global.zipkin.url=http://localhost:9411/api/v2/span
 # Install Radius with central prometheus monitoring service
 rad install kubernetes --set global.prometheus.path=/customdomain.com/metrics,global.prometheus.port=443,global.rootCA.cert=/path/to/rootCA.crt 
 
+# Install Radius with the Postgres datastore enabled
+rad install kubernetes --set database.enabled=true
+
 # Install Radius using a helmchart from specified file path
 rad install kubernetes --chart /root/radius/deploy/Chart
 
