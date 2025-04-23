@@ -38,20 +38,20 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
       }
       //CONNECTION
       env: {
-        CONNECTION_POSTGRESQL_HOST: {
+        CONNECTION_POSTGRES_HOST: {
           value: postgresql.properties.status.binding.host
         }
-        CONNECTION_POSTGRESQL_PORT: {
+        CONNECTION_POSTGRES_PORT: {
           value: string(postgresql.properties.status.binding.port)
         }
-        CONNECTION_POSTGRESQL_USERNAME: {
+        CONNECTION_POSTGRES_USERNAME: {
           value: postgresql.properties.status.binding.username
         }
-        CONNECTION_POSTGRESQL_DATABASE: {
+        CONNECTION_POSTGRES_DATABASE: {
           value: postgresql.properties.status.binding.database
         }
         //This is stored and passed as cleartext for demo purposes. In production, use a secret store.
-        CONNECTION_POSTGRESQL_PASSWORD: {
+        CONNECTION_POSTGRES_PASSWORD: {
           value: postgresql.properties.status.binding.password
         }   
       }
