@@ -206,7 +206,7 @@ To clean up the resources created in this tutorial, run the following commands
 2. Delete the environment
 
     ```bash
-    rad env delete -environment default
+    rad env delete --environment default
     ```
 3. Delete the PostgreSQL resource type
 
