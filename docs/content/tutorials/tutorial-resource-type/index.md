@@ -17,11 +17,11 @@ Radius includes several built-in resource types which developers can use to buil
 
 - [A Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview" >}}) to host Radius and the Todo List application. Make sure to follow the instructions under the [Supported Kubernetes clusters]({{< ref "/guides/operations/kubernetes/overview#supported-kubernetes-clusters" >}}). 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- Store your Recipe at a location for Radius to pull from.
-  - If you are using Terraform, Radius supports pulling Terraform Recipes from a generic Git repository, including GitHub
-  - If you are using Bicep, you must have an OCI compliant container registry
+- Store your Recipe at a location.
+  - If you are using Terraform, Radius supports pulling Terraform modules from the following [module sources](https://developer.hashicorp.com/terraform/language/modules/sources): A generic Git repository including GitHub and Bitbucket and Terraform Registry
+  - If you are using Bicep, you must store your Recipe at an [OCI compliant container registry](https://oras.land/docs/compatible_oci_registries/). Make sure the container registry is set up with appropriate permissions to publish and pull Recipes.
 - The [Bicep extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}}) for VS Code is recommended for Bicep language support
-- [Node.js](https://nodejs.org/en/download) is required to generate 
+- [Node.js](https://nodejs.org/en/download) is required to generate the Bicep extension to deploy the new resource type. 
 
 ## Step 1: Install Radius and initialize a new environment
 
@@ -68,27 +68,27 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
 
 ## Step 3: Register a Recipe for the PostgreSQL resource type
 
-[Recipes]({{< ref "/guides/recipes/overview" >}}) define how resource types are deployed. To deploy the PostgreSQL resource type, you must create a Bicep Template or a Terraform module and publish it to a registry. Then register the template or module as a Recipe in the Radius environment. 
+[Recipes]({{< ref "/guides/recipes/overview" >}}) define how resource types are deployed. To deploy the PostgreSQL resource type, you must create a Bicep Template or a Terraform module and publish it to a location. Then register the template or module as a Recipe in the Radius environment. 
 
-  {{< tabs Terraform Bicep >}}{{% codetab %}} 
+{{< tabs Terraform Bicep >}}{{% codetab %}} 
 
-1. Create a new file called `main.tf` and add the following:
+1. Radius supports pulling Terraform modules from a generic [Git repository](https://developer.hashicorp.com/terraform/language/modules/sources#generic-git-repository), including GitHub. Create a new directory in your Git repository for the PostgreSQL Terraform module and navigate to it: 
+
+    Create a new file called `main.tf` and add the following:
 
    {{% rad file="snippets/recipes/terraform/main.tf" embed=true %}}
    
-   Learn more about Authoring Terraform Modules as Recipes in this [how-to-guide]({{< ref "/guides/recipes/howto-author-recipes" >}}).
-
-1. Follow the documentation on [Publish modules](https://developer.hashicorp.com/terraform/registry/modules/publish) to set up and publish the postgreSQL Terraform module to a Terraform registry. If you want to pull Terraform modules from a private registry, follow the how-to-guide on [pulling Terraform modules from a private registry](https://docs.radapp.io/guides/recipes/terraform/howto-private-registry/)
+   Learn more about Authoring Terraform Modules as Recipes in this [how-to-guide]({{< ref "/guides/recipes/howto-author-recipes" >}}). If you want to pull Terraform modules from a private registry, follow the how-to-guide on [pulling Terraform modules from a private registry](https://docs.radapp.io/guides/recipes/terraform/howto-private-registry/)
 
 1. Register the Terraform module as the `default` Recipe in the `default` environment (the default environment was created when `rad init` was run)
 
     ```bash
     rad recipe register default --environment default --resource-type MyCompany.Resources/postgreSQL --template-kind terraform --template-path git::<path to your tf module>
     ```
-    For eg: if you have the terraform module in your git repository `terraform-recipes/kubernetes/postgres`, the command would look like this:
+    For eg: if you have the terraform module in your git repository named `terraform-recipes/kubernetes/postgres`, the command would look like this:
     
     ```bash 
-    rad recipe register default --environment default --resource-type MyCompany.Resources/postgreSQL --template-kind terraform --template-path https://github.com/<org-name/user-name>/terraform-recipes.git//kubernetes/postgres
+    rad recipe register default --environment default --resource-type MyCompany.Resources/postgreSQL --template-kind terraform --template-path https://github.com/<org-name>/terraform-recipes.git//kubernetes/postgres
     ```
 
 1. Verify the Recipe is registered to the `default` environment
@@ -138,6 +138,10 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
 
 ## Step 4: Generate a Bicep extension
 
+{{% alert title="Info" color="info" %}}
+This step is required even if you use Terraform Recipes to deploy the PostgreSQL resource type as part of the application.
+{{% /alert %}}
+
 For the rad CLI and VS Code to recognize the PostgreSQL resource type, a [Bicep extension](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-extension) must be generated and added to the [`bicepconfig.json`]({{< ref "/guides/tooling/bicepconfig/overview" >}}) file.
 
 1. Generate the Bicep extension using the [rad bicep publish-extension]({{< ref rad_bicep_publish-extension >}}) command:
@@ -145,7 +149,7 @@ For the rad CLI and VS Code to recognize the PostgreSQL resource type, a [Bicep 
     ```bash
     rad bicep publish-extension -f postgreSQL.yaml --target ./mycompany.tgz
     ```
-    The bicep extension `mycompany` is generated and saved to the `mycompany.tgz` file. 
+    The Bicep extension `mycompany` is generated and saved to the `mycompany.tgz` file. 
     
 1. Open the `bicepconfig.json` file and replace it with the below config.
 
