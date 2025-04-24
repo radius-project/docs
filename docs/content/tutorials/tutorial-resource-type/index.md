@@ -17,9 +17,9 @@ Radius includes several built-in resource types which developers can use to buil
 
 - [A Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview" >}}) to host Radius and the Todo List application. Make sure to follow the instructions under the [Supported Kubernetes clusters]({{< ref "/guides/operations/kubernetes/overview#supported-kubernetes-clusters" >}}). 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- Setup a registry to publish and pull the Recipes
-  - If you prefer Bicep as the language to author your Recipe, set up an [OCI-compliant container registry ](https://oras.land/docs/compatible_oci_registries/) with required permissions to publish and pull Recipes.
-  - If you prefer Terraform as the language to author your Recipe, set up a [Terraform registry](https://developer.hashicorp.com/terraform/registry) with required permissions to publish and pull Recipes.
+- Store your Recipe at a location
+  - If you are using Terraform, Radius supports pulling Terraform in a generic Git repository, including GitHub
+  - If you are using Bicep, you must have an OCI container registry
 - The [Bicep extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}}) for VS Code is recommended for Bicep language support
 
 ## Step 1: Install Radius and initialize a new environment
@@ -84,10 +84,10 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
     ```bash
     rad recipe register default --environment default --resource-type MyCompany.Resources/postgreSQL --template-kind terraform --template-path git::<path to your tf module>
     ```
-    For eg: if you have the terraform module in a git repository `terraform-recipes/kubernetes/postgres`, the command would look like this:
+    For eg: if you have the terraform module in your git repository `terraform-recipes/kubernetes/postgres`, the command would look like this:
     
     ```bash 
-    rad recipe register default --environment default --resource-type MyCompany.Resources/postgreSQL --template-kind terraform --template-path https://github.com/<org/name>/terraform-recipes.git//kubernetes/postgres
+    rad recipe register default --environment default --resource-type MyCompany.Resources/postgreSQL --template-kind terraform --template-path https://github.com/<user-name/org-name>/terraform-recipes.git//kubernetes/postgres
     ```
 
 1. Verify the Recipe is registered to the `default` environment
