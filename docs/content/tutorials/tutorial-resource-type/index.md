@@ -17,10 +17,11 @@ Radius includes several built-in resource types which developers can use to buil
 
 - [A Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview" >}}) to host Radius and the Todo List application. Make sure to follow the instructions under the [Supported Kubernetes clusters]({{< ref "/guides/operations/kubernetes/overview#supported-kubernetes-clusters" >}}). 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- Store your Recipe at a location
-  - If you are using Terraform, Radius supports pulling Terraform in a generic Git repository, including GitHub
-  - If you are using Bicep, you must have an OCI container registry
+- Store your Recipe at a location for Radius to pull from.
+  - If you are using Terraform, Radius supports pulling Terraform Recipes from a generic Git repository, including GitHub
+  - If you are using Bicep, you must have an OCI compliant container registry
 - The [Bicep extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}}) for VS Code is recommended for Bicep language support
+- [Node.js](https://nodejs.org/en/download) is required to generate 
 
 ## Step 1: Install Radius and initialize a new environment
 
@@ -87,7 +88,7 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
     For eg: if you have the terraform module in your git repository `terraform-recipes/kubernetes/postgres`, the command would look like this:
     
     ```bash 
-    rad recipe register default --environment default --resource-type MyCompany.Resources/postgreSQL --template-kind terraform --template-path https://github.com/<user-name/org-name>/terraform-recipes.git//kubernetes/postgres
+    rad recipe register default --environment default --resource-type MyCompany.Resources/postgreSQL --template-kind terraform --template-path https://github.com/<org-name/user-name>/terraform-recipes.git//kubernetes/postgres
     ```
 
 1. Verify the Recipe is registered to the `default` environment
