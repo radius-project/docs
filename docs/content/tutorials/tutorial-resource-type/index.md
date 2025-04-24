@@ -201,7 +201,7 @@ To clean up the resources created in this tutorial, run the following commands
 1. Delete the application and all resources created by the application
 
     ```bash
-    rad app delete -application todolist
+    rad app delete --application todolist
     ```
 2. Delete the environment
 
