@@ -42,7 +42,7 @@ rad install kubernetes --set-file global.rootCA.cert=/etc/ssl/your-root-ca.crt
 1. Begin by adding the Radius Helm repository:
 
    ```bash
-   helm repo add radius https://radius.azurecr.io/helm/v1/repo
+   helm repo add radius oci://ghcr.io/radius-project/helm-chart
    helm repo update
    ```
 
