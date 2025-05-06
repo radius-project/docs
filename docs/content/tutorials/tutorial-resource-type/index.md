@@ -56,6 +56,7 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
     - `schema`: The schema defines the properties of the resource type.
         - `environment`: The Radius environment in which the resource type is deployed; this property is set by Radius when the resource is deployed
         - `application`: The application to which the resource belongs to
+        - `size`: The size of the PostgreSQL resource type.
         - `status`: This is a read-only property that is set by the Recipe that includes connection information to the resource type.
     - `capabilities`: This specifies features of the resource type. The only available option is `SupportsRecipes` which indicates that the resource type can be deployed via a Recipe.
     <br></br>
@@ -201,7 +202,7 @@ Run the application using `rad run`. The `rad run` command sets up port forwardi
 ```sh
 rad run app.bicep --application todolist
 ```
-Visit the application at [http://localhost:3000](http://localhost:3000).You should see the Radius Connections section with new environment variables added. The `demo` container now has connection information for PostgreSQL (`CONNECTION_POSTGRESQL_HOST`, `CONNECTION_POSTGRESQL_PORT`, etc.)
+Visit the application at [http://localhost:3000](http://localhost:3000). You should see the Radius Connections section with new environment variables added. The `demo` container now has connection information for PostgreSQL (`CONNECTION_POSTGRESQL_HOST`, `CONNECTION_POSTGRESQL_PORT`, etc.)
 
 {{< image src=todolist_postgresql.png" alt="Todo List with PostgreSQL connection" width=800px >}}
 

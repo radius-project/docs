@@ -15,11 +15,17 @@ param password string = uniqueString(context.resource.id)
 @description('Tag to pull for the postgres container image.')
 param tag string = '16-alpine'
 
-@description('Memory request for the postgres deployment.')
-var memoryRequest = '512Mi' 
-
-@description('Memory limit for the postgres deployment')
-var memoryLimit = '1024Mi' 
+@description('Memory limits for the PostgreSQL container')
+var memory ={
+  S: {
+    memoryRequest: '512Mi'
+    memoryLimit: '1024Mi'
+  } 
+  M: {
+    memoryRequest: '1Gi'
+    memoryLimit: '2Gi'
+  }
+} 
 
 extension kubernetes with {
   kubeConfig: ''
@@ -63,10 +69,10 @@ resource postgresql 'apps/Deployment@v1' = {
             ]
             resources: {
               requests: {
-                memory: memoryRequest
+                memory: memory[context.resource.properties.size].memoryRequest
               }
               limits: {
-                memory: memoryLimit
+                memory: memory[context.resource.properties.size].memoryLimit
               }
             }
             env: [
@@ -123,7 +129,7 @@ output result object = {
     username: user
   }
   secrets: {
-    #disable-next-line secure-parameter-default
+    #disable-next-line outputs-should-not-contain-secrets
     password: password
   } 
 }

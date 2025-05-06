@@ -10,6 +10,8 @@ types:
               type: string
             application:
               type: string
+            size:
+              type: string
             status:
               type: object
               properties:

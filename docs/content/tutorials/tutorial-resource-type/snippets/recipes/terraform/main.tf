@@ -12,6 +12,24 @@ variable "context" {
   type = any
 }
 
+variable "memory" {
+  description = "Memory limits for the PostgreSQL container"
+  type = map(object({
+    memoryRequest = string
+    memoryLimit  = string
+  }))
+  default = {
+    S = {
+      memoryRequest = "512Mi"
+      memoryLimit   = "1024Mi"
+    },
+    M = {
+      memoryRequest = "1Gi"
+      memoryLimit   = "2Gi"
+    }
+  }
+}
+
 locals {
   uniqueName = var.context.resource.name
   port     = 5432
@@ -46,6 +64,14 @@ resource "kubernetes_deployment" "postgresql" {
         container {
           image = "postgres:16-alpine"
           name  = "postgres"
+          resources {
+            requests = {
+              memory = var.memory[var.context.resource.properties.size].memoryRequest
+              }
+              limits = {
+                memory= var.memory[var.context.resource.properties.size].memoryLimit
+              }
+            }
           env {
             name  = "POSTGRES_PASSWORD"
             value = random_password.password.result
