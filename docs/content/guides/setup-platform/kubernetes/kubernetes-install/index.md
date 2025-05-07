@@ -13,7 +13,7 @@ Radius handles the deployment and management of environments, applications, and 
 
 ## Prerequisites
 
-- [Kubernetes cluster]({{< ref "guides/operations/kubernetes/overview#supported-kubernetes-clusters" >}})
+- [Kubernetes cluster]({{< ref "guides/setup-platform/kubernetes/overview#supported-kubernetes-clusters" >}})
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [rad CLI]({{< ref howto-rad-cli >}})
 
