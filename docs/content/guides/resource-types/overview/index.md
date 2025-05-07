@@ -31,6 +31,6 @@ Portable resource types are sample resource types designed to be used across dif
 
 There are other resource types that are platform specific and can be used to manage resources on specific cloud providers or platforms. They are designed to work specifically with the respective provider APIs. These include
 
-- [Kubernetes](<{{ ref "/guides/resource-types/kubernetes" >}})>) 
-- [AWS](<{{ ref "/guides/resource-types/aws" >}}>)
-- [Azure](<{{ ref "/guides/resource-types/azure" >}}>)
+- [Kubernetes]({{< ref "/guides/resource-types/kubernetes" >}})) 
+- [AWS]({{<> ref "/guides/resource-types/aws" >}})
+- [Azure]({{< ref "/guides/resource-types/azure" >}})
