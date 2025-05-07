@@ -57,7 +57,10 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
         - `environment`: The Radius environment in which the resource type is deployed; this property is set by Radius when the resource is deployed
         - `application`: The application to which the resource belongs to
         - `size`: The size of the PostgreSQL resource type.
-        - `status`: This is a read-only property that is set by the Recipe that includes connection information to the resource type.
+        - `host`: The host name of the PostgreSQL resource type; this is a read only property set by Recipe
+        - `port`: The port of the PostgreSQL resource type; this is a read only property set by Recipe
+        - `username`: The username of the PostgreSQL resource type; this is a read only property set by Recipe
+        - `password`: The password of the PostgreSQL resource type; this is a read only property set by Recipe
     - `capabilities`: This specifies features of the resource type. The only available option is `SupportsRecipes` which indicates that the resource type can be deployed via a Recipe.
     <br></br>
 

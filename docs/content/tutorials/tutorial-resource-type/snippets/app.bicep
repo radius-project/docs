@@ -20,7 +20,7 @@ resource postgresql 'MyCompany.Resources/postgreSQL@2023-10-01-preview' = {
   properties: {
     application: todolist.id
     environment: environment
-    size: 'M'
+    size: 'S'
   }
 }
 //POSTGRESQL
@@ -40,20 +40,20 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
       //CONNECTION
       env: {
         CONNECTION_POSTGRES_HOST: {
-          value: postgresql.properties.status.binding.host
+          value: postgresql.properties.host
         }
         CONNECTION_POSTGRES_PORT: {
-          value: string(postgresql.properties.status.binding.port)
+          value: string(postgresql.properties.port)
         }
         CONNECTION_POSTGRES_USERNAME: {
-          value: postgresql.properties.status.binding.username
+          value: postgresql.properties.username
         }
         CONNECTION_POSTGRES_DATABASE: {
-          value: postgresql.properties.status.binding.database
+          value: postgresql.properties.database
         }
         //This is stored and passed as cleartext for demo purposes. In production, use a secret store.
         CONNECTION_POSTGRES_PASSWORD: {
-          value: postgresql.properties.status.binding.password
+          value: postgresql.properties.password
         }   
       }
     }
