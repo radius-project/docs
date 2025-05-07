@@ -25,8 +25,8 @@ The Radius getting-started guide can be [run **for free** in a GitHub Codespace]
 
 ## 1. Have your Kubernetes cluster handy
 
-Radius runs inside [Kubernetes]({{< ref "guides/setup-platform/setup-kubernetes/overview" >}}). However you run Kubernetes, get a cluster ready.
-> *If you don't have a preferred way to create Kubernetes clusters, you could try using [k3d](https://k3d.io/), which runs a minimal Kubernetes distribution in Docker. Make sure to apply the [recommended configuration]({{< ref "guides/setup-platform/setup-kubernetes/overview#supported-kubernetes-clusters" >}}).*
+Radius runs inside [Kubernetes]({{< ref "guides/setup-platform/kubernetes/overview" >}}). However you run Kubernetes, get a cluster ready.
+> *If you don't have a preferred way to create Kubernetes clusters, you could try using [k3d](https://k3d.io/), which runs a minimal Kubernetes distribution in Docker. Make sure to apply the [recommended configuration]({{< ref "guides/setup-platform/kubernetes/overview#supported-kubernetes-clusters" >}}).*
 
 Ensure your cluster is set as your current context:
 
@@ -121,7 +121,7 @@ First add some new code to `app.bicep` by pasting in the content below at the en
 
 {{< rad file="snippets/app-with-redis-snippets.bicep" embed=true marker="//REDIS" markdownConfig="{linenos=table,linenostart=21}" >}}
 
-Next, update your container definition to include `connections` inside `properties`. This code creates a connection between the container and the database. Based on this connection, Radius will [inject environment variables]({{< ref "/guides/author-apps/containers/overview#connections" >}}) into the container that inform the container how to connect. You will view these in the next step.
+Next, update your container definition to include `connections` inside `properties`. This code creates a connection between the container and the database. Based on this connection, Radius will [inject environment variables]({{< ref "/guides/resource-types/core-resource-types/containers/overview#connections" >}}) into the container that inform the container how to connect. You will view these in the next step.
 
 {{< rad file="snippets/app-with-redis-snippets.bicep" embed=true marker="//CONNECTION" markdownConfig="{linenos=table,hl_lines=[\"13-17\"],linenostart=7}" >}}
 

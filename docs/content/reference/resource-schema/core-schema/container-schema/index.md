@@ -119,7 +119,7 @@ Additional properties are available and required depending on the 'kind' of the 
 
 #### kubernetesMetadata
 
-The [Kubernetes Metadata extension]({{< ref "guides/setup-platform/setup-kubernetes/overviewkubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius Application. For examples refer to the extension overview page.
+The [Kubernetes Metadata extension]({{< ref "guides/setup-platform/kubernetes/overview#kubernetes-metadata">}}) enables you set and cascade Kubernetes metadata such as labels and Annotations on all the Kubernetes resources defined with in your Radius Application. For examples refer to the extension overview page.
 
 ##### Properties
 
@@ -175,5 +175,5 @@ The `manualScaling` extension configures the number of replicas of a compute ins
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| base | n | The base Kubernetes resource manifest on top of which Radius specified properties will be applied. Supported resource types are documented [here]({{<ref "guides/author-apps/containers/overview#base-kubernetes-yaml">}}). | `loadTextContent('manifest/base-container.yaml')`
+| base | n | The base Kubernetes resource manifest on top of which Radius specified properties will be applied. Supported resource types are documented [here]({{<ref "/guides/resource-types/core-resource-types/containers/overview#base-kubernetes-yaml">}}). | `loadTextContent('manifest/base-container.yaml')`
 | pod | n | The pod specifications to apply to the Kubernetes resource created by Radius. Any field defined on [PodSpec](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#PodSpec) can be set here. | [`topologySpreadConstraints`](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling)

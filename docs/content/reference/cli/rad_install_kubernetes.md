@@ -17,7 +17,7 @@ By default 'rad install kubernetes' will install Radius with the version matchin
 
 Radius will be installed in the 'radius-system' namespace. For more information visit https://docs.radapp.io/concepts/technical/architecture/
 
-Overrides can be set by specifying Helm chart values with the '--set' flag. For more information visit https://docs.radapp.io/guides/setup-platform/setup-kubernetes/overviewinstall/.
+Overrides can be set by specifying Helm chart values with the '--set' flag. For more information visit https://docs.radapp.io/guides/setup-platform/kubernetes/overviewinstall/.
 
 
 ```

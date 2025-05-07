@@ -37,13 +37,13 @@ Users can employ multiple environments for isolation and organization, for examp
 - Difference in hosting (standalone Kubernetes vs Microsoft Azure)
 - Multi-region deployments (deploy an application to multiple regions)
 
-[Workspaces]({{< ref "/guides/operations/workspaces/overview" >}}) can be used to manage multiple environments from one machine.
+[Workspaces]({{< ref "/guides/setup-platform/workspaces/overview" >}}) can be used to manage multiple environments from one machine.
 
 ## Recipes
 
 ### What resources do Recipes support?
 
-Recipes currently support the set of [Radius portable resources]({{< ref "/guides/author-apps/portable-resources/overview" >}}): Redis, Mongo, RabbitMQ, SQL, Dapr State Stores, Dapr Secret Stores, Dapr Pub/Sub, and the untyped extender resource. Additional support for other resources (_Azure, AWS, etc._) will come in a future release.
+Recipes currently support the set of [Radius portable resources]({{< ref "/guides/resource-types/portable-resource-types/overview" >}}): Redis, Mongo, RabbitMQ, SQL, Dapr State Stores, Dapr Secret Stores, Dapr Pub/Sub, and the untyped extender resource. Additional support for other resources (_Azure, AWS, etc._) will come in a future release.
 
 ### What infrastructure can Recipes deploy?
 
@@ -61,7 +61,7 @@ No. Recipes are deployed on-behalf-of the Radius Environment so developers do no
 
 ### What AWS services does Radius support?
 
-Radius Applications can include AWS services that are also supported by the AWS cloud control API. See the [AWS resource library]({{< ref "/guides/author-apps/aws/overview#resource-library" >}}) for the complete list of supported AWS resources. Connections from a Radius container to an AWS resource are not yet supported. Properties such as hostnames, ports, endpoints, and connection strings need to be manually specified as environment variables. Additional support for Connections to AWS resources is on our backlog.
+Radius Applications can include AWS services that are also supported by the AWS cloud control API. See the [AWS resource library]({{< ref "/guides/resource-types/aws/overview#resource-library" >}}) for the complete list of supported AWS resources. Connections from a Radius container to an AWS resource are not yet supported. Properties such as hostnames, ports, endpoints, and connection strings need to be manually specified as environment variables. Additional support for Connections to AWS resources is on our backlog.
 
 ### What Azure services does Radius support?
 
@@ -73,7 +73,7 @@ Not yet, but it is on the backlog.
 
 ### Does Radius support Dapr?
 
-Yes. Radius has first-class support for [Dapr building blocks]({{< ref "/guides/author-apps/dapr" >}}) such as state stores, secret stores, and pub/sub brokers. Developers can add Dapr resources to their applications and operators can define Recipes that deploy and manage the underlying infrastructure.
+Yes. Radius has first-class support for [Dapr building blocks]({{< ref "guides/resource-types/core-resource-types/dapr" >}}) such as state stores, secret stores, and pub/sub brokers. Developers can add Dapr resources to their applications and operators can define Recipes that deploy and manage the underlying infrastructure.
 
 ## Comparison to other tools
 
@@ -116,7 +116,7 @@ Teams looking to leverage existing Terraform modules can use [Recipes]({{< ref "
 
 [Dapr](https://dapr.io/) is a portable, event-driven runtime that makes it easy for developers to build resilient, microservice stateless and stateful applications that run on the cloud and edge. Dapr is a great tool for writing microservice code, but doesn't provide a way to model or deploy an entire application and its infrastructure.
 
-Radius provides [built-in Dapr support]({{< ref "/guides/author-apps/dapr" >}}) to make it easy to model Dapr building blocks and Dapr-enabled services within your app. Like peanut butter and jelly, Radius and Dapr are better together.
+Radius provides [built-in Dapr support]({{< ref "/guides/resource-types/core-resource-types/dapr" >}}) to make it easy to model Dapr building blocks and Dapr-enabled services within your app. Like peanut butter and jelly, Radius and Dapr are better together.
 
 ### How does Radius compare to Acorn?
 

@@ -29,7 +29,7 @@ Platform engineers and IT operators collaborate with application teams by managi
 
 When an Application is deployed, Radius will *bind* the Application to the configuration of the target Environment and apply the relevant settings. Storing the operational configuration in the Environment increases developer velocity because the Application does not need to change when it is deployed across Environments configured for different purposes or leveraging different infrastructure.
 
-{{< button text="Learn more about Environments" page="/guides/deploy-apps/environments/overview" newtab="true" >}}
+{{< button text="Learn more about Environments" page="/guides/setup-platform/environments/overview" newtab="true" >}}
 
 ## Recipes as part of the Environment
 

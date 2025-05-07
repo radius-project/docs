@@ -10,7 +10,7 @@ tags: ["deployments"]
 
 ## Pre-requisites
 
-- [An authored Radius Application]({{< ref author-apps >}})
+- [An authored Radius Application]({{< ref resource-types >}})
 
 ## Step 1: Run an application
 

@@ -21,13 +21,13 @@ By the end of the tutorial, you will have created and deployed a new Radius Appl
 
 ## Prerequisites
 
-- [Supported Kubernetes cluster]({{< ref "/guides/setup-platform/setup-kubernetes/overview" >}})
+- [Supported Kubernetes cluster]({{< ref "/guides/setup-platform/kubernetes/overview" >}})
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 
 ## Step 1: Initialize a Radius Environment and Application
 
-[Radius Environments]({{< ref "/guides/deploy-apps/environments/overview" >}}) are where applications are deployed. Environments determine how an application runs on a particular platform (_like AWS or Azure_).
+[Radius Environments]({{< ref "/guides/setup-platform/environments/overview" >}}) are where applications are deployed. Environments determine how an application runs on a particular platform (_like AWS or Azure_).
 
 1. Begin by creating a new directory for your application:
 
@@ -154,7 +154,7 @@ Radius Applications are where all your app's resources and relationships come to
     ```
 
    {{< alert title="💡 Kubernetes mapping" color="info" >}}
-   Radius Environments map how Applications "bind" to a particular platform. Earlier we saw the Application compute was set to `kubernetes` and the namespace was set to `default-myapp`. This means the container resources were deployed to the `default-myapp` namespace in the Kubernetes cluster where Radius is installed. Visit the [Kubernetes mapping docs]({{< ref "/guides/setup-platform/setup-kubernetes/overview#resource-mapping" >}}) to learn more.
+   Radius Environments map how Applications "bind" to a particular platform. Earlier we saw the Application compute was set to `kubernetes` and the namespace was set to `default-myapp`. This means the container resources were deployed to the `default-myapp` namespace in the Kubernetes cluster where Radius is installed. Visit the [Kubernetes mapping docs]({{< ref "/guides/setup-platform/kubernetes/overview#resource-mapping" >}}) to learn more.
    {{< /alert >}}
 
 ## Step 4: Run your application
@@ -231,7 +231,7 @@ In addition to containers, you can add dependencies like Redis caches, Dapr Stat
    {{% rad file="snippets/2-app-mongo.bicep" embed=true marker="//CONTAINER" markdownConfig="{hl_lines=[\"16-20\"]}" %}}
 
    {{< alert title="💡 Radius Connections" color="info" >}}
-   Radius Connections are more than just bookkeeping. They are used to automatically configure access for your containers. Learn more in the [containers documentation]({{< ref "/guides/author-apps/containers/overview" >}}).
+   Radius Connections are more than just bookkeeping. They are used to automatically configure access for your containers. Learn more in the [containers documentation]({{< ref "/guides/resource-types/core-resource-types/containers/overview" >}}).
    {{< /alert >}}
 
 1. Re-run your app with [`rad run`]({{< ref rad_run >}}) to deploy the Mongo database and container and start the port-forward and log stream:

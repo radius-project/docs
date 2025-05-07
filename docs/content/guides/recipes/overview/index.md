@@ -53,7 +53,7 @@ It's easy to author and register your own Recipes which define how to deploy and
 
 ## Supported resources
 
-Recipes support all of the available portable resources listed [here]({{< ref "/guides/author-apps/portable-resources/overview" >}}).
+Recipes support all of the available portable resources listed [here]({{< ref "/guides/resource-types/portable-resource-types/overview" >}}).
 
 ## Infrastructure linking
 

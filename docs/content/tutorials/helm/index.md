@@ -19,7 +19,7 @@ This tutorial will teach you the following about Radius:
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Helm](https://helm.sh/docs/intro/install/)
-- [Setup a supported Kubernetes cluster]({{< ref "/guides/setup-platform/setup-kubernetes/overview#supported-clusters" >}})
+- [Setup a supported Kubernetes cluster]({{< ref "/guides/setup-platform/kubernetes/overview#supported-clusters" >}})
 
 ## Step 1. Clone and open the sample code
 
@@ -247,7 +247,7 @@ From here you will go through a series of steps to incrementally add more Radius
     ```bash
     rad app graph -a demo -g default-demo
     ```
-    where `-a demo` specifies the application name and `-g default-demo` specifies the resource group name. [Resource groups]({{< ref "guides/operations/groups/overview" >}}) are a way to organize resources in Radius.
+    where `-a demo` specifies the application name and `-g default-demo` specifies the resource group name. [Resource groups]({{< ref "guides/setup-platform/groups/overview" >}}) are a way to organize resources in Radius.
 
     The output should look like this:
 

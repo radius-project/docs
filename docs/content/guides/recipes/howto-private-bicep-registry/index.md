@@ -29,9 +29,9 @@ Radius supports three authentication methods for accessing private container reg
 
 ## Step 2: Define a secret store resource
 
-Create a [Radius Secret Store]({{< ref "/guides/author-apps/secrets/overview" >}}) to securely store and manage the secrets information required for authenticating with a private registry. Define the namespace for the cluster that will contain your [Kubernetes Secret](https://kubernetes.io/docs/concepts/configuration/secret/) with the `resource` property and specify the type of secret e.g. `basicAuthentication`, `azureWorkloadIdeneity`, `awsIRSA`. 
+Create a [Radius Secret Store]({{< ref "/guides/resource-types/core-resource-types/secrets/overview" >}}) to securely store and manage the secrets information required for authenticating with a private registry. Define the namespace for the cluster that will contain your [Kubernetes Secret](https://kubernetes.io/docs/concepts/configuration/secret/) with the `resource` property and specify the type of secret e.g. `basicAuthentication`, `azureWorkloadIdeneity`, `awsIRSA`. 
 
-> While this example shows a Radius-managed secret store where Radius creates the underlying secrets infrastructure, you can also bring your own existing secrets. Refer to the [secrets documentation]({{< ref "/guides/author-apps/secrets/overview" >}}) for more information.
+> While this example shows a Radius-managed secret store where Radius creates the underlying secrets infrastructure, you can also bring your own existing secrets. Refer to the [secrets documentation]({{< ref "/guides/resource-types/core-resource-types/secrets/overview" >}}) for more information.
 
 Secret store example for secret type `awsIRSA`:
 {{< rad file="snippets/env.bicep" embed=true marker="//SECRETSTORE" >}}
@@ -67,6 +67,6 @@ rad env delete my-env
 ## Further reading
 
 - [Recipes overview]({{< ref "/guides/recipes/overview" >}})
-- [Radius Environments]({{< ref "/guides/deploy-apps/environments/overview" >}})
+- [Radius Environments]({{< ref "/guides/setup-platform/environments/overview" >}})
 - [`rad recipe CLI reference`]({{< ref rad_recipe >}})
 - [`rad env CLI reference`]({{< ref rad_environment >}})

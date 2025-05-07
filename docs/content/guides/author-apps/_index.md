@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Authoring applications"
-linkTitle: "Authoring applications"
+title: "Authoring Applications"
+linkTitle: "Authoring Applications"
 description: "Learn how to author a Radius Application"
-weight: 100
+weight: 500
 ---

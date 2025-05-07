@@ -10,7 +10,7 @@ tags: ["logs","observability"]
 
 ## Prerequisites
 
-- [Setup a supported Kubernetes cluster]({{< ref "/guides/setup-platform/setup-kubernetes/overview#supported-clusters" >}})
+- [Setup a supported Kubernetes cluster]({{< ref "/guides/setup-platform/kubernetes/overview#supported-clusters" >}})
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [Helm 3](https://helm.sh/)
 

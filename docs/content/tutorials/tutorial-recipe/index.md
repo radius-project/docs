@@ -22,7 +22,7 @@ This tutorial will teach you the following about Recipes
 
 ## Application overview
 
-This application is a simple to-do list which stores and visualizes to-do items. It consists of a frontend [container]({{< ref "guides/author-apps/containers" >}}) and a backend [Redis Cache]({{< ref redis >}}).
+This application is a simple to-do list which stores and visualizes to-do items. It consists of a frontend [container]({{< ref "guides/resource-types/core-resource-types/containers" >}}) and a backend [Redis Cache]({{< ref redis >}}).
 
 {{< image src="recipe-tutorial-diagram.png" alt="Screenshot of the todoapp with Kubernetes, Azure and AWS Redis Cache options" style="width:500px" >}}
 
@@ -34,7 +34,7 @@ Developers don't need to specify what cloud resources they're using in their app
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
-- [Setup a supported Kubernetes cluster]({{< ref "/guides/setup-platform/setup-kubernetes/overview#supported-clusters" >}})
+- [Setup a supported Kubernetes cluster]({{< ref "/guides/setup-platform/kubernetes/overview#supported-clusters" >}})
 
 ## Step 1: Initialize a Radius Environment
 
@@ -143,7 +143,7 @@ Note that no Recipe name is specified with 'db', so it will be using the default
  
 ## Step 4: Use Azure/AWS recipes in your application
 
-This step requires an Azure subscription or an AWS account to deploy cloud resources, which will incur costs. You will need to add the [Azure/AWS cloud provider]({{< ref providers >}}) to your environment in order to deploy Azure/AWS resources and leverage Azure Recipes.
+This step requires an Azure subscription or an AWS account to deploy cloud resources, which will incur costs. You will need to add the [Azure/AWS cloud provider]({{< ref cloud-providers >}}) to your environment in order to deploy Azure/AWS resources and leverage Azure Recipes.
 
 {{< tabs Azure AWS >}}
 
