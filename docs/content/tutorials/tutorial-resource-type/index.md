@@ -62,7 +62,8 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
         - `username`: The username of the PostgreSQL resource type; this is a read only property set by Recipe
         - `password`: The password of the PostgreSQL resource type; this is a read only property set by Recipe
     - `capabilities`: This specifies features of the resource type. The only available option is `SupportsRecipes` which indicates that the resource type can be deployed via a Recipe.
-    <br></br>
+    {{% alert title="Warning" color="warning" %}} `environment`, `application`, `status` are system reserved resource properties updated by Radius after deployment.
+    {{% /alert %}}
 
 1. Create the resource type using the [rad resource-type]({{< ref rad_resource-type_create >}}) command:
 
