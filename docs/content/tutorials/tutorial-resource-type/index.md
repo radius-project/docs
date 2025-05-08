@@ -187,7 +187,7 @@ For the rad CLI and VS Code to recognize the PostgreSQL resource type, a [Bicep 
     ```
    {{% rad file="snippets/app.bicep" embed=true marker="//POSTGRESQL" %}}
 
-1. Add the `demo` container definition along with the connection to the PostgreSQL resource type as environment variables. 
+1. Add the `demo` container definition along with the connection to the PostgreSQL resource type and environment variables. 
 
    {{% rad file="snippets/app.bicep" embed=true marker="//CONTAINER" %}}
 
@@ -209,6 +209,10 @@ rad run app.bicep --application todolist
 Visit the application at [http://localhost:3000](http://localhost:3000). You should see the Radius Connections section with new environment variables added. The `demo` container now has connection information for PostgreSQL (`CONNECTION_POSTGRESQL_HOST`, `CONNECTION_POSTGRESQL_PORT`, etc.)
 
 {{< image src=todolist_postgresql.png" alt="Todo List with PostgreSQL connection" width=800px >}}
+
+Navigate to the Radius Dashboard at [http://localhost:7007](http://localhost:7007/resources/default/Applications.Core/applications/todolist/application), You should see a visualization of the application graph for your `todolist` app, including the connection from the `demo` container to the `postgreSQL` db
+
+{{< image src="todolist_dashboard.png" alt="screenshot of Radius Dashboard with the new resource type" width=800 >}}
 
 ## Step 6: Clean up
 
