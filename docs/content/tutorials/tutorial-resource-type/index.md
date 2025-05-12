@@ -93,7 +93,7 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
     For example, if you have the terraform module in your git repository named `terraform-recipes/kubernetes/postgres`, the command would look like this:
     
     ```bash 
-    rad recipe register default --environment default --resource-type Radius.Resources/postgreSQL --template-kind terraform --template-path https://github.com/<org-name>/terraform-recipes.git//kubernetes/postgres
+    rad recipe register default --environment default --resource-type Radius.Resources/postgreSQL --template-kind terraform --template-path git::https://github.com/<org-name>/terraform-recipes.git//kubernetes/postgres
     ```
 
 1. Verify the Recipe is registered to the `default` environment
@@ -104,7 +104,7 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
     You should see the Recipe for the PostgreSQL resource type listed in the output (along with several Bicep recipes that were installed by the rad init command).
 
     ```bash
-    RECIPE    TYPE                            TEMPLATE KIND  TEMPLATE VERSION TEMPLATE
+    RECIPE    TYPE                         TEMPLATE KIND  TEMPLATE VERSION TEMPLATE
     default   Radius.Resources/postgreSQL  terraform                       git::<path to your tf module>
     ...
     ```

@@ -1,6 +1,6 @@
 // Import the set of Radius resources (Applications.*) into Bicep
 extension radius
-// Import the set of MyCompany resources (MyCompany.*) into Bicep
+// Import the set of Radius resources (Radius.Resources) into Bicep
 extension radiusResources
 
 //APP
@@ -14,7 +14,7 @@ resource todolist 'Applications.Core/applications@2023-10-01-preview' = {
 
 //POSTGRESQL
 param environment string
-resource postgresql 'MyCompany.Resources/postgreSQL@2023-10-01-preview' = {
+resource postgresql 'Radius.Resources/postgreSQL@2023-10-01-preview' = {
   name: 'postgresql'
   location: 'global'
   properties: {
