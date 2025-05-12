@@ -44,9 +44,9 @@ Radius includes several built-in resource types which developers can use to buil
 
 To create a PostgreSQL resource type in Radius, first create the resource type definition then add the resource type to Radius.
 
-1. Create a new file called `postgreSQL.yaml` and add the following:
+1. Create a new file called `types.yaml` and add the following:
 
-   {{% rad file="snippets/postgreSQL.yaml" lang=YAML embed=true %}}
+   {{% rad file="snippets/types.yaml" lang=YAML embed=true %}}
 
     The PostgreSQL resource type definition includes:
 
@@ -68,7 +68,7 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
 1. Create the resource type using the [rad resource-type]({{< ref rad_resource-type_create >}}) command:
 
     ```bash
-    rad resource-type create postgreSQL -f postgreSQL.yaml
+    rad resource-type create postgreSQL -f types.yaml
     ```
 
 ## Step 3: Register a Recipe for the PostgreSQL resource type
@@ -152,7 +152,7 @@ For the rad CLI and VS Code to recognize the PostgreSQL resource type, a [Bicep 
 1. Generate the Bicep extension using the [rad bicep publish-extension]({{< ref rad_bicep_publish-extension >}}) command:
 
     ```bash
-    rad bicep publish-extension -f postgreSQL.yaml --target ./radiusResources.tgz
+    rad bicep publish-extension -f types.yaml --target ./radiusResources.tgz
     ```
     The Bicep extension `radiusResources` is generated and saved to the `radiusResources.tgz` file. 
     
