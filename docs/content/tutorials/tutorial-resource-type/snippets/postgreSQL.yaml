@@ -1,4 +1,4 @@
-name: MyCompany.Resources
+name: Radius.Resources
 types:
   postgreSQL:
     apiVersions:

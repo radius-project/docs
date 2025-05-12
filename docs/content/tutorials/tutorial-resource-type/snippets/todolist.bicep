@@ -1,7 +1,7 @@
 // Import the set of Radius resources (Applications.*) into Bicep
 extension radius
 // Import the set of MyCompany resources (MyCompany.*) into Bicep
-extension mycompany
+extension radiusResources
 
 //APP
 resource todolist 'Applications.Core/applications@2023-10-01-preview' = {

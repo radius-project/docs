@@ -88,12 +88,12 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
 1. Register the Terraform module as the `default` Recipe in the `default` environment (the default environment was created when `rad init` was run)
 
     ```bash
-    rad recipe register default --environment default --resource-type MyCompany.Resources/postgreSQL --template-kind terraform --template-path git::<path to your tf module>
+    rad recipe register default --environment default --resource-type Radius.Resources/postgreSQL --template-kind terraform --template-path git::<path to your tf module>
     ```
     For example, if you have the terraform module in your git repository named `terraform-recipes/kubernetes/postgres`, the command would look like this:
     
     ```bash 
-    rad recipe register default --environment default --resource-type MyCompany.Resources/postgreSQL --template-kind terraform --template-path https://github.com/<org-name>/terraform-recipes.git//kubernetes/postgres
+    rad recipe register default --environment default --resource-type Radius.Resources/postgreSQL --template-kind terraform --template-path https://github.com/<org-name>/terraform-recipes.git//kubernetes/postgres
     ```
 
 1. Verify the Recipe is registered to the `default` environment
@@ -105,7 +105,7 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
 
     ```bash
     RECIPE    TYPE                            TEMPLATE KIND  TEMPLATE VERSION TEMPLATE
-    default   MyCompany.Resources/postgreSQL  terraform                       git::<path to your tf module>
+    default   Radius.Resources/postgreSQL  terraform                       git::<path to your tf module>
     ...
     ```
 {{% /codetab %}}
@@ -124,7 +124,7 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
 1. Register the Bicep template as the `default` Recipe in the `default` environment (the default environment was created when `rad init` was run)
 
     ```bash
-    rad recipe register default --environment default --resource-type MyCompany.Resources/postgreSQL --template-kind bicep --template-path <host>/<repository>/postgresql:latest
+    rad recipe register default --environment default --resource-type Radius.Resources/postgreSQL --template-kind bicep --template-path <host>/<repository>/postgresql:latest
     ```
 1. Verify the Recipe is registered to the `default` environment
 
@@ -135,7 +135,7 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
 
     ```bash
     RECIPE    TYPE                            TEMPLATE KIND  TEMPLATE VERSION TEMPLATE
-    default   MyCompany.Resources/postgreSQL  bicep                           <host>/<repository>/postgresql:latest
+    default   Radius.Resources/postgreSQL  bicep                           <host>/<repository>/postgresql:latest
     ...
     ```
 {{% /codetab %}}
@@ -152,9 +152,9 @@ For the rad CLI and VS Code to recognize the PostgreSQL resource type, a [Bicep 
 1. Generate the Bicep extension using the [rad bicep publish-extension]({{< ref rad_bicep_publish-extension >}}) command:
 
     ```bash
-    rad bicep publish-extension -f postgreSQL.yaml --target ./mycompany.tgz
+    rad bicep publish-extension -f postgreSQL.yaml --target ./radiusResources.tgz
     ```
-    The Bicep extension `mycompany` is generated and saved to the `mycompany.tgz` file. 
+    The Bicep extension `radiusResources` is generated and saved to the `radiusResources.tgz` file. 
     
 1. Open the `bicepconfig.json` file and replace it with the below config.
 
@@ -166,45 +166,45 @@ For the rad CLI and VS Code to recognize the PostgreSQL resource type, a [Bicep 
         "extensions": {
             "radius": "br:biceptypes.azurecr.io/radius:latest",
             "aws": "br:biceptypes.azurecr.io/aws:latest",
-            "mycompany": "./mycompany.tgz"
+            "radiusResources": "./radiusResources.tgz"
         }
     }
     ```
 
 ## Step 5: Author the Todo List application with PostgreSQL
 
-1. Create `app.bicep` and add the Todo List application.
+1. Create `todolist.bicep` and add the Todo List application.
     
     ```bicep
     extension radius
     ```
-   {{% rad file="snippets/app.bicep" embed=true marker="//APP" %}}
+   {{% rad file="snippets/todolist.bicep" embed=true marker="//APP" %}}
 
-1. Add the `mycompany` extension and the PostgreSQL resource type
+1. Add the `radiusResources` extension and the PostgreSQL resource type
    
     ```bicep
-    extension mycompany
+    extension radiusResources
     ```
-   {{% rad file="snippets/app.bicep" embed=true marker="//POSTGRESQL" %}}
+   {{% rad file="snippets/todolist.bicep" embed=true marker="//POSTGRESQL" %}}
 
 1. Add the `demo` container definition along with the connection to the PostgreSQL resource type and environment variables. 
 
-   {{% rad file="snippets/app.bicep" embed=true marker="//CONTAINER" %}}
+   {{% rad file="snippets/todolist.bicep" embed=true marker="//CONTAINER" %}}
 
    {{% alert title="Caution" color="warning" %}}
    In this example the POSTGRESQL_PASSWORD is stored as a cleartext property for demo purposes. In production environments, always use secrets to store and reference sensitive information like passwords.
    {{% /alert %}}
 
-1. Your final `app.bicep` file should look like this:
+1. Your final `todolist.bicep` file should look like this:
 
-   {{% rad file="snippets/app.bicep" embed=true %}}
+   {{% rad file="snippets/todolist.bicep" embed=true %}}
 
 ## Step 5: Run the application
 
 Run the application using `rad run`. The `rad run` command sets up port forwarding to the application. .
 
 ```sh
-rad run app.bicep --application todolist
+rad run todolist.bicep --application todolist
 ```
 Visit the application at [http://localhost:3000](http://localhost:3000). You should see the Radius Connections section with new environment variables added. The `demo` container now has connection information for PostgreSQL (`CONNECTION_POSTGRESQL_HOST`, `CONNECTION_POSTGRESQL_PORT`, etc.)
 
@@ -231,7 +231,7 @@ To clean up the resources created in this tutorial, run the following commands
 3. Delete the PostgreSQL resource type
 
     ```bash
-    rad resource-type delete MyCompany.Resources/postgreSQL
+    rad resource-type delete Radius.Resources/postgreSQL
     ```
 4. Uninstall Radius 
 
