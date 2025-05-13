@@ -8,10 +8,25 @@ description: "Details on the rad version Radius CLI command"
 ---
 ## rad version
 
-Prints the versions of the rad cli
+Prints the versions of the rad CLI and the Radius Control Plane
+
+### Synopsis
+
+Display version information for the rad CLI installed on your machine and the Radius Control Plane running on your cluster.
+By default this shows all available version information.
 
 ```
 rad version [flags]
+```
+
+### Examples
+
+```
+# Show all version information
+rad version
+
+# Show only the CLI version
+rad version --cli
 ```
 
 ### Options
