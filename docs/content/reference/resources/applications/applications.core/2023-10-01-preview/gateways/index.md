@@ -59,6 +59,16 @@ description: "Detailed reference documentation for applications.core/gateways@20
 | **enableWebsockets** | bool | Enables websocket support for the route. Defaults to false. |
 | **path** | string | The path to match the incoming request path on. Ex - /myservice. |
 | **replacePrefix** | string | Optionally update the prefix when sending the request to the service. Ex - replacePrefix: '/' and path: '/myservice' will transform '/myservice/myroute' to '/myroute' |
+| **timeoutPolicy** | [GatewayRouteTimeoutPolicy](#gatewayroutetimeoutpolicy) | Gateway route timeout policy |
+
+### GatewayRouteTimeoutPolicy
+
+#### Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| **backendRequest** | string | The backend request timeout in duration for the route. Cannot be greater than the request timeout. |
+| **request** | string | The request timeout in duration for the route. Defaults to 15 seconds. |
 
 ### ResourceStatus
 
