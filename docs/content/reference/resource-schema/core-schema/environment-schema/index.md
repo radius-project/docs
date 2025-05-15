@@ -47,7 +47,7 @@ Details on what to run and how to run it are defined in the `container` property
 |------|:--------:|-------------|---------|
 | kind | y | The kind of identity, `'azure.com.workload'` and `'managedIdentity'` are currently supported | `'managedIdentity'` |
 | oidcIssuer | n | The [OIDC issuer URL](https://azure.github.io/azure-workload-identity/docs/installation/self-managed-clusters/oidc-issuer.html) for your Kubernetes cluster | `'{IssuerURL}/.well-known/openid-configuration'` |
-| managedIdentity | n | The managed identity to use for the environment, this is only required if the kind is set to `'managedIdentity'` | `'/subscriptions/mySubscriptionId/resourceGroups/my-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myManagedIdentity'`
+| managedIdentity | n | The managed identity to use for the environment, this is only required if the kind is set to `'managedIdentity'` | [`'/subscriptions/mySubscriptionId/resourceGroups/my-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myManagedIdentity'`]
 
 ### recipeConfig
 
