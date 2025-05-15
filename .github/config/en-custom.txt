@@ -1307,3 +1307,5 @@ timeoutPolicy
 ACI
 aci
 managedIdentity
+gatewayID
+Ngroup
