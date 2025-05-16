@@ -9,8 +9,8 @@ resource env 'Applications.Core/environments@2023-10-01-preview' = {
       // Replace value with your resource group ID
       resourceGroup: '/subscriptions/<>/resourceGroups/<>'
       identity: {
-        kind:'managedIdentity'
-        // Replace value with your managed identity ID
+        kind:'userAssigned'
+        // Replace value with your managed identity resource ID
         managedIdentity: ['/subscriptions/<>/resourceGroups/<>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<>']
       }
     }
