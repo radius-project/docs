@@ -36,7 +36,7 @@ Since the Radius control plane is hosted on your Kubernetes cluster, you'll need
    rad workspace create kubernetes aci-workspace
    ```
 
-## Step 1: Define the Environment with ACI compute
+## Step 2: Define the Environment with ACI compute
 
 Create a new file named `app.bicep` and add the following Environment definition. This Environment uses the `aci` compute provider and a user-assigned managed identity to provision the necessary resources for ACI and also registers a default Recipe for provisioning an Azure Redis Cache.
 
@@ -44,7 +44,7 @@ Create a new file named `app.bicep` and add the following Environment definition
 
 > Note: be sure to replace the `resourceGroup` and `scope` values with your resource group ID and the `managedIdentity` value with your managed identity resource ID.
 
-## Step 2: Deploy the Environment
+## Step 3: Deploy the Environment
 
 1. Run the following command to deploy the Environment and associate it with the `aci-workspace` you created in the previous step:
    ```bash
@@ -63,11 +63,12 @@ Create a new file named `app.bicep` and add the following Environment definition
    ```
 
 <br>
+
 Navigate to your resource group in the [Azure portal](https://portal.azure.com/) and you should see the relevant Azure resources that were provisioned by Radius for your ACI Environment, including the virtual network, internal load balancer, and network security group:
 
-{{< image src="azure-portal-env.png" alt="Screenshot of the Azure portal showing the resource group with the virtual network, internal load balancer, and network security group resources created by Radius" width=800px >}}
+{{< image src="azure-portal-env.png" alt="Screenshot of the Azure portal showing the resource group with the virtual network, internal load balancer, and network security group resources created by Radius" width=700px >}}
 
-## Step 3: Define the Application and its resources
+## Step 4: Define the Application and its resources
 
 Add the application definition, along with Redis cache and gateway resources to the `app.bicep` file.
 
@@ -79,7 +80,7 @@ Add the application Container resource to the `app.bicep` file.
 
 > Notice that for ACI containers, you define a Gateway resource that provides L7 traffic for the container. Radius will provision an Azure Application Gateway on your behalf and configure the container to use the Gateway as its ingress. The Gateway will be provisioned with a public IP address and a DNS name that you can use to access the application.
 
-## Step 4: Deploy the Application
+## Step 5: Deploy the Application
 
 Run the following command to deploy the application:
 
@@ -89,7 +90,7 @@ rad deploy ./app.bicep --workspace aci-workspace
 
 > Note that you are deploying the application specifically targeting the `aci-workspace` you had created in a previous step, which ensures that your application gets deployed to the ACI Environment. The same application can also be targeted to deploy into a Kubernetes Environment instead.
 
-You should see the following terminal output:
+Once the deployment succeeds, you should see the following terminal output:
 
 ```
 Deployment In Progress... 
@@ -111,20 +112,57 @@ Public Endpoints:
     gateway         Applications.Core/gateways http://gateway.demo-app.4.149.194.115.nip.io
 ```
 
-## Step 5: View the deployed resources
+## Step 6: View the deployed resources
 
-TODO: add `rad app graph -a demo-app`
+Now you can check the Radius application graph in your terminal to view resources that were provisioned for your application:
 
-Navigate to your resource group in the [Azure portal](https://portal.azure.com/) and you should see the relevant Azure resources that were provisioned by Radius for your application, including the container instance, container group profile, Ngroup, load balancer, virtual network, and network security groups that are required for the application to run on ACI.
+```bash
+rad app graph -a demo-app
+```
 
-{{< image src="azure-portal-app.png" alt="Screenshot of the Azure portal showing the resource group with all the ACI resources" width=800px >}}
+You should see the following output:
+
+```
+Displaying application: demo-app
+
+Name: frontend (Applications.Core/containers)
+Connections:
+  gateway (Applications.Core/gateways) -> frontend
+  frontend -> database (Applications.Datastores/redisCaches)
+Resources:
+  frontend (Microsoft.ContainerInstance/containerGroupProfiles)
+  frontend (Microsoft.ContainerInstance/nGroups)
+  frontend (Microsoft.Network/loadBalancers/applications)
+  frontend (Microsoft.Network/virtualNetworks/subnets)
+
+Name: gateway (Applications.Core/gateways)
+Connections:
+  gateway -> frontend (Applications.Core/containers)
+Resources:
+  gateway (Microsoft.Network/applicationGateways)
+  gateway-nsg (Microsoft.Network/networkSecurityGroups)
+  gateway (Microsoft.Network/publicIPAddresses)
+  gateway (Microsoft.Network/virtualNetworks/subnets)
+
+Name: database (Applications.Datastores/redisCaches)
+Connections:
+  frontend (Applications.Core/containers) -> database
+Resources:
+  cache-vxkt2iou25nht (Microsoft.Cache/redis)
+```
+
+Navigate to your resource group in the [Azure portal](https://portal.azure.com/) and you should see the relevant Azure resources that were provisioned by Radius for your application, including the container instance, container group profile, Ngroup, load balancer, virtual network, and network security groups that are required for the application to run on ACI:
+
+{{< image src="azure-portal-app.png" alt="Screenshot of the Azure portal showing the resource group with all the ACI resources" width=700px >}}
 <br>
 
-## Step 6: Browse the Application
+## Step 7: Browse the Application
 
-TODO: note about adding port 3000 to the public dns address, add screenshot of the Gateway resource to show where they can get the public dns address.
+In your Azure portal, click on the Gateway public IP address resource and you should see the public IP address of the Gateway resource. This is the public DNS name that you can use to access your application. Copy the public DNS name.
 
-Open a web browser and navigate to the public IP address of the Gateway resource. You should see the demo application landing page running on your Azure Container Instance, along with some information about the application and its resources.
+{{< image src="azure-portal-gateway.png" alt="Screenshot of the Azure portal showing the public IP address of the Gateway resource" width=700px >}}<br>
+
+Open a web browser and in the address bar paste in the public DNS name of the Gateway resource that you just copied with a `:3000` appended to that address, as the application container is exposed to users on port 3000. You should see the demo application landing page showing that your application is running on your Azure Container Instance, along with some information about its containers and resources.
 
 {{< image src="demo-app-landing.png" alt="Screenshot of the demo app landing page" width=700px >}}
 
@@ -140,4 +178,24 @@ Navigate to the Todo List tab and test out the application. Using the Todo page 
    rad app delete demo-app --yes
    ```
 
-TODO: add environment and workspace cleanup commands
+1. Run the following command to delete your environment:
+
+   ```bash
+   rad env delete aci-env --yes
+   ```
+
+1. Run the following command to delete your workspace:
+
+   ```bash
+   rad workspace delete aci-workspace --yes
+   ```
+
+1. Finally, navigate to your Azure portal and delete the related resources that were created for the ACI Environment, namely the virtual network, internal load balancer, and network security group. You can also delete the resource group if you no longer need it.
+
+   {{< image src="azure-portal-env.png" alt="Screenshot of the Azure portal showing the resource group with the virtual network, internal load balancer, and network security group resources created by Radius" width=700px >}}
+
+## Further reading
+- [Azure resources overview]({{< ref "/guides/author-apps/azure/overview" >}})
+- [Radius Environment schema]({{< ref "/reference/resource-schema/core-schema/environment-schema" >}})
+- [Radius Application schema]({{< ref "/reference/resource-schema/core-schema/application-schema" >}})
+- [Radius Container schema]({{< ref "/reference/resource-schema/core-schema/container-schema" >}})

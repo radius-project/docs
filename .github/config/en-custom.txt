@@ -1309,3 +1309,4 @@ aci
 managedIdentity
 gatewayID
 Ngroup
+dns
