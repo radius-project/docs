@@ -3,7 +3,7 @@ type: docs
 title: "Application reference"
 linkTitle: "Application"
 description: "Learn how to define an application"
-weight: 100
+weight: 200
 ---
 
 ## Resource format
