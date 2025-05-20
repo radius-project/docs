@@ -45,7 +45,7 @@ Details on what to run and how to run it are defined in the `container` property
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| kind | y | The kind of identity, `'azure.com.workload'`, `'userAssigned'`, `'systemAssigned'`, and `'systemAssignedUserAssigned'` are currently supported and defaults to `'systemAssigned'` if none provided. | `'systemAssigned'` |
+| kind | y | The kind of identity, `'azure.com.workload'`, `'userAssigned'`, `'systemAssigned'`, and `'systemAssignedUserAssigned'` are currently supported; if not provided and `compute.kind` is set to `'aci'` then defaults to `'systemAssigned'` | `'systemAssigned'` |
 | oidcIssuer | n | The [OIDC issuer URL](https://azure.github.io/azure-workload-identity/docs/installation/self-managed-clusters/oidc-issuer.html) for your Kubernetes cluster | `'{IssuerURL}/.well-known/openid-configuration'` |
 | managedIdentity | n | The list of assigned managed identities, this is only required if the kind is set to `'userAssigned'` or `'systemAssignedUserAssigned'` | [`'/subscriptions/mySubscriptionId/resourceGroups/my-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myManagedIdentity'`]
 
