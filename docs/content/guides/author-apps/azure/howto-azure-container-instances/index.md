@@ -26,21 +26,28 @@ The [Bicep extension]({{< ref "installation#step-2-install-the-vs-code-extension
 
 Since the Radius control plane is hosted on your Kubernetes cluster, you'll need to create a new Radius Resource Group and Workspace so that you can target your application deployments to an ACI Environment. These will then be associated with the ACI Environment that you will configure and create in subsequent steps. 
 
-1. Create a new Radius Resource Group called `aciGroup`:
-   ```bash
-   rad group create aciGroup
-   ```
-
-1. Then, create a new Radius Workspace called `aci-workspace`:
+1. Create a new Radius Workspace called `aci-workspace`:
    ```bash
    rad workspace create kubernetes aci-workspace
    ```
 
+1. Then, create a new Radius Resource Group called `aciGroup` and switch to it:
+   ```bash
+   rad group create aciGroup
+   rad group switch aciGroup
+   ```
+
+1. Finally, create a new ACI Environment within the `aci-workspace` workspace you just created and switch to it:
+   ```bash
+   rad env create aci-demo -w aci-workspace
+   rad env switch aci-demo
+   ```
+
 ## Step 2: Define the Environment with ACI compute
 
-Create a new file named `app.bicep` and add the following Environment definition. This Environment uses the `aci` compute provider and a user-assigned managed identity to provision the necessary resources for ACI and also registers a default Recipe for provisioning an Azure Redis Cache.
+Create a new file named `env.bicep` and add the following Environment definition. This Environment uses the `aci` compute provider and a user-assigned managed identity to provision the necessary resources for ACI and also registers a default Recipe for provisioning an Azure Redis Cache.
 
-{{< rad file="snippets/app.bicep" embed=true marker="//ENVIRONMENT">}}
+{{< rad file="snippets/env.bicep" embed=true >}}
 
 > Note: be sure to replace the `resourceGroup` and `scope` values with your resource group ID and the `managedIdentity` value with your managed identity resource ID.
 
@@ -48,7 +55,7 @@ Create a new file named `app.bicep` and add the following Environment definition
 
 1. Run the following command to deploy the Environment and associate it with the `aci-workspace` you created in the previous step:
    ```bash
-   rad deploy ./app.bicep --workspace aci-workspace
+   rad deploy ./env.bicep --workspace aci-workspace
    ```
 
    You should see the following terminal output:
@@ -70,13 +77,9 @@ Navigate to your resource group in the [Azure portal](https://portal.azure.com/)
 
 ## Step 4: Define the Application and its resources
 
-Add the application definition, along with Redis cache and gateway resources to the `app.bicep` file.
+Create a file named `app.bicep` and add the application definition, along with Redis cache, gateway, and container resources to the file:
 
-{{< rad file="snippets/app.bicep" embed=true marker="//APPLICATION" >}}
-
-Add the application Container resource to the `app.bicep` file.
-
-{{< rad file="snippets/app.bicep" embed=true marker="//CONTAINER" >}}
+{{< rad file="snippets/app.bicep" embed=true >}}
 
 > Notice that for ACI containers, you define a Gateway resource that provides L7 traffic for the container. Radius will provision an Azure Application Gateway on your behalf and configure the container to use the Gateway as its ingress. The Gateway will be provisioned with a public IP address and a DNS name that you can use to access the application.
 
@@ -88,7 +91,7 @@ Run the following command to deploy the application:
 rad deploy ./app.bicep --workspace aci-workspace
 ```
 
-> Note that you are deploying the application specifically targeting the `aci-workspace` you had created in a previous step, which ensures that your application gets deployed to the ACI Environment. The same application can also be targeted to deploy into a Kubernetes Radius Environment instead.
+> Note that you are deploying the application specifically targeting the `aci-workspace` you had created in a previous step, which ensures that your application gets deployed to the ACI Environment. The same application can also be targeted to deploy into a workspace associated with a Kubernetes Radius Environment instead.
 
 Once the deployment succeeds, you should see the following terminal output:
 
