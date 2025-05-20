@@ -3,7 +3,7 @@ type: docs
 title: "Environment"
 linkTitle: "Environment"
 description: "Learn how to define an environment"
-weight: 000
+weight: 100
 ---
 
 ## Resource format
@@ -24,9 +24,10 @@ weight: 000
 |------|:--------:|-------------|---------|
 | [compute](#compute) | y | Container runtime configuration. | [See below](#compute)
 | [recipeConfig](#recipeconfig) | n | Configuration for Recipes. Defines how each type of Recipe should be configured and run. | [See below](#recipeconfig) 
-| [recipes](#recipes) | n | Recipes registered to the environment | [See below](#recipes)
+| [recipes](#recipes) | n | Recipes registered to the environment. | [See below](#recipes)
 | simulated | n | When enabled, a simulated environment will not deploy any output resources or run any Recipes when an application is deployed. This is useful for dry runs or testing. Defaults to `false`. | `true`
 | [extensions](#extensions) | n | The environment extension. | [See below](#extensions)
+| [providers](#providers) | n | The cloud provider configuration, either `azure` or `aws`. | [See below](#providers)
 
 ### compute
 
@@ -34,17 +35,19 @@ Details on what to run and how to run it are defined in the `container` property
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| kind | y | The kind of container runtime to use. Only option is `'kubernetes'` | `'kubernetes'`
-| namespace | y | The Kubernetes namespace to render application resources into | `'default'`
-| resourceId | n | The resource ID of the AKS cluster to render application resources into. Only required for Azure environments | `aksCluster.id`
-| identity | n | The cluster identity configuration | [See below](#identity) |
+| kind | y | The kind of container runtime to use, with `'kubernetes'` and `'aci'` currently supported. | `'kubernetes'`
+| namespace | n | The Kubernetes namespace to render application resources into, only required for Kubernetes environments. | `'default'`
+| resourceId | n | The resource ID of the AKS cluster to render application resources into, only required for Azure environments. | `aksCluster.id`
+| resourceGroup | n | The resource group to render application resources into, only required for ACI environments. | `'/subscriptions/mySubscriptionId/resourceGroups/my-resource-group'`
+| identity | n | The cluster identity configuration. | [See below](#identity) |
 
 ### identity
 
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
-| kind | y | The kind of identity. 'azure.com.workload' is currently only supported. | `'azure.com.workload'` |
-| oidcIssuer | n | The [OIDC issuer URL](https://azure.github.io/azure-workload-identity/docs/installation/self-managed-clusters/oidc-issuer.html) for your Kubernetes cluster. | `'{IssuerURL}/.well-known/openid-configuration'` |
+| kind | y | The kind of identity, `'azure.com.workload'`, `'userAssigned'`, `'systemAssigned'`, and `'systemAssignedUserAssigned'` are currently supported; if not provided and `compute.kind` is set to `'aci'` then defaults to `'systemAssigned'` | `'systemAssigned'` |
+| oidcIssuer | n | The [OIDC issuer URL](https://azure.github.io/azure-workload-identity/docs/installation/self-managed-clusters/oidc-issuer.html) for your Kubernetes cluster | `'{IssuerURL}/.well-known/openid-configuration'` |
+| managedIdentity | n | The list of assigned managed identities, this is only required if the kind is set to `'userAssigned'` or `'systemAssignedUserAssigned'` | [`'/subscriptions/mySubscriptionId/resourceGroups/my-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myManagedIdentity'`]
 
 ### recipeConfig
 
@@ -121,6 +124,11 @@ The [Kubernetes Metadata extension]({{< ref "guides/operations/kubernetes/kubern
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | user defined annotation key | y | The key and value of the annotation to be set on the application and its resources.| `'app.io/port': '8081'` |
+
+### providers
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| scope | n | The target level for deploying the cloud resources. | `'/subscriptions/mySubscriptionId/resourceGroups/my-resource-group'`|
 
 ## Further reading
 

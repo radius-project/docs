@@ -20,7 +20,7 @@ The following configuration options are available for environments:
 
 ### Container runtime
 
-Radius Environments can be configured with a container runtime, where Radius [containers]({{< ref "guides/author-apps/containers" >}}) will be deployed. Currently, only Kubernetes clusters are supported for container runtimes.
+Radius Environments can be configured with a container runtime, where Radius [containers]({{< ref "guides/author-apps/containers" >}}) will be deployed. Currently, Kubernetes clusters and Azure Container Instances are supported for container runtimes.
 
 A Kubernetes namespace is specified on the environment to tell Radius where to render environment-scoped resources. For example, a shared database deployed to an environment will be deployed to the namespace specified on the environment. Application-scoped resources will be deployed into a new namespace for each application, in the format `<environment-namespace>-<application-name>`. For example, if an application named `myapp` is deployed to an environment with the namespace `default`, the application-scoped resources will be deployed to the namespace `default-myapp`.
 

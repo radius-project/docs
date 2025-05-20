@@ -170,6 +170,7 @@ The `manualScaling` extension configures the number of replicas of a compute ins
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | kubernetes | n | Kubernetes specific configuration for the container. | [See below](#kubernetes)
+| aci | n | Azure Container Instances specific configuration for the container. | [See below](#aci)
 
 #### Kubernetes
 
@@ -177,3 +178,9 @@ The `manualScaling` extension configures the number of replicas of a compute ins
 |------|:--------:|-------------|---------|
 | base | n | The base Kubernetes resource manifest on top of which Radius specified properties will be applied. Supported resource types are documented [here]({{<ref "guides/author-apps/containers/overview#base-kubernetes-yaml">}}). | `loadTextContent('manifest/base-container.yaml')`
 | pod | n | The pod specifications to apply to the Kubernetes resource created by Radius. Any field defined on [PodSpec](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#PodSpec) can be set here. | [`topologySpreadConstraints`](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling)
+
+#### ACI
+
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| gatewayID | n | The gateway resource ID that provides L7 traffic for the container. | `'myGatewayId'` 

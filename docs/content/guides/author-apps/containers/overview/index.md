@@ -44,6 +44,10 @@ Radius currently supports the following Kubernetes resource types for the `base`
 
 You can also "patch" the Kubernetes containers created and deployed by Radius using [PodSpec](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#PodSpec) definitions. This allows for setting Kubernetes-specific configurations, as well as overriding Radius behaviors, which means that you may access all Kubernetes Pod features, even if they are not supported by Radius. For more information on how to patch Kubernetes pods, refer to the [Kubernetes pod patching guide]({{< ref "guides/author-apps/kubernetes/how-to-patch-pod" >}}).
 
+### Azure Container Instances
+
+Containers can be deployed to Azure Container Instances (ACI) using the `aci` runtime. This allows you to run your container workloads in a serverless environment without needing to manage any infrastructure. For more information on how to deploy containers to ACI, refer to the [Azure Container Instances guide]({{< ref "/guides/author-apps/azure/howto-azure-container-instances" >}}).
+
 ## Container definition
 
 Radius containers allow you to specify your image, ports, environment variables, volumes, and more. Refer to the [container resource schema]({{< ref "container-schema" >}}) for more information.
