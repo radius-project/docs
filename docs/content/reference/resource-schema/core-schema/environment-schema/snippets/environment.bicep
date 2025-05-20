@@ -14,6 +14,11 @@ resource environment 'Applications.Core/environments@2023-10-01-preview' = {
         oidcIssuer: oidcIssuer
       }
     }
+    providers: {
+      azure: {
+        scope: '/subscriptions/mySubscriptionId/resourceGroups/my-resource-group'
+      }
+    }
     extensions: [
       {
         kind: 'kubernetesMetadata'

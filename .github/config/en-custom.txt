@@ -1304,3 +1304,9 @@ bicepparam
 backendRequest
 GatewayRouteTimeoutPolicy
 timeoutPolicy
+ACI
+aci
+managedIdentity
+gatewayID
+Ngroup
+dns
