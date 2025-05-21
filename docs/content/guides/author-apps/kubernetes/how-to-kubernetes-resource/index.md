@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "How-To: Use a Kubernetes resources in your application"
+title: "How-To: Use Kubernetes resources in your application"
 linkTitle: "Add Kubernetes resources"
-description: "Learn how to use a Kubernetes resources in your application"
+description: "Learn how to use Kubernetes resources in your application"
 weight: 200
 categories: "How-To"
 tags: ["Kubernetes"]

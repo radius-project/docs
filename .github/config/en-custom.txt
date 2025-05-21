@@ -1303,3 +1303,11 @@ auditable
 bicepparam
 cleartext
 MyCompany
+backendRequest
+GatewayRouteTimeoutPolicy
+timeoutPolicy
+ACI
+aci
+managedIdentity
+gatewayID
+Ngroup
