@@ -37,7 +37,7 @@ weight: 401
 | enableWebsockets | n | Enables websocket support for the route. Defaults to false. | `true`
 | timeoutPolicy | n | The timeout policy for the route. | See [below](#timeout-policy)
 
-#### Timeout Policy
+##### Timeout Policy
 | Key  | Required | Description | Example |
 |------|:--------:|-------------|---------|
 | request | n | The timeout for the request in seconds. Defaults to 15 seconds. | `30s`
