@@ -14,11 +14,6 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
     application: application
     container: {
       image: 'ghcr.io/radius-project/samples/tutorial/demo:edge'
-      env: {
-        FOO: {
-          value: 'bar'
-        }
-      }
       ports: {
         web: {
           containerPort: 3000
@@ -27,10 +22,10 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
     }
     connections: {
       mongodb: {
-        source: mongodb.id
+        source: db.id
       }
       backend: {
-        source: 'http://backend:3000'
+        source: 'http://backend:80'
       }
     }
   }

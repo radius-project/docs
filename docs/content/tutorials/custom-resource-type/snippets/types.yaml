@@ -1,6 +1,7 @@
 name: Radius.Resources
 types:
   postgreSQL:
+    capabilities: ["SupportsRecipes"]
     apiVersions:
       '2023-10-01-preview':
         schema: 
@@ -33,4 +34,3 @@ types:
               type: string
               description: The password for the database.
               readOnly: true
-    capabilities: ["SupportsRecipes"]
