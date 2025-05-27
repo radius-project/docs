@@ -35,6 +35,13 @@ weight: 401
 | destination | y | The service to route traffic to, in the form `'[scheme]://[serviceName]:[port]'` | `'http://backend:80'`
 | replacePrefix | n | The prefix to replace in the incoming request path that is sent to the destination route. | `'/'`
 | enableWebsockets | n | Enables websocket support for the route. Defaults to false. | `true`
+| timeoutPolicy | n | The timeout policy for the route. | See [below](#timeout-policy)
+
+#### Timeout Policy
+| Key  | Required | Description | Example |
+|------|:--------:|-------------|---------|
+| request | n | The timeout for the request in seconds. Defaults to 15 seconds. | `30s`
+| backendRequest | n | The timeout for the backend request in seconds. Defaults to 15 seconds. | `30s`
 
 #### Hostname
 
