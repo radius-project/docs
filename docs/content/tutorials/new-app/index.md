@@ -73,7 +73,7 @@ This tutorial will use the [`rad init`]({{< ref rad_initialize >}}) command to i
    Notice that a Radius Workspace is a combination of a Kubernetes context, a Radius Environment, and a Resource Group.
 
    {{< alert title="💡 Workspaces" color="info" >}}
-   [Workspaces]({{< ref Workspaces >}}) are configurations set for the Radius CLI. Similar to kubectl contexts, you can have multiple Wprkspaces pointing to different Radius servers, Resource Groups, and Environments.
+   [Workspaces]({{< ref Workspaces >}}) are configurations set for the Radius CLI. Similar to kubectl contexts, you can have multiple Workspaces pointing to different Radius servers, Resource Groups, and Environments.
    {{< /alert >}}
 
 1. List the resource groups created by `rad init` using the [`rad group list`]({{< ref rad_group_list >}}) command. 

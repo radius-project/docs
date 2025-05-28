@@ -19,9 +19,9 @@ This tutorial assumes you have completed the [Create a new application]({{< ref 
 
 Additionally, you will need a location to store your Recipe:
 
-  - **Terraform** configurations must be stored in a Git repository. Ideally for this tutorial the Git repository has annonymous access. If not, you will need to configure [Git authentication]({{< ref "guides/recipes/terraform/howto-private-registry" >}}).
+  - **Terraform** configurations must be stored in a Git repository. Ideally for this tutorial the Git repository has anonymous access. If not, you will need to configure [Git authentication]({{< ref "guides/recipes/terraform/howto-private-registry" >}}).
   
-  - **Bicep** tompletes must be stored in an OCI registry. As with Git, you must have anonumous access to the registry or configure [authentication]({{< ref "guides/recipes/howto-private-bicep-registry" >}}).
+  - **Bicep** templates must be stored in an OCI registry. As with Git, you must have anonymous access to the registry or configure [authentication]({{< ref "guides/recipes/howto-private-bicep-registry" >}}).
 
 Finally, [Node.js](https://nodejs.org/en/download) must be installed on the workstation to generate the Bicep extension to deploy the new resource type. 
 
@@ -106,7 +106,7 @@ This step is required even if you use Terraform-based Recipes to deploy the Post
 
 {{< tabs Terraform Bicep >}}{{% codetab %}} 
 
-Terraform configurations must be stored in a Git repository accessible by Radius. As discussed in the prerequisites, using a Git repository with annonymous access is easiest for this tutorial, otherwise you will need to configure [Git authentication]({{< ref "guides/recipes/terraform/howto-private-registry" >}}). Learn more about Recipes in this [How-to guide]({{< ref "/guides/recipes/howto-author-recipes" >}}). 
+Terraform configurations must be stored in a Git repository accessible by Radius. As discussed in the prerequisites, using a Git repository with anonymous access is easiest for this tutorial, otherwise you will need to configure [Git authentication]({{< ref "guides/recipes/terraform/howto-private-registry" >}}). Learn more about Recipes in this [How-to guide]({{< ref "/guides/recipes/howto-author-recipes" >}}). 
 
 1. Create a new directory in your Git repository for the PostgreSQL Terraform module then create the `main.tf` file and add the following:
 
@@ -142,7 +142,7 @@ Terraform configurations must be stored in a Git repository accessible by Radius
 {{% /codetab %}}
 {{% codetab %}}
 
-Bicep templatesmust be stored in an OCI registry accessible by Radius. As discussed in the prerequisites, using an OCI registry with annonymous access is easiest for this tutorial, otherwise you will need to configure [authentication]({{< ref "guides/recipes/howto-private-bicep-registry" >}}). Learn more about Recipes in this [How-to guide]({{< ref "/guides/recipes/howto-author-recipes" >}}).
+Bicep templates must be stored in an OCI registry accessible by Radius. As discussed in the prerequisites, using an OCI registry with anonymous access is easiest for this tutorial, otherwise you will need to configure [authentication]({{< ref "guides/recipes/howto-private-bicep-registry" >}}). Learn more about Recipes in this [How-to guide]({{< ref "/guides/recipes/howto-author-recipes" >}}).
 
 1. Create a new file called `postgreSQL.bicep` and add the following:
 

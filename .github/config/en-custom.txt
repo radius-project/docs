@@ -1311,3 +1311,4 @@ aci
 managedIdentity
 gatewayID
 Ngroup
+resourcegroups
