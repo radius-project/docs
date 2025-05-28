@@ -19,11 +19,11 @@ This tutorial will teach you the basics of creating a new Radius Application. Yo
 
 By the end of the tutorial, you will have created and deployed a new Radius Application.
 
-{{< image src="tutorial1.png" alt="Diagram of the application resources and their connections" width=600px >}}
+{{< image src="todolist-app.png" alt="Diagram of the application resources and their connections" width=600px >}}
 
 ## Prerequisites
 
-- [Supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview" >}})
+- [Supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-kubernetes-clusters" >}})
 - [Radius CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Bicep extension for VS Code]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 
@@ -44,7 +44,7 @@ This tutorial will use the [`rad init`]({{< ref rad_initialize >}}) command to i
    rad init
    ```
 
-   When asked if you want to create a new application select *Yes*. This will create a new file named `app.bicep` in your working directory where. It will also create a [`bicepconfig.json`]({{< ref "/guides/tooling/bicepconfig/overview" >}}) file that will contain the necessary setup to use Radius resource types. 
+   When asked if you want to create a new application select *Yes*. This will create a new file named `app.bicep` in your working directory where. It will also create a [`bicepconfig.json`]({{< ref "/guides/tooling/bicepconfig/overview" >}}) file that will contain the necessary configuration to use Radius core resource types. 
 
 ## Step 2: Explore the default configuration
 
@@ -52,14 +52,14 @@ This tutorial will use the [`rad init`]({{< ref rad_initialize >}}) command to i
 
    ```bash
    $ rad workspace list
-   GROUP     ID
-   default   /planes/radius/local/resourcegroups/default
+   WORKSPACE  KIND        KUBECONTEXT           ENVIRONMENT
+   default    kubernetes  <my-kube-context>   default
    ```
 
-   Show the current Workspace. The `--output json` will show all of the details of the Workspace.
+   Show the current Workspace. The `--output json` will show all the details of the Workspace.
 
    ```bash
-   $ rad workspace show -o json    
+   $ rad workspace show -o json   
    {
      "connection": {
        "context": "my-kube-context",
@@ -73,7 +73,7 @@ This tutorial will use the [`rad init`]({{< ref rad_initialize >}}) command to i
    Notice that a Radius Workspace is a combination of a Kubernetes context, a Radius Environment, and a Resource Group.
 
    {{< alert title="💡 Workspaces" color="info" >}}
-   [Workspaces]({{< ref Workspaces >}}) are configurations set for the Radius CLI. Similar to kubectl contexts, you can have multiple Workspaces pointing to different Radius servers, Resource Groups, and Environments.
+   [Workspaces]({{< ref Workspaces >}}) are configurations set for the Radius CLI. Similar to kubectl contexts, you can have multiple Workspaces pointing to different Radius installation, Resource Groups, and Environments.
    {{< /alert >}}
 
 1. List the resource groups created by `rad init` using the [`rad group list`]({{< ref rad_group_list >}}) command. 
@@ -130,7 +130,7 @@ The `app.bicep` file defines all the resources (Containers, Gateways, cloud serv
 
    {{% rad file="snippets/1-app.bicep" embed=true marker="//IMPORT" %}}
 
-   The `import` statement imports the resource types built into Radius.
+   The `extension` statement imports the resource types built into Radius.
 
    {{% rad file="snippets/1-app.bicep" embed=true marker="//PARAM" %}}
 

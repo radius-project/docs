@@ -20,7 +20,6 @@ This tutorial demonstrates:
 
 {{< image src="tutorial3.png" alt="Diagram of the Todo List application with using a web service" width=600px >}}
 
-
 ## Prerequisites
 
 This tutorial assumes you have completed the [Add a custom resource type]({{< ref "/tutorials/custom-resource-type" >}}) tutorial and have the demo application deployed with a PostgreSQL database. this section and have Radius installed and configured. 

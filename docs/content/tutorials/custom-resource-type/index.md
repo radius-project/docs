@@ -11,7 +11,7 @@ categories: ["Tutorial"]
 
 Radius includes several built-in resource types which developers can use to build applications. These include core resource types such as Containers, Gateways, and Secrets. You can also create your own custom resource types. This tutorial guides you through creating a PostgreSQL resource and deploying the sample Todo List application with PostgreSQL.
 
-{{< image src="tutorial2.png" alt="Diagram of the Todo List with PostgreSQL" width=600px >}}
+{{< image src="todolist-app2.png" alt="Diagram of the Todo List with PostgreSQL" width=600px >}}
 
 ## Prerequisites
 
@@ -160,7 +160,7 @@ Bicep templates must be stored in an OCI registry accessible by Radius. As discu
 
     ```bash
     rad recipe register default --environment default \
-      --resource-type Radius.Resources/postgreSQL 
+      --resource-type Radius.Resources/postgreSQL \
       --template-kind bicep \
       --template-path <host>/<registry>/postgresql:latest
     ```
