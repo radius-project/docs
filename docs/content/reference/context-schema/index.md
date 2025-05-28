@@ -37,6 +37,7 @@ The `context` object is automatically injected to Bicep templates when a Recipe 
 | `name` | string | The name of the resource calling this Recipe | `myredis`
 | `id` | string | The ID of the resource calling this Recipe | `/planes/radius/resourceGroups/myrg/Applications.Link/redisCaches/myredis`
 | `type` | string | The type of the resource calling this recipe | `Applications.Link/redisCaches`
+| `properties` | object | The properties of the resource calling this recipe | `{ "cpuCores": 4, "memory": "8GB" }`
 
 ### application
 
