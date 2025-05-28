@@ -1312,3 +1312,4 @@ managedIdentity
 gatewayID
 Ngroup
 resourcegroups
+webservices

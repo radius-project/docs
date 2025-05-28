@@ -22,7 +22,7 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
     }
     connections: {
       mongodb: {
-        source: db.id
+        source: mongodb.id
       }
       backend: {
         source: 'http://backend:80'
