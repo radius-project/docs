@@ -1301,6 +1301,8 @@ DeploymentTemplate
 gitops
 auditable
 bicepparam
+cleartext
+MyCompany
 backendRequest
 GatewayRouteTimeoutPolicy
 timeoutPolicy
@@ -1309,4 +1311,6 @@ aci
 managedIdentity
 gatewayID
 Ngroup
-dns
+resourcegroups
+webservices
+webServices
