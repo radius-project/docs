@@ -117,6 +117,15 @@ description: "Detailed reference documentation for applications.dapr/statestores
 | **identity** | [IdentitySettings](#identitysettings) | IdentitySettings is the external identity setting. |
 | **resourceId** | string | The resource id of the compute resource for application environment. |
 
+#### AzureContainerInstanceCompute
+
+##### Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| **kind** | 'aci' | Discriminator property for EnvironmentCompute. <br />_(Required)_ |
+| **resourceGroup** | string | The resource group to use for the environment. |
+
 #### KubernetesCompute
 
 ##### Properties
@@ -133,7 +142,8 @@ description: "Detailed reference documentation for applications.dapr/statestores
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'azure.com.workload' | 'undefined' | IdentitySettingKind is the kind of supported external identity setting <br />_(Required)_ |
+| **kind** | 'azure.com.workload' | 'systemAssigned' | 'systemAssignedUserAssigned' | 'undefined' | 'userAssigned' | IdentitySettingKind is the kind of supported external identity setting <br />_(Required)_ |
+| **managedIdentity** | string[] | The list of user assigned managed identities |
 | **oidcIssuer** | string | The URI for your compute platform's OIDC issuer |
 | **resource** | string | The resource ID of the provisioned identity |
 
