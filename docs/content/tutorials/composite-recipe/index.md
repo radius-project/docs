@@ -105,10 +105,10 @@ The previous tutorial demonstrated deploying a resource using Terraform or Bicep
    rad bicep publish --file webservices.bicep --target br:<host>/<registry>/webservices:latest
    ```
    ```
-   $ rad bicep publish --file webservices.bicep --target br:ghcr.io/zachcasper/tutorial/webservices:latest
+   $ rad bicep publish --file webservices.bicep --target br:<host>/<registry>/tutorial/webservices:latest
    Building webservices.bicep...
    WARNING: The following experimental Bicep features have been enabled: Extensibility. Experimental features should be enabled for testing purposes only, as there are no guarantees about the quality or stability of these features. Do not enable these settings for any production usage, or your production environment may be subject to breaking.
-   Pushed to <host>/<registry>/webservices@sha256:7f423e8bfdb7615dc15132270088344b97e40384e0290e3f747ac1113fef11b8
+   Pushed to <host>/<registry>/webservices@sha256:...
 
    Successfully published Bicep file "webservices.bicep" to "<host>/<registry>/tutorial/webservices:latest"
     ```
