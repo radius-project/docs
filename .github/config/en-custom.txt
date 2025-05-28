@@ -1301,3 +1301,15 @@ DeploymentTemplate
 gitops
 auditable
 bicepparam
+cleartext
+MyCompany
+backendRequest
+GatewayRouteTimeoutPolicy
+timeoutPolicy
+ACI
+aci
+managedIdentity
+gatewayID
+Ngroup
+resourcegroups
+webservices
