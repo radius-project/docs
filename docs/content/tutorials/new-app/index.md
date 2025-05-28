@@ -48,17 +48,27 @@ This tutorial will use the [`rad init`]({{< ref rad_initialize >}}) command to i
 
 ## Step 2: Explore the default configuration
 
-1. Inspect the Workspace created by `rad init`. List the available Workspaces using [`rad workspace list`]({{< ref rad_workspace_list >}})
+Inspect the Workspace created by `rad init`. 
+
+1. List the available Workspaces using [`rad workspace list`]({{< ref rad_workspace_list >}})
 
    ```bash
+   rad workspace list
+   ```
+
+   ```
    $ rad workspace list
    WORKSPACE  KIND        KUBECONTEXT           ENVIRONMENT
-   default    kubernetes  <my-kube-context>   default
+   default    kubernetes  my-kube-context       default
    ```
 
    Show the current Workspace. The `--output json` will show all the details of the Workspace.
 
    ```bash
+   rad workspace show -o json   
+   ```
+
+   ```
    $ rad workspace show -o json   
    {
      "connection": {
@@ -79,6 +89,10 @@ This tutorial will use the [`rad init`]({{< ref rad_initialize >}}) command to i
 1. List the resource groups created by `rad init` using the [`rad group list`]({{< ref rad_group_list >}}) command. 
 
    ```bash
+   rad group list
+   ```
+
+   ```
    $ rad group list                            
    GROUP     ID
    default   /planes/radius/local/resourcegroups/default
@@ -87,17 +101,26 @@ This tutorial will use the [`rad init`]({{< ref rad_initialize >}}) command to i
    `rad init` creates a group called `default`.
 
    {{< alert title="💡 Resource Groups" color="info" >}}
-   Every resource deployed in Radius belongs to one and only resource group. And each resource in a group must have a unique name. This includes environments and applications which are modeled as resources in Radius.
+   Every resource deployed in Radius belongs to one and only [resource group]({{< ref Groups >}}). And each resource in a group must have a unique name. This includes environments and applications which are modeled as resources in Radius.
    {{< /alert >}}
 
 1. Inspect the Environment using the [`rad environment list`]({{< ref rad_environment_list >}}) and [`rad environment show`]({{< ref rad_environment_show >}}) commands.
 
-
    ```bash
+   rad environment list
+   ```
+
+   ```
    $ rad environment list
    RESOURCE  TYPE                            GROUP     STATE
    default   Applications.Core/environments  default   Succeeded
+   ```
 
+   ```bash
+   rad environment show default --output json
+   ```
+
+   ```
    $ rad environment show default --output json
    {
      "id": "/planes/radius/local/resourcegroups/default/providers/Applications.Core/environments/default",
@@ -107,7 +130,7 @@ This tutorial will use the [`rad init`]({{< ref rad_initialize >}}) command to i
        "compute": {
          "kind": "kubernetes",
          "namespace": "default"
-     },
+       },
        "provisioningState": "Succeeded",
        "recipes": {
             ...
@@ -119,7 +142,7 @@ This tutorial will use the [`rad init`]({{< ref rad_initialize >}}) command to i
    ```
 
    {{< alert title="💡 Development Environments" color="info" >}}
-   By default `rad init` gets you up and running with a local, development-focused environment where most of the environment configuration is handled for you, including Recipes (_more on that soon_). If you would like to fully customize your environment, you can run `rad init --full`
+   By default `rad init` gets you up and running with a local, development-focused [environment](/guides/deploy-apps/environments/overview/) where most of the environment configuration is handled for you, including Recipes (_more on that soon_). If you would like to fully customize your environment, you can run `rad init --full`
    {{< /alert >}}
 
 ## Step 3: Deploy the Todo List application
@@ -146,26 +169,21 @@ The `app.bicep` file defines all the resources (Containers, Gateways, cloud serv
    rad deploy app.bicep
    ```
 
-   You should see output similar to:
-
-   ```bash
+   ```
    $ rad deploy app.bicep
    Building app.bicep...
+   WARNING: The following experimental Bicep features have been enabled: Extensibility. Experimental features should be enabled for testing purposes only, as there are no guarantees about the quality or stability of these features. Do not enable these settings for any production usage, or your production environment may be subject to breaking.
    Deploying template 'app.bicep' for application 'todolist' and environment '/planes/radius/local/resourceGroups/default/providers/Applications.Core/environments/default' from workspace 'default'...
 
    Deployment In Progress... 
 
-   ...                   demo            Applications.Core/containers
+   Completes         demo            Applications.Core/containers
 
    Deployment Complete
 
    Resources:
      demo            Applications.Core/containers
    ```
-
-   {{% alert title="Tip" color="info" %}}
-   If you see a warning about saying *WARNING: The following experimental Bicep features have been enabled: Extensibility.*, this is normal.
-   {{% /alert %}}
 
 1. Run `rad app graph` command to print the application resources and relationships:
 
@@ -175,7 +193,7 @@ The `app.bicep` file defines all the resources (Containers, Gateways, cloud serv
 
    You should see the container you just deployed, along with the underlying Kubernetes resources that were created to run it:
 
-   ```bash
+   ```
    $ rad app graph
    Displaying application: myapp
 
@@ -199,14 +217,15 @@ rad run app.bicep
 
 You should see the container deployed and the port forward and log stream started:
 
-```bash
+```
 $ rad run app.bicep
 Building app.bicep...
+WARNING: The following experimental Bicep features have been enabled: Extensibility. Experimental features should be enabled for testing purposes only, as there are no guarantees about the quality or stability of these features. Do not enable these settings for any production usage, or your production environment may be subject to breaking.
 Deploying template 'app.bicep' for application 'todolist' and environment '/planes/radius/local/resourceGroups/default/providers/Applications.Core/environments/default' from workspace 'default'...
 
 Deployment In Progress... 
 
-...                   demo            Applications.Core/containers
+Completes           demo            Applications.Core/containers
 
 Deployment Complete
 
@@ -249,7 +268,7 @@ Add a database to the Todo List application so that the todo items are persisted
 
    You'll see details on the Recipe, including available parameters and defaults:
 
-   ```bash
+   ```
    $ rad recipe show default --resource-type Applications.Datastores/mongoDatabases
    NAME      TYPE                                    TEMPLATE KIND  TEMPLATE VERSION  TEMPLATE
    default   Applications.Datastores/mongoDatabases  bicep                            ghcr.io/radius-project/recipes/local-dev/mongodatabases:latest
@@ -290,7 +309,7 @@ Add a database to the Todo List application so that the todo items are persisted
 
    You should see the container and MongoDB database you just deployed, along with the underlying Kubernetes resources that were created:
 
-   ```bash
+   ```
    $ rad app graph
    rad app graph
    Displaying application: todolist
@@ -358,7 +377,7 @@ Finally, add a Gateway to your application to expose the application so that it 
    rad deploy app.bicep
    ```
 
-   ```bash
+   ```
    Building app.bicep...
    Deploying template 'app.bicep' for application 'todolist' and environment '/planes/radius/local/resourceGroups/default/providers/Applications.Core/environments/default' from workspace 'default'...
 

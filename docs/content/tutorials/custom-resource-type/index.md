@@ -39,8 +39,8 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
 
     - **`name`**: The namespace of the resource type, as a convention `Radius.Resources` is recommended but any name in the form `PrimaryName.SecondaryName` can be used
     - **`types`**: The resource type name
-    - **`capabilities`**: This specifies features of the resource type. The only available option is `SupportsRecipes` which indicates that the resource type can be deployed via a Recipe. In a future release of Radius, `SupportsRecipes` will be the default and this line item will not be required.
-    - **`apiVersions`**: The version of the schema defined below, currently must be `2023-10-01-preview` 
+    - **`capabilities`**: This specifies features of the resource type. The only available option is `SupportsRecipes` which indicates that the resource type can be deployed via a Recipe. 
+    - **`apiVersions`**: The version of the schema defined below
     - **`schema`**: The OpenAPI v3 schema which defines the properties of the resource type
         - **`environment`**: The Radius environment ID which the resource is deployed to, this property is set by the Radius CLI when the resource is deployed
         - **`application`**: The application ID which the resource belongs to
@@ -58,9 +58,7 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
     rad resource-type create postgreSQL -f types.yaml
     ```
 
-   You should see output similar to:
-
-   ```bash
+   ```
    $ rad resource-type create postgreSQL -f types.yaml 
    Resource provider "Radius.Resources" not found.
    Creating resource provider Radius.Resources at location global
@@ -79,10 +77,19 @@ This step is required even if you use Terraform-based Recipes to deploy the Post
 
 1. Generate the Bicep extension using the [rad bicep publish-extension]({{< ref rad_bicep_publish-extension >}}) command.
 
-    ```bash
-    rad bicep publish-extension -f types.yaml --target radiusResources.tgz
-    ```
+   ```bash
+   rad bicep publish-extension -f types.yaml --target radiusResources.tgz
+   ```
     
+   ```
+   $ rad bicep publish-extension -f types.yaml --target radiusResources.tgz
+   Writing types to /var/folders/w8/89pqzjp52pbg4g256z9cpkww0000gn/T/bicep-extension-2214011863/types.json
+   Writing index to /var/folders/w8/89pqzjp52pbg4g256z9cpkww0000gn/T/bicep-extension-2214011863/index.json
+   Writing documentation to /var/folders/w8/89pqzjp52pbg4g256z9cpkww0000gn/T/bicep-extension-2214011863/index.md
+   WARNING: The 'publish-extension' CLI command group is an experimental feature. Experimental features should be enabled for testing purposes only, as there are no guarantees about the quality or stability of these features. Do not enable these settings for any production usage, or your production environment may be subject to breaking.
+   Successfully published Bicep extension "types.yaml" to "radiusResources.tgz"
+   ```
+
 1. Open the `bicepconfig.json` file and modify the contents.
 
     ```diff
@@ -98,6 +105,22 @@ This step is required even if you use Terraform-based Recipes to deploy the Post
         }
     }
     ```
+
+    The final file should be:
+
+    ```
+    {
+        "experimentalFeaturesEnabled": {
+                "extensibility": true
+        },
+        "extensions": {
+                "radius": "br:biceptypes.azurecr.io/radius:latest",
+                "aws": "br:biceptypes.azurecr.io/aws:latest",
+                "radiusResources": "radiusResources.tgz"
+        }
+    }
+    ```
+
     Now, any Bicep template with `extension radiusResources` will reference the `radiusResources.tgz` file for details about the PostgreSQL resource type.
 
 ## Step 3: Create a Recipe for the PostgreSQL resource type
@@ -130,9 +153,19 @@ Terraform configurations must be stored in a Git repository accessible by Radius
       --template-path git::https://github.com/<github-user-name>/recipes.git//kubernetes/postgresql
     ```
 
-1. Verify the Recipe is registered using the [`rad recipe list`]({{< ref rad_recipe_list >}}) command. You should see output similar to:
+    The output will be:
+
+    ```
+    Successfully linked recipe "default" to environment "default"
+    ```
+
+1. Verify the Recipe is registered using the [`rad recipe list`]({{< ref rad_recipe_list >}}) command. 
 
     ```bash
+    rad recipe list
+    ```
+
+    ```
     $ rad recipe list
     RECIPE    TYPE                         TEMPLATE KIND  TEMPLATE VERSION TEMPLATE
     ...
@@ -144,16 +177,20 @@ Terraform configurations must be stored in a Git repository accessible by Radius
 
 Bicep templates must be stored in an OCI registry accessible by Radius. As discussed in the prerequisites, using an OCI registry with anonymous access is easiest for this tutorial, otherwise you will need to configure [authentication]({{< ref "guides/recipes/howto-private-bicep-registry" >}}). Learn more about Recipes in this [How-to guide]({{< ref "/guides/recipes/howto-author-recipes" >}}).
 
-1. Create a new file called `postgreSQL.bicep` and add the following:
+1. Create a new file called `postgresql.bicep` and add the following:
 
-   {{% rad file="snippets/recipes/bicep/postgreSQL.bicep" embed=true %}}
+   {{% rad file="snippets/recipes/bicep/postgresql.bicep" embed=true %}}
 
     <!--TODO: Replace with button to download like in the composite recipe tutorial. Save the full contents for the Recipe how-to which explains what all of this is.  -->
 
 1. Publish the Recipe to the OCI registry. Make sure to replace `host` and `registry` with your container registry.
 
     ```bash
-    rad bicep publish --file postgreSQL.bicep --target br:<host>/<registry>/postgresql:latest
+    rad bicep publish --file postgresql.bicep --target br:<host>/<registry>/postgresql:latest
+    ```
+
+    ```
+    Successfully published Bicep file "postgresql.bicep" to "<host>/<registry>/postgresql:latest"
     ```
 
 1. Register the Bicep template as a Recipe called `default`. Since Recipes are registered with Environments, use the  `default` environment created in the previous tutorial.
@@ -165,9 +202,17 @@ Bicep templates must be stored in an OCI registry accessible by Radius. As discu
       --template-path <host>/<registry>/postgresql:latest
     ```
 
+    ```
+    Successfully linked recipe "default" to environment "default"
+    ```
+
 1. Verify the Recipe is registered using the [`rad recipe list`]({{< ref rad_recipe_list >}}) command. You should see output similar to:
 
-    ```bash
+   ```bash
+   rad recipe list
+   ```
+
+    ```
     $ rad recipe list
     RECIPE    TYPE                         TEMPLATE KIND  TEMPLATE VERSION TEMPLATE
     ...
@@ -264,6 +309,31 @@ Run the application using `rad run`. The `rad run` command sets up port forwardi
 
 ```bash
 rad deploy app.bicep
+```
+
+```
+$ rad deploy app.bicep
+Building app.bicep...
+WARNING: The following experimental Bicep features have been enabled: Extensibility. Experimental features should be enabled for testing purposes only, as there are no guarantees about the quality or stability of these features. Do not enable these settings for any production usage, or your production environment may be subject to breaking.
+Deploying template 'app.bicep' for application 'todolist' and environment '/planes/radius/local/resourceGroups/default/providers/Applications.Core/environments/default' from workspace 'default'...
+
+Deployment In Progress... 
+
+Completed            postgresql      Radius.Resources/postgreSQL
+Completed            backend         Applications.Core/containers
+Completed            gateway         Applications.Core/gateways
+Completed            demo            Applications.Core/containers
+
+Deployment Complete
+
+Resources:
+    backend         Applications.Core/containers
+    demo            Applications.Core/containers
+    gateway         Applications.Core/gateways
+    postgresql      Radius.Resources/postgreSQL
+
+Public Endpoints:
+    gateway         Applications.Core/gateways http://gateway.todolist.172.18.0.6.nip.io
 ```
 
 Open the gateway URL in your browser. The Radius Connections section now has PostgreSQL details and MongoDB is no longer there.
