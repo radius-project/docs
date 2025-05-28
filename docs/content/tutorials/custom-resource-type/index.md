@@ -272,4 +272,4 @@ Open the gateway URL in your browser. The Radius Connections section now has Pos
 
 <br><br>
 
-{{< button text="Next step: Create a composite Recipe →" link="../composite-recipe" >}}
+{{< button text="Next step: Create a composite Recipe →" page="composite-recipe" >}}
