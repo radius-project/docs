@@ -37,7 +37,7 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
 
    The PostgreSQL resource type definition includes:
 
-    - **`name`**: The namespace of the resource type, as a convention `Radius.Resources` is recommended but any name in the form `PrimaryName.SecondaryName` can be used
+    - **`namespace`**: The namespace of the resource type, as a convention `Radius.Resources` is recommended but any name in the form `PrimaryName.SecondaryName` can be used
     - **`types`**: The resource type name
     - **`capabilities`**: This specifies features of the resource type. The only available option is `SupportsRecipes` which indicates that the resource type can be deployed via a Recipe. 
     - **`apiVersions`**: The version of the schema defined below
