@@ -1,9 +1,13 @@
-// Import the set of Radius resources (Applications.*) into Bicep
+//IMPORT
 extension radius
+//IMPORT
 
+//PARAM
 @description('The ID of your Radius Application. Set automatically by the rad CLI.')
 param application string
+//PARAM
 
+//CONTAINER
 resource demo 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'demo'
   properties: {
@@ -18,3 +22,4 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
     }
   }
 }
+//CONTAINER
