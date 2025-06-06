@@ -75,7 +75,7 @@ It's easy to get up and running with a GitHub Codespace. This will give you a fu
    ```sh
    cd themes/docsy
    npm install
-   cd ..
+   cd ../..
    ```
 
 ### Run local server
