@@ -2,19 +2,19 @@
 type: docs
 title: "Tutorial: Create a composite Recipe"
 linkTitle: "Create a composite Recipe"
-description: "Learn how to create a composite recipe for a custom resource type"
+description: "Learn how to create a composite recipe"
 weight: 140
 categories: ["Tutorial"]
 ---
 ## Overview
 
-This tutorial introduces composite Recipes. Rather than being composed of infrastructure or cloud resources like typical Recipes, composite Recipes are composed of other Radius resource types. Composite Recipes are authored in Bicep and can include any Radius resource types including built-in types, other custom types, AWS types, and/or Azure types. 
+This tutorial introduces composite Recipes. Rather than being composed of infrastructure or cloud resources like typical Recipes, composite Recipes are composed of other Radius resource types. Composite Recipes are authored in Bicep and can include any Radius resource types including built-in types and types you have defined.
 
-The previous tutorial demonstrated how to define a custom resource type for a PostgreSQL database, author a Recipe for deploying the database on Kubernetes, and adding the new Resource Type to an application. The sample Todo List application used the built-in Containers resource type for the frontend service. This tutorial continues using the same application but extends the Containers resource type with additional functionality.
+The previous tutorial demonstrated how to define a resource type for a PostgreSQL database, author a Recipe for deploying the database on Kubernetes, and adding the new Resource Type to an application. The sample Todo List application used the built-in Containers resource type for the frontend service. This tutorial continues using the same application but extends the Containers resource type with additional functionality.
 
 This tutorial demonstrates:
 
-* Creating a web service custom resource type which adds an `ingress` property to the Containers schema
+* Creating a web service resource type which adds an `ingress` property to the Containers schema
 * Creating a composite Recipe in Bicep which creates a Gateway resource when the ingress property is true
 * Modifying the Todo List application to use the new web service
 
@@ -22,7 +22,7 @@ This tutorial demonstrates:
 
 ## Prerequisites
 
-This tutorial assumes you have completed the [Add a custom resource type]({{< ref "/tutorials/custom-resource-type" >}}) tutorial and have the demo application deployed with a PostgreSQL database and have Radius installed and configured. 
+This tutorial assumes you have completed the [Create a resource type]({{< ref "/tutorials/create-resource-type" >}}) tutorial and have the demo application deployed with a PostgreSQL database and have Radius installed and configured. 
 
 Composite Recipes are only written in Bicep. If you used Terraform in the previous tutorial for your Recipes, you will need an OCI registry to store your Recipe. While Terraform-based Recipes are stored in Git, Bicep-based Recipes can only be published to OCI registry.
 
@@ -148,7 +148,7 @@ The previous tutorial demonstrated deploying a resource using Terraform or Bicep
    + resource demo 'Radius.Resources/webServices@2023-10-01-preview' = {
    ```
 
-1. Add `ingress: true` to the demo resource so that a Gateway gets deployed as part of the web service. The web service also needs an environment property similar to the database custom resource.
+1. Add `ingress: true` to the demo resource so that a Gateway gets deployed as part of the web service. The web service also needs an environment property similar to the PostgreSQL resource.
 
    ```diff
    resource demo 'Radius.Resources/webServices@2023-10-01-preview' = {
