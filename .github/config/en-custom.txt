@@ -1314,9 +1314,9 @@ Ngroup
 resourcegroups
 webservices
 webServices
-ACIRuntimeProperties
 AzureContainerInstanceCompute
+systemAssigned
+systemAssignedUserAssigned
+userAssigned
 AzureContainerInstanceExtension
-KubernetesCompute
-managedIdentity
-resourceGroup
+ACIRuntimeProperties
