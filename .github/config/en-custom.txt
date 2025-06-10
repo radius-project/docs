@@ -1314,3 +1314,9 @@ Ngroup
 resourcegroups
 webservices
 webServices
+AzureContainerInstanceCompute
+systemAssigned
+systemAssignedUserAssigned
+userAssigned
+AzureContainerInstanceExtension
+ACIRuntimeProperties
