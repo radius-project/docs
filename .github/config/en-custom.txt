@@ -1314,3 +1314,9 @@ Ngroup
 resourcegroups
 webservices
 webServices
+ACIRuntimeProperties
+AzureContainerInstanceCompute
+AzureContainerInstanceExtension
+KubernetesCompute
+managedIdentity
+resourceGroup
