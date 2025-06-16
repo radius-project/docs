@@ -176,7 +176,7 @@ The previous tutorial demonstrated deploying a resource using Terraform or Bicep
    - }
    ```
 
-1. Run the application using `rad run`. 
+1. Run the application using `rad deploy`. 
 
     ```bash
     rad deploy app.bicep
