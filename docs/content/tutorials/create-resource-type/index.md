@@ -303,9 +303,9 @@ Bicep templates must be stored in an OCI registry accessible by Radius. As discu
    In this example the POSTGRESQL_PASSWORD is stored as a cleartext property for demo purposes. In production environments, always use secrets to store and reference sensitive information like passwords.
    {{% /alert %}}
 
-## Step 5: Run the application
+## Step 5: Deploy the application
 
-Run the application using `rad run`. The `rad run` command sets up port forwarding to the application. .
+Deploy the application using `rad deploy`.
 
 ```bash
 rad deploy app.bicep
