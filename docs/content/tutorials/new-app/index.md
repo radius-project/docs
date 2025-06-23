@@ -406,4 +406,4 @@ Finally, add a Gateway to your application to expose the application so that it 
    The application will only be accessible if the Kubernetes cluster you are using has a load balancer controller. If you are using AKS or EKS, the controller is enabled by default. If you are using a local Kubernetes cluster such as kind or k3d, you will need to configure a load balancer controller. See this tutorial for [k3d](https://k3d.io/v5.3.0/usage/exposing_services/) and this for [kind](https://kind.sigs.k8s.io/docs/user/loadbalancer).
    {{% /alert %}}
 
-{{< button text="Next step: Add a custom resource →" page="custom-resource-type" >}}
+{{< button text="Next step: Create a resource type →" page="create-resource-type" >}}
