@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Tutorial: Add a custom resource type"
-linkTitle: "Add a custom resource type"
+title: "Tutorial: Create a resource type"
+linkTitle: "Create a resource type"
 description: "Learn how to define and deploy a resource type in your Radius application"
 weight: 120
 categories: ["Tutorial"]
@@ -9,7 +9,7 @@ categories: ["Tutorial"]
 
 ## Overview
 
-Radius includes several built-in resource types which developers can use to build applications. These include core resource types such as Containers, Gateways, and Secrets. You can also create your own custom resource types. This tutorial guides you through creating a PostgreSQL resource and deploying the sample Todo List application with PostgreSQL.
+Radius includes several built-in resource types which developers can use to build applications. These include resource types such as Containers, Gateways, and Secrets. You can also create your own resource types. This tutorial guides you through creating a PostgreSQL resource and deploying the sample Todo List application with PostgreSQL.
 
 {{< image src="tutorial2.png" alt="Diagram of the Todo List with PostgreSQL" width=600px >}}
 
@@ -303,9 +303,9 @@ Bicep templates must be stored in an OCI registry accessible by Radius. As discu
    In this example the POSTGRESQL_PASSWORD is stored as a cleartext property for demo purposes. In production environments, always use secrets to store and reference sensitive information like passwords.
    {{% /alert %}}
 
-## Step 5: Run the application
+## Step 5: Deploy the application
 
-Run the application using `rad run`. The `rad run` command sets up port forwarding to the application. .
+Deploy the application using `rad deploy`.
 
 ```bash
 rad deploy app.bicep
@@ -342,4 +342,4 @@ Open the gateway URL in your browser. The Radius Connections section now has Pos
 
 <br><br>
 
-{{< button text="Next step: Create a composite Recipe →" page="composite-recipe" >}}
+{{< button text="Next step: Create a composite Recipe →" page="create-composite-recipe" >}}
