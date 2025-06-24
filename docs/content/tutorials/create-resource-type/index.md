@@ -268,7 +268,7 @@ Bicep templates must be stored in an OCI registry accessible by Radius. As discu
     -      mongodb: {
     -        source: mongodb.id
     -      }
-    +      postgresql: {
+    +      postgres: {
     +        source: postgresql.id
     +   }
           backend: {
