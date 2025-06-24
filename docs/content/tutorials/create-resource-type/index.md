@@ -249,7 +249,7 @@ Bicep templates must be stored in an OCI registry accessible by Radius. As discu
     + }
     ```
 
-1. Modify the `demo` container to use the PostgreSQL. Because PostgreSQL is a custom resource type, the environment variables must be manually specified.
+2. Connect the `demo` container to PostgreSQL. Connections from a container to a resource of custom resource type result in environment variables for each of the custom resource property automatically being set on the container.
 
     ```diff
     resource demo 'Applications.Core/containers@2023-10-01-preview' = {
