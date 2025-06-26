@@ -60,8 +60,6 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
 
    ```
    $ rad resource-type create postgreSQL -f types.yaml 
-   Resource provider "Radius.Resources" not found.
-   Creating resource provider Radius.Resources at location global
    Creating resource type Radius.Resources/postgreSQL
    Creating API Version Radius.Resources/postgreSQL@2023-10-01-preview
    Creating location Radius.Resources/global/
@@ -251,7 +249,7 @@ Bicep templates must be stored in an OCI registry accessible by Radius. As discu
     + }
     ```
 
-1. Modify the `demo` container to use the PostgreSQL. Because PostgreSQL is a custom resource type, the environment variables must be manually specified.
+2. Connect the `demo` container to the PostgreSQL database. When a connection is added between a container and another resource, the properties of the connected resource are created as environment variables in the container. If you prefer to not have environment variables created automatically, set the `disableDefaultEnvVars` property to `true` on the container resource.
 
     ```diff
     resource demo 'Applications.Core/containers@2023-10-01-preview' = {
@@ -265,24 +263,6 @@ Bicep templates must be stored in an OCI registry accessible by Radius. As discu
               containerPort: 3000
             }
           }
-    +      env: {
-    +        CONNECTION_POSTGRES_HOST: {
-    +          value: postgresql.properties.host
-    +        }
-    +        CONNECTION_POSTGRES_PORT: {
-    +          value: string(postgresql.properties.port)
-    +        }
-    +        CONNECTION_POSTGRES_USERNAME: {
-    +          value: postgresql.properties.username
-    +        }
-    +        CONNECTION_POSTGRES_DATABASE: {
-    +          value: postgresql.properties.database
-    +        }
-    +        //This is stored and passed as cleartext for demo purposes. In production, use a secret store.
-    +        CONNECTION_POSTGRES_PASSWORD: {
-    +          value: postgresql.properties.password
-    +        }   
-    +      }
         }
         connections: {
     -      mongodb: {
@@ -298,10 +278,6 @@ Bicep templates must be stored in an OCI registry accessible by Radius. As discu
       }
     }
     ```
-
-   {{% alert title="Caution" color="warning" %}}
-   In this example the POSTGRESQL_PASSWORD is stored as a cleartext property for demo purposes. In production environments, always use secrets to store and reference sensitive information like passwords.
-   {{% /alert %}}
 
 ## Step 5: Deploy the application
 
