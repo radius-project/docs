@@ -56,14 +56,19 @@ tag = "tags"
     pre = "<i class='fas fa-blog'></i>"
 [[menu.main]]
     name = "GitHub"
-    weight = 40
+    weight = 30
     url = "https://github.com/radius-project"
     pre = "<i class='fab fa-github'></i>"
 [[menu.main]]
     name = "Discord"
-    weight = 90
+    weight = 40
     url = "https://aka.ms/Radius/Discord"
     pre = "<i class='fab fa-discord'></i>"
+[[menu.main]]
+    name = "Youtube"
+    weight = 50
+    url = "https://www.youtube.com/@radapp_io"
+    pre = "<i class='fab fa-youtube'></i>"
 
 [params]
 copyright = "The Radius Authors. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see the https://linuxfoundation.org/trademark-usage/ page."
