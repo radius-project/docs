@@ -19,6 +19,9 @@ Create or update a resource type from a resource type manifest.
 	Creating a resource type defines a new type that can be used in applications.
 	
 	Input can be passed in using a JSON or YAML file using the --from-file option.
+
+	resource-type name argument is optional. If specified, only the specified type is created/updated. 
+	If not specified, all resource types in the referenced file are created/updated.
 	
 
 ```
@@ -34,6 +37,12 @@ rad resource-type create myType --from-file /path/to/input.yaml
 
 # Create a resource type from JSON file
 rad resource-type create myType --from-file /path/to/input.json
+
+# Create all resource types from YAML file
+rad resource-type create  --from-file /path/to/input.yaml
+ 
+# Create all resource types from JSON file
+rad resource-type create --from-file /path/to/input.json
 
 ```
 
