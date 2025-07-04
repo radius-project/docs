@@ -59,7 +59,7 @@ Update your Environment with a Terraform Recipe, pointing to your private git re
 Deploy your new Radius Environment:
 
 ```
-rad deploy ./env.bicep -p username=<GIT_PLATFORM_USERNAME> -p pat=<PASSWORD_OR_PAT>
+rad deploy ./env.bicep -p user=<GIT_PLATFORM_USERNAME> -p pat=<PASSWORD_OR_PAT>
 ```
 
 ## Done
