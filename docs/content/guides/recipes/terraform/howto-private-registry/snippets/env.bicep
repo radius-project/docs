@@ -5,12 +5,18 @@ extension radius
 @secure()
 param pat string
 
+@description('Required value, refers to the username of the git platform')
+param user string
+
 resource secretStoreGit 'Applications.Core/secretStores@2023-10-01-preview' = {
   name: 'my-git-secret-store'
   properties: {
     resource: 'my-secret-namespace/github'
     type: 'generic'
     data: {
+      username: {
+        value: user
+      }
       pat: {
         value: pat 
       }
