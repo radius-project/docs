@@ -30,7 +30,7 @@ The PAT should have access to read the files inside the specific private reposit
 
 ## Step 2: Define a secret store resource
 
-Configure a [Radius Secret Store]({{< ref "/guides/author-apps/secrets/overview" >}}) with the personal access token or username + password you previously created, which has access to your private git repository. Define the namespace for the cluster that will contain your [Kubernetes Secret](https://kubernetes.io/docs/concepts/configuration/secret/) with the `resource` property. 
+Configure a [Radius Secret Store]({{< ref "/guides/author-apps/secrets/overview" >}}) with the username and personal access token (or password) you previously created. Both are required to access your private git repository. Define the namespace for the cluster that will contain your [Kubernetes Secret](https://kubernetes.io/docs/concepts/configuration/secret/) with the `resource` property. 
 
 > While this example shows a Radius-managed secret store where Radius creates the underlying secrets infrastructure, you can also bring your own existing secrets. Refer to the [secrets documentation]({{< ref "/guides/author-apps/secrets/overview" >}}) for more information.
 
@@ -38,7 +38,7 @@ Create a Bicep file `env.bicep`, import Radius, and  define your resource:
 
 {{< rad file="snippets/env.bicep" embed=true marker="//SECRETSTORE" >}}
 
-> The property `pat` is required and refers to your personal access token or password, while `username` is optional and refers to a username, if your git platform requires one.
+> Both properties `username` and `pat` are required. `username` refers to your username for the git platform, and `pat` refers to your personal access token or password.
 
 ## Step 3: Configure Terraform Recipe git authentication
 
@@ -59,7 +59,7 @@ Update your Environment with a Terraform Recipe, pointing to your private git re
 Deploy your new Radius Environment:
 
 ```
-rad deploy ./env.bicep -p pat=******
+rad deploy ./env.bicep -p user=<GIT-PLATFORM-USERNAME> -p pat=<GIT-PLATFORM-PAT>
 ```
 
 ## Done

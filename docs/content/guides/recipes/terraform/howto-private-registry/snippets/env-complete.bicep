@@ -1,6 +1,9 @@
 //SECRETSTORE
 extension radius
 
+@description('Required value, refers to the username of the git platform')
+param user string
+
 @description('Required value, refers to the personal access token or password of the git platform')
 @secure()
 param pat string
@@ -11,6 +14,9 @@ resource secretStoreGit 'Applications.Core/secretStores@2023-10-01-preview' = {
     resource: 'my-secret-namespace/github'
     type: 'generic'
     data: {
+      username: {
+        value: user
+      }
       pat: {
         value: pat 
       }
