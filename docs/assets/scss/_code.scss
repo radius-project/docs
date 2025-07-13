@@ -33,6 +33,15 @@
             padding: 1rem;
             border-radius: 10px;
         }
+
+        table td:nth-child(2) {
+            display: grid;
+            background-color: #fff;
+
+            pre {
+                border-radius: 0px 10px 10px 0px;
+            }
+        }
     }
 
     // Inline code
