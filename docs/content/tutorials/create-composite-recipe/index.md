@@ -48,7 +48,7 @@ rad resource-type create webServices -f types.yaml
 ```
 $ rad resource-type create webServices -f types.yaml
 Resource provider "Radius.Resources" found. Registering resource type "webServices".
-Creating resource type Radius.Resources/webServices with capabilities SupportsRecipes 
+Creating resource type Radius.Resources/webServices
 Creating API Version Radius.Resources/webServices@2023-10-01-preview
 Updating location Radius.Resources/global with new resource type
 Resource type Radius.Resources/webServices created successfully
