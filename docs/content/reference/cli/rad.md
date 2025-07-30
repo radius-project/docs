@@ -39,6 +39,7 @@ Radius CLI
 * [rad resource-type]({{< ref rad_resource-type.md >}})	 - Manage resource types
 * [rad run]({{< ref rad_run.md >}})	 - Run an application
 * [rad uninstall]({{< ref rad_uninstall.md >}})	 - Uninstall Radius for a specific platform
+* [rad upgrade]({{< ref rad_upgrade.md >}})	 - Upgrades Radius for a given platform
 * [rad version]({{< ref rad_version.md >}})	 - Prints the versions of the rad CLI and the Radius Control Plane
 * [rad workspace]({{< ref rad_workspace.md >}})	 - Manage workspaces
 
