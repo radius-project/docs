@@ -1320,3 +1320,5 @@ systemAssignedUserAssigned
 userAssigned
 AzureContainerInstanceExtension
 ACIRuntimeProperties
+Preflight
+preflight
