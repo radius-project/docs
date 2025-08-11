@@ -14,6 +14,4 @@ output "result" {
         "/planes/kubernetes/local/namespaces/${kubernetes_deployment.metadata.namespace}/providers/apps/Deployment/${kubernetes_deployment.metadata.name}"
     ]
   }
-  description = "The result of the Recipe. Must match the target resource's schema."
-  sensitive = true
 }
