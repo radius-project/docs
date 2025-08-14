@@ -1320,3 +1320,4 @@ systemAssignedUserAssigned
 userAssigned
 AzureContainerInstanceExtension
 ACIRuntimeProperties
+contrib
