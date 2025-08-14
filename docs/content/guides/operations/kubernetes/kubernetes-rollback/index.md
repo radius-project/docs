@@ -142,7 +142,7 @@ If rollback is not possible or encounters issues, you can perform a fresh instal
    rad install kubernetes --chart /path/to/radius-chart-<version>
 
    # Or use Helm directly to install a specific version
-   helm install radius oci://ghcr.io/radius-project/helm-chart/radius --version <chart-version> -n radius-system --create-namespace
+   helm install radius oci://ghcr.io/radius-project/helm-chart --version <chart-version> -n radius-system --create-namespace
    ```
 
 4. Create new environments and deploy your applications using the backup as reference
