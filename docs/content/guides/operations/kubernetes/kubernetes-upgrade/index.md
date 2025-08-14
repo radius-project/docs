@@ -87,7 +87,9 @@ While Radius supports in-place upgrades, breaking changes may still occur betwee
 
 ### Rollback capability
 
-If an upgrade encounters issues, you can rollback to a previous version using the [`rad rollback kubernetes` command]({{< ref "guides/operations/kubernetes/kubernetes-rollback" >}}). It's recommended to backup your environment configurations before upgrading.
+If an upgrade encounters issues, you can rollback to a previous version using the [`rad rollback kubernetes` command]({{< ref "guides/operations/kubernetes/kubernetes-rollback" >}}).
+
+It's recommended to backup your environment configurations before upgrading, which you may do with something like `rad env show -o json > env-backup.json`.
 
 ## Alternative: Fresh installation
 
@@ -121,3 +123,4 @@ If you prefer to do a fresh installation instead of an in-place upgrade, follow 
 
 - Learn how to [rollback Radius]({{< ref "guides/operations/kubernetes/kubernetes-rollback" >}}) if needed
 - Review [Radius versioning]({{< ref "guides/operations/versioning" >}}) for version compatibility information
+- Refer to the [`rad upgrade`]({{< ref "reference/cli/rad_upgrade_kubernetes" >}}) CLI reference docs for more details

@@ -182,3 +182,4 @@ helm rollback radius 2 -n radius-system
 - Learn about [upgrading Radius]({{< ref "guides/operations/kubernetes/kubernetes-upgrade" >}})
 - Review [Radius versioning]({{< ref "guides/operations/versioning" >}}) for version compatibility
 - Check [release notes](https://github.com/radius-project/radius/releases) for version-specific information
+- Refer to the [`rad rollback kubernetes`]({{< ref "reference/cli/rad_rollback_kubernetes" >}}) CLI reference docs for more details
