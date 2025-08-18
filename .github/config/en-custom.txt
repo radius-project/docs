@@ -1320,6 +1320,7 @@ systemAssignedUserAssigned
 userAssigned
 AzureContainerInstanceExtension
 ACIRuntimeProperties
+contrib
 Preflight
 preflight
 oci

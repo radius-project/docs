@@ -29,7 +29,7 @@ Check out the following table to learn where and how you can contribute:
 
 | Repository | Description | Contribution guides |
 |------------|-------------|---------------------|
-| **Docs** | Documentation for Radius | [radius-project/docs]({{< ref contributing-docs>}})|
+| **Resource Types and Recipes** | Shared library of Radius Resource Types and Recipes for Radius applications | [radius-project/resource-types-contrib](https://github.com/radius-project/resource-types-contrib/blob/main/CONTRIBUTING.MD) |
 | **Radius** | Main repository that contains source code for [`rad` CLI](https://github.com/radius-project/radius/blob/main/docs/contributing/contributing-code/contributing-code-cli/README.md), [control plane](https://github.com/radius-project/radius/blob/main/docs/contributing/contributing-code/contributing-code-control-plane/README.md) and other components of Radius | [radius-project/radius](https://github.com/radius-project/radius/blob/main/CONTRIBUTING.md)|
-| **Recipes** | Commonly used [Recipe]({{< ref "guides/recipes/overview">}}) templates for Radius Environments | [radius-project/recipes](https://github.com/radius-project/recipes/blob/main/CONTRIBUTING.md) |
+| **Docs** | Documentation for Radius | [radius-project/docs]({{< ref contributing-docs>}})|
 | **Dashboard** | The frontend experience for Radius |[radius-project/dashboard](https://github.com/radius-project/dashboard/blob/main/CONTRIBUTING.md) |
