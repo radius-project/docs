@@ -75,12 +75,6 @@ rad env list
 
 ## Important considerations
 
-### CRD updates
-
-> **Note:** Due to a [Helm limitation](https://helm.sh/docs/chart_best_practices/custom_resource_definitions/), Custom Resource Definitions (CRDs) are only installed during the initial Radius installation and are not automatically updated during upgrades.
->
-> If a Radius upgrade includes CRD changes (typically in major version upgrades), you may need to manually update the CRDs. Check the release notes for specific instructions when CRD updates are required.
-
 ### Breaking changes
 
 While Radius supports in-place upgrades, breaking changes may still occur between major versions. Always review the [release notes](https://github.com/radius-project/radius/releases) before upgrading to understand any breaking changes or migration steps required.
