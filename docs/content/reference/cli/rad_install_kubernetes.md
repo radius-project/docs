@@ -78,16 +78,12 @@ rad install kubernetes --reinstall
 ### Options
 
 ```
-      --chart string                   Specify a file path to a helm chart to install Radius from
-      --contour-chart string           Specify a local file path to a helm chart to install Contour from
-      --contour-set stringArray        Set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
-      --contour-set-file stringArray   Set values from files on the command line (can specify multiple or separate files with commas: key1=filename1,key2=filename2)
-  -h, --help                           help for kubernetes
-      --kubecontext string             The Kubernetes context to use, will use the default if unset
-      --reinstall                      Specify to force reinstallation of Radius
-      --set stringArray                Set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
-      --set-file stringArray           Set values from files on the command line (can specify multiple or separate files with commas: key1=filename1,key2=filename2)
-      --skip-contour-install           Install Contour ingress controller (enabled by default)
+      --chart string           Specify a file path to a helm chart to install Radius from
+  -h, --help                   help for kubernetes
+      --kubecontext string     The Kubernetes context to use, will use the default if unset
+      --reinstall              Specify to force reinstallation of Radius
+      --set stringArray        Set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
+      --set-file stringArray   Set values from files on the command line (can specify multiple or separate files with commas: key1=filename1,key2=filename2)
 ```
 
 ### Options inherited from parent commands
