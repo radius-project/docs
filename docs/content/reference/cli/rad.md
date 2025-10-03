@@ -37,8 +37,10 @@ Radius CLI
 * [rad recipe]({{< ref rad_recipe.md >}})	 - Manage recipes
 * [rad resource]({{< ref rad_resource.md >}})	 - Manage resources
 * [rad resource-type]({{< ref rad_resource-type.md >}})	 - Manage resource types
+* [rad rollback]({{< ref rad_rollback.md >}})	 - Rolls back Radius for a given platform
 * [rad run]({{< ref rad_run.md >}})	 - Run an application
 * [rad uninstall]({{< ref rad_uninstall.md >}})	 - Uninstall Radius for a specific platform
+* [rad upgrade]({{< ref rad_upgrade.md >}})	 - Upgrades Radius for a given platform
 * [rad version]({{< ref rad_version.md >}})	 - Prints the versions of the rad CLI and the Radius Control Plane
 * [rad workspace]({{< ref rad_workspace.md >}})	 - Manage workspaces
 

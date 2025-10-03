@@ -10,8 +10,9 @@ tags: ["Azure"]
 
 The Azure provider allows you to deploy and connect to Azure resources from a self-hosted Radius Environment. It can be configured:
 
-- [Interactively via `rad init`](#interactive-configuration)
-- [Manually via `rad env update` and `rad credential register`](#manual-configuration)
+- [Prerequisites](#prerequisites)
+- [Interactive configuration](#interactive-configuration)
+- [Manual configuration](#manual-configuration)
 
 ## Prerequisites
 
@@ -29,9 +30,9 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
 
 1. Follow the prompts, specifying:
    - **Namespace** - The Kubernetes namespace where your application containers and networking resources will be deployed (different than the Radius control-plane namespace, `radius-system`)
-   - **Add an Azure provider** 
-      1. Pick the subscription and resource group to deploy your Azure resources to
-      2. Select the "Service Principal" option
+   - **Add an Azure provider**
+      1. Pick the subscription and resource group to deploy your Azure resources to. The resource group should exist.
+      2. Select the "Service Principal" option.
       3. Run `az ad sp create-for-rbac` to create a Service Principal without a role assignment and obtain your `appId`, `displayName`, `password`, and `tenant` information.
 
       ```
@@ -43,6 +44,7 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
          }
          ```
          Enter the `appId`, `password`, and `tenant` information when prompted.
+      4. Grant the service principal access to the resource group using the Azure role that allows creating the resource you plan to deploy.
 
    - **Environment name** - The name of the environment to create
 
@@ -66,13 +68,13 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
 
 ## Manual configuration
 
-1. Use [`rad env update`]({{< ref rad_environment_update >}}) to update your Radius Environment with your Azure subscription ID and Azure resource group:
+1. Use [`rad env update`]({{< ref rad_environment_update >}}) to update your Radius Environment with your Azure subscription ID and Azure resource group. The resource group should exist:
 
     ```bash
     rad env update myEnvironment --azure-subscription-id myAzureSubscriptionId --azure-resource-group  myAzureResourceGroup
     ```
 
-1. Run `az ad sp create-for-rbac` to create a Service Principal without a role assignment and obtain your `appId`, `displayName`, `password`, and `tenant` information.
+2. Run `az ad sp create-for-rbac` to create a Service Principal without a role assignment and obtain your `appId`, `displayName`, `password`, and `tenant` information.
 
    ```
    {
@@ -83,8 +85,9 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
    }
    ```
 
+3. Grant the service principal access to the resource group using the Azure role that allows creating the resource you plan to deploy.
 
-1. Use [`rad credential register azure`]({{< ref rad_credential_register_azure >}}) to add the Azure service principal to your Radius installation:
+4. Use [`rad credential register azure`]({{< ref rad_credential_register_azure >}}) to add the Azure service principal to your Radius installation:
 
     ```bash
     rad credential register azure sp --client-id myClientId  --client-secret myClientSecret  --tenant-id myTenantId
