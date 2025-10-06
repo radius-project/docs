@@ -12,9 +12,14 @@ Delete a resource group
 
 ### Synopsis
 
-Delete a resource group. 
-		
-Delete a resource group if it is empty. If not empty, delete the contents and try again
+Delete a resource group and all its resources.
+
+The command will:
+- Check if the resource group contains any deployed resources
+- Show an appropriate confirmation prompt based on whether resources exist
+- Delete all resources in the group (if any) before deleting the group itself
+
+Use the --yes flag to skip confirmation prompts.
 
 ```
 rad group delete resourcegroupname [flags]
@@ -24,6 +29,7 @@ rad group delete resourcegroupname [flags]
 
 ```
 rad group delete rgprod
+rad group delete rgprod --yes
 ```
 
 ### Options
