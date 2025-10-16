@@ -8,8 +8,6 @@ weight: 30
 
 This hands-on tutorial guides you through deploying a To Do List application that demonstrates key Radius concepts and capabilities. This will take approximately 30-60 minutes to complete.
 
-{{< image src="todolist.png" alt="Diagram of the application resources and their connections" width=600px >}} 
-
 ## Prerequisites
 
 - A Kubernetes cluster (local using kind/minikube or cloud-based)
