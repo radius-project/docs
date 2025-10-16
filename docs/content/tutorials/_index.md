@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Tutorial"
+title: "Tutorial: Deploy a To Do List Application"
 linkTitle: "Tutorial"
 description: "Step-by-step guide to define and deploy a Radius application"
 weight: 30
