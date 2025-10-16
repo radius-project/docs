@@ -1,56 +1,38 @@
 ---
 type: docs
-title: "Getting started with Radius: Run your first app"
-linkTitle: "Getting started"
+title: "Quick Start: Deploy a containerized application"
+linkTitle: "Quick Start"
 weight: 10
-description: "Take a tour of Radius by getting started with your first app"
+description: "Perform a quick installation of Radius and deploy your first application"
 aliases:
     - /getting-started/tutorial/
     - /getting-started/install/
     - /getting-started/first-app/
 ---
 
-This guide will show you how to quickly get started with Radius. You'll walk through both installing Radius and running your first Radius app.
+This guide will show you how to quickly get started with Radius. You will do a basic installation Radius on a Kubernetes cluster then deploy the Todo List demo application.
 
-**Estimated time to complete: 10 min**
+## Prerequisites
 
-{{< image src="diagram.png" alt="Diagram of the application and its resources" width="500px" >}}
+For this quick start, you will only need a **Kubernetes cluster**. In order to install Radius your use must have the cluster-admin role. Any Kubernetes cluster will work including AKS and EKS. However, since this is a quick start, running a Kubernetes cluster on your workstation with [k3d](https://k3d.io/) or [kind](https://kind.sigs.k8s.io/) is recommended.
 
-<!-- commenting until we enable free minutes to try Codepaces
-{{< alert title="🚀 Run in a <b>free</b> GitHub Codespace" color="primary" >}}
-The Radius getting-started guide can be [run **for free** in a GitHub Codespace](https://github.blog/changelog/2022-11-09-codespaces-for-free-and-pro-accounts/). Visit the following link to get started in seconds:
-
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/radius-project/samples)
-{{< /alert >}}-->
-
-## 1. Have your Kubernetes cluster handy
-
-Radius runs inside [Kubernetes]({{< ref "guides/operations/kubernetes" >}}). However you run Kubernetes, get a cluster ready.
-> *If you don't have a preferred way to create Kubernetes clusters, you could try using [k3d](https://k3d.io/), which runs a minimal Kubernetes distribution in Docker. Make sure to apply the [recommended configuration]({{< ref "guides/operations/kubernetes/overview#supported-kubernetes-clusters" >}}).*
-
-Ensure your cluster is set as your current context:
-
-```bash
-kubectl config current-context
-```
-
-## 2. Install Radius CLI
+## Install the Radius CLI
 
 {{< read file= "/shared-content/installation/rad-cli/install-rad-cli.md" >}}
 
-## 3. Initialize Radius
+## Install Radius
 
-Create a new directory for your app and navigate into it:
+Create a new directory for the Todo List application.
 
 ```bash
-mkdir first-app
-cd first-app
+mkdir todolist
+cd todolist
 ```
 
-Initialize Radius. For this example, accept all the default options (press ENTER to confirm):
+Ensure your cluster is set as your current context using `kubectl config current-context`. If the context needs updating, change it using `kubectl config set-context <context-name>`. Then install Radius. For this example, accept all the default options (press ENTER to confirm):
 
 ```bash
-rad init
+rad initialize
 ```
 
 Example output:
@@ -64,21 +46,40 @@ Initializing Radius...
 ✅ Create new environment default
     - Kubernetes namespace: default
     - Recipe pack: local-dev
-✅ Scaffold application docs
+✅ Scaffold application todolist
 ✅ Update local configuration
 
 Initialization complete! Have a RAD time 😎
 ```
 
-In addition to starting Radius services in your Kubernetes cluster, this initialization command creates a default application (`app.bicep`) as your starting point. It contains a single container definition (`demo`). `rad init` also creates a [`bicepconfig.json`]({{< ref "/guides/tooling/bicepconfig/overview" >}}) file in your application's directory that has the necessary setup to use Radius with the official Bicep compiler.
+## Run the Todo List application
 
-{{< rad file="snippets/app.bicep" embed=true markdownConfig="{linenos=table,linenostart=1}" >}}
+In addition to installing Radius, the `rad initialize` command creates a sample application definition, `app.bicep`:
 
-> This file will run the `ghcr.io/radius-project/samples/demo:latest` image. This image is published by the Radius team to a public registry, you do not need to create it.
+```
+extension radius
+extension radiusResources
 
-## 4. Run the app
+@description('The Radius Application ID. Injected automatically by the rad CLI.')
+param application string
 
-Use the below command to run the app in your environment, then access the application by opening [http://localhost:3000](http://localhost:3000) in a browser.
+resource demo 'Applications.Core/containers@2023-10-01-preview' = {
+  name: 'demo'
+  properties: {
+    application: application
+    container: {
+      image: 'ghcr.io/radius-project/samples/demo:latest'
+      ports: {
+        web: {
+          containerPort: 3000
+        }
+      }
+    }
+  }
+}
+```
+
+Use the `rad run` command to deploy the application and setup port forwarding.
 
 ```bash
 rad run app.bicep
@@ -86,77 +87,23 @@ rad run app.bicep
 
 This command:
 
-- Runs the application in your Kubernetes cluster
-- Creates a port-forward from localhost to port 3000 inside the container so you can navigate to the app's frontend UI
-- Creates a port-forward from localhost to port 7007 inside the container so you can navigate to your Radius Dashboard
+- Creates a Deployment on the Kubernetes cluster
+- Since a containerPort was specified, creates a ClusterIP Service on the Kubernetes cluster
+- Sets up port forwarding from localhost to the container so you can access the application via [http://localhost:3000](http://localhost:3000)
+- Sets up port forwarding from localhost to the Radius Dashboardso you can access the Dashboard via [http://localhost:7007](http://localhost:7007)
 - Streams container logs to your terminal
 
-<br>
-In your browser you should see the demo app:
+## Browse the Todo List application UI
 
-{{< image src="demo-screenshot.png" alt="Screenshot of the demo container" width=600px >}}
-<br>
+Browse to the Todo List application by visiting [http://localhost:3000](http://localhost:3000). Notice that the Radius Connections section says "No connections defined." In the full tutorial, you will add a database and a connection between the container and the database.
 
-Access your Radius Dashboard by opening [http://localhost:7007](http://localhost:7007/resources/default/Applications.Core/applications/demo/application) in a browser. In your browser, you should see the Radius Dashboard, which includes visualizations of the application graph, environments, and recipes:
+## Browse the Radius Dashboard
 
-{{< image src="demo-dashboard-appgraph.png" alt="screenshot of an example Radius Dashboard home page" width=800 >}}
-<br><br>
+Browse to the Radius Dashboard by visiting [http://localhost:7007](http://localhost:7007). Find the Todo List application under the Applications tab and examine its resources.
 
-> Congrats! You're running your first Radius app. <br> When you're ready to move on to the next step, use <kbd>CTRL</kbd>+ <kbd>C</kbd> to exit the command.
+## View the application graph
 
-## 5. Add Database
-
-This step will add a database (Redis Cache) to the application.
-
-You can create a Redis Cache using [Recipes]({{< ref "guides/recipes/overview" >}}) provided by Radius. The Radius community provides Recipes for running commonly used application dependencies, including Redis.
-
-In this step you will:
-
-- Add Redis to the application using a Recipe.
-- Connect to Redis from the `demo` container using environment variables that Radius automatically sets.
-
-Open `app.bicep` in your editor and get ready to edit the file.
-
-First add some new code to `app.bicep` by pasting in the content below at the end of the file. This code creates a Redis Cache using a Radius Recipe:
-
-{{< rad file="snippets/app-with-redis-snippets.bicep" embed=true marker="//REDIS" markdownConfig="{linenos=table,linenostart=21}" >}}
-
-Next, update your container definition to include `connections` inside `properties`. This code creates a connection between the container and the database. Based on this connection, Radius will [inject environment variables]({{< ref "/guides/author-apps/containers/overview#connections" >}}) into the container that inform the container how to connect. You will view these in the next step.
-
-{{< rad file="snippets/app-with-redis-snippets.bicep" embed=true marker="//CONNECTION" markdownConfig="{linenos=table,hl_lines=[\"13-17\"],linenostart=7}" >}}
-
-Your updated `app.bicep` will look like this:
-
-{{< rad file="snippets/app-with-redis.bicep" embed=true markdownConfig="{linenos=table}" >}}
-
-## 6. Rerun the application with a database
-
-Use the command below to run the updated application again, then open the browser to [http://localhost:3000](http://localhost:3000).
-
-```sh
-rad run app.bicep
-```
-
-You should see the Radius Connections section with new environment variables added. The `demo` container now has connection information for Redis (`CONNECTION_REDIS_HOST`, `CONNECTION_REDIS_PORT`, etc.):
-
-{{< image src="demo-with-redis-screenshot.png" alt="Screenshot of the demo container" width=800px >}}
-<br /><br />
-
-Navigate to the Todo List tab and test out the application. Using the Todo page will update the saved state in Redis:
-
-{{< image src="demo-with-todolist.png" alt="Screenshot of the todolist" width=700px >}}
-<br /><br />
-
-Access your Radius Dashboard again by opening [http://localhost:7007](http://localhost:7007/resources/default/Applications.Core/applications/demo/application) in a browser. You should see a visualization of the application graph for your `demo` app, including the connection to the `db` Redis Cache:
-
-{{< image src="demo-dashboard-appgraph-db.png" alt="screenshot of an example Radius Dashboard home page" width=800 >}}
-<br><br>
-
-> Press <kbd>CTRL</kbd>+ <kbd>C</kbd> when you are finished with the websites.
-
-## 7. View the application graph
-
-Radius Connections are more than just environment variables and configuration. You can also access the "application graph" and understand the connections within your application with the following command:
+The `rad app graph` command shows you the all the resources that the application is composed of. 
 
 ```bash
 rad app graph
@@ -165,40 +112,34 @@ rad app graph
 You should see the following output, detailing the connections between the `demo` container and the `db` Redis Cache, along with information about the underlying Kubernetes resources running the app:
 
 ```
-Displaying application: demo
+Displaying application: todolist
 
 Name: demo (Applications.Core/containers)
-Connections:
-  demo -> db (Applications.Datastores/redisCaches)
+Connections: (none)
 Resources:
-  demo (kubernetes: apps/Deployment)
-  demo (kubernetes: core/Secret)
-  demo (kubernetes: core/Service)
-  demo (kubernetes: core/ServiceAccount)
-  demo (kubernetes: rbac.authorization.k8s.io/Role)
-  demo (kubernetes: rbac.authorization.k8s.io/RoleBinding)
-
-Name: db (Applications.Datastores/redisCaches)
-Connections:
-  demo (Applications.Core/containers) -> db
-Resources:
-  redis-r5tcrra3d7uh6 (kubernetes: apps/Deployment)
-  redis-r5tcrra3d7uh6 (kubernetes: core/Service)
+  demo (apps/Deployment)
+  demo (core/Service)
+  demo (core/ServiceAccount)
+  demo (rbac.authorization.k8s.io/Role)
+  demo (rbac.authorization.k8s.io/RoleBinding)
 ```
 
-## 8. Cleanup
+Congratulations, you have deployed your first application using Radius!
 
-To delete your app, run the [rad app delete]({{< ref rad_application_delete >}}) command to cleanup the app and its resources, including the Recipe resources:
+
+## Cleanup
+
+Delete the Todo List application:
 
 ```bash
-rad app delete first-app -y
+rad app delete todolist
 ```
 
-## Next steps
+Optionally, uninstall Radius using the `purge` argument to remove Radius and all data:
 
-Now that you've run your first Radius app, you can learn more about Radius by reading the following guides:
+```bash
+rad uninstall kubernetes --purge
+```
 
-- [Tutorials]({{< ref tutorials >}}) - Learn how to build and deploy a variety of applications with Radius
-
-<br>
-{{< button text="Next step: Radius Tutorials" page="tutorials" >}}
+<br><br>
+{{< button text="Next step: Read Radius concepts" page="concepts" >}}
