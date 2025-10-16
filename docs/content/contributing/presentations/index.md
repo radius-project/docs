@@ -29,7 +29,7 @@ We offer a template PowerPoint file to get started:
 
 ### Preparing the demo
 
-1. Use the Radius [getting started guide]({{< ref getting-started >}}) and [samples repo](https://github.com/radius-project/samples) to show demos of how to use Radius.
+1. Use the Radius [tutorial]({{< ref tutorial >}}) and [samples repo](https://github.com/radius-project/samples) to show demos of how to use Radius.
 
 ## Other resources
 

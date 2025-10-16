@@ -53,7 +53,3 @@ kubectl port-forward --namespace=radius-system svc/dashboard 7007:80
 ## Reference documentation
 
 Visit the [API reference documentation]({{< ref "concepts/technical/api" >}}) to learn more about the underlying [Radius Application Graph]({{< ref "guides/author-apps/application/overview#query-and-understand-your-application-with-the-radius-application-graph" >}}) data on which the dashboard visualizations are built.
-
-To get started with trying the Radius Dashboard, see the [getting started guide]({{< ref "getting-started" >}}):
-
-{{< button text="Getting started" page="getting-started" >}}

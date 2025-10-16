@@ -8,6 +8,7 @@ aliases:
     - /getting-started/tutorial/
     - /getting-started/install/
     - /getting-started/first-app/
+    - /quick-start/
 ---
 
 This guide will show you how to quickly get started with Radius. You will do a basic installation Radius on a Kubernetes cluster then deploy the Todo List demo application.
