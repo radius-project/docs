@@ -90,8 +90,8 @@ This command:
 
 - Creates a Deployment on the Kubernetes cluster
 - Since a containerPort was specified, creates a ClusterIP Service on the Kubernetes cluster
-- Sets up port forwarding from localhost to the container so you can access the application via [http://localhost:3000](http://localhost:3000)
-- Sets up port forwarding from localhost to the Radius Dashboardso you can access the Dashboard via [http://localhost:7007](http://localhost:7007)
+- Sets up port forwarding from localhost to the container
+- Sets up port forwarding from localhost to the Radius Dashboard
 - Streams container logs to your terminal
 
 ## Browse the Todo List application UI
