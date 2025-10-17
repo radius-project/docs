@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "4. Create Recipes"
-linkTitle: "4. Create Recipes"
+title: "3. Create Recipes"
+linkTitle: "3. Create Recipes"
 description: "Author Bicep or Terraform Recipes implementing the Resource Type"
-weight: 500
+weight: 300
 ---
 ## Prerequisites
 
@@ -112,4 +112,4 @@ Bicep templates must be stored in an OCI registry accessible by Radius. As discu
 {{% /codetab %}}
 {{< /tabs >}}
 
-{{< button text="Next step: Deploy Application" page="deploy-application" color="primary" >}}
+{{< button text="Next step: create-environment" page="create-environment" color="primary" >}}

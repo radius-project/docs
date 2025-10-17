@@ -1,19 +1,12 @@
 ---
 type: docs
-title: "2. Create Resource Types in Radius"
+title: "2. Create Resource Types"
 linkTitle: "2. Create Resource Types"
-description: "Learn how to create a Radius Resource type"
-weight: 300
-categories: ["Tutorial"]
+description: "Learn how to create Radius Resource Types"
+weight: 200
 ---
 
-Radius includes several built-in resource types which developers can use to build applications. These include resource types such as Containers, Gateways, and Secrets. You can also create your own resource types. 
-
-## Pre-requisites
-
-[Node.js](https://nodejs.org/en/download) must be installed on the workstation to generate the Bicep extension to deploy the new resource type. 
-
-<!-- TODO: Add option for users to skip the need for an OCI registry or Git repository for their recipe by showing a `rad recipe register` command which includes a reference to an already deployed recipe in the Radius project.  -->
+Resource types are the building blocks of Radius and define what developers can deploy. In part two of this tutorial, you will create a PostgreSQL resource type. For a comprehensive description of resource types, see the [Resource Types concept page]<insert link>
 
 ## Create a PostgreSQL resource type in Radius
 
@@ -27,7 +20,7 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
 
     - **`namespace`**: The namespace of the resource type, as a convention `Radius.Data` is recommended but any name in the form `PrimaryName.SecondaryName` can be used
     - **`types`**: The resource type name
-    - **`description`**: The developer documentation on how and when to use the resource is embedded in the description
+    - **`description`**: The developer documentation on how and when to use the resource, formatted using Markdown
     - **`apiVersions`**: The version of the schema defined below
     - **`schema`**: The OpenAPI v3 schema which defines the properties of the resource type
         - **`environment`**: The Radius environment ID which the resource is deployed to, this property is set by the Radius CLI when the resource is deployed
@@ -43,19 +36,19 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
 2. Create the resource type using the [rad resource-type]({{< ref rad_resource-type_create >}}) command:
 
     ```bash
-    rad resource-type create postgreSQL -f types.yaml
+    rad resource-type create postgreSqlDatabases -f types.yaml
     ```
 
    ```
-   $ rad resource-type create postgreSQL -f types.yaml 
-   Creating resource type Radius.Resources/postgreSQL
-   Creating API Version Radius.Resources/postgreSQL@2023-10-01-preview
+   $ rad resource-type create postgreSqlDatabases -f types.yaml
+   Creating resource type Radius.Resources/postgreSqlDatabases
+   Creating API Version Radius.Resources/postgreSqlDatabases@2023-10-01-preview
    Creating location Radius.Resources/global/
    ```
 
 ## Create a Bicep extension
 
-The `rad resource-type create` command created the resource type in the Radius control plane. The next step is to create a Bicep extension which will be used by the Radius CLI and VS Code (if you have the Bicep VS Code extension installed).
+The `rad resource-type create` command created the resource type in the Radius control plane. The next step is to create a Bicep extension which will be used by the Radius CLI and VS Code (if you have the Bicep extension for VS Code installed).
 
 {{% alert title="Warning" color="warning" %}}
 This step is required even if you use Terraform-based Recipes to deploy the PostgreSQL resource type as part of the application.
@@ -109,4 +102,6 @@ This step is required even if you use Terraform-based Recipes to deploy the Post
 
     Now, any Bicep template with `extension radiusResources` will reference the `radiusResources.tgz` file for details about the PostgreSQL resource type.
 
-{{< button text="Next Step: Create Environment" page="create-environment" color="primary" >}}
+In part three of this tutorial, you will create a Recipe which will deploy the PostgreSQL resource type you just created.  
+<br><br>  
+{{< button text="Next Step: Create Environment" page="create-recipe" color="primary" >}}  

@@ -4,6 +4,7 @@ title: "Tutorial: Deploy a To Do List Application"
 linkTitle: "Tutorial"
 description: "Step-by-step guide to define and deploy a Radius application"
 weight: 30
+categories: ["Tutorial"]
 ---
 
 This hands-on tutorial guides you through deploying a To Do List application that demonstrates key Radius concepts and capabilities. This will take approximately 30-60 minutes to complete.

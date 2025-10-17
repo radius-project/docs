@@ -1,8 +1,10 @@
 namespace: Radius.Data
 types:
-  description: |
+  postgreSqlDatabases:  
+    description: |
       The Radius.Data/postgreSQLDatabases Resource Type deploys a PostgresSQL database. To deploy a new PostgresSQL database, add the postgreSQLDatabases resource to the application definition Bicep file.
-
+      
+      ```
       extension radius
       param environment string 
 
@@ -15,9 +17,11 @@ types:
           environment: environment
         }
       }
+      ```
+
 
       To connect your container to the database, create a connection from the Container resource to the database as shown below. 
-
+      ```
       resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
         name: 'frontend'
         properties: {
@@ -38,16 +42,15 @@ types:
           }
         }
       }
+      ```
 
       The connection automatically injects environment variables into the container for all properties from the database. The environment variables are named `CONNECTION_<CONNECTION-NAME>_<PROPERTY-NAME>`. In this example, the connection name is `mysqldb` so the environment variables will be:
  
-      CONNECTION_POSTGRESQL_DATABASE
-      CONNECTION_POSTGRESQL_USERNAME
-      CONNECTION_POSTGRESQL_PASSWORD
-      CONNECTION_POSTGRESQL_HOST
-      CONNECTION_POSTGRESQL_PORT
-
-  postgreSQL:
+      - CONNECTION_POSTGRESQL_DATABASE
+      - CONNECTION_POSTGRESQL_USERNAME
+      - CONNECTION_POSTGRESQL_PASSWORD
+      - CONNECTION_POSTGRESQL_HOST
+      - CONNECTION_POSTGRESQL_PORT
     apiVersions:
       '2025-10-01-preview':
         schema: 
@@ -55,7 +58,7 @@ types:
           properties:
             environment:
               type: string
-              description: "(Required) The Radius EnvironmentID. Typically set by the rad CLI. Typically value should be `environment`."
+              description: "(Required) The Radius Environment ID. Typically set by the rad CLI. Typically value should be `environment`."
             application:
               type: string
               description: "(Optional) The Radius Application ID. `myApplication.id` for example."
@@ -83,5 +86,4 @@ types:
               type: string
               description: The password for connecting to the database.
               readOnly: true
-          required:
-          - environment
+          required: [environment]

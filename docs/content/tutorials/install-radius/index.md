@@ -3,7 +3,7 @@ type: docs
 title: "1. Install Radius"
 linkTitle: "1. Install Radius"
 description: "Learn how to install Radius"
-weight: 200
+weight: 100
 ---
 
 ## Prerequisites

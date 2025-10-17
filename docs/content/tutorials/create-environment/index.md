@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "3. Create Environment"
-linkTitle: "3. Create Environment"
+title: "4. Create Environment"
+linkTitle: "4. Create Environment"
 description: "Create a Radius Environment to deploy the application"
 weight: 400
 ---
@@ -88,4 +88,4 @@ Inspect the Environment using the [`rad environment show`]({{< ref rad_environme
      "type": "Applications.Core/environments"
    }
    ```
-{{< button text="Next Step: Create Recipe" page="create-recipe" color="primary" >}}
+{{< button text="Next Step: Deploy Application" page="deploy-application" color="primary" >}}
