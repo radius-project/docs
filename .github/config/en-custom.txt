@@ -105,7 +105,7 @@ RabbitMQ
 ResourceDeploymentClient
 resourceGroup
 ResourceType
-ResourceTypeName
+resourceTypeName
 Rollout
 SaaS
 SDKs
