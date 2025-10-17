@@ -23,7 +23,7 @@ For this quick start, you will only need a **Kubernetes cluster**. In order to i
 
 ## Install Radius
 
-Create a new directory for the Todo List application.
+Create a new directory for the Todo List application:
 
 ```bash
 mkdir todolist
