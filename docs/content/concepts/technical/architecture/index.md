@@ -173,5 +173,5 @@ When using the `tf` CLI to deploy a Radius Application using Terraform:
 
 Now that you have an understanding of the Radius architecture, try Radius out:
 
-{{< button text="Get started" page="getting-started" size="btn-lg" color="success" >}}
+{{< button text="Quick Start" page="quick-start" size="btn-lg" color="success" >}}
 
