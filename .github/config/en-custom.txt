@@ -90,6 +90,7 @@ NodeJS
 OAuth
 OCI
 OIDC
+OpenAPI
 OUTRESOURCE
 OUTVALUES
 PARAMS
@@ -103,6 +104,8 @@ RBAC
 RabbitMQ
 ResourceDeploymentClient
 resourceGroup
+ResourceType
+ResourceTypeName
 Rollout
 SaaS
 SDKs
@@ -122,6 +125,7 @@ Swappable
 TBD
 TCP
 Terraform
+testResources
 TLS
 ToCs
 UCP
