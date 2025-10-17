@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "Concept: Collaboration in Radius"
-linkTitle: "Dev + ops collaboration"
-description: "Learn how Radius Environments and Recipes support collaboration between platform engineers, application developers, and IT operators."
-weight: 300
+title: "Resource Types"
+linkTitle: "Resource Types"
+description: "Learn how Radius Resource Types support collaboration between platform engineers, application developers, and IT operators."
+weight: 200
 aliases:
   - /concepts/collaboration-concept/
 ---

@@ -80,12 +80,13 @@ Public Endpoints:
 Open the gateway URL in your browser. The Radius Connections section now has PostgreSQL details and MongoDB is no longer there.
 
 {{< image src="todolist_postgresql.png" alt="Todo List with PostgreSQL connection" width=800px >}}
+
 When you're done press `CTRL + c` to terminate the port forward and log stream. The application continues to be deployed.
 
 
-## Step 4: View the application graph in the Radius Dashboard
+## View the application graph in the Radius Dashboard
 
-Navigate to the Radius Dashboard at [http://localhost:7007](http://localhost:7007/resources/default/Applications.Core/applications/todolist/application), You should see a visualization of the application graph for the application, including the connection from the `demo` container to `postgresq`
+Navigate to the Radius Dashboard at [http://localhost:7007](http://localhost:7007/resources/default/Applications.Core/applications/todolist/application), You should see a visualization of the application graph for the application, including the connection from the `demo` container to `postgresql`
 
 {{< image src="dashboard.png" alt="Screenshot of the Radius dashboard showing the demo container with a connection to the backend container" width=600px >}}
 

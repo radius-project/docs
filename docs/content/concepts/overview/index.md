@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Introduction: Why did we create Radius?"
-linkTitle: "Introduction"
+title: "Radius Overview"
+linkTitle: "Radius Overview"
 description: "Learn about why we created Radius and how it can help you"
 weight: 100
 categories: "Concept"

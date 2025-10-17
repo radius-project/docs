@@ -1,14 +1,10 @@
 ---
 type: docs
-title: Radius Application Graph
-linkTitle: Application graph
-description: Learn how the Radius application graph allows you to model your entire application
-weight: 200
-toc_hide: true
-hide_summary: true
+title: "Application and Resources"
+linkTitle: "Application and Resources"
+description: "Learn about Radius Application"
+weight: 400
 ---
-
-<!-- DISABLE_ALGOLIA -->
 
 ## Radius Applications
 
@@ -28,11 +24,11 @@ The Radius Application graph also allows your application to be self-documenting
 
 {{< image src="dashboard.png" alt="A mockup of a dashboard UI showing an application, its resources, and its connections" width=700px >}}
 
-> **Note:** A Radius dashboard is still on the roadmap, but in the meantime you can use the [Radius API]({{< ref "/concepts/technical/api" >}}) to build your own visual experiences today.
+> **Note:** A Radius dashboard is still on the roadmap, but in the meantime you can use the Radius API to build your own visual experiences today.
 
 ## Mine the app graph API
 
-The Radius Application graph is also exposed as an API, allowing you to build your own visualizations, workflows, and more on top of Radius. Learn more in the [API docs]({{< ref "/concepts/technical/api" >}}).
+The Radius Application graph is also exposed as an API, allowing you to build your own visualizations, workflows, and more on top of Radius. Learn more in the API docs.
 
 For example, I can get the status of my `frontend` container, and get its definition and its connections to other resources:
 
@@ -75,4 +71,4 @@ GET /planes/radius/local/resourceGroups/default/providers/Applications.Core/cont
 
 Now that you have an understanding of the Radius app graph, learn how you can deploy Radius applications to prepared landing zones with Radius Environments:
 
-{{< button text="Radius Environments" page="/concepts/why-radius/collaboration" color="success" >}}
+
