@@ -35,8 +35,8 @@ resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
       }
     }
     connections: {
-      database: {
-        source: database.id
+      postgresql: {
+        source: postgresql.id
       }
     }
   }
@@ -44,8 +44,8 @@ resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
 //CONTAINER
 
 //DATABASE
-resource database 'Radius.Data/postgreSqlDatabases@2025-08-01-preview' = {
-  name: 'database'
+resource postgresql 'Radius.Data/postgreSqlDatabases@2025-08-01-preview' = {
+  name: 'postgresql'
   properties: {
     environment: environment
     application: application

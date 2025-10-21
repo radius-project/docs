@@ -6,13 +6,11 @@ description: "Author Bicep or Terraform Recipes implementing the Resource Type"
 weight: 300
 ---
 
-[Recipes]({{< ref "/guides/recipes/overview" >}}) define how a resource is deployed. In part three of this tutorial, you will create a Terraform or Bicep Recipe for the PostgreSQL resource type.
+[Recipes]({{< ref "/guides/recipes/overview" >}}) define how a resource is deployed. In part three of this tutorial, you will create a Terraform or Bicep Recipes are authored and published for the PostgreSQL resource type.
 
 ## Prerequisites
 
-Location to store your Recipe:
-
-- **Terraform** configurations must be stored in a Git repository. For this tutorial, the Git repository has anonymous access. 
+Location to store your Recipe: 
   
 - **Bicep** templates must be stored in an OCI registry. 
 
@@ -22,9 +20,7 @@ Recipes can be either Terraform configurations or Bicep templates. Once the Terr
 
 {{< tabs Terraform Bicep >}}{{% codetab %}}
 
-Terraform configurations must be stored in a Git repository accessible by Radius. As discussed in the prerequisites, using a Git repository with anonymous access is easiest for this tutorial. Create a new directory in your Git repository for the PostgreSQL Terraform module then download the `main.tf` file into that directory. 
-
-{{< button text="Download main.tf" link="snippets/recipes/terraform/main.tf" newtab="true" >}}
+In this tutorial, we will use a Terraform Recipe for PostgreSQL maintained in the [resource-types-contrib](https://github.com/radius-project/resource-types-contrib/blob/main/Data/postgreSqlDatabases/recipes/kubernetes/terraform/main.tf) repository. Required changes to convert a Terraform configuration into a Radius Recipe:
 
 1. **Input parameters via `context`**
 
@@ -43,30 +39,28 @@ Terraform configurations must be stored in a Git repository accessible by Radius
       description = "Memory limits for the PostgreSQL container"
       type = map(object({
         memoryRequest = string
-        memoryLimit  = string
       }))
       default = {
         S = {
           memoryRequest = "512Mi"
-          memoryLimit   = "1024Mi"
         },
         M = {
           memoryRequest = "1Gi"
-          memoryLimit   = "2Gi"
         }
+        L = {
+          memoryRequest = "2Gi"
+        }
+      
       }
     ```
-    The `memory` variable allows customizing the memory request and limit for the PostgreSQL container based on the `size` property defined in the Resource Type.
+    The `memory` variable allows customizing the memory request for the PostgreSQL container based on the `size` property defined in the Resource Type.
 
-1. **Setting memory limits for resources based on the `size` property**
+1. **Setting memory for resources based on the `size` property**
 
     ```tf
      resources {
         requests = {
           memory = var.memory[var.context.resource.properties.size].memoryRequest
-        }
-        limits = {
-          memory = var.memory[var.context.resource.properties.size].memoryLimit
         }
       }
     ```
@@ -88,14 +82,14 @@ Terraform configurations must be stored in a Git repository accessible by Radius
       ``` 
     Radius injects the output values as properties of the resource calling the Recipe. When a connection is defined to the resource, Radius injects the properties as environment variables into the connecting resource.
 
-1. **Store the Recipe** : Store the Recipe in your Git repository with Anonymous access enabled. 
-
 {{% /codetab %}}
 {{% codetab %}}
 
-Bicep templates must be stored in an OCI registry accessible by Radius. As discussed in the prerequisites, using an OCI registry with anonymous access is easiest for this tutorial. Download the `postgresql.bicep`
+Bicep templates must be stored in an OCI registry accessible by Radius. As discussed in the prerequisites, using an OCI registry with anonymous access is easiest for this tutorial. For this tutorial, we will use a Bicep Recipe maintained in the [resource-types-contrib](https://github.com/radius-project/resource-types-contrib/blob/main/Data/postgreSqlDatabases/recipes/kubernetes/bicep/kubernetes-postgresql.bicep) repository. 
 
-{{< button text="Download postgresql.bicep" link="snippets/recipes/bicep/postgresql.bicep" newtab="true" >}}
+{{< button text="Download postgresql.bicep" link="https://github.com/radius-project/resource-types-contrib/blob/main/Data/postgreSqlDatabases/recipes/kubernetes/bicep/kubernetes-postgresql.bicep" newtab="true" >}}
+
+Required changes to convert Bicep Template into a Recipe:
 
 1. **Input parameters via `context`**
 
@@ -112,25 +106,23 @@ Bicep templates must be stored in an OCI registry accessible by Radius. As discu
     var memory ={
       S: {
         memoryRequest: '512Mi'
-        memoryLimit: '1024Mi'
       } 
       M: {
         memoryRequest: '1Gi'
-        memoryLimit: '2Gi'
+      }
+      L: {
+        memoryRequest: '2Gi'
       }
     } 
     ```
-    The `memory` variable allows customizing the memory request and limit for the PostgreSQL container based on the `size` property defined in the Resource Type. 
+    The `memory` variable allows customizing the memory request for the PostgreSQL container based on the `size` property defined in the Resource Type.
 
-1. **Setting memory limits for resources based on the `size` property**
+1. **Setting memory for resources based on the `size` property**
 
     ```bicep
     resources: {
       requests: {
         memory: memory[context.resource.properties.size].memoryRequest
-      }
-      limits: {
-        memory: memory[context.resource.properties.size].memoryLimit
       }
     }
     ```
@@ -166,4 +158,4 @@ Bicep templates must be stored in an OCI registry accessible by Radius. As discu
 
 In the next part, you will register the Recipe in an environment.
 <br><br>
-{{< button text="Next step: create-environment" page="create-environment" color="primary" >}}
+{{< button text="Next step: Create Environment" page="create-environment" color="primary" >}}

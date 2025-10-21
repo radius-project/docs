@@ -54,7 +54,7 @@ Deploying template 'app.bicep' for application 'todolist' and environment '/plan
 Deployment In Progress... 
 
 Completed            todolist        Applications.Core/applications
-Completed            database      Radius.Data/postgreSqlDatabases
+Completed            postgresql      Radius.Data/postgreSqlDatabases
 Completed            frontend       Applications.Core/containers
 
 Deployment Complete
@@ -62,7 +62,7 @@ Deployment Complete
 Resources:
    todolist        Applications.Core/applications
    frontend        Applications.Core/containers
-   database      Radius.Data/postgreSqlDatabases
+   postgresql      Radius.Data/postgreSqlDatabases
 ```
 
 Create a port-foward to access the Todo List application using the [rad resource expose]({{< ref rad_resource_expose>}}) command.
@@ -77,6 +77,12 @@ Navigate to the [http://localhost:3000](http://localhost:3000) to access the Tod
 When you're done press `CTRL + c` to terminate the port forward and log stream. The application continues to be deployed.
 
 ## View the application graph in the Radius Dashboard
+
+Create a port-forward to access the Radius Dashboard:
+
+```bash
+kubectl port-forward --namespace=radius-system svc/dashboard 7007:80 
+```
 
 Navigate to the Radius Dashboard at [http://localhost:7007](http://localhost:7007/resources/my-group/Applications.Core/applications/todolist/application), You should see a visualization of the application graph for the application, including the connection from the `frontend` container to `database`
 

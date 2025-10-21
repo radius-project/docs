@@ -42,7 +42,7 @@ Create a new workspace using the [`rad workspace create`]({{< ref rad_workspace_
 
 Radius Resource group define the permission boundary for Radius resources.
 
-Create a Radius Resource Group using the [rad group create]({{< ref rad_group_create >}}) command.
+Create a Radius Resource Group using the [`rad group create`]({{< ref rad_group_create >}}) command.
 
 ```bash
 rad group create my-group
@@ -57,7 +57,7 @@ resource group "my-group" created
 
 Radius Environment is the landing zone for Radius applications.
 
-Create a Radius Environment using the [rad environment create]({{< ref rad_environment_create >}}) command.
+Create a Radius Environment using the [`rad environment create`]({{< ref rad_environment_create >}}) command.
 
 ```bash
 rad environment create my-env --group my-group
@@ -98,10 +98,9 @@ rad environment show my-env --output json
 
 ```
 
-
 ## Register a Recipe
 
-Register the Recipe as `default` in the environment `my-env` created in the previous step
+Register the Recipe as `default` in the environment `my-env` created in the previous step using the [`rad recipe register`]({{< ref rad_recipe_register >}}) command.
 
 {{< tabs Terraform Bicep >}}{{% codetab %}}
 
@@ -110,13 +109,7 @@ Register the Recipe as `default` in the environment `my-env` created in the prev
     --environment my-env \
     --resource-type Radius.Data/postgreSqlDatabases \
     --template-kind terraform \
-    --template-path git::<git-server-name>/<repository-name>.git//<directory>/<subdirectory>
-```
-
-For example, if the `main.tf` file is in a GitHub repository named `recipes` in a directory called `/kubernetes/postgresql`, the command would look like this:
-    
-```bash 
---template-path git::https://github.com/<github-user-name>/recipes.git//kubernetes/postgresql
+    --template-path git::https://github.com/radius-project/resource-types-contrib.git//Data/postgreSqlDatabases/recipes/kubernetes/terraform
 ```
 
 The output will be:

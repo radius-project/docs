@@ -8,43 +8,48 @@ weight: 200
 
 Resource types are the building blocks of Radius and define what developers can deploy. In part two of this tutorial, you will create a PostgreSQL resource type. For a comprehensive description of resource types, see the [Resource Types concept page]<insert link>
 
+
 ## Create a PostgreSQL resource type in Radius
 
-To create a PostgreSQL resource type in Radius, first create the resource type definition then add the resource type to Radius.
+To create a PostgreSQL resource type in Radius, first create the resource type definition then add the resource type to Radius. The resource-type definition for PostgreSQL is in the [radius-project/resource-types-contrib](https://github.com/radius-project/resource-types-contrib/Data/postgreSqlDatabases) repository where all the Radius Resource types and Recipes are maintained.
 
-1. Create a new file called `types.yaml` and add the following:
+Create a new directory for the Todo List application.
 
-   {{% rad file="snippets/types.yaml" lang=YAML embed=true %}}
-
-   The PostgreSQL resource type definition includes:
-
-    - **`namespace`**: The namespace of the resource type, as a convention `Radius.Data` is recommended but any name in the form `PrimaryName.SecondaryName` can be used
-    - **`types`**: The resource type name
-    - **`description`**: The developer documentation on how and when to use the resource, formatted using Markdown
-    - **`apiVersions`**: The version of the schema defined below
-    - **`schema`**: The OpenAPI v3 schema which defines the properties of the resource type
-        - **`environment`**: The Radius environment ID which the resource is deployed to, this property is set by the Radius CLI when the resource is deployed
-        - **`application`**: The application ID which the resource belongs to
-        - **`size`**: The size of the PostgreSQL database
-        - **`host`**: The host name used to connect to the database
-        - **`port`**: The port used to connect to the database
-        - **`username`**: The username used to connect to the database
-        - **`password`**: The password used to connect to the database
-
-    The `host`, `port`, `username`, and `password` properties are read-only properties set by Recipe.
-
-2. Create the resource type using the [rad resource-type]({{< ref rad_resource-type_create >}}) command:
-
-    ```bash
-    rad resource-type create postgreSqlDatabases -f types.yaml
-    ```
-
+   ```bash
+   mkdir todolist
+   cd todolist
    ```
-   $ rad resource-type create postgreSqlDatabases -f types.yaml
-   Creating resource type Radius.Data/postgreSqlDatabases
-   Creating API Version Radius.Data/postgreSqlDatabases@2023-10-01-preview
-   Creating location Radius.Data/global/
-   ```
+
+{{< button text="Download postgreSqlDatabases.yaml" link="https://raw.githubusercontent.com/radius-project/resource-types-contrib/main/Data/postgreSqlDatabases/postgreSqlDatabases.yaml" newtab="true" >}}
+
+The PostgreSQL resource type definition includes:
+
+- **`namespace`**: The namespace of the resource type, as a convention `Radius.Data` is recommended but any name in the form `PrimaryName.SecondaryName` can be used
+- **`types`**: The resource type name
+- **`description`**: The developer documentation on how and when to use the resource, formatted using Markdown
+- **`apiVersions`**: The version of the schema defined below
+- **`schema`**: The OpenAPI v3 schema which defines the properties of the resource type
+    - **`environment`**: The Radius environment ID which the resource is deployed to, this property is set by the Radius CLI when the resource is deployed
+    - **`application`**: The application ID which the resource belongs to
+    - **`size`**: The size of the PostgreSQL database
+    - **`host`**: The host name used to connect to the database
+    - **`port`**: The port used to connect to the database
+    - **`username`**: The username used to connect to the database
+    - **`password`**: The password used to connect to the database
+
+The `host`, `port`, `username`, and `password` properties are read-only properties set by Recipe.
+
+Create the resource type using the [rad resource-type]({{< ref rad_resource-type_create >}}) command:
+
+```bash
+rad resource-type create postgreSqlDatabases -f postgreSqlDatabases.yaml
+```
+
+```
+Creating resource type Radius.Data/postgreSqlDatabases
+Creating API Version Radius.Data/postgreSqlDatabases@2023-10-01-preview
+Creating location Radius.Data/global/
+```
 
 ## Create a Bicep extension
 
@@ -57,15 +62,15 @@ This step is required even if you use Terraform-based Recipes to deploy the Post
 1. Generate the Bicep extension using the [rad bicep publish-extension]({{< ref rad_bicep_publish-extension >}}) command.
 
    ```bash
-   rad bicep publish-extension -f types.yaml --target radiusResources.tgz
+   rad bicep publish-extension -f postgreSqlDatabases.yaml --target radiusResources.tgz
    ```
     
    ```
-   $ rad bicep publish-extension -f types.yaml --target radiusResources.tgz
+   $ rad bicep publish-extension -f postgreSqlDatabases.yaml --target radiusResources.tgz
    Writing types to /var/folders/w8/89pqzjp52pbg4g256z9cpkww0000gn/T/bicep-extension-2214011863/types.json
    Writing index to /var/folders/w8/89pqzjp52pbg4g256z9cpkww0000gn/T/bicep-extension-2214011863/index.json
    Writing documentation to /var/folders/w8/89pqzjp52pbg4g256z9cpkww0000gn/T/bicep-extension-2214011863/index.md
-   Successfully published Bicep extension "types.yaml" to "radiusResources.tgz"
+   Successfully published Bicep extension "postgreSqlDatabases.yaml" to "radiusResources.tgz"
    ```
 
 1. Create the `bicepconfig.json` file and add the following contents.
