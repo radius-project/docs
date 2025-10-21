@@ -82,7 +82,11 @@ types:
               type: string
               description: The username for connecting to the database.
               readOnly: true
-            password:
+            password_key:
+              type: string
+              description: The password for connecting to the database.
+              readOnly: true
+            password_secret:
               type: string
               description: The password for connecting to the database.
               readOnly: true

@@ -6,10 +6,14 @@ description: "Learn how to install Radius"
 weight: 100
 ---
 
+In part one, you will install Radius on an existing Kubernetes cluster.  
+
 ## Prerequisites
 
-- A Kubernetes cluster running (local or cloud-based). If you don't have one, you can create a local cluster using [kind](https://kind.sigs.k8s.io/) or [k3d](https://k3d.io/)
-- `kubectl` installed
+- A Kubernetes cluster 
+- `kubectl` configured with the correct context  
+- Your user must have the Kubernetes cluster-admin role  
+- [Node.js](https://nodejs.org/en/download) installed  
 
 ## Install the Radius CLI
 
@@ -17,13 +21,12 @@ weight: 100
 
 ## Install Radius
 
-The Radius control plane provides the backend API layer to manage your Radius environments and applications. You can use the rad CLI to install the control plane:
+[`rad initialize`]({{< ref "rad_initialize" >}}) installs Radius and creates a pre-configured set of Resource Types, Recipes, and Environments. It is intended to get you started as quick as possible. This tutorial is a step-by-step guide so uses the [`rad install kubernetes`]({{< ref "rad_install_kubernetes" >}}) command which only installs Radius:  
+
 
 ```bash
 rad install kubernetes
 ```
-
-The command creates the `radius-system` namespace with all the Radius control plane components.
 
 Verify if the pods are installed and running:
 
@@ -34,21 +37,22 @@ You should see output similar to:
 
 ```
 NAME                READY   STATUS    RESTARTS   AGE
-ucp                  1/1     Running   0          1m
 applications-rp      1/1     Running   0          1m
 bicep-de             1/1     Running   0          1m
 controller           1/1     Running   0          1m
+dashboard            1/1     Running   0          1m 
 dynamic-rp           1/1     Running   0          1m
+ucp                  1/1     Running   0          1m
 ```
 
-## Step 3: Install VS Code extension (optional)
+## Install the Bicep and Terraform extensions for VS Code (optional) 
 
-Radius operates on IaC (Infrastructure as Code) languages Bicep and Terraform. Installing the VS Code extension can enhance your development experience by providing syntax highlighting, autocompletion, and other useful features for these languages.
+Radius uses the Infrastructure as Code (IaC) language Bicep to define application resources and either Bicep or Terraform to deploy resources. Installing the Bicep and Terraform VS Code extensions provides syntax highlighting, auto-completion, and other useful features for these languages.  
 
-To install the VS Code extension:
+- [Install the Bicep extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep)  
 
-1. Open Visual Studio Code.
-2. Go to the Extensions view by clicking on the Extensions icon in the Activity Bar on the side of the window.
-3. Search for "Bicep" and "Terraform" extensions and install them.
+- [Install the Terraform extension for VS Code](https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform)  
 
-{{< button text="Next Step: Create Resource Type" page="create-resource-type" color="primary" >}}
+In part two of this tutorial, you will create a PostgreSQL resource type. 
+<br><br>
+{{< button text="Next Step: Create Resource Type" page="create-resource-type" color="primary" >}} 

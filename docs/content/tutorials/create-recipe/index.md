@@ -5,75 +5,161 @@ linkTitle: "3. Create Recipes"
 description: "Author Bicep or Terraform Recipes implementing the Resource Type"
 weight: 300
 ---
+
+In this part three of this tutorial, you will create a Terraform or Bicep Recipe for the PostgreSQL resource type created part two of the tutorial
+
 ## Prerequisites
 
-You will use either Bicep or Terraform to author Recipes that implement the Resource Type you created in Step 2 and hence need a location to store your Recipe:
+Location to store your Recipe:
 
-  - **Terraform** configurations must be stored in a Git repository. Ideally for this tutorial the Git repository has anonymous access. If not, you will need to configure [Git authentication]({{< ref "guides/recipes/terraform/howto-private-registry" >}}).
+  - **Terraform** configurations must be stored in a Git repository. Ideally for this tutorial the Git repository has anonymous access. 
   
   - **Bicep** templates must be stored in an OCI registry. As with Git, you must have anonymous access to the registry or configure [authentication]({{< ref "guides/recipes/howto-private-bicep-registry" >}}).
 
 ## Create a Recipe for the PostgreSQL resource type
 
-[Recipes]({{< ref "/guides/recipes/overview" >}}) define how resource are deployed. Recipes can be either Terraform configurations or Bicep templates. Once the Terraform configuration or Bicep template has been published in a Git repo or OCI registry, it can be registered as a recipe in a Radius environment. 
+[Recipes]({{< ref "/guides/recipes/overview" >}}) define how a resource is deployed. Recipes can be either Terraform configurations or Bicep templates. Once the Terraform configuration or Bicep template has been published in a Git repo or OCI registry, it can be registered as a Recipe in a Radius environment.
 
-{{< tabs Terraform Bicep >}}{{% codetab %}} 
+{{< tabs Terraform Bicep >}}{{% codetab %}}
 
-Terraform configurations must be stored in a Git repository accessible by Radius. As discussed in the prerequisites, using a Git repository with anonymous access is easiest for this tutorial, otherwise you will need to configure [Git authentication]({{< ref "guides/recipes/terraform/howto-private-registry" >}}). Learn more about Recipes in this [How-to guide]({{< ref "/guides/recipes/howto-author-recipes" >}}). 
+Terraform configurations must be stored in a Git repository accessible by Radius. As discussed in the prerequisites, using a Git repository with anonymous access is easiest for this tutorial, otherwise you will need to configure [Git authentication]({{< ref "guides/recipes/terraform/howto-private-registry" >}}). Learn more about Recipes in this [How-to guide]({{< ref "/guides/recipes/howto-author-recipes" >}}).
 
-1. Create a new directory in your Git repository for the PostgreSQL Terraform module then create the `main.tf` file and add the following:
+Create a new directory in your Git repository for the PostgreSQL Terraform module then download the `main.tf` file into that directory.
 
-   {{% rad file="snippets/recipes/terraform/main.tf" embed=true %}}  
+{{< button text="Download main.tf" link="snippets/recipes/terraform/main.tf" newtab="true" >}} 
 
-    <!--TODO: Replace with button to download like in the composite recipe tutorial. Save the full contents for the Recipe how-to which explains what all of this is.  -->
+1. **Input parameters via `context`**
 
-1. Register the Terraform configuration as a Recipe called `default`. Since Recipes are registered with Environments, use the  `default` environment created in the previous tutorial.
+   ```tf
+    variable "context" {
+      description = "Radius-provided object containing information about the resource calling the Recipe."
+      type        = any
+    }
+      ```
+    Radius automatically injects the properties and other metadata from the resource calling the Recipe into the `context` variable. Refer to the [context schema]({{< ref context-schema>}}) for the available properties from the resource.
 
-    ```bash
-    rad recipe register default \
-      --environment default \
-      --resource-type Radius.Resources/postgreSQL \
-      --template-kind terraform \
-      --template-path git::<git-server-name>/<repository-name>.git//<directory>/<subdirectory>
+1. **Variables for Recipe customization**
+
+    ```tf
+      variable "memory" {
+        description = "Memory limits for the PostgreSQL container"
+        type = map(object({
+          memoryRequest = string
+          memoryLimit  = string
+        }))
+        default = {
+          S = {
+            memoryRequest = "512Mi"
+            memoryLimit   = "1024Mi"
+          },
+          M = {
+            memoryRequest = "1Gi"
+            memoryLimit   = "2Gi"
+          }
+        }
+      }
     ```
+    The `memory` variable allows customizing the memory request and limit for the PostgreSQL container based on the `size` property defined in the Resource Type. 
 
-    For example, if the `main.tf` file is in a GitHub repository named `recipes` in a directory called `/kubernetes/postgresql`, the command would look like this:
+1. **Setting memory limits for resources based on the `size` property**
+
+    ```tf
+     resources {
+        requests = {
+          memory = var.memory[var.context.resource.properties.size].memoryRequest
+        }
+        limits = {
+          memory = var.memory[var.context.resource.properties.size].memoryLimit
+        }
+      }
+    ```
     
-    ```bash 
-      --template-path git::https://github.com/<github-user-name>/recipes.git//kubernetes/postgresql
-    ```
+1. **Output values**
+     
+      ```tf
+        output "result" {
+          value = {
+            values = {
+              host = "${kubernetes_service.postgres.metadata[0].name}.${kubernetes_service.postgres.metadata[0].namespace}.svc.cluster.local"
+              port = local.port
+              database = "postgres_db"
+              username = "postgres"
+              password = random_password.password.result
+            }       
+          }
+        }
+      ``` 
+    Radius injects the output values as properties of the resource calling the Recipe. When a connection is defined to the resource, Radius injects the properties as environment variables into the connecting resource
 
-    The output will be:
+1.**Store the Recipe**
 
-    ```
-    Successfully linked recipe "default" to environment "default"
-    ```
+  Store the Recipe in your Git repository with Anonymous access enabled. 
 
-1. Verify the Recipe is registered using the [`rad recipe list`]({{< ref rad_recipe_list >}}) command. 
-
-    ```bash
-    rad recipe list
-    ```
-
-    ```
-    $ rad recipe list
-    RECIPE    TYPE                         TEMPLATE KIND  TEMPLATE VERSION TEMPLATE
-    ...
-    default   Radius.Resources/postgreSQL  terraform                       git::https://github.com/<github-user-name>/recipes.git//kubernetes/postgres
-    ```
-    
 {{% /codetab %}}
 {{% codetab %}}
 
 Bicep templates must be stored in an OCI registry accessible by Radius. As discussed in the prerequisites, using an OCI registry with anonymous access is easiest for this tutorial, otherwise you will need to configure [authentication]({{< ref "guides/recipes/howto-private-bicep-registry" >}}). Learn more about Recipes in this [How-to guide]({{< ref "/guides/recipes/howto-author-recipes" >}}).
 
-1. Create a new file called `postgresql.bicep` and add the following:
+Download the `postgresql.bicep`
 
-   {{% rad file="snippets/recipes/bicep/postgresql.bicep" embed=true %}}
+  {{< button text="Download postgresql.bicep" link="snippets/recipes/bicep/postgresql.bicep" newtab="true" >}} 
 
-    <!--TODO: Replace with button to download like in the composite recipe tutorial. Save the full contents for the Recipe how-to which explains what all of this is.  -->
+1. **Input parameters via `context`**
 
-1. Publish the Recipe to the OCI registry. Make sure to replace `host` and `registry` with your container registry.
+  ```bicep
+    @description('Information about what resource is calling this Recipe. Generated by Radius.')
+    param context object
+  ```
+  Radius automatically injects the properties and other metadata from the resource calling the Recipe into the `context` variable. Refer to the [context schema]({{< ref context-schema>}}) for the available properties from the resource.
+
+1. **Variables for Recipe customization**
+
+    ```bicep
+    @description('Memory limits for the PostgreSQL container')
+    var memory ={
+      S: {
+        memoryRequest: '512Mi'
+        memoryLimit: '1024Mi'
+      } 
+      M: {
+        memoryRequest: '1Gi'
+        memoryLimit: '2Gi'
+      }
+    } 
+    ```
+    The `memory` variable allows customizing the memory request and limit for the PostgreSQL container based on the `size` property defined in the Resource Type. 
+
+1. **Setting memory limits for resources based on the `size` property**
+
+    ```bicep
+    resources: {
+      requests: {
+        memory: memory[context.resource.properties.size].memoryRequest
+      }
+      limits: {
+        memory: memory[context.resource.properties.size].memoryLimit
+      }
+    }
+    ```
+    
+1. **Output values**
+     
+    ```bicep
+    output result object = {
+      values: {
+        host: '${svc.metadata.name}.${svc.metadata.namespace}.svc.cluster.local'
+        port: port
+        database: database
+        username: user
+        password: password
+      } 
+    }
+    ``` 
+  Radius injects the output values as properties of the resource calling the Recipe. When a connection is defined to the resource, Radius injects the properties as environment variables into the connecting resource
+
+1. **Store the Recipe**
+
+  Publish the Recipe to the OCI registry. Make sure to replace `host` and `registry` with your container registry.
 
     ```bash
     rad bicep publish --file postgresql.bicep --target br:<host>/<registry>/postgresql:latest
@@ -82,34 +168,9 @@ Bicep templates must be stored in an OCI registry accessible by Radius. As discu
     ```
     Successfully published Bicep file "postgresql.bicep" to "<host>/<registry>/postgresql:latest"
     ```
-
-1. Register the Bicep template as a Recipe called `default`. Since Recipes are registered with Environments, use the  `default` environment created in the previous tutorial.
-
-    ```bash
-    rad recipe register default --environment default \
-      --resource-type Radius.Resources/postgreSQL \
-      --template-kind bicep \
-      --template-path <host>/<registry>/postgresql:latest
-    ```
-
-    ```
-    Successfully linked recipe "default" to environment "default"
-    ```
-
-1. Verify the Recipe is registered using the [`rad recipe list`]({{< ref rad_recipe_list >}}) command. You should see output similar to:
-
-   ```bash
-   rad recipe list
-   ```
-
-    ```
-    $ rad recipe list
-    RECIPE    TYPE                         TEMPLATE KIND  TEMPLATE VERSION TEMPLATE
-    ...
-    default   Radius.Resources/postgreSQL  bicep                           <host>/<repository>/postgresql:latest
-    ```
-
 {{% /codetab %}}
 {{< /tabs >}}
 
+In the next part, you will register the Recipe in an environment
+<br>
 {{< button text="Next step: create-environment" page="create-environment" color="primary" >}}

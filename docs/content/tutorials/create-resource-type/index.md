@@ -69,39 +69,24 @@ This step is required even if you use Terraform-based Recipes to deploy the Post
    Successfully published Bicep extension "types.yaml" to "radiusResources.tgz"
    ```
 
-1. Open the `bicepconfig.json` file and modify the contents.
+1. Create the `bicepconfig.json` file and add the following contents.
 
-    ```diff
+    ```
     {
         "experimentalFeaturesEnabled": {
             "extensibility": true
         },
         "extensions": {
             "radius": "br:biceptypes.azurecr.io/radius:latest",
-    -        "aws": "br:biceptypes.azurecr.io/aws:latest"
-    +        "aws": "br:biceptypes.azurecr.io/aws:latest",
-    +        "radiusResources": "radiusResources.tgz"
-        }
-    }
-    ```
-
-    The final file should be:
-
-    ```
-    {
-        "experimentalFeaturesEnabled": {
-                "extensibility": true
-        },
-        "extensions": {
-                "radius": "br:biceptypes.azurecr.io/radius:latest",
-                "aws": "br:biceptypes.azurecr.io/aws:latest",
-                "radiusResources": "radiusResources.tgz"
+            "aws": "br:biceptypes.azurecr.io/aws:latest",
+            "radiusResources": "radiusResources.tgz"
         }
     }
     ```
 
     Now, any Bicep template with `extension radiusResources` will reference the `radiusResources.tgz` file for details about the PostgreSQL resource type.
 
+
 In part three of this tutorial, you will create a Recipe which will deploy the PostgreSQL resource type you just created.  
-<br><br>  
-{{< button text="Next Step: Create Environment" page="create-recipe" color="primary" >}}  
+<br>
+{{< button text="Next Step: Create Recipes" page="create-recipe" color="primary" >}}  
