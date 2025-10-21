@@ -2,7 +2,7 @@
 type: docs
 title: "Tutorial"
 linkTitle: "Tutorial"
-description: "End-to-end tutorial configure Radius and deploy an application"
+description: "End-to-end tutorial to configure Radius and deploy an application"
 weight: 30
 categories: ["Tutorial"]
 ---
@@ -21,4 +21,3 @@ After completing this tutorial, you'll be able to:
 ## Organization  
 
 This tutorial is organized in five sequential parts. It is important to complete each part in order.  
-

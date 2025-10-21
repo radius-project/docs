@@ -8,9 +8,7 @@ types:
       extension radius
       param environment string 
 
-      resource myApplication 'Applications.Core/Applications@2023-10-01-preview' = { ... }
-
-      resource database 'Radius.Data/postgreSQLDatabases@2025-08-01-preview' = {
+      resource database 'Radius.Data/postgreSqlDatabases@2025-08-01-preview' = {
         name: 'database'
         properties: {
           application: myApplication.id
@@ -19,9 +17,10 @@ types:
       }
       ```
 
-
       To connect your container to the database, create a connection from the Container resource to the database as shown below. 
       ```
+      resource myApplication 'Applications.Core/Applications@2023-10-01-preview' = { ... }
+
       resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
         name: 'frontend'
         properties: {
@@ -52,7 +51,7 @@ types:
       - CONNECTION_POSTGRESQL_HOST
       - CONNECTION_POSTGRESQL_PORT
     apiVersions:
-      '2025-10-01-preview':
+      '2025-08-01-preview':
         schema: 
           type: object
           properties:
@@ -82,11 +81,7 @@ types:
               type: string
               description: The username for connecting to the database.
               readOnly: true
-            password_key:
-              type: string
-              description: The password for connecting to the database.
-              readOnly: true
-            password_secret:
+            password:
               type: string
               description: The password for connecting to the database.
               readOnly: true

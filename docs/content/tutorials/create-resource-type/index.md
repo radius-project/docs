@@ -41,9 +41,9 @@ To create a PostgreSQL resource type in Radius, first create the resource type d
 
    ```
    $ rad resource-type create postgreSqlDatabases -f types.yaml
-   Creating resource type Radius.Resources/postgreSqlDatabases
-   Creating API Version Radius.Resources/postgreSqlDatabases@2023-10-01-preview
-   Creating location Radius.Resources/global/
+   Creating resource type Radius.Data/postgreSqlDatabases
+   Creating API Version Radius.Data/postgreSqlDatabases@2023-10-01-preview
+   Creating location Radius.Data/global/
    ```
 
 ## Create a Bicep extension
@@ -65,7 +65,6 @@ This step is required even if you use Terraform-based Recipes to deploy the Post
    Writing types to /var/folders/w8/89pqzjp52pbg4g256z9cpkww0000gn/T/bicep-extension-2214011863/types.json
    Writing index to /var/folders/w8/89pqzjp52pbg4g256z9cpkww0000gn/T/bicep-extension-2214011863/index.json
    Writing documentation to /var/folders/w8/89pqzjp52pbg4g256z9cpkww0000gn/T/bicep-extension-2214011863/index.md
-   WARNING: The 'publish-extension' CLI command group is an experimental feature. Experimental features should be enabled for testing purposes only, as there are no guarantees about the quality or stability of these features. Do not enable these settings for any production usage, or your production environment may be subject to breaking.
    Successfully published Bicep extension "types.yaml" to "radiusResources.tgz"
    ```
 
@@ -86,7 +85,17 @@ This step is required even if you use Terraform-based Recipes to deploy the Post
 
     Now, any Bicep template with `extension radiusResources` will reference the `radiusResources.tgz` file for details about the PostgreSQL resource type.
 
+## View the resource type in Radius Dashboard
 
-In part three of this tutorial, you will create a Recipe which will deploy the PostgreSQL resource type you just created.  
+Radius Dashboard is the front end experience to visualize your resource types, environments and application resources. Create a port-forward to access the Radius Dashboard:
+
+```bash
+kubectl port-forward --namespace=radius-system svc/dashboard 7007:80 
+```
+Navigate to [http://localhost:7007/resource-types/Radius.Data/postgreSqlDatabases](http://localhost:7007/resource-types/Radius.Data/postgreSqlDatabases) to view the documentation of the PostgreSQL resource type.
+
+{{< image src="resource-type.png" alt="Radius Resource types in Dashboard" width="700px" >}} <br /><br />
+
+In part three of this tutorial, you will create a Recipe to deploy the PostgreSQL resource type you just created.  
 <br>
 {{< button text="Next Step: Create Recipes" page="create-recipe" color="primary" >}}  

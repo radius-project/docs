@@ -15,6 +15,8 @@ In part one, you will install Radius on an existing Kubernetes cluster.
 - Your user must have the Kubernetes cluster-admin role  
 - [Node.js](https://nodejs.org/en/download) installed  
 
+For all technical requirements, see the [Installation how-to guide]({{< ref installation >}})
+
 ## Install the Radius CLI
 
 {{< read file= "/shared-content/installation/rad-cli/install-rad-cli.md" >}}

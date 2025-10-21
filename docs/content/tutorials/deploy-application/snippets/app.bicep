@@ -22,8 +22,8 @@ resource todolist 'Applications.Core/applications@2023-10-01-preview' = {
 //APPLICATION
 
 //CONTAINER
-resource demo 'Applications.Core/containers@2023-10-01-preview' = {
-  name: 'demo'
+resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
+  name: 'frontend'
   properties: {
     application: application
     container: {
@@ -44,7 +44,7 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
 //CONTAINER
 
 //DATABASE
-resource database 'Radius.Resources/postgreSQL@2023-10-01-preview' = {
+resource database 'Radius.Data/postgreSqlDatabases@2025-08-01-preview' = {
   name: 'database'
   properties: {
     environment: environment
@@ -53,18 +53,3 @@ resource database 'Radius.Resources/postgreSQL@2023-10-01-preview' = {
   }
 }
 //DATABASE
-
-//GATEWAY
-resource gateway 'Applications.Core/gateways@2023-10-01-preview' = {
-  name: 'gateway'
-  properties: {
-    application: application
-    routes: [
-      {
-        path: '/'
-        destination: 'http://demo:3000'
-      }
-    ]
-  }
-}
-//GATEWAY

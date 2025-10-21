@@ -14,149 +14,156 @@ Radius Workspace is a combination of a Kubernetes context, a Radius Environment,
 
 Create a new workspace using the [`rad workspace create`]({{< ref rad_workspace_create >}}) command to manage the cluster configuration.
 
-   ```bash
-   rad workspace create kubernetes my-workspace
-   ```
+  ```bash
+  rad workspace create kubernetes my-workspace
+  ```
 
-   ```
-   $ rad workspace create my-workspace
-   Creating workspace 'my-workspace'...
-   Workspace 'my-workspace' created successfully.
-   ```
+  ```
+  Creating workspace...
+  Set "my-workspace" as current workspace.
+  ```
 
-   Show the current Workspace. The `--output json` will show all the details of the Workspace.
+  Show the current workspace. The `--output json` will show the details of the workspace created.
 
-   ```bash
-   rad workspace show -o json   
-   ```
+  ```bash
+  rad workspace show -o json   
+  ```
 
-   ```
-   $ rad workspace show -o json   
-   {
-     "connection": {
-       "context": "my-kube-context",
-       "kind": "kubernetes"
-     },
-     "environment": "/planes/radius/local/resourceGroups/default/providers/Applications.Core/environments/default",
-     "scope": "/planes/radius/local/resourceGroups/default"
-   }
-   ```
-
-   Notice that a 
-   {{< alert title="💡 Workspaces" color="info" >}}
-   [Workspaces]({{< ref Workspaces >}}) are configurations set for the Radius CLI. Similar to kubectl contexts, you can have multiple Workspaces pointing to different Radius installation, Resource Groups, and Environments.
-   {{< /alert >}}
-
+  ```  
+  {
+    "connection": {
+      "context": "my-kube-context",
+      "kind": "kubernetes"
+    }
+  }
+  ```
 
 ## Create a Radius Resource Group
 
-Create a Radius Resource Group using the rad group create command. 
+Radius Resource group define the permission boundary for Radius resources.
+
+Create a Radius Resource Group using the [rad group create]({{< ref rad_group_create >}}) command.
 
 ```bash
 rad group create my-group
 ```
+```
+creating resource group "my-group" in workspace "my-workspace"...
+
+resource group "my-group" created
+```
 
 ## Create a Radius Environment
 
-Create a Radius Environment using the rad environment create command.
+Radius Environment is the landing zone for Radius applications.
+
+Create a Radius Environment using the [rad environment create]({{< ref rad_environment_create >}}) command.
 
 ```bash
-rad environment create my-env
+rad environment create my-env --group my-group
 ```
+```
+Creating Environment...
+Successfully created environment "my-env" in resource group "my-group"
+```
+Update the workspace with the group and environment
+
+```bash
+  rad workspace create kubernetes my-workspace \
+  --context `kubectl config current-context` \
+  --environment my-env \
+  --group my-group --force
+```
+
 
 Inspect the Environment using the [`rad environment show`]({{< ref rad_environment_show >}}) commands.
 
-   ```bash
-   rad environment show my-env --output json
-   ```
+```bash
+rad environment show my-env --output json
+```
+```
+{
+"id": "/planes/radius/local/resourcegroups/my-group/providers/Applications.Core/environments/my-env",
+  "location": "global",
+  "name": "my-env",
+  "properties": {
+    "compute": {
+      "kind": "kubernetes",
+      "namespace": "my-env"
+    },
+    "provisioningState": "Succeeded"
+  }...
+  "type": "Applications.Core/environments"
+}
 
-   ```
-   $ rad environment show my-env --output json
-   {
-     "id": "/planes/radius/local/resourcegroups/default/providers/Applications.Core/environments/my-env",
-     "location": "global",
-     "name": "my-env",
-     "properties": {
-       "compute": {
-         "kind": "kubernetes",
-         "namespace": "default"
-       },
-       "provisioningState": "Succeeded",
-       "recipes": {
-            ...
-       }
-     },
-     ...
-     "type": "Applications.Core/environments"
-   }
-   ```
+```
+
 
 ## Register a Recipe
 
+Register the Recipe as `default` in the environment `my-env` created in the previous step
+
 {{< tabs Terraform Bicep >}}{{% codetab %}}
-Register the Terraform configuration as a Recipe called `default`. Since Recipes are registered with Environments, use the  `default` environment created in the previous tutorial.
 
-    ```bash
-    rad recipe register default \
-      --environment default \
-      --resource-type Radius.Resources/postgreSQL \
-      --template-kind terraform \
-      --template-path git::<git-server-name>/<repository-name>.git//<directory>/<subdirectory>
-    ```
+```bash
+  rad recipe register default \
+    --environment my-env \
+    --resource-type Radius.Data/postgreSqlDatabases \
+    --template-kind terraform \
+    --template-path git::<git-server-name>/<repository-name>.git//<directory>/<subdirectory>
+```
 
-    For example, if the `main.tf` file is in a GitHub repository named `recipes` in a directory called `/kubernetes/postgresql`, the command would look like this:
+For example, if the `main.tf` file is in a GitHub repository named `recipes` in a directory called `/kubernetes/postgresql`, the command would look like this:
     
-    ```bash 
-      --template-path git::https://github.com/<github-user-name>/recipes.git//kubernetes/postgresql
-    ```
+```bash 
+--template-path git::https://github.com/<github-user-name>/recipes.git//kubernetes/postgresql
+```
 
-    The output will be:
+The output will be:
 
-    ```
-    Successfully linked recipe "default" to environment "default"
-    ```
+```
+Successfully linked recipe "default" to environment "my-env"
+```
 
-1. Verify the Recipe is registered using the [`rad recipe list`]({{< ref rad_recipe_list >}}) command. 
+Verify the Recipe is registered using the [`rad recipe list`]({{< ref rad_recipe_list >}}) command.
 
-    ```bash
-    rad recipe list
-    ```
+```bash
+rad recipe list
+```
 
-    ```
-    $ rad recipe list
-    RECIPE    TYPE                         TEMPLATE KIND  TEMPLATE VERSION TEMPLATE
-    ...
-    default   Radius.Resources/postgreSQL  terraform                       git::https://github.com/<github-user-name>/recipes.git//kubernetes/postgres
-    ```
+```
+RECIPE    TYPE                             TEMPLATE KIND  TEMPLATE VERSION TEMPLATE
+...
+default   Radius.Data/postgreSqlDatabases  terraform                       git::https://github.com/<github-user-name>/recipes.git//kubernetes/postgresql
+```
 {{% /codetab %}}
 {{% codetab %}}
 
-1. Register the Bicep template as a Recipe called `default`. Since Recipes are registered with Environments, use the  `default` environment created in the previous tutorial.
+ ```bash
+  rad recipe register default --environment my-env \
+    --resource-type Radius.Data/postgreSqlDatabases \
+    --template-kind bicep \
+    --template-path <host>/<registry>/postgresql:latest
+```
 
-    ```bash
-    rad recipe register default --environment default \
-      --resource-type Radius.Resources/postgreSQL \
-      --template-kind bicep \
-      --template-path <host>/<registry>/postgresql:latest
-    ```
+```
+Successfully linked recipe "default" to environment "my-env"
+```
 
-    ```
-    Successfully linked recipe "default" to environment "default"
-    ```
+Verify the Recipe is registered using the [`rad recipe list`]({{< ref rad_recipe_list >}}) command. You should see output similar to:
 
-1. Verify the Recipe is registered using the [`rad recipe list`]({{< ref rad_recipe_list >}}) command. You should see output similar to:
+```bash
+rad recipe list
+```
 
-   ```bash
-   rad recipe list
-   ```
-
-    ```
-    $ rad recipe list
-    RECIPE    TYPE                         TEMPLATE KIND  TEMPLATE VERSION TEMPLATE
-    ...
-    default   Radius.Resources/postgreSQL  bicep                           <host>/<repository>/postgresql:latest
-    ```
+```
+RECIPE    TYPE                             TEMPLATE KIND  TEMPLATE VERSION TEMPLATE
+...
+default   Radius.Data/postgreSqlDatabases  bicep                           <host>/<repository>/postgresql:latest
+```
 {{% /codetab %}}
 {{< /tabs >}}
 
+In the next part, you will deploy an application with the PostgreSQL resource that uses the Terraform or Bicep Recipe registered in the environment.
+<br><br>
 {{< button text="Next Step: Deploy Application" page="deploy-application" color="primary" >}}
