@@ -2,35 +2,31 @@
 type: docs
 title: "3. Create Recipes"
 linkTitle: "3. Create Recipes"
-description: "Author Bicep or Terraform Recipes implementing the Resource Type"
+description: "Create Bicep or Terraform Recipes that implement the Resource Type"
 weight: 300
 ---
 
-[Recipes]({{< ref "/guides/recipes/overview" >}}) define how a resource is deployed. In part three of this tutorial, you will create a Terraform or Bicep Recipes are authored and published for the PostgreSQL resource type.
-
-## Prerequisites
-
-Location to store your Recipe: 
-  
-- **Bicep** templates must be stored in an OCI registry. 
+Recipes define how a resource is deployed. In part three of this tutorial, you will create a Terraform or Bicep Recipe for the PostgreSQL resource type.
 
 ## Create a Recipe for the PostgreSQL resource type
 
-Recipes can be either Terraform configurations or Bicep templates. Once the Terraform configuration or Bicep template has been published in a Git repo or OCI registry, it can be registered as a Recipe in a Radius environment.
+Recipes can be either Terraform configurations or Bicep templates. Select the tab for the IaC language you prefer. 
 
 {{< tabs Terraform Bicep >}}{{% codetab %}}
 
-In this tutorial, we will use a Terraform Recipe for PostgreSQL maintained in the [resource-types-contrib](https://github.com/radius-project/resource-types-contrib/blob/main/Data/postgreSqlDatabases/recipes/kubernetes/terraform/main.tf) repository. Required changes to convert a Terraform configuration into a Radius Recipe:
+In this tutorial, we will use a Terraform Recipe for PostgreSQL maintained in the [resource-types-contrib](https://github.com/radius-project/resource-types-contrib/blob/main/Data/postgreSqlDatabases/recipes/kubernetes/terraform/main.tf) repository. The Terraform configuration contains the following details required for it be used as a Recipe:
 
-1. **Input parameters via `context`**
+1. **Radius Metadata via `context` variable**  
 
-   ```tf
-    variable "context" {
-      description = "Radius-provided object containing information about the resource calling the Recipe."
-      type        = any
-    }
-      ```
-    Radius automatically injects the input parameters and other metadata from the resource calling the Recipe into the `context` variable. Refer to the [context schema]({{< ref context-schema>}}) for the available properties.
+    Radius automatically injects a variable called `context`. The context variable contains the Resource Type's and the Environment's properties. To use this metadata within the Terraform configuration, a variable must be defined within the `main.tf` or `variables.tf` file.  
+
+    ```tf  
+      variable "context" {  
+        description = "Radius-provided object containing information about the resource calling the Recipe."  
+        type        = any  
+      }  
+    ```  
+    Refer to the [context schema]({{< ref context-schema>}}) for the available properties.  
 
 1. **Variables for Recipe customization**
 
@@ -65,9 +61,11 @@ In this tutorial, we will use a Terraform Recipe for PostgreSQL maintained in th
       }
     ```
     
-1. **Output values**
-     
-      ```tf
+1. **Result Output**
+
+    Radius requires Terraform configuration to have an output defined called `result` which provides Radius with the values for each read-only property on the Resource Type. Since the postgreSqlDatabases has five read-only properties, each are specified within the `result`.
+
+      ```tf  
         output "result" {
           value = {
             values = {
@@ -80,24 +78,21 @@ In this tutorial, we will use a Terraform Recipe for PostgreSQL maintained in th
           }
         }
       ``` 
-    Radius injects the output values as properties of the resource calling the Recipe. When a connection is defined to the resource, Radius injects the properties as environment variables into the connecting resource.
 
 {{% /codetab %}}
 {{% codetab %}}
 
-Bicep templates must be stored in an OCI registry accessible by Radius. As discussed in the prerequisites, using an OCI registry with anonymous access is easiest for this tutorial. For this tutorial, we will use a Bicep Recipe maintained in the [resource-types-contrib](https://github.com/radius-project/resource-types-contrib/blob/main/Data/postgreSqlDatabases/recipes/kubernetes/bicep/kubernetes-postgresql.bicep) repository. 
+In this tutorial, we will use a Bicep Recipe maintained in the [resource-types-contrib](https://github.com/radius-project/resource-types-contrib/blob/main/Data/postgreSqlDatabases/recipes/kubernetes/bicep/kubernetes-postgresql.bicep) repository. The Bicep template contains the following details required for it be used as a Recipe:
 
-{{< button text="Download postgresql.bicep" link="https://github.com/radius-project/resource-types-contrib/blob/main/Data/postgreSqlDatabases/recipes/kubernetes/bicep/kubernetes-postgresql.bicep" newtab="true" >}}
+1. **Radius Metadata via `context` variable** 
 
-Required changes to convert Bicep Template into a Recipe:
-
-1. **Input parameters via `context`**
+    Radius automatically injects a variable called `context`. The context variable contains the Resource Type's and the Environment's properties. To use this metadata within the Bicep template, a `context` parameter must be defined.
 
     ```bicep
       @description('Information about what resource is calling this Recipe. Generated by Radius.')
       param context object
     ```
-    Radius automatically injects the properties and other metadata from the resource calling the Recipe into the `context` variable. Refer to the [context schema]({{< ref context-schema>}}) for the available properties from the resource.
+    Refer to the [context schema]({{< ref context-schema>}}) for the available properties.  
 
 1. **Variables for Recipe customization**
 
@@ -127,7 +122,9 @@ Required changes to convert Bicep Template into a Recipe:
     }
     ```
     
-1. **Output values**
+1. **Result Output**
+    
+    Radius requires Bicep template to have an output defined called `result` which provides Radius with the values for each read-only property on the Resource Type. Since the postgreSqlDatabases has five read-only properties, each are specified within the `result`.
      
     ```bicep
     output result object = {
@@ -140,22 +137,10 @@ Required changes to convert Bicep Template into a Recipe:
       } 
     }
     ``` 
-    Radius injects the output values as properties of the resource calling the Recipe. When a connection is defined to the resource, Radius injects the properties as environment variables into the connecting resource
 
-1. **Store the Recipe**
-
-    Publish the Recipe to the OCI registry. Make sure to replace `host` and `registry` with your container registry.
-
-    ```bash
-    rad bicep publish --file postgresql.bicep --target br:<host>/<registry>/postgresql:latest
-    ```
-
-    ```
-    Successfully published Bicep file "postgresql.bicep" to "<host>/<registry>/postgresql:latest"
-    ```
 {{% /codetab %}}
 {{< /tabs >}}
 
-In the next part, you will register the Recipe in an environment.
+In the next part, you will create an Environment and register the Recipe.
 <br><br>
 {{< button text="Next step: Create Environment" page="create-environment" color="primary" >}}

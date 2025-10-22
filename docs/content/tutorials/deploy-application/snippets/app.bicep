@@ -5,9 +5,6 @@ extension radiusResources
 //IMPORT
 
 //PARAM
-@description('The ID of your Radius Application. Set automatically by the rad CLI.')
-param application string
-
 @description('The ID of your Radius Environment. Set automatically by the rad CLI.')
 param environment string
 //PARAM
@@ -25,7 +22,7 @@ resource todolist 'Applications.Core/applications@2023-10-01-preview' = {
 resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'frontend'
   properties: {
-    application: application
+    application: todolist.id
     container: {
       image: 'ghcr.io/radius-project/samples/demo:latest'
       ports: {
@@ -48,7 +45,7 @@ resource postgresql 'Radius.Data/postgreSqlDatabases@2025-08-01-preview' = {
   name: 'postgresql'
   properties: {
     environment: environment
-    application: application
+    application: todolist.id
     size: 'S'
   }
 }

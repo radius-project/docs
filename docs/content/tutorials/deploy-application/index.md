@@ -7,11 +7,11 @@ weight: 600
 categories: "Tutorial"
 ---
 
-In part five of this tutorial, you will deploy the Todo List application with the PostgreSQL resource type.
+In part five of this tutorial, you will deploy the Todo List Application to the Environment.
 
-## Model the Todo List application 
+## Model the Todo List Application
 
-Create a `app.bicep` file that defines all the resources that make up the Todo List application, including how those resources are connected to each other. 
+Create a file called `app.bicep` in your current directory. This file defines all the resources that make up the Todo List Application, including how those resources are connected to each other.
 
 Add the following to `app.bicep`:
 
@@ -23,29 +23,31 @@ The `extension radiusResources` statement imports the PostgreSQL resource type c
 
 {{% rad file="snippets/app.bicep" embed=true marker="//PARAM" %}}
 
-The `application` and `environment` parameters are defined so that they can be used later in the resources. These parameters are set by the Radius CLI when deploying the application.
+The `environment` parameter is set by the Radius CLI when deploying the application.
 
 ### Add the Application resource
 
 {{% rad file="snippets/app.bicep" embed=true marker="//APPLICATION" %}}
 
+### Add the PostgreSQL resource
+
+{{% rad file="snippets/app.bicep" embed=true marker="//DATABASE" %}}
+
 ### Add the Container resource
 
 {{% rad file="snippets/app.bicep" embed=true marker="//CONTAINER" %}}
    
-When a connection is added between a container and another resource, the properties of the connected resource are created as environment variables in the container. If you prefer to not have environment variables created automatically, set the disableDefaultEnvVars property to true on the container resource. 
-
-### Add the PostgreSQL resource
-
-{{% rad file="snippets/app.bicep" embed=true marker="//DATABASE" %}}
+When a connection is added between a container and another resource, the properties of the connected resource are created as environment variables in the container.
 
 ## Deploy the application
 
 Deploy the application using `rad deploy`.
 
 ```bash
-rad deploy app.bicep --application todolist
+rad deploy app.bicep
 ```
+
+You should see output similar to:
 
 ```
 Building app.bicep...
@@ -65,20 +67,21 @@ Resources:
    postgresql      Radius.Data/postgreSqlDatabases
 ```
 
-Create a port-foward to access the Todo List application using the [rad resource expose]({{< ref rad_resource_expose>}}) command.
+Set up port forwarding to access the Todo List Application using the `rad resource expose` command.
 
 ```bash
 rad resource expose Applications.Core/containers frontend -a todolist --port 3000
 ```
+
 Navigate to the [http://localhost:3000](http://localhost:3000) to access the Todo List application.
 
 {{< image src="todolist.png" alt="Todo List with PostgreSQL connection" width=800px >}}
 
 When you're done press `CTRL + c` to terminate the port forward and log stream. The application continues to be deployed.
 
-## View the application graph in the Radius Dashboard
+## View Application in the Radius Dashboard
 
-Create a port-forward to access the Radius Dashboard:
+If you already set up the port-forward in part 2, use the same to access the Radius Dashboard else create a new port-forward.
 
 ```bash
 kubectl port-forward --namespace=radius-system svc/dashboard 7007:80 
@@ -90,15 +93,19 @@ Navigate to the Radius Dashboard at [http://localhost:7007](http://localhost:700
 
 ## Cleanup
 
-Delete the Todo List application:
+Delete the Todo List application using `rad application delete`
 
 ```bash
-rad app delete todolist
+rad application delete todolist
 ```
 
-Optionally, uninstall Radius using the `purge` argument to remove Radius and all data:
+This will delete the Radius application and the deployed resources.
+
+Optionally, uninstall Radius using the `purge` flag to remove Radius and all its data from your Kubernetes cluster:
+
 ```bash
 rad uninstall kubernetes --purge
 ```
-<br><br>
+
+<br>
 {{< button text="Next step: Explore How-To Guides" page="guides" >}}

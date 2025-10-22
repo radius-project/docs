@@ -23,8 +23,9 @@ For all technical requirements, see the [Installation how-to guide]({{< ref inst
 
 ## Install Radius
 
-[`rad initialize`]({{< ref "rad_initialize" >}}) installs Radius and creates a pre-configured set of Resource Types, Recipes, and Environments. It is intended to get you started as quick as possible. This tutorial is a step-by-step guide so uses the [`rad install kubernetes`]({{< ref "rad_install_kubernetes" >}}) command which only installs Radius:  
+If you ran the quick start, you would have used `rad initialize` command which installs Radius and creates a pre-configured set of Resource Types, Recipes, and Environments. It is intended to get you started as quick as possible. 
 
+This tutorial is a step-by-step guide so uses the `rad install kubernetes` command which only installs Radius:  
 
 ```bash
 rad install kubernetes
@@ -55,6 +56,6 @@ Radius uses the Infrastructure as Code (IaC) language Bicep to define applicatio
 
 - [Install the Terraform extension for VS Code](https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform)  
 
-In part two of this tutorial, you will create a PostgreSQL resource type. 
+In part two of this tutorial, you will create a PostgreSQL Resource Type. 
 <br><br>
 {{< button text="Next Step: Create Resource Type" page="create-resource-type" color="primary" >}} 

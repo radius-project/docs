@@ -2,16 +2,15 @@
 type: docs
 title: "2. Create Resource Types"
 linkTitle: "2. Create Resource Types"
-description: "Learn how to create Radius Resource Types"
+description: "Learn how to create Resource Types"
 weight: 200
 ---
 
-Resource types are the building blocks of Radius and define what developers can deploy. In part two of this tutorial, you will create a PostgreSQL resource type. For a comprehensive description of resource types, see the [Resource Types concept page]<insert link>
+Resource Types are the building blocks of Radius and define what developers can deploy. In part two of this tutorial, you will create a PostgreSQL Resource Type.
 
+## Create a PostgreSQL Resource Type in Radius
 
-## Create a PostgreSQL resource type in Radius
-
-To create a PostgreSQL resource type in Radius, first create the resource type definition then add the resource type to Radius. The resource-type definition for PostgreSQL is in the [radius-project/resource-types-contrib](https://github.com/radius-project/resource-types-contrib/Data/postgreSqlDatabases) repository where all the Radius Resource types and Recipes are maintained.
+To create a PostgreSQL Resource Type in Radius, first create the resource type definition then add the resource type to Radius. The resource type definition for PostgreSQL is in the [radius-project/resource-types-contrib](https://github.com/radius-project/resource-types-contrib/Data/postgreSqlDatabases) repository where all the Radius Resource Types and Recipes are maintained.
 
 Create a new directory for the Todo List application.
 
@@ -22,7 +21,7 @@ Create a new directory for the Todo List application.
 
 {{< button text="Download postgreSqlDatabases.yaml" link="https://raw.githubusercontent.com/radius-project/resource-types-contrib/main/Data/postgreSqlDatabases/postgreSqlDatabases.yaml" newtab="true" >}}
 
-The PostgreSQL resource type definition includes:
+The PostgreSQL Resource Type definition includes:
 
 - **`namespace`**: The namespace of the resource type, as a convention `Radius.Data` is recommended but any name in the form `PrimaryName.SecondaryName` can be used
 - **`types`**: The resource type name
@@ -39,7 +38,7 @@ The PostgreSQL resource type definition includes:
 
 The `host`, `port`, `username`, and `password` properties are read-only properties set by Recipe.
 
-Create the resource type using the [rad resource-type]({{< ref rad_resource-type_create >}}) command:
+Create the Resource Type using the `rad resource-type create` command:
 
 ```bash
 rad resource-type create postgreSqlDatabases -f postgreSqlDatabases.yaml
@@ -47,16 +46,16 @@ rad resource-type create postgreSqlDatabases -f postgreSqlDatabases.yaml
 
 ```
 Creating resource type Radius.Data/postgreSqlDatabases
-Creating API Version Radius.Data/postgreSqlDatabases@2023-10-01-preview
+Creating API Version Radius.Data/postgreSqlDatabases@2025-08-01-preview
 Creating location Radius.Data/global/
 ```
 
 ## Create a Bicep extension
 
-The `rad resource-type create` command created the resource type in the Radius control plane. The next step is to create a Bicep extension which will be used by the Radius CLI and VS Code (if you have the Bicep extension for VS Code installed).
+The `rad resource-type create` command created the Resource Type in the Radius control plane. The next step is to create a Bicep extension which will be used by the Radius CLI and VS Code (if you have the Bicep extension for VS Code installed).
 
 {{% alert title="Warning" color="warning" %}}
-This step is required even if you use Terraform-based Recipes to deploy the PostgreSQL resource type as part of the application.
+This step is required even if you use Terraform-based Recipes to deploy the PostgreSQL Resource Type as part of the application.
 {{% /alert %}}
 
 1. Generate the Bicep extension using the [rad bicep publish-extension]({{< ref rad_bicep_publish-extension >}}) command.
@@ -73,16 +72,12 @@ This step is required even if you use Terraform-based Recipes to deploy the Post
    Successfully published Bicep extension "postgreSqlDatabases.yaml" to "radiusResources.tgz"
    ```
 
-1. Create the `bicepconfig.json` file and add the following contents.
+1. In the same directory where the `radiusResources.tgz` file was published, create a file called `bicepconfig.json` file and add the following contents.
 
     ```
     {
-        "experimentalFeaturesEnabled": {
-            "extensibility": true
-        },
         "extensions": {
             "radius": "br:biceptypes.azurecr.io/radius:latest",
-            "aws": "br:biceptypes.azurecr.io/aws:latest",
             "radiusResources": "radiusResources.tgz"
         }
     }
@@ -90,9 +85,9 @@ This step is required even if you use Terraform-based Recipes to deploy the Post
 
     Now, any Bicep template with `extension radiusResources` will reference the `radiusResources.tgz` file for details about the PostgreSQL resource type.
 
-## View the resource type in Radius Dashboard
+## View the Resource Type in Radius Dashboard
 
-Radius Dashboard is the front end experience to visualize your resource types, environments and application resources. Create a port-forward to access the Radius Dashboard:
+Radius Dashboard is the front end experience to visualize your Resource types, Environments and Application resources. Create a port-forward to access the Radius Dashboard:
 
 ```bash
 kubectl port-forward --namespace=radius-system svc/dashboard 7007:80 
@@ -101,6 +96,6 @@ Navigate to [http://localhost:7007/resource-types/Radius.Data/postgreSqlDatabase
 
 {{< image src="resource-type.png" alt="Radius Resource types in Dashboard" width="700px" >}} <br /><br />
 
-In part three of this tutorial, you will create a Recipe to deploy the PostgreSQL resource type you just created.  
+In part three of this tutorial, you will create a Recipe to deploy the PostgreSQL Resource Type you just created.  
 <br>
 {{< button text="Next Step: Create Recipes" page="create-recipe" color="primary" >}}  
