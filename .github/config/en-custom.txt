@@ -1328,3 +1328,4 @@ postgreSqlDatabases
 OpenAPI
 Gi
 memoryRequest
+githubusercontent
