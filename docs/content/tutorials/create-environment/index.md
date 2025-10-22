@@ -29,11 +29,11 @@ creating resource group "my-group" in workspace "my-workspace"...
 resource group "my-group" created
 ```
 
-## Create a Radius Environment
+## Create an Environment
 
-A Radius Environment is the landing zone that is configured with all the Recipes to deploy a Radius Application.
+Radius Environments define where to deploy resources and what Recipes to use during deployment.
 
-Create a Radius Environment using the [`rad environment create`]({{< ref rad_environment_create >}}) command.
+Create an Environment using the `rad environment create` command.
 
 ```bash
 rad environment create my-env --group my-group
@@ -44,14 +44,6 @@ You should see output similar to:
 ```
 Creating Environment...
 Successfully created environment "my-env" in resource group "my-group"
-```
-Update the Workspace with the Resource Group and Environment
-
-```bash
-  rad workspace create kubernetes my-workspace \
-  --context `kubectl config current-context` \
-  --environment my-env \
-  --group my-group --force
 ```
 
 Inspect the Environment using the `rad environment show`
@@ -85,8 +77,12 @@ A Radius Workspace is a set of configurations for the local Radius CLI. It is a 
 Create a new Workspace using the `rad workspace create` command to manage the cluster configurations locally.
 
   ```bash
-  rad workspace create kubernetes my-workspace
+  rad workspace create kubernetes my-workspace \
+  --context `kubectl config current-context` \
+  --environment my-env \
+  --group my-group 
   ```
+
   You should see output similar to: 
 
   ```
@@ -105,19 +101,20 @@ Create a new Workspace using the `rad workspace create` command to manage the cl
   ```  
   {
     "connection": {
-      "context": "my-kube-context",
+      "context": "k3d-k3s-default",
       "kind": "kubernetes"
-    }
+    },
+    "environment": "/planes/radius/local/resourceGroups/my-group/providers/applications.core/environments/my-env",
+    "scope": "/planes/radius/local/resourceGroups/my-group"
   }
   ```
 
 You can also view the workspace by inspecting the contents of `~/.rad/config.yaml`. 
 
 
+## Update the Environment with the Recipe
 
-## Register a Recipe to the Environment
-
-Register the Recipe as `default` in the environment `my-env` created in the previous step using the [`rad recipe register`]({{< ref rad_recipe_register >}}) command.
+Update the Environment with Terraform or Bicep Recipe based on your preference.
 
 {{< tabs Terraform Bicep >}}{{% codetab %}}
 

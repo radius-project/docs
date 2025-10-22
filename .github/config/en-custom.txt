@@ -1324,3 +1324,7 @@ Preflight
 preflight
 oci
 contrib
+postgreSqlDatabases
+OpenAPI
+Gi
+memoryRequest

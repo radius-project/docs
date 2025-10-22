@@ -14,7 +14,7 @@ Recipes can be either Terraform configurations or Bicep templates. Select the ta
 
 {{< tabs Terraform Bicep >}}{{% codetab %}}
 
-In this tutorial, we will use a Terraform Recipe for PostgreSQL maintained in the [resource-types-contrib](https://github.com/radius-project/resource-types-contrib/blob/main/Data/postgreSqlDatabases/recipes/kubernetes/terraform/main.tf) repository. The Terraform configuration contains the following details required for it be used as a Recipe:
+Terraform configuration are stored in a Git repository for Radius to access the Recipe. For this tutorial, the Terraform Recipe has already been created and stored in the Radius [resource-types-contrib](https://github.com/radius-project/resource-types-contrib/blob/main/Data/postgreSqlDatabases/recipes/kubernetes/terraform/main.tf) repository. Hence, there are no actual steps to complete for this section of the tutorial. What follows is a walkthrough of the Radius-specific aspects of the Terraform configuration.
 
 1. **Radius Metadata via `context` variable**  
 
@@ -51,8 +51,6 @@ In this tutorial, we will use a Terraform Recipe for PostgreSQL maintained in th
     ```
     The `memory` variable allows customizing the memory request for the PostgreSQL container based on the `size` property defined in the Resource Type.
 
-1. **Setting memory for resources based on the `size` property**
-
     ```tf
      resources {
         requests = {
@@ -82,9 +80,9 @@ In this tutorial, we will use a Terraform Recipe for PostgreSQL maintained in th
 {{% /codetab %}}
 {{% codetab %}}
 
-In this tutorial, we will use a Bicep Recipe maintained in the [resource-types-contrib](https://github.com/radius-project/resource-types-contrib/blob/main/Data/postgreSqlDatabases/recipes/kubernetes/bicep/kubernetes-postgresql.bicep) repository. The Bicep template contains the following details required for it be used as a Recipe:
+Bicep Templates are stored in an OCI registry for Radius to access the Recipe. For this tutorial, the [Bicep Recipe](https://github.com/radius-project/resource-types-contrib/blob/main/Data/postgreSqlDatabases/recipes/kubernetes/bicep/kubernetes-postgresql.bicep) has already been created and stored in the Radius GHCR. Hence, there are no actual steps to complete for this section of the tutorial. What follows is a walkthrough of the Radius-specific aspects of the Bicep template.
 
-1. **Radius Metadata via `context` variable** 
+1. **Radius Metadata via `context` variable**
 
     Radius automatically injects a variable called `context`. The context variable contains the Resource Type's and the Environment's properties. To use this metadata within the Bicep template, a `context` parameter must be defined.
 
@@ -111,8 +109,6 @@ In this tutorial, we will use a Bicep Recipe maintained in the [resource-types-c
     } 
     ```
     The `memory` variable allows customizing the memory request for the PostgreSQL container based on the `size` property defined in the Resource Type.
-
-1. **Setting memory for resources based on the `size` property**
 
     ```bicep
     resources: {
