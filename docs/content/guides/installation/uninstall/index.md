@@ -36,4 +36,4 @@ All Radius configuration and data will be removed as part of the namespace. This
 
 ## Step 3: Remove the rad CLI
 
-You can remove the rad CLI by deleting the [ binary ]({{< ref "/guides/tooling/rad-cli/overview#binary-location" >}}) and ~/.rad folder from your machine.
+You can remove the rad CLI by deleting the `rad` binary under `/usr/local/bin/` and `~/.rad` folder from your machine.

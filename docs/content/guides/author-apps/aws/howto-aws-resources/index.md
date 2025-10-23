@@ -58,8 +58,6 @@ Select 'No' when asked to setup application in the current directory.
 
 {{< read file= "/shared-content/installation/bicepconfig/manual.md" >}}
 
-More information on how to setup a `bicepconfig.json` can be found [here]({{< ref "/guides/tooling/bicepconfig/overview" >}})
-
 ## Step 4: Create a Bicep file to model AWS Simple Storage Service (S3)
 
 Create a new file called `app.bicep` and add the following bicep code to model an AWS S3 Bucket:

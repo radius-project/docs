@@ -44,7 +44,7 @@ This tutorial will use the [`rad init`]({{< ref rad_initialize >}}) command to i
    rad init
    ```
 
-   When asked if you want to create a new application select *Yes*. This will create a new file named `app.bicep` in your working directory where. It will also create a [`bicepconfig.json`]({{< ref "/guides/tooling/bicepconfig/overview" >}}) file that will contain the necessary configuration to use Radius core resource types. 
+   When asked if you want to create a new application select *Yes*. This will create a new file named `app.bicep` in your working directory where. It will also create a `bicepconfig.json` file that will contain the necessary configuration to use Radius core resource types.
 
 ## Step 2: Explore the default configuration
 

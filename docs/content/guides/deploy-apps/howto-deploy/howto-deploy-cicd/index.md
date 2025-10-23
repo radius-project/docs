@@ -28,7 +28,7 @@ Make sure you have the following files checked into your repository under `iac/`
 
 {{< rad file="snippets/app.bicep" embed="true" >}}
 
-### [`bicepconfig.json`]({{< ref "/guides/tooling/bicepconfig/overview" >}})
+### `bicepconfig.json`
 
 ```json
 {

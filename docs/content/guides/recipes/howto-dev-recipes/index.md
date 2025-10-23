@@ -59,8 +59,6 @@ Local development environments created by the rad init command include a set of 
 
 {{< read file= "/shared-content/installation/bicepconfig/manual.md" >}}
 
-More information on how to setup a `bicepconfig.json` can be found [here]({{< ref "/guides/tooling/bicepconfig/overview" >}})
-
 ## Step 3: Define your application
 
 Create a file named `app.bicep` with the following set of resources:

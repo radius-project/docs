@@ -70,7 +70,7 @@ Initializing Radius...
 Initialization complete! Have a RAD time 😎
 ```
 
-In addition to starting Radius services in your Kubernetes cluster, this initialization command creates a default application (`app.bicep`) as your starting point. It contains a single container definition (`demo`). `rad init` also creates a [`bicepconfig.json`]({{< ref "/guides/tooling/bicepconfig/overview" >}}) file in your application's directory that has the necessary setup to use Radius with the official Bicep compiler.
+In addition to starting Radius services in your Kubernetes cluster, this initialization command creates a default application (`app.bicep`) as your starting point. It contains a single container definition (`demo`). `rad init` also creates a `bicepconfig.json` file in your application's directory that has the necessary setup to use Radius with the official Bicep compiler.
 
 {{< rad file="snippets/app.bicep" embed=true markdownConfig="{linenos=table,linenostart=1}" >}}
 

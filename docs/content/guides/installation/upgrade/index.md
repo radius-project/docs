@@ -15,7 +15,6 @@ Radius supports in-place upgrades on Kubernetes clusters using the `rad upgrade 
 ## Prerequisites
 
 - [Radius installed on Kubernetes cluster]({{< ref "guides/installation/install" >}})
-- [Latest rad CLI]({{< ref howto-rad-cli >}})
 
 ## Step 1: Upgrade the rad CLI
 

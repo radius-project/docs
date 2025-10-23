@@ -25,7 +25,7 @@ Radius Environments can be setup with the rad CLI via two paths: interactive or 
    rad init
    ```
 
-   Select `Yes` to setup the application in the current directory. This will create `app.bicep` and [`bicepconfig.json`]({{< ref "/guides/tooling/bicepconfig/overview" >}}) files
+   Select `Yes` to setup the application in the current directory. This will create `app.bicep` and `bicepconfig.json`
 
    ```
    Initializing Radius...

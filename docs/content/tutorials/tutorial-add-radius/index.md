@@ -20,9 +20,8 @@ By the end of this tutorial, you will have deployed an existing Kubernetes appli
 
 ## Prerequisites
 
-- [Kubernetes cluster]({{< ref "guides/operations/kubernetes/overview#supported-kubernetes-clusters" >}})
+- [Install Radius]({{< ref "guides/installation/install" >}})
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-- [rad CLI]({{< ref howto-rad-cli >}})
 
 ## Overview
 

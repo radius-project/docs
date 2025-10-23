@@ -38,8 +38,6 @@ Select 'No' when asked to setup application in the current directory.
 
 {{< read file= "/shared-content/installation/bicepconfig/manual.md" >}}
 
-More information on how to setup a `bicepconfig.json` can be found [here]({{< ref "/guides/tooling/bicepconfig/overview" >}})
-
 ## Step 3: Define a Radius Environment
 
 Create a file named `app.bicep` and define a Radius Environment with [identity property]({{< ref "/guides/deploy-apps/environments/overview" >}}) set. This configures your environment to use your Azure AD workload identity installation with your cluster's OIDC endpoint:
