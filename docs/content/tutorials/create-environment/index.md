@@ -10,7 +10,7 @@ In part four of this tutorial, you will :
 
   - Create a Resource Group to contain all your resources.
   - Create an Environment that uses the Recipe for the PostgreSQL Resource Type.
-  - Create a Workspace to manage the cluster configurations locally.
+  - Create a Workspace to configure the local Radius CLI.
 
 ## Create a Resource Group
 
@@ -74,7 +74,7 @@ You should see output similar to:
 
 A Radius Workspace is a set of configurations for the local Radius CLI. It is a combination of a Kubernetes context, a Radius Environment, and a Resource Group.
 
-Create a new Workspace using the `rad workspace create` command to manage the cluster configurations locally.
+Create a new Workspace using the `rad workspace create` command.
 
   ```bash
   rad workspace create kubernetes my-workspace \
