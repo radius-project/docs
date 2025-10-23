@@ -1,16 +1,18 @@
 ---
 type: docs
 title: "How-To: Uninstall Radius from Kubernetes"
-linkTitle: "Uninstall Radius"
+linkTitle: "Uninstall "
 description: "Learn how to uninstall Radius control plane from your Kubernetes cluster"
 weight: 400
 categories: "How-To"
 tags: ["Kubernetes"]
+aliases:
+- /guides/operations/kubernetes/kubernetes-uninstall
 ---
 
 ## Prerequisites
 
-- [Radius installed on Kubernetes cluster]({{< ref "guides/operations/kubernetes/kubernetes-install" >}})
+- [Radius installed on Kubernetes cluster]({{< ref "guides/installation/install" >}})
 
 ## Step 1: Uninstall the Radius control-plane from your kubernetes cluster
 

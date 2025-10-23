@@ -1,19 +1,21 @@
 ---
 type: docs
 title: "How-To: Rollback Radius on Kubernetes"
-linkTitle: "Rollback Radius on Kubernetes"
+linkTitle: "Rollback "
 description: "Learn how to rollback Radius to a previous version on Kubernetes"
 weight: 350
 categories: "How-To"
 tags: ["Kubernetes"]
+aliases: 
+- /guides/operations/kubernetes/kubernetes-rollback
 ---
 
 Radius supports rolling back to previous versions on Kubernetes clusters using the `rad rollback kubernetes` command. This feature allows you to quickly revert to a known-good version if issues are encountered after an upgrade.
 
 ## Prerequisites
 
-- [Radius installed on Kubernetes cluster]({{< ref "guides/operations/kubernetes/kubernetes-install" >}})
-- [rad CLI]({{< ref howto-rad-cli >}})
+- [Radius installed on Kubernetes cluster]({{< ref "guides/installation/install" >}})
+- [rad CLI]({{< ref installation >}})
 - Previous Radius installation to rollback to
 
 ## Understanding Helm revisions
@@ -179,7 +181,8 @@ helm rollback radius 2 -n radius-system
 
 ## Next steps
 
-- Learn about [upgrading Radius]({{< ref "guides/operations/kubernetes/kubernetes-upgrade" >}})
+- Learn about [upgrading Radius]({{< ref "guides/installation/upgrade" >}})
 - Review [Radius versioning]({{< ref "guides/operations/versioning" >}}) for version compatibility
 - Check [release notes](https://github.com/radius-project/radius/releases) for version-specific information
 - Refer to the [`rad rollback kubernetes`]({{< ref "reference/cli/rad_rollback_kubernetes" >}}) CLI reference docs for more details
+

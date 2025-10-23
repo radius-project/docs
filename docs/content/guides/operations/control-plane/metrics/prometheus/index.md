@@ -17,7 +17,7 @@ tags: ["metrics", "observability"]
    - [Supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters"  >}})
    - [kubectl](https://kubernetes.io/docs/tasks/tools/)
    - [Helm 3](https://helm.sh/)
-   - [Radius control plane installed]({{< ref kubernetes-install >}})
+   - [Radius installed]({{< ref "/guides/installation/install" >}})
 
 1. Create a namespace that can be used to deploy the Grafana and Prometheus monitoring tools:
 

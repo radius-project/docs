@@ -13,7 +13,7 @@ It's easy to get Radius added to your GitHub Actions deployment pipelines. By le
 ## Prerequisites
 
 - [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
-- Radius control plane [installed in your cluster]({{< ref kubernetes-install >}})
+- [Radius installed in your cluster]({{< ref "/guides/installation/install" >}})
 - GitHub repo with Actions enabled
 
 ## Step 1: Create your environment and application definitions

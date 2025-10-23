@@ -1,18 +1,20 @@
 ---
 type: docs
 title: "How-To: Upgrade Radius on Kubernetes"
-linkTitle: "Upgrade Radius on Kubernetes"
+linkTitle: "Upgrade"
 description: "Learn how to upgrade Radius on Kubernetes"
 weight: 300
 categories: "How-To"
 tags: ["Kubernetes"]
+aliases: 
+- /guides/operations/kubernetes/kubernetes-upgrade
 ---
 
 Radius supports in-place upgrades on Kubernetes clusters using the `rad upgrade kubernetes` command. This command upgrades the Radius control plane while preserving your existing environments and applications.
 
 ## Prerequisites
 
-- [Radius installed on Kubernetes cluster]({{< ref "guides/operations/kubernetes/kubernetes-install" >}})
+- [Radius installed on Kubernetes cluster]({{< ref "guides/installation/install" >}})
 - [Latest rad CLI]({{< ref howto-rad-cli >}})
 
 ## Step 1: Upgrade the rad CLI
@@ -81,7 +83,7 @@ While Radius supports in-place upgrades, breaking changes may still occur betwee
 
 ### Rollback capability
 
-If an upgrade encounters issues, you can rollback to a previous version using the [`rad rollback kubernetes` command]({{< ref "guides/operations/kubernetes/kubernetes-rollback" >}}).
+If an upgrade encounters issues, you can rollback to a previous version using the [`rad rollback kubernetes` command]({{< ref "guides/installation/rollback" >}}).
 
 It's recommended to backup your environment configurations before upgrading, which you may do with something like `rad env show -o json > env-backup.json`.
 
@@ -115,6 +117,6 @@ If you prefer to do a fresh installation instead of an in-place upgrade, follow 
 
 ## Next steps
 
-- Learn how to [rollback Radius]({{< ref "guides/operations/kubernetes/kubernetes-rollback" >}}) if needed
+- Learn how to [rollback Radius]({{< ref "guides/installation/rollback" >}}) if needed
 - Review [Radius versioning]({{< ref "guides/operations/versioning" >}}) for version compatibility information
 - Refer to the [`rad upgrade`]({{< ref "reference/cli/rad_upgrade_kubernetes" >}}) CLI reference docs for more details
