@@ -11,11 +11,11 @@ aliases:
     - /quick-start/
 ---
 
-This guide will show you how to quickly get started with Radius. You will do a basic installation Radius on a Kubernetes cluster then deploy the Todo List demo application.
+This guide will show you how to quickly get started with Radius. You will do a basic installation of Radius on a Kubernetes cluster then deploy the Todo List sample application.
 
 ## Prerequisites
 
-For this quick start, you will only need a **Kubernetes cluster**. In order to install Radius your use must have the cluster-admin role. Any Kubernetes cluster will work including AKS and EKS. However, since this is a quick start, running a Kubernetes cluster on your workstation with [k3d](https://k3d.io/) or [kind](https://kind.sigs.k8s.io/) is recommended.
+For this quick start, you will only need a **Kubernetes cluster**. To install Radius your user must have the cluster-admin role. Any Kubernetes cluster will work including AKS and EKS. However, since this is a quick start, running a Kubernetes cluster on your workstation with [k3d](https://k3d.io/) or [kind](https://kind.sigs.k8s.io/) is recommended.
 
 ## Install the Radius CLI
 
@@ -30,11 +30,13 @@ mkdir todolist
 cd todolist
 ```
 
-Ensure your cluster is set as your current context using `kubectl config current-context`. If the context needs updating, change it using `kubectl config set-context <context-name>`. Then install Radius. For this example, accept all the default options (press ENTER to confirm):
+Ensure your cluster is set as your current context using `kubectl config current-context`. If the context needs updating, change it using `kubectl config set-context <context-name>`. Then install Radius using `rad initialize` command:
 
 ```bash
 rad initialize
 ```
+
+Select `Yes` to setup application in the current directory.
 
 Example output:
 
@@ -53,13 +55,12 @@ Initializing Radius...
 Initialization complete! Have a RAD time 😎
 ```
 
-## Run the Todo List application
+## Run the Todo List Application
 
 In addition to installing Radius, the `rad initialize` command creates a sample application definition, `app.bicep`:
 
 ```
 extension radius
-extension radiusResources
 
 @description('The Radius Application ID. Injected automatically by the rad CLI.')
 param application string
@@ -94,23 +95,23 @@ This command:
 - Sets up port forwarding from localhost to the Radius Dashboard
 - Streams container logs to your terminal
 
-## Browse the Todo List application UI
+## Browse the Todo List Application UI
 
-Browse to the Todo List application by visiting [http://localhost:3000](http://localhost:3000). Notice that the Radius Connections section says "No connections defined." In the full tutorial, you will add a database and a connection between the container and the database.
+Browse to the Todo List application by visiting [http://localhost:3000](http://localhost:3000). Notice that the Radius Connections section says "No connections defined." In the five part tutorial, you will add a database and a connection between the container and the database.
 
 ## Browse the Radius Dashboard
 
-Browse to the Radius Dashboard by visiting [http://localhost:7007](http://localhost:7007). Find the Todo List application under the Applications tab and examine its resources.
+Browse to the Radius Dashboard by visiting [http://localhost:7007](http://localhost:7007). Find the Todo List Application under the Applications tab and examine its resources.
 
-## View the application graph
+## View the Application Graph
 
-The `rad app graph` command shows you the all the resources that the application is composed of. 
+The `rad app graph` command shows you all the resources that the application is composed of. 
 
 ```bash
 rad app graph
 ```
 
-You should see the following output, detailing the connections between the `demo` container and the `db` Redis Cache, along with information about the underlying Kubernetes resources running the app:
+You should see the following output, which lists the underlying Kubernetes resources running the application.
 
 ```
 Displaying application: todolist
