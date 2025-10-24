@@ -12,13 +12,6 @@ Resource Types are the building blocks of Radius and define what developers can 
 
 To create a PostgreSQL Resource Type in Radius, create the resource type definition file then create the resource type in Radius. The resource type definition for PostgreSQL is in the Radius [resource-types-contrib](https://github.com/radius-project/resource-types-contrib/tree/main/Data/postgreSqlDatabases) repository where all the Radius Resource Types and Recipes are maintained.
 
-Create a new directory for the Todo List application.
-
-   ```bash
-   mkdir todolist
-   cd todolist
-   ```
-
 {{< button text="Download postgreSqlDatabases.yaml" link="https://raw.githubusercontent.com/radius-project/resource-types-contrib/main/Data/postgreSqlDatabases/postgreSqlDatabases.yaml" newtab="true" >}}
 
 The PostgreSQL Resource Type definition includes:
@@ -43,6 +36,8 @@ Create the Resource Type using the `rad resource-type create` command:
 ```bash
 rad resource-type create postgreSqlDatabases -f postgreSqlDatabases.yaml
 ```
+
+You should see output similar to:
 
 ```
 Creating resource type Radius.Data/postgreSqlDatabases
