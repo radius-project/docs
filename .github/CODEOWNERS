@@ -2,5 +2,5 @@
 *       @radius-project/maintainers-docs @radius-project/approvers-docs
 
 # Dependabot managed files
-docs/package.json        @radius-project/on-call
-docs/package-lock.json   @radius-project/on-call
+docs/package.json        @radius-project/on-call @radius-project/maintainers-docs @radius-project/approvers-docs
+docs/package-lock.json   @radius-project/on-call @radius-project/maintainers-docs @radius-project/approvers-docs
