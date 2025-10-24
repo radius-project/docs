@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "How-To: Uninstall Radius from Kubernetes"
+title: "How-To: Uninstall Radius on Kubernetes"
 linkTitle: "Uninstall "
-description: "Learn how to uninstall Radius control plane from your Kubernetes cluster"
+description: "Learn how to uninstall Radius on Kubernetes"
 weight: 400
 categories: "How-To"
 tags: ["Kubernetes"]
@@ -14,26 +14,55 @@ aliases:
 
 - [Radius installed on Kubernetes cluster]({{< ref "guides/installation/install" >}})
 
-## Step 1: Uninstall the Radius control-plane from your kubernetes cluster
+## Step 1: Uninstall Radius 
 
-To uninstall the existing Radius control-plane, run the following command:
+To uninstall the existing Radius installation, run the following command:
 
+{{< tabs "Uninstall" "Uninstall with purge" >}}
+
+{{% codetab %}}
 ```bash
 rad uninstall kubernetes
 ```
+You should see the Helm releases that will be removed and prompted for user confirmation:
 
-All the Radius services running in the `radius-system` namespace will be removed. Note that Radius configuration and data will still be persisted in the cluster until the namespace is also deleted.
-
-## Step 2: Delete the `radius-system` namespace
-
-To delete the `radius-system` namespace, run the following command:
-
-```bash
-kubectl delete namespace radius-system
+```
+About to uninstall Radius. This will remove:
+- Helm releases: radius, contour
+                                              
+Continue uninstalling Radius?                 
+  >  1. No                         
 ```
 
-All Radius configuration and data will be removed as part of the namespace. This completely removes from your cluster.
+Select `Yes`. All the Radius services running in the `radius-system` namespace will be removed. Note that the Radius configuration and data will still be persisted in the cluster.
+{{% /codetab %}}
 
-## Step 3: Remove the rad CLI
+{{% codetab %}}
+```bash
+rad uninstall kubernetes --purge
+```
+
+You should see the list of all the Radius resources that will be removed and prompted for user confirmation 
+
+```
+About to uninstall Radius. This will remove:
+- Helm releases: radius, contour
+- Radius environments:
+  • /planes/radius/local/resourcegroups/default/providers/Applications.Core/environments/default (namespace default)
+- Kubernetes namespaces: radius-system
+- Kubernetes namespaces (skipped): default
+- Kubernetes API services: v1alpha3.api.ucp.dev
+- Kubernetes custom resource definitions: deploymentresources.radapp.io, deploymenttemplates.radapp.io, recipes.radapp.io, queuemessages.ucp.dev, resources.ucp.dev
+                                              
+Continue uninstalling Radius?                 
+  >  1. No                                    
+```
+
+Select `Yes`. This will delete all the Radius data from your cluster.
+{{% /codetab %}}
+
+{{< /tabs >}}
+
+## Step 2: Remove the rad CLI
 
 You can remove the rad CLI by deleting the `rad` binary under `/usr/local/bin/` and `~/.rad` folder from your machine.
