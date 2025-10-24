@@ -67,7 +67,7 @@ This command:
 
 [`rad install kubernetes`]({{< ref rad_install_kubernetes >}}) installs the Radius control plane into the `radius-system` namespace.
 
-You can optionally use the `--set` flag to customize the installation with Helm configuration options([#helm-configuration-options](https://github.com/radius-project/radius/blob/main/deploy/Chart/values.yaml)):
+You can optionally use the `--set` flag to customize the installation with [Helm configuration options](https://github.com/radius-project/radius/blob/main/deploy/Chart/values.yaml):
 
 ```bash
 # Install Radius
