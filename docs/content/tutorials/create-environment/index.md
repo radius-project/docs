@@ -78,7 +78,7 @@ Create a new Workspace using the `rad workspace create` command.
 
   ```bash
   rad workspace create kubernetes my-workspace \
-  --context `kubectl config current-context` \
+  --context $(kubectl config current-context) \
   --environment my-env \
   --group my-group 
   ```
