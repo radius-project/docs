@@ -6,11 +6,11 @@ description: "Create a Radius Environment to deploy the Application"
 weight: 400
 ---
 
-In part four of this tutorial, you will :
+In part four of this tutorial, you will:
 
-  - Create a Resource Group to contain all your resources.
-  - Create an Environment that uses the Recipe for the PostgreSQL Resource Type.
-  - Create a Workspace to configure the local Radius CLI.
+  - Create a Resource Group to contain all your resources
+  - Create an Environment that uses the Recipe for the PostgreSQL Resource Type
+  - Create a Workspace to configure the local Radius CLI
 
 ## Create a Resource Group
 
@@ -149,7 +149,8 @@ default   Radius.Data/postgreSqlDatabases  terraform                       git::
 {{% codetab %}}
 
  ```bash
-  rad recipe register default --environment my-env \
+  rad recipe register default \
+    --environment my-env \
     --resource-type Radius.Data/postgreSqlDatabases \
     --template-kind bicep \
     --template-path ghcr.io/radius-project/recipes/kubernetes/postgresql:0.53.0
@@ -176,6 +177,6 @@ default   Radius.Data/postgreSqlDatabases  bicep                           ghcr.
 {{% /codetab %}}
 {{< /tabs >}}
 
-In the next part, you will deploy the Todo List application to the Environment you just created.
+In the final part, you will deploy the Todo List application to the Environment you just created.
 <br><br>
 {{< button text="Next Step: Deploy Application" page="deploy-application" color="primary" >}}

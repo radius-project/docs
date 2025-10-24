@@ -12,7 +12,7 @@ This hands-on tutorial guides you through installing Radius, configuring Resourc
 
 After completing this tutorial, you will:
 
-- Understand Radius concepts including Resource Types, Environments, Recipes, and Applications  
+- Understand Radius concepts including Resource Types, Recipes, Environments, and Applications  
 - Know how to develop new Radius Resource Types and Recipes  
 - Have hands-on experience configuring Radius using the Radius CLI  
 - Know how to deploy an Application using Radius

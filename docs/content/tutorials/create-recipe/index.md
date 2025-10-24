@@ -6,9 +6,9 @@ description: "Create Bicep or Terraform Recipes that implement the Resource Type
 weight: 300
 ---
 
-Recipes define how a resource is deployed. In part three of this tutorial, you will create a Terraform or Bicep Recipe for the PostgreSQL resource type.
+Recipes define how a resource is deployed. In part three of this tutorial, you will create a Terraform or Bicep Recipe for the PostgreSQL Resource Type.
 
-## Create a Recipe for the PostgreSQL resource type
+## Create a Recipe for the PostgreSQL Resource Type
 
 Recipes can be either Terraform configurations or Bicep templates. Select the tab for the IaC language you prefer. 
 
@@ -16,7 +16,7 @@ Recipes can be either Terraform configurations or Bicep templates. Select the ta
 
 Terraform configuration are stored in a Git repository for Radius to access the Recipe. For this tutorial, the Terraform Recipe has already been created and stored in the Radius [resource-types-contrib](https://github.com/radius-project/resource-types-contrib/blob/main/Data/postgreSqlDatabases/recipes/kubernetes/terraform/main.tf) repository. Hence, there are no actual steps to complete for this section of the tutorial. What follows is a walkthrough of the Radius-specific aspects of the Terraform configuration.
 
-1. **Radius Metadata via `context` variable**  
+1. **Radius metadata via `context` variable**  
 
     Radius automatically injects a variable called `context`. The context variable contains the Resource Type's and the Environment's properties. To use this metadata within the Terraform configuration, a variable must be defined within the `main.tf` or `variables.tf` file.  
 
@@ -30,6 +30,7 @@ Terraform configuration are stored in a Git repository for Radius to access the 
 
 1. **Variables for Recipe customization**
 
+    The `memory` variable allows customizing the memory request for the PostgreSQL container based on the `size` property defined in the Resource Type.
     ```tf
     variable "memory" {
       description = "Memory limits for the PostgreSQL container"
@@ -49,7 +50,7 @@ Terraform configuration are stored in a Git repository for Radius to access the 
       
       }
     ```
-    The `memory` variable allows customizing the memory request for the PostgreSQL container based on the `size` property defined in the Resource Type.
+    It is then used in the Kubernetes Deployment:
 
     ```tf
      resources {
