@@ -23,15 +23,15 @@ For all technical requirements, see the [Installation how-to guide]({{< ref inst
 
 ## Install Radius
 
-If you ran the quick start, you would have used `rad initialize` command which installs Radius and creates a pre-configured set of Resource Types, Recipes, and Environments. It is intended to get you started as quick as possible. 
+If you completed the quick start, you used `rad initialize` command which installs Radius and creates a pre-configured set of Resource Types, Recipes, and Environments. It is intended to get you started as quick as possible. 
 
-This tutorial is a step-by-step guide so uses the `rad install kubernetes` command which only installs Radius:  
+This tutorial is a step-by-step guide so uses the `rad install kubernetes` command which only installs Radius. Install Radius to the Kubernetes cluster in your Kubernetes context:  
 
 ```bash
 rad install kubernetes
 ```
 
-Verify if the pods are installed and running:
+Verify the pods are running:
 
 ```bash
 kubectl get pods -n radius-system
@@ -50,7 +50,7 @@ ucp                  1/1     Running   0          1m
 
 ## Install the Bicep and Terraform extensions for VS Code (optional) 
 
-Radius uses the Infrastructure as Code (IaC) language Bicep to define application resources and either Bicep or Terraform to deploy resources. Installing the Bicep and Terraform VS Code extensions provides syntax highlighting, auto-completion, and other useful features for these languages.  
+Radius uses the Bicep Infrastructure as Code (IaC) language to define application resources and either Bicep or Terraform to deploy resources. Installing the Bicep and Terraform extensions provides syntax highlighting, auto-completion, and other useful features for these languages.  
 
 - [Install the Bicep extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep)  
 
