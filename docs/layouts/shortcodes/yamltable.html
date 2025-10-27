@@ -6,9 +6,9 @@
 {{- $content := "" -}}
 {{- $fileForError := $fileParam -}}
 
-{{- if strings.HasPrefix $fileParam "http" -}}
+{{- if hasPrefix $fileParam "http" -}}
   {{- $repoPrefix := "https://github.com/radius-project/radius/blob/main/" -}}
-  {{- if strings.HasPrefix $fileParam $repoPrefix -}}
+  {{- if hasPrefix $fileParam $repoPrefix -}}
     {{- $relative := replace $fileParam $repoPrefix "" -}}
     {{- $localCandidate := path.Join "../../radius" $relative -}}
     {{- if fileExists $localCandidate -}}
@@ -18,7 +18,7 @@
   {{- end -}}
   {{- if eq $content "" -}}
     {{- $remote := $fileParam -}}
-    {{- if strings.HasPrefix $fileParam "https://github.com/" -}}
+    {{- if hasPrefix $fileParam "https://github.com/" -}}
       {{- $remote = replace (replace $fileParam "https://github.com/" "https://raw.githubusercontent.com/") "/blob/" "/" -}}
     {{- end -}}
     {{- with resources.GetRemote $remote -}}
@@ -49,19 +49,19 @@
 {{- $comments := slice -}}
 
 {{- range $line := split $content "\n" }}
-  {{- $trim := strings.TrimSpace $line -}}
+  {{- $trim := trim $line " \t\r\n" -}}
   {{- if or (eq $trim "") (eq $trim "---") (eq $trim "...") -}}
     {{- $comments = slice -}}
     {{- continue -}}
   {{- end -}}
-  {{- if strings.HasPrefix $trim "#" -}}
-    {{- $clean := strings.TrimSpace (replaceRE "^#+\\s*" "" $trim) -}}
+  {{- if hasPrefix $trim "#" -}}
+    {{- $clean := trim (replaceRE "^#+\\s*" "" $trim) " \t\r\n" -}}
     {{- if ne $clean "" -}}
       {{- $comments = $comments | append $clean -}}
     {{- end -}}
     {{- continue -}}
   {{- end -}}
-  {{- if strings.HasPrefix $trim "-" -}}
+  {{- if hasPrefix $trim "-" -}}
     {{- $comments = slice -}}
     {{- continue -}}
   {{- end -}}
@@ -74,7 +74,7 @@
     {{- continue -}}
   {{- end -}}
 
-  {{- $key := strings.TrimSpace (index $groups 1) -}}
+  {{- $key := trim (index $groups 1) " \t\r\n" -}}
   {{- $indentStr := "" -}}
   {{- with findRE "^\\s*" $line -}}
     {{- $indentStr = index . 0 -}}
