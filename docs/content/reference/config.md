@@ -3,7 +3,7 @@ type: docs
 title: "Radius Configuration file"
 linkTitle: "config.yaml"
 description: "Detailed reference documentation on the Radius config.yaml configuration file"
-weight: 500
+weight: 100
 ---
 
 Radius [workspaces]({{< ref workspaces >}}) are used to easily switch between environments.

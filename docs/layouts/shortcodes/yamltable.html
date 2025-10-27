@@ -1,0 +1,165 @@
+{{- $fileParam := .Get "file" | default (.Get "path") -}}
+{{- if not $fileParam -}}
+  {{- errorf "yamltable shortcode: missing required attribute \"file\"" -}}
+{{- end -}}
+
+{{- $content := "" -}}
+{{- $fileForError := $fileParam -}}
+
+{{- if strings.HasPrefix $fileParam "http" -}}
+  {{- $repoPrefix := "https://github.com/radius-project/radius/blob/main/" -}}
+  {{- if strings.HasPrefix $fileParam $repoPrefix -}}
+    {{- $relative := replace $fileParam $repoPrefix "" -}}
+    {{- $localCandidate := path.Join "../../radius" $relative -}}
+    {{- if fileExists $localCandidate -}}
+      {{- $content = readFile $localCandidate -}}
+      {{- $fileForError = $localCandidate -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if eq $content "" -}}
+    {{- $remote := $fileParam -}}
+    {{- if strings.HasPrefix $fileParam "https://github.com/" -}}
+      {{- $remote = replace (replace $fileParam "https://github.com/" "https://raw.githubusercontent.com/") "/blob/" "/" -}}
+    {{- end -}}
+    {{- with resources.GetRemote $remote -}}
+      {{- $content = .Content -}}
+      {{- $fileForError = $remote -}}
+    {{- else -}}
+      {{- errorf "yamltable shortcode: failed to fetch %q" $fileParam -}}
+    {{- end -}}
+  {{- end -}}
+{{- else -}}
+  {{- if not (fileExists $fileParam) -}}
+    {{- errorf "yamltable shortcode: file %q not found" $fileParam -}}
+  {{- end -}}
+  {{- $content = readFile $fileParam -}}
+{{- end -}}
+
+{{- $content = replace $content "\ufeff" "" -}}
+
+{{- $data := transform.Unmarshal $content -}}
+{{- if not (reflect.IsMap $data) -}}
+  {{- errorf "yamltable shortcode: expected YAML object at root of %q" $fileForError -}}
+{{- end -}}
+
+{{- $descMap := dict -}}
+{{- $order := slice -}}
+{{- $orderSeen := dict -}}
+{{- $paths := dict -}}
+{{- $comments := slice -}}
+
+{{- range $line := split $content "\n" }}
+  {{- $trim := strings.TrimSpace $line -}}
+  {{- if or (eq $trim "") (eq $trim "---") (eq $trim "...") -}}
+    {{- $comments = slice -}}
+    {{- continue -}}
+  {{- end -}}
+  {{- if strings.HasPrefix $trim "#" -}}
+    {{- $clean := strings.TrimSpace (replaceRE "^#+\\s*" "" $trim) -}}
+    {{- if ne $clean "" -}}
+      {{- $comments = $comments | append $clean -}}
+    {{- end -}}
+    {{- continue -}}
+  {{- end -}}
+  {{- if strings.HasPrefix $trim "-" -}}
+    {{- $comments = slice -}}
+    {{- continue -}}
+  {{- end -}}
+  {{- $match := findRESubmatch "^([^:#]+):\\s*(.*)$" $trim -}}
+  {{- if not $match -}}
+    {{- continue -}}
+  {{- end -}}
+  {{- $groups := index $match 0 -}}
+  {{- if lt (len $groups) 3 -}}
+    {{- continue -}}
+  {{- end -}}
+
+  {{- $key := strings.TrimSpace (index $groups 1) -}}
+  {{- $indentStr := "" -}}
+  {{- with findRE "^\\s*" $line -}}
+    {{- $indentStr = index . 0 -}}
+  {{- end -}}
+  {{- $indent := len $indentStr -}}
+  {{- $level := 0 -}}
+  {{- if gt $indent 0 -}}
+    {{- $level = div $indent 2 -}}
+  {{- end -}}
+  {{- $parent := "" -}}
+  {{- if gt $level 0 -}}
+    {{- $parentKey := printf "%d" (sub $level 1) -}}
+    {{- with index $paths $parentKey -}}
+      {{- $parent = . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $fullKey := cond (eq $parent "") $key (printf "%s.%s" $parent $key) -}}
+  {{- $paths = merge $paths (dict (printf "%d" $level) $fullKey) -}}
+
+  {{- if gt (len $comments) 0 -}}
+    {{- $desc := delimit $comments " " -}}
+    {{- $descMap = merge $descMap (dict $fullKey $desc) -}}
+  {{- end -}}
+  {{- $comments = slice -}}
+
+  {{- if not (isset $orderSeen $fullKey) -}}
+    {{- $order = $order | append $fullKey -}}
+    {{- $orderSeen = merge $orderSeen (dict $fullKey true) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $scratch := newScratch -}}
+{{- partial "yamltable/flatten.html" (dict "value" $data "prefix" "" "scratch" $scratch) -}}
+{{- $entries := $scratch.Get "rows" | default (slice) -}}
+{{- $entryDict := dict -}}
+{{- range $entries }}
+  {{- $entryDict = merge $entryDict (dict .key .value) -}}
+{{- end -}}
+
+{{- range $entries }}
+  {{- if not (isset $orderSeen .key) -}}
+    {{- $order = $order | append .key -}}
+    {{- $orderSeen = merge $orderSeen (dict .key true) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $rows := slice -}}
+{{- $seenKeys := dict -}}
+{{- range $order }}
+  {{- $key := . -}}
+  {{- if isset $entryDict $key -}}
+    {{- $value := index $entryDict $key -}}
+    {{- $desc := index $descMap $key | default "" -}}
+    {{- $rows = $rows | append (dict "key" $key "value" $value "description" $desc) -}}
+    {{- $seenKeys = merge $seenKeys (dict $key true) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- range $entries }}
+  {{- if not (isset $seenKeys .key) -}}
+    {{- $desc := index $descMap .key | default "" -}}
+    {{- $rows = $rows | append (dict "key" .key "value" .value "description" $desc) -}}
+  {{- end -}}
+{{- end -}}
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+  {{- range $rows }}
+    <tr>
+      <td><code>{{ .key }}</code></td>
+      <td>
+        {{- if .description }}<div>{{ .description | htmlEscape }}</div>{{- end }}
+        {{- if .value }}<div><code>{{ .value }}</code></div>{{- end }}
+      </td>
+    </tr>
+  {{- else }}
+    <tr>
+      <td colspan="2"><em>No entries parsed from {{ $fileForError }}</em></td>
+    </tr>
+  {{- end }}
+  </tbody>
+</table>
