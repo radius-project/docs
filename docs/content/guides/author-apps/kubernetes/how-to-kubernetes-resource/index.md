@@ -14,7 +14,7 @@ This how-to guide will provide an overview of how to:
 
 ## Prerequisites
 
-- [rad CLI]({{< ref getting-started >}})
+- rad CLI
 - [Radius initialized with `rad init`]({{< ref howto-environment >}})
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 

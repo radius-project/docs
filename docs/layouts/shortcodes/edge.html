@@ -3,6 +3,4 @@
 
 {{ if eq $version "edge" }}
 {{ (print "\n" $content "\n") | markdownify }}
-{{ else }}
-{{ (print "\n" "To try out an unstable release visit the [edge docs](https://edge.docs.radapp.io)." "\n") | markdownify }}
 {{ end }}

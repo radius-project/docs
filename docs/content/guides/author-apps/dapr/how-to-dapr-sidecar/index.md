@@ -15,7 +15,7 @@ This how-to guide will provide an overview of how to:
 ## Prerequisites
 
 - [Supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-kubernetes-clusters" >}})
-- [rad CLI]({{< ref getting-started >}})
+- rad CLI
 - [Dapr CLI](https://docs.dapr.io/getting-started/install-dapr-cli/)
 - [Radius initialized with `rad init`]({{< ref howto-environment >}})
 - [Dapr initialized with `dapr init -k`](https://docs.dapr.io/getting-started/install-dapr-selfhost/)
@@ -83,6 +83,6 @@ Run the following command to [delete]({{< ref "guides/deploy-apps/howto-delete" 
 
 ## Further reading
 
-- [Radius Dapr tutorial]({{< ref "tutorials/tutorial-dapr" >}})
+- [Radius Dapr tutorial]({{< ref "reference/samples/tutorial-dapr" >}})
 - [Dapr in Radius containers]({{< ref "guides/author-apps/containers/overview#kubernetes" >}})
 - [Dapr sidecar schema]({{< ref "reference/resource-schema/dapr-schema/dapr-extension" >}})
