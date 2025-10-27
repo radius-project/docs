@@ -1,0 +1,36 @@
+{{- $value := .value -}}
+{{- $prefix := .prefix -}}
+{{- $scratch := .scratch -}}
+
+{{- if reflect.IsMap $value -}}
+  {{- $items := slice -}}
+  {{- range $k, $_ := $value -}}
+    {{- $items = $items | append (dict "raw" $k "label" (printf "%v" $k)) -}}
+  {{- end -}}
+  {{- $items = sort $items "label" -}}
+  {{- range $items }}
+    {{- $raw := .raw -}}
+    {{- $label := .label -}}
+    {{- $child := index $value $raw -}}
+    {{- $full := cond (eq $prefix "") $label (printf "%s.%s" $prefix $label) -}}
+    {{- partial "yamltable/flatten.html" (dict "value" $child "prefix" $full "scratch" $scratch) -}}
+  {{- end -}}
+{{- else if reflect.IsSlice $value -}}
+  {{- $json := $value | jsonify -}}
+  {{- $json = replace $json "\n" " " -}}
+  {{- $rows := $scratch.Get "rows" | default (slice) -}}
+  {{- $rows = $rows | append (dict "key" $prefix "value" $json) -}}
+  {{- $scratch.Set "rows" $rows -}}
+{{- else -}}
+  {{- $type := printf "%T" $value -}}
+  {{- $str := printf "%v" $value -}}
+  {{- if eq $type "string" -}}
+    {{- $str = $value -}}
+  {{- end -}}
+  {{- if eq $str "<nil>" -}}
+    {{- $str = "null" -}}
+  {{- end -}}
+  {{- $rows := $scratch.Get "rows" | default (slice) -}}
+  {{- $rows = $rows | append (dict "key" $prefix "value" $str) -}}
+  {{- $scratch.Set "rows" $rows -}}
+{{- end -}}
