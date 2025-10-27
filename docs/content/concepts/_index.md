@@ -10,7 +10,7 @@ weight: 20
 
 Radius is a platform for managing application resources deployed to the cloud. It is a central component of modern-day internal developer platform (IDP) and allows platform engineers to define resource types for developers to use when building their applications, and separately, the implementation of those resource types using existing Infrastructure as Code (IaC) templates and modules. Additionally, Radius enables platform engineers to define logical environments with specific deployment targets (e.g., a specific cloud provider region), each with their own IaC implementation. 
 
-This page is a conceptual overview of Radius. It describes how Radius integrates with other IDP components, its logical components, and its technical architecture. It is accompanied by additional concept pages focused on each of the core components: Resource Types, Recipes, Environments, and Applications. If you are new to Radius, you are encouraged to complete the [Quick Start]({{< ref "getting-started" >}}). Then, after reading the concept documentation, complete the end-to-end [tutorial]({{< ref "tutorials" >}}).
+This page is a conceptual overview of Radius. It describes how Radius integrates with other IDP components, its logical components, and its technical architecture. It is accompanied by additional concept pages focused on each of the core components: Resource Types, Recipes, Environments, and Applications. If you are new to Radius, you are encouraged to complete the [Quick Start]({{< ref "quick-start" >}}). Then, after reading the concept documentation, complete the end-to-end [tutorial]({{< ref "tutorials" >}}).
 
 ## IDP reference architecture
 
