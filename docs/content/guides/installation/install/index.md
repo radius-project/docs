@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "How-To: Install Radius on Kubernetes"
-linkTitle: "Install"
-description: "Learn how to install Radius on Kubernetes"
+title: "How-To: Install/Uninstall Radius on Kubernetes"
+linkTitle: "Install/Uninstall"
+description: "Learn how to install and uninstall Radius on Kubernetes"
 weight: 100
 categories: "How-To"
 tags: ["Kubernetes"]
@@ -22,7 +22,7 @@ Radius operates on a Kubernetes cluster for the deployment and management of Env
 
 {{< read file= "/shared-content/installation/rad-cli/install-rad-cli.md" >}}
 
-The Radius CLI stores its configuration in a YAML file named `config.yaml` under the `rad` directory. This file contains Workspaces, which point to your cluster, your Resource Group, and your Environment. When the Radius CLI runs commands, it will use the configuration in the `config.yaml` file to determine which cluster, resource group, and environment to target and use. Each workspace entry is updated automatically when you create and switch environments.
+The Radius CLI stores its configuration in a YAML file named `config.yaml` under the `rad` directory. This file contains Workspaces, which points to your cluster, Resource Group, and Environment. When the Radius CLI runs commands, it will use the configuration in the `config.yaml` file to determine which configuration to target and use. Each workspace entry is updated automatically when you create and switch environments.
 
 For more information, refer to the [`config.yaml` reference documentation]({{< ref "/reference/config" >}}).
 
@@ -116,13 +116,9 @@ Many enterprises leverage intermediate root certificate authorities (CAs) to enh
 rad install kubernetes --set-file global.rootCA.cert=/etc/ssl/your-root-ca.crt
 ```
 
-### Air-gapped Environments 
+### Air-gapped environments
 
-By default, Radius pulls container images from GitHub Container Registry (GHCR.io). For air-gapped environments or when using private registries,
-
-- Mirror all Radius images to your private registry
-- Configure Radius to use your private registry
-- Create and reference image pull secrets if authentication is required
+Radius pulls container images for control plane services from the GitHub Container Registry (ghcr.io). In environments with strict security controls or no internet access (air‑gapped), mirror the required images to an internal registry and configure Radius to use that registry.
 
 Example of mirroring images (requires access to both registries):
 
@@ -149,7 +145,7 @@ for IMAGE in "${IMAGES[@]}"; do
   docker push ${TARGET_REGISTRY}/${IMAGE}:${VERSION}
 done
 ```
-Then install Radius using your private registry and reference the secret if authentication is required 
+Then install Radius configured to pull images from your private registry, and supply image pull secrets if authentication is required.
 
 ```bash
 rad install kubernetes \
@@ -198,13 +194,59 @@ dynamic-rp           1/1     Running   0          1m
 ucp                  1/1     Running   0          1m
 ```
 
-## Install the Bicep and Terraform extensions for VS Code (optional) 
+## Uninstall Radius 
 
-Radius uses the Infrastructure as Code (IaC) language Bicep to define application resources and either Bicep or Terraform to deploy resources. Installing the Bicep and Terraform VS Code extensions provides syntax highlighting, auto-completion, and other useful features for these languages.  
+To uninstall the existing Radius installation, use any of the following commands:
 
-- [Install the Bicep extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep)  
+{{< tabs "Uninstall" "Uninstall with purge" >}}
 
-- [Install the Terraform extension for VS Code](https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform) 
+{{% codetab %}}
+```bash
+rad uninstall kubernetes
+```
+You should see the Helm releases that will be removed and prompted for user confirmation:
+
+```
+About to uninstall Radius. This will remove:
+- Helm releases: radius, contour
+                                              
+Continue uninstalling Radius?                 
+  >  1. No                         
+```
+
+Select `Yes`. All the Radius services running in the `radius-system` namespace will be removed. Note that the Radius configuration and data will still be persisted in the cluster.
+
+{{% /codetab %}}
+{{% codetab %}}
+
+```bash
+rad uninstall kubernetes --purge
+```
+
+You should see the list of all the Radius resources that will be removed and prompted for user confirmation 
+
+```
+About to uninstall Radius. This will remove:
+- Helm releases: radius, contour
+- Radius environments:
+  • /planes/radius/local/resourcegroups/default/providers/Applications.Core/environments/default (namespace default)
+- Kubernetes namespaces: radius-system
+- Kubernetes namespaces (skipped): default
+- Kubernetes API services: v1alpha3.api.ucp.dev
+- Kubernetes custom resource definitions: deploymentresources.radapp.io, deploymenttemplates.radapp.io, recipes.radapp.io, queuemessages.ucp.dev, resources.ucp.dev
+                                              
+Continue uninstalling Radius?                 
+  >  1. No                                    
+```
+
+Select `Yes`. This will delete all the Radius data from your cluster.
+
+{{% /codetab %}}
+{{< /tabs >}}
+
+## Remove the rad CLI
+
+You can remove the rad CLI by deleting the `rad` binary under `/usr/local/bin/` and `~/.rad` folder from your machine.
 
 ## Next steps
 
