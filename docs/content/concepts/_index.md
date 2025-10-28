@@ -110,3 +110,5 @@ The Controller component is an internal component that handles miscellaneous fun
 ### Git repository and OCI registry
 
 When Radius deploys a resource using Terraform or Bicep, the Dynamic RP container must have access to the specified Recipe. Therefore, a Git repository is used to store Terraform configurations and an OCI registry is used to store Bicep templates. Radius does not run recipes off the local workstation's file system. 
+
+<br>
