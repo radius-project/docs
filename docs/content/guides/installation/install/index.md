@@ -10,11 +10,11 @@ aliases:
 - /guides/operations/kubernetes/kubernetes-install
 ---
 
-Radius handles the deployment and management of environments, applications, and other resources with components that are installed into the Kubernetes cluster.
+Radius operates on a Kubernetes cluster for the deployment and management of Environments, Applications, and other resources. This guide goes through all the installation options and client tools to interact with Radius.
 
 ## Prerequisites
 
-- Any Kubernetes cluster. Cluster-admin permissions are required because Radius creates namespaces, deployments, and custom resource definitions.
+- Any Kubernetes cluster. Cluster-admin permissions are required because Radius creates namespaces, deployments, and custom resource definitions in the cluster.
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - If installing via Helm, use Helm 3 or later.
 
@@ -32,13 +32,13 @@ Install Radius using any of the following options:
 
 {{< tabs `rad initialize` `rad install` `Using Helm` >}}{{% codetab %}}
 
-[`rad initialize`](<{{< ref rad_initialize >}}>) installs Radius and creates a developer-ready set of Resource Groups, Environments, Recipes, and scaffolds a sample application.
+[`rad initialize`](<{{< ref rad_initialize >}}>) installs Radius and creates a default set of Resource Groups, Environments, Recipes, and scaffolds a sample application.
 
 ``` bash
 rad initialize
 ```
 
-Select `Yes` to setup application in the current directory.
+Select `Yes` to set up application in the current directory.
 
 Example output:
 
@@ -57,7 +57,7 @@ Initialization complete! Have a RAD time 😎
 
 This command:
 
-- Creates the radius-system namespace (if it doesn’t exist) and installs the `radius` Helm release.
+- Creates the radius-system namespace and installs the `radius` Helm release.
 - Creates a default Resource Group, Environment, and Workspace.
 - Pre-configures the environment with the `local-dev` Recipe Pack. Recipes are fetched from `ghcr.io/radius-project/recipes/local-dev`.
 - Creates a sample `app.bicep`, `bicepconfig.json`, and `.rad/rad.yaml` when you opt in to scaffolding.
@@ -106,7 +106,7 @@ Check out the [Helm chart](https://github.com/radius-project/radius/blob/main/de
 
 You can customize the Radius installation regardless of the entry point (`rad initialize`, `rad install kubernetes`, or Helm) with Helm overrides (`--set`, `--set-file`). 
 
-For more information on the [Helm Installation Options]({{< ref "helminstallation" >}}).
+For more information on the Helm Installation Options, checkout the [reference guide]({{< ref "helminstallation" >}}).
 
 ### Use your own root certificate authority certificate
 
@@ -116,7 +116,7 @@ Many enterprises leverage intermediate root certificate authorities (CAs) to enh
 rad install kubernetes --set-file global.rootCA.cert=/etc/ssl/your-root-ca.crt
 ```
 
-### Air-gapped Environments
+### Air-gapped Environments 
 
 By default, Radius pulls container images from GitHub Container Registry (GHCR.io). For air-gapped environments or when using private registries,
 
@@ -161,7 +161,7 @@ Note: When using a custom registry, images are pulled directly from <registry>/<
 
 ### Workload Identity 
 
-Radius enables you to deploy and connect to cloud resources across Azure and AWS. `global.azureWorkloadIdentity.enabled` and `global.aws.irsa.enabled` enable workload identity support for the cloud providers.
+Radius enables you to deploy and connect to cloud resources across Azure and AWS. `global.azureWorkloadIdentity.enabled` and `global.aws.irsa.enabled` options enable workload identity support for the cloud providers.
 
 ```bash
 # Azure workload identity
