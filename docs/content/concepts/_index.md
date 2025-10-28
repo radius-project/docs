@@ -18,7 +18,7 @@ Developers are often tasked with writing low-level IaC code. For example, they m
 
 The diagram below is a reference architecture for an IDP that incorporates these concepts.
 
-{{< image src="idp-reference-arch.png" width="65%" alt="IDP reference architecture" >}}
+{{< image src="reference-arch.png" width="65%" alt="IDP reference architecture" >}}
 
 You will notice that resources are defined separately from the deployment of the resource. These resource types are abstract and application-oriented, and infrastructure and cloud provider agnostic. For example, rather than an Azure Database for PostgreSQL flexible server resource definition and deploy, simply a PostgreSQL database resource type is defined. Then the resource deployment implementation may deploy to Azure.
 
