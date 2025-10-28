@@ -40,9 +40,7 @@ Radius is designed around a small number of core components. In order to enforce
 
 #### Resource Types
 
-Resource Types define the abstraction, or **interface**, for resource. They are the contract between developers and the platform. They define what the resource is and the required and optional properties used when creating a resource. Since they are abstract, there is a single Resource Type for each resource type in the real world. For example, while Radius may by able to deploy a PostgreSQL database to Kubernetes, AWS, and Azure, there is only one PostgreSQL Resource Type defined within Radius. Platform engineers can use the Resource Types which ship with Radius, community contributed Resource Types in the `resource-type-contrib` repository, or define their own from scratch. 
-
-Resource Types are discussed in detail in the Resource Types concept page.
+Resource Types define the abstraction, or **interface**, for resource. They are the contract between developers and the platform. They define what the resource is and the required and optional properties used when creating a resource. Since they are abstract, there is a single Resource Type for each resource type in the real world. For example, while Radius may by able to deploy a PostgreSQL database to Kubernetes, AWS, and Azure, there is only one PostgreSQL Resource Type defined within Radius. Platform engineers can use the Resource Types which ship with Radius, community contributed Resource Types in the `resource-type-contrib` repository, or define their own from scratch.
 
 #### Credentials
 
@@ -63,11 +61,9 @@ While Resource Types define the interface, Recipes define the **implementation**
 
 Multiple recipes are not required. In the example above, the recipe #1 and #2 could be combined into an enhanced Recipe which has an conditional on the Environment name; e.g., if the Environment name is `test` then set the CPU resource requests to 2, else do not set the CPU resource request.
 
-Other examples and how the recipe knows what environment it is using is discussed in the Recipes concept page. 
-
 #### Environments
 
-Because applications defined using Radius do not have infrastructure details in their definitions, platform engineers can define the deployment target without affecting application definitions. In Radius, this deployment target is referred to as an Environment. An Environment is a composed of the target deployment destination (such as what cloud provider and what region) as well as the set of Recipes to use to deploy to that Environment. Environments can also used to configure deployment-time settings for Terraform and Bicep. This is discussed in the Environments concept page.
+Because applications defined using Radius do not have infrastructure details in their definitions, platform engineers can define the deployment target without affecting application definitions. In Radius, this deployment target is referred to as an Environment. An Environment is a composed of the target deployment destination (such as what cloud provider and what region) as well as the set of Recipes to use to deploy to that Environment. Environments can also used to configure deployment-time settings for Terraform and Bicep.
 
 ### Developer components
 
@@ -114,7 +110,3 @@ The Controller component is an internal component that handles miscellaneous fun
 ### Git repository and OCI registry
 
 When Radius deploys a resource using Terraform or Bicep, the Dynamic RP container must have access to the specified Recipe. Therefore, a Git repository is used to store Terraform configurations and an OCI registry is used to store Bicep templates. Radius does not run recipes off the local workstation's file system. 
-
-## Additional concept pages
-
-This section continues by going into detail on the following topics:
