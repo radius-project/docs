@@ -8,27 +8,27 @@ weight: 20
 
 ## Introduction
 
-Radius is a platform for managing application resources deployed to the cloud. It is a central component of modern-day internal developer platform (IDP) and allows platform engineers to define resource types for developers to use when building their applications, and separately, the implementation of those resource types using existing Infrastructure as Code (IaC) templates and modules. Additionally, Radius enables platform engineers to define logical environments with specific deployment targets (e.g., a specific cloud provider region), each with their own IaC implementation. 
+Radius is a platform for managing application resources deployed to the cloud. It is a central component of a modern-day internal developer platform (IDP) and allows platform engineers to define resource types for developers to use when building their applications, and separately, the implementation of those resource types using existing Infrastructure as Code (IaC) templates and modules. Additionally, Radius enables platform engineers to define logical environments with specific deployment targets (e.g., a specific cloud provider region), each with their own IaC implementation. 
 
-This page is a conceptual overview of Radius. It describes how Radius integrates with other IDP components, its logical components, and its technical architecture. It is accompanied by additional concept pages focused on each of the core components: Resource Types, Recipes, Environments, and Applications. If you are new to Radius, you are encouraged to complete the [Quick Start]({{< ref "quick-start" >}}). Then, after reading the concept documentation, complete the end-to-end [tutorial]({{< ref "tutorials" >}}).
+This page is a conceptual overview of Radius. It describes how Radius fit in with other IDP components, its logical components, and its technical architecture. <!-- It is accompanied by additional concept pages focused on each of the core components: Resource Types, Recipes, Environments, and Applications.  --> If you are new to Radius, you are encouraged to complete the [Quick Start]({{< ref "quick-start" >}}). Then, after reading the concept documentation, complete the end-to-end [tutorial]({{< ref "tutorials" >}}).
 
 ## IDP reference architecture
 
-Developers are often tasked with writing low-level IaC code. For example, they may author a Helm chart to deploy their containers to Kubernetes and, separately, a CloudFormation template to deploy an AWS RDS database. In this reference architecture, cloud resources are defined separately from the deployment implementation. Developers define their applications and application resources abstractly using resource types the platform engineer has defined. Platform engineers then separately use IaC solutions to implement how the resources are deployed.
+Developers are often tasked with writing low-level IaC code. For example, they may author a Helm chart to deploy their containers to Kubernetes then a CloudFormation template to deploy an AWS RDS database. In this reference architecture, cloud resources are defined separately from the deployment implementation. Developers define their applications and application resources abstractly using resource types the platform engineer has defined. Platform engineers then use IaC solutions to implement how the resources are deployed.
 
 The diagram below is a reference architecture for an IDP that incorporates these concepts.
 
 {{< image src="reference-arch.png" width="65%" alt="IDP reference architecture" >}}
 
-You will notice that resources are defined separately from the deployment of the resource. These resource types are abstract and application-oriented, and infrastructure and cloud provider agnostic. For example, rather than an Azure Database for PostgreSQL flexible server resource definition and deploy, simply a PostgreSQL database resource type is defined. Then the resource deployment implementation may deploy to Azure.
+Notice that resources are defined separately from the deployment of the resource. These resource types are abstract, application oriented, and infrastructure/cloud provider agnostic. For example, rather than an *Azure Database for PostgreSQL Flexible Server* resource that is obviously only deployable to Azure, an abstract PostgreSQL database resource type is defined. Then a swappable resource deployment IaC implementation is used when deploying to Azure.
 
 By separating resource definition from resource deployment, platform engineers are able to:
 
 * Enforce separation of concerns between application developers and platform engineers
-* Define resource types which are higher level and more application oriented 
+* Define resource types with a higher level of abstraction and are more application oriented
 * Eliminate the need for developers to handle low-level infrastructure details
 * Ensure portability between cloud providers and container platforms
-* Enforce infrastructure security, operational, and cost best practices 
+* Enforce infrastructure security, operational, and cost best practices
 
 ## Logical architecture
 
@@ -40,42 +40,64 @@ Radius is designed around a small number of core components. In order to enforce
 
 #### Resource Types
 
-Resource Types define the abstraction, or **interface**, for resource. They are the contract between developers and the platform. They define what the resource is and the required and optional properties used when creating a resource. Since they are abstract, there is a single Resource Type for each resource type in the real world. For example, while Radius may by able to deploy a PostgreSQL database to Kubernetes, AWS, and Azure, there is only one PostgreSQL Resource Type defined within Radius. Platform engineers can use the Resource Types which ship with Radius, community contributed Resource Types in the `resource-type-contrib` repository, or define their own from scratch.
+Resource Types define the abstraction for a resource that will exist in the real world when deployed. Resource Types represent the **interface**, or contract, between developers and the platform. Since they are abstract and application-oriented, there is only one Resource Type defined within Radius for each application resource. For example, a platform engineer may define a PostgreSQL database Resource Type which is an application-oriented abstraction of a one of the many ways of deploying an PostgreSQL database. Resource Types are defined conceptually by what they represent, but concretely by their name, API version, and their schema. The schema contains the set of required and optional properties which are used by developers when defining their application.
 
-#### Credentials
+#### Recipes
 
-When a developer requests a resource to be deployed, those resources are not deployed using the developers credentials. Rather, Radius uses its own Kubernetes, AWS, or Azure credentials. This enables platform engineers to only allow resources to be deployed via Radius. Radius supports creating credentials for AWS and Azure using either secrets or workload identity.
+While Resource Types define the interface, Recipes define the **implementation**. Radius supports using both Terraform and Bicep IaC languages as the Recipe implementation. The term *recipe* is used as a generic term to refer to both a Terraform configuration/module or a Bicep template.
+
+Recipes are not tightly coupled with Radius or the Resource Type. In most circumstances, an existing Terraform module or Bicep template can be used as a Recipe with slight modifications to ensure the properties in the Resource Type map to the Terraform variables or Bicep parameters.
+
+Radius makes it easier to implement Recipes by automatically injecting Recipes with a `context` object which includes *contextual* information needed to deploy the resource. This includes:
+
+- The Application name
+- The Environment name as well as Kubernetes, AWS, and Azure details
+- Parameters specified in the Environment definition (see Environments below)
+- The resource name and all of its properties
+- All connected resources and their properties (connections are discussed later)
+
+By using the `context` object, Recipes have all the information needed to deploy the actual resource in the target location.
+
+#### Environments
+
+Radius Environments define the deployment location as well as the set of Recipes to use to deploy resources to that Environment. Environments can be modeled in many ways according to your preferences. They may be logical environments such as dev, test, stage, prod. Or they may be locations such as AWS us-east-1. They may be specific to an application or a team, or shared across the organization. 
+
+When defining an Environment, the deployment location is specified by `provider`:
+
+- **Kubernetes**: The namespace
+- **AWS**: The account and region
+- **Azure**: The subscription and resource group
+
+When a resource is deployed, these location details are provided to the Terraform module or Bicep template via the `context` object.
+
+The second component of the Environment definition is the set of Recipes for each Resource Type. By assigning Recipes at the Environment level, it is possible for each Environment to have a unique set of Recipes. Take a PostgreSQL database Resource Type as an example, there may be:
+
+- A development environment running on a local workstation that deploys the database to a local Kind or k3d cluster
+- A test environment which deploys to a shared Kubernetes cluster but also assigns more CPU and memory to the database
+- A staging environment that deploys the database to AWS using RDS
+- A production environment that also uses AWS RDS but configures the database with high availability and backups
+
+Finally, each Recipe in an Environment definition can also have Environment-level Recipe parameters. Recipe parameters are useful for injecting additional environmental information into the Recipe. Take, for example, a Recipe which deploys a PostgreSQL database using AWS RDS or Azure Database for PostgreSQL. Ideally, the database is created with an endpoint in an existing VPC/virtual network. The virtual network ID can be passed to the Recipe via a Recipe parameter defined within the Environment. 
 
 #### Resource Groups
 
 All resources are created in one and only one Resource Group. They are analogous to a Kubernetes Namespace or an Azure Resource Group.
 
-#### Recipes
+#### Credentials
 
-While Resource Types define the interface, Recipes define the **implementation**. Radius supports both Terraform and Bicep IaC solutions. The term *recipe* is used as a generic term to refer either to a Terraform configuration/module or a Bicep template. A recipe can be an existing Terraform module stored in a Git repository or a Bicep template stored in an OCI registry. For each Resource Type, there may be multiple Recipes. For example, a PostgreSQL Resource Type may have:
-
-1. A Recipe for local development which deploys to Kubernetes
-2. A Recipe for the test environment which deploys to Kubernetes with more resources
-3. A Recipe for the staging environment that deploys to AWS using AWS RDS
-4. A Recipe for the production environment that deploys to AWS using AWS RDS with high availability and backups configured
-
-Multiple recipes are not required. In the example above, the recipe #1 and #2 could be combined into an enhanced Recipe which has an conditional on the Environment name; e.g., if the Environment name is `test` then set the CPU resource requests to 2, else do not set the CPU resource request.
-
-#### Environments
-
-Because applications defined using Radius do not have infrastructure details in their definitions, platform engineers can define the deployment target without affecting application definitions. In Radius, this deployment target is referred to as an Environment. An Environment is a composed of the target deployment destination (such as what cloud provider and what region) as well as the set of Recipes to use to deploy to that Environment. Environments can also used to configure deployment-time settings for Terraform and Bicep.
+When a developer requests a resource to be deployed, those resources are not deployed using the developers credentials. Rather, Radius uses its own Kubernetes, AWS, or Azure credentials. This enables platform engineers to only allow resources to be deployed via Radius. Radius supports creating credentials for AWS and Azure using either secrets or workload identity.
 
 ### Developer components
 
 #### Applications and resources
 
-Developers build applications. But when they deploy those applications to Kubernetes or other container platforms, the notion of an application is typically lost. Developers are left with a sea of resources that are deployed as a flat list of resources. Maybe the resources are annotated with the application name, but maybe not. This makes it challenging to manage for developers and SREs.
+Developers build applications. But when they deploy those applications to Kubernetes or other container platforms, the notion of an application is typically lost. Developers are left with essentially a flat list of resources. In the best case, the resources are annotated with the application name, but not always. This makes it challenging for developers and SREs to understand what resources belong to what applications. 
 
 Radius takes a different approach and makes the application a first-class resource. With Radius, developers first define an Application resource, then add resources to that Application such as containers and databases. All resources belong to an Application (with some exceptions for resources shared across applications such as shared storage). When an Application is deployed to an Environment, the Application's abstract resource definitions are married with the Environment's cloud-specific Recipes. 
 
 ## Technical architecture
 
-Radius is deployed on a Kubernetes cluster and has its own CLI and Dashboard.
+The diagram below visualizes the technical components that are created when you install Radius on a Kubernetes cluster.
 
 {{< image src="technical-arch.png" width="65%" alt="Technical architecture of Radius" >}}
 
@@ -85,7 +107,7 @@ The Radius CLI, `rad`, is the primary means of interacting with Radius for both 
 
 ### Dashboard
 
-The Radius Dashboard is a developer portal built using Backstage. Its primary purpose is to provide developers with organization-specific developer documentation. The Dashboard includes details for developers on what Resource Types are available for use within their application, as well as a list of Environments they can deploy their application to. Platform engineers can write customized developer documentation for each Resource Type. 
+The Radius Dashboard is a Backstage-based developer portal. Its primary purpose is to provide developers with organization-specific developer documentation. The Dashboard includes details for developers on what Resource Types are available, as well as a list of Environments they can deploy their application to. Platform engineers can write customized developer documentation for each Resource Type. 
 
 When installing Radius, the Dashboard is installed with a Kubernetes Service of type `ClusterIP`. It is left to the platform engineer to configure ingress to the Dashboard.
 
