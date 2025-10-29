@@ -10,50 +10,47 @@ aliases:
 - /guides/operations/kubernetes/kubernetes-install
 ---
 
-Radius operates on a Kubernetes cluster for the deployment and management of Environments, Applications, and other resources. This guide goes through all the installation options and client tools to interact with Radius.
+This guide goes through all the installation options and client tools to interact with Radius.
 
-## Prerequisites
+## Radius CLI 
 
-- Any Kubernetes cluster. Cluster-admin permissions are required because Radius creates namespaces, deployments, and custom resource definitions in the cluster.
-- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-- If installing via Helm, use Helm 3 or later.
+The `rad` CLI is the primary interface for installing and operating Radius. Install it on any workstation or automation runner that will interact with Radius.
 
-## Install the Radius CLI
+Use the project installer to add `rad` plus the embedded `rad-bicep` compiler:
 
-{{< read file= "/shared-content/installation/rad-cli/install-rad-cli.md" >}}
+```bash
+curl -fsSL "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh" | /bin/bash
+```
+
+To install a **specific version**, pass the version number (without the leading `v`) to the script. The installer translates it to the tagged release:
+
+  ```bash
+  curl -fsSL "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh" | /bin/bash -s 0.50.0
+  ```
+
+To install into **an alternate directory**, set `RADIUS_INSTALL_DIR` before invoking the script. This is required in environments like Azure Cloud Shell that disallow writes to `/usr/local/bin`:
+
+```bash
+export RADIUS_INSTALL_DIR=$HOME/bin
+curl -fsSL "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh" | /bin/bash
+```
 
 The Radius CLI stores its configuration in a YAML file named `config.yaml` under the `rad` directory. This file contains Workspaces, which points to your cluster, Resource Group, and Environment. When the Radius CLI runs commands, it will use the configuration in the `config.yaml` file to determine which configuration to target and use. Each workspace entry is updated automatically when you create and switch environments.
 
 For more information, refer to the [`config.yaml` reference documentation]({{< ref "/reference/config" >}}).
 
-## Install Radius
+## Radius Control Plane Installation
 
-Install Radius using any of the following options:
+The Radius Control Plane services can be installed using Radius CLI or Helm. `rad install` and `rad init` both pin the chart version to the CLI’s channel; keeping them aligned prevents API mismatches.
 
 {{< tabs `rad initialize` `rad install` `Using Helm` >}}{{% codetab %}}
 
-[`rad initialize`](<{{< ref rad_initialize >}}>) installs Radius and creates a default set of Resource Groups, Environments, Recipes, and scaffolds a sample application.
+[`rad initialize`](<{{< ref rad_initialize >}}>) is meant to get started with Radius and doesn't allow much customization.
 
 ``` bash
 rad initialize
 ```
-
 Select `Yes` to set up application in the current directory.
-
-Example output:
-
-```
-Initializing Radius...
-✅ Install Radius {{< param version >}}
-    - Kubernetes cluster: k3d-k3s-default
-    - Kubernetes namespace: radius-system
-✅ Create new environment default
-    - Kubernetes namespace: default
-    - Recipe pack: local-dev
-✅ Scaffold application todolist
-✅ Update local configuration
-Initialization complete! Have a RAD time 😎
-```
 
 This command:
 
@@ -65,7 +62,7 @@ This command:
 {{% /codetab %}}
 {{% codetab %}}
 
-[`rad install kubernetes`]({{< ref rad_install_kubernetes >}}) installs or reinstalls the Radius control plane into the `radius-system` namespace.
+[`rad install kubernetes`]({{< ref rad_install_kubernetes >}}) installs or reinstalls only the Radius control plane into the `radius-system` namespace. Use this option when you need to customize the installation for your production workloads and platform needs.
 
 ```bash
 # Install Radius
@@ -77,6 +74,8 @@ rad install kubernetes --reinstall
 
 {{% /codetab %}}
 {{% codetab %}}
+
+You can directly install the Radius control plane services with Helm chart. Use this option if you are already using Helm as part of your GitOps or other automation systems.
 
 Begin by adding the Radius Helm repository:
 
@@ -108,15 +107,17 @@ You can customize the Radius installation regardless of the entry point (`rad in
 
 For more information on the Helm Installation Options, checkout the [reference guide]({{< ref "helminstallation" >}}).
 
-### Use your own root certificate authority certificate
+### Bring your own root certificate authority certificate
 
-Many enterprises leverage intermediate root certificate authorities (CAs) to enhance security and control over outgoing traffic originating from their employees' machines, particularly when using a firewall or proxy solution. For example, some enterprises may choose to issue CAs per org and control the traffic per org. In this setup, when Radius attempts to connect to an external endpoint, such as Azure or AWS, traffic is blocked by the firewall. You may optionally use`--set-file` when installing Radius to inject your root CA certificates into Radius:
+Many enterprises leverage intermediate root certificate authorities (CAs) to enhance security and control over outgoing traffic originating from their employees' machines, particularly when using a firewall or proxy solution. Radius can mount an intermediate CA bundle into every control-plane pod. Set `global.rootCA.cert` using `--set-file` option via CLI or in the Helm chart. 
+
+Example:
 
 ```bash
 rad install kubernetes --set-file global.rootCA.cert=/etc/ssl/your-root-ca.crt
 ```
 
-### Air-gapped environments
+### Deploy to Air-gapped environments
 
 Radius pulls container images for control plane services from the GitHub Container Registry (ghcr.io). In environments with strict security controls or no internet access (air‑gapped), mirror the required images to an internal registry and configure Radius to use that registry.
 
@@ -149,15 +150,16 @@ Then install Radius configured to pull images from your private registry, and su
 
 ```bash
 rad install kubernetes \
-  --set global.imageRegistry=myregistry.azurecr.io
+  --set global.imageRegistry=myregistry.azurecr.io \
+  --set global.imageTag={{ .Chart.AppVersion }} \
   --set global.imagePullSecrets[0].name=myregistry-secret
 ```
 
-Note: When using a custom registry, images are pulled directly from <registry>/<image-name>:<tag> format. For example, with myregistry.azurecr.io, the controller image will be pulled from myregistry.azurecr.io/controller:latest.
+When using a custom registry, images are pulled directly from <registry>/<image-name>:<tag> format. For example, with myregistry.azurecr.io, the controller image will be pulled from myregistry.azurecr.io/controller:latest.
 
-### Workload Identity 
+#### Configure workload identity
 
-Radius enables you to deploy and connect to cloud resources across Azure and AWS. `global.azureWorkloadIdentity.enabled` and `global.aws.irsa.enabled` options enable workload identity support for the cloud providers.
+Radius enables you to deploy and connect to cloud resources across Azure and AWS. The chart flags `global.azureWorkloadIdentity.enabled` and `global.aws.irsa.enabled` toggle the Kubernetes-side configuration; you still need to configure cloud identities and register credentials afterward. See the [Azure workload identity guide]({{< ref "/guides/operations/providers/azure-provider/howto-azure-provider-wi" >}}) and the [AWS IRSA guide]({{< ref "/guides/operations/providers/aws-provider/howto-aws-provider-irsa" >}}).
 
 ```bash
 # Azure workload identity
@@ -175,27 +177,30 @@ Radius installs Contour as the ingress controller by default. If your platform a
 rad install kubernetes --set --skip-contour-install
 ```
 
-## Verify the installation
+### Radius Dashboard
 
-Verify if the pods are installed and running:
+The Dashboard is enabled by default. You can disable it when you do not need the Backstage-based UI:
 
-```bash
-kubectl get pods -n radius-system
-```
-You should see output similar to:
+  ```bash
+  rad install kubernetes --set dashboard.enabled=false
+  ```
 
-```
-NAME                READY   STATUS    RESTARTS   AGE
-applications-rp      1/1     Running   0          1m
-bicep-de             1/1     Running   0          1m
-controller           1/1     Running   0          1m
-dashboard            1/1     Running   0          1m 
-dynamic-rp           1/1     Running   0          1m
-ucp                  1/1     Running   0          1m
-```
+When enabled, expose it via Contour or your ingress. In locked-down clusters you can port-forward:
+
+  ```bash
+  kubectl port-forward svc/dashboard -n radius-system 7007:7007
+  ```
+
+## Troubleshooting installation
+
+- **403 when pulling charts from ghcr.io** – Clear cached credentials with `docker logout ghcr.io`, or mirror the chart and install with `rad install kubernetes --chart /path/to/radius-<version>.tgz`.
+- **Existing Radius release detected** – Rerun the installer with `--reinstall` or uninstall the existing release before retrying, otherwise Helm skips the upgrade.
+- **Helm reports missing permissions** – Verify the kube context and ensure the account has cluster-admin rights (`kubectl auth can-i create crd`).
+- **Contour chart download fails** – Provide a local chart via `--contour-chart` if the cluster cannot reach the Bitnami registry.
+- **Pods stuck after install** – Inspect with `kubectl describe pod -n radius-system` to identify image pull or workload-identity issues.
 
 ## Next steps
 
-- Refer to the [`rad install`]({{< ref rad_install >}}) command for installation options.
-- Learn about [upgrading Radius]({{< ref "guides/installation/upgrade" >}})
-- Learn how to [rollback Radius]({{< ref "guides/installation/rollback" >}})
+- Review the [`rad install`]({{< ref rad_install >}}) command reference for the full set of flags.
+- Follow the [upgrade guide]({{< ref "guides/installation/upgrade" >}}) to plan version rollouts.
+- Learn how to [roll back Radius]({{< ref "guides/installation/rollback" >}}) if an installation or upgrade needs to be reversed.
