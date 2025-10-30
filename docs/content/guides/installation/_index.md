@@ -20,7 +20,7 @@ Radius installations spans across your Kubernetes cluster, developer workstation
 
   - **Dashboard** – The Backstage based UI for managing Radius resources. You can disable it during installation.
 
-- **Bicep extensions** – Radius packages Resource Type definitions as Bicep extensions stored in OCI registries or a file share. To use the Resource Types in your application, a workstation or CI runner must have config file (`bicepconfig.json`) that points to the extensions. Checkout the [how-to generate Bicep extensions]() for more information.
+- **Bicep extensions** – Radius packages Resource Type definitions as Bicep extensions stored in OCI registries or a file share. To use the Resource Types in your application, a workstation or CI runner must have config file (`bicepconfig.json`) that points to the extensions. Checkout the [how-to generate Bicep extensions](TODO) for more information.
 
 ### External tools and services Radius interacts with
 
@@ -39,30 +39,12 @@ Building on the technical architecture overview, Radius runs on Kubernetes and e
 {{< tabs AKS EKS k3d kind>}}
 {{% codetab %}}
 
-To learn how to setup a cluster visit the [Azure docs](https://docs.microsoft.com/azure/aks/learn/quick-kubernetes-deploy-portal?tabs=azure-cli).
-
-Note that [AKS-managed AAD](https://docs.microsoft.com/en-us/azure/aks/managed-aad) is not supported currently.
-
-To create a new AKS cluster and retrieve its kubecontext, you can run the following commands:
-
-```bash
-az aks create --subscription mySubscription --resource-group myResourceGroup --name myAKSCluster --node-count 1
-az aks get-credentials --subscription mySubscription --resource-group myResourceGroup --name myAKSCluster
-```
-
-Once deployed and your kubectl context has been set as your default, you can run install the control plane following the [Installation how-to]({{< ref "/guides/installation/install" >}})
+Visit the [Azure docs](https://docs.microsoft.com/azure/aks/learn/quick-kubernetes-deploy-portal?tabs=azure-cli) to set up an AKS cluster.
 
 {{% /codetab %}}
 {{% codetab %}}
 
-Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service that you can use to run Kubernetes on AWS. Learn how to set up an EKS cluster on the [AWS docs](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html).
-
-```bash
-eksctl create cluster --name my-cluster --region region-code
-```
-
-Once deployed and your kubectl context has been set as your default, you can install the control plane following the [Installation how-to]({{< ref "/guides/installation/install" >}}).
-
+Visit [AWS docs](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html) to set up an EKS cluster. 
 {{% /codetab %}}
 {{% codetab %}}
 
@@ -74,19 +56,17 @@ First, ensure that memory resource is 8GB or more in `Resource` setting of `Pref
 softwareupdate --install-rosetta --agree-to-license
 ```
 
-Use the following command to create a new cluster. and install the Radius control plane, along with a new environment: 
-
-- The first parameter adds a port mapping which routes traffic from the local machine into the cluster. 
-- The second parameter disables [`traefik`](https://k3d.io/v5.1.0/usage/k3s/#traefik) pods because Radius provides an ingress controller.
-- The third parameter disables the [k3d internal load balancer](https://k3d.io/v5.1.0/usage/k3s/#servicelb-klipper-lb).
-
-The `rad install` command is configured to route localhost traffic on port 8081 into the cluster.
+Use the following command to create a new cluster and install the Radius control plane 
 
 ```bash
 k3d cluster create -p "8081:80@loadbalancer" --k3s-arg "--disable=traefik@server:*" --k3s-arg "--disable=servicelb@server:*"
 ```
 
-Next, install the Radius control plane, along with a new environment. The `rad install` command below adds a parameter to override the default public endpoint so that Radius knows that traffic from the local machine will enter the pod on port 8081:
+- The first parameter adds a port mapping which routes traffic from the local machine into the cluster. 
+- The second parameter disables [`traefik`](https://k3d.io/v5.1.0/usage/k3s/#traefik) pods because Radius provides an ingress controller.
+- The third parameter disables the [k3d internal load balancer](https://k3d.io/v5.1.0/usage/k3s/#servicelb-klipper-lb).
+
+Next install the Radius control plane with an override of the default public endpoint:
 
 ```bash
 rad install kubernetes --set rp.publicEndpointOverride=localhost:8081
@@ -124,7 +104,6 @@ Then, create a kind cluster with this config and initialize your Radius Environm
 # Create the kind cluster
 kind create cluster --config kind-config.yaml
 ```
-Checkout the [Installation how-to]({{< ref "/guides/installation/install" >}}) to get started.
 
 {{% /codetab %}}
 {{< /tabs >}}

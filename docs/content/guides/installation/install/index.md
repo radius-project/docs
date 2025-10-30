@@ -184,7 +184,7 @@ When enabled, expose it via Contour or your ingress. In locked-down clusters you
 - **Existing Radius release detected** – Rerun the installer with `--reinstall` or uninstall the existing release before retrying, otherwise Helm skips the upgrade.
 - **Helm reports missing permissions** – Verify the kube context and ensure the account has cluster-admin rights (`kubectl auth can-i create crd`).
 - **Contour chart download fails** – Provide a local chart via `--contour-chart` if the cluster cannot reach the Bitnami registry.
-- **Pods stuck after install** – Inspect with `kubectl describe pod -n radius-system` to identify image pull or workload-identity issues.
+- **Pods stuck after install** – Inspect with `kubectl describe pod -n radius-system` to identify image pull issues.
 
 ## Next steps
 
