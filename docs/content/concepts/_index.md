@@ -46,7 +46,7 @@ Resource Types define the abstraction for a resource that will exist in the real
 
 While Resource Types define the interface, Recipes define the resource deployment **implementation**. Radius supports deploying resources using either Terraform or Bicep. The term *recipe* is used as a generic term to refer to both a Terraform configuration or a Bicep template.
 
-Recipes are not tightly coupled with Radius or the Resource Type. In most circumstances, an existing Terraform module or Bicep template can be used as a Recipe with slight modifications to ensure the properties in the Resource Type map to the Terraform variables or Bicep parameters.
+Recipes are not tightly coupled with Radius or the Resource Type. In most circumstances, an existing Terraform configuration or Bicep template can be used as a Recipe with slight modifications to ensure the properties in the Resource Type map to the Terraform variables or Bicep parameters.
 
 #### Environments
 

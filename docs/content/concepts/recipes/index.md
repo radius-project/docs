@@ -32,9 +32,9 @@ Radius automatically injects a `context` object when deploying resources. The `c
 
 - The Application name
 - The Environment name as well as Kubernetes, AWS, and Azure details
-- Parameters specified in the Environment definition (see Environments below)
+- Parameters specified in the Environment definition
 - The resource name and all of its properties
-- All connected resources and their properties (connections are discussed later)
+- All connected resources and their properties
 
 By using the `context` object, Recipes have all the information needed to deploy the actual resource in the target location.
 
