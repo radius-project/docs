@@ -14,7 +14,7 @@ This guide goes through all the installation options and client tools to interac
 
 ## Radius CLI 
 
-The `rad` CLI is the primary interface for installing and operating Radius. Install it on any workstation or automation runner that will interact with Radius.
+The `rad` CLI is the primary interface for installing and operating Radius. Install it on any workstation or automation runner that interacts with Radius.
 
 Use the project installer to add `rad` plus the embedded `rad-bicep` compiler:
 
@@ -75,7 +75,7 @@ rad install kubernetes --reinstall
 {{% /codetab %}}
 {{% codetab %}}
 
-You can directly install the Radius control plane services with Helm chart. Use this option if you are already using Helm as part of your GitOps or other automation systems.
+You can directly install the Radius control plane services with Helm chart. Use this option if you are already using Helm as part of your GitOps or automation systems.
 
 Begin by adding the Radius Helm repository:
 
@@ -159,7 +159,7 @@ When using a custom registry, images are pulled directly from <registry>/<image-
 
 #### Configure workload identity
 
-Radius enables you to deploy and connect to cloud resources across Azure and AWS. The chart flags `global.azureWorkloadIdentity.enabled` and `global.aws.irsa.enabled` toggle the Kubernetes-side configuration; you still need to configure cloud identities and register credentials afterward. See the [Azure workload identity guide]({{< ref "/guides/operations/providers/azure-provider/howto-azure-provider-wi" >}}) and the [AWS IRSA guide]({{< ref "/guides/operations/providers/aws-provider/howto-aws-provider-irsa" >}}).
+Radius enables you to deploy and connect to cloud resources across Azure and AWS. The chart flags `global.azureWorkloadIdentity.enabled` and `global.aws.irsa.enabled` toggle the Kubernetes-side configuration to use workload identity; you still need to configure cloud identities and register credentials afterward. See the [Azure workload identity guide]({{< ref "/guides/operations/providers/azure-provider/howto-azure-provider-wi" >}}) and the [AWS IRSA guide]({{< ref "/guides/operations/providers/aws-provider/howto-aws-provider-irsa" >}}).
 
 ```bash
 # Azure workload identity
@@ -171,11 +171,13 @@ rad install kubernetes --set global.aws.irsa.enabled=true
 
 ### Skip Contour
 
-Radius installs Contour as the ingress controller by default. If your platform already has a preferred ingress, you can skip installing Contour.
+Radius installs the Bitnami Contour chart alongside the control plane so gateways and the dashboard can expose HTTP(S) endpoints. If your platform already runs an ingress or gateway controller, disable Contour and make sure your controller understands the `projectcontour.io/HTTPProxy` CRDs (or adjust your application definitions accordingly).
 
 ```bash
-rad install kubernetes --set --skip-contour-install
+rad install kubernetes --skip-contour-install
 ```
+
+Radius still emits `HTTPProxy` resources when you deploy gateways. If you use a different ingress API, install the matching CRDs and update your app manifests so the generated resources are compatible with your controller.
 
 ### Radius Dashboard
 

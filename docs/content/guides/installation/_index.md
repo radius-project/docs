@@ -14,29 +14,31 @@ Radius installations spans across your Kubernetes cluster, developer workstation
 
 - **Radius CLI (`rad`)** – The installer places `rad` on your PATH and downloads the bundled `rad-bicep` compiler to compile and deploy the Applications.
 
-- **Radius control plane** – The Helm chart deploys the controller, Universal Control Plane (UCP), Applications RP, Dynamic RP, Deployment Engine, and optional Dashboard and Contour. Everything runs in the `radius-system` namespace.
-  - **Ingress or gateway controller** – Radius installs Contour unless you supply your own. Any alternative must be configured to route traffic to the Radius APIs.
+- **Radius control plane** – The Helm chart deploys the Controller, Universal Control Plane (UCP), Applications RP, Dynamic RP, Deployment Engine, and optional Dashboard and Contour. Everything runs in the `radius-system` namespace.
+
+  - **Ingress or gateway controller** – Radius installs Contour as the ingress controller by default. You can skip installing it and any alternative must be configured to route traffic to the Radius APIs.
+
   - **Dashboard** – The Backstage based UI for managing Radius resources. You can disable it during installation.
 
-- **Bicep extensions** – Radius packages Resource Type definitions as Bicep extensions stored in OCI registries or a file share. To use the Resource Types in your application, a workstation or CI runner must have config file (`bicepconfig.json`) that points to the extensions. Checkout the [Bicep extensions]() guide for more information.
+- **Bicep extensions** – Radius packages Resource Type definitions as Bicep extensions stored in OCI registries or a file share. To use the Resource Types in your application, a workstation or CI runner must have config file (`bicepconfig.json`) that points to the extensions. Checkout the [how-to generate Bicep extensions]() for more information.
 
 ### External tools and services Radius interacts with
 
 - **OCI registries** – Hosts the control-plane images, Bicep extensions, and Recipes (for example GHCR or ACR). Ensure both clusters and workstations can authenticate to them. 
 
-- **Git repositories** – Store Terraform based Recipes. Ensure authentication is set up if the repositories are private. Checkout the [Recipe guides]() for more information.
+- **Git repositories** – Store Terraform based Recipes. Ensure authentication is set up if the repositories are private. Checkout the [Recipe guides]({{< ref "/guides/recipes" >}}) for more information.
 
-- **Observability back ends** – Prometheus and Zipkin/Jaeger endpoints collect metrics and traces using the chart settings. Checkout the [Observability guide]() for more information.
+- **Observability back ends** – Prometheus and Zipkin/Jaeger endpoints collect metrics and traces using the chart settings. Checkout the [Observability guide]({{< ref "/guides/observability" >}}) for more information.
 
 ## Installation Requirements
 
 ### Kubernetes requirements
 
-Radius runs on Kubernetes. Radius requires **cluster-admin** permissions to create namespaces, CRDs, and cluster roles.
+Building on the technical architecture overview, Radius runs on Kubernetes and exposes its Universal Control Plane (UCP) through the Kubernetes API aggregation layer. Hence, installing Radius requires **cluster-admin permissions**, so it can register CRDs, namespaces, and RBAC objects.
 
 {{< tabs AKS EKS k3d kind>}}
-
 {{% codetab %}}
+
 To learn how to setup a cluster visit the [Azure docs](https://docs.microsoft.com/azure/aks/learn/quick-kubernetes-deploy-portal?tabs=azure-cli).
 
 Note that [AKS-managed AAD](https://docs.microsoft.com/en-us/azure/aks/managed-aad) is not supported currently.
@@ -48,20 +50,22 @@ az aks create --subscription mySubscription --resource-group myResourceGroup --n
 az aks get-credentials --subscription mySubscription --resource-group myResourceGroup --name myAKSCluster
 ```
 
-Once deployed and your kubectl context has been set as your default, you can run install the control plane following the [Installation guide]({{< ref "/guides/installation/install" >}})
+Once deployed and your kubectl context has been set as your default, you can run install the control plane following the [Installation how-to]({{< ref "/guides/installation/install" >}})
 
 {{% /codetab %}}
 {{% codetab %}}
+
 Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service that you can use to run Kubernetes on AWS. Learn how to set up an EKS cluster on the [AWS docs](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html).
 
 ```bash
 eksctl create cluster --name my-cluster --region region-code
 ```
 
-Once deployed and your kubectl context has been set as your default, you can install the control plane following the [Installation guide]({{< ref "/guides/installation/install" >}})
+Once deployed and your kubectl context has been set as your default, you can install the control plane following the [Installation how-to]({{< ref "/guides/installation/install" >}}).
 
 {{% /codetab %}}
 {{% codetab %}}
+
 [k3d](https://k3d.io) is a lightweight wrapper to run [k3s](https://github.com/rancher/k3s) (Rancher Lab’s minimal Kubernetes distribution) in Docker. 
 
 First, ensure that memory resource is 8GB or more in `Resource` setting of `Preferences` if you're using Docker Desktop. Also make sure you've enabled Rosetta if you're running on an Apple M1 chip:
@@ -88,8 +92,8 @@ Next, install the Radius control plane, along with a new environment. The `rad i
 rad install kubernetes --set rp.publicEndpointOverride=localhost:8081
 ```
 {{% /codetab %}}
-
 {{% codetab %}}
+
 [Kind](https://kind.sigs.k8s.io/) is a tool for running local Kubernetes clusters inside Docker containers. Use the following setup to create a new cluster and install the Radius control plane, along with a new environment:
 
 First, ensure that memory resource is 8GB or more in `Resource` setting of `Preferences` if you're using Docker Desktop. Also make sure you've enabled Rosetta if you're running on an Apple M1 chip:
@@ -120,7 +124,7 @@ Then, create a kind cluster with this config and initialize your Radius Environm
 # Create the kind cluster
 kind create cluster --config kind-config.yaml
 ```
-Checkout the [Installation guide]({{< ref "/guides/installation/install" >}}) for more information.
+Checkout the [Installation how-to]({{< ref "/guides/installation/install" >}}) to get started.
 
 {{% /codetab %}}
 {{< /tabs >}}
@@ -134,3 +138,5 @@ Checkout the [Installation guide]({{< ref "/guides/installation/install" >}}) fo
 - Install Node.js 16 to generate or publish Bicep extensions.
 
 - Ensure you can authenticate to your registries (`docker login`/`az acr login`) from any workstation or CI runner that will push Recipes, Bicep extensions, or mirrored control-plane images if working off a private network.
+
+Use the following how-to guides to install, upgrade, and maintain Radius.
