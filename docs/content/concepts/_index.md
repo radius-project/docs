@@ -14,7 +14,7 @@ This page provides a conceptual overview of Radius. It describes Radius' logical
 
 ## IDP reference architecture
 
-Application developers are often tasked with writing low-level IaC code. For example, they may author a Helm chart to deploy their containers to Kubernetes then a CloudFormation template to deploy an AWS RDS database. In this reference architecture, cloud resources are defined separately from the applicaton deployment implementation. Developers define their applications and application resources abstractly using resource types the platform engineer has defined. Platform engineers then use IaC solutions to implement how the resources are deployed.
+Application developers are often tasked with writing low-level IaC code. For example, they may author a Helm chart to deploy their containers to Kubernetes then a CloudFormation template to deploy an AWS RDS database. In this reference architecture, cloud resources are defined separately from the application deployment implementation. Developers define their applications and application resources abstractly using resource types the platform engineer has defined. Platform engineers then use IaC solutions to implement how the resources are deployed.
 
 The diagram below shows an IDP reference architecture that incorporates these concepts.
 
@@ -25,7 +25,7 @@ As the diagram shows, Radius strictly separates resource *definition* from resou
 By separating resource definition from resource deployment, platform engineers are able to:
 
 - Cleanly separate the work of developers building applications from platform engineers building IaC
-- Improve the application developer experience by defining resource types that are just the right level of abstraction for specific applicatio
+- Improve the application developer experience by defining resource types that are just the right level of abstraction for specific application
 - Eliminate the need for developers to handle low-level infrastructure details
 - Ensure portability between cloud providers and container platforms
 - Ensure best practices for infrastructure security, operational, and cost are followed by default
