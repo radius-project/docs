@@ -1336,3 +1336,5 @@ githubusercontent
 IDP
 IDPs
 swappable
+enums
+camelCase

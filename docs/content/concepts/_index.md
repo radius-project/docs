@@ -44,7 +44,7 @@ Resource Types define the abstraction for a resource that will exist in the real
 
 #### Recipes
 
-While Resource Types define the interface, Recipes define the **implementation**. Radius supports using both Terraform and Bicep IaC languages as the Recipe implementation. The term *recipe* is used as a generic term to refer to both a Terraform configuration/module or a Bicep template.
+While Resource Types define the interface, Recipes define the resource deployment **implementation**. Radius supports deploying resources using either Terraform or Bicep. The term *recipe* is used as a generic term to refer to both a Terraform configuration or a Bicep template.
 
 Recipes are not tightly coupled with Radius or the Resource Type. In most circumstances, an existing Terraform module or Bicep template can be used as a Recipe with slight modifications to ensure the properties in the Resource Type map to the Terraform variables or Bicep parameters.
 
@@ -80,7 +80,9 @@ The Radius CLI, `rad`, is the primary means of interacting with Radius for both 
 
 ### Dashboard
 
-The Radius Dashboard is a Backstage-based developer portal. Its primary purpose is to provide developers with organization-specific developer documentation. The Dashboard includes details for developers on what Resource Types are available, as well as a list of Environments they can deploy their application to. Platform engineers can write customized developer documentation for each Resource Type. 
+The Radius Dashboard is a Backstage-based developer portal. Its primary purpose is to provide developers with 
+
+When defining their application, developers use the Dashboard to reference organization-specific developer documentation, see what Resource Types are available, and get a list of Environments they can deploy their application to. After applications have been deployed, the Dashboard gives developers and operators the list of deployed applications and resources. The Dashboard also visualizes resource dependencies in a graph structure.
 
 When installing Radius, the Dashboard is installed with a Kubernetes Service of type `ClusterIP`. It is left to the platform engineer to configure ingress to the Dashboard.
 

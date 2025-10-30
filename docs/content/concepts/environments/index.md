@@ -25,5 +25,21 @@ The second component of the Environment definition is the set of Recipes for eac
 
 Finally, each Recipe in an Environment definition can also have Environment-level Recipe parameters. Recipe parameters are useful for injecting additional environmental information into the Recipe. Take, for example, a Recipe which deploys a PostgreSQL database using AWS RDS or Azure Database for PostgreSQL. Ideally, the database is created with an endpoint in an existing VPC/virtual network. The virtual network ID can be passed to the Recipe via a Recipe parameter defined within the Environment.
 
+## Environment landscapes
+
+Below are three example landscapes of multiple Environments. There is no right or wrong, it depends on your orgnizational structure and preference. The fist example is a small Radius deployment for one team:
+
+{{< image src="environments-simple.png" width="25%" alt="Simple environment layout" >}}
+
+This approach is simple and easy to get started. However, as the number of applications or teams grows, developers may start to encournter naming collisions and having excessive rights to delete resources. Another approach is an application-centric approach where each application has its own resource group and set of environments.
+
+{{< image src="environments-apps.png"  alt="Application-centric environment layout" >}}
+
+This layout has the advantage of having the ability to customize Recipes per application. However as the number of applications increases, so do the number of Environments which just make for a more complex platform. The final, most advanced layout, represents a large enterprise company with multiple business units.
+
+{{< image src="environments-enterprise.png"  alt="Enterprise environment layout" >}}
+
+Here, Environments are organized by business units, cloud regions, and production versus non-production environments.
+
 <br>
 {{< button text="Next step: Read about Applications concepts" page="concepts/applications" >}}
