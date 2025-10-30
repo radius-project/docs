@@ -1,3 +1,52 @@
+<!--
+
+# Collapsible Code Shortcode
+
+## Usage
+
+The `collapsible-code` shortcode allows you to create collapsible code blocks that are hidden by default and expand when readers choose **Show _text_**.
+
+### Basic Syntax
+
+```markdown
+{{< collapsible-code >}}
+your code here
+{{< /collapsible-code >}}
+```
+
+### With Language Specification
+
+```markdown
+{{< collapsible-code language="bicep" >}}
+resource myApp 'Radius.Applications/applications@2025-10-29' = {
+  name: 'myapp'
+  properties: {
+    // properties here
+  }
+}
+{{< /collapsible-code >}}
+```
+
+### With Custom Text Description
+
+```markdown
+{{< collapsible-code text="example configuration" language="yaml" >}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  database_url: "postgresql://localhost:5432/mydb"
+{{< /collapsible-code >}}
+```
+
+### Supported Parameters
+
+- `language` (optional): Specifies the programming language for syntax highlighting. Defaults to "text" if not specified.
+- `text` (optional): Description appended to "Show"/"Hide". Defaults to "code" if not specified.
+
+-->
+
 <!-- {{ $_hugo_config := `{ "version": 1 }` }} -->
 {{- $defaultDescription := "code" -}}
 {{- $description := $defaultDescription -}}
