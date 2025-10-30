@@ -28,7 +28,7 @@ Radius installations spans across your Kubernetes cluster, developer workstation
 
 - **Git repositories** – Store Terraform based Recipes. Ensure authentication is set up if the repositories are private. Checkout the [Recipe guides]({{< ref "/guides/recipes" >}}) for more information.
 
-- **Observability back ends** – Prometheus and Zipkin/Jaeger endpoints collect metrics and traces using the chart settings. Checkout the [Observability guide]({{< ref "/guides/observability" >}}) for more information.
+- **Observability back ends** – Prometheus and Zipkin/Jaeger endpoints collect metrics and traces using the chart settings. Checkout the [Observability guide](TODO) for more information.
 
 ## Installation Requirements
 
