@@ -45,14 +45,7 @@ The Radius Control Plane services can be installed using Radius CLI or Helm. `ra
 
 {{< tabs `rad initialize` `rad install` `Using Helm` >}}{{% codetab %}}
 
-[`rad initialize`](<{{< ref rad_initialize >}}>) is meant to get started with Radius and doesn't allow much customization.
-
-``` bash
-rad initialize
-```
-Select `Yes` to set up application in the current directory.
-
-This command:
+[`rad initialize`](<{{< ref rad_initialize >}}>) is meant to get started with Radius and doesn't allow much customization. It
 
 - Creates the radius-system namespace and installs the `radius` Helm release.
 - Creates a default Resource Group, Environment, and Workspace.
@@ -63,14 +56,6 @@ This command:
 {{% codetab %}}
 
 [`rad install kubernetes`]({{< ref rad_install_kubernetes >}}) installs or reinstalls only the Radius control plane into the `radius-system` namespace. Use this option when you need to customize the installation for your production workloads and platform needs.
-
-```bash
-# Install Radius
-rad install kubernetes
-
-# Force reinstall
-rad install kubernetes --reinstall
-```
 
 {{% /codetab %}}
 {{% codetab %}}
@@ -101,13 +86,13 @@ Check out the [Helm chart](https://github.com/radius-project/radius/blob/main/de
 {{% /codetab %}}
 {{</tabs>}}
 
-## Customize the Radius installation
+### Customize the Radius installation
 
 You can customize the Radius installation regardless of the entry point (`rad initialize`, `rad install kubernetes`, or Helm) with Helm overrides (`--set`, `--set-file`). 
 
 For more information on the Helm Installation Options, checkout the [reference guide]({{< ref "helminstallation" >}}).
 
-### Bring your own root certificate authority certificate
+#### Bring your own root certificate authority certificate
 
 Many enterprises leverage intermediate root certificate authorities (CAs) to enhance security and control over outgoing traffic originating from their employees' machines, particularly when using a firewall or proxy solution. Radius can mount an intermediate CA bundle into every control-plane pod. Set `global.rootCA.cert` using `--set-file` option via CLI or in the Helm chart. 
 
@@ -117,13 +102,13 @@ Example:
 rad install kubernetes --set-file global.rootCA.cert=/etc/ssl/your-root-ca.crt
 ```
 
-### Deploy to Air-gapped environments
+#### Deploy to Air-gapped environments
 
 Radius pulls container images for control plane services from the GitHub Container Registry (ghcr.io). In environments with strict security controls or no internet access (air‑gapped), mirror the required images to an internal registry and configure Radius to use that registry.
 
 Example of mirroring images (requires access to both registries):
 
-```bash
+```sh
 # List of Radius images
 IMAGES=(
   "controller"
@@ -179,7 +164,7 @@ rad install kubernetes --skip-contour-install
 
 Radius still emits `HTTPProxy` resources when you deploy gateways. If you use a different ingress API, install the matching CRDs and update your app manifests so the generated resources are compatible with your controller.
 
-### Radius Dashboard
+#### Radius Dashboard
 
 The Dashboard is enabled by default. You can disable it when you do not need the Backstage-based UI:
 
