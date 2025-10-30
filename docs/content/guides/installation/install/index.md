@@ -190,4 +190,4 @@ When enabled, expose it via Contour or your ingress. In locked-down clusters you
 
 - Review the [`rad install`]({{< ref rad_install >}}) command reference for the full set of flags.
 - Follow the [upgrade guide]({{< ref "guides/installation/upgrade" >}}) to plan version rollouts.
-- Learn how to [roll back Radius]({{< ref "guides/installation/rollback" >}}) if an installation or upgrade needs to be reversed.
+- Learn how to [roll back Radius]({{< ref "guides/installation/upgrade#roll-back-radius" >}}) if an installation or upgrade needs to be reversed.
