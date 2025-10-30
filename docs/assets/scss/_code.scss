@@ -1,88 +1,110 @@
-// Code formatting.
+/* ---- Code block overrides (Chroma + Highlight.js) ---- */
 
-.highlight .copy-icon {
-    position: absolute;
-    right: 20px;
-    top: 18px;
-    opacity: 0.7;
+/* Ensure the copy icon is always visible and positioned */
+.td-content .highlight {
+  position: relative; /* anchor for absolutely positioned copy icon */
 }
 
-
-.highlight pre {
-    /* Avoid pushing up the copy buttons. */
-    margin: 0;
+/* --- Copy icon: always visible and colored --- */
+.td-content .highlight {
+  position: relative;
 }
 
-.td-content {
+/* Always visible */
+.td-content .highlight .copy-icon {
+  position: absolute;
+  right: 20px;
+  top: 18px;
+  z-index: 2;
 
-    // Highlighted code.
-    .highlight {
-        @extend .card;
+  /* Always show */
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto;
+  transition: none !important;
 
-        margin: 0rem 0;
-        padding: 0rem;
+  /* 🔹 Visual style */
+  background-color: #444;       /* primary blue, adjust as needed */
+  color: #ffffff;                  /* white icon/text */
+  border: none;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-        margin-bottom: 2rem;
+  &:hover {
+    background-color: #444;     /* darker blue on hover */
+  }
+}
 
-        max-width: 100%;
+/* Make ALL code block surfaces light grey, regardless of renderer */
+.td-content .highlight,
+.td-content .highlight pre,
+.td-content .highlight table,
+.td-content .highlight td,
+.td-content pre,
+.td-content pre > code,
+.td-content .chroma,
+.td-content .chroma .hl,
+.td-content code[class*="language-"],
+.td-content pre[class*="language-"] {
+  background-color: #f5f5f5 !important; /* light grey */
+  color: #1a1a1a;                       /* readable text */
+  border-radius: 10px;
+}
 
-        border: none;
+/* Fix the table layout Chroma uses so the grey fills the code cell */
+.td-content .highlight table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
 
-        pre {
-            margin: 0;
-            padding: 1rem;
-            border-radius: 10px;
-        }
+.td-content .highlight td {
+  border: 0;
+  padding: 0;
+}
 
-        table td:nth-child(2) {
-            display: grid;
-            background-color: #fff;
+/* Keep inner <pre> edges flush when inside the table wrapper */
+.td-content .highlight table td:nth-child(2) pre {
+  border-radius: 0 0 0 0;
+  margin: 0;
+  padding: 1rem;
+}
 
-            pre {
-                border-radius: 0px 0px 0px 0px;
-            }
-        }
-    }
+/* Override Chroma inline string/link color (yellow) for better readability */
+.td-content .highlight span[style*="#e6db74"],
+.td-content .highlight span[style*="#f1fa8c"],
+.td-content pre span[style*="#e6db74"],
+.td-content pre span[style*="#f1fa8c"] {
+  color: #1d4ed8 !important;
+}
 
-    // Inline code
-    p code,
-    li>code,
-    table code {
-        color: inherit;
-        padding: 0.2em 0.4em;
-        margin: 0;
-        font-size: 85%;
-        word-break: normal;
-        background-color: rgba($black, 0.05);
-        border-radius: $border-radius;
+/* Generic <pre> blocks outside .highlight */
+.td-content pre {
+  margin: 0;
+  padding: 1rem;
+  word-wrap: normal;
+}
 
-        br {
-            display: none;
-        }
-    }
+/* Inline code stays subtle */
+.td-content p code,
+.td-content li > code,
+.td-content table code {
+  background-color: rgba(0, 0, 0, 0.05);
+}
 
+/* Override string color (yellow) in code blocks */
+.td-content .highlight .chroma .s,
+.td-content .highlight .chroma .s1,
+.td-content .highlight .chroma .s2 {
+  color: #0a66c2 !important;  /* example: Azure blue */
+}
 
-    // Code blocks
-    pre {
-        word-wrap: normal;
-        background-color: $gray-100;
-        padding: $spacer;
-
-        max-width: 100%;
-
-        >code {
-            background-color: inherit !important;
-            padding: 0;
-            margin: 0;
-            font-size: 100%;
-            word-break: normal;
-            white-space: pre;
-            border: 0;
-        }
-    }
-
-    pre.mermaid {
-        background-color: inherit;
-        font-size: 0;
-    }
+/* Or neutralize syntax coloring for a more uniform look */
+.td-content .highlight .chroma * {
+  color: #1a1a1a !important;
 }
