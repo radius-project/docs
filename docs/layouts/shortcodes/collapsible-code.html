@@ -1,0 +1,35 @@
+<!-- {{ $_hugo_config := `{ "version": 1 }` }} -->
+{{- $defaultDescription := "code" -}}
+{{- $description := $defaultDescription -}}
+{{- with .Get "text" -}}
+    {{- $cleanText := trim (plainify (printf "%s" .)) " \t\r\n" -}}
+    {{- $cleanText = replaceRE "^(?i)(show|hide|click here to view)\\s+" "" $cleanText -}}
+    {{- if ne $cleanText "" -}}
+        {{- $description = $cleanText -}}
+    {{- end -}}
+{{- end -}}
+{{- $showText := printf "Show %s" $description -}}
+{{- $hideText := printf "Hide %s" $description -}}
+{{- $iconCollapsed := "▸" -}}
+{{- $iconExpanded := "▾" -}}
+{{- $code := trim .Inner "\r\n" -}}
+<div class="collapsible-code" style="background-color: #f8f9fa; border-radius: 0.5rem; padding: 0.75rem 1rem; margin: 1rem 0;">
+    <div class="collapsible-code-toggle" style="cursor: pointer; display: flex; align-items: center; gap: 0.75rem; font-family: inherit; font-weight: 600; margin: 0;" 
+        role="button"
+        tabindex="0"
+        aria-expanded="false"
+         data-show-text="{{ $showText }}" 
+         data-hide-text="{{ $hideText }}"
+         data-icon-collapsed="{{ $iconCollapsed }}"
+         data-icon-expanded="{{ $iconExpanded }}"
+        onclick="$h=$(this);$content=$h.next('.collapsible-code-content');$showText=$h.data('show-text');$hideText=$h.data('hide-text');$collapsedIcon=$h.data('icon-collapsed');$expandedIcon=$h.data('icon-expanded');$icon=$h.find('.collapsible-code-icon');$label=$h.find('.collapsible-code-label');$content.slideToggle(200,function(){$expanded=$content.is(':visible');$icon.text($expanded?$expandedIcon:$collapsedIcon);$label.text($expanded?$hideText:$showText);$h.attr('aria-expanded',$expanded);});"
+        onkeydown="if(event.key==='Enter'||event.key===' '||event.keyCode===13||event.keyCode===32){event.preventDefault();$(this).trigger('click');}">
+    <span class="collapsible-code-icon" aria-hidden="true" style="font-size: 1.5rem; line-height: 1;">{{ $iconCollapsed }}</span>
+    <span class="collapsible-code-label" style="font-size: 1rem; color: #1a1a1a;">{{ $showText }}</span>
+    </div>
+    <div class="collapsible-code-content" style="display: none; margin-top: 0.75rem;">
+        <div class="highlight" style="background-color: #f5f5f5; border: none; margin: 0;">
+            <pre style="background-color: #f8f9fa; margin: 0;"><code class="language-{{ .Get "language" | default "text" }}">{{- $code -}}</code></pre>
+        </div>
+    </div>
+</div>
