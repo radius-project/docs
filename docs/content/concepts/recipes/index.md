@@ -6,13 +6,13 @@ description: "How Recipes are used to deploy resources"
 weight: 20
 ---
 
-Recipes are how resources are deployed. The generic term *recipe* is used because Radius uses existing Infrastructure as Code (IaC) solutions to perform the actual deployment of resources. Today, Radius supports deploying resources using both Terraform configurations and Bicep templates, but Radius is designed to integrate with other IaC solutions in the future. Just as Resource Types can represent any resource, Recipes can deploy any resource supported by the IaC language. As long as there is a Terraform provider or Bicep extension, Radius can deploy that resource. In fact, if you have an existing Terraform module or Bicep template, it can be used as a Recipe with only minor changes.
+Recipes are how resources are deployed. The generic term *recipe* is used because Radius uses existing Infrastructure as Code (IaC) solutions to perform the actual deployment of resources. Today, Radius supports deploying resources using both Terraform configurations and Bicep templates, but Radius is designed to integrate with other IaC solutions in the future. Just as Resource Types can represent any resource, Recipes can deploy any resource supported by the IaC language. As long as there is a Terraform provider or Bicep extension, Radius can deploy that resource. In fact, if you have an existing Terraform configurations or Bicep template, it can be used as a Recipe with only minor changes.
 
 This concepts page discusses how Radius makes using Terraform and Bicep easier to deploy resources.
 
 ## How Recipes are executed
 
-Recipes can be any new or existing Terraform module or Bicep template. When a resource is deployed via Radius, the Radius control plane (specifically the Application Resource Provider) cross references the Resource Type and Environment to determine which Recipe to execute. It then executes the Terraform or Bicep binary within the Application RP container and passes the Recipe location as a command-line argument.
+Recipes can be any new or existing Terraform configurations or Bicep template. When a resource is deployed via Radius, the Radius control plane (specifically the Application Resource Provider) cross references the Resource Type and Environment to determine which Recipe to execute. It then executes the Terraform or Bicep binary within the Application RP container and passes the Recipe location as a command-line argument.
 
 When executing the Terraform or Bicep binaries, Radius does several things:
 

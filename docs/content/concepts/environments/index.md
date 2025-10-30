@@ -14,7 +14,7 @@ When defining an Environment, the deployment location is specified by `provider`
 - **AWS**: The account and region
 - **Azure**: The subscription and resource group
 
-When a resource is deployed, these location details are provided to the Terraform module or Bicep template via the `context` object.
+When a resource is deployed, these location details are provided to the Terraform configuration or Bicep template via the `context` object.
 
 The second component of the Environment definition is the set of Recipes for each Resource Type. By assigning Recipes at the Environment level, it is possible for each Environment to have a unique set of Recipes. Take a PostgreSQL database Resource Type as an example, there may be:
 
