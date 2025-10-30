@@ -27,11 +27,11 @@ Finally, each Recipe in an Environment definition can also have Environment-leve
 
 ## Environment landscapes
 
-Below are three example landscapes of multiple Environments. There is no right or wrong, it depends on your orgnizational structure and preference. The fist example is a small Radius deployment for one team:
+Below are three example landscapes of multiple Environments. There is no right or wrong, it depends on your organizational structure and preference. The fist example is a small Radius deployment for one team:
 
 {{< image src="environments-simple.png" width="25%" alt="Simple environment layout" >}}
 
-This approach is simple and easy to get started. However, as the number of applications or teams grows, developers may start to encournter naming collisions and having excessive rights to delete resources. Another approach is an application-centric approach where each application has its own resource group and set of environments.
+This approach is simple and easy to get started. However, as the number of applications or teams grows, developers may start to encounter naming collisions and having excessive rights to delete resources. Another approach is an application-centric approach where each application has its own resource group and set of environments.
 
 {{< image src="environments-apps.png"  alt="Application-centric environment layout" >}}
 
