@@ -286,7 +286,7 @@ When developers are defining their applications and have the Bicep extension for
 
 ### Read-only properties
 
-Read-only properties are properties that are set by the Recipe when the resource is deployed. In IaC solutions, these properties are often called *outputs*. When defining a Resource Type, consider what information a developer needs in order to use the deployed resource. Most often this information is connection informations such as hostnames and/or credentials. 
+Read-only properties are properties that are set by the Recipe when the resource is deployed. In IaC solutions, these properties are often called *outputs*. When defining a Resource Type, consider what information a developer needs in order to use the deployed resource. Most often this information is connection information such as hostnames and/or credentials. 
 
 In the case of the Containers Resource Type, we will define a read-only property for the fully-qualified domain name for the service that is created when exposing a container port.
 
@@ -357,7 +357,7 @@ The description includes whether the property is Required, Optional, or Read-onl
 
 ## Creating Resource Types
 
-THe final Containers Resource Type incorporating all the techniques demonstrated in this guide is available in the [`resource-types-contrib`](https://github.com/radius-project/resource-types-contrib/blob/main/Compute/containers/containers.yaml) repository on GitHub.
+The final Containers Resource Type incorporating all the techniques demonstrated in this guide is available in the [`resource-types-contrib`](https://github.com/radius-project/resource-types-contrib/blob/main/Compute/containers/containers.yaml) repository on GitHub.
 
 Creating this Resource Type in Radius requires three actions:
 
@@ -367,7 +367,7 @@ Creating this Resource Type in Radius requires three actions:
 
 Resource Types can be created in Radius using the [`rad resource-type create`]({{< ref "rad_resource-type_create" >}}) command.
 
-In order for the Radius CLI and Bicep extension for VS Code to understand the structure of a Resource Type, a Bicep extension must be created using the [`rad bicep publish-extension`]({{< ref "rad_bicep_publish-extension" >}}) command. The `--target` arguement can be either:
+In order for the Radius CLI and Bicep extension for VS Code to understand the structure of a Resource Type, a Bicep extension must be created using the [`rad bicep publish-extension`]({{< ref "rad_bicep_publish-extension" >}}) command. The `--target` argument can be either:
 
 * Azure Container Registry
 * A local disk or file share
