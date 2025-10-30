@@ -9,35 +9,35 @@ The `collapsible-code` shortcode allows you to create collapsible code blocks th
 ### Basic Syntax
 
 ```markdown
-{{< collapsible-code >}}
+< collapsible-code > enclose in double curly braces
 your code here
-{{< /collapsible-code >}}
+< /collapsible-code > enclose in double curly braces
 ```
 
 ### With Language Specification
 
 ```markdown
-{{< collapsible-code language="bicep" >}}
+< collapsible-code language="bicep" > enclose in double curly braces
 resource myApp 'Radius.Applications/applications@2025-10-29' = {
   name: 'myapp'
   properties: {
     // properties here
   }
 }
-{{< /collapsible-code >}}
+< /collapsible-code > enclose in double curly braces
 ```
 
 ### With Custom Text Description
 
 ```markdown
-{{< collapsible-code text="example configuration" language="yaml" >}}
+< collapsible-code text="example configuration" language="yaml" > enclose in double curly braces
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: app-config
 data:
   database_url: "postgresql://localhost:5432/mydb"
-{{< /collapsible-code >}}
+< /collapsible-code > enclose in double curly braces
 ```
 
 ### Supported Parameters
