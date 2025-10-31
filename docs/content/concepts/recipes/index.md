@@ -8,6 +8,8 @@ weight: 20
 
 Recipes are how resources are deployed. The generic term *recipe* is used because Radius uses existing Infrastructure as Code (IaC) solutions to perform the actual deployment of resources. Today, Radius supports deploying resources using both Terraform and Bicep, but Radius is designed to integrate with other IaC solutions in the future. Just as Resource Types can represent any resource, Recipes can deploy any resource supported by the IaC language. As long as there is a Terraform provider or Bicep extension, Radius can deploy that resource. In fact, if you have an existing Terraform configurations or Bicep templates, they can be used as Recipes with only minor changes.
 
+The combination of Resource Types and Recipes remove the need for developers to have deep understanding of infrastructure they are deploying too. Additionally, Recipes enable platform engineers to enforce security, operational, and cost best practices by requiring resource deployments to be performed only via a configured Recipe.
+
 ## How Recipes are executed
 
 Recipes can be any new or existing Terraform configurations or Bicep template. When a resource is deployed via Radius, the Radius control plane (specifically the Application RP) cross-references the Resource Type and Environment to determine which Recipe to execute. It then executes the Terraform or Bicep binary within the Application RP container and passes the Recipe location as a command-line argument.
@@ -24,8 +26,6 @@ When executing the Terraform or Bicep binaries, Radius does several things:
 
 ## Recipe context object and Recipe parameters
 
-{{< image src="context.png" width="70%" alt="Recipe context sources" >}}
-
 Radius automatically injects a `context` object when deploying resources. The `context` object is rich with *contextual* information about the Environment, Application, and the resource being deployed. This includes:
 
 - The Application name
@@ -35,6 +35,8 @@ Radius automatically injects a `context` object when deploying resources. The `c
 - All connected resources and their properties
 
 In addition to `context`, platform engineers can specify Recipe parameters in the Environment definition. These Recipe parameters are then set as Terraform variables or Bicep parameters. 
+
+{{< image src="context.png" width="70%" alt="Recipe context sources" >}}
 
 By using the `context` object and Recipe parameters, Recipes have all the information needed to deploy the actual resource in the target location. this significantly reduces the amount of information needed from developers.
 

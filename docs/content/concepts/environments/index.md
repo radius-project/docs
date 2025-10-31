@@ -23,11 +23,11 @@ The second component is the set of Recipes for each Resource Type. By assigning 
 
 Finally, each Recipe in an Environment definition can also have Environment-level Recipe parameters. Recipe parameters are useful for injecting additional environmental information into the Recipe. Take, for example, a Recipe which deploys a PostgreSQL database using AWS RDS or Azure Database for PostgreSQL. Ideally, the database is created with an endpoint in an existing VPC/virtual network. The virtual network ID can be passed to the Recipe via a Recipe parameter defined within the Environment.
 
-## Environment landscapes
+## Example of using Environments
 
 Environments can be modeled in many ways according to your preferences. When combined with Resource Groups, Environments can be organized in many different ways. They may be logical environments such as dev, test, stage, prod. Or they may be locations such as AWS us-east-1. They may be specific to an application or a team, or shared across the organization.
 
-Below are three example landscapes of multiple Environments. There is no right or wrong, it depends on your organizational structure and preference. The first example is a small Radius deployment for one team:
+Below are three example using of multiple Environments. There is no right or wrong, it depends on your organizational structure and preference. The first example is a small Radius deployment for one team:
 
 {{< image src="environments-simple.png" width="25%" alt="Simple environment layout" >}}
 
@@ -35,7 +35,7 @@ This approach is simple and easy to get started. However, as the number of appli
 
 {{< image src="environments-apps.png"  alt="Application-centric environment layout" >}}
 
-This layout has the advantage of having the ability to customize Recipes per application. However as the number of applications increases, so do the number of Environments which just make for a more complex platform. The final, most advanced layout, represents a large enterprise company with multiple business units.
+This layout has the advantage of having the ability to customize Recipes per application. However as the number of applications increases, so do the number of Environments which just make for a more complex platform. The final, most advanced layout, represents a large enterprise with multiple business units.
 
 {{< image src="environments-enterprise.png"  alt="Enterprise environment layout" >}}
 
