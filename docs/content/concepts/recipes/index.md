@@ -34,7 +34,7 @@ Radius automatically injects a `context` object when deploying resources. The `c
 - The resource name and all of its properties
 - All connected resources and their properties
 
-In addition to `context`, platform engineers can specify Recipe parameters in the Envirnoment definition. These Recipe parameters are then set as Terraform variables or Bicep parameters. 
+In addition to `context`, platform engineers can specify Recipe parameters in the Environment definition. These Recipe parameters are then set as Terraform variables or Bicep parameters. 
 
 By using the `context` object and Recipe parameters, Recipes have all the information needed to deploy the actual resource in the target location. this significantly reduces the amount of information needed from developers.
 
