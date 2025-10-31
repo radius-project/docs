@@ -6,7 +6,7 @@ description: "How Radius manages applications"
 weight: 40
 ---
 
-A Radius Application is a resource that is a parent to other resources that make up the application. Radius typically operates on Applications rather individual resources. For example, developers deploy Applications rather than individual resources. Operators and SREs view an Application's deployed resources or view an Application's dependencies. Applications and its resources are defined in an application definition file using the Bicep Infrastructure as Code (IaC) language. 
+A Radius Application is a resource that is a parent to other resources that make up the application. Radius typically operates on Applications rather individual resources. For example, developers deploy Applications rather than individual resources. SREs view an Application's deployed resources or view an Application's dependencies. Applications and its resources are defined in an application definition file using the Bicep Infrastructure as Code (IaC) language. 
 
 ## Resources
 
@@ -28,7 +28,7 @@ resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
   properties: {
     application: todolist.id
     container: { ... }
-    connections: {
+    connections: {              // Connection named postgresql
       postgresql: {
         source: postgresql.id
       }
@@ -37,7 +37,7 @@ resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
 }
 ```
 
-In this case, the connection name is `postgresql` and the connection is between the frontend container and the PostgreSQL database resource (not pictured). Since the PostgreSQL Resource Type has `host`, `port`, and `username` property, environment variables within the container are automatically created for those properties:
+In this case, the connection name is `postgresql` and the connection is between the frontend container and the PostgreSQL database resource (omitted for brevity). Since the PostgreSQL Resource Type has `host`, `port`, and `username` properties, environment variables within the container are automatically created for those properties:
 
 - `CONNECTION_POSTGRESQL_HOST`
 - `CONNECTION_POSTGRESQL_PORT`
@@ -65,7 +65,7 @@ But the application graph is not just resources defined by the developer. Deploy
       - Kubernetes Deployment
       - Kubernetes Service
 
-The application graph allows developers to understand what resources got deployed even when they defined their application using high-level Resource Types. It also allows operators and SREs to easily understand what application a deployed resource belongs to. 
+The application graph allows developers to understand what resources got deployed even when they defined their application using high-level Resource Types. It also allows SREs to easily understand what application a deployed resource belongs to. 
 
 <br>
 {{< button text="Next step: Complete the tutorial" page="tutorials" >}}

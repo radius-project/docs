@@ -24,8 +24,8 @@ As the diagram shows, Radius strictly separates resource *definition* from resou
 
 By separating resource definition from resource deployment, platform engineers are able to:
 
-- Cleanly separate the work of developers building applications from platform engineers building IaC
-- Improve the application developer experience by defining resource types that are just the right level of abstraction for specific application
+- Cleanly separate the work of developers building applications from platform engineers building infrastructure
+- Improve the application developer experience by defining resource types that are just the right level of abstraction for applications
 - Eliminate the need for developers to handle low-level infrastructure details
 - Ensure portability between cloud providers and container platforms
 - Ensure best practices for infrastructure security, operational, and cost are followed by default
@@ -40,7 +40,7 @@ Radius is designed around a small number of core components. In order to enforce
 
 #### Resource Types
 
-Resource Types define the abstraction for a resource that will exist in the real world when deployed. Resource Types represent the **interface**, or contract, between developers and the platform. Since they are abstract and application-oriented, there is only one Resource Type defined within Radius for each application resource. For example, a platform engineer may define a PostgreSQL database Resource Type which is an application-oriented abstraction of a one of the many ways of deploying an PostgreSQL database. Resource Types are defined conceptually by what they represent, but concretely by their name, API version, and their schema. The schema contains the set of required and optional properties which are used by developers when defining their application.
+Resource Types define the abstraction for a resource that will exist in the real world when deployed. Resource Types represent the **interface**, or contract, between developers and the platform. Since they are abstract and application oriented, there is only one Resource Type defined within Radius for each application resource. For example, a platform engineer may define a PostgreSQL database Resource Type which is an application-oriented abstraction of a one of the many ways of deploying an PostgreSQL database. Resource Types are defined conceptually by what they represent, but concretely by their name, API version, and their schema. The schema contains the set of required and optional properties which are used by developers when defining their application.
 
 #### Recipes
 
@@ -50,7 +50,7 @@ Recipes are not tightly coupled with Radius or the Resource Type. In most circum
 
 #### Environments
 
-Environments are where Resource Types, Recipes, and your cloud provider come together. An Environment defines the target deployment location. Specifically, a Kubernetes namespace, an AWS account and region, or an Azure subscription and resource group. Critically, the Environment also defines the set of Recipes to be used for each Resource Type. By assigning Recipes at the Environment level, it is possible for each Environment to have a unique set of Recipes. Finally, each Recipe in an Environment definition can also have Environment-level Recipe parameters. Recipe parameters are useful for injecting additional environmental information into the Recipe.
+Environments are where Resource Types, Recipes, and cloud providers come together. An Environment defines the target deployment location. Specifically, a Kubernetes namespace, an AWS account and region, or an Azure subscription and resource group. Critically, the Environment also defines the set of Recipes to be used for each Resource Type. By assigning Recipes at the Environment level, it is possible for each Environment to have a unique set of Recipes. Finally, each Recipe in an Environment definition can also have Environment-level Recipe parameters. Recipe parameters are useful for injecting additional environmental information into the Recipe.
 
 #### Resource Groups
 
@@ -58,7 +58,7 @@ All resources are created in one and only one Resource Group. They are analogous
 
 #### Credentials
 
-When a developer requests a resource to be deployed, those resources are not deployed using the developers credentials. Rather, Radius uses its own Kubernetes, AWS, or Azure credentials. This enables platform engineers to only allow resources to be deployed via Radius. Radius supports creating credentials for AWS and Azure using either secrets or workload identity.
+When a developer requests a resource to be deployed, those resources are not deployed using the developers' credentials. Rather, Radius uses its own Kubernetes, AWS, or Azure credentials stored in the Radius control plane. This enables platform engineers to only allow resources to be deployed via Radius.
 
 ### Developer components
 
@@ -80,11 +80,7 @@ The Radius CLI, `rad`, is the primary means of interacting with Radius for both 
 
 ### Dashboard
 
-The Radius Dashboard is a Backstage-based developer portal. Its primary purpose is to provide developers with 
-
-When defining their application, developers use the Dashboard to reference organization-specific developer documentation, see what Resource Types are available, and get a list of Environments they can deploy their application to. After applications have been deployed, the Dashboard gives developers and operators the list of deployed applications and resources. The Dashboard also visualizes resource dependencies in a graph structure.
-
-When installing Radius, the Dashboard is installed with a Kubernetes Service of type `ClusterIP`. It is left to the platform engineer to configure ingress to the Dashboard.
+When defining their application, developers use the Dashboard to reference organization-specific developer documentation, see what Resource Types are available, and get a list of Environments they can deploy their application to. After applications have been deployed, the Dashboard gives developers and SREs the list of deployed applications and resources. The Dashboard also visualizes resource dependencies in a graph structure.
 
 ### Universal Control Plane
 
@@ -98,7 +94,7 @@ When an Application is deployed using Radius, UCP makes a request to the Deploym
 
 ### Applications and Dynamic Resource Providers
 
-The Applications and Dynamic Resource Provider (RP) components are internal components that handle the actual deployment of resources. Ultimately, the Terraform or Bicep CLIs are executed within the Dynamic RP container.
+The Applications and Dynamic Resource Provider (RP) components are internal components that handle the actual deployment of resources. Ultimately, the Terraform or Bicep CLIs are executed within the Applications RP container.
 
 ### Controller
 
@@ -106,8 +102,8 @@ The Controller component is an internal component that handles miscellaneous fun
 
 ### Git repository and OCI registry
 
-When Radius deploys a resource using Terraform or Bicep, the Dynamic RP container must have access to the specified Recipe. Therefore, a Git repository is used to store Terraform configurations and an OCI registry is used to store Bicep templates. Radius does not run recipes off the local workstation's file system. 
+When Radius deploys a resource using Terraform or Bicep, the Applications and Dynamic RP container must have access to the specified Recipe. Therefore, a Git repository is used to store Terraform configurations and an OCI registry is used to store Bicep templates. Radius does not run recipes off the local workstation's file system. 
 
 ## Next Steps
 
-If you want to learn more about Radius concepts, continue reading the additional concept pages below. However, if you prefer to be hands on, skip forward to the [tutorial]({{< ref "tutorials" >}}).
+If you want to learn more about Radius concepts, continue reading the additional concept pages below. However, if you prefer to be hands-on, skip forward to the [tutorial]({{< ref "tutorials" >}}).
