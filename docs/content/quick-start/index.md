@@ -36,7 +36,7 @@ Ensure your cluster is set as your current context using `kubectl config current
 rad initialize
 ```
 
-Select `Yes` to setup application in the current directory.
+Select `Yes` to set up application in the current directory.
 
 Example output:
 
