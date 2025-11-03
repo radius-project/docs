@@ -8,27 +8,26 @@ description: "Details on the rad resource-type delete Radius CLI command"
 ---
 ## rad resource-type delete
 
-Delete a resource type
+Delete resource type
 
 ### Synopsis
 
-Delete a resource type
+Delete resource type
+		
+Resource types are the entities that implement resource types such as 'Applications.Core/containers'. Each resource type can define multiple API versions, and each API version defines a schema that resource instances conform to. Resource providers can be created and deleted by users.
 
-Deleting a resource type will delete the specified resource type. For example, deleting 'Applications.Core/containers' will delete that type (but not deployed instances of the type).
-
-The resource type name argument must be a fully qualified resource type name in the format 'ResourceType.Namespace/resourceTypeName' (e.g., 'Radius.Compute/containers').
-
+Deleting a resource type will delete all resources of the specified resource type. For example, deleting 'Applications.Core/containers' will delete all containers.
 
 ```
-rad resource-type delete [resource-type-name] [flags]
+rad resource-type delete [resource type] [flags]
 ```
 
 ### Examples
 
 ```
 
-# Delete a resource type (fully qualified name required)
-rad resource-type delete Radius.Compute/containers
+# Delete a resource type
+rad resource-type delete Applications.Core/containers
 
 # Delete a resource type (bypass confirmation)
 rad resource-type delete Applications.Core/containers --yes

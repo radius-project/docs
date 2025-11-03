@@ -1333,3 +1333,9 @@ OpenAPI
 Gi
 memoryRequest
 githubusercontent
+IDP
+IDPs
+swappable
+enums
+camelCase
+ArgoCD
