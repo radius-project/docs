@@ -5,6 +5,7 @@ linkTitle: "Quick Start"
 weight: 10
 description: "Perform a quick installation of Radius and deploy your first application"
 aliases:
+    - /getting-started/
     - /getting-started/tutorial/
     - /getting-started/install/
     - /getting-started/first-app/
