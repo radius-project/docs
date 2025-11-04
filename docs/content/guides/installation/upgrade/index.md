@@ -11,96 +11,144 @@ aliases:
   - /guides/operations/kubernetes/kubernetes-rollback
 ---
 
-Radius supports in-place upgrades on Kubernetes with `rad upgrade kubernetes`. If a release misbehaves, restore a prior Helm revision with `rad rollback kubernetes`. Use the workflow below to move forward—and back—safely.
+Radius upgrades and rollbacks ship directly in the CLI. `rad upgrade kubernetes` drives a Helm upgrade of the Radius control plane (and Contour, if installed), while `rad rollback kubernetes` replays an earlier Helm revision. Both commands act on the cluster wired to your active workspace; use `rad workspace show` and `rad workspace switch` if you need a different target.
 
 ## Upgrade Radius
 
-1. **Update the `rad` CLI** – Installation and upgrade commands are tied to the CLI version. Install the latest CLI before upgrading Radius services.
+### Before you run `rad upgrade`
 
-2. **Run the upgrade** – The upgrade process automatically runs preflight checks to ensure your cluster is ready for the upgrade. These checks include:
+- Install the latest `rad` CLI. The CLI release determines the default chart version pushed to the cluster.
+- Confirm Radius is already installed in the target cluster—`rad upgrade` exits early if it cannot find the `radius` Helm release.
+- Make sure your kubeconfig user has cluster-admin permissions. The upgrade re-applies cluster-scoped resources and CRDs.
 
-- Kubernetes connectivity and permissions: Verifies connection to the cluster and required RBAC permissions
-- Helm connectivity and installation status: Confirms Radius is installed via Helm and can be upgraded
-- Version compatibility validation: Ensures the target version is compatible with your current version
-- Cluster resource availability: Checks for sufficient resources (optional warning)
-- Custom configuration validation: Validates any custom Helm values
+### Choose the target version
 
-   ```bash
-   # Upgrade to the version that matches your CLI (recommended)
-   rad upgrade kubernetes
+`rad upgrade kubernetes` resolves the upgrade version the same way the code does:
 
-   # Upgrade to a specific version
-   rad upgrade kubernetes --version 0.50.0
+- **Default:** The CLI release version. On edge builds, the CLI resolves the latest stable chart from `ghcr.io/radius-project/helm-chart`.
+- **`--version <semver>`:** Force a specific chart version (for example `0.50.0`). The preflight logic prevents downgrades and only allows a one-minor-step upgrade.
+- **`--version latest`:** Resolve to the newest chart available in the Radius registry.
+- **Custom values:** Pass the same overrides you used during install with `--set` and `--set-file` (for example image registry overrides or custom CA bundles). The CLI parses these flags before invoking Helm, matching the logic in `pkg/cli/helm/radius.go`.
 
-   # Upgrade with custom Helm values
-   rad upgrade kubernetes --set key=value
-   ```
+```bash
+# Recommended: upgrade to the version that matches your CLI
+rad upgrade kubernetes
 
-   Need to adjust the checks?
+# Upgrade to a specific chart version
+rad upgrade kubernetes --version 0.50.0
 
-   ```bash
-   rad upgrade kubernetes --preflight-only     # Run checks only
-   rad upgrade kubernetes --skip-preflight     # Skip checks (not recommended)
-   ```
+# Override Helm values during the upgrade
+rad upgrade kubernetes --set global.imageRegistry=myregistry.azurecr.io
+```
 
-3. **Verify success** – Confirm the control plane restarted on the expected version and your environments still respond.
+### Understand the preflight checks
 
-   ```bash
-   rad version
-   kubectl get pods -n radius-system
-   rad env list
-   ```
+Unless you skip them, the command runs `pkg/upgrade/preflight` checks before touching the cluster:
 
-> **Tip:** Review the [release notes](https://github.com/radius-project/radius/releases) for breaking changes and back up environment definitions before upgrading: `rad env show -o json > env-backup.json`.
+- **Kubernetes connectivity** – Verifies kubeconfig context and basic cluster permissions.
+- **Helm connectivity** – Confirms the `radius` release exists and Helm can talk to it.
+- **Radius installation status** – Ensures the control plane is currently installed.
+- **Version compatibility** – Blocks downgrades or multi-version jumps.
+- **Custom configuration validation** – Parses all `--set`/`--set-file` input and warns when keys do not map to the chart.
+- **Resource availability** – Emits warnings if the cluster reports low capacity.
 
-## Roll back workflow
+The upgrade stops on any error-level check. Configuration and resource checks surface as warnings so you can review them after the run.
 
-1. **Inspect available revisions** – Each install or upgrade produces a Helm revision. Identify the target revision before rolling back.
+```bash
+# Dry-run the checks without upgrading
+rad upgrade kubernetes --preflight-only
 
-   ```bash
-   rad rollback kubernetes --list-revisions
-   helm history radius -n radius-system
-   ```
+# Skip preflight checks (not recommended)
+rad upgrade kubernetes --skip-preflight
+```
 
-2. **Restore the desired revision** – Reapply the chosen Helm revision and restart the control plane.
+### Run the upgrade and verify
 
-   ```bash
-   rad rollback kubernetes                 # Previous revision
-   rad rollback kubernetes --revision 0    # Explicit previous revision
-   rad rollback kubernetes --revision 3    # Specific revision number
-   ```
+`rad upgrade` upgrades the Radius release and then re-applies the bundled Contour chart (if Contour was installed). Watch the logs or re-run the command with `--verbose` if you need Helm output.
 
-3. **Validate the rollback** – Re-run the basic health checks to confirm the older version is active.
+```bash
+rad upgrade kubernetes
+```
 
-   ```bash
-   rad version
-   kubectl get pods -n radius-system
-   helm status radius -n radius-system
-   rad env list
-   ```
+After the command finishes, confirm the expected version is running:
 
-> **Warning:** Helm does not roll back Custom Resource Definitions (CRDs). If the newer release changed CRDs, you may need to revert them manually or perform a clean installation of the target version.
+```bash
+rad version
+kubectl get pods -n radius-system
+rad env list
+```
+
+> **Tip:** Read the [release notes](https://github.com/radius-project/radius/releases) for breaking changes, and back up environment definitions before upgrading: `rad env show -o json > env-backup.json`.
+
+## Roll back Radius
+
+`rad rollback kubernetes` uses Helm history to revert to an earlier chart. The command validates that Radius is currently installed before executing.
+
+### Inspect available revisions
+
+Each `rad install` or `rad upgrade` run creates a Helm revision. List the revisions directly from the CLI, or fall back to native Helm tooling:
+
+```bash
+rad rollback kubernetes --list-revisions
+helm history radius -n radius-system
+```
+
+The `--list-revisions` output matches the data returned by `helm history`, including chart version, status, updated time, and the Helm description field.
+
+### Restore a revision
+
+- `rad rollback kubernetes` (no flags) finds the most recent revision with an older chart version and replays it. This matches the logic in `pkg/cli/helm/cluster.go`, which prevents rolling back to the current release.
+- `rad rollback kubernetes --revision 0` is the explicit form of “previous revision”, aligning with Helm semantics.
+- `rad rollback kubernetes --revision N` replays the exact revision number you specify after verifying it exists.
+
+```bash
+# Roll back to the previous successful revision
+rad rollback kubernetes
+
+# Explicit previous revision (alias for --revision 0)
+rad rollback kubernetes --revision 0
+
+# Roll back to a specific revision number
+rad rollback kubernetes --revision 3
+```
+
+After the rollback, validate that the older version is active:
+
+```bash
+rad version
+kubectl get pods -n radius-system
+helm status radius -n radius-system
+rad env list
+```
+
+> **Warning:** Helm does not revert CRDs. If the newer release introduced CRD schema changes, you may need to apply the prior definitions manually or reinstall the desired version.
+
+The rollback command operates on the `radius` release only. If you also changed your ingress stack (Contour or another controller), roll that release back separately.
 
 ### When rollback is not viable
 
-Rollback can fail if the desired revision has been pruned, if CRDs or data formats changed, or if the older container images are no longer available. Capture diagnostics (`helm status radius -n radius-system`, `kubectl describe pod -n radius-system <pod-name>`) and move to a clean install if required.
+Rollback can fail when:
 
-## Fresh installation (fallback option)
+- The target revision was pruned or never existed in the cluster history.
+- The upgrade introduced CRD or data format changes that are incompatible with older controllers.
+- The container registry no longer hosts the images for the older chart.
 
-If rollback fails or you prefer a clean slate:
+Collect diagnostics with `helm status radius -n radius-system` and `kubectl describe pod -n radius-system <pod-name>`. If Helm cannot restore a working state, perform a clean installation of the target version.
 
-1. Optionally export environment definitions: `rad env show -o json > env-backup.json`
-2. Remove environments and uninstall Radius: `rad env delete <name>` and `rad uninstall kubernetes`
-3. Install the target version (`rad install kubernetes --chart …` or `helm install …`)
+## Fresh installation (fallback)
+
+1. Export any environments you need to re-create: `rad env show -o json > env-backup.json`
+2. Delete the environments and uninstall Radius: `rad env delete <name>` and `rad uninstall kubernetes`
+3. Install the desired version (`rad install kubernetes --chart …` or `helm install …`)
 4. Re-create environments and redeploy applications
 
 ## Troubleshooting
 
-- **Upgrade failed preflight checks** – Resolve the reported connectivity, permission, or configuration issues before re-running the command.
-- **Rollback failed** – Inspect Helm and Kubernetes events to determine why the revision could not be restored.
-- **Previous revision missing** – If the target revision is gone, perform a fresh installation of the desired release.
+- **Preflight failures:** Resolve the specific connectivity, RBAC, or configuration errors surfaced by the preflight output, then rerun the upgrade.
+- **Rollback failures:** Review Helm and Kubernetes events to pinpoint why the release could not be restored.
+- **Missing revision:** If the required revision is gone, install the desired version from scratch.
 
 ## Next steps
 
-- Review [Radius versioning]({{< ref "guides/operations/versioning" >}}) for compatibility guidance
-- Reference the [`rad upgrade`]({{< ref "reference/cli/rad_upgrade_kubernetes" >}}) and [`rad rollback`]({{< ref "reference/cli/rad_rollback_kubernetes" >}}) CLI docs for advanced options
+- Review [Radius versioning]({{< ref "guides/operations/versioning" >}}) for compatibility expectations.
+- See the [`rad upgrade`]({{< ref "reference/cli/rad_upgrade_kubernetes" >}}) and [`rad rollback`]({{< ref "reference/cli/rad_rollback_kubernetes" >}}) command references for the full flag set.
