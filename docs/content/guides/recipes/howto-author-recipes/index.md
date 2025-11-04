@@ -81,13 +81,13 @@ Once you have defined your IaC template you will need to output a `result` objec
 The `result` object must include:
 - **`values`**: The fields that the target resource requires. (_username, host, port, etc._)
 - **`secrets`**: The fields that the target resource requires, but should be treated as secrets. (_password, connectionString, etc._)
-- **`resources`**: The [UCP ID(s)]({{< ref "/concepts/technical/api#resource-ids" >}}) of the resources providing the backing service. Used by UCP to track dependencies and manage deletion.
+- **`resources`**: The [UCP ID(s)]({{< ref "resource-ids" >}}) of the resources providing the backing service. Used by UCP to track dependencies and manage deletion.
 
 {{< tabs "Bicep" "Terraform" >}}
 
 {{% codetab %}}
 
-Resources are populated automatically for Bicep Recipes for any new Azure or AWS resource ([_Kubernetes coming soon_]({{< ref "faq#why-do-i-need-to-manually-output-a-kubernetes-ucp-id-as-part-of-my-bicep-recipe" >}})). For now, make sure to include the UCP ID of any Kubernetes resources your Recipe creates.
+Resources are populated automatically for Bicep Recipes for any new Azure or AWS resource For Kubernetes, make sure to include the UCP ID of any Kubernetes resources your Recipe creates.
 
 {{< rad file="snippets/redis-kubernetes.bicep" embed=true marker="//OUTPUT" >}}
 

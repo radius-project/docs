@@ -1,6 +1,6 @@
 Install the Radius CLI on your workstation with the appropriate installation script:
 
-{{< tabs "Linux/WSL" MacOS "Windows PowerShell" "GitHub Codespace" "Azure Cloud Shell" Binaries >}}
+{{< tabs "Linux/WSL" MacOS "Windows PowerShell" "GitHub Codespaces" "Azure Cloud Shell" Binaries >}}
 
 {{% codetab %}}
 {{< latest >}}

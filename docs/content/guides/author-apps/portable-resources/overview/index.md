@@ -26,7 +26,3 @@ The following portable resources are available to use within your application:
 - [`Applications.Dapr/secretStores`]({{< ref "/reference/api/applications.dapr/api-secretstores" >}})
 - [`Applications.Dapr/stateStores`]({{< ref api-statestores >}})
 - [`Applications.Messaging/rabbitmqQueues`]({{< ref api-rabbitmqqueues >}})
-
-## Reference
-
-Refer to the [API reference docs]({{< ref "/concepts/technical/api" >}}) to learn more about the Radius API and the available portable resources plus their schema
