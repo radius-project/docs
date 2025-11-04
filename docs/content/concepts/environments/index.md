@@ -4,6 +4,8 @@ title: "Environments Concepts"
 linkTitle: "Environments"
 description: "How Environments define how and where resources are deployed"
 weight: 30
+aliases:
+    - /content/guides/deploy-apps/environments/overview
 ---
 
 All resources are deployed to an Environment. Environments define the deployment location as well as the set of Recipes to use to deploy resources to that Environment. The first component of an Environment definition is the deployment location, specified by `provider` property:

@@ -25,7 +25,7 @@ Before you get started, you'll need to make sure you have the following tools an
 - [Radius Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [Radius initialized with `rad init`]({{< ref howto-environment >}})
-- [Recipes overview]({{< ref "/guides/recipes/overview" >}})
+- [Recipes overview]({{< ref "/concepts/recipes" >}})
 
 ## Step 1: Define a secretStore resource for the custom provider
 
@@ -69,7 +69,7 @@ rad deploy ./env.bicep -p username=****** -p password=******
 
 ## Done
 
-Your Radius Environment is now configured with a custom Terraform Provider which you can use to deploy Radius Terraform Recipes. For more information on Radius Recipes visit the [Recipes overview page]({{< ref "/guides/recipes/overview" >}}).
+Your Radius Environment is now configured with a custom Terraform Provider which you can use to deploy Radius Terraform Recipes. For more information on Radius Recipes visit the [Recipes overview page]({{< ref "/concepts/recipes" >}}).
 
 ## Cleanup
 
@@ -81,7 +81,7 @@ rad env delete my-env
 
 ## Further reading
 
-- [Recipes overview]({{< ref "/guides/recipes/overview" >}})
-- [Radius Environments]({{< ref "/guides/deploy-apps/environments/overview" >}})
+- [Recipes overview]({{< ref "/concepts/recipes" >}})
+- [Radius Environments]({{< ref "concepts/environments" >}})
 - [`rad recipe CLI reference`]({{< ref rad_recipe >}})
 - [`rad env CLI reference`]({{< ref rad_environment >}})

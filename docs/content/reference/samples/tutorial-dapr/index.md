@@ -73,7 +73,7 @@ Begin by creating a new file named `dapr.bicep` with a Radius Application that c
 
 1. Press CTRL+C to terminate the port-forward.
 
-1. A [local-dev Recipe]({{< ref "/guides/recipes/overview" >}}) was run during application deployment to automatically create a lightweight Redis container plus a Dapr component configuration. Confirm that the Dapr Redis statestore was successfully created:
+1. A [local-dev Recipe]({{< ref "/concepts/recipes" >}}) was run during application deployment to automatically create a lightweight Redis container plus a Dapr component configuration. Confirm that the Dapr Redis statestore was successfully created:
 
    ```sh
    dapr components -k -A

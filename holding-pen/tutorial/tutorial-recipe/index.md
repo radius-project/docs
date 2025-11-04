@@ -16,9 +16,9 @@ This tutorial will teach you the following about Recipes
 
 ## Recipes overview
 
-[Recipes]({{< ref "guides/recipes/overview">}}) enable a separation of concerns between infrastructure teams and developers by automating infrastructure deployment. Developers define _what_ they need (_Redis, Mongo, etc._), and operators define _how_ it will be deployed (_Azure/AWS/Kubernetes infrastructure_).
+[Recipes]({{< ref "concepts/recipes">}}) enable a separation of concerns between infrastructure teams and developers by automating infrastructure deployment. Developers define _what_ they need (_Redis, Mongo, etc._), and operators define _how_ it will be deployed (_Azure/AWS/Kubernetes infrastructure_).
 
-{{< button text="Learn more about Recipes here" page="/guides/recipes/overview" newtab="true" >}}
+{{< button text="Learn more about Recipes here" page="/concepts/recipes" newtab="true" >}}
 
 ## Application overview
 
@@ -73,7 +73,7 @@ Developers don't need to specify what cloud resources they're using in their app
    ```
 
 {{< alert title="💡 local-dev Recipes" color="info" >}}
-Development environments are preloaded with [local-dev Recipes]({{< ref "guides/recipes/overview#use-community-dev-recipes" >}}), a set of Recipes that allow you to quickly get up and running with lightweight containerized infrastructure. In this how-to guide, the local-dev Recipe for Redis deploys a lightweight Redis container into your Kubernetes cluster.
+Development environments are preloaded with [local-dev Recipes]({{< ref "concepts/recipes#use-community-dev-recipes" >}}), a set of Recipes that allow you to quickly get up and running with lightweight containerized infrastructure. In this how-to guide, the local-dev Recipe for Redis deploys a lightweight Redis container into your Kubernetes cluster.
 
 When a Recipe is named "default" it will be used by default when deploying resources when a Recipe is not specified.
 {{< /alert >}}
