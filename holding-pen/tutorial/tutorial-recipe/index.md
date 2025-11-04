@@ -73,7 +73,7 @@ Developers don't need to specify what cloud resources they're using in their app
    ```
 
 {{< alert title="💡 local-dev Recipes" color="info" >}}
-Development environments are preloaded with [local-dev Recipes]({{< ref "concepts/recipes#use-community-dev-recipes" >}}), a set of Recipes that allow you to quickly get up and running with lightweight containerized infrastructure. In this how-to guide, the local-dev Recipe for Redis deploys a lightweight Redis container into your Kubernetes cluster.
+Development environments are preloaded with [local-dev Recipes]({{< ref "concepts/recipes" >}}), a set of Recipes that allow you to quickly get up and running with lightweight containerized infrastructure. In this how-to guide, the local-dev Recipe for Redis deploys a lightweight Redis container into your Kubernetes cluster.
 
 When a Recipe is named "default" it will be used by default when deploying resources when a Recipe is not specified.
 {{< /alert >}}
