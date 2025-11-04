@@ -54,7 +54,7 @@ rad deploy ./env.bicep
 ```
 {{< image src="env-deploy-output.png" width=700px alt="Screenshot of environment deployment output" >}}<br>
 
-Your Radius Environment is now ready to utilize your Radius Recipes stored inside your private registry. For more information on Radius Recipes visit the [Recipes overview page]({{< ref "/concepts/recipes" >}}).
+Your Radius Environment is now ready to utilize your Radius Recipes stored inside your private registry. For more information on Radius Recipes visit the [Recipes overview page]({{< ref "concepts/recipes" >}}).
 
 ## Cleanup
 
@@ -66,7 +66,7 @@ rad env delete my-env
 
 ## Further reading
 
-- [Recipes overview]({{< ref "/concepts/recipes" >}})
+- [Recipes overview]({{< ref "concepts/recipes" >}})
 - [Radius Environments]({{< ref "concepts/environments" >}})
 - [`rad recipe CLI reference`]({{< ref rad_recipe >}})
 - [`rad env CLI reference`]({{< ref rad_environment >}})

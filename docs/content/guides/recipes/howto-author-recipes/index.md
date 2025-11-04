@@ -165,5 +165,5 @@ You can now use your custom Recipe with its accompanying resource in your applic
 
 ## Further reading
 
-- [Recipes overview]({{< ref "/concepts/recipes" >}})
+- [Recipes overview]({{< ref "concepts/recipes" >}})
 - [`rad recipe CLI reference`]({{< ref rad_recipe >}})

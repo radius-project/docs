@@ -32,7 +32,7 @@ Create a file named `app.bicep` and paste the following:
 
 {{< rad file="snippets/app-redis-recipe.bicep" embed=true marker="//RECIPE" >}}
 
-To learn more about Recipes visit the [Recipes overview page]({{< ref "/concepts/recipes" >}}).
+To learn more about Recipes visit the [Recipes overview page]({{< ref "concepts/recipes" >}}).
 
 {{% /codetab %}}
 
