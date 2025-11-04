@@ -65,9 +65,3 @@ rad group switch mygroup
 {{% /codetab %}}
 
 {{< /tabs >}}
-
-## Additional information
-
-- [Radius API]({{< ref "/concepts/technical/api" >}})
-- [Radius architecture]({{< ref "/concepts/technical/architecture" >}})
-- [rad CLI reference]({{< ref rad_group >}})

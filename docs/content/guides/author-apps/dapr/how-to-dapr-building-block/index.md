@@ -28,7 +28,7 @@ Begin by creating a file named `app.bicep` with a defined Radius container and a
 
 ## Step 2: Add a Dapr state store resource
 
-Now add a Dapr state store resource, which models a [Dapr state store component](https://docs.dapr.io/developing-applications/building-blocks/state-management/state-management-overview/). The underlying infrastructure and Dapr component configuration are deployed via a [`local-dev` Recipe]({{< ref "guides/recipes/overview##use-lightweight-local-dev-recipes" >}}), which leverages a lightweight Redis container:
+Now add a Dapr state store resource, which models a [Dapr state store component](https://docs.dapr.io/developing-applications/building-blocks/state-management/state-management-overview/). The underlying infrastructure and Dapr component configuration are deployed via a `local-dev` Recipe, which leverages a lightweight Redis container:
 
 {{< rad file="./snippets/app-statestore.bicep" embed=true marker="//STATESTORE" >}}
 
