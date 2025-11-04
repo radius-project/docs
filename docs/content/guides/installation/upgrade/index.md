@@ -28,6 +28,7 @@ Radius upgrades drives a Helm upgrade of the Radius control plane (and Contour, 
 - **Default:** The CLI release version. On edge builds, the CLI resolves the latest stable chart from `ghcr.io/radius-project/helm-chart`.
 - **`--version <semver>`:** Force a specific chart version (for example `0.50.0`). The preflight logic prevents downgrades and only allows a one-minor-step upgrade.
 - **`--version latest`:** Resolve to the newest chart available in the Radius registry.
+- **`--chart <path>`:** Point to a local chart archive—useful in air-gapped environments or when validating a release candidate.
 - **Custom values:** Pass the same overrides you used during install with `--set` and `--set-file` (for example image registry overrides or custom CA bundles). The CLI parses these flags before invoking Helm, matching the logic in `pkg/cli/helm/radius.go`.
 
 ```bash
@@ -39,6 +40,13 @@ rad upgrade kubernetes --version 0.50.0
 
 # Override Helm values during the upgrade
 rad upgrade kubernetes --set global.imageRegistry=myregistry.azurecr.io
+
+# Reapply custom certificates or feature toggles
+rad upgrade kubernetes \
+  --set global.prometheus.path=/metrics-radius \
+  --set database.enabled=true \
+  --set preupgrade.enabled=true \
+  --set-file global.rootCA.cert=/etc/ssl/your-root-ca.crt
 ```
 
 ### Understand the preflight checks
@@ -62,6 +70,12 @@ rad upgrade kubernetes --preflight-only
 rad upgrade kubernetes --skip-preflight
 ```
 
+If you enable the chart’s Helm-hook job (`--set preupgrade.enabled=true`), Radius also runs the same checks inside the cluster before applying the new release. Review the job output with:
+
+```bash
+kubectl logs job/pre-upgrade -n radius-system
+```
+
 ### Run the upgrade and verify
 
 `rad upgrade` upgrades the Radius release and then re-applies the bundled Contour chart (if Contour was installed). Watch the logs or re-run the command with `--verbose` if you need Helm output.
@@ -76,6 +90,12 @@ After the command finishes, confirm the expected version is running:
 rad version
 kubectl get pods -n radius-system
 rad env list
+```
+
+If the pre-upgrade job is enabled, confirm it succeeded before moving on:
+
+```bash
+kubectl get jobs -n radius-system -l control-plane=pre-upgrade
 ```
 
 > **Tip:** Read the [release notes](https://github.com/radius-project/radius/releases) for breaking changes, and back up environment definitions before upgrading: `rad env show -o json > env-backup.json`.

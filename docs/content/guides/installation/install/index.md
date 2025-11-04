@@ -35,6 +35,16 @@ export RADIUS_INSTALL_DIR=$HOME/bin
 curl -fsSL "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh" | /bin/bash
 ```
 
+On Windows, run the PowerShell installer shipped with the repository:
+
+```powershell
+irm https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.ps1 | iex
+```
+
+The installer honors the optional `-Version` parameter (omit the `v` prefix), and writes the binary to `%LOCALAPPDATA%\radius` by default.
+
+> **Preview builds:** Both installers accept `edge` as the version. Edge builds are pulled from the GitHub Container Registry and require the [`oras` CLI](https://oras.land/docs/cli/installation/) to be present in `PATH`.
+
 The Radius CLI stores its configuration in a YAML file named `config.yaml` under the `rad` directory. This file contains Workspace configurations, which points to your cluster, Resource Group, and Environment. When the Radius CLI runs commands, it will use the configuration in the `config.yaml` file to determine which configuration to target and use. Each workspace entry is updated automatically when you create and switch environments.
 
 For more information, refer to the [`config.yaml` reference documentation]({{< ref "/reference/config" >}}).
@@ -154,7 +164,41 @@ rad install kubernetes --set global.azureWorkloadIdentity.enabled=true
 rad install kubernetes --set global.aws.irsa.enabled=true
 ```
 
-### Skip Contour
+#### Pre-download Terraform binaries
+
+Radius can pre-stage Terraform binaries inside the control-plane pods so Terraform-based Recipes start faster and do not need internet access at runtime. Enable it and optionally point to a custom download URL:
+
+```bash
+rad install kubernetes --set global.terraform.enabled=true
+# Optional custom artifact mirror
+rad install kubernetes --set global.terraform.enabled=true --set global.terraform.downloadUrl=https://example.com/terraform_1.6.6_linux_amd64.zip
+```
+
+#### Configure observability endpoints
+
+Control-plane components expose Prometheus metrics and Zipkin-compatible tracing. Override the defaults to point at your platform endpoints during installation:
+
+```bash
+# Custom metrics scrape path and TLS proxy port
+rad install kubernetes --set global.prometheus.path=/metrics-radius --set global.prometheus.port=9443
+
+# Send traces to Jaeger/Zipkin collector
+rad install kubernetes --set global.zipkin.url=http://jaeger-collector.radius-monitoring.svc.cluster.local:9411/api/v2/spans
+```
+
+Refer to the [Prometheus]({{< ref "/guides/operations/control-plane/metrics/prometheus" >}}) and [Jaeger]({{< ref "/guides/operations/control-plane/traces/jaeger" >}}) guides for end-to-end configuration steps.
+
+#### Run pre-upgrade checks automatically
+
+Enable the `preupgrade` job to validate Helm connectivity, version compatibility, and cluster prerequisites before each upgrade:
+
+```bash
+rad install kubernetes --set preupgrade.enabled=true --set preupgrade.checks.resources=true
+```
+
+Radius executes the job on every future `rad upgrade` unless you disable it.
+
+### Configure Contour
 
 Radius installs the Bitnami Contour chart alongside the control plane so gateways and the dashboard can expose HTTP(S) endpoints. If your platform already runs an ingress or gateway controller, disable Contour and make sure your controller understands the `projectcontour.io/HTTPProxy` CRDs (or adjust your application definitions accordingly).
 
@@ -163,6 +207,16 @@ rad install kubernetes --skip-contour-install
 ```
 
 Radius still emits `HTTPProxy` resources when you deploy gateways. If you use a different ingress API, install the matching CRDs and update your app manifests so the generated resources are compatible with your controller.
+
+Need more control over Contour? Supply your own chart or override Bitnami settings:
+
+```bash
+# Install from a local chart archive
+rad install kubernetes --contour-chart /path/to/contour-helm-chart.tgz
+
+# Override Bitnami values (for example host networking or custom service type)
+rad install kubernetes --contour-set envoy.service.type=NodePort --contour-set envoy.hostNetwork=true
+```
 
 #### Radius Dashboard
 
@@ -177,6 +231,14 @@ When enabled, expose it via Contour or your ingress. In locked-down clusters you
   ```bash
   kubectl port-forward svc/dashboard -n radius-system 7007:7007
   ```
+
+### Verify the installation
+
+Check that the control plane pods are running in the `radius-system` namespace before moving on:
+
+```bash
+kubectl get pods -n radius-system
+```
 
 ## Troubleshooting installation
 
