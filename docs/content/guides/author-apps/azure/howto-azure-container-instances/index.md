@@ -11,7 +11,7 @@ tags: ["Azure","containers"]
 
 This how-to guide will provide an overview of how to:
 
-- Configure and deploy a Radius [Environment]({{< ref "/guides/deploy-apps/environments/overview" >}}) that uses [Azure Container Instances (ACI)](https://learn.microsoft.com/en-us/azure/container-instances/) as the compute provider.
+- Configure and deploy a Radius [Environment]({{< ref "concepts/environments" >}}) that uses [Azure Container Instances (ACI)](https://learn.microsoft.com/en-us/azure/container-instances/) as the compute provider.
 - Define and deploy the demo application to the ACI Radius Environment, which provisions the necessary resources to run the application in ACI.
 
 ## Prerequisites

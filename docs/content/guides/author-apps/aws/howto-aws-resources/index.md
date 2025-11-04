@@ -36,7 +36,7 @@ eksctl create cluster --name <my-cluster> --region=<my-region>
 
 ## Step 2: Create a Radius Environment with the AWS cloud provider
 
-Create a [Radius Environment]({{< ref "/guides/deploy-apps/environments/overview" >}}) where you will deploy your application.
+Create a [Radius Environment]({{< ref "concepts/environments" >}}) where you will deploy your application.
 
 Run [`rad init --full`]({{< ref rad_initialize >}}) to initialize a new environment into your current kubectl context:
 

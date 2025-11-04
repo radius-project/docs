@@ -4,6 +4,8 @@ title: "Applications Concepts"
 linkTitle: "Applications"
 description: "How Radius manages applications"
 weight: 40
+aliases:
+    - /content/guides/author-apps/applications/overview
 ---
 
 A Radius Application is a resource that is a parent to other resources that make up the application. Applications and its resources are defined in an application definition file using the Bicep Infrastructure as Code (IaC) language. Since applications are a first-class Resource Type in Radius, developers perform operations on applications rather than individual resources. When deploying resources, developers simply deploy the Application. Radius also tracks all deployed resources and their dependencies in a graph. Developers can add to the graph by expressing explicit dependencies such as a container relying on a database.
@@ -18,7 +20,7 @@ Radius maintains a graph of all resources. Resources are the nodes in the graph 
 
 The application graph is not just resources defined by the developer. Deployed resources are also part of the graph. For example, if a developer defines an application with a Container and a PostgreSQL resource, the recipes for those Resource Types will create several deployed resources. The resulting application graph may look similar to:
 
-{{< image src="app-graph.png"  alt="Application graph" >}}
+{{< image src="app-graph.png" alt="Application graph" >}}
 
 Application graph data can be visualized in the Dashboard, via the `rad application graph` command, or via the Radius API. By enabling developers and SREs to better understand the what resources got deployed, and the dependencies between those resources and other applications, the application graph is useful for operational and troubleshooting purposes.
 

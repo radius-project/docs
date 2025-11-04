@@ -82,7 +82,7 @@ The following methods are available on the Mongo database resource:
 
 ### Provision with a Recipe
 
-[Recipes]({{< ref "guides/recipes/overview" >}}) automate infrastructure provisioning using approved templates.
+[Recipes]({{< ref "concepts/recipes" >}}) automate infrastructure provisioning using approved templates.
 You can specify a Recipe name that is registered in the environment or omit the name and use the "default" Recipe.
 
 Parameters can also optionally be specified for the Recipe.
