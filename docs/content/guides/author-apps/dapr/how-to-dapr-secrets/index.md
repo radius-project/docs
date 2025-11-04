@@ -59,7 +59,7 @@ spec:
 
 ## Step 2: Add a Dapr secret store resource and create a secret
 
-Secure the Redis username using a Dapr Secret Store. In your `app.bicep` file, add a Dapr secret store resource. Use the [`local-dev` recipe]({{< ref "guides/recipes/overview##use-lightweight-local-dev-recipes" >}}) to deploy the secret store, leveraging Kubernetes secrets
+Secure the Redis username using a Dapr Secret Store. In your `app.bicep` file, add a Dapr secret store resource. Use the `local-dev` recipe to deploy the secret store, leveraging Kubernetes secrets
 
 {{< rad file="./snippets/app-statestore-secret.bicep" embed=true marker="//SECRETSTORE" >}}
 

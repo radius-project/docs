@@ -8,7 +8,7 @@ categories: "How-To"
 tags: ["environments"]
 ---
 
-Radius Environments are prepared landing zones for applications that contain configuration and Recipes. To learn more visit the [environments overview]({{< ref "/guides/deploy-apps/environments/overview" >}}) page.
+Radius Environments are prepared landing zones for applications that contain configuration and Recipes. To learn more visit the [environments overview]({{< ref "concepts/environments" >}}) page.
 
 Radius Environments can be setup with the rad CLI via two paths: interactive or manual.
 
@@ -20,7 +20,7 @@ Radius Environments can be setup with the rad CLI via two paths: interactive or 
 
 ## Create a development environment
 
-1. Initialize a new [Radius Environment]({{< ref "/guides/deploy-apps/environments/overview">}}) with [`rad init`]({{< ref rad_initialize >}}):
+1. Initialize a new [Radius Environment]({{< ref "concepts/environments">}}) with [`rad init`]({{< ref rad_initialize >}}):
    ```bash
    rad init
    ```
@@ -71,7 +71,7 @@ Radius Environments can be setup with the rad CLI via two paths: interactive or 
    default   Applications.Datastores/redisCaches     bicep          ghcr.io/radius-project/recipes/local-dev/rediscaches:latest
    ```
 
-   You can follow the [Recipes]({{< ref "/guides/recipes/overview" >}}) documentation to learn more about the Recipes and how to use them in your application.
+   You can follow the [Recipes]({{< ref "concepts/recipes" >}}) documentation to learn more about the Recipes and how to use them in your application.
 
 ## Create an environment interactively
 

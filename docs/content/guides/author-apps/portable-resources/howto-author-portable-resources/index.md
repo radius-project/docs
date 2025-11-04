@@ -8,7 +8,7 @@ categories: "How-To"
 tags: ["portability"]
 ---
 
-This guide will teach you how to author a portable resource for your [Radius Application]({{< ref "/guides/author-apps/application/overview" >}}).
+This guide will teach you how to author a portable resource for your [Radius Application]({{< ref "concepts/applications" >}}).
 
 ## Prerequisites
 
@@ -32,7 +32,7 @@ Create a file named `app.bicep` and paste the following:
 
 {{< rad file="snippets/app-redis-recipe.bicep" embed=true marker="//RECIPE" >}}
 
-To learn more about Recipes visit the [Recipes overview page]({{< ref "/guides/recipes/overview" >}}).
+To learn more about Recipes visit the [Recipes overview page]({{< ref "concepts/recipes" >}}).
 
 {{% /codetab %}}
 
@@ -75,4 +75,4 @@ rad app delete -a demo
 ## Further reading
 
 - [Portable resource overview]({{< ref "/guides/author-apps/portable-resources/overview" >}})
-- [Radius Application overview]({{< ref "/guides/author-apps/application/overview" >}})
+- [Radius Application overview]({{< ref "concepts/applications" >}})

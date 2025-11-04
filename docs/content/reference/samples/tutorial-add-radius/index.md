@@ -284,7 +284,7 @@ Resources:
   redis-replica (kubernetes: apps/Deployment)
 ```
 
-This output shows that Radius has detected the three container resources in the Kubernetes application that you have just deployed. Note that since you have not used Radius to define any connections between the resources, the `Connections` field is empty. However, your application is now ready to be further modified using the Radius features that are now available to you, , such as [Connections]({{< ref "guides/author-apps/containers/overview#connections" >}}), [Recipes]({{< ref "guides/recipes/overview" >}}), and more.
+This output shows that Radius has detected the three container resources in the Kubernetes application that you have just deployed. Note that since you have not used Radius to define any connections between the resources, the `Connections` field is empty. However, your application is now ready to be further modified using the Radius features that are now available to you, , such as [Connections]({{< ref "guides/author-apps/containers/overview#connections" >}}), [Recipes]({{< ref "concepts/recipes" >}}), and more.
 
 ## Step 6: Clean up
 
