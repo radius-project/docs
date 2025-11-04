@@ -35,7 +35,7 @@ export RADIUS_INSTALL_DIR=$HOME/bin
 curl -fsSL "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh" | /bin/bash
 ```
 
-The Radius CLI stores its configuration in a YAML file named `config.yaml` under the `rad` directory. This file contains Workspaces, which points to your cluster, Resource Group, and Environment. When the Radius CLI runs commands, it will use the configuration in the `config.yaml` file to determine which configuration to target and use. Each workspace entry is updated automatically when you create and switch environments.
+The Radius CLI stores its configuration in a YAML file named `config.yaml` under the `rad` directory. This file contains Workspace configurations, which points to your cluster, Resource Group, and Environment. When the Radius CLI runs commands, it will use the configuration in the `config.yaml` file to determine which configuration to target and use. Each workspace entry is updated automatically when you create and switch environments.
 
 For more information, refer to the [`config.yaml` reference documentation]({{< ref "/reference/config" >}}).
 
@@ -45,7 +45,7 @@ The Radius Control Plane services can be installed using Radius CLI or Helm. `ra
 
 {{< tabs `rad initialize` `rad install` `Using Helm` >}}{{% codetab %}}
 
-[`rad initialize`](<{{< ref rad_initialize >}}>) is meant to get started with Radius and doesn't allow much customization. It
+[`rad initialize`](<{{< ref rad_initialize >}}>) is only meant to get started with Radius and doesn't allow much customization. It
 
 - Creates the radius-system namespace and installs the `radius` Helm release.
 - Creates a default Resource Group, Environment, and Workspace.

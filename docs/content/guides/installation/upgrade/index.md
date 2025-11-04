@@ -11,15 +11,15 @@ aliases:
   - /guides/operations/kubernetes/kubernetes-rollback
 ---
 
-Radius upgrades and rollbacks ship directly in the CLI. `rad upgrade kubernetes` drives a Helm upgrade of the Radius control plane (and Contour, if installed), while `rad rollback kubernetes` replays an earlier Helm revision. Both commands act on the cluster wired to your active workspace; use `rad workspace show` and `rad workspace switch` if you need a different target.
+Radius upgrades drives a Helm upgrade of the Radius control plane (and Contour, if installed), while rollbacks replays an earlier Helm revision. Both these operations target the `radius` Helm release in the `radius-system` namespace.
 
 ## Upgrade Radius
 
 ### Before you run `rad upgrade`
 
 - Install the latest `rad` CLI. The CLI release determines the default chart version pushed to the cluster.
-- Confirm Radius is already installed in the target cluster—`rad upgrade` exits early if it cannot find the `radius` Helm release.
 - Make sure your kubeconfig user has cluster-admin permissions. The upgrade re-applies cluster-scoped resources and CRDs.
+- Confirm Radius is already installed in the target cluster—`rad upgrade` exits early if it cannot find the `radius` Helm release.
 
 ### Choose the target version
 

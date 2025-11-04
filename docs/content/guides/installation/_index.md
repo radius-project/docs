@@ -6,15 +6,15 @@ description: "Learn how to install and manage Radius"
 weight: 100
 ---
 
-Radius installations spans across your Kubernetes cluster, developer workstations, and registries. Use this page as your installation planning checklist and understand how each component fits into the deployment.
+Radius installation spans across your Kubernetes cluster, developer workstations, and OCI registries to deliver the platform's capabilities. Use this page as your installation planning checklist and understand how each component fits into the deployment.
 
 ## Installation Components
 
 ### Radius components
 
-- **Radius CLI (`rad`)** – The installer places `rad` on your PATH and downloads the bundled `rad-bicep` compiler to compile and deploy the Applications.
+- **Radius CLI (`rad`)** – The installer places `rad` binary on your PATH and downloads the bundled `rad-bicep` compiler to compile and deploy the Applications.
 
-- **Radius control plane** – The Helm chart deploys the Controller, Universal Control Plane (UCP), Applications RP, Dynamic RP, Deployment Engine, and optional Dashboard and Contour. Everything runs in the `radius-system` namespace.
+- **Radius control plane** – The Helm chart deploys the Controller, Universal Control Plane (UCP), Applications RP, Dynamic RP, Deployment Engine, and optional Dashboard and Contour. All these components run in the `radius-system` namespace.
 
   - **Ingress or gateway controller** – Radius installs Contour as the ingress controller by default. You can skip installing it and any alternative must be configured to route traffic to the Radius APIs.
 
@@ -24,9 +24,9 @@ Radius installations spans across your Kubernetes cluster, developer workstation
 
 ### External tools and services Radius interacts with
 
-- **OCI registries** – Hosts the control-plane images, Bicep extensions, and Recipes (for example GHCR or ACR). Ensure both clusters and workstations can authenticate to them. 
+- **OCI registries** – Hosts the Radius control-plane images, Bicep extensions, and Recipes (for example GHCR or ACR). Ensure authentication is setup if working off a private network or of the Recipes and extensions are stored in private registries. Checkout the [how-to publish Recipes](TODO) and [how-to publish Bicep extensions](TODO) for more information.
 
-- **Git repositories** – Store Terraform based Recipes. Ensure authentication is set up if the repositories are private. Checkout the [Recipe guides]({{< ref "/guides/recipes" >}}) for more information.
+- **Git repositories** – Terraform based Recipes are stored in Git repositories. Ensure authentication is set up if the repositories are private. Checkout the [Recipe guides]({{< ref "/guides/recipes" >}}) for more information.
 
 - **Observability back ends** – Prometheus and Zipkin/Jaeger endpoints collect metrics and traces using the chart settings. Checkout the [Observability guide](TODO) for more information.
 
@@ -34,7 +34,7 @@ Radius installations spans across your Kubernetes cluster, developer workstation
 
 ### Kubernetes requirements
 
-Building on the technical architecture overview, Radius runs on Kubernetes and exposes its Universal Control Plane (UCP) through the Kubernetes API aggregation layer. Hence, installing Radius requires **cluster-admin permissions**, so it can register CRDs, namespaces, and RBAC objects.
+Building on the [technical architecture overview]({{< ref "concepts/#technical-architecture" >}}), Radius runs on Kubernetes and exposes its Universal Control Plane (UCP) through the Kubernetes API aggregation layer. Hence, installing Radius requires **cluster-admin permissions**, so it can register CRDs, namespaces, and RBAC objects.
 
 {{< tabs AKS EKS k3d kind>}}
 {{% codetab %}}
@@ -108,7 +108,7 @@ kind create cluster --config kind-config.yaml
 {{% /codetab %}}
 {{< /tabs >}}
 
-#### Workstation tooling requirements
+#### Other tooling requirements
 
 - `kubectl` to troubleshoot installations. Radius CLI uses the active kubeconfig context.
 
