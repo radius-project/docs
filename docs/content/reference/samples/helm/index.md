@@ -269,7 +269,7 @@ From here you will go through a series of steps to incrementally add more Radius
 
 This step will add a database (Redis Cache) to the application.
 
-You can create a Redis Cache using [Recipes]({{< ref "guides/recipes/overview" >}}) provided by Radius. The Radius community provides [Recipes](https://github.com/radius-project/recipes) for running commonly used application dependencies, including Redis.
+You can create a Redis Cache using [Recipes]({{< ref "concepts/recipes" >}}) provided by Radius. The Radius community provides [Recipes](https://github.com/radius-project/recipes) for running commonly used application dependencies, including Redis.
 
 In this step you will:
 

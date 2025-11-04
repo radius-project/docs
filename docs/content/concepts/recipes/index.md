@@ -4,6 +4,8 @@ title: "Recipes Concepts"
 linkTitle: "Recipes"
 description: "How Recipes are used to deploy resources"
 weight: 20
+aliases:
+    - /content/guides/recipes/overview/
 ---
 
 Recipes are how resources are deployed. The generic term *recipe* is used because Radius uses existing Infrastructure as Code (IaC) solutions to perform the actual deployment of resources. Today, Radius supports deploying resources using both Terraform and Bicep, but Radius is designed to integrate with other IaC solutions in the future. Just as Resource Types can represent any resource, Recipes can deploy any resource supported by the IaC language. As long as there is a Terraform provider or Bicep extension, Radius can deploy that resource. In fact, if you have an existing Terraform configurations or Bicep templates, they can be used as Recipes with only minor changes.

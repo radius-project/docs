@@ -8,7 +8,7 @@ categories: "Overview"
 tags: ["recipes","Terraform"]
 ---
 
-For a general explanation on Recipes as a concept visit the general [Recipes overview]({{< ref "/guides/recipes/overview" >}}) page.
+For a general explanation on Recipes as a concept visit the general [Recipes overview]({{< ref "concepts/recipes" >}}) page.
 
 ## Capabilities
 
@@ -25,4 +25,4 @@ Radius Recipes can leverage any Terraform provider allowing users to interact wi
 - [Author custom recipes]({{< ref howto-author-recipes >}})
 - [Register a Recipe from a private registry]({{< ref "/guides/recipes/terraform/howto-private-registry" >}})
 - [`rad recipe` CLI reference]({{< ref rad_recipe >}})
-- [Recipes overview]({{< ref "/guides/recipes/overview" >}})
+- [Recipes overview]({{< ref "concepts/recipes" >}})

@@ -10,7 +10,7 @@ tags: ["dashboard"]
 
 ## What is the Radius Dashboard?
 
-The Radius Dashboard is the frontend experience for Radius and provides a graphical interface for visualizing your [Application Graph]({{< ref "guides/author-apps/application/overview#query-and-understand-your-application-with-the-radius-application-graph" >}}), [Environments]({{< ref "guides/deploy-apps/environments/overview" >}}), and [Recipes]({{< ref "guides/recipes/overview" >}}). It provides both textual and visual representations of your Radius Applications and resources, as well as a directory of Recipes that are available in each Environment.
+The Radius Dashboard is the frontend experience for Radius and provides a graphical interface for visualizing your [Application Graph]({{< ref "concepts/applications" >}}), [Environments]({{< ref "concepts/environments" >}}), and [Recipes]({{< ref "concepts/recipes" >}}). It provides both textual and visual representations of your Radius Applications and resources, as well as a directory of Recipes that are available in each Environment.
 
 {{< image src="dashboard-home.png" alt="screenshot of an example Radius Dashboard home page" width=800 >}}
 
@@ -22,9 +22,9 @@ The Radius Dashboard is built on [Backstage](https://backstage.io/), an open-sou
 
 The Radius Dashboard currently provides the following features:
 
-- **Application graph visualization**: A visualization of the [application graph]({{< ref "guides/author-apps/application/overview#query-and-understand-your-application-with-the-radius-application-graph" >}}) that shows how resources within an application are connected to each other and the underlying infrastructure.
-- **Resource overview and details**: Detailed information about resources within Radius, including [applications]({{< ref "guides/author-apps/application/overview" >}}), [environments]({{< ref "guides/deploy-apps/environments/overview" >}}), and infrastructure.
-- **Recipes directory**: A listing of all the Radius [Recipes]({{< ref "guides/recipes/overview" >}}) available to the user for a given environment.
+- **Application graph visualization**: A visualization of the [application graph]({{< ref "concepts/applications" >}}) that shows how resources within an application are connected to each other and the underlying infrastructure.
+- **Resource overview and details**: Detailed information about resources within Radius, including [applications]({{< ref "concepts/applications" >}}), [environments]({{< ref "concepts/environments" >}}), and infrastructure.
+- **Recipes directory**: A listing of all the Radius [Recipes]({{< ref "concepts/recipes" >}}) available to the user for a given environment.
 
 ## Installation
 
