@@ -16,7 +16,7 @@ This guide goes through all the installation options and client tools to interac
 
 The `rad` CLI is the primary interface for installing and operating Radius. Install it on any workstation or automation runner that interacts with Radius.
 
-Use the project installer to add `rad` plus the embedded `rad-bicep` compiler:
+Use the install.sh script to add `rad` plus the embedded `rad-bicep` compiler:
 
 ```bash
 curl -fsSL "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh" | /bin/bash
@@ -35,17 +35,9 @@ export RADIUS_INSTALL_DIR=$HOME/bin
 curl -fsSL "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh" | /bin/bash
 ```
 
-On Windows, run the PowerShell installer shipped with the repository:
+> **Preview builds:** The install.sh script accepts `edge` as the version. Edge builds are pulled from the GitHub Container Registry and require the [`oras` CLI](https://oras.land/docs/cli/installation/) to be present in `PATH`.
 
-```powershell
-irm https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.ps1 | iex
-```
-
-The installer honors the optional `-Version` parameter (omit the `v` prefix), and writes the binary to `%LOCALAPPDATA%\radius` by default.
-
-> **Preview builds:** Both installers accept `edge` as the version. Edge builds are pulled from the GitHub Container Registry and require the [`oras` CLI](https://oras.land/docs/cli/installation/) to be present in `PATH`.
-
-The Radius CLI stores its configuration in a YAML file named `config.yaml` under the `rad` directory. This file contains Workspace configurations, which points to your cluster, Resource Group, and Environment. When the Radius CLI runs commands, it will use the configuration in the `config.yaml` file to determine which configuration to target and use. Each workspace entry is updated automatically when you create and switch environments.
+The Radius CLI stores its configuration in a YAML file named `config.yaml` under the `rad` directory. This file contains Workspace configurations, which points to your cluster, Resource Group, and Environment. When the Radius CLI runs commands, it will use the configuration in the `config.yaml` file to determine which configuration to target and use. Each workspace entry is updated automatically when you create and switch the default environments.
 
 For more information, refer to the [`config.yaml` reference documentation]({{< ref "/reference/config" >}}).
 
@@ -65,7 +57,7 @@ The Radius Control Plane services can be installed using Radius CLI or Helm. `ra
 {{% /codetab %}}
 {{% codetab %}}
 
-[`rad install kubernetes`]({{< ref rad_install_kubernetes >}}) installs or reinstalls only the Radius control plane into the `radius-system` namespace. Use this option when you need to customize the installation for your production workloads and platform needs.
+[`rad install kubernetes`]({{< ref rad_install_kubernetes >}}) installs only the Radius control plane into the `radius-system` namespace. Use this option when you need to customize the installation for your production workloads and platform needs.
 
 {{% /codetab %}}
 {{% codetab %}}
@@ -188,16 +180,6 @@ rad install kubernetes --set global.zipkin.url=http://jaeger-collector.radius-mo
 
 Refer to the [Prometheus]({{< ref "/guides/operations/control-plane/metrics/prometheus" >}}) and [Jaeger]({{< ref "/guides/operations/control-plane/traces/jaeger" >}}) guides for end-to-end configuration steps.
 
-#### Run pre-upgrade checks automatically
-
-Enable the `preupgrade` job to validate Helm connectivity, version compatibility, and cluster prerequisites before each upgrade:
-
-```bash
-rad install kubernetes --set preupgrade.enabled=true --set preupgrade.checks.resources=true
-```
-
-Radius executes the job on every future `rad upgrade` unless you disable it.
-
 ### Configure Contour
 
 Radius installs the Bitnami Contour chart alongside the control plane so gateways and the dashboard can expose HTTP(S) endpoints. If your platform already runs an ingress or gateway controller, disable Contour and make sure your controller understands the `projectcontour.io/HTTPProxy` CRDs (or adjust your application definitions accordingly).
@@ -243,7 +225,7 @@ kubectl get pods -n radius-system
 ## Troubleshooting installation
 
 - **403 when pulling charts from ghcr.io** – Clear cached credentials with `docker logout ghcr.io`, or mirror the chart and install with `rad install kubernetes --chart /path/to/radius-<version>.tgz`.
-- **Existing Radius release detected** – Rerun the installer with `--reinstall` or uninstall the existing release before retrying, otherwise Helm skips the upgrade.
+- **Existing Radius release detected** – Rerun the installer with `--reinstall` or uninstall the existing release before retrying.
 - **Helm reports missing permissions** – Verify the kube context and ensure the account has cluster-admin rights (`kubectl auth can-i create crd`).
 - **Contour chart download fails** – Provide a local chart via `--contour-chart` if the cluster cannot reach the Bitnami registry.
 - **Pods stuck after install** – Inspect with `kubectl describe pod -n radius-system` to identify image pull issues.

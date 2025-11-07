@@ -52,10 +52,6 @@ Visit [AWS docs](https://docs.aws.amazon.com/eks/latest/userguide/getting-starte
 
 First, ensure that memory resource is 8GB or more in `Resource` setting of `Preferences` if you're using Docker Desktop. Also make sure you've enabled Rosetta if you're running on an Apple M1 chip:
 
-```bash
-softwareupdate --install-rosetta --agree-to-license
-```
-
 Use the following command to create a new cluster and install the Radius control plane 
 
 ```bash
@@ -77,10 +73,6 @@ rad install kubernetes --set rp.publicEndpointOverride=localhost:8081
 [Kind](https://kind.sigs.k8s.io/) is a tool for running local Kubernetes clusters inside Docker containers. Use the following setup to create a new cluster and install the Radius control plane, along with a new environment:
 
 First, ensure that memory resource is 8GB or more in `Resource` setting of `Preferences` if you're using Docker Desktop. Also make sure you've enabled Rosetta if you're running on an Apple M1 chip:
-
-```bash
-softwareupdate --install-rosetta --agree-to-license
-```
 
 Second, copy the text below into a new file `kind-config.yaml`:
 
@@ -114,7 +106,7 @@ kind create cluster --config kind-config.yaml
 
 - If you plan to install directly with Helm, use Helm 3 or later.
 
-- Install Node.js 16 to generate or publish Bicep extensions.
+- Install [Node.js](https://nodejs.org/) to generate or publish Bicep extensions.
 
 - Ensure you can authenticate to your registries (`docker login`/`az acr login`) from any workstation or CI runner that will push Recipes, Bicep extensions, or mirrored control-plane images if working off a private network.
 
