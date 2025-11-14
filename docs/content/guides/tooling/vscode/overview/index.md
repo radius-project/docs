@@ -25,6 +25,6 @@ The Bicep extension provides formatting, intellisense, and validation for Bicep 
 
 ## Terraform extension
 
-When authoring [Terraform Recipes]({{< ref "/guides/recipes/overview" >}}) you can use the HashiCorp Terraform extension to help author, validate, and manage your Terraform templates.
+When authoring [Terraform Recipes]({{< ref "concepts/recipes" >}}) you can use the HashiCorp Terraform extension to help author, validate, and manage your Terraform templates.
 
 {{< button text="Terraform extension" link="https://marketplace.visualstudio.com/items?itemName=hashicorp.terraform" newtab="true" >}}

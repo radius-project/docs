@@ -132,4 +132,4 @@ The [Kubernetes Metadata extension]({{< ref "guides/operations/kubernetes/kubern
 
 ## Further reading
 
-- [Radius Environments]({{< ref "/guides/deploy-apps/environments/overview" >}})
+- [Radius Environments]({{< ref "concepts/environments" >}})

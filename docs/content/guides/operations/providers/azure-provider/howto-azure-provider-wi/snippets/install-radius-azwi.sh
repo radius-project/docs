@@ -58,6 +58,20 @@ cat <<EOF > params-ucp.json
 EOF
 az ad app federated-credential create --id "${APPLICATION_OBJECT_ID}" --parameters @params-ucp.json
 
+# Create the dynamic-rp federated credential for the application
+cat <<EOF > params-dynamic-rp.json
+{
+  "name": "radius-dynamic-rp",
+  "issuer": "${SERVICE_ACCOUNT_ISSUER}",
+  "subject": "system:serviceaccount:radius-system:dynamic-rp",
+  "description": "Kubernetes service account federated credential for dynamic-rp",
+  "audiences": [
+    "api://AzureADTokenExchange"
+  ]
+}
+EOF
+az ad app federated-credential create --id "${APPLICATION_OBJECT_ID}" --parameters @params-dynamic-rp.json
+
 # Set the permissions for the application
 az ad sp create --id ${APPLICATION_CLIENT_ID}
 az role assignment create --assignee "${APPLICATION_CLIENT_ID}" --role "Owner" --scope "/subscriptions/${AZURE_SUBSCRIPTION_ID}/resourceGroups/${AZURE_RESOURCE_GROUP}"

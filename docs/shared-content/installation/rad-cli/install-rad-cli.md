@@ -1,6 +1,6 @@
 Install the Radius CLI on your workstation with the appropriate installation script:
 
-{{< tabs "Linux/WSL" MacOS "Windows PowerShell" "GitHub Codespace" "Azure Cloud Shell" Binaries >}}
+{{< tabs "Linux/WSL" MacOS "Windows PowerShell" "GitHub Codespaces" "Azure Cloud Shell" Binaries >}}
 
 {{% codetab %}}
 {{< latest >}}
@@ -86,6 +86,6 @@ Visit [Radius GitHub releases](https://github.com/radius-project/radius/releases
 
 {{< /tabs >}}
 
-You may be prompted for your sudo password during installation, as the installation script places the `rad` binary in `/usr/local/bin`. If you are unable to sudo you can install the Radius CLI to another directory by setting the `RADIUS_INSTALL_DIR` environment variable with your intended install path.
+You may be prompted for your root or administrator password during installation. If you do not have permission to the default installation location, you can set the RADIUS_INSTALL_DIR environment variable with your preferred install directory.
 
 Verify the Radius CLI is installed correctly by running `rad version`.
