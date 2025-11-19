@@ -1339,3 +1339,14 @@ swappable
 enums
 camelCase
 ArgoCD
+ProvidersKubernetes
+RecipeDefinition
+RecipeDefinitionParameters
+RecipePackProperties
+RecipePackPropertiesRecipes
+recipeKind
+recipeLocation
+recipePacks
+recipepacks
+referencedBy
+subscriptionId
