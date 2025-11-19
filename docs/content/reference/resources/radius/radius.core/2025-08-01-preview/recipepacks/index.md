@@ -30,7 +30,6 @@ description: "Detailed reference documentation for radius.core/recipepacks@2025-
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **description** | string | Description of what this recipe pack provides |
 | **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
 | **recipes** | [RecipePackPropertiesRecipes](#recipepackpropertiesrecipes) | Map of resource types to their recipe configurations <br />_(Required)_ |
 | **referencedBy** | string[] | List of environment IDs that reference this recipe pack <br />_(ReadOnly)_ |
