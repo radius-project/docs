@@ -37,6 +37,7 @@ jobs:
           app_location: redirect/src
           skip_api_build: true
           skip_app_build: true
+          skip_deploy_on_missing_secrets: true
 
   close_pr_site:
     name: Close PR Staging Site
@@ -50,3 +51,4 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.SWA_REDIRECT_TOKEN }}
           action: close
           app_location: redirect/src
+          skip_deploy_on_missing_secrets: true
