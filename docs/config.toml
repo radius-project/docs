@@ -5,6 +5,8 @@ theme =  "docsy"
 
 disableFastRender = true
 
+googleAnalytics = "G-9JR8B6TPF9"
+
 # Ignore sample code
 ignoreFiles = ["/code/*"]
 
@@ -95,6 +97,12 @@ version_menu = "Releases"
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+[markup.highlight]
+  codeFences = true
+  guessSyntax = true
+  noClasses = true # Use inline styles instead of CSS classes (false for CSS classes)
+  style = "github" 
+  tabWidth = 4
 
 # UI Customization
 [params.ui]
@@ -109,3 +117,4 @@ navbar_logo = true
 enable = true
 yes = '<b>Glad to hear it!</b> Please feel free to <a href="https://github.com/radius-project/radius">star our repo</a> and join our <a href="https://aka.ms/radius/discord">Discord server</a> to stay up to date with the project.'
 no = '<b>Sorry to hear that.</b> If you would like to also contribute a suggestion visit <a href="https://github.com/radius-project/docs/issues/new/choose"> and tell us how we can improve</a>.'
+
