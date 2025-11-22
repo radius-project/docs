@@ -24,7 +24,7 @@ Preflight checks include:
 - Cluster resource availability
 - Custom configuration parameter validation
 
-Radius is installed in the 'radius-system' namespace. For more information visit https://docs.radapp.io/concepts/technical/architecture/.
+Radius is installed in the 'radius-system' namespace. For more information visit https://docs.radapp.io/concepts/.
 
 
 ```
