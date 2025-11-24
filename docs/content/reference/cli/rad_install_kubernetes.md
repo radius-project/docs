@@ -15,7 +15,7 @@ Installs Radius onto a kubernetes cluster
 Install Radius in a Kubernetes cluster using the Radius Helm chart.
 By default 'rad install kubernetes' will install Radius with the version matching the rad CLI version.
 
-Radius will be installed in the 'radius-system' namespace. For more information visit https://docs.radapp.io/concepts/
+Radius will be installed in the 'radius-system' namespace. For more information visit https://docs.radapp.io/concepts/technical/architecture/
 
 Overrides can be set by specifying Helm chart values with the '--set' flag. For more information visit https://docs.radapp.io/guides/operations/kubernetes/install/.
 
@@ -61,11 +61,11 @@ rad install kubernetes --set-string 'global.imagePullSecrets[0].name=azure-cred'
 # Install Radius with the intermediate root CA certificate in the current Kubernetes context
 rad install kubernetes --set-file global.rootCA.cert=/path/to/rootCA.crt
 
-# Install Radius with zipkin server for distributed tracing
+# Install Radius with zipkin server for distributed tracing 
 rad install kubernetes --set global.zipkin.url=http://localhost:9411/api/v2/spans
 
 # Install Radius with central prometheus monitoring service
-rad install kubernetes --set global.prometheus.path=/customdomain.com/metrics,global.prometheus.port=443,global.rootCA.cert=/path/to/rootCA.crt
+rad install kubernetes --set global.prometheus.path=/customdomain.com/metrics,global.prometheus.port=443,global.rootCA.cert=/path/to/rootCA.crt 
 
 # Install Radius using a helmchart from specified file path
 rad install kubernetes --chart /root/radius/deploy/Chart
