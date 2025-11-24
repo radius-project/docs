@@ -35,7 +35,6 @@ Radius CLI
 * [rad initialize]({{< ref rad_initialize.md >}})	 - Initialize Radius
 * [rad install]({{< ref rad_install.md >}})	 - Installs Radius for a given platform
 * [rad recipe]({{< ref rad_recipe.md >}})	 - Manage recipes
-* [rad recipe-pack]({{< ref rad_recipe-pack.md >}})	 - Manage recipe-packs
 * [rad resource]({{< ref rad_resource.md >}})	 - Manage resources
 * [rad resource-type]({{< ref rad_resource-type.md >}})	 - Manage resource types
 * [rad rollback]({{< ref rad_rollback.md >}})	 - Rolls back Radius for a given platform

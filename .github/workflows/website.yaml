@@ -1,5 +1,3 @@
-# yaml-language-server: $schema=https://www.schemastore.org/github-workflow.json
----
 name: Radius Website
 
 on:
@@ -16,7 +14,7 @@ on:
 
 permissions:
   id-token: write # Required for requesting the JWT
-  contents: read # Required for actions/checkout
+  contents: read  # Required for actions/checkout
 
 jobs:
   build:
@@ -27,38 +25,33 @@ jobs:
       # If a PR into edge, use 'edge'. If a PR into anywhere else, use 'latest'. If a push, use the branch name.
       name: ${{ github.event_name == 'pull_request' && (github.base_ref == 'edge' && 'edge' || 'latest') || github.ref_name }}
     env:
-      GOVER: "^1.17"
-      TUTORIAL_PATH: "./docs/content/user-guides/tutorials/"
-      CODE_ZIP_PATH: "./docs/static/tutorial/"
+      GOVER: '^1.17'
+      TUTORIAL_PATH: './docs/content/user-guides/tutorials/'
+      CODE_ZIP_PATH: './docs/static/tutorial/'
       HUGO_VERSION: 0.117.0
       HUGO_ENV: production
     steps:
       - name: Checkout docs repo
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+        uses: actions/checkout@v4
         with:
           submodules: true
-
       - name: Parse release version and set environment variables
         run: python ./.github/scripts/get_docs_version.py
-
       - name: Checkout radius repo
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+        uses: actions/checkout@v4
         with:
           repository: radius-project/radius
           ref: ${{ env.RELEASE_BRANCH }}
           path: ./radius
-
       - name: Setup Node
-        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
+        uses: actions/setup-node@v4
         with:
-          node-version: "14"
-
+          node-version: '14'
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@75d2e84710de30f6ff7268e08f310b60ef14033f # v3.0.0
+        uses: peaceiris/actions-hugo@v2.6.0
         with:
           hugo-version: ${{ env.HUGO_VERSION }}
           extended: true
-
       - name: Setup Docsy
         run: |
           cd docs
@@ -67,16 +60,14 @@ jobs:
           cd themes/docsy
           npm install
       - name: Generate Swagger docs
-        run: |
+        run : |
           mkdir -p ./docs/static/swagger
           cp -r ./radius/swagger ./docs/static/
-
       - name: Override git_branch for PR
         if: github.event_name == 'pull_request'
         run: |
           # Within docs/config.toml, replace the line that starts with "github_branch" with "github_branch: $GITHUB_HEAD_REF"
           sed -i "s|github_branch = .*|github_branch = \"$GITHUB_HEAD_REF\"|" docs/config.toml
-
       - name: Build Hugo Site
         run: |
           cd docs
@@ -84,18 +75,17 @@ jobs:
             STAGING_URL="https://${{ vars.ENV_STATICWEBAPP_BASE }}-${{github.event.number }}.westus2.3.azurestaticapps.net/"
           fi
           hugo ${STAGING_URL+-b "$STAGING_URL"}
-
       - name: Upload Hugo artifacts
-        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+        uses: actions/upload-artifact@v4
         with:
           name: hugo_build
           path: ./docs/public/
           if-no-files-found: error
-
+  
   deploy:
     name: Deploy Hugo Website to App Service
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-    needs: [build]
+    needs: ['build']
     runs-on: ubuntu-latest
     environment:
       # If push to edge, use 'edge'. If push to anywhere else, use 'latest'.
@@ -103,25 +93,22 @@ jobs:
       url: ${{ github.ref_name == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io' }}
     steps:
       - name: Checkout docs repo
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+        uses: actions/checkout@v4
         with:
           submodules: false
-
       - name: Download Hugo artifacts
-        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+        uses: actions/download-artifact@v4
         with:
           name: hugo_build
           path: site/
-
       - name: Login to Azure
-        uses: azure/login@a457da9ea143d694b1b9c7c869ebb04ebe844ef5 # v2.3.0
+        uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_SP_TESTS_APPID }}
           tenant-id: ${{ secrets.AZURE_SP_TESTS_TENANTID }}
           subscription-id: ${{ vars.ENV_APPSERVICE_SUBSCRIPTIONID }}
-
       - name: Deploy to WebApp
-        uses: Azure/webapps-deploy@657f0700ea5214d56a0400d8ac5e8023c963d25d # v3.0.6
+        uses: Azure/webapps-deploy@v3
         with:
           app-name: ${{ vars.ENV_APPSERVICE_NAME }}
           resource-group-name: ${{ vars.ENV_APPSERVICE_RESOURCEGROUP }}
@@ -129,7 +116,7 @@ jobs:
 
   deploy-website:
     name: Deploy Hugo Website
-    needs: [build]
+    needs: ['build']
     runs-on: ubuntu-latest
     environment:
       # If a PR or push into edge, use 'edge'. If a PR or push into anywhere else, use 'latest'.
@@ -138,20 +125,19 @@ jobs:
       url: ${{ github.event_name == 'pull_request' && '' || (github.ref_name == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io') }}
     steps:
       - name: Download Hugo artifacts
-        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+        uses: actions/download-artifact@v4
         with:
           name: hugo_build
           path: site/
-
       - name: Deploy staging site
-        uses: Azure/static-web-apps-deploy@4d27395796ac319302594769cfe812bd207490b1 # v1
+        uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.ENV_STATICWEBAPP_TOKEN }}
           skip_deploy_on_missing_secrets: true
-          repo_token: ${{ github.token }}
-          action: upload
-          app_location: site/
-          api_location: site/
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          app_location: "site/"
+          api_location: "site/" 
           output_location: ""
           skip_app_build: true
 
@@ -162,21 +148,20 @@ jobs:
     environment:
       # If a PR into edge, use 'edge'. If a PR into anywhere else, use 'latest'.
       name: ${{ github.base_ref == 'edge' && 'edge' || 'latest' }}
-      url: ${{ github.base_ref == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io' }}
+      url:  ${{ github.base_ref == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io' }}
     steps:
       - name: Close Pull Request
         id: closepullrequest
-        uses: Azure/static-web-apps-deploy@4d27395796ac319302594769cfe812bd207490b1 # v1
+        uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.ENV_STATICWEBAPP_TOKEN }}
           skip_deploy_on_missing_secrets: true
-          action: close
-          app_location: site/
+          action: "close"
 
   algolia_index:
     name: Index site for Algolia
     if: github.event_name == 'push'
-    needs: ["build", "deploy"]
+    needs: ['build', 'deploy']
     runs-on: ubuntu-latest
     environment:
       # If push to edge, use 'edge'. If push to anywhere else, use 'latest'.
@@ -187,20 +172,17 @@ jobs:
       ALGOLIA_INDEX_NAME: ${{ secrets.ENV_ALGOLIA_INDEXNAME }}
     steps:
       - name: Checkout docs repo
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+        uses: actions/checkout@v4
         with:
           submodules: false
-
       - name: Download Hugo artifacts
-        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+        uses: actions/download-artifact@v4
         with:
           name: hugo_build
           path: site/
-
       - name: Install Python packages
         run: |
           pip install --upgrade bs4
           pip install --upgrade 'algoliasearch>=2.0,<3.0'
-
       - name: Index site
         run: python ./.github/scripts/algolia.py ./site

@@ -12,9 +12,9 @@ Radius Applications are able to connect to and leverage Kubernetes resources.
 
 ## Resource library
 
-Visit [GitHub](https://github.com/Azure/bicep-types-k8s/tree/main/generated) to reference the Kubernetes resource.
+Visit [GitHub](https://github.com/Azure/bicep-types-k8s/blob/main/generated/index.md) to reference the Kubernetes resource.
 
-{{< button text="Kubernetes resource library" link="https://github.com/Azure/bicep-types-k8s/tree/main/generated" newtab="true" >}}
+{{< button text="Kubernetes resource library" link="https://github.com/Azure/bicep-types-k8s/blob/main/generated/index.md" newtab="true" >}}
 
 ## Example
 

@@ -26,7 +26,7 @@ This will be addressed further in a future release.
 
 A Radius Environment allows you to specify Kubernetes as your compute platform, as well as specify the Kubernetes namespace in which Kubernetes objects are deployed. Additionally, you can override the namespace for a specific application using the [kubernetesNamespace extension.]({{< ref "application-schema#kubernetesNamespace" >}}). Currently, changing the namespace of an environment or application requires the application to be deleted and redeployed. If you need to change the namespace of an application, you can do so by deleting the application and/or environment and redeploying it with the new namespace.
 
-### Resource names cannot contain underscores (\_)
+### Resource names cannot contain underscores (_)
 
 Using an underscore in a resource name will result in an error.
 
@@ -45,9 +45,7 @@ Error - Type: IncludeError, Status: True, Reason: RootIncludesRoot, Message: roo
 As a workaround make sure to use distinct names for both containers and gateways.
 
 ### Typos in Radius Resource Type Names
-
 Deploying a Radius Resources with a typo in the resource type or an unsupported resource type will result in an Azure provider related error being thrown during deployment. For example, when `Application.Core/Extenders` is defined as `Application.Core/Extender` you will get an error messaging similar to:
-
 ```
 Azure deployment failed, please ensure you have configured an Azure provider with your Radius environment: https://docs.radapp.io/guides/operations/providers/azure-provider/
 ```
@@ -123,7 +121,7 @@ This will be addressed in a future release when we change how the environmentId 
 
 ### Bicep AWS limitations
 
-Some of the [AWS resource types](./resource-schema/aws) are 'non-idempotent', this means that this resource type is assigned a primary identifier at deployment time and is currently not supported by Bicep.
+Some of the [AWS resource types](/resource-schema/aws) are 'non-idempotent', this means that this resource type is assigned a primary identifier at deployment time and is currently not supported by Bicep.
 
 We are currently building support for non-idempotent resources in Radius. Please like and comment on this [this issue](https://github.com/radius-project/radius/issues/6227) if you are interested in the same.
 
@@ -135,6 +133,6 @@ As a workaround, you can try using [Terraform Recipes]({{< ref "concepts/recipes
 
 If you receive an error saying Visual Studio Code or another application is not authorized to clone any of the Radius repositories you may need to re-authorize the GitHub app:
 
-1. Open a browser to <https://github.com/settings/applications>
+1. Open a browser to https://github.com/settings/applications
 1. Find the applicable app and select Revoke
 1. Reopen app on local machine and re-auth

@@ -28,7 +28,7 @@ By the end of this tutorial, you will have deployed an existing Kubernetes appli
 
 As a part of this tutorial you will deploy an existing containerized Guestbook application originally authored by the Kubernetes community for use in their own tutorials. You will then add Radius to the deployed application. To incrementally add Radius to an existing application, you will leverage the built-in Kubernetes integration functionality by adding an annotation to the application's Kubernetes deployment manifest. This approach is particularly useful for adding Radius capabilities to applications that are already deployed.
 
-The Guestbook application consists of a web front end along with primary and secondary Redis containers for storage, all deployed with Kubernetes. For more information about the application and access its source code, see the [Kubernetes tutorial](https://kubernetes.io/docs/tutorials/stateless-application/guestbook/) and their [examples repo](https://github.com/kubernetes/examples/tree/master/web/guestbook).
+The Guestbook application consists of a web front end along with primary and secondary Redis containers for storage, all deployed with Kubernetes. For more information about the application and access its source code, see the [Kubernetes tutorial](https://kubernetes.io/docs/tutorials/stateless-application/guestbook/) and their [examples repo](https://github.com/kubernetes/examples/tree/master/guestbook).
 
 <img src="./guestbook-app.png" alt="Guestbook application architecture diagram" width=500>
 
@@ -46,11 +46,11 @@ The Guestbook application consists of a web front end along with primary and sec
    cd samples/kubernetes/guestbook
    ```
 
-   > The `kubernetes/guestbook` directory contains the Kubernetes YAML manifest files for their Guestbook sample application, copied directly from the [Kubernetes examples repo](https://github.com/kubernetes/examples/tree/master/web/guestbook).
+   > The `kubernetes/guestbook` directory contains the Kubernetes YAML manifest files for their Guestbook sample application, copied directly from the [Kubernetes examples repo](https://github.com/kubernetes/examples/tree/master/guestbook).
 
 1. Initialize Radius:
 
-   Run this command to initialize Radius. For this example, answer **NO** when asked whether to set up an application:
+   Run this command to initialize Radius. For this example, answer **NO** when asked whether to set up an application: 
 
    ```bash
    rad init
@@ -143,13 +143,13 @@ Step 2: Deploy and test the existing Guestbook application using `kubectl`
 
    ```
    Displaying application: demo
-
+   
    (empty)
    ```
 
 ## Step 3: Add Radius to the Guestbook application
 
-You will now add Radius to the Guestbook application's Kubernetes deployment manifests by making edits to the YAML files in the `deploy` directory.
+You will now add Radius to the Guestbook application's Kubernetes deployment manifests by making edits to the YAML files in the `deploy` directory. 
 
 1. In each of the YAML files that contain a manifest for `Kind: Deployment`, add the `annotations` property to `metadata`, and then add the `radapp.io/enabled: 'true'` annotation. Note that the `'true'` must be surrounded in quotes.
 
