@@ -30,7 +30,7 @@ The rollback operation will:
 This command operates on the cluster associated with the active workspace.
 To rollback Radius in a different cluster, switch to the appropriate workspace first using 'rad workspace switch'.
 
-Radius is installed in the 'radius-system' namespace. For more information visit https://docs.radapp.io/concepts/
+Radius is installed in the 'radius-system' namespace. For more information visit https://docs.radapp.io/concepts/technical/architecture/
 
 
 ```
@@ -52,7 +52,7 @@ rad rollback kubernetes --revision 3
 # List available revisions without performing rollback
 rad rollback kubernetes --list-revisions
 
-# Check which workspace is active
+# Check which workspace is active  
 rad workspace show
 
 # Switch to a different workspace before rolling back
