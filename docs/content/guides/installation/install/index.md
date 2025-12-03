@@ -10,11 +10,11 @@ aliases:
 - /guides/operations/kubernetes/kubernetes-install
 ---
 
-This guide goes through all the installation options and client tools to interact with Radius.
+This guide provides advanced instructions and for customizing the Radius installation.
 
 ## Radius CLI 
 
-The `rad` CLI is the primary interface for installing and operating Radius. Install it on any workstation or automation runner that interacts with Radius.
+The Radius CLI, `rad` is the primary tool used to install and configure Radius. Install it on any workstation that interacts with Radius.
 
 Use the install.sh script to add `rad` plus the embedded `rad-bicep` compiler:
 
@@ -37,11 +37,9 @@ curl -fsSL "https://raw.githubusercontent.com/radius-project/radius/main/deploy/
 
 > **Preview builds:** The install.sh script accepts `edge` as the version. Edge builds are pulled from the GitHub Container Registry and require the [`oras` CLI](https://oras.land/docs/cli/installation/) to be present in `PATH`.
 
-The Radius CLI stores its configuration in a YAML file named `config.yaml` under the `rad` directory. This file contains Workspace configurations, which points to your cluster, Resource Group, and Environment. When the Radius CLI runs commands, it will use the configuration in the `config.yaml` file to determine which configuration to target and use. Each workspace entry is updated automatically when you create and switch the default environments.
+The Radius CLI stores its configuration in `~/.rad/config.yaml`. This file contains Workspace configurations, which points to your Kubernetes cluster, Radiud Resource Group, and Environment. When the Radius CLI runs commands, it will use the configuration in the `config.yaml` file to determine which Resource Group and Environment to use. For more information, refer to the [`config.yaml` reference documentation]({{< ref "/reference/config" >}}).
 
-For more information, refer to the [`config.yaml` reference documentation]({{< ref "/reference/config" >}}).
-
-## Radius Control Plane Installation
+## Radius control plane installation
 
 The Radius Control Plane services can be installed using Radius CLI or Helm. `rad install` and `rad init` both pin the chart version to the CLI’s channel; keeping them aligned prevents API mismatches.
 
@@ -96,9 +94,7 @@ For more information on the Helm Installation Options, checkout the [reference g
 
 #### Bring your own root certificate authority certificate
 
-Many enterprises leverage intermediate root certificate authorities (CAs) to enhance security and control over outgoing traffic originating from their employees' machines, particularly when using a firewall or proxy solution. Radius can mount an intermediate CA bundle into every control-plane pod. Set `global.rootCA.cert` using `--set-file` option via CLI or in the Helm chart. 
-
-Example:
+If your organization uses an intermediate or alternative trusted root certificate authority (CA), you can install the CA's certificate on the Radius control plane by setting `global.rootCA.cert` option. For example:
 
 ```bash
 rad install kubernetes --set-file global.rootCA.cert=/etc/ssl/your-root-ca.crt

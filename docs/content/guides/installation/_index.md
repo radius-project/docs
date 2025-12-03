@@ -6,29 +6,24 @@ description: "Learn how to install and manage Radius"
 weight: 100
 ---
 
-Radius installation spans across your Kubernetes cluster, developer workstations, and OCI registries to deliver the platform's capabilities. Use this page as your installation planning checklist and understand how each component fits into the deployment.
+Installing Radius includes installing the Radius command-line interface (CLI), installing the Radius control plane on Kubernetes, and configuring credentials for Radius to access your AWS account, Azure subscription, and Git repository or OCI registry for your Recipes.
 
-## Installation Components
+## Installation checklist
 
-### Radius components
+### Required steps
 
-- **Radius CLI (`rad`)** – The installer places `rad` binary on your PATH and downloads the bundled `rad-bicep` compiler to compile and deploy the Applications.
+- Install the Radius CLI (`rad`) and Bicep CLI (`rad-bicep`)
+- Install the Radius control plane on a Kubernetes cluster
+- Configure Radius Resource Groups and Environments
 
-- **Radius control plane** – The Helm chart deploys the Controller, Universal Control Plane (UCP), Applications RP, Dynamic RP, Deployment Engine, and optional Dashboard and Contour. All these components run in the `radius-system` namespace.
+### Additional optional steps
 
-  - **Ingress or gateway controller** – Radius installs Contour as the ingress controller by default. You can skip installing it and any alternative must be configured to route traffic to the Radius APIs.
-
-  - **Dashboard** – The Backstage based UI for managing Radius resources. You can disable it during installation.
-
-- **Bicep extensions** – Radius packages Resource Type definitions as Bicep extensions stored in OCI registries or a file share. To use the Resource Types in your application, a workstation or CI runner must have config file (`bicepconfig.json`) that points to the extensions. Checkout the [how-to generate Bicep extensions](TODO) for more information.
-
-### External tools and services Radius interacts with
-
-- **OCI registries** – Hosts the Radius control-plane images, Bicep extensions, and Recipes (for example GHCR or ACR). Ensure authentication is setup if working off a private network or of the Recipes and extensions are stored in private registries. Checkout the [how-to publish Recipes](TODO) and [how-to publish Bicep extensions](TODO) for more information.
-
-- **Git repositories** – Terraform based Recipes are stored in Git repositories. Ensure authentication is set up if the repositories are private. Checkout the [Recipe guides]({{< ref "/guides/recipes" >}}) for more information.
-
-- **Observability back ends** – Prometheus and Zipkin/Jaeger endpoints collect metrics and traces using the chart settings. Checkout the [Observability guide](TODO) for more information.
+- Configure AWS and/or Azure credentials in Radius
+- Configure a Git repository or OCI registry to store Recipes
+- Customize Radius Resource Types
+- Distribute Bicep extensions for Radius Resource Types
+- Expose access to the Radius Dashboard
+- Configure Kubernetes ingress 
 
 ## Installation Requirements
 
