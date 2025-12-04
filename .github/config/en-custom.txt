@@ -1103,6 +1103,7 @@ OnFailure
 AzureKeyVaultVolumePropertiesKeys
 EnvironmentProperties
 Readonly
+EnvironmentPropertiesRecipeParameters
 EnvironmentPropertiesRecipes
 SystemData
 TrackedResourceTags
@@ -1344,8 +1345,10 @@ RecipeDefinition
 RecipeDefinitionParameters
 RecipePackProperties
 RecipePackPropertiesRecipes
+RecipeParameterValue
 recipeKind
 recipeLocation
+recipeParameters
 recipePacks
 recipepacks
 referencedBy
