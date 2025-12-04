@@ -10,12 +10,14 @@ on:
   schedule:
     - cron: "0 18 * * *" # Run the workflow every day at 6PM UTC (10AM PST).
 
+permissions: {}
+
 jobs:
   stale:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
     permissions:
       pull-requests: write
-
     steps:
       - uses: actions/stale@5f858e3efba33a5ca4407a664cc011ad407f2008 # v10.1.0
         with:
