@@ -14,6 +14,8 @@ on:
       - v*.*
       - edge
 
+permissions: {}
+
 env:
   ACTION_LINK: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
@@ -23,10 +25,16 @@ concurrency:
 jobs:
   spellcheck:
     name: Spellcheck
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
       - name: Checkout docs
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        with:
+          persist-credentials: false
 
       - name: Spellcheck
         uses: rojopolis/spellcheck-github-actions@6f2326b663e2dbab920da0fc4144b9f3202434ba # 0.54.0
@@ -36,15 +44,19 @@ jobs:
       - name: Post GitHub workkflow output on failure
         if: failure()
         run: |
-          echo "## :x: Spellcheck Failed" >> $GITHUB_STEP_SUMMARY
-          echo "There are spelling errors in your PR. Visit [the workflow output](${{ env.ACTION_LINK }}) to see what words are failing." >> $GITHUB_STEP_SUMMARY
-          echo "### Adding new words" >> $GITHUB_STEP_SUMMARY
-          echo "If you are adding a new custom word refer to the [docs guide](https://docs.radapp.io/contributing/docs/#spelling)" >> $GITHUB_STEP_SUMMARY
+          {
+            echo "## :x: Spellcheck Failed"
+            echo "There are spelling errors in your PR. Visit [the workflow output](${{ env.ACTION_LINK }}) to see what words are failing."
+            echo "### Adding new words"
+            echo "If you are adding a new custom word refer to the [docs guide](https://docs.radapp.io/contributing/docs/#spelling)"
+          } >> "${GITHUB_STEP_SUMMARY}"
 
       - name: Post GitHub workflow output on success
         run: |
-          echo "## :white_check_mark: Spellcheck Passed" >> $GITHUB_STEP_SUMMARY
-          echo "There are no spelling errors in your PR." >> $GITHUB_STEP_SUMMARY
+          {
+            echo "## :white_check_mark: Spellcheck Passed"
+            echo "There are no spelling errors in your PR."
+          } >> "${GITHUB_STEP_SUMMARY}"
 
       - name: Post GitHub comment on failure
         if: failure()
