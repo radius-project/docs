@@ -42,6 +42,12 @@ rad env update myenv --clear-azure
 ## Remove AWS cloud provider
 rad env update myenv --clear-aws
 
+## Add Kubernetes cloud provider (preview)
+rad env update myenv --kubernetes-namespace mynamespace
+
+## Remove Kubernetes cloud provider (preview)
+rad env update myenv --clear-kubernetes
+
 ```
 
 ### Options
@@ -53,10 +59,14 @@ rad env update myenv --clear-aws
       --azure-subscription-id string   The subscription ID where Azure resources will be deployed
       --clear-aws                      Specify if aws provider needs to be cleared on env
       --clear-azure                    Specify if azure provider needs to be cleared on env
+      --clear-kubernetes               Specify if kubernetes provider needs to be cleared on env (preview)
   -e, --environment string             The environment name
   -g, --group string                   The resource group name
   -h, --help                           help for update
+      --kubernetes-namespace string    The namespace where Kubernetes resources will be deployed (preview)
   -o, --output string                  output format (supported formats are json, table) (default "table")
+      --preview                        Use the Radius.Core preview implementation for environment update.
+      --recipe-packs stringArray       Specify recipe packs to be added to the environment (preview)
   -w, --workspace string               The workspace name
 ```
 

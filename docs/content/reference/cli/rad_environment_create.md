@@ -33,6 +33,7 @@ rad env create myenv
   -g, --group string         The resource group name
   -h, --help                 help for create
   -n, --namespace string     The Kubernetes namespace
+      --preview              Use the Radius.Core preview implementation
   -w, --workspace string     The workspace name
 ```
 

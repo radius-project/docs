@@ -29,6 +29,7 @@ rad env switch newEnvironment
 ```
   -e, --environment string   The environment name
   -h, --help                 help for switch
+      --preview              Use the Radius.Core preview implementation
   -w, --workspace string     The workspace name
 ```
 
