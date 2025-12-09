@@ -30,7 +30,7 @@ jobs:
           token: ${{ secrets.GH_RAD_CI_BOT_PAT }}
           ref: edge
           path: docs
-          persist-credentials: false
+          # persist-credentials: false
 
       - name: Configure git
         run: |
