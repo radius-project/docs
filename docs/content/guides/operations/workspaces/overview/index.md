@@ -22,10 +22,10 @@ The following commands let you interact with Radius Environments:
 {{< tabs create list show delete switch >}}
 
 {{% codetab %}}
-[rad workspace init kubernetes]({{< ref rad_workspace_create >}}) creates a new workspace:
+[rad workspace create kubernetes]({{< ref rad_workspace_create >}}) creates a new workspace:
 
 ```bash
-rad workspace init kubernetes
+rad workspace create kubernetes
 ```
 
 {{% /codetab %}}
