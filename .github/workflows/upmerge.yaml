@@ -1,6 +1,6 @@
 # This workflow automates the process of upmerging changes from the current release branch to the edge branch.
 # During the course of a release, the release branch is the default branch so that PRs can be immediately
-# brought into the release without waiting for a new release. This workflow merges those changes into 
+# brought into the release without waiting for a new release. This workflow merges those changes into
 # the edge branch so that edge can be used as the basis for the next release branch.
 #
 # This workflow assumes that it is being triggered from the current release branch, but it could be triggered from
@@ -22,65 +22,73 @@
 # 2. Changes from branch v0.36 are merged into branch upmerge/2024-07-31-98b9.
 # 3. A PR is created from branch upmerge/2024-07-31-98b9 --> edge. The workflow finishes and reports success.
 
+# yaml-language-server: $schema=https://www.schemastore.org/github-workflow.json
+---
 name: Upmerge docs to edge
 
 on:
   workflow_dispatch:
 
+permissions: {}
+
 jobs:
   upmerge:
     name: Upmerge docs to edge
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
-
       # Checkout the edge branch
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
         with:
           ref: edge
           # https://github.com/actions/checkout/issues/125#issuecomment-570254411
           fetch-depth: 0
           persist-credentials: false
-      
+
       - name: Configure git
         env:
-            GH_TOKEN: ${{ secrets.GH_RAD_CI_BOT_PAT }}
+          GH_TOKEN: ${{ secrets.GH_RAD_CI_BOT_PAT }}
         run: |
           git config --global user.email "radiuscoreteam@service.microsoft.com"
           git config --global user.name "Radius CI Bot"
-          git remote set-url origin https://$GH_TOKEN@github.com/${{ github.repository }}
+          git remote set-url origin "https://${GH_TOKEN}@github.com/${{ github.repository }}"
 
       # Create a new branch from edge. This branch will be used to PR back into edge.
       - name: Create new branch
         run: |
-          export DATE=$(date +%Y-%m-%d)
-          export RAND=$(openssl rand -hex 2)
-          export BRANCH_NAME=upmerge/$DATE-$RAND
-          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
-          git checkout -b $BRANCH_NAME
-      
+          DATE=$(date +%Y-%m-%d)
+          RAND=$(openssl rand -hex 2)
+          BRANCH_NAME="upmerge/${DATE}-${RAND}"
+          echo "BRANCH_NAME=${BRANCH_NAME}" >> "${GITHUB_ENV}"
+          git checkout -b "${BRANCH_NAME}"
+
       # Merge changes from the github.ref branch, i.e., the branch from which the workflow is triggered. That
       # branch is assumed to be the current release branch, but could be any branch.
       # If there are no changes, stop the workflow.
       - name: Upmerge docs
         run: |
-          export SOURCE_BRANCH=$(basename ${{ github.ref }})
+          SOURCE_BRANCH=$(basename ${{ github.ref }})
           echo "Upmerging docs from $SOURCE_BRANCH to edge"
-          git fetch origin $SOURCE_BRANCH
-          git merge --no-commit origin/$SOURCE_BRANCH
+          git fetch origin "${SOURCE_BRANCH}"
+          git merge --no-commit "origin/${SOURCE_BRANCH}"
           git checkout edge -- docs/config.toml docs/layouts/partials/hooks/body-end.html
           git commit --signoff --message "Upmerge to edge"
-          
+
           if git diff --quiet edge; then
-              echo "No changes to merge from $SOURCE_BRANCH to edge"
-              echo "NO_CHANGES=true" >> $GITHUB_ENV
+              echo "No changes to merge from ${SOURCE_BRANCH} to edge"
+              echo "NO_CHANGES=true" >> "${GITHUB_ENV}"
           else
-              echo "Pushing $BRANCH_NAME for PR to edge"
-              git push --set-upstream origin $BRANCH_NAME
+              echo "Pushing ${BRANCH_NAME} for PR to edge"
+              git push --set-upstream origin "${BRANCH_NAME}"
           fi
-      
+
       # Create a PR from the new branch to edge
       - name: Create pull request
         if: env.NO_CHANGES != 'true'
         env:
           GH_TOKEN: ${{ secrets.GH_RAD_CI_BOT_PAT }}
-        run: gh pr create --title "Upmerge to edge" --body "Upmerge to edge (kicked off by @${{ github.triggering_actor }})" --base edge --head $BRANCH_NAME
+        run: |
+          gh pr create --title "Upmerge to edge" --body "Upmerge to edge (kicked off by @${{ github.triggering_actor }})" --base edge --head "${BRANCH_NAME}"
