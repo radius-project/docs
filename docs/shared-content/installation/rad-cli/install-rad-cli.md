@@ -1,6 +1,6 @@
 Install the Radius CLI on your workstation with the appropriate installation script:
 
-{{< tabs "Linux/WSL" MacOS "Windows PowerShell" "GitHub Codespaces" "Azure Cloud Shell" Binaries >}}
+{{< tabs "Linux/WSL" MacOS "Windows PowerShell" "Windows WinGet" "GitHub Codespaces" "Azure Cloud Shell" Binaries >}}
 
 {{% codetab %}}
 {{< latest >}}
@@ -60,6 +60,20 @@ To install the latest edge release, first install [ORAS](https://oras.land/docs/
 $script=iwr -useb "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.ps1"; $block=[ScriptBlock]::Create($script); invoke-command -ScriptBlock $block -ArgumentList edge
 ```
 
+{{< /edge >}}
+{{% /codetab %}}
+
+{{% codetab %}}
+{{< latest >}}
+Run the following in a console window:
+
+```shell
+winget install --exact --id Radius.Radius
+```
+
+{{< /latest >}}
+{{< edge >}}
+Edge version installation via WinGet is not supported. To install the latest edge release, use the install script in the Windows PowerShell tab.
 {{< /edge >}}
 {{% /codetab %}}
 
