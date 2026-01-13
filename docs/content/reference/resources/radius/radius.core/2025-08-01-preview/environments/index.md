@@ -52,7 +52,8 @@ description: "Detailed reference documentation for radius.core/environments@2025
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **scope** | string | Target scope for AWS resources to be deployed into.  For example: '/planes/aws/aws/accounts/000000000000/regions/us-west-2'. <br />_(Required)_ |
+| **accountId** | string | AWS account ID for AWS resources to be deployed into. <br />_(Required)_ |
+| **region** | string | AWS region for AWS resources to be deployed into. <br />_(Required)_ |
 
 ### ProvidersAzure
 
