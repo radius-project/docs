@@ -16,7 +16,7 @@ Deploy a Bicep or ARM template
 	
 The deploy command compiles a Bicep or ARM template and deploys it to your default environment (unless otherwise specified).
 	
-You can combine Radius types as well as other types that are available in Bicep such as Azure resources. See
+You can combine Radius types as as well as other types that are available in Bicep such as Azure resources. See
 the Radius documentation for information about describing your application and resources with Bicep.
 
 You can specify parameters using the '--parameter' flag ('-p' for short). Parameters can be passed as:
