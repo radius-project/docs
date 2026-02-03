@@ -49,7 +49,7 @@ Successfully created environment "my-env" in resource group "my-group"
 Inspect the Environment using the `rad environment show`
 
 ```bash
-rad environment show my-env --output json
+rad environment show my-env --group my-group --output json
 ```
 
 You should see output similar to: 
