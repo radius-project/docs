@@ -87,6 +87,7 @@ Use the `rad run` command to deploy the application and setup port forwarding.
 ```bash
 rad run app.bicep
 ```
+Note: If you don't have bicep compiler installed, run `rad bicep download`, before running 'rad run app.bicep`
 
 This command:
 
