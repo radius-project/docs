@@ -35,6 +35,7 @@ rad app graph my-application
   -a, --application string   The application name
   -g, --group string         The resource group name
   -h, --help                 help for graph
+  -o, --output string        output format (supported formats are json, table) (default "table")
   -w, --workspace string     The workspace name
 ```
 
@@ -42,7 +43,6 @@ rad app graph my-application
 
 ```
       --config string   config file (default "$HOME/.rad/config.yaml")
-  -o, --output string   output format (supported formats are json, table) (default "table")
 ```
 
 ### SEE ALSO
