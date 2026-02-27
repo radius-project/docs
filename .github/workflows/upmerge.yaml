@@ -46,7 +46,7 @@ jobs:
           ref: edge
           # https://github.com/actions/checkout/issues/125#issuecomment-570254411
           fetch-depth: 0
-          persist-credentials: false
+          persist-credentials: true
 
       - name: Configure git
         env:
