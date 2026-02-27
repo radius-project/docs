@@ -3,6 +3,8 @@
 
 # Allows on-call members to respond to changes in .github and .devcontainer folders
 .github/*.yaml          @radius-project/on-call @radius-project/maintainers-docs @radius-project/approvers-docs
+.github/*.yml          @radius-project/on-call @radius-project/maintainers-docs @radius-project/approvers-docs
+.github/dependabot.yml @radius-project/on-call @radius-project/maintainers-docs @radius-project/approvers-docs
 .devcontainer/**    @radius-project/on-call @radius-project/maintainers-docs @radius-project/approvers-docs
 
 # Dependabot managed files
