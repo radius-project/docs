@@ -13,6 +13,8 @@ updates:
     commit-message:
       prefix: ci
       include: scope
+    ignore:
+      - dependency-name: Azure/static-web-apps-deploy
     groups:
       all:
         patterns:
