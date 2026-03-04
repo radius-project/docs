@@ -136,6 +136,7 @@ VPC
 VSCode
 VSIX
 WSL
+accountId
 addon
 aks
 api
@@ -1103,6 +1104,7 @@ OnFailure
 AzureKeyVaultVolumePropertiesKeys
 EnvironmentProperties
 Readonly
+EnvironmentPropertiesRecipeParameters
 EnvironmentPropertiesRecipes
 SystemData
 TrackedResourceTags
@@ -1339,3 +1341,16 @@ swappable
 enums
 camelCase
 ArgoCD
+ProvidersKubernetes
+RecipeDefinition
+RecipeDefinitionParameters
+RecipePackProperties
+RecipePackPropertiesRecipes
+RecipeParameterValue
+recipeKind
+recipeLocation
+recipeParameters
+recipePacks
+recipepacks
+referencedBy
+subscriptionId

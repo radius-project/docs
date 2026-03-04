@@ -1,2 +1,15 @@
 # These owners are the maintainers and approvers of this repo
 *       @radius-project/maintainers-docs @radius-project/approvers-docs
+
+# Allows on-call members to respond to changes in .github and .devcontainer folders
+.github/workflows/*.yaml          @radius-project/on-call @radius-project/maintainers-docs @radius-project/approvers-docs
+.github/workflows/*.yml          @radius-project/on-call @radius-project/maintainers-docs @radius-project/approvers-docs
+.devcontainer/**    @radius-project/on-call @radius-project/maintainers-docs @radius-project/approvers-docs
+
+# GitHub configs
+.github/*.yml   @radius-project/maintainers-docs @radius-project/approvers-docs @radius-project/on-call
+.github/*.yaml  @radius-project/maintainers-docs @radius-project/approvers-docs @radius-project/on-call
+
+# Dependabot managed files
+docs/package.json        @radius-project/on-call @radius-project/maintainers-docs @radius-project/approvers-docs
+docs/package-lock.json   @radius-project/on-call @radius-project/maintainers-docs @radius-project/approvers-docs

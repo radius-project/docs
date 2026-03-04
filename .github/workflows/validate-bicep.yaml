@@ -4,7 +4,7 @@
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-#    
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
@@ -14,7 +14,10 @@
 # limitations under the License.
 # ------------------------------------------------------------
 
+# yaml-language-server: $schema=https://www.schemastore.org/github-workflow.json
+---
 name: Validate Bicep Code
+
 on:
   pull_request:
     branches:
@@ -24,17 +27,27 @@ on:
     branches:
       - edge
       - v*
+
+permissions: {}
+
 jobs:
   build:
     name: Validate Bicep Code
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
     steps:
-    - name: Check out repo
-      uses: actions/checkout@v4
-    - name: Setup and verify bicep CLI
-      run: |
-        curl -Lo bicep https://github.com/Azure/bicep/releases/latest/download/bicep-linux-x64
-        chmod +x ./bicep
-        ./bicep --version
-    - name: Verify Bicep files
-      run: python ./.github/scripts/validate_bicep.py
+      - name: Check out repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Setup and verify bicep CLI
+        run: |
+          curl -Lo bicep https://github.com/Azure/bicep/releases/latest/download/bicep-linux-x64
+          chmod +x ./bicep
+          ./bicep --version
+
+      - name: Verify Bicep files
+        run: python ./.github/scripts/validate_bicep.py
