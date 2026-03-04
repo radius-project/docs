@@ -153,6 +153,7 @@ nav.foldable-nav {
     }
 
     ul.foldable {
+        display: block;
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
@@ -170,13 +171,12 @@ nav.foldable-nav {
         padding-left: 1.3em;
     }
 
-    .ul-1 .with-child > label:before {
+    .with-child > label:before {
         display: inline-block;
-        font-style: normal;
-        font-variant: normal;
-        text-rendering: auto;
-        -webkit-font-smoothing: antialiased;
-        font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f0da";
+        content: "▸";
+        font-family: inherit;
+        font-weight: $font-weight-bold;
+        line-height: 1;
         position: absolute;
         left: 0.1em;
         padding-left: 0.4em;
@@ -189,7 +189,7 @@ nav.foldable-nav {
         }
     }
 
-    .ul-1 .with-child > input:checked ~ label:before {
+    .with-child > input:checked ~ label:before {
         color: $primary;
         transform: rotate(90deg);
         transition: transform 0.5s;
@@ -202,13 +202,13 @@ nav.foldable-nav {
 
     nav.foldable-nav {
 
-        .ul-1 .with-child > label:hover:before {
+        .with-child > label:hover:before {
             color: $primary;
             transform: rotate(30deg);
             transition: transform 0.5s;
         }
 
-        .ul-1 .with-child > input:checked ~ label:hover:before {
+        .with-child > input:checked ~ label:hover:before {
             color: $primary;
             transform: rotate(60deg) !important;
             transition: transform 0.5s;

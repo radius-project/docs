@@ -15,15 +15,23 @@
   "homepage": "https://docs.radapp.io",
   "devDependencies": {
     "autoprefixer": "^10.4.27",
-    "hugo-extended": "^0.117.0",
+    "hugo-extended": "0.157.0",
     "postcss": "^8.5.8",
-    "postcss-cli": "^11.0.1"
+    "postcss-cli": "^11.0.1",
+    "rimraf": "^6.1.3"
   },
   "scripts": {
-    "postinstall": "cd themes/docsy && npm install --no-fund --no-audit",
-    "dev": "hugo server --buildDrafts",
-    "start": "npm run dev",
-    "build": "hugo --minify",
-    "build:preview": "hugo --buildDrafts --buildFuture"
+    "build": "hugo --gc --minify",
+    "build:preview": "hugo --gc --minify --buildDrafts --buildFuture",
+    "start": "hugo server",
+    "start:drafts": "hugo server --buildDrafts --navigateToChanged",
+    "hugo": "hugo",
+    "hugo:version": "hugo version",
+    "hugo:env": "hugo env",
+    "hugo:mod:get": "hugo mod get",
+    "hugo:mod:tidy": "hugo mod tidy",
+    "hugo:mod:clean": "hugo mod clean --all",
+    "hugo:mod:graph": "hugo mod graph",
+    "clean": "hugo --gc && rimraf public resources"
   }
 }

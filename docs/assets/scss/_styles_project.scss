@@ -1,3 +1,7 @@
+@import "nav";
+@import "sidebar-tree";
+@import "content";
+
 .td-navbar .navbar-brand__name {
     display: none;
 }
@@ -10,4 +14,16 @@
 
 .btn {
     border-radius: 10px;
+}
+
+.td-content .alert-primary {
+    background-color: #ffffff;
+    color: inherit;
+    border-color: #c43821;
+}
+
+.cardpane-matrix > .td-card {
+    margin-right: 0 !important;
+    margin-bottom: 0;
+    height: 100%;
 }
