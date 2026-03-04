@@ -68,7 +68,7 @@ By default, the rad CLI installation script installs the rad CLI to `%LOCALAPPDA
 
 ## Configuration
 
-The rad CLI stores its configuration, the rad-Bicep compiler, and other configuration under the `rad` directory.
+The rad CLI stores its configuration, the Bicep compiler, and other configuration under the `rad` directory.
 
 {{< tabs "macOS/Linux/WSL" "Windows" >}}
 
@@ -90,9 +90,9 @@ When the rad CLI runs commands, it will use the configuration in the `config.yam
 
 For more information, refer to the [`config.yaml` reference documentation]({{< ref "/reference/config" >}}).
 
-### `rad-bicep` compiler
+### `bicep` compiler
 
-The rad CLI uses the Bicep compiler to compile Bicep files to JSON templates. The Bicep compiler is stored as `/bin/rad-bicep` within your configuration directory.
+The rad CLI uses the Bicep compiler to compile Bicep files to JSON templates. The Bicep compiler is stored as `/bin/bicep` within your configuration directory.
 
 ## Reference documentation
 

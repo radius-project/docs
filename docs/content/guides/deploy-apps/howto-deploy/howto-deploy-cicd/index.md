@@ -110,7 +110,7 @@ Ensure the service principal created above has the proper RBAC assignment to dow
 Next, download the latest `rad` CLI release and setup your workspace:
 
 ```yml
-    - name: Download rad CLI and rad-bicep
+    - name: Download rad CLI and bicep
       run: |
         wget -q "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh" -O - | /bin/bash
         ./rad bicep download
