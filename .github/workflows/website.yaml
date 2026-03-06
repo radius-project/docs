@@ -93,11 +93,14 @@ jobs:
         working-directory: docs
         run: |
           if [ "${GITHUB_EVENT_NAME}" = 'pull_request' ]; then
-            STAGING_URL="https://${{ vars.ENV_STATICWEBAPP_BASE }}-pr${{ github.event.number }}.westus2.3.azurestaticapps.net/"
+            STAGING_URL="https://${ENV_STATICWEBAPP_BASE}-pr${PR_NUMBER}.westus2.3.azurestaticapps.net/"
             npm run build:preview -- -b "${STAGING_URL}"
           else
             npm run build
           fi
+        env:
+          ENV_STATICWEBAPP_BASE: ${{ vars.ENV_STATICWEBAPP_BASE }}
+          PR_NUMBER: ${{ github.event.number }}
 
       - name: Upload Hugo artifacts
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
@@ -197,7 +200,7 @@ jobs:
               "source_repository": "${{ github.repository }}",
               "source_run_id": "${{ github.run_id }}",
               "artifact_name": "${{ env.BUILD_ARTIFACT_NAME }}",
-              "swa_cli_app_name": "${{ vars.ENV_STATICWEBAPP_BASE }}"
+              "swa_cli_app_name": "${{ vars.ENV_STATICWEBAPP_NAME }}"
             }
 
       - name: Monitor remote workflow
@@ -278,7 +281,7 @@ jobs:
               "source_repository": "${{ github.repository }}",
               "source_run_id": "${{ github.run_id }}",
               "artifact_name": "${{ env.BUILD_ARTIFACT_NAME }}",
-              "swa_cli_app_name": "${{ vars.ENV_STATICWEBAPP_BASE }}"
+              "swa_cli_app_name": "${{ vars.ENV_STATICWEBAPP_NAME }}"
             }
 
       - name: Monitor remote workflow
@@ -377,7 +380,7 @@ jobs:
               "action": "close",
               "source_repository": "${{ github.repository }}",
               "pr_number": ${{ github.event.pull_request.number }},
-              "swa_cli_app_name": "${{ vars.ENV_STATICWEBAPP_BASE }}"
+              "swa_cli_app_name": "${{ vars.ENV_STATICWEBAPP_NAME }}"
             }
 
       - name: Monitor remote workflow
