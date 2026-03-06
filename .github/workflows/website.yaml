@@ -16,12 +16,25 @@ on:
 
 permissions: {}
 
+concurrency:
+  group: docs-swa-${{ github.event.pull_request.number || github.ref || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  TARGET_OWNER: azure-octo
+  TARGET_REPO: radius-publisher
+  TARGET_WORKFLOW_FILE: swa.yml
+  MAX_WAIT_SECONDS: "600"
+  POLL_INTERVAL_SECONDS: "15"
+  PREVIEW_COMMENT_HEADER: swa-preview
+  BUILD_ARTIFACT_NAME: hugo_build
+
 jobs:
   build:
     name: Build Hugo Website
     if: github.event.action != 'closed'
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 15
     permissions:
       contents: read # Required for actions/checkout
     environment:
@@ -31,7 +44,6 @@ jobs:
       GOVER: "^1.17"
       TUTORIAL_PATH: "./docs/content/user-guides/tutorials/"
       CODE_ZIP_PATH: "./docs/static/tutorial/"
-      HUGO_VERSION: 0.117.0
       HUGO_ENV: production
     steps:
       - name: Checkout docs repo
@@ -52,23 +64,20 @@ jobs:
           persist-credentials: false
 
       - name: Setup Node
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
-          node-version: "14"
+          node-version-file: docs/.node-version
+          cache: npm
+          cache-dependency-path: docs/package-lock.json
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@75d2e84710de30f6ff7268e08f310b60ef14033f # v3.0.0
-        with:
-          hugo-version: ${{ env.HUGO_VERSION }}
-          extended: true
+      - name: Install root dependencies
+        working-directory: docs
+        run: npm ci --ignore-scripts
 
-      - name: Setup Docsy
-        run: |
-          cd docs
-          sudo npm install -D --save autoprefixer
-          sudo npm install -D --save postcss-cli
-          cd themes/docsy
-          npm install
+      - name: Install Docsy dependencies
+        working-directory: docs/themes/docsy
+        run: npm install --no-fund --no-audit
+
       - name: Generate Swagger docs
         run: |
           mkdir -p ./docs/static/swagger
@@ -81,19 +90,22 @@ jobs:
           sed -i "s|github_branch = .*|github_branch = \"$GITHUB_HEAD_REF\"|" docs/config.toml
 
       - name: Build Hugo Site
+        working-directory: docs
         run: |
-          cd docs
-          if [ "${GITHUB_EVENT_NAME}" == 'pull_request' ]; then
-            STAGING_URL="https://${{ vars.ENV_STATICWEBAPP_BASE }}-${{github.event.number }}.westus2.3.azurestaticapps.net/"
+          if [ "${GITHUB_EVENT_NAME}" = 'pull_request' ]; then
+            STAGING_URL="https://${{ vars.ENV_STATICWEBAPP_BASE }}-pr${{ github.event.number }}.westus2.3.azurestaticapps.net/"
+            npm run build:preview -- -b "${STAGING_URL}"
+          else
+            npm run build
           fi
-          hugo ${STAGING_URL+-b "$STAGING_URL"}
 
       - name: Upload Hugo artifacts
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
         with:
-          name: hugo_build
+          name: ${{ env.BUILD_ARTIFACT_NAME }}
           path: ./docs/public/
           if-no-files-found: error
+          retention-days: 1
 
   deploy:
     name: Deploy Hugo Website to App Service
@@ -118,7 +130,7 @@ jobs:
       - name: Download Hugo artifacts
         uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3 # v8.0.0
         with:
-          name: hugo_build
+          name: ${{ env.BUILD_ARTIFACT_NAME }}
           path: site/
 
       - name: Login to Azure
@@ -135,57 +147,262 @@ jobs:
           resource-group-name: ${{ vars.ENV_APPSERVICE_RESOURCEGROUP }}
           package: site/
 
-  deploy-website:
-    name: Deploy Hugo Website
+  dispatch-production:
+    name: Dispatch Static Web App Deploy
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     needs: [build]
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 15
     permissions:
-      contents: read # Required for actions/checkout
+      contents: read
     environment:
-      # If a PR or push into edge, use 'edge'. If a PR or push into anywhere else, use 'latest'.
-      name: ${{ github.event_name == 'pull_request' && (github.base_ref == 'edge' && 'edge' || 'latest') || (github.ref_name == 'edge' && 'edge' || 'latest') }}
-      # If a push to edge, use the edge URL. If a push to anywhere else, use the latest URL. If a PR, blank.
-      url: ${{ github.event_name == 'pull_request' && '' || (github.ref_name == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io') }}
+      name: ${{ github.ref_name == 'edge' && 'edge' || 'latest' }}
+      url: ${{ github.ref_name == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io' }}
     steps:
-      - name: Download Hugo artifacts
-        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3 # v8.0.0
+      - name: Checkout docs repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          name: hugo_build
-          path: site/
+          persist-credentials: false
+          sparse-checkout: |
+            .github/scripts/monitor-remote-workflow.mjs
 
-      - name: Deploy staging site
-        uses: Azure/static-web-apps-deploy@4d27395796ac319302594769cfe812bd207490b1 # v1
+      - name: Get App Token
+        uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+        id: github-app-token
         with:
-          azure_static_web_apps_api_token: ${{ secrets.ENV_STATICWEBAPP_TOKEN }}
-          skip_deploy_on_missing_secrets: true
-          repo_token: ${{ github.token }}
-          action: upload
-          app_location: site/
-          api_location: site/
-          output_location: ""
-          skip_app_build: true
+          app-id: ${{ secrets.RADIUS_PUBLISHER_BOT_APP_ID }}
+          private-key: ${{ secrets.RADIUS_PUBLISHER_BOT_PRIVATE_KEY }}
+          permission-metadata: read
+          permission-actions: read
+          permission-contents: write
+          owner: ${{ env.TARGET_OWNER }}
+          repositories: |
+            ${{ env.TARGET_REPO }}
 
-  close_pr_site:
-    name: Close PR Staging Site
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+      - name: Capture dispatch start time
+        id: dispatch-start
+        run: |
+          echo "started_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "${GITHUB_OUTPUT}"
+
+      - name: Dispatch static web app deploy
+        uses: peter-evans/repository-dispatch@28959ce8df70de7be546dd1250a005dd32156697 # v4.0.1
+        with:
+          token: ${{ steps.github-app-token.outputs.token }}
+          repository: ${{ env.TARGET_OWNER }}/${{ env.TARGET_REPO }}
+          event-type: swa
+          client-payload: |-
+            {
+              "action": "deploy",
+              "environment": "production",
+              "source_repository": "${{ github.repository }}",
+              "source_run_id": "${{ github.run_id }}",
+              "artifact_name": "${{ env.BUILD_ARTIFACT_NAME }}",
+              "swa_cli_app_name": "${{ vars.ENV_STATICWEBAPP_BASE }}"
+            }
+
+      - name: Monitor remote workflow
+        id: monitor
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        with:
+          github-token: ${{ steps.github-app-token.outputs.token }}
+          script: |
+            const { default: script } = await import(`${process.env.GITHUB_WORKSPACE}/.github/scripts/monitor-remote-workflow.mjs`)
+            await script({github, core})
+        env:
+          INPUT_OWNER: ${{ env.TARGET_OWNER }}
+          INPUT_REPO: ${{ env.TARGET_REPO }}
+          INPUT_WORKFLOW_FILE: ${{ env.TARGET_WORKFLOW_FILE }}
+          INPUT_DISPATCH_STARTED_AT: ${{ steps.dispatch-start.outputs.started_at }}
+          INPUT_MAX_WAIT_SECONDS: ${{ env.MAX_WAIT_SECONDS }}
+          INPUT_POLL_INTERVAL_SECONDS: ${{ env.POLL_INTERVAL_SECONDS }}
+
+      - name: Show failed logs
+        if: failure()
+        run: |
+          gh run view "${RUN_ID}" --repo "${TARGET_OWNER}/${TARGET_REPO}" --log-failed || true
+        env:
+          GH_TOKEN: ${{ steps.github-app-token.outputs.token }}
+          RUN_ID: ${{ steps.monitor.outputs.run_id }}
+
+  dispatch-preview:
+    name: Dispatch Static Web App Preview
+    if: >-
+      github.event_name == 'pull_request'
+        && github.event.action != 'closed'
+        && github.event.pull_request.head.repo.full_name == github.repository
+    needs: [build]
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 15
     permissions:
-      contents: read # Required for actions/checkout
+      contents: read
+      pull-requests: write
     environment:
-      # If a PR into edge, use 'edge'. If a PR into anywhere else, use 'latest'.
+      name: ${{ github.base_ref == 'edge' && 'edge' || 'latest' }}
+    steps:
+      - name: Checkout docs repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            .github/scripts/monitor-remote-workflow.mjs
+
+      - name: Get App Token
+        uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+        id: github-app-token
+        with:
+          app-id: ${{ secrets.RADIUS_PUBLISHER_BOT_APP_ID }}
+          private-key: ${{ secrets.RADIUS_PUBLISHER_BOT_PRIVATE_KEY }}
+          permission-metadata: read
+          permission-actions: read
+          permission-contents: write
+          owner: ${{ env.TARGET_OWNER }}
+          repositories: |
+            ${{ env.TARGET_REPO }}
+
+      - name: Capture dispatch start time
+        id: dispatch-start
+        run: |
+          echo "started_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "${GITHUB_OUTPUT}"
+
+      - name: Dispatch static web app preview
+        uses: peter-evans/repository-dispatch@28959ce8df70de7be546dd1250a005dd32156697 # v4.0.1
+        with:
+          token: ${{ steps.github-app-token.outputs.token }}
+          repository: ${{ env.TARGET_OWNER }}/${{ env.TARGET_REPO }}
+          event-type: swa
+          client-payload: |-
+            {
+              "action": "deploy",
+              "environment": "preview",
+              "pr_number": ${{ github.event.pull_request.number }},
+              "source_repository": "${{ github.repository }}",
+              "source_run_id": "${{ github.run_id }}",
+              "artifact_name": "${{ env.BUILD_ARTIFACT_NAME }}",
+              "swa_cli_app_name": "${{ vars.ENV_STATICWEBAPP_BASE }}"
+            }
+
+      - name: Monitor remote workflow
+        id: monitor
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        with:
+          github-token: ${{ steps.github-app-token.outputs.token }}
+          script: |
+            const { default: script } = await import(`${process.env.GITHUB_WORKSPACE}/.github/scripts/monitor-remote-workflow.mjs`)
+            await script({github, core})
+        env:
+          INPUT_OWNER: ${{ env.TARGET_OWNER }}
+          INPUT_REPO: ${{ env.TARGET_REPO }}
+          INPUT_WORKFLOW_FILE: ${{ env.TARGET_WORKFLOW_FILE }}
+          INPUT_DISPATCH_STARTED_AT: ${{ steps.dispatch-start.outputs.started_at }}
+          INPUT_MAX_WAIT_SECONDS: ${{ env.MAX_WAIT_SECONDS }}
+          INPUT_POLL_INTERVAL_SECONDS: ${{ env.POLL_INTERVAL_SECONDS }}
+
+      - name: Upsert preview PR comment
+        if: success()
+        uses: marocchino/sticky-pull-request-comment@773744901bac0e8cbb5a0dc842800d45e9b2b405 # v2.9.4
+        with:
+          header: ${{ env.PREVIEW_COMMENT_HEADER }}
+          skip_unchanged: true
+          message: |
+            ### Static Web App Preview
+
+            | Environment | Deployment |
+            |---|---|
+            | pr${{ github.event.pull_request.number }} | [View workflow run](${{ steps.monitor.outputs.run_url }}) |
+
+            _Deployed from commit `${{ github.event.pull_request.head.sha }}` via the publisher workflow._
+
+      - name: Show failed logs
+        if: failure()
+        run: |
+          gh run view "${RUN_ID}" --repo "${TARGET_OWNER}/${TARGET_REPO}" --log-failed || true
+        env:
+          GH_TOKEN: ${{ steps.github-app-token.outputs.token }}
+          RUN_ID: ${{ steps.monitor.outputs.run_id }}
+
+  dispatch-cleanup:
+    name: Dispatch Static Web App Preview Cleanup
+    if: >-
+      github.event_name == 'pull_request'
+        && github.event.action == 'closed'
+        && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pull-requests: write
+    environment:
       name: ${{ github.base_ref == 'edge' && 'edge' || 'latest' }}
       url: ${{ github.base_ref == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io' }}
     steps:
-      - name: Close Pull Request
-        id: closepullrequest
-        uses: Azure/static-web-apps-deploy@4d27395796ac319302594769cfe812bd207490b1 # v1
+      - name: Checkout docs repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          azure_static_web_apps_api_token: ${{ secrets.ENV_STATICWEBAPP_TOKEN }}
-          skip_deploy_on_missing_secrets: true
-          action: close
-          app_location: site/
+          persist-credentials: false
+          sparse-checkout: |
+            .github/scripts/monitor-remote-workflow.mjs
+
+      - name: Get App Token
+        uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+        id: github-app-token
+        with:
+          app-id: ${{ secrets.RADIUS_PUBLISHER_BOT_APP_ID }}
+          private-key: ${{ secrets.RADIUS_PUBLISHER_BOT_PRIVATE_KEY }}
+          permission-metadata: read
+          permission-actions: read
+          permission-contents: write
+          owner: ${{ env.TARGET_OWNER }}
+          repositories: |
+            ${{ env.TARGET_REPO }}
+
+      - name: Delete preview PR comment
+        uses: marocchino/sticky-pull-request-comment@773744901bac0e8cbb5a0dc842800d45e9b2b405 # v2.9.4
+        with:
+          header: ${{ env.PREVIEW_COMMENT_HEADER }}
+          delete: true
+
+      - name: Capture dispatch start time
+        id: dispatch-start
+        run: |
+          echo "started_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "${GITHUB_OUTPUT}"
+
+      - name: Dispatch static web app preview cleanup
+        uses: peter-evans/repository-dispatch@28959ce8df70de7be546dd1250a005dd32156697 # v4.0.1
+        with:
+          token: ${{ steps.github-app-token.outputs.token }}
+          repository: ${{ env.TARGET_OWNER }}/${{ env.TARGET_REPO }}
+          event-type: swa
+          client-payload: |-
+            {
+              "action": "close",
+              "source_repository": "${{ github.repository }}",
+              "pr_number": ${{ github.event.pull_request.number }},
+              "swa_cli_app_name": "${{ vars.ENV_STATICWEBAPP_BASE }}"
+            }
+
+      - name: Monitor remote workflow
+        id: monitor
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        with:
+          github-token: ${{ steps.github-app-token.outputs.token }}
+          script: |
+            const { default: script } = await import(`${process.env.GITHUB_WORKSPACE}/.github/scripts/monitor-remote-workflow.mjs`)
+            await script({github, core})
+        env:
+          INPUT_OWNER: ${{ env.TARGET_OWNER }}
+          INPUT_REPO: ${{ env.TARGET_REPO }}
+          INPUT_WORKFLOW_FILE: ${{ env.TARGET_WORKFLOW_FILE }}
+          INPUT_DISPATCH_STARTED_AT: ${{ steps.dispatch-start.outputs.started_at }}
+          INPUT_MAX_WAIT_SECONDS: ${{ env.MAX_WAIT_SECONDS }}
+          INPUT_POLL_INTERVAL_SECONDS: ${{ env.POLL_INTERVAL_SECONDS }}
+
+      - name: Show failed logs
+        if: failure()
+        run: |
+          gh run view "${RUN_ID}" --repo "${TARGET_OWNER}/${TARGET_REPO}" --log-failed || true
+        env:
+          GH_TOKEN: ${{ steps.github-app-token.outputs.token }}
+          RUN_ID: ${{ steps.monitor.outputs.run_id }}
 
   algolia_index:
     name: Index site for Algolia
@@ -208,7 +425,7 @@ jobs:
       - name: Download Hugo artifacts
         uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3 # v8.0.0
         with:
-          name: hugo_build
+          name: ${{ env.BUILD_ARTIFACT_NAME }}
           path: site/
 
       - name: Install Python packages

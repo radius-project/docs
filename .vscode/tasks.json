@@ -16,7 +16,7 @@
 		{
 			"label": "npm ci",
 			"type": "shell",
-			"command": "npm install",
+			"command": "npm ci",
 			"options": {
 				"cwd": "${workspaceFolder}/docs"
 			},
