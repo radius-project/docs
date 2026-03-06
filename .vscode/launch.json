@@ -9,7 +9,7 @@
             "runtimeExecutable": "npm",
             "runtimeArgs": [
                 "run",
-                "start"
+                "dev"
             ],
             "preLaunchTask": "npm install"
         },
