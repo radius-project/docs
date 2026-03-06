@@ -110,45 +110,45 @@ jobs:
           if-no-files-found: error
           retention-days: 1
 
-  deploy:
-    name: Deploy Hugo Website to App Service
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-    needs: [build]
-    runs-on: ubuntu-24.04
-    timeout-minutes: 5
-    permissions:
-      id-token: write # Required for requesting the JWT
-      contents: read # Required for actions/checkout
-    environment:
-      # If push to edge, use 'edge'. If push to anywhere else, use 'latest'.
-      name: ${{ github.ref_name == 'edge' && 'edge' || 'latest' }}
-      url: ${{ github.ref_name == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io' }}
-    steps:
-      - name: Checkout docs repo
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          submodules: false
-          persist-credentials: false
+  # deploy:
+  #   name: Deploy Hugo Website to App Service
+  #   if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+  #   needs: [build]
+  #   runs-on: ubuntu-24.04
+  #   timeout-minutes: 5
+  #   permissions:
+  #     id-token: write # Required for requesting the JWT
+  #     contents: read # Required for actions/checkout
+  #   environment:
+  #     # If push to edge, use 'edge'. If push to anywhere else, use 'latest'.
+  #     name: ${{ github.ref_name == 'edge' && 'edge' || 'latest' }}
+  #     url: ${{ github.ref_name == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io' }}
+  #   steps:
+  #     - name: Checkout docs repo
+  #       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+  #       with:
+  #         submodules: false
+  #         persist-credentials: false
 
-      - name: Download Hugo artifacts
-        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3 # v8.0.0
-        with:
-          name: ${{ env.BUILD_ARTIFACT_NAME }}
-          path: site/
+  #     - name: Download Hugo artifacts
+  #       uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3 # v8.0.0
+  #       with:
+  #         name: ${{ env.BUILD_ARTIFACT_NAME }}
+  #         path: site/
 
-      - name: Login to Azure
-        uses: azure/login@a457da9ea143d694b1b9c7c869ebb04ebe844ef5 # v2.3.0
-        with:
-          client-id: ${{ secrets.AZURE_SP_TESTS_APPID }}
-          tenant-id: ${{ secrets.AZURE_SP_TESTS_TENANTID }}
-          subscription-id: ${{ vars.ENV_APPSERVICE_SUBSCRIPTIONID }}
+  #     - name: Login to Azure
+  #       uses: azure/login@a457da9ea143d694b1b9c7c869ebb04ebe844ef5 # v2.3.0
+  #       with:
+  #         client-id: ${{ secrets.AZURE_SP_TESTS_APPID }}
+  #         tenant-id: ${{ secrets.AZURE_SP_TESTS_TENANTID }}
+  #         subscription-id: ${{ vars.ENV_APPSERVICE_SUBSCRIPTIONID }}
 
-      - name: Deploy to WebApp
-        uses: Azure/webapps-deploy@84a80cfe7e9889f35148ed88c307e6e93bf02578 # v3.0.7
-        with:
-          app-name: ${{ vars.ENV_APPSERVICE_NAME }}
-          resource-group-name: ${{ vars.ENV_APPSERVICE_RESOURCEGROUP }}
-          package: site/
+  #     - name: Deploy to WebApp
+  #       uses: Azure/webapps-deploy@84a80cfe7e9889f35148ed88c307e6e93bf02578 # v3.0.7
+  #       with:
+  #         app-name: ${{ vars.ENV_APPSERVICE_NAME }}
+  #         resource-group-name: ${{ vars.ENV_APPSERVICE_RESOURCEGROUP }}
+  #         package: site/
 
   dispatch-production:
     name: Dispatch Static Web App Deploy
