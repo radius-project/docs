@@ -14,21 +14,16 @@
   "license": "Apache-2.0",
   "homepage": "https://docs.radapp.io",
   "devDependencies": {
-    "autoprefixer": "^9.8.6",
-    "exec-bin": "^1.0.0",
-    "hugo-installer": "^4.0.1",
-    "postcss-cli": "^7.1.2"
-  },
-  "dependencies": {
-    "autoprefixer": "^9.8.6",
-    "exec-bin": "^1.0.0",
-    "hugo-installer": "^4.0.1",
-    "postcss-cli": "^7.1.2"
+    "autoprefixer": "^10.4.27",
+    "hugo-extended": "^0.117.0",
+    "postcss": "^8.5.8",
+    "postcss-cli": "^11.0.1"
   },
   "scripts": {
-    "install": "git submodule update --init --recursive && cd themes/docsy && npm install",
-    "postinstall": "hugo-installer --version 0.117.0 --extended",
-    "build": "exec-bin bin/hugo/hugo",
-    "start": "exec-bin bin/hugo/hugo server"
+    "postinstall": "cd themes/docsy && npm install --no-fund --no-audit",
+    "dev": "hugo server --buildDrafts",
+    "start": "npm run dev",
+    "build": "hugo --minify",
+    "build:preview": "hugo --buildDrafts --buildFuture"
   }
 }
