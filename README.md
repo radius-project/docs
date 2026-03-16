@@ -42,3 +42,7 @@ Staging docs are generated for each PR, with the URL posted as a comment. Access
 ## Code of Conduct
 
 Please refer to our [Radius Community Code of Conduct](https://github.com/radius-project/radius/blob/main/CODE_OF_CONDUCT.md)
+
+## Testing
+
+Testing a documentation change
