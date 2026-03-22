@@ -66,7 +66,7 @@ rad env update myenv --clear-kubernetes
       --kubernetes-namespace string    The namespace where Kubernetes resources will be deployed (preview)
   -o, --output string                  output format (supported formats are json, table) (default "table")
       --preview                        Use the Radius.Core preview implementation for environment update.
-      --recipe-packs stringArray       Specify recipe packs to be added to the environment (--preview)
+      --recipe-packs strings           Specify recipe packs to replace the environment's recipe pack list (--preview). Accepts comma-separated values.
   -w, --workspace string               The workspace name
 ```
 
