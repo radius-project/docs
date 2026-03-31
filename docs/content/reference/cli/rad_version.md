@@ -32,15 +32,15 @@ rad version --cli
 ### Options
 
 ```
-      --cli    Use this flag to only show the rad CLI version
-  -h, --help   help for version
+      --cli             Use this flag to only show the rad CLI version
+  -h, --help            help for version
+  -o, --output string   output format (supported formats are json, table) (default "table")
 ```
 
 ### Options inherited from parent commands
 
 ```
       --config string   config file (default "$HOME/.rad/config.yaml")
-  -o, --output string   output format (supported formats are json, table) (default "table")
 ```
 
 ### SEE ALSO
