@@ -14,7 +14,7 @@ Recipes can be either Terraform configurations or Bicep templates. Select the ta
 
 {{< tabs Terraform Bicep >}}{{% codetab %}}
 
-Terraform configuration are stored in a Git repository for Radius to access the Recipe. For this tutorial, the [Terraform Recipe](https://github.com/radius-project/docs/tree/v0.56/docs/content/tutorials/create-recipe/recipes/main.tf) has already been created and stored in the Radius docs repository. Hence, there are no actual steps to complete for this section of the tutorial. What follows is a walkthrough of the Radius-specific aspects of the Terraform configuration.
+Terraform configuration are stored in a Git repository for Radius to access the Recipe. For this tutorial, the [Terraform Recipe](https://github.com/radius-project/docs/tree/v0.56/docs/content/tutorials/create-recipe/recipes/terraform/main.tf) has already been created and stored in the Radius docs repository. Hence, there are no actual steps to complete for this section of the tutorial. What follows is a walkthrough of the Radius-specific aspects of the Terraform configuration.
 
 1. **Radius metadata via `context` variable**  
 
@@ -81,7 +81,7 @@ Terraform configuration are stored in a Git repository for Radius to access the 
 {{% /codetab %}}
 {{% codetab %}}
 
-Bicep templates are stored in an OCI registry for Radius to access the Recipe. For this tutorial, the [Bicep Recipe](https://github.com/radius-project/docs/tree/v0.56/docs/content/tutorials/create-recipe/recipes/kubernetes/bicep/kubernetes-postgresql.bicep) has already been created and stored in the Radius OCI registry. Hence, there are no actual steps to complete for this section of the tutorial. What follows is a walkthrough of the Radius-specific aspects of the Bicep template.
+Bicep templates are stored in an OCI registry for Radius to access the Recipe. For this tutorial, the [Bicep Recipe](https://github.com/radius-project/docs/tree/v0.56/docs/content/tutorials/create-recipe/recipes/bicep/kubernetes-postgresql.bicep) has already been created and stored in the Radius OCI registry. Hence, there are no actual steps to complete for this section of the tutorial. What follows is a walkthrough of the Radius-specific aspects of the Bicep template.
 
 1. **Radius metadata via `context` variable**
 
