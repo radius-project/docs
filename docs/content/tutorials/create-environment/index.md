@@ -123,7 +123,7 @@ Update the Environment with Terraform or Bicep Recipe based on your preference.
     --environment my-env \
     --resource-type Radius.Data/postgreSqlDatabases \
     --template-kind terraform \
-    --template-path git::https://github.com/radius-project/resource-types-contrib.git//Data/postgreSqlDatabases/recipes/kubernetes/terraform
+    --template-path git::https://github.com/radius-project/docs.git//docs/content/tutorials/create-recipe/recipes/terraform
 ```
 
 You should see output similar to: 

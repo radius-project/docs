@@ -10,11 +10,11 @@ Recipes define how a resource is deployed. In part three of this tutorial, you w
 
 ## Create a Recipe for the PostgreSQL Resource Type
 
-Recipes can be either Terraform configurations or Bicep templates. Select the tab for the IaC language you prefer. 
+Recipes can be either Terraform configurations or Bicep templates. Select the tab for the IaC language you prefer.
 
 {{< tabs Terraform Bicep >}}{{% codetab %}}
 
-Terraform configuration are stored in a Git repository for Radius to access the Recipe. For this tutorial, the Terraform Recipe has already been created and stored in the Radius [resource-types-contrib](https://github.com/radius-project/resource-types-contrib/blob/main/Data/postgreSqlDatabases/recipes/kubernetes/terraform/main.tf) repository. Hence, there are no actual steps to complete for this section of the tutorial. What follows is a walkthrough of the Radius-specific aspects of the Terraform configuration.
+Terraform configuration are stored in a Git repository for Radius to access the Recipe. For this tutorial, the [Terraform Recipe](https://github.com/radius-project/docs/tree/v0.56/docs/content/tutorials/create-recipe/recipes/terraform/main.tf) has already been created and stored in the Radius docs repository. Hence, there are no actual steps to complete for this section of the tutorial. What follows is a walkthrough of the Radius-specific aspects of the Terraform configuration.
 
 1. **Radius metadata via `context` variable**  
 
@@ -28,7 +28,7 @@ Terraform configuration are stored in a Git repository for Radius to access the 
     ```  
     Refer to the [context schema]({{< ref context-schema>}}) for the available properties.  
 
-1. **Variables for Recipe customization**
+2. **Variables for Recipe customization**
 
     The `memory` variable allows customizing the memory request for the PostgreSQL container based on the `size` property defined in the Resource Type.
     ```tf
@@ -60,7 +60,7 @@ Terraform configuration are stored in a Git repository for Radius to access the 
       }
     ```
     
-1. **Result output**
+3. **Result output**
 
     Radius requires Terraform configuration to have a `result` output defined which provides Radius with the values for each read-only property on the Resource Type. Since the postgreSqlDatabases Resource Type has five read-only properties, each are specified within the `result`.
 
@@ -81,7 +81,7 @@ Terraform configuration are stored in a Git repository for Radius to access the 
 {{% /codetab %}}
 {{% codetab %}}
 
-Bicep templates are stored in an OCI registry for Radius to access the Recipe. For this tutorial, the [Bicep Recipe](https://github.com/radius-project/resource-types-contrib/blob/main/Data/postgreSqlDatabases/recipes/kubernetes/bicep/kubernetes-postgresql.bicep) has already been created and stored in the Radius OCI registry. Hence, there are no actual steps to complete for this section of the tutorial. What follows is a walkthrough of the Radius-specific aspects of the Bicep template.
+Bicep templates are stored in an OCI registry for Radius to access the Recipe. For this tutorial, the [Bicep Recipe](https://github.com/radius-project/docs/tree/v0.56/docs/content/tutorials/create-recipe/recipes/bicep/kubernetes-postgresql.bicep) has already been created and stored in the Radius OCI registry. Hence, there are no actual steps to complete for this section of the tutorial. What follows is a walkthrough of the Radius-specific aspects of the Bicep template.
 
 1. **Radius metadata via `context` variable**
 
