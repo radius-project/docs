@@ -60,7 +60,7 @@ jobs:
 
       - name: Post GitHub comment on failure
         if: failure()
-        uses: marocchino/sticky-pull-request-comment@70d2764d1a7d5d9560b100cbea0077fc8f633987 # v3.0.2
+        uses: marocchino/sticky-pull-request-comment@d4d6b0936434b21bc8345ad45a440c5f7d2c40ff # v3.0.3
         with:
           header: spellcheck
           recreate: true
@@ -71,7 +71,7 @@ jobs:
             If you are adding a new custom word refer to the [docs guide](https://docs.radapp.io/contributing/docs/#spelling)
 
       - name: Clear GitHub comment on success
-        uses: marocchino/sticky-pull-request-comment@70d2764d1a7d5d9560b100cbea0077fc8f633987 # v3.0.2
+        uses: marocchino/sticky-pull-request-comment@d4d6b0936434b21bc8345ad45a440c5f7d2c40ff # v3.0.3
         continue-on-error: true
         with:
           header: spellcheck
