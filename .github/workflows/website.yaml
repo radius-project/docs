@@ -103,7 +103,7 @@ jobs:
           PR_NUMBER: ${{ github.event.number }}
 
       - name: Upload Hugo artifacts
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: ${{ env.BUILD_ARTIFACT_NAME }}
           path: ./docs/public/
@@ -170,7 +170,7 @@ jobs:
             .github/scripts/monitor-remote-workflow.mjs
 
       - name: Get App Token
-        uses: actions/create-github-app-token@f8d387b68d61c58ab83c6c016672934102569859 # v3.0.0
+        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
         id: github-app-token
         with:
           app-id: ${{ secrets.RADIUS_PUBLISHER_BOT_APP_ID }}
@@ -205,7 +205,7 @@ jobs:
 
       - name: Monitor remote workflow
         id: monitor
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           github-token: ${{ steps.github-app-token.outputs.token }}
           script: |
@@ -250,7 +250,7 @@ jobs:
             .github/scripts/monitor-remote-workflow.mjs
 
       - name: Get App Token
-        uses: actions/create-github-app-token@f8d387b68d61c58ab83c6c016672934102569859 # v3.0.0
+        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
         id: github-app-token
         with:
           app-id: ${{ secrets.RADIUS_PUBLISHER_BOT_APP_ID }}
@@ -286,7 +286,7 @@ jobs:
 
       - name: Monitor remote workflow
         id: monitor
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           github-token: ${{ steps.github-app-token.outputs.token }}
           script: |
@@ -302,7 +302,7 @@ jobs:
 
       - name: Upsert preview PR comment
         if: success()
-        uses: marocchino/sticky-pull-request-comment@d4d6b0936434b21bc8345ad45a440c5f7d2c40ff # v3.0.3
+        uses: marocchino/sticky-pull-request-comment@0ea0beb66eb9baf113663a64ec522f60e49231c0 # v3.0.4
         with:
           header: ${{ env.PREVIEW_COMMENT_HEADER }}
           skip_unchanged: true
@@ -346,7 +346,7 @@ jobs:
             .github/scripts/monitor-remote-workflow.mjs
 
       - name: Get App Token
-        uses: actions/create-github-app-token@f8d387b68d61c58ab83c6c016672934102569859 # v3.0.0
+        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
         id: github-app-token
         with:
           app-id: ${{ secrets.RADIUS_PUBLISHER_BOT_APP_ID }}
@@ -359,7 +359,7 @@ jobs:
             ${{ env.TARGET_REPO }}
 
       - name: Delete preview PR comment
-        uses: marocchino/sticky-pull-request-comment@d4d6b0936434b21bc8345ad45a440c5f7d2c40ff # v3.0.3
+        uses: marocchino/sticky-pull-request-comment@0ea0beb66eb9baf113663a64ec522f60e49231c0 # v3.0.4
         with:
           header: ${{ env.PREVIEW_COMMENT_HEADER }}
           delete: true
@@ -385,7 +385,7 @@ jobs:
 
       - name: Monitor remote workflow
         id: monitor
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           github-token: ${{ steps.github-app-token.outputs.token }}
           script: |
