@@ -8,6 +8,10 @@ categories: "How-To"
 tags: ["recipes", "bicep"]
 ---
 
+{{% alert title="Legacy guide" color="warning" %}}
+This guide describes the **legacy** `Environment.properties.recipeConfig.bicep.authentication` model. With the new [compute extensibility]({{< ref "concepts/compute-extensibility" >}}) architecture, private Bicep registries are configured through a dedicated `Radius.Core/bicepSettings` resource. New users should follow the [BicepSettings how-to guide]({{< ref "howto-bicep-settings" >}}) instead, and existing users should consult the [migration guide]({{< ref "guides/operations/migration" >}}).
+{{% /alert %}}
+
 This guide will describe how to:
 
 - Configure a Radius environment to utilize Bicep Recipe templates that are stored in a private OCI (Open Container Initiative) complaint container registry. This setup will ensure the templates are securely stored within a private OCI registry and accessed by Radius using required credentials.
