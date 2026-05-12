@@ -22,11 +22,8 @@ rad application delete [flags]
 
 ```
 
-# Delete current application
-rad app delete
-
-# Delete current application and bypass confirmation prompt
-rad app delete --yes
+# Delete specified application and bypass confirmation prompt
+rad app delete --yes --application my-app
 
 # Delete specified application
 rad app delete my-app

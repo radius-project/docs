@@ -22,9 +22,6 @@ rad application graph [flags]
 
 ```
 
-# Show graph for current application
-rad app graph
-
 # Show graph for specified application
 rad app graph my-application
 ```
