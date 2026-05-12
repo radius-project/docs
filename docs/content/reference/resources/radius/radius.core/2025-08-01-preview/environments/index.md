@@ -30,11 +30,13 @@ description: "Detailed reference documentation for radius.core/environments@2025
 
 | Property | Type | Description |
 |----------|------|-------------|
+| **bicepConfig** | string | Resource ID of a Radius.Core/bicepConfigs resource providing Bicep recipe settings. |
 | **providers** | [Providers](#providers) |  |
 | **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
 | **recipePacks** | string[] | List of Recipe Pack resource IDs linked to this environment. |
 | **recipeParameters** | [EnvironmentPropertiesRecipeParameters](#environmentpropertiesrecipeparameters) | Recipe specific parameters that apply to all resources of a given type in this environment. |
 | **simulated** | bool | Simulated environment. |
+| **terraformConfig** | string | Resource ID of a Radius.Core/terraformConfigs resource providing Terraform recipe settings. |
 
 ### Providers
 
