@@ -12,7 +12,7 @@ Show Radius Application status
 
 ### Synopsis
 
-Show Radius Application status, such as public endpoints and resource count. Shows details for the user's default application (if configured) by default.
+Show Radius Application status, such as public endpoints and resource count.
 
 ```
 rad application status [flags]
@@ -21,9 +21,6 @@ rad application status [flags]
 ### Examples
 
 ```
-
-# Show status of current application
-rad app status
 
 # Show status of specified application
 rad app status my-app
