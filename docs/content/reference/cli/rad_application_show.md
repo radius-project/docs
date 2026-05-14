@@ -12,7 +12,7 @@ Show Radius Application details
 
 ### Synopsis
 
-Show Radius Application details. Shows the user's default application (if configured) by default.
+Show Radius Application details
 
 ```
 rad application show [flags]
@@ -21,9 +21,6 @@ rad application show [flags]
 ### Examples
 
 ```
-
-# Show current application
-rad app show
 
 # Show specified application
 rad app show my-app
