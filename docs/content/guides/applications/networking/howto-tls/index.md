@@ -27,7 +27,7 @@ Begin by creating a file named `app.bicep`. Add a container which will be expose
 
 ## Step 2: Add a secret store
 
-TLS certificates need to be referenced via a Radius [secret store]({{< ref "/guides/author-apps/secrets" >}}). You can either reference an existing secret, or define a new one with certificate data.
+TLS certificates need to be referenced via a Radius [secret store]({{< ref "/guides/applications/secrets" >}}). You can either reference an existing secret, or define a new one with certificate data.
 
 {{< tabs "Reference existing secrets" "Define new secrets" >}}
 
@@ -115,5 +115,5 @@ rad app delete tlsdemo -y
 
 ## Further reading
 
-- [Networking overview]({{< ref "/guides/author-apps/networking/overview" >}})
+- [Networking overview]({{< ref "/guides/applications/networking/overview" >}})
 - [Gateway reference]({{< ref "/reference/resource-schema/core-schema/gateway" >}})

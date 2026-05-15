@@ -12,13 +12,13 @@ Radius Applications are able to connect to and leverage every Azure resource wit
 
 ## Configure an Azure Provider
 
-The Azure provider allows you to deploy and connect to Azure resources from a Radius Environment on any of the [supported k8s clusters]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}}) or [Azure Container Instances (ACI)]({{< ref "/guides/author-apps/azure/howto-azure-container-instances" >}}). To configure an Azure provider, you can follow the documentation [here]({{< ref "/guides/operations/providers/azure-provider" >}}).
+The Azure provider allows you to deploy and connect to Azure resources from a Radius Environment on any of the [supported k8s clusters]({{< ref "/guides/installation/overview#supported-clusters" >}}) or [Azure Container Instances (ACI)]({{< ref "/guides/applications/azure/howto-azure-container-instances" >}}). To configure an Azure provider, you can follow the documentation [here]({{< ref "/guides/installation/providers/azure-provider" >}}).
 
 ## Set up an Azure compute environment
 
 Radius allows you to target the deployment of your application containers to either Azure Kubernetes Service (AKS) or Azure Container Instances (ACI). The underlying compute platform is preconfigured in the Radius Environment, which means that you are able to deploy a Radius application to either AKS or ACI without needing to change the application definition. To learn more, visit the following resources: 
-- The [Kubernetes operations guide](https://docs.radapp.io/guides/operations/kubernetes/overview/#supported-kubernetes-clusters) has more information about setting up Radius in an AKS cluster
-- The [how-to guide for ACI]({{< ref "/guides/author-apps/azure/howto-azure-container-instances" >}}) details how to configure a Radius Environment with ACI as the underlying compute platform and deploy a Radius application to ACI
+- The [Kubernetes operations guide](https://docs.radapp.io/guides/installation/overview/#supported-kubernetes-clusters) has more information about setting up Radius in an AKS cluster
+- The [how-to guide for ACI]({{< ref "/guides/applications/azure/howto-azure-container-instances" >}}) details how to configure a Radius Environment with ACI as the underlying compute platform and deploy a Radius application to ACI
 
 ## Resource library
 
@@ -31,7 +31,7 @@ Visit [the Microsoft docs](https://docs.microsoft.com/azure/templates/) to refer
 {{< tabs Bicep >}}
 
 {{% codetab %}}
-In the following example, a [Container]({{< ref "guides/author-apps/containers" >}}) is connecting to an Azure Cache for Redis resource. The Container is assigned the `Redis Cache Contributor` role:
+In the following example, a [Container]({{< ref "guides/applications/containers" >}}) is connecting to an Azure Cache for Redis resource. The Container is assigned the `Redis Cache Contributor` role:
 
 {{< rad file="snippets/azure-connection.bicep" embed=true >}}
 {{% /codetab %}}

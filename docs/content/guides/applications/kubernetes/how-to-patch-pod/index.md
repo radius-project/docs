@@ -21,7 +21,7 @@ This how-to guide will provide an overview of how to:
 
 ## Step 1: Define a container
 
-Begin by creating a file named `app.bicep` with a Radius [container]({{< ref "guides/author-apps/containers" >}}):
+Begin by creating a file named `app.bicep` with a Radius [container]({{< ref "guides/applications/containers" >}}):
 
 {{< rad file="snippets/patch-container.bicep" embed=true >}}
 
@@ -124,7 +124,7 @@ Add the following [`runtimes`]({{< ref "reference/resource-schema/core-schema/co
 
 ## Cleanup
 
-Run the following command to [delete]({{< ref "guides/deploy-apps/howto-delete" >}}) your app and container:
+Run the following command to [delete]({{< ref "guides/applications/howto-delete" >}}) your app and container:
 
    ```bash
    rad app delete demo
@@ -132,5 +132,5 @@ Run the following command to [delete]({{< ref "guides/deploy-apps/howto-delete" 
 
 ## Further reading
 
-- [Kubernetes in Radius containers]({{< ref "guides/author-apps/containers/overview#kubernetes" >}})
+- [Kubernetes in Radius containers]({{< ref "guides/applications/containers/overview#kubernetes" >}})
 - [PodSpec in Radius containers]({{< ref "reference/resource-schema/core-schema/container-schema#runtimes" >}})

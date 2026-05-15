@@ -31,7 +31,7 @@ The Radius Dashboard currently provides the following features:
 The Radius Dashboard is installed by default as a part of your Radius initialization and deployment.
 
 {{< alert title="Opting-out" color="warning" >}}
-To opt-out of installing the dashboard, you can use the `--set dashboard.enabled=false` flag when running `rad init` or `rad install kubernetes`. See more instructions in the Radius [initialization]({{< ref "installation#step-3-initialize-radius" >}}) and [installation]({{< ref "guides/operations/kubernetes/kubernetes-install" >}}) guides.
+To opt-out of installing the dashboard, you can use the `--set dashboard.enabled=false` flag when running `rad init` or `rad install kubernetes`. See more instructions in the Radius [initialization]({{< ref "installation#step-3-initialize-radius" >}}) and [installation]({{< ref "guides/installation/kubernetes-install" >}}) guides.
 {{< /alert >}}
 
 To remove the dashboard from your existing installation of Radius on your cluster, you can run:

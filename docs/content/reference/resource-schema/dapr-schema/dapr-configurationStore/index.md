@@ -80,7 +80,7 @@ If you want to manually manage your infrastructure provisioning outside of Recip
 
 ## Environment variables for connections
 
-Other Radius resources, such as [containers]({{< ref "guides/author-apps/containers" >}}), may connect to a Dapr configuration store resource via connections. When a connection to Dapr configuration store named, for example, `myconnection` is declared, Radius injects values into environment variables that are then used to access the connected Dapr configuration store resource:
+Other Radius resources, such as [containers]({{< ref "guides/applications/containers" >}}), may connect to a Dapr configuration store resource via connections. When a connection to Dapr configuration store named, for example, `myconnection` is declared, Radius injects values into environment variables that are then used to access the connected Dapr configuration store resource:
 
 | Environment variable | Example(s) |
 |----------------------|------------|

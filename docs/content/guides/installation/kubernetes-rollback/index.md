@@ -12,7 +12,7 @@ Radius supports rolling back to previous versions on Kubernetes clusters using t
 
 ## Prerequisites
 
-- [Radius installed on Kubernetes cluster]({{< ref "guides/operations/kubernetes/kubernetes-install" >}})
+- [Radius installed on Kubernetes cluster]({{< ref "guides/installation/kubernetes-install" >}})
 - [rad CLI]({{< ref howto-rad-cli >}})
 - Previous Radius installation to rollback to
 
@@ -179,7 +179,7 @@ helm rollback radius 2 -n radius-system
 
 ## Next steps
 
-- Learn about [upgrading Radius]({{< ref "guides/operations/kubernetes/kubernetes-upgrade" >}})
-- Review [Radius versioning]({{< ref "guides/operations/versioning" >}}) for version compatibility
+- Learn about [upgrading Radius]({{< ref "guides/installation/kubernetes-upgrade" >}})
+- Review [Radius versioning]({{< ref "reference/limitations" >}}) for version compatibility
 - Check [release notes](https://github.com/radius-project/radius/releases) for version-specific information
 - Refer to the [`rad rollback kubernetes`]({{< ref "reference/cli/rad_rollback_kubernetes" >}}) CLI reference docs for more details

@@ -44,12 +44,12 @@ Run [`rad init --full`]({{< ref rad_initialize >}}) to initialize a new environm
 rad init --full
 ```
 
-Follow the prompts to install Radius , create an [environment resource]({{< ref "/guides/deploy-apps/environments" >}}), and create a [local workspace]({{< ref workspaces >}}). You will be asked for:
+Follow the prompts to install Radius , create an [environment resource]({{< ref "/guides/environments/environments/howto-environment" >}}), and create a [local workspace]({{< ref workspaces >}}). You will be asked for:
 
 - **Namespace** - When an application is deployed, this is the namespace where your containers and other Kubernetes resources will be run. By default, this will be in the `default` namespace.
 {{% alert title="💡 About namespaces" color="success" %}} When you initialize a Radius Kubernetes environment, Radius installs the control plane resources within    the `radius-system` namespace in your cluster, separate from your applications. The namespace specified in this step will be used for your application deployments.
 {{% /alert %}}
-- **Add AWS provider** - An [AWS cloud provider]({{< ref "/guides/operations/providers/aws-provider" >}}) allows you to deploy and manage AWS resources as part of your application. Follow the how-to guides to [configure the AWS provider]({{< ref "/guides/operations/providers/aws-provider/howto-aws-provider-access-key" >}}) with the preferred identity.
+- **Add AWS provider** - An [AWS cloud provider]({{< ref "/guides/installation/providers/aws-provider" >}}) allows you to deploy and manage AWS resources as part of your application. Follow the how-to guides to [configure the AWS provider]({{< ref "/guides/installation/providers/aws-provider/howto-aws-provider-access-key" >}}) with the preferred identity.
 - **Environment name** - The name of the environment to create. You can specify any name with lowercase letters, such as `myawsenv`.
 
 Select 'No' when asked to setup application in the current directory. 
@@ -58,7 +58,7 @@ Select 'No' when asked to setup application in the current directory.
 
 {{< read file= "/shared-content/installation/bicepconfig/manual.md" >}}
 
-More information on how to setup a `bicepconfig.json` can be found [here]({{< ref "/guides/tooling/bicepconfig/overview" >}})
+More information on how to setup a `bicepconfig.json` can be found [here]({{< ref "/guides/installation/bicepconfig/overview" >}})
 
 ## Step 4: Create a Bicep file to model AWS Simple Storage Service (S3)
 
@@ -66,7 +66,7 @@ Create a new file called `app.bicep` and add the following bicep code to model a
 
 {{< rad file="snippets/s3.bicep" embed=true >}}
 
-Radius uses the [AWS Cloud Control API](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/what-is-cloudcontrolapi.html) to interact with AWS resources. This means that you can model your AWS resources in Bicep and Radius will be able to deploy and manage them. You can find the list of supported AWS resources in the [AWS resource library]({{< ref "guides/author-apps/aws/overview#resource-library" >}}).
+Radius uses the [AWS Cloud Control API](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/what-is-cloudcontrolapi.html) to interact with AWS resources. This means that you can model your AWS resources in Bicep and Radius will be able to deploy and manage them. You can find the list of supported AWS resources in the [AWS resource library]({{< ref "guides/applications/aws/overview#resource-library" >}}).
 
 ## Step 5: Add a Radius container to interact with the AWS S3 Bucket
 

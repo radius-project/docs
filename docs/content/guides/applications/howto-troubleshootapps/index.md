@@ -10,7 +10,7 @@ tags: ["troubleshooting"]
 
 ## Pre-requisites
 
-- A [deployed application]({{< ref deploy-apps >}}) in a Radius Environment.
+- A [deployed application]({{< ref "guides/applications/howto-deploy" >}}) in a Radius Environment.
 
 ## Step 1: Port-forward container to your local machine
 
@@ -30,7 +30,7 @@ If your Radius Application is unresponsive or does not connect to its dependenci
 rad resource logs Applications.Core/containers <container_name> -a <app_name>
 ```
 
-> Also refer to the [connections section]({{< ref "guides/author-apps/containers/overview#connections" >}}) to know about the naming convention of the environment variables and inspect if your application uses the right variables.
+> Also refer to the [connections section]({{< ref "guides/applications/containers/overview#connections" >}}) to know about the naming convention of the environment variables and inspect if your application uses the right variables.
 
 ## Step 3: Inspect control-plane logs
 

@@ -10,7 +10,7 @@ tags: ["logs","observability"]
 
 ## Prerequisites
 
-- [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
+- [Setup a supported Kubernetes cluster]({{< ref "/guides/installation/overview#supported-clusters" >}})
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [Helm 3](https://helm.sh/)
 
@@ -98,7 +98,7 @@ tags: ["logs","observability"]
 
 ## Install Radius control plane
 
-Visit the [Kubernetes docs]({{< ref "guides/operations/kubernetes" >}}) to learn how to install the Radius control plane. By default, Radius has JSON logging enabled.
+Visit the [Kubernetes docs]({{< ref "guides/installation" >}}) to learn how to install the Radius control plane. By default, Radius has JSON logging enabled.
 
 For Kubernetes, you can install with the rad CLI:
 

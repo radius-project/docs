@@ -12,7 +12,7 @@ tags : ["Dapr"]
 This tutorial will teach you the following about Dapr:
 
 - How to use Radius to deploy a Dapr microservices sample application for an online shop
-- How [Dapr and Radius]({{< ref "guides/author-apps/dapr" >}}) seamlessly work together
+- How [Dapr and Radius]({{< ref "guides/applications/dapr" >}}) seamlessly work together
 
 For more details on the app and access to the source code, visit the `samples/dapr` directory in the [samples repo](https://github.com/radius-project/samples).
 
@@ -21,7 +21,7 @@ For more details on the app and access to the source code, visit the `samples/da
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
 - [Radius environment]({{< ref "installation#step-3-initialize-radius" >}})
-- [Setup a supported Kubernetes cluster](https://docs.radapp.io/guides/operations/kubernetes/overview/#supported-clusters)
+- [Setup a supported Kubernetes cluster](https://docs.radapp.io/guides/installation/overview/#supported-clusters)
 - [Dapr installed on your Kubernetes cluster](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/)
 
 ## Step 1: Initialize a Radius Environment
@@ -88,7 +88,7 @@ Begin by creating a new file named `dapr.bicep` with a Radius Application that c
 
 ## Step 4: Define the `frontend` container
 
-Add a `frontend` [container]({{< ref "guides/author-apps/containers" >}}) which will serve as the application's user interface.
+Add a `frontend` [container]({{< ref "guides/applications/containers" >}}) which will serve as the application's user interface.
 
 {{< rad file="snippets/dapr.bicep" embed=true marker="//FRONTEND" >}}
 

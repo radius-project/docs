@@ -17,7 +17,7 @@ An independent resource with its own lifecycle, a Radius Secret Store ensures th
 ## Create a new Secret Store
 
 Radius leverages the secrets management solution available on the hosting platform to create and store the secret. For example, if you are deploying to Kubernetes, the secret will be created in Kubernetes Secrets.
-Follow the [how-to guide on creating new secret store]({{< ref "/guides/author-apps/secrets/howto-new-secretstore" >}}) to learn more about creating a new secret store resource and storing a TLS certificate in it.
+Follow the [how-to guide on creating new secret store]({{< ref "/guides/applications/secrets/howto-new-secretstore" >}}) to learn more about creating a new secret store resource and storing a TLS certificate in it.
 
 ## Reference an existing Secret Store
 
@@ -25,7 +25,7 @@ You can also reference an existing secrets management solution that is external 
 
 ## Using Secret Stores
 
-Secret Stores can currently be used for TLS certificates with [Radius Gateways]({{< ref "guides/author-apps/networking/overview#gateways" >}}).
+Secret Stores can currently be used for TLS certificates with [Radius Gateways]({{< ref "guides/applications/networking/overview#gateways" >}}).
 
 Additional use-cases will be added in upcoming releases.
 

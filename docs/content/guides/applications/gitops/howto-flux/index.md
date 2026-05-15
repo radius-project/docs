@@ -16,7 +16,7 @@ This guide will provide an overview of how to:
 
 ## Prerequisites
 
-- [Supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview" >}})
+- [Supported Kubernetes cluster]({{< ref "/guides/installation/overview" >}})
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Radius environment]({{< ref "installation#step-3-initialize-radius" >}})
 - A remote Git repository (e.g., GitHub, GitLab, etc.) to store your application files
