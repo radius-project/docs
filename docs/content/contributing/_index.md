@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Contributing to Radius"
-linkTitle: "Contributing"
-description: "Guides and requirements for contributing to Radius"
+title: "Contributing and community"
+linkTitle: "Contributing and community"
+description: "Engage with the Radius community and contribute to the project"
 weight: 110
 ---

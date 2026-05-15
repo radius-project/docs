@@ -84,7 +84,7 @@ The rad CLI stores configuration under `%USERPROFILE%\.rad`
 
 ### `config.yaml` file
 
-The rad CLI stores its configuration in a YAML file named `config.yaml` under the `rad` directory. This file contains [workspaces]({{< ref "/guides/operations/workspaces/overview" >}}), which point to your cluster, your default [resource group]({{< ref "/guides/operations/groups/overview" >}}), and your default [environment]({{< ref "concepts/environments" >}}).
+The rad CLI stores its configuration in a YAML file named `config.yaml` under the `rad` directory. This file contains [workspaces]({{< ref "/guides/environments/workspaces/overview" >}}), which point to your cluster, your default [resource group]({{< ref "/guides/environments/groups/overview" >}}), and your default [environment]({{< ref "concepts/environments" >}}).
 
 When the rad CLI runs commands, it will use the configuration in the `config.yaml` file to determine which cluster, resource group, and environment to target and use.
 

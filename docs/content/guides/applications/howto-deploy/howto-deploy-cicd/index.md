@@ -12,7 +12,7 @@ It's easy to get Radius added to your GitHub Actions deployment pipelines. By le
 
 ## Prerequisites
 
-- [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
+- [Setup a supported Kubernetes cluster]({{< ref "/guides/installation/overview#supported-clusters" >}})
 - Radius control plane [installed in your cluster]({{< ref kubernetes-install >}})
 - GitHub repo with Actions enabled
 
@@ -28,7 +28,7 @@ Make sure you have the following files checked into your repository under `iac/`
 
 {{< rad file="snippets/app.bicep" embed="true" >}}
 
-### [`bicepconfig.json`]({{< ref "/guides/tooling/bicepconfig/overview" >}})
+### [`bicepconfig.json`]({{< ref "/guides/installation/bicepconfig/overview" >}})
 
 ```json
 {

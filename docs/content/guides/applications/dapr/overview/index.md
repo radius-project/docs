@@ -22,7 +22,7 @@ A [Dapr sidecar](https://docs.dapr.io/concepts/dapr-services/sidecar/) allows yo
 
 {{< image src="dapr-sidecar.png" style="width:600px" alt="Diagram of the Dapr sidecar" >}} <br />
 
-You can easily add the Dapr sidecar to your [Containers]({{< ref "guides/author-apps/containers" >}}) using a Dapr sidecar extension:
+You can easily add the Dapr sidecar to your [Containers]({{< ref "guides/applications/containers" >}}) using a Dapr sidecar extension:
 
 {{< tabs Bicep >}}
 

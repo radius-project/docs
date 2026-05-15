@@ -20,7 +20,7 @@ This how-to guide will provide an overview of how to:
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 - [Bicep VSCode extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}})
-- [Supported Kubernetes cluster]({{< ref "guides/operations/kubernetes" >}})
+- [Supported Kubernetes cluster]({{< ref "guides/installation" >}})
 - [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed on your cluster
 - [Azure Keyvault Provider](https://azure.github.io/secrets-store-csi-driver-provider-azure/docs/getting-started/installation/)
   - The above installation will also install the required [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/getting-started/installation.html)
@@ -39,7 +39,7 @@ Select 'No' when asked to setup application in the current directory.
 
 {{< read file= "/shared-content/installation/bicepconfig/manual.md" >}}
 
-More information on how to setup a `bicepconfig.json` can be found [here]({{< ref "/guides/tooling/bicepconfig/overview" >}})
+More information on how to setup a `bicepconfig.json` can be found [here]({{< ref "/guides/installation/bicepconfig/overview" >}})
 
 ## Step 3: Define a Radius Environment
 
@@ -55,7 +55,7 @@ Add a Radius Application, an Azure Key Vault, and a Radius volume which uses the
 
 ## Step 5: Define an app, Key  Vault, and volume
 
-Now add a Radius [container]({{< ref "guides/author-apps/containers" >}}) with a volume mount for the Radius volume:
+Now add a Radius [container]({{< ref "guides/applications/containers" >}}) with a volume mount for the Radius volume:
 
 {{< rad file="snippets/keyvault-wi.bicep" embed=true marker="//CONTAINER" >}}
 

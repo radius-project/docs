@@ -93,7 +93,7 @@ If you want to manually manage your infrastructure provisioning outside of Recip
 
 ## Environment variables for connections
 
-Other Radius resources, such as [containers]({{< ref "guides/author-apps/containers" >}}), may connect to a MongoDB resource via connections. When a connection to MongoDB named, for example, `myconnection` is declared, Radius injects values into environment variables that are then used to access the connected MongoDB resource:
+Other Radius resources, such as [containers]({{< ref "guides/applications/containers" >}}), may connect to a MongoDB resource via connections. When a connection to MongoDB named, for example, `myconnection` is declared, Radius injects values into environment variables that are then used to access the connected MongoDB resource:
 
 | Environment variable | Example(s) |
 |----------------------|------------|

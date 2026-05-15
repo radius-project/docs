@@ -74,5 +74,5 @@ rad app delete -a demo
 
 ## Further reading
 
-- [Portable resource overview]({{< ref "/guides/author-apps/portable-resources/overview" >}})
+- [Portable resource overview]({{< ref "/guides/resource-types/portable-resources/overview" >}})
 - [Radius Application overview]({{< ref "concepts/applications" >}})

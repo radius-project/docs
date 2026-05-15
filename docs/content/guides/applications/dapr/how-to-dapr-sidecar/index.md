@@ -14,7 +14,7 @@ This how-to guide will provide an overview of how to:
 
 ## Prerequisites
 
-- [Supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-kubernetes-clusters" >}})
+- [Supported Kubernetes cluster]({{< ref "/guides/installation/overview#supported-kubernetes-clusters" >}})
 - rad CLI
 - [Dapr CLI](https://docs.dapr.io/getting-started/install-dapr-cli/)
 - [Radius initialized with `rad init`]({{< ref howto-environment >}})
@@ -22,7 +22,7 @@ This how-to guide will provide an overview of how to:
 
 ## Step 1: Start with a container
 
-Begin by creating a file named `app.bicep` with a Radius [container]({{< ref "guides/author-apps/containers" >}}):
+Begin by creating a file named `app.bicep` with a Radius [container]({{< ref "guides/applications/containers" >}}):
 
 {{< rad file="snippets/app.bicep" embed=true >}}
 
@@ -75,7 +75,7 @@ You've successfully deployed a Radius container with a Dapr sidecar! You can now
 
 ## Cleanup
 
-Run the following command to [delete]({{< ref "guides/deploy-apps/howto-delete" >}}) your app and container:
+Run the following command to [delete]({{< ref "guides/applications/howto-delete" >}}) your app and container:
    
    ```bash
    rad app delete -a demo
@@ -84,5 +84,5 @@ Run the following command to [delete]({{< ref "guides/deploy-apps/howto-delete" 
 ## Further reading
 
 - [Radius Dapr tutorial]({{< ref "reference/samples/tutorial-dapr" >}})
-- [Dapr in Radius containers]({{< ref "guides/author-apps/containers/overview#kubernetes" >}})
+- [Dapr in Radius containers]({{< ref "guides/applications/containers/overview#kubernetes" >}})
 - [Dapr sidecar schema]({{< ref "reference/resource-schema/dapr-schema/dapr-extension" >}})

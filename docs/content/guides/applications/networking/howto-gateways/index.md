@@ -72,5 +72,5 @@ rad app delete gatewaydemo -y
 
 ## Further reading
 
-- [Networking overview]({{< ref "/guides/author-apps/networking/overview" >}})
+- [Networking overview]({{< ref "/guides/applications/networking/overview" >}})
 - [Gateway reference]({{< ref "/reference/resource-schema/core-schema/gateway" >}})

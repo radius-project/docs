@@ -18,8 +18,8 @@ This how-to guide will provide an overview of how to:
 
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 The [Bicep extension]({{< ref "installation#step-2-install-the-vs-code-extension" >}}) for VS Code is recommended for Bicep language support
-- Radius [installed]({{< ref "/guides/operations/kubernetes/kubernetes-install" >}}) on a [supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-kubernetes-clusters" >}})
-- An Azure provider configured and registered with your Radius control plane, either through [Service Principal](https://docs.radapp.io/guides/operations/providers/azure-provider/howto-azure-provider-sp/) or [Workload Identity](https://docs.radapp.io/guides/operations/providers/azure-provider/howto-azure-provider-wi/) that have been assigned to the `Reader` role on the subscription and the `Contributor` role on the resource group where the ACI containers will be deployed
+- Radius [installed]({{< ref "/guides/installation/kubernetes-install" >}}) on a [supported Kubernetes cluster]({{< ref "/guides/installation/overview#supported-kubernetes-clusters" >}})
+- An Azure provider configured and registered with your Radius control plane, either through [Service Principal](https://docs.radapp.io/guides/installation/providers/azure-provider/howto-azure-provider-sp/) or [Workload Identity](https://docs.radapp.io/guides/installation/providers/azure-provider/howto-azure-provider-wi/) that have been assigned to the `Reader` role on the subscription and the `Contributor` role on the resource group where the ACI containers will be deployed
 - A [managed identity](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/) is [required]({{< ref "/reference/resource-schema/core-schema/environment-schema#identity" >}}) for ACI deployments, if you choose to utilize a [user-assigned managed identity](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/how-manage-user-assigned-managed-identities?pivots=identity-mi-methods-azp) then you need to ensure it is assigned to the `Contributor` and `Azure Container Instances Contributor` roles on the subscription and resource group where the ACI containers will be deployed
 
 ## Step 1: Create a Radius Resource Group and Workspace
@@ -198,7 +198,7 @@ Navigate to the Todo List tab and test out the application. Using the Todo page 
    {{< image src="azure-portal-env.png" alt="Screenshot of the Azure portal showing the resource group with the virtual network, internal load balancer, and network security group resources created by Radius" width=700px >}}
 
 ## Further reading
-- [Azure resources overview]({{< ref "/guides/author-apps/azure/overview" >}})
+- [Azure resources overview]({{< ref "/guides/applications/azure/overview" >}})
 - [Radius Environment schema]({{< ref "/reference/resource-schema/core-schema/environment-schema" >}})
 - [Radius Application schema]({{< ref "/reference/resource-schema/core-schema/application-schema" >}})
 - [Radius Container schema]({{< ref "/reference/resource-schema/core-schema/container-schema" >}})

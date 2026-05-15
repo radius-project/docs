@@ -18,19 +18,29 @@ Radius is a cloud native application platform.  It enables developers and IT ope
 
 {{< button text="Radius Quick Start 🚀" page="quick-start" color="success" size="btn-lg" >}}
 
+## How docs are organized
+
 {{< cardpane >}}
-  {{< card header="**🎓 Tutorials**" footer="[**View available tutorials →**]({{< ref tutorials >}})" >}}
-  Visit the tutorials for guided learning paths to try out Radius and pick up the main concepts. We'll walk you through the steps to get started with Radius and run your first set of apps.
+  {{< card header="**🚀 Quick Start**" footer="[**Get started →**]({{< ref quick-start >}})" >}}
+  A zero-to-wow walkthrough to quickly install Radius and deploy your first application.
   {{< /card >}}
-  {{< card header="**📘 How-to guides**" footer="[**Visit how-to guides →**]({{< ref guides >}})" >}}
-  Check out the how-to guides for step-by-step instructions on how to use Radius and its features. We'll walk you through how to accomplish specific tasks when using Radius.
+  {{< card header="**💭 Concepts**" footer="[**Learn the concepts →**]({{< ref concepts >}})" >}}
+  Understand the core concepts behind Radius: Resource Types, Recipes, Environments, and Applications.
   {{< /card >}}
 {{< /cardpane >}}
 {{< cardpane >}}
-  {{< card header="**💭 Concepts**" footer="[**Learn the concepts →**]({{< ref concepts >}})" >}}
-  Learn about the background and concepts behind Radius with in-depth explanations. We'll cover the main concepts and how Radius works, so you have the broader context to deeply understand Radius and use it most effectively.
+  {{< card header="**🎓 Tutorial**" footer="[**Start the tutorial →**]({{< ref tutorials >}})" >}}
+  A guided end-to-end walkthrough covering installation, configuration, and application deployment.
   {{< /card >}}
-  {{< card header="**🧾 Reference**" footer="[**Visit reference material →**]({{< ref guides >}})" >}}
-  Refer to detailed information on Radius resources, APIs, FAQs, and more. Reference material is useful for looking up specific information about Radius when you need it.
+  {{< card header="**📘 How-to guides**" footer="[**Visit how-to guides →**]({{< ref guides >}})" >}}
+  Step-by-step instructions for installing Radius, creating resource types, recipes, environments, and deploying applications.
+  {{< /card >}}
+{{< /cardpane >}}
+{{< cardpane >}}
+  {{< card header="**🧾 Reference**" footer="[**Visit reference material →**]({{< ref reference >}})" >}}
+  Detailed information on Radius CLI, APIs, resource schemas, and configuration.
+  {{< /card >}}
+  {{< card header="**🤝 Contributing and community**" footer="[**Get involved →**]({{< ref contributing >}})" >}}
+  Engage with the Radius community, contribute to the project, and find community resources.
   {{< /card >}}
 {{< /cardpane >}}

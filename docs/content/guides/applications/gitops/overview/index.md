@@ -30,4 +30,4 @@ GitOps is a popular set of practices, implemented as popular tools like [Flux](h
 
 Today, Radius has integrated first-class support for [Flux](https://fluxcd.io/), a popular GitOps tool. Flux is designed to work with Kubernetes and provides a powerful set of features for managing applications and infrastructure through Git.
 
-To get started with using Radius and Flux, check out the [how-to guide for Radius + Flux]({{< ref "guides/deploy-apps/gitops/howto-flux" >}}).
+To get started with using Radius and Flux, check out the [how-to guide for Radius + Flux]({{< ref "guides/applications/gitops/howto-flux" >}}).

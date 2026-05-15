@@ -8,7 +8,7 @@ categories: "How-To"
 tags: ["containers"]
 ---
 
-This how-to guide will teach how to connect to your dependencies via [connections]({{< ref "guides/author-apps/containers#connections" >}})
+This how-to guide will teach how to connect to your dependencies via [connections]({{< ref "guides/applications/containers#connections" >}})
 
 ## Prerequisites
 
@@ -18,13 +18,13 @@ This how-to guide will teach how to connect to your dependencies via [connection
 
 ## Step 1: View the container definition
 
-Open the `app.bicep` and view the [container]({{< ref "guides/author-apps/containers" >}}):
+Open the `app.bicep` and view the [container]({{< ref "guides/applications/containers" >}}):
 
 {{< rad file="snippets/app.bicep" embed=true >}}
 
 ## Step 2: Add a Redis cache as a dependency
 
-Next, add to `app.bicep` a [Redis cache]({{< ref "/guides/author-apps/portable-resources/overview" >}}), leveraging the default "local-dev" Recipe:
+Next, add to `app.bicep` a [Redis cache]({{< ref "/guides/resource-types/portable-resources/overview" >}}), leveraging the default "local-dev" Recipe:
 
 {{< rad file="snippets/app-with-redis.bicep" embed=true marker="//DB" >}}
 
@@ -88,5 +88,5 @@ rad app delete -a demo
 
 ## Further reading
 
-- [Connections]({{< ref "guides/author-apps/containers/overview#connections" >}})
+- [Connections]({{< ref "guides/applications/containers/overview#connections" >}})
 - [Container schema]({{< ref container-schema >}})

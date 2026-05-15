@@ -9,7 +9,7 @@ categories: "How-To"
 
 ## Pre-requisites
 
-- [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
+- [Setup a supported Kubernetes cluster]({{< ref "/guides/installation/overview#supported-clusters" >}})
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 
 ## How-to: Use workspaces to switch between environments

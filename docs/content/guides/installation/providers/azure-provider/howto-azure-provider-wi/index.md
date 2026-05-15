@@ -18,7 +18,7 @@ The Azure provider allows you to deploy and connect to Azure resources from a se
 - [Azure subscription](https://azure.com)
 - [az CLI](https://aka.ms/azcli)
 - [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
-- [Setup a supported Kubernetes cluster]({{< ref "/guides/operations/kubernetes/overview#supported-clusters" >}})
+- [Setup a supported Kubernetes cluster]({{< ref "/guides/installation/overview#supported-clusters" >}})
   - You will need the cluster's OIDC Issuer URL. [AKS Example](https://azure.github.io/azure-workload-identity/docs/installation/managed-clusters.html#azure-kubernetes-service-aks)
 - [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/installation.html) installed in your cluster, including the [Mutating Admission Webhook](https://azure.github.io/azure-workload-identity/docs/installation/mutating-admission-webhook.html)
 

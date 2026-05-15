@@ -21,7 +21,7 @@ This how-to guide will provide an overview of how to:
 
 ## Step 1: Define an app and a container
 
-Begin by creating a file named `app.bicep` with a Radius Application and [container]({{< ref "guides/author-apps/containers" >}}):
+Begin by creating a file named `app.bicep` with a Radius Application and [container]({{< ref "guides/applications/containers" >}}):
 
 {{< rad file="snippets/1-app.bicep" embed=true >}}
 
