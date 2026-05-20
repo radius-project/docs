@@ -26,11 +26,15 @@ sample list of resourceType: Applications.Core/containers, Applications.Core/gat
 
 # Delete a container named orders
 rad resource delete Applications.Core/containers orders
+
+# Force delete a resource that is stuck in a non-terminal state
+rad resource delete Applications.Core/containers orders --force
 ```
 
 ### Options
 
 ```
+      --force              Force the operation even if the resource is in a non-terminal provisioning state
   -g, --group string       The resource group name
   -h, --help               help for delete
   -o, --output string      output format (supported formats are json, table) (default "table")

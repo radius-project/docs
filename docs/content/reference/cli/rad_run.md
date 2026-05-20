@@ -28,16 +28,16 @@ rad run [file] [flags]
 ```
 
 # Run app.bicep
-rad run app.bicep
+rad run app.bicep --application my-app
 
 # Run in a specific environment
-rad run app.bicep --environment prod
+rad run app.bicep --environment prod --application my-app
 
 # Run app.bicep and specify a string parameter
-rad run app.bicep --parameters version=latest
+rad run app.bicep --parameters version=latest --application my-app
 
 # Run app.bicep and specify parameters from multiple sources
-rad run app.bicep --parameters @myfile.json --parameters version=latest
+rad run app.bicep --parameters @myfile.json --parameters version=latest --application my-app
 
 ```
 
