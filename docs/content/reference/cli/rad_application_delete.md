@@ -31,12 +31,16 @@ rad app delete my-app
 # Delete specified application in a specified resource group
 rad app delete my-app --group my-group
 
+# Force delete an application with resources stuck in a non-terminal state
+rad app delete my-app --force
+
 ```
 
 ### Options
 
 ```
   -a, --application string   The application name
+      --force                Force the operation even if the resource is in a non-terminal provisioning state
   -g, --group string         The resource group name
   -h, --help                 help for delete
   -w, --workspace string     The workspace name
