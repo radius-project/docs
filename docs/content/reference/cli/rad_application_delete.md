@@ -22,11 +22,8 @@ rad application delete [flags]
 
 ```
 
-# Delete current application
-rad app delete
-
-# Delete current application and bypass confirmation prompt
-rad app delete --yes
+# Delete specified application and bypass confirmation prompt
+rad app delete --yes --application my-app
 
 # Delete specified application
 rad app delete my-app
@@ -34,14 +31,19 @@ rad app delete my-app
 # Delete specified application in a specified resource group
 rad app delete my-app --group my-group
 
+# Force delete an application with resources stuck in a non-terminal state
+rad app delete my-app --force
+
 ```
 
 ### Options
 
 ```
   -a, --application string   The application name
+      --force                Force the operation even if the resource is in a non-terminal provisioning state
   -g, --group string         The resource group name
   -h, --help                 help for delete
+      --preview              Use the Radius.Core preview implementation
   -w, --workspace string     The workspace name
   -y, --yes                  The confirmation flag
 ```
