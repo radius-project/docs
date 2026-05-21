@@ -12,7 +12,7 @@ Show Radius Application details
 
 ### Synopsis
 
-Show Radius Application details. Shows the user's default application (if configured) by default.
+Show Radius Application details
 
 ```
 rad application show [flags]
@@ -21,9 +21,6 @@ rad application show [flags]
 ### Examples
 
 ```
-
-# Show current application
-rad app show
 
 # Show specified application
 rad app show my-app
@@ -40,6 +37,7 @@ rad app show my-app --group my-group
   -g, --group string         The resource group name
   -h, --help                 help for show
   -o, --output string        output format (supported formats are json, table) (default "table")
+      --preview              Use the Radius.Core preview implementation
   -w, --workspace string     The workspace name
 ```
 
