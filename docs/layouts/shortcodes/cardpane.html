@@ -1,4 +1,4 @@
 {{ $link := .Get "width" | default "auto" }}
-<div class="card-deck cardpane-matrix row row-cols-1 row-cols-lg-2 g-4 mb-4" style="max-width:{{ $link }}" >
+<div class="cardpane-matrix mb-4" style="max-width:{{ $link }}" >
 {{- .Inner -}}
 </div>

@@ -28,6 +28,7 @@
     background: $primary;
     min-height: 4rem;
     margin: 0;
+    padding: .5rem 1rem;
     z-index: 32;
 
     @include media-breakpoint-up(md) {
@@ -173,10 +174,11 @@ nav.foldable-nav {
 
     .with-child > label:before {
         display: inline-block;
-        content: "▸";
-        font-family: inherit;
-        font-weight: $font-weight-bold;
-        line-height: 1;
+        font-style: normal;
+        font-variant: normal;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        font-family: "Font Awesome 6 Free"; font-weight: 900; content: "\f0da";
         position: absolute;
         left: 0.1em;
         padding-left: 0.4em;

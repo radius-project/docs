@@ -22,8 +22,19 @@
     border-color: #c43821;
 }
 
-.cardpane-matrix > .td-card {
-    margin-right: 0 !important;
-    margin-bottom: 0;
-    height: 100%;
+
+.cardpane-matrix {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+
+    @include media-breakpoint-up(lg) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    > .td-card {
+        margin: 0 !important;
+        min-width: 0;
+        height: 100%;
+    }
 }
