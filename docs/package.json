@@ -14,9 +14,9 @@
   "license": "Apache-2.0",
   "homepage": "https://docs.radapp.io",
   "devDependencies": {
-    "autoprefixer": "^10.4.27",
-    "hugo-extended": "0.158.0",
-    "postcss": "^8.5.8",
+    "autoprefixer": "^10.5.0",
+    "hugo-extended": "0.161.1",
+    "postcss": "^8.5.15",
     "postcss-cli": "^11.0.1",
     "rimraf": "^6.1.3"
   },
