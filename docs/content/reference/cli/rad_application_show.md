@@ -37,6 +37,7 @@ rad app show my-app --group my-group
   -g, --group string         The resource group name
   -h, --help                 help for show
   -o, --output string        output format (supported formats are json, table) (default "table")
+      --preview              Use the Radius.Core preview implementation
   -w, --workspace string     The workspace name
 ```
 
