@@ -55,14 +55,16 @@ patterns:
       - \[.*\]\(#(?:requirement|provider|module){1}.*\)\s*
       - \|{1}\s*\[[\w_\.]*\]\(.*\)\s*\|\s(?:resource|data source)\s*\|
       - (?:\|\s*){1}(?:Azure\/avm){1}.*(?:\s*\|){1}
-  # Markdown image links: ![alt text](path/to/image.png)
+  # Markdown link / image targets: only the `](url)` portion is ignored so
+  # typos in the visible link text or image alt text are still caught.
+  # Matches both `[text](url)` and `![alt](url)` because we only skip the
+  # parentheses payload.
   - name: md_image_link
     pattern:
-      - /!\[[^\]]*\]\([^)]*\)/g
-  # Markdown links: [text](url)
+      - /\]\([^)]*\)/g
   - name: md_link
     pattern:
-      - /\[[^\]]*\]\([^)]*\)/g
+      - /\]\([^)]*\)/g
   # URLs
   - name: url
     pattern:
@@ -87,11 +89,18 @@ patterns:
   - name: hugo_shortcode
     pattern:
       - /\{\{[%<][\s\S]*?[%>]\}\}/g
-  # Hugo front matter (YAML/TOML block at the top of a markdown file)
+  # Hugo front matter: only skip non-rendered keys so user-facing fields
+  # (title, description, linkTitle) are still spell-checked. Keys observed
+  # in this repo: type, weight, slug, url, aliases, no_list, manualLink,
+  # manualLinkTarget, category, categories, tags. The first sub-pattern
+  # covers single-line `key: value` entries; the second covers multi-line
+  # list values (e.g. `aliases:` followed by indented `- /path` items);
+  # the third matches the `---` / `+++` delimiter lines.
   - name: front_matter
     pattern:
-      - /^---\n[\s\S]*?\n---\s*$/m
-      - /^\+\+\+\n[\s\S]*?\n\+\+\+\s*$/m
+      - /^(?:type|weight|slug|url|no_list|manualLink|manualLinkTarget|category|categories|tags)\s*:[^\n]*$/gm
+      - /^aliases\s*:[^\n]*(?:\n[ \t]+-[^\n]*)*/gm
+      - /^(?:---|\+\+\+)\s*$/gm
 
 # Use the shared .cspellignore file (at the repo root) as a custom dictionary.
 dictionaryDefinitions:
