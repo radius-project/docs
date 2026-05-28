@@ -4,7 +4,7 @@ This directory contains the files to generate the <https://docs.radapp.io> site.
 
 ## Codespace
 
-The easiest way to get up and runnning with a docs environment is a GitHub codespace.
+The easiest way to get up and running with a docs environment is a GitHub codespace.
 
 1. Open codespace
 1. Ensure postCreate script has completed (takes ~2 minutes)
