@@ -95,7 +95,7 @@ The Radius project follows the [Developer Certificate of Origin](https://develop
 
 Contributors sign-off that they adhere to these requirements by adding a Signed-off-by line to commit messages.
 
-```
+```text
 This is my commit message
 
 Signed-off-by: Random J Developer <random@developer.example.org>
@@ -103,8 +103,8 @@ Signed-off-by: Random J Developer <random@developer.example.org>
 
 Git even has a -s command line option to append this automatically to your commit message:
 
-```
-$ git commit -s -m 'This is my commit message'
+```text
+git commit -s -m 'This is my commit message'
 ```
 
 Visual Studio Code has a setting, `git.alwaysSignOff` to automatically add a Signed-off-by line to commit messages. Search for "sign-off" in VS Code settings to find it and enable it.
@@ -137,9 +137,9 @@ Visit [Diátaxis](https://diataxis.fr/explanation/) for more information on expl
 
 Visit [Diátaxis](https://diataxis.fr/explanation/) for more information on explanatory documentation that helps the user understand the project or a specific area of the project.
 
-- Ensure the reader can understand why they should care about the feature and what it enables them to do. 
+- Ensure the reader can understand why they should care about the feature and what it enables them to do.
 - If applicable, ensure the doc references the reference spec document.
-- If applicable, ensure the doc is consistent with any related concepts or specs in terms of names, parameters, and terminology. Update both the concept, spec, and the doc as needed. Avoid repeating the spec. The idea is to give the reader more information and background on the capability so that they can try this out. 
+- If applicable, ensure the doc is consistent with any related concepts or specs in terms of names, parameters, and terminology. Update both the concept, spec, and the doc as needed. Avoid repeating the spec. The idea is to give the reader more information and background on the capability so that they can try this out.
 - Provide the reader with related links if needed (this can be other concepts, overviews, how-to guides, or references)
 - Set the `category` as `Overview` in [Hugo front-matter](#front-matter).
 
@@ -167,15 +167,22 @@ These conventions should be followed throughout all Radius documentation to ensu
 | Style/Tone | Guidance |
 |---------|-------------|
 |**Casing**|Use upper case only:<ul><li>At the start of a sentence or header</li><li>For proper nouns including names of technologies (Redis, Kubernetes, etc.)</li> <li>Names of Radius concepts (Radius Recipe, Radius Environment, Radius Application, etc.)</li></ul>|
-|**Headers and titles**|Headers and titles must be descriptive and clear, use sentence casing i.e. use the above casing guidance for headers and titles too| 
-|**Use simple sentences**|Easy-to-read sentences mean the reader can quickly use the guidance you share.| 
-|**Avoid the first person**|Use second person "you", "your" instead of "I", "we", "our".| 
-|**Assume a new developer audience**|Some obvious steps can seem hard. E.g. Now set an environment variable Radius to a value X. It is better to give the reader the explicit command to do this, rather than having them figure this out.| 
+|**Headers and titles**|Headers and titles must be descriptive and clear, use sentence casing i.e. use the above casing guidance for headers and titles too|
+|**Use simple sentences**|Easy-to-read sentences mean the reader can quickly use the guidance you share.|
+|**Avoid the first person**|Use second person "you", "your" instead of "I", "we", "our".|
+|**Assume a new developer audience**|Some obvious steps can seem hard. E.g. Now set an environment variable Radius to a value X. It is better to give the reader the explicit command to do this, rather than having them figure this out.|
 |**Use present tense**|Avoid sentences like "this command will install redis", which implies the action is in the future. Instead, use "This command installs redis" which is in the present tense. |
 
 ### Spelling
 
-The docs pipeline uses [aspell](http://aspell.net/) to check for spelling mistakes. If you need to add a new custom word to the allow-list, update `.github/config/en-custom.txt`.
+The docs pipeline uses [cspell](https://cspell.org/) to check for spelling mistakes. The configuration lives in `.github/configs/.cspell.yml` and is kept in sync with the [radius-project/radius](https://github.com/radius-project/radius) repository so spell-checking behaves the same across Radius repos. If you need to add a new custom word to the allow-list, append it to `.cspellignore` at the repository root (keep the list sorted, one word per line).
+
+To run the spell checker locally:
+
+```shell
+npm install -g cspell
+cspell lint --config ./.github/configs/.cspell.yml --no-progress --dot "**/*.md"
+```
 
 ### Numbering
 
@@ -226,6 +233,7 @@ tags: "Dapr"
 ```
 
 > **Weight** determines the order of the pages in the left sidebar, with 0 being the top-most.
+>
 > - Index file weights follow the parent directory's ordering.
 > - For the first page in a new directory, reset the counter and set the weight to be an order of magnitude greater.
 
@@ -235,12 +243,12 @@ Front-matter should be completed with all fields including type, title, linkTitl
 - `linkTitle` should be 1-3 words, with the exception of How-to at the front.
 - `description` should be 1-2 sentences on what the reader will learn, accomplish, or do in this doc.
 - `categories` should be one of the following:
-    - Concept
-    - Overview
-    - Tutorial
-    - How-To
-    - Reference
-    - Schema
+  - Concept
+  - Overview
+  - Tutorial
+  - How-To
+  - Reference
+  - Schema
 - `tags` should be a comma-separated list of metadata tags.
 
 As per the [styling conventions](#styling-conventions), titles should only capitalize the first word and proper nouns, with the exception of "How-To:"
@@ -545,7 +553,7 @@ An optional `newtab` parameter will indicate if the page should open in a new ta
 
 #### Link to an external page
 
-```
+```text
 {{</* button text="My Button" link="https://example.com" */>}}
 ```
 
@@ -555,7 +563,7 @@ An optional `newtab` parameter will indicate if the page should open in a new ta
 
 You can also reference pages in your button as well:
 
-```
+```text
 {{</* button text="My Button" page="contributing" newtab="true" */>}}
 ```
 
@@ -565,7 +573,7 @@ You can also reference pages in your button as well:
 
 You can link to a GitHub repo and path with the `githubRepo` and `githubPath` parameters:
 
-```
+```text
 {{</* button text="My Button" githubRepo="samples" githubPath="samples" */>}}
 ```
 
@@ -575,7 +583,7 @@ You can link to a GitHub repo and path with the `githubRepo` and `githubPath` pa
 
 You can customize the colors using the Bootstrap colors:
 
-```
+```text
 {{</* button text="My Button" link="https://example.com" color="primary" */>}}
 {{</* button text="My Button" link="https://example.com" color="secondary" */>}}
 {{</* button text="My Button" link="https://example.com" color="success" */>}}
@@ -595,7 +603,7 @@ You can customize the colors using the Bootstrap colors:
 
 By default, buttons are padded with new lines below the button. To remove these new lines to create multiple buttons in-line, add a `newline="false"` parameter:
 
-```
+```text
 {{</* button text="Previous" link="https://example.com" newline="false" */>}}
 {{</* button text="Next" link="https://example.com" */>}}
 ```
@@ -607,15 +615,16 @@ By default, buttons are padded with new lines below the button. To remove these 
 
 You can use the `categorizeby` shortcode to pull and organize content by either categories and tags. This is useful when you want to categorize content by tags and the type of the document
 
-```
+```text
 {{ categorizeby category="How-To" tag= "containers" }}
 ```
 
 This categorizes and lists all the docs that has both "How-To" as the category and "container" as the tag.
 
-```
+```text
 {{ categorizeby category="How-To" }}
 ```
+
 This categorizes and lists all the docs that are How-To by the available tags.
 
 ### References
