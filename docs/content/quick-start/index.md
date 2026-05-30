@@ -47,9 +47,6 @@ Initializing Radius...
 ✅ Install Radius {{< param version >}}
     - Kubernetes cluster: k3d-k3s-default
     - Kubernetes namespace: radius-system
-✅ Create new environment default
-    - Kubernetes namespace: default
-    - Recipe pack: local-dev
 ✅ Scaffold application todolist
 ✅ Update local configuration
 
@@ -63,18 +60,24 @@ In addition to installing Radius, the `rad initialize` command creates a sample 
 ```
 extension radius
 
+@description('The Radius Environment ID. Injected automatically by the rad CLI.')
+param environment string
+
 @description('The Radius Application ID. Injected automatically by the rad CLI.')
 param application string
 
-resource demo 'Applications.Core/containers@2023-10-01-preview' = {
+resource demo 'Radius.Compute/containers@2025-08-01-preview' = {
   name: 'demo'
   properties: {
+    environment: environment
     application: application
-    container: {
-      image: 'ghcr.io/radius-project/samples/demo:latest'
-      ports: {
-        web: {
-          containerPort: 3000
+    containers: {
+      demo: {
+        image: 'ghcr.io/radius-project/samples/demo:latest'
+        ports: {
+          web: {
+            containerPort: 3000
+          }
         }
       }
     }
@@ -82,19 +85,35 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
 }
 ```
 
-Use the `rad run` command to deploy the application and setup port forwarding.
+Use the `rad deploy` command to deploy the application to your Radius environment.
 
 ```bash
-rad run app.bicep
+rad deploy app.bicep
 ```
 
-This command:
+This command runs the recipe registered for `Radius.Compute/containers` in the current environment, which provisions the Kubernetes resources needed to run the container (such as a Deployment and, since a `containerPort` was specified, a ClusterIP Service).
 
-- Creates a Deployment on the Kubernetes cluster
-- Since a containerPort was specified, creates a ClusterIP Service on the Kubernetes cluster
-- Sets up port forwarding from localhost to the container
-- Sets up port forwarding from localhost to the Radius Dashboard
-- Streams container logs to your terminal
+## Port-forward to the application
+
+`rad deploy` does not set up port forwarding, so use `kubectl` to forward a local port to the container's Service. The Service is created in the namespace configured on your environment (`default` when using the recipe pack registered by `rad initialize`).
+
+```bash
+kubectl port-forward svc/demo 3000:3000 -n default
+```
+
+Leave this command running. In a separate terminal, you can also port-forward the Radius Dashboard:
+
+```bash
+kubectl port-forward svc/dashboard 7007:80 -n radius-system
+```
+
+## Stream container logs
+
+In another terminal, stream logs from the `demo` container:
+
+```bash
+kubectl logs -f deployment/demo -n default --all-containers=true
+```
 
 ## Browse the Todo List Application UI
 
@@ -106,7 +125,7 @@ Browse to the Radius Dashboard by visiting [http://localhost:7007](http://localh
 
 ## View the Application Graph
 
-The `rad app graph` command shows you all the resources that the application is composed of. 
+The `rad app graph` command shows you all the resources that the application is composed of.
 
 ```bash
 rad app graph
@@ -117,20 +136,19 @@ You should see the following output, which lists the underlying Kubernetes resou
 ```
 Displaying application: todolist
 
-Name: demo (Applications.Core/containers)
+Name: demo (Radius.Compute/containers)
 Connections: (none)
 Resources:
   demo (apps/Deployment)
   demo (core/Service)
-  demo (core/ServiceAccount)
-  demo (rbac.authorization.k8s.io/Role)
-  demo (rbac.authorization.k8s.io/RoleBinding)
 ```
 
 Congratulations, you have deployed your first application using Radius!
 
 
 ## Cleanup
+
+Stop any port-forward and log-streaming terminals you started earlier by pressing `Ctrl+C` in each terminal (or close the terminal windows). This terminates the `kubectl port-forward` and `kubectl logs` processes.
 
 Delete the Todo List application:
 
