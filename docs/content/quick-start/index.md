@@ -48,8 +48,8 @@ Initializing Radius...
     - Kubernetes cluster: k3d-k3s-default
     - Kubernetes namespace: radius-system
 ✅ Create new environment default
-   - Kubernetes namespace: default
-   - Recipe pack: default recipe pack
+    - Kubernetes namespace: default
+    - Recipe pack: default recipe pack
 ✅ Scaffold application todolist
 ✅ Update local configuration
 
