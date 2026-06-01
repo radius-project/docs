@@ -25,3 +25,30 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    groups:
+      all:
+        patterns: ["*"]
+
+  - package-ecosystem: gomod
+    target-branch: edge
+    directory: /docs
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: deps
+      include: scope
+    groups:
+      all:
+        patterns: ["*"]
+
+  - package-ecosystem: npm
+    target-branch: edge
+    directory: /docs
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: deps
+      include: scope
+    groups:
+      all:
+        patterns: ["*"]
