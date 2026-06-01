@@ -16,7 +16,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.27",
     "hugo-extended": "^0.117.0",
-    "postcss": "^8.5.8",
+    "postcss": "^8.5.15",
     "postcss-cli": "^11.0.1"
   },
   "scripts": {
