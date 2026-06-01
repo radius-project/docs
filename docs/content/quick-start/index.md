@@ -16,7 +16,7 @@ This guide will show you how to quickly get started with Radius. You will do a b
 
 ## Prerequisites
 
-For this quick start, you will only need a **Kubernetes cluster**. To install Radius your user must have the cluster-admin role. Radius <a href="https://docs.radapp.io/guides/operations/kubernetes/overview/#supported-kubernetes-clusters">supports</a> <a href="https://azure.microsoft.com/en-us/products/kubernetes-service">AKS</a>, <a href="https://aws.amazon.com/eks/">EKS</a>, <a href="https://k3d.io/">k3d</a>, and <a href="https://kind.sigs.k8s.io/">kind</a> clusters. For this quick start, running a Kubernetes cluster on your workstation with k3d or kind is recommended.
+For this quick start, you will only need a **Kubernetes cluster**. To install Radius your user must have the cluster-admin role. Radius <a href="https://docs.radapp.io/guides/installation/overview/#supported-kubernetes-clusters">supports</a> <a href="https://azure.microsoft.com/en-us/products/kubernetes-service">AKS</a>, <a href="https://aws.amazon.com/eks/">EKS</a>, <a href="https://k3d.io/">k3d</a>, and <a href="https://kind.sigs.k8s.io/">kind</a> clusters. For this quick start, running a Kubernetes cluster on your workstation with k3d or kind is recommended.
 
 ## Install the Radius CLI
 

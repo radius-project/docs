@@ -20,7 +20,7 @@ By the end of this tutorial, you will have deployed an existing Kubernetes appli
 
 ## Prerequisites
 
-- [Kubernetes cluster]({{< ref "guides/operations/kubernetes/overview#supported-kubernetes-clusters" >}})
+- [Kubernetes cluster]({{< ref "guides/installation/overview#supported-kubernetes-clusters" >}})
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [rad CLI]({{< ref howto-rad-cli >}})
 
@@ -284,7 +284,7 @@ Resources:
   redis-replica (kubernetes: apps/Deployment)
 ```
 
-This output shows that Radius has detected the three container resources in the Kubernetes application that you have just deployed. Note that since you have not used Radius to define any connections between the resources, the `Connections` field is empty. However, your application is now ready to be further modified using the Radius features that are now available to you, , such as [Connections]({{< ref "guides/author-apps/containers/overview#connections" >}}), [Recipes]({{< ref "concepts/recipes" >}}), and more.
+This output shows that Radius has detected the three container resources in the Kubernetes application that you have just deployed. Note that since you have not used Radius to define any connections between the resources, the `Connections` field is empty. However, your application is now ready to be further modified using the Radius features that are now available to you, , such as [Connections]({{< ref "guides/applications/containers/overview#connections" >}}), [Recipes]({{< ref "concepts/recipes" >}}), and more.
 
 ## Step 6: Clean up
 
@@ -319,7 +319,7 @@ This output shows that Radius has detected the three container resources in the 
 
 ## Next steps
 
-- To learn more about authoring Radius applications, visit the [Authoring applications guide]({{< ref "guides/author-apps" >}})
-- To learn more about deploying applications using Radius, visit the [Deploying applications guide]({{< ref "guides/deploy-apps" >}})
-- To learn more about using the [Radius Connections]({{< ref "guides/author-apps/containers/overview#connections" >}}) annotations to connect your containers and resources, visit the [Radius Helm tutorial]({{< ref "reference/samples/helm#step-6-add-connection" >}})
+- To learn more about authoring Radius applications, visit the [Authoring applications guide]({{< ref "guides/applications" >}})
+- To learn more about deploying applications using Radius, visit the [Deploying applications guide]({{< ref "guides/applications/howto-deploy" >}})
+- To learn more about using the [Radius Connections]({{< ref "guides/applications/containers/overview#connections" >}}) annotations to connect your containers and resources, visit the [Radius Helm tutorial]({{< ref "reference/samples/helm#step-6-add-connection" >}})
 - To learn more about Radius Recipes, visit the [Recipes guide]({{< ref "guides/recipes" >}})

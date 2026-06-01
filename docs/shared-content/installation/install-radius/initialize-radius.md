@@ -2,7 +2,7 @@ Initializing Radius installs the Radius control-plane and creates a Radius Envir
 
 1. Create a Kubernetes cluster
 
-   Radius runs inside [Kubernetes]({{< ref "guides/operations/kubernetes" >}}). Create one from the [supported k8s clusters]({{< ref "/guides/operations/kubernetes/overview#supported-kubernetes-clusters" >}})
+   Radius runs inside [Kubernetes]({{< ref "guides/installation" >}}). Create one from the [supported k8s clusters]({{< ref "/guides/installation/overview#supported-kubernetes-clusters" >}})
    > *If you don't have a preferred way to create Kubernetes clusters, you could try using [k3d](https://k3d.io/), which runs a minimal Kubernetes distribution in Docker.*
 
    Ensure your cluster is set as your current context:
@@ -17,7 +17,7 @@ Initializing Radius installs the Radius control-plane and creates a Radius Envir
    rad init
    ```
 
-   Select `Yes` to setup the application in the current directory. This will create `app.bicep` and [`bicepconfig.json`]({{< ref "/guides/tooling/bicepconfig/overview" >}}) files
+   Select `Yes` to setup the application in the current directory. This will create `app.bicep` and [`bicepconfig.json`]({{< ref "/guides/installation/bicepconfig/overview" >}}) files
 
    ```
    Initializing Radius...
