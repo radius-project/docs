@@ -41,7 +41,7 @@
 
     &__section-title {
         display: block;
-        font-weight: $font-weight-medium;
+        font-weight: $font-weight-normal;
 
         .active {
             font-weight: $font-weight-bold;
@@ -98,20 +98,26 @@
     }
 
     .td-sidebar-link.tree-root{
-        font-weight: $font-weight-bold;
-        color: $td-sidebar-tree-root-color;
-        border-bottom: 1px $td-sidebar-tree-root-color solid;
+        font-weight: $font-weight-normal;
+        color: $gray-900;
+        border-bottom: 1px $gray-900 solid;
         margin-bottom: 1rem;
         margin-top: 1rem;
+    }
+
+    .td-sidebar-link.tree-root.active,
+    .td-sidebar-link.tree-root .active {
+        font-weight: $font-weight-bold;
     }
 }
 
 .td-sidebar {
     @include media-breakpoint-up(md) {
+        margin-top: 0;
         padding-top: 4rem;
-        background-color: $td-sidebar-bg-color;
+        background-color: $gray-100;
         padding-right: 1rem;
-        border-right: 1px solid $td-sidebar-border-color;
+        border-right: 1px solid $gray-300;
     }
 
 
@@ -137,7 +143,7 @@
                 position: sticky;
                 top: 4rem;
                 z-index: 10;
-                height: calc(100vh - 6rem);
+                height: calc(100vh - 4rem);
             }
         }
 

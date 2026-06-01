@@ -9,7 +9,7 @@
 		{{ end }}
 	</header>
 	{{ .Content }}
-	{{ if (.Site.DisqusShortname) }}
+	{{ if (site.Config.Services.Disqus.Shortname) }}
 		<br />
 		{{ partial "disqus-comment.html" . }}
 	{{ end }}

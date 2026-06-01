@@ -1,7 +1,6 @@
 baseURL = "https://edge.docs.radapp.io/"
 languageCode = "en-us"
 title = "Radius Docs"
-theme =  "docsy"
 
 disableFastRender = true
 
@@ -14,29 +13,35 @@ id = "G-9JR8B6TPF9"
 
 enableGitInfo = true
 
-# Mounts
+# Hugo Modules
 [module]
-  [[module.mounts]]
-    source = "content"
-    target = "content"
-  [[module.mounts]]
-    source = "shared-content"
-    target = "content"
-  [[module.mounts]]
-    source = "static"
-    target = "static"
-  [[module.mounts]]
-    source = "layouts"
-    target = "layouts"
-  [[module.mounts]]
-    source = "data"
-    target = "data"
-  [[module.mounts]]
-    source = "assets"
-    target = "assets"
-  [[module.mounts]]
-    source = "archetypes"
-    target = "archetypes"
+proxy = "direct"
+[module.hugoVersion]
+extended = true
+min = "0.157.0"
+[[module.imports]]
+path = "github.com/google/docsy"
+[[module.mounts]]
+source = "content"
+target = "content"
+[[module.mounts]]
+source = "shared-content"
+target = "content"
+[[module.mounts]]
+source = "static"
+target = "static"
+[[module.mounts]]
+source = "layouts"
+target = "layouts"
+[[module.mounts]]
+source = "data"
+target = "data"
+[[module.mounts]]
+source = "assets"
+target = "assets"
+[[module.mounts]]
+source = "archetypes"
+target = "archetypes"
 
 # Taxonomies
 [taxonomies]
@@ -45,34 +50,31 @@ tag = "tags"
 
 # Top Nav Bar
 [[menu.main]]
-    name = "Home"
-    weight = 10
-    url = "https://radapp.io"
-    pre = "<i class='fas fa-home'></i>"
+name = "Home"
+weight = 10
+url = "https://radapp.io"
+pre = "<i class='fas fa-home'></i>"
 [[menu.main]]
-    name = "Blog"
-    weight = 20
-    url = "https://blog.radapp.io"
-    pre = "<i class='fas fa-blog'></i>"
+name = "Blog"
+weight = 20
+url = "https://blog.radapp.io"
+pre = "<i class='fas fa-blog'></i>"
 [[menu.main]]
-    name = "GitHub"
-    weight = 40
-    url = "https://github.com/radius-project"
-    pre = "<i class='fab fa-github'></i>"
+name = "GitHub"
+weight = 40
+url = "https://github.com/radius-project"
+pre = "<i class='fab fa-github'></i>"
 [[menu.main]]
-    name = "Discord"
-    weight = 90
-    url = "https://aka.ms/Radius/Discord"
-    pre = "<i class='fab fa-discord'></i>"
+name = "Discord"
+weight = 90
+url = "https://aka.ms/Radius/Discord"
+pre = "<i class='fab fa-discord'></i>"
 
 [params]
 copyright = "The Radius Authors. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see the https://linuxfoundation.org/trademark-usage/ page."
 version = "edge"
 tag_version = "latest"
 chart_version = "0.26.0"
-
-# Algolia Search
-algolia_docsearch = true
 
 # GitHub Information
 github_repo = "https://github.com/radius-project/docs"
@@ -83,18 +85,21 @@ github_project_repo = "https://github.com/radius-project/radius"
 # Versioning
 version_menu = "Releases"
 [[params.versions]]
-  version = "edge (preview)"
-  url = "https://edge.docs.radapp.io"
+version = "edge (preview)"
+url = "https://edge.docs.radapp.io"
 
 [[params.versions]]
-  version = "latest"
-  url = "https://docs.radapp.io"
+version = "latest"
+url = "https://docs.radapp.io"
+
+# Algolia Search
+[params.search.algolia]
 
 # Markdown Engine - Allow inline html
 [markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
 
 # UI Customization
 [params.ui]

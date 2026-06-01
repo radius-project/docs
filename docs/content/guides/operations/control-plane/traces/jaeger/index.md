@@ -3,7 +3,6 @@ type: docs
 title: "How-To: Set up Jaeger for distributed tracing"
 linkTitle: "Jaeger"
 description: "Learn how to deploy and set up Jaeger for distributed tracing"
-type: docs
 categories: "How-To"
 tags: ["tracing", "observability"]
 ---
