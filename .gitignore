@@ -3,3 +3,4 @@ docs/.hugo_build.lock
 dictionary.dic
 docs/static/swagger/**
 .DS_STORE
+docs/_vendor/

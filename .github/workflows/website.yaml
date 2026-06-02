@@ -41,15 +41,12 @@ jobs:
       # If a PR into edge, use 'edge'. If a PR into anywhere else, use 'latest'. If a push, use the branch name.
       name: ${{ github.event_name == 'pull_request' && (github.base_ref == 'edge' && 'edge' || 'latest') || github.ref_name }}
     env:
-      GOVER: "^1.17"
-      TUTORIAL_PATH: "./docs/content/user-guides/tutorials/"
-      CODE_ZIP_PATH: "./docs/static/tutorial/"
       HUGO_ENV: production
     steps:
       - name: Checkout docs repo
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          submodules: true
+          fetch-depth: 0 # Required for enableGitInfo
           persist-credentials: false
 
       - name: Parse release version and set environment variables
@@ -63,20 +60,27 @@ jobs:
           path: ./radius
           persist-credentials: false
 
+      - name: Setup Go
+        uses: actions/setup-go@4b73464bb391d4059bd26b0524d20df3927bd417 # v6.3.0
+        with:
+          go-version-file: docs/go.mod
+          cache: false
+
       - name: Setup Node
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
-          node-version-file: docs/.node-version
-          cache: npm
-          cache-dependency-path: docs/package-lock.json
+          node-version-file: .node-version
 
-      - name: Install root dependencies
+      - name: Install Node.js dependencies
         working-directory: docs
-        run: npm ci --ignore-scripts
+        run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || npm install"
 
-      - name: Install Docsy dependencies
-        working-directory: docs/themes/docsy
-        run: npm install --no-fund --no-audit
+      - name: Verify installations
+        working-directory: docs
+        run: |
+          echo "Go: $(go version)"
+          echo "Node.js: $(node --version)"
+          npm run hugo:version
 
       - name: Generate Swagger docs
         run: |
@@ -89,18 +93,31 @@ jobs:
           # Within docs/config.toml, replace the line that starts with "github_branch" with "github_branch: $GITHUB_HEAD_REF"
           sed -i "s|github_branch = .*|github_branch = \"$GITHUB_HEAD_REF\"|" docs/config.toml
 
+      - name: Restore Hugo cache
+        id: cache-restore
+        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        with:
+          path: ${{ runner.temp }}/hugo_cache
+          key: hugo-${{ github.run_id }}
+          restore-keys: hugo-
+
       - name: Build Hugo Site
         working-directory: docs
         run: |
-          if [ "${GITHUB_EVENT_NAME}" = 'pull_request' ]; then
-            STAGING_URL="https://${ENV_STATICWEBAPP_BASE}-pr${PR_NUMBER}.westus2.3.azurestaticapps.net/"
-            npm run build:preview -- -b "${STAGING_URL}"
-          else
-            npm run build
+          if [ "${GITHUB_EVENT_NAME}" == 'pull_request' ]; then
+            STAGING_URL="https://${ENV_STATICWEBAPP_BASE}-${GITHUB_EVENT_NUMBER}.westus2.3.azurestaticapps.net/"
           fi
+          npm run build -- ${STAGING_URL+-b "$STAGING_URL"} --cacheDir "${RUNNER_TEMP}/hugo_cache"
         env:
           ENV_STATICWEBAPP_BASE: ${{ vars.ENV_STATICWEBAPP_BASE }}
-          PR_NUMBER: ${{ github.event.number }}
+          GITHUB_EVENT_NUMBER: ${{ github.event.number }}
+          RUNNER_TEMP: ${{ runner.temp }}
+
+      - name: Save Hugo cache
+        uses: actions/cache/save@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        with:
+          path: ${{ runner.temp }}/hugo_cache
+          key: ${{ steps.cache-restore.outputs.cache-primary-key }}
 
       - name: Upload Hugo artifacts
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1

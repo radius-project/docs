@@ -34,23 +34,29 @@ jobs:
 
       - name: Configure git
         run: |
-          git config --global user.email "${{ env.GITHUB_EMAIL }}"
-          git config --global user.name "${{ env.GITHUB_USER }}"
+          git config --global user.email "${GITHUB_EMAIL}"
+          git config --global user.name "${GITHUB_USER}"
 
       - name: Ensure inputs.version is valid semver
         run: |
-          python ./docs/.github/scripts/validate_semver.py ${{ inputs.version }}
+          python ./docs/.github/scripts/validate_semver.py "${INPUT_VERSION}"
+        env:
+          INPUT_VERSION: ${{ inputs.version }}
 
       - name: Parse release channel
         id: parse_release_channel
         run: |
           # CHANNEL is the major and minor version of the VERSION_NUMBER (e.g. 0.1)
-          CHANNEL="$(echo ${{ inputs.version }} | cut -d '.' -f 1,2)"
+          CHANNEL="$(echo ${INPUT_VERSION} | cut -d '.' -f 1,2)"
           echo "channel=$CHANNEL" >> "${GITHUB_OUTPUT}"
+        env:
+          INPUT_VERSION: ${{ inputs.version }}
 
       - name: Release docs
         run: |
-          ./docs/.github/scripts/release-docs.sh ${{ inputs.version }}
+          ./docs/.github/scripts/release-docs.sh "${INPUT_VERSION}"
+        env:
+          INPUT_VERSION: ${{ inputs.version }}
 
       - name: Change the default branch
         run: |

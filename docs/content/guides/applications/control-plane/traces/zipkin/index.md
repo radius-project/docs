@@ -3,7 +3,6 @@ type: docs
 title: "How-To: Set up Zipkin for distributed tracing"
 linkTitle: "Zipkin"
 description: "Learn how to deploy and set up Zipkin for distributed tracing"
-type: docs
 categories: "How-To"
 tags: ["tracing", "observability"]
 ---
