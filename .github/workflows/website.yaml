@@ -44,7 +44,7 @@ jobs:
       HUGO_ENV: production
     steps:
       - name: Checkout docs repo
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           fetch-depth: 0 # Required for enableGitInfo
           persist-credentials: false
@@ -53,7 +53,7 @@ jobs:
         run: python ./.github/scripts/get_docs_version.py
 
       - name: Checkout radius repo
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           repository: radius-project/radius
           ref: ${{ env.RELEASE_BRANCH }}
@@ -61,7 +61,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup Go
-        uses: actions/setup-go@4b73464bb391d4059bd26b0524d20df3927bd417 # v6.3.0
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
           go-version-file: docs/go.mod
           cache: false
@@ -95,7 +95,7 @@ jobs:
 
       - name: Restore Hugo cache
         id: cache-restore
-        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: ${{ runner.temp }}/hugo_cache
           key: hugo-${{ github.run_id }}
@@ -114,7 +114,7 @@ jobs:
           RUNNER_TEMP: ${{ runner.temp }}
 
       - name: Save Hugo cache
-        uses: actions/cache/save@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        uses: actions/cache/save@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: ${{ runner.temp }}/hugo_cache
           key: ${{ steps.cache-restore.outputs.cache-primary-key }}
@@ -142,7 +142,7 @@ jobs:
   #     url: ${{ github.ref_name == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io' }}
   #   steps:
   #     - name: Checkout docs repo
-  #       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+  #       uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
   #       with:
   #         submodules: false
   #         persist-credentials: false
@@ -180,7 +180,7 @@ jobs:
       url: ${{ github.ref_name == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io' }}
     steps:
       - name: Checkout docs repo
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           persist-credentials: false
           sparse-checkout: |
@@ -260,7 +260,7 @@ jobs:
       name: ${{ github.base_ref == 'edge' && 'edge' || 'latest' }}
     steps:
       - name: Checkout docs repo
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           persist-credentials: false
           sparse-checkout: |
@@ -356,7 +356,7 @@ jobs:
       url: ${{ github.base_ref == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io' }}
     steps:
       - name: Checkout docs repo
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           persist-credentials: false
           sparse-checkout: |
@@ -437,7 +437,7 @@ jobs:
       name: ${{ github.ref_name == 'edge' && 'edge' || 'latest' }}
     steps:
       - name: Checkout docs repo
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           submodules: false
           persist-credentials: false
