@@ -33,6 +33,7 @@ rad app graph my-application
   -g, --group string         The resource group name
   -h, --help                 help for graph
   -o, --output string        output format (supported formats are json, table) (default "table")
+      --preview              Use the Radius.Core preview implementation
   -w, --workspace string     The workspace name
 ```
 

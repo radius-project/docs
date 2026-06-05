@@ -66,8 +66,7 @@ rad env update myenv --recipe-packs pack1,pack2
   -e, --environment string             The environment name
   -g, --group string                   The resource group name
   -h, --help                           help for update
-      --kubernetes-namespace string    The namespace where Kubernetes resources will be deployed (preview)
-  -o, --output string                  output format (supported formats are json, table) (default "table")
+      --kubernetes-namespace string    The namespace where Kubernetes resources will be deployed
       --preview                        Use the Radius.Core preview implementation for environment update.
       --recipe-packs strings           Specify recipe packs to replace the environment's recipe pack list (--preview). Accepts comma-separated values.
   -w, --workspace string               The workspace name
@@ -77,6 +76,7 @@ rad env update myenv --recipe-packs pack1,pack2
 
 ```
       --config string   config file (default "$HOME/.rad/config.yaml")
+  -o, --output string   output format (supported formats are json, table) (default "table")
 ```
 
 ### SEE ALSO
