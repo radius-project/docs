@@ -14,6 +14,17 @@ Shows the application graph for an application.
 
 Shows the application graph for an application.
 
+When invoked with the name of a deployed application using the --application flag,
+the command queries the Radius control plane and prints the graph of live
+resources. When invoked with a path to an app.bicep,
+the command compiles the template and writes the resulting modeled graph to
+./app-graph.json without contacting the control plane.
+
+If the command runs inside a GitHub Actions runner (GITHUB_ACTIONS=true), the
+modeled graph is committed to <source-branch>/app-graph.json on the radius-graph
+orphan branch instead of the local filesystem. This is auto-detected; no flag
+is required.
+
 ```
 rad application graph [flags]
 ```
@@ -22,8 +33,11 @@ rad application graph [flags]
 
 ```
 
-# Show graph for specified application
-rad app graph my-application
+# Show graph for the deployed application named my-application.
+rad app graph -a my-application
+
+# Build the modeled graph for an app.bicep and write it to ./app-graph.json.
+rad app graph ./app.bicep
 ```
 
 ### Options
@@ -33,6 +47,7 @@ rad app graph my-application
   -g, --group string         The resource group name
   -h, --help                 help for graph
   -o, --output string        output format (supported formats are json, table) (default "table")
+      --preview              Use the Radius.Core preview implementation
   -w, --workspace string     The workspace name
 ```
 

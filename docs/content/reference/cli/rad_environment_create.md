@@ -23,18 +23,34 @@ rad environment create [envName] [flags]
 ### Examples
 
 ```
+
+## Create environment with default namespace
 rad env create myenv
+
+## Create environment with a specific Kubernetes namespace
+rad env create myenv --kubernetes-namespace mynamespace
+
+## Create environment with Azure cloud provider
+rad env create myenv --azure-subscription-id <subscription-id> --azure-resource-group <resource-group>
+
+## Create environment with AWS cloud provider
+rad env create myenv --aws-region <region> --aws-account-id <account-id>
+
 ```
 
 ### Options
 
 ```
-  -e, --environment string   The environment name
-  -g, --group string         The resource group name
-  -h, --help                 help for create
-  -n, --namespace string     The Kubernetes namespace
-      --preview              Use the Radius.Core preview implementation
-  -w, --workspace string     The workspace name
+      --aws-account-id string          The account ID where AWS resources will be deployed
+      --aws-region string              The region where AWS resources will be deployed
+      --azure-resource-group string    The resource group where Azure resources will be deployed
+      --azure-subscription-id string   The subscription ID where Azure resources will be deployed
+  -e, --environment string             The environment name
+  -g, --group string                   The resource group name
+  -h, --help                           help for create
+      --kubernetes-namespace string    The namespace where Kubernetes resources will be deployed
+      --preview                        Use the Radius.Core preview implementation
+  -w, --workspace string               The workspace name
 ```
 
 ### Options inherited from parent commands

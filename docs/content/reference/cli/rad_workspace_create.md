@@ -42,6 +42,7 @@ rad workspace create kubernetes
   -f, --force                Overwrite existing workspace if present
   -g, --group string         The resource group name
   -h, --help                 help for create
+      --preview              Use the Radius.Core preview implementation
   -w, --workspace string     The workspace name
 ```
 
