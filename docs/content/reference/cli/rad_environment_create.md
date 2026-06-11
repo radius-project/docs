@@ -27,7 +27,7 @@ rad environment create [envName] [flags]
 ## Create environment with default namespace
 rad env create myenv
 
-## Create environment with a specific Kubernetes namespace
+## Create environment with a specific namespace
 rad env create myenv --kubernetes-namespace mynamespace
 
 ## Create environment with Azure cloud provider
