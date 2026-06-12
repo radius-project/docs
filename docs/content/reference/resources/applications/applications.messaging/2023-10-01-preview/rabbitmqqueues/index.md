@@ -16,13 +16,27 @@ description: "Detailed reference documentation for applications.messaging/rabbit
 | Property | Type | Description |
 |----------|------|-------------|
 | **apiVersion** | '2023-10-01-preview' | The resource api version <br />_(ReadOnly, DeployTimeConstant)_ |
+| **application** | string | Fully qualified resource ID for the application that the portable resource is consumed by (if applicable) <br />_(ReadOnly)_ |
+| **environment** | string | Fully qualified resource ID for the environment that the portable resource is linked to <br />_(ReadOnly)_ |
+| **host** | string | The hostname of the RabbitMQ instance <br />_(ReadOnly)_ |
 | **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
 | **location** | string | The geo-location where the resource lives |
 | **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
+| **port** | int | The port of the RabbitMQ instance. Defaults to 5672 <br />_(ReadOnly)_ |
 | **properties** | [RabbitMQQueueProperties](#rabbitmqqueueproperties) | RabbitMQQueue portable resource properties <br />_(Required)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **queue** | string | The name of the queue <br />_(ReadOnly)_ |
+| **recipe** | [Recipe](#recipe) | The recipe used to automatically deploy underlying infrastructure for a portable resource <br />_(ReadOnly)_ |
+| **resourceProvisioning** | 'manual' | 'recipe' | Specifies how the underlying service/resource is provisioned and managed. Available values are 'recipe', where Radius manages the lifecycle of the resource through a Recipe, and 'manual', where a user manages the resource and provides the values. <br />_(ReadOnly)_ |
+| **resources** | [ResourceReference](#resourcereference)[] | List of the resource IDs that support the rabbitMQ resource <br />_(ReadOnly)_ |
+| **secrets** | [RabbitMQSecrets](#rabbitmqsecrets) | The connection secrets properties to the RabbitMQ instance <br />_(ReadOnly)_ |
+| **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
 | **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(ReadOnly)_ |
 | **tags** | [TrackedResourceTags](#trackedresourcetags) | Resource tags. |
+| **tls** | bool | Specifies whether to use SSL when connecting to the RabbitMQ instance <br />_(ReadOnly)_ |
 | **type** | 'Applications.Messaging/rabbitMQQueues' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
+| **username** | string | The username to use when connecting to the RabbitMQ instance <br />_(ReadOnly)_ |
+| **vHost** | string | The RabbitMQ virtual host (vHost) the client will connect to. Defaults to no vHost. <br />_(ReadOnly)_ |
 
 ### RabbitMQQueueProperties
 

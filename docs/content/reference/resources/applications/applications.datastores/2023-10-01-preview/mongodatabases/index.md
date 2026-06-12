@@ -16,13 +16,25 @@ description: "Detailed reference documentation for applications.datastores/mongo
 | Property | Type | Description |
 |----------|------|-------------|
 | **apiVersion** | '2023-10-01-preview' | The resource api version <br />_(ReadOnly, DeployTimeConstant)_ |
+| **application** | string | Fully qualified resource ID for the application that the portable resource is consumed by (if applicable) <br />_(ReadOnly)_ |
+| **database** | string | Database name of the target Mongo database <br />_(ReadOnly)_ |
+| **environment** | string | Fully qualified resource ID for the environment that the portable resource is linked to <br />_(ReadOnly)_ |
+| **host** | string | Host name of the target Mongo database <br />_(ReadOnly)_ |
 | **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
 | **location** | string | The geo-location where the resource lives |
 | **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
+| **port** | int | Port value of the target Mongo database <br />_(ReadOnly)_ |
 | **properties** | [MongoDatabaseProperties](#mongodatabaseproperties) | MongoDatabase portable resource properties <br />_(Required)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **recipe** | [Recipe](#recipe) | The recipe used to automatically deploy underlying infrastructure for a portable resource <br />_(ReadOnly)_ |
+| **resourceProvisioning** | 'manual' | 'recipe' | Specifies how the underlying service/resource is provisioned and managed. Available values are 'recipe', where Radius manages the lifecycle of the resource through a Recipe, and 'manual', where a user manages the resource and provides the values. <br />_(ReadOnly)_ |
+| **resources** | [ResourceReference](#resourcereference)[] | List of the resource IDs that support the MongoDB resource <br />_(ReadOnly)_ |
+| **secrets** | [MongoDatabaseSecrets](#mongodatabasesecrets) | The secret values for the given MongoDatabase resource <br />_(ReadOnly)_ |
+| **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
 | **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(ReadOnly)_ |
 | **tags** | [TrackedResourceTags](#trackedresourcetags) | Resource tags. |
 | **type** | 'Applications.Datastores/mongoDatabases' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
+| **username** | string | Username to use when connecting to the target Mongo database <br />_(ReadOnly)_ |
 
 ### MongoDatabaseProperties
 

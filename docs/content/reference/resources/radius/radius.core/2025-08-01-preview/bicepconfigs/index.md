@@ -20,6 +20,9 @@ description: "Detailed reference documentation for radius.core/bicepconfigs@2025
 | **location** | string | The geo-location where the resource lives |
 | **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
 | **properties** | [BicepConfigProperties](#bicepconfigproperties) | Bicep configuration properties. <br />_(Required)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **referencedBy** | string[] | Environments that reference this Bicep configuration. <br />_(ReadOnly)_ |
+| **registryAuthentications** | [BicepConfigPropertiesRegistryAuthentications](#bicepconfigpropertiesregistryauthentications) | Authentication configuration for private Bicep registries, keyed by registry hostname (e.g. 'corp.acr.io'). The Bicep driver looks up credentials by the host parsed from the recipe template path. <br />_(ReadOnly)_ |
 | **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(ReadOnly)_ |
 | **tags** | [TrackedResourceTags](#trackedresourcetags) | Resource tags. |
 | **type** | 'Radius.Core/bicepConfigs' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
@@ -55,6 +58,16 @@ description: "Detailed reference documentation for radius.core/bicepconfigs@2025
 | **azureWiClientId** | string | Azure Workload Identity client ID. Required when authenticationMethod is 'AzureWI'. |
 | **azureWiTenantId** | string | Azure Workload Identity tenant ID. Required when authenticationMethod is 'AzureWI'. |
 | **basicAuthSecretId** | string | The ID of an Applications.Core/SecretStore resource containing username and password for BasicAuth. Required when authenticationMethod is 'BasicAuth'. |
+
+### BicepConfigPropertiesRegistryAuthentications
+
+#### Properties
+
+* **none**
+
+#### Additional Properties
+
+* **Additional Properties Type**: [BicepRegistryAuthentication](#bicepregistryauthentication)
 
 ### SystemData
 
