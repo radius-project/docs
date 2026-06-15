@@ -1,23 +1,23 @@
 ---
 type: docs
 title: "How-To: Use NGINX Gateway Fabric with Radius routes"
-linkTitle: "NGINX Gateway"
-description: "Install Radius without Contour and use NGINX Gateway Fabric with Radius.Compute/routes"
-weight: 260
+linkTitle: "NGINX Gateway routes"
+description: "Configure Radius.Compute/routes recipes to use NGINX Gateway Fabric."
+weight: 300
 categories: "How-To"
-tags: ["Kubernetes", "Recipes", "Networking"]
+tags: ["recipes", "Kubernetes", "Networking"]
 ---
 
-This guide shows how to install Radius without the default Contour ingress controller, install [NGINX Gateway Fabric](https://docs.nginx.com/nginx-gateway-fabric/), and configure the `Radius.Compute/routes` recipe to attach application routes to an NGINX Gateway API `Gateway`.
+This guide shows how to install Radius without the default Contour ingress controller, install [NGINX Gateway Fabric](https://docs.nginx.com/nginx-gateway-fabric/), and configure the `Radius.Compute/routes` recipe to attach application routes to a Kubernetes Gateway API `Gateway`.
 
 Use this pattern when your platform team wants to manage the Kubernetes Gateway controller separately from Radius while still letting application authors use portable Radius route resources.
 
 ## Prerequisites
 
-- [Kubernetes cluster]({{< ref "guides/operations/kubernetes/overview#supported-kubernetes-clusters" >}})
+- [Setup a supported Kubernetes cluster]({{< ref "/guides/installation/overview#supported-clusters" >}})
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [Helm](https://helm.sh/docs/intro/install/)
-- [rad CLI]({{< ref howto-rad-cli >}})
+- [rad CLI]({{< ref "installation#step-1-install-the-rad-cli" >}})
 
 The examples use:
 
@@ -116,32 +116,7 @@ Create `bicepconfig.json`:
 
 Create `nginx-routes-recipe-pack.bicep`:
 
-```bicep
-extension radius
-
-param recipeTag string = 'latest'
-
-resource recipePack 'Radius.Core/recipePacks@2025-08-01-preview' = {
-  name: 'nginx-gateway'
-  location: 'global'
-  properties: {
-    recipes: {
-      'Radius.Compute/containers': {
-        recipeKind: 'bicep'
-        recipeLocation: 'ghcr.io/radius-project/kube-recipes/containers:${recipeTag}'
-      }
-      'Radius.Compute/routes': {
-        recipeKind: 'bicep'
-        recipeLocation: 'ghcr.io/radius-project/kube-recipes/routes:${recipeTag}'
-        parameters: {
-          gatewayName: 'radius'
-          gatewayNamespace: 'nginx-radius-demo'
-        }
-      }
-    }
-  }
-}
-```
+{{< rad file="snippets/nginx-routes-recipe-pack.bicep" embed=true >}}
 
 Deploy the recipe pack and attach it to the environment:
 
@@ -161,65 +136,7 @@ The `gatewayName` and `gatewayNamespace` parameters tell the `Radius.Compute/rou
 
 Create `app.bicep`:
 
-```bicep
-extension radius
-extension radiusCompute
-
-param environment string
-param routeHostname string = 'nginx.example.com'
-
-resource app 'Radius.Core/applications@2025-08-01-preview' = {
-  name: 'nginx-radius-demo'
-  properties: {
-    environment: environment
-  }
-}
-
-resource web 'radiusCompute:Radius.Compute/containers@2025-08-01-preview' = {
-  name: 'web'
-  properties: {
-    environment: environment
-    application: app.id
-    containers: {
-      web: {
-        image: 'nginx:alpine'
-        ports: {
-          http: {
-            containerPort: 80
-            protocol: 'TCP'
-          }
-        }
-      }
-    }
-  }
-}
-
-resource route 'radiusCompute:Radius.Compute/routes@2025-08-01-preview' = {
-  name: 'web'
-  properties: {
-    environment: environment
-    application: app.id
-    kind: 'HTTP'
-    hostnames: [
-      routeHostname
-    ]
-    rules: [
-      {
-        matches: [
-          {
-            httpPath: '/'
-          }
-        ]
-        destinationContainer: any({
-          resourceId: web.id
-          containerName: 'web'
-          containerPort: web.properties.containers.web.ports.http.containerPort
-        })
-      }
-    ]
-  }
-}
-```
+{{< rad file="snippets/app.bicep" embed=true >}}
 
 Deploy the application:
 
@@ -287,5 +204,5 @@ kubectl delete namespace nginx-gateway
 ## Further reading
 
 - [Radius Recipes]({{< ref "/guides/recipes" >}})
-- [Kubernetes platform]({{< ref "/guides/operations/kubernetes/overview" >}})
-- [Application networking]({{< ref "/guides/author-apps/networking/overview" >}})
+- [Kubernetes installation]({{< ref "/guides/installation/kubernetes-install" >}})
+- [Application networking]({{< ref "/guides/applications/networking/overview" >}})
