@@ -50,10 +50,10 @@ description: "Detailed reference documentation for radius.core/recipepacks@2025-
 
 | Property | Type | Description |
 |----------|------|-------------|
+| **kind** | 'bicep' | 'terraform' | The type of recipe (e.g., Terraform, Bicep) <br />_(Required)_ |
 | **parameters** | [RecipeDefinitionParameters](#recipedefinitionparameters) | Parameters to pass to the recipe |
-| **plainHttp** | bool | Connect to the location using HTTP (not HTTPS). This should be used when the location is known not to support HTTPS, for example in a locally hosted registry for Bicep recipes. Defaults to false (use HTTPS/TLS) |
-| **recipeKind** | 'bicep' | 'terraform' | The type of recipe <br />_(Required)_ |
-| **recipeLocation** | string | URL path to the recipe <br />_(Required)_ |
+| **plainHttp** | bool | Connect to the source using HTTP (not HTTPS). This should be used when the source is known not to support HTTPS, for example in a locally hosted registry for Bicep recipes. Defaults to false (use HTTPS/TLS) |
+| **source** | string | The source of the recipe. For Bicep recipes this is the OCI registry reference. For Terraform recipes this is the module source. <br />_(Required)_ |
 
 ### RecipeDefinitionParameters
 

@@ -851,8 +851,6 @@ RecipeConfigProperties
 RecipeConfigPropertiesEnvSecrets
 RecipeDefinition
 RecipeDefinitionParameters
-recipeKind
-recipeLocation
 RecipePackProperties
 RecipePackPropertiesRecipes
 recipePacks
