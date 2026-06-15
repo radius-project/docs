@@ -48,11 +48,13 @@ rad env update default --kubernetes-namespace nginx-radius-demo --preview
 
 ## Step 2: Install NGINX Gateway Fabric
 
-Install the Gateway API CRDs:
+Install the Gateway API standard channel CRDs:
 
 ```bash
-kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.3.0/experimental-install.yaml
+kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.5.0/standard-install.yaml
 ```
+
+The standard channel includes the `GatewayClass`, `Gateway`, and `HTTPRoute` resources used in this guide. Use the experimental channel only if your route recipes need experimental Gateway API resources such as `TLSRoute`, `TCPRoute`, or `UDPRoute`.
 
 Install NGINX Gateway Fabric:
 
