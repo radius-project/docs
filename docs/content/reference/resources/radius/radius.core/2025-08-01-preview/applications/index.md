@@ -16,10 +16,13 @@ description: "Detailed reference documentation for radius.core/applications@2025
 | Property | Type | Description |
 |----------|------|-------------|
 | **apiVersion** | '2025-08-01-preview' | The resource api version <br />_(ReadOnly, DeployTimeConstant)_ |
+| **environment** | string | Fully qualified resource ID for the environment that the application is linked to <br />_(ReadOnly)_ |
 | **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
 | **location** | string | The geo-location where the resource lives |
 | **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
 | **properties** | [ApplicationProperties](#applicationproperties) | Application properties <br />_(Required)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
 | **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(ReadOnly)_ |
 | **tags** | [TrackedResourceTags](#trackedresourcetags) | Resource tags. |
 | **type** | 'Radius.Core/applications' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |

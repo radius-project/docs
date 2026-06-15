@@ -16,32 +16,25 @@ description: "Detailed reference documentation for applications.core/containers@
 | Property | Type | Description |
 |----------|------|-------------|
 | **apiVersion** | '2023-10-01-preview' | The resource api version <br />_(ReadOnly, DeployTimeConstant)_ |
+| **application** | string | Fully qualified resource ID for the application <br />_(ReadOnly)_ |
+| **connections** | [ContainerPropertiesConnections](#containerpropertiesconnections) | Specifies a connection to another resource. <br />_(ReadOnly)_ |
+| **container** | [Container](#container) | Definition of a container <br />_(ReadOnly)_ |
+| **environment** | string | Fully qualified resource ID for the environment that the application is linked to <br />_(ReadOnly)_ |
+| **extensions** | [Extension](#extension)[] | Extensions spec of the resource <br />_(ReadOnly)_ |
 | **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
+| **identity** | [IdentitySettings](#identitysettings) | IdentitySettings is the external identity setting. <br />_(ReadOnly)_ |
 | **location** | string | The geo-location where the resource lives |
 | **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
 | **properties** | [ContainerProperties](#containerproperties) | Container properties <br />_(Required)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **resourceProvisioning** | 'internal' | 'manual' | Specifies how the underlying service/resource is provisioned and managed. Available values are 'internal', where Radius manages the lifecycle of the resource internally, and 'manual', where a user manages the resource. <br />_(ReadOnly)_ |
+| **resources** | [ResourceReference](#resourcereference)[] | A collection of references to resources associated with the container <br />_(ReadOnly)_ |
+| **restartPolicy** | 'Always' | 'Never' | 'OnFailure' | Restart policy for the container <br />_(ReadOnly)_ |
+| **runtimes** | [RuntimesProperties](#runtimesproperties) | The properties for runtime configuration <br />_(ReadOnly)_ |
+| **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
 | **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(ReadOnly)_ |
 | **tags** | [TrackedResourceTags](#trackedresourcetags) | Resource tags. |
 | **type** | 'Applications.Core/containers' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
-
-### ContainerProperties
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **application** | string | Fully qualified resource ID for the application <br />_(Required)_ |
-| **connections** | [ContainerPropertiesConnections](#containerpropertiesconnections) | Specifies a connection to another resource. |
-| **container** | [Container](#container) | Definition of a container <br />_(Required)_ |
-| **environment** | string | Fully qualified resource ID for the environment that the application is linked to |
-| **extensions** | [Extension](#extension)[] | Extensions spec of the resource |
-| **identity** | [IdentitySettings](#identitysettings) | IdentitySettings is the external identity setting. |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
-| **resourceProvisioning** | 'internal' | 'manual' | Specifies how the underlying service/resource is provisioned and managed. Available values are 'internal', where Radius manages the lifecycle of the resource internally, and 'manual', where a user manages the resource. |
-| **resources** | [ResourceReference](#resourcereference)[] | A collection of references to resources associated with the container |
-| **restartPolicy** | 'Always' | 'Never' | 'OnFailure' | Restart policy for the container |
-| **runtimes** | [RuntimesProperties](#runtimesproperties) | The properties for runtime configuration |
-| **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
 
 ### ContainerPropertiesConnections
 
@@ -328,6 +321,35 @@ description: "Detailed reference documentation for applications.core/containers@
 | **managedIdentity** | string[] | The list of user assigned managed identities |
 | **oidcIssuer** | string | The URI for your compute platform's OIDC issuer |
 | **resource** | string | The resource ID of the provisioned identity |
+
+### ContainerProperties
+
+#### Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| **application** | string | Fully qualified resource ID for the application <br />_(Required)_ |
+| **connections** | [ContainerPropertiesConnections](#containerpropertiesconnections) | Specifies a connection to another resource. |
+| **container** | [Container](#container) | Definition of a container <br />_(Required)_ |
+| **environment** | string | Fully qualified resource ID for the environment that the application is linked to |
+| **extensions** | [Extension](#extension)[] | Extensions spec of the resource |
+| **identity** | [IdentitySettings](#identitysettings) | IdentitySettings is the external identity setting. |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **resourceProvisioning** | 'internal' | 'manual' | Specifies how the underlying service/resource is provisioned and managed. Available values are 'internal', where Radius manages the lifecycle of the resource internally, and 'manual', where a user manages the resource. |
+| **resources** | [ResourceReference](#resourcereference)[] | A collection of references to resources associated with the container |
+| **restartPolicy** | 'Always' | 'Never' | 'OnFailure' | Restart policy for the container |
+| **runtimes** | [RuntimesProperties](#runtimesproperties) | The properties for runtime configuration |
+| **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
+
+### ContainerPropertiesConnections
+
+#### Properties
+
+* **none**
+
+#### Additional Properties
+
+* **Additional Properties Type**: [ConnectionProperties](#connectionproperties)
 
 ### ResourceReference
 

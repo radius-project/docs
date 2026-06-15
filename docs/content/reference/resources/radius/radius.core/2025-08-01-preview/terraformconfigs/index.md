@@ -16,13 +16,27 @@ description: "Detailed reference documentation for radius.core/terraformconfigs@
 | Property | Type | Description |
 |----------|------|-------------|
 | **apiVersion** | '2025-08-01-preview' | The resource api version <br />_(ReadOnly, DeployTimeConstant)_ |
+| **env** | [TerraformConfigPropertiesEnv](#terraformconfigpropertiesenv) | Environment variables injected during Terraform recipe execution. <br />_(ReadOnly)_ |
 | **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
 | **location** | string | The geo-location where the resource lives |
 | **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
 | **properties** | [TerraformConfigProperties](#terraformconfigproperties) | Terraform configuration properties. <br />_(Required)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **referencedBy** | string[] | Environments that reference this Terraform configuration. <br />_(ReadOnly)_ |
 | **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(ReadOnly)_ |
 | **tags** | [TrackedResourceTags](#trackedresourcetags) | Resource tags. |
+| **terraformrc** | [TerraformrcConfig](#terraformrcconfig) | Terraform CLI configuration file (.terraformrc) settings. See https://developer.hashicorp.com/terraform/cli/config for details. <br />_(ReadOnly)_ |
 | **type** | 'Radius.Core/terraformConfigs' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
+
+### TerraformConfigPropertiesEnv
+
+#### Properties
+
+* **none**
+
+#### Additional Properties
+
+* **Additional Properties Type**: string
 
 ### TerraformConfigProperties
 

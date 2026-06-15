@@ -16,27 +16,20 @@ description: "Detailed reference documentation for applications.core/environment
 | Property | Type | Description |
 |----------|------|-------------|
 | **apiVersion** | '2023-10-01-preview' | The resource api version <br />_(ReadOnly, DeployTimeConstant)_ |
+| **compute** | [EnvironmentCompute](#environmentcompute) | Represents backing compute resource <br />_(ReadOnly)_ |
+| **extensions** | [Extension](#extension)[] | The environment extension. <br />_(ReadOnly)_ |
 | **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
 | **location** | string | The geo-location where the resource lives |
 | **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
 | **properties** | [EnvironmentProperties](#environmentproperties) | Environment properties <br />_(Required)_ |
+| **providers** | [Providers](#providers) | The Cloud providers configuration. <br />_(ReadOnly)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **recipeConfig** | [RecipeConfigProperties](#recipeconfigproperties) | Configuration for Recipes. Defines how each type of Recipe should be configured and run. <br />_(ReadOnly)_ |
+| **recipes** | [EnvironmentPropertiesRecipes](#environmentpropertiesrecipes) | Specifies Recipes linked to the Environment. <br />_(ReadOnly)_ |
+| **simulated** | bool | Simulated environment. <br />_(ReadOnly)_ |
 | **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(ReadOnly)_ |
 | **tags** | [TrackedResourceTags](#trackedresourcetags) | Resource tags. |
 | **type** | 'Applications.Core/environments' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
-
-### EnvironmentProperties
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **compute** | [EnvironmentCompute](#environmentcompute) | Represents backing compute resource <br />_(Required)_ |
-| **extensions** | [Extension](#extension)[] | The environment extension. |
-| **providers** | [Providers](#providers) | The Cloud providers configuration. |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
-| **recipeConfig** | [RecipeConfigProperties](#recipeconfigproperties) | Configuration for Recipes. Defines how each type of Recipe should be configured and run. |
-| **recipes** | [EnvironmentPropertiesRecipes](#environmentpropertiesrecipes) | Specifies Recipes linked to the Environment. |
-| **simulated** | bool | Simulated environment. |
 
 ### EnvironmentCompute
 
@@ -157,6 +150,20 @@ description: "Detailed reference documentation for applications.core/environment
 #### Additional Properties
 
 * **Additional Properties Type**: string
+
+### EnvironmentProperties
+
+#### Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| **compute** | [EnvironmentCompute](#environmentcompute) | Represents backing compute resource <br />_(Required)_ |
+| **extensions** | [Extension](#extension)[] | The environment extension. |
+| **providers** | [Providers](#providers) | The Cloud providers configuration. |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **recipeConfig** | [RecipeConfigProperties](#recipeconfigproperties) | Configuration for Recipes. Defines how each type of Recipe should be configured and run. |
+| **recipes** | [EnvironmentPropertiesRecipes](#environmentpropertiesrecipes) | Specifies Recipes linked to the Environment. |
+| **simulated** | bool | Simulated environment. |
 
 ### Providers
 
@@ -372,6 +379,26 @@ description: "Detailed reference documentation for applications.core/environment
 | **templateKind** | 'terraform' | Discriminator property for RecipeProperties. <br />_(Required)_ |
 | **templateVersion** | string | Version of the template to deploy. For Terraform recipes using a module registry this is required, but must be omitted for other module sources. |
 
+
+### EnvironmentPropertiesRecipes
+
+#### Properties
+
+* **none**
+
+#### Additional Properties
+
+* **Additional Properties Type**: [DictionaryOfRecipeProperties](#dictionaryofrecipeproperties)
+
+### DictionaryOfRecipeProperties
+
+#### Properties
+
+* **none**
+
+#### Additional Properties
+
+* **Additional Properties Type**: [RecipeProperties](#recipeproperties)
 
 ### SystemData
 
