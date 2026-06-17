@@ -1,5 +1,4 @@
 extension radius
-extension radiusCompute
 
 param environment string
 param routeHostname string = 'nginx.example.com'
@@ -11,7 +10,7 @@ resource app 'Radius.Core/applications@2025-08-01-preview' = {
   }
 }
 
-resource web 'radiusCompute:Radius.Compute/containers@2025-08-01-preview' = {
+resource web 'Radius.Compute/containers@2025-08-01-preview' = {
   name: 'web'
   properties: {
     environment: environment
@@ -30,7 +29,7 @@ resource web 'radiusCompute:Radius.Compute/containers@2025-08-01-preview' = {
   }
 }
 
-resource route 'radiusCompute:Radius.Compute/routes@2025-08-01-preview' = {
+resource route 'Radius.Compute/routes@2025-08-01-preview' = {
   name: 'web'
   properties: {
     environment: environment
@@ -46,11 +45,11 @@ resource route 'radiusCompute:Radius.Compute/routes@2025-08-01-preview' = {
             httpPath: '/'
           }
         ]
-        destinationContainer: any({
+        destinationContainer: {
           resourceId: web.id
           containerName: 'web'
           containerPort: web.properties.containers.web.ports.http.containerPort
-        })
+        }
       }
     ]
   }

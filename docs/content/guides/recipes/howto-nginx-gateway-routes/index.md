@@ -109,8 +109,7 @@ Create `bicepconfig.json`. Use the current Radius release version, such as `0.58
     "extensibility": true
   },
   "extensions": {
-    "radius": "br:biceptypes.azurecr.io/radius:<release-version>",
-    "radiusCompute": "br:biceptypes.azurecr.io/radiuscompute:<release-version>"
+    "radius": "br:biceptypes.azurecr.io/radius:<release-version>"
   }
 }
 ```
@@ -143,6 +142,7 @@ Deploy the application:
 
 ```bash
 rad deploy app.bicep \
+  --group default \
   --environment /planes/radius/local/resourceGroups/default/providers/Radius.Core/environments/default \
   --parameters routeHostname=nginx.example.com
 ```
