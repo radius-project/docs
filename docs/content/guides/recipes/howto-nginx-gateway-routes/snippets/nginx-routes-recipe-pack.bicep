@@ -1,6 +1,6 @@
 extension radius
 
-param recipeTag string = 'latest'
+param recipeTag string = '0.58'
 
 resource recipePack 'Radius.Core/recipePacks@2025-08-01-preview' = {
   name: 'nginx-gateway'

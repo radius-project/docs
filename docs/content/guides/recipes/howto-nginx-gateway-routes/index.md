@@ -8,7 +8,7 @@ categories: "How-To"
 tags: ["recipes", "Kubernetes", "Networking"]
 ---
 
-This guide shows how to install Radius without the default Contour ingress controller, install [NGINX Gateway Fabric](https://docs.nginx.com/nginx-gateway-fabric/), and configure the `Radius.Compute/routes` recipe to attach application routes to a Kubernetes Gateway API `Gateway`.
+This guide shows platform operators how to install Radius without the default Contour ingress controller, install [NGINX Gateway Fabric](https://docs.nginx.com/nginx-gateway-fabric/), and configure the `Radius.Compute/routes` recipe to attach application routes to a Kubernetes Gateway API `Gateway`.
 
 Use this pattern when your platform team wants to manage the Kubernetes Gateway controller separately from Radius while still letting application authors use portable Radius route resources.
 
@@ -70,10 +70,9 @@ kubectl wait --timeout=5m \
   --for=condition=Available
 ```
 
-Create a Gateway API `Gateway` for Radius routes:
+Create `gateway.yaml`:
 
-```bash
-cat <<'EOF' | kubectl apply -f -
+```yaml
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
@@ -88,8 +87,12 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
-EOF
+```
 
+Apply the Gateway:
+
+```bash
+kubectl apply -f gateway.yaml
 kubectl wait --timeout=5m \
   --namespace nginx-radius-demo \
   gateway/radius \
@@ -98,7 +101,7 @@ kubectl wait --timeout=5m \
 
 ## Step 3: Configure Bicep extensions
 
-Create `bicepconfig.json`:
+Create `bicepconfig.json`. Use the current Radius release version, such as `0.58`.
 
 ```json
 {
@@ -106,8 +109,8 @@ Create `bicepconfig.json`:
     "extensibility": true
   },
   "extensions": {
-    "radius": "br:biceptypes.azurecr.io/radius:latest",
-    "radiusCompute": "br:biceptypes.azurecr.io/radiuscompute:latest"
+    "radius": "br:biceptypes.azurecr.io/radius:<release-version>",
+    "radiusCompute": "br:biceptypes.azurecr.io/radiuscompute:<release-version>"
   }
 }
 ```
@@ -121,16 +124,14 @@ Create `nginx-routes-recipe-pack.bicep`:
 Deploy the recipe pack and attach it to the environment:
 
 ```bash
-ENVIRONMENT_ID="/planes/radius/local/resourcegroups/default/providers/Radius.Core/environments/default"
-
 rad deploy nginx-routes-recipe-pack.bicep \
   --group default \
-  --environment "$ENVIRONMENT_ID"
+  --environment /planes/radius/local/resourceGroups/default/providers/Radius.Core/environments/default
 
 rad env update default --recipe-packs nginx-gateway --preview
 ```
 
-The `gatewayName` and `gatewayNamespace` parameters tell the `Radius.Compute/routes` recipe which Kubernetes Gateway should receive generated `HTTPRoute` resources.
+The `gatewayName` and `gatewayNamespace` parameters tell the `Radius.Compute/routes` recipe which Kubernetes Gateway should receive generated `HTTPRoute` resources. This changes the route implementation in the environment without changing application code.
 
 ## Step 5: Deploy an application with a route
 
@@ -142,8 +143,7 @@ Deploy the application:
 
 ```bash
 rad deploy app.bicep \
-  --application nginx-radius-demo \
-  --environment "$ENVIRONMENT_ID" \
+  --environment /planes/radius/local/resourceGroups/default/providers/Radius.Core/environments/default \
   --parameters routeHostname=nginx.example.com
 ```
 
@@ -161,14 +161,18 @@ kubectl get httproute --namespace nginx-radius-demo
 For local clusters, port-forward the NGINX Gateway service:
 
 ```bash
-SERVICE_NAME="$(kubectl get service \
+kubectl get service \
   --namespace nginx-radius-demo \
   --selector gateway.networking.k8s.io/gateway-name=radius \
-  --output jsonpath='{.items[0].metadata.name}')"
+  --output name
+```
 
+Use the returned service name to port-forward traffic:
+
+```bash
 kubectl port-forward \
   --namespace nginx-radius-demo \
-  "service/${SERVICE_NAME}" \
+  service/<service-name> \
   8080:80
 ```
 
