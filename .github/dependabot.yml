@@ -39,7 +39,7 @@ updates:
     cooldown:
       default-days: 7
     commit-message:
-      prefix: deps
+      prefix: chore
       include: scope
     groups:
       all:
@@ -59,7 +59,7 @@ updates:
     cooldown:
       default-days: 7
     commit-message:
-      prefix: deps
+      prefix: chore
       include: scope
     groups:
       all:
@@ -79,7 +79,7 @@ updates:
     cooldown:
       default-days: 7
     commit-message:
-      prefix: deps
+      prefix: chore
       include: scope
     groups:
       all:
