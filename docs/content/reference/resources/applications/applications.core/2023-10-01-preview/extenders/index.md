@@ -25,7 +25,7 @@ description: "Detailed reference documentation for applications.core/extenders@2
 | **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
 | **recipe** | [Recipe](#recipe) | The recipe used to automatically deploy underlying infrastructure for a portable resource <br />_(ReadOnly)_ |
 | **resourceProvisioning** | 'manual' | 'recipe' | Specifies how the underlying service/resource is provisioned and managed. Available values are 'recipe', where Radius manages the lifecycle of the resource through a Recipe, and 'manual', where a user manages the resource and provides the values. <br />_(ReadOnly)_ |
-| **secrets** | any | Any object <br />_(ReadOnly)_ |
+| **secrets** | [ExtenderPropertiesSecrets](#extenderpropertiessecrets) | The secrets for referenced resource <br />_(ReadOnly)_ |
 | **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
 | **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(ReadOnly)_ |
 | **tags** | [TrackedResourceTags](#trackedresourcetags) | Resource tags. |
@@ -42,7 +42,7 @@ description: "Detailed reference documentation for applications.core/extenders@2
 | **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
 | **recipe** | [Recipe](#recipe) | The recipe used to automatically deploy underlying infrastructure for a portable resource |
 | **resourceProvisioning** | 'manual' | 'recipe' | Specifies how the underlying service/resource is provisioned and managed. Available values are 'recipe', where Radius manages the lifecycle of the resource through a Recipe, and 'manual', where a user manages the resource and provides the values. |
-| **secrets** | any | Any object |
+| **secrets** | [ExtenderPropertiesSecrets](#extenderpropertiessecrets) | The secrets for referenced resource |
 | **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
 #### Additional Properties
 
@@ -55,7 +55,27 @@ description: "Detailed reference documentation for applications.core/extenders@2
 | Property | Type | Description |
 |----------|------|-------------|
 | **name** | string | The name of the recipe within the environment to use <br />_(Required)_ |
-| **parameters** | any | Any object |
+| **parameters** | [RecipeParameters](#recipeparameters) | Key/value parameters to pass into the recipe at deployment |
+
+### RecipeParameters
+
+#### Properties
+
+* **none**
+
+#### Additional Properties
+
+* **Additional Properties Type**: any
+
+### ExtenderPropertiesSecrets
+
+#### Properties
+
+* **none**
+
+#### Additional Properties
+
+* **Additional Properties Type**: any
 
 ### ResourceStatus
 
@@ -127,6 +147,16 @@ description: "Detailed reference documentation for applications.core/extenders@2
 | **templateKind** | string | TemplateKind is the kind of the recipe template used by the portable resource upon deployment. <br />_(Required)_ |
 | **templatePath** | string | TemplatePath is the path of the recipe consumed by the portable resource upon deployment. <br />_(Required)_ |
 | **templateVersion** | string | TemplateVersion is the version number of the template. |
+
+### ExtenderPropertiesSecrets
+
+#### Properties
+
+* **none**
+
+#### Additional Properties
+
+* **Additional Properties Type**: any
 
 ### SystemData
 
