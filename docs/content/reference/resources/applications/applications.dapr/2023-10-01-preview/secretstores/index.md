@@ -76,7 +76,17 @@ description: "Detailed reference documentation for applications.dapr/secretstore
 | Property | Type | Description |
 |----------|------|-------------|
 | **name** | string | The name of the recipe within the environment to use <br />_(Required)_ |
-| **parameters** | any | Any object |
+| **parameters** | [RecipeParameters](#recipeparameters) | Key/value parameters to pass into the recipe at deployment |
+
+### RecipeParameters
+
+#### Properties
+
+* **none**
+
+#### Additional Properties
+
+* **Additional Properties Type**: any
 
 ### ResourceStatus
 

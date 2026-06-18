@@ -358,7 +358,7 @@ description: "Detailed reference documentation for applications.core/environment
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **parameters** | any | Any object |
+| **parameters** | [RecipePropertiesParameters](#recipepropertiesparameters) | Key/value parameters to pass to the recipe template at deployment. |
 | **templatePath** | string | Path to the template provided by the recipe. Currently only link to Azure Container Registry is supported. <br />_(Required)_ |
 
 #### BicepRecipeProperties
@@ -379,6 +379,16 @@ description: "Detailed reference documentation for applications.core/environment
 | **templateKind** | 'terraform' | Discriminator property for RecipeProperties. <br />_(Required)_ |
 | **templateVersion** | string | Version of the template to deploy. For Terraform recipes using a module registry this is required, but must be omitted for other module sources. |
 
+
+### RecipePropertiesParameters
+
+#### Properties
+
+* **none**
+
+#### Additional Properties
+
+* **Additional Properties Type**: any
 
 ### EnvironmentPropertiesRecipes
 
