@@ -1,4 +1,4 @@
-baseURL = "https://edge.docs.radapp.io/"
+baseURL = "https://docs.radapp.io/"
 languageCode = "en-us"
 title = "Radius Docs"
 
@@ -72,14 +72,14 @@ pre = "<i class='fab fa-discord'></i>"
 
 [params]
 copyright = "The Radius Authors. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see the https://linuxfoundation.org/trademark-usage/ page."
-version = "edge"
+version = "v0.59"
 tag_version = "latest"
-chart_version = "0.26.0"
+chart_version = "0.59.0"
 
 # GitHub Information
 github_repo = "https://github.com/radius-project/docs"
 github_subdir = "docs"
-github_branch = "edge"
+github_branch = "v0.59"
 github_project_repo = "https://github.com/radius-project/radius"
 
 # Versioning
