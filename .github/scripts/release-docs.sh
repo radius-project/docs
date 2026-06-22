@@ -77,9 +77,13 @@ for pair in \
   fi
 done
 
-# In docs/layouts/partials/hooks/body-end.html, change indexName to radapp-dev instead of radapp-dev-edge
-awk '{gsub(/indexName: '\''radapp-dev-edge'\''/, "indexName: '\''radapp-dev'\''"); print}' docs/layouts/partials/hooks/body-end.html > docs/layouts/partials/hooks/body-end.html.tmp
-mv docs/layouts/partials/hooks/body-end.html.tmp docs/layouts/partials/hooks/body-end.html
+# In docs/config.toml, change the Algolia indexName to radapp-dev instead of radapp-dev-edge
+sed -E -i 's|^[[:space:]]*indexName[[:space:]]*=[[:space:]]*["\x27]radapp-dev-edge["\x27][[:space:]]*(#.*)?$|indexName = "radapp-dev"|' docs/config.toml
+
+if ! grep -Fxq 'indexName = "radapp-dev"' docs/config.toml; then
+  echo 'Error: expected Algolia indexName not found in docs/config.toml: indexName = "radapp-dev"'
+  exit 1
+fi
 
 # Push changes to GitHub
 git add --all
