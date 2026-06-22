@@ -93,7 +93,12 @@ version = "latest"
 url = "https://docs.radapp.io"
 
 # Algolia Search
+# These credentials are consumed by Docsy's built-in DocSearch integration.
+# The apiKey is a public, search-only Algolia key and is safe to expose client-side.
 [params.search.algolia]
+appId = "ED67NSVSZS"
+apiKey = "21e2920c3a9c29b98cbc382694413f29"
+indexName = "radapp-dev-edge"
 
 # Markdown Engine - Allow inline html
 [markup]
