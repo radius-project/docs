@@ -1,13 +1,18 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
 # docs: https://cspell.org/docs/getting-started
+# ------------------------------------------------------------------------------
+# This file is synced from the radius-project/.github repository.
+# DO NOT EDIT MANUALLY - changes will be overwritten by the next sync.
+# Source: https://github.com/radius-project/.github
+# ------------------------------------------------------------------------------
 ---
 $schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
 version: "0.2"
 language: en
 
 # Built-in dictionaries plus the shared custom word list (.cspellignore at repo root).
-# Kept in sync with the radius-project/radius spellcheck configuration to provide a
-# unified spell-checking experience across the Radius repositories.
+# This is the unified Radius spell-checking configuration; per-repository custom
+# words belong in the repo's own .cspellignore file, not in this synced config.
 dictionaries:
   - softwareTerms
   - companies
@@ -23,7 +28,6 @@ ignoreRegExpList:
   - adr_yaml_formatter
   - inline_code
   - tf_docs
-  - md_image_link
   - md_link
   - url
   - at_mention
@@ -33,9 +37,8 @@ ignoreRegExpList:
   - front_matter
   - html_code_tag
 
-# Custom regex patterns matching the radius-project/radius configuration so that
-# fenced code, inline code, markdown links, URLs, HTML and similar tokens are
-# excluded from spell-checking.
+# Custom regex patterns so that fenced code, inline code, markdown links, URLs,
+# HTML and similar tokens are excluded from spell-checking.
 patterns:
   # Fenced code blocks: ```lang ... ``` (with or without language identifier).
   # Allows leading whitespace so indented code blocks inside list items match.
@@ -59,9 +62,6 @@ patterns:
   # typos in the visible link text or image alt text are still caught.
   # Matches both `[text](url)` and `![alt](url)` because we only skip the
   # parentheses payload.
-  - name: md_image_link
-    pattern:
-      - /\]\([^)]*\)/g
   - name: md_link
     pattern:
       - /\]\([^)]*\)/g
@@ -90,12 +90,10 @@ patterns:
     pattern:
       - /\{\{[%<][\s\S]*?[%>]\}\}/g
   # Hugo front matter: only skip non-rendered keys so user-facing fields
-  # (title, description, linkTitle) are still spell-checked. Keys observed
-  # in this repo: type, weight, slug, url, aliases, no_list, manualLink,
-  # manualLinkTarget, category, categories, tags. The first sub-pattern
-  # covers single-line `key: value` entries; the second covers multi-line
-  # list values (e.g. `aliases:` followed by indented `- /path` items);
-  # the third matches the `---` / `+++` delimiter lines.
+  # (title, description, linkTitle) are still spell-checked. The first
+  # sub-pattern covers single-line `key: value` entries; the second covers
+  # multi-line list values (e.g. `aliases:` followed by indented `- /path`
+  # items); the third matches the `---` / `+++` delimiter lines.
   - name: front_matter
     pattern:
       - /^(?:type|weight|slug|url|no_list|manualLink|manualLinkTarget|category|categories|tags)\s*:[^\n]*$/gm
@@ -115,7 +113,8 @@ allowCompoundWords: true
 # Paths that should not be spell-checked: vendored theme/modules, generated
 # Hugo output, dependency folders and the shared dictionary itself.
 # Patterns use the `**/` prefix because cspell resolves ignorePaths relative
-# to the config file location (.github/configs/).
+# to the config file location (.github/configs/). Entries that do not exist in
+# a given repository are simply no-ops, so this superset is safe to share.
 ignorePaths:
   - "**/node_modules/**"
   - "**/.dev/**"

@@ -20,6 +20,9 @@ description: "Detailed reference documentation for radius.core/recipepacks@2025-
 | **location** | string | The geo-location where the resource lives |
 | **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
 | **properties** | [RecipePackProperties](#recipepackproperties) | Recipe Pack properties <br />_(Required)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **recipes** | [RecipePackPropertiesRecipes](#recipepackpropertiesrecipes) | Map of resource types to their recipe configurations <br />_(ReadOnly)_ |
+| **referencedBy** | string[] | List of environment IDs that reference this recipe pack <br />_(ReadOnly)_ |
 | **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(ReadOnly)_ |
 | **tags** | [TrackedResourceTags](#trackedresourcetags) | Resource tags. |
 | **type** | 'Radius.Core/recipePacks' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
@@ -64,6 +67,16 @@ description: "Detailed reference documentation for radius.core/recipepacks@2025-
 #### Additional Properties
 
 * **Additional Properties Type**: any
+
+### RecipePackPropertiesRecipes
+
+#### Properties
+
+* **none**
+
+#### Additional Properties
+
+* **Additional Properties Type**: [RecipeDefinition](#recipedefinition)
 
 ### SystemData
 

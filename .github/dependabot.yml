@@ -1,54 +1,93 @@
 # yaml-language-server: $schema=https://www.schemastore.org/dependabot-2.0.json
-# See GitHub's documentation for more information on this file:
-# https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference
+# ------------------------------------------------------------------------------
+# This file is synced from the radius-project/.github repository.
+# DO NOT EDIT MANUALLY - changes will be overwritten by the next sync.
+# Source: https://github.com/radius-project/.github
+# Reference: https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference
+# ------------------------------------------------------------------------------
 ---
 version: 2
 
+
 updates:
   - package-ecosystem: github-actions
-    target-branch: edge
-    directory: /
+    directory: "/"
+    target-branch: "edge"
     schedule:
       interval: weekly
+    cooldown:
+      default-days: 7
     commit-message:
       prefix: ci
       include: scope
-    ignore:
-      - dependency-name: Azure/static-web-apps-deploy
     groups:
-      all:
+      github-actions:
+        applies-to: version-updates
+        patterns:
+          - "*"
+      security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+    ignore:
+      - dependency-name: "Azure/static-web-apps-deploy"
+
+  - package-ecosystem: devcontainers
+    directory: "/"
+    target-branch: "edge"
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    commit-message:
+      prefix: chore
+      include: scope
+    groups:
+      devcontainers:
+        applies-to: version-updates
+        patterns:
+          - "*"
+      security:
+        applies-to: security-updates
         patterns:
           - "*"
 
-  - package-ecosystem: devcontainers
-    target-branch: edge
-    directory: /
-    schedule:
-      interval: weekly
-    groups:
-      all:
-        patterns: ["*"]
-
   - package-ecosystem: gomod
-    target-branch: edge
-    directory: /docs
+    directory: "/docs"
+    target-branch: "edge"
     schedule:
       interval: weekly
+    cooldown:
+      default-days: 7
     commit-message:
-      prefix: deps
+      prefix: chore
       include: scope
     groups:
-      all:
-        patterns: ["*"]
+      go-deps:
+        applies-to: version-updates
+        patterns:
+          - "*"
+      security:
+        applies-to: security-updates
+        patterns:
+          - "*"
 
   - package-ecosystem: npm
-    target-branch: edge
-    directory: /docs
+    directory: "/docs"
+    target-branch: "edge"
     schedule:
       interval: weekly
+    cooldown:
+      default-days: 7
     commit-message:
-      prefix: deps
+      prefix: chore
       include: scope
     groups:
-      all:
-        patterns: ["*"]
+      javascript-deps:
+        applies-to: version-updates
+        patterns:
+          - "*"
+      security:
+        applies-to: security-updates
+        patterns:
+          - "*"

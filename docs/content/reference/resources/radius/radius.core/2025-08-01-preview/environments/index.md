@@ -16,12 +16,19 @@ description: "Detailed reference documentation for radius.core/environments@2025
 | Property | Type | Description |
 |----------|------|-------------|
 | **apiVersion** | '2025-08-01-preview' | The resource api version <br />_(ReadOnly, DeployTimeConstant)_ |
+| **bicepConfig** | string | Resource ID of a Radius.Core/bicepConfigs resource providing Bicep recipe settings. <br />_(ReadOnly)_ |
 | **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
 | **location** | string | The geo-location where the resource lives |
 | **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
 | **properties** | [EnvironmentProperties](#environmentproperties) | Environment properties <br />_(Required)_ |
+| **providers** | [Providers](#providers) |  <br />_(ReadOnly)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **recipePacks** | string[] | List of Recipe Pack resource IDs linked to this environment. <br />_(ReadOnly)_ |
+| **recipeParameters** | [EnvironmentPropertiesRecipeParameters](#environmentpropertiesrecipeparameters) | Recipe specific parameters that apply to all resources of a given type in this environment. <br />_(ReadOnly)_ |
+| **simulated** | bool | Simulated environment. <br />_(ReadOnly)_ |
 | **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(ReadOnly)_ |
 | **tags** | [TrackedResourceTags](#trackedresourcetags) | Resource tags. |
+| **terraformConfig** | string | Resource ID of a Radius.Core/terraformConfigs resource providing Terraform recipe settings. <br />_(ReadOnly)_ |
 | **type** | 'Radius.Core/environments' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
 
 ### EnvironmentProperties
@@ -85,6 +92,26 @@ description: "Detailed reference documentation for radius.core/environments@2025
 | Property | Type | Description |
 |----------|------|-------------|
 | **namespace** | string | Kubernetes namespace to deploy workloads into. <br />_(Required)_ |
+
+### EnvironmentPropertiesRecipeParameters
+
+#### Properties
+
+* **none**
+
+#### Additional Properties
+
+* **Additional Properties Type**: [RecipeParameterValue](#recipeparametervalue)
+
+### RecipeParameterValue
+
+#### Properties
+
+* **none**
+
+#### Additional Properties
+
+* **Additional Properties Type**: any
 
 ### EnvironmentPropertiesRecipeParameters
 
