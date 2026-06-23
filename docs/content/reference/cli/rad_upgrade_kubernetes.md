@@ -16,6 +16,14 @@ Upgrade Radius in a Kubernetes cluster using the Radius Helm chart.
 This command upgrades the Radius control plane in the cluster associated with the active workspace.
 To upgrade Radius in a different cluster, switch to the appropriate workspace first using 'rad workspace switch'.
 
+By default, the upgrade preserves any values that were previously set on the existing Helm release.
+This means non-default settings configured during install or earlier upgrades (for example
+'global.azureWorkloadIdentity.enabled=true' or 'database.enabled=true') are carried forward
+automatically — the upgrade starts from the new chart's defaults, re-applies the previously
+stored user-supplied values, and then overlays any --set / --set-file values provided in the
+current invocation. Pass --reset-values to opt out and use only the current --set flags plus
+the new chart's defaults (this mirrors 'helm upgrade --reset-values').
+
 The upgrade process includes preflight checks to ensure the cluster is ready for upgrade.
 Preflight checks include:
 - Kubernetes connectivity and permissions
@@ -84,6 +92,10 @@ rad upgrade kubernetes --preflight-only
 # Upgrade Radius using a Helm chart from specified file path
 rad upgrade kubernetes --chart /root/radius/deploy/Chart
 
+# Discard previously-stored Helm values and upgrade using only the current --set flags
+# plus the new chart's defaults (mirrors 'helm upgrade --reset-values').
+rad upgrade kubernetes --reset-values
+
 ```
 
 ### Options
@@ -93,6 +105,7 @@ rad upgrade kubernetes --chart /root/radius/deploy/Chart
   -h, --help                   help for kubernetes
       --kubecontext string     The Kubernetes context to use, will use the default if unset
       --preflight-only         Run only preflight checks without performing the upgrade
+      --reset-values           Discard values previously stored on the Helm release and use only the current --set / --set-file flags plus the new chart's defaults
       --set stringArray        Set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
       --set-file stringArray   Set values from files on the command line (can specify multiple or separate files with commas: key1=filename1,key2=filename2)
       --skip-preflight         Skip preflight checks before upgrade (not recommended)

@@ -49,7 +49,7 @@ rad env create myenv --aws-region <region> --aws-account-id <account-id>
   -g, --group string                   The resource group name
   -h, --help                           help for create
       --kubernetes-namespace string    The namespace where Kubernetes resources will be deployed
-      --preview                        Use the Radius.Core preview implementation
+      --preview                        Use the Radius.Core preview implementation (can also be set via RADIUS_PREVIEW=true)
   -w, --workspace string               The workspace name
 ```
 
