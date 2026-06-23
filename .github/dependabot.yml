@@ -20,6 +20,9 @@ updates:
     commit-message:
       prefix: ci
       include: scope
+    labels:
+      - dependencies
+      - deps/github-actions
     groups:
       github-actions:
         applies-to: version-updates
@@ -42,6 +45,9 @@ updates:
     commit-message:
       prefix: chore
       include: scope
+    labels:
+      - dependencies
+      - deps/devcontainers
     groups:
       devcontainers:
         applies-to: version-updates
@@ -62,6 +68,9 @@ updates:
     commit-message:
       prefix: chore
       include: scope
+    labels:
+      - dependencies
+      - deps/gomod
     groups:
       go-deps:
         applies-to: version-updates
@@ -82,6 +91,9 @@ updates:
     commit-message:
       prefix: chore
       include: scope
+    labels:
+      - dependencies
+      - deps/npm
     groups:
       javascript-deps:
         applies-to: version-updates
