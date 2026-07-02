@@ -4,6 +4,7 @@ title: "5. Deploy Application"
 linkTitle: "5. Deploy Application"
 description: "Learn how to deploy, and manage a Radius Application"
 weight: 600
+categories: "Tutorial"
 ---
 
 In part five of this tutorial, you will deploy the Todo List Application to the Environment.
@@ -37,7 +38,9 @@ Notice the `size` parameter is set by the developer to 'S'.
 ### Add the Container resource
 
 {{% rad file="snippets/app.bicep" embed=true marker="//CONTAINER" %}}
-   
+
+The `containers` property is a map of container definitions keyed by name. The outer resource name (`frontend`) identifies the workload in Radius and is used for the Kubernetes Deployment, while each inner key (also `frontend` here) names one container inside the workload and becomes the name of the Kubernetes Service when a port is exposed.
+
 When a connection is added between a container and another resource, the properties of the connected resource are created as environment variables in the container.
 
 ## Deploy the application
@@ -52,33 +55,43 @@ You should see output similar to:
 
 ```
 Building app.bicep...
-Deploying template 'app.bicep' for application 'todolist' and environment '/planes/radius/local/resourceGroups/my-group/providers/applications.core/environments/my-env' from workspace 'my-workspace'...
+Deploying template 'app.bicep' for application 'todolist' and environment '/planes/radius/local/resourceGroups/my-group/providers/Radius.Core/environments/my-env' from workspace 'my-workspace'...
 
 Deployment In Progress... 
 
-Completed            todolist        Applications.Core/applications
+Completed            todolist        Radius.Core/applications
 Completed            postgresql      Radius.Data/postgreSqlDatabases
-Completed            frontend       Applications.Core/containers
+Completed            frontend        Radius.Compute/containers
 
 Deployment Complete
 
 Resources:
-   todolist        Applications.Core/applications
-   frontend        Applications.Core/containers
+   todolist        Radius.Core/applications
+   frontend        Radius.Compute/containers
    postgresql      Radius.Data/postgreSqlDatabases
 ```
 
-Set up port forwarding to access the Todo List Application using the `rad resource expose` command.
+## Port-forward to the application
+
+`rad deploy` does not set up port forwarding. The default Kubernetes container Recipe creates a `ClusterIP` Service named after the inner container key (`frontend`) in the namespace configured on your Environment (`my-env` from part four).
+
+In a new terminal, forward a local port to the Service:
 
 ```bash
-rad resource expose Applications.Core/containers frontend -a todolist --port 3000
+kubectl port-forward svc/frontend 3000:3000 -n my-env
 ```
 
-Navigate to the [http://localhost:3000](http://localhost:3000) to access the Todo List application. You should see the Todo List application similar to this screenshot:
+Leave this terminal running, then navigate to [http://localhost:3000](http://localhost:3000) to access the Todo List Application. You should see the Todo List application similar to this screenshot:
 
 {{< image src="todolist.png" alt="Todo List with PostgreSQL connection" width=800px >}}
 
-When you're done press `CTRL + c` to terminate the port forward and log stream. The application continues to be deployed.
+## Stream container logs
+
+In another terminal, stream logs from the `frontend` container:
+
+```bash
+kubectl logs -f deployment/frontend -n my-env --all-containers=true
+```
 
 ## View the Application in the Radius Dashboard
 
@@ -88,11 +101,13 @@ If you already set up the port-forward in part 2, use the same to access the Rad
 kubectl port-forward --namespace=radius-system svc/dashboard 7007:80 
 ```
 
-Navigate to the Radius Dashboard at [http://localhost:7007](http://localhost:7007/resources/my-group/Applications.Core/applications/todolist/application), You should see a visualization of the application graph for the application, including the connection from the `frontend` container to `database`.
+Navigate to the Radius Dashboard at [http://localhost:7007](http://localhost:7007/resources/my-group/Radius.Core/applications/todolist/application). You should see a visualization of the application graph for the application, including the connection from the `frontend` container to `postgresql`.
 
 {{< image src="dashboard.png" alt="Screenshot of the Radius dashboard showing the frontend container with a connection to the backend container" width=800px >}}
 
 ## Cleanup
+
+Stop the open port-forward and log-streaming terminals you started above by pressing `Ctrl+C` in each terminal (or close the terminal windows). This terminates the `kubectl port-forward` and `kubectl logs` processes.
 
 Delete the Todo List application using the `rad application delete` command:
 

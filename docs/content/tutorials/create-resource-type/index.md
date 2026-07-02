@@ -4,6 +4,7 @@ title: "2. Create Resource Types"
 linkTitle: "2. Create Resource Types"
 description: "Learn how to create Resource Types"
 weight: 200
+categories: "Tutorial"
 ---
 
 Resource Types are the building blocks of Radius and define what developers can deploy. In part two of this tutorial, you will create a PostgreSQL Resource Type.
@@ -12,9 +13,7 @@ Resource Types are the building blocks of Radius and define what developers can 
 
 To create a PostgreSQL Resource Type in Radius, create the resource type definition file then create the resource type in Radius.
 
-<!-- Commenting this as container resource type in contrib repository is not part of install yet to work with the updated postgreSqlDatabases resource type, we will uncomment and update this section once the resource type is part of install:
-
-The resource type definition for PostgreSQL is in the Radius [resource-types-contrib](https://github.com/radius-project/resource-types-contrib/tree/main/Data/postgreSqlDatabases) repository where all the Radius Resource Types and Recipes are maintained. -->
+A community-maintained set of Resource Types and Recipes lives in the Radius [resource-types-contrib](https://github.com/radius-project/resource-types-contrib) repository, including the [`Radius.Data/postgreSqlDatabases`](https://github.com/radius-project/resource-types-contrib/tree/main/Data/postgreSqlDatabases) resource type used in this tutorial. The version below is a simplified copy you can download and edit locally.
 
 {{< button text="Download postgreSqlDatabases.yaml" link="postgreSqlDatabases.yaml" newtab="true" >}}
 
@@ -47,6 +46,12 @@ You should see output similar to:
 Creating resource type Radius.Data/postgreSqlDatabases
 Creating API Version Radius.Data/postgreSqlDatabases@2025-08-01-preview
 Creating location Radius.Data/global/
+```
+
+Once the Resource Type is registered, developer-facing documentation for it is available via the `rad resource-type show` command:
+
+```bash
+rad resource-type show Radius.Data/postgreSqlDatabases
 ```
 
 ## Create a Bicep extension

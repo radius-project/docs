@@ -4,9 +4,10 @@ title: "3. Create Recipes"
 linkTitle: "3. Create Recipes"
 description: "Create Bicep or Terraform Recipes that implement the Resource Type"
 weight: 300
+categories: "Tutorial"
 ---
 
-Recipes define how a resource is deployed. In part three of this tutorial, you will create a Terraform or Bicep Recipe for the PostgreSQL Resource Type.
+Recipes define how a resource is deployed. In part three of this tutorial, you will walk through a Terraform or Bicep Recipe for the PostgreSQL Resource Type. You will attach this Recipe to your Environment via a Recipe Pack in part four.
 
 ## Create a Recipe for the PostgreSQL Resource Type
 
@@ -14,7 +15,7 @@ Recipes can be either Terraform configurations or Bicep templates. Select the ta
 
 {{< tabs Terraform Bicep >}}{{% codetab %}}
 
-Terraform configuration are stored in a Git repository for Radius to access the Recipe. For this tutorial, the [Terraform Recipe](https://github.com/radius-project/docs/tree/v0.56/docs/content/tutorials/create-recipe/recipes/terraform/main.tf) has already been created and stored in the Radius docs repository. Hence, there are no actual steps to complete for this section of the tutorial. What follows is a walkthrough of the Radius-specific aspects of the Terraform configuration.
+Terraform configuration are stored in a Git repository for Radius to access the Recipe. For this tutorial, the [Terraform Recipe](https://github.com/radius-project/docs/tree/{{< param version >}}/docs/content/tutorials/create-recipe/recipes/terraform/main.tf) has already been created and stored in the Radius docs repository. Hence, there are no actual steps to complete for this section of the tutorial. What follows is a walkthrough of the Radius-specific aspects of the Terraform configuration.
 
 1. **Radius metadata via `context` variable**  
 
@@ -81,7 +82,7 @@ Terraform configuration are stored in a Git repository for Radius to access the 
 {{% /codetab %}}
 {{% codetab %}}
 
-Bicep templates are stored in an OCI registry for Radius to access the Recipe. For this tutorial, the [Bicep Recipe](https://github.com/radius-project/docs/tree/v0.56/docs/content/tutorials/create-recipe/recipes/bicep/kubernetes-postgresql.bicep) has already been created and stored in the Radius OCI registry. Hence, there are no actual steps to complete for this section of the tutorial. What follows is a walkthrough of the Radius-specific aspects of the Bicep template.
+Bicep templates are stored in an OCI registry for Radius to access the Recipe. For this tutorial, the [Bicep Recipe](https://github.com/radius-project/docs/tree/{{< param version >}}/docs/content/tutorials/create-recipe/recipes/bicep/kubernetes-postgresql.bicep) has already been created and stored in the Radius OCI registry. Hence, there are no actual steps to complete for this section of the tutorial. What follows is a walkthrough of the Radius-specific aspects of the Bicep template.
 
 1. **Radius metadata via `context` variable**
 
@@ -140,6 +141,6 @@ Bicep templates are stored in an OCI registry for Radius to access the Recipe. F
 {{% /codetab %}}
 {{< /tabs >}}
 
-In part four, you will create an Environment which uses the new Recipe.
+In part four, you will bundle this Recipe into a Recipe Pack and attach it to a new Environment.
 <br><br>
 {{< button text="Next step: Create Environment" page="create-environment" color="primary" >}}

@@ -4,6 +4,7 @@ title: "1. Install Radius"
 linkTitle: "1. Install Radius"
 description: "Learn how to install Radius"
 weight: 100
+categories: "Tutorial"
 aliases:
     - /installation/
 ---
@@ -47,6 +48,8 @@ dashboard            1/1     Running   0          1m
 dynamic-rp           1/1     Running   0          1m
 ucp                  1/1     Running   0          1m
 ```
+
+`rad install kubernetes` installs the Radius control plane and registers the built-in Resource Types (such as `Radius.Compute/containers`, `Radius.Compute/persistentVolumes`, and `Radius.Security/secrets`). It does not register any Recipes. You will create a Recipe in part three and bundle it into a Recipe Pack that you attach to your Environment in part four.
 
 ## Install the Bicep and Terraform extensions for VS Code (optional) 
 

@@ -9,7 +9,7 @@ param environment string
 //PARAM
 
 //APPLICATION
-resource todolist 'Applications.Core/applications@2023-10-01-preview' = {
+resource todolist 'Radius.Core/applications@2025-08-01-preview' = {
   name: 'todolist'
   properties: {
     environment: environment
@@ -17,16 +17,30 @@ resource todolist 'Applications.Core/applications@2023-10-01-preview' = {
 }
 //APPLICATION
 
+//DATABASE
+resource postgresql 'Radius.Data/postgreSqlDatabases@2025-08-01-preview' = {
+  name: 'postgresql'
+  properties: {
+    environment: environment
+    application: todolist.id
+    size: 'S'
+  }
+}
+//DATABASE
+
 //CONTAINER
-resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
+resource frontend 'Radius.Compute/containers@2025-08-01-preview' = {
   name: 'frontend'
   properties: {
+    environment: environment
     application: todolist.id
-    container: {
-      image: 'ghcr.io/radius-project/samples/demo:latest'
-      ports: {
-        web: {
-          containerPort: 3000
+    containers: {
+      frontend: {
+        image: 'ghcr.io/radius-project/samples/demo:latest'
+        ports: {
+          web: {
+            containerPort: 3000
+          }
         }
       }
     }
@@ -39,13 +53,3 @@ resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
 }
 //CONTAINER
 
-//DATABASE
-resource postgresql 'Radius.Data/postgreSqlDatabases@2025-08-01-preview' = {
-  name: 'postgresql'
-  properties: {
-    environment: environment
-    application: todolist.id
-    size: 'S'
-  }
-}
-//DATABASE

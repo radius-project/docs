@@ -4,13 +4,15 @@ title: "4. Create Environment"
 linkTitle: "4. Create Environment"
 description: "Create a Radius Environment to deploy the Application"
 weight: 400
+categories: "Tutorial"
 ---
 
 In part four of this tutorial, you will:
 
   - Create a Resource Group to contain all your resources
-  - Create an Environment that uses the Recipe for the PostgreSQL Resource Type
   - Create a Workspace to configure the local Radius CLI
+  - Create a Recipe Pack that bundles the PostgreSQL Recipe from part three
+  - Create an Environment that attaches the Recipe Pack and targets your Kubernetes cluster
 
 ## Create a Resource Group
 
@@ -29,153 +31,106 @@ creating resource group "my-group" in workspace "my-workspace"...
 resource group "my-group" created
 ```
 
-## Create an Environment
-
-Radius Environments define where to deploy resources and what Recipes to use during deployment.
-
-Create an Environment using the `rad environment create` command.
-
-```bash
-rad environment create my-env --group my-group
-```
-
-You should see output similar to: 
-
-```
-Creating Environment...
-Successfully created environment "my-env" in resource group "my-group"
-```
-
-Inspect the Environment using the `rad environment show`
-
-```bash
-rad environment show my-env --group my-group --output json
-```
-
-You should see output similar to: 
-
-```
-{
-"id": "/planes/radius/local/resourcegroups/my-group/providers/Applications.Core/environments/my-env",
-  "location": "global",
-  "name": "my-env",
-  "properties": {
-    "compute": {
-      "kind": "kubernetes",
-      "namespace": "my-env"
-    },
-    "provisioningState": "Succeeded"
-  }...
-  "type": "Applications.Core/environments"
-}
-```
-
 ## Create a Workspace
 
-A Radius Workspace is a set of configurations for the local Radius CLI. It is a combination of a Kubernetes context, a Radius Environment, and a Resource Group.
+A Radius Workspace is a set of configurations for the local Radius CLI. It is a combination of a Kubernetes context, a Resource Group, and (later) a Radius Environment.
 
 Create a new Workspace using the `rad workspace create` command.
 
-  ```bash
-  rad workspace create kubernetes my-workspace \
+```bash
+rad workspace create kubernetes my-workspace \
   --context $(kubectl config current-context) \
-  --environment my-env \
-  --group my-group 
-  ```
+  --group my-group
+```
 
-  You should see output similar to: 
+You should see output similar to: 
 
-  ```
-  Creating workspace...
-  Set "my-workspace" as current workspace.
-  ```
-
-  Show the current workspace. The `--output json` will show the details of the workspace created.
-
-  ```bash
-  rad workspace show --output json
-  ```
-  
-  You should see output similar to: 
-
-  ```  
-  {
-    "connection": {
-      "context": "k3d-k3s-default",
-      "kind": "kubernetes"
-    },
-    "environment": "/planes/radius/local/resourceGroups/my-group/providers/applications.core/environments/my-env",
-    "scope": "/planes/radius/local/resourceGroups/my-group"
-  }
-  ```
+```
+Creating workspace...
+Set "my-workspace" as current workspace.
+```
 
 You can also view the workspace by inspecting the contents of `~/.rad/config.yaml`. 
 
+## Create a Recipe Pack and Environment
 
-## Update the Environment with the Recipe
+A Recipe Pack is a collection of Recipes grouped by resource type. An Environment attaches one or more Recipe Packs and selects a target compute provider (such as Kubernetes). Both resources are defined together in a single Bicep file.
 
-Update the Environment with Terraform or Bicep Recipe based on your preference.
+Create a file called `env.bicep` and add the contents below, choosing the tab for the IaC language you used in part three.
 
 {{< tabs Terraform Bicep >}}{{% codetab %}}
 
-```bash
-  rad recipe register default \
-    --environment my-env \
-    --resource-type Radius.Data/postgreSqlDatabases \
-    --template-kind terraform \
-    --template-path git::https://github.com/radius-project/docs.git//docs/content/tutorials/create-recipe/recipes/terraform
-```
+{{% rad file="snippets/env-terraform.bicep" embed=true %}}
 
-You should see output similar to: 
-
-```
-Successfully linked recipe "default" to environment "my-env"
-```
-
-Verify the Recipe is registered using the `rad recipe list` command.
-
-```bash
-rad recipe list
-```
-
-You should see output similar to: 
-
-```
-RECIPE    TYPE                             TEMPLATE KIND  TEMPLATE VERSION TEMPLATE
-...
-default   Radius.Data/postgreSqlDatabases  terraform                       git::https://github.com/radius-project/resource-types-contrib.git//Data/postgreSqlDatabases/recipes/kubernetes/terraform
-```
 {{% /codetab %}}
 {{% codetab %}}
 
- ```bash
-  rad recipe register default \
-    --environment my-env \
-    --resource-type Radius.Data/postgreSqlDatabases \
-    --template-kind bicep \
-    --template-path ghcr.io/radius-project/recipes/kubernetes/postgresql:0.53.0
-```
+{{% rad file="snippets/env-bicep.bicep" embed=true %}}
 
-You should see output similar to: 
-```
-Successfully linked recipe "default" to environment "my-env"
-```
+{{% /codetab %}}
+{{< /tabs >}}
 
-Verify the Recipe is registered using the `rad recipe list` command. 
+Deploy the Recipe Pack and Environment:
 
 ```bash
-rad recipe list
+rad deploy env.bicep --group my-group
 ```
 
 You should see output similar to:
 
 ```
-RECIPE    TYPE                             TEMPLATE KIND  TEMPLATE VERSION TEMPLATE
-...
-default   Radius.Data/postgreSqlDatabases  bicep                           ghcr.io/radius-project/recipes/kubernetes/postgresql:0.53.0
+Building env.bicep...
+Deploying template 'env.bicep' for workspace 'my-workspace'...
+
+Deployment In Progress... 
+
+Completed            postgresqlPack       Radius.Core/recipePacks
+Completed            my-env               Radius.Core/environments
+
+Deployment Complete
 ```
-{{% /codetab %}}
-{{< /tabs >}}
+
+Set the new Environment as the default for your Workspace so that `rad deploy` targets it automatically:
+
+```bash
+rad workspace update my-workspace --environment my-env
+```
+
+## Inspect the Environment and Recipe Pack
+
+Inspect the Environment using `rad environment show`:
+
+```bash
+rad environment show my-env --group my-group --output json
+```
+
+You should see output similar to:
+
+```json
+{
+  "id": "/planes/radius/local/resourcegroups/my-group/providers/Radius.Core/environments/my-env",
+  "location": "global",
+  "name": "my-env",
+  "properties": {
+    "providers": {
+      "kubernetes": {
+        "namespace": "my-env"
+      }
+    },
+    "recipePacks": [
+      "/planes/radius/local/resourcegroups/my-group/providers/Radius.Core/recipePacks/postgresqlPack"
+    ],
+    "provisioningState": "Succeeded"
+  },
+  "type": "Radius.Core/environments"
+}
+```
+
+Inspect the Recipe Pack and the Recipes it contains using `rad recipe-pack show`:
+
+```bash
+rad recipe-pack show postgresqlPack --group my-group
+```
 
 In the final part, you will deploy the Todo List application to the Environment you just created.
 <br><br>
