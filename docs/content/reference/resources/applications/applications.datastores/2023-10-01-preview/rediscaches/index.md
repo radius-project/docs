@@ -23,15 +23,15 @@ description: "Detailed reference documentation for applications.datastores/redis
 | **location** | string | The geo-location where the resource lives |
 | **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
 | **port** | int | The port value of the target Redis cache <br />_(ReadOnly)_ |
-| **properties** | [RedisCacheProperties](#rediscacheproperties) | RedisCache portable resource properties <br />_(Required)_ |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
-| **recipe** | [Recipe](#recipe) | The recipe used to automatically deploy underlying infrastructure for a portable resource <br />_(ReadOnly)_ |
-| **resourceProvisioning** | 'manual' | 'recipe' | Specifies how the underlying service/resource is provisioned and managed. Available values are 'recipe', where Radius manages the lifecycle of the resource through a Recipe, and 'manual', where a user manages the resource and provides the values. <br />_(ReadOnly)_ |
+| **properties** | [RedisCacheProperties](#rediscacheproperties) | The resource-specific properties for this resource. <br />_(Required)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
+| **recipe** | [Recipe](#recipe) | The recipe used to automatically deploy underlying infrastructure for the resource <br />_(ReadOnly)_ |
+| **resourceProvisioning** | 'manual' | 'recipe' | Specifies how the underlying service/resource is provisioned and managed. <br />_(ReadOnly)_ |
 | **resources** | [ResourceReference](#resourcereference)[] | List of the resource IDs that support the Redis resource <br />_(ReadOnly)_ |
-| **secrets** | [RedisCacheSecrets](#rediscachesecrets) | The secret values for the given RedisCache resource <br />_(ReadOnly)_ |
+| **secrets** | [RedisCacheSecrets](#rediscachesecrets) | Secrets provided by resource <br />_(ReadOnly)_ |
 | **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
-| **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(ReadOnly)_ |
-| **tags** | [TrackedResourceTags](#trackedresourcetags) | Resource tags. |
+| **systemData** | [SystemData](#systemdata) | Azure Resource Manager metadata containing createdBy and modifiedBy information. <br />_(ReadOnly)_ |
+| **tags** | [Record](#record) | Resource tags. |
 | **tls** | bool | Specifies whether to enable SSL connections to the Redis cache <br />_(ReadOnly)_ |
 | **type** | 'Applications.Datastores/redisCaches' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
 | **username** | string | The username for Redis cache <br />_(ReadOnly)_ |
@@ -46,11 +46,11 @@ description: "Detailed reference documentation for applications.datastores/redis
 | **environment** | string | Fully qualified resource ID for the environment that the portable resource is linked to <br />_(Required)_ |
 | **host** | string | The host name of the target Redis cache |
 | **port** | int | The port value of the target Redis cache |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
-| **recipe** | [Recipe](#recipe) | The recipe used to automatically deploy underlying infrastructure for a portable resource |
-| **resourceProvisioning** | 'manual' | 'recipe' | Specifies how the underlying service/resource is provisioned and managed. Available values are 'recipe', where Radius manages the lifecycle of the resource through a Recipe, and 'manual', where a user manages the resource and provides the values. |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
+| **recipe** | [Recipe](#recipe) | The recipe used to automatically deploy underlying infrastructure for the resource |
+| **resourceProvisioning** | 'manual' | 'recipe' | Specifies how the underlying service/resource is provisioned and managed. |
 | **resources** | [ResourceReference](#resourcereference)[] | List of the resource IDs that support the Redis resource |
-| **secrets** | [RedisCacheSecrets](#rediscachesecrets) | The secret values for the given RedisCache resource |
+| **secrets** | [RedisCacheSecrets](#rediscachesecrets) | Secrets provided by resource |
 | **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
 | **tls** | bool | Specifies whether to enable SSL connections to the Redis cache |
 | **username** | string | The username for Redis cache |
@@ -62,9 +62,9 @@ description: "Detailed reference documentation for applications.datastores/redis
 | Property | Type | Description |
 |----------|------|-------------|
 | **name** | string | The name of the recipe within the environment to use <br />_(Required)_ |
-| **parameters** | [RecipeParameters](#recipeparameters) | Key/value parameters to pass into the recipe at deployment |
+| **parameters** | [Record](#record) | Key/value parameters to pass into the recipe at deployment |
 
-### RecipeParameters
+### Record
 
 #### Properties
 
@@ -98,9 +98,9 @@ description: "Detailed reference documentation for applications.datastores/redis
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **compute** | [EnvironmentCompute](#environmentcompute) | Represents backing compute resource |
+| **compute** | [EnvironmentCompute](#environmentcompute) | The compute resource associated with the resource. |
 | **outputResources** | [OutputResource](#outputresource)[] | Properties of an output resource |
-| **recipe** | [RecipeStatus](#recipestatus) | Recipe status at deployment time for a resource. <br />_(ReadOnly)_ |
+| **recipe** | [RecipeStatus](#recipestatus) | The recipe data at the time of deployment <br />_(ReadOnly)_ |
 
 ### EnvironmentCompute
 
@@ -110,7 +110,7 @@ description: "Detailed reference documentation for applications.datastores/redis
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **identity** | [IdentitySettings](#identitysettings) | IdentitySettings is the external identity setting. |
+| **identity** | [IdentitySettings](#identitysettings) | Configuration for supported external identity providers |
 | **resourceId** | string | The resource id of the compute resource for application environment. |
 
 #### AzureContainerInstanceCompute
@@ -119,7 +119,7 @@ description: "Detailed reference documentation for applications.datastores/redis
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'aci' | Discriminator property for EnvironmentCompute. <br />_(Required)_ |
+| **kind** | 'aci' | The Azure container instance compute kind <br />_(Required)_ |
 | **resourceGroup** | string | The resource group to use for the environment. |
 
 #### KubernetesCompute
@@ -128,7 +128,7 @@ description: "Detailed reference documentation for applications.datastores/redis
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'kubernetes' | Discriminator property for EnvironmentCompute. <br />_(Required)_ |
+| **kind** | 'kubernetes' | The Kubernetes compute kind <br />_(Required)_ |
 | **namespace** | string | The namespace to use for the environment. <br />_(Required)_ |
 
 
@@ -138,7 +138,7 @@ description: "Detailed reference documentation for applications.datastores/redis
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'azure.com.workload' | 'systemAssigned' | 'systemAssignedUserAssigned' | 'undefined' | 'userAssigned' | IdentitySettingKind is the kind of supported external identity setting <br />_(Required)_ |
+| **kind** | 'azure.com.workload' | 'systemAssigned' | 'systemAssignedUserAssigned' | 'undefined' | 'userAssigned' | kind of identity setting <br />_(Required)_ |
 | **managedIdentity** | string[] | The list of user assigned managed identities |
 | **oidcIssuer** | string | The URI for your compute platform's OIDC issuer |
 | **resource** | string | The resource ID of the provisioned identity |
@@ -174,9 +174,9 @@ description: "Detailed reference documentation for applications.datastores/redis
 | **createdByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that created the resource. |
 | **lastModifiedAt** | string | The timestamp of resource last modification (UTC) |
 | **lastModifiedBy** | string | The identity that last modified the resource. |
-| **lastModifiedByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that created the resource. |
+| **lastModifiedByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that last modified the resource. |
 
-### TrackedResourceTags
+### Record
 
 #### Properties
 
