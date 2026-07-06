@@ -19,9 +19,9 @@ description: "Detailed reference documentation for applications.core/volumes@202
 | **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
 | **location** | string | The geo-location where the resource lives |
 | **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
-| **properties** | [VolumeProperties](#volumeproperties) | Volume properties <br />_(Required)_ |
-| **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(ReadOnly)_ |
-| **tags** | [TrackedResourceTags](#trackedresourcetags) | Resource tags. |
+| **properties** | [VolumeProperties](#volumeproperties) | The resource-specific properties for this resource. <br />_(Required)_ |
+| **systemData** | [SystemData](#systemdata) | Azure Resource Manager metadata containing createdBy and modifiedBy information. <br />_(ReadOnly)_ |
+| **tags** | [Record](#record) | Resource tags. |
 | **type** | 'Applications.Core/volumes' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
 
 ### VolumeProperties
@@ -34,7 +34,7 @@ description: "Detailed reference documentation for applications.core/volumes@202
 |----------|------|-------------|
 | **application** | string | Fully qualified resource ID for the application <br />_(Required)_ |
 | **environment** | string | Fully qualified resource ID for the environment that the application is linked to |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
 | **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
 
 #### AzureKeyVaultVolumeProperties
@@ -43,11 +43,11 @@ description: "Detailed reference documentation for applications.core/volumes@202
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **certificates** | [AzureKeyVaultVolumePropertiesCertificates](#azurekeyvaultvolumepropertiescertificates) | The KeyVault certificates that this volume exposes |
-| **keys** | [AzureKeyVaultVolumePropertiesKeys](#azurekeyvaultvolumepropertieskeys) | The KeyVault keys that this volume exposes |
-| **kind** | 'azure.com.keyvault' | Discriminator property for VolumeProperties. <br />_(Required)_ |
+| **certificates** | [Record](#record) | The KeyVault certificates that this volume exposes |
+| **keys** | [Record](#record) | The KeyVault keys that this volume exposes |
+| **kind** | 'azure.com.keyvault' | The Azure Key Vault Volume kind <br />_(Required)_ |
 | **resource** | string | The ID of the keyvault to use for this volume resource <br />_(Required)_ |
-| **secrets** | [AzureKeyVaultVolumePropertiesSecrets](#azurekeyvaultvolumepropertiessecrets) | The KeyVault secrets that this volume exposes |
+| **secrets** | [Record](#record) | The KeyVault secrets that this volume exposes |
 
 
 ### ResourceStatus
@@ -56,9 +56,9 @@ description: "Detailed reference documentation for applications.core/volumes@202
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **compute** | [EnvironmentCompute](#environmentcompute) | Represents backing compute resource |
+| **compute** | [EnvironmentCompute](#environmentcompute) | The compute resource associated with the resource. |
 | **outputResources** | [OutputResource](#outputresource)[] | Properties of an output resource |
-| **recipe** | [RecipeStatus](#recipestatus) | Recipe status at deployment time for a resource. <br />_(ReadOnly)_ |
+| **recipe** | [RecipeStatus](#recipestatus) | The recipe data at the time of deployment <br />_(ReadOnly)_ |
 
 ### EnvironmentCompute
 
@@ -68,7 +68,7 @@ description: "Detailed reference documentation for applications.core/volumes@202
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **identity** | [IdentitySettings](#identitysettings) | IdentitySettings is the external identity setting. |
+| **identity** | [IdentitySettings](#identitysettings) | Configuration for supported external identity providers |
 | **resourceId** | string | The resource id of the compute resource for application environment. |
 
 #### AzureContainerInstanceCompute
@@ -77,7 +77,7 @@ description: "Detailed reference documentation for applications.core/volumes@202
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'aci' | Discriminator property for EnvironmentCompute. <br />_(Required)_ |
+| **kind** | 'aci' | The Azure container instance compute kind <br />_(Required)_ |
 | **resourceGroup** | string | The resource group to use for the environment. |
 
 #### KubernetesCompute
@@ -86,7 +86,7 @@ description: "Detailed reference documentation for applications.core/volumes@202
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'kubernetes' | Discriminator property for EnvironmentCompute. <br />_(Required)_ |
+| **kind** | 'kubernetes' | The Kubernetes compute kind <br />_(Required)_ |
 | **namespace** | string | The namespace to use for the environment. <br />_(Required)_ |
 
 
@@ -96,7 +96,7 @@ description: "Detailed reference documentation for applications.core/volumes@202
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'azure.com.workload' | 'systemAssigned' | 'systemAssignedUserAssigned' | 'undefined' | 'userAssigned' | IdentitySettingKind is the kind of supported external identity setting <br />_(Required)_ |
+| **kind** | 'azure.com.workload' | 'systemAssigned' | 'systemAssignedUserAssigned' | 'undefined' | 'userAssigned' | kind of identity setting <br />_(Required)_ |
 | **managedIdentity** | string[] | The list of user assigned managed identities |
 | **oidcIssuer** | string | The URI for your compute platform's OIDC issuer |
 | **resource** | string | The resource ID of the provisioned identity |
@@ -121,7 +121,7 @@ description: "Detailed reference documentation for applications.core/volumes@202
 | **templatePath** | string | TemplatePath is the path of the recipe consumed by the portable resource upon deployment. <br />_(Required)_ |
 | **templateVersion** | string | TemplateVersion is the version number of the template. |
 
-### AzureKeyVaultVolumePropertiesCertificates
+### Record
 
 #### Properties
 
@@ -138,13 +138,13 @@ description: "Detailed reference documentation for applications.core/volumes@202
 | Property | Type | Description |
 |----------|------|-------------|
 | **alias** | string | File name when written to disk |
-| **certType** | 'certificate' | 'privatekey' | 'publickey' | Represents certificate types |
+| **certType** | 'certificate' | 'privatekey' | 'publickey' | Certificate object type to be downloaded - the certificate itself, private key or public key of the certificate |
 | **encoding** | 'base64' | 'hex' | 'utf-8' | Encoding format. Default utf-8 |
-| **format** | 'pem' | 'pfx' | Represents certificate formats |
+| **format** | 'pem' | 'pfx' | Certificate format. Default pem |
 | **name** | string | The name of the certificate <br />_(Required)_ |
 | **version** | string | Certificate version |
 
-### AzureKeyVaultVolumePropertiesKeys
+### Record
 
 #### Properties
 
@@ -164,7 +164,7 @@ description: "Detailed reference documentation for applications.core/volumes@202
 | **name** | string | The name of the key <br />_(Required)_ |
 | **version** | string | Key version |
 
-### AzureKeyVaultVolumePropertiesSecrets
+### Record
 
 #### Properties
 
@@ -196,9 +196,9 @@ description: "Detailed reference documentation for applications.core/volumes@202
 | **createdByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that created the resource. |
 | **lastModifiedAt** | string | The timestamp of resource last modification (UTC) |
 | **lastModifiedBy** | string | The identity that last modified the resource. |
-| **lastModifiedByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that created the resource. |
+| **lastModifiedByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that last modified the resource. |
 
-### TrackedResourceTags
+### Record
 
 #### Properties
 

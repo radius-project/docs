@@ -12,7 +12,7 @@ Read logs from a running containers resource
 
 ### Synopsis
 
-Reads logs from a running resource. Currently only supports the resource type 'Applications.Core/containers'.
+Reads logs from a running resource. Supports the resource type 'Applications.Core/containers', or 'Radius.Compute/containers' when the '--preview' flag is set.
 This command allows you to access logs of a deployed application and output those logs to the local console.
 
 'rad resource logs' will output all currently available logs for the resource and then exit.
@@ -39,6 +39,9 @@ rad resource logs Applications.Core/containers orders --application icecream-sto
 
 # read logs from the 'daprd' sidecar container of the 'orders' resource of the 'icecream-store' application
 rad resource logs Applications.Core/containers orders --application icecream-store --container daprd
+
+# read logs from the 'orders' resource using the preview resource type 'Radius.Compute/containers'
+rad resource logs Radius.Compute/containers orders --application icecream-store --preview
 ```
 
 ### Options
@@ -48,6 +51,7 @@ rad resource logs Applications.Core/containers orders --application icecream-sto
   -f, --follow             specify that logs should be stream until the command is canceled
   -g, --group string       The resource group name
   -h, --help               help for logs
+      --preview            Use the Radius.Core preview implementation (can also be set via RADIUS_PREVIEW=true)
       --replica string     specify the replica to collect logs from
 ```
 

@@ -20,11 +20,11 @@ description: "Detailed reference documentation for radius.core/applications@2025
 | **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
 | **location** | string | The geo-location where the resource lives |
 | **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
-| **properties** | [ApplicationProperties](#applicationproperties) | Application properties <br />_(Required)_ |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **properties** | [ApplicationProperties](#applicationproperties) | The resource-specific properties for this resource. <br />_(Required)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
 | **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
-| **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(ReadOnly)_ |
-| **tags** | [TrackedResourceTags](#trackedresourcetags) | Resource tags. |
+| **systemData** | [SystemData](#systemdata) | Azure Resource Manager metadata containing createdBy and modifiedBy information. <br />_(ReadOnly)_ |
+| **tags** | [Record](#record) | Resource tags. |
 | **type** | 'Radius.Core/applications' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
 
 ### ApplicationProperties
@@ -34,7 +34,7 @@ description: "Detailed reference documentation for radius.core/applications@2025
 | Property | Type | Description |
 |----------|------|-------------|
 | **environment** | string | Fully qualified resource ID for the environment that the application is linked to <br />_(Required)_ |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
 | **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
 
 ### ResourceStatus
@@ -43,9 +43,9 @@ description: "Detailed reference documentation for radius.core/applications@2025
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **compute** | [EnvironmentCompute](#environmentcompute) | Represents backing compute resource |
+| **compute** | [EnvironmentCompute](#environmentcompute) | The compute resource associated with the resource. |
 | **outputResources** | [OutputResource](#outputresource)[] | Properties of an output resource |
-| **recipe** | [RecipeStatus](#recipestatus) | Recipe status at deployment time for a resource. <br />_(ReadOnly)_ |
+| **recipe** | [RecipeStatus](#recipestatus) | The recipe data at the time of deployment <br />_(ReadOnly)_ |
 
 ### EnvironmentCompute
 
@@ -55,7 +55,7 @@ description: "Detailed reference documentation for radius.core/applications@2025
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **identity** | [IdentitySettings](#identitysettings) | IdentitySettings is the external identity setting. |
+| **identity** | [IdentitySettings](#identitysettings) | Configuration for supported external identity providers |
 | **resourceId** | string | The resource id of the compute resource for application environment. |
 
 #### AzureContainerInstanceCompute
@@ -64,7 +64,7 @@ description: "Detailed reference documentation for radius.core/applications@2025
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'aci' | Discriminator property for EnvironmentCompute. <br />_(Required)_ |
+| **kind** | 'aci' | The Azure container instance compute kind <br />_(Required)_ |
 | **resourceGroup** | string | The resource group to use for the environment. |
 
 #### KubernetesCompute
@@ -73,7 +73,7 @@ description: "Detailed reference documentation for radius.core/applications@2025
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'kubernetes' | Discriminator property for EnvironmentCompute. <br />_(Required)_ |
+| **kind** | 'kubernetes' | The Kubernetes compute kind <br />_(Required)_ |
 | **namespace** | string | The namespace to use for the environment. <br />_(Required)_ |
 
 
@@ -83,7 +83,7 @@ description: "Detailed reference documentation for radius.core/applications@2025
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'azure.com.workload' | 'systemAssigned' | 'systemAssignedUserAssigned' | 'undefined' | 'userAssigned' | IdentitySettingKind is the kind of supported external identity setting <br />_(Required)_ |
+| **kind** | 'azure.com.workload' | 'systemAssigned' | 'systemAssignedUserAssigned' | 'undefined' | 'userAssigned' | kind of identity setting <br />_(Required)_ |
 | **managedIdentity** | string[] | The list of user assigned managed identities |
 | **oidcIssuer** | string | The URI for your compute platform's OIDC issuer |
 | **resource** | string | The resource ID of the provisioned identity |
@@ -119,9 +119,9 @@ description: "Detailed reference documentation for radius.core/applications@2025
 | **createdByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that created the resource. |
 | **lastModifiedAt** | string | The timestamp of resource last modification (UTC) |
 | **lastModifiedBy** | string | The identity that last modified the resource. |
-| **lastModifiedByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that created the resource. |
+| **lastModifiedByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that last modified the resource. |
 
-### TrackedResourceTags
+### Record
 
 #### Properties
 

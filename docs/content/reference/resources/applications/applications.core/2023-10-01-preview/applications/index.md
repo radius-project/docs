@@ -21,11 +21,11 @@ description: "Detailed reference documentation for applications.core/application
 | **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
 | **location** | string | The geo-location where the resource lives |
 | **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
-| **properties** | [ApplicationProperties](#applicationproperties) | Application properties <br />_(Required)_ |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **properties** | [ApplicationProperties](#applicationproperties) | The resource-specific properties for this resource. <br />_(Required)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
 | **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
-| **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(ReadOnly)_ |
-| **tags** | [TrackedResourceTags](#trackedresourcetags) | Resource tags. |
+| **systemData** | [SystemData](#systemdata) | Azure Resource Manager metadata containing createdBy and modifiedBy information. <br />_(ReadOnly)_ |
+| **tags** | [Record](#record) | Resource tags. |
 | **type** | 'Applications.Core/applications' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
 
 ### Extension
@@ -43,7 +43,7 @@ description: "Detailed reference documentation for applications.core/application
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'aci' | Discriminator property for Extension. <br />_(Required)_ |
+| **kind** | 'aci' | The kind of the resource. <br />_(Required)_ |
 | **resourceGroup** | string | The resource group of the application environment. <br />_(Required)_ |
 
 #### DaprSidecarExtension
@@ -53,10 +53,10 @@ description: "Detailed reference documentation for applications.core/application
 | Property | Type | Description |
 |----------|------|-------------|
 | **appId** | string | The Dapr appId. Specifies the identifier used by Dapr for service invocation. <br />_(Required)_ |
-| **appPort** | int | The Dapr appPort. Specifies the internal listening port for the application to handle requests from the Dapr sidecar. |
+| **appPort** | int | The Dapr appPort. Specifies the internal listening port for the application to handle requests from the Dapr sidecar.  |
 | **config** | string | Specifies the Dapr configuration to use for the resource. |
-| **kind** | 'daprSidecar' | Discriminator property for Extension. <br />_(Required)_ |
-| **protocol** | 'grpc' | 'http' | The Dapr sidecar extension protocol |
+| **kind** | 'daprSidecar' | Specifies the extension of the resource <br />_(Required)_ |
+| **protocol** | 'grpc' | 'http' | Specifies the Dapr app-protocol to use for the resource. |
 
 #### KubernetesMetadataExtension
 
@@ -64,9 +64,9 @@ description: "Detailed reference documentation for applications.core/application
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **annotations** | [KubernetesMetadataExtensionAnnotations](#kubernetesmetadataextensionannotations) | Annotations to be applied to the Kubernetes resources output by the resource |
-| **kind** | 'kubernetesMetadata' | Discriminator property for Extension. <br />_(Required)_ |
-| **labels** | [KubernetesMetadataExtensionLabels](#kubernetesmetadataextensionlabels) | Labels to be applied to the Kubernetes resources output by the resource |
+| **annotations** | [Record](#record) | Annotations to be applied to the Kubernetes resources output by the resource |
+| **kind** | 'kubernetesMetadata' | The kind of the resource. <br />_(Required)_ |
+| **labels** | [Record](#record) | Labels to be applied to the Kubernetes resources output by the resource |
 
 #### KubernetesNamespaceExtension
 
@@ -74,7 +74,7 @@ description: "Detailed reference documentation for applications.core/application
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'kubernetesNamespace' | Discriminator property for Extension. <br />_(Required)_ |
+| **kind** | 'kubernetesNamespace' | The kind of the resource. <br />_(Required)_ |
 | **namespace** | string | The namespace of the application environment. <br />_(Required)_ |
 
 #### ManualScalingExtension
@@ -83,11 +83,11 @@ description: "Detailed reference documentation for applications.core/application
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'manualScaling' | Discriminator property for Extension. <br />_(Required)_ |
+| **kind** | 'manualScaling' | Specifies the extension of the resource <br />_(Required)_ |
 | **replicas** | int | Replica count. <br />_(Required)_ |
 
 
-### KubernetesMetadataExtensionAnnotations
+### Record
 
 #### Properties
 
@@ -97,7 +97,7 @@ description: "Detailed reference documentation for applications.core/application
 
 * **Additional Properties Type**: string
 
-### KubernetesMetadataExtensionLabels
+### Record
 
 #### Properties
 
@@ -115,7 +115,7 @@ description: "Detailed reference documentation for applications.core/application
 |----------|------|-------------|
 | **environment** | string | Fully qualified resource ID for the environment that the application is linked to <br />_(Required)_ |
 | **extensions** | [Extension](#extension)[] | The application extension. |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
 | **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
 
 ### ResourceStatus
@@ -124,9 +124,9 @@ description: "Detailed reference documentation for applications.core/application
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **compute** | [EnvironmentCompute](#environmentcompute) | Represents backing compute resource |
+| **compute** | [EnvironmentCompute](#environmentcompute) | The compute resource associated with the resource. |
 | **outputResources** | [OutputResource](#outputresource)[] | Properties of an output resource |
-| **recipe** | [RecipeStatus](#recipestatus) | Recipe status at deployment time for a resource. <br />_(ReadOnly)_ |
+| **recipe** | [RecipeStatus](#recipestatus) | The recipe data at the time of deployment <br />_(ReadOnly)_ |
 
 ### EnvironmentCompute
 
@@ -136,7 +136,7 @@ description: "Detailed reference documentation for applications.core/application
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **identity** | [IdentitySettings](#identitysettings) | IdentitySettings is the external identity setting. |
+| **identity** | [IdentitySettings](#identitysettings) | Configuration for supported external identity providers |
 | **resourceId** | string | The resource id of the compute resource for application environment. |
 
 #### AzureContainerInstanceCompute
@@ -145,7 +145,7 @@ description: "Detailed reference documentation for applications.core/application
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'aci' | Discriminator property for EnvironmentCompute. <br />_(Required)_ |
+| **kind** | 'aci' | The Azure container instance compute kind <br />_(Required)_ |
 | **resourceGroup** | string | The resource group to use for the environment. |
 
 #### KubernetesCompute
@@ -154,7 +154,7 @@ description: "Detailed reference documentation for applications.core/application
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'kubernetes' | Discriminator property for EnvironmentCompute. <br />_(Required)_ |
+| **kind** | 'kubernetes' | The Kubernetes compute kind <br />_(Required)_ |
 | **namespace** | string | The namespace to use for the environment. <br />_(Required)_ |
 
 
@@ -164,7 +164,7 @@ description: "Detailed reference documentation for applications.core/application
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'azure.com.workload' | 'systemAssigned' | 'systemAssignedUserAssigned' | 'undefined' | 'userAssigned' | IdentitySettingKind is the kind of supported external identity setting <br />_(Required)_ |
+| **kind** | 'azure.com.workload' | 'systemAssigned' | 'systemAssignedUserAssigned' | 'undefined' | 'userAssigned' | kind of identity setting <br />_(Required)_ |
 | **managedIdentity** | string[] | The list of user assigned managed identities |
 | **oidcIssuer** | string | The URI for your compute platform's OIDC issuer |
 | **resource** | string | The resource ID of the provisioned identity |
@@ -200,9 +200,9 @@ description: "Detailed reference documentation for applications.core/application
 | **createdByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that created the resource. |
 | **lastModifiedAt** | string | The timestamp of resource last modification (UTC) |
 | **lastModifiedBy** | string | The identity that last modified the resource. |
-| **lastModifiedByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that created the resource. |
+| **lastModifiedByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that last modified the resource. |
 
-### TrackedResourceTags
+### Record
 
 #### Properties
 
