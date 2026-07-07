@@ -1,5 +1,5 @@
 baseURL = "https://edge.docs.radapp.io/"
-languageCode = "en-us"
+locale = "en-us"
 title = "Radius Docs"
 
 disableFastRender = true
