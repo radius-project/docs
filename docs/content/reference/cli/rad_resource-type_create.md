@@ -14,7 +14,7 @@ Create or update a resource type
 
 Create or update a resource type from a resource type definition file.
 
-Resource types define the resources that Radius can deploy and the API for those resources. They are defined by a name, one or more API versions, and an OpenAPI schema. 
+Resource types define the resources that Radius can deploy and the API for those resources. They are defined by a name, one or more API versions, and an OpenAPI schema.
 
 Input can be passed in using a JSON or YAML file using the --from-file option.
 
@@ -39,7 +39,7 @@ rad resource-type create myType --from-file /path/to/input.json
 
 # Create all resource types from a YAML file
 rad resource-type create --from-file /path/to/input.yaml
- 
+
 # Create all resource types from a JSON file
 rad resource-type create --from-file /path/to/input.json
 
@@ -50,6 +50,7 @@ rad resource-type create --from-file /path/to/input.json
 ```
   -f, --from-file string   The input file. May be an absolute path or a path relative to the current working directory
   -h, --help               help for create
+      --icon string        Path to an SVG file to associate with the resource type(s) being created. The icon's bytes and a SHA-256 hash are stored with the resource type.
   -o, --output string      output format (supported formats are json, table) (default "table")
   -w, --workspace string   The workspace name
 ```
