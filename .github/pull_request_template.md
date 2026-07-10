@@ -1,26 +1,30 @@
-Thank you for helping make the Radius documentation better!
+<!--
+Thank you for contributing to Radius! Please fill out each section below so
+reviewers have the context they need. Sections marked optional can be removed
+if they do not apply.
+-->
 
-**Please follow this checklist before submitting:**
+## Summary
 
-- [ ] [Read the contribution guide](https://docs.radapp.io/community/contributing/docs/)
-- [ ] Commands include options for Linux, MacOS, and Windows within codetabs
-- [ ] New file and folder names are globally unique
-- [ ] Page references use shortcodes instead of markdown or URL links
-- [ ] Images use HTML style and have alternative text
-- [ ] Places where multiple code/command options are given have codetabs
+<!-- Provide a concise description of what this PR does. -->
 
-In addition, please fill out the following to help reviewers understand this pull request:
-
-## Description
-
-<!--Please explain the changes you've made-->
-
-## Issue reference
+## Reason for change
 
 <!--
-Please reference the docs or Radius issue that this pull request addresses:
-
-Fixes: #[issue number]
-or
-Fixes: https://github.com/radius-project/radius/issues/[issue number]
+Explain why this change is needed. If it addresses a GitHub issue, link it
+below so it is automatically closed when this PR merges (optional).
 -->
+
+Fixes #<!-- issue number (optional) -->
+
+## How to test
+
+<!-- Describe the steps a reviewer can take to verify these changes. -->
+
+## File change summary
+
+<!-- Summarize the change made in each file that was modified. -->
+
+| File | Summary of change |
+| ---- | ----------------- |
+|      |                   |
