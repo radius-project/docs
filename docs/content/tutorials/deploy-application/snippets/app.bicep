@@ -1,6 +1,5 @@
 //IMPORT
 extension radius
-extension radiusResources
 //IMPORT
 
 //PARAM

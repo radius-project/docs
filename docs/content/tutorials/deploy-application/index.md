@@ -16,9 +16,7 @@ Add the following to `app.bicep`:
 
 {{% rad file="snippets/app.bicep" embed=true marker="//IMPORT" %}}
 
-The `extension radius` statement imports the resource types built into Radius. 
-
-The `extension radiusResources` statement imports the PostgreSQL resource type created in the previous step.
+The `extension radius` statement imports the resource types built into Radius.
 
 {{% rad file="snippets/app.bicep" embed=true marker="//PARAM" %}}
 
