@@ -23,7 +23,7 @@ To quickly get started with contributing to code on Radius, here are some identi
 
 <a class="btn btn-primary" href="https://aka.ms/radius-first-issues" role="button" target="_blank">good-first-issues</a>
 
-### Contributing to Radius
+## Where to contribute
 
 Check out the following table to learn where and how you can contribute:
 
