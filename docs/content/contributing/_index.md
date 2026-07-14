@@ -7,7 +7,7 @@ weight: 110
 aliases:
   - "/community/"
   - "/community/overview/"
-  - "/community/contributing/overview"
+  - "/community/contributing/overview/"
   - "/contributing/overview/"
 ---
 
