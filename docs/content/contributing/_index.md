@@ -60,7 +60,7 @@ All Radius source lives under the [radius-project](https://github.com/radius-pro
 Review these requirements before you contribute:
 
 - **Read the Code of Conduct**: the Radius community follows the [CNCF Code of Conduct](https://github.com/radius-project/radius/blob/main/CODE_OF_CONDUCT.md). Be respectful and inclusive.
-- **Sign off your commits (DCO)**: every commit must include a `Signed-off-by` line. Add one automatically with `git commit -s`. Pull requests without a sign-off fail the DCO check.
+- **Sign your commits (DCO)**: every commit must be cryptographically signed. See the [contribution guide](https://github.com/radius-project/radius/blob/main/docs/contributing/contributing-code/contributing-code-first-commit/first-commit-06-creating-a-pr/index.md#signing-your-commits) for details.
 - **Follow the repository's contribution guide**: each repository has its own setup and workflow instructions. Start there.
 - **Ask for help when you need it**: reach out on [Discord](#stay-connected) or comment on the issue you're working on.
 

@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Present & share Radius"
-linkTitle: "Present & share Radius"
+title: "Spread the word"
+linkTitle: "Spread the word"
 description: "Give presentations, write about Radius, and share it with your community"
 weight: 300
 aliases:
