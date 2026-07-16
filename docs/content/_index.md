@@ -7,30 +7,81 @@ weight: 1
 no_list: true
 ---
 
-Welcome to the Radius documentation! Here you'll find everything you need to know about Radius, from getting started to advanced topics.
-
 {{% alert color="primary" %}}
 {{< image src="radius-logo.svg" alt="Radius logo" width="400px" >}} <br /><br />
-Radius is a cloud native application platform.  It enables developers and IT operators to collaborate on delivering and managing cloud-native applications. With Radius, teams can easily understand their applications and how applications are running environments including dev, cloud, edge, and on-prem. Plus, teams can ensure their application infrastructure meets cost, operations, and security requirements. Open-source and multi-cloud, Radius is the cloud-native application platform for delivering and managing applications anywhere.
-
-[**Learn more**](https://radapp.io/)
+Radius is an open-source, multi-cloud application platform that helps developers and the platform engineers who support them build, deploy, and manage cloud-native applications. Teams get a clear view of their applications and how they run across environments, from dev to cloud, edge, and on-prem, while making sure their infrastructure meets cost, operations, and security requirements.
 {{% /alert %}}
 
-{{< button text="Radius Quick Start 🚀" page="quick-start" color="success" size="btn-lg" >}}
+{{< button text="Get started with Radius 🚀" page="quick-start" color="success" size="btn-lg" >}}
+
+## What you can do with Radius
 
 {{< cardpane >}}
-  {{< card header="**🎓 Tutorials**" footer="[**View available tutorials →**]({{< ref tutorials >}})" >}}
-  Visit the tutorials for guided learning paths to try out Radius and pick up the main concepts. We'll walk you through the steps to get started with Radius and run your first set of apps.
-  {{< /card >}}
-  {{< card header="**📘 How-to guides**" footer="[**Visit how-to guides →**]({{< ref guides >}})" >}}
-  Check out the how-to guides for step-by-step instructions on how to use Radius and its features. We'll walk you through how to accomplish specific tasks when using Radius.
-  {{< /card >}}
+  {{% card header="**🔍 Understand and operate your applications**" %}}
+  See your whole application, including services, infrastructure, and their connections, as a live graph to onboard faster, debug issues, and manage changes with confidence.
+
+  [**Explore applications →**]({{< ref "concepts/applications" >}})
+  {{% /card %}}
+  {{% card header="**🏗️ Standardize how your teams build and deploy**" %}}
+  Define reusable Resource Types, Recipes, and environments so every team follows the same golden paths and meets your cost, security, and operations requirements.
+
+  [**Discover Resource Types →**]({{< ref "concepts/resource-types" >}})
+  {{% /card %}}
 {{< /cardpane >}}
 {{< cardpane >}}
-  {{< card header="**💭 Concepts**" footer="[**Learn the concepts →**]({{< ref concepts >}})" >}}
-  Learn about the background and concepts behind Radius with in-depth explanations. We'll cover the main concepts and how Radius works, so you have the broader context to deeply understand Radius and use it most effectively.
-  {{< /card >}}
-  {{< card header="**🧾 Reference**" footer="[**Visit reference material →**]({{< ref guides >}})" >}}
-  Refer to detailed information on Radius resources, APIs, FAQs, and more. Reference material is useful for looking up specific information about Radius when you need it.
-  {{< /card >}}
+  {{% card header="**🧰 Give developers self-service infrastructure**" %}}
+  Let application teams provision the databases, caches, and messaging they need on demand, while platform engineers control how that infrastructure is created with Recipes.
+
+  [**Learn about Recipes →**]({{< ref "concepts/recipes" >}})
+  {{% /card %}}
+  {{% card header="**🚀 Ship your app to any environment**" %}}
+  Define your application once and run it consistently across dev, cloud, edge, and on-prem, without rewriting it for each target.
+
+  [**Understand environments →**]({{< ref "concepts/environments" >}})
+  {{% /card %}}
+{{< /cardpane >}}
+
+## Integrations
+
+{{< cardpane >}}
+  {{% card header="**🧱 Use your existing Infrastructure as Code**" %}}
+  Use the infrastructure-as-code tools you already know, Bicep and Terraform, to author Radius applications and Recipes.
+
+  [**Author Recipes →**]({{< ref "guides/recipes/howto-author-recipes" >}})
+  {{% /card %}}
+  {{% card header="**☁️ Run on your platforms**" %}}
+  Run Radius on Kubernetes and connect it to your cloud platforms, including Azure and AWS.
+
+  [**Configure providers →**]({{< ref "guides/operations/providers/overview" >}})
+  {{% /card %}}
+  {{% card header="**🔄 GitOps**" %}}
+  Deploy and manage Radius applications through your GitOps workflows using tools like Flux.
+
+  [**Deploy with GitOps →**]({{< ref "guides/deploy-apps/gitops/overview" >}})
+  {{% /card %}}
+  {{% card header="**📊 Backstage-based Dashboard**" %}}
+  Visualize and interact with your applications, environments, and Recipes in the Radius dashboard, built on Backstage.
+
+  [**Explore the dashboard →**]({{< ref "guides/tooling/dashboard/overview" >}})
+  {{% /card %}}
+{{< /cardpane >}}
+
+## Get involved
+
+{{< cardpane >}}
+  {{% card header="**🤝 Contribute**" %}}
+  Help improve Radius through code, docs, or by sharing your experience.
+
+  [**Start contributing →**]({{< ref contributing >}})
+  {{% /card %}}
+  {{% card header="**🗺️ Roadmap**" %}}
+  See what's planned for Radius and where the project is headed.
+
+  [**View the roadmap →**](https://aka.ms/radius-roadmap)
+  {{% /card %}}
+  {{% card header="**💬 Community**" %}}
+  Connect with the Radius community to ask questions and stay up to date.
+
+  [**Join us on Discord →**](https://aka.ms/Radius/Discord)
+  {{% /card %}}
 {{< /cardpane >}}
