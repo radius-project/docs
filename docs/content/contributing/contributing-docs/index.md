@@ -56,34 +56,27 @@ The easiest way to get up and running is with a GitHub Codespace. This gives you
    popd
    ```
 
-1. Update submodules:
+1. Change into the docs site directory:
 
    ```sh
-   cd docs
-   git submodule update --init --recursive
+   cd docs/docs
    ```
 
 1. Install npm packages:
 
    ```sh
-   npm install
+   npm ci
    ```
 
-1. Initialize the docsy theme:
-
-   ```sh
-   cd themes/docsy
-   npm install
-   cd ..
-   ```
+   > The [Docsy theme](https://www.docsy.dev/) is pulled in automatically as a [Hugo Module](https://gohugo.io/hugo-modules/), so there is no separate theme initialization step.
 
 **Run local server**
 
-1. Make sure you're still in the `docs` directory
+1. Make sure you're still in the `docs/docs` directory
 1. Run
 
    ```sh
-   hugo server
+   npm start
    ```
 
 1. Navigate to `http://localhost:1313/`
@@ -609,7 +602,7 @@ For the following steps, treat `v1.0` as the current release and `edge` as the p
 1. Make sure included files look accurate. Inspect any merge conflicts in VS Code. Remove configuration changes or version information that does not need to be merged. Examples of files that usually shouldn't be merged:
    - docs/config.toml
    - docs/layouts/partials/hooks/body-end.html
-   - docsy sub-module
+   - docsy Hugo Module version (docs/go.mod and docs/go.sum)
 1. Commit the staged changes and push to the upmerge branch (`upmerge_MM-DD`).
 1. Open a PR from the upmerge branch to the upcoming release branch (`edge`).
 1. Review the PR and double check that no unintended changes were pushed to the upmerge branch.
