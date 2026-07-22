@@ -2,6 +2,19 @@
 @import "sidebar-tree";
 @import "content";
 
+// Code blocks use a dark syntax theme, so Docsy's default (dark) copy-to-clipboard
+// button is nearly invisible against them until hovered. Use a light color so the
+// button stays visible at all times, like other docs sites.
+.td-content .highlight pre button.td-click-to-copy {
+    color: rgba($white, 0.6);
+
+    &:hover,
+    &:active {
+        color: $white;
+        background-color: rgba($white, 0.15);
+    }
+}
+
 .td-navbar .navbar-brand__name {
     display: none;
 }
