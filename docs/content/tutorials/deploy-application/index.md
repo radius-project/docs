@@ -18,8 +18,6 @@ Add the following to `app.bicep`:
 
 The `extension radius` statement imports the resource types built into Radius. 
 
-The `extension radiusResources` statement imports the PostgreSQL resource type created in the previous step.
-
 {{% rad file="snippets/app.bicep" embed=true marker="//PARAM" %}}
 
 The `environment` parameter is set by the Radius CLI when deploying the application.
