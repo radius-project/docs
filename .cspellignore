@@ -104,6 +104,7 @@ BicepConfigProperties
 BicepConfigPropertiesAuthentication
 bicepparam
 BicepRecipeProperties
+binfmt
 Bitbucket
 Blazor
 blockOwnerDeletion
@@ -692,6 +693,7 @@ myroute
 mysample
 myservice
 myserviceroute
+mysqldb
 myworkspace
 NamedQuery
 namespace
