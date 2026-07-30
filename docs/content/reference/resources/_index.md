@@ -12,7 +12,7 @@ Resource Types define the schema for the resources developers use to model their
 
 `Radius.Core` Resource Types are embedded in the Radius control plane. All other Resource Types are sourced from the [resource-types-contrib](https://github.com/radius-project/resource-types-contrib) repository.
 
-All of the schema information on these pages is also available directly from your environment using [`rad resource-type list`]({{< ref rad_resource-type_list >}}) and [`rad resource-type show`]({{< ref rad_resource-type_show >}}), as well as through the [Radius Dashboard]({{< ref "/guides/installation/dashboard/overview" >}}).
+All of the schema information on these pages is also available directly from your environment using [`rad resource-type list`]({{< ref rad_resource-type_list >}}) and [`rad resource-type show`]({{< ref rad_resource-type_show >}}), as well as through the [Radius Dashboard]({{< ref "/installation/dashboard" >}}).
 
 ## How this section is organized
 
