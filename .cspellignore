@@ -425,6 +425,7 @@ geos
 gg
 ghcr
 Gi
+gibibytes
 GigaOm
 GitAuthConfig
 GitAuthConfigPat
@@ -773,6 +774,7 @@ periodSeconds
 PermissionSet
 PersistentVolume
 pfx
+PGDATA
 PhoneNumber
 plainHTTP
 PlaybackConfiguration
@@ -1071,6 +1073,7 @@ TaskTemplate
 TBD
 TCP
 TcpHealthProbeProperties
+tcpsocket
 tcrra
 TechCrunch
 templateKind
@@ -1094,6 +1097,7 @@ tls
 tlsdemo
 tlstermination
 tmp
+tmpfs
 toc
 ToCs
 ToDo
