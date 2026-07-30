@@ -19,6 +19,12 @@
     display: none;
 }
 
+// Add breathing room above the "Feedback" footer section so it isn't crowded
+// against the preceding page content.
+.feedback--title {
+    margin-top: 2rem;
+}
+
 .btn-success {
     background: #3176d9;
     background-color: #3176d9;

@@ -1,0 +1,13 @@
+{{/*
+  Site-wide preview-release banner.
+
+  This overrides Docsy's empty "_td-content-after-header" content view, which
+  renders immediately after the page title/description header and before the
+  page body. Placing the banner here shows it on every content page (single and
+  list) without editing individual Markdown files. The markup mirrors the Docsy
+  `alert` shortcode (color="warning").
+*/ -}}
+<div class="alert alert-warning" role="alert">
+  <div class="h4 alert-heading" role="heading">❗️ Preview Release</div>
+  <p>This documentation is for a preview version of Radius. Features and APIs may change before general availability. To run preview commands, pass <code>--preview</code> or set the environment variable <code>RADIUS_PREVIEW=true</code>.</p>
+</div>

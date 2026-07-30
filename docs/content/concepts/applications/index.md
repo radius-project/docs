@@ -3,9 +3,9 @@ type: docs
 title: "Applications Concepts"
 linkTitle: "Applications"
 description: "How Radius manages applications"
-weight: 40
+weight: 400
 aliases:
-    - /content/guides/author-apps/applications/overview
+    - /content/guides/applications/applications/overview
 ---
 
 A Radius Application is a resource that is a parent to other resources that make up the application. Applications and its resources are defined in an application definition file using the Bicep Infrastructure as Code (IaC) language. Since applications are a first-class Resource Type in Radius, developers perform operations on applications rather than individual resources. When deploying resources, developers simply deploy the Application. Radius also tracks all deployed resources and their dependencies in a graph. Developers can add to the graph by expressing explicit dependencies such as a container relying on a database.

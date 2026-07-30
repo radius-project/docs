@@ -1,6 +1,6 @@
 Install the Radius CLI on your workstation with the appropriate installation script:
 
-{{< tabs "Linux/WSL" MacOS "Windows PowerShell" "Windows WinGet" "GitHub Codespaces" "Azure Cloud Shell" Binaries >}}
+{{< tabs Linux macOS "Windows PowerShell" "Windows WinGet" "GitHub Codespaces" Binaries >}}
 
 {{% codetab %}}
 {{< latest >}}
@@ -82,24 +82,10 @@ Edge version installation via WinGet is not supported. To install the latest edg
 {{% /codetab %}}
 
 {{% codetab %}}
-[Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/overview) is an interactive, authenticated, browser-accessible shell for managing Azure resources.
-
-Azure Cloud Shell for bash doesn't have a sudo command, so users are unable to install Radius to the default `/usr/local/bin` installation path. To install the Radius CLI to the home directory, run the following commands:
-
-```bash
-export RADIUS_INSTALL_DIR=./
-wget -q "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh" -O - | /bin/bash
-```
-
-{{% /codetab %}}
-
-{{% codetab %}}
 Visit [Radius GitHub releases](https://github.com/radius-project/radius/releases) to select and download a specific version of the Radius CLI.
 
 {{% /codetab %}}
 
 {{< /tabs >}}
-
-You may be prompted for your root or administrator password during installation. If you do not have permission to the default installation location, you can set the RADIUS_INSTALL_DIR environment variable with your preferred install directory.
 
 Verify the Radius CLI is installed correctly by running `rad version`.

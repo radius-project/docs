@@ -3,7 +3,7 @@ type: docs
 title: "5. Deploy Application"
 linkTitle: "5. Deploy Application"
 description: "Learn how to deploy, and manage a Radius Application"
-weight: 600
+weight: 400
 ---
 
 In part five of this tutorial, you will deploy the Todo List Application to the Environment.
@@ -107,4 +107,4 @@ rad uninstall kubernetes --purge
 ```
 
 <br>
-{{< button text="Next step: Explore How-To Guides" page="guides" >}}
+{{< button text="Next step: Deploy Applications" page="applications" >}}

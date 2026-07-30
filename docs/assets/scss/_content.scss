@@ -44,14 +44,35 @@
         @extend .img-fluid;
     }
 
-    > table {
+    > table:not(.td-initial) {
         @extend .table-striped;
-
-        @extend .table-responsive;
 
         @extend .table-bordered;
 
         @extend .table;
+
+        // Render as a normal table rather than Docsy's responsive
+        // `display: block` (which sets `display: block` and adds horizontal
+        // scrolling). The `:not(.td-initial)` qualifier matches the specificity
+        // of Docsy's own responsive-table rule so `display: table` wins the
+        // cascade.
+        display: table;
+        width: 100%;
+
+        // Use a fixed layout but WITHOUT any hard-coded per-column widths. With
+        // no `<col>`/`width` rules, the fixed algorithm divides the table width
+        // equally among columns (2 columns → 50/50, 3 → thirds, 4 → quarters).
+        // This is dynamic to the column count, never lets one column hog the
+        // width, and gives every column enough room that ordinary words like
+        // "string" or "boolean" are never broken mid-word. A genuinely long,
+        // unbreakable token (e.g. a UCP resource ID) wraps within its column
+        // via `overflow-wrap: anywhere` instead of forcing the table wide.
+        table-layout: fixed;
+
+        td, th {
+            overflow-wrap: anywhere;
+            word-break: normal;
+        }
     }
 
     > blockquote {
@@ -80,6 +101,27 @@
 
     .lead {
         margin-bottom: 1.5rem;
+    }
+
+    // The Docsy `tabs`/`codetab` shortcodes render each tab's body in a
+    // `.tab-pane` that has no horizontal padding, so paragraphs and code blocks
+    // sit flush against the tab-content border. Inset the content from the
+    // border for readability.
+    .tab-content .tab-pane {
+        padding: 1rem;
+
+        // The shortcode injects a leading <br> for top spacing; the padding now
+        // provides it, so hide the redundant break.
+        > br:first-child {
+            display: none;
+        }
+
+        // Docsy's tab styling resets `.highlight` to `margin: 0` inside a tab
+        // pane, which removes the spacing between a code block and the text that
+        // follows it. Restore a bottom margin so code blocks aren't cramped.
+        .highlight {
+            margin-bottom: 1rem;
+        }
     }
 }
 

@@ -4,8 +4,6 @@ title: "1. Install Radius"
 linkTitle: "1. Install Radius"
 description: "Learn how to install Radius"
 weight: 100
-aliases:
-    - /installation/
 ---
 
 In part one, you will install Radius on an existing Kubernetes cluster.  

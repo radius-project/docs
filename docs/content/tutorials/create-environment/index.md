@@ -3,7 +3,7 @@ type: docs
 title: "4. Create Environment"
 linkTitle: "4. Create Environment"
 description: "Create a Radius Environment to deploy the Application"
-weight: 400
+weight: 300
 ---
 
 In part four of this tutorial, you will:

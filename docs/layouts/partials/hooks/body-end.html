@@ -1,7 +1,31 @@
 {{/*
   Docsy "body-end" hook: markup injected just before </body>.
-  Intentionally empty. Analytics (Microsoft Clarity) is loaded from the
+  Analytics (Microsoft Clarity) is loaded from the
   "head-end.html" hook, and code-block copy buttons are provided by Docsy's
-  built-in click-to-copy feature, so no scripts are needed here.
+  built-in click-to-copy feature.
 */}}
 
+<script>
+  (() => {
+    const synchronizedTabs = new Set(['terraform', 'bicep']);
+    let synchronizing = false;
+
+    document.addEventListener('show.bs.tab', (event) => {
+      const label = event.target.dataset.tabLabel;
+      if (synchronizing || !synchronizedTabs.has(label)) {
+        return;
+      }
+
+      synchronizing = true;
+      try {
+        document.querySelectorAll(`[data-tab-label="${label}"]`).forEach((tab) => {
+          if (tab !== event.target && !tab.classList.contains('active')) {
+            bootstrap.Tab.getOrCreateInstance(tab).show();
+          }
+        });
+      } finally {
+        synchronizing = false;
+      }
+    });
+  })();
+</script>

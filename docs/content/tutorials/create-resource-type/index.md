@@ -95,6 +95,6 @@ Navigate to [http://localhost:7007/resource-types/Radius.Data/postgreSqlDatabase
 
 {{< image src="resource-type.png" alt="Radius Resource types in Dashboard" width="700px" >}} <br /><br />
 
-In part three of this tutorial, you will create a Recipe to deploy the PostgreSQL Resource Type you just created.  
+Next, learn how to author and store a recipe that implements a Resource Type.
 <br>
-{{< button text="Next Step: Create Recipes" page="create-recipe" color="primary" >}}  
+{{< button text="Next step: Author a recipe" page="extensibility/recipes" color="primary" >}}

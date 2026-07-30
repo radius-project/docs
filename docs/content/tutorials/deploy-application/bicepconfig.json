@@ -1,11 +1,7 @@
 // The bicepconfig.json file is needed so the bicep files for this tutorial can be compiled with the correct setup
 {
-    "experimentalFeaturesEnabled": {
-        "extensibility": true
-    },
     "extensions": {
         "radius": "br:biceptypes.azurecr.io/radius:latest",
-        "aws": "br:biceptypes.azurecr.io/aws:latest",
         "radiusResources": "radiusResources.tgz"
     }
 }

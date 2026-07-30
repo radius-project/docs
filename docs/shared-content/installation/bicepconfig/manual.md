@@ -2,12 +2,8 @@
 
 ```json
 {
-	"experimentalFeaturesEnabled": {
-		"extensibility": true
-	},
-	"extensions": {
-		"radius": "br:biceptypes.azurecr.io/radius:<release-version>",
-		"aws": "br:biceptypes.azurecr.io/aws:<release-version>"
+    "extensions": {
+        "radius": "br:biceptypes.azurecr.io/radius:<release-version>" 
 	}
 }
 ```

@@ -3,7 +3,7 @@ type: docs
 title: "Tutorial"
 linkTitle: "Tutorial"
 description: "End-to-end tutorial to configure Radius and deploy an application"
-weight: 30
+weight: 300
 ---
 
 This hands-on tutorial guides you through installing Radius, configuring Resource Types, Recipes, and Environments, and finally deploying the Todo List sample application. This tutorial will take approximately 30-60 minutes to complete.  

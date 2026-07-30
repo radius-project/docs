@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Radius reference documentation"
+title: "Reference"
 linkTitle: "Reference"
-description: "Detailed reference documentation on various Radius components"
-weight: 100
+description: "Technical reference for the Radius CLI, Resource Types, Recipes, and control plane"
+weight: 900
 ---
