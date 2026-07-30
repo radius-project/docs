@@ -55,8 +55,6 @@ resource frontend 'Radius.Compute/containers@2025-08-01-preview' = {
 }
 ```
 
-For more information, see the Radius documentation at https://docs.radapp.io.
-
 ## Top-Level Properties
 
 | Property | Type | Description |
@@ -79,6 +77,7 @@ For more information, see the Radius documentation at https://docs.radapp.io.
 
 | Property | Type | Description |
 |----------|------|-------------|
+| `kind` | string | Discriminator property that selects the variant. Allowed values: [`aci`](#status-compute-aci), [`kubernetes`](#status-compute-kubernetes). |
 | `identity` | [object](#status-compute-identity) | Configuration for supported external identity providers |
 | `resourceId` | string | The resource id of the compute resource for application environment. |
 
@@ -106,3 +105,15 @@ For more information, see the Radius documentation at https://docs.radapp.io.
 | `managedIdentity` | string array | The list of user assigned managed identities |
 | `oidcIssuer` | string | The URI for your compute platform's OIDC issuer |
 | `resource` | string | The resource ID of the provisioned identity |
+
+### `status.compute.aci` {#status-compute-aci}
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `resourceGroup` | string | The resource group to use for the environment. |
+
+### `status.compute.kubernetes` {#status-compute-kubernetes}
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `namespace` | string | The namespace to use for the environment. |

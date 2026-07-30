@@ -95,8 +95,6 @@ Radius is installed with a `default` Recipe Pack in the `default` resource group
 
 Prebuilt Recipe Packs and the Recipes they reference are published in the [resource-types-contrib](https://github.com/radius-project/resource-types-contrib) repository.
 
-For more information, see the Radius documentation at https://docs.radapp.io.
-
 ## Top-Level Properties
 
 | Property | Type | Description |

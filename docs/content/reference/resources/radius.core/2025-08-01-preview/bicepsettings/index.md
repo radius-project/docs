@@ -75,8 +75,6 @@ resource myEnvironment 'Radius.Core/environments@2025-08-01-preview' = {
 }
 ```
 
-For more information, see the Radius documentation at https://docs.radapp.io.
-
 ## Top-Level Properties
 
 | Property | Type | Description |
