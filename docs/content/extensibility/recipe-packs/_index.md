@@ -3,14 +3,14 @@ type: docs
 title: "How to manage Recipe Packs"
 linkTitle: "Manage Recipe Packs"
 description: "Learn how to create, assign, update, and manage Recipe Packs"
-weight: 300
+weight: 400
 aliases:
   - /guides/recipe-packs/
 ---
 
 A [Recipe Pack]({{< ref "/concepts/recipe-packs" >}}) is a Radius resource that groups recipes by Resource Type. Platform engineers create Recipe Packs in the Radius control plane and assign them to Environments to control how Radius provisions infrastructure.
 
-This guide focuses on managing the Recipe Pack resource after its recipes have been authored and published. To create and publish a recipe, see [How to use custom recipes with Radius]({{< ref "/extensibility/recipes" >}}).
+This guide focuses on managing the Recipe Pack resource after its recipes have been authored and published. To create and publish a recipe, see [How to use custom recipes with Radius]({{< ref "/extensibility/custom-recipes" >}}).
 
 ## Step 1: Create a Recipe Pack
 

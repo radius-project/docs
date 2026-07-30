@@ -6,7 +6,7 @@ description: "Learn how to use the result object to return values from a recipe"
 weight: 200
 ---
 
-A recipe returns data to Radius through a special output named `result`. After a recipe provisions its infrastructure, the `result` object carries the values, secrets, and resource IDs that Radius records on the resource that called the recipe. Radius surfaces those values to the resource and to any resources that connect to it, stores secrets securely, and tracks the returned resource IDs so it can manage their lifecycle. A recipe returns it from an `output result object` in Bicep or an `output "result"` in Terraform. For more information, visit the [recipe authoring how-to guide]({{< ref "/extensibility/recipes" >}}).
+A recipe returns data to Radius through a special output named `result`. After a recipe provisions its infrastructure, the `result` object carries the values, secrets, and resource IDs that Radius records on the resource that called the recipe. Radius surfaces those values to the resource and to any resources that connect to it, stores secrets securely, and tracks the returned resource IDs so it can manage their lifecycle. A recipe returns it from an `output result object` in Bicep or an `output "result"` in Terraform. For more information, visit the [recipe authoring how-to guide]({{< ref "/extensibility/custom-recipes" >}}).
 
 ## Usage
 

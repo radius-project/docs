@@ -49,7 +49,7 @@ Initializing Radius...
     - Kubernetes namespace: radius-system
 ✅ Create new environment default
     - Kubernetes namespace: default
-    - Recipe pack: default recipe pack
+    - Recipe pack: default
 ✅ Scaffold application todolist
 ✅ Update local configuration
 

@@ -97,4 +97,4 @@ Navigate to [http://localhost:7007/resource-types/Radius.Data/postgreSqlDatabase
 
 Next, learn how to author and store a recipe that implements a Resource Type.
 <br>
-{{< button text="Next step: Author a recipe" page="extensibility/recipes" color="primary" >}}
+{{< button text="Next step: Author a recipe" page="extensibility/custom-recipes" color="primary" >}}

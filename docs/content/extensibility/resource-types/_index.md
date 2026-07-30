@@ -66,7 +66,7 @@ Radius supports string, integer, number, boolean, array, and object properties. 
 
 ## Step 3: Choose the provisioning behavior
 
-Most Resource Types use a [recipe]({{< ref "/extensibility/recipes" >}}) to provision backing infrastructure. For a recipe-backed Resource Type, omit `capabilities`; the Recipe Pack assigned to the Environment determines which recipe Radius runs.
+Most Resource Types use a [recipe]({{< ref "/extensibility/custom-recipes" >}}) to provision backing infrastructure. For a recipe-backed Resource Type, omit `capabilities`; the Recipe Pack assigned to the Environment determines which recipe Radius runs.
 
 Use `ManualResourceProvisioning` only when Radius should store the supplied properties without running a recipe:
 
@@ -124,4 +124,4 @@ See [Distribute Bicep extensions to developers]({{< ref "/installation/dev-works
 
 After creating a custom Resource Type, create a recipe which deploys the new Resource Type to a cloud provider.
 
-{{< button text="Next step: How to create a custom recipe" page="/extensibility/recipes" >}}
+{{< button text="Next step: How to create a custom recipe" page="/extensibility/custom-recipes" >}}

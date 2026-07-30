@@ -44,7 +44,7 @@ Resource Types define the abstraction for a resource that will exist in the real
 
 While Resource Types define the interface, Recipe Packs define the resource deployment **implementation**. A Recipe Pack is a simple manifest whose primary property is a set of recipes, one for each Resource Type. The term *recipe* is used as a generic term to refer to both a Terraform configuration or a Bicep template. For each Resource Type, the Recipe Pack specifies the Terraform configuration or Bicep template used to deploy that type, along with recipe parameter values that Radius will pass to the recipe at deploy-time. One or more Recipe Packs are then referenced in an Environment definition.
 
-Recipes are not tightly coupled with Radius or the Resource Type. In most circumstances, an existing Terraform configuration or Bicep template can be used as a recipe with slight modifications to ensure the properties in the Resource Type map to the Terraform variables or Bicep parameters.
+Recipes are not tightly coupled with Radius or the Resource Type. In most circumstances, an existing Terraform configuration or Bicep template can be used as a recipe with slight modifications to ensure the properties in the Resource Type map to the Terraform variables or Bicep parameters. Off-the-shelf community modules can also be used directly as recipes without modification.
 
 #### Environments
 

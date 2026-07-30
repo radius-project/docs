@@ -5,12 +5,13 @@ linkTitle: "Create custom Recipes"
 description: "Learn how to use Terraform and Bicep recipes with Radius"
 weight: 200
 aliases:
+  - /extensibility/recipes/
   - /guides/recipes/
   - /guides/recipes/howto-author-recipes/
   - /tutorials/create-recipe/
 ---
 
-A [recipe]({{< ref "/concepts/recipe-packs" >}}) is a Terraform module or Bicep template that defines how Radius provisions infrastructure for a Resource Type. You can use existing infrastructure-as-code with Radius by accepting the Radius `context` object and, when needed, returning a `result` object.
+A [recipe]({{< ref "/concepts/recipe-packs" >}}) is a Terraform module or Bicep template that defines how Radius provisions infrastructure for a Resource Type. You can adapt existing infrastructure-as-code to run as a recipe by accepting the Radius `context` object and, when needed, returning a `result` object. If a published module already provisions what you need, you can use it without modification instead; see [How to use existing modules as Recipes]({{< ref "/extensibility/existing-recipes" >}}).
 
 This guide shows you how to adapt a Terraform module or Bicep template to run as a Radius recipe. It focuses on using `context` to make Radius resource, application, Environment, runtime, connection, and cloud provider information available within the recipe. It also explains how to use `result` to return information to Radius. Adding the recipe to a Recipe Pack and assigning that Recipe Pack to an Environment are covered separately.
 

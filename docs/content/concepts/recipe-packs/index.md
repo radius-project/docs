@@ -16,7 +16,7 @@ While Resource Types are abstract and application oriented, a Recipe Pack is con
 
 Because deployments only happen through a Recipe Pack, Recipe Packs are also how a platform enforces security, operational, and cost best practices. A resource is requested by its Resource Type, and the approved Recipe Pack determines how that resource is actually created.
 
-The term *recipe* is used because Radius uses existing Infrastructure as Code (IaC) solutions to perform the actual deployment. Today, Radius supports both Terraform and Bicep, and is designed to integrate with other IaC solutions in the future. As long as there is a Terraform provider or Bicep extension, Radius can deploy the resource. In most cases an existing Terraform configuration or Bicep template can be used as a recipe with only minor changes.
+The term *recipe* is used because Radius uses existing Infrastructure as Code (IaC) solutions to perform the actual deployment. Today, Radius supports both Terraform and Bicep, and is designed to integrate with other IaC solutions in the future. As long as there is a Terraform provider or Bicep extension, Radius can deploy the resource. In most cases an existing Terraform configuration or Bicep template can be used as a recipe with only minor changes. A community module, such as one from the Terraform Registry or an Azure Verified Module, can even be referenced directly as a recipe without modification.
 
 For each Resource Type, a Recipe Pack defines:
 
