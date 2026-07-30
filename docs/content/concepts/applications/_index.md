@@ -44,6 +44,3 @@ In this example, the connection name is `postgresql` and the connection is speci
 - `CONNECTION_POSTGRESQL_USERNAME`
 
 If the connection name was `db` instead of `postgresql` the environment variable would have been `CONNECTION_DB_HOST`.
-
-<br>
-{{< button text="Next step: Complete the tutorial" page="tutorials" >}}

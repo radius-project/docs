@@ -6,6 +6,58 @@ linkTitle: "Models"
 
 {{< schemaExample >}}
 
+## Description
+
+The Radius.AI/models Resource Type deploys an LLM inference model endpoint.
+To deploy a model, add a models resource to the application definition Bicep
+file. The platform-engineer recipe binds this developer-facing contract to a
+managed cloud model service without exposing any module details to the app.
+```
+resource model 'Radius.AI/models@2025-08-01-preview' = {
+  name: 'model'
+  properties: {
+    environment: environment
+    application: myApplication.id
+    model: 'gpt-5-mini'
+  }
+}
+```
+
+To connect your container to the model, create a connection from the
+Container resource to the model as shown below.
+```
+resource frontend 'Radius.Compute/containers@2025-08-01-preview' = {
+  name: 'frontend'
+  properties: {
+    application: myApplication.id
+    environment: environment
+    containers: {
+      frontend: {
+        image: 'frontend:1.25'
+      }
+    }
+    connections: {
+      llm: {
+        source: model.id
+      }
+    }
+  }
+}
+```
+
+The connection automatically injects environment variables into the
+container for all properties from the model. The environment variables are
+named `CONNECTION_<CONNECTION-NAME>_<PROPERTY-NAME>`. In this example the
+connection name is `llm` so the environment variables will be:
+
+- CONNECTION_LLM_MODEL
+- CONNECTION_LLM_ENDPOINT
+
+The `apiKey` secret is NOT injected via the connection — it is materialized
+into a managed `Radius.Security/secrets` resource. Bind it into a container
+env var with a `secretKeyRef`, using `model.properties.secrets.name` as the
+`secretName` and key `apiKey` (see the `secrets` property).
+
 ## Top-Level Properties
 
 | Property | Type | Description |

@@ -6,6 +6,63 @@ linkTitle: "MongoDatabases"
 
 {{< schemaExample >}}
 
+## Description
+
+The Radius.Data/mongoDatabases Resource Type deploys a Mongo-compatible
+database. To deploy a Mongo database, add a mongoDatabases resource to the
+application definition Bicep file. The Azure recipe uses Cosmos DB for
+MongoDB and exposes its endpoint and connection string as resource
+properties.
+```
+resource database 'Radius.Data/mongoDatabases@2025-08-01-preview' = {
+  name: 'mongo'
+  properties: {
+    environment: environment
+    application: myApplication.id
+    database: 'mongo_db'
+  }
+}
+```
+
+To connect your container to the database, create a connection from the
+Container resource to the database as shown below.
+```
+resource frontend 'Radius.Compute/containers@2025-08-01-preview' = {
+  name: 'frontend'
+  properties: {
+    application: myApplication.id
+    environment: environment
+    container: {
+      image: 'frontend:1.25'
+    }
+    connections: {
+      mongo: {
+        source: database.id
+      }
+    }
+  }
+}
+```
+
+The connection automatically injects environment variables into the
+container for all properties from the database. The environment variables
+are named `CONNECTION_<CONNECTION-NAME>_<PROPERTY-NAME>`. In this example
+the connection name is `mongo` so the environment variables will be:
+
+- CONNECTION_MONGO_DATABASE
+- CONNECTION_MONGO_ENDPOINT
+
+The `connectionString` secret is NOT injected via the connection — it is
+materialized into a managed `Radius.Security/secrets` resource. Bind it into
+a container env var with a `secretKeyRef`, using `mongo.properties.secrets.name`
+as the `secretName` and key `connectionString` (see the `secrets` property).
+
+Portability note: this schema is platform-neutral so the same resource
+type works with Azure AVM, AWS Terraform modules, and Kubernetes recipes.
+Only the recipePack source plus parameters/outputs mapping change per
+platform; the developer-facing database knob and read-only connection
+surface stay identical.
+
 ## Top-Level Properties
 
 | Property | Type | Description |

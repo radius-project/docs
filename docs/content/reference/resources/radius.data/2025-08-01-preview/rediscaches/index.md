@@ -6,6 +6,59 @@ linkTitle: "RedisCaches"
 
 {{< schemaExample >}}
 
+## Description
+
+The Radius.Data/redisCaches Resource Type deploys a Redis cache. To deploy a
+Redis cache, add a redisCaches resource to the application definition Bicep
+file. Unlike database types, no secret is required: Azure Managed Redis
+generates its own access keys, so the platform-engineer recipe needs no
+injected credentials.
+```
+resource cache 'Radius.Data/redisCaches@2025-08-01-preview' = {
+  name: 'redis'
+  properties: {
+    environment: environment
+    application: myApplication.id
+    size: 'S'
+  }
+}
+```
+
+To connect your container to the cache, create a connection from the
+Container resource to the cache as shown below.
+```
+resource frontend 'Radius.Compute/containers@2025-08-01-preview' = {
+  name: 'frontend'
+  properties: {
+    application: myApplication.id
+    environment: environment
+    containers: {
+      frontend: {
+        image: 'frontend:1.25'
+      }
+    }
+    connections: {
+      redis: {
+        source: cache.id
+      }
+    }
+  }
+}
+```
+
+The connection automatically injects environment variables into the
+container for all properties from the cache. The environment variables are
+named `CONNECTION_<CONNECTION-NAME>_<PROPERTY-NAME>`. In this example the
+connection name is `redis` so the environment variables will be:
+
+- CONNECTION_REDIS_HOST
+- CONNECTION_REDIS_PORT
+
+The `url` secret is NOT injected via the connection — it is materialized into
+a managed `Radius.Security/secrets` resource. Bind it into a container env var
+with a `secretKeyRef`, using `redis.properties.secrets.name` as the `secretName`
+and key `url` (see the `secrets` property).
+
 ## Top-Level Properties
 
 | Property | Type | Description |

@@ -10,7 +10,7 @@ weight: 200
 
 Radius is a platform for defining and deploying applications and infrastructure to any cloud. It is a central component of modern-day internal developer platforms (IDPs). It allows platform engineers to define resource types for developers to use when building their applications, and separately, the implementation of those resource types using existing Infrastructure as Code (IaC) templates and modules. Additionally, Radius enables platform engineers to define logical environments with specific deployment targets (e.g., a specific cloud provider region), each with their own IaC implementation.
 
-This page provides a conceptual overview of Radius. It describes Radius' logical components, technical architecture, and how Radius relates to other IDP components. It is accompanied by additional concept pages focused on each of the core components: Resource Types, Recipe Packs, Environments, and Applications. If you are new to Radius, you are encouraged to complete the [Quick Start]({{< ref "quick-start" >}}). Then, after reading the concept documentation, complete the end-to-end [tutorial]({{< ref "tutorials" >}}).
+This page provides a conceptual overview of Radius. It describes Radius' logical components, technical architecture, and how Radius relates to other IDP components. It is accompanied by additional concept pages focused on each of the core components: Resource Types, Recipe Packs, Environments, and Applications. If you are new to Radius, you are encouraged to complete the [Getting Started guide]({{< ref "getting-started" >}}) before or after reading these concept pages.
 
 ## IDP reference architecture
 
@@ -106,6 +106,6 @@ When Radius deploys a resource using Terraform or Bicep, the Applications and Dy
 
 ## Organization
 
-The concept documentation is organized into four sequential pages, each covering one of the core Radius components: Resource Types, Recipe Packs, Environments, and Applications. Read them in order for a complete conceptual overview. If you prefer to be hands-on, skip forward to the [tutorial]({{< ref "tutorials" >}}).
+The concept documentation is organized into four sequential pages, each covering one of the core Radius components: Resource Types, Recipe Packs, Environments, and Applications. Read them in order for a complete conceptual overview. If you prefer to be hands-on, skip forward to the [Getting Started guide]({{< ref "getting-started" >}}).
 
 {{< button text="Next step: Read about Resource Types" page="concepts/resource-types" >}}

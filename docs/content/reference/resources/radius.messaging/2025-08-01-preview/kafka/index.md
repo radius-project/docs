@@ -6,6 +6,64 @@ linkTitle: "Kafka"
 
 {{< schemaExample >}}
 
+## Description
+
+The Radius.Messaging/kafka Resource Type deploys a Kafka-compatible
+messaging namespace. On Azure, the verification recipe provisions Azure
+Event Hubs with its Kafka surface enabled by the Standard tier and creates
+an Event Hub named by the developer-authored `topic` property.
+```
+resource kafka 'Radius.Messaging/kafka@2025-08-01-preview' = {
+  name: 'kafka'
+  properties: {
+    environment: environment
+    application: myApplication.id
+    topic: 'events'
+  }
+}
+```
+
+To connect a container to the cluster, create a connection from the
+Container resource to the Kafka cluster as shown below.
+```
+resource frontend 'Radius.Compute/containers@2025-08-01-preview' = {
+  name: 'frontend'
+  properties: {
+    application: myApplication.id
+    environment: environment
+    container: {
+      image: 'frontend:1.25'
+    }
+    connections: {
+      kafka: {
+        source: kafka.id
+      }
+    }
+  }
+}
+```
+
+The connection automatically injects environment variables into the
+container for all properties from the cluster. The environment variables are
+named `CONNECTION_<CONNECTION-NAME>_<PROPERTY-NAME>`. In this example the
+connection name is `kafka` so the environment variables will be:
+
+- CONNECTION_KAFKA_HOST
+
+The `connectionString` secret is NOT injected via the connection — it is
+materialized into a managed `Radius.Security/secrets` resource. Bind it into
+a container env var with a `secretKeyRef`, using `kafka.properties.secrets.name`
+as the `secretName` and key `connectionString` (see the `secrets` property).
+
+Portability note: the schema is platform-neutral so the same type works
+with Azure AVM (Bicep), AWS Terraform registry modules, and Kubernetes
+recipes. Only the recipePack `source` plus `parameters`/`outputs` mapping
+change per platform; the developer-facing properties (knobs and readOnly
+connection surface) stay identical. For example, Azure maps `host` from the
+Event Hubs namespace name while AWS MSK can map it from Terraform
+`bootstrap_brokers`, and a Kubernetes Strimzi/Kafka recipe can map it from
+the broker bootstrap Service DNS.
+
 ## Top-Level Properties
 
 | Property | Type | Description |

@@ -16,11 +16,11 @@ Radius is a cloud native application platform.  It enables developers and IT ope
 [**Learn more**](https://radapp.io/)
 {{% /alert %}}
 
-{{< button text="Radius Quick Start 🚀" page="quick-start" color="success" size="btn-lg" >}}
+{{< button text="Radius Quick Start 🚀" page="getting-started" color="success" size="btn-lg" >}}
 
 {{< cardpane >}}
-  {{< card header="**🎓 Tutorials**" footer="[**View available tutorials →**]({{< ref tutorials >}})" >}}
-  Visit the tutorials for guided learning paths to try out Radius and pick up the main concepts. We'll walk you through the steps to get started with Radius and run your first set of apps.
+  {{< card header="**🎓 Get started**" footer="[**Get started with Radius →**]({{< ref getting-started >}})" >}}
+  Follow the getting started guide for a guided path to try out Radius and pick up the main concepts. We'll walk you through installing Radius and running your first application.
   {{< /card >}}
   {{< card header="**📘 How-to guides**" footer="[**Visit how-to guides →**]({{< ref applications >}})" >}}
   Check out the how-to guides for step-by-step instructions on how to use Radius and its features. We'll walk you through how to accomplish specific tasks when using Radius.

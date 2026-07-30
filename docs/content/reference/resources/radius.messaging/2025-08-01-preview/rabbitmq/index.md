@@ -6,6 +6,36 @@ linkTitle: "RabbitMQ"
 
 {{< schemaExample >}}
 
+## Description
+
+The Radius.Messaging/rabbitMQ Resource Type deploys a queue-compatible
+messaging resource. In the Azure verification recipe, the platform engineer
+maps this type to Azure Service Bus using the Service Bus AMQP endpoint. This
+provisions the resource and maps its connection outputs; it does not prove
+RabbitMQ broker API compatibility.
+```
+resource queue 'Radius.Messaging/rabbitMQ@2025-08-01-preview' = {
+  name: 'rabbitmq'
+  properties: {
+    environment: environment
+    application: myApplication.id
+    queue: 'jobs'
+  }
+}
+```
+
+To connect your workload to the queue, create a connection from the workload
+resource to the queue resource. The connection automatically injects
+environment variables named `CONNECTION_<CONNECTION-NAME>_<PROPERTY-NAME>`.
+For a connection named `rabbitmq`, the variables are:
+
+- CONNECTION_RABBITMQ_HOST
+
+The `connectionString` secret is NOT injected via the connection — it is
+materialized into a managed `Radius.Security/secrets` resource. Bind it into
+a container env var with a `secretKeyRef`, using `rabbitmq.properties.secrets.name`
+as the `secretName` and key `connectionString` (see the `secrets` property).
+
 ## Top-Level Properties
 
 | Property | Type | Description |

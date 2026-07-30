@@ -6,6 +6,57 @@ linkTitle: "ContainerImages"
 
 {{< schemaExample >}}
 
+## Description
+
+The Radius.Compute/containerImages Resource Type builds a container image from source and pushes it to an OCI registry. Builds run inside the Radius control plane.
+
+To use a containerImages resource in your application, add a containerImages resource to the application definition Bicep file, then reference the `containerImages.imageReference` property in the containers resource. For example:
+
+```bicep
+extension radius
+
+param environment string
+
+resource myApp 'Radius.Core/applications@2025-08-01-preview' = {
+  name: 'myApp'
+  properties: {
+    environment: environment
+  }
+}
+
+resource myImage 'Radius.Compute/containerImages@2025-08-01-preview' = {
+  name: 'myImage'
+  properties: {
+    environment: environment
+    application: myApp.id
+    tag:         'v1.2.3'
+    build: {
+      source: 'git::https://github.com/myorg/myapp.git//frontend?ref=v1.2.3'
+    }
+  }
+}
+
+resource myContainer 'Radius.Compute/containers@2025-08-01-preview' = {
+  name: 'myContainer'
+  properties: {
+    environment: environment
+    application: myApp.id
+    containers: {
+      app: {
+        image: myImage.properties.imageReference
+        ports: {
+          web: {
+            containerPort: 3000
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Multi-architecture builds (e.g. `platforms: ["linux/amd64", "linux/arm64"]`) require a Dockerfile that supports cross-compilation via `FROM --platform=$BUILDPLATFORM` and `TARGETARCH`. Dockerfiles that execute target-arch binaries during the build will fail with `exec format error`. There is no QEMU/binfmt fallback in this design.
+
 ## Top-Level Properties
 
 | Property | Type | Description |

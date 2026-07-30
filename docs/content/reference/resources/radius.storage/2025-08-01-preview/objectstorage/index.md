@@ -6,6 +6,66 @@ linkTitle: "ObjectStorage"
 
 {{< schemaExample >}}
 
+## Description
+
+The Radius.Storage/objectStorage Resource Type deploys an object storage
+container (an S3-style bucket / Azure Blob container / GCS bucket). To deploy
+one, add an objectStorage resource to the application definition Bicep file.
+Unlike database types, no secret is required from the developer: Azure Storage
+generates its own account keys, so the platform-engineer recipe needs no
+injected credentials.
+```
+resource store 'Radius.Storage/objectStorage@2025-08-01-preview' = {
+  name: 'store'
+  properties: {
+    environment: environment
+    application: myApplication.id
+    containerName: 'data'
+  }
+}
+```
+
+To connect your container to the store, create a connection from the
+Container resource to the store as shown below. This verification test is
+provisioning-only because the stock demo image has no Azure Blob backend, but
+the type still exposes a connection surface for applications that can use it.
+```
+resource frontend 'Radius.Compute/containers@2025-08-01-preview' = {
+  name: 'frontend'
+  properties: {
+    application: myApplication.id
+    environment: environment
+    container: {
+      image: 'frontend:1.25'
+    }
+    connections: {
+      storage: {
+        source: store.id
+      }
+    }
+  }
+}
+```
+
+The connection automatically injects environment variables into the
+container for all properties from the store. The environment variables are
+named `CONNECTION_<CONNECTION-NAME>_<PROPERTY-NAME>`. In this example the
+connection name is `storage` so the environment variables will be:
+
+- CONNECTION_STORAGE_CONTAINERNAME
+- CONNECTION_STORAGE_ENDPOINT
+- CONNECTION_STORAGE_ACCOUNTNAME
+
+The `connectionString` and `accountKey` secrets are NOT injected via the
+connection — they are materialized into a managed `Radius.Security/secrets`
+resource. Bind them into container env vars with a `secretKeyRef`, using
+`store.properties.secrets.name` as the `secretName` and the desired key
+(`connectionString` or `accountKey`; see the `secrets` property).
+
+The schema is platform-neutral: the same developer-facing properties can be
+backed by Azure Blob Storage, AWS S3, or a Kubernetes object-store recipe by
+changing only the platform recipe's module source, parameters, and outputs.
+
 ## Top-Level Properties
 
 | Property | Type | Description |

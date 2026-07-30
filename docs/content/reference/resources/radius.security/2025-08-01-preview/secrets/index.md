@@ -6,6 +6,48 @@ linkTitle: "Secrets"
 
 {{< schemaExample >}}
 
+## Description
+
+The Radius.Security/secrets Resource Type stores sensitive data such as tokens, passwords, keys, and certificates. To create a new Secret, start by adding parameter to your application definition decorated with `@secure()`. Then add a `secrets` resource. Never include secret values in an application definition. 
+```
+  extension radius
+
+  @description('The Radius environment ID')
+  param environment string
+
+  @secure()
+  param password string
+
+  resource myApplication 'Radius.Core/applications@2025-08-01-preview' = { 
+    name: 'my-app'
+    properties: {
+      environment: environment
+    }
+  }
+
+  // Passing password as a parameter to `rad deploy`
+  // password=$(openssl rand -hex 16) 
+  // rad deploy app.bicep -p password=$password
+  resource dbCredentials 'Radius.Security/secrets@2025-08-01-preview' = {
+    name: 'db-creds'
+    properties: {
+      environment: environment
+      application: myApplication.id
+      data: {
+        username: {
+          value: 'admin'
+        }
+        password: {
+          // From password parameter passed in via CLI. 
+          value: password
+        }
+      }
+    }
+  }
+  ```
+When deploying the application, specify the secret value as a command-line parameter. It is recommended to use a password generator such as `openssl` or equivalent. For example, `rad deploy app.bicep -p password=$(openssl rand -hex 16)`.
+For details on how to use the secret with another resource such as a container or database, see the documentation for those resource types.
+
 ## Top-Level Properties
 
 | Property | Type | Description |

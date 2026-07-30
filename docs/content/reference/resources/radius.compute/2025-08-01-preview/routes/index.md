@@ -6,6 +6,108 @@ linkTitle: "Routes"
 
 {{< schemaExample >}}
 
+## Description
+
+The Radius.Compute/routes Resource Type defines network routes for responding to external clients. Note that a Routes resource is not required for service-to-service communication. To use Routes, define a Container and ensure a `containerPort` is specified.
+```
+extension radius
+param environment string
+
+resource myApplication 'Radius.Core/applications@2025-08-01-preview' = { ... }
+
+resource myContainer 'Radius.Compute/containers@2025-08-01-preview' = {
+  name: 'myContainer'
+  properties: {
+    environment: environment
+    application: myApplication.id
+    containers: {
+      frontend: {
+        image: 'frontend:1.25'
+        ports: {
+          web: {
+            containerPort: 8080
+          }
+        }
+      }
+      accounts: {
+        image: 'accounts:1.25'
+        ports: {
+          web: {
+            containerPort: 8080
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Then define a Routes resource.
+```
+resource ingressRule 'Radius.Compute/routes@2025-08-01-preview' = {
+  name: 'ingressRule'
+  properties: {
+    application: myApplication.id
+    environment: environment
+    kind: 'HTTP'
+    rules: [
+      {
+        matches: [
+          {
+            httpPath: '/'
+          }
+        ]
+        destinationContainer: {
+          resourceId: myContainer.id
+          containerName: 'frontend'
+          containerPort: myContainer.properties.containers.frontend.ports.web.containerPort
+        }
+      }
+    ]
+  }
+}
+```
+
+The hostname is determined by the Recipe. 
+
+Multiple rules can be included in Routes.
+```
+resource ingressRule 'Radius.Compute/routes@2025-08-01-preview' = {
+  name: 'ingressRule'
+  properties: {
+    application: myApplication.id
+    environment: environment
+    kind: 'HTTP'
+    rules: [
+      {
+        matches: [
+          {
+            httpPath: '/'
+          }
+        ]
+        destinationContainer: {
+          resourceId: myContainer.id
+          containerName: 'frontend'
+          containerPort: myContainer.properties.containers.frontend.ports.web.containerPort
+        }
+      }
+      {
+        matches: [
+          {
+            httpPath: '/accounts'
+          }
+        ]
+        destinationContainer: {
+          resourceId: myContainer.id
+          containerName: 'accounts'
+          containerPort: myContainer.properties.containers.accounts.ports.web.containerPort
+        }
+      }
+    ]
+  }
+}
+```
+
 ## Top-Level Properties
 
 | Property | Type | Description |

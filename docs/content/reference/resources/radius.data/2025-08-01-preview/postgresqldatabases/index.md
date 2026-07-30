@@ -6,6 +6,58 @@ linkTitle: "PostgreSqlDatabases"
 
 {{< schemaExample >}}
 
+## Description
+
+The Radius.Data/postgreSqlDatabases Resource Type deploys a PostgreSQL database. Provide the administrator `username` and `password` directly on the resource. The `password` property is marked `x-radius-sensitive`, so Radius encrypts it at rest, redacts it on reads, and exposes it (decrypted) only to the recipe that provisions the database.
+```
+resource postgresql 'Radius.Data/postgreSqlDatabases@2025-08-01-preview' = {
+    name: 'postgresql'
+    properties: {
+      environment: environment
+      application: myApplication.id
+      size: 'S'
+      database: 'appdb'
+      username: 'myadmin'
+      // From a @secure() password parameter passed in via the CLI
+      password: password
+    }
+  }
+```
+
+When deploying the application definition, provide the database password value as a parameter. It is recommended to use a password generator such as `openssl` or equivalent. For example, `rad deploy app.bicep -p password=$(openssl rand -hex 16)`.
+
+To connect your container to the database, create a connection from the Container resource to the database as shown below. 
+```
+resource myApplication 'Radius.Core/Applications@2025-08-01-preview' = { ... }
+
+resource frontend 'Radius.Compute/containers@2025-08-01-preview' = {
+  name: 'frontend'
+  properties: {
+    application: myApplication.id
+    environment: environment
+    container: {
+      image: 'frontend:1.25'
+      ports: {
+        web: {
+          containerPort: 8080
+        }
+      }
+    }
+    connections: {
+      postgresql: {
+        source: postgresql.id
+      }
+    }
+  }
+}
+```
+
+The connection automatically injects environment variables into the container for all properties from the database. The environment variables are named `CONNECTION_<CONNECTION-NAME>_<PROPERTY-NAME>`. In this example, the connection name is `postgresql` so the environment variables will be:
+
+- CONNECTION_POSTGRESQL_DATABASE
+- CONNECTION_POSTGRESQL_HOST
+- CONNECTION_POSTGRESQL_PORT
+
 ## Top-Level Properties
 
 | Property | Type | Description |

@@ -6,6 +6,95 @@ linkTitle: "Containers"
 
 {{< schemaExample >}}
 
+## Description
+
+The Radius.Compute/containers Resource Type is the primary resource type for running one or more containers. It is always part of a Radius Application. To deploy a Container add a resource to the application definition Bicep file.
+
+```
+extension radius
+param environment string 
+
+resource myApplication 'Radius.Core/applications@2025-08-01-preview' = { ... }
+
+resource myContainer 'Radius.Compute/containers@2025-08-01-preview' = {
+  name: 'myContainer'
+  properties: {
+    environment: environment
+    application: myApplication.id
+    containers: {
+      demo: {
+        image: 'ghcr.io/radius-project/samples/demo:latest'
+      }
+    }
+  }
+}
+```
+
+By default, Containers deploys to Kubernetes. In this case, a Kubernetes Deployment named myContainer is deployed which includes a Pod named myContainer. Your Radius environment may deploy to other container platforms such as Azure Container Instances. 
+
+To accept network connections, expose a port on the container.
+
+```
+resource myContainer 'Radius.Compute/containers@2025-08-01-preview' = {
+  name: 'myContainer'
+  properties: {
+    environment: environment
+    application: myApplication.id
+    containers: {
+      demo: {
+        image: 'ghcr.io/radius-project/samples/demo:latest'
+        ports: {
+          web: {
+            containerPort: 3000
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+When a port is included, a Kubernetes Service named demo with the type ClusterIP is created.
+
+To create a emphemeral emptyDir shared between two containers add a Containers.properties.volumes.
+
+```
+resource myContainer 'Radius.Compute/containers@2025-08-01-preview' = {
+  name: 'myContainer'
+  properties: {
+    environment: environment
+    application: myApplication.id
+    containers: {
+      frontend: {
+        image: 'frontend:latest'
+        volumeMounts: [
+          {
+            volumeName: 'shared'
+            mountPath: '/var/shared' 
+          }
+        ]
+      }
+      backend: {
+        image: 'backend:latest'
+        volumeMounts: [
+          {
+            volumeName: 'shared'
+            mountPath: '/var/shared' 
+          }
+        ]
+      }
+    }
+    volumes: {
+      shared: {
+        emptyDir: {}
+      }
+    }
+  }
+}
+```
+
+To mount a persistent volume or secret see the PersistentVolumes and Secrets Resource Types.
+
 ## Top-Level Properties
 
 | Property | Type | Description |
