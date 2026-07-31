@@ -14,20 +14,16 @@ extension radius
 @description('The Radius Environment ID. Injected automatically by the rad CLI.')
 param environment string
 
-resource todolist 'Radius.Core/applications@2025-08-01-preview' = {
-  name: 'todolist'
-  properties: {
-    environment: environment
-  }
-}
+@description('The Radius Application ID. Injected automatically by the rad CLI.')
+param application string
 
-resource frontend 'Radius.Compute/containers@2025-08-01-preview' = {
-  name: 'frontend'
+resource demo 'Radius.Compute/containers@2025-08-01-preview' = {
+  name: 'demo'
   properties: {
     environment: environment
-    application: todolist.id
+    application: application
     containers: {
-      web: {
+      demo: {
         image: 'ghcr.io/radius-project/samples/demo:latest'
         ports: {
           web: {
@@ -43,7 +39,7 @@ resource frontend 'Radius.Compute/containers@2025-08-01-preview' = {
 Deploy the application with `rad deploy`:
 
 ```bash
-rad deploy app.bicep
+rad deploy app.bicep --application todolist
 ```
 
 Radius deploys the application to the `default` Environment, which is configured to use the `default` namespace of your Kubernetes cluster. The `Radius.Compute/containers` resource is provisioned by a Recipe that creates a Kubernetes Deployment and a `ClusterIP` Service.
@@ -57,11 +53,11 @@ kubectl get deployment,service
 Example output:
 
 ```
-NAME                       READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/frontend   1/1     1            1           6m55s
+NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/demo   1/1     1            1           3m18s
 
-NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
-service/frontend-web   ClusterIP   10.96.166.208   <none>        3000/TCP   6m55s
+NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/demo-demo    ClusterIP   10.96.177.228   <none>        3000/TCP   3m18s
 ```
 
 ## Browse the Todo List application
@@ -69,7 +65,7 @@ service/frontend-web   ClusterIP   10.96.166.208   <none>        3000/TCP   6m55
 Use `kubectl` to forward a local port to the container's Kubernetes Service:
 
 ```bash
-kubectl port-forward svc/frontend-web 3000:3000
+kubectl port-forward svc/demo-demo 3000:3000
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser. The Radius Connections section says "No connections defined"; you will add a database connection in the next step. Press `Ctrl+C` to stop the port forward.
@@ -98,17 +94,17 @@ You should see output listing the underlying Kubernetes resources:
 ```
 Displaying application: todolist
 
-Name: frontend (Radius.Compute/containers)
+Name: demo (Radius.Compute/containers)
 Connections: (none)
 Resources:
-  frontend (apps/Deployment)
-  frontend-web (core/Service)
+  demo (apps/Deployment)
+  demo-demo (core/Service)
 ```
 
 You have deployed your first application with Radius. For a deeper walkthrough of authoring and deploying application definitions, see [How to deploy applications using Radius]({{< ref "/applications/deploy" >}}).
 
 ## Next steps
 
-In part three of this guide, you will add a database resource and a connection to the `frontend` container.
+In part three of this guide, you will add a database resource and a connection to the `demo` container.
 
 {{< button text="Next step: Add a connection" page="getting-started/add-connection" >}}

@@ -1,4 +1,6 @@
 {{/*
+  TODO: Remove this preview-release banner (this entire file) once Radius is no longer in preview (GA).
+
   Site-wide preview-release banner.
 
   This overrides Docsy's empty "_td-content-after-header" content view, which
@@ -8,6 +10,5 @@
   `alert` shortcode (color="warning").
 */ -}}
 <div class="alert alert-warning" role="alert">
-  <div class="h4 alert-heading" role="heading">❗️ Preview Release</div>
-  <p>This documentation is for a preview version of Radius. Features and APIs may change before general availability. To run preview commands, pass <code>--preview</code> or set the environment variable <code>RADIUS_PREVIEW=true</code>.</p>
+  <p>❗️ <strong>Preview Release</strong>: This documentation covers a preview of Radius which uses different Resource Types from the current release. Enable it by passing the <code>--preview</code> to the Radius CLI or setting<code>RADIUS_PREVIEW=true</code>.</p>
 </div>
