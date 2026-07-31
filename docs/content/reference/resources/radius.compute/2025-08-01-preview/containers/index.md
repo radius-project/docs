@@ -56,7 +56,7 @@ resource myContainer 'Radius.Compute/containers@2025-08-01-preview' = {
 
 When a port is included, a Kubernetes Service named demo with the type ClusterIP is created.
 
-To create a emphemeral emptyDir shared between two containers add a Containers.properties.volumes.
+To create an ephemeral emptyDir shared between two containers add a Containers.properties.volumes.
 
 ```
 resource myContainer 'Radius.Compute/containers@2025-08-01-preview' = {
