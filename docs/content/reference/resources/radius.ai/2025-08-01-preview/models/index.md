@@ -12,7 +12,7 @@ The Radius.AI/models Resource Type deploys an LLM inference model endpoint.
 To deploy a model, add a models resource to the application definition Bicep
 file. The platform-engineer recipe binds this developer-facing contract to a
 managed cloud model service without exposing any module details to the app.
-```
+```bicep
 resource model 'Radius.AI/models@2025-08-01-preview' = {
   name: 'model'
   properties: {
@@ -25,7 +25,7 @@ resource model 'Radius.AI/models@2025-08-01-preview' = {
 
 To connect your container to the model, create a connection from the
 Container resource to the model as shown below.
-```
+```bicep
 resource frontend 'Radius.Compute/containers@2025-08-01-preview' = {
   name: 'frontend'
   properties: {

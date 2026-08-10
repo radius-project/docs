@@ -9,7 +9,7 @@ linkTitle: "Routes"
 ## Description
 
 The Radius.Compute/routes Resource Type defines network routes for responding to external clients. Note that a Routes resource is not required for service-to-service communication. To use Routes, define a Container and ensure a `containerPort` is specified.
-```
+```bicep
 extension radius
 param environment string
 
@@ -43,7 +43,7 @@ resource myContainer 'Radius.Compute/containers@2025-08-01-preview' = {
 ```
 
 Then define a Routes resource.
-```
+```bicep
 resource ingressRule 'Radius.Compute/routes@2025-08-01-preview' = {
   name: 'ingressRule'
   properties: {
@@ -71,7 +71,7 @@ resource ingressRule 'Radius.Compute/routes@2025-08-01-preview' = {
 The hostname is determined by the Recipe. 
 
 Multiple rules can be included in Routes.
-```
+```bicep
 resource ingressRule 'Radius.Compute/routes@2025-08-01-preview' = {
   name: 'ingressRule'
   properties: {

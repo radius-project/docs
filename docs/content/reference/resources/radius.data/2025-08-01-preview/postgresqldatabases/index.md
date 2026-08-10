@@ -9,7 +9,7 @@ linkTitle: "PostgreSqlDatabases"
 ## Description
 
 The Radius.Data/postgreSqlDatabases Resource Type deploys a PostgreSQL database. Provide the administrator `username` and `password` directly on the resource. The `password` property is marked `x-radius-sensitive`, so Radius encrypts it at rest, redacts it on reads, and exposes it (decrypted) only to the recipe that provisions the database.
-```
+```bicep
 resource postgresql 'Radius.Data/postgreSqlDatabases@2025-08-01-preview' = {
     name: 'postgresql'
     properties: {
@@ -27,7 +27,7 @@ resource postgresql 'Radius.Data/postgreSqlDatabases@2025-08-01-preview' = {
 When deploying the application definition, provide the database password value as a parameter. It is recommended to use a password generator such as `openssl` or equivalent. For example, `rad deploy app.bicep -p password=$(openssl rand -hex 16)`.
 
 To connect your container to the database, create a connection from the Container resource to the database as shown below. 
-```
+```bicep
 resource myApplication 'Radius.Core/Applications@2025-08-01-preview' = { ... }
 
 resource frontend 'Radius.Compute/containers@2025-08-01-preview' = {

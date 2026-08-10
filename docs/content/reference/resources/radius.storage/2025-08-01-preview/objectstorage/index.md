@@ -14,7 +14,7 @@ one, add an objectStorage resource to the application definition Bicep file.
 Unlike database types, no secret is required from the developer: Azure Storage
 generates its own account keys, so the platform-engineer recipe needs no
 injected credentials.
-```
+```bicep
 resource store 'Radius.Storage/objectStorage@2025-08-01-preview' = {
   name: 'store'
   properties: {
@@ -29,7 +29,7 @@ To connect your container to the store, create a connection from the
 Container resource to the store as shown below. This verification test is
 provisioning-only because the stock demo image has no Azure Blob backend, but
 the type still exposes a connection surface for applications that can use it.
-```
+```bicep
 resource frontend 'Radius.Compute/containers@2025-08-01-preview' = {
   name: 'frontend'
   properties: {

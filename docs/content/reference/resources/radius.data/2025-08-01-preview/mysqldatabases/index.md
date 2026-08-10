@@ -9,7 +9,7 @@ linkTitle: "MySqlDatabases"
 ## Description
 
 The Radius.Data/mySqlDatabases Resource Type deploys a MySQL database. Provide the administrator `username` and `password` directly on the resource. The `password` property is marked `x-radius-sensitive`, so Radius encrypts it at rest, redacts it on reads, and exposes it (decrypted) only to the platform-engineer recipe that provisions the database.
-```
+```bicep
 resource mysql 'Radius.Data/mySqlDatabases@2025-08-01-preview' = {
   name: 'mysql'
   properties: {
@@ -27,7 +27,7 @@ resource mysql 'Radius.Data/mySqlDatabases@2025-08-01-preview' = {
 When deploying the application definition, provide the database password value as a parameter. It is recommended to use a password generator such as `openssl` or equivalent. For example, `rad deploy app.bicep -p ****** rand -hex 16)`.
 
 To connect your container to the database, create a connection from the Container resource to the database as shown below.
-```
+```bicep
 resource myApplication 'Radius.Core/Applications@2025-08-01-preview' = { ... }
 
 resource frontend 'Radius.Compute/containers@2025-08-01-preview' = {
@@ -71,7 +71,7 @@ The connection automatically injects environment variables into the container fo
 | `password` | string | (Required) The administrator password for the MySQL database. Marked `x-radius-sensitive`: Radius encrypts it at rest, redacts it on reads, and exposes it decrypted only to the recipe as `{{context.resource.properties.password}}`. |
 | `port` | integer | The port number used to connect to the database. Mapped from the recipe module's output (MySQL flexible server uses 3306). |
 | `username` | string | (Required) The administrator username for the MySQL database. Provided directly on the resource and passed to the recipe as `{{context.resource.properties.username}}`. |
-| `version` | string | (Optional) The major MySQL server version in the X.Y format. Assumed to be 8.4 if not specified.<br />Allowed values: `5.7`, `8.0`, `8.4`. |
+| `version` | string | (Optional) The major MySQL server version in the X.Y format. Defaults to `8.4` if not provided.<br />Allowed values: `5.7`, `8.0`, `8.4`. |
 
 ## Object Properties
 

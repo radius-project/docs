@@ -13,7 +13,7 @@ messaging resource. In the Azure verification recipe, the platform engineer
 maps this type to Azure Service Bus using the Service Bus AMQP endpoint. This
 provisions the resource and maps its connection outputs; it does not prove
 RabbitMQ broker API compatibility.
-```
+```bicep
 resource queue 'Radius.Messaging/rabbitMQ@2025-08-01-preview' = {
   name: 'rabbitmq'
   properties: {

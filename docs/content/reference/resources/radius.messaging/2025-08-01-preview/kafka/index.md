@@ -12,7 +12,7 @@ The Radius.Messaging/kafka Resource Type deploys a Kafka-compatible
 messaging namespace. On Azure, the verification recipe provisions Azure
 Event Hubs with its Kafka surface enabled by the Standard tier and creates
 an Event Hub named by the developer-authored `topic` property.
-```
+```bicep
 resource kafka 'Radius.Messaging/kafka@2025-08-01-preview' = {
   name: 'kafka'
   properties: {
@@ -25,7 +25,7 @@ resource kafka 'Radius.Messaging/kafka@2025-08-01-preview' = {
 
 To connect a container to the cluster, create a connection from the
 Container resource to the Kafka cluster as shown below.
-```
+```bicep
 resource frontend 'Radius.Compute/containers@2025-08-01-preview' = {
   name: 'frontend'
   properties: {

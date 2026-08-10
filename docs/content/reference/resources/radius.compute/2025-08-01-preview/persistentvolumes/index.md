@@ -10,7 +10,7 @@ linkTitle: "PersistentVolumes"
 
 The Radius.Compute/persistentVolumes Resource Type represents a persistent storage volume. A PersistentVolume can be referenced in the volumes property of a Container. 
 To deploy, first add a PersistentVolume resource to the application definition Bicep file.
-```
+```bicep
 extension radius
 param environment string 
 
@@ -27,7 +27,7 @@ resource myPersistentVolume 'Radius.Compute/persistentVolumes@2025-08-01-preview
 ```
 
 Then reference the PersistentVolume by ID in the volumes property of the Container. Finally, set the mountPath in the container referencing the volumeName.
-```
+```bicep
 resource myContainer 'Radius.Compute/containers@2025-08-01-preview' = {
   name: 'myContainer'
   properties: {
@@ -56,14 +56,14 @@ resource myContainer 'Radius.Compute/containers@2025-08-01-preview' = {
 ```
 
 PersistentVolumes may be shared across multiple Containers. To mount an existing PersistentVolume in read-only mode, reference the PersistentVolume by name using the `existing` Bicep keyword. For example:
-```
+```bicep
 resource existingPersistentVolume 'Radius.Compute/persistentVolumes@2025-08-01-preview' existing = {
   name: 'existingPersistentVolume'
 }
 ```
 
 Then add the existing PersistentVolume to the volumes property of a Container with accessMode set to `ReadOnlyMany`.
-```
+```bicep
 resource myContainer 'Radius.Compute/containers@2025-08-01-preview' = {
   name: 'myContainer'
   properties: {

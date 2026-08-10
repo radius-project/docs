@@ -13,7 +13,7 @@ database. To deploy a Mongo database, add a mongoDatabases resource to the
 application definition Bicep file. The Azure recipe uses Cosmos DB for
 MongoDB and exposes its endpoint and connection string as resource
 properties.
-```
+```bicep
 resource database 'Radius.Data/mongoDatabases@2025-08-01-preview' = {
   name: 'mongo'
   properties: {
@@ -26,7 +26,7 @@ resource database 'Radius.Data/mongoDatabases@2025-08-01-preview' = {
 
 To connect your container to the database, create a connection from the
 Container resource to the database as shown below.
-```
+```bicep
 resource frontend 'Radius.Compute/containers@2025-08-01-preview' = {
   name: 'frontend'
   properties: {

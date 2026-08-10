@@ -13,7 +13,7 @@ Redis cache, add a redisCaches resource to the application definition Bicep
 file. Unlike database types, no secret is required: Azure Managed Redis
 generates its own access keys, so the platform-engineer recipe needs no
 injected credentials.
-```
+```bicep
 resource cache 'Radius.Data/redisCaches@2025-08-01-preview' = {
   name: 'redis'
   properties: {
@@ -26,7 +26,7 @@ resource cache 'Radius.Data/redisCaches@2025-08-01-preview' = {
 
 To connect your container to the cache, create a connection from the
 Container resource to the cache as shown below.
-```
+```bicep
 resource frontend 'Radius.Compute/containers@2025-08-01-preview' = {
   name: 'frontend'
   properties: {

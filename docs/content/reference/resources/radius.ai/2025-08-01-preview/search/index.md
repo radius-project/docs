@@ -12,7 +12,7 @@ The Radius.AI/search Resource Type deploys a search service. To
 deploy a search service, add a search resource to the application
 definition Bicep file. The platform-engineer recipe provisions the concrete
 backend and maps its endpoint and API key outputs back onto this resource.
-```
+```bicep
 resource search 'Radius.AI/search@2025-08-01-preview' = {
   name: 'search'
   properties: {
@@ -24,7 +24,7 @@ resource search 'Radius.AI/search@2025-08-01-preview' = {
 
 To connect your container to the service, create a connection from the
 Container resource to the search service as shown below.
-```
+```bicep
 resource frontend 'Radius.Compute/containers@2025-08-01-preview' = {
   name: 'frontend'
   properties: {
