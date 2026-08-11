@@ -39,7 +39,7 @@ resource demo 'Radius.Compute/containers@2025-08-01-preview' = {
 Deploy the application with `rad deploy`:
 
 ```bash
-rad deploy app.bicep --application todolist
+rad deploy app.bicep --application todolist --preview
 ```
 
 Radius deploys the application to the `default` Environment, which is configured to use the `default` namespace of your Kubernetes cluster. The `Radius.Compute/containers` resource is provisioned by a Recipe that creates a Kubernetes Deployment and a `ClusterIP` Service.
@@ -47,17 +47,21 @@ Radius deploys the application to the `default` Environment, which is configured
 View the deployed resources with `kubectl`:
 
 ```bash
-kubectl get deployment,service
+kubectl get pod,deployment,service
 ```
 
 Example output:
 
 ```
+NAME                   READY   STATUS       RESTARTS   AGE
+pod/demo               1/1     Running      0          3m18s
+
 NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
 deployment.apps/demo   1/1     1            1           3m18s
 
-NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
-service/demo-demo    ClusterIP   10.96.177.228   <none>        3000/TCP   3m18s
+NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/demo-demo      ClusterIP   10.96.177.228   <none>        3000/TCP   3m18s
+service/kubernetes     ClusterIP   10.96.0.1       <none>        443/TCP    4m10s
 ```
 
 ## Browse the Todo List application

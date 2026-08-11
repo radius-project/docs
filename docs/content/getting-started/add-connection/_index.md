@@ -68,7 +68,7 @@ The `connections` entry tells Radius that the container depends on the database.
 ## Redeploy the application
 
 ```bash
-rad deploy app.bicep --application todolist -p password=$(openssl rand -hex 16)
+rad deploy app.bicep --application todolist -p password=$(openssl rand -hex 16) --preview
 ```
 
 The `-p password=` flag sets the `password` parameter for the database. `$(openssl rand -hex 16)` is a shell command that generates a random secure string, so a new password is used on each deploy. This syntax works in Bash and Zsh. In PowerShell, generate the value separately and pass it in.
@@ -79,7 +79,7 @@ Radius creates the database and updates the container with the connection. Forwa
 kubectl port-forward svc/demo-demo 3000:3000
 ```
 
-Open [http://localhost:7007/applications](http://localhost:7007/applications). The Radius Connections section now lists the `db` connection.
+Open [http://localhost:3000](http://localhost:3000). The Radius Connections section now lists the `db` connection.
 
 {{< image src="todolist.png" alt="The Todo List application showing the database connection" width=800px >}}
 

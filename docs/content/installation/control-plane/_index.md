@@ -35,8 +35,9 @@ Each method is described in detail below.
 
 [`rad initialize`]({{< ref rad_initialize >}}) is the fastest way to get started. It installs the control plane on the current Kubernetes cluster and configures the local machine in one step:
 
+<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
 ```bash
-rad initialize
+rad initialize --preview
 ```
 
 ### Customizing with `rad initialize --full`
@@ -45,8 +46,9 @@ By default, `rad initialize` uses opinionated defaults: it installs into the cur
 
 To choose these settings yourself, run `rad initialize` with the `--full` flag:
 
+<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
 ```bash
-rad initialize --full
+rad initialize --full --preview
 ```
 
 In full mode, `rad initialize` interactively prompts you for all available configuration options, including:
@@ -62,20 +64,22 @@ Use `--full` when the defaults do not match your setup, for example when you wan
 
 Use [`rad install kubernetes`]({{< ref rad_install_kubernetes >}}) to install the control plane. It installs the control plane, creates the default Resource Types, and creates a `default` Resource Group and Environment, but it does not create any local files. Optionally use the `--set` flag to customize the installation with [Helm chart options](#customizing-the-installation-with-helm-chart-options):
 
+<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
 ```bash
 # Install Radius
-rad install kubernetes
+rad install kubernetes --preview
 
 # Install Radius with tracing and a public endpoint override
-rad install kubernetes --set global.zipkin.url=http://jaeger-collector.radius-monitoring.svc.cluster.local:9411/api/v2/spans,rp.publicEndpointOverride=localhost:8081
+rad install kubernetes --preview --set global.zipkin.url=http://jaeger-collector.radius-monitoring.svc.cluster.local:9411/api/v2/spans,rp.publicEndpointOverride=localhost:8081
 ```
 
 ### Use your own root certificate authority certificate
 
 Many enterprises leverage intermediate root certificate authorities (CAs) to enhance security and control over outgoing traffic, particularly when using a firewall or proxy. In this setup, when Radius attempts to connect to an external endpoint such as Azure or AWS, traffic may be blocked by the firewall. Optionally use `--set-file` when installing Radius to inject your root CA certificate into Radius:
 
+<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
 ```bash
-rad install kubernetes --set-file global.rootCA.cert=/etc/ssl/your-root-ca.crt
+rad install kubernetes --preview --set-file global.rootCA.cert=/etc/ssl/your-root-ca.crt
 ```
 
 ## Using Helm

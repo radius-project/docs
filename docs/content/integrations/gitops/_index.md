@@ -123,8 +123,9 @@ kubectl describe deploymenttemplate app.bicep -n app
 
 A ready `DeploymentTemplate` indicates that Radius compiled the Bicep file and completed the deployment. Use [`rad app graph`]({{< ref rad_application_graph >}}) with the Application name declared in the Bicep file to inspect the resulting Application graph:
 
+<!-- TODO: Remove the `--preview` flag when the Radius.Core Application implementation is no longer in preview. -->
 ```bash
-rad app graph -a <application-name>
+rad application graph --application <application-name> --preview
 ```
 
 ## Step 4: Update a deployment

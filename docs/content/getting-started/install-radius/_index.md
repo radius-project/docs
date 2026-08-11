@@ -63,6 +63,8 @@ You should see output similar to:
 NAME                READY   STATUS    RESTARTS   AGE
 applications-rp      1/1     Running   0          1m
 bicep-de             1/1     Running   0          1m
+contour-contour      1/1     Running   0          1m
+contour-envoy        1/1     Running   0          1m
 controller           1/1     Running   0          1m
 dashboard            1/1     Running   0          1m
 dynamic-rp           1/1     Running   0          1m
