@@ -17,7 +17,7 @@ as part of their Radius applications.
 
 Provision the broker password by creating a `Radius.Security/secrets` resource
 (with the value passed to `rad deploy` as a `@secure()` parameter) and pass its
-resource ID on the `passwordSecret` property. The Recipe references the
+resource ID on the `password` property. The Recipe references the
 materialized Kubernetes Secret by name and mounts the password into the broker
 via `secretKeyRef`, so the plaintext password is never written into the pod spec
 or onto this resource.
@@ -45,7 +45,7 @@ resource queue 'Radius.Messaging/rabbitMQ@2025-08-01-preview' = {
     application: myApplication.id
     queue: 'jobs'
     username: 'radius'
-    passwordSecret: rabbitmqSecret.id
+    password: rabbitmqSecret.id
   }
 }
 ```
@@ -73,7 +73,7 @@ container env var with a `secretKeyRef`, using `rabbitmqSecret.name` as the
 | `connections` | [object](#connections) | false | false | Map of connection name to connection data. |
 | `environment` | string | true | false | (Required) The Radius Environment ID. Typically set by the rad CLI. Typically value should be `environment`. |
 | `host` | string | false | true | (Read Only) The host name used to connect to the broker. Mapped from the recipe's Service DNS name. |
-| `passwordSecret` | string | true | false | (Required) The resource ID of the `Radius.Security/secrets` resource that holds the broker password under the data key `password`. Set to `<secretResource>.id`. The Kubernetes Recipe references the materialized Kubernetes Secret by name and mounts the password into the broker via `secretKeyRef`, so the plaintext password is never written into the pod spec or onto this resource. |
+| `password` | string | true | false | (Required) The resource ID of the `Radius.Security/secrets` resource that holds the broker password under the data key `password`. Set to `<secretResource>.id`. The Kubernetes Recipe references the materialized Kubernetes Secret by name and mounts the password into the broker via `secretKeyRef`, so the plaintext password is never written into the pod spec or onto this resource. |
 | `port` | integer | false | true | (Read Only) The port used to connect to the broker over AMQP 0-9-1 (5672). Mapped from the recipe's output. |
 | `queue` | string | false | false | (Optional) The name of the queue to pre-provision on the broker. The Recipe creates this durable queue on the default virtual host when the broker starts, so it exists before your workload connects. Defaults to `jobs` if not provided. |
 | `username` | string | false | false | (Optional) The username the broker is provisioned with and that clients authenticate as. Defaults to `radius` if not provided. Avoid `guest`, which RabbitMQ restricts to loopback connections. The username is not sensitive and is exposed as a read-only connection value. |
