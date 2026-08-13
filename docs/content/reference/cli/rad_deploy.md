@@ -85,6 +85,7 @@ rad deploy myapp.bicep --parameters @myfile.json --parameters version=latest
   -g, --group string             The resource group name
   -h, --help                     help for deploy
   -p, --parameters stringArray   Specify parameters for the deployment
+      --preview                  Deploy the application using the Radius.Core/applications resource type instead of Applications.Core/applications (can also be set via RADIUS_PREVIEW=true)
   -w, --workspace string         The workspace name
 ```
 
