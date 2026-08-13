@@ -9,179 +9,98 @@ description: "Detailed reference documentation for applications.datastores/mongo
 
 ## Schema
 
-### Top-Level Resource
+## Description
 
-#### Properties
+MongoDatabase portable resource
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **apiVersion** | '2023-10-01-preview' | The resource api version <br />_(ReadOnly, DeployTimeConstant)_ |
-| **application** | string | Fully qualified resource ID for the application that the portable resource is consumed by (if applicable) <br />_(ReadOnly)_ |
-| **database** | string | Database name of the target Mongo database <br />_(ReadOnly)_ |
-| **environment** | string | Fully qualified resource ID for the environment that the portable resource is linked to <br />_(ReadOnly)_ |
-| **host** | string | Host name of the target Mongo database <br />_(ReadOnly)_ |
-| **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
-| **location** | string | The geo-location where the resource lives |
-| **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
-| **port** | int | Port value of the target Mongo database <br />_(ReadOnly)_ |
-| **properties** | [MongoDatabaseProperties](#mongodatabaseproperties) | The resource-specific properties for this resource. <br />_(Required)_ |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
-| **recipe** | [Recipe](#recipe) | The recipe used to automatically deploy underlying infrastructure for the resource <br />_(ReadOnly)_ |
-| **resourceProvisioning** | 'manual' | 'recipe' | Specifies how the underlying service/resource is provisioned and managed. <br />_(ReadOnly)_ |
-| **resources** | [ResourceReference](#resourcereference)[] | List of the resource IDs that support the MongoDB resource <br />_(ReadOnly)_ |
-| **secrets** | [MongoDatabaseSecrets](#mongodatabasesecrets) | Secret values provided for the resource <br />_(ReadOnly)_ |
-| **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
-| **systemData** | [SystemData](#systemdata) | Azure Resource Manager metadata containing createdBy and modifiedBy information. <br />_(ReadOnly)_ |
-| **tags** | [Record](#record) | Resource tags. |
-| **type** | 'Applications.Datastores/mongoDatabases' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
-| **username** | string | Username to use when connecting to the target Mongo database <br />_(ReadOnly)_ |
+## Top-Level Properties
 
-### MongoDatabaseProperties
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `application` | string | false | false | Fully qualified resource ID for the application that the portable resource is consumed by (if applicable) |
+| `database` | string | false | false | Database name of the target Mongo database |
+| `environment` | string | true | false | Fully qualified resource ID for the environment that the portable resource is linked to |
+| `host` | string | false | false | Host name of the target Mongo database |
+| `port` | integer | false | false | Port value of the target Mongo database |
+| `provisioningState` | string | false | true | The status of the asynchronous operation.<br />Allowed values: `Accepted`, `Canceled`, `Creating`, `Deleting`, `Failed`, `Provisioning`, `Succeeded`, `Updating`. |
+| `recipe` | [object](#recipe) | false | false | The recipe used to automatically deploy underlying infrastructure for the resource |
+| `resourceProvisioning` | string | false | false | Specifies how the underlying service/resource is provisioned and managed.<br />Allowed values: `manual`, `recipe`. |
+| `resources` | [object](#resources)[] | false | false | List of the resource IDs that support the MongoDB resource |
+| `secrets` | [object](#secrets) | false | false | Secret values provided for the resource |
+| `status` | [object](#status) | false | true | Status of a resource. |
+| `username` | string | false | false | Username to use when connecting to the target Mongo database |
 
-#### Properties
+## Object Properties
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **application** | string | Fully qualified resource ID for the application that the portable resource is consumed by (if applicable) |
-| **database** | string | Database name of the target Mongo database |
-| **environment** | string | Fully qualified resource ID for the environment that the portable resource is linked to <br />_(Required)_ |
-| **host** | string | Host name of the target Mongo database |
-| **port** | int | Port value of the target Mongo database |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
-| **recipe** | [Recipe](#recipe) | The recipe used to automatically deploy underlying infrastructure for the resource |
-| **resourceProvisioning** | 'manual' | 'recipe' | Specifies how the underlying service/resource is provisioned and managed. |
-| **resources** | [ResourceReference](#resourcereference)[] | List of the resource IDs that support the MongoDB resource |
-| **secrets** | [MongoDatabaseSecrets](#mongodatabasesecrets) | Secret values provided for the resource |
-| **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
-| **username** | string | Username to use when connecting to the target Mongo database |
+### `recipe` {#recipe}
 
-### Recipe
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `name` | string | true | false | The name of the recipe within the environment to use |
+| `parameters` | object | false | false | Key/value parameters to pass into the recipe at deployment |
 
-#### Properties
+### `resources` {#resources}
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **name** | string | The name of the recipe within the environment to use <br />_(Required)_ |
-| **parameters** | [Record](#record) | Key/value parameters to pass into the recipe at deployment |
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `id` | string | true | false | Resource id of an existing resource |
 
-### Record
+### `secrets` {#secrets}
 
-#### Properties
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `connectionString` | string | false | false | Connection string used to connect to the target Mongo database |
+| `password` | string | false | false | Password to use when connecting to the target Mongo database |
 
-* **none**
+### `status` {#status}
 
-#### Additional Properties
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `compute` | [object](#status-compute) | false | false | The compute resource associated with the resource. |
+| `outputResources` | [object](#status-outputresources)[] | false | false | Properties of an output resource |
+| `recipe` | [object](#status-recipe) | false | true | The recipe data at the time of deployment |
 
-* **Additional Properties Type**: any
+### `status.compute` {#status-compute}
 
-### ResourceReference
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `kind` | string | true | false | Discriminator property that selects the variant. Allowed values: [`aci`](#status-compute-aci), [`kubernetes`](#status-compute-kubernetes). |
+| `identity` | [object](#status-compute-identity) | false | false | Configuration for supported external identity providers |
+| `resourceId` | string | false | false | The resource id of the compute resource for application environment. |
 
-#### Properties
+### `status.outputResources` {#status-outputresources}
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **id** | string | Resource id of an existing resource <br />_(Required)_ |
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `id` | string | false | false | The UCP resource ID of the underlying resource. |
+| `localId` | string | false | false | The logical identifier scoped to the owning Radius resource. This is only needed or used when a resource has a dependency relationship. LocalIDs do not have any particular format or meaning beyond being compared to determine dependency relationships. |
+| `radiusManaged` | boolean | false | false | Determines whether Radius manages the lifecycle of the underlying resource. |
 
-### MongoDatabaseSecrets
+### `status.recipe` {#status-recipe}
 
-#### Properties
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `templateKind` | string | true | false | TemplateKind is the kind of the recipe template used by the portable resource upon deployment. |
+| `templatePath` | string | true | false | TemplatePath is the path of the recipe consumed by the portable resource upon deployment. |
+| `templateVersion` | string | false | false | TemplateVersion is the version number of the template. |
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **connectionString** | string | Connection string used to connect to the target Mongo database |
-| **password** | string | Password to use when connecting to the target Mongo database |
+### `status.compute.identity` {#status-compute-identity}
 
-### ResourceStatus
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `kind` | string | true | false | kind of identity setting<br />Allowed values: `azure.com.workload`, `systemAssigned`, `systemAssignedUserAssigned`, `undefined`, `userAssigned`. |
+| `managedIdentity` | string array | false | false | The list of user assigned managed identities |
+| `oidcIssuer` | string | false | false | The URI for your compute platform's OIDC issuer |
+| `resource` | string | false | false | The resource ID of the provisioned identity |
 
-#### Properties
+### `status.compute.aci` {#status-compute-aci}
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **compute** | [EnvironmentCompute](#environmentcompute) | The compute resource associated with the resource. |
-| **outputResources** | [OutputResource](#outputresource)[] | Properties of an output resource |
-| **recipe** | [RecipeStatus](#recipestatus) | The recipe data at the time of deployment <br />_(ReadOnly)_ |
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `resourceGroup` | string | false | false | The resource group to use for the environment. |
 
-### EnvironmentCompute
+### `status.compute.kubernetes` {#status-compute-kubernetes}
 
-* **Discriminator**: kind
-
-#### Base Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **identity** | [IdentitySettings](#identitysettings) | Configuration for supported external identity providers |
-| **resourceId** | string | The resource id of the compute resource for application environment. |
-
-#### AzureContainerInstanceCompute
-
-##### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **kind** | 'aci' | The Azure container instance compute kind <br />_(Required)_ |
-| **resourceGroup** | string | The resource group to use for the environment. |
-
-#### KubernetesCompute
-
-##### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **kind** | 'kubernetes' | The Kubernetes compute kind <br />_(Required)_ |
-| **namespace** | string | The namespace to use for the environment. <br />_(Required)_ |
-
-
-### IdentitySettings
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **kind** | 'azure.com.workload' | 'systemAssigned' | 'systemAssignedUserAssigned' | 'undefined' | 'userAssigned' | kind of identity setting <br />_(Required)_ |
-| **managedIdentity** | string[] | The list of user assigned managed identities |
-| **oidcIssuer** | string | The URI for your compute platform's OIDC issuer |
-| **resource** | string | The resource ID of the provisioned identity |
-
-### OutputResource
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **id** | string | The UCP resource ID of the underlying resource. |
-| **localId** | string | The logical identifier scoped to the owning Radius resource. This is only needed or used when a resource has a dependency relationship. LocalIDs do not have any particular format or meaning beyond being compared to determine dependency relationships. |
-| **radiusManaged** | bool | Determines whether Radius manages the lifecycle of the underlying resource. |
-
-### RecipeStatus
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **templateKind** | string | TemplateKind is the kind of the recipe template used by the portable resource upon deployment. <br />_(Required)_ |
-| **templatePath** | string | TemplatePath is the path of the recipe consumed by the portable resource upon deployment. <br />_(Required)_ |
-| **templateVersion** | string | TemplateVersion is the version number of the template. |
-
-### SystemData
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **createdAt** | string | The timestamp of resource creation (UTC). |
-| **createdBy** | string | The identity that created the resource. |
-| **createdByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that created the resource. |
-| **lastModifiedAt** | string | The timestamp of resource last modification (UTC) |
-| **lastModifiedBy** | string | The identity that last modified the resource. |
-| **lastModifiedByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that last modified the resource. |
-
-### Record
-
-#### Properties
-
-* **none**
-
-#### Additional Properties
-
-* **Additional Properties Type**: string
-
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `namespace` | string | true | false | The namespace to use for the environment. |
