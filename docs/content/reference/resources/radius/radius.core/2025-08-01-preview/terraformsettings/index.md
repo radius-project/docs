@@ -9,131 +9,156 @@ description: "Detailed reference documentation for radius.core/terraformsettings
 
 ## Schema
 
-### Top-Level Resource
+## Description
 
-#### Properties
+The `Radius.Core/terraformSettings` Resource Type holds reusable Terraform CLI settings that Environments apply when running Terraform Recipes. Its primary use is authenticating to private Terraform registries that host the modules referenced by a Recipe Pack, along with configuring provider installation and injecting environment variables during Recipe execution.
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **apiVersion** | '2025-08-01-preview' | The resource api version <br />_(ReadOnly, DeployTimeConstant)_ |
-| **env** | [Record](#record) | Environment variables injected during Terraform recipe execution. <br />_(ReadOnly)_ |
-| **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
-| **location** | string | The geo-location where the resource lives |
-| **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
-| **properties** | [TerraformSettingsProperties](#terraformsettingsproperties) | The resource-specific properties for this resource. <br />_(Required)_ |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
-| **referencedBy** | string[] | Environments that reference this Terraform configuration. <br />_(ReadOnly)_ |
-| **systemData** | [SystemData](#systemdata) | Azure Resource Manager metadata containing createdBy and modifiedBy information. <br />_(ReadOnly)_ |
-| **tags** | [Record](#record) | Resource tags. |
-| **terraformrc** | [TerraformrcConfig](#terraformrcconfig) | Terraform CLI configuration file settings. Maps directly to the Terraform CLI configuration file (.terraformrc). <br />_(ReadOnly)_ |
-| **type** | 'Radius.Core/terraformSettings' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
+Platform engineers define a `Radius.Core/terraformSettings` resource once and reference it from any Environment whose Recipes pull modules from a private registry.
 
-### Record
+## Defining Terraform settings
 
-#### Properties
+Configure `terraformrc.credentials`, keyed by registry hostname, to authenticate to a private Terraform registry. Each entry points to a secret whose `token` key holds the registry token:
 
-* **none**
+```bicep
+extension radius
 
-#### Additional Properties
+@description('The Radius Environment ID. Injected automatically by the rad CLI.')
+param environment string
 
-* **Additional Properties Type**: string
+resource registrySecret 'Radius.Security/secrets@2025-08-01-preview' = {
+  name: 'terraform-registry-token'
+  properties: {
+    environment: environment
+    data: {
+      token: { value: 'my-registry-token' }
+    }
+  }
+}
 
-### TerraformSettingsProperties
+resource terraformRegistry 'Radius.Core/terraformSettings@2025-08-01-preview' = {
+  name: 'private-registry'
+  properties: {
+    terraformrc: {
+      credentials: {
+        'app.terraform.io': {
+          secret: registrySecret.id
+        }
+      }
+    }
+  }
+}
+```
 
-#### Properties
+Two other settings are available: provider installation and environment variables.
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **env** | [Record](#record) | Environment variables injected during Terraform recipe execution. |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
-| **referencedBy** | string[] | Environments that reference this Terraform configuration. <br />_(ReadOnly)_ |
-| **terraformrc** | [TerraformrcConfig](#terraformrcconfig) | Terraform CLI configuration file settings. Maps directly to the Terraform CLI configuration file (.terraformrc). |
+### Provider installation
 
-### Record
+In air-gapped or internal environments, use `terraformrc.providerInstallation` to install providers from a network mirror instead of the public registry. Set the mirror `url`, optionally narrow it with `include` or `exclude` provider address patterns, and use `direct` to control which providers are still downloaded directly:
 
-#### Properties
+```bicep
+resource providerMirror 'Radius.Core/terraformSettings@2025-08-01-preview' = {
+  name: 'internal-mirror'
+  properties: {
+    terraformrc: {
+      providerInstallation: {
+        networkMirror: {
+          url: 'https://terraform.corp.example.com/providers/'
+          include: ['*']
+        }
+        direct: {
+          exclude: ['*']
+        }
+      }
+    }
+  }
+}
+```
 
-* **none**
+### Environment variables
 
-#### Additional Properties
+Use `env` to inject environment variables into every Terraform Recipe run, for example to raise the Terraform log level for troubleshooting or to tune CLI behavior:
 
-* **Additional Properties Type**: string
+```bicep
+resource terraformLogging 'Radius.Core/terraformSettings@2025-08-01-preview' = {
+  name: 'terraform-logging'
+  properties: {
+    env: {
+      TF_LOG: 'TRACE'
+      TF_REGISTRY_CLIENT_TIMEOUT: '15'
+    }
+  }
+}
+```
 
-### TerraformrcConfig
+## Deploying Terraform settings
 
-#### Properties
+Deploy the settings resource with the `rad deploy` command:
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **credentials** | [Record](#record) | Credentials for authenticating to private Terraform registries (HTTP-based, e.g. app.terraform.io). Map of registry hostname to credential configuration. Rendered as native `credentials "hostname" {}` blocks in the generated .terraformrc. Note: this is for Terraform CLI registry auth (HTTP), not for Git-based module sources; Git auth is a separate mechanism. |
-| **providerInstallation** | [TerraformProviderInstallation](#terraformproviderinstallation) | Provider installation configuration. Specifies the location of providers via network mirrors or direct downloads. |
+```bash
+rad deploy ./terraform-settings.bicep
+```
 
-### Record
+## Referencing Terraform settings from an Environment
 
-#### Properties
+Reference the settings from an Environment by setting its `terraformSettings` property to the resource ID. Every Terraform Recipe run in that Environment then uses the configured registry credentials:
 
-* **none**
+```bicep
+extension radius
 
-#### Additional Properties
+resource terraformRegistry 'Radius.Core/terraformSettings@2025-08-01-preview' existing = {
+  name: 'private-registry'
+}
 
-* **Additional Properties Type**: [TerraformCredentialConfig](#terraformcredentialconfig)
+resource myEnvironment 'Radius.Core/environments@2025-08-01-preview' = {
+  name: 'my-environment'
+  properties: {
+    terraformSettings: terraformRegistry.id
+  }
+}
+```
 
-### TerraformCredentialConfig
+## Top-Level Properties
 
-#### Properties
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `env` | object | false | false | (Optional) Environment variables injected into the Terraform process during Recipe execution. |
+| `provisioningState` | string | false | true | (Read Only) The status of the Terraform settings resource within the Radius control plane.<br />Allowed values: `Accepted`, `Canceled`, `Creating`, `Deleting`, `Failed`, `Provisioning`, `Succeeded`, `Updating`. |
+| `referencedBy` | string array | false | true | (Read Only) Resource IDs of the Environments that reference this Terraform settings resource. |
+| `terraformrc` | [object](#terraformrc) | false | false | (Optional) Settings for the Terraform CLI configuration file. Radius renders these into a `.terraformrc` file used when running Terraform Recipes. |
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **secret** | string | The ID of a secret resource containing the authentication token. Supported types: Radius.Security/secrets (recommended) or Applications.Core/secretStores. The secret must have a key named 'token'. |
+## Object Properties
 
-### TerraformProviderInstallation
+### `terraformrc` {#terraformrc}
 
-#### Properties
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `credentials` | [object](#terraformrc-credentials) | false | false | (Optional) Credentials for authenticating to private Terraform registries such as `app.terraform.io`. Maps a registry hostname to its credential configuration. This authenticates to Terraform CLI registries over HTTP and does not authenticate Git-based module sources, which use a separate mechanism. |
+| `providerInstallation` | [object](#terraformrc-providerinstallation) | false | false | (Optional) Controls where Terraform installs providers from, such as a network mirror instead of the public registry. |
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **direct** | [TerraformProviderDirect](#terraformproviderdirect) | Direct provider installation configuration. |
-| **networkMirror** | [TerraformProviderMirror](#terraformprovidermirror) | Network mirror configuration for downloading providers. |
+### `terraformrc.credentials` {#terraformrc-credentials}
 
-### TerraformProviderDirect
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `secret` | string | false | false | (Optional) The ID of a `Radius.Security/secrets` resource containing the authentication token. The secret must have a key named `token`. |
 
-#### Properties
+### `terraformrc.providerInstallation` {#terraformrc-providerinstallation}
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **exclude** | string[] | Provider address patterns to exclude from direct installation. |
-| **include** | string[] | Provider address patterns to include for direct installation. |
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `direct` | [object](#terraformrc-providerinstallation-direct) | false | false | (Optional) Providers to install directly from the public registry rather than a mirror. |
+| `networkMirror` | [object](#terraformrc-providerinstallation-networkmirror) | false | false | (Optional) A network mirror to install providers from instead of the public registry. |
 
-### TerraformProviderMirror
+### `terraformrc.providerInstallation.direct` {#terraformrc-providerinstallation-direct}
 
-#### Properties
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `exclude` | string array | false | false | (Optional) Provider address patterns to exclude from direct installation. |
+| `include` | string array | false | false | (Optional) Provider address patterns to include for direct installation. |
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **exclude** | string[] | Provider address patterns to exclude from this mirror. |
-| **include** | string[] | Provider address patterns to include from this mirror. |
-| **url** | string | The URL of the provider mirror. |
+### `terraformrc.providerInstallation.networkMirror` {#terraformrc-providerinstallation-networkmirror}
 
-### SystemData
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **createdAt** | string | The timestamp of resource creation (UTC). |
-| **createdBy** | string | The identity that created the resource. |
-| **createdByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that created the resource. |
-| **lastModifiedAt** | string | The timestamp of resource last modification (UTC) |
-| **lastModifiedBy** | string | The identity that last modified the resource. |
-| **lastModifiedByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that last modified the resource. |
-
-### Record
-
-#### Properties
-
-* **none**
-
-#### Additional Properties
-
-* **Additional Properties Type**: string
-
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `exclude` | string array | false | false | (Optional) Provider address patterns to exclude from this mirror. |
+| `include` | string array | false | false | (Optional) Provider address patterns to include from this mirror. |
+| `url` | string | false | false | (Optional) The URL of the provider mirror. |
