@@ -98,15 +98,23 @@ jobs:
         run: |
           SOURCE_BRANCH="${GITHUB_REF_NAME}"
           MERGE_CONFLICT=false
+          EDGE_OWNED_FILES=(
+              docs/config.toml
+              docs/layouts/partials/hooks/body-end.html
+          )
           echo "Upmerging docs from $SOURCE_BRANCH to edge"
           git fetch origin "${SOURCE_BRANCH}"
 
           if git merge --no-ff --no-commit "origin/${SOURCE_BRANCH}"; then
-              git checkout edge -- docs/config.toml docs/layouts/partials/hooks/body-end.html
+              git checkout edge -- "${EDGE_OWNED_FILES[@]}"
           else
               echo "::warning::Merge conflicts detected. Opening a draft PR for manual resolution."
               git merge --abort
               git reset --hard "origin/${SOURCE_BRANCH}"
+              git checkout edge -- "${EDGE_OWNED_FILES[@]}"
+              if ! git diff --cached --quiet; then
+                  git commit --signoff --message "Preserve edge-specific configuration"
+              fi
               MERGE_CONFLICT=true
               echo "MERGE_CONFLICT=true" >> "${GITHUB_ENV}"
           fi
