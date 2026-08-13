@@ -1213,3 +1213,9 @@ upmerging
 octo
 TENANTID
 magpiego
+binfmt
+tmpfs
+tcpsocket
+gibibytes
+MYSQLDB
+PGDATA
