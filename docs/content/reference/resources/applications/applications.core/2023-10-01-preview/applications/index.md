@@ -9,206 +9,110 @@ description: "Detailed reference documentation for applications.core/application
 
 ## Schema
 
-### Top-Level Resource
+## Description
 
-#### Properties
+Radius Application resource
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **apiVersion** | '2023-10-01-preview' | The resource api version <br />_(ReadOnly, DeployTimeConstant)_ |
-| **environment** | string | Fully qualified resource ID for the environment that the application is linked to <br />_(ReadOnly)_ |
-| **extensions** | [Extension](#extension)[] | The application extension. <br />_(ReadOnly)_ |
-| **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
-| **location** | string | The geo-location where the resource lives |
-| **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
-| **properties** | [ApplicationProperties](#applicationproperties) | The resource-specific properties for this resource. <br />_(Required)_ |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
-| **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
-| **systemData** | [SystemData](#systemdata) | Azure Resource Manager metadata containing createdBy and modifiedBy information. <br />_(ReadOnly)_ |
-| **tags** | [Record](#record) | Resource tags. |
-| **type** | 'Applications.Core/applications' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
+## Top-Level Properties
 
-### Extension
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `environment` | string | true | false | Fully qualified resource ID for the environment that the application is linked to |
+| `extensions` | [object](#extensions)[] | false | false | The application extension. |
+| `provisioningState` | string | false | true | The status of the asynchronous operation.<br />Allowed values: `Accepted`, `Canceled`, `Creating`, `Deleting`, `Failed`, `Provisioning`, `Succeeded`, `Updating`. |
+| `status` | [object](#status) | false | true | Status of a resource. |
 
-* **Discriminator**: kind
+## Object Properties
 
-#### Base Properties
+### `extensions` {#extensions}
 
-* **none**
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `kind` | string | true | false | Discriminator property that selects the variant. Allowed values: [`aci`](#extensions-aci), [`daprSidecar`](#extensions-daprsidecar), [`kubernetesMetadata`](#extensions-kubernetesmetadata), [`kubernetesNamespace`](#extensions-kubernetesnamespace), [`manualScaling`](#extensions-manualscaling). |
 
+### `status` {#status}
 
-#### AzureContainerInstanceExtension
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `compute` | [object](#status-compute) | false | false | The compute resource associated with the resource. |
+| `outputResources` | [object](#status-outputresources)[] | false | false | Properties of an output resource |
+| `recipe` | [object](#status-recipe) | false | true | The recipe data at the time of deployment |
 
-##### Properties
+### `extensions.aci` {#extensions-aci}
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **kind** | 'aci' | The kind of the resource. <br />_(Required)_ |
-| **resourceGroup** | string | The resource group of the application environment. <br />_(Required)_ |
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `resourceGroup` | string | true | false | The resource group of the application environment. |
 
-#### DaprSidecarExtension
+### `extensions.daprSidecar` {#extensions-daprsidecar}
 
-##### Properties
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `appId` | string | true | false | The Dapr appId. Specifies the identifier used by Dapr for service invocation. |
+| `appPort` | integer | false | false | The Dapr appPort. Specifies the internal listening port for the application to handle requests from the Dapr sidecar. |
+| `config` | string | false | false | Specifies the Dapr configuration to use for the resource. |
+| `protocol` | string | false | false | Specifies the Dapr app-protocol to use for the resource.<br />Allowed values: `grpc`, `http`. |
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **appId** | string | The Dapr appId. Specifies the identifier used by Dapr for service invocation. <br />_(Required)_ |
-| **appPort** | int | The Dapr appPort. Specifies the internal listening port for the application to handle requests from the Dapr sidecar.  |
-| **config** | string | Specifies the Dapr configuration to use for the resource. |
-| **kind** | 'daprSidecar' | Specifies the extension of the resource <br />_(Required)_ |
-| **protocol** | 'grpc' | 'http' | Specifies the Dapr app-protocol to use for the resource. |
+### `extensions.kubernetesMetadata` {#extensions-kubernetesmetadata}
 
-#### KubernetesMetadataExtension
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `annotations` | object | false | false | Annotations to be applied to the Kubernetes resources output by the resource |
+| `labels` | object | false | false | Labels to be applied to the Kubernetes resources output by the resource |
 
-##### Properties
+### `extensions.kubernetesNamespace` {#extensions-kubernetesnamespace}
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **annotations** | [Record](#record) | Annotations to be applied to the Kubernetes resources output by the resource |
-| **kind** | 'kubernetesMetadata' | The kind of the resource. <br />_(Required)_ |
-| **labels** | [Record](#record) | Labels to be applied to the Kubernetes resources output by the resource |
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `namespace` | string | true | false | The namespace of the application environment. |
 
-#### KubernetesNamespaceExtension
+### `extensions.manualScaling` {#extensions-manualscaling}
 
-##### Properties
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `replicas` | integer | true | false | Replica count. |
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **kind** | 'kubernetesNamespace' | The kind of the resource. <br />_(Required)_ |
-| **namespace** | string | The namespace of the application environment. <br />_(Required)_ |
+### `status.compute` {#status-compute}
 
-#### ManualScalingExtension
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `kind` | string | true | false | Discriminator property that selects the variant. Allowed values: [`aci`](#status-compute-aci), [`kubernetes`](#status-compute-kubernetes). |
+| `identity` | [object](#status-compute-identity) | false | false | Configuration for supported external identity providers |
+| `resourceId` | string | false | false | The resource id of the compute resource for application environment. |
 
-##### Properties
+### `status.outputResources` {#status-outputresources}
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **kind** | 'manualScaling' | Specifies the extension of the resource <br />_(Required)_ |
-| **replicas** | int | Replica count. <br />_(Required)_ |
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `id` | string | false | false | The UCP resource ID of the underlying resource. |
+| `localId` | string | false | false | The logical identifier scoped to the owning Radius resource. This is only needed or used when a resource has a dependency relationship. LocalIDs do not have any particular format or meaning beyond being compared to determine dependency relationships. |
+| `radiusManaged` | boolean | false | false | Determines whether Radius manages the lifecycle of the underlying resource. |
 
+### `status.recipe` {#status-recipe}
 
-### Record
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `templateKind` | string | true | false | TemplateKind is the kind of the recipe template used by the portable resource upon deployment. |
+| `templatePath` | string | true | false | TemplatePath is the path of the recipe consumed by the portable resource upon deployment. |
+| `templateVersion` | string | false | false | TemplateVersion is the version number of the template. |
 
-#### Properties
+### `status.compute.identity` {#status-compute-identity}
 
-* **none**
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `kind` | string | true | false | kind of identity setting<br />Allowed values: `azure.com.workload`, `systemAssigned`, `systemAssignedUserAssigned`, `undefined`, `userAssigned`. |
+| `managedIdentity` | string array | false | false | The list of user assigned managed identities |
+| `oidcIssuer` | string | false | false | The URI for your compute platform's OIDC issuer |
+| `resource` | string | false | false | The resource ID of the provisioned identity |
 
-#### Additional Properties
+### `status.compute.aci` {#status-compute-aci}
 
-* **Additional Properties Type**: string
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `resourceGroup` | string | false | false | The resource group to use for the environment. |
 
-### Record
+### `status.compute.kubernetes` {#status-compute-kubernetes}
 
-#### Properties
-
-* **none**
-
-#### Additional Properties
-
-* **Additional Properties Type**: string
-
-### ApplicationProperties
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **environment** | string | Fully qualified resource ID for the environment that the application is linked to <br />_(Required)_ |
-| **extensions** | [Extension](#extension)[] | The application extension. |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
-| **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
-
-### ResourceStatus
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **compute** | [EnvironmentCompute](#environmentcompute) | The compute resource associated with the resource. |
-| **outputResources** | [OutputResource](#outputresource)[] | Properties of an output resource |
-| **recipe** | [RecipeStatus](#recipestatus) | The recipe data at the time of deployment <br />_(ReadOnly)_ |
-
-### EnvironmentCompute
-
-* **Discriminator**: kind
-
-#### Base Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **identity** | [IdentitySettings](#identitysettings) | Configuration for supported external identity providers |
-| **resourceId** | string | The resource id of the compute resource for application environment. |
-
-#### AzureContainerInstanceCompute
-
-##### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **kind** | 'aci' | The Azure container instance compute kind <br />_(Required)_ |
-| **resourceGroup** | string | The resource group to use for the environment. |
-
-#### KubernetesCompute
-
-##### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **kind** | 'kubernetes' | The Kubernetes compute kind <br />_(Required)_ |
-| **namespace** | string | The namespace to use for the environment. <br />_(Required)_ |
-
-
-### IdentitySettings
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **kind** | 'azure.com.workload' | 'systemAssigned' | 'systemAssignedUserAssigned' | 'undefined' | 'userAssigned' | kind of identity setting <br />_(Required)_ |
-| **managedIdentity** | string[] | The list of user assigned managed identities |
-| **oidcIssuer** | string | The URI for your compute platform's OIDC issuer |
-| **resource** | string | The resource ID of the provisioned identity |
-
-### OutputResource
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **id** | string | The UCP resource ID of the underlying resource. |
-| **localId** | string | The logical identifier scoped to the owning Radius resource. This is only needed or used when a resource has a dependency relationship. LocalIDs do not have any particular format or meaning beyond being compared to determine dependency relationships. |
-| **radiusManaged** | bool | Determines whether Radius manages the lifecycle of the underlying resource. |
-
-### RecipeStatus
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **templateKind** | string | TemplateKind is the kind of the recipe template used by the portable resource upon deployment. <br />_(Required)_ |
-| **templatePath** | string | TemplatePath is the path of the recipe consumed by the portable resource upon deployment. <br />_(Required)_ |
-| **templateVersion** | string | TemplateVersion is the version number of the template. |
-
-### SystemData
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **createdAt** | string | The timestamp of resource creation (UTC). |
-| **createdBy** | string | The identity that created the resource. |
-| **createdByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that created the resource. |
-| **lastModifiedAt** | string | The timestamp of resource last modification (UTC) |
-| **lastModifiedBy** | string | The identity that last modified the resource. |
-| **lastModifiedByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that last modified the resource. |
-
-### Record
-
-#### Properties
-
-* **none**
-
-#### Additional Properties
-
-* **Additional Properties Type**: string
-
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `namespace` | string | true | false | The namespace to use for the environment. |
