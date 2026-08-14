@@ -19,9 +19,9 @@ description: "Detailed reference documentation for applications.dapr/secretstore
 | **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
 | **location** | string | The geo-location where the resource lives |
 | **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
-| **properties** | [DaprSecretStoreProperties](#daprsecretstoreproperties) | Dapr SecretStore portable resource properties <br />_(Required)_ |
-| **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(ReadOnly)_ |
-| **tags** | [TrackedResourceTags](#trackedresourcetags) | Resource tags. |
+| **properties** | [DaprSecretStoreProperties](#daprsecretstoreproperties) | The resource-specific properties for this resource. <br />_(Required)_ |
+| **systemData** | [SystemData](#systemdata) | Azure Resource Manager metadata containing createdBy and modifiedBy information. <br />_(ReadOnly)_ |
+| **tags** | [Record](#record) | Resource tags. |
 | **type** | 'Applications.Dapr/secretStores' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
 
 ### DaprSecretStoreProperties
@@ -33,15 +33,15 @@ description: "Detailed reference documentation for applications.dapr/secretstore
 | **application** | string | Fully qualified resource ID for the application that the portable resource is consumed by (if applicable) |
 | **componentName** | string | The name of the Dapr component object. Use this value in your code when interacting with the Dapr client to use the Dapr component. <br />_(ReadOnly)_ |
 | **environment** | string | Fully qualified resource ID for the environment that the portable resource is linked to <br />_(Required)_ |
-| **metadata** | [DaprSecretStorePropertiesMetadata](#daprsecretstorepropertiesmetadata) | The metadata for Dapr resource which must match the values specified in Dapr component spec |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
-| **recipe** | [Recipe](#recipe) | The recipe used to automatically deploy underlying infrastructure for a portable resource |
-| **resourceProvisioning** | 'manual' | 'recipe' | Specifies how the underlying service/resource is provisioned and managed. Available values are 'recipe', where Radius manages the lifecycle of the resource through a Recipe, and 'manual', where a user manages the resource and provides the values. |
+| **metadata** | [Record](#record) | The metadata for Dapr resource which must match the values specified in Dapr component spec |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
+| **recipe** | [Recipe](#recipe) | The recipe used to automatically deploy underlying infrastructure for the resource |
+| **resourceProvisioning** | 'manual' | 'recipe' | Specifies how the underlying service/resource is provisioned and managed. |
 | **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
 | **type** | string | Dapr component type which must matches the format used by Dapr Kubernetes configuration format |
 | **version** | string | Dapr component version |
 
-### DaprSecretStorePropertiesMetadata
+### Record
 
 #### Properties
 
@@ -57,7 +57,7 @@ description: "Detailed reference documentation for applications.dapr/secretstore
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **secretKeyRef** | [MetadataValueFromSecret](#metadatavaluefromsecret) | A reference of a value in a secret store component. |
+| **secretKeyRef** | [MetadataValueFromSecret](#metadatavaluefromsecret) | A reference of a value in a secret store component |
 | **value** | string | The plain text value of the metadata |
 
 ### MetadataValueFromSecret
@@ -76,7 +76,17 @@ description: "Detailed reference documentation for applications.dapr/secretstore
 | Property | Type | Description |
 |----------|------|-------------|
 | **name** | string | The name of the recipe within the environment to use <br />_(Required)_ |
-| **parameters** | any | Any object |
+| **parameters** | [Record](#record) | Key/value parameters to pass into the recipe at deployment |
+
+### Record
+
+#### Properties
+
+* **none**
+
+#### Additional Properties
+
+* **Additional Properties Type**: any
 
 ### ResourceStatus
 
@@ -84,9 +94,9 @@ description: "Detailed reference documentation for applications.dapr/secretstore
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **compute** | [EnvironmentCompute](#environmentcompute) | Represents backing compute resource |
+| **compute** | [EnvironmentCompute](#environmentcompute) | The compute resource associated with the resource. |
 | **outputResources** | [OutputResource](#outputresource)[] | Properties of an output resource |
-| **recipe** | [RecipeStatus](#recipestatus) | Recipe status at deployment time for a resource. <br />_(ReadOnly)_ |
+| **recipe** | [RecipeStatus](#recipestatus) | The recipe data at the time of deployment <br />_(ReadOnly)_ |
 
 ### EnvironmentCompute
 
@@ -96,7 +106,7 @@ description: "Detailed reference documentation for applications.dapr/secretstore
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **identity** | [IdentitySettings](#identitysettings) | IdentitySettings is the external identity setting. |
+| **identity** | [IdentitySettings](#identitysettings) | Configuration for supported external identity providers |
 | **resourceId** | string | The resource id of the compute resource for application environment. |
 
 #### AzureContainerInstanceCompute
@@ -105,7 +115,7 @@ description: "Detailed reference documentation for applications.dapr/secretstore
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'aci' | Discriminator property for EnvironmentCompute. <br />_(Required)_ |
+| **kind** | 'aci' | The Azure container instance compute kind <br />_(Required)_ |
 | **resourceGroup** | string | The resource group to use for the environment. |
 
 #### KubernetesCompute
@@ -114,7 +124,7 @@ description: "Detailed reference documentation for applications.dapr/secretstore
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'kubernetes' | Discriminator property for EnvironmentCompute. <br />_(Required)_ |
+| **kind** | 'kubernetes' | The Kubernetes compute kind <br />_(Required)_ |
 | **namespace** | string | The namespace to use for the environment. <br />_(Required)_ |
 
 
@@ -124,7 +134,7 @@ description: "Detailed reference documentation for applications.dapr/secretstore
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'azure.com.workload' | 'systemAssigned' | 'systemAssignedUserAssigned' | 'undefined' | 'userAssigned' | IdentitySettingKind is the kind of supported external identity setting <br />_(Required)_ |
+| **kind** | 'azure.com.workload' | 'systemAssigned' | 'systemAssignedUserAssigned' | 'undefined' | 'userAssigned' | kind of identity setting <br />_(Required)_ |
 | **managedIdentity** | string[] | The list of user assigned managed identities |
 | **oidcIssuer** | string | The URI for your compute platform's OIDC issuer |
 | **resource** | string | The resource ID of the provisioned identity |
@@ -160,9 +170,9 @@ description: "Detailed reference documentation for applications.dapr/secretstore
 | **createdByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that created the resource. |
 | **lastModifiedAt** | string | The timestamp of resource last modification (UTC) |
 | **lastModifiedBy** | string | The identity that last modified the resource. |
-| **lastModifiedByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that created the resource. |
+| **lastModifiedByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that last modified the resource. |
 
-### TrackedResourceTags
+### Record
 
 #### Properties
 

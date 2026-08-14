@@ -44,7 +44,7 @@ jobs:
       HUGO_ENV: production
     steps:
       - name: Checkout docs repo
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0 # Required for enableGitInfo
           persist-credentials: false
@@ -53,7 +53,7 @@ jobs:
         run: python ./.github/scripts/get_docs_version.py
 
       - name: Checkout radius repo
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: radius-project/radius
           ref: ${{ env.RELEASE_BRANCH }}
@@ -61,13 +61,13 @@ jobs:
           persist-credentials: false
 
       - name: Setup Go
-        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
         with:
           go-version-file: docs/go.mod
           cache: false
 
       - name: Setup Node
-        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version-file: .node-version
 
@@ -95,7 +95,7 @@ jobs:
 
       - name: Restore Hugo cache
         id: cache-restore
-        uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ${{ runner.temp }}/hugo_cache
           key: hugo-${{ github.run_id }}
@@ -114,7 +114,7 @@ jobs:
           RUNNER_TEMP: ${{ runner.temp }}
 
       - name: Save Hugo cache
-        uses: actions/cache/save@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ${{ runner.temp }}/hugo_cache
           key: ${{ steps.cache-restore.outputs.cache-primary-key }}
@@ -142,7 +142,7 @@ jobs:
   #     url: ${{ github.ref_name == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io' }}
   #   steps:
   #     - name: Checkout docs repo
-  #       uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+  #       uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
   #       with:
   #         submodules: false
   #         persist-credentials: false
@@ -180,7 +180,7 @@ jobs:
       url: ${{ github.ref_name == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io' }}
     steps:
       - name: Checkout docs repo
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
           sparse-checkout: |
@@ -260,7 +260,7 @@ jobs:
       name: ${{ github.base_ref == 'edge' && 'edge' || 'latest' }}
     steps:
       - name: Checkout docs repo
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
           sparse-checkout: |
@@ -319,7 +319,7 @@ jobs:
 
       - name: Upsert preview PR comment
         if: success()
-        uses: marocchino/sticky-pull-request-comment@0ea0beb66eb9baf113663a64ec522f60e49231c0 # v3.0.4
+        uses: marocchino/sticky-pull-request-comment@5770ad5eb8f42dd2c4f34da00c94c5381e49af88 # v3.0.5
         with:
           header: ${{ env.PREVIEW_COMMENT_HEADER }}
           skip_unchanged: true
@@ -356,7 +356,7 @@ jobs:
       url: ${{ github.base_ref == 'edge' && 'https://edge.docs.radapp.io' || 'https://docs.radapp.io' }}
     steps:
       - name: Checkout docs repo
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
           sparse-checkout: |
@@ -376,7 +376,7 @@ jobs:
             ${{ env.TARGET_REPO }}
 
       - name: Delete preview PR comment
-        uses: marocchino/sticky-pull-request-comment@0ea0beb66eb9baf113663a64ec522f60e49231c0 # v3.0.4
+        uses: marocchino/sticky-pull-request-comment@5770ad5eb8f42dd2c4f34da00c94c5381e49af88 # v3.0.5
         with:
           header: ${{ env.PREVIEW_COMMENT_HEADER }}
           delete: true
@@ -437,7 +437,7 @@ jobs:
       name: ${{ github.ref_name == 'edge' && 'edge' || 'latest' }}
     steps:
       - name: Checkout docs repo
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           submodules: false
           persist-credentials: false

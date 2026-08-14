@@ -23,13 +23,13 @@ description: "Detailed reference documentation for applications.core/gateways@20
 | **internal** | bool | Sets Gateway to not be exposed externally (no public IP address associated). Defaults to false (exposed to internet). <br />_(ReadOnly)_ |
 | **location** | string | The geo-location where the resource lives |
 | **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
-| **properties** | [GatewayProperties](#gatewayproperties) | Gateway properties <br />_(Required)_ |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **properties** | [GatewayProperties](#gatewayproperties) | The resource-specific properties for this resource. <br />_(Required)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
 | **routes** | [GatewayRoute](#gatewayroute)[] | Routes attached to this Gateway <br />_(ReadOnly)_ |
 | **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
-| **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(ReadOnly)_ |
-| **tags** | [TrackedResourceTags](#trackedresourcetags) | Resource tags. |
-| **tls** | [GatewayTls](#gatewaytls) | TLS configuration definition for Gateway resource. <br />_(ReadOnly)_ |
+| **systemData** | [SystemData](#systemdata) | Azure Resource Manager metadata containing createdBy and modifiedBy information. <br />_(ReadOnly)_ |
+| **tags** | [Record](#record) | Resource tags. |
+| **tls** | [GatewayTls](#gatewaytls) | TLS configuration for the Gateway. <br />_(ReadOnly)_ |
 | **type** | 'Applications.Core/gateways' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
 | **url** | string | URL of the gateway resource. Readonly <br />_(ReadOnly)_ |
 
@@ -52,10 +52,10 @@ description: "Detailed reference documentation for applications.core/gateways@20
 | **environment** | string | Fully qualified resource ID for the environment that the application is linked to |
 | **hostname** | [GatewayHostname](#gatewayhostname) | Declare hostname information for the Gateway. Leaving the hostname empty auto-assigns one: mygateway.myapp.PUBLICHOSTNAMEORIP.nip.io. |
 | **internal** | bool | Sets Gateway to not be exposed externally (no public IP address associated). Defaults to false (exposed to internet). |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
 | **routes** | [GatewayRoute](#gatewayroute)[] | Routes attached to this Gateway <br />_(Required)_ |
 | **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
-| **tls** | [GatewayTls](#gatewaytls) | TLS configuration definition for Gateway resource. |
+| **tls** | [GatewayTls](#gatewaytls) | TLS configuration for the Gateway. |
 | **url** | string | URL of the gateway resource. Readonly <br />_(ReadOnly)_ |
 
 ### GatewayRoute
@@ -68,7 +68,7 @@ description: "Detailed reference documentation for applications.core/gateways@20
 | **enableWebsockets** | bool | Enables websocket support for the route. Defaults to false. |
 | **path** | string | The path to match the incoming request path on. Ex - /myservice. |
 | **replacePrefix** | string | Optionally update the prefix when sending the request to the service. Ex - replacePrefix: '/' and path: '/myservice' will transform '/myservice/myroute' to '/myroute' |
-| **timeoutPolicy** | [GatewayRouteTimeoutPolicy](#gatewayroutetimeoutpolicy) | Gateway route timeout policy |
+| **timeoutPolicy** | [GatewayRouteTimeoutPolicy](#gatewayroutetimeoutpolicy) | The timeout policy for the route. |
 
 ### GatewayRouteTimeoutPolicy
 
@@ -85,9 +85,9 @@ description: "Detailed reference documentation for applications.core/gateways@20
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **compute** | [EnvironmentCompute](#environmentcompute) | Represents backing compute resource |
+| **compute** | [EnvironmentCompute](#environmentcompute) | The compute resource associated with the resource. |
 | **outputResources** | [OutputResource](#outputresource)[] | Properties of an output resource |
-| **recipe** | [RecipeStatus](#recipestatus) | Recipe status at deployment time for a resource. <br />_(ReadOnly)_ |
+| **recipe** | [RecipeStatus](#recipestatus) | The recipe data at the time of deployment <br />_(ReadOnly)_ |
 
 ### EnvironmentCompute
 
@@ -97,7 +97,7 @@ description: "Detailed reference documentation for applications.core/gateways@20
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **identity** | [IdentitySettings](#identitysettings) | IdentitySettings is the external identity setting. |
+| **identity** | [IdentitySettings](#identitysettings) | Configuration for supported external identity providers |
 | **resourceId** | string | The resource id of the compute resource for application environment. |
 
 #### AzureContainerInstanceCompute
@@ -106,7 +106,7 @@ description: "Detailed reference documentation for applications.core/gateways@20
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'aci' | Discriminator property for EnvironmentCompute. <br />_(Required)_ |
+| **kind** | 'aci' | The Azure container instance compute kind <br />_(Required)_ |
 | **resourceGroup** | string | The resource group to use for the environment. |
 
 #### KubernetesCompute
@@ -115,7 +115,7 @@ description: "Detailed reference documentation for applications.core/gateways@20
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'kubernetes' | Discriminator property for EnvironmentCompute. <br />_(Required)_ |
+| **kind** | 'kubernetes' | The Kubernetes compute kind <br />_(Required)_ |
 | **namespace** | string | The namespace to use for the environment. <br />_(Required)_ |
 
 
@@ -125,7 +125,7 @@ description: "Detailed reference documentation for applications.core/gateways@20
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'azure.com.workload' | 'systemAssigned' | 'systemAssignedUserAssigned' | 'undefined' | 'userAssigned' | IdentitySettingKind is the kind of supported external identity setting <br />_(Required)_ |
+| **kind** | 'azure.com.workload' | 'systemAssigned' | 'systemAssignedUserAssigned' | 'undefined' | 'userAssigned' | kind of identity setting <br />_(Required)_ |
 | **managedIdentity** | string[] | The list of user assigned managed identities |
 | **oidcIssuer** | string | The URI for your compute platform's OIDC issuer |
 | **resource** | string | The resource ID of the provisioned identity |
@@ -171,9 +171,9 @@ description: "Detailed reference documentation for applications.core/gateways@20
 | **createdByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that created the resource. |
 | **lastModifiedAt** | string | The timestamp of resource last modification (UTC) |
 | **lastModifiedBy** | string | The identity that last modified the resource. |
-| **lastModifiedByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that created the resource. |
+| **lastModifiedByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that last modified the resource. |
 
-### TrackedResourceTags
+### Record
 
 #### Properties
 

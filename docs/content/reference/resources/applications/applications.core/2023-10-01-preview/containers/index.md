@@ -17,26 +17,26 @@ description: "Detailed reference documentation for applications.core/containers@
 |----------|------|-------------|
 | **apiVersion** | '2023-10-01-preview' | The resource api version <br />_(ReadOnly, DeployTimeConstant)_ |
 | **application** | string | Fully qualified resource ID for the application <br />_(ReadOnly)_ |
-| **connections** | [ContainerPropertiesConnections](#containerpropertiesconnections) | Specifies a connection to another resource. <br />_(ReadOnly)_ |
-| **container** | [Container](#container) | Definition of a container <br />_(ReadOnly)_ |
+| **connections** | [Record](#record) | Specifies a connection to another resource. <br />_(ReadOnly)_ |
+| **container** | [Container](#container) | Definition of a container. <br />_(ReadOnly)_ |
 | **environment** | string | Fully qualified resource ID for the environment that the application is linked to <br />_(ReadOnly)_ |
 | **extensions** | [Extension](#extension)[] | Extensions spec of the resource <br />_(ReadOnly)_ |
 | **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
-| **identity** | [IdentitySettings](#identitysettings) | IdentitySettings is the external identity setting. <br />_(ReadOnly)_ |
+| **identity** | [IdentitySettings](#identitysettings) | Configuration for supported external identity providers <br />_(ReadOnly)_ |
 | **location** | string | The geo-location where the resource lives |
 | **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
-| **properties** | [ContainerProperties](#containerproperties) | Container properties <br />_(Required)_ |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
-| **resourceProvisioning** | 'internal' | 'manual' | Specifies how the underlying service/resource is provisioned and managed. Available values are 'internal', where Radius manages the lifecycle of the resource internally, and 'manual', where a user manages the resource. <br />_(ReadOnly)_ |
+| **properties** | [ContainerProperties](#containerproperties) | The resource-specific properties for this resource. <br />_(Required)_ |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
+| **resourceProvisioning** | 'internal' | 'manual' | Specifies how the underlying container resource is provisioned and managed. <br />_(ReadOnly)_ |
 | **resources** | [ResourceReference](#resourcereference)[] | A collection of references to resources associated with the container <br />_(ReadOnly)_ |
-| **restartPolicy** | 'Always' | 'Never' | 'OnFailure' | Restart policy for the container <br />_(ReadOnly)_ |
-| **runtimes** | [RuntimesProperties](#runtimesproperties) | The properties for runtime configuration <br />_(ReadOnly)_ |
+| **restartPolicy** | 'Always' | 'Never' | 'OnFailure' | The restart policy for the underlying container <br />_(ReadOnly)_ |
+| **runtimes** | [RuntimesProperties](#runtimesproperties) | Specifies Runtime-specific functionality <br />_(ReadOnly)_ |
 | **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
-| **systemData** | [SystemData](#systemdata) | Metadata pertaining to creation and last modification of the resource. <br />_(ReadOnly)_ |
-| **tags** | [TrackedResourceTags](#trackedresourcetags) | Resource tags. |
+| **systemData** | [SystemData](#systemdata) | Azure Resource Manager metadata containing createdBy and modifiedBy information. <br />_(ReadOnly)_ |
+| **tags** | [Record](#record) | Resource tags. |
 | **type** | 'Applications.Core/containers' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
 
-### ContainerPropertiesConnections
+### Record
 
 #### Properties
 
@@ -53,7 +53,7 @@ description: "Detailed reference documentation for applications.core/containers@
 | Property | Type | Description |
 |----------|------|-------------|
 | **disableDefaultEnvVars** | bool | default environment variable override |
-| **iam** | [IamProperties](#iamproperties) | IAM properties |
+| **iam** | [IamProperties](#iamproperties) | iam properties |
 | **source** | string | The source of the connection <br />_(Required)_ |
 
 ### IamProperties
@@ -73,16 +73,16 @@ description: "Detailed reference documentation for applications.core/containers@
 |----------|------|-------------|
 | **args** | string[] | Arguments to the entrypoint. Overrides the container image's CMD |
 | **command** | string[] | Entrypoint array. Overrides the container image's ENTRYPOINT |
-| **env** | [ContainerEnv](#containerenv) | environment |
+| **env** | [Record](#record) | environment |
 | **image** | string | The registry and image to download and run in your container <br />_(Required)_ |
-| **imagePullPolicy** | 'Always' | 'IfNotPresent' | 'Never' | The image pull policy for the container |
-| **livenessProbe** | [HealthProbeProperties](#healthprobeproperties) | Properties for readiness/liveness probe |
-| **ports** | [ContainerPorts](#containerports) | container ports |
-| **readinessProbe** | [HealthProbeProperties](#healthprobeproperties) | Properties for readiness/liveness probe |
-| **volumes** | [ContainerVolumes](#containervolumes) | container volumes |
+| **imagePullPolicy** | 'Always' | 'IfNotPresent' | 'Never' | The pull policy for the container image |
+| **livenessProbe** | [HealthProbeProperties](#healthprobeproperties) | liveness probe properties |
+| **ports** | [Record](#record) | container ports |
+| **readinessProbe** | [HealthProbeProperties](#healthprobeproperties) | readiness probe properties |
+| **volumes** | [Record](#record) | container volumes |
 | **workingDir** | string | Working directory for the container |
 
-### ContainerEnv
+### Record
 
 #### Properties
 
@@ -107,7 +107,7 @@ description: "Detailed reference documentation for applications.core/containers@
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **secretRef** | [SecretReference](#secretreference) | This secret is used within a recipe. Secrets are encrypted, often have fine-grained access control, auditing and are recommended to be used to hold sensitive data. <br />_(Required)_ |
+| **secretRef** | [SecretReference](#secretreference) | The secret reference <br />_(Required)_ |
 
 ### SecretReference
 
@@ -138,7 +138,7 @@ description: "Detailed reference documentation for applications.core/containers@
 | Property | Type | Description |
 |----------|------|-------------|
 | **command** | string | Command to execute to probe readiness/liveness <br />_(Required)_ |
-| **kind** | 'exec' | Discriminator property for HealthProbeProperties. <br />_(Required)_ |
+| **kind** | 'exec' | The HealthProbeProperties kind <br />_(Required)_ |
 
 #### HttpGetHealthProbeProperties
 
@@ -147,8 +147,8 @@ description: "Detailed reference documentation for applications.core/containers@
 | Property | Type | Description |
 |----------|------|-------------|
 | **containerPort** | int | The listening port number <br />_(Required)_ |
-| **headers** | [HttpGetHealthProbePropertiesHeaders](#httpgethealthprobepropertiesheaders) | Custom HTTP headers to add to the get request |
-| **kind** | 'httpGet' | Discriminator property for HealthProbeProperties. <br />_(Required)_ |
+| **headers** | [Record](#record) | Custom HTTP headers to add to the get request |
+| **kind** | 'httpGet' | The HealthProbeProperties kind <br />_(Required)_ |
 | **path** | string | The route to make the HTTP request on <br />_(Required)_ |
 
 #### TcpHealthProbeProperties
@@ -158,10 +158,10 @@ description: "Detailed reference documentation for applications.core/containers@
 | Property | Type | Description |
 |----------|------|-------------|
 | **containerPort** | int | The listening port number <br />_(Required)_ |
-| **kind** | 'tcp' | Discriminator property for HealthProbeProperties. <br />_(Required)_ |
+| **kind** | 'tcp' | The HealthProbeProperties kind <br />_(Required)_ |
 
 
-### HttpGetHealthProbePropertiesHeaders
+### Record
 
 #### Properties
 
@@ -171,7 +171,7 @@ description: "Detailed reference documentation for applications.core/containers@
 
 * **Additional Properties Type**: string
 
-### ContainerPorts
+### Record
 
 #### Properties
 
@@ -189,10 +189,10 @@ description: "Detailed reference documentation for applications.core/containers@
 |----------|------|-------------|
 | **containerPort** | int | The listening port number <br />_(Required)_ |
 | **port** | int | Specifies the port that will be exposed by this container. Must be set when value different from containerPort is desired |
-| **protocol** | 'TCP' | 'UDP' | The protocol in use by the port |
+| **protocol** | 'TCP' | 'UDP' | Protocol in use by the port |
 | **scheme** | string | Specifies the URL scheme of the communication protocol. Consumers can use the scheme to construct a URL. The value defaults to 'http' or 'https' depending on the port value |
 
-### ContainerVolumes
+### Record
 
 #### Properties
 
@@ -218,8 +218,8 @@ description: "Detailed reference documentation for applications.core/containers@
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'ephemeral' | Discriminator property for Volume. <br />_(Required)_ |
-| **managedStore** | 'disk' | 'memory' | The managed store for the ephemeral volume <br />_(Required)_ |
+| **kind** | 'ephemeral' | The Volume kind <br />_(Required)_ |
+| **managedStore** | 'disk' | 'memory' | Backing store for the ephemeral volume <br />_(Required)_ |
 
 #### PersistentVolume
 
@@ -227,8 +227,8 @@ description: "Detailed reference documentation for applications.core/containers@
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'persistent' | Discriminator property for Volume. <br />_(Required)_ |
-| **permission** | 'read' | 'write' | The persistent volume permission |
+| **kind** | 'persistent' | The Volume kind <br />_(Required)_ |
+| **permission** | 'read' | 'write' | Container read/write access to the volume |
 | **source** | string | The source of the volume <br />_(Required)_ |
 
 
@@ -247,7 +247,7 @@ description: "Detailed reference documentation for applications.core/containers@
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'aci' | Discriminator property for Extension. <br />_(Required)_ |
+| **kind** | 'aci' | The kind of the resource. <br />_(Required)_ |
 | **resourceGroup** | string | The resource group of the application environment. <br />_(Required)_ |
 
 #### DaprSidecarExtension
@@ -257,10 +257,10 @@ description: "Detailed reference documentation for applications.core/containers@
 | Property | Type | Description |
 |----------|------|-------------|
 | **appId** | string | The Dapr appId. Specifies the identifier used by Dapr for service invocation. <br />_(Required)_ |
-| **appPort** | int | The Dapr appPort. Specifies the internal listening port for the application to handle requests from the Dapr sidecar. |
+| **appPort** | int | The Dapr appPort. Specifies the internal listening port for the application to handle requests from the Dapr sidecar.  |
 | **config** | string | Specifies the Dapr configuration to use for the resource. |
-| **kind** | 'daprSidecar' | Discriminator property for Extension. <br />_(Required)_ |
-| **protocol** | 'grpc' | 'http' | The Dapr sidecar extension protocol |
+| **kind** | 'daprSidecar' | Specifies the extension of the resource <br />_(Required)_ |
+| **protocol** | 'grpc' | 'http' | Specifies the Dapr app-protocol to use for the resource. |
 
 #### KubernetesMetadataExtension
 
@@ -268,9 +268,9 @@ description: "Detailed reference documentation for applications.core/containers@
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **annotations** | [KubernetesMetadataExtensionAnnotations](#kubernetesmetadataextensionannotations) | Annotations to be applied to the Kubernetes resources output by the resource |
-| **kind** | 'kubernetesMetadata' | Discriminator property for Extension. <br />_(Required)_ |
-| **labels** | [KubernetesMetadataExtensionLabels](#kubernetesmetadataextensionlabels) | Labels to be applied to the Kubernetes resources output by the resource |
+| **annotations** | [Record](#record) | Annotations to be applied to the Kubernetes resources output by the resource |
+| **kind** | 'kubernetesMetadata' | The kind of the resource. <br />_(Required)_ |
+| **labels** | [Record](#record) | Labels to be applied to the Kubernetes resources output by the resource |
 
 #### KubernetesNamespaceExtension
 
@@ -278,7 +278,7 @@ description: "Detailed reference documentation for applications.core/containers@
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'kubernetesNamespace' | Discriminator property for Extension. <br />_(Required)_ |
+| **kind** | 'kubernetesNamespace' | The kind of the resource. <br />_(Required)_ |
 | **namespace** | string | The namespace of the application environment. <br />_(Required)_ |
 
 #### ManualScalingExtension
@@ -287,11 +287,11 @@ description: "Detailed reference documentation for applications.core/containers@
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'manualScaling' | Discriminator property for Extension. <br />_(Required)_ |
+| **kind** | 'manualScaling' | Specifies the extension of the resource <br />_(Required)_ |
 | **replicas** | int | Replica count. <br />_(Required)_ |
 
 
-### KubernetesMetadataExtensionAnnotations
+### Record
 
 #### Properties
 
@@ -301,7 +301,7 @@ description: "Detailed reference documentation for applications.core/containers@
 
 * **Additional Properties Type**: string
 
-### KubernetesMetadataExtensionLabels
+### Record
 
 #### Properties
 
@@ -317,7 +317,7 @@ description: "Detailed reference documentation for applications.core/containers@
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'azure.com.workload' | 'systemAssigned' | 'systemAssignedUserAssigned' | 'undefined' | 'userAssigned' | IdentitySettingKind is the kind of supported external identity setting <br />_(Required)_ |
+| **kind** | 'azure.com.workload' | 'systemAssigned' | 'systemAssignedUserAssigned' | 'undefined' | 'userAssigned' | kind of identity setting <br />_(Required)_ |
 | **managedIdentity** | string[] | The list of user assigned managed identities |
 | **oidcIssuer** | string | The URI for your compute platform's OIDC issuer |
 | **resource** | string | The resource ID of the provisioned identity |
@@ -329,19 +329,19 @@ description: "Detailed reference documentation for applications.core/containers@
 | Property | Type | Description |
 |----------|------|-------------|
 | **application** | string | Fully qualified resource ID for the application <br />_(Required)_ |
-| **connections** | [ContainerPropertiesConnections](#containerpropertiesconnections) | Specifies a connection to another resource. |
-| **container** | [Container](#container) | Definition of a container <br />_(Required)_ |
+| **connections** | [Record](#record) | Specifies a connection to another resource. |
+| **container** | [Container](#container) | Definition of a container. <br />_(Required)_ |
 | **environment** | string | Fully qualified resource ID for the environment that the application is linked to |
 | **extensions** | [Extension](#extension)[] | Extensions spec of the resource |
-| **identity** | [IdentitySettings](#identitysettings) | IdentitySettings is the external identity setting. |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | Provisioning state of the resource at the time the operation was called <br />_(ReadOnly)_ |
-| **resourceProvisioning** | 'internal' | 'manual' | Specifies how the underlying service/resource is provisioned and managed. Available values are 'internal', where Radius manages the lifecycle of the resource internally, and 'manual', where a user manages the resource. |
+| **identity** | [IdentitySettings](#identitysettings) | Configuration for supported external identity providers |
+| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
+| **resourceProvisioning** | 'internal' | 'manual' | Specifies how the underlying container resource is provisioned and managed. |
 | **resources** | [ResourceReference](#resourcereference)[] | A collection of references to resources associated with the container |
-| **restartPolicy** | 'Always' | 'Never' | 'OnFailure' | Restart policy for the container |
-| **runtimes** | [RuntimesProperties](#runtimesproperties) | The properties for runtime configuration |
+| **restartPolicy** | 'Always' | 'Never' | 'OnFailure' | The restart policy for the underlying container |
+| **runtimes** | [RuntimesProperties](#runtimesproperties) | Specifies Runtime-specific functionality |
 | **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
 
-### ContainerPropertiesConnections
+### Record
 
 #### Properties
 
@@ -365,7 +365,7 @@ description: "Detailed reference documentation for applications.core/containers@
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **aci** | [ACIRuntimeProperties](#aciruntimeproperties) | The runtime configuration properties for Kubernetes |
+| **aci** | [ACIRuntimeProperties](#aciruntimeproperties) | The runtime configuration properties for ACI |
 | **kubernetes** | [KubernetesRuntimeProperties](#kubernetesruntimeproperties) | The runtime configuration properties for Kubernetes |
 
 ### ACIRuntimeProperties
@@ -401,9 +401,9 @@ description: "Detailed reference documentation for applications.core/containers@
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **compute** | [EnvironmentCompute](#environmentcompute) | Represents backing compute resource |
+| **compute** | [EnvironmentCompute](#environmentcompute) | The compute resource associated with the resource. |
 | **outputResources** | [OutputResource](#outputresource)[] | Properties of an output resource |
-| **recipe** | [RecipeStatus](#recipestatus) | Recipe status at deployment time for a resource. <br />_(ReadOnly)_ |
+| **recipe** | [RecipeStatus](#recipestatus) | The recipe data at the time of deployment <br />_(ReadOnly)_ |
 
 ### EnvironmentCompute
 
@@ -413,7 +413,7 @@ description: "Detailed reference documentation for applications.core/containers@
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **identity** | [IdentitySettings](#identitysettings) | IdentitySettings is the external identity setting. |
+| **identity** | [IdentitySettings](#identitysettings) | Configuration for supported external identity providers |
 | **resourceId** | string | The resource id of the compute resource for application environment. |
 
 #### AzureContainerInstanceCompute
@@ -422,7 +422,7 @@ description: "Detailed reference documentation for applications.core/containers@
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'aci' | Discriminator property for EnvironmentCompute. <br />_(Required)_ |
+| **kind** | 'aci' | The Azure container instance compute kind <br />_(Required)_ |
 | **resourceGroup** | string | The resource group to use for the environment. |
 
 #### KubernetesCompute
@@ -431,7 +431,7 @@ description: "Detailed reference documentation for applications.core/containers@
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **kind** | 'kubernetes' | Discriminator property for EnvironmentCompute. <br />_(Required)_ |
+| **kind** | 'kubernetes' | The Kubernetes compute kind <br />_(Required)_ |
 | **namespace** | string | The namespace to use for the environment. <br />_(Required)_ |
 
 
@@ -466,9 +466,9 @@ description: "Detailed reference documentation for applications.core/containers@
 | **createdByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that created the resource. |
 | **lastModifiedAt** | string | The timestamp of resource last modification (UTC) |
 | **lastModifiedBy** | string | The identity that last modified the resource. |
-| **lastModifiedByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that created the resource. |
+| **lastModifiedByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that last modified the resource. |
 
-### TrackedResourceTags
+### Record
 
 #### Properties
 

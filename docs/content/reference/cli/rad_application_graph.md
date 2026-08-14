@@ -46,8 +46,9 @@ rad app graph ./app.bicep
   -a, --application string   The application name
   -g, --group string         The resource group name
   -h, --help                 help for graph
+      --include-icons        When set with --preview, embeds each referenced resource type icon's SVG bytes in the response.
   -o, --output string        output format (supported formats are json, table) (default "table")
-      --preview              Use the Radius.Core preview implementation
+      --preview              Use the Radius.Core preview implementation (can also be set via RADIUS_PREVIEW=true)
   -w, --workspace string     The workspace name
 ```
 
