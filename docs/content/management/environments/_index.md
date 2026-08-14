@@ -93,6 +93,17 @@ rad environment update dev \
   --preview
 ```
 
+Add or replace the Azure cloud provider on `dev` with the subscription ID and resource group where Azure resources are deployed:
+
+<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
+```bash
+rad environment update dev \
+  --group dev \
+  --azure-subscription-id 00000000-0000-0000-0000-000000000000 \
+  --azure-resource-group my-resource-group \
+  --preview
+```
+
 The CLI can update cloud provider configuration and, in preview, the Recipe Pack list. Manage advanced properties declaratively in Bicep. Review changes to an Environment carefully because they affect subsequent deployments that target it.
 
 For example, after deploying the `data-recipes` Recipe Pack defined above into the `dev` Resource Group, replace the Environment's `default` Recipe Pack with `data-recipes`:

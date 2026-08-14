@@ -80,7 +80,9 @@ The Radius CLI, `rad`, is the primary means of interacting with Radius for both 
 
 ### Dashboard
 
-When defining an application, developers use the Backstage-based Dashboard to reference organization-specific documentation, see what Resource Types are available, and get a list of Environments they can deploy their application to. After applications have been deployed, the Dashboard gives developers and SREs the list of deployed applications and resources. The Dashboard also makes it easy to visualize deployed applications in an application, or dependency, graph.
+When defining an application, developers use the [Backstage](https://backstage.io/)-based Dashboard to reference organization-specific documentation, see what Resource Types are available, and get a list of Environments they can deploy their application to. After applications have been deployed, the Dashboard gives developers and SREs the list of deployed applications and resources. The Dashboard also makes it easy to visualize deployed applications in an application, or dependency, graph.
+
+![Dashboard screenshot](dashboard-screenshot.png)
 
 ### Universal Control Plane
 
