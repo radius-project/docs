@@ -12,7 +12,7 @@ Lists resources
 
 ### Synopsis
 
-List all resources of specified type
+List all resources of a specified type. If no resource type is given, lists all resources of any type in an environment or application.
 
 ```
 rad resource list [resourceType] [flags]
@@ -35,12 +35,25 @@ rad resource list Applications.Core/containers --application icecream-store
 # list all resources of a specified type in an application (shorthand flag)
 rad resource list Applications.Core/containers -a icecream-store
 
+# list all resources of a specified type in a specified environment
+rad resource list Applications.Core/containers -e not-default-env
+
+# list all resources of any type in the default environment
+rad resource list
+
+# list all resources of any type in a specified environment
+rad resource list -e not-default-env
+
+# list all resources of any type in an application
+rad resource list -a icecream-store
+
 ```
 
 ### Options
 
 ```
   -a, --application string   The application name
+  -e, --environment string   The environment name
   -g, --group string         The resource group name
   -h, --help                 help for list
   -o, --output string        output format (supported formats are json, table) (default "table")
