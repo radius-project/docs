@@ -9,150 +9,156 @@ description: "Detailed reference documentation for radius.core/environments@2025
 
 ## Schema
 
-### Top-Level Resource
+## Description
 
-#### Properties
+The `Radius.Core/environments` Resource Type represents a Radius Environment: the deployment target that platform engineers configure for their developers. Every Radius Application is deployed to an Environment through its `environment` property.
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **apiVersion** | '2025-08-01-preview' | The resource api version <br />_(ReadOnly, DeployTimeConstant)_ |
-| **bicepSettings** | string | Resource ID of a Radius.Core/bicepSettings resource providing Bicep recipe settings. <br />_(ReadOnly)_ |
-| **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
-| **location** | string | The geo-location where the resource lives |
-| **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
-| **properties** | [EnvironmentProperties](#environmentproperties) | The resource-specific properties for this resource. <br />_(Required)_ |
-| **providers** | [Providers](#providers) | Cloud provider configuration for the environment. <br />_(ReadOnly)_ |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
-| **recipePacks** | string[] | List of Recipe Pack resource IDs linked to this environment. <br />_(ReadOnly)_ |
-| **recipeParameters** | [Record](#record) | Recipe specific parameters that apply to all resources of a given type in this environment. <br />_(ReadOnly)_ |
-| **simulated** | bool | Simulated environment. <br />_(ReadOnly)_ |
-| **systemData** | [SystemData](#systemdata) | Azure Resource Manager metadata containing createdBy and modifiedBy information. <br />_(ReadOnly)_ |
-| **tags** | [Record](#record) | Resource tags. |
-| **terraformSettings** | string | Resource ID of a Radius.Core/terraformSettings resource providing Terraform recipe settings. <br />_(ReadOnly)_ |
-| **type** | 'Radius.Core/environments' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
+An Environment defines three things for the Applications deployed to it:
 
-### EnvironmentProperties
+- **Where resources are deployed**: the target compute platform and cloud provider accounts, set through the `providers` property.
+- **Which Recipes are used**: the Recipe Packs whose Recipes provision the infrastructure backing application resources, set through the `recipePacks` property.
+- **Advanced Terraform and Bicep settings**: environment-wide Recipe parameters and Terraform or Bicep engine configuration applied when Recipes run.
 
-#### Properties
+## Defining an Environment
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **bicepSettings** | string | Resource ID of a Radius.Core/bicepSettings resource providing Bicep recipe settings. |
-| **providers** | [Providers](#providers) | Cloud provider configuration for the environment. |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
-| **recipePacks** | string[] | List of Recipe Pack resource IDs linked to this environment. |
-| **recipeParameters** | [Record](#record) | Recipe specific parameters that apply to all resources of a given type in this environment. |
-| **simulated** | bool | Simulated environment. |
-| **terraformSettings** | string | Resource ID of a Radius.Core/terraformSettings resource providing Terraform recipe settings. |
+The simplest Environment can be created directly with the `rad environment create` command, without a Bicep file:
 
-### Providers
+```bash
+rad environment create my-environment
+```
 
-#### Properties
+For more advanced configurations, define an Environment as a `Radius.Core/environments` resource in a Bicep file. For example:
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **aws** | [ProvidersAws](#providersaws) | The AWS cloud provider configuration. |
-| **azure** | [ProvidersAzure](#providersazure) | The Azure cloud provider configuration. |
-| **kubernetes** | [ProvidersKubernetes](#providerskubernetes) | The Kubernetes provider configuration. |
+```bicep
+extension radius
 
-### ProvidersAws
+resource myEnvironment 'Radius.Core/environments@2025-08-01-preview' = {
+  name: 'my-environment'
+  properties: {
+    recipePacks: [
+      myRecipePack.id
+    ]
+    providers: {
+      kubernetes: {
+        namespace: 'my-namespace'
+      }
+    }
+  }
+}
 
-#### Properties
+resource myRecipePack 'Radius.Core/recipePacks@2025-08-01-preview' existing = {
+  name: 'my-recipe-pack'
+}
+```
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **accountId** | string | AWS account ID for AWS resources to be deployed into. <br />_(Required)_ |
-| **region** | string | AWS region for AWS resources to be deployed into. <br />_(Required)_ |
+Both properties are optional. When you create an Environment with the Radius CLI, an omitted `providers` defaults to Kubernetes in the `default` namespace, and an omitted `recipePacks` defaults to the `default` Recipe Pack in the `default` resource group.
 
-### ProvidersAzure
+## Deploying an Environment
 
-#### Properties
+Deploy a defined Environment with the `rad deploy` command:
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **identity** | [IdentitySettings](#identitysettings) | External identity settings (moved from compute). |
-| **resourceGroupName** | string | Optional resource group name. |
-| **subscriptionId** | string | Azure subscription ID hosting deployed resources. <br />_(Required)_ |
+```bash
+rad deploy ./environment.bicep
+```
 
-### IdentitySettings
+## Cloud providers
 
-#### Properties
+To use Recipes that provision resources in a cloud provider, you must configure that provider's account details on the Environment by setting the `providers` property. For AWS, set the account ID and the region resources are deployed to:
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **kind** | 'azure.com.workload' | 'systemAssigned' | 'systemAssignedUserAssigned' | 'undefined' | 'userAssigned' | kind of identity setting <br />_(Required)_ |
-| **managedIdentity** | string[] | The list of user assigned managed identities |
-| **oidcIssuer** | string | The URI for your compute platform's OIDC issuer |
-| **resource** | string | The resource ID of the provisioned identity |
+```bicep
+extension radius
 
-### ProvidersKubernetes
+resource myEnvironment 'Radius.Core/environments@2025-08-01-preview' = {
+  name: 'my-environment'
+  properties: {
+    providers: {
+      aws: {
+        accountId: '123456789012'
+        region: 'us-west-2'
+      }
+    }
+  }
+}
+```
 
-#### Properties
+For Azure, set the subscription ID and the name of the resource group that resources are deployed to:
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **namespace** | string | Kubernetes namespace to deploy workloads into. <br />_(Required)_ |
+```bicep
+extension radius
 
-### Record
+resource myEnvironment 'Radius.Core/environments@2025-08-01-preview' = {
+  name: 'my-environment'
+  properties: {
+    providers: {
+      azure: {
+        subscriptionId: '00000000-0000-0000-0000-000000000000'
+        resourceGroupName: 'my-resource-group'
+      }
+    }
+  }
+}
+```
 
-#### Properties
+The `providers` property selects the target account, but the credentials Radius uses to authenticate to AWS and Azure are configured separately with the `rad credential register` command.
 
-* **none**
+## Recipe Packs
 
-#### Additional Properties
+A Recipe Pack is a collection of Recipes, defined as a separate `Radius.Core/recipePacks` resource. A Recipe is an infrastructure-as-code module, a Terraform module or Bicep template, that provisions the infrastructure backing an application resource. Reference one or more Recipe Packs by their resource IDs in the `recipePacks` property to control which Recipes are used. See the `Radius.Core/recipePacks` documentation for details.
 
-* **Additional Properties Type**: [RecipeParameterValue](#recipeparametervalue)
+Use `recipeParameters` to pass environment-specific parameters to the Recipes defined in the referenced Recipe Packs, for example to standardize configuration such as SKUs or instance sizes across an Environment.
 
-### RecipeParameterValue
+## Advanced Terraform and Bicep settings
 
-#### Properties
+For advanced Terraform and Bicep settings, such as private module sources and registry authentication, reference a `Radius.Core/terraformSettings` or `Radius.Core/bicepSettings` resource from the `terraformSettings` and `bicepSettings` properties.
 
-* **none**
+## Top-Level Properties
 
-#### Additional Properties
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `bicepSettings` | string | false | false | (Optional) Resource ID of a `Radius.Core/bicepSettings` resource that supplies Bicep engine settings, such as private registry authentication, used when running Bicep Recipes in this Environment. |
+| `providers` | [object](#providers) | false | false | (Optional) Target compute platform and cloud provider accounts that resources are deployed into. When created with the Radius CLI, defaults to Kubernetes in the `default` namespace. |
+| `provisioningState` | string | false | true | (Read Only) The status of the Environment resource within the Radius control plane. Does not include the resources deployed to the Environment.<br />Allowed values: `Accepted`, `Canceled`, `Creating`, `Deleting`, `Failed`, `Provisioning`, `Succeeded`, `Updating`. |
+| `recipePacks` | string array | false | false | (Optional) Resource IDs of the Recipe Packs this Environment uses to provision infrastructure for application resources. When created with the Radius CLI, defaults to the `default` Recipe Pack in the `default` resource group. |
+| `recipeParameters` | object | false | false | (Optional) Parameters passed to Recipes when they run, keyed by resource type. Values here override the default parameters defined in the Recipe Pack for every resource of that type deployed to this Environment. |
+| `simulated` | boolean | false | false | (Optional) When true, the Environment is simulated and does not deploy real infrastructure. Recipes are evaluated but no resources are provisioned, which is useful for validating application definitions. Defaults to `false` if not specified. |
+| `terraformSettings` | string | false | false | (Optional) Resource ID of a `Radius.Core/terraformSettings` resource that supplies Terraform CLI settings, such as private registry credentials, used when running Terraform Recipes in this Environment. |
 
-* **Additional Properties Type**: any
+## Object Properties
 
-### Record
+### `providers` {#providers}
 
-#### Properties
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `aws` | [object](#providers-aws) | false | false | (Optional) Configuration for deploying resources to AWS. |
+| `azure` | [object](#providers-azure) | false | false | (Optional) Configuration for deploying resources to Azure. |
+| `kubernetes` | [object](#providers-kubernetes) | false | false | (Optional) Configuration for deploying resources to Kubernetes. |
 
-* **none**
+### `providers.aws` {#providers-aws}
 
-#### Additional Properties
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `accountId` | string | true | false | (Required) ID of the AWS account that resources are deployed into. |
+| `region` | string | true | false | (Required) AWS region that resources are deployed into. |
 
-* **Additional Properties Type**: [RecipeParameterValue](#recipeparametervalue)
+### `providers.azure` {#providers-azure}
 
-### RecipeParameterValue
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `identity` | [object](#providers-azure-identity) | false | false | (Optional) Managed or workload identity Radius uses to authenticate to Azure when deploying resources. |
+| `resourceGroupName` | string | false | false | (Optional) Name of the Azure resource group that resources are deployed into. Most Bicep and Terraform Recipes expect a resource group in the deployment context, so set this whenever deploying Azure resources. |
+| `subscriptionId` | string | true | false | (Required) ID of the Azure subscription that resources are deployed into. |
 
-#### Properties
+### `providers.kubernetes` {#providers-kubernetes}
 
-* **none**
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `namespace` | string | true | false | (Required) Kubernetes namespace that workloads are deployed into. |
 
-#### Additional Properties
+### `providers.azure.identity` {#providers-azure-identity}
 
-* **Additional Properties Type**: any
-
-### SystemData
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **createdAt** | string | The timestamp of resource creation (UTC). |
-| **createdBy** | string | The identity that created the resource. |
-| **createdByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that created the resource. |
-| **lastModifiedAt** | string | The timestamp of resource last modification (UTC) |
-| **lastModifiedBy** | string | The identity that last modified the resource. |
-| **lastModifiedByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that last modified the resource. |
-
-### Record
-
-#### Properties
-
-* **none**
-
-#### Additional Properties
-
-* **Additional Properties Type**: string
-
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `kind` | string | true | false | kind of identity setting<br />Allowed values: `azure.com.workload`, `systemAssigned`, `systemAssignedUserAssigned`, `undefined`, `userAssigned`. |
+| `managedIdentity` | string array | false | false | The list of user assigned managed identities |
+| `oidcIssuer` | string | false | false | The URI for your compute platform's OIDC issuer |
+| `resource` | string | false | false | The resource ID of the provisioned identity |
