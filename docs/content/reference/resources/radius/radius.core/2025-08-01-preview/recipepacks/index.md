@@ -9,106 +9,111 @@ description: "Detailed reference documentation for radius.core/recipepacks@2025-
 
 ## Schema
 
-### Top-Level Resource
+## Description
 
-#### Properties
+The `Radius.Core/recipePacks` Resource Type represents a Recipe Pack: a named collection of Recipes that platform engineers assign to an Environment. A Recipe maps a resource type (such as `Radius.Data/redisCaches`) to an infrastructure-as-code module, a Terraform module or Bicep template, that provisions the infrastructure backing that resource when a developer deploys it.
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **apiVersion** | '2025-08-01-preview' | The resource api version <br />_(ReadOnly, DeployTimeConstant)_ |
-| **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
-| **location** | string | The geo-location where the resource lives |
-| **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
-| **properties** | [RecipePackProperties](#recipepackproperties) | The resource-specific properties for this resource. <br />_(Required)_ |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation <br />_(ReadOnly)_ |
-| **recipes** | [Record](#record) | Map of resource types to their recipe configurations <br />_(ReadOnly)_ |
-| **referencedBy** | string[] | List of environment IDs that reference this recipe pack <br />_(ReadOnly)_ |
-| **systemData** | [SystemData](#systemdata) | Azure Resource Manager metadata containing createdBy and modifiedBy information. <br />_(ReadOnly)_ |
-| **tags** | [Record](#record) | Resource tags. |
-| **type** | 'Radius.Core/recipePacks' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
+A Recipe Pack is defined as its own resource and referenced from an Environment's `recipePacks` property, so one Recipe Pack can be shared across many Environments.
 
-### RecipePackProperties
+## Defining a Recipe Pack
 
-#### Properties
+Each entry in the `recipes` map is keyed by resource type. Set the recipe `kind` (`bicep` or `terraform`) and its `source` (an OCI registry reference for Bicep recipes, or a module source for Terraform recipes).
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation <br />_(ReadOnly)_ |
-| **recipes** | [Record](#record) | Map of resource types to their recipe configurations <br />_(Required)_ |
-| **referencedBy** | string[] | List of environment IDs that reference this recipe pack <br />_(ReadOnly)_ |
+```bicep
+extension radius
 
-### Record
+resource dataRecipes 'Radius.Core/recipePacks@2025-08-01-preview' = {
+  name: 'data-recipes'
+  properties: {
+    recipes: {
+      'Radius.Data/redisCaches': {
+        kind: 'bicep'
+        source: 'ghcr.io/my-org/recipes/redis:latest'
+      }
+      'Radius.Data/postgreSqlDatabases': {
+        kind: 'terraform'
+        source: 'git::https://github.com/my-org/recipes//postgresql'
+      }
+    }
+  }
+}
+```
 
-#### Properties
+## Recipe parameters
 
-* **none**
+Each Recipe can declare default `parameters` that are passed to its module. Platform engineers set baseline values here, and developers get them automatically. An Environment can override these values per resource type through its `recipeParameters` property.
 
-#### Additional Properties
+```bicep
+resource dataRecipes 'Radius.Core/recipePacks@2025-08-01-preview' = {
+  name: 'data-recipes'
+  properties: {
+    recipes: {
+      'Radius.Data/redisCaches': {
+        kind: 'bicep'
+        source: 'ghcr.io/my-org/recipes/redis:latest'
+        parameters: {
+          sku: 'Standard'
+          capacity: 1
+        }
+      }
+    }
+  }
+}
+```
 
-* **Additional Properties Type**: [RecipeDefinition](#recipedefinition)
+## Deploying a Recipe Pack
 
-### RecipeDefinition
+Deploy the Bicep file with `rad deploy` to create the Recipe Pack resource. Once deployed, list and inspect Recipe Packs with the `rad recipe-pack list` and `rad recipe-pack show` commands.
 
-#### Properties
+## Referencing a Recipe Pack from an Environment
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **kind** | 'bicep' | 'terraform' | The type of recipe (e.g., Terraform, Bicep) <br />_(Required)_ |
-| **outputs** | [Record](#record) | Map of resource type property names to module output names. Used for recipes that point directly at a Bicep or Terraform module to map the module's outputs onto the resource's properties. |
-| **parameters** | [Record](#record) | Parameters to pass to the recipe |
-| **plainHttp** | bool | Connect to the source using HTTP (not HTTPS). This should be used when the source is known not to support HTTPS, for example in a locally hosted registry for Bicep recipes. Defaults to false (use HTTPS/TLS) |
-| **source** | string | The source of the recipe. For Bicep recipes this is the OCI registry reference. For Terraform recipes this is the module source. <br />_(Required)_ |
+An Environment references a Recipe Pack through its `recipePacks` property. When the Recipe Pack and the Environment are deployed to the same resource group, declare it as an `existing` resource and reference its `.id`:
 
-### Record
+```bicep
+extension radius
 
-#### Properties
+resource dataRecipes 'Radius.Core/recipePacks@2025-08-01-preview' existing = {
+  name: 'data-recipes'
+}
 
-* **none**
+resource myEnvironment 'Radius.Core/environments@2025-08-01-preview' = {
+  name: 'my-environment'
+  properties: {
+    recipePacks: [
+      dataRecipes.id
+    ]
+  }
+}
+```
 
-#### Additional Properties
+To reference a Recipe Pack in a different resource group, use its full resource ID instead:
 
-* **Additional Properties Type**: string
+```bicep
+recipePacks: [
+  '/planes/radius/local/resourceGroups/shared/providers/Radius.Core/recipePacks/data-recipes'
+]
+```
 
-### Record
+Radius is installed with a `default` Recipe Pack in the `default` resource group. When you create an Environment with the Radius CLI and do not set `recipePacks`, the Environment uses this `default` Recipe Pack.
 
-#### Properties
+Prebuilt Recipe Packs and the Recipes they reference are published in the [resource-types-contrib](https://github.com/radius-project/resource-types-contrib) repository.
 
-* **none**
+## Top-Level Properties
 
-#### Additional Properties
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `provisioningState` | string | false | true | (Read Only) The status of the Recipe Pack resource within the Radius control plane.<br />Allowed values: `Accepted`, `Canceled`, `Creating`, `Deleting`, `Failed`, `Provisioning`, `Succeeded`, `Updating`. |
+| `recipes` | [object](#recipes) | true | false | (Required) The Recipes in this pack, keyed by the resource type each Recipe provisions. Each key is a resource type such as `Radius.Data/redisCaches`. |
+| `referencedBy` | string array | false | true | (Read Only) Resource IDs of the Environments that reference this Recipe Pack. |
 
-* **Additional Properties Type**: any
+## Object Properties
 
-### Record
+### `recipes` {#recipes}
 
-#### Properties
-
-* **none**
-
-#### Additional Properties
-
-* **Additional Properties Type**: [RecipeDefinition](#recipedefinition)
-
-### SystemData
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **createdAt** | string | The timestamp of resource creation (UTC). |
-| **createdBy** | string | The identity that created the resource. |
-| **createdByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that created the resource. |
-| **lastModifiedAt** | string | The timestamp of resource last modification (UTC) |
-| **lastModifiedBy** | string | The identity that last modified the resource. |
-| **lastModifiedByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that last modified the resource. |
-
-### Record
-
-#### Properties
-
-* **none**
-
-#### Additional Properties
-
-* **Additional Properties Type**: string
-
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `kind` | string | true | false | (Required) The kind of Recipe, which determines how Radius runs it.<br />Allowed values: `bicep`, `terraform`. |
+| `outputs` | object | false | false | (Optional) Maps the module outputs onto the resource type properties for recipes that point directly at a Bicep or Terraform module. Each value is the module output name for a non-secret property. Under the reserved `secrets` key a nested object maps secret property names to module output names and always routes those outputs to the resource secret outputs. |
+| `parameters` | object | false | false | (Optional) Default parameter values passed to the Recipe when it runs. An Environment can override these per resource type through its `recipeParameters` property. |
+| `plainHttp` | boolean | false | false | (Optional) Connect to the source using HTTP instead of HTTPS. Use this only when the source does not support HTTPS such as a locally hosted registry for Bicep recipes. Defaults to `false` if not specified. |
+| `source` | string | true | false | (Required) Location of the Recipe. For Bicep Recipes this is an OCI registry reference. For Terraform Recipes this is the module source such as a Git URL or a Terraform registry module. |
