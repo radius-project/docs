@@ -11,7 +11,7 @@ aliases:
     - /guides/environments/groups/howto-resourcegroups/
 ---
 
-Resource Groups organize Radius resources into scopes that can be managed independently. They are analogous to, but distinct from, Kubernetes namespaces and Azure resource groups. Every Radius resource belongs to exactly one Resource Group. Today, Resource Groups only hold resources. In the future, Resource Groups will be extended to implement Radius role-based access controls.
+When Radius is installed, a `default` Resource Group is created. Resource Groups organize Radius resources into scopes that can be managed independently. They are analogous to, but distinct from, Kubernetes namespaces and Azure resource groups. Every Radius resource belongs to exactly one Resource Group. Today, Resource Groups only hold resources. In the future, Resource Groups will be extended to implement Radius role-based access controls.
 
 This guide explains how to design a Resource Group layout, create a group, and target it with Radius CLI commands. For more background, see [Resource Groups in the Radius concepts documentation]({{< ref "concepts#resource-groups" >}}).
 
@@ -99,12 +99,8 @@ rad group delete myGroup
 
 The command shows a confirmation prompt and deletes resources in the group before deleting the group. Review the resources carefully because this operation affects the entire Resource Group.
 
-## Manage advanced layouts with Workspaces
-
-For installations with multiple Resource Groups and Environments, use Workspaces to save the control plane, Resource Group, and Environment as a named target. See [How to manage Workspaces]({{< ref "/management/workspaces" >}}) to create and switch between targets without passing `--group` and `--environment` to every command.
-
 ## Next steps
 
-Now that Resource Groups have been created, learn how to manage Environments.
+Now that Resource Groups have been created, learn how to design and manage Environments.
 
-{{< button text="Next step: How to manage Environments" page="/management/environments" >}}
+{{< button text="Next step: How to design and manage Environments" page="/management/environments" >}}

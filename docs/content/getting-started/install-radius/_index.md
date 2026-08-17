@@ -18,11 +18,11 @@ For this guide you only need a **Kubernetes cluster**. To install Radius, your u
 
 ## Install Radius
 
-Create a new directory for the Todo List application:
+Create a new directory for the Radius Demo application:
 
 ```bash
-mkdir todolist
-cd todolist
+mkdir radius
+cd radius
 ```
 
 Ensure your cluster is set as your current context with `kubectl config current-context`. If the context needs updating, change it with `kubectl config set-context <context-name>`. Then install Radius with the `rad initialize` command:
@@ -45,7 +45,7 @@ Initializing Radius...
 ✅ Create new environment default
     - Kubernetes namespace: default
     - Recipe pack: default
-✅ Scaffold application todolist
+✅ Scaffold application radius
 ✅ Update local configuration
 
 Initialization complete! Have a RAD time 😎
@@ -60,21 +60,21 @@ kubectl get pods -n radius-system
 You should see output similar to:
 
 ```
-NAME                READY   STATUS    RESTARTS   AGE
-applications-rp      1/1     Running   0          1m
-bicep-de             1/1     Running   0          1m
-contour-contour      1/1     Running   0          1m
-contour-envoy        1/1     Running   0          1m
-controller           1/1     Running   0          1m
-dashboard            1/1     Running   0          1m
-dynamic-rp           1/1     Running   0          1m
-ucp                  1/1     Running   0          1m
+NAME                                  READY   STATUS    RESTARTS   AGE
+applications-rp-xxxxxxxxxx-xxxxx      1/1     Running   0          1m
+bicep-de-xxxxxxxxxx-xxxxx             1/1     Running   0          1m
+contour-contour-xxxxxxxxxx-xxxxx      1/1     Running   0          1m
+contour-envoy-xxxxxxxxxx-xxxxx        1/1     Running   0          1m
+controller-xxxxxxxxxx-xxxxx           1/1     Running   0          1m
+dashboard-xxxxxxxxxx-xxxxx            1/1     Running   0          1m
+dynamic-rp-xxxxxxxxxx-xxxxx           1/1     Running   0          1m
+ucp-xxxxxxxxxx-xxxxx                  1/1     Running   0          1m
 ```
 
 For more details on installing Radius, see [How to Install Radius]({{< ref "/installation" >}}).
 
 ## Next steps
 
-In part two of this guide, you will deploy the Todo List sample application.
+In part two of this guide, you will deploy the Radius Demo sample application.
 
-{{< button text="Next step: Deploy an application" page="getting-started/deploy-todolist" >}}
+{{< button text="Next step: Deploy an application" page="getting-started/deploy-demo" >}}

@@ -3,7 +3,7 @@ type: docs
 title: "How to manage Workspaces"
 linkTitle: "Manage Workspaces"
 description: "Use Workspaces to connect the Radius CLI to a control plane, Resource Group, and Environment"
-weight: 300
+weight: 600
 aliases:
   - /guides/workspaces/
   - /guides/installation/workspaces/
@@ -24,7 +24,7 @@ Before creating a Workspace, verify that:
 - The [Radius control plane]({{< ref "/installation/control-plane" >}}) is installed and reachable through a context in your kubeconfig.
 - The target [Resource Group]({{< ref "/management/groups" >}}) and [Environment]({{< ref "/management/environments" >}}) already exist on that control plane.
 
-## Step 1: Create a Workspace
+## Create a Workspace
 
 Use [`rad workspace create`]({{< ref rad_workspace_create >}}) to save a Kubernetes context, Resource Group, and Environment as a named Workspace:
 
@@ -43,7 +43,7 @@ Most `rad` commands do not accept a Kubernetes context directly. To run commands
 
 Creating a Workspace makes it the current Workspace.
 
-## Step 2: List and inspect Workspaces
+## List and inspect Workspaces
 
 Use [`rad workspace list`]({{< ref rad_workspace_list >}}) to display the saved Workspaces and identify the current one:
 
@@ -58,7 +58,7 @@ rad workspace show
 rad workspace show --workspace my-workspace
 ```
 
-## Step 3: Switch the current Workspace
+## Switch the current Workspace
 
 The current Workspace is the default target for `rad` commands. Use [`rad workspace switch`]({{< ref rad_workspace_switch >}}) to select another Workspace:
 
@@ -68,7 +68,7 @@ rad workspace switch my-workspace
 
 Confirm the selection with `rad workspace show`. Subsequent commands use the selected control plane, Resource Group, and Environment unless the command overrides them.
 
-## Step 4: Target a Workspace for one command
+## Target a Workspace for one command
 
 To use a different Workspace without changing the current one, pass `--workspace` (or `-w`) to the command:
 
@@ -78,7 +78,7 @@ rad deploy ./app.bicep --workspace my-workspace
 
 This selects the Workspace's control plane, Resource Group, and Environment for that command only.
 
-## Step 5: Replace a Workspace
+## Replace a Workspace
 
 To change a Workspace's context, Resource Group, or Environment, rerun `rad workspace create` with the same name and `--force`:
 
@@ -94,7 +94,7 @@ rad workspace create kubernetes my-workspace \
 
 The replacement becomes the current Workspace. Specify every value the updated Workspace should retain.
 
-## Step 6: Delete a Workspace
+## Delete a Workspace
 
 Delete a saved target with [`rad workspace delete`]({{< ref rad_workspace_delete >}}):
 

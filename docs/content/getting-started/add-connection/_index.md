@@ -2,86 +2,38 @@
 type: docs
 title: "3. Add a connection"
 linkTitle: "3. Add a connection"
-description: "Add a database and connect the Todo List container to it"
+description: "Add a Redis cache and connect the Radius Demo container to it"
 weight: 300
 ---
 
-The Todo List application runs on its own, but most applications depend on other resources such as databases and caches. In this step you will add a PostgreSQL database to the application and create a *connection* from the container to the database.
+The Radius Demo application runs on its own, but most applications depend on other resources such as databases and caches. In this step you will add a Redis cache to the application and create a *connection* from the container to it.
 
-## Add a database
+## Add a Redis cache and connection
 
-Open `app.bicep` and add a `Radius.Data/postgreSqlDatabases` resource:
+The `app-redis.bicep` definition builds on `app.bicep` by adding a `Radius.Data/redisCaches` resource and a `connections` entry on the container. The highlighted lines are the additions:
 
-```bicep
-@description('The password for the PostgreSQL database. Example: `rad deploy app.bicep -p password=$(openssl rand -hex 16)`.')
-@secure()
-param password string
+<div class="td-max-width-on-larger-screens" style="margin-bottom: -2rem;"><a href="https://github.com/radius-project/samples/blob/{{< param version >}}/samples/demo/app-redis.bicep" target="_blank" rel="noopener">samples/demo/app-redis.bicep</a></div>
 
-resource db 'Radius.Data/postgreSqlDatabases@2025-08-01-preview' = {
-  name: 'db'
-  properties: {
-    environment: environment
-    application: application
-    username: 'myadmin'
-    // From a @secure() password parameter passed in via the CLI
-    password: password
-    size: 'S'
-  }
-}
-```
+{{< rad file="/static/samples/demo/app-redis.bicep" embed=true markdownConfig=` {hl_lines=["32-36","40-47"]}` >}}
 
-The `db` resource is provisioned by the PostgreSQL recipe in the default Recipe Pack.
-
-The `password` parameter is declared with `@secure()`, which keeps its value out of deployment logs and history and lets you supply the password at deploy time instead of hardcoding it. Because the `password` property is `x-radius-sensitive` on the Resource Type, Radius also encrypts it and redacts it from reads.
-
-## Connect the container to the database
-
-Add a `connections` entry to the `frontend` container. The highlighted lines are the only change:
-
-```bicep {hl_lines=["16-20"]}
-resource demo 'Radius.Compute/containers@2025-08-01-preview' = {
-  name: 'demo'
-  properties: {
-    environment: environment
-    application: application
-    containers: {
-      demo: {
-        image: 'ghcr.io/radius-project/samples/demo:latest'
-        ports: {
-          web: {
-            containerPort: 3000
-          }
-        }
-      }
-    }
-    connections: {
-      postgresql: {
-        source: db.id
-      }
-    }
-  }
-}
-```
-
-The `connections` entry tells Radius that the container depends on the database. Radius provisions the database first, then injects its connection details into the container as environment variables named `CONNECTION_DB_<PROPERTY>`, such as `CONNECTION_DB_HOST` and `CONNECTION_DB_PORT`.
+The `redis` resource is provisioned by the Redis recipe in the default Recipe Pack. The `connections` entry tells Radius that the container depends on the cache. Radius provisions the cache first, then injects its connection details into the container as environment variables named `CONNECTION_REDIS_<PROPERTY>`, such as `CONNECTION_REDIS_HOST` and `CONNECTION_REDIS_PORT`.
 
 ## Redeploy the application
 
-```bash
-rad deploy app.bicep --application todolist -p password=$(openssl rand -hex 16) --preview
-```
+Deploy the updated definition from its published URL:
 
-The `-p password=` flag sets the `password` parameter for the database. `$(openssl rand -hex 16)` is a shell command that generates a random secure string, so a new password is used on each deploy. This syntax works in Bash and Zsh. In PowerShell, generate the value separately and pass it in.
+{{< rad-deploy path="samples/demo/app-redis.bicep" >}}
 
-Radius creates the database and updates the container with the connection. Forward a local port to the container and open the application again:
+Radius creates the cache and updates the container with the connection. Forward a local port to the container and open the application again:
 
 ```bash
-kubectl port-forward svc/demo-demo 3000:3000
+kubectl port-forward svc/demo-default-web 3000:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000). The Radius Connections section now lists the `db` connection.
+Open [http://localhost:3000](http://localhost:3000). The Radius Connections section now lists the `redis` connection.
 
-{{< image src="todolist.png" alt="The Todo List application showing the database connection" width=800px >}}
+<!-- TODO: reshoot this screenshot for the Redis connection (currently shows the old PostgreSQL example). -->
+{{< image src="todolist.png" alt="The Radius Demo application showing the Redis connection" width=800px >}}
 
 ## View the connection in the Dashboard
 
@@ -91,20 +43,21 @@ Start port forwarding for the Dashboard:
 kubectl port-forward svc/dashboard 7007:80 -n radius-system
 ```
 
-Open [http://localhost:7007](http://localhost:7007) and select the Todo List application. The graph shows the `frontend` container connected to the `db` database.
+Open [http://localhost:7007](http://localhost:7007) and select the `demo-default` application. The graph shows the `demo-default` container connected to the `redis-default` cache.
 
-{{< image src="dashboard.png" alt="The Radius Dashboard showing the frontend container connected to the database" width=800px >}}
+<!-- TODO: reshoot this screenshot for the Redis connection (currently shows the old PostgreSQL example). -->
+{{< image src="dashboard.png" alt="The Radius Dashboard showing the container connected to the Redis cache" width=800px >}}
 <br/>
 
 To learn more about modeling dependencies between resources, see [How to model application dependencies using connections]({{< ref "/applications/connections" >}}).
 
 ## Clean up
 
-Delete the Todo List application:
+Delete the Radius Demo application:
 
 <!-- TODO: Remove the `--preview` flag when the Radius.Core Application implementation is no longer in preview. -->
 ```bash
-rad application delete todolist --preview
+rad application delete demo-default --preview
 ```
 
 Optionally, uninstall Radius and remove all of its data:
@@ -115,6 +68,6 @@ rad uninstall kubernetes --purge
 
 ## Next steps
 
-You have installed Radius, deployed the Todo List application, and connected it to a database. Continue with the Radius Labs for deeper, real-world scenarios.
+You have installed Radius, deployed the Radius Demo application, and connected it to a Redis cache. Continue with the hands-on labs for deeper, real-world scenarios.
 
-{{< button text="Next step: Explore the Labs" page="getting-started/labs" >}}
+{{< button text="Next step: Explore the labs" page="getting-started/labs" >}}

@@ -60,8 +60,8 @@ Radius automatically injects the `context` object into each recipe at deploy tim
 
 | Key | Type | Description | Example |
 |-----|------|-------------|---------|
-| `name` | string | The name of the application | `todolist` |
-| `id` | string | The resource ID of the application | `/planes/radius/local/resourceGroups/default/providers/Radius.Core/applications/todolist` |
+| `name` | string | The name of the application | `demo-default` |
+| `id` | string | The resource ID of the application | `/planes/radius/local/resourceGroups/default/providers/Radius.Core/applications/demo-default` |
 
 ### environment
 

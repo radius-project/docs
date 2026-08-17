@@ -3,7 +3,7 @@ type: docs
 title: "How to use Dapr and Radius together"
 linkTitle: "Use Dapr with Radius"
 description: "Learn how to configure Dapr sidecars and building blocks with Radius"
-weight: 300
+weight: 200
 aliases:
   - /guides/dapr/
   - /guides/dapr/overview/

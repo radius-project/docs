@@ -3,7 +3,7 @@ type: docs
 title: "How to use the Kubernetes Gateway API with Radius"
 linkTitle: "Use the Gateway API with Radius"
 description: "Learn how the Routes Resource Type uses the Kubernetes Gateway API, the built-in Contour gateway, and third-party gateway controllers"
-weight: 200
+weight: 300
 aliases:
    - /guides/routes/
 ---
@@ -126,7 +126,7 @@ resource devEnvironment 'Radius.Core/environments@2025-08-01-preview' = {
 }
 ```
 
-See [How to manage Recipe Packs]({{< ref "/extensibility/recipe-packs" >}}) and [How to design and manage Environments]({{< ref "/management/environments" >}}) for more on assigning recipes and setting parameters.
+See [How to manage Recipe Packs]({{< ref "/management/recipe-packs" >}}) and [How to design and manage Environments]({{< ref "/management/environments" >}}) for more on assigning recipes and setting parameters.
 
 ## Add a route to your application
 

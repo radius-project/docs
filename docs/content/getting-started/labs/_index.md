@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "4. Radius Labs"
-linkTitle: "4. Radius Labs"
+title: "4. Hands-on labs"
+linkTitle: "4. Hands-on labs"
 description: "Hands-on, scenario-based labs for Radius"
 weight: 400
 ---
 
-Now that you have installed Radius and deployed an application, work through the Radius Labs for deeper, real-world scenarios. Each lab is a self-contained project with source code and step-by-step instructions.
+Now that you have installed Radius and deployed an application, work through the hands-on labs for deeper, real-world scenarios. Each lab is a self-contained project with source code and step-by-step instructions.
 
 ## Labs
 

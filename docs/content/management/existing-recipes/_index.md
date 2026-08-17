@@ -1,27 +1,20 @@
 ---
 type: docs
-title: "How to use existing modules as Recipes"
-linkTitle: "Use existing Recipes"
-description: "Use an already-published Terraform or Bicep module as a Radius Recipe without modifying it"
-weight: 300
+title: "How to use existing modules as recipes"
+linkTitle: "Use existing recipes"
+description: "Use an already-published Terraform or Bicep module as a Radius recipe without modifying it"
+weight: 400
+aliases:
+  - /extensibility/existing-recipes/
 ---
 
-Radius can use an existing Terraform or Bicep module that has already been published to a registry or repository as a [recipe]({{< ref "/concepts/recipe-packs" >}}), without changing the module. Point a recipe's `source` at a community module such as a [Terraform Registry module](https://registry.terraform.io/) or an [Azure Verified Module](https://azure.github.io/Azure-Verified-Modules/), map the developer-facing inputs to the module's parameters, and map the module's outputs back to your Resource Type's properties. You consume the module exactly as its authors published it.
+A [Recipe Pack]({{< ref "/management/recipe-packs" >}}) maps each Resource Type to the recipe that provisions it, and each recipe points at a Terraform module or Bicep template. This page shows how to use an existing module that is already published to a registry or repository as that recipe, without changing the module. Point a recipe's `source` at a community module such as a [Terraform Registry module](https://registry.terraform.io/) or an [Azure Verified Module](https://azure.github.io/Azure-Verified-Modules/), map the developer-facing inputs to the module's parameters, and map the module's outputs back to your Resource Type's properties. You consume the module exactly as its authors published it.
 
-Use this approach when a published module already provisions the infrastructure you need and you want to adopt it as-is. If instead you want to write a new recipe of your own that declares its own `context` inputs and `result` output, see [How to create a custom recipe with Radius]({{< ref "/extensibility/custom-recipes" >}}).
-
-## Existing modules versus custom recipes
-
-A [custom recipe]({{< ref "/extensibility/custom-recipes" >}}) is one you write yourself: you author a Terraform module or Bicep template that declares a `context` input and returns a structured `result` output built for a specific Resource Type. An existing recipe reuses a module that someone else has already published, such as a community Terraform Registry module or an Azure Verified Module. You reference the published module unchanged and let Radius connect it to your Resource Type:
-
-- `parameters` supply the module's inputs, including values resolved from the Radius `context` at deploy time.
-- `outputs` map the module's output names to the properties defined by your Resource Type.
-
-Both kinds of recipe live in a Recipe Pack, so you can mix custom recipes and existing modules across the Resource Types in a single pack.
+Use this approach when a published module already provisions the infrastructure you need and you want to adopt it as-is. If instead you want to write a new recipe of your own that declares its own `context` inputs and `result` output, see [How to create a custom recipe with Radius]({{< ref "/extensibility/custom-recipes" >}}). You can mix custom recipes and existing modules across the Resource Types in a single Recipe Pack.
 
 ## Reference an existing module
 
-Add the module to a [Recipe Pack]({{< ref "/extensibility/recipe-packs" >}}) recipe definition. Set `kind` to `terraform` or `bicep` and set `source` to the module. The module must be fetched from a remote registry, Git, or OCI reference; local filesystem paths are not supported. Always pin an immutable version, because Radius does not upgrade modules automatically and a version that is later removed from its registry causes the recipe to fail at download.
+Add the module to a [Recipe Pack]({{< ref "/management/recipe-packs" >}}) recipe definition. Set `kind` to `terraform` or `bicep` and set `source` to the module. The module must be fetched from a remote registry, Git, or OCI reference; local filesystem paths are not supported. Always pin an immutable version, because Radius does not upgrade modules automatically and a version that is later removed from its registry causes the recipe to fail at download.
 
 {{< tabs Terraform Bicep >}}
 
@@ -160,12 +153,15 @@ resource devEnvironment 'Radius.Core/environments@2025-08-01-preview' = {
 }
 ```
 
-## Use modules from private registries
+## Reference a module from a private registry or repository
 
-Existing modules use the same download path as any other recipe, so private registries and repositories work through the Environment's existing settings resources. Configure `Radius.Core/terraformConfigs` for private Terraform registries or Git, and `Radius.Core/bicepConfigs` for private OCI registries, then reference them from the Environment. See [How to design and manage Environments]({{< ref "/management/environments#configure-terraformsettings-and-bicepsettings" >}}) for the available authentication settings.
+When the module you reference is published privately, configure authentication on the Environment through a settings resource, then reference that resource from the Environment. Radius applies the credentials whenever a recipe pulls the module.
+
+- **Bicep modules in a private OCI registry:** Configure a [`Radius.Core/bicepSettings`]({{< ref "/reference/resources/radius.core/2025-08-01-preview/bicepsettings" >}}) resource that maps the registry hostname to its authentication, then set the Environment's `bicepSettings` property to that resource's ID.
+- **Terraform modules in a private registry:** Configure a [`Radius.Core/terraformSettings`]({{< ref "/reference/resources/radius.core/2025-08-01-preview/terraformsettings" >}}) resource with the registry token, stored in a `Radius.Security/secrets` resource, then set the Environment's `terraformSettings` property to that resource's ID. TerraformSettings authenticates Terraform CLI registries; Terraform modules referenced from a Git repository authenticate through a separate mechanism.
 
 ## Next steps
 
-Now that you have referenced an existing module as a recipe, add it to a Recipe Pack and assign that pack to an Environment.
+Now that you can reference existing modules as recipes, learn how to run application containers on other platforms.
 
-{{< button text="Next step: How to manage Recipe Packs" page="/extensibility/recipe-packs" >}}
+{{< button text="Next step: How to use other container platforms" page="/management/container-platforms" >}}

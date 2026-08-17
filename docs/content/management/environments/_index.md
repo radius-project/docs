@@ -59,7 +59,7 @@ rad environment create dev \
   --preview
 ```
 
-`rad environment create` assigns the `default` Recipe Pack from the `default` Resource Group to the new Environment. Use `rad environment update` after creation to select a different Recipe Pack.
+When you omit `--recipe-packs`, `rad environment create` assigns the `default` Recipe Pack from the `default` Resource Group to the new Environment.
 
 Confirm that the Environment exists with [`rad environment show`]({{< ref rad_environment_show >}}):
 
@@ -67,6 +67,21 @@ Confirm that the Environment exists with [`rad environment show`]({{< ref rad_en
 ```bash
 rad environment show dev --group dev --preview
 ```
+
+## Create an Environment with a specific Recipe Pack
+
+A [Recipe Pack]({{< ref "/management/recipe-packs" >}}) determines which recipes provision infrastructure for the Environment. To assign one or more Recipe Packs at creation, pass `--recipe-packs` with a comma-separated list:
+
+<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
+```bash
+rad environment create dev \
+  --group dev \
+  --kubernetes-namespace dev \
+  --recipe-packs data-recipes \
+  --preview
+```
+
+Applications deployed to `dev` now provision their resources using the recipes in `data-recipes`. To change the Recipe Packs on an existing Environment, see [Update an Environment](#update-an-environment).
 
 ## Target the Environment
 
@@ -106,21 +121,11 @@ rad environment update dev \
 
 The CLI can update cloud provider configuration and, in preview, the Recipe Pack list. Manage advanced properties declaratively in Bicep. Review changes to an Environment carefully because they affect subsequent deployments that target it.
 
-For example, after deploying the `data-recipes` Recipe Pack defined above into the `dev` Resource Group, replace the Environment's `default` Recipe Pack with `data-recipes`:
-
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
-```bash
-rad environment update dev \
-  --group dev \
-  --recipe-packs data-recipes \
-  --preview
-```
-
-`--recipe-packs` replaces the complete Recipe Pack list; it does not append to it. Include every Recipe Pack the Environment should continue to use each time you run the command. To assign a Recipe Pack stored in a different Resource Group, see [Reference a Recipe Pack across Resource Groups](#reference-a-recipe-pack-across-resource-groups).
+When you change the Recipe Pack list, `--recipe-packs` replaces the complete list; it does not append to it. Include every Recipe Pack the Environment should continue to use each time you run the command. To assign a Recipe Pack stored in a different Resource Group, see [Reference a Recipe Pack across Resource Groups](#reference-a-recipe-pack-across-resource-groups).
 
 ## Reference a Recipe Pack across Resource Groups
 
-When you use `--group`, a Recipe Pack name resolves in that Resource Group. To assign a Recipe Pack from another Resource Group, pass its full Radius resource ID.
+When you use `--group`, a bare Recipe Pack name in `--recipe-packs` resolves in that Resource Group. To resolve bare names against a different Resource Group, add `--recipe-pack-group`. This helps when Recipe Packs live in a shared Resource Group separate from your Environments.
 
 For example, configure the `production` Environment in the `production` Resource Group to use `data-recipes` from the `default` Resource Group:
 
@@ -128,12 +133,16 @@ For example, configure the `production` Environment in the `production` Resource
 ```bash
 rad environment update production \
   --group production \
-  --recipe-packs /planes/radius/local/resourceGroups/default/providers/Radius.Core/recipePacks/data-recipes \
+  --recipe-packs data-recipes \
+  --recipe-pack-group default \
   --preview
 ```
 
-You can combine names and full resource IDs in a comma-separated list when an Environment uses multiple Recipe Packs:
+`--recipe-pack-group` applies to every bare name in `--recipe-packs` and must be used together with `--recipe-packs`. The same flag works with `rad environment create`.
 
+To mix Recipe Packs from different Resource Groups in one command, pass a full Radius resource ID for any pack outside the `--recipe-pack-group` scope:
+
+<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
 ```bash
 rad environment update production \
   --group production \
@@ -210,6 +219,6 @@ Reference the TerraformSettings resource ID from the Environment's `terraformSet
 
 ## Next steps
 
-For installations with multiple control planes, Resource Groups, and Environments, use Workspaces to save them as named targets and use the Radius CLI without passing `--group` and `--environment` to every command.
+Now that Environments are configured, learn how to control provisioning with Recipe Packs.
 
-{{< button text="Next step: How to manage Workspaces" page="/management/workspaces" >}}
+{{< button text="Next step: How to manage Recipe Packs" page="/management/recipe-packs" >}}

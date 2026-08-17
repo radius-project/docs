@@ -2,8 +2,6 @@
 type: docs
 title: "Manage Radius"
 linkTitle: "Manage Radius"
-description: "Manage Resource Groups, Environments, and Workspaces"
+description: "Organize resources with Resource Groups, provision infrastructure with Recipe Packs and recipes, and configure Environments and Workspaces"
 weight: 500
 ---
-
-Use Resource Groups, Environments, and Workspaces to organize resources, configure deployment targets, and save frequently used Radius contexts.

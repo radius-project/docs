@@ -387,6 +387,28 @@ Will result in the following output:
   }
 ```
 
+### Embedding a sample from the samples repository
+
+Some pages embed application samples straight from the [`radius-project/samples`](https://github.com/radius-project/samples) repository instead of keeping a separate `snippets` copy. Those files are vendored into `docs/static/samples/` and kept in sync automatically (see [How-To: Maintain the Radius docs]({{< ref "maintainers-docs#keep-the-sample-application-in-sync" >}})). Reuse this pattern so the embedded code, the source link, and the deploy command all stay version-correct and never drift from the tested sample.
+
+Embed the vendored file with the `rad` shortcode using an absolute `/static/...` path:
+
+```md
+{{</* rad file="/static/samples/demo/app.bicep" embed=true */>}}
+```
+
+Add a source link just above the code block so readers can open the upstream file. The `param` shortcode resolves `version` to the samples branch that matches the current docs version:
+
+```md
+<div class="td-max-width-on-larger-screens" style="margin-bottom: -2rem;"><a href="https://github.com/radius-project/samples/blob/{{</* param version */>}}/samples/demo/app.bicep" target="_blank" rel="noopener">samples/demo/app.bicep</a></div>
+```
+
+Show the deploy command with the `rad-deploy` shortcode. It renders `rad deploy <url>` against the correct docs host (`edge.docs.radapp.io` on edge, `docs.radapp.io` on release branches):
+
+```md
+{{</* rad-deploy path="samples/demo/app.bicep" */>}}
+```
+
 ### Images
 
 The markdown spec used by Docsy and Hugo does not give an option to resize images using markdown notation. Instead, raw HTML is used.

@@ -1,5 +1,6 @@
 {{ $file := .Get "file" }}
-{{ $filePath := (path.Join $.Page.File.Dir $file ) }}
+{{/* A leading "/" reads from the project root (e.g. /shared-content/...); otherwise the path is page-relative. */}}
+{{ $filePath := cond (hasPrefix $file "/") $file (path.Join $.Page.File.Dir $file) }}
 {{ $fileContents := $filePath | readFile }}
 {{ $lang := .Get "lang" | default "bicep" }}
 {{ $embed := .Get "embed" | default false }}
