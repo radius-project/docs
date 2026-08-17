@@ -9,7 +9,7 @@ The easiest way to get up and running with a docs environment is a GitHub codesp
 1. Open codespace
 1. Ensure postCreate script has completed (takes ~2 minutes)
 1. Run `cd docs` to change into the docs directory
-1. Run `npm run dev` to run a docs server
+1. Run `npm start` to run a docs server
 1. Click the `localhost:1313` link in your terminal to open the Codespace tunnel to the page
 
 ## Local machine
@@ -44,7 +44,7 @@ The easiest way to get up and running with a docs environment is a GitHub codesp
 1. Run:
 
    ```sh
-   npm run dev
+   npm start
    ```
 
 1. Navigate to `http://localhost:1313/`

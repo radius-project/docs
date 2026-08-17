@@ -3,11 +3,9 @@ type: docs
 title: "How-To: Contribute to the Radius documentation"
 linkTitle: "Contribute to docs"
 description: "How to contribute to the Radius documentation"
-weight: 100
-aliases  : ["/community/contributing/docs/"]
+weight: 200
+aliases: ["/community/contributing/docs/", "/contributing/docs/contributing-docs/", "/community/maintainers/docs-maintainers/", "/contributing/docs/maintainers-docs/", "/contributing/maintainers-docs/"]
 ---
-
-The Radius docs are built on [Hugo](https://gohugo.io) with the [Docsy](https://docsy.dev) theme. GitHub Actions are used to build and deploy the docs upon each PR.
 
 Radius uses the [Diátaxis framework](https://diataxis.fr/) for its documentation:
 
@@ -17,29 +15,30 @@ Follow the guidance on this page to learn how to get started, how to contribute,
 
 ## Setup your docs environment
 
-### GitHub Codespace (easiest)
+{{< tabs "GitHub Codespace" "Local machine" >}}
 
-It's easy to get up and running with a GitHub Codespace. This will give you a fully configured environment with all the tools you need to build the docs, all in your browser.
+{{% codetab %}}
+The easiest way to get up and running is with a GitHub Codespace. This gives you a fully configured environment with all the tools you need to build the docs, all in your browser.
 
 {{< button link="https://github.com/codespaces/new?hide_repo_select=true&repo=421982809" text="Create codespace" >}}
 
-> Note the `postCreateCommand` may take up to 3 minutes to complete after the codespace is created to complete.
+> Note the `postCreateCommand` may take up to 3 minutes to complete after the codespace is created.
 
 1. Start Codespace
 1. Wait for `postCreateCommand` to complete
 1. Run `cd docs` to enter the hugo site directory
 1. Run `hugo server` to start the local server
 1. Click on the link in the terminal to open the docs in your browser
+{{% /codetab %}}
 
-### Local machine
-
-### Pre-requisites
+{{% codetab %}}
+**Pre-requisites**
 
 - [Hugo extended version](https://gohugo.io/getting-started/installing)
 - [Node.js](https://nodejs.org/en/)
 - [git](https://git-scm.com/downloads)
 
-### Environment setup
+**Environment setup**
 
 1. Ensure pre-requisites are installed
 1. Clone this repository and the radius repository
@@ -57,37 +56,33 @@ It's easy to get up and running with a GitHub Codespace. This will give you a fu
    popd
    ```
 
-1. Update submodules:
+1. Change into the docs site directory:
 
    ```sh
-   cd docs
-   git submodule update --init --recursive
+   cd docs/docs
    ```
 
 1. Install npm packages:
 
    ```sh
-   npm install
+   npm ci
    ```
 
-1. Initialize the docsy theme:
+   > The [Docsy theme](https://www.docsy.dev/) is pulled in automatically as a [Hugo Module](https://gohugo.io/hugo-modules/), so there is no separate theme initialization step.
 
-   ```sh
-   cd themes/docsy
-   npm install
-   cd ..
-   ```
+**Run local server**
 
-### Run local server
-
-1. Make sure you're still in the `docs` directory
+1. Make sure you're still in the `docs/docs` directory
 1. Run
 
    ```sh
-   hugo server
+   npm start
    ```
 
 1. Navigate to `http://localhost:1313/`
+{{% /codetab %}}
+
+{{< /tabs >}}
 
 ## Developer Certificate of Origin
 
@@ -111,52 +106,19 @@ Visual Studio Code has a setting, `git.alwaysSignOff` to automatically add a Sig
 
 ## Types of docs
 
-There are 5 types of docs in Radius:
+Radius follows the [Diátaxis framework](https://diataxis.fr/). Pick the type that matches your goal — the docs are organized by type, so place your page in the matching section:
 
-1. **Concept** - A concept doc is a high-level overview of the project or an area of the project.
-1. **Overview** - A overview page documents a specific feature or capability of the project, with information on what the feature is and additional context and links on how to use it.
-1. **How-To** - A how-to guide is a step-by-step guide to help the reader achieve a specific task. It assumes the reader has a basic understanding of the project and its concepts. For more information on how-to guides, see [Diátaxis](https://diataxis.fr/how-to-guides/).
-1. **Reference** - A reference doc is a detailed description of a specific feature or capability of the project. It assumes the reader has a basic understanding of the project and its concepts. For more information on reference docs, see [Diátaxis](https://diataxis.fr/reference/).
+- **Concept** — explain what something is and why it matters, so the reader understands the problem it solves.
+- **Tutorial** — teach a newcomer by guiding them through a complete, hands-on lesson from start to finish.
+- **How-To** — walk a reader who already knows the basics through completing a specific task, step by step.
+- **Reference** — describe the details of a feature precisely; auto-generate from source code where possible.
+- **Schema** — document the schema of a resource type or API, typically generated from the source definition.
 
-Overall:
+Whatever you write:
 
-- Avoid creating new sections where possible, there is a good chance a proper place in the docs hierarchy already exists.
-- Make sure to include a complete [Hugo front-matter](#front-matter).
-- Determine the [type of doc](#types-of-docs) you are contributing
-
-### Concept docs
-
-Visit [Diátaxis](https://diataxis.fr/explanation/) for more information on explanatory documentation that helps the user understand the project or a specific area of the project.
-
-- Ensure the reader can understand why they should care about the project or the concept. What problems does it help them solve?
-- Provide a link to the overview page of the feature that justifies the concept(s)
-- Provide the reader with related links if needed (this can be other concepts, overviews, how-to guides, or references)
-- Set the `category` as `Concept` in [Hugo front-matter](#front-matter).
-
-### Overview docs
-
-Visit [Diátaxis](https://diataxis.fr/explanation/) for more information on explanatory documentation that helps the user understand the project or a specific area of the project.
-
-- Ensure the reader can understand why they should care about the feature and what it enables them to do.
-- If applicable, ensure the doc references the reference spec document.
-- If applicable, ensure the doc is consistent with any related concepts or specs in terms of names, parameters, and terminology. Update both the concept, spec, and the doc as needed. Avoid repeating the spec. The idea is to give the reader more information and background on the capability so that they can try this out.
-- Provide the reader with related links if needed (this can be other concepts, overviews, how-to guides, or references)
-- Set the `category` as `Overview` in [Hugo front-matter](#front-matter).
-
-### How-To guides
-
-Visit [Diátaxis](https://diataxis.fr/how-to-guides/) for more information on how-to documentation that helps the user accomplish a specific task.
-
-- Do not assume the reader is using a specific environment unless the article itself is specific to an environment. This includes OS (Windows/Linux/MacOS), deployment target (Kubernetes, IoT, etc.), or programming language. If instructions vary between operating systems, provide guidance for all.
-- Include code/sample/config snippets that can be easily copied and pasted.
-- Provide the reader with related links if needed (this can be other concepts, overviews, how-to guides, or references)
-- Set the `category` as `How To` in [Hugo front-matter](#front-matter).
-
-### Reference docs
-
-Visit [Diátaxis](https://diataxis.fr/reference/) for more information on reference documentation that helps the user understand the details of a specific feature or capability of the project.
-
-Reference docs should be auto-generated from source-code whenever possible. Please contact the maintainers if you need to add a new reference doc, or open an Issue to discuss.
+- Reuse an existing section instead of creating a new one where possible — there's a good chance the right place already exists.
+- Write for a new-developer audience: keep steps explicit, copy-pasteable, and environment-agnostic unless the doc is specific to one environment.
+- Link to related concepts, overviews, how-to guides, and references.
 
 ## Writing styles and tips
 
@@ -175,7 +137,7 @@ These conventions should be followed throughout all Radius documentation to ensu
 
 ### Spelling
 
-The docs pipeline uses [cspell](https://cspell.org/) to check for spelling mistakes. The configuration lives in `.github/configs/.cspell.yml` and is kept in sync with the [radius-project/radius](https://github.com/radius-project/radius) repository so spell-checking behaves the same across Radius repos. If you need to add a new custom word to the allow-list, append it to `.cspellignore` at the repository root (keep the list sorted, one word per line).
+The docs pipeline uses [cspell](https://cspell.org/) to check for spelling mistakes. The configuration lives in `.github/configs/.cspell.yml` and is synced from the [radius-project/.github](https://github.com/radius-project/.github) repository so spell-checking behaves the same across Radius repos. If you need to add a new custom word to the allow-list, append it to `.cspellignore` at the repository root (keep the list sorted, one word per line).
 
 To run the spell checker locally:
 
@@ -213,7 +175,6 @@ title: "TITLE FOR THE PAGE"
 linkTitle: "SHORT TITLE FOR THE NAV BAR"
 weight: (number)
 description: "1+ SENTENCES DESCRIBING THE ARTICLE"
-categories: "TYPE OF THE DOCUMENT"
 tags: "METADATA ON THE DOCUMENT"
 ---
 ```
@@ -223,12 +184,11 @@ tags: "METADATA ON THE DOCUMENT"
 ```yaml
 ---
 type: docs
-title: "Service invocation overview"
+title: "Recipes overview"
 linkTitle: "Overview"
 weight: 10
-description: "A quick overview of Dapr service invocation and how to use it to invoke services within your application"
-categories: "Concept"
-tags: "Dapr"
+description: "A quick overview of Radius Recipes and how to use them to deploy infrastructure for your application"
+tags: "Recipes"
 ---
 ```
 
@@ -237,22 +197,15 @@ tags: "Dapr"
 > - Index file weights follow the parent directory's ordering.
 > - For the first page in a new directory, reset the counter and set the weight to be an order of magnitude greater.
 
-Front-matter should be completed with all fields including type, title, linkTitle, weight, description, categories and tags.
+Front-matter should be completed with all fields including type, title, linkTitle, weight, description, and tags.
 
 - `title` should be 1 sentence, with no period at the end
 - `linkTitle` should be 1-3 words, with the exception of How-to at the front.
 - `description` should be 1-2 sentences on what the reader will learn, accomplish, or do in this doc.
-- `categories` should be one of the following:
-  - Concept
-  - Overview
-  - Tutorial
-  - How-To
-  - Reference
-  - Schema
 - `tags` should be a comma-separated list of metadata tags.
 
-As per the [styling conventions](#styling-conventions), titles should only capitalize the first word and proper nouns, with the exception of "How-To:"
-    - "Getting started with Dapr service invocation"
+As per the [styling conventions](#style-and-tone), titles should only capitalize the first word and proper nouns, with the exception of "How-To:"
+    - "Getting started with Radius Recipes"
     - "How-To: Setup a local Redis instance"
 
 ### Referencing other pages
@@ -350,7 +303,7 @@ The shortcode below and code sample:
 
 ```bicep
 // in snippets/mysample.bicep
-resource app 'radius.dev/Application@v1alpha1' = {
+resource app 'radius.dev/Application@v1alpha3' = {
   name: 'storefront-app'
 
   //SAMPLE
@@ -389,7 +342,7 @@ Will result in the following output:
 
 ### Embedding a sample from the samples repository
 
-Some pages embed application samples straight from the [`radius-project/samples`](https://github.com/radius-project/samples) repository instead of keeping a separate `snippets` copy. Those files are vendored into `docs/static/samples/` and kept in sync automatically (see [How-To: Maintain the Radius docs]({{< ref "maintainers-docs#keep-the-sample-application-in-sync" >}})). Reuse this pattern so the embedded code, the source link, and the deploy command all stay version-correct and never drift from the tested sample.
+Some pages embed application samples straight from the [`radius-project/samples`](https://github.com/radius-project/samples) repository instead of keeping a separate `snippets` copy. Those files are vendored into `docs/static/samples/` and kept in sync automatically (see [Keep the sample application in sync](#keep-the-sample-application-in-sync)). Reuse this pattern so the embedded code, the source link, and the deploy command all stay version-correct and never drift from the tested sample.
 
 Embed the vendored file with the `rad` shortcode using an absolute `/static/...` path:
 
@@ -413,7 +366,7 @@ Show the deploy command with the `rad-deploy` shortcode. It renders `rad deploy 
 
 The markdown spec used by Docsy and Hugo does not give an option to resize images using markdown notation. Instead, raw HTML is used.
 
-Begin by placing images under `/daprdocs/static/images` with the naming convention of `[page-name]-[image-name].[png|jpg|svg]`.
+Begin by placing images under `/docs/static/images` with the naming convention of `[page-name]-[image-name].[png|jpg|svg]`.
 
 Then link to the image using:
 
@@ -428,7 +381,7 @@ Then link to the image using:
 This HTML will display the `radius-overview.png` image on the `overview.md` page:
 
 ```md
-{{</* image src="radius-overview.png" width=1000 alt="Overview diagram of Dapr and its building blocks" */>}}
+{{</* image src="radius-overview.png" width=1000 alt="Overview diagram of Radius and its core concepts" */>}}
 ```
 
 ### Alerts
@@ -500,19 +453,19 @@ All content you author will be rendered to Markdown, so you can include images, 
 
 {{% codetab %}}
 ```powershell
-powershell -Command "iwr -useb https://raw.githubusercontent.com/dapr/cli/master/install/install.ps1 | iex"
+iwr -useb "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.ps1" | iex
 ```
 {{% /codetab %}}
 
 {{% codetab %}}
 ```bash
-wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | /bin/bash
+wget -q "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh" -O - | /bin/bash
 ```
 {{% /codetab %}}
 
 {{% codetab %}}
 ```bash
-brew install dapr/tap/dapr-cli
+curl -fsSL "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh" | /bin/bash
 ```
 {{% /codetab %}}
 
@@ -526,7 +479,7 @@ This example will render to this:
 {{% codetab %}}
 
 ```powershell
-powershell -Command "iwr -useb https://raw.githubusercontent.com/dapr/cli/master/install/install.ps1 | iex"
+iwr -useb "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.ps1" | iex
 ```
 
 {{% /codetab %}}
@@ -534,7 +487,7 @@ powershell -Command "iwr -useb https://raw.githubusercontent.com/dapr/cli/master
 {{% codetab %}}
 
 ```bash
-wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | /bin/bash
+wget -q "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh" -O - | /bin/bash
 ```
 
 {{% /codetab %}}
@@ -542,7 +495,7 @@ wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O 
 {{% codetab %}}
 
 ```bash
-brew install dapr/tap/dapr-cli
+curl -fsSL "https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh" | /bin/bash
 ```
 
 {{% /codetab %}}
@@ -609,17 +562,11 @@ You can customize the colors using the Bootstrap colors:
 {{</* button text="My Button" link="https://example.com" color="primary" */>}}
 {{</* button text="My Button" link="https://example.com" color="secondary" */>}}
 {{</* button text="My Button" link="https://example.com" color="success" */>}}
-{{</* button text="My Button" link="https://example.com" color="danger" */>}}
-{{</* button text="My Button" link="https://example.com" color="warning" */>}}
-{{</* button text="My Button" link="https://example.com" color="info" */>}}
 ```
 
 {{< button text="My Button" link="https://example.com" color="primary" >}}
 {{< button text="My Button" link="https://example.com" color="secondary" >}}
 {{< button text="My Button" link="https://example.com" color="success" >}}
-{{< button text="My Button" link="https://example.com" color="danger" >}}
-{{< button text="My Button" link="https://example.com" color="warning" >}}
-{{< button text="My Button" link="https://example.com" color="info" >}}
 
 #### Inline buttons
 
@@ -633,21 +580,77 @@ By default, buttons are padded with new lines below the button. To remove these 
 {{< button text="Previous" link="https://example.com" newline="false" >}}
 {{< button text="Next" link="https://example.com" >}}
 
-#### Categorize content
+## Maintaining the docs
 
-You can use the `categorizeby` shortcode to pull and organize content by either categories and tags. This is useful when you want to categorize content by tags and the type of the document
+This section covers routine Radius docs maintainer and approver responsibilities. To perform these tasks, you need either approver or maintainer status in the [`radius-project/docs`](https://github.com/radius-project/docs) repo.
 
-```text
-{{ categorizeby category="How-To" tag= "containers" }}
+### Branch guidance
+
+The Radius docs handles branching differently than most code repositories. Instead of a `main` branch, every branch is labeled to match the major and minor version of a runtime release, plus an `edge` branch for in-flight work. For example, the `v1.0` branch contains the docs for the `v1.0` release. The `edge` branch contains the latest in-flight work.
+
+### Managing content between branches
+
+As a docs approver or maintainer, you need to perform routine **upmerges** to keep the pre-release `edge` branch aligned with updates to the current release branch. It is recommended to upmerge the current branch into the pre-release branch on a weekly basis.
+
+For the following steps, treat `v1.0` as the current release and `edge` as the pre-release branch.
+
+1. Open Visual Studio Code to the Radius docs repo.
+1. From your local repo, switch to the latest branch (`v1.0`) and synchronize changes:
+
+   ```bash
+   git pull upstream v1.0
+   git push origin v1.0
+   ```
+
+1. Switch to the upcoming branch (`edge`) and synchronize changes:
+
+   ```bash
+   git pull upstream edge
+   git push origin edge
+   ```
+
+1. Create a new branch from `edge`:
+
+   ```bash
+   git checkout -b upmerge_MM-DD
+   ```
+
+1. Open a terminal and stage a merge from the latest release into the upmerge branch:
+
+   ```bash
+   git merge --no-ff --no-commit v1.0
+   ```
+
+1. Make sure included files look accurate. Inspect any merge conflicts in VS Code. Remove configuration changes or version information that does not need to be merged. Examples of files that usually shouldn't be merged:
+   - docs/config.toml
+   - docs/layouts/partials/hooks/body-end.html
+   - docsy Hugo Module version (docs/go.mod and docs/go.sum)
+1. Commit the staged changes and push to the upmerge branch (`upmerge_MM-DD`).
+1. Open a PR from the upmerge branch to the upcoming release branch (`edge`).
+1. Review the PR and double check that no unintended changes were pushed to the upmerge branch.
+
+### Keep the sample application in sync
+
+The Getting Started tutorial embeds the Radius Demo application (`app.bicep` and `app-redis.bicep`) directly from the [`radius-project/samples`](https://github.com/radius-project/samples) repository so the docs never drift from the real, tested sample. The files are vendored into this repo under `docs/static/samples/demo/`. Because Hugo serves `static/` from the site root, each file is also published at a stable URL, for example `https://docs.radapp.io/samples/demo/app.bicep`.
+
+#### How the sync works
+
+- **Source of truth:** `samples/demo/*.bicep` in `radius-project/samples`, on the branch that matches this docs branch (`edge` on `edge`, `vX.Y` on release branches).
+- **Vendored copy:** `docs/static/samples/demo/*.bicep`, committed to this repo and embedded by the tutorial pages with the `rad` shortcode.
+- **Download script:** `.github/scripts/download-sample-app.sh` reads the `version` param from `docs/config.toml`, downloads every `*.bicep` from `samples/demo/` at that ref (falling back to the default branch if the ref is missing), and writes them into `docs/static/samples/demo/`. A new `*.bicep` added upstream is picked up automatically.
+- **Drift check:** `.github/workflows/sync-sample-app.yaml` runs the script on every pull request and fails if the committed copy is out of date with upstream. It is a no-op until the files are first vendored.
+
+#### Refresh the vendored files
+
+When the sample changes upstream, run the script from the repo root and commit the result:
+
+```bash
+bash ./.github/scripts/download-sample-app.sh
+git add docs/static/samples/demo
+git commit -s -m "Sync sample app from radius-project/samples"
 ```
 
-This categorizes and lists all the docs that has both "How-To" as the category and "container" as the tag.
-
-```text
-{{ categorizeby category="How-To" }}
-```
-
-This categorizes and lists all the docs that are How-To by the available tags.
+Set `GITHUB_TOKEN` first if you hit the GitHub API rate limit. When cutting a release branch, run the script once so the new `vX.Y` branch vendors the matching `vX.Y` sample.
 
 ### References
 
