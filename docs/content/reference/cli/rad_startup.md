@@ -14,7 +14,7 @@ Restore Radius state after startup
 
 Restore durable Radius state for the current workspace.
 
-Opens the radius-state git orphan branch, waits for the control-plane PostgreSQL instance to be
+Opens the radius-state archive, waits for the control-plane PostgreSQL instance to be
 ready, restores the control-plane databases, and re-creates the Terraform recipe state Secrets.
 Run this after Radius is installed on a fresh cluster to resume from the state saved by
 'rad shutdown'.
