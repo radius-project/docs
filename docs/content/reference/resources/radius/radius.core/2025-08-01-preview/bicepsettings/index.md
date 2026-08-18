@@ -9,86 +9,91 @@ description: "Detailed reference documentation for radius.core/bicepsettings@202
 
 ## Schema
 
-### Top-Level Resource
+## Description
 
-#### Properties
+The `Radius.Core/bicepSettings` Resource Type holds reusable Bicep engine settings that Environments apply when running Bicep Recipes. Its primary use is authenticating to private Bicep registries: OCI registries, such as Azure Container Registry, that host the Recipe templates referenced by a Recipe Pack.
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **apiVersion** | '2025-08-01-preview' | The resource api version <br />_(ReadOnly, DeployTimeConstant)_ |
-| **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
-| **location** | string | The geo-location where the resource lives |
-| **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
-| **properties** | [BicepSettingsProperties](#bicepsettingsproperties) | The resource-specific properties for this resource. <br />_(Required)_ |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
-| **referencedBy** | string[] | Environments that reference this Bicep configuration. <br />_(ReadOnly)_ |
-| **registryAuthentications** | [Record](#record) | Authentication configuration for private Bicep registries, keyed by registry hostname (e.g. 'corp.acr.io'). The Bicep driver looks up credentials by the host parsed from the recipe template path. <br />_(ReadOnly)_ |
-| **systemData** | [SystemData](#systemdata) | Azure Resource Manager metadata containing createdBy and modifiedBy information. <br />_(ReadOnly)_ |
-| **tags** | [Record](#record) | Resource tags. |
-| **type** | 'Radius.Core/bicepSettings' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
+Platform engineers define a `Radius.Core/bicepSettings` resource once and reference it from any Environment whose Recipes pull templates from a private registry.
 
-### BicepSettingsProperties
+## Defining Bicep settings
 
-#### Properties
+Configure `registryAuthentications`, keyed by registry hostname. When a Recipe template is pulled from a matching host, Radius authenticates using the configured method. The example below uses basic authentication, reading the username and password from a secret:
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
-| **referencedBy** | string[] | Environments that reference this Bicep configuration. <br />_(ReadOnly)_ |
-| **registryAuthentications** | [Record](#record) | Authentication configuration for private Bicep registries, keyed by registry hostname (e.g. 'corp.acr.io'). The Bicep driver looks up credentials by the host parsed from the recipe template path. |
+```bicep
+extension radius
 
-### Record
+@description('The Radius Environment ID. Injected automatically by the rad CLI.')
+param environment string
 
-#### Properties
+resource registrySecret 'Radius.Security/secrets@2025-08-01-preview' = {
+  name: 'registry-credentials'
+  properties: {
+    environment: environment
+    data: {
+      username: { value: 'my-username' }
+      password: { value: 'my-password' }
+    }
+  }
+}
 
-* **none**
+resource bicepRegistry 'Radius.Core/bicepSettings@2025-08-01-preview' = {
+  name: 'private-registry'
+  properties: {
+    registryAuthentications: {
+      'corp.azurecr.io': {
+        authenticationMethod: 'BasicAuth'
+        basicAuthSecretId: registrySecret.id
+      }
+    }
+  }
+}
+```
 
-#### Additional Properties
+Basic authentication is supported via `BasicAuth` (username and password from a secret). `AwsIrsa` and `AzureWI` will be implemented in the future.
 
-* **Additional Properties Type**: [BicepRegistryAuthentication](#bicepregistryauthentication)
+## Deploying Bicep settings
 
-### BicepRegistryAuthentication
+Deploy the settings resource with the `rad deploy` command:
 
-#### Properties
+```bash
+rad deploy ./bicep-settings.bicep
+```
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **authenticationMethod** | 'AwsIrsa' | 'AzureWI' | 'BasicAuth' | The authentication method to use. Supported values: BasicAuth, AzureWI, AwsIrsa. |
-| **awsIamRoleArn** | string | AWS IAM Role ARN for IRSA authentication. Required when authenticationMethod is 'AwsIrsa'. |
-| **azureWiClientId** | string | Azure Workload Identity client ID. Required when authenticationMethod is 'AzureWI'. |
-| **azureWiTenantId** | string | Azure Workload Identity tenant ID. Required when authenticationMethod is 'AzureWI'. |
-| **basicAuthSecretId** | string | The ID of a secret resource containing username and password for BasicAuth. Supported types: Radius.Security/secrets (recommended) or Applications.Core/secretStores. Required when authenticationMethod is 'BasicAuth'. |
+## Referencing Bicep settings from an Environment
 
-### Record
+Reference the settings from an Environment by setting its `bicepSettings` property to the resource ID. Every Bicep Recipe run in that Environment then uses the configured registry authentication:
 
-#### Properties
+```bicep
+extension radius
 
-* **none**
+resource bicepRegistry 'Radius.Core/bicepSettings@2025-08-01-preview' existing = {
+  name: 'private-registry'
+}
 
-#### Additional Properties
+resource myEnvironment 'Radius.Core/environments@2025-08-01-preview' = {
+  name: 'my-environment'
+  properties: {
+    bicepSettings: bicepRegistry.id
+  }
+}
+```
 
-* **Additional Properties Type**: [BicepRegistryAuthentication](#bicepregistryauthentication)
+## Top-Level Properties
 
-### SystemData
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `provisioningState` | string | false | true | (Read Only) The status of the Bicep settings resource within the Radius control plane.<br />Allowed values: `Accepted`, `Canceled`, `Creating`, `Deleting`, `Failed`, `Provisioning`, `Succeeded`, `Updating`. |
+| `referencedBy` | string array | false | true | (Read Only) Resource IDs of the Environments that reference this Bicep settings resource. |
+| `registryAuthentications` | [object](#registryauthentications) | false | false | (Optional) Authentication for private Bicep registries that host Recipe templates, keyed by registry hostname such as `corp.acr.io`. Radius matches a registry by the hostname in the Recipe source. |
 
-#### Properties
+## Object Properties
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **createdAt** | string | The timestamp of resource creation (UTC). |
-| **createdBy** | string | The identity that created the resource. |
-| **createdByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that created the resource. |
-| **lastModifiedAt** | string | The timestamp of resource last modification (UTC) |
-| **lastModifiedBy** | string | The identity that last modified the resource. |
-| **lastModifiedByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that last modified the resource. |
+### `registryAuthentications` {#registryauthentications}
 
-### Record
-
-#### Properties
-
-* **none**
-
-#### Additional Properties
-
-* **Additional Properties Type**: string
-
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `authenticationMethod` | string | false | false | (Optional) How Radius authenticates to the registry.<br />Allowed values: `AwsIrsa`, `AzureWI`, `BasicAuth`. |
+| `awsIamRoleArn` | string | false | false | (Optional) AWS IAM Role ARN for IRSA authentication. Required when `authenticationMethod` is `AwsIrsa`. |
+| `azureWiClientId` | string | false | false | (Optional) Azure Workload Identity client ID. Required when `authenticationMethod` is `AzureWI`. |
+| `azureWiTenantId` | string | false | false | (Optional) Azure Workload Identity tenant ID. Required when `authenticationMethod` is `AzureWI`. |
+| `basicAuthSecretId` | string | false | false | (Optional) The ID of a `Radius.Security/secrets` resource containing the username and password. Required when `authenticationMethod` is `BasicAuth`. |
