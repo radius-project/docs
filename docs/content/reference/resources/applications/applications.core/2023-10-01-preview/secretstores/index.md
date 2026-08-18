@@ -9,155 +9,88 @@ description: "Detailed reference documentation for applications.core/secretstore
 
 ## Schema
 
-### Top-Level Resource
+## Description
 
-#### Properties
+Concrete tracked resource types can be created by aliasing this type using a specific property type.
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **apiVersion** | '2023-10-01-preview' | The resource api version <br />_(ReadOnly, DeployTimeConstant)_ |
-| **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
-| **location** | string | The geo-location where the resource lives |
-| **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
-| **properties** | [SecretStoreProperties](#secretstoreproperties) | The resource-specific properties for this resource. <br />_(Required)_ |
-| **systemData** | [SystemData](#systemdata) | Azure Resource Manager metadata containing createdBy and modifiedBy information. <br />_(ReadOnly)_ |
-| **tags** | [Record](#record) | Resource tags. |
-| **type** | 'Applications.Core/secretStores' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
+## Top-Level Properties
 
-### SecretStoreProperties
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `application` | string | false | false | Fully qualified resource ID for the application |
+| `data` | [object](#data) | true | false | An object to represent key-value type secrets |
+| `environment` | string | false | false | Fully qualified resource ID for the environment that the application is linked to |
+| `provisioningState` | string | false | true | The status of the asynchronous operation.<br />Allowed values: `Accepted`, `Canceled`, `Creating`, `Deleting`, `Failed`, `Provisioning`, `Succeeded`, `Updating`. |
+| `resource` | string | false | false | The resource id of external secret store. |
+| `status` | [object](#status) | false | true | Status of a resource. |
+| `type` | string | false | false | The type of secret store data<br />Allowed values: `awsIRSA`, `azureWorkloadIdentity`, `basicAuthentication`, `certificate`, `generic`. |
 
-#### Properties
+## Object Properties
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **application** | string | Fully qualified resource ID for the application |
-| **data** | [Record](#record) | An object to represent key-value type secrets <br />_(Required)_ |
-| **environment** | string | Fully qualified resource ID for the environment that the application is linked to |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
-| **resource** | string | The resource id of external secret store. |
-| **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
-| **type** | 'awsIRSA' | 'azureWorkloadIdentity' | 'basicAuthentication' | 'certificate' | 'generic' | The type of secret store data |
+### `data` {#data}
 
-### Record
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `encoding` | string | false | false | The encoding of value<br />Allowed values: `base64`, `raw`. |
+| `value` | string | false | false | The value of secret. |
+| `valueFrom` | [object](#data-valuefrom) | false | false | The referenced secret in properties.resource |
 
-#### Properties
+### `status` {#status}
 
-* **none**
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `compute` | [object](#status-compute) | false | false | The compute resource associated with the resource. |
+| `outputResources` | [object](#status-outputresources)[] | false | false | Properties of an output resource |
+| `recipe` | [object](#status-recipe) | false | true | The recipe data at the time of deployment |
 
-#### Additional Properties
+### `data.valueFrom` {#data-valuefrom}
 
-* **Additional Properties Type**: [SecretValueProperties](#secretvalueproperties)
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `name` | string | true | false | The name of the referenced secret. |
+| `version` | string | false | false | The version of the referenced secret. |
 
-### SecretValueProperties
+### `status.compute` {#status-compute}
 
-#### Properties
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `kind` | string | true | false | Discriminator property that selects the variant. Allowed values: [`aci`](#status-compute-aci), [`kubernetes`](#status-compute-kubernetes). |
+| `identity` | [object](#status-compute-identity) | false | false | Configuration for supported external identity providers |
+| `resourceId` | string | false | false | The resource id of the compute resource for application environment. |
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **encoding** | 'base64' | 'raw' | The encoding of value |
-| **value** | string | The value of secret. |
-| **valueFrom** | [ValueFromProperties](#valuefromproperties) | The referenced secret in properties.resource |
+### `status.outputResources` {#status-outputresources}
 
-### ValueFromProperties
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `id` | string | false | false | The UCP resource ID of the underlying resource. |
+| `localId` | string | false | false | The logical identifier scoped to the owning Radius resource. This is only needed or used when a resource has a dependency relationship. LocalIDs do not have any particular format or meaning beyond being compared to determine dependency relationships. |
+| `radiusManaged` | boolean | false | false | Determines whether Radius manages the lifecycle of the underlying resource. |
 
-#### Properties
+### `status.recipe` {#status-recipe}
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **name** | string | The name of the referenced secret. <br />_(Required)_ |
-| **version** | string | The version of the referenced secret. |
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `templateKind` | string | true | false | TemplateKind is the kind of the recipe template used by the portable resource upon deployment. |
+| `templatePath` | string | true | false | TemplatePath is the path of the recipe consumed by the portable resource upon deployment. |
+| `templateVersion` | string | false | false | TemplateVersion is the version number of the template. |
 
-### ResourceStatus
+### `status.compute.identity` {#status-compute-identity}
 
-#### Properties
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `kind` | string | true | false | kind of identity setting<br />Allowed values: `azure.com.workload`, `systemAssigned`, `systemAssignedUserAssigned`, `undefined`, `userAssigned`. |
+| `managedIdentity` | string array | false | false | The list of user assigned managed identities |
+| `oidcIssuer` | string | false | false | The URI for your compute platform's OIDC issuer |
+| `resource` | string | false | false | The resource ID of the provisioned identity |
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **compute** | [EnvironmentCompute](#environmentcompute) | The compute resource associated with the resource. |
-| **outputResources** | [OutputResource](#outputresource)[] | Properties of an output resource |
-| **recipe** | [RecipeStatus](#recipestatus) | The recipe data at the time of deployment <br />_(ReadOnly)_ |
+### `status.compute.aci` {#status-compute-aci}
 
-### EnvironmentCompute
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `resourceGroup` | string | false | false | The resource group to use for the environment. |
 
-* **Discriminator**: kind
+### `status.compute.kubernetes` {#status-compute-kubernetes}
 
-#### Base Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **identity** | [IdentitySettings](#identitysettings) | Configuration for supported external identity providers |
-| **resourceId** | string | The resource id of the compute resource for application environment. |
-
-#### AzureContainerInstanceCompute
-
-##### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **kind** | 'aci' | The Azure container instance compute kind <br />_(Required)_ |
-| **resourceGroup** | string | The resource group to use for the environment. |
-
-#### KubernetesCompute
-
-##### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **kind** | 'kubernetes' | The Kubernetes compute kind <br />_(Required)_ |
-| **namespace** | string | The namespace to use for the environment. <br />_(Required)_ |
-
-
-### IdentitySettings
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **kind** | 'azure.com.workload' | 'systemAssigned' | 'systemAssignedUserAssigned' | 'undefined' | 'userAssigned' | kind of identity setting <br />_(Required)_ |
-| **managedIdentity** | string[] | The list of user assigned managed identities |
-| **oidcIssuer** | string | The URI for your compute platform's OIDC issuer |
-| **resource** | string | The resource ID of the provisioned identity |
-
-### OutputResource
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **id** | string | The UCP resource ID of the underlying resource. |
-| **localId** | string | The logical identifier scoped to the owning Radius resource. This is only needed or used when a resource has a dependency relationship. LocalIDs do not have any particular format or meaning beyond being compared to determine dependency relationships. |
-| **radiusManaged** | bool | Determines whether Radius manages the lifecycle of the underlying resource. |
-
-### RecipeStatus
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **templateKind** | string | TemplateKind is the kind of the recipe template used by the portable resource upon deployment. <br />_(Required)_ |
-| **templatePath** | string | TemplatePath is the path of the recipe consumed by the portable resource upon deployment. <br />_(Required)_ |
-| **templateVersion** | string | TemplateVersion is the version number of the template. |
-
-### SystemData
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **createdAt** | string | The timestamp of resource creation (UTC). |
-| **createdBy** | string | The identity that created the resource. |
-| **createdByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that created the resource. |
-| **lastModifiedAt** | string | The timestamp of resource last modification (UTC) |
-| **lastModifiedBy** | string | The identity that last modified the resource. |
-| **lastModifiedByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that last modified the resource. |
-
-### Record
-
-#### Properties
-
-* **none**
-
-#### Additional Properties
-
-* **Additional Properties Type**: string
-
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `namespace` | string | true | false | The namespace to use for the environment. |
