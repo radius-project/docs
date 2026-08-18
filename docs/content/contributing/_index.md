@@ -3,7 +3,7 @@ type: docs
 title: "Contributing to Radius"
 linkTitle: "Contributing"
 description: "Guides and requirements for contributing to and engaging with the Radius community"
-weight: 110
+weight: 1000
 aliases:
   - "/community/"
   - "/community/overview/"
