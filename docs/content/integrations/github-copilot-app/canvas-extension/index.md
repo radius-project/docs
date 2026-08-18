@@ -4,6 +4,11 @@ title: "How-To: Visualize and deploy applications using Radius Canvas extension"
 linkTitle: "Radius Canvas extension"
 weight: 100
 description: "Install the Radius Canvas extension to model, visualize, and deploy an application from inside the GitHub Copilot app"
+aliases:
+  - /github-copilot-app/canvas-extension/
+  - /github-copilot-integration/use-canvas-extension/
+  - /integrations/github-copilot/use-canvas-extension/
+  - /github-copilot/use-canvas-extension/
 ---
 
 This guide walks you through the Radius Canvas extension by modeling and deploying the Docker [Example Voting App](https://github.com/dockersamples/example-voting-app). The sample is a distributed application with voting and results frontends, a worker, Redis, and PostgreSQL.
@@ -15,6 +20,7 @@ You install the `radius` plugin, model the sample as a Radius Application, confi
 - The latest version of the [GitHub Copilot app](https://docs.github.com/en/copilot/concepts/agents/github-copilot-app). The canvas runs only in the app.
 - An Azure subscription.
 - An Azure Kubernetes Service (AKS) cluster.
+- `az login` 
 - A fork of the [Example Voting App](https://github.com/dockersamples/example-voting-app). [Fork the repository](https://github.com/dockersamples/example-voting-app/fork) into your GitHub account, so Radius can add the Application definition and GitHub Actions workflows.
 
 ## Step 1: Install the plugin
