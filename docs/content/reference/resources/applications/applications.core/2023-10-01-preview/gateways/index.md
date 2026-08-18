@@ -9,177 +9,107 @@ description: "Detailed reference documentation for applications.core/gateways@20
 
 ## Schema
 
-### Top-Level Resource
+## Description
 
-#### Properties
+Concrete tracked resource types can be created by aliasing this type using a specific property type.
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **apiVersion** | '2023-10-01-preview' | The resource api version <br />_(ReadOnly, DeployTimeConstant)_ |
-| **application** | string | Fully qualified resource ID for the application <br />_(ReadOnly)_ |
-| **environment** | string | Fully qualified resource ID for the environment that the application is linked to <br />_(ReadOnly)_ |
-| **hostname** | [GatewayHostname](#gatewayhostname) | Declare hostname information for the Gateway. Leaving the hostname empty auto-assigns one: mygateway.myapp.PUBLICHOSTNAMEORIP.nip.io. <br />_(ReadOnly)_ |
-| **id** | string | The resource id <br />_(ReadOnly, DeployTimeConstant)_ |
-| **internal** | bool | Sets Gateway to not be exposed externally (no public IP address associated). Defaults to false (exposed to internet). <br />_(ReadOnly)_ |
-| **location** | string | The geo-location where the resource lives |
-| **name** | string | The resource name <br />_(Required, DeployTimeConstant, Identifier)_ |
-| **properties** | [GatewayProperties](#gatewayproperties) | The resource-specific properties for this resource. <br />_(Required)_ |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
-| **routes** | [GatewayRoute](#gatewayroute)[] | Routes attached to this Gateway <br />_(ReadOnly)_ |
-| **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
-| **systemData** | [SystemData](#systemdata) | Azure Resource Manager metadata containing createdBy and modifiedBy information. <br />_(ReadOnly)_ |
-| **tags** | [Record](#record) | Resource tags. |
-| **tls** | [GatewayTls](#gatewaytls) | TLS configuration for the Gateway. <br />_(ReadOnly)_ |
-| **type** | 'Applications.Core/gateways' | The resource type <br />_(ReadOnly, DeployTimeConstant)_ |
-| **url** | string | URL of the gateway resource. Readonly <br />_(ReadOnly)_ |
+## Top-Level Properties
 
-### GatewayHostname
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `application` | string | true | false | Fully qualified resource ID for the application |
+| `environment` | string | false | false | Fully qualified resource ID for the environment that the application is linked to |
+| `hostname` | [object](#hostname) | false | false | Declare hostname information for the Gateway. Leaving the hostname empty auto-assigns one: mygateway.myapp.PUBLICHOSTNAMEORIP.nip.io. |
+| `internal` | boolean | false | false | Sets Gateway to not be exposed externally (no public IP address associated). Defaults to false (exposed to internet). |
+| `provisioningState` | string | false | true | The status of the asynchronous operation.<br />Allowed values: `Accepted`, `Canceled`, `Creating`, `Deleting`, `Failed`, `Provisioning`, `Succeeded`, `Updating`. |
+| `routes` | [object](#routes)[] | true | false | Routes attached to this Gateway |
+| `status` | [object](#status) | false | true | Status of a resource. |
+| `tls` | [object](#tls) | false | false | TLS configuration for the Gateway. |
+| `url` | string | false | true | URL of the gateway resource. Readonly |
 
-#### Properties
+## Object Properties
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **fullyQualifiedHostname** | string | Specify a fully-qualified domain name: myapp.mydomain.com. Mutually exclusive with 'prefix' and will take priority if both are defined. |
-| **prefix** | string | Specify a prefix for the hostname: myhostname.myapp.PUBLICHOSTNAMEORIP.nip.io. Mutually exclusive with 'fullyQualifiedHostname' and will be overridden if both are defined. |
+### `hostname` {#hostname}
 
-### GatewayProperties
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `fullyQualifiedHostname` | string | false | false | Specify a fully-qualified domain name: myapp.mydomain.com. Mutually exclusive with 'prefix' and will take priority if both are defined. |
+| `prefix` | string | false | false | Specify a prefix for the hostname: myhostname.myapp.PUBLICHOSTNAMEORIP.nip.io. Mutually exclusive with 'fullyQualifiedHostname' and will be overridden if both are defined. |
 
-#### Properties
+### `routes` {#routes}
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **application** | string | Fully qualified resource ID for the application <br />_(Required)_ |
-| **environment** | string | Fully qualified resource ID for the environment that the application is linked to |
-| **hostname** | [GatewayHostname](#gatewayhostname) | Declare hostname information for the Gateway. Leaving the hostname empty auto-assigns one: mygateway.myapp.PUBLICHOSTNAMEORIP.nip.io. |
-| **internal** | bool | Sets Gateway to not be exposed externally (no public IP address associated). Defaults to false (exposed to internet). |
-| **provisioningState** | 'Accepted' | 'Canceled' | 'Creating' | 'Deleting' | 'Failed' | 'Provisioning' | 'Succeeded' | 'Updating' | The status of the asynchronous operation. <br />_(ReadOnly)_ |
-| **routes** | [GatewayRoute](#gatewayroute)[] | Routes attached to this Gateway <br />_(Required)_ |
-| **status** | [ResourceStatus](#resourcestatus) | Status of a resource. <br />_(ReadOnly)_ |
-| **tls** | [GatewayTls](#gatewaytls) | TLS configuration for the Gateway. |
-| **url** | string | URL of the gateway resource. Readonly <br />_(ReadOnly)_ |
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `destination` | string | false | false | The URL or id of the service to route to. Ex - 'http://myservice'. |
+| `enableWebsockets` | boolean | false | false | Enables websocket support for the route. Defaults to false. |
+| `path` | string | false | false | The path to match the incoming request path on. Ex - /myservice. |
+| `replacePrefix` | string | false | false | Optionally update the prefix when sending the request to the service. Ex - replacePrefix: '/' and path: '/myservice' will transform '/myservice/myroute' to '/myroute' |
+| `timeoutPolicy` | [object](#routes-timeoutpolicy) | false | false | The timeout policy for the route. |
 
-### GatewayRoute
+### `status` {#status}
 
-#### Properties
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `compute` | [object](#status-compute) | false | false | The compute resource associated with the resource. |
+| `outputResources` | [object](#status-outputresources)[] | false | false | Properties of an output resource |
+| `recipe` | [object](#status-recipe) | false | true | The recipe data at the time of deployment |
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **destination** | string | The URL or id of the service to route to. Ex - 'http://myservice'. |
-| **enableWebsockets** | bool | Enables websocket support for the route. Defaults to false. |
-| **path** | string | The path to match the incoming request path on. Ex - /myservice. |
-| **replacePrefix** | string | Optionally update the prefix when sending the request to the service. Ex - replacePrefix: '/' and path: '/myservice' will transform '/myservice/myroute' to '/myroute' |
-| **timeoutPolicy** | [GatewayRouteTimeoutPolicy](#gatewayroutetimeoutpolicy) | The timeout policy for the route. |
+### `tls` {#tls}
 
-### GatewayRouteTimeoutPolicy
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `certificateFrom` | string | false | false | The resource id for the secret containing the TLS certificate and key for the gateway. |
+| `minimumProtocolVersion` | string | false | false | TLS minimum protocol version (defaults to 1.2).<br />Allowed values: `1.2`, `1.3`. |
+| `sslPassthrough` | boolean | false | false | If true, gateway lets the https traffic sslPassthrough to the backend servers for decryption. |
 
-#### Properties
+### `routes.timeoutPolicy` {#routes-timeoutpolicy}
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **backendRequest** | string | The backend request timeout in duration for the route. Cannot be greater than the request timeout. |
-| **request** | string | The request timeout in duration for the route. Defaults to 15 seconds. |
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `backendRequest` | string | false | false | The backend request timeout in duration for the route. Cannot be greater than the request timeout. |
+| `request` | string | false | false | The request timeout in duration for the route. Defaults to 15 seconds. |
 
-### ResourceStatus
+### `status.compute` {#status-compute}
 
-#### Properties
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `kind` | string | true | false | Discriminator property that selects the variant. Allowed values: [`aci`](#status-compute-aci), [`kubernetes`](#status-compute-kubernetes). |
+| `identity` | [object](#status-compute-identity) | false | false | Configuration for supported external identity providers |
+| `resourceId` | string | false | false | The resource id of the compute resource for application environment. |
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **compute** | [EnvironmentCompute](#environmentcompute) | The compute resource associated with the resource. |
-| **outputResources** | [OutputResource](#outputresource)[] | Properties of an output resource |
-| **recipe** | [RecipeStatus](#recipestatus) | The recipe data at the time of deployment <br />_(ReadOnly)_ |
+### `status.outputResources` {#status-outputresources}
 
-### EnvironmentCompute
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `id` | string | false | false | The UCP resource ID of the underlying resource. |
+| `localId` | string | false | false | The logical identifier scoped to the owning Radius resource. This is only needed or used when a resource has a dependency relationship. LocalIDs do not have any particular format or meaning beyond being compared to determine dependency relationships. |
+| `radiusManaged` | boolean | false | false | Determines whether Radius manages the lifecycle of the underlying resource. |
 
-* **Discriminator**: kind
+### `status.recipe` {#status-recipe}
 
-#### Base Properties
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `templateKind` | string | true | false | TemplateKind is the kind of the recipe template used by the portable resource upon deployment. |
+| `templatePath` | string | true | false | TemplatePath is the path of the recipe consumed by the portable resource upon deployment. |
+| `templateVersion` | string | false | false | TemplateVersion is the version number of the template. |
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **identity** | [IdentitySettings](#identitysettings) | Configuration for supported external identity providers |
-| **resourceId** | string | The resource id of the compute resource for application environment. |
+### `status.compute.identity` {#status-compute-identity}
 
-#### AzureContainerInstanceCompute
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `kind` | string | true | false | kind of identity setting<br />Allowed values: `azure.com.workload`, `systemAssigned`, `systemAssignedUserAssigned`, `undefined`, `userAssigned`. |
+| `managedIdentity` | string array | false | false | The list of user assigned managed identities |
+| `oidcIssuer` | string | false | false | The URI for your compute platform's OIDC issuer |
+| `resource` | string | false | false | The resource ID of the provisioned identity |
 
-##### Properties
+### `status.compute.aci` {#status-compute-aci}
 
-| Property | Type | Description |
-|----------|------|-------------|
-| **kind** | 'aci' | The Azure container instance compute kind <br />_(Required)_ |
-| **resourceGroup** | string | The resource group to use for the environment. |
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `resourceGroup` | string | false | false | The resource group to use for the environment. |
 
-#### KubernetesCompute
+### `status.compute.kubernetes` {#status-compute-kubernetes}
 
-##### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **kind** | 'kubernetes' | The Kubernetes compute kind <br />_(Required)_ |
-| **namespace** | string | The namespace to use for the environment. <br />_(Required)_ |
-
-
-### IdentitySettings
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **kind** | 'azure.com.workload' | 'systemAssigned' | 'systemAssignedUserAssigned' | 'undefined' | 'userAssigned' | kind of identity setting <br />_(Required)_ |
-| **managedIdentity** | string[] | The list of user assigned managed identities |
-| **oidcIssuer** | string | The URI for your compute platform's OIDC issuer |
-| **resource** | string | The resource ID of the provisioned identity |
-
-### OutputResource
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **id** | string | The UCP resource ID of the underlying resource. |
-| **localId** | string | The logical identifier scoped to the owning Radius resource. This is only needed or used when a resource has a dependency relationship. LocalIDs do not have any particular format or meaning beyond being compared to determine dependency relationships. |
-| **radiusManaged** | bool | Determines whether Radius manages the lifecycle of the underlying resource. |
-
-### RecipeStatus
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **templateKind** | string | TemplateKind is the kind of the recipe template used by the portable resource upon deployment. <br />_(Required)_ |
-| **templatePath** | string | TemplatePath is the path of the recipe consumed by the portable resource upon deployment. <br />_(Required)_ |
-| **templateVersion** | string | TemplateVersion is the version number of the template. |
-
-### GatewayTls
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **certificateFrom** | string | The resource id for the secret containing the TLS certificate and key for the gateway. |
-| **minimumProtocolVersion** | '1.2' | '1.3' | TLS minimum protocol version (defaults to 1.2). |
-| **sslPassthrough** | bool | If true, gateway lets the https traffic sslPassthrough to the backend servers for decryption. |
-
-### SystemData
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| **createdAt** | string | The timestamp of resource creation (UTC). |
-| **createdBy** | string | The identity that created the resource. |
-| **createdByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that created the resource. |
-| **lastModifiedAt** | string | The timestamp of resource last modification (UTC) |
-| **lastModifiedBy** | string | The identity that last modified the resource. |
-| **lastModifiedByType** | 'Application' | 'Key' | 'ManagedIdentity' | 'User' | The type of identity that last modified the resource. |
-
-### Record
-
-#### Properties
-
-* **none**
-
-#### Additional Properties
-
-* **Additional Properties Type**: string
-
+| Property | Type | Required | Read-Only | Description |
+|----------|------|----------|-----------|-------------|
+| `namespace` | string | true | false | The namespace to use for the environment. |
