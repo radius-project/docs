@@ -1,11 +1,10 @@
 ---
 type: docs
-title: "Model, visualize and deploy applications using Radius Canvas extension"
+title: "Model, visualize, and deploy applications using Radius Canvas extension"
 linkTitle: "Radius Canvas extension"
 weight: 2
 description: "Install the Radius Canvas extension to model, visualize, and deploy an application in the GitHub Copilot app"
 hide_preview_release_banner: true
-
 ---
 
 ## Prerequisites
@@ -35,20 +34,20 @@ You can use your own application or fork one of these open-source samples:
 ## Step 1: Install the plugin
 
 1. Open the GitHub Copilot app.
-1. Open settings in the bottom left corner and select **Plugins**.
-2. Select the dropdown next to **Install**, and then select **Add marketplace**.
+2. Open **Settings** in the bottom-left corner, and then select **Plugins**.
+3. Select the dropdown next to **Install**, and then select **Add marketplace**.
 
    {{< image src="open-add-marketplace-menu.png" alt="Plugins settings with the Install menu open and Add marketplace selected" width=800px >}}
 
-3. Enter `radius-project/ai-extensions`, and then select **Add marketplace**.
+4. Enter `radius-project/ai-extensions`, and then select **Add marketplace**.
 
    {{< image src="add-radius-marketplace.png" alt="Add marketplace dialog with radius-project/ai-extensions entered as the marketplace source" width=800px >}}
 
-4. In the `radius-plugins` marketplace, install the `radius-edge` plugin.
+5. In the `radius-plugins` marketplace, install the `radius-edge` plugin.
 
    {{< image src="install-radius-plugin.png" alt="Radius plugins marketplace showing the radius-edge plugin available to install" width=700px >}}
 
-5. Restart your Copilot session so the skills and canvas become available.
+6. Restart your Copilot session so the skills and canvas become available.
 
 The plugin bundles the Radius skills and canvas extension into one installation. After installation, use the plugin's three-dot menu to update or uninstall it.
 
@@ -62,7 +61,7 @@ Adding the Radius marketplace manually is temporary. When the extension is relea
 
    {{< image src="select-github-repository.png" alt="GitHub Copilot App menu for starting a session from a GitHub repository" width=500px >}}
 
-1. In the chat, enter **Show me the application graph**.
+2. In the chat, enter **Show me the application graph**.
 
    {{< image src="prompt-application-graph.png" alt="GitHub Copilot App chat prompt asking Copilot to show the application graph" width=800px >}}
 
@@ -83,27 +82,29 @@ Adding the Radius marketplace manually is temporary. When the extension is relea
    - Ensure that the connections between resources accurately represent the application architecture.
    - Select **View source code** to open the file where Radius detected the service or dependency.
 
-2. Select **Create Environment** next to the Modeled graph to begin configuring the environment to plan the deployment.
+3. Select **Create Environment** next to the **Modeled** graph to begin configuring the Environment and planning the deployment.
 
 ## Step 3: Configure your Environment
 
 An Environment defines where your Application runs and the infrastructure available to it. After you select **Create Environment**, the canvas opens the environment configuration flow.
 
-1. Under **Choose Cloud credentials**, select a credential profile dropdown and click **Create new profile**.
+1. Under **Choose Cloud credentials**, open the credential profile dropdown, and then select **Create new profile**.
 
    {{< image src="choose-cloud-credentials.png" alt="Choose cloud credentials step with the option to create a credential profile" width=800px >}}
-2. Enter a profile name and select Azure as the provider and enter your Azure tenant ID and subscription.
+
+2. Enter a profile name, select **Azure** as the provider, and enter your Azure tenant ID and subscription.
 
    {{< image src="create-azure-credential-profile.png" alt="Create Credential Profile form for an Azure tenant and subscription" width=800px >}}
+
 3. Select **Verify credentials**.
 4. After verification succeeds, select **Save and continue**.
 5. Next, enter a name for the environment and select the GitHub account and the saved credential profile under **Connect GitHub to a cloud**.
 
    {{< image src="connect-github-to-cloud.png" alt="Create Environment form connecting a GitHub account to an Azure credential profile" width=800px >}}
+
 6. Under **Deploy identity**, the Microsoft Entra app registration name is already populated.
 7. Under **Infrastructure**, select the Azure resource group and AKS cluster. Select an existing Kubernetes namespace or enter a namespace such as `my-app`.
-8. Click **Create the Environment**.
-   You can follow along the status of the environment configuration.
+8. Select **Create the Environment**. You can follow the status of the Environment configuration.
 
    {{< image src="environment-creation-progress.png" alt="Environment creation progress showing deploy identity authorization, configuration, and credential verification" width=800px >}}
 
@@ -116,6 +117,7 @@ When Environment configuration is complete, the canvas displays **View planned g
 1. Confirm that the correct Application, branch, and Environment are selected.
 
    {{< image src="planned-application-graph.png" alt="Radius Canvas Planned graph showing application workloads and supporting infrastructure" width=800px >}}
+
 2. Review the planned Application and supporting infrastructure.
 3. Confirm how Radius will deploy each workload and provide its infrastructure dependencies in the selected Environment.
 
@@ -135,13 +137,13 @@ When the deployment completes, return to the Application graph and open the **De
 
 ## Step 6: Access your Application
 
-In the Copilot chat, enter "Access my deployed application".
+In the Copilot chat, enter **Access my deployed application**.
 
 Copilot sets up port forwarding and provides a URL to access the deployed Application.
 
 ## Step 7: Clean up
 
-1. In the **Deployments** view, click **Delete Deployment** and confirm the deletion.
+1. In the **Deployments** view, select **Delete Deployment**, and then confirm the deletion.
 2. Monitor the deletion workflow until it completes. Radius deletes the Application and the infrastructure resources owned by it.
 3. If you no longer need the Radius Environment, open the **Environments** view and delete it.
 
@@ -156,7 +158,7 @@ Make changes to your Application on a branch, and then open the **Diff** view to
 3. Select the branch containing your changes as the **Head** branch.
 4. Review which components, connections, and dependencies your changes add, remove, or modify.
 
-You can generate a Markdown summary of the graph diff and post it as part of pull request comment, so reviewers can see the architectural impact alongside the code.
+You can generate a Markdown summary of the graph diff and post it as part of a pull request comment, so reviewers can see the architectural impact alongside the code.
 
 {{< image src="application-graph-diff.png" alt="Radius Canvas Diff view comparing application resources and connections between two branches" width=800px >}}
 
