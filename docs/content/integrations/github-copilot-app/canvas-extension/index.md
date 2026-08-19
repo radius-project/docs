@@ -20,8 +20,8 @@ hide_preview_release_banner: true
 
 You can use your own application or fork one of these open-source samples:
 
-- [Docker Wordsmith](https://github.com/dockersamples/wordsmith)
 - [Docker Example Voting App](https://github.com/dockersamples/example-voting-app)
+- [Docker Todo List App](https://github.com/dockersamples/todo-list-app)
 - [AKS Store Demo](https://github.com/Azure-Samples/aks-store-demo)
 - [Spring Petclinic Microservices](https://github.com/spring-petclinic/spring-petclinic-microservices)
 - [Google Cloud Microservices Demo](https://github.com/GoogleCloudPlatform/microservices-demo)
@@ -62,7 +62,7 @@ Adding the Radius marketplace manually is temporary. When the extension is relea
 
    Copilot runs the Radius app-modeling skill. The skill analyzes your source code, manifests, and Dockerfiles, identifies your workloads and their dependencies, generates a Radius Application definition, and writes it into your repository. The canvas opens and renders the definition as an interactive Application graph.
 
-   {{< image src="image.png" alt="Radius Canvas Modeled graph with the Create Environment action" width=800px >}}
+   {{< image src="modeled-application-graph-create-environment.png" alt="Radius Canvas Modeled graph with the Create Environment action" width=800px >}}
 
    {{% alert title="Canvas troubleshooting" color="info" %}}
    If Radius Canvas does not open, ask Copilot to `Fix my Radius extension`. This invokes the Radius repair skill, which copies the required Canvas extension files into place.
