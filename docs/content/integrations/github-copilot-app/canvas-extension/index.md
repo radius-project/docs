@@ -1,36 +1,49 @@
 ---
 type: docs
-title: "How-To: Visualize and deploy applications using Radius Canvas extension"
+title: "Model, visualize and deploy applications using Radius Canvas extension"
 linkTitle: "Radius Canvas extension"
-weight: 100
-description: "Install the Radius Canvas extension to model, visualize, and deploy an application from inside the GitHub Copilot app"
-aliases:
-  - /github-copilot-app/canvas-extension/
-  - /github-copilot-integration/use-canvas-extension/
-  - /integrations/github-copilot/use-canvas-extension/
-  - /github-copilot/use-canvas-extension/
+weight: 2
+description: "Install the Radius Canvas extension to model, visualize, and deploy an application in the GitHub Copilot app"
+
 ---
 
-This guide walks you through the Radius Canvas extension by modeling and deploying the Docker [Example Voting App](https://github.com/dockersamples/example-voting-app). The sample is a distributed application with voting and results frontends, a worker, Redis, and PostgreSQL.
-
-You install the `radius` plugin, model the sample as a Radius Application, configure an Environment, review the planned deployment, and deploy through GitHub Actions.
+This guide walks you through the Radius Canvas extension to model and deploy a containerized application from a GitHub repository.
 
 ## Prerequisites
 
-- The latest version of the [GitHub Copilot app](https://docs.github.com/en/copilot/concepts/agents/github-copilot-app). The canvas runs only in the app.
+- The latest version of the [GitHub Copilot app](https://docs.github.com/en/copilot/concepts/agents/github-copilot-app).
 - An Azure subscription.
-- An Azure Kubernetes Service (AKS) cluster.
-- `az login` 
-- A fork of the [Example Voting App](https://github.com/dockersamples/example-voting-app). [Fork the repository](https://github.com/dockersamples/example-voting-app/fork) into your GitHub account, so Radius can add the Application definition and GitHub Actions workflows.
+- An [Azure Kubernetes Service (AKS) cluster](https://learn.microsoft.com/azure/aks/learn/quick-kubernetes-deploy-cli).
+- The [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli). Run [`az login`](https://learn.microsoft.com/cli/azure/authenticate-azure-cli-interactively) before you begin.
+- A GitHub repository with a containerized application. You must own the repository or have write access to it. Fork the repository if necessary.
+
+### Sample repositories
+
+You can use your own application or fork one of these open-source samples:
+
+- [Docker Wordsmith](https://github.com/dockersamples/wordsmith)
+- [Docker Example Voting App](https://github.com/dockersamples/example-voting-app)
+- [AKS Store Demo](https://github.com/Azure-Samples/aks-store-demo)
+- [Spring Petclinic Microservices](https://github.com/spring-petclinic/spring-petclinic-microservices)
+- [Google Cloud Microservices Demo](https://github.com/GoogleCloudPlatform/microservices-demo)
 
 ## Step 1: Install the plugin
 
 1. Open the GitHub Copilot app.
-1. Open app settings and select **Plugins**.
-1. Select the arrow next to **Install**, and then select **Add marketplace**.
-1. Enter `https://github.com/radius-project/ai-extensions`, and then select **Add marketplace**.
-1. In the `radius-plugins` marketplace, turn on the `radius` plugin.
-1. Restart your Copilot session so the skills and canvas become available.
+1. Open settings in the bottom right corner and select **Plugins**.
+2. Select the dropdown next to **Install**, and then select **Add marketplace**.
+
+   {{< image src="open-add-marketplace-menu.png" alt="Plugins settings with the Install menu open and Add marketplace selected" width=800px >}}
+
+3. Enter `radius-project/ai-extensions`, and then select **Add marketplace**.
+
+   {{< image src="add-radius-marketplace.png" alt="Add marketplace dialog with radius-project/ai-extensions entered as the marketplace source" width=800px >}}
+
+4. In the `radius-plugins` marketplace, install the `radius-edge` plugin.
+
+   {{< image src="install-radius-plugin.png" alt="Radius plugins marketplace showing the radius-edge plugin available to install" width=700px >}}
+
+5. Restart your Copilot session so the skills and canvas become available.
 
 The plugin bundles the Radius skills and canvas extension into one installation. After installation, use the plugin's three-dot menu to update or uninstall it.
 
@@ -38,102 +51,89 @@ The plugin bundles the Radius skills and canvas extension into one installation.
 Adding the Radius marketplace manually is temporary. When the extension is released for public preview, the plugin will be available from the `awesome-copilot` marketplace.
 {{% /alert %}}
 
-<!-- TODO: screenshot of installing the radius plugin from the GitHub Copilot app Plugins settings. Save the PNG next to this index.md and uncomment:
-{{< image src="install-plugin.png" alt="Installing the radius plugin from the GitHub Copilot app plugins settings" width=800px >}}
--->
-
 ## Step 2: Model your Application
 
-1. Create a new Copilot session and add your fork of the Example Voting App:
+1. Create a new Copilot session. Select **GitHub repository**, and then add the repository you want to model.
 
-   ```text
-   https://github.com/<your-github-user>/example-voting-app
-   ```
+   {{< image src="select-github-repository.png" alt="GitHub Copilot App menu for starting a session from a GitHub repository" width=500px >}}
 
-1. Ask Copilot:
+1. In the chat, enter **Show me the application graph**.
 
-   ```text
-   Show me the application graph.
-   ```
+   {{< image src="prompt-application-graph.png" alt="GitHub Copilot App chat prompt asking Copilot to show the application graph" width=800px >}}
 
-Copilot runs the Radius app-modeling skill. The skill analyzes your source code, manifests, and Dockerfiles, identifies your workloads and their dependencies, generates a Radius Application definition, and writes it into your repository. The canvas opens and renders the definition as an interactive Application graph.
+   Copilot runs the Radius app-modeling skill. The skill analyzes your source code, manifests, and Dockerfiles, identifies your workloads and their dependencies, generates a Radius Application definition, and writes it into your repository. The canvas opens and renders the definition as an interactive Application graph.
 
-{{< image src="modeled-application-graph.png" alt="Radius Canvas Modeled view showing the Example Voting App workloads, routes, Redis cache, and PostgreSQL database" width=1000px >}}
+   {{< image src="modeled-graph-create-environment.png" alt="Radius Canvas Modeled graph with the Create Environment action" width=800px >}}
 
-{{% alert title="Canvas troubleshooting" color="info" %}}
-If Radius Canvas does not open, ask Copilot to `Fix my Radius extension`. This invokes the Radius repair skill, which copies the required Canvas extension files into place.
-{{% /alert %}}
+   {{% alert title="Canvas troubleshooting" color="info" %}}
+   If Radius Canvas does not open, ask Copilot to `Fix my Radius extension`. This invokes the Radius repair skill, which copies the required Canvas extension files into place.
+   {{% /alert %}}
 
-The **Modeled** view visualizes the generated `.radius/app.bicep` file. For the Example Voting App, the graph represents the application workloads and backing services identified in the repository, including the `vote`, `worker`, and `result` components and their Redis and PostgreSQL dependencies.
+   The **Modeled** view visualizes the generated application definition `.radius/app.bicep` file. The graph represents the workloads, routes, backing services, and connections Radius identified in the repository.
 
-Review the connections in the graph:
+   Review the connections in the graph:
 
-- `vote` accepts votes and writes them to Redis.
-- `worker` reads votes from Redis and writes the results to PostgreSQL.
-- `result` reads the voting results from PostgreSQL.
+   - Verify that all application workloads appear in the graph.
+   - Check that the graph includes the expected backing services and infrastructure dependencies.
+   - Ensure that the connections between resources accurately represent the application architecture.
+   - Select **View source code** to open the file where Radius detected the service or dependency.
 
-Each resource can link back to where it is defined or initialized in the source repository. Select a node to open the source file and, when available, the exact line.
-
-Select **Create Environment** next to the Modeled graph to begin configuring the environment to plan the deployment.
+2. Select **Create Environment** next to the Modeled graph to begin configuring the environment to plan the deployment.
 
 ## Step 3: Configure your Environment
 
-An Environment defines where your Application runs and the infrastructure available to it.
+An Environment defines where your Application runs and the infrastructure available to it. After you select **Create Environment**, the canvas opens the environment configuration flow.
 
-After you select **Create Environment**, the canvas opens the deployment configuration flow.
+1. Under **Choose Cloud credentials**, select a credential profile dropdown and click **Create new profile**.
 
-1. Under **Cloud credentials**, expand **New credential profile**.
-1. Enter a profile name and select Azure as the provider.
-1. Enter your Azure tenant ID and subscription ID.
-1. Select **Verify credentials**.
-1. After verification succeeds, select **Save credential profile**, and then select **Next**.
-1. Under **Target environment**, enter a name such as `voting-azure`.
-1. Under **Connect GitHub to cloud**, select the GitHub account and the saved credential profile, and then select **Next**.
-1. Specify the deployment target.
-1. Under **Infrastructure**, verify access, and then select the Azure resource group and AKS cluster. Select an existing Kubernetes namespace or enter a namespace such as `voting`.
-1. Create the Environment.
+   {{< image src="choose-cloud-credentials.png" alt="Choose cloud credentials step with the option to create a credential profile" width=800px >}}
+2. Enter a profile name and select Azure as the provider and enter your Azure tenant ID and subscription.
 
-Radius establishes OIDC trust with GitHub Actions, so deployment workflows authenticate with short-lived credentials instead of long-lived secrets stored in the repository.
+   {{< image src="create-azure-credential-profile.png" alt="Create Credential Profile form for an Azure tenant and subscription" width=800px >}}
+3. Select **Verify credentials**.
+4. After verification succeeds, select **Save and continue**.
+5. Next, enter a name for the environment and select the GitHub account and the saved credential profile under **Connect GitHub to a cloud**.
 
-<!-- TODO: screenshot of the credential profile and Environment creation flow. Save the PNG next to this index.md and uncomment:
-{{< image src="configure-environment.png" alt="Creating an Azure credential profile and configuring a Radius Environment in the canvas" width=800px >}}
--->
+   {{< image src="connect-github-to-cloud.png" alt="Create Environment form connecting a GitHub account to an Azure credential profile" width=800px >}}
+6. Under **Deploy identity**, the Microsoft Entra app registration name is already populated.
+7. Under **Infrastructure**, select the Azure resource group and AKS cluster. Select an existing Kubernetes namespace or enter a namespace such as `my-app`.
+8. Click **Create the Environment**.
+   You can follow along the status of the environment configuration.
+
+   {{< image src="environment-creation-progress.png" alt="Environment creation progress showing deploy identity authorization, configuration, and credential verification" width=800px >}}
+
+   Radius establishes OIDC trust with GitHub Actions, so deployment workflows authenticate with short-lived credentials instead of long-lived secrets stored in the repository.
+
 
 ## Step 4: Plan the deployment
 
-When Environment configuration is complete, the canvas returns to the Application graph and displays the **Planned** view.
+When Environment configuration is complete, the canvas displays **View planned graph** that takes you the **Planned** graph view.
 
-1. Confirm that the Example Voting App, your fork's branch, and the `voting-azure` Environment are selected.
-1. Review the planned Application and supporting infrastructure.
-1. Confirm how Radius will deploy the `vote`, `worker`, and `result` workloads and provide their Redis and PostgreSQL dependencies in the selected Environment.
+1. Confirm that the correct Application, branch, and Environment are selected.
+
+   {{< image src="planned-application-graph.png" alt="Radius Canvas Planned graph showing application workloads and supporting infrastructure" width=800px >}}
+2. Review the planned Application and supporting infrastructure.
+3. Confirm how Radius will deploy each workload and provide its infrastructure dependencies in the selected Environment.
 
 Viewing the planned graph does not deploy or change cloud resources.
 
-<!-- TODO: screenshot of the Planned graph. Save the PNG next to this index.md and uncomment:
-{{< image src="planned-graph.png" alt="The Planned graph for the Example Voting App and its supporting infrastructure" width=800px >}}
--->
-
 ## Step 5: Deploy your Application
 
-1. Select **Deploy App**, or ask Copilot:
+Select **Deploy Application**.
 
-   ```text
-   Deploy the voting application.
-   ```
+{{< image src="deploy-application.png" alt="Deployments view for selecting an Application, Environment, and branch to deploy" width=800px >}}
 
-Radius generates a GitHub Actions workflow that provisions the required infrastructure and deploys the Application to the selected Environment. The workflow is committed to your repository, so you review it before it runs and maintain it alongside your Application code.
+The canvas opens the **Deployments** area, where you can monitor deployment progress and open the GitHub Actions run. Radius generates a GitHub Actions workflow that provisions the required infrastructure and deploys the Application to the selected Environment. The workflow is committed to your repository, so you review it before it runs and maintain it alongside your Application code.
 
-The canvas opens the **Deployments** area, where you can monitor deployment progress and open the GitHub Actions run. When the deployment completes, return to the Application graph and open the **Deployed** view to see the voting application and its resources running in the Environment.
-
-<!-- TODO: screenshot of the deployment list and the Deployed graph. Save the PNG next to this index.md and uncomment:
-{{< image src="deploy.png" alt="Monitoring a Radius deployment and viewing the deployed Application graph" width=800px >}}
--->
+When the deployment completes, return to the Application graph and open the **Deployed** view to see the Application and its resources running in the Environment.
 
 ## Compare Application changes
 
 The **Diff** view shows how an Application changes between two branches, such as a pull request against `main`. Use it during code review to see which components, connections, and dependencies a change adds, removes, or modifies.
 
-You can generate a Markdown summary of the graph diff and post it as a pull request comment so reviewers can see the architectural impact alongside the code.
+You can generate a Markdown summary of the graph diff and post it as part of pull request comment, so reviewers can see the architectural impact alongside the code.
+
+{{< image src="application-graph-diff.png" alt="Radius Canvas Diff view comparing application resources and connections between two branches" width=800px >}}
 
 ## Report bugs and feedback
 

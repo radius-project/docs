@@ -145,7 +145,10 @@
         {{- end -}}
         <span class="{{ if $active }}td-sidebar-nav-active-item{{ end }}">
           {{- $s.LinkTitle -}}
-        </span> {{- /**/ -}}
+        </span>
+        {{- if $s.Params.new_badge }}
+          <span class="badge bg-primary rounded-pill ms-1 sidebar-new-badge">New</span>
+        {{- end }} {{- /**/ -}}
       </a> {{- /**/ -}}
     </label>
     {{ else -}}
@@ -170,7 +173,11 @@
         {{- if and $treeRoot $s.Params.sidebar_root_for site.Params.ui.sidebar_root_enabled }} td-sidebar-root-up-icon{{ end -}}
       ">
         {{- $s.LinkTitle -}}
-      </span></a>
+      </span>
+      {{- if $s.Params.new_badge }}
+        <span class="badge bg-primary rounded-pill ms-1 sidebar-new-badge">New</span>
+      {{- end }}
+      </a>
     {{- end -}}
     {{ if $withChild -}}
     {{ $ulNr := add $ulNr 1 }}

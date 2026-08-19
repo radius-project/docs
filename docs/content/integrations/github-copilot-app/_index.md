@@ -2,14 +2,9 @@
 type: docs
 title: "GitHub Copilot App integration"
 linkTitle: "GitHub Copilot App"
-weight: 50
+weight: 1
+new_badge: true
 description: "Use Radius with the GitHub Copilot App to model, visualize, configure, and deploy applications"
-tags: "GitHub Copilot App, Applications"
-aliases:
-  - /github-copilot-app/
-  - /github-copilot-integration/
-  - /github-copilot/
-  - /integrations/github-copilot/
 ---
 
 {{% alert title="Public preview" color="info" %}}
