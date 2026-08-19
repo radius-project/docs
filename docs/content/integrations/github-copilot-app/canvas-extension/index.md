@@ -141,4 +141,4 @@ Before opening an issue, check the [existing Radius AI extensions backlog](https
 
 Submit bugs and feedback with the [feedback or bug report form](https://github.com/radius-project/ai-extensions/issues/new?template=feedback-or-bug-report.yml). You can also open the form from the feedback button in the bottom right corner of the canvas extension.
 
-{{< image src="feedback.png" alt="Feedback button in the canvas extension" width=800px >}}
+{{< image src="feedback.png" alt="Feedback button in the canvas extension" width=250px >}}
