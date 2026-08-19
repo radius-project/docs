@@ -4,6 +4,7 @@ title: "Model, visualize and deploy applications using Radius Canvas extension"
 linkTitle: "Radius Canvas extension"
 weight: 2
 description: "Install the Radius Canvas extension to model, visualize, and deploy an application in the GitHub Copilot app"
+hide_preview_release_banner: true
 
 ---
 
@@ -101,7 +102,6 @@ An Environment defines where your Application runs and the infrastructure availa
    {{< image src="environment-creation-progress.png" alt="Environment creation progress showing deploy identity authorization, configuration, and credential verification" width=800px >}}
 
    Radius establishes OIDC trust with GitHub Actions, so deployment workflows authenticate with short-lived credentials instead of long-lived secrets stored in the repository.
-
 
 ## Step 4: Plan the deployment
 
