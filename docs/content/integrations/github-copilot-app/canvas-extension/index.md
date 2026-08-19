@@ -14,11 +14,10 @@ hide_preview_release_banner: true
 - An Azure subscription.
 - An [Azure Kubernetes Service (AKS) cluster](https://learn.microsoft.com/azure/aks/learn/quick-kubernetes-deploy-cli).
 - The [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli). Run [`az login`](https://learn.microsoft.com/cli/azure/authenticate-azure-cli-interactively) before you begin.
-- The [GitHub CLI](https://cli.github.com/), authenticated with package and workflow access. Run:
+- The [GitHub CLI](https://cli.github.com/). Run [`gh auth login`](https://cli.github.com/manual/gh_auth_login) with package and workflow access before you begin:
 
   ```bash
-  gh auth login
-  gh auth refresh -s read:packages -s write:packages -s workflow
+  gh auth login --scopes read:packages,write:packages,workflow
   ```
 
 - A GitHub repository with a containerized application. You must own the repository or have write access to it. Fork the repository if necessary.
@@ -144,7 +143,7 @@ Copilot sets up port forwarding and provides a URL to access the deployed Applic
 
 1. In the **Deployments** view, click **Delete Deployment** and confirm the deletion.
 2. Monitor the deletion workflow until it completes. Radius deletes the Application and the infrastructure resources owned by it.
-3. If you no longer need the Radius Environment, open the **Environments** area and delete it.
+3. If you no longer need the Radius Environment, open the **Environments** view and delete it.
 
 Deleting the Radius deployment or Environment does not delete the AKS cluster or Azure resource group.
 
