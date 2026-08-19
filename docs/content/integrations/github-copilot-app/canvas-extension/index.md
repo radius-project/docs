@@ -29,7 +29,7 @@ You can use your own application or fork one of these open-source samples:
 ## Step 1: Install the plugin
 
 1. Open the GitHub Copilot app.
-1. Open settings in the bottom right corner and select **Plugins**.
+1. Open settings in the bottom left corner and select **Plugins**.
 2. Select the dropdown next to **Install**, and then select **Add marketplace**.
 
    {{< image src="open-add-marketplace-menu.png" alt="Plugins settings with the Install menu open and Add marketplace selected" width=800px >}}
@@ -125,6 +125,8 @@ The canvas opens the **Deployments** area, where you can monitor deployment prog
 
 When the deployment completes, return to the Application graph and open the **Deployed** view to see the Application and its resources running in the Environment.
 
+{{< image src="deployed-application-graph.png" alt="Deployed view of the application graph" width=800px >}}
+
 ## Compare Application changes
 
 The **Diff** view shows how an Application changes between two branches, such as a pull request against `main`. Use it during code review to see which components, connections, and dependencies a change adds, removes, or modifies.
@@ -137,4 +139,6 @@ You can generate a Markdown summary of the graph diff and post it as part of pul
 
 Before opening an issue, check the [existing Radius AI extensions backlog](https://github.com/orgs/radius-project/projects/23/views/14?layout=table) for a matching report.
 
-Submit bugs and feedback with the [feedback or bug report form](https://github.com/radius-project/ai-extensions/issues/new?template=feedback-or-bug-report.yml). You can also open the form from the feedback button in the canvas.
+Submit bugs and feedback with the [feedback or bug report form](https://github.com/radius-project/ai-extensions/issues/new?template=feedback-or-bug-report.yml). You can also open the form from the feedback button in the bottom right corner of the canvas extension.
+
+{{< image src="feedback.png" alt="Feedback button in the canvas extension" width=800px >}}
