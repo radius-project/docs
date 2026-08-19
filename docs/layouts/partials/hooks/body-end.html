@@ -1,6 +1,138 @@
 {{/*
-  Docsy "body-end" hook: markup injected just before </body>.
-  Intentionally empty. Analytics (Microsoft Clarity) is loaded from the
-  "head-end.html" hook, and code-block copy buttons are provided by Docsy's
-  built-in click-to-copy feature, so no scripts are needed here.
+  Docsy "body-end" hook: markup injected just before </body> on every page.
+
+  Rendered by Docsy's `_partials/scripts.html` (which calls
+  `{{ partial "hooks/body-end.html" . }}`), so the script below runs site-wide
+  and only after Bootstrap's JS bundle (`main.js`) has loaded.
+
+  Purpose:
+    1. Operating-system aware install tabs. On page load the visitor's OS is
+       detected and the matching tab (Linux / macOS / Windows) is activated in
+       every tab group that offers one. A tab the visitor selects manually is
+       saved to localStorage, takes precedence over detection on later visits,
+       and is mirrored across every OS tab group on the page.
+    2. Keeps the Terraform / Bicep tabs in sync across a page.
+
+  Where the OS tabs come from: they are emitted by the `tabs` shortcode
+  (layouts/shortcodes/tabs.html), which adds the `data-tab-label` attribute the
+  script matches on. The canonical example is the CLI install guide at
+  shared-content/installation/rad-cli/install-rad-cli.md, whose `tabs` shortcode
+  lists the OS names (Linux, macOS, "Windows PowerShell", "Windows WinGet", ...).
+  That file is embedded by several pages, including /installation/cli,
+  /installation/upgrade, /installation/dev-workstation, and
+  /getting-started/install-radius, so a single visitor OS choice follows them
+  across all of these guides.
+
+  Note: Microsoft Clarity analytics is loaded separately from the
+  "head-end.html" hook; code-block copy buttons come from Docsy's built-in
+  click-to-copy feature.
 */}}
+
+<script>
+  (() => {
+    // Ordered label candidates per OS; the first present in a tab group wins.
+    // Labels are the anchorized tab titles produced by the `tabs` shortcode.
+    const osLabelCandidates = {
+      windows: ['windows', 'windows-powershell', 'windows-winget'],
+      macos: ['macos', 'mac', 'macintosh'],
+      linux: ['linux'],
+    };
+    const labelToOS = {};
+    for (const [os, labels] of Object.entries(osLabelCandidates)) {
+      labels.forEach((label) => (labelToOS[label] = os));
+    }
+    const osStorageKey = 'radius-os-tab';
+
+    function detectOS() {
+      const platform = (
+        navigator.userAgentData?.platform ||
+        navigator.platform ||
+        ''
+      ).toLowerCase();
+      const ua = (navigator.userAgent || '').toLowerCase();
+      if (platform.includes('win') || ua.includes('windows')) return 'windows';
+      if (platform.includes('mac')) return 'macos';
+      if (platform.includes('linux') || ua.includes('linux')) return 'linux';
+      return null;
+    }
+
+    function readStoredOS() {
+      try {
+        return localStorage.getItem(osStorageKey);
+      } catch {
+        return null;
+      }
+    }
+
+    function storeOS(os) {
+      try {
+        localStorage.setItem(osStorageKey, os);
+      } catch {
+        // Ignore storage failures (e.g. private browsing).
+      }
+    }
+
+    // Activate the matching OS tab in each tab group that offers one.
+    function activateOSTabs(os, exceptGroup) {
+      const candidates = osLabelCandidates[os];
+      if (!candidates) return;
+      document.querySelectorAll('.nav-tabs').forEach((group) => {
+        if (group === exceptGroup) return;
+        for (const label of candidates) {
+          const tab = group.querySelector(`[data-tab-label="${label}"]`);
+          if (tab && !tab.classList.contains('active')) {
+            bootstrap.Tab.getOrCreateInstance(tab).show();
+            break;
+          }
+        }
+      });
+    }
+
+    const synchronizedTabs = new Set(['terraform', 'bicep']);
+    let synchronizing = false;
+
+    // On load, prefer a saved manual OS choice; otherwise detect from the browser.
+    window.addEventListener('DOMContentLoaded', () => {
+      const os = readStoredOS() || detectOS();
+      if (!os) return;
+      synchronizing = true;
+      try {
+        activateOSTabs(os);
+      } finally {
+        synchronizing = false;
+      }
+    });
+
+    document.addEventListener('show.bs.tab', (event) => {
+      const label = event.target.dataset.tabLabel;
+
+      // Remember an explicit OS choice and mirror it across the page.
+      if (labelToOS[label]) {
+        if (synchronizing) return;
+        storeOS(labelToOS[label]);
+        synchronizing = true;
+        try {
+          activateOSTabs(labelToOS[label], event.target.closest('.nav-tabs'));
+        } finally {
+          synchronizing = false;
+        }
+        return;
+      }
+
+      if (synchronizing || !synchronizedTabs.has(label)) {
+        return;
+      }
+
+      synchronizing = true;
+      try {
+        document.querySelectorAll(`[data-tab-label="${label}"]`).forEach((tab) => {
+          if (tab !== event.target && !tab.classList.contains('active')) {
+            bootstrap.Tab.getOrCreateInstance(tab).show();
+          }
+        });
+      } finally {
+        synchronizing = false;
+      }
+    });
+  })();
+</script>

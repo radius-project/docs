@@ -340,6 +340,28 @@ Will result in the following output:
   }
 ```
 
+### Embedding a sample from the samples repository
+
+Some pages embed application samples straight from the [`radius-project/samples`](https://github.com/radius-project/samples) repository instead of keeping a separate `snippets` copy. Those files are vendored into `docs/static/samples/` and kept in sync automatically (see [Keep the sample application in sync](#keep-the-sample-application-in-sync)). Reuse this pattern so the embedded code, the source link, and the deploy command all stay version-correct and never drift from the tested sample.
+
+Embed the vendored file with the `rad` shortcode using an absolute `/static/...` path:
+
+```md
+{{</* rad file="/static/samples/demo/app.bicep" embed=true */>}}
+```
+
+Add a source link just above the code block so readers can open the upstream file. The `param` shortcode resolves `version` to the samples branch that matches the current docs version:
+
+```md
+<div class="td-max-width-on-larger-screens" style="margin-bottom: -2rem;"><a href="https://github.com/radius-project/samples/blob/{{</* param version */>}}/samples/demo/app.bicep" target="_blank" rel="noopener">samples/demo/app.bicep</a></div>
+```
+
+Show the deploy command with the `rad-deploy` shortcode. It renders `rad deploy <url>` against the correct docs host (`edge.docs.radapp.io` on edge, `docs.radapp.io` on release branches):
+
+```md
+{{</* rad-deploy path="samples/demo/app.bicep" */>}}
+```
+
 ### Images
 
 The markdown spec used by Docsy and Hugo does not give an option to resize images using markdown notation. Instead, raw HTML is used.
@@ -606,6 +628,29 @@ For the following steps, treat `v1.0` as the current release and `edge` as the p
 1. Commit the staged changes and push to the upmerge branch (`upmerge_MM-DD`).
 1. Open a PR from the upmerge branch to the upcoming release branch (`edge`).
 1. Review the PR and double check that no unintended changes were pushed to the upmerge branch.
+
+### Keep the sample application in sync
+
+The Getting Started tutorial embeds the Radius Demo application (`app.bicep` and `app-redis.bicep`) directly from the [`radius-project/samples`](https://github.com/radius-project/samples) repository so the docs never drift from the real, tested sample. The files are vendored into this repo under `docs/static/samples/demo/`. Because Hugo serves `static/` from the site root, each file is also published at a stable URL, for example `https://docs.radapp.io/samples/demo/app.bicep`.
+
+#### How the sync works
+
+- **Source of truth:** `samples/demo/*.bicep` in `radius-project/samples`, on the branch that matches this docs branch (`edge` on `edge`, `vX.Y` on release branches).
+- **Vendored copy:** `docs/static/samples/demo/*.bicep`, committed to this repo and embedded by the tutorial pages with the `rad` shortcode.
+- **Download script:** `.github/scripts/download-sample-app.sh` reads the `version` param from `docs/config.toml`, downloads every `*.bicep` from `samples/demo/` at that ref (falling back to the default branch if the ref is missing), and writes them into `docs/static/samples/demo/`. A new `*.bicep` added upstream is picked up automatically.
+- **Drift check:** `.github/workflows/sync-sample-app.yaml` runs the script on every pull request and fails if the committed copy is out of date with upstream. It is a no-op until the files are first vendored.
+
+#### Refresh the vendored files
+
+When the sample changes upstream, run the script from the repo root and commit the result:
+
+```bash
+bash ./.github/scripts/download-sample-app.sh
+git add docs/static/samples/demo
+git commit -s -m "Sync sample app from radius-project/samples"
+```
+
+Set `GITHUB_TOKEN` first if you hit the GitHub API rate limit. When cutting a release branch, run the script once so the new `vX.Y` branch vendors the matching `vX.Y` sample.
 
 ### References
 

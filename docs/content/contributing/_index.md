@@ -3,7 +3,7 @@ type: docs
 title: "Contributing to Radius"
 linkTitle: "Contributing"
 description: "Guides and requirements for contributing to and engaging with the Radius community"
-weight: 110
+weight: 1000
 aliases:
   - "/community/"
   - "/community/overview/"
@@ -26,7 +26,7 @@ Radius is built and maintained by an open community, and you're invited to contr
 You don't need to write code to make an impact. Using Radius and sharing your experience is a valuable contribution in itself. Radius spans several repositories — choose the path that matches your interests and follow that repository's contribution guide to get started.
 
 {{< cardpane >}}
-  {{% card header="**🚀 Use Radius & share feedback**" footer="[**Get started with Radius →**]({{< ref quick-start >}})" %}}
+  {{% card header="**🚀 Use Radius & share feedback**" footer="[**Get started with Radius →**]({{< ref getting-started >}})" %}}
   Run Radius on your own apps, build a sample with Resource Types and Recipes, and [report bugs or request features](https://github.com/radius-project/radius/issues/new/choose). Real-world feedback shapes the roadmap.
   {{% /card %}}
   {{% card header="**💻 Contribute code**" footer="[**Radius contribution guide →**](https://github.com/radius-project/radius/blob/main/CONTRIBUTING.md)" %}}

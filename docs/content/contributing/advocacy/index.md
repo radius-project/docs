@@ -23,7 +23,7 @@ We welcome community members giving presentations on Radius and spreading the wo
 
 1. **Gather supporting assets.** Browse the [presentation pack directory](https://github.com/radius-project/docs/tree/{{< param github_branch >}}/presentation-pack) for diagrams and images you can reuse.
 1. **Prepare your pitch.** Review the [concepts]({{< ref concepts >}}) so you can explain what Radius is and why it matters.
-1. **Prepare a demo.** Use the [tutorials]({{< ref tutorials >}}) and the [samples repository](https://github.com/radius-project/samples) to demonstrate Radius in action.
+1. **Prepare a demo.** Use the [getting started guide]({{< ref getting-started >}}) and the [samples repository](https://github.com/radius-project/samples) to demonstrate Radius in action.
 
 ## Write about Radius
 
@@ -36,5 +36,5 @@ Blog posts and articles are a great way to share how you use Radius.
 
 - Star and share the [radius-project](https://github.com/radius-project) repositories on GitHub.
 - Post about Radius on social media and in your communities.
-- Introduce Radius to your team and point them to the [getting started guide]({{< ref quick-start >}}).
+- Introduce Radius to your team and point them to the [getting started guide]({{< ref getting-started >}}).
 - Join the conversation on [Discord](https://aka.ms/radius/discord).

@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Radius API reference"
-linkTitle: "Radius API"
-description: "Detailed reference documentation on the Radius API"
+title: "Radius control plane"
+linkTitle: "Radius control plane"
+description: "Detailed reference documentation on the Radius control plane"
 weight: 400
 ---

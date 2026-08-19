@@ -12,7 +12,7 @@ no_list: true
 Radius is an open-source, multi-cloud application platform that helps developers and the platform engineers who support them build, deploy, and manage cloud-native applications. Teams get a clear view of their applications and how they run across environments, from dev to cloud, edge, and on-prem, while making sure their infrastructure meets cost, operations, and security requirements.
 {{% /alert %}}
 
-{{< button text="Get started with Radius 🚀" page="quick-start" color="success" size="btn-lg" >}}
+{{< button text="Get started with Radius 🚀" page="getting-started" color="success" size="btn-lg" >}}
 
 ## What you can do with Radius
 
@@ -32,7 +32,7 @@ Radius is an open-source, multi-cloud application platform that helps developers
   {{% card header="**🧰 Give developers self-service infrastructure**" %}}
   Let application teams provision the databases, caches, and messaging they need on demand, while platform engineers control how that infrastructure is created with Recipes.
 
-  [**Learn about Recipes →**]({{< ref "concepts/recipes" >}})
+  [**Learn about Recipes →**]({{< ref "concepts/recipe-packs" >}})
   {{% /card %}}
   {{% card header="**🚀 Ship your app to any environment**" %}}
   Define your application once and run it consistently across dev, cloud, edge, and on-prem, without rewriting it for each target.
@@ -47,22 +47,22 @@ Radius is an open-source, multi-cloud application platform that helps developers
   {{% card header="**🧱 Use your existing Infrastructure as Code**" %}}
   Use the infrastructure-as-code tools you already know, Bicep and Terraform, to author Radius applications and Recipes.
 
-  [**Author Recipes →**]({{< ref "guides/recipes/howto-author-recipes" >}})
+  [**Author Recipes →**]({{< ref "extensibility/custom-recipes" >}})
   {{% /card %}}
   {{% card header="**☁️ Run on your platforms**" %}}
   Run Radius on Kubernetes and connect it to your cloud platforms, including Azure and AWS.
 
-  [**Configure providers →**]({{< ref "guides/operations/providers/overview" >}})
+  [**Configure providers →**]({{< ref "installation/cloud-providers" >}})
   {{% /card %}}
   {{% card header="**🔄 GitOps**" %}}
   Deploy and manage Radius applications through your GitOps workflows using tools like Flux.
 
-  [**Deploy with GitOps →**]({{< ref "guides/deploy-apps/gitops/overview" >}})
+  [**Deploy with GitOps →**]({{< ref "integrations/gitops" >}})
   {{% /card %}}
   {{% card header="**📊 Backstage-based Dashboard**" %}}
   Visualize and interact with your applications, environments, and Recipes in the Radius dashboard, built on Backstage.
 
-  [**Explore the dashboard →**]({{< ref "guides/tooling/dashboard/overview" >}})
+  [**Explore the dashboard →**]({{< ref "installation/dashboard" >}})
   {{% /card %}}
 {{< /cardpane >}}
 

@@ -1,0 +1,10 @@
+{{- /* Emits a `rad deploy` command for a docs-hosted sample file, pointing at the docs
+       host for this docs version: edge.docs.radapp.io on the edge branch, docs.radapp.io
+       on release branches (keyed off the same `version` param the edge/latest shortcodes use).
+       Usage: {{< rad-deploy path="samples/demo/app.bicep" >}}
+       Optional `args` appends flags, e.g. args="--parameters password=$(openssl rand -hex 16)". */ -}}
+{{- $host := cond (eq (.Site.Params.version | default "") "edge") "https://edge.docs.radapp.io" "https://docs.radapp.io" -}}
+{{- $path := .Get "path" -}}
+{{- $args := .Get "args" | default "" -}}
+{{- $suffix := cond (ne $args "") (print " " $args) "" -}}
+{{ (print "```bash\nrad deploy " $host "/" $path $suffix "\n```") | markdownify }}

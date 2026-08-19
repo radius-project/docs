@@ -56,8 +56,11 @@
         display: block;
         padding-bottom: 0.15rem;
 
+        // Keep leaf-page links the same color and weight as section links so
+        // same-level siblings look identical regardless of page kind.
         &__page {
-            color: $gray-700;
+            color: $gray-900;
+            font-weight: $font-weight-normal;
         }
     }
 

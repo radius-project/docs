@@ -104,6 +104,7 @@ BicepConfigProperties
 BicepConfigPropertiesAuthentication
 bicepparam
 BicepRecipeProperties
+binfmt
 Bitbucket
 Blazor
 blockOwnerDeletion
@@ -425,6 +426,7 @@ geos
 gg
 ghcr
 Gi
+gibibytes
 GigaOm
 GitAuthConfig
 GitAuthConfigPat
@@ -691,6 +693,7 @@ myroute
 mysample
 myservice
 myserviceroute
+mysqldb
 myworkspace
 NamedQuery
 namespace
@@ -773,6 +776,7 @@ periodSeconds
 PermissionSet
 PersistentVolume
 pfx
+PGDATA
 PhoneNumber
 plainHTTP
 PlaybackConfiguration
@@ -1071,6 +1075,7 @@ TaskTemplate
 TBD
 TCP
 TcpHealthProbeProperties
+tcpsocket
 tcrra
 TechCrunch
 templateKind
@@ -1094,6 +1099,7 @@ tls
 tlsdemo
 tlstermination
 tmp
+tmpfs
 toc
 ToCs
 ToDo

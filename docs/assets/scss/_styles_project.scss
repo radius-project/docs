@@ -2,6 +2,21 @@
 @import "sidebar-tree";
 @import "content";
 
+// Right-side "on this page" TOC: match the left sidebar's size and weight. Docsy
+// renders top-level entries semibold (via --td-toc-h1-font-weight-delta) at the
+// larger body font size, which reads as a different font next to the sidebar.
+.td-toc {
+    font-size: .9rem;
+
+    #TableOfContents {
+        --td-toc-h1-font-weight-delta: 0;
+    }
+
+    nav a {
+        font-weight: $font-weight-normal;
+    }
+}
+
 // Code blocks use a dark syntax theme, so Docsy's default (dark) copy-to-clipboard
 // button is nearly invisible against them until hovered. Use a light color so the
 // button stays visible at all times, like other docs sites.
@@ -17,6 +32,12 @@
 
 .td-navbar .navbar-brand__name {
     display: none;
+}
+
+// Add breathing room above the "Feedback" footer section so it isn't crowded
+// against the preceding page content.
+.feedback--title {
+    margin-top: 2rem;
 }
 
 .btn-success {

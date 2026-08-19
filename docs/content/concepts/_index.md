@@ -3,14 +3,14 @@ type: docs
 title: "Radius Concepts"
 linkTitle: "Concepts"
 description: "Radius core concepts and architecture"
-weight: 20
+weight: 200
 ---
 
 ## Introduction
 
 Radius is a platform for defining and deploying applications and infrastructure to any cloud. It is a central component of modern-day internal developer platforms (IDPs). It allows platform engineers to define resource types for developers to use when building their applications, and separately, the implementation of those resource types using existing Infrastructure as Code (IaC) templates and modules. Additionally, Radius enables platform engineers to define logical environments with specific deployment targets (e.g., a specific cloud provider region), each with their own IaC implementation.
 
-This page provides a conceptual overview of Radius. It describes Radius' logical components, technical architecture and how Radius relates to other IDP components. It is accompanied by additional concept pages focused on each of the core components: Resource Types, Recipes, Environments, and Applications. If you are new to Radius, you are encouraged to complete the [Quick Start]({{< ref "quick-start" >}}). Then, after reading the concept documentation, complete the end-to-end [tutorial]({{< ref "tutorials" >}}).
+This page provides a conceptual overview of Radius. It describes Radius' logical components, technical architecture, and how Radius relates to other IDP components. It is accompanied by additional concept pages focused on each of the core components: Resource Types, Recipe Packs, Environments, and Applications. If you are new to Radius, you are encouraged to complete the [Getting Started guide]({{< ref "getting-started" >}}) before or after reading these concept pages.
 
 ## IDP reference architecture
 
@@ -38,17 +38,19 @@ Radius is designed around a small number of core components. In order to enforce
 
 #### Resource Types
 
-Resource Types define the abstraction for a resource that will exist in the real world when deployed. Resource Types represent the **interface**, or contract, between developers and the platform. Since they are abstract and application oriented, there is only one Resource Type defined within Radius for each application resource. For example, a platform engineer may define a PostgreSQL database Resource Type which is an application-oriented abstraction of a one of the many ways of deploying an PostgreSQL database. Resource Types are defined conceptually by what they represent, but concretely by their name, API version, and their schema. The schema contains the set of required and optional properties which are used by developers when defining their application.
+Resource Types define the abstraction for a resource that will exist in the real world when deployed. Resource Types represent the **interface**, or contract, between developers and the platform. Since they are abstract and application oriented, there is only one Resource Type defined within Radius for each application resource. For example, a platform engineer may define a PostgreSQL database Resource Type which is an application-oriented abstraction of one of the many ways of deploying a PostgreSQL database. Resource Types are defined conceptually by what they represent, but concretely by their name, API version, and their schema. The schema contains the set of required and optional properties which are used by developers when defining their application.
 
-#### Recipes
+#### Recipe Packs
 
-While Resource Types define the interface, Recipes define the resource deployment **implementation**. Radius supports deploying resources using either Terraform or Bicep. The term *recipe* is used as a generic term to refer to both a Terraform configuration or a Bicep template.
+While Resource Types define the interface, Recipe Packs define the resource deployment **implementation**. A Recipe Pack is a simple manifest whose primary property is a set of recipes, one for each Resource Type. The term *recipe* is used as a generic term to refer to both a Terraform configuration or a Bicep template. For each Resource Type, the Recipe Pack specifies the Terraform configuration or Bicep template used to deploy that type, along with recipe parameter values that Radius will pass to the recipe at deploy-time. One or more Recipe Packs are then referenced in an Environment definition.
 
-Recipes are not tightly coupled with Radius or the Resource Type. In most circumstances, an existing Terraform configuration or Bicep template can be used as a Recipe with slight modifications to ensure the properties in the Resource Type map to the Terraform variables or Bicep parameters.
+Recipes are not tightly coupled with Radius or the Resource Type. In most circumstances, an existing Terraform configuration or Bicep template can be used as a recipe with slight modifications to ensure the properties in the Resource Type map to the Terraform variables or Bicep parameters. Off-the-shelf community modules can also be used directly as recipes without modification.
 
 #### Environments
 
-Environments are where Resource Types, Recipes, and cloud providers come together. An Environment defines where applications are deployed; i.e., a landing zone for applications. Specifically, a Kubernetes namespace, an AWS account and region, or an Azure subscription and resource group. Critically, the Environment also defines the set of Recipes to be used for each Resource Type. By assigning Recipes at the Environment level, it is possible for each Environment to have a unique set of Recipes. Finally, each Recipe in an Environment definition can also have Environment-level Recipe parameters. Recipe parameters are useful for injecting additional environmental information into the Recipe.
+Environments are where Resource Types, Recipe Packs, and cloud providers come together. An Environment defines where applications are deployed; i.e., a landing zone for applications. Specifically, a Kubernetes namespace, an AWS account, region, and EKS cluster, or an Azure subscription, resource group, and AKS cluster. The Kubernetes cluster where the Radius control plane runs is independent of where application containers are deployed, so a single Radius installation can deploy applications to many different clusters. Critically, the Environment also defines which Recipe Packs are used to deploy resources. By assigning Recipe Packs at the Environment level, it is possible for each Environment to have a unique set of recipes.
+
+Finally, within the Environment definition, Environment-level recipe parameters can be defined. Recipe parameters are useful for injecting additional environmental information into the recipe such as if the environment is production or non-production. These parameters will override parameters defined within the Recipe Pack.
 
 #### Resource Groups
 
@@ -62,9 +64,9 @@ When a developer requests a resource to be deployed, those resources are not dep
 
 #### Applications and resources
 
-Developers build applications. But when they deploy those applications to Kubernetes or other container platforms, the notion of an application is typically lost. Developers are left with essentially a flat list of resources. In the best case, the resources are annotated with the application name, but not always. This makes it challenging for developers and SREs to understand what resources belong to what applications. 
+Developers build applications. But when they deploy those applications to Kubernetes or other container platforms, the notion of an application is typically lost. Developers are left with essentially a flat list of resources. In the best case, the resources are annotated with the application name, but not always. This makes it challenging for developers and SREs to understand what resources belong to what applications.
 
-Radius takes a different approach and makes the application a first-class resource. With Radius, developers first define an Application resource, then add resources to that Application such as containers and databases. All resources belong to an Application (with some exceptions for resources shared across applications such as shared storage). When an Application is deployed to an Environment, the Application's abstract resource definitions are *implemented* by the platform-specific Recipes in the Environment.
+Radius takes a different approach and makes the application a first-class resource. With Radius, developers first define an Application resource, then add resources to that Application such as containers and databases. All resources belong to an Application (with some exceptions for resources shared across applications such as shared storage). When an Application is deployed to an Environment, the Application's abstract resource definitions are *implemented* by the platform-specific recipes in the Recipe Packs assigned to the Environment.
 
 ## Technical architecture
 
@@ -78,7 +80,9 @@ The Radius CLI, `rad`, is the primary means of interacting with Radius for both 
 
 ### Dashboard
 
-When defining an application, developers use the Backstage-based Dashboard to reference organization-specific documentation, see what Resource Types are available, and get a list of Environments they can deploy their application to. After applications have been deployed, the Dashboard gives developers and SREs the list of deployed applications and resources. The Dashboard also makes it easy to visualize deployed applications in an application, or dependency, graph.
+When defining an application, developers use the [Backstage](https://backstage.io/)-based Dashboard to reference organization-specific documentation, see what Resource Types are available, and get a list of Environments they can deploy their application to. After applications have been deployed, the Dashboard gives developers and SREs the list of deployed applications and resources. The Dashboard also makes it easy to visualize deployed applications in an application, or dependency, graph.
+
+![Dashboard screenshot](dashboard-screenshot.png)
 
 ### Universal Control Plane
 
@@ -100,8 +104,10 @@ The Controller component is an internal component that handles miscellaneous fun
 
 ### Git repository and OCI registry
 
-When Radius deploys a resource using Terraform or Bicep, the Applications and Dynamic RP container must have access to the specified Recipe. Therefore, a Git repository is used to store Terraform configurations and an OCI registry is used to store Bicep templates. Radius does not run Recipes off the local workstation's file system.
+When Radius deploys a resource using Terraform or Bicep, the Applications and Dynamic RP container must have access to the specified recipe. Therefore, a Git repository is used to store Terraform configurations and an OCI registry is used to store Bicep templates. Radius does not run recipes off the local workstation's file system.
 
-## Next Steps
+## Organization
 
-If you want to learn more about Radius concepts, continue reading the additional concept pages below. However, if you prefer to be hands-on, skip forward to the [tutorial]({{< ref "tutorials" >}}).
+The concept documentation is organized into four sequential pages, each covering one of the core Radius components: Resource Types, Recipe Packs, Environments, and Applications. Read them in order for a complete conceptual overview. If you prefer to be hands-on, skip forward to the [Getting Started guide]({{< ref "getting-started" >}}).
+
+{{< button text="Next step: Read about Resource Types" page="concepts/resource-types" >}}

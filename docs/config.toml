@@ -25,9 +25,6 @@ path = "github.com/google/docsy"
 source = "content"
 target = "content"
 [[module.mounts]]
-source = "shared-content"
-target = "content"
-[[module.mounts]]
 source = "static"
 target = "static"
 [[module.mounts]]
