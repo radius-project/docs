@@ -136,11 +136,7 @@ When the deployment completes, return to the Application graph and open the **De
 
 ## Step 6: Access your Application
 
-In the Copilot chat, enter:
-
-```text
-Access the deployed application
-```
+In the Copilot chat, enter "Access my deployed application".
 
 Copilot sets up port forwarding and provides a URL to access the deployed Application.
 
