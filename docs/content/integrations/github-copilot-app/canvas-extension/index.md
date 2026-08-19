@@ -7,8 +7,6 @@ description: "Install the Radius Canvas extension to model, visualize, and deplo
 
 ---
 
-This guide walks you through the Radius Canvas extension to model and deploy a containerized application from a GitHub repository.
-
 ## Prerequisites
 
 - The latest version of the [GitHub Copilot app](https://docs.github.com/en/copilot/concepts/agents/github-copilot-app).
@@ -63,7 +61,7 @@ Adding the Radius marketplace manually is temporary. When the extension is relea
 
    Copilot runs the Radius app-modeling skill. The skill analyzes your source code, manifests, and Dockerfiles, identifies your workloads and their dependencies, generates a Radius Application definition, and writes it into your repository. The canvas opens and renders the definition as an interactive Application graph.
 
-   {{< image src="modeled-graph-create-environment.png" alt="Radius Canvas Modeled graph with the Create Environment action" width=800px >}}
+   {{< image src="image.png" alt="Radius Canvas Modeled graph with the Create Environment action" width=800px >}}
 
    {{% alert title="Canvas troubleshooting" color="info" %}}
    If Radius Canvas does not open, ask Copilot to `Fix my Radius extension`. This invokes the Radius repair skill, which copies the required Canvas extension files into place.
