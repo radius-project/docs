@@ -14,6 +14,13 @@ hide_preview_release_banner: true
 - An Azure subscription.
 - An [Azure Kubernetes Service (AKS) cluster](https://learn.microsoft.com/azure/aks/learn/quick-kubernetes-deploy-cli).
 - The [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli). Run [`az login`](https://learn.microsoft.com/cli/azure/authenticate-azure-cli-interactively) before you begin.
+- The [GitHub CLI](https://cli.github.com/), authenticated with package and workflow access. Run:
+
+  ```bash
+  gh auth login
+  gh auth refresh -s read:packages -s write:packages -s workflow
+  ```
+
 - A GitHub repository with a containerized application. You must own the repository or have write access to it. Fork the repository if necessary.
 
 ### Sample repositories
@@ -127,9 +134,32 @@ When the deployment completes, return to the Application graph and open the **De
 
 {{< image src="deployed-application-graph.png" alt="Deployed view of the application graph" width=800px >}}
 
+## Step 6: Access your Application
+
+In the Copilot chat, enter:
+
+```text
+Access the deployed application
+```
+
+Copilot sets up port forwarding and provides a URL to access the deployed Application.
+
+## Step 7: Clean up
+
+1. In the **Deployments** view, click **Delete Deployment** and confirm the deletion.
+2. Monitor the deletion workflow until it completes. Radius deletes the Application and the infrastructure resources owned by it.
+3. If you no longer need the Radius Environment, open the **Environments** area and delete it.
+
+Deleting the Radius deployment or Environment does not delete the AKS cluster or Azure resource group.
+
 ## Compare Application changes
 
-The **Diff** view shows how an Application changes between two branches, such as a pull request against `main`. Use it during code review to see which components, connections, and dependencies a change adds, removes, or modifies.
+Make changes to your Application on a branch, and then open the **Diff** view to compare the updated Application against `main`.
+
+1. Select your Application.
+2. Select `main` as the **Base** branch.
+3. Select the branch containing your changes as the **Head** branch.
+4. Review which components, connections, and dependencies your changes add, remove, or modify.
 
 You can generate a Markdown summary of the graph diff and post it as part of pull request comment, so reviewers can see the architectural impact alongside the code.
 
