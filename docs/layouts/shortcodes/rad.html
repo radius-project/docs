@@ -6,6 +6,14 @@
 {{ $embed := .Get "embed" | default false }}
 {{ $download := .Get "download" | default false }}
 {{ $markdownConfig := .Get "markdownConfig" | default "" }}
+{{ $markdownConfig = cond (eq $markdownConfig "") "" (printf " %s" $markdownConfig) }}
+{{ $startLine := int (.Get "startLine" | default 0) }}
+{{ $endLine := int (.Get "endLine" | default 0) }}
+
+{{ if and (gt $startLine 0) (ge $endLine $startLine) }}
+    {{ $lines := split $fileContents "\n" }}
+    {{ $fileContents = delimit (first (add (sub $endLine $startLine) 1) (after (sub $startLine 1) $lines)) "\n" }}
+{{ end }}
 
 {{ if $download }}
 <a class="btn btn-primary btn-sm" href={{ print $file }} download>Download Bicep file</a>
