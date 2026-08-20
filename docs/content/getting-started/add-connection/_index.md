@@ -68,6 +68,6 @@ rad uninstall kubernetes --purge
 
 ## Next steps
 
-You have installed Radius, deployed the Radius Demo application, and connected it to a PostgreSQL database. Continue with the hands-on labs for deeper, real-world scenarios.
+You have installed Radius, deployed the Radius Demo application, and connected it to a PostgreSQL database. Next, use the GitHub Copilot app to model and deploy an application directly from your source code repository.
 
-{{< button text="Next step: Explore the labs" page="getting-started/labs" >}}
+{{< button text="Next step: Use the GitHub Copilot app" page="getting-started/try-github-copilot-app" >}}

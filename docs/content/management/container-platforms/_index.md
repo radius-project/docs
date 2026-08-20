@@ -28,7 +28,7 @@ The rest of this guide walks through the `azure-aci` Recipe Pack, which deploys 
 
 The `azure-aci` Recipe Pack provisions `Radius.Compute/containers` on Azure Container Instances, along with the `Radius.Compute/persistentVolumes` and `Radius.Security/secrets` those containers use, backed by Azure Files and Azure Key Vault. For more information on the platform itself, consult the [Azure Container Instances documentation](https://learn.microsoft.com/azure/container-instances/). To see exactly how these resources are provisioned, review the [ACI recipes in `resource-types-contrib`](https://github.com/radius-project/resource-types-contrib/tree/main/Compute/containers/recipes/azure/bicep).
 
-### Prerequisites
+### Before you begin
 
 The ACI recipes provision Azure resources, so before you use the pack you need:
 

@@ -16,6 +16,6 @@ This guide will show you how to quickly get started with Radius. You will do a b
 
 ## Organization
 
-This guide is organized into four sequential parts.
+This guide is organized into five sequential parts.
 
 {{< button text="Get started: Install Radius" page="getting-started/install-radius" >}}

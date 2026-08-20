@@ -1,9 +1,10 @@
 {{ $imagePath := .Get "src" }}
 {{ $altText := .Get "alt" }}
 {{ $width := .Get "width" | default "600px" }}
+{{ $class := .Get "class" }}
 
 {{ $image := .Page.Resources.GetMatch $imagePath }}
 
 {{ with $image }}
-  <img src="{{ .RelPermalink }}" width="{{ $width }}">
+  <img src="{{ .RelPermalink }}"{{ with $altText }} alt="{{ . }}"{{ end }} width="{{ $width }}"{{ with $class }} class="{{ . }}"{{ end }}>
 {{ end }}
