@@ -54,7 +54,7 @@ resource myContainer 'Radius.Compute/containers@2025-08-01-preview' = {
 }
 ```
 
-When a port is included, a Kubernetes Service named demo with the type ClusterIP is created.
+When a port is included, a Kubernetes Service of type ClusterIP is created for the container. Its name is `<container-resource-name>-<container-name>`, lowercased to satisfy Kubernetes naming rules — for the example above, `mycontainer-demo`. The recipe publishes each port-exposing container's in-cluster Service DNS name in the read-only `hosts` map, keyed by container name. Peer containers can address a specific container by referencing `<peer>.properties.hosts.<containerName>` instead of hardcoding a Service name.
 
 To create an ephemeral emptyDir shared between two containers add a Containers.properties.volumes.
 
@@ -106,6 +106,7 @@ To mount a persistent volume or secret see the PersistentVolumes and Secrets Res
 | `containers` | [object](#containers) |  |
 | `environment` | string | (Required) The Radius Environment ID. Typically set by the rad CLI. Typically value should be `environment`. |
 | `extensions` | [object](#extensions) | (Optional) Properties for additional functionality. daprSidecar is the only available option. |
+| `hosts` | object | (Read Only) Map of container name to the in-cluster DNS host of that container's Kubernetes Service. Populated for every container that exposes a port, so a multi-container resource publishes all of its Service hosts. Peer containers address a specific container by referencing `<peer>.properties.hosts.<containerName>`. |
 | `platformOptions` | object | (Optional) If enabled by the platform engineer, properties to be passed to the Recipe for the specified platform. |
 | `replicas` | integer | (Optional) The minimum number of replicas for the set of containers. |
 | `restartPolicy` | string | (Optional) Defines how a containers behave when they terminate. `Always` will restart containers regardless of their exit status. `OnFailure` will restart containers if they return a non-zero exit code.<br />Allowed values: `Always`, `Never`, `OnFailure`. |
