@@ -4,7 +4,6 @@ title: "Radius control plane metrics"
 linkTitle: "Metrics"
 weight: 40
 description: "Learn what metrics are available for monitoring the Radius control plane"
-categories: ["Reference"]
 ---
 
 Radius currently records the following custom metrics that provide insight into its health and operations:
