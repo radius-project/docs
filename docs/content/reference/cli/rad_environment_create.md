@@ -24,17 +24,23 @@ rad environment create [envName] [flags]
 
 ```
 
-## Create environment with default namespace
+## Create environment
 rad env create myenv
-
-## Create environment with a specific namespace
-rad env create myenv --kubernetes-namespace mynamespace
 
 ## Create environment with Azure cloud provider
 rad env create myenv --azure-subscription-id <subscription-id> --azure-resource-group <resource-group>
 
 ## Create environment with AWS cloud provider
 rad env create myenv --aws-region <region> --aws-account-id <account-id>
+
+## Create environment with a specific Kubernetes namespace
+rad env create myenv --kubernetes-namespace mynamespace
+
+## Create environment with recipe packs (--preview)
+rad env create myenv --preview --recipe-packs pack1,pack2
+
+## Create environment with recipe packs from a different resource group (--preview)
+rad env create myenv --preview --recipe-packs pack1 --recipe-pack-group other-group
 
 ```
 
@@ -49,7 +55,9 @@ rad env create myenv --aws-region <region> --aws-account-id <account-id>
   -g, --group string                   The resource group name
   -h, --help                           help for create
       --kubernetes-namespace string    The namespace where Kubernetes resources will be deployed
-      --preview                        Use the Radius.Core preview implementation (can also be set via RADIUS_PREVIEW=true)
+      --preview                        Use the Radius.Core preview implementation for environment create (can also be set via RADIUS_PREVIEW=true)
+      --recipe-pack-group string       Specify the resource group containing the recipe packs named in --recipe-packs, if different from the environment's resource group (--preview).
+      --recipe-packs strings           Specify recipe packs to assign to the environment (--preview). Accepts comma-separated values.
   -w, --workspace string               The workspace name
 ```
 
