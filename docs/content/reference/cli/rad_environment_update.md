@@ -51,6 +51,9 @@ rad env update myenv --clear-kubernetes
 ## Set recipe packs to environment (--preview)
 rad env update myenv --recipe-packs pack1,pack2
 
+## Set recipe packs from a different resource group to environment (--preview)
+rad env update myenv --recipe-packs pack1 --recipe-pack-group other-group
+
 ```
 
 ### Options
@@ -67,7 +70,8 @@ rad env update myenv --recipe-packs pack1,pack2
   -g, --group string                   The resource group name
   -h, --help                           help for update
       --kubernetes-namespace string    The namespace where Kubernetes resources will be deployed
-      --preview                        Use the Radius.Core preview implementation for environment update.
+      --preview                        Use the Radius.Core preview implementation for environment update (can also be set via RADIUS_PREVIEW=true)
+      --recipe-pack-group string       Specify the resource group containing the recipe packs named in --recipe-packs, if different from the environment's resource group (--preview).
       --recipe-packs strings           Specify recipe packs to replace the environment's recipe pack list (--preview). Accepts comma-separated values.
   -w, --workspace string               The workspace name
 ```
