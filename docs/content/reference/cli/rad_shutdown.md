@@ -15,8 +15,8 @@ Back up Radius state and prepare for shutdown
 Back up all durable Radius state for the current workspace.
 
 Dumps the control-plane PostgreSQL databases and exports the Terraform recipe state Secrets,
-commits them to the radius-state git orphan branch, and pushes to the remote when one is
-configured. The state can be restored into a fresh control plane with 'rad startup'.
+commits them to the radius-state archive. The state can be restored into a fresh control plane
+with 'rad startup'.
 
 This command does not delete the cluster or uninstall Radius.
 
