@@ -43,13 +43,15 @@ rad env update myenv --clear-azure
 rad env update myenv --clear-aws
 
 ## Add Kubernetes cloud provider (preview)
+## The namespace can only be set on an environment that does not already have one; it is
+## immutable afterwards.
 rad env update myenv --kubernetes-namespace mynamespace
-
-## Remove Kubernetes cloud provider (preview)
-rad env update myenv --clear-kubernetes
 
 ## Set recipe packs to environment (--preview)
 rad env update myenv --recipe-packs pack1,pack2
+
+## Set recipe packs from a different resource group to environment (--preview)
+rad env update myenv --recipe-packs pack1 --recipe-pack-group other-group
 
 ```
 
@@ -62,12 +64,12 @@ rad env update myenv --recipe-packs pack1,pack2
       --azure-subscription-id string   The subscription ID where Azure resources will be deployed
       --clear-aws                      Specify if aws provider needs to be cleared on env
       --clear-azure                    Specify if azure provider needs to be cleared on env
-      --clear-kubernetes               Specify if kubernetes provider needs to be cleared on env (--preview)
   -e, --environment string             The environment name
   -g, --group string                   The resource group name
   -h, --help                           help for update
       --kubernetes-namespace string    The namespace where Kubernetes resources will be deployed
-      --preview                        Use the Radius.Core preview implementation for environment update.
+      --preview                        Use the Radius.Core preview implementation for environment update (can also be set via RADIUS_PREVIEW=true)
+      --recipe-pack-group string       Specify the resource group containing the recipe packs named in --recipe-packs, if different from the environment's resource group (--preview).
       --recipe-packs strings           Specify recipe packs to replace the environment's recipe pack list (--preview). Accepts comma-separated values.
   -w, --workspace string               The workspace name
 ```
