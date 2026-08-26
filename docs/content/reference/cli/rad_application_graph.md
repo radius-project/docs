@@ -21,8 +21,8 @@ the command compiles the template and writes the resulting modeled graph to
 ./app-graph.json without contacting the control plane.
 
 If the command runs inside a GitHub Actions runner (GITHUB_ACTIONS=true), the
-modeled graph is committed to <source-branch>/app-graph.json on the radius-graph
-orphan branch instead of the local filesystem. This is auto-detected; no flag
+modeled graph is saved to <source-branch>/app-graph.json in the radius-graph
+archive instead of the local filesystem. This is auto-detected; no flag
 is required.
 
 ```
@@ -46,7 +46,7 @@ rad app graph ./app.bicep
   -a, --application string   The application name
   -g, --group string         The resource group name
   -h, --help                 help for graph
-      --include-icons        When set with --preview, embeds each referenced resource type icon's SVG bytes in the response.
+      --include-icons        When set with --preview (deployed) or with a bicep-file argument (modeled), embeds each referenced resource type icon's SVG bytes in the response's icons map.
   -o, --output string        output format (supported formats are json, table) (default "table")
       --preview              Use the Radius.Core preview implementation (can also be set via RADIUS_PREVIEW=true)
   -w, --workspace string     The workspace name
