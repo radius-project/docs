@@ -14,6 +14,9 @@ Delete environment
 
 Delete environment. Deletes the user's default environment by default.
 
+In preview mode, deleting an environment also deletes the applications in that environment
+and the resources deployed into it.
+
 ```
 rad environment delete [flags]
 ```
@@ -34,16 +37,23 @@ rad env delete my-env
 # Delete specified environment in a specified resource group
 rad env delete my-env --group my-env
 
+# Delete a Radius.Core environment and everything deployed into it
+rad env delete my-env --preview
+
+# Delete a Radius.Core environment, forcing deletion of resources in a non-terminal state
+rad env delete my-env --force --preview
+
 ```
 
 ### Options
 
 ```
   -e, --environment string   The environment name
+      --force                Force the operation even if the resource is in a non-terminal provisioning state
   -g, --group string         The resource group name
   -h, --help                 help for delete
   -o, --output string        output format (supported formats are json, table) (default "table")
-      --preview              Use the Radius.Core preview implementation (can also be set via RADIUS_PREVIEW=true)
+      --preview              Use the Radius.Core preview implementation for environment delete (can also be set via RADIUS_PREVIEW=true)
   -w, --workspace string     The workspace name
   -y, --yes                  The confirmation flag
 ```
