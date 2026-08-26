@@ -39,6 +39,9 @@ rad env create myenv --kubernetes-namespace mynamespace
 ## Create environment with recipe packs (--preview)
 rad env create myenv --preview --recipe-packs pack1,pack2
 
+## Create environment with recipe packs from a different resource group (--preview)
+rad env create myenv --preview --recipe-packs pack1 --recipe-pack-group other-group
+
 ```
 
 ### Options
@@ -53,6 +56,7 @@ rad env create myenv --preview --recipe-packs pack1,pack2
   -h, --help                           help for create
       --kubernetes-namespace string    The namespace where Kubernetes resources will be deployed
       --preview                        Use the Radius.Core preview implementation for environment create (can also be set via RADIUS_PREVIEW=true)
+      --recipe-pack-group string       Specify the resource group containing the recipe packs named in --recipe-packs, if different from the environment's resource group (--preview).
       --recipe-packs strings           Specify recipe packs to assign to the environment (--preview). Accepts comma-separated values.
   -w, --workspace string               The workspace name
 ```
