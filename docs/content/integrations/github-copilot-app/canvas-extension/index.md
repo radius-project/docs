@@ -45,15 +45,11 @@ You can use your own application or fork one of these open-source samples:
 ## Step 1: Install the plugin
 
 1. Open the GitHub Copilot app.
-2. Open the **Customize** tab in the side menu, and then select **Plugins**.
+2. Open the **Customize** tab in the side menu, and then select **Plugins**. Search for `radius`, and then install the plugin.
 
-   {{< image src="open-customize-plugins-tab.png" alt="Customize page with the Plugins tab selected" width=800px >}}
+   {{< image src="search-and-install-radius-plugin.png" alt="Available plugins filtered to show the Radius plugin with the Install action" width=800px >}}
 
-3. Search for `radius`, and then install the plugin.
-
-   {{< image src="search-install-radius-plugin.png" alt="Available plugins filtered to show the Radius plugin with the Install action" width=800px >}}
-
-4. Restart your Copilot session so the skills and Radius Canvas become available.
+3. Restart your Copilot session so the skills and Radius Canvas become available.
 
 After installation, use the plugin's three-dot menu to update or uninstall it.
 
