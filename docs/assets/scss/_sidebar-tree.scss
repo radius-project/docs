@@ -64,6 +64,17 @@
         }
     }
 
+    .sidebar-new-badge {
+        font-size: .6em;
+    }
+
+    // When a foldable section is expanded its child links are visible, so if a
+    // child carries its own "New" badge, hide the parent section's badge to
+    // avoid showing the same "New" twice.
+    li:has(> ul .sidebar-new-badge) > input:checked + label .sidebar-new-badge {
+        display: none;
+    }
+
     a {
         font-size: .9rem;
         &:hover {

@@ -9,6 +9,8 @@
   list) without editing individual Markdown files. The markup mirrors the Docsy
   `alert` shortcode (color="warning").
 */ -}}
+{{- if not .Params.hide_preview_release_banner }}
 <div class="alert alert-warning" role="alert">
   <p>❗️ <strong>Preview Release</strong>: This documentation covers a preview of Radius which uses different Resource Types from the current release. Enable it by passing the <code>--preview</code> to the Radius CLI or setting<code>RADIUS_PREVIEW=true</code>.</p>
 </div>
+{{- end }}

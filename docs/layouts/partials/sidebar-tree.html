@@ -94,6 +94,12 @@
   {{ end -}}
 
   {{ $withChild := gt (len $pages) 0 -}}
+  {{/* Show the New badge if this section is new or, for non-root sections, any
+       descendant is new, so a parent inherits a child's New badge. */ -}}
+  {{ $showNewBadge := $s.Params.new_badge | default false -}}
+  {{ if and (not $treeRoot) (not $showNewBadge) -}}
+    {{ $showNewBadge = partialCached "has-new-badge.html" $s $s.RelPermalink -}}
+  {{ end -}}
   {{ $manualLink :=
       cond
         (isset $s.Params "manuallink")
@@ -145,7 +151,10 @@
         {{- end -}}
         <span class="{{ if $active }}td-sidebar-nav-active-item{{ end }}">
           {{- $s.LinkTitle -}}
-        </span> {{- /**/ -}}
+        </span>
+        {{- if $showNewBadge }}
+          <span class="badge bg-primary rounded-pill ms-1 sidebar-new-badge">New</span>
+        {{- end }} {{- /**/ -}}
       </a> {{- /**/ -}}
     </label>
     {{ else -}}
@@ -170,7 +179,11 @@
         {{- if and $treeRoot $s.Params.sidebar_root_for site.Params.ui.sidebar_root_enabled }} td-sidebar-root-up-icon{{ end -}}
       ">
         {{- $s.LinkTitle -}}
-      </span></a>
+      </span>
+      {{- if $showNewBadge }}
+        <span class="badge bg-primary rounded-pill ms-1 sidebar-new-badge">New</span>
+      {{- end }}
+      </a>
     {{- end -}}
     {{ if $withChild -}}
     {{ $ulNr := add $ulNr 1 }}

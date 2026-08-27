@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../ai-extensions"
+		},
+		{
+			"path": "../blog"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {}
+}
