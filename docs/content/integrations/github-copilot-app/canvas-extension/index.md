@@ -48,6 +48,7 @@ You can use your own application or fork one of these open-source samples:
 2. Open the **Customize** tab in the side menu, and then select **Plugins**. Search for `radius`, and then install the plugin.
 
    {{< image src="search-and-install-radius-plugin.png" alt="Available plugins filtered to show the Radius plugin with the Install action" width=800px >}}
+   <br />
 
 3. Restart your Copilot session so the skills and Radius Canvas become available.
 
@@ -58,6 +59,7 @@ After installation, use the plugin's three-dot menu to update or uninstall it.
 1. Create a new Copilot session. Select **GitHub repository**, and then add the repository you want to model.
 
    {{< image src="select-github-repository.png" alt="GitHub Copilot app menu for starting a session from a GitHub repository" width=500px >}}
+   <br />
 
 2. In the Copilot chat, enter:
 
@@ -66,10 +68,12 @@ After installation, use the plugin's three-dot menu to update or uninstall it.
    ```
 
    {{< image src="prompt-show-application-graph.png" alt="Copilot chat prompt to show the application graph" width=800px >}}
+   <br />
 
    Copilot analyzes your source code, manifests, and Dockerfiles, generates an application definition at `.radius/app.bicep`, and opens it in the **Modeled** view of Radius Canvas.
 
    {{< image src="modeled-application-graph.png" alt="Radius Canvas Modeled view with the Create Environment action" width=800px >}}
+   <br />
 
    The **Application graph** represents the workloads, routes, backing services, and connections Radius identified in the repository.
 
@@ -86,22 +90,26 @@ An Environment defines where your Application runs and the infrastructure availa
    A credential profile is a reusable set of Azure tenant and subscription details that Radius uses to authenticate to Azure and configure OIDC trust for GitHub Actions.
 
    {{< image src="choose-cloud-credentials.png" alt="Choose cloud credentials step with the option to create a credential profile" width=800px >}}
+   <br />
 
 2. Enter a profile name, select **Azure** as the provider, and enter your Azure tenant ID and subscription.
 
    {{< image src="create-azure-credential-profile.png" alt="Create Credential Profile form for an Azure tenant and subscription" width=800px >}}
+   <br />
 
 3. Select **Verify credentials**.
 4. After verification succeeds, select **Save and continue**.
 5. Next, enter a name for the Environment and select the GitHub account and the saved credential profile under **Connect GitHub to a cloud**.
 
    {{< image src="connect-github-to-cloud.png" alt="Create Environment form connecting a GitHub account to an Azure credential profile" width=800px >}}
+   <br />
 
 6. Under **Deploy identity**, the Microsoft Entra app registration name is already populated.
 7. Under **Infrastructure**, select the Azure resource group and AKS cluster. Select an existing Kubernetes namespace or enter a namespace such as `my-app`.
 8. Select **Create the Environment**. You can follow the status of the Environment configuration.
 
    {{< image src="environment-creation-progress.png" alt="Environment creation progress showing deploy identity authorization, configuration, and credential verification" width=800px >}}
+   <br />
 
    Radius establishes OIDC trust with GitHub Actions, so deployment workflows authenticate with short-lived credentials instead of long-lived secrets stored in the repository.
 
@@ -112,6 +120,7 @@ When the Environment configuration is complete, Radius Canvas displays **Plan de
 1. Confirm that the correct Application, branch, and Environment are selected.
 
    {{< image src="planned-application-graph.png" alt="Radius Canvas Planned view showing Application workloads and supporting infrastructure" width=800px >}}
+   <br />
 
 2. Review the planned Application and supporting infrastructure.
 3. Select a resource to review its Radius resource type, connections, and links to **View source code** or **View app definition**.
@@ -123,6 +132,7 @@ Reviewing the plan does not deploy or change cloud resources.
 In the **Planned** view, select **Deploy Application**.
 
 {{< image src="deploy-application.png" alt="Deployments view for selecting an Application, Environment, and branch to deploy" width=800px >}}
+<br />
 
 Radius Canvas opens the **Deployments** view and dispatches a GitHub Actions workflow that provisions the required infrastructure and deploys the Application to the selected Environment. Monitor progress in the view, or open the workflow run for details.
 
@@ -131,6 +141,7 @@ The workflow is committed to your repository, so you can review it before it run
 When the deployment completes, return to the **Application graph** and open the **Deployed** view to see the Application and its resources running in the Environment.
 
 {{< image src="deployed-application-graph.png" alt="Deployed view of the Application graph" width=800px >}}
+<br />
 
 ## Step 6: Access your Application
 
@@ -154,6 +165,7 @@ Make changes to your Application on a branch, and then open the **Diff** view to
 You can generate a Markdown summary of the **Diff** view and post it as part of a pull request comment, so reviewers can see the architectural impact alongside the code.
 
 {{< image src="application-graph-diff.png" alt="Radius Canvas Diff view comparing Application resources and connections between two branches" width=800px >}}
+<br />
 
 ## Step 8: Clean up
 
