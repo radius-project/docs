@@ -14,23 +14,25 @@ The `app-postgresql.bicep` definition builds on `app.bicep` by adding a `Radius.
 
 <div class="td-max-width-on-larger-screens" style="margin-bottom: -2rem;"><a href="https://github.com/radius-project/samples/blob/{{< param version >}}/samples/demo/app-postgresql.bicep" target="_blank" rel="noopener">samples/demo/app-postgresql.bicep</a></div>
 
-{{< rad file="/static/samples/demo/app-postgresql.bicep" embed=true markdownConfig=` {hl_lines=["6-8","36-43","47-57","59-72"]}` >}}
+{{< rad file="/static/samples/demo/app-postgresql.bicep" embed=true markdownConfig=` {hl_lines=["6-8","36-43","47-57","59-70"]}` >}}
 
 The `postgresql` resource is provisioned by the PostgreSQL Recipe in the default Recipe Pack. The `password` parameter is declared with `@secure()`, which keeps its value out of deployment logs and history and lets you supply the password at deploy time instead of hardcoding it. The application passes that value directly to the database's `password` property. Because the property is `x-radius-sensitive`, Radius encrypts it and redacts it from reads.
 
-The application also stores the same value under the `password` key of the authored `postgresqlClientCredentials` Secret instead of relying on database Recipe `result.secrets` for a developer-owned credential. The Secret has the same application and environment as the other resources, so it shares their lifecycle. Its resource name is deliberately different from the `postgresql-${environmentName}-credentials` Kubernetes Secret owned by the PostgreSQL Recipe.
+The application also stores the same value under the `password` key of the authored `postgresqlCredentials` Secret instead of relying on database Recipe `result.secrets` for a developer-owned credential. The Secret has the same application and environment as the other resources, so it shares their lifecycle. Its resource name is deliberately different from the `postgresql-${environmentName}-credentials` Kubernetes Secret owned by the PostgreSQL Recipe.
 
 The `postgresql` connection tells Radius that the container depends on the database. Radius provisions the database first, then injects its ordinary connection values as `CONNECTION_POSTGRESQL_HOST`, `CONNECTION_POSTGRESQL_PORT`, `CONNECTION_POSTGRESQL_DATABASE`, and `CONNECTION_POSTGRESQL_USERNAME`.
 
-The `postgresqlcredentials` connection points directly to the authored Secret. With a compatible Kubernetes Container Recipe, Radius projects its `password` key through a Kubernetes `secretKeyRef` as `CONNECTION_POSTGRESQLCREDENTIALS_PASSWORD`. The secret value remains in the Secret and is not copied into Recipe output or plaintext container configuration.
+The `postgresqlCredentials` connection points directly to the authored Secret. With a compatible Kubernetes Container Recipe, Radius projects its `password` key through a Kubernetes `secretKeyRef` as `CONNECTION_POSTGRESQLCREDENTIALS_PASSWORD`. The secret value remains in the Secret and is not copied into Recipe output or plaintext container configuration.
 
+> **Caution:** The Radius Demo displays all `CONNECTION_*` environment variables it receives, including this password, to illustrate connection injection. Do not display secret values in a production application.
+>
 > **Compatibility:** Automatic Secret connection projection requires a compatible Radius runtime and Kubernetes Container Recipe. In older or mixed-version environments, keep an explicit container `env.valueFrom.secretKeyRef` binding instead of changing a working model. Azure Container Instances behavior is unchanged.
 
 ## Redeploy the application
 
 Deploy the updated definition from its published URL. The `--parameters` argument sets the database password, and `$(openssl rand -hex 16)` generates a random value on each deploy. This works in Bash and Zsh; in PowerShell, generate the value separately and pass it in:
 
-{{< rad-deploy path="samples/demo/app-postgresql.bicep" args=`--parameters 'password'="$(openssl rand -hex 16)"` >}}
+{{< rad-deploy path="samples/demo/app-postgresql.bicep" args=`--parameters password="$(openssl rand -hex 16)"` >}}
 
 Radius creates the database and authored Secret, then updates the container with both connections. Forward a local port to the container and open the application again:
 
@@ -38,9 +40,7 @@ Radius creates the database and authored Secret, then updates the container with
 kubectl port-forward svc/demo-default-web 3000:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000). The Radius Connections section now lists the PostgreSQL-backed data used by the demo.
-
-{{< image src="todolist.png" alt="The Radius Demo application showing the PostgreSQL connection" width=800px >}}
+Open [http://localhost:3000](http://localhost:3000). The Radius Connections section now lists the `postgresql` database connection and the `postgresqlCredentials` Secret connection.
 
 ## View the connections in the Dashboard
 
@@ -50,10 +50,7 @@ Start port forwarding for the Dashboard:
 kubectl port-forward svc/dashboard 7007:80 -n radius-system
 ```
 
-Open [http://localhost:7007](http://localhost:7007) and select the `demo-default` application. The graph shows the `demo-default` container connected to the `postgresql-default` database and `postgresql-client-credentials-default` Secret.
-
-{{< image src="dashboard.png" alt="The Radius Dashboard showing the container connected to the PostgreSQL database and client credentials Secret" width=800px >}}
-<br/>
+Open [http://localhost:7007](http://localhost:7007), select the `demo-default` application, and use the application graph to inspect the container's connections to the `postgresql-default` database and `postgresql-credentials-default` Secret.
 
 To learn more about modeling dependencies between resources, see [How to model application dependencies using connections]({{< ref "/applications/connections" >}}).
 
