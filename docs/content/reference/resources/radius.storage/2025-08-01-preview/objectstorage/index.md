@@ -47,20 +47,23 @@ resource frontend 'Radius.Compute/containers@2025-08-01-preview' = {
 }
 ```
 
-The connection automatically injects environment variables into the
-container for all properties from the store. The environment variables are
+On compatible Kubernetes Container Recipes, the connection injects environment
+variables into the container for the storage properties. The variables are
 named `CONNECTION_<CONNECTION-NAME>_<PROPERTY-NAME>`. In this example the
 connection name is `storage` so the environment variables will be:
 
 - CONNECTION_STORAGE_CONTAINERNAME
 - CONNECTION_STORAGE_ENDPOINT
 - CONNECTION_STORAGE_ACCOUNTNAME
+- CONNECTION_STORAGE_CONNECTIONSTRING (secret-backed)
+- CONNECTION_STORAGE_ACCOUNTKEY (secret-backed)
 
-The `connectionString` and `accountKey` secrets are NOT injected via the
-connection — they are materialized into a managed `Radius.Security/secrets`
-resource. Bind them into container env vars with a `secretKeyRef`, using
-`store.properties.secrets.name` as the `secretName` and the desired key
-(`connectionString` or `accountKey`; see the `secrets` property).
+With Radius control-plane support from `radius-project/radius#12709` and
+Kubernetes Container Recipe support from `resource-types-contrib#300` or
+later, the same connection injects `connectionString` and `accountKey` through
+Kubernetes secret references. For custom, older, or mixed-version Kubernetes
+deployments, use `store.properties.secrets.name` as the `secretName` and the
+desired key in an explicitly authored `secretKeyRef`.
 
 The schema is platform-neutral: the same developer-facing properties can be
 backed by Azure Blob Storage, AWS S3, or a Kubernetes object-store recipe by
@@ -77,7 +80,7 @@ changing only the platform recipe's module source, parameters, and outputs.
 | `containerName` | string | (Optional) The object container (blob container / S3 bucket) name to create inside the storage account. Defaults to `data` if not provided. |
 | `endpoint` | string | The object storage endpoint used to connect to the store. Mapped from the recipe module's `primaryBlobEndpoint` output. |
 | `environment` | string | (Required) The Radius Environment ID. Typically set by the rad CLI. Typically value should be `environment`. |
-| `secrets` | [object](#secrets) | (Read-only) Recipe secrets. The reserved `name` sub-property references the managed Radius.Security/secrets resource Radius materializes from the recipe's `outputs.secrets`; the other sub-properties declare secret keys whose values are written only into that managed secret (never onto this resource). Consumers bind a key into a container env var via `secretKeyRef`, using `<resource>.properties.secrets.name` as `secretName`. |
+| `secrets` | [object](#secrets) | (Read-only) Recipe secrets. The reserved `name` sub-property references the managed Radius.Security/secrets resource Radius materializes from the Recipe's `result.secrets`; the other sub-properties declare secret keys whose values are written only into that managed secret (never onto this resource). Consumers bind a key into a container env var via `secretKeyRef`, using `<resource>.properties.secrets.name` as `secretName`. |
 
 ## Object Properties
 
