@@ -9,7 +9,7 @@ hide_preview_release_banner: true
 ---
 
 {{% alert title="Preview release" color="info" %}}
-The Radius Canvas preview supports containerized applications deployed to Azure.
+The Radius Canvas preview supports containerized applications deployed to Azure. Support for AWS is coming soon.
 {{% /alert %}}
 
 The Radius integration for the GitHub Copilot app helps you model, visualize, and deploy applications directly from your source code repository. In Copilot chat, ask Copilot to analyze your repository. Radius creates an application model that captures your workloads, dependencies, connections, and infrastructure requirements. In Radius Canvas, you can review the application graph, configure a target Radius Environment, and plan and deploy the Application to the cloud, all without leaving the GitHub Copilot app.
