@@ -44,15 +44,15 @@ Radius is an open-source, multi-cloud application platform that helps developers
 ## Integrations
 
 {{< cardpane >}}
+  {{% card header="**🤖 GitHub Copilot app** <span class='badge bg-primary rounded-pill ms-1'>New</span>" %}}
+  Model, visualize, and deploy applications directly from your source code repository with Radius Canvas.
+
+  [**Use Radius with GitHub Copilot →**]({{< ref "integrations/github-copilot-app" >}})
+  {{% /card %}}
   {{% card header="**🧱 Use your existing Infrastructure as Code**" %}}
   Use the infrastructure-as-code tools you already know, Bicep and Terraform, to author Radius applications and Recipes.
 
   [**Author Recipes →**]({{< ref "extensibility/custom-recipes" >}})
-  {{% /card %}}
-  {{% card header="**☁️ Run on your platforms**" %}}
-  Run Radius on Kubernetes and connect it to your cloud platforms, including Azure and AWS.
-
-  [**Configure providers →**]({{< ref "installation/cloud-providers" >}})
   {{% /card %}}
   {{% card header="**🔄 GitOps**" %}}
   Deploy and manage Radius applications through your GitOps workflows using tools like Flux.

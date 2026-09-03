@@ -66,6 +66,11 @@ name = "Discord"
 weight = 90
 url = "https://aka.ms/Radius/Discord"
 pre = "<i class='fab fa-discord'></i>"
+[[menu.main]]
+name = "Roadmap"
+weight = 100
+url = "https://aka.ms/radius-roadmap"
+pre = "<i class='fas fa-map-signs'></i>"
 
 [params]
 copyright = "The Radius Authors. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see the https://linuxfoundation.org/trademark-usage/ page."

@@ -1,0 +1,16 @@
+{{- /*
+  Returns true if the given page, or any descendant page, has `new_badge: true`.
+  Lets a parent section inherit a child's "New" badge without setting new_badge
+  on the parent itself. Called from the sidebar tree.
+*/ -}}
+{{- $found := .Params.new_badge | default false -}}
+{{- if not $found -}}
+  {{- range .Pages -}}
+    {{- if not $found -}}
+      {{- if partialCached "has-new-badge.html" . .RelPermalink -}}
+        {{- $found = true -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $found -}}
