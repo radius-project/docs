@@ -58,4 +58,4 @@ The preview scope focuses on:
 
 Support for additional application structures and cloud providers is planned for future releases.
 
-View the [Radius Canvas roadmap](https://github.com/orgs/radius-project/projects/8/views/1?filterQuery=label%3Agh-copilot-app) and vote for the features you would like to see prioritized.
+View the [Radius Canvas roadmap](https://github.com/orgs/radius-project/projects/27/views/1) and vote for the features you would like to see prioritized.

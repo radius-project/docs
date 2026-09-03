@@ -8,7 +8,7 @@ hide_preview_release_banner: true
 ---
 
 {{% alert title="Preview release" color="info" %}}
-The Radius Canvas preview supports containerized applications deployed to Azure.
+The Radius Canvas preview supports containerized applications deployed to Azure. Support for AWS is coming soon.
 {{% /alert %}}
 
 ## Prerequisites
