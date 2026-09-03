@@ -67,9 +67,9 @@ The connection automatically injects environment variables into the container fo
 | `connections` | [object](#connections) | Map of connection name to connection data. |
 | `database` | string | (Optional) The name of the database. Defaults to `mysql_db` if not provided. |
 | `environment` | string | (Required) The Radius Environment ID. Typically set by the rad CLI. Typically value should be `environment`. |
-| `host` | string | The host name used to connect to the database. Mapped from the recipe module's output. |
+| `host` | string | (Read Only) The host name used to connect to the database. Mapped from the recipe module's output. |
 | `password` | string | (Required) The administrator password for the MySQL database. Marked `x-radius-sensitive`: Radius encrypts it at rest, redacts it on reads, and exposes it decrypted only to the recipe as `{{context.resource.properties.password}}`. |
-| `port` | integer | The port number used to connect to the database. Mapped from the recipe module's output (MySQL flexible server uses 3306). |
+| `port` | integer | (Optional) The TCP port used to connect to the database. Defaults to `3306`, the standard MySQL port that every Recipe in this repository provisions and the port MySQL flexible server is fixed to. A Recipe that provisions the database on a different port reports the real port as an output, which overwrites this value once the deployment finishes. Setting it in an application definition changes only the value reported to connected containers, never the port the server listens on, so leave it unset. |
 | `username` | string | (Required) The administrator username for the MySQL database. Provided directly on the resource and passed to the recipe as `{{context.resource.properties.username}}`. |
 | `version` | string | (Optional) The major MySQL server version in the X.Y format. Defaults to `8.4` if not provided.<br />Allowed values: `5.7`, `8.0`, `8.4`. |
 
