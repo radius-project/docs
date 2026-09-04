@@ -12,65 +12,25 @@ An [Application]({{< ref "/concepts/applications" >}}) in Radius groups the reso
 
 ## Step 1: Create an application definition
 
-Create a file named `app.bicep`. Import the Radius extension and declare an `environment` parameter. The Radius CLI supplies the selected Environment's resource ID when you deploy the file.
-
-Define a `Radius.Core/applications` resource, then add the resources that make up the Application. Set `environment` and `application` on each resource to associate it with the Application:
-
-```bicep
-extension radius
-
-@description('The Radius Environment ID. Injected automatically by the rad CLI.')
-param environment string
-
-resource app 'Radius.Core/applications@2025-08-01-preview' = {
-  name: 'my-app'
-  properties: {
-    environment: environment
-  }
-}
-
-resource frontend 'Radius.Compute/containers@2025-08-01-preview' = {
-  name: 'frontend'
-  properties: {
-    environment: environment
-    application: app.id
-    containers: {
-      web: {
-        image: 'ghcr.io/radius-project/samples/demo:latest'
-        ports: {
-          web: {
-            containerPort: 3000
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-Use any Resource Type installed in your Radius control plane. Review the [Resource Types reference]({{< ref "/reference/resources" >}}) for the available properties and examples. The Environment's Recipe Packs must contain a recipe for each Resource Type used by the Application.
+Begin with the Radius Demo `app.bicep` from [How to model application resources]({{< ref "/applications/definitions" >}}). It declares a `demoApp` Application and a `demoContainer` Container. The target Environment's Recipe Packs must contain a recipe for each Resource Type the definition uses.
 
 ## Step 2: Deploy to an Environment
 
-Deploy the application definition to an Environment with [`rad deploy`]({{< ref rad_deploy >}}):
+Deploy the application definition from its published URL to an Environment with [`rad deploy`]({{< ref rad_deploy >}}):
 
-```bash
-rad deploy app.bicep
-```
+{{< rad-deploy path="samples/demo/app.bicep" >}}
 
 Radius compiles the Bicep file, supplies the Environment configured in the current Workspace through the `environment` parameter, and creates or updates the Application and its resources.
 
 Use `--environment` to deploy to a different Environment:
 
-```bash
-rad deploy app.bicep --environment dev
-```
+{{< rad-deploy path="samples/demo/app.bicep" args="--environment dev" >}}
 
 After the deployment succeeds, inspect the Application graph:
 
 <!-- TODO: Remove the `--preview` flag when the Radius.Core Application implementation is no longer in preview. -->
 ```bash
-rad application graph --application my-app --preview
+rad application graph --application demo-default --preview
 ```
 
 The graph shows the Radius resources, infrastructure created by recipes, and relationships between resources.
@@ -87,8 +47,8 @@ Use JSON output when you need the complete resource details:
 
 <!-- TODO: Remove the `--preview` flag when the Radius.Core Application implementation is no longer in preview. -->
 ```bash
-rad application status my-app --preview --output json
-rad application graph --application my-app --preview --output json
+rad application status demo-default --preview --output json
+rad application graph --application demo-default --preview --output json
 ```
 
 If a recipe creates Kubernetes resources, inspect the target namespace for failed workloads and events:
@@ -102,24 +62,22 @@ The Kubernetes namespace is configured on the Environment and may differ from th
 
 ## Prune removed resources
 
-Removing a resource declaration from `app.bicep` and deploying the file again does not delete the existing resource. This prevents an accidental deletion when a declaration is removed or renamed.
+Removing a resource declaration from your definition and deploying the file again does not delete the existing resource. This prevents an accidental deletion when a declaration is removed or renamed.
 
-After removing the declaration, deploy the updated Application:
+For example, if you added the `redis` cache in [How to model application dependencies using connections]({{< ref "/applications/connections" >}}), redeploy the original `app.bicep`, which does not declare the cache or its connection:
+
+{{< rad-deploy path="samples/demo/app.bicep" >}}
+
+Radius leaves the existing `redis-default` cache in place because its declaration is gone. List the Application's resources to confirm:
 
 ```bash
-rad deploy app.bicep
+rad resource list --application demo-default
 ```
 
-List the resources that still belong to the Application:
+Delete the removed resource by its Resource Type and name:
 
 ```bash
-rad resource list --application my-app
-```
-
-Delete the removed resource by its Resource Type and name. For example, delete the `frontend` Container:
-
-```bash
-rad resource delete Radius.Compute/containers frontend
+rad resource delete Radius.Data/redisCaches redis-default
 ```
 
 The command prompts for confirmation, deletes the Radius resource, and runs its normal deletion lifecycle for infrastructure managed by that resource.
@@ -130,7 +88,7 @@ Confirm that the removed resource no longer appears in the Application graph:
 
 <!-- TODO: Remove the `--preview` flag when the Radius.Core Application implementation is no longer in preview. -->
 ```bash
-rad application graph --application my-app --preview
+rad application graph --application demo-default --preview
 ```
 
 ## Delete an Application
@@ -139,10 +97,10 @@ Delete an Application when it and all of its owned resources are no longer neede
 
 <!-- TODO: Remove the `--preview` flag when the Radius.Core Application implementation is no longer in preview. -->
 ```bash
-rad application delete my-app --preview
+rad application delete demo-default --preview
 ```
 
-The command prompts for confirmation. Radius finds resources whose `application` property references `my-app`, deletes them, and then deletes the Application resource. Resources that are shared with or connected to the Application but are not owned by it are not deleted.
+The command prompts for confirmation. Radius finds resources whose `application` property references `demo-default`, deletes them, and then deletes the Application resource. Resources that are shared with or connected to the Application but are not owned by it are not deleted.
 
 Deleting an Application can permanently delete managed infrastructure and data. Review the Application graph before confirming the operation. Use `--yes` to bypass confirmation in automation.
 
