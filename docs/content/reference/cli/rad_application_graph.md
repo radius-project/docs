@@ -22,8 +22,9 @@ the command compiles the template and writes the resulting modeled graph to
 
 If the command runs inside a GitHub Actions runner (GITHUB_ACTIONS=true), the
 modeled graph is saved to <source-branch>/app-graph.json in the radius-graph
-archive instead of the local filesystem. This is auto-detected; no flag
-is required.
+OCI archive instead of the local filesystem. Configure RADIUS_GRAPH_REGISTRY
+with an OCI repository and authenticate to the registry. Local output does not
+require a registry.
 
 ```
 rad application graph [flags]

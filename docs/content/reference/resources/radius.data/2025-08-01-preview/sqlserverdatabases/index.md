@@ -72,9 +72,9 @@ Kubernetes would map a Service DNS name.
 | `connections` | [object](#connections) | Map of connection name to connection data. |
 | `database` | string | (Required) The SQL database name to create on the server. Defaults to `appdb` in the sample application. |
 | `environment` | string | (Required) The Radius Environment ID. Typically set by the rad CLI. Typically value should be `environment`. |
-| `host` | string | The SQL Server fully qualified domain name. Mapped from the recipe module's `fullyQualifiedDomainName` output. |
+| `host` | string | (Read Only) The SQL Server fully qualified domain name. Mapped from the recipe module's `fullyQualifiedDomainName` output. |
 | `password` | string | (Required) The administrator password for the SQL database. Marked `x-radius-sensitive`: Radius encrypts it at rest, redacts it on reads, and exposes it decrypted only to the recipe as `{{context.resource.properties.password}}`. |
-| `port` | string | The SQL Server TCP port. Azure SQL Database listens on 1433. |
+| `port` | integer | (Optional) The TCP port used to connect to the database. Defaults to `1433`, the standard SQL Server port that every Recipe in this repository provisions and the port Azure SQL Database is fixed to. A Recipe that provisions the database on a different port reports the real port as an output, which overwrites this value once the deployment finishes. Setting it in an application definition changes only the value reported to connected containers, never the port the server listens on, so leave it unset. |
 | `username` | string | (Required) The administrator username for the SQL database. Provided directly on the resource and passed to the recipe as `{{context.resource.properties.username}}`. |
 
 ## Object Properties
