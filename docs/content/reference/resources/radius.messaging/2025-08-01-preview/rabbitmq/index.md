@@ -47,18 +47,24 @@ resource queue 'Radius.Messaging/rabbitMQ@2025-08-01-preview' = {
 ```
 
 To connect your workload to the queue, create a connection from the workload
-resource to the queue resource. The connection automatically injects
-environment variables named `CONNECTION_<CONNECTION-NAME>_<PROPERTY-NAME>`.
-For a connection named `rabbitmq`, the variables are:
+resource to the queue resource. On compatible Kubernetes Container Recipes,
+the connection injects environment variables named
+`CONNECTION_<CONNECTION-NAME>_<PROPERTY-NAME>`. For a connection named
+`rabbitmq`, the variables are:
 
 - CONNECTION_RABBITMQ_HOST
 - CONNECTION_RABBITMQ_PORT
 - CONNECTION_RABBITMQ_USERNAME
+- CONNECTION_RABBITMQ_PASSWORD (secret-backed, when `password` is omitted)
 
-When `password` is supplied, bind the same `Radius.Security/secrets` resource
-into the workload. When it is omitted, bind the Recipe-generated managed
-secret using `queue.properties.secrets.name` as the `secretName`. In both cases,
-use key `password`.
+With Radius control-plane support from `radius-project/radius#12709` and
+Kubernetes Container Recipe support from `resource-types-contrib#300` or
+later, omitting `password` lets the same connection inject the Recipe-generated
+password. `queue.properties.secrets.name` remains available for explicitly
+authored custom or backward-compatible `secretKeyRef` wiring. When `password`
+supplies a user-authored `Radius.Security/secrets` resource, the Recipe emits
+no managed secret and the queue connection has no password variable. Connect
+the workload directly to the supplied Secret to inject its keys.
 
 ## Top-Level Properties
 
@@ -72,7 +78,7 @@ use key `password`.
 | `password` | string | (Optional) The resource ID of the `Radius.Security/secrets` resource that holds the broker password under the data key `password`. Set to `<secretResource>.id`. If omitted, the Kubernetes Recipe generates a random password and returns it through the managed `secrets.password` output. |
 | `port` | integer | (Read Only) The port used to connect to the broker over AMQP 0-9-1 (5672). Mapped from the recipe's output. |
 | `queue` | string | (Optional) The name of the queue to pre-provision on the broker. The Recipe creates this durable queue on the default virtual host when the broker starts, so it exists before your workload connects. Defaults to `jobs` if not provided. |
-| `secrets` | [object](#secrets) | (Read Only) Recipe-generated secrets. The reserved `name` sub-property references the managed Radius.Security/secrets resource Radius materializes from the Recipe's `outputs.secrets`. Consumers bind a key into a container env var via `secretKeyRef`. |
+| `secrets` | [object](#secrets) | (Read Only) Recipe-generated secrets. The reserved `name` sub-property references the managed Radius.Security/secrets resource Radius materializes from the Recipe's `result.secrets`. Consumers bind a key into a container env var via `secretKeyRef`. |
 | `username` | string | (Optional) The username the broker is provisioned with and that clients authenticate as. Defaults to `radius` if not provided. Avoid `guest`, which RabbitMQ restricts to loopback connections. The username is not sensitive and is exposed as a read-only connection value. |
 
 ## Object Properties
