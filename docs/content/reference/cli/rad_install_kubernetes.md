@@ -81,6 +81,9 @@ rad install kubernetes --reinstall
 # Install Radius with custom Terraform log level
 rad install kubernetes --set global.terraform.loglevel=DEBUG
 
+# Install Radius, allowing more time for the control plane to become ready on a slow cluster
+rad install kubernetes --timeout 15m
+
 ```
 
 ### Options
@@ -96,6 +99,7 @@ rad install kubernetes --set global.terraform.loglevel=DEBUG
       --set stringArray                Set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
       --set-file stringArray           Set values from files on the command line (can specify multiple or separate files with commas: key1=filename1,key2=filename2)
       --skip-contour-install           Install Contour ingress controller (enabled by default)
+      --timeout duration               Specify how long to wait for the Radius control plane to become ready (for example 15m, 1h) (default 10m0s)
 ```
 
 ### Options inherited from parent commands

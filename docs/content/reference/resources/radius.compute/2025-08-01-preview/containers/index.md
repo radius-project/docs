@@ -95,6 +95,13 @@ resource myContainer 'Radius.Compute/containers@2025-08-01-preview' = {
 
 To mount a persistent volume or secret see the PersistentVolumes and Secrets Resource Types.
 
+On Kubernetes, each connection injects ordinary producer properties and
+Recipe-managed secret references using
+`CONNECTION_<CONNECTION-NAME>_<PROPERTY-NAME>`. Explicit environment variables
+take precedence, followed by managed secret references, then ordinary values.
+Set `disableDefaultEnvVars: true` to disable all generated variables for a
+connection. This behavior applies to regular and init containers.
+
 ## Top-Level Properties
 
 | Property | Type | Description |
@@ -125,7 +132,7 @@ To mount a persistent volume or secret see the PersistentVolumes and Secrets Res
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `disableDefaultEnvVars` | boolean | (Optional) Disables the automatic injection of environment variables from connected resource properties. |
+| `disableDefaultEnvVars` | boolean | (Optional) Disables automatic injection of ordinary properties and secret-backed environment variables from this connection. |
 | `source` | string | (Required) The resource ID of the resource this container is dependent upon. |
 
 ### `containers` {#containers}
