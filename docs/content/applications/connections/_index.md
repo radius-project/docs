@@ -10,128 +10,62 @@ aliases:
 
 A connection is an explicit relationship between two resources in your [Application]({{< ref "/concepts/applications" >}}). Declaring a connection from a Container to another resource adds an edge to the Application graph and injects the connected resource's properties into the Container as environment variables. Your application then reads those variables instead of hard-coding hosts, ports, or credentials.
 
-This guide adds a Redis cache to an application and connects a Container to it. It builds on the definition from [How to model an application definition]({{< ref "/applications/definitions" >}}).
+This guide adds a Redis cache to an application and connects a Container to it. It builds on the definition from [How to model application resources]({{< ref "/applications/definitions" >}}).
 
 ## Step 1: Start from an application definition
 
-Begin with a definition that declares an Application and a Container. The following `app.bicep` defines a `frontend` Container:
-
-```bicep
-extension radius
-
-@description('The Radius Environment ID. Injected automatically by the rad CLI.')
-param environment string
-
-resource app 'Radius.Core/applications@2025-08-01-preview' = {
-  name: 'my-app'
-  properties: {
-    environment: environment
-  }
-}
-
-resource frontend 'Radius.Compute/containers@2025-08-01-preview' = {
-  name: 'frontend'
-  properties: {
-    environment: environment
-    application: app.id
-    containers: {
-      web: {
-        image: 'ghcr.io/radius-project/samples/demo:latest'
-        ports: {
-          web: {
-            containerPort: 3000
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-See [How to model an application definition]({{< ref "/applications/definitions" >}}) to build this file from scratch.
+Begin with the Radius Demo `app.bicep` from [How to model application resources]({{< ref "/applications/definitions" >}}). It declares a `demoApp` Application and a `demoContainer` Container, which the following steps connect to a Redis cache.
 
 ## Step 2: Add the resource to connect to
 
-Add the dependency the Container needs. The following example adds a `Radius.Data/redisCaches` resource named `db` to the same Application:
+<!-- markdownlint-disable-next-line MD033 -->
+Add the dependency the Container needs. The demo's <a href="https://github.com/radius-project/samples/blob/{{< param version >}}/samples/demo/app-redis.bicep" target="_blank" rel="noopener">`app-redis.bicep`</a> definition adds a `Radius.Data/redisCaches` resource named `redis` to the same Application:
 
-```bicep
-resource db 'Radius.Data/redisCaches@2025-08-01-preview' = {
-  name: 'db'
-  properties: {
-    environment: environment
-    application: app.id
-  }
-}
-```
+{{< rad file="/static/samples/demo/app-redis.bicep" embed=true startLine=40 endLine=47 >}}
 
 ## Step 3: Connect the Container to the resource
 
 Add a `connections` entry to the Container's `properties`. Each connection has a name and a `source` set to the target resource's `.id`:
 
-```bicep
-resource frontend 'Radius.Compute/containers@2025-08-01-preview' = {
-  name: 'frontend'
-  properties: {
-    environment: environment
-    application: app.id
-    containers: {
-      web: {
-        image: 'ghcr.io/radius-project/samples/demo:latest'
-        ports: {
-          web: {
-            containerPort: 3000
-          }
-        }
-      }
-    }
-    connections: {
-      redis: {
-        source: db.id
-      }
-    }
-  }
-}
-```
+{{< rad file="/static/samples/demo/app-redis.bicep" embed=true startLine=17 endLine=38 markdownConfig=`{hl_lines=["16-20"]}` >}}
 
-The connection name (`redis`) becomes the prefix of the environment variables Radius injects into the Container. Referencing `db.id` also orders the deployment so Radius creates the cache before the Container.
+The connection name (`redis`) becomes the prefix of the environment variables Radius injects into the Container. Referencing `redis.id` also orders the deployment so Radius creates the cache before the Container.
 
 ## Step 4: Deploy the application
 
-Deploy the updated definition with [`rad deploy`]({{< ref rad_deploy >}}):
+Deploy the updated definition from its published URL with [`rad deploy`]({{< ref rad_deploy >}}):
 
-```bash
-rad deploy app.bicep
-```
+{{< rad-deploy path="samples/demo/app-redis.bicep" >}}
 
 Radius provisions the Redis cache, injects its connection details into the Container, and records the connection in the Application graph.
 
 ## Step 5: Inspect the connection in the Application graph
 
-Use [`rad application graph`]({{< ref rad_application_graph >}}) to view the resources and the connection between them:
+Use [`rad application graph`]({{< ref rad_application_graph >}}) to view the resources and the connection between them. The sample includes the Environment name in its resource names; the following command uses the default Environment:
 
 <!-- TODO: Remove the `--preview` flag when the Radius.Core Application implementation is no longer in preview. -->
 ```bash
-rad application graph --application my-app --preview
+rad application graph --application demo-default --preview
 ```
 
-The output shows the `frontend` Container connected to the `db` cache, along with the infrastructure each resource created:
+The output shows the `demo-default` Container connected to the `redis-default` cache, along with the infrastructure each resource created:
 
 ```text
-Displaying application: my-app
+Displaying application: demo-default
 
-Name: frontend (Radius.Compute/containers)
+Name: demo-default (Radius.Compute/containers)
 Connections:
-  frontend -> db (Radius.Data/redisCaches)
+  demo-default -> redis-default (Radius.Data/redisCaches)
 Resources:
-  frontend (kubernetes: apps/Deployment)
-  frontend (kubernetes: core/Service)
+  demo-default (kubernetes: apps/Deployment)
+  demo-default (kubernetes: core/Service)
 
-Name: db (Radius.Data/redisCaches)
+Name: redis-default (Radius.Data/redisCaches)
 Connections:
-  frontend (Radius.Compute/containers) -> db
+  demo-default (Radius.Compute/containers) -> redis-default
 Resources:
-  db (kubernetes: apps/Deployment)
-  db (kubernetes: core/Service)
+  redis-default (kubernetes: apps/Deployment)
+  redis-default (kubernetes: core/Service)
 ```
 
 ## Connection environment variables
