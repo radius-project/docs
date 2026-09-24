@@ -57,6 +57,7 @@ The connection automatically injects environment variables into the container fo
 - CONNECTION_POSTGRESQL_DATABASE
 - CONNECTION_POSTGRESQL_HOST
 - CONNECTION_POSTGRESQL_PORT
+- CONNECTION_POSTGRESQL_TLS
 
 ## Top-Level Properties
 
@@ -72,6 +73,7 @@ The connection automatically injects environment variables into the container fo
 | `password` | string | (Required) The administrator password for the PostgreSQL database. Marked `x-radius-sensitive`: Radius encrypts it at rest, redacts it on reads, and exposes it decrypted only to the recipe as `{{context.resource.properties.password}}`. |
 | `port` | integer | (Optional) The TCP port used to connect to the database. Defaults to `5432`, the standard PostgreSQL port that every Recipe in this repository provisions and the port PostgreSQL flexible server is fixed to. A Recipe that provisions the database on a different port reports the real port as an output, which overwrites this value once the deployment finishes. Setting it in an application definition changes only the value reported to connected containers, never the port the server listens on, so leave it unset. |
 | `size` | string | (Optional) The size of the PostgreSQL database. Defaults to `S` if not provided.<br />Allowed values: `L`, `M`, `S`. |
+| `tls` | string | (Optional) The requested transport policy for database connections. Configure your client using `CONNECTION_POSTGRESQL_TLS`. Defaults to `required`. Use `optional` only when the server is not publicly reachable; it permits connections without TLS.<br />Allowed values: `optional`, `required`. |
 | `username` | string | (Required) The administrator username for the PostgreSQL database. Provided directly on the resource and passed to the recipe as `{{context.resource.properties.username}}`. |
 
 ## Object Properties
