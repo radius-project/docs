@@ -101,8 +101,10 @@ if ! grep -Fxq 'indexName = "radapp-dev"' config.toml; then
   exit 1
 fi
 
+python3 .github/scripts/set_bicep_extension_tags.py "${VERSION_NUMBER}"
+
 # Only release configuration belongs in this commit.
-git add -- config.toml
+git add -- config.toml bicepconfig.json
 if git diff --cached --quiet; then
   echo "Error: No changes to commit for ${CHANNEL_VERSION}."
   exit 1
@@ -111,11 +113,19 @@ fi
 BLOB_SHA="$(base64 --wrap=0 config.toml |
   jq --raw-input --slurp '{content: ., encoding: "base64"}' |
   gh api --method POST "repos/${GITHUB_REPOSITORY}/git/blobs" --input - --jq '.sha')"
+BICEP_BLOB_SHA="$(base64 --wrap=0 bicepconfig.json |
+  jq --raw-input --slurp '{content: ., encoding: "base64"}' |
+  gh api --method POST "repos/${GITHUB_REPOSITORY}/git/blobs" --input - --jq '.sha')"
 TREE_SHA="$(jq --null-input \
   --arg base_tree "$(git rev-parse "${BASE_SHA}^{tree}")" \
   --arg mode "$(git ls-files --stage -- config.toml | awk '{print $1}')" \
   --arg sha "${BLOB_SHA}" \
-  '{base_tree: $base_tree, tree: [{path: "config.toml", mode: $mode, type: "blob", sha: $sha}]}' |
+  --arg bicep_mode "$(git ls-files --stage -- bicepconfig.json | awk '{print $1}')" \
+  --arg bicep_sha "${BICEP_BLOB_SHA}" \
+  '{base_tree: $base_tree, tree: [
+    {path: "config.toml", mode: $mode, type: "blob", sha: $sha},
+    {path: "bicepconfig.json", mode: $bicep_mode, type: "blob", sha: $bicep_sha}
+  ]}' |
   gh api --method POST "repos/${GITHUB_REPOSITORY}/git/trees" --input - --jq '.sha')"
 if [[ "${TREE_SHA}" != "$(git write-tree)" ]]; then
   echo "Error: GitHub tree ${TREE_SHA} does not match the local release configuration."

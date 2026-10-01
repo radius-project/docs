@@ -31,6 +31,32 @@ Open the URL printed by Hugo. In a Codespace, the container runs `npm ci` for yo
 
 The lockfile supplies Hugo and Dart Sass; no global installation is needed. After updating Docsy in `go.mod`, run `npm run hugo -- mod npm pack` and `npm install` to refresh the theme workspace and lockfile. The `adm-zip` override pins the Hugo installer's patched ZIP reader on Windows; remove it once `hugo-extended` requires a patched version.
 
+### Validate Bicep configuration
+
+From the repository root, run the release tag-selection tests:
+
+```sh
+python3 -m unittest discover -s .github/scripts -p 'test_set_bicep_extension_tags.py'
+```
+
+The root `bicepconfig.json` uses the development `edge` tags. The docs release script selects the `major.minor` channel for stable releases and the full version for release candidates. It updates only the canonical production GHCR development references, preserving explicit stable tags, manifest pins, custom registries, and local extensions. It publishes both the site configuration and Bicep configuration in one verified App-signed commit. Do not run the release script for local validation: it writes commits and release refs on GitHub.
+
+The release integration tests use a local `gh` stub and temporary repositories, without publishing anything. On Linux, run:
+
+```sh
+bash .github/scripts/release-docs_test.sh
+```
+
+These tests require GNU `sed` and `base64`, matching the release runner.
+
+Bicep validation uses v0.46.1, with `experimentalFeaturesEnabled.ociEnabled` enabled in the effective configuration. Both production packages have public development `edge` tags. Point `BICEP_PATH` at a directory containing that `bicep` binary and run:
+
+```sh
+BICEP_PATH=/path/to/bicep-directory python3 .github/scripts/validate_bicep.py
+```
+
+This command restores extensions and compiles the examples; it does not deploy them. An unavailable public tag blocks this check. Public development artifacts do not establish stable or release-candidate availability. Radius v0.61.1 bundles Bicep v0.46.1, but the selected release artifacts must also be published and verified with the released Radius CLI before the documentation cutover. A standalone compiler check does not certify the released CLI or its generated configuration.
+
 ## ☁ Hosting
 
 The [Publish workflow](.github/workflows/publish.yaml) deploys **one GitHub Pages artifact** with two versions:
