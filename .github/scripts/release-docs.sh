@@ -85,6 +85,8 @@ if ! grep -Fxq 'indexName = "radapp-dev"' docs/config.toml; then
   exit 1
 fi
 
+python3 .github/scripts/set_bicep_extension_tags.py "${VERSION_NUMBER}"
+
 # Push changes to GitHub
 git add --all
 git commit -m "Update docs for ${VERSION}"
