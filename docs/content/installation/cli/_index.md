@@ -17,6 +17,14 @@ Because Radius uses [Bicep](https://github.com/Azure/bicep) to define Applicatio
 
 Visit the [reference documentation]({{< ref "/reference/cli" >}}) to learn more about the Radius CLI and its commands.
 
+## Bicep compatibility for GHCR
+
+The GHCR configuration examples in these edge docs are for the production Bicep extension registry migration. They require a Radius release that bundles Bicep CLI **v0.45.6 or later**. [Radius v0.61.1](https://github.com/radius-project/radius/releases/tag/v0.61.1) bundles Bicep **v0.46.1** and meets this compiler requirement, but public GHCR restore and compilation have not yet been verified. Do not use these configurations for a new installation or switch existing applications until the corresponding public extension artifacts are available and validated with the released Radius CLI. Radius releases that bundle Bicep v0.42.1 cannot restore these extensions.
+
+Use `rad version` to check the Bicep version used by Radius. Installing a newer standalone Bicep CLI does not upgrade the compiler used by `rad`. Set `experimentalFeaturesEnabled.ociEnabled` to `true` in each effective `bicepconfig.json`, as shown in [Configure Bicep extensions]({{< ref "/installation/dev-workstation#configure-bicepconfigjson" >}}).
+
+The production Radius and AWS Bicep extension packages will be public at `ghcr.io/radius-project/bicep-types-radius` and `ghcr.io/radius-project/bicep-types-aws`. Once published, these public extensions can be restored anonymously; no Azure or GitHub registry login is required. Authentication for private extension and recipe registries is unchanged.
+
 ## Install the Radius CLI
 
 The Radius CLI is distributed as a single binary that can be installed on Linux, macOS, and Windows.
