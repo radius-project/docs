@@ -1091,6 +1091,7 @@ TestGridProject
 testGroup
 testResources
 tf
+tflock
 th
 timeoutPolicy
 timeoutSeconds

@@ -118,6 +118,7 @@ resource myEnvironment 'Radius.Core/environments@2025-08-01-preview' = {
 
 | Property | Type | Description |
 |----------|------|-------------|
+| `backend` | [object](#backend) | (Optional) Remote Terraform state backend. Omission uses Kubernetes. Storage must already exist. Backend selection is immutable after TerraformSettings creation, including the Kubernetes default. Configure a cloud backend when creating new settings. |
 | `env` | object | (Optional) Environment variables injected into the Terraform process during Recipe execution. |
 | `provisioningState` | string | (Read Only) The status of the Terraform settings resource within the Radius control plane.<br />Allowed values: `Accepted`, `Canceled`, `Creating`, `Deleting`, `Failed`, `Provisioning`, `Succeeded`, `Updating`. |
 | `referencedBy` | string array | (Read Only) Resource IDs of the Environments that reference this Terraform settings resource. |
@@ -125,12 +126,33 @@ resource myEnvironment 'Radius.Core/environments@2025-08-01-preview' = {
 
 ## Object Properties
 
+### `backend` {#backend}
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `type` | string | Discriminator property that selects the variant. Allowed values: [`azurerm`](#backend-azurerm), [`s3`](#backend-s3). |
+| `keyPrefix` | string | State key prefix, required. State keys are derived only from environment, application and resource names, so installations that share storage must use distinct prefixes to avoid writing the same key. Both clouds allow at most 968 ASCII characters, reserving space for the state key and S3 .tflock suffix within 1024 bytes. |
+
 ### `terraformrc` {#terraformrc}
 
 | Property | Type | Description |
 |----------|------|-------------|
 | `credentials` | [object](#terraformrc-credentials) | (Optional) Credentials for authenticating to private Terraform registries such as `app.terraform.io`. Maps a registry hostname to its credential configuration. This authenticates to Terraform CLI registries over HTTP and does not authenticate Git-based module sources, which use a separate mechanism. |
 | `providerInstallation` | [object](#terraformrc-providerinstallation) | (Optional) Controls where Terraform installs providers from, such as a network mirror instead of the public registry. |
+
+### `backend.azurerm` {#backend-azurerm}
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `containerName` | string | The existing blob container name. |
+| `storageAccountName` | string | The existing Azure storage account name. |
+
+### `backend.s3` {#backend-s3}
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `bucket` | string | The existing S3 bucket name. |
+| `region` | string | The AWS region containing the bucket. |
 
 ### `terraformrc.credentials` {#terraformrc-credentials}
 
