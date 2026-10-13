@@ -180,7 +180,7 @@ After a successful deployment, use your cloud storage tool to check for `.tfstat
 
 To update other TerraformSettings properties, such as registry configuration, include the unchanged `backend` object. Its type, storage location, region, and prefix cannot change. Both PUT and PATCH reject requests that omit or remove an existing backend.
 
-After destroying a recipe's resources, Radius checks whether its state object is empty and attempts to delete it. Radius keeps state that still tracks resources, changes during cleanup, or cannot be verified as empty. If cleanup fails, Radius logs a warning but still completes the resource deletion.
+After destroying a recipe's resources, Radius checks whether its state object is empty and attempts to delete it. Radius keeps state that still tracks resources, changes during cleanup, or cannot be verified as empty. If cleanup fails, Radius logs the cleanup failure but still completes the resource deletion.
 
 **Radius never deletes the bucket, storage account, or container.** Versioning and soft-delete policies can retain earlier state versions.
 
@@ -196,7 +196,7 @@ Both deployments exist temporarily. Plan separately for moving application data 
 | `terraform init` cannot find or access storage | Confirm the bucket region or storage account/container, network access from Radius, and permissions of the registered default credential. Azure role assignments may take time to propagate. |
 | A settings update rejects the backend | Retain the exact backend object for unrelated changes. Do not try to switch an existing deployment to new storage; create a new Environment instead. |
 | Execution rejects an endpoint or authentication variable | Remove the conflicting setting from TerraformSettings or the inherited Radius process environment. The rules below apply to both deploy and delete, so retry deletion only after removing the conflict. |
-| A warning reports state left after destroy | Inspect the object and the warning before acting. Do not delete live, changed, or unrecognized state. For a failed cleanup of confirmed-empty state, check delete permissions and use the logged key to locate the leftover object. |
+| A log message reports state left after destroy | Inspect the object and the log message before acting. Do not delete live, changed, or unrecognized state. For a failed cleanup of confirmed-empty state, check delete permissions and use the logged key to locate the leftover object. |
 
 ### AWS endpoint overrides
 
