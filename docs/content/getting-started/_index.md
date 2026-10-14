@@ -12,7 +12,7 @@ aliases:
   - /getting-started/first-app/
 ---
 
-This guide will show you how to quickly get started with Radius. You will do a basic installation of Radius on a Kubernetes cluster, deploy the Radius Demo sample application, and add a Redis cache connection to it. When you finish, explore the hands-on labs for deeper, scenario-based projects.
+This guide will show you how to quickly get started with Radius. You will install Radius on a disposable Kubernetes cluster, deploy the Radius Demo sample application, and add a PostgreSQL database connection to it. When you finish, explore the hands-on labs for deeper, scenario-based projects.
 
 ## Organization
 
