@@ -8,40 +8,22 @@ weight: 250
 
 Radius tracks the infrastructure provisioned by each Terraform recipe in a separate Terraform state. By default, Radius stores this state in Kubernetes secrets. You can instead configure an existing AWS S3 bucket or Azure Blob container through `Radius.Core/terraformSettings`.
 
-This guide describes the cloud backend support in the Radius edge build. Use matching CLI, control plane, and Bicep extension versions that include this feature; do not assume it is available in an older released installation.
-
-| Backend | Configuration | Storage to provision before deployment |
-| --------- | --------------- | ---------------------------------------- |
-| Kubernetes | Omit `backend` | Radius manages state secrets in its Kubernetes cluster. |
-| S3 | `backend.type: 's3'` | An S3 bucket in the specified AWS region. |
-| Azure Blob | `backend.type: 'azurerm'` | An Azure storage account and blob container. |
-
 {{% alert title="Choose the backend before deploying applications" color="warning" %}}
 Cloud backends are supported for **new Environments only**. Configure the backend when creating TerraformSettings, then reference those settings from the new Environment. You cannot change the backend later or add one to existing settings, even if they have never been used.
 
-Radius cannot migrate or adopt existing Terraform state. Replacing settings or changing an existing deployment's settings reference can leave infrastructure that Radius can no longer manage. The control plane does not block every unsafe change.
+Radius cannot migrate or adopt existing Terraform state. Replacing Terraform settings or changing the settings referenced by an existing deployment can cause existing infrastructure to remain deployed but no longer be manageable by Radius. The control plane does not block every unsafe change.
 {{% /alert %}}
 
 ## Before you begin
 
-- Install a Radius build with cloud backend support and configure the [Radius Bicep extension]({{< ref "/installation/dev-workstation#configure-bicepconfigjson" >}}) used by your deployment.
-- Choose a new Environment name and create its Kubernetes namespace before deploying the Environment. The namespace must not be assigned to another Environment.
-- Provision the backend storage using your organization's cloud provisioning process. Radius does not create the bucket, storage account, or container.
-- [Register cloud credentials]({{< ref "/installation/cloud-providers" >}}) in Radius and grant them the state-storage permissions below. S3 supports AccessKey and IRSA; Azure supports ServicePrincipal and Workload Identity. Identity-based credentials also require the token projection and federation described in their installation guides.
-- Have a [Recipe Pack]({{< ref "/management/recipe-packs" >}}) containing the Terraform recipes you intend to run. Backend storage is independent of where a recipe provisions infrastructure: a Kubernetes-only recipe can use S3 state and still requires registered AWS credentials.
-
-Registry tokens under `terraformrc.credentials` authenticate module downloads, not access to backend storage. Do not put cloud credentials in the `backend` object.
-
 ### Grant storage permissions
 
-Grant the **default credential registered in Radius for the selected cloud** access to the storage:
+Grant the default [credential registered in Radius]({{< ref "/installation/cloud-providers" >}}) for the selected cloud access to the storage:
 
 | Backend | Required permissions |
 | --- | --- |
 | S3 | `s3:ListBucket` on the bucket, scoped to the state prefix as appropriate; `s3:GetObject`, `s3:PutObject`, and `s3:DeleteObject` on the state and lock objects under that prefix, for example `arn:aws:s3:::YOUR-BUCKET/YOUR-PREFIX/*`. Customer-managed encryption keys may require additional KMS permissions. |
-| Azure Blob | **Storage Blob Data Contributor**, or equivalent blob read/write/delete/lease permissions, scoped to the container. Azure management-plane Contributor alone does not grant blob data access. Account-key lookup permission is not required. |
-
-Delete permission is needed for state cleanup as well as lock handling. S3 uses native `.tflock` locking, not DynamoDB; Azure uses blob leases. Enable S3 versioning or Azure Blob soft delete according to your recovery policy.
+| Azure Blob | Storage Blob Data Contributor, or equivalent blob read/write/delete/lease permissions, scoped to the container. Azure management-plane Contributor alone does not grant blob data access. Account-key lookup permission is not required. |
 
 {{% alert title="State storage is not an Environment isolation boundary" color="warning" %}}
 Terraform state can contain sensitive values. Radius uses one registered default identity per cloud across the installation, not a separate backend identity per Environment or TerraformSettings resource. Separate prefixes or buckets do not isolate access from that shared principal. Use separate Radius installations with separately scoped credentials when you need independent state-access identities.
@@ -57,9 +39,19 @@ A prefix must contain 1–968 ASCII characters. Use letters, digits, underscores
 
 ## Create settings and a new Environment
 
-Choose **one** of the following examples and save it as `environment.bicep`. Replace the sample storage names, prefix, Environment name, namespace, and Recipe Pack name with your own values. The examples reference an existing Recipe Pack in the same Radius Resource Group.
+Choose the backend for your new Environment. For a cloud backend, provision the storage before deploying the settings:
 
-### S3
+| Backend | Configuration | Storage to provision before deployment |
+| --------- | --------------- | ---------------------------------------- |
+| Kubernetes | Omit `backend` | Radius manages state secrets in its Kubernetes cluster. |
+| S3 | `backend.type: 's3'` | An S3 bucket in the specified AWS region. |
+| Azure Blob | `backend.type: 'azurerm'` | An Azure storage account and blob container. |
+
+Save the example for your cloud as `environment.bicep`. Replace the sample storage names, prefix, Environment name, namespace, and Recipe Pack name with your own values. The examples reference an existing Recipe Pack in the same Radius Resource Group.
+
+{{< tabs "AWS S3" "Azure Blob" >}}
+
+{{% codetab %}}
 
 ```bicep
 extension radius
@@ -96,7 +88,9 @@ resource environment 'Radius.Core/environments@2025-08-01-preview' = {
 }
 ```
 
-### Azure Blob
+{{% /codetab %}}
+
+{{% codetab %}}
 
 ```bicep
 extension radius
@@ -135,18 +129,37 @@ resource environment 'Radius.Core/environments@2025-08-01-preview' = {
 
 Azure state access uses Microsoft Entra authentication, not storage account keys. The storage account name must contain 3–24 lowercase letters or digits. Use a valid Azure container name containing 3–63 lowercase letters, digits, or hyphens, starting and ending with a letter or digit.
 
+{{% /codetab %}}
+
+{{< /tabs >}}
+
 These examples configure state storage, not cloud provisioning destinations for recipe resources. If your recipes provision AWS or Azure resources, also configure the appropriate Environment `providers` properties as described in [Manage Environments]({{< ref "/management/environments" >}}).
 
 ### Deploy the Environment definition
 
-Create the namespace used by your chosen example in the Kubernetes cluster configured for the Environment. Confirm that your `kubectl` context targets that cluster first:
+Create the namespace used by your chosen example in the Kubernetes cluster configured for the Environment. Use a namespace that is not assigned to another Environment, and confirm that your `kubectl` context targets the correct cluster:
+
+{{< tabs "AWS S3" "Azure Blob" >}}
+
+{{% codetab %}}
 
 ```bash
 kubectl config current-context
 kubectl create namespace dev-s3-state
 ```
 
-For the Azure example, create `dev-azure-state` instead. Radius requires the namespace to exist when the Environment is created; declaring its name in Bicep does not create it.
+{{% /codetab %}}
+
+{{% codetab %}}
+
+```bash
+kubectl config current-context
+kubectl create namespace dev-azure-state
+```
+
+{{% /codetab %}}
+
+{{< /tabs >}}
 
 Create a Radius Resource Group if needed, and ensure the referenced Recipe Pack exists there. If it does not, follow [Manage Recipe Packs]({{< ref "/management/recipe-packs#creating-a-new-recipe-pack" >}}) to prepare and deploy `recipe-pack.bicep` into this group before deploying the Environment. Its name must match `my-terraform-recipes` in the example, or you must update the example to match your pack.
 
@@ -156,37 +169,73 @@ rad recipe-pack list --group state-demo
 rad deploy environment.bicep --group state-demo
 ```
 
-Read the settings back before deploying an application. For the S3 example:
+### Verify the settings
+
+Read the settings back and confirm that `properties.backend` contains the type, storage location, and prefix you specified:
+
+{{< tabs "AWS S3" "Azure Blob" >}}
+
+{{% codetab %}}
 
 ```bash
 rad resource show Radius.Core/terraformSettings s3-state-settings --group state-demo --output json
 ```
 
-For Azure, use `azure-state-settings`. Confirm that `properties.backend` contains the type, storage location, and prefix you specified. If it is missing, stop and follow the [troubleshooting guidance](#troubleshoot-a-deployment) before deploying an application.
+{{% /codetab %}}
 
-Deploy your application into the new Environment. For the S3 example:
+{{% codetab %}}
+
+```bash
+rad resource show Radius.Core/terraformSettings azure-state-settings --group state-demo --output json
+```
+
+{{% /codetab %}}
+
+{{< /tabs >}}
+
+If `properties.backend` is missing, follow the [troubleshooting guidance](#troubleshoot-a-deployment) before deploying an application.
+
+### Deploy an application
+
+Deploy an application that uses Resource Types backed by Terraform recipes in the referenced Recipe Pack:
+
+{{< tabs "AWS S3" "Azure Blob" >}}
+
+{{% codetab %}}
 
 ```bash
 rad deploy app.bicep --group state-demo --environment dev-s3-state
 ```
 
-For the Azure example, use `--environment dev-azure-state`. The application must use Resource Types backed by Terraform recipes in the referenced Recipe Pack to exercise the backend; Bicep recipes do not use Terraform state.
+{{% /codetab %}}
 
-Creating settings does not check access to the bucket or container. The first Terraform recipe deployment runs `terraform init`, which reports missing storage, permission, or connectivity errors.
+{{% codetab %}}
 
-After a successful deployment, use your cloud storage tool to check for `.tfstate` objects under the configured prefix. State can contain sensitive values; do not paste its contents into logs or support requests.
+```bash
+rad deploy app.bicep --group state-demo --environment dev-azure-state
+```
+
+{{% /codetab %}}
+
+{{< /tabs >}}
+
+After deployment, use your cloud storage tool to check for `.tfstate` objects under the configured prefix.
 
 ## Update settings and manage state
 
-To update other TerraformSettings properties, such as registry configuration, include the unchanged `backend` object. Its type, storage location, region, and prefix cannot change. Both PUT and PATCH reject requests that omit or remove an existing backend.
+### Update other Terraform settings
 
-After destroying a recipe's resources, Radius checks whether its state object is empty and attempts to delete it. Radius keeps state that still tracks resources, changes during cleanup, or cannot be verified as empty. If cleanup fails, Radius logs the cleanup failure but still completes the resource deletion.
+To change registry configuration or other TerraformSettings properties, include the unchanged `backend` object in the update. Both PUT and PATCH require it.
 
-**Radius never deletes the bucket, storage account, or container.** Versioning and soft-delete policies can retain earlier state versions.
+### Delete resources and clean up state
 
-For applications already using Kubernetes-backed state, create a new Environment with cloud-backed settings and redeploy the applications there. Verify the new deployments before deleting the old ones through their **original Environment and settings**. Keep the original state accessible until deletion finishes.
+Delete deployments through their original Environment and settings, keeping the state accessible until deletion finishes. After destroying a recipe's resources, Radius attempts to delete the empty state object. It preserves state that still tracks resources or outputs, changes during cleanup, or cannot be verified as empty. Cleanup failures are logged and do not fail resource deletion.
 
-Both deployments exist temporarily. Plan separately for moving application data and traffic, especially for stateful services.
+Radius leaves the bucket, storage account, and container for you to manage. Versioning and soft-delete policies can retain earlier state versions.
+
+### Redeploy applications with a different backend
+
+Create a new Environment with new TerraformSettings and redeploy the applications there. Plan for both deployments to coexist while you move application data and traffic. Verify the new deployments before deleting the old ones through their original Environment and settings.
 
 ## Troubleshoot a deployment
 
