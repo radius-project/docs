@@ -11,7 +11,7 @@
        every tab group that offers one. A tab the visitor selects manually is
        saved to localStorage, takes precedence over detection on later visits,
        and is mirrored across every OS tab group on the page.
-    2. Keeps the Terraform / Bicep tabs in sync across a page.
+    2. Keeps the Terraform / Bicep and AWS S3 / Azure Blob tabs in sync across a page.
 
   Where the OS tabs come from: they are emitted by the `tabs` shortcode
   (layouts/shortcodes/tabs.html), which adds the `data-tab-label` attribute the
@@ -88,7 +88,7 @@
       });
     }
 
-    const synchronizedTabs = new Set(['terraform', 'bicep']);
+    const synchronizedTabs = new Set(['terraform', 'bicep', 'aws-s3', 'azure-blob']);
     let synchronizing = false;
 
     // On load, prefer a saved manual OS choice; otherwise detect from the browser.
