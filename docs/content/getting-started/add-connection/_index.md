@@ -14,7 +14,7 @@ This guide targets PostgreSQL on Kubernetes, not managed Azure or AWS databases.
 
 ## Choose the database transport
 
-Use the Bash shell from [the prerequisites]({{< ref "/getting-started/install-radius#prerequisites" >}}), retaining its local `RAD_CONFIG` and `KUBE_CONTEXT` variables. Keep the same shell open for the following commands. Disable shell tracing before handling private files:
+Use the Bash shell from [the prerequisites]({{< ref "/getting-started/install-radius#prerequisites" >}}), retaining its local `RAD_CONFIG` and `KUBE_CONTEXT` variables and `rad_environment` helper. Keep the same shell open for the following commands. Disable shell tracing before handling private files:
 
 ```bash
 set -euo pipefail
@@ -44,9 +44,10 @@ Read the isolated tutorial Environment's actual Kubernetes namespace. The runtim
 
 ```bash
 ENVIRONMENT=tutorial
-NAMESPACE="$(rad environment show "$ENVIRONMENT" --group default \
+NAMESPACE="$(rad_environment show "$ENVIRONMENT" --group default \
   --config "$RAD_CONFIG" --output json \
-  | jq -er '.properties.providers.kubernetes.namespace | select(type == "string" and length > 0)')"
+  | jq -er 'if .type != "Radius.Core/environments" then error("Expected a Radius.Core Environment")
+    else .properties.providers.kubernetes.namespace | select(type == "string" and length > 0) end')"
 if [[ "$NAMESPACE" != radius-tutorial ]]; then
   printf 'Unexpected tutorial namespace: %s. Check the Environment before continuing.\n' "$NAMESPACE" >&2
   exit 1
@@ -582,7 +583,7 @@ Delete only the files you created for this tutorial. Do not delete a shared name
 Once no application uses the tutorial Environment, remove that Environment and its dedicated Recipe Pack. Do not remove the installation's default Environment or default Recipe Pack:
 
 ```bash
-rad environment delete tutorial --group default --config "$RAD_CONFIG"
+rad_environment delete tutorial --group default --config "$RAD_CONFIG"
 rad recipe-pack delete tutorial-postgresql-tls --group default --config "$RAD_CONFIG"
 ```
 

@@ -141,16 +141,37 @@ Use the Environment name `tutorial` and the Kubernetes namespace `radius-tutoria
 
 Before creating anything, check for an existing Environment with that name or namespace, an existing tutorial Recipe Pack, and an existing Kubernetes namespace. Stop on a collision or failed lookup. Do not reuse another application's resources or change a shared Environment's Recipe Pack.
 
+Environment commands differ between CLI generations. Some require `--preview` to select `Radius.Core/environments`; newer commands reject that flag. Define this helper in the same tutorial shell. It checks each command's help before running it, passes the flag only when advertised, and stops if help fails. It never retries a failed mutation with different flags. Keep the helper for the later steps and cleanup; leave the other commands' preview flags unchanged.
+
 ```bash
+rad_environment() {
+  local command="$1"
+  shift
+  local help
+  if ! help="$(rad environment "$command" --help)"; then
+    printf 'Cannot inspect Environment command %s; stopping.\n' "$command" >&2
+    return 1
+  fi
+  if [[ "$help" != *"Usage:"* ]]; then
+    printf 'Unrecognized Environment help for %s; stopping.\n' "$command" >&2
+    return 1
+  fi
+  local preview=()
+  if grep -Eq -- '(^|[[:space:]])--preview([[:space:]]|$)' <<< "$help"; then
+    preview=(--preview)
+  fi
+  rad environment "$command" "${preview[@]}" "$@"
+}
+
 ENVIRONMENT=tutorial
 NAMESPACE=radius-tutorial
 PACK_NAME=tutorial-postgresql-tls
 
-environments="$(rad environment list --group default \
+environments="$(rad_environment list --group default \
   --config "$RAD_CONFIG" --output json)"
 if ! jq -e --arg name "$ENVIRONMENT" --arg namespace "$NAMESPACE" '
   if type != "array" then error("Expected an Environment list")
-  else all(.[];
+  else all(.[]; .type == "Radius.Core/environments" and
     (.name | ascii_downcase) != ($name | ascii_downcase) and
     .properties.providers.kubernetes.namespace != $namespace)
   end
@@ -177,16 +198,17 @@ if [[ -n "$existing_namespace" ]]; then
 fi
 
 kubectl create namespace "$NAMESPACE" --context "$KUBE_CONTEXT"
-rad environment create "$ENVIRONMENT" --group default \
+rad_environment create "$ENVIRONMENT" --group default \
   --kubernetes-namespace "$NAMESPACE" --config "$RAD_CONFIG"
 
-rad environment show "$ENVIRONMENT" --group default \
+rad_environment show "$ENVIRONMENT" --group default \
   --config "$RAD_CONFIG" --output json \
   | jq -e --arg namespace "$NAMESPACE" \
-      '.properties.providers.kubernetes.namespace == $namespace'
+      '.type == "Radius.Core/environments" and
+       .properties.providers.kubernetes.namespace == $namespace'
 ```
 
-The namespace is created explicitly; creating a Radius Environment does not by itself prove that the namespace exists. This Environment initially references the default Recipe Pack only to bootstrap pack deployment. Do not deploy the base application or PostgreSQL until the named TLS pack has been deployed, selected, and inspected below.
+The namespace is created explicitly; creating a Radius Environment does not by itself prove that the namespace exists. The type and namespace checks must return `true`. An `Applications.Core/environments` result is not the tutorial Environment, even if its name matches. Command-help checks alone do not establish a compatible runtime: record the CLI and control-plane versions and validate the complete artifact tuple. This Environment initially references the default Recipe Pack only to bootstrap pack deployment. Do not deploy the base application or PostgreSQL until the named TLS pack has been deployed, selected, and inspected below.
 
 ## Select the tutorial Recipe Pack
 
@@ -282,16 +304,17 @@ Deploy the pack before deploying the base application:
 After deploying the verified pack into the tutorial Environment, assign it only to that Environment and inspect its stored sources:
 
 ```bash
-rad environment update "$ENVIRONMENT" --group default \
+rad_environment update "$ENVIRONMENT" --group default \
   --recipe-packs "$PACK_NAME" --config "$RAD_CONFIG"
 rad recipe-pack show "$PACK_NAME" --group default \
   --config "$RAD_CONFIG" --output json
 
 pack_id="$(rad recipe-pack show "$PACK_NAME" --group default \
   --config "$RAD_CONFIG" --output json | jq -er '.id')"
-rad environment show "$ENVIRONMENT" --group default \
+rad_environment show "$ENVIRONMENT" --group default \
   --config "$RAD_CONFIG" --output json \
   | jq -e --arg namespace "$NAMESPACE" --arg pack "$pack_id" '
+      .type == "Radius.Core/environments" and
       .properties.providers.kubernetes.namespace == $namespace and
       .properties.recipePacks == [$pack]
     '

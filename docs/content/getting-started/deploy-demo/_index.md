@@ -27,9 +27,10 @@ Radius deploys the application to the `tutorial` Environment, which uses the `ra
 View the deployed resources with `kubectl`:
 
 ```bash
-NAMESPACE="$(rad environment show tutorial --group default \
+NAMESPACE="$(rad_environment show tutorial --group default \
   --config "$RAD_CONFIG" --output json \
-  | jq -er '.properties.providers.kubernetes.namespace | select(type == "string" and length > 0)')"
+  | jq -er 'if .type != "Radius.Core/environments" then error("Expected a Radius.Core Environment")
+    else .properties.providers.kubernetes.namespace | select(type == "string" and length > 0) end')"
 if [[ "$NAMESPACE" != radius-tutorial ]]; then
   printf 'Unexpected tutorial namespace: %s. Stop and check the Environment.\n' "$NAMESPACE" >&2
   exit 1
