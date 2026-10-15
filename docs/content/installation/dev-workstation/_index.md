@@ -18,6 +18,8 @@ Setting up a developer workstation is very similar to [installing Radius]({{< re
 
 The [Radius CLI]({{< ref "/installation/cli" >}}) (`rad`) is the primary tool for deploying and managing Radius applications.
 
+Before using the GHCR configuration examples below, check the [Radius and Bicep compatibility requirements]({{< ref "/installation/cli#bicep-compatibility-for-ghcr" >}}). Do not switch an existing application until a compatible Radius release and the public extension packages are available.
+
 {{< read file="/shared-content/installation/rad-cli/install-rad-cli.md" >}}
 
 For more detail, including how to change the installation directory, see [Install the Radius CLI]({{< ref "/installation/cli#install-the-radius-cli" >}}).
@@ -80,15 +82,26 @@ Once the extension is published, each developer references it from their `bicepc
 
 ## Add custom resource types to bicepconfig.json {#configure-bicepconfigjson}
 
-`rad initialize` generates a `bicepconfig.json` that includes the **`radius`** extension, which configures the Bicep extension for all out-of-the-box Resource Types. Bicep resolves this file from the same directory as your Bicep files, or the nearest parent directory. With the `radius` extension in place, you can deploy applications that use any of the out-of-the-box Resource Types:
+`rad initialize` generates a `bicepconfig.json` that includes the **`radius`** extension, which configures the Bicep extension for all out-of-the-box Resource Types. A release with an OCI-capable compiler may still generate ACR references. After the [GHCR prerequisites]({{< ref "/installation/cli#bicep-compatibility-for-ghcr" >}}) are satisfied, configure the extension as follows. Bicep resolves this file from the same directory as your Bicep files, or the nearest parent directory.
 
 ```json
 {
+  "experimentalFeaturesEnabled": {
+    "ociEnabled": true
+  },
   "extensions": {
-    "radius": "br:biceptypes.azurecr.io/radius:<release-version>"
+    "radius": "br:ghcr.io/radius-project/bicep-types-radius:<release-version>"
   }
 }
 ```
+
+Replace `<release-version>` with the `major.minor` stable channel for your compatible Radius release, or its full `major.minor.patch` version to select a specific approved release. Channel tags are mutable and advance to the newest approved stable release in that line. Full stable versions are published once by CI policy; the registry does not enforce protection against overwrites.
+
+For development builds, use `edge`. GHCR `latest` selects the newest approved stable release, unlike the legacy ACR `latest` development tag. These tag meanings apply to both the Radius and AWS extension packages.
+
+To pin exact content instead of a tag, use `br:ghcr.io/radius-project/bicep-types-radius@sha256:<manifest-digest>` (or the same syntax with `bicep-types-aws`). Use the manifest's 64-character lowercase hexadecimal digest, not a Git commit SHA. Digest pinning does not prevent deletion of the package content.
+
+Generic OCI support must be enabled in every effective `bicepconfig.json` that references GHCR. If an application or sample directory has its own configuration file, include `experimentalFeaturesEnabled.ociEnabled` there as well instead of relying on the parent configuration.
 
 To author against Resource Types that your team has [published as a Bicep extension](#distribute-bicep-extensions-to-developers), add that extension to the `extensions` map alongside `radius`. Reference an ACR-published extension by its registry path, or a local extension by its path on disk:
 
@@ -98,8 +111,11 @@ To author against Resource Types that your team has [published as a Bicep extens
 
 ```json
 {
+  "experimentalFeaturesEnabled": {
+    "ociEnabled": true
+  },
   "extensions": {
-    "radius": "br:biceptypes.azurecr.io/radius:<release-version>",
+    "radius": "br:ghcr.io/radius-project/bicep-types-radius:<release-version>",
     "mycompany": "br:mycompany.azurecr.io/radius-resources:v1"
   }
 }
@@ -111,8 +127,11 @@ To author against Resource Types that your team has [published as a Bicep extens
 
 ```json
 {
+  "experimentalFeaturesEnabled": {
+    "ociEnabled": true
+  },
   "extensions": {
-    "radius": "br:biceptypes.azurecr.io/radius:<release-version>",
+    "radius": "br:ghcr.io/radius-project/bicep-types-radius:<release-version>",
     "mycompany": "./mycompany-radius-resources.tgz"
   }
 }
@@ -136,6 +155,8 @@ Sharing a common `bicepconfig.json` keeps every developer on the same extension 
 Radius applications are authored in [Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/overview). Visual Studio Code offers the best authoring experience, providing formatting, IntelliSense, and validation for Bicep templates and Radius resource types.
 
 To install the Bicep extension, refer to their [installation documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/install#visual-studio-code-and-bicep-extension).
+
+Editor validation also requires Bicep tooling with generic OCI support (v0.45.6 or later).
 
 ## Create Kubernetes users and roles
 
