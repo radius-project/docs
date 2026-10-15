@@ -404,7 +404,7 @@ kubectl port-forward svc/demo-tutorial-web 3000:3000 \
   -n "$NAMESPACE" --context "$KUBE_CONTEXT"
 ```
 
-Open [http://localhost:3000](http://localhost:3000). The Radius Connections section now lists the `postgresql` database connection and the `postgresqlCredentials` Secret connection.
+Open [http://localhost:3000](http://localhost:3000). The Radius Connections section now lists the `postgresql` database connection and the `postgresqlCredentials` Secret connection. Press `Ctrl+C` to stop the port forward before continuing in the same tutorial shell.
 
 ## View the connections in the Dashboard
 
@@ -414,7 +414,7 @@ Start port forwarding for the Dashboard:
 kubectl port-forward svc/dashboard 7007:80 -n radius-system --context "$KUBE_CONTEXT"
 ```
 
-Open [http://localhost:7007](http://localhost:7007), select the `demo-tutorial` application, and use the application graph to inspect the container's connections to the `postgresql-tutorial` database and `postgresql-credentials-tutorial` Secret.
+Open [http://localhost:7007](http://localhost:7007), select the `demo-tutorial` application, and use the application graph to inspect the container's connections to the `postgresql-tutorial` database and `postgresql-credentials-tutorial` Secret. Press `Ctrl+C` to stop the port forward when you are done.
 
 To learn more about modeling dependencies between resources, see [How to model application dependencies using connections]({{< ref "/applications/connections" >}}).
 
@@ -434,7 +434,7 @@ Keep verification enabled while diagnosing failures. Do not set `PGSSLMODE=no-ve
 
 ## Clean up
 
-Stop both local port forwards with `Ctrl+C`. Delete the Radius Demo application. Its database, authored password Secret, and CA-only Secret belong to the application and are deleted with the container. The operator-owned server Secret does not belong to the application and must remain:
+If a port forward is still running, stop it with `Ctrl+C`. Delete the Radius Demo application from the same tutorial shell. Its database, authored password Secret, and CA-only Secret belong to the application and are deleted with the container. The operator-owned server Secret does not belong to the application and must remain:
 
 <!-- TODO: Remove the `--preview` flag when the Radius.Core Application implementation is no longer in preview. -->
 ```bash
