@@ -59,6 +59,21 @@ The connection automatically injects environment variables into the container fo
 - CONNECTION_POSTGRESQL_PORT
 - CONNECTION_POSTGRESQL_TLS
 
+Both Kubernetes recipes reject plaintext TCP when `tls` is `required` or omitted; `optional` supports TLS and plaintext. These two policies require an operator-supplied TLS Secret. Explicit `disabled` turns off TLS on Kubernetes without a certificate and still requires password authentication. Use it only for disposable databases on trusted/private networks: credentials and data are not encrypted. Azure does not support `disabled`; its guarded Recipe rejects it even with operator transport overrides. See [the PostgreSQL README](https://github.com/radius-project/resource-types-contrib/blob/main/Data/postgreSqlDatabases/README.md#kubernetes-certificates-and-recipe-parameters) for certificate setup, client verification, and release prerequisites.
+
+For a disposable Kubernetes database without certificates:
+```bicep
+resource disposableDatabase 'Radius.Data/postgreSqlDatabases@2025-08-01-preview' = {
+  name: 'disposable-database'
+  properties: {
+    environment: environment
+    username: 'radadmin'
+    password: databasePassword // Supply through a secure parameter.
+    tls: 'disabled'
+  }
+}
+```
+
 ## Top-Level Properties
 
 | Property | Type | Description |
@@ -73,7 +88,7 @@ The connection automatically injects environment variables into the container fo
 | `password` | string | (Required) The administrator password for the PostgreSQL database. Marked `x-radius-sensitive`: Radius encrypts it at rest, redacts it on reads, and exposes it decrypted only to the recipe as `{{context.resource.properties.password}}`. |
 | `port` | integer | (Optional) The TCP port used to connect to the database. Defaults to `5432`, the standard PostgreSQL port that every Recipe in this repository provisions and the port PostgreSQL flexible server is fixed to. A Recipe that provisions the database on a different port reports the real port as an output, which overwrites this value once the deployment finishes. Setting it in an application definition changes only the value reported to connected containers, never the port the server listens on, so leave it unset. |
 | `size` | string | (Optional) The size of the PostgreSQL database. Defaults to `S` if not provided.<br />Allowed values: `L`, `M`, `S`. |
-| `tls` | string | (Optional) The requested transport policy for database connections. Configure your client using `CONNECTION_POSTGRESQL_TLS`. Defaults to `required`. Use `optional` only when the server is not publicly reachable; it permits connections without TLS.<br />Allowed values: `optional`, `required`. |
+| `tls` | string | (Optional) The transport policy, reported in `CONNECTION_POSTGRESQL_TLS`. Defaults to `required`, which rejects plaintext TCP on Kubernetes. `optional` permits plaintext but keeps TLS enabled. Both need an operator-managed TLS Secret and separate client CA trust and hostname verification. Explicit `disabled` turns TLS off on Kubernetes, needs no certificate, ignores certificate parameters, and retains password authentication. Use plaintext only for disposable databases on trusted/private networks. Azure rejects `disabled` regardless of operator transport overrides; overrides retain precedence for `required` and `optional`.<br />Allowed values: `disabled`, `optional`, `required`. |
 | `username` | string | (Required) The administrator username for the PostgreSQL database. Provided directly on the resource and passed to the recipe as `{{context.resource.properties.username}}`. |
 
 ## Object Properties

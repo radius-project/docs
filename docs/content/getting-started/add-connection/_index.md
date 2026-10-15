@@ -6,15 +6,13 @@ description: "Add a PostgreSQL database and connect the Radius Demo container to
 weight: 300
 ---
 
-> **Work in progress: do not publish or run this draft.** The sample definitions are synchronized, but deployment remains blocked on the approved public TLS Recipe, retained client image, and validation against that public artifact tuple. The branch-based source links may not yet match this draft's synchronized sample checkpoint.
+> **Work in progress: do not publish or run this draft.** The embedded samples match signed samples commit `d0c8f10c3477ab9dd1f5a6428e3d9065c30ef4a9`. Deployment remains blocked on approved public Recipes, a retained client image, a compatible public Bicep extension, and validation of both modes against that public artifact tuple. The branch-based source links may not yet match this draft's sample checkpoint.
 
-The Radius Demo application runs on its own, but most applications depend on other resources such as databases and caches. In this step you will add a PostgreSQL database, an authored password Secret, and a separate CA-only Secret to the application. The container will verify the database server's certificate and DNS name.
+The Radius Demo application runs on its own, but most applications depend on other resources such as databases and caches. In this step you will add a PostgreSQL database and an authored password Secret. By default, you will also add a separate CA-only Secret so the container verifies the database server's certificate and DNS name.
 
-This guide targets PostgreSQL on Kubernetes, not managed Azure or AWS databases. Keep the demo local-only: it displays connection credentials in the browser. These Kubernetes PostgreSQL Recipes use ephemeral storage; replacing the database Pod can erase its data. Read the [PostgreSQL Recipe's operational guidance](https://github.com/radius-project/resource-types-contrib/blob/1a4c120fdab2b0f0c49bda692aef4b519855d79d/Data/postgreSqlDatabases/README.md) before using it outside this tutorial. This tutorial is not a production migration or certificate-rotation procedure.
+This guide targets PostgreSQL on Kubernetes, not managed Azure or AWS databases. Keep the demo local-only: it displays connection credentials in the browser. These Kubernetes PostgreSQL Recipes use ephemeral storage; replacing the database Pod can erase its data. Read the [PostgreSQL Recipe's operational guidance](https://github.com/radius-project/resource-types-contrib/blob/c587abffceeb0296bc9a6e10f2835b9a6cdf56a4/Data/postgreSqlDatabases/README.md) before using it outside this tutorial. This tutorial is not a production migration or certificate-rotation procedure.
 
-## Prepare the server certificate
-
-The operator owns the server TLS Secret. The application owns a different Secret containing only the public CA certificate. Do not connect the server Secret to the demo, project its values into environment variables, or mount its private key in the client. The CA signing key also stays outside Kubernetes and the application.
+## Choose the database transport
 
 Use the Bash shell from [the prerequisites]({{< ref "/getting-started/install-radius#prerequisites" >}}), retaining its local `RAD_CONFIG` and `KUBE_CONTEXT` variables. Keep the same shell open for the following commands. Disable shell tracing before handling private files:
 
@@ -24,11 +22,29 @@ set +x
 umask 077
 ```
 
+Choose `required` (the default) for verified TLS, or explicitly enter `disabled` for a disposable database on a trusted, private Kubernetes network. **Disabled mode sends credentials and data without TLS.** It creates no server TLS Secret or client CA Secret. Azure rejects this policy. The resource's `optional` policy is different: it still requires certificates and accepts both protocols; this tutorial does not offer it.
+
+Choose once for a fresh deployment. To try the other mode, clean up this application first and start a new tutorial deployment. Do not edit the mode of a running database: policy changes can replace its Pod and lose ephemeral data, and incremental deployment may leave a previously created CA Secret.
+
+```bash
+read -r -p 'PostgreSQL transport [required/disabled] (default required): ' POSTGRESQL_TLS
+POSTGRESQL_TLS="${POSTGRESQL_TLS:-required}"
+case "$POSTGRESQL_TLS" in
+  required|disabled) ;;
+  *) printf 'Choose required or disabled.\n' >&2; exit 1 ;;
+esac
+PARAMETER_DIR="$(mktemp -d "$HOME/radius-postgresql-parameters.XXXXXXXX")"
+chmod 700 "$PARAMETER_DIR"
+printf '%s' "$POSTGRESQL_TLS" > "$PARAMETER_DIR/postgresql-mode.txt"
+```
+
+This shared private directory holds the selected mode, password, and parameter file in either path. Keep it outside your checkout.
+
 Read the isolated tutorial Environment's actual Kubernetes namespace. The runtime namespace is not necessarily the Environment name, `default`, or the Radius control-plane namespace `radius-system`. The namespace must already exist from the installation step; stop if it is missing rather than creating or taking over a shared namespace.
 
 ```bash
 ENVIRONMENT=tutorial
-NAMESPACE="$(rad environment show "$ENVIRONMENT" --group default --preview \
+NAMESPACE="$(rad environment show "$ENVIRONMENT" --group default \
   --config "$RAD_CONFIG" --output json \
   | jq -er '.properties.providers.kubernetes.namespace | select(type == "string" and length > 0)')"
 if [[ "$NAMESPACE" != radius-tutorial ]]; then
@@ -43,13 +59,18 @@ SERVER_SECRET="${DB_NAME}-tls"
 printf 'Database hostname: %s\nServer Secret: %s\n' "$DB_HOST" "$SERVER_SECRET"
 ```
 
-The selected Recipe uses the database resource's exact name for its Kubernetes Service and defaults the server Secret name to that name followed by `-tls`. Issue the certificate for the full hostname above, not `localhost`, an IP address, or a shortened Service name.
+The selected Recipe uses the database resource's exact name for its Kubernetes Service and defaults the server Secret name to that name followed by `-tls`. In `required` mode, issue the certificate for the full hostname above, not `localhost`, an IP address, or a shortened Service name.
+
+## Prepare the server certificate (required mode only)
+
+The following commands skip certificate setup when you selected `disabled`. In `required` mode, the operator owns the server TLS Secret. The application owns a different Secret containing only the public CA certificate. Do not connect the server Secret to the demo, project its values into environment variables, or mount its private key in the client. The CA signing key also stays outside Kubernetes and the application.
 
 ### Issue a local tutorial certificate
 
 Create a private directory outside your checkout. On WSL2, use the Linux home directory. Do not commit these files, upload them as build artifacts, or print their contents:
 
 ```bash
+if [[ "$POSTGRESQL_TLS" == required ]]; then
 TLS_DIR="$(mktemp -d "$HOME/radius-postgresql-tls.XXXXXXXX")"
 chmod 700 "$TLS_DIR"
 
@@ -79,6 +100,7 @@ openssl x509 -req -sha256 -days 1 \
   -CAcreateserial -out "$TLS_DIR/server.crt" \
   -extfile "$TLS_DIR/server.ext"
 chmod 600 "$TLS_DIR"/*
+fi
 ```
 
 These certificates are deliberately short-lived. If you supply an operator-issued certificate instead, keep its files in a protected directory and use its CA trust bundle in place of `ca.crt`. The server certificate file must include any intermediate certificates required to build its chain.
@@ -86,6 +108,7 @@ These certificates are deliberately short-lived. If you supply an operator-issue
 Verify the certificate's chain, server purpose, and hostname before creating the Secret. The `-untrusted` argument supplies any intermediate certificates in the server certificate file; it does not make an untrusted certificate valid:
 
 ```bash
+if [[ "$POSTGRESQL_TLS" == required ]]; then
 openssl verify -CAfile "$TLS_DIR/ca.crt" \
   -untrusted "$TLS_DIR/server.crt" \
   -purpose sslserver -verify_hostname "$DB_HOST" "$TLS_DIR/server.crt"
@@ -99,13 +122,14 @@ if [[ "$cert_public_key" != "$key_public_key" ]]; then
   printf 'Server certificate and private key do not match.\n' >&2
   exit 1
 fi
+fi
 ```
 
-The first command must report `OK`. The second must list `DNS:` followed by the exact database hostname. A certificate that is trusted but names another server is not valid for this database.
+In required mode, the first command must report `OK`. The second must list `DNS:` followed by the exact database hostname. A certificate that is trusted but names another server is not valid for this database.
 
 ### Create the operator-owned server Secret
 
-Check that the Secret name is unused. A permissions or connection error must stop the procedure, not be treated as evidence that the Secret is absent:
+Check that the Secret name is unused in either mode. Disabled mode must start without a server TLS Secret; required mode creates one after this check. A permissions or connection error must stop the procedure, not be treated as evidence that the Secret is absent:
 
 ```bash
 existing="$(kubectl get secret "$SERVER_SECRET" -n "$NAMESPACE" \
@@ -116,21 +140,23 @@ if [[ -n "$existing" ]]; then
   exit 1
 fi
 
+if [[ "$POSTGRESQL_TLS" == required ]]; then
 kubectl create secret tls "$SERVER_SECRET" -n "$NAMESPACE" \
   --context "$KUBE_CONTEXT" --cert="$TLS_DIR/server.crt" --key="$TLS_DIR/server.key"
 kubectl get secret "$SERVER_SECRET" -n "$NAMESPACE" \
   --context "$KUBE_CONTEXT" -o jsonpath='{.metadata.uid}' > "$TLS_DIR/server-secret.uid"
+fi
 ```
 
 `kubectl create` also refuses an overwrite if another process creates the Secret after the check. Only certificate and key **file paths** appear in its arguments. Do not use `kubectl get secret -o yaml`, paste private keys into commands, or pass this server Secret to the application. The application receives only `ca.crt` through its separate CA Secret.
 
 ## Add a PostgreSQL database and connections
 
-The TLS-only `app-postgresql.bicep` definition builds on `app.bicep` by adding a `Radius.Data/postgreSqlDatabases` resource, an authored password Secret, and a CA-only Secret. Its parameters require a password, the public CA certificate, and a compatible client image. The container has connections to the database and the password Secret, plus a volume mount for the CA certificate.
+The `app-postgresql.bicep` definition builds on `app.bicep` by adding a `Radius.Data/postgreSqlDatabases` resource and an authored password Secret. Its `postgresqlTls` parameter accepts `required` (default) or `disabled`. Both modes require a password and a compatible client image. Required mode also needs a nonempty public CA certificate; the template rejects a missing CA before changing application resources. Disabled mode omits the CA Secret and mount.
 
 <div class="td-max-width-on-larger-screens" style="margin-bottom: -2rem;"><a href="https://github.com/radius-project/samples/blob/{{< param version >}}/samples/demo/app-postgresql.bicep" target="_blank" rel="noopener">samples/demo/app-postgresql.bicep</a></div>
 
-{{< rad file="/static/samples/demo/app-postgresql.bicep" embed=true markdownConfig=` {hl_lines=["6-16","36-50","58-76","79-117"]}` >}}
+{{< rad file="/static/samples/demo/app-postgresql.bicep" embed=true markdownConfig=` {hl_lines=["6-27","34","47-67","75-95","98-136"]}` >}}
 
 [Download the application definition](/samples/demo/app-postgresql.bicep).
 
@@ -142,9 +168,9 @@ The `postgresql` connection tells Radius that the container depends on the datab
 
 The `postgresqlCredentials` connection points directly to the authored Secret. With a compatible Kubernetes Container Recipe, Radius projects its `password` key through a Kubernetes `secretKeyRef` as `CONNECTION_POSTGRESQLCREDENTIALS_PASSWORD`. The secret value remains in the Secret and is not copied into Recipe output or plaintext container configuration.
 
-The CA-only Secret, `postgresql-ca-tutorial`, contains just `ca.crt`. It is distinct from the operator's `postgresql-tutorial-tls` Secret, the Recipe's generated `postgresql-tutorial-credentials` Secret, and the authored `postgresql-credentials-tutorial` password Secret. The Container Recipe mounts the CA Secret as a Kubernetes Secret volume at `/etc/postgresql-ca`, which is inherently read-only. The Bicep definition references the CA resource by name and declares an explicit deployment dependency so the CA Secret is provisioned before the container. Neither the server private key nor the CA signing key is delivered to the container.
+In required mode, the CA-only Secret, `postgresql-ca-tutorial`, contains just `ca.crt`. It is distinct from the operator's `postgresql-tutorial-tls` Secret, the Recipe's generated `postgresql-tutorial-credentials` Secret, and the authored `postgresql-credentials-tutorial` password Secret. The Container Recipe mounts the CA Secret as a Kubernetes Secret volume at `/etc/postgresql-ca`, which is inherently read-only. The Bicep definition references the CA resource by name and declares an explicit deployment dependency so the CA Secret is provisioned before the container. Neither the server private key nor the CA signing key is delivered to the container.
 
-The sample opts into certificate and hostname verification with `RADIUS_DEMO_POSTGRESQL_TLS=verify-full` and sets `RADIUS_DEMO_POSTGRESQL_CA_FILE` to `/etc/postgresql-ca/ca.crt`. A missing or invalid CA, an untrusted server certificate, or a hostname mismatch stops the connection; the client does not retry without TLS. Do not use `CONNECTION_POSTGRESQL_TLS` as proof of encryption: older Recipes could return `required` without configuring server TLS.
+Required mode opts into certificate and hostname verification with `RADIUS_DEMO_POSTGRESQL_TLS=verify-full` and sets `RADIUS_DEMO_POSTGRESQL_CA_FILE` to `/etc/postgresql-ca/ca.crt`. A missing or invalid CA, an untrusted server certificate, or a hostname mismatch stops the connection; the client does not retry without TLS. Disabled mode omits both settings, skips the conditional CA resource and its mount, and explicitly sets `PGSSLMODE=disable`. It uses the existing client's plaintext connection behavior; do not set `RADIUS_DEMO_POSTGRESQL_TLS=disabled`, which is not a supported client setting. Do not use `CONNECTION_POSTGRESQL_TLS` as proof of encryption: older Recipes could return `required` without configuring server TLS.
 
 > **Caution:** The Radius Demo displays all `CONNECTION_*` environment variables it receives, including this password, to illustrate connection injection. Do not display secret values in a production application.
 >
@@ -152,7 +178,7 @@ The sample opts into certificate and hostname verification with `RADIUS_DEMO_POS
 
 ## Redeploy the application
 
-Create a protected JSON parameter file that contains the database password, the public CA certificate, and the approved retained client image digest. The `image` parameter has no default in this draft. Set `IMAGE` only to the verified public digest from the installation preflight; do not use `latest` or guess an unpublished image. The digest's syntax alone does not prove that the image exists, supports TLS, or will be retained.
+Create a protected JSON parameter file containing the selected mode, database password, and approved retained client image digest. Include the public CA certificate only for required mode. The `image` parameter has no default in this draft. Set `IMAGE` only to the verified public digest from the installation preflight; do not use `latest` or guess an unpublished image. The digest's syntax alone does not prove that the image exists, supports the tutorial, or will be retained.
 
 The serializer preserves the PEM line breaks without manual escaping. Run this once for this tutorial deployment; reuse the file when redeploying rather than silently changing the database password.
 
@@ -162,43 +188,53 @@ if [[ ! "$IMAGE" =~ ^ghcr\.io/radius-project/samples/demo@sha256:[0-9a-f]{64}$ ]
   printf 'Use the approved retained demo image digest, not a mutable tag.\n' >&2
   exit 1
 fi
-if [[ -e "$TLS_DIR/password.txt" || -e "$TLS_DIR/app.parameters.json" ]]; then
+if [[ -e "$PARAMETER_DIR/password.txt" || -e "$PARAMETER_DIR/app.parameters.json" ]]; then
   printf 'Tutorial parameters already exist. Reuse them instead of generating a new password.\n' >&2
   exit 1
 fi
-openssl rand -hex 32 | tr -d '\n' > "$TLS_DIR/password.txt"
+test "$(cat "$PARAMETER_DIR/postgresql-mode.txt")" = "$POSTGRESQL_TLS"
+openssl rand -hex 32 | tr -d '\n' > "$PARAMETER_DIR/password.txt"
+ca_args=(--arg ca '')
+if [[ "$POSTGRESQL_TLS" == required ]]; then
+  ca_args=(--rawfile ca "$TLS_DIR/ca.crt")
+fi
 jq -n \
   --arg image "$IMAGE" \
-  --rawfile password "$TLS_DIR/password.txt" \
-  --rawfile ca "$TLS_DIR/ca.crt" \
+  --arg mode "$POSTGRESQL_TLS" \
+  --rawfile password "$PARAMETER_DIR/password.txt" \
+  "${ca_args[@]}" \
   '{
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
     contentVersion: "1.0.0.0",
-    parameters: {
+    parameters: ({
       image: {value: $image},
       password: {value: $password},
-      postgresqlCaCertificate: {value: $ca}
-    }
-  }' > "$TLS_DIR/app.parameters.json"
-chmod 600 "$TLS_DIR/password.txt" "$TLS_DIR/app.parameters.json"
+      postgresqlTls: {value: $mode}
+    } + (if $mode == "required" then
+      {postgresqlCaCertificate: {value: $ca}} else {} end))
+  }' > "$PARAMETER_DIR/app.parameters.json"
+chmod 600 "$PARAMETER_DIR/password.txt" "$PARAMETER_DIR/app.parameters.json"
 ```
 
 Only file paths, not passwords or private keys, appear in command arguments. The parameter file itself contains a password: keep it private and out of source control even though the Bicep password parameter is marked `@secure()`. It contains no server private key or CA signing key.
 
 Deploy the updated definition from its published URL, targeting only the tutorial Environment:
 
-{{< rad-deploy path="samples/demo/app-postgresql.bicep" args=`--environment tutorial --group default --config "$RAD_CONFIG" --parameters "@$TLS_DIR/app.parameters.json"` >}}
+{{< rad-deploy path="samples/demo/app-postgresql.bicep" args=`--environment tutorial --group default --config "$RAD_CONFIG" --parameters "@$PARAMETER_DIR/app.parameters.json"` >}}
 
 The remote Bicep definition accepts the CA as a parameter. It must not use `loadTextContent` to read a file relative to the remote URL.
 
 ### Parameter files in PowerShell
 
-Native PowerShell can serialize the parameter file, but the deployment commands in this guide still run in the isolated Bash/WSL shell. Read the existing `ca.crt` and `password.txt` files through their Windows-accessible WSL path. Do not copy the server key or CA signing key into Windows just to create this parameter file, and do not switch to an unverified native Windows compiler/cache for deployment.
+Native PowerShell can serialize the parameter file, but the deployment commands in this guide still run in the isolated Bash/WSL shell. Read the existing `postgresql-mode.txt` and `password.txt` through their Windows-accessible WSL path; required mode also reads `ca.crt` from the separate certificate directory. Do not copy the server key or CA signing key into Windows just to create this parameter file, and do not switch to an unverified native Windows compiler/cache for deployment.
 
 In WSL, print the Windows-accessible directory path without printing its contents:
 
 ```bash
-wslpath -w "$TLS_DIR"
+wslpath -w "$PARAMETER_DIR"
+if [[ "$POSTGRESQL_TLS" == required ]]; then
+  wslpath -w "$TLS_DIR"
+fi
 ```
 
 This alternative creates a separate temporary directory and sets a new access control list (ACL) that grants access only to your Windows account before writing the parameter file. It disables inherited permissions without changing the original certificate directory.
@@ -209,7 +245,14 @@ $Image = Read-Host 'Approved retained demo image digest from the installation pr
 if ($Image -cnotmatch '^ghcr\.io/radius-project/samples/demo@sha256:[0-9a-f]{64}$') {
     throw 'Use the approved retained demo image digest, not a mutable tag.'
 }
-$TlsDir = Read-Host 'Absolute path to the protected directory containing ca.crt and password.txt'
+$InputDir = Read-Host 'Absolute path to the protected directory containing postgresql-mode.txt and password.txt'
+$Mode = [System.IO.File]::ReadAllText((Join-Path $InputDir 'postgresql-mode.txt'))
+if ($Mode -cnotin @('required', 'disabled')) {
+    throw 'The saved mode must be required or disabled.'
+}
+if ($Mode -ceq 'required') {
+    $TlsDir = Read-Host 'Absolute path to the protected certificate directory containing ca.crt'
+}
 $ParameterDir = Join-Path ([System.IO.Path]::GetTempPath()) (
     'radius-postgresql-parameters-' + [guid]::NewGuid().ToString('N')
 )
@@ -228,11 +271,14 @@ $Parameters = @{
     parameters = @{
         image = @{ value = $Image }
         password = @{
-            value = [System.IO.File]::ReadAllText((Join-Path $TlsDir 'password.txt'))
+            value = [System.IO.File]::ReadAllText((Join-Path $InputDir 'password.txt'))
         }
-        postgresqlCaCertificate = @{
-            value = [System.IO.File]::ReadAllText((Join-Path $TlsDir 'ca.crt'))
-        }
+        postgresqlTls = @{ value = $Mode }
+    }
+}
+if ($Mode -ceq 'required') {
+    $Parameters.parameters.postgresqlCaCertificate = @{
+        value = [System.IO.File]::ReadAllText((Join-Path $TlsDir 'ca.crt'))
     }
 }
 $ParametersPath = Join-Path $ParameterDir 'app.parameters.json'
@@ -263,9 +309,10 @@ Remove-Item -LiteralPath $ParameterDir
 
 ## Verify the database connection
 
-Wait for the database and application Deployments, then compare the database's returned host with the name covered by the certificate:
+Wait for the database and application Deployments, then compare the database's returned host with the expected Service hostname. In required mode, this is also the name covered by the certificate:
 
 ```bash
+test "$(cat "$PARAMETER_DIR/postgresql-mode.txt")" = "$POSTGRESQL_TLS"
 kubectl rollout status "deployment/$DB_NAME" -n "$NAMESPACE" \
   --context "$KUBE_CONTEXT" --timeout=180s
 kubectl rollout status deployment/demo-tutorial -n "$NAMESPACE" \
@@ -280,38 +327,84 @@ if [[ "$actual_host" != "$DB_HOST" ]]; then
 fi
 ```
 
-Readiness alone does not prove an authenticated TLS connection. Use the database container's `psql` client to connect over TCP to the full Service hostname. This command streams only the public CA into a temporary file. The database password is read from the container's existing environment, not passed as a command argument or printed:
+For a fresh disabled deployment, confirm that neither the operator TLS Secret nor the application CA Secret exists. Check the Radius resource and Kubernetes volume definitions too. A failed lookup must stop the check, not count as an absent resource:
 
 ```bash
+if [[ "$POSTGRESQL_TLS" == disabled ]]; then
+  for secret in "$SERVER_SECRET" postgresql-ca-tutorial; do
+    existing="$(kubectl get secret "$secret" -n "$NAMESPACE" \
+      --context "$KUBE_CONTEXT" --ignore-not-found -o name)"
+    if [[ -n "$existing" ]]; then
+      printf 'Unexpected certificate Secret %s in this fresh disabled deployment.\n' "$secret" >&2
+      exit 1
+    fi
+  done
+  rad resource list Radius.Security/secrets --group default --preview \
+    --config "$RAD_CONFIG" --output json \
+    | jq -e 'if type != "array" then error("Expected a resource list")
+      else all(.[]; .name != "postgresql-ca-tutorial") end'
+  kubectl get deployment demo-tutorial -n "$NAMESPACE" \
+    --context "$KUBE_CONTEXT" -o json \
+    | jq -e '
+        all(.spec.template.spec.volumes[]?;
+          .name != "postgresql-ca" and .secret.secretName != "postgresql-ca-tutorial") and
+        all(.spec.template.spec.containers[].volumeMounts[]?;
+          .mountPath != "/etc/postgresql-ca" and .name != "postgresql-ca")
+      '
+fi
+```
+
+Readiness alone does not prove that the selected transport works. Use the database container's `psql` client to connect over TCP to the full Service hostname. Required mode streams the public CA into a temporary file and verifies it; disabled mode reads no CA and explicitly disables TLS. The database password comes from the container's existing environment, not command arguments:
+
+```bash
+ca_input=/dev/null
+if [[ "$POSTGRESQL_TLS" == required ]]; then
+  ca_input="$TLS_DIR/ca.crt"
+fi
 kubectl exec -i "deployment/$DB_NAME" -n "$NAMESPACE" \
   --context "$KUBE_CONTEXT" -c postgres -- sh -ec '
     set +x
     umask 077
-    ca_file="$(mktemp)"
-    trap "rm -f -- \"$ca_file\"" EXIT
-    cat > "$ca_file"
     export PGPASSWORD="$POSTGRES_PASSWORD"
-    export PGSSLMODE=verify-full
-    export PGSSLROOTCERT="$ca_file"
+    case "$2" in
+      required)
+        ca_file="$(mktemp)"
+        trap "rm -f -- \"$ca_file\"" EXIT
+        cat > "$ca_file"
+        export PGSSLMODE=verify-full
+        export PGSSLROOTCERT="$ca_file"
+        expected=t
+        ;;
+      disabled)
+        export PGSSLMODE=disable
+        unset PGSSLROOTCERT
+        expected=f
+        ;;
+      *) printf "Unknown tutorial transport.\n" >&2; exit 1 ;;
+    esac
     ssl="$(psql --host="$1" --port=5432 \
       --username="$POSTGRES_USER" --dbname="$POSTGRES_DB" \
       --no-password --set=ON_ERROR_STOP=1 --tuples-only --no-align \
       --command="SELECT ssl FROM pg_stat_ssl WHERE pid=pg_backend_pid();")"
-    if [ "$ssl" != t ]; then
-      printf "The authenticated database session is not encrypted.\n" >&2
+    if [ "$ssl" != "$expected" ]; then
+      printf "The authenticated database session does not match the selected transport.\n" >&2
       exit 1
     fi
-    printf "Authenticated TLS certificate and hostname verification succeeded.\n"
-  ' sh "$DB_HOST" < "$TLS_DIR/ca.crt"
+    if [ "$2" = required ]; then
+      printf "Authenticated TLS certificate and hostname verification succeeded.\n"
+    else
+      printf "Authenticated plaintext connection succeeded (TLS explicitly disabled).\n"
+    fi
+  ' sh "$DB_HOST" "$POSTGRESQL_TLS" < "$ca_input"
 ```
 
-This verifies the `psql` session, not the Node application's session. Next, run a check inside the demo container using its own repository factory and connection settings. It rejects the in-memory fallback, checks the Node client's TLS session, and exercises the running application's HTTP API. SQL queries independently confirm the HTTP writes and deletion in the `items` table.
+This verifies the `psql` session, not the Node application's session. Next, run a check inside the demo container using its own repository factory and connection settings. It rejects the in-memory fallback, checks whether the Node session uses TLS as selected, and exercises the running application's HTTP API. SQL queries independently confirm the HTTP writes and deletion in the `items` table.
 
 The test creates and deletes one to-do item. If a check fails before cleanup, the test item may remain; fix the reported error and remove only that test item. No password or connection string is printed.
 
 ```bash
 kubectl exec -i deployment/demo-tutorial -n "$NAMESPACE" \
-  --context "$KUBE_CONTEXT" -c web -- node <<'NODE'
+  --context "$KUBE_CONTEXT" -c web -- node - "$POSTGRESQL_TLS" <<'NODE'
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -319,17 +412,26 @@ const { randomUUID } = require('node:crypto');
 const { createFactory } = require(`${process.cwd()}/dist/db/repository`);
 
 async function verify() {
-  assert.equal(process.env.RADIUS_DEMO_POSTGRESQL_TLS, 'verify-full');
-  const caFile = process.env.RADIUS_DEMO_POSTGRESQL_CA_FILE;
-  assert.equal(caFile, '/etc/postgresql-ca/ca.crt');
-  fs.accessSync(caFile, fs.constants.R_OK);
-  const writeProbe = path.join(path.dirname(caFile), `readonly-${randomUUID()}`);
-  try {
-    fs.writeFileSync(writeProbe, '');
-    fs.unlinkSync(writeProbe);
-    throw new Error('The CA mount is writable.');
-  } catch (error) {
-    if (error.code !== 'EROFS') throw error;
+  const mode = process.argv[2];
+  assert.ok(mode === 'required' || mode === 'disabled');
+  if (mode === 'required') {
+    assert.equal(process.env.RADIUS_DEMO_POSTGRESQL_TLS, 'verify-full');
+    const caFile = process.env.RADIUS_DEMO_POSTGRESQL_CA_FILE;
+    assert.equal(caFile, '/etc/postgresql-ca/ca.crt');
+    fs.accessSync(caFile, fs.constants.R_OK);
+    const writeProbe = path.join(path.dirname(caFile), `readonly-${randomUUID()}`);
+    try {
+      fs.writeFileSync(writeProbe, '');
+      fs.unlinkSync(writeProbe);
+      throw new Error('The CA mount is writable.');
+    } catch (error) {
+      if (error.code !== 'EROFS') throw error;
+    }
+  } else {
+    assert.equal(process.env.RADIUS_DEMO_POSTGRESQL_TLS, undefined);
+    assert.equal(process.env.RADIUS_DEMO_POSTGRESQL_CA_FILE, undefined);
+    assert.equal(process.env.PGSSLMODE, 'disable');
+    assert.throws(() => fs.statSync('/etc/postgresql-ca'), { code: 'ENOENT' });
   }
 
   const factory = createFactory();
@@ -340,10 +442,10 @@ async function verify() {
     const tls = await repository.pool.query(
       'SELECT ssl FROM pg_stat_ssl WHERE pid = pg_backend_pid()'
     );
-    assert.deepEqual(tls.rows, [{ ssl: true }]);
+    assert.deepEqual(tls.rows, [{ ssl: mode === 'required' }]);
 
     const base = 'http://127.0.0.1:3000/api/todos';
-    const initial = { title: 'verified-tls-persistence', done: false };
+    const initial = { title: 'verified-database-persistence', done: false };
     const createdResponse = await fetch(base, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -358,7 +460,7 @@ async function verify() {
       (await repository.pool.query(rowQuery, [created.id])).rows, [initial]
     );
 
-    const updated = { title: 'verified-tls-update', done: true };
+    const updated = { title: 'verified-database-update', done: true };
     const updateResponse = await fetch(itemUrl, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -381,7 +483,9 @@ async function verify() {
     assert.deepEqual(
       (await repository.pool.query(rowQuery, [created.id])).rows, []
     );
-    console.log('PostgreSQL backend, verified Node TLS, read-only CA mount, and HTTP/SQL CRUD passed.');
+    console.log(mode === 'required'
+      ? 'PostgreSQL backend, verified Node TLS, read-only CA mount, and HTTP/SQL CRUD passed.'
+      : 'PostgreSQL backend, explicit plaintext, absent CA mount, and HTTP/SQL CRUD passed.');
   } finally {
     await repository.dispose();
   }
@@ -393,11 +497,11 @@ verify().catch(error => {
 NODE
 ```
 
-Do not proceed merely because `rad deploy` succeeds or the browser loads. The Node check must report success without relaxing certificate or hostname verification.
+Do not proceed merely because `rad deploy` succeeds or the browser loads. The Node check must report success for the selected mode. Never switch to disabled to hide a required-mode certificate or hostname error.
 
 ### Browse the connected application
 
-Radius creates the database and application-owned Secrets, then updates the container with its connections and CA mount. Forward a local port to the container and open the application again:
+Radius creates the database and application-owned Secrets, then updates the container with its connections and, in required mode, its CA mount. Forward a local port to the container and open the application again:
 
 ```bash
 kubectl port-forward svc/demo-tutorial-web 3000:3000 \
@@ -418,9 +522,9 @@ Open [http://localhost:7007](http://localhost:7007), select the `demo-tutorial` 
 
 To learn more about modeling dependencies between resources, see [How to model application dependencies using connections]({{< ref "/applications/connections" >}}).
 
-## Troubleshoot a failed TLS connection
+## Troubleshoot a failed connection
 
-Keep verification enabled while diagnosing failures. Do not set `PGSSLMODE=no-verify`, disable certificate validation, or retry with plaintext.
+For required mode, keep verification enabled while diagnosing failures. Do not disable certificate validation or retry with plaintext. For disabled mode, confirm that you selected it explicitly on a fresh disposable deployment; do not add certificates to disguise a wrong Recipe or stale deployment.
 
 | Symptom | What to check |
 | --- | --- |
@@ -431,10 +535,12 @@ Keep verification enabled while diagnosing failures. Do not set `PGSSLMODE=no-ve
 | Client reports a hostname mismatch | Compare the database's returned host to `postgresql-tutorial.<runtime-namespace>.svc.cluster.local` and the certificate's DNS SAN. Reissue the certificate for that exact name; do not override hostname verification. |
 | Server does not support TLS | Inspect the Environment's selected Recipe Pack and stored PostgreSQL source. A `tls` schema property or projected connection value alone does not prove that the selected Recipe enforces TLS. |
 | Browser works but no database data appears | Confirm that the Node application selected its PostgreSQL backend, not the in-memory fallback, and verify its database session and stored rows. A successful deployment or page load alone is not proof of a working database connection. |
+| Disabled deployment still needs certificates | Check the selected Recipe version and the explicit `postgresqlTls` parameter. `optional` is not certificate-free. A fresh disabled deployment must have no CA Secret or mount and must set `PGSSLMODE=disable`. |
+| Azure rejects disabled | This mode is supported only by the Kubernetes Recipes. Use a supported Azure transport policy; do not bypass the validation wrapper or change server settings to force this tutorial's disabled path onto Azure. |
 
 ## Clean up
 
-If a port forward is still running, stop it with `Ctrl+C`. Delete the Radius Demo application from the same tutorial shell. Its database, authored password Secret, and CA-only Secret belong to the application and are deleted with the container. The operator-owned server Secret does not belong to the application and must remain:
+If a port forward is still running, stop it with `Ctrl+C`. Delete the Radius Demo application from the same tutorial shell. Its database, authored password Secret, and any CA-only Secret belong to the application and are deleted with the container. In required mode, the operator-owned server Secret does not belong to the application and must remain:
 
 <!-- TODO: Remove the `--preview` flag when the Radius.Core Application implementation is no longer in preview. -->
 ```bash
@@ -442,9 +548,10 @@ rad application delete demo-tutorial --environment tutorial --group default \
   --preview --config "$RAD_CONFIG"
 ```
 
-Check that the server Secret still has the UID recorded when you created it. If it has been replaced, stop and ask its current owner before deleting anything:
+For required mode, check that the server Secret still has the UID recorded when you created it. If it has been replaced, stop and ask its current owner before deleting anything. Disabled mode skips this check:
 
 ```bash
+if [[ "$POSTGRESQL_TLS" == required ]]; then
 original_uid="$(cat "$TLS_DIR/server-secret.uid")"
 current_uid="$(kubectl get secret "$SERVER_SECRET" -n "$NAMESPACE" \
   --context "$KUBE_CONTEXT" -o jsonpath='{.metadata.uid}')"
@@ -452,17 +559,22 @@ if [[ "$current_uid" != "$original_uid" ]]; then
   printf 'Server Secret identity changed; do not delete it.\n' >&2
   exit 1
 fi
+fi
 ```
 
 For the local certificate created by this tutorial, delete that server Secret when you no longer need it. Retain operator-provided certificate resources unless their owner authorizes removal:
 
 ```bash
+if [[ "$POSTGRESQL_TLS" == required ]]; then
 kubectl delete secret "$SERVER_SECRET" -n "$NAMESPACE" --context "$KUBE_CONTEXT"
-rm -- "$TLS_DIR/server-secret.uid" "$TLS_DIR/app.parameters.json" \
-  "$TLS_DIR/password.txt" "$TLS_DIR/server.crt" "$TLS_DIR/server.key" \
+rm -- "$TLS_DIR/server-secret.uid" "$TLS_DIR/server.crt" "$TLS_DIR/server.key" \
   "$TLS_DIR/server.csr" "$TLS_DIR/server.ext" "$TLS_DIR/ca.crt" \
   "$TLS_DIR/ca.key" "$TLS_DIR/ca.srl"
 rmdir -- "$TLS_DIR"
+fi
+rm -- "$PARAMETER_DIR/app.parameters.json" "$PARAMETER_DIR/password.txt" \
+  "$PARAMETER_DIR/postgresql-mode.txt"
+rmdir -- "$PARAMETER_DIR"
 ```
 
 Delete only the files you created for this tutorial. Do not delete a shared namespace or an operator's certificate directory. File removal is not a guarantee of secure erasure on the underlying storage.
@@ -470,7 +582,7 @@ Delete only the files you created for this tutorial. Do not delete a shared name
 Once no application uses the tutorial Environment, remove that Environment and its dedicated Recipe Pack. Do not remove the installation's default Environment or default Recipe Pack:
 
 ```bash
-rad environment delete tutorial --group default --preview --config "$RAD_CONFIG"
+rad environment delete tutorial --group default --config "$RAD_CONFIG"
 rad recipe-pack delete tutorial-postgresql-tls --group default --config "$RAD_CONFIG"
 ```
 

@@ -6,7 +6,7 @@ description: "Install Radius on a Kubernetes cluster and initialize your first a
 weight: 100
 ---
 
-> **Work in progress: do not publish or run this draft.** The sample checkpoint is synchronized. Approved public Recipe sources, a retained client image, and validation against that public artifact tuple are still pending.
+> **Work in progress: do not publish or run this draft.** Approved public Recipe sources, a retained client image, a compatible public Bicep extension, and validation against that public artifact tuple are still pending.
 
 In part one, you will install Radius on a disposable Kubernetes cluster that you own. Do not use a shared cluster, a production database, or an existing application Environment for this tutorial.
 
@@ -14,7 +14,7 @@ In part one, you will install Radius on a disposable Kubernetes cluster that you
 
 You need a **Kubernetes cluster** and `kubectl`. To install Radius, your user must have the cluster-admin role. Radius <a href="{{< ref "installation#supported-kubernetes-clusters" >}}">supports</a> <a href="https://azure.microsoft.com/en-us/products/kubernetes-service">AKS</a>, <a href="https://aws.amazon.com/eks/">EKS</a>, <a href="https://k3d.io/">k3d</a>, and <a href="https://kind.sigs.k8s.io/">kind</a> clusters. Use a disposable local cluster with k3d or kind for this guide.
 
-The PostgreSQL certificate steps use **Bash on Linux, or Bash in WSL2 on Windows**, with **OpenSSL 1.1.1 or newer** and `jq`. The compiler preflight also uses `curl` and `sha256sum`. Native PowerShell does not include OpenSSL. On Windows, run certificate generation in your WSL2 Linux filesystem, not in a Windows-mounted repository or a synchronized folder; Linux permissions protect the private key files there. Run `rad` and `kubectl` against the same tutorial cluster from that shell.
+Use **Bash on Linux, or Bash in WSL2 on Windows**, with **OpenSSL 1.1.1 or newer** and `jq`. Both tutorial modes use OpenSSL to generate a password; only the default `required` mode uses it to issue certificates. The compiler preflight also uses `curl` and `sha256sum`. Native PowerShell does not include OpenSSL. On Windows, create private files in your WSL2 Linux filesystem, not in a Windows-mounted repository or a synchronized folder; Linux permissions protect them there. Run `rad` and `kubectl` against the same tutorial cluster from that shell.
 
 Check the tools before continuing:
 
@@ -28,6 +28,8 @@ kubectl version --client
 ```
 
 Confirm that `openssl version` reports OpenSSL 1.1.1 or a newer supported OpenSSL release. The certificate commands use its `-addext` and `-verify_hostname` options. An operator can instead supply a server certificate and matching private key issued by an existing certificate authority, provided the certificate covers the database Service's exact DNS name.
+
+The connection step defaults to verified TLS (`required`). It also offers an explicit `disabled` choice for a disposable Kubernetes database on a trusted, private network. That choice needs no certificates and sends credentials and data without TLS. It is not a fallback for certificate errors. The separate `optional` resource policy still needs certificates and accepts both TLS and plaintext; it is not a tutorial choice. Azure rejects `disabled`.
 
 ## Install the Radius CLI
 
@@ -144,7 +146,7 @@ ENVIRONMENT=tutorial
 NAMESPACE=radius-tutorial
 PACK_NAME=tutorial-postgresql-tls
 
-environments="$(rad environment list --group default --preview \
+environments="$(rad environment list --group default \
   --config "$RAD_CONFIG" --output json)"
 if ! jq -e --arg name "$ENVIRONMENT" --arg namespace "$NAMESPACE" '
   if type != "array" then error("Expected an Environment list")
@@ -176,9 +178,9 @@ fi
 
 kubectl create namespace "$NAMESPACE" --context "$KUBE_CONTEXT"
 rad environment create "$ENVIRONMENT" --group default \
-  --kubernetes-namespace "$NAMESPACE" --preview --config "$RAD_CONFIG"
+  --kubernetes-namespace "$NAMESPACE" --config "$RAD_CONFIG"
 
-rad environment show "$ENVIRONMENT" --group default --preview \
+rad environment show "$ENVIRONMENT" --group default \
   --config "$RAD_CONFIG" --output json \
   | jq -e --arg namespace "$NAMESPACE" \
       '.properties.providers.kubernetes.namespace == $namespace'
@@ -188,9 +190,11 @@ The namespace is created explicitly; creating a Radius Environment does not by i
 
 ## Select the tutorial Recipe Pack
 
-**Publication hold:** the approved public Recipe sources, retained client image, and compatible CLI/runtime/schema tuple are not yet available in this draft. Do not continue to application deployment or substitute `edge`, `latest`, an unpublished tag, or a Recipe digest-only reference.
+**Publication hold:** the approved public Recipe sources, retained client image, public unified Bicep extension, and compatible CLI/runtime/schema tuple are not yet available in this draft. Both tutorial modes require validation against those exact artifacts. Record the public extension reference and digest, clean-cache compilation of the exact public sample for both modes, and registered runtime schema support before removing this hold. Published Recipe tags alone do not establish compiler support for `disabled`; a locally built extension proves only private candidate compatibility. Do not continue to application deployment or substitute `edge`, `latest`, an unpublished tag, or a Recipe digest-only reference. The Azure validation wrapper must be published and verified before the shared schema and Azure pack are activated; this draft grants no publication or rollout approval.
 
 The public `postgresql-tls-pack.bicep` helper selects the tested PostgreSQL, Container, and Secret Recipes. Recipe sources use raw registry paths and tags, without a `br:` prefix. The public tutorial must not enable plain HTTP or use the helper's isolated CI registry exception. The client image is supplied separately to the application by its approved retained digest.
+
+Use this same compatible pack for either tutorial mode. A legacy plaintext Recipe that ignores `tls` does not implement `disabled`. Keep the Secret Recipe mapping: the application needs its password Secret even without certificates.
 
 <div class="td-max-width-on-larger-screens" style="margin-bottom: -2rem;"><a href="https://github.com/radius-project/samples/blob/{{< param version >}}/samples/demo/postgresql-tls-pack.bicep" target="_blank" rel="noopener">samples/demo/postgresql-tls-pack.bicep</a></div>
 
@@ -219,13 +223,24 @@ curl -fsSL https://docs.radapp.io/samples/demo/app-postgresql.bicep \
 
 ```bash
 cat bicepconfig.json
-"$HOME/.rad/bin/bicep" build postgresql-tls-pack.bicep --stdout > /dev/null
-"$HOME/.rad/bin/bicep" build app-postgresql.bicep --stdout > /dev/null
+for template in postgresql-tls-pack.bicep app-postgresql.bicep; do
+  if ! "$HOME/.rad/bin/bicep" build "$template" --stdout \
+      > /dev/null 2> "$template.diagnostics"; then
+    cat "$template.diagnostics" >&2
+    exit 1
+  fi
+  if [[ -s "$template.diagnostics" ]]; then
+    cat "$template.diagnostics" >&2
+    printf 'Resolve compiler diagnostics before deploying the tutorial.\n' >&2
+    exit 1
+  fi
+  rm -- "$template.diagnostics"
+done
 find "$HOME/.bicep" -type f \( -name manifest -o -name types.tgz \) \
   -exec sha256sum {} \;
 ```
 
-Compare the compiler version, configured Radius extension reference, and restored manifest and type-bundle hashes with the tested tuple. The compiler restores missing types automatically; there is no need to invent a refresh flag or clear a shared cache. If `tls` is rejected or any expected version differs, stop rather than suppressing the error. Keep using this same shell, `HOME`, `KUBECONFIG`, and `RAD_CONFIG` for deployment.
+Compare the compiler version, configured Radius extension reference, and restored manifest and type-bundle hashes with the tested tuple. The compiler restores missing types automatically; there is no need to invent a refresh flag or clear a shared cache. An older extension may report an unsupported `disabled` value as a warning rather than a build failure, so the preflight stops on diagnostics too. Resolve them instead of suppressing them. Keep using this same shell, `HOME`, `KUBECONFIG`, and `RAD_CONFIG` for deployment.
 
 Once the approved public tuple is available, set `POSTGRESQL_RECIPE_SOURCE`, `CONTAINER_RECIPE_SOURCE`, and `SECRET_RECIPE_SOURCE` to its exact tagged Recipe references. These values are required inputs, not defaults. Set `IMAGE` to the tuple's retained client image digest for the later application deployment.
 
@@ -267,14 +282,14 @@ Deploy the pack before deploying the base application:
 After deploying the verified pack into the tutorial Environment, assign it only to that Environment and inspect its stored sources:
 
 ```bash
-rad environment update "$ENVIRONMENT" --group default --preview \
+rad environment update "$ENVIRONMENT" --group default \
   --recipe-packs "$PACK_NAME" --config "$RAD_CONFIG"
 rad recipe-pack show "$PACK_NAME" --group default \
   --config "$RAD_CONFIG" --output json
 
 pack_id="$(rad recipe-pack show "$PACK_NAME" --group default \
   --config "$RAD_CONFIG" --output json | jq -er '.id')"
-rad environment show "$ENVIRONMENT" --group default --preview \
+rad environment show "$ENVIRONMENT" --group default \
   --config "$RAD_CONFIG" --output json \
   | jq -e --arg namespace "$NAMESPACE" --arg pack "$pack_id" '
       .properties.providers.kubernetes.namespace == $namespace and
@@ -292,13 +307,15 @@ rad resource-type show Radius.Data/postgreSqlDatabases \
   --config "$RAD_CONFIG" --output json > postgresql-schema.json
 jq -e '
   .APIVersions["2025-08-01-preview"].Schema.properties.tls |
-  .type == "string" and (.enum | index("required") != null)
+  .type == "string" and .default == "required" and
+  (.enum | index("required") != null and
+           index("optional") != null and index("disabled") != null)
 ' postgresql-schema.json
 jq -S '.APIVersions["2025-08-01-preview"].Schema' postgresql-schema.json \
   | sha256sum
 ```
 
-The first check must return `true`. Record the schema hash with the compiler and Recipe sources. If the field is absent or `required` is unsupported, stop; installing a fresh compiler extension alone does not update the running control plane's registered schema.
+The first check must return `true`. Record the schema hash with the compiler and Recipe sources. If the default or any policy differs, stop; installing a fresh compiler extension alone does not update the running control plane's registered schema. The compiled sample must also accept its `required` and `disabled` parameter values. Schema and compiler checks do not prove either server behavior; the connection step checks the deployed database and client.
 
 Record the control-plane container images and resolved image IDs, rather than relying only on mutable image tags:
 
