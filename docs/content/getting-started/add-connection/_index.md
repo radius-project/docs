@@ -6,7 +6,7 @@ description: "Add a PostgreSQL database and connect the Radius Demo container to
 weight: 300
 ---
 
-> **Work in progress: do not publish or run this draft.** The embedded samples match signed samples commit `f53bcf6cd25537695d74742c3206545e16d1d3b6`. Deployment remains blocked on approved public Recipes, a retained client image, a compatible public Bicep extension, and validation of both modes against that public artifact tuple. The branch-based source links may not yet match this draft's sample checkpoint.
+> **Work in progress: do not publish or run this draft.** The embedded samples match signed samples commit `d6d71144e81afd9180e88fc6b814a726e3498221`. Deployment remains blocked on approved public Recipes, a retained client image, a compatible public Bicep extension, and validation of both modes against that public artifact tuple. The branch-based source links may not yet match this draft's sample checkpoint.
 
 The Radius Demo application runs on its own, but most applications depend on other resources such as databases and caches. In this step you will add a PostgreSQL database and an authored password Secret. By default, you will also add a separate CA-only Secret so the container verifies the database server's certificate and DNS name.
 
@@ -157,7 +157,7 @@ The `app-postgresql.bicep` definition builds on `app.bicep` by adding a `Radius.
 
 <div class="td-max-width-on-larger-screens" style="margin-bottom: -2rem;"><a href="https://github.com/radius-project/samples/blob/{{< param version >}}/samples/demo/app-postgresql.bicep" target="_blank" rel="noopener">samples/demo/app-postgresql.bicep</a></div>
 
-{{< rad file="/static/samples/demo/app-postgresql.bicep" embed=true markdownConfig=` {hl_lines=["6-27","32","35","48-68","76-95","98-136"]}` >}}
+{{< rad file="/static/samples/demo/app-postgresql.bicep" embed=true markdownConfig=` {hl_lines=["6-27","32","35","48-68","76-95","98-137"]}` >}}
 
 [Download the application definition](/samples/demo/app-postgresql.bicep).
 
@@ -169,9 +169,9 @@ The `postgresql` connection tells Radius that the container depends on the datab
 
 The `postgresqlCredentials` connection points directly to the authored Secret. With a compatible Kubernetes Container Recipe, Radius projects its `password` key through a Kubernetes `secretKeyRef` as `CONNECTION_POSTGRESQLCREDENTIALS_PASSWORD`. The secret value remains in the Secret and is not copied into Recipe output or plaintext container configuration.
 
-In required mode, the CA-only Secret, `postgresql-ca-tutorial`, contains just `ca.crt`. It is distinct from the operator's `postgresql-tutorial-tls` Secret, the Recipe's generated `postgresql-tutorial-credentials` Secret, and the authored `postgresql-credentials-tutorial` password Secret. The Container Recipe mounts the CA Secret as a Kubernetes Secret volume at `/etc/postgresql-ca`, which is inherently read-only. The Bicep definition uses a shared name variable for the CA resource and mount, with an explicit deployment dependency so the CA Secret is provisioned before the container. This avoids reading a resource that disabled mode skips. Neither the server private key nor the CA signing key is delivered to the container.
+In required mode, the CA-only Secret, `postgresql-ca-tutorial`, contains just `ca.crt`. It is distinct from the operator's `postgresql-tutorial-tls` Secret, the Recipe's generated `postgresql-tutorial-credentials` Secret, and the authored `postgresql-credentials-tutorial` password Secret. The Container Recipe mounts the CA Secret as a Kubernetes Secret volume at `/etc/postgresql-ca`, which is inherently read-only. The Bicep definition uses a shared name variable for the CA resource and mount. Its CA resource collection creates one Secret in required mode and zero in disabled mode. An explicit dependency on that collection ensures that the required CA Secret is provisioned before the container without depending on a conditionally skipped resource. Neither the server private key nor the CA signing key is delivered to the container.
 
-Required mode opts into certificate and hostname verification with `RADIUS_DEMO_POSTGRESQL_TLS=verify-full` and sets `RADIUS_DEMO_POSTGRESQL_CA_FILE` to `/etc/postgresql-ca/ca.crt`. A missing or invalid CA, an untrusted server certificate, or a hostname mismatch stops the connection; the client does not retry without TLS. Disabled mode omits both settings, skips the conditional CA resource and its mount, and explicitly sets `PGSSLMODE=disable`. It uses the existing client's plaintext connection behavior; do not set `RADIUS_DEMO_POSTGRESQL_TLS=disabled`, which is not a supported client setting. Do not use `CONNECTION_POSTGRESQL_TLS` as proof of encryption: older Recipes could return `required` without configuring server TLS.
+Required mode opts into certificate and hostname verification with `RADIUS_DEMO_POSTGRESQL_TLS=verify-full` and sets `RADIUS_DEMO_POSTGRESQL_CA_FILE` to `/etc/postgresql-ca/ca.crt`. A missing or invalid CA, an untrusted server certificate, or a hostname mismatch stops the connection; the client does not retry without TLS. Disabled mode omits both settings, creates no CA resource or mount, and explicitly sets `PGSSLMODE=disable`. It uses the existing client's plaintext connection behavior; do not set `RADIUS_DEMO_POSTGRESQL_TLS=disabled`, which is not a supported client setting. Do not use `CONNECTION_POSTGRESQL_TLS` as proof of encryption: older Recipes could return `required` without configuring server TLS.
 
 > **Caution:** The Radius Demo displays all `CONNECTION_*` environment variables it receives, including this password, to illustrate connection injection. Do not display secret values in a production application.
 >
