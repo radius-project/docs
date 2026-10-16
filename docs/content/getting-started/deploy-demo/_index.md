@@ -23,7 +23,6 @@ Deploy the Radius Demo using `rad deploy`:
 Radius deploys the application to the `default` Environment. The `Radius.Compute/containers` resource is provisioned by a Recipe that creates a Kubernetes Deployment and a `ClusterIP` Service. Find the actual runtime namespace rather than assuming it matches the Environment's configured namespace:
 
 ```bash
-rad environment show default --preview --output json
 kubectl get deployment --all-namespaces \
   -l radapp.io/application=demo-default,radapp.io/resource=demo-default
 ```
