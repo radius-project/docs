@@ -96,7 +96,7 @@ resource dataRecipes 'Radius.Core/recipePacks@2025-08-01-preview' = {
 
 The `parameters` and `outputs` names come from the module you reference, so consult the module's own documentation for its input variables and outputs. Radius passes only the parameters you map; every other input uses the module's own default.
 
-> **PostgreSQL transport policy:** The custom Azure example above calls the AVM directly. It bypasses the guarded PostgreSQL Recipe's transport-policy validation, including its rejection of `tls: 'disabled'`; it does not map the resource's `tls` request. Do not assume a custom direct-AVM Recipe enforces that contract. See the [PostgreSQL operator guide](https://github.com/radius-project/resource-types-contrib/blob/131913259f3beb40807afed9730b454128f6d108/Data/postgreSqlDatabases/README.md#using-the-resource-type) for the candidate guarded Recipe and adoption requirements.
+> **PostgreSQL transport policy:** The custom Azure example above calls the AVM directly. It bypasses the guarded PostgreSQL Recipe's transport-policy validation, including its rejection of `tls: 'disabled'`; it does not map the resource's `tls` request. Do not assume a custom direct-AVM Recipe enforces that contract. See the [PostgreSQL operator guide](https://github.com/radius-project/resource-types-contrib/blob/67b77684cc165f069a392b7d3e9151318feab062/Data/postgreSqlDatabases/README.md#using-the-resource-type) for the candidate guarded Recipe and adoption requirements.
 
 ## Resolve developer inputs with context expressions
 
