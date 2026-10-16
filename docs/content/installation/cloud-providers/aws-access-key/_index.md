@@ -32,9 +32,8 @@ For more information, see [Manage access keys for IAM users](https://docs.aws.am
 
 If Radius has not been installed already, [`rad initialize --full`]({{< ref rad_initialize >}}) can be used to interactively install Radius and configure an AWS access key at the same time.
 
-<!-- TODO: Remove the `--preview` flag from `rad initialize --full` below once it is no longer required. -->
 ```bash
-rad initialize --full --preview
+rad initialize --full
 ```
 
 Follow the prompts:
@@ -58,12 +57,10 @@ Radius will use the provided access key for all interactions with AWS.
 
 If you have existing Environments, you must also update your Environments with your AWS region and AWS account ID:
 
-<!-- TODO: Remove the `--preview` flag from `rad environment` below once it is no longer required. -->
 ```bash
 rad environment update myEnvironment \
   --aws-region myAwsRegion \
-  --aws-account-id myAwsAccountId \
-  --preview
+  --aws-account-id myAwsAccountId
 ```
 
 This command updates the configuration of an environment for properties that are able to be changed. For more information visit [`rad environment update`]({{< ref rad_environment_update >}}).

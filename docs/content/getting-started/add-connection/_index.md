@@ -58,9 +58,8 @@ To learn more about modeling dependencies between resources, see [How to model a
 
 Delete the Radius Demo application. Because the database and authored Secret belong to this application, Radius deletes them with the container:
 
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Application implementation is no longer in preview. -->
 ```bash
-rad application delete demo-default --preview
+rad application delete demo-default
 ```
 
 Optionally, uninstall Radius and remove all of its data:
