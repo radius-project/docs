@@ -2,19 +2,23 @@
 type: docs
 title: "How to Install Radius"
 linkTitle: "Install Radius"
-description: "Learn how to install Radius on Kubernetes, configure cloud providers, and set up developer workstations"
+description: "Install Radius on Kubernetes, including Amazon EKS and Azure AKS, and configure AWS and Azure deployments."
 weight: 400
 aliases:
   - /guides/installation/
 ---
 
-Radius runs as a control plane on a Kubernetes cluster with a command-line interface for performing Radius commands. This guide covers how to install and configure each component required to run Radius. This includes:
+Radius runs as a control plane on a Kubernetes cluster, including Amazon EKS and Azure Kubernetes Service (AKS). The cluster that hosts Radius and the cloud resources it deploys are separate choices. To deploy AWS or Azure resources, register cloud credentials and configure the target Environment and its Recipe Packs.
+
+This guide covers:
 
 - How to install the [Radius CLI]({{< ref "/installation/cli" >}}) on your workstation.
 - How to install the [Radius control plane]({{< ref "/installation/control-plane" >}}) on a Kubernetes cluster.
-- How to configure [cloud providers]({{< ref "/installation/cloud-providers" >}}) to deploy to AWS and Azure.
+- How to register [cloud provider credentials]({{< ref "/installation/cloud-providers" >}}).
 - How to set up a [developer workstation]({{< ref "/installation/dev-workstation" >}}) to use Radius.
 - How to configure access to the [Radius Dashboard]({{< ref "/installation/dashboard/" >}}).
+
+After installation, follow [Configure AWS and Azure deployments]({{< ref "/aws-and-azure" >}}) to configure cloud credentials, an Environment, and Recipe Packs.
 
 ## System requirements
 

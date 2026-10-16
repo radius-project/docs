@@ -2,14 +2,14 @@
 type: docs
 title: "Radius Documentation"
 linkTitle: "Home"
-description: "Radius enables developers and the platform engineers that support them to build cloud-native applications"
+description: "Build and deploy applications on AWS, Azure, and local Kubernetes with Radius."
 weight: 1
 no_list: true
 ---
 
 {{% alert color="primary" %}}
 {{< image src="radius-logo.svg" alt="Radius logo" width="400px" >}} <br /><br />
-Radius is an open-source, multi-cloud application platform that helps developers and the platform engineers who support them build, deploy, and manage cloud-native applications. Teams get a clear view of their applications and how they run across environments, from dev to cloud, edge, and on-prem, while making sure their infrastructure meets cost, operations, and security requirements.
+Radius is an open-source application platform for AWS, Azure, and local Kubernetes, as well as edge and on-premises environments. Developers define applications and their dependencies. Platform engineers use recipes to control how and where those resources are deployed.
 {{% /alert %}}
 
 {{< button text="Get started with Radius 🚀" page="getting-started" color="success" size="btn-lg" >}}
@@ -34,10 +34,36 @@ Radius is an open-source, multi-cloud application platform that helps developers
 
   [**Learn about Recipes →**]({{< ref "concepts/recipe-packs" >}})
   {{% /card %}}
-  {{% card header="**🚀 Ship your app to any environment**" %}}
-  Define your application once and run it consistently across dev, cloud, edge, and on-prem, without rewriting it for each target.
+  {{% card header="**🚀 Deploy across environments**" %}}
+  Use the same application definition in local, AWS, and Azure Environments when their recipes implement the Resource Types your application uses. Each Environment selects its deployment targets and Recipe Packs.
 
   [**Understand environments →**]({{< ref "concepts/environments" >}})
+  {{% /card %}}
+{{< /cardpane >}}
+
+## Deploy to AWS and Azure
+
+{{< cardpane >}}
+  {{% card header="**🟨 Amazon Web Services (AWS)**" %}}
+  Run the Radius control plane on [Amazon EKS]({{< ref "installation#supported-kubernetes-clusters" >}}). To provision AWS resources through recipes, register an IAM access key or use IAM Roles for Service Accounts (IRSA).
+
+  [**Configure an IAM access key →**]({{< ref "installation/cloud-providers/aws-access-key" >}})
+
+  [**Configure IRSA →**]({{< ref "installation/cloud-providers/aws-irsa" >}})
+  {{% /card %}}
+  {{% card header="**🟦 Microsoft Azure**" %}}
+  Run the Radius control plane on [Azure Kubernetes Service (AKS)]({{< ref "installation#supported-kubernetes-clusters" >}}). To provision Azure resources through recipes, register a service principal or use workload identity.
+
+  [**Configure a service principal →**]({{< ref "installation/cloud-providers/azure-service-principal" >}})
+
+  [**Configure workload identity →**]({{< ref "installation/cloud-providers/azure-workload-identity" >}})
+  {{% /card %}}
+  {{% card header="**🎯 Configure deployment targets**" %}}
+  Cloud credentials authorize Radius to provision resources. Each Environment selects the target cloud configuration and Recipe Packs. Reuse an application definition across clouds when their recipes implement the Resource Types it uses.
+
+  [**Configure AWS and Azure deployments →**]({{< ref "aws-and-azure" >}})
+
+  [**Understand cross-cloud deployment →**]({{< ref "concepts#deploying-across-aws-and-azure" >}})
   {{% /card %}}
 {{< /cardpane >}}
 
