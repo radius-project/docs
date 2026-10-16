@@ -68,9 +68,8 @@ rad deploy app.bicep --environment dev
 
 After the deployment succeeds, inspect the Application graph:
 
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Application implementation is no longer in preview. -->
 ```bash
-rad application graph --application my-app --preview
+rad application graph --application my-app
 ```
 
 The graph shows the Radius resources, infrastructure created by recipes, and relationships between resources.
@@ -85,10 +84,9 @@ Start with the error returned by `rad deploy`. Errors generally occur in one of 
 
 Use JSON output when you need the complete resource details:
 
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Application implementation is no longer in preview. -->
 ```bash
-rad application status my-app --preview --output json
-rad application graph --application my-app --preview --output json
+rad application status my-app --output json
+rad application graph --application my-app --output json
 ```
 
 If a recipe creates Kubernetes resources, inspect the target namespace for failed workloads and events:
@@ -128,18 +126,16 @@ Review the resource before confirming deletion. Deleting a database, message bro
 
 Confirm that the removed resource no longer appears in the Application graph:
 
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Application implementation is no longer in preview. -->
 ```bash
-rad application graph --application my-app --preview
+rad application graph --application my-app
 ```
 
 ## Delete an Application
 
 Delete an Application when it and all of its owned resources are no longer needed:
 
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Application implementation is no longer in preview. -->
 ```bash
-rad application delete my-app --preview
+rad application delete my-app
 ```
 
 The command prompts for confirmation. Radius finds resources whose `application` property references `my-app`, deletes them, and then deletes the Application resource. Resources that are shared with or connected to the Application but are not owned by it are not deleted.

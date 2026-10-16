@@ -86,9 +86,8 @@ To authorize Radius to connect to AWS using IAM Roles for Service Accounts (IRSA
 
 If Radius has not been installed already, [`rad initialize --full`]({{< ref rad_initialize >}}) can be used to interactively install Radius and configure AWS IRSA at the same time.
 
-<!-- TODO: Remove the `--preview` flag from `rad initialize --full` below once it is no longer required. -->
 ```bash
-rad initialize --full --preview
+rad initialize --full
 ```
 
 Follow the prompts:
@@ -124,12 +123,10 @@ Radius will use the provided role ARN for all interactions with AWS.
 
 If you have existing Environments, you must also update your Environments with your AWS region and AWS account ID:
 
-<!-- TODO: Remove the `--preview` flag from `rad environment` below once it is no longer required. -->
 ```bash
 rad environment update myEnvironment \
   --aws-region myAwsRegion \
-  --aws-account-id myAwsAccountId \
-  --preview
+  --aws-account-id myAwsAccountId
 ```
 
 This command updates the configuration of an environment for properties that are able to be changed. For more information visit [`rad environment update`]({{< ref rad_environment_update >}}).

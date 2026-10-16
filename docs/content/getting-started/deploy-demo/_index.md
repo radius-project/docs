@@ -66,9 +66,8 @@ Open [http://localhost:7007](http://localhost:7007). Find the `demo-default` app
 
 The `rad application graph` command lists the resources the application is composed of:
 
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Application implementation is no longer in preview. -->
 ```bash
-rad application graph demo-default --preview
+rad application graph demo-default
 ```
 
 You should see output listing the underlying Kubernetes resources:
