@@ -1,5 +1,6 @@
 import contextlib
 import io
+import os
 import subprocess
 import unittest
 from unittest.mock import patch
@@ -52,7 +53,8 @@ class ValidationTests(unittest.TestCase):
         for diagnostic, expected in [(TLS_TYPE_WARNING, 1), (TLS_PROPERTY_WARNING, 1), ("", 0)]:
             with self.subTest(diagnostic=diagnostic):
                 result = subprocess.CompletedProcess(
-                    args=[], returncode=0, stderr=diagnostic.encode("utf-8")
+                    args=[], returncode=0,
+                    stderr=f"{SAMPLE}(61,10) : {diagnostic}".encode("utf-8")
                 )
                 output = io.StringIO()
                 with patch.object(validate_bicep.os, "walk", return_value=[
@@ -60,6 +62,21 @@ class ValidationTests(unittest.TestCase):
                 ]), patch.object(validate_bicep.subprocess, "run", return_value=result), contextlib.redirect_stdout(output):
                     self.assertEqual(validate_bicep.main(), expected)
                 self.assertEqual("Failed:" in output.getvalue(), expected == 1)
+
+    def test_diagnostic_must_belong_to_sample(self):
+        for filename, expected in [
+            (os.path.abspath(SAMPLE), True),
+            (".\\" + SAMPLE.replace("/", "\\"), True),
+            ("other/app-postgresql.bicep", False),
+            (SAMPLE.replace("postgresql", "redis"), False),
+        ]:
+            with self.subTest(filename=filename):
+                diagnostic = f"{filename}(120,9) : {TLS_TYPE_WARNING}"
+                self.assertEqual(
+                    validate_bicep.is_validation_failure(SAMPLE, diagnostic, 0),
+                    expected,
+                )
+        self.assertFalse(validate_bicep.is_validation_failure(SAMPLE, TLS_TYPE_WARNING, 0))
 
 
 if __name__ == "__main__":

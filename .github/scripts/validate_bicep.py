@@ -1,5 +1,4 @@
 import os
-import posixpath
 import re
 import subprocess
 import concurrent.futures
@@ -11,17 +10,29 @@ def is_validation_failure(filename, stderr, exitcode):
     if exitcode != 0 or "Error" in stderr:
         return True
 
-    normalized = posixpath.normpath(filename.replace("\\", "/"))
-    if normalized not in (
-        "docs/static/samples/demo/app-postgresql.bicep",
-        "docs/public/samples/demo/app-postgresql.bicep",
-    ):
+    sample_path = os.path.normcase(os.path.abspath(filename.replace("\\", "/")))
+    if sample_path not in {
+        os.path.normcase(os.path.abspath(path))
+        for path in (
+            "docs/static/samples/demo/app-postgresql.bicep",
+            "docs/public/samples/demo/app-postgresql.bicep",
+        )
+    }:
         return False
 
-    return any(
-        re.search(r"\bBCP03[67]:\s+The property ([\"'])tls\1(?:\s|$)", line)
-        for line in stderr.splitlines()
-    )
+    for line in stderr.splitlines():
+        diagnostic = re.match(
+            r"^(.+)\(\d+,\d+\)\s*:\s*(?:Warning|Error)\s+BCP03[67]:"
+            r"\s+The property ([\"'])tls\2(?:\s|$)",
+            line,
+        )
+        if diagnostic:
+            diagnostic_path = os.path.normcase(os.path.abspath(
+                diagnostic.group(1).replace("\\", "/")
+            ))
+            if diagnostic_path == sample_path:
+                return True
+    return False
 
 
 def main():
