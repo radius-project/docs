@@ -10,7 +10,11 @@ In part one, you will install Radius on an existing Kubernetes cluster.
 
 ## Prerequisites
 
-For this guide you only need a **Kubernetes cluster**. To install Radius, your user must have the cluster-admin role. Radius <a href="{{< ref "installation#supported-kubernetes-clusters" >}}">supports</a> <a href="https://azure.microsoft.com/en-us/products/kubernetes-service">AKS</a>, <a href="https://aws.amazon.com/eks/">EKS</a>, <a href="https://k3d.io/">k3d</a>, and <a href="https://kind.sigs.k8s.io/">kind</a> clusters. Running a local cluster with k3d or kind is recommended.
+Use a **private, disposable Kubernetes cluster** with no existing `demo-default` application. To install Radius, your user must have the cluster-admin role. Radius <a href="{{< ref "installation#supported-kubernetes-clusters" >}}">supports</a> <a href="https://azure.microsoft.com/en-us/products/kubernetes-service">AKS</a>, <a href="https://aws.amazon.com/eks/">EKS</a>, <a href="https://k3d.io/">k3d</a>, and <a href="https://kind.sigs.k8s.io/">kind</a> clusters. Running a local cluster with k3d or kind is recommended. Do not expose the demo or database publicly: step three deliberately uses unencrypted PostgreSQL connections.
+
+The commands use Bash on Linux or macOS, `kubectl`, and OpenSSL. On Windows, use WSL with a Linux filesystem for the protected temporary password file; Git Bash on a Windows filesystem does not provide the same Unix permission guarantees. Use a compatible Radius CLI/runtime, Bicep compiler and extension, registered PostgreSQL schema, and Kubernetes Recipe Pack. The schema must accept `tls: 'disabled'`, the PostgreSQL Recipe must implement that policy, and the Container and Secret Recipes must support password projection through `secretKeyRef`. Secret support alone does not establish TLS-policy compatibility. Check the Environment's assigned Recipe Pack and any overrides, not just the CLI version.
+
+> **Edge adoption gate:** This tutorial depends on the [PostgreSQL transport-policy change](https://github.com/radius-project/resource-types-contrib/pull/394) and the matching samples update. Do not run the database step until compatible schemas, extensions, and recipes are publicly available and the sample has landed on `edge`. This tutorial targets compatible Radius edge artifacts, not an upgrade to a stable Radius release or changes to `v0.61`. However, Radius currently pins `Radius.Data` to a stable namespace release. Advancing that pin requires a separately approved upstream namespace release containing the fix, followed by Radius adoption and publication of compatible artifacts. Publishing an edge Recipe alone does not update the schema. This tutorial does not authorize release or adoption. An older plaintext Recipe, a schema warning, or an unpublished candidate is not a supported substitute. See the [PostgreSQL operator guide](https://github.com/radius-project/resource-types-contrib/blob/67b77684cc165f069a392b7d3e9151318feab062/Data/postgreSqlDatabases/README.md#adopting-the-change) for the candidate policy and adoption requirements.
 
 ## Install the Radius CLI
 
@@ -25,7 +29,7 @@ mkdir radius
 cd radius
 ```
 
-Ensure your cluster is set as your current context with `kubectl config current-context`. If the context needs updating, change it with `kubectl config set-context <context-name>`. Then install Radius with the `rad initialize` command:
+Ensure your disposable cluster is set as your current context with `kubectl config current-context`. If the context needs updating, change it with `kubectl config use-context <context-name>`. Then install Radius with the `rad initialize` command:
 
 <!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
 ```bash
