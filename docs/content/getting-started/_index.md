@@ -12,10 +12,18 @@ aliases:
   - /getting-started/first-app/
 ---
 
-This guide will show you how to quickly get started with Radius. You will do a basic installation of Radius on a Kubernetes cluster, deploy the Radius Demo sample application, and add a Redis cache connection to it. When you finish, explore the hands-on labs for deeper, scenario-based projects.
+Install Radius on a Kubernetes cluster, deploy the Radius Demo sample application, and add a Redis cache connection. This tutorial uses the default Kubernetes Recipe Pack, which deploys the application and its resources to Kubernetes. You can use a local kind or k3d cluster without an AWS account or Azure subscription.
+
+## Deploying to AWS or Azure
+
+Radius also supports [Amazon EKS and Azure Kubernetes Service (AKS)]({{< ref "installation#supported-kubernetes-clusters" >}}). Running this tutorial on either service still deploys its resources through the default Kubernetes recipes.
+
+To use AWS or Azure cloud resources, [configure cloud credentials, an Environment, and Recipe Packs]({{< ref "aws-and-azure" >}}). Recipes determine which cloud services implement the application's Resource Types. See [how application definitions work across AWS and Azure]({{< ref "concepts#deploying-across-aws-and-azure" >}}).
 
 ## Organization
 
 This guide is organized into four sequential parts.
+
+After the tutorial, explore the [hands-on labs]({{< ref "getting-started/labs" >}}) for deeper, scenario-based projects.
 
 {{< button text="Get started: Install Radius" page="getting-started/install-radius" >}}
