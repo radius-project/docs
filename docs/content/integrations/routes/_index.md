@@ -42,9 +42,8 @@ To route through a Gateway API controller other than the built-in Contour, disab
 
 Contour is installed by default. To skip it, pass `--skip-contour-install` when you install Radius:
 
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
 ```bash
-rad install kubernetes --preview --skip-contour-install
+rad install kubernetes --skip-contour-install
 ```
 
 With Contour skipped, Radius does not create the managed `radius` gateway, so no gateway exists on the cluster until you create one. The default Routes recipe has nothing to attach to until you complete the next two steps. See [How to install the Radius control plane]({{< ref "/installation/control-plane" >}}) for more installation options.
