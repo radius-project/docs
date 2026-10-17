@@ -42,15 +42,15 @@ rad env update myenv --clear-azure
 ## Remove AWS cloud provider
 rad env update myenv --clear-aws
 
-## Add Kubernetes cloud provider (preview)
+## Add Kubernetes cloud provider
 ## The namespace can only be set on an environment that does not already have one; it is
 ## immutable afterwards.
 rad env update myenv --kubernetes-namespace mynamespace
 
-## Set recipe packs to environment (--preview)
+## Set recipe packs to environment
 rad env update myenv --recipe-packs pack1,pack2
 
-## Set recipe packs from a different resource group to environment (--preview)
+## Set recipe packs from a different resource group to environment
 rad env update myenv --recipe-packs pack1 --recipe-pack-group other-group
 
 ```
@@ -68,9 +68,8 @@ rad env update myenv --recipe-packs pack1 --recipe-pack-group other-group
   -g, --group string                   The resource group name
   -h, --help                           help for update
       --kubernetes-namespace string    The namespace where Kubernetes resources will be deployed
-      --preview                        Use the Radius.Core preview implementation for environment update (can also be set via RADIUS_PREVIEW=true)
-      --recipe-pack-group string       Specify the resource group containing the recipe packs named in --recipe-packs, if different from the environment's resource group (--preview).
-      --recipe-packs strings           Specify recipe packs to replace the environment's recipe pack list (--preview). Accepts comma-separated values.
+      --recipe-pack-group string       Specify the resource group containing the recipe packs named in --recipe-packs, if different from the environment's resource group.
+      --recipe-packs strings           Specify recipe packs to replace the environment's recipe pack list. Accepts comma-separated values.
   -w, --workspace string               The workspace name
 ```
 

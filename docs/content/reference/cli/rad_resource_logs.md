@@ -12,7 +12,7 @@ Read logs from a running containers resource
 
 ### Synopsis
 
-Reads logs from a running resource. Supports the resource type 'Applications.Core/containers', or 'Radius.Compute/containers' when the '--preview' flag is set.
+Reads logs from a running resource. Supports the resource type 'Radius.Compute/containers'.
 This command allows you to access logs of a deployed application and output those logs to the local console.
 
 'rad resource logs' will output all currently available logs for the resource and then exit.
@@ -29,19 +29,16 @@ rad resource logs [resource] [flags]
 
 ```
 # read logs from the 'webapp' resource of the current default app
-rad resource logs Applications.Core/containers webapp
+rad resource logs Radius.Compute/containers webapp
 
 # read logs from the 'orders' resource of the 'icecream-store' application
-rad resource logs Applications.Core/containers orders --application icecream-store
+rad resource logs Radius.Compute/containers orders --application icecream-store
 
 # stream logs from the 'orders' resource of the 'icecream-store' application
-rad resource logs Applications.Core/containers orders --application icecream-store --follow
+rad resource logs Radius.Compute/containers orders --application icecream-store --follow
 
 # read logs from the 'daprd' sidecar container of the 'orders' resource of the 'icecream-store' application
-rad resource logs Applications.Core/containers orders --application icecream-store --container daprd
-
-# read logs from the 'orders' resource using the preview resource type 'Radius.Compute/containers'
-rad resource logs Radius.Compute/containers orders --application icecream-store --preview
+rad resource logs Radius.Compute/containers orders --application icecream-store --container daprd
 ```
 
 ### Options
@@ -51,7 +48,6 @@ rad resource logs Radius.Compute/containers orders --application icecream-store 
   -f, --follow             specify that logs should be stream until the command is canceled
   -g, --group string       The resource group name
   -h, --help               help for logs
-      --preview            Use the Radius.Core preview implementation (can also be set via RADIUS_PREVIEW=true)
       --replica string     specify the replica to collect logs from
 ```
 
