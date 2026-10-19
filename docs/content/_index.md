@@ -47,16 +47,16 @@ Radius is an open-source application platform for AWS, Azure, and local Kubernet
   {{% card header="**🟨 Amazon Web Services (AWS)**" %}}
   Run the Radius control plane on [Amazon EKS]({{< ref "installation#supported-kubernetes-clusters" >}}). To provision AWS resources through recipes, register an IAM access key or use IAM Roles for Service Accounts (IRSA).
 
-  [**Configure an IAM access key →**]({{< ref "installation/cloud-providers/aws-access-key" >}})
+  [**Configure an IAM access key →**]({{< ref "aws-and-azure/cloud-providers/aws-access-key" >}})
 
-  [**Configure IRSA →**]({{< ref "installation/cloud-providers/aws-irsa" >}})
+  [**Configure IRSA →**]({{< ref "aws-and-azure/cloud-providers/aws-irsa" >}})
   {{% /card %}}
   {{% card header="**🟦 Microsoft Azure**" %}}
   Run the Radius control plane on [Azure Kubernetes Service (AKS)]({{< ref "installation#supported-kubernetes-clusters" >}}). To provision Azure resources through recipes, register a service principal or use workload identity.
 
-  [**Configure a service principal →**]({{< ref "installation/cloud-providers/azure-service-principal" >}})
+  [**Configure a service principal →**]({{< ref "aws-and-azure/cloud-providers/azure-service-principal" >}})
 
-  [**Configure workload identity →**]({{< ref "installation/cloud-providers/azure-workload-identity" >}})
+  [**Configure workload identity →**]({{< ref "aws-and-azure/cloud-providers/azure-workload-identity" >}})
   {{% /card %}}
   {{% card header="**🎯 Configure deployment targets**" %}}
   Cloud credentials authorize Radius to provision resources. Each Environment selects the target cloud configuration and Recipe Packs. Reuse an application definition across clouds when their recipes implement the Resource Types it uses.

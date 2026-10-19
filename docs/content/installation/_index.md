@@ -14,7 +14,6 @@ This guide covers:
 
 - How to install the [Radius CLI]({{< ref "/installation/cli" >}}) on your workstation.
 - How to install the [Radius control plane]({{< ref "/installation/control-plane" >}}) on a Kubernetes cluster.
-- How to register [cloud provider credentials]({{< ref "/installation/cloud-providers" >}}).
 - How to set up a [developer workstation]({{< ref "/installation/dev-workstation" >}}) to use Radius.
 - How to configure access to the [Radius Dashboard]({{< ref "/installation/dashboard/" >}}).
 
@@ -41,6 +40,6 @@ Radius is tested and validated against the following Kubernetes distributions:
 
 ## Organization
 
-This guide is organized into a separate page for each component you install and configure: the Radius CLI, the control plane, cloud providers, a developer workstation, and the Dashboard. Start with the Radius CLI, then continue through the remaining pages in order.
+This guide is organized into a separate page for each component you install and configure: the Radius CLI, the control plane, a developer workstation, and the Dashboard. Start with the Radius CLI, then continue through the remaining pages in order.
 
 {{< button text="Next step: How to install the Radius CLI" page="installation/cli" >}}

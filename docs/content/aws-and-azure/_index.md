@@ -19,7 +19,7 @@ The Radius control plane runs on a [supported Kubernetes cluster]({{< ref "/inst
 
 ## Configure a cloud deployment
 
-1. **Register cloud credentials.** Choose an identity from the table below and follow its [credential guide]({{< ref "/installation/cloud-providers" >}}). The identity needs permission to provision the resources your recipes create.
+1. **Register cloud credentials.** Choose an identity from the table below and follow its [credential guide]({{< ref "/aws-and-azure/cloud-providers" >}}). The identity needs permission to provision the resources your recipes create.
 2. **Configure the Environment.** Set the AWS account and region, or the Azure subscription and resource group, where resources will be deployed. See [Update an Environment]({{< ref "/management/environments#update-an-environment" >}}).
 3. **Assign Recipe Packs.** Choose or author recipes for the target cloud, then assign their Recipe Packs to the Environment. See [Manage Recipe Packs]({{< ref "/management/recipe-packs" >}}). Each Resource Type the application uses needs a recipe, and the assigned packs must not define duplicate recipes for the same Resource Type.
 
@@ -29,10 +29,10 @@ With the Environment configured, [deploy the application to it]({{< ref "/manage
 
 | Provider | Identity | Description |
 |----------|----------|-------------|
-| AWS | [IAM access key]({{< ref "/installation/cloud-providers/aws-access-key" >}}) | Deploy and connect to AWS resources using an IAM access key |
-| | [IAM Roles for Service Accounts (IRSA)]({{< ref "/installation/cloud-providers/aws-irsa" >}}) | Deploy and connect to AWS resources using AWS IRSA |
-| Azure | [Service principal]({{< ref "/installation/cloud-providers/azure-service-principal" >}}) | Deploy and connect to Azure resources using a service principal |
-| | [Workload Identity]({{< ref "/installation/cloud-providers/azure-workload-identity" >}}) | Deploy and connect to Azure resources using Workload Identity |
+| AWS | [IAM access key]({{< ref "/aws-and-azure/cloud-providers/aws-access-key" >}}) | Deploy and connect to AWS resources using an IAM access key |
+| | [IAM Roles for Service Accounts (IRSA)]({{< ref "/aws-and-azure/cloud-providers/aws-irsa" >}}) | Deploy and connect to AWS resources using AWS IRSA |
+| Azure | [Service principal]({{< ref "/aws-and-azure/cloud-providers/azure-service-principal" >}}) | Deploy and connect to Azure resources using a service principal |
+| | [Workload Identity]({{< ref "/aws-and-azure/cloud-providers/azure-workload-identity" >}}) | Deploy and connect to Azure resources using Workload Identity |
 
 ## Resource support and portability
 

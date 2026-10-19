@@ -5,6 +5,7 @@ linkTitle: "Azure Workload Identity"
 description: "Learn how to configure Azure credentials using workload identity in the Radius control plane"
 weight: 400
 aliases:
+  - /installation/cloud-providers/azure-workload-identity/
   - /guides/installation/cloud-providers/azure/workload-identity/
 ---
 
@@ -81,6 +82,6 @@ This command updates the configuration of an environment for properties that are
 
 ## Next steps
 
-Once AWS or Azure credentials are configured, set up access to the Radius Dashboard.
+With credentials registered and the Environment configured, assign Recipe Packs to select how Radius provisions the application's resources.
 
-{{< button text="Next step: How to configure access to the Radius dashboard" page="installation/dashboard" >}}
+{{< button text="Next step: How to manage Recipe Packs" page="/management/recipe-packs" >}}

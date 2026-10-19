@@ -56,7 +56,7 @@ In full mode, `rad initialize` interactively prompts you for all available confi
 - The Kubernetes cluster to install onto
 - The Environment name
 - The namespace that applications are deployed into
-- Azure and AWS [cloud providers]({{< ref "/installation/cloud-providers" >}}) and their credentials
+- Azure and AWS [cloud providers]({{< ref "/aws-and-azure/cloud-providers" >}}) and their credentials
 
 Use `--full` when the defaults do not match your setup, for example when you want a non-default Environment or namespace, or when you need to configure cloud providers during initialization.
 
