@@ -30,12 +30,23 @@ Radius automatically injects the `context` object into each recipe at deploy tim
 
 | Key | Type | Description |
 |-----|------|-------------|
+| [`operation`](#operation) | string | **Candidate runtime contract:** `deploy` or `delete`. Defaults to `deploy`; only Terraform destroy explicitly receives `delete`. Older runtimes omit this field. |
 | [`resource`](#resource) | object | Metadata about the resource, defined in the application definition, being deployed including its name, ID, type, and properties. |
 | [`application`](#application) | object | Metadata about the application the resource belongs to. Populated only when the resource is application-scoped. |
 | [`environment`](#environment) | object | Metadata about the environment the resource is deployed into. |
 | [`runtime`](#runtime) | object | Details about the target runtime that hosts the deployed resources, such as the Kubernetes cluster. |
 | [`azure`](#azure) | object | The Azure provider scope (subscription and resource group) for the deployment. Present only when an Azure provider is configured on the environment. |
 | [`aws`](#aws) | object | The AWS provider scope (account and region) for the deployment. Present only when an AWS provider is configured on the environment. |
+
+### operation
+
+> **Candidate runtime requirement:** This field describes a new runtime contract, not published or deployed availability. Recipes that depend on it require adoption of a compatible Radius runtime as well as the matching Recipe. Upgrading the CLI alone does not upgrade an existing runtime.
+
+`context.operation` is a string with values `deploy` and `delete`. The runtime's `recipecontext.New` constructor defaults it to `deploy`. Only the Terraform destroy path explicitly sets it to `delete`, both in the wrapped `context` input and when resolving direct-module parameter expressions such as `{{context.operation}}`. Do not interpret it as a general deletion signal for every recipe backend.
+
+Use the explicit operation rather than inferring deletion from null or missing resource properties. Redacted stored Secret properties contain no recoverable original values. In the candidate Azure Secret Terraform Recipe, only an explicit `delete` sets the secret resource's `for_each` to `{}` so Terraform can destroy the existing state without reconstructing those values. Invalid create inputs still fail rather than silently producing an empty deployment. This preserves existing state, provider configuration, and module/resource addresses.
+
+Older runtimes omit `operation` and remain blocked on this Secret cleanup path; a missing field must not be treated as authorization to delete. Do not remove input validation or substitute fabricated secret values to work around the runtime prerequisite.
 
 ### resource
 
