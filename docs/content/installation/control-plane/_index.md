@@ -11,9 +11,9 @@ aliases:
 
 There are three ways to install the Radius control plane. They install the same Radius control plane; they differ in how much of the surrounding setup they automate and how much control they give you over the installation.
 
-- **`rad install`** performs the base installation and is oriented toward platform engineers who are setting up a centralized Radius control plane for developers to connect to. `rad install` accepts `--set` flags to override individual Helm chart values (listed below).
+- **`rad install`** performs the base installation and is oriented toward platform engineers who are setting up a centralized Radius control plane for developers to connect to. `rad install` accepts `--set` flags to override individual Helm chart values (listed below). It also installs the Contour ingress controller by default; pass `--skip-contour-install` to opt out.
 - **`rad initialize`** does everything `rad install` does, creates a `default` Resource Group and Environment, and configures the local workstation with a Workspace and Bicep configuration file. It is oriented toward local development, where you install Radius and build an application on the same machine.
-- **`helm upgrade radius`** installs only the control plane, which registers the default Resource Types when it starts. It does not install Contour or create a Resource Group or Environment.
+- **`helm upgrade radius`** installs only the control plane, which registers the default Resource Types when it starts. Unlike `rad install` and `rad initialize`, it does not install Contour, and it does not create a Resource Group or Environment.
 
 The following table summarizes the differences:
 
