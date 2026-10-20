@@ -214,8 +214,11 @@ Use **TerraformSettings** to configure the Terraform CLI that runs Terraform rec
 - Authenticating to a private Terraform registry with a token stored in a Radius Secret.
 - Installing Terraform providers from an internal network mirror, including in air-gapped environments.
 - Setting environment variables for Terraform CLI behavior or troubleshooting.
+- Storing Terraform recipe state in an existing S3 bucket or Azure Blob container instead of Kubernetes secrets.
 
 Reference the TerraformSettings resource ID from the Environment's `terraformSettings` property. Radius applies the configuration to every Terraform recipe run in that Environment. Registry credentials configured in TerraformSettings authenticate Terraform CLI registries; they do not authenticate Git-based module sources. See the [`Radius.Core/terraformSettings` reference]({{< ref "/reference/resources/radius.core/2025-08-01-preview/terraformsettings" >}}) for private registry, provider mirror, environment variable, and Environment reference examples.
+
+For cloud-backed Terraform state, create new TerraformSettings with the backend configured initially and reference them from a new Environment before deploying applications. Backend selection is immutable, including the implicit Kubernetes default, and existing state cannot be migrated or adopted. Changing the settings reference of an Environment with deployments can orphan infrastructure and is not fully guarded by the control plane. See [How to configure Terraform state storage]({{< ref "/management/terraform-state" >}}) for prerequisites, S3/Azure examples, and lifecycle behavior.
 
 ## Next steps
 

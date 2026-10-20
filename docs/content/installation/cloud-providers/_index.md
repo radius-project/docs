@@ -14,6 +14,8 @@ aliases:
 
 Out of the box, Radius deploys all applications and resources to Kubernetes. In order to deploy to AWS or Azure, you must configure credentials that allow Radius to manage resources in your cloud environment.
 
+The same registered default cloud credential is also used when you [configure S3 or Azure Blob storage for Terraform recipe state]({{< ref "/management/terraform-state" >}}), independently of where the recipe provisions resources. Grant that identity the backend storage permissions described in the guide.
+
 ## Supported cloud providers and identities
 
 | Provider | Identity | Description |

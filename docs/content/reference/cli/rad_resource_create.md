@@ -28,6 +28,9 @@ rad resource create [resource type] [name] -f [inputfilepath] [flags]
 
 # Create a resource (from file)
 rad resource create 'Applications.Core/containers' mycontainer -f /path/to/input.json
+
+# Create a resource of any registered resource type
+rad resource create 'Radius.Compute/containers' mycontainer -f /path/to/input.json
 ```
 
 ### Options
