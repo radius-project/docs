@@ -32,7 +32,7 @@ The `azure-aci` Recipe Pack provisions `Radius.Compute/containers` on Azure Cont
 
 The ACI recipes provision Azure resources, so before you use the pack you need:
 
-- **Azure credentials registered with Radius.** See [How to configure cloud provider credentials]({{< ref "/installation/cloud-providers" >}}).
+- **Azure credentials registered with Radius.** See [How to configure cloud provider credentials]({{< ref "/aws-and-azure/cloud-providers" >}}).
 - **An Environment with the Azure provider configured** with the Azure subscription ID and resource group the recipes provision into. See [How to design and manage Environments]({{< ref "/management/environments/#update-an-environment" >}}).
 
 ### Deploy the ACI Recipe Pack
