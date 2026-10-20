@@ -9,17 +9,25 @@ on:
 permissions: {}
 
 jobs:
+  merge-holds:
+    # Reads only the event's labels; it never checks out PR code.
+    uses: radius-project/.github/.github/workflows/__pr-holds.yml@main
+    permissions: {}
+    with:
+      labels: ${{ vars.PR_STATUS_LABELS }}
+
+  # Keeps the "Check for do-not-merge tag" context that the ruleset requires and
+  # fails closed unless the shared merge-hold check passes.
   check-do-not-merge-tag:
     name: Check for do-not-merge tag
+    needs: merge-holds
+    if: always()
     runs-on: ubuntu-24.04
     timeout-minutes: 5
-    permissions:
-      issues: read
-      pull-requests: read
+    permissions: {}
     steps:
-      - name: Check for do-not-merge label
-        uses: mheap/github-action-required-labels@23e10fde7e062233401931a0eece796cd9bf3177 # v5.6.0
-        with:
-          labels: do-not-merge
-          mode: exactly
-          count: 0
+      - name: Require successful merge-hold validation
+        if: needs.merge-holds.result != 'success'
+        run: |
+          echo "::error::This PR is on hold. Remove the pr:do-not-merge or pr:needs-author-response label before merging. See the merge-holds job."
+          exit 1
