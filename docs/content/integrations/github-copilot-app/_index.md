@@ -5,7 +5,6 @@ linkTitle: "GitHub Copilot app"
 weight: 1
 new_badge: true
 description: "Use Radius Canvas in the GitHub Copilot app to model, visualize, and deploy applications"
-hide_preview_release_banner: true
 ---
 
 {{% alert title="Preview release" color="info" %}}
