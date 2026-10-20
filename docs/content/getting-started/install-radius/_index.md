@@ -27,12 +27,11 @@ cd radius
 
 Ensure your cluster is set as your current context with `kubectl config current-context`. If the context needs updating, change it with `kubectl config set-context <context-name>`. Then install Radius with the `rad initialize` command:
 
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
 ```bash
-rad initialize --preview
+rad initialize
 ```
 
-Select `Yes` to set up an application in the current directory.
+`rad initialize` also writes a `bicepconfig.json` file to the current directory so you can author and deploy Radius Bicep files.
 
 Example output:
 
@@ -45,8 +44,8 @@ Initializing Radius...
 ✅ Create new environment default
     - Kubernetes namespace: default
     - Recipe pack: default
-✅ Scaffold application radius
 ✅ Update local configuration
+    - /home/user/my-app/bicepconfig.json
 
 Initialization complete! Have a RAD time 😎
 ```

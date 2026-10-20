@@ -32,9 +32,8 @@ kubectl config current-context
 
 From your application's directory, install Radius:
 
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
 ```bash
-rad initialize --preview
+rad initialize
 ```
 
 Because Radius is already installed in the cluster, `rad initialize` does not install the control plane again. Instead, it:

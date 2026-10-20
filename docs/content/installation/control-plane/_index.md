@@ -9,23 +9,22 @@ aliases:
   - /guides/installation/install/
 ---
 
-There are three ways to install the Radius control plane. They install the same components on the Kubernetes cluster; they differ in how much of the surrounding setup they automate and how much control they give you over the installation.
+There are three ways to install the Radius control plane. They install the same Radius control plane; they differ in how much of the surrounding setup they automate and how much control they give you over the installation.
 
-- **`rad install`** performs the base installation and is oriented toward platform engineers who are setting up a centralized Radius control plane for developers to connect to. `rad install` accepts `--set` flags to override individual Helm chart values (listed below).
-- **`rad initialize`** does everything `rad install` does plus configures the local workstation with a Workspace and Bicep configuration file. It is oriented toward local development, where you install Radius and build an application on the same machine.
-- **`helm upgrade radius`** installs only the control plane. It does not create Resource Types, Resource Groups, or Environments.
+- **`rad install`** performs the base installation and is oriented toward platform engineers who are setting up a centralized Radius control plane for developers to connect to. `rad install` accepts `--set` flags to override individual Helm chart values (listed below). It also installs the Contour ingress controller by default; pass `--skip-contour-install` to opt out.
+- **`rad initialize`** does everything `rad install` does, creates a `default` Resource Group and Environment, and configures the local workstation with a Workspace and Bicep configuration file. It is oriented toward local development, where you install Radius and build an application on the same machine.
+- **`helm upgrade radius`** installs only the control plane, which registers the default Resource Types when it starts. Unlike `rad install` and `rad initialize`, it does not install Contour, and it does not create a Resource Group or Environment.
 
 The following table summarizes the differences:
 
 | | `rad initialize` | `rad install` | `helm upgrade radius` |
 | --- | --- | --- | --- |
 | Installs the control plane | Yes | Yes | Yes |
-| Creates common Resource Types | Yes | Yes | No |
-| Creates a `default` Resource Group | Yes | Yes | No |
-| Creates a `default` Environment | Yes | Yes | No |
+| Creates common Resource Types | Yes | Yes | Yes |
+| Creates a `default` Resource Group | Yes | No | No |
+| Creates a `default` Environment | Yes | No | No |
 | Configures a `default` Workspace | Yes | No | No |
 | Creates a `bicepconfig.json` | Yes | No | No |
-| Optionally creates a sample `app.bicep` | Yes | No | No |
 | Customization | Defaults only | `--set` chart values | Full chart values, version, release name |
 | Requires the Radius CLI | Yes | Yes | No |
 
@@ -35,9 +34,8 @@ Each method is described in detail below.
 
 [`rad initialize`]({{< ref rad_initialize >}}) is the fastest way to get started. It installs the control plane on the current Kubernetes cluster and configures the local machine in one step:
 
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
 ```bash
-rad initialize --preview
+rad initialize
 ```
 
 ### Customizing with `rad initialize --full`
@@ -46,9 +44,8 @@ By default, `rad initialize` uses opinionated defaults: it installs into the cur
 
 To choose these settings yourself, run `rad initialize` with the `--full` flag:
 
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
 ```bash
-rad initialize --full --preview
+rad initialize --full
 ```
 
 In full mode, `rad initialize` interactively prompts you for all available configuration options, including:
@@ -62,24 +59,22 @@ Use `--full` when the defaults do not match your setup, for example when you wan
 
 ## Using `rad install`
 
-Use [`rad install kubernetes`]({{< ref rad_install_kubernetes >}}) to install the control plane. It installs the control plane, creates the default Resource Types, and creates a `default` Resource Group and Environment, but it does not create any local files. Optionally use the `--set` flag to customize the installation with [Helm chart options](#customizing-the-installation-with-helm-chart-options):
+Use [`rad install kubernetes`]({{< ref rad_install_kubernetes >}}) to install the control plane. It installs the control plane and registers the default Resource Types, but it does not create a Resource Group, an Environment, or any local files. Use [`rad initialize`](#using-rad-initialize) to also set up a default Resource Group, Environment, Recipe Pack, and Workspace. Optionally use the `--set` flag to customize the installation with [Helm chart options](#customizing-the-installation-with-helm-chart-options):
 
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
 ```bash
 # Install Radius
-rad install kubernetes --preview
+rad install kubernetes
 
 # Install Radius with tracing and a public endpoint override
-rad install kubernetes --preview --set global.zipkin.url=http://jaeger-collector.radius-monitoring.svc.cluster.local:9411/api/v2/spans,rp.publicEndpointOverride=localhost:8081
+rad install kubernetes --set global.zipkin.url=http://jaeger-collector.radius-monitoring.svc.cluster.local:9411/api/v2/spans,rp.publicEndpointOverride=localhost:8081
 ```
 
 ### Use your own root certificate authority certificate
 
 Many enterprises leverage intermediate root certificate authorities (CAs) to enhance security and control over outgoing traffic, particularly when using a firewall or proxy. In this setup, when Radius attempts to connect to an external endpoint such as Azure or AWS, traffic may be blocked by the firewall. Optionally use `--set-file` when installing Radius to inject your root CA certificate into Radius:
 
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
 ```bash
-rad install kubernetes --preview --set-file global.rootCA.cert=/etc/ssl/your-root-ca.crt
+rad install kubernetes --set-file global.rootCA.cert=/etc/ssl/your-root-ca.crt
 ```
 
 ## Using Helm

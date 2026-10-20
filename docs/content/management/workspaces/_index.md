@@ -28,13 +28,11 @@ Before creating a Workspace, verify that:
 
 Use [`rad workspace create`]({{< ref rad_workspace_create >}}) to save a Kubernetes context, Resource Group, and Environment as a named Workspace:
 
-<!-- TODO: Remove the `--preview` flag from `rad workspace create` below once it is no longer required. -->
 ```bash
 rad workspace create kubernetes my-workspace \
   --context my-context \
   --group my-group \
-  --environment my-environment \
-  --preview
+  --environment my-environment
 ```
 
 The `--context` flag selects the Kubernetes context used to reach the Radius control plane. The `--group` and `--environment` flags set the default Resource Group and Environment for commands using the Workspace. Omit both defaults to select only the control plane, or omit `--environment` to select the control plane and Resource Group without a default Environment.
@@ -82,14 +80,12 @@ This selects the Workspace's control plane, Resource Group, and Environment for 
 
 To change a Workspace's context, Resource Group, or Environment, rerun `rad workspace create` with the same name and `--force`:
 
-<!-- TODO: Remove the `--preview` flag from `rad workspace create` below once it is no longer required. -->
 ```bash
 rad workspace create kubernetes my-workspace \
   --context another-context \
   --group another-group \
   --environment another-environment \
-  --force \
-  --preview
+  --force
 ```
 
 The replacement becomes the current Workspace. Specify every value the updated Workspace should retain.
