@@ -12,9 +12,7 @@ The Radius Demo application runs on its own, but most applications depend on oth
 
 > **Private development only:** This Kubernetes demo sets the database's `tls` policy to `disabled` and the PostgreSQL client's `PGSSLMODE` to `disable`. Password authentication remains enabled, but database traffic is unencrypted and credentials and queries can be exposed in transit. Use only a private, disposable development cluster.
 
-The Resource Type's default remains `required`. Both `required` and `optional` need operator-provided certificates; `optional` is not a certificate-free alternative. Only explicit `disabled` needs no TLS Secret or client CA. The guarded Azure Recipe rejects `disabled`. See the [PostgreSQL operator guide](https://github.com/radius-project/resource-types-contrib/blob/67b77684cc165f069a392b7d3e9151318feab062/Data/postgreSqlDatabases/README.md#kubernetes-tls-prerequisites) for secure deployments and migration. Complete the [compatible-artifact prerequisite]({{< ref "/getting-started/install-radius#prerequisites" >}}) before proceeding; the linked policy is a candidate, not proof of published support.
-
-The `app-postgresql.bicep` definition builds on `app.bicep` by adding a `Radius.Data/postgreSqlDatabases` resource, a `Radius.Security/secrets` resource, a `@secure()` password parameter, and two `connections` entries on the container. It also explicitly disables TLS on the server and client. The highlighted lines are the additions:
+The `app-postgresql.bicep` definition builds on `app.bicep` by adding a `Radius.Data/postgreSqlDatabases` resource, a `Radius.Security/secrets` resource, a `@secure()` password parameter, and two `connections` entries on the container. The highlighted lines are the additions:
 
 <div class="td-max-width-on-larger-screens" style="margin-bottom: -2rem;"><a href="https://github.com/radius-project/samples/blob/{{< param version >}}/samples/demo/app-postgresql.bicep" target="_blank" rel="noopener">samples/demo/app-postgresql.bicep</a></div>
 
@@ -45,8 +43,6 @@ kubectl port-forward svc/demo-default-web 3000:3000
 ```
 
 Open [http://localhost:3000](http://localhost:3000). The Radius Connections section now lists the `postgresql` database connection and the `postgresqlCredentials` Secret connection.
-
-The database connection reports `tls: disabled`. The client separately uses `PGSSLMODE=disable`; the connection's TLS property does not configure the client by itself.
 
 ## View the connections in the Dashboard
 
