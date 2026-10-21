@@ -20,24 +20,12 @@ Deploy the Radius Demo using `rad deploy`:
 
 {{< rad-deploy path="samples/demo/app.bicep" >}}
 
-Radius deploys the application to the `default` Environment. The `Radius.Compute/containers` resource is provisioned by a Recipe that creates a Kubernetes Deployment and a `ClusterIP` Service. Find the actual runtime namespace rather than assuming it matches the Environment's configured namespace:
-
-```bash
-kubectl get deployment --all-namespaces \
-  -l radapp.io/application=demo-default,radapp.io/resource=demo-default
-```
-
-Set `DEMO_NAMESPACE` to the namespace shown for this tutorial's deployment. If more than one deployment matches, identify the one in your tutorial Environment before continuing:
-
-```bash
-DEMO_NAMESPACE='<runtime-namespace>'
-kubectl rollout status deployment/demo-default -n "$DEMO_NAMESPACE" --timeout=180s
-```
+Radius deploys the application to the `default` Environment, which is configured to use the `default` namespace of your Kubernetes cluster. The `Radius.Compute/containers` resource is provisioned by a Recipe that creates a Kubernetes Deployment and a `ClusterIP` Service.
 
 View the deployed resources with `kubectl`:
 
 ```bash
-kubectl get pod,deployment,service -n "$DEMO_NAMESPACE" -l radapp.io/application=demo-default
+kubectl get pod,deployment,service
 ```
 
 Example output:
@@ -51,6 +39,7 @@ deployment.apps/demo-default   1/1     1            1           3m18s
 
 NAME                       TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
 service/demo-default-web   ClusterIP   10.96.177.228   <none>        3000/TCP   3m18s
+service/kubernetes         ClusterIP   10.96.0.1       <none>        443/TCP    4m10s
 ```
 
 ## Browse the Radius Demo application
@@ -58,10 +47,10 @@ service/demo-default-web   ClusterIP   10.96.177.228   <none>        3000/TCP   
 Use `kubectl` to forward a local port to the container's Kubernetes Service:
 
 ```bash
-kubectl port-forward svc/demo-default-web -n "$DEMO_NAMESPACE" 3000:3000
+kubectl port-forward svc/demo-default-web 3000:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser. The Radius Connections section says "No connections defined"; you will add PostgreSQL and password Secret connections in the next step. Press `Ctrl+C` to stop the port forward.
+Open [http://localhost:3000](http://localhost:3000) in your browser. The Radius Connections section says "No connections defined"; you will add a Redis cache connection in the next step. Press `Ctrl+C` to stop the port forward.
 
 ## Browse the Radius Dashboard
 
@@ -98,6 +87,6 @@ You have deployed your first application with Radius. For a deeper walkthrough o
 
 ## Next steps
 
-In part three of this guide, you will add a PostgreSQL database and an authored password Secret, then connect both to the `demo-default` container.
+In part three of this guide, you will add a Redis cache resource and a connection to the `demo-default` container.
 
 {{< button text="Next step: Add a connection" page="getting-started/add-connection" >}}

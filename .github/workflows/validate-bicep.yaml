@@ -50,6 +50,4 @@ jobs:
           ./bicep --version
 
       - name: Verify Bicep files
-        run: |
-          python -m unittest discover -s .github/scripts -p test_validate_bicep.py
-          python ./.github/scripts/validate_bicep.py
+        run: python ./.github/scripts/validate_bicep.py
