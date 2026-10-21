@@ -62,27 +62,39 @@ git::https://github.com/my-org/modules.git//rds?ref=v6.1.0
 
 {{% codetab %}}
 
-Bicep modules are referenced by their OCI registry path, with the version in the image tag. For example, reference an Azure Verified Module from the Microsoft Container Registry:
+Bicep modules are referenced by their OCI registry path, with the version in the image tag. This example uses the Azure Storage Account AVM to provision a blob container for [`Radius.Storage/objectStorage`]({{< ref "/reference/resources/radius.storage/2025-08-01-preview/objectstorage" >}}):
 
 ```bicep
 extension radius
 
 resource dataRecipes 'Radius.Core/recipePacks@2025-08-01-preview' = {
-  name: 'azure-data-recipes'
+  name: 'azure-storage-recipes'
   properties: {
     recipes: {
-      'Radius.Data/postgreSqlDatabases': {
+      'Radius.Storage/objectStorage': {
         kind: 'bicep'
-        source: 'br:mcr.microsoft.com/bicep/avm/res/db-for-postgre-sql/flexible-server:0.4.0'
+        source: 'br:mcr.microsoft.com/bicep/avm/res/storage/storage-account:0.32.1'
         parameters: {
-          name: 'pg-{{context.resource.name}}'
+          name: '{{context.resource.name}}'
           location: 'eastus2'
-          skuName: 'Standard_B1ms'
+          kind: 'StorageV2'
+          skuName: 'Standard_LRS'
+          allowBlobPublicAccess: false
+          blobServices: {
+            containers: [
+              {
+                name: '{{context.resource.properties.containerName}}'
+              }
+            ]
+          }
         }
         outputs: {
-          host: 'fqdn'
-          port: 'port'
-          database: 'name'
+          endpoint: 'primaryBlobEndpoint'
+          accountName: 'name'
+          secrets: {
+            accountKey: 'primaryAccessKey'
+            connectionString: 'primaryConnectionString'
+          }
         }
       }
     }
@@ -90,13 +102,13 @@ resource dataRecipes 'Radius.Core/recipePacks@2025-08-01-preview' = {
 }
 ```
 
+The resource's name becomes the Azure storage account name, so choose a globally unique name with 3 to 24 lowercase letters or digits. The `containerName` property selects the blob container. The nested `secrets` mapping sends the account key and connection string to Radius-managed secret storage rather than ordinary resource properties. The module retains its default network access restrictions; configure access for your application separately.
+
 {{% /codetab %}}
 
 {{< /tabs >}}
 
 The `parameters` and `outputs` names come from the module you reference, so consult the module's own documentation for its input variables and outputs. Radius passes only the parameters you map; every other input uses the module's own default.
-
-> **PostgreSQL transport policy:** The custom Azure example above calls the AVM directly. It bypasses the guarded PostgreSQL Recipe's transport-policy validation, including its rejection of `tls: 'disabled'`; it does not map the resource's `tls` request. Do not assume a custom direct-AVM Recipe enforces that contract. See the [PostgreSQL operator guide](https://github.com/radius-project/resource-types-contrib/blob/67b77684cc165f069a392b7d3e9151318feab062/Data/postgreSqlDatabases/README.md#using-the-resource-type) for the candidate guarded Recipe and adoption requirements.
 
 ## Resolve developer inputs with context expressions
 
