@@ -13,13 +13,15 @@ Initialize Radius
 ### Synopsis
 
 
-Interactively install the Radius control-plane and setup an environment.
+Interactively install the Radius control-plane and setup a Radius.Core environment.
 
 If an environment already exists, 'rad init' will prompt the user to use the existing environment or create a new one.
 
-By default, 'rad init' will optimize for a developer-focused environment with an environment named "default" and Recipes that support prototyping, development and testing using lightweight containers. These environments are great for building and testing your application.
+'rad init' writes a bicepconfig.json file to the current directory so that Radius Bicep files can be authored and deployed. An existing bicepconfig.json is never overwritten.
 
-Specifying the '--full' flag will cause 'rad init' to prompt the user for all available configuration options such as Kubernetes context, environment name, and cloud providers. This is useful for fully customizing your environment.
+By default, 'rad init' will optimize for a developer-focused environment with an environment named "default" and a default recipe pack that includes recipes to support prototyping, development and testing in Kubernetes. These environments are great for building and testing your application.
+
+Specifying the '--full' flag will cause 'rad init --full' to prompt the user for all available configuration options such as Kubernetes context, environment name, and cloud providers. This is useful for fully customizing your environment.
 
 
 ```
@@ -30,7 +32,7 @@ rad initialize [flags]
 
 ```
 
-## Create a new development environment named "default"
+## Create a new Radius.Core environment named "default" which includes a default recipe pack for prototyping, development, and testing Kubernetes resources.
 rad init
 
 ## Prompt the user for all available options to create a new environment
@@ -66,7 +68,6 @@ rad init --set-file global.rootCA.cert=/path/to/rootCA.crt
       --full                   Prompt user for all available configuration options
   -h, --help                   help for initialize
   -o, --output string          output format (supported formats are json, table) (default "table")
-      --preview                Use the Radius.Core preview implementation (can also be set via RADIUS_PREVIEW=true)
       --set stringArray        Set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
       --set-file stringArray   Set values from files on the command line (can specify multiple or separate files with commas: key1=filename1,key2=filename2)
 ```

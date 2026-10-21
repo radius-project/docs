@@ -14,6 +14,9 @@ Lists resources
 
 List all resources of a specified type. If no resource type is given, lists all resources of any type in an environment or application.
 
+Applications and environments given with '-a/--application' and '-e/--environment' are Radius.Core/applications and Radius.Core/environments resources.
+A resource type with no application or environment lists every resource of that type in the resource group, including Applications.* resource types.
+
 ```
 rad resource list [resourceType] [flags]
 ```
@@ -22,21 +25,18 @@ rad resource list [resourceType] [flags]
 
 ```
 
-sample list of resourceType: Applications.Core/containers, Applications.Core/gateways, Applications.Dapr/daprPubSubBrokers, Applications.Core/extenders, Applications.Datastores/mongoDatabases, Applications.Messaging/rabbitMQMessageQueues, Applications.Datastores/redisCaches, Applications.Datastores/sqlDatabases, Applications.Dapr/daprStateStores, Applications.Dapr/daprSecretStores
-
-# list all resources of a specified type in the default environment
-
-rad resource list Applications.Core/containers
-rad resource list Applications.Core/gateways
+# list all resources of a specified type in the resource group
+rad resource list Radius.Compute/containers
+rad resource list Radius.Data/redisCaches
 
 # list all resources of a specified type in an application
-rad resource list Applications.Core/containers --application icecream-store
+rad resource list Radius.Compute/containers --application icecream-store
 
 # list all resources of a specified type in an application (shorthand flag)
-rad resource list Applications.Core/containers -a icecream-store
+rad resource list Radius.Compute/containers -a icecream-store
 
 # list all resources of a specified type in a specified environment
-rad resource list Applications.Core/containers -e not-default-env
+rad resource list Radius.Compute/containers -e not-default-env
 
 # list all resources of any type in the default environment
 rad resource list
@@ -46,10 +46,6 @@ rad resource list -e not-default-env
 
 # list all resources of any type in an application
 rad resource list -a icecream-store
-
-# list preview resources in a Radius.Core environment or application
-rad resource list -e not-default-env --preview
-rad resource list -a icecream-store --preview
 
 ```
 
@@ -61,7 +57,6 @@ rad resource list -a icecream-store --preview
   -g, --group string         The resource group name
   -h, --help                 help for list
   -o, --output string        output format (supported formats are json, table) (default "table")
-      --preview              Use the Radius.Core preview implementation (can also be set via RADIUS_PREVIEW=true)
   -w, --workspace string     The workspace name
 ```
 

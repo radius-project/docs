@@ -26,10 +26,7 @@ rad resource expose [type] [resource] [flags]
 ```
 # expose port 80 on the 'orders' resource of the 'icecream-store' application
 # on local port 5000
-rad resource expose --application icecream-store Applications.Core/containers orders --port 5000 --remote-port 80
-
-# expose port 80 using the preview resource type 'Radius.Compute/containers'
-rad resource expose --application icecream-store Radius.Compute/containers orders --port 5000 --remote-port 80 --preview
+rad resource expose --application icecream-store Radius.Compute/containers orders --port 5000 --remote-port 80
 ```
 
 ### Options
@@ -38,7 +35,6 @@ rad resource expose --application icecream-store Radius.Compute/containers order
   -g, --group string      The resource group name
   -h, --help              help for expose
   -p, --port int          specify the local port (default -1)
-      --preview           Use the Radius.Core preview implementation (can also be set via RADIUS_PREVIEW=true)
       --remote-port int   specify the remote port (default -1)
       --replica string    specify the replica to expose
   -r, --resource string   The resource name
