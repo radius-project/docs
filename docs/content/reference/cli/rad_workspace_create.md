@@ -20,6 +20,8 @@ Workspaces allow you to manage multiple Radius platforms and environments using 
 
 You can easily define and switch between workspaces to deploy and manage applications across local, test, and production environments.
 
+Use '--environment' to bind the workspace to a Radius.Core environment created with 'rad env create'.
+
 ```
 rad workspace create [workspaceType] [workspaceName] [flags]
 ```
@@ -32,6 +34,8 @@ rad workspace create [workspaceType] [workspaceName] [flags]
 rad workspace create kubernetes myworkspace --context aks
 # Create a workspace with name of current kubernetes context in current kubernetes context
 rad workspace create kubernetes
+# Create a workspace bound to the environment 'my-env' in the resource group 'my-grp'
+rad workspace create kubernetes myworkspace --group my-grp --environment my-env
 ```
 
 ### Options
@@ -42,7 +46,6 @@ rad workspace create kubernetes
   -f, --force                Overwrite existing workspace if present
   -g, --group string         The resource group name
   -h, --help                 help for create
-      --preview              Use the Radius.Core preview implementation (can also be set via RADIUS_PREVIEW=true)
   -w, --workspace string     The workspace name
 ```
 
