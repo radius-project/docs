@@ -14,17 +14,26 @@ Shows the application graph for an application.
 
 Shows the application graph for an application.
 
-When invoked with the name of a deployed application using the --application flag,
-the command queries the Radius control plane and prints the graph of live
-resources. When invoked with a path to an app.bicep,
-the command compiles the template and writes the resulting modeled graph to
+When invoked with the name of a deployed application, either as an argument or
+with the --application flag, the command queries the Radius control plane and
+prints the deployed graph computed from stored resources (Kind: Connection
+edges only).
+
+When invoked with --application <name> AND a path to the application's
+app.bicep, the command additionally compiles the template locally, extracts the
+dependsOn edges implied by it, and sends them to the server. The server merges
+them onto the deployed graph as Kind: Dependency edges. Any edge already present
+as Kind: Connection wins; excluded types and unknown endpoints are dropped.
+
+When invoked with only a path to an app.bicep (no --application), the command
+compiles the template and writes the resulting modeled graph to
 ./app-graph.json without contacting the control plane.
 
-If the command runs inside a GitHub Actions runner (GITHUB_ACTIONS=true), the
-modeled graph is saved to <source-branch>/app-graph.json in the radius-graph
-OCI archive instead of the local filesystem. Configure RADIUS_GRAPH_REGISTRY
-with an OCI repository and authenticate to the registry. Local output does not
-require a registry.
+If the modeled graph is built inside a GitHub Actions runner
+(GITHUB_ACTIONS=true), it is saved to <source-branch>/app-graph.json in the
+radius-graph OCI archive instead of the local filesystem. Configure
+RADIUS_GRAPH_REGISTRY with an OCI repository and authenticate to the registry.
+Local output does not require a registry.
 
 ```
 rad application graph [flags]
@@ -34,10 +43,16 @@ rad application graph [flags]
 
 ```
 
-# Show graph for the deployed application named my-application.
-rad app graph -a my-application
+# Show graph for the deployed application named my-application
+rad app graph my-application
 
-# Build the modeled graph for an app.bicep and write it to ./app-graph.json.
+# Include icon SVG bytes inline in the JSON output
+rad app graph my-application -o json --include-icons
+
+# Enrich the deployed graph with dependsOn edges from a local app.bicep
+rad app graph -a my-application ./app.bicep
+
+# Build the modeled graph for an app.bicep and write it to ./app-graph.json
 rad app graph ./app.bicep
 ```
 
@@ -47,9 +62,8 @@ rad app graph ./app.bicep
   -a, --application string   The application name
   -g, --group string         The resource group name
   -h, --help                 help for graph
-      --include-icons        When set with --preview (deployed) or with a bicep-file argument (modeled), embeds each referenced resource type icon's SVG bytes in the response's icons map.
+      --include-icons        When set, embeds each referenced resource type icon's SVG bytes in the response's icons map.
   -o, --output string        output format (supported formats are json, table) (default "table")
-      --preview              Use the Radius.Core preview implementation (can also be set via RADIUS_PREVIEW=true)
   -w, --workspace string     The workspace name
 ```
 
