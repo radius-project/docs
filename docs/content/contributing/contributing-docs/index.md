@@ -601,19 +601,21 @@ As a docs approver or maintainer, you need to perform routine **upmerges** to ke
 
 For a clean merge, the workflow preserves the combined tree from both branches but publishes only one new commit, rooted in `edge`. The pinned `peter-evans/create-pull-request` action uses `sign-commits: true` and the short-lived `radius-release` GitHub App token so GitHub signs that commit. The App's DCO `Signed-off-by` trailer is separate from its cryptographic signature. Local `git commit --signoff`, token authentication, or signing only a merge tip does not make imported unsigned history verified.
 
-The **Verify signed upmerge** step checks the actual GitHub PR and commit: one parent matching the prepared `edge` base, exactly one new commit, the expected tree, a valid GitHub signature, the App's DCO trailer, and the expected draft state. A moved base, API failure, or mismatched result fails the run. Fetch, Git, and filesystem failures also fail instead of being treated as conflicts or no changes.
+A small native `git merge --squash --no-commit` step prepares only uncommitted changes. The action owns commit signing and the PR lifecycle; there is no custom signing or GitHub API verifier. The **Verify signed upmerge** step requires a PR number and the action's `pull-request-commits-verified` output to be `true`. This output comes from GitHub's verification result for the published commit. Fetch, Git, and filesystem failures fail instead of being treated as conflicts or no changes.
+
+`peter-evans/create-pull-request` is used directly rather than `raven-actions/repo-files-sync`: copying source files, including deleting absent files, would not preserve the combined three-way merge result. File synchronization would still need Git preparation to avoid replacing edge-only content.
 
 The `RADIUS_RELEASE_BOT` App installation on `radius-project/docs` must grant **Contents: Read & Write**, **Pull requests: Read & Write**, and **Workflows: Read & Write**. The workflow requests only those write permissions for this repository. The workflow permission is needed to carry changes to `.github/workflows/`; an installation administrator must grant it if missing. Do not work around a missing grant by dropping workflow changes, weakening branch rules, or adding a private commit-signing key.
 
-Workflow repairs must first reach the current release branch (`v0.61` for this rollout), because that is where the upmerge executes. The helper is checked out separately from the running workflow's revision, not from `edge`. After the repair PR merges into `v0.61`, a new signed upmerge carries the workflow and helper to `edge` before the next release branch is cut. Updating only `edge` does not repair current release-branch executions. Previously recorded runs remain pinned to their old workflow revision; rerunning them does not adopt the repair. No default-branch or final-release behavior changes are needed.
+Workflow repairs must first reach the current release branch (`v0.61` for this rollout), because that is where the upmerge executes. Preparation is inline in the workflow, so it does not depend on a helper already being present on `edge`. After the repair PR merges into `v0.61`, a new signed upmerge carries the workflow and tests to `edge` before the next release branch is cut. Updating only `edge` does not repair current release-branch executions. Previously recorded runs remain pinned to their old workflow revision; rerunning them does not adopt the repair. No default-branch or final-release behavior changes are needed.
 
-To run the focused regression tests locally with Node.js 24 and Git 2.38 or later:
+To run the focused regression tests locally with Node.js 24, Bash, and Git:
 
 ```bash
 node --test .github/scripts/upmerge.test.mjs
 ```
 
-These tests use disposable Git repositories and mocked GitHub responses; they do not dispatch a live upmerge.
+These tests execute the workflow's actual preparation and verification steps with disposable Git repositories and test action outputs; they do not dispatch a live upmerge or call GitHub.
 
 ### Keep the sample application in sync
 

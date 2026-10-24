@@ -40,45 +40,72 @@ jobs:
         with:
           bot-slug-name: ${{ steps.app-token.outputs.app-slug }}
 
-      # The helper may not exist on edge yet. Keep tooling outside the PR checkout.
-      - name: Checkout workflow tooling
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          ref: ${{ github.workflow_sha }}
-          path: workflow-tooling
-          persist-credentials: false
-
       - name: Checkout edge
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: edge
-          path: upmerge
           token: ${{ steps.app-token.outputs.token }}
           fetch-depth: 0
-          # The helper fetches the exact source commit using this short-lived token.
+          # Git fetch uses this short-lived token to get the immutable source commit.
           persist-credentials: true
 
       - name: Upmerge docs
         id: prepare
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
-        with:
-          script: |
-            const { prepareUpmerge } = await import(`${process.env.GITHUB_WORKSPACE}/workflow-tooling/.github/scripts/upmerge.mjs`);
-            const result = prepareUpmerge({
-              cwd: `${process.env.GITHUB_WORKSPACE}/upmerge`,
-              source: process.env.GITHUB_SHA
-            });
-            core.setOutput("base-sha", result.base);
-            core.setOutput("source-sha", result.source);
-            core.setOutput("tree-sha", result.tree);
-            core.setOutput("has-changes", result.hasChanges);
-            core.setOutput("conflict", result.conflict);
-            if (result.conflict) {
-              core.warning(`Content conflicts require manual resolution: ${result.conflicts.join(", ")}. Preparing a draft source snapshot, not a resolved merge.`);
-            }
-            if (!result.hasChanges) {
-              core.info("No changes to upmerge to edge.");
-            }
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE_SHA=$(git rev-parse HEAD)
+          git fetch --no-tags origin "${GITHUB_SHA}"
+
+          MERGE_STATUS=0
+          git merge --squash --no-commit "${GITHUB_SHA}" || MERGE_STATUS=$?
+          UNMERGED=$(git ls-files --unmerged)
+          if [[ "${MERGE_STATUS}" -ne 0 && ("${MERGE_STATUS}" -ne 1 || -z "${UNMERGED}") ]]; then
+              echo "::error::Upmerge preparation failed (git merge exit ${MERGE_STATUS})."
+              exit "${MERGE_STATUS}"
+          fi
+
+          restore_edge_files() {
+              local path original tracked
+              for path in docs/config.toml docs/layouts/partials/hooks/body-end.html; do
+                  original=$(git ls-tree "${BASE_SHA}" -- "${path}")
+                  tracked=$(git ls-files -- "${path}")
+                  if [[ -n "${original}" ]]; then
+                      git restore --source="${BASE_SHA}" --staged --worktree -- "${path}"
+                  elif [[ -n "${tracked}" ]]; then
+                      git rm --force -- "${path}"
+                  fi
+              done
+          }
+          restore_edge_files
+
+          MERGE_CONFLICT=false
+          UNMERGED=$(git ls-files --unmerged)
+          if [[ -n "${UNMERGED}" ]]; then
+              echo "::warning::Content conflicts detected. Preparing a draft source snapshot, not a resolved merge."
+              git read-tree --reset -u "${GITHUB_SHA}"
+              restore_edge_files
+              MERGE_CONFLICT=true
+          fi
+
+          DIFF_STATUS=0
+          git diff --cached --quiet "${BASE_SHA}" -- || DIFF_STATUS=$?
+          case "${DIFF_STATUS}" in
+              0)
+                  HAS_CHANGES=false
+                  echo "No changes to upmerge to edge."
+                  ;;
+              1) HAS_CHANGES=true ;;
+              *)
+                  echo "::error::Unable to inspect the prepared changes."
+                  exit "${DIFF_STATUS}"
+                  ;;
+          esac
+          {
+              echo "base-sha=${BASE_SHA}"
+              echo "conflict=${MERGE_CONFLICT}"
+              echo "has-changes=${HAS_CHANGES}"
+          } >> "${GITHUB_OUTPUT}"
 
       - name: Create pull request
         id: pull-request
@@ -86,7 +113,6 @@ jobs:
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           token: ${{ steps.app-token.outputs.token }}
-          path: upmerge
           base: edge
           branch: upmerge/${{ github.run_id }}-${{ github.run_attempt }}
           sign-commits: true
@@ -100,7 +126,7 @@ jobs:
           body: |
             Upmerge to edge (kicked off by @${{ github.triggering_actor }}).
 
-            Source: `${{ github.ref_name }}` at `${{ steps.prepare.outputs.source-sha }}`.
+            Source: `${{ github.ref_name }}` at `${{ github.sha }}`.
             Edge snapshot: `${{ steps.prepare.outputs.base-sha }}`.
 
             ${{ steps.prepare.outputs.conflict == 'true' && '**Manual resolution required.** The merge had content conflicts. This draft contains the source snapshot, not a resolved merge. Reconcile it with edge, including edge-only content, before marking it ready for review.' || 'Prepared the clean merged tree, preserving changes from both branches without importing source commit history.' }}
@@ -109,28 +135,12 @@ jobs:
 
       - name: Verify signed upmerge
         if: steps.prepare.outputs.has-changes == 'true'
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
-        with:
-          github-token: ${{ steps.app-token.outputs.token }}
-          script: |
-            const { verifyUpmerge } = await import(`${process.env.GITHUB_WORKSPACE}/workflow-tooling/.github/scripts/upmerge.mjs`);
-            const url = await verifyUpmerge({
-              github,
-              ...context.repo,
-              pullNumber: Number(process.env.PR_NUMBER),
-              head: process.env.PR_HEAD,
-              branch: process.env.PR_BRANCH,
-              base: process.env.BASE_SHA,
-              tree: process.env.TREE_SHA,
-              conflict: process.env.MERGE_CONFLICT === "true",
-              signoff: process.env.DCO_SIGNOFF
-            });
-            core.info(`Verified one GitHub-signed commit with the expected edge parent, tree, and DCO trailer: ${url}`);
+        shell: bash
         env:
           PR_NUMBER: ${{ steps.pull-request.outputs.pull-request-number }}
-          PR_HEAD: ${{ steps.pull-request.outputs.pull-request-head-sha }}
-          PR_BRANCH: upmerge/${{ github.run_id }}-${{ github.run_attempt }}
-          BASE_SHA: ${{ steps.prepare.outputs.base-sha }}
-          TREE_SHA: ${{ steps.prepare.outputs.tree-sha }}
-          MERGE_CONFLICT: ${{ steps.prepare.outputs.conflict }}
-          DCO_SIGNOFF: "Signed-off-by: ${{ steps.bot-details.outputs.name }} <${{ steps.bot-details.outputs.email }}>"
+          COMMITS_VERIFIED: ${{ steps.pull-request.outputs.pull-request-commits-verified }}
+        run: |
+          if [[ -z "${PR_NUMBER}" || "${COMMITS_VERIFIED}" != "true" ]]; then
+              echo "::error::The action did not publish a pull request with verified commits."
+              exit 1
+          fi
