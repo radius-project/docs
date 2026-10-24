@@ -1,28 +1,6 @@
-# This workflow automates the process of upmerging changes from the current release branch to the edge branch.
-# During the course of a release, the release branch is the default branch so that PRs can be immediately
-# brought into the release without waiting for a new release. This workflow merges those changes into
-# the edge branch so that edge can be used as the basis for the next release branch.
-#
-# This workflow assumes that it is being triggered from the current release branch, but it could be triggered from
-# any branch, and it uses that branch as the source branch for merging into the edge branch.
-# The workflow is triggered manually via the workflow_dispatch event.
-#
-# The workflow performs the following steps:
-# 1. Checks out the edge branch.
-# 2. Configures git with a user name and email.
-# 3. Creates a new branch from edge.
-# 4. Merges changes from the branch executing the workflow into the edge branch created in the previous step.
-# 5. If the merge conflicts, resets the new branch to the source branch so the conflicts can be resolved in a PR.
-# 6. Pushes the new branch if there are changes.
-# 7. Creates a pull request to merge the new branch into edge.
-
-# Example:
-# The current release branch is v0.36. We are creating the new release for v0.37.
-# The release person manually triggers this workflow from branch v0.36. The workflow runs, which does the following
-# 1. A new branch is created named upmerge/2024-07-31-98b9. The source branch is edge.
-# 2. Changes from branch v0.36 are merged into branch upmerge/2024-07-31-98b9.
-# 3. A PR is created from branch upmerge/2024-07-31-98b9 --> edge. The workflow finishes and reports success.
-
+# Prepare the source-to-edge merge tree without importing source commit history.
+# GitHub signs one App-authored commit on edge; content conflicts get a draft
+# source-snapshot PR for manual resolution instead of conflict-marker blobs.
 # yaml-language-server: $schema=https://www.schemastore.org/github-workflow.json
 ---
 name: Upmerge docs to edge
@@ -42,7 +20,7 @@ jobs:
     steps:
       # Generate a short-lived installation token scoped to this repository.
       # Requires RADIUS_RELEASE_BOT installed on radius-project/docs with:
-      #   Contents: Read & Write, Pull requests: Read & Write
+      #   Contents: Read & Write, Pull requests: Read & Write, Workflows: Read & Write
       - name: Get App Token
         id: app-token
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
@@ -52,98 +30,121 @@ jobs:
           owner: ${{ github.repository_owner }}
           permission-contents: write
           permission-pull-requests: write
+          permission-workflows: write
           repositories: docs
 
-      # Resolve the bot's GitHub-formatted name and email dynamically from the app slug
-      # so commits are attributed to the bot identity rather than hardcoded values.
+      # Use the App identity for DCO, without overriding the signing action's author.
       - name: Get bot details
         id: bot-details
         uses: raven-actions/bot-details@ee8966a9ff6e7e42cbfc4a56b4ddb60a9d1b40a6 # v1.2.0
         with:
           bot-slug-name: ${{ steps.app-token.outputs.app-slug }}
 
-      # Checkout the edge branch
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Checkout edge
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: edge
           token: ${{ steps.app-token.outputs.token }}
-          # https://github.com/actions/checkout/issues/125#issuecomment-570254411
           fetch-depth: 0
+          # Git fetch uses this short-lived token to get the immutable source commit.
           persist-credentials: true
 
-      - name: Configure git
-        run: |
-          git config --global user.name "${GIT_USER_NAME}"
-          git config --global user.email "${GIT_USER_EMAIL}"
-          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}"
-        env:
-          GIT_USER_NAME: ${{ steps.bot-details.outputs.name }}
-          GIT_USER_EMAIL: ${{ steps.bot-details.outputs.email }}
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
-
-      # Create a new branch from edge. This branch will be used to PR back into edge.
-      - name: Create new branch
-        run: |
-          DATE=$(date +%Y-%m-%d)
-          RAND=$(openssl rand -hex 2)
-          BRANCH_NAME="upmerge/${DATE}-${RAND}"
-          echo "BRANCH_NAME=${BRANCH_NAME}" >> "${GITHUB_ENV}"
-          git checkout -b "${BRANCH_NAME}"
-
-      # Merge changes from the github.ref branch, i.e., the branch from which the workflow is triggered. That
-      # branch is assumed to be the current release branch, but could be any branch.
-      # If the merge conflicts, push the source state so a draft PR can be opened for manual resolution.
-      # If there are no changes, stop the workflow.
       - name: Upmerge docs
-        run: |
-          SOURCE_BRANCH="${GITHUB_REF_NAME}"
-          MERGE_CONFLICT=false
-          EDGE_OWNED_FILES=(
-              docs/config.toml
-              docs/layouts/partials/hooks/body-end.html
-          )
-          echo "Upmerging docs from $SOURCE_BRANCH to edge"
-          git fetch origin "${SOURCE_BRANCH}"
-
-          if git merge --no-ff --no-commit "origin/${SOURCE_BRANCH}"; then
-              git checkout edge -- "${EDGE_OWNED_FILES[@]}"
-          else
-              echo "::warning::Merge conflicts detected. Opening a draft PR for manual resolution."
-              git merge --abort
-              git reset --hard "origin/${SOURCE_BRANCH}"
-              git checkout edge -- "${EDGE_OWNED_FILES[@]}"
-              if ! git diff --cached --quiet; then
-                  git commit --signoff --message "Preserve edge-specific configuration"
-              fi
-              MERGE_CONFLICT=true
-              echo "MERGE_CONFLICT=true" >> "${GITHUB_ENV}"
-          fi
-
-          if git diff --quiet edge; then
-              echo "No changes to merge from ${SOURCE_BRANCH} to edge"
-              echo "NO_CHANGES=true" >> "${GITHUB_ENV}"
-          else
-              if [[ "${MERGE_CONFLICT:-false}" != "true" ]]; then
-                  git commit --signoff --message "Upmerge to edge"
-              fi
-              echo "Pushing ${BRANCH_NAME} for PR to edge"
-              git push --set-upstream origin "${BRANCH_NAME}"
-          fi
-
-      # Create a PR from the new branch to edge
-      - name: Create pull request
-        if: env.NO_CHANGES != 'true'
+        id: prepare
+        shell: bash
+        # Git needs an identity even without a commit; scope it to preparation.
         env:
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          GIT_COMMITTER_NAME: ${{ steps.bot-details.outputs.name }}
+          GIT_COMMITTER_EMAIL: ${{ steps.bot-details.outputs.email }}
         run: |
-          BODY="Upmerge to edge (kicked off by @${{ github.triggering_actor }})"
-          DRAFT_ARGS=()
+          set -euo pipefail
+          BASE_SHA=$(git rev-parse HEAD)
+          git fetch --no-tags origin "${GITHUB_SHA}"
 
-          if [[ "${MERGE_CONFLICT:-false}" == "true" ]]; then
-              BODY="${BODY}
-
-          This upmerge has merge conflicts that require manual resolution."
-              DRAFT_ARGS+=(--draft)
+          MERGE_STATUS=0
+          git merge --squash --no-commit "${GITHUB_SHA}" || MERGE_STATUS=$?
+          UNMERGED=$(git ls-files --unmerged)
+          if [[ "${MERGE_STATUS}" -ne 0 && ("${MERGE_STATUS}" -ne 1 || -z "${UNMERGED}") ]]; then
+              echo "::error::Upmerge preparation failed (git merge exit ${MERGE_STATUS})."
+              exit "${MERGE_STATUS}"
           fi
 
-          gh pr create "${DRAFT_ARGS[@]}" --title "Upmerge to edge" --body "${BODY}" --base edge --head "${BRANCH_NAME}"
+          restore_edge_files() {
+              local path original tracked
+              for path in docs/config.toml docs/layouts/partials/hooks/body-end.html; do
+                  original=$(git ls-tree "${BASE_SHA}" -- "${path}")
+                  tracked=$(git ls-files -- "${path}")
+                  if [[ -n "${original}" ]]; then
+                      git restore --source="${BASE_SHA}" --staged --worktree -- "${path}"
+                  elif [[ -n "${tracked}" ]]; then
+                      git rm --force -- "${path}"
+                  fi
+              done
+          }
+          restore_edge_files
+
+          MERGE_CONFLICT=false
+          UNMERGED=$(git ls-files --unmerged)
+          if [[ -n "${UNMERGED}" ]]; then
+              echo "::warning::Content conflicts detected. Preparing a draft source snapshot, not a resolved merge."
+              git read-tree --reset -u "${GITHUB_SHA}"
+              restore_edge_files
+              MERGE_CONFLICT=true
+          fi
+
+          DIFF_STATUS=0
+          git diff --cached --quiet "${BASE_SHA}" -- || DIFF_STATUS=$?
+          case "${DIFF_STATUS}" in
+              0)
+                  HAS_CHANGES=false
+                  echo "No changes to upmerge to edge."
+                  ;;
+              1) HAS_CHANGES=true ;;
+              *)
+                  echo "::error::Unable to inspect the prepared changes."
+                  exit "${DIFF_STATUS}"
+                  ;;
+          esac
+          {
+              echo "base-sha=${BASE_SHA}"
+              echo "conflict=${MERGE_CONFLICT}"
+              echo "has-changes=${HAS_CHANGES}"
+          } >> "${GITHUB_OUTPUT}"
+
+      - name: Create pull request
+        id: pull-request
+        if: steps.prepare.outputs.has-changes == 'true'
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          base: edge
+          branch: upmerge/${{ github.run_id }}-${{ github.run_attempt }}
+          sign-commits: true
+          # An explicit App DCO trailer avoids signing off as the default local committer.
+          commit-message: |
+            Upmerge ${{ github.ref_name }} to edge
+
+            Signed-off-by: ${{ steps.bot-details.outputs.name }} <${{ steps.bot-details.outputs.email }}>
+          title: Upmerge to edge
+          draft: ${{ steps.prepare.outputs.conflict == 'true' }}
+          body: |
+            Upmerge to edge (kicked off by @${{ github.triggering_actor }}).
+
+            Source: `${{ github.ref_name }}` at `${{ github.sha }}`.
+            Edge snapshot: `${{ steps.prepare.outputs.base-sha }}`.
+
+            ${{ steps.prepare.outputs.conflict == 'true' && '**Manual resolution required.** The merge had content conflicts. This draft contains the source snapshot, not a resolved merge. Reconcile it with edge, including edge-only content, before marking it ready for review.' || 'Prepared the clean merged tree, preserving changes from both branches without importing source commit history.' }}
+
+            The edge versions of `docs/config.toml` and `docs/layouts/partials/hooks/body-end.html`, including deletions, are preserved. Normal review and branch rules still apply.
+
+      - name: Verify signed upmerge
+        if: steps.prepare.outputs.has-changes == 'true'
+        shell: bash
+        env:
+          PR_NUMBER: ${{ steps.pull-request.outputs.pull-request-number }}
+          COMMITS_VERIFIED: ${{ steps.pull-request.outputs.pull-request-commits-verified }}
+        run: |
+          if [[ -z "${PR_NUMBER}" || "${COMMITS_VERIFIED}" != "true" ]]; then
+              echo "::error::The action did not publish a pull request with verified commits."
+              exit 1
+          fi
