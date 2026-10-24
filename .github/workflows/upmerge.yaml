@@ -52,6 +52,10 @@ jobs:
       - name: Upmerge docs
         id: prepare
         shell: bash
+        # Git needs an identity even without a commit; scope it to preparation.
+        env:
+          GIT_COMMITTER_NAME: ${{ steps.bot-details.outputs.name }}
+          GIT_COMMITTER_EMAIL: ${{ steps.bot-details.outputs.email }}
         run: |
           set -euo pipefail
           BASE_SHA=$(git rev-parse HEAD)

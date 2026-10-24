@@ -123,10 +123,16 @@ function fixture(t, initial = {}) {
     prepare(source = git(origin, "rev-parse", "release"), prefix = "") {
       git(root, "clone", "--quiet", "--no-local", "--branch=edge", origin, target);
       git(target, "config", "core.autocrlf", "false");
+      git(target, "config", "user.useConfigOnly", "true");
       runStep(
         "Upmerge docs",
         target,
-        { GITHUB_SHA: source, GITHUB_OUTPUT: output },
+        {
+          GITHUB_SHA: source,
+          GITHUB_OUTPUT: output,
+          GIT_COMMITTER_NAME: "Upmerge Fixture",
+          GIT_COMMITTER_EMAIL: "fixture@example.com"
+        },
         prefix
       );
       const outputs = Object.fromEntries(
@@ -400,6 +406,14 @@ test("workflow directly wires pinned CPR signing, DCO, no-op/draft handling, and
     step("Upmerge docs"),
     /git merge --squash --no-commit "\$\{GITHUB_SHA\}"/
   );
+  assert.match(
+    step("Upmerge docs"),
+    /GIT_COMMITTER_NAME: \$\{\{ steps.bot-details.outputs.name \}\}/
+  );
+  assert.match(
+    step("Upmerge docs"),
+    /GIT_COMMITTER_EMAIL: \$\{\{ steps.bot-details.outputs.email \}\}/
+  );
 
   const publish = step("Create pull request");
   assert.match(
@@ -424,6 +438,7 @@ test("workflow directly wires pinned CPR signing, DCO, no-op/draft handling, and
   );
   assert.match(publish, /not a resolved merge/);
   assert.doesNotMatch(publish, /^\s+(author|committer):/m);
+  assert.doesNotMatch(publish, /GIT_COMMITTER_/);
   assert.doesNotMatch(
     workflow,
     /\bgit (commit|push)\b|\bgh pr\b|github-script|workflow-tooling|upmerge\.mjs/
