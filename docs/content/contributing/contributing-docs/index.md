@@ -592,42 +592,26 @@ The Radius docs handles branching differently than most code repositories. Inste
 
 As a docs approver or maintainer, you need to perform routine **upmerges** to keep the pre-release `edge` branch aligned with updates to the current release branch. It is recommended to upmerge the current branch into the pre-release branch on a weekly basis.
 
-For the following steps, treat `v1.0` as the current release and `edge` as the pre-release branch.
+1. Open the [Upmerge to edge workflow](https://github.com/radius-project/docs/actions/workflows/upmerge.yaml).
+1. Select **Run workflow**, choose the current release branch (for example, `v1.0`), and run it. The selected source commit is pinned for the run; the workflow does not change the source branch.
+1. Follow the new `upmerge/` pull request linked by the **Create pull request** step. If merging produces no net changes, including when the source is already an ancestor of `edge`, no PR is created.
+1. Review the diff, including the Docsy module version in `docs/go.mod` and its checksum entries in `docs/go.sum`. If versions differ, keep the `edge` Docsy version and corresponding checksum entries unless the PR includes an intentional, reviewed Docsy version change. Retain unrelated module changes rather than restoring either file wholesale. The workflow preserves the `edge` versions of `docs/config.toml` and `docs/layouts/partials/hooks/body-end.html`, including files deleted on `edge`.
+1. If the PR is a draft, resolve the reported content conflicts manually before marking it ready. The draft contains the source tree with the edge-owned files restored, **not a resolved merge**. Reconcile edge-only content as well as source changes; conflict markers are not committed by the workflow. Keep any resolution commits signed and DCO-signed-off, without merging source history into the PR.
+1. Obtain the normal reviews and required checks, then squash-merge the PR. The workflow never bypasses branch rules or merges automatically.
 
-1. Open Visual Studio Code to the Radius docs repo.
-1. From your local repo, switch to the latest branch (`v1.0`) and synchronize changes:
+The local `.github/workflows/upmerge.yaml` is a synced caller for the [shared upmerge workflow](https://github.com/radius-project/.github/blob/main/.github/workflows/__upmerge.yml). Docs and samples use that same implementation at `main`; only repository-specific settings, such as the docs files preserved from `edge`, belong in the caller.
 
-   ```bash
-   git pull upstream v1.0
-   git push origin v1.0
-   ```
+For the shared workflow's merge and signing behavior, see [Signed Release Upmerge](https://github.com/radius-project/.github/blob/main/eng/SYNC.md#signed-release-upmerge).
 
-1. Switch to the upcoming branch (`edge`) and synchronize changes:
+Change upmerge rules and action versions in `radius-project/.github`, not in copies here. Update the native `preserve-paths` workflow input in [`workflow-templates/upmerge-docs.yml`](https://github.com/radius-project/.github/blob/main/workflow-templates/upmerge-docs.yml) when docs-specific preserved paths change. The `.github/sync.yml` configuration maps the static docs and samples callers to their `edge` branches; use the [signed release upmerge sync process](https://github.com/radius-project/.github/blob/main/eng/SYNC.md#signed-release-upmerge) to propagate them. Sync copies only the thin callers, not the shared implementation. File synchronization is appropriate for the caller; the actual upmerge still needs a three-way merge to preserve edge-only content.
 
-   ```bash
-   git pull upstream edge
-   git push origin edge
-   ```
+The `RADIUS_RELEASE_BOT` App installation on `radius-project/docs` must grant **Contents: Read & Write**, **Pull requests: Read & Write**, and **Workflows: Read & Write**. The workflow requests only those write permissions for this repository. The workflow permission is needed to carry changes to `.github/workflows/`; an installation administrator must grant it if missing. Do not work around a missing grant by dropping workflow changes, weakening branch rules, or adding a private commit-signing key.
 
-1. Create a new branch from `edge`:
+Merge the shared workflow into `radius-project/.github@main` **before** merging or dispatching its callers. For this rollout, the docs caller must also reach `v0.61`, the current default branch and executing upmerge source; syncing only `edge` does not bootstrap current release-branch executions. After the shared implementation and release-branch caller are available, a new signed upmerge can carry the caller to `edge` before the next release branch is cut. Future shared implementation fixes are maintained centrally rather than copied into each repository. No default-branch or final-release behavior changes are needed.
 
-   ```bash
-   git checkout -b upmerge_MM-DD
-   ```
+New runs resolve the shared workflow at the current `main` revision. For runs using the reusable workflow, rerunning failed jobs or a specific job keeps the original shared-workflow commit, while rerunning all jobs resolves `main` again. Rerunning an older, pre-migration inline workflow cannot adopt the changed caller; start a new run after rollout.
 
-1. Open a terminal and stage a merge from the latest release into the upmerge branch:
-
-   ```bash
-   git merge --no-ff --no-commit v1.0
-   ```
-
-1. Make sure included files look accurate. Inspect any merge conflicts in VS Code. Remove configuration changes or version information that does not need to be merged. Examples of files that usually shouldn't be merged:
-   - docs/config.toml
-   - docs/layouts/partials/hooks/body-end.html
-   - docsy Hugo Module version (docs/go.mod and docs/go.sum)
-1. Commit the staged changes and push to the upmerge branch (`upmerge_MM-DD`).
-1. Open a PR from the upmerge branch to the upcoming release branch (`edge`).
-1. Review the PR and double check that no unintended changes were pushed to the upmerge branch.
+Validate caller changes with the existing workflow configuration lint and documentation checks, and compare `.github/workflows/upmerge.yaml` with its native source in `radius-project/.github`. Check the explicit secret mappings and the two preserved docs paths. Do not dispatch a live upmerge just to validate caller wiring.
 
 ### Keep the sample application in sync
 
