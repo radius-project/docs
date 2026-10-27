@@ -109,9 +109,8 @@ Radius provisions the Redis cache, injects its connection details into the Conta
 
 Use [`rad application graph`]({{< ref rad_application_graph >}}) to view the resources and the connection between them:
 
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Application implementation is no longer in preview. -->
 ```bash
-rad application graph --application my-app --preview
+rad application graph --application my-app
 ```
 
 The output shows the `frontend` Container connected to the `db` cache, along with the infrastructure each resource created:

@@ -49,20 +49,16 @@ This creates the `azure-aci` Recipe Pack in the Radius control plane. To review 
 
 [Assign the `azure-aci` Recipe Pack]({{< ref "/management/environments#update-an-environment" >}}) to your Azure-configured Environment. This replaces the container recipe so subsequent deployments run containers on ACI:
 
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
 ```bash
 rad environment update <environment-name> \
-  --recipe-packs azure-aci \
-  --preview
+  --recipe-packs azure-aci
 ```
 
 The `azure-aci` pack covers only `Radius.Compute/containers`, `Radius.Compute/persistentVolumes`, and `Radius.Security/secrets`, so assign it alongside any additional Recipe Packs that provide the other Resource Types your applications use, such as a data Recipe Pack:
 
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
 ```bash
 rad environment update <environment-name> \
-  --recipe-packs azure-aci,data-recipes \
-  --preview
+  --recipe-packs azure-aci,data-recipes
 ```
 
 ### Deploy an application

@@ -22,13 +22,11 @@ rad resource delete [resourceType] [resourceName] [flags]
 
 ```
 
-sample list of resourceType: Applications.Core/containers, Applications.Core/gateways, Applications.Dapr/daprPubSubBrokers, Applications.Core/extenders, Applications.Datastores/mongoDatabases, Applications.Messaging/rabbitMQMessageQueues, Applications.Datastores/redisCaches, Applications.Datastores/sqlDatabases, Applications.Dapr/daprStateStores, Applications.Dapr/daprSecretStores
-
 # Delete a container named orders
-rad resource delete Applications.Core/containers orders
+rad resource delete Radius.Compute/containers orders
 
 # Force delete a resource that is stuck in a non-terminal state
-rad resource delete Applications.Core/containers orders --force
+rad resource delete Radius.Compute/containers orders --force
 ```
 
 ### Options
