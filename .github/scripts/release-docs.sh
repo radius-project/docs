@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # ------------------------------------------------------------
 # Copyright 2023 The Radius Authors.
 #
@@ -14,13 +16,19 @@
 # limitations under the License.
 # ------------------------------------------------------------
 
-set -xe
+set -euo pipefail
 
-VERSION_NUMBER=$1 # (e.g. 0.1.0)
+VERSION_NUMBER="${1:-}" # (e.g. 0.1.0)
 REPOSITORY="docs"
 
 if [[ -z "${VERSION_NUMBER}" ]]; then
   echo "Error: VERSION_NUMBER is not set."
+  exit 1
+fi
+
+if [[ -z "${GITHUB_REPOSITORY:-}" || -z "${GH_TOKEN:-}" ||
+  -z "${BOT_NAME:-}" || -z "${BOT_EMAIL:-}" ]]; then
+  echo "Error: GITHUB_REPOSITORY, GH_TOKEN, BOT_NAME, and BOT_EMAIL must be set."
   exit 1
 fi
 
@@ -40,9 +48,13 @@ echo "Channel version: ${CHANNEL_VERSION}"
 
 echo "Creating release branch for ${REPOSITORY}..."
 
-pushd $REPOSITORY
+pushd "${REPOSITORY}" > /dev/null
 
-git checkout -B "${CHANNEL_VERSION}"
+if [[ -n "$(git status --porcelain)" ]]; then
+  echo "Error: Release publication requires a clean docs checkout."
+  exit 1
+fi
+BASE_SHA="$(git rev-parse HEAD)"
 
 # Replacements below are whitespace-, quote-, and comment-tolerant so they keep
 # working even after `docs/config.toml` is reformatted.
@@ -85,9 +97,51 @@ if ! grep -Fxq 'indexName = "radapp-dev"' docs/config.toml; then
   exit 1
 fi
 
-# Push changes to GitHub
-git add --all
-git commit -m "Update docs for ${VERSION}"
-git push origin "${CHANNEL_VERSION}"
+# Only release configuration belongs in this commit.
+git add -- docs/config.toml
+if git diff --cached --quiet; then
+  echo "Error: No changes to commit for ${CHANNEL_VERSION}."
+  exit 1
+fi
 
-popd
+BLOB_SHA="$(base64 --wrap=0 docs/config.toml |
+  jq --raw-input --slurp '{content: ., encoding: "base64"}' |
+  gh api --method POST "repos/${GITHUB_REPOSITORY}/git/blobs" --input - --jq '.sha')"
+TREE_SHA="$(jq --null-input \
+  --arg base_tree "$(git rev-parse "${BASE_SHA}^{tree}")" \
+  --arg mode "$(git ls-files --stage -- docs/config.toml | awk '{print $1}')" \
+  --arg sha "${BLOB_SHA}" \
+  '{base_tree: $base_tree, tree: [{path: "docs/config.toml", mode: $mode, type: "blob", sha: $sha}]}' |
+  gh api --method POST "repos/${GITHUB_REPOSITORY}/git/trees" --input - --jq '.sha')"
+if [[ "${TREE_SHA}" != "$(git write-tree)" ]]; then
+  echo "Error: GitHub tree ${TREE_SHA} does not match the local release configuration."
+  exit 1
+fi
+
+# As in samples, omit author/committer/signature so GitHub signs for the App.
+COMMIT="$(jq --null-input \
+  --arg message "$(printf 'Update docs for %s\n\nSigned-off-by: %s <%s>' "${VERSION}" "${BOT_NAME}" "${BOT_EMAIL}")" \
+  --arg tree "${TREE_SHA}" --arg parent "${BASE_SHA}" \
+  '{message: $message, tree: $tree, parents: [$parent]}' |
+  gh api --method POST "repos/${GITHUB_REPOSITORY}/git/commits" --input -)"
+COMMIT_SHA="$(jq --raw-output '.sha' <<< "${COMMIT}")"
+if [[ ! "${COMMIT_SHA}" =~ ^[0-9a-f]{40}$ ]] ||
+  ! jq --exit-status '.verification.verified == true' <<< "${COMMIT}" > /dev/null; then
+  echo "Error: GitHub did not verify release commit ${COMMIT_SHA} ($(jq --raw-output '.verification.reason' <<< "${COMMIT}")). GH_TOKEN must be a GitHub App installation token."
+  exit 1
+fi
+
+# A failed lookup is not evidence that the branch is absent.
+REFERENCES="$(gh api "repos/${GITHUB_REPOSITORY}/git/matching-refs/heads/${CHANNEL_VERSION}")"
+EXISTS="$(jq --raw-output --arg ref "refs/heads/${CHANNEL_VERSION}" \
+  'any(.[]; .ref == $ref)' <<< "${REFERENCES}")"
+if [[ "${EXISTS}" == true ]]; then
+  gh api --method PATCH "repos/${GITHUB_REPOSITORY}/git/refs/heads/${CHANNEL_VERSION}" \
+    -f sha="${COMMIT_SHA}" -F force=false --silent
+else
+  gh api --method POST "repos/${GITHUB_REPOSITORY}/git/refs" \
+    -f ref="refs/heads/${CHANNEL_VERSION}" -f sha="${COMMIT_SHA}" --silent
+fi
+echo "Published verified docs commit ${COMMIT_SHA} to ${CHANNEL_VERSION}."
+
+popd > /dev/null
