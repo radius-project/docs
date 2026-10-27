@@ -12,7 +12,7 @@ List Radius Applications
 
 ### Synopsis
 
-Lists Radius Applications deployed in the resource group associated with the default environment
+Lists Radius Applications in the current resource group.
 
 ```
 rad application list [flags]
@@ -36,7 +36,6 @@ rad app list --group my-group
   -g, --group string       The resource group name
   -h, --help               help for list
   -o, --output string      output format (supported formats are json, table) (default "table")
-      --preview            Use the Radius.Core preview implementation (can also be set via RADIUS_PREVIEW=true)
   -w, --workspace string   The workspace name
 ```
 

@@ -4,7 +4,6 @@ title: "Model, visualize, and deploy applications with Radius Canvas"
 linkTitle: "Radius Canvas"
 weight: 2
 description: "Use Radius Canvas to model, visualize, and deploy applications in the GitHub Copilot app"
-hide_preview_release_banner: true
 ---
 
 {{% alert title="Preview release" color="info" %}}

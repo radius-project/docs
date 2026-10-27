@@ -51,34 +51,29 @@ rad group create dev
 
 Run [`rad environment create`]({{< ref rad_environment_create >}}) to create a `dev` Environment in the `dev` Resource Group. The Kubernetes cloud provider deploys workloads into the `dev` namespace:
 
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
 ```bash
 rad environment create dev \
   --group dev \
-  --kubernetes-namespace dev \
-  --preview
+  --kubernetes-namespace dev
 ```
 
 When you omit `--recipe-packs`, `rad environment create` assigns the `default` Recipe Pack from the `default` Resource Group to the new Environment.
 
 Confirm that the Environment exists with [`rad environment show`]({{< ref rad_environment_show >}}):
 
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
 ```bash
-rad environment show dev --group dev --preview
+rad environment show dev --group dev
 ```
 
 ## Create an Environment with a specific Recipe Pack
 
 A [Recipe Pack]({{< ref "/management/recipe-packs" >}}) determines which recipes provision infrastructure for the Environment. To assign one or more Recipe Packs at creation, pass `--recipe-packs` with a comma-separated list:
 
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
 ```bash
 rad environment create dev \
   --group dev \
   --kubernetes-namespace dev \
-  --recipe-packs data-recipes \
-  --preview
+  --recipe-packs data-recipes
 ```
 
 Applications deployed to `dev` now provision their resources using the recipes in `data-recipes`. To change the Recipe Packs on an existing Environment, see [Update an Environment](#update-an-environment).
@@ -99,24 +94,20 @@ Specifying both flags makes the target explicit and is useful in scripts and aut
 
 Use [`rad environment update`]({{< ref rad_environment_update >}}) to update cloud provider configuration. For example, add or replace the AWS cloud provider on `dev`:
 
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
 ```bash
 rad environment update dev \
   --group dev \
   --aws-account-id 123456789012 \
-  --aws-region us-west-2 \
-  --preview
+  --aws-region us-west-2
 ```
 
 Add or replace the Azure cloud provider on `dev` with the subscription ID and resource group where Azure resources are deployed:
 
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
 ```bash
 rad environment update dev \
   --group dev \
   --azure-subscription-id 00000000-0000-0000-0000-000000000000 \
-  --azure-resource-group my-resource-group \
-  --preview
+  --azure-resource-group my-resource-group
 ```
 
 The CLI can update cloud provider configuration and, in preview, the Recipe Pack list. Manage advanced properties declaratively in Bicep. Review changes to an Environment carefully because they affect subsequent deployments that target it.
@@ -129,25 +120,21 @@ When you use `--group`, a bare Recipe Pack name in `--recipe-packs` resolves in 
 
 For example, configure the `production` Environment in the `production` Resource Group to use `data-recipes` from the `default` Resource Group:
 
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
 ```bash
 rad environment update production \
   --group production \
   --recipe-packs data-recipes \
-  --recipe-pack-group default \
-  --preview
+  --recipe-pack-group default
 ```
 
 `--recipe-pack-group` applies to every bare name in `--recipe-packs` and must be used together with `--recipe-packs`. The same flag works with `rad environment create`.
 
 To mix Recipe Packs from different Resource Groups in one command, pass a full Radius resource ID for any pack outside the `--recipe-pack-group` scope:
 
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
 ```bash
 rad environment update production \
   --group production \
-  --recipe-packs production-recipes,/planes/radius/local/resourceGroups/default/providers/Radius.Core/recipePacks/data-recipes \
-  --preview
+  --recipe-packs production-recipes,/planes/radius/local/resourceGroups/default/providers/Radius.Core/recipePacks/data-recipes
 ```
 
 The `production-recipes` name resolves in the `production` Resource Group selected by `--group`, while the full resource ID selects `data-recipes` from `default`. Ensure that the selected Recipe Packs do not define recipes for the same Resource Type.
@@ -156,9 +143,8 @@ The `production-recipes` name resolves in the `production` Resource Group select
 
 Run [`rad environment delete`]({{< ref rad_environment_delete >}}) when the Environment is no longer needed:
 
-<!-- TODO: Remove the `--preview` flag when the Radius.Core Environment implementation is no longer in preview. -->
 ```bash
-rad environment delete dev --group dev --preview
+rad environment delete dev --group dev
 ```
 
 The command prompts for confirmation. Verify that applications no longer target the Environment before deleting it.
@@ -214,8 +200,11 @@ Use **TerraformSettings** to configure the Terraform CLI that runs Terraform rec
 - Authenticating to a private Terraform registry with a token stored in a Radius Secret.
 - Installing Terraform providers from an internal network mirror, including in air-gapped environments.
 - Setting environment variables for Terraform CLI behavior or troubleshooting.
+- Storing Terraform recipe state in an existing S3 bucket or Azure Blob container instead of Kubernetes secrets.
 
 Reference the TerraformSettings resource ID from the Environment's `terraformSettings` property. Radius applies the configuration to every Terraform recipe run in that Environment. Registry credentials configured in TerraformSettings authenticate Terraform CLI registries; they do not authenticate Git-based module sources. See the [`Radius.Core/terraformSettings` reference]({{< ref "/reference/resources/radius.core/2025-08-01-preview/terraformsettings" >}}) for private registry, provider mirror, environment variable, and Environment reference examples.
+
+For cloud-backed Terraform state, create new TerraformSettings with the backend configured initially and reference them from a new Environment before deploying applications. Backend selection is immutable, including the implicit Kubernetes default, and existing state cannot be migrated or adopted. Changing the settings reference of an Environment with deployments can orphan infrastructure and is not fully guarded by the control plane. See [How to configure Terraform state storage]({{< ref "/management/terraform-state" >}}) for prerequisites, S3/Azure examples, and lifecycle behavior.
 
 ## Next steps
 

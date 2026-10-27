@@ -36,6 +36,13 @@ for root, _, filenames in os.walk("."):
         if filename.endswith(".bicep"):
             files.append(os.path.join(root, filename))
 
+print("Restoring Bicep artifacts...", flush=True)
+restore_result = subprocess.run(
+    [bicep_executable, "restore", "--pattern", "**/*.bicep"],
+)
+if restore_result.returncode != 0:
+    exit(restore_result.returncode)
+
 def validate_file(f):
     print(f"Validating {f}...", flush=True)
 
