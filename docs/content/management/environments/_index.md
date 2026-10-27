@@ -201,7 +201,7 @@ Deploy the Environment definition into its Resource Group:
 rad deploy environment.bicep --group dev
 ```
 
-See the [`Radius.Core/environments` reference]({{< ref "/reference/resources/radius.core/2025-08-01-preview/environments" >}}) for all supported properties. See the [cloud provider guides]({{< ref "/installation/cloud-providers" >}}) before configuring AWS or Azure cloud providers.
+See the [`Radius.Core/environments` reference]({{< ref "/reference/resources/radius.core/2025-08-01-preview/environments" >}}) for all supported properties. See the [cloud provider guides]({{< ref "/aws-and-azure/cloud-providers" >}}) before configuring AWS or Azure cloud providers.
 
 ## Configure TerraformSettings and BicepSettings
 

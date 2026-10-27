@@ -56,7 +56,7 @@ In full mode, `rad initialize` interactively prompts you for all available confi
 - The Kubernetes cluster to install onto
 - The Environment name
 - The namespace that applications are deployed into
-- Azure and AWS [cloud providers]({{< ref "/installation/cloud-providers" >}}) and their credentials
+- Azure and AWS [cloud providers]({{< ref "/aws-and-azure/cloud-providers" >}}) and their credentials
 
 Use `--full` when the defaults do not match your setup, for example when you want a non-default Environment or namespace, or when you need to configure cloud providers during initialization.
 
@@ -119,6 +119,6 @@ Whether you install with `rad install kubernetes --set` or with Helm directly, t
 
 ## Next steps
 
-Once the Radius control plane has been installed, Radius can be used to deploy applications to the Kubernetes cluster. In order to deploy resources to AWS or Azure, configure cloud providers.
+Once the Radius control plane has been installed, Radius can deploy applications to the Kubernetes cluster. To deploy AWS or Azure resources, configure cloud credentials, an Environment, and Recipe Packs.
 
-{{< button text="Next step: How to configure cloud provider credentials" page="installation/cloud-providers" >}}
+{{< button text="Next step: Configure AWS and Azure deployments" page="aws-and-azure" >}}
