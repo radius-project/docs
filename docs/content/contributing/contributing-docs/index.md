@@ -588,6 +588,14 @@ This section covers routine Radius docs maintainer and approver responsibilities
 
 The Radius docs handles branching differently than most code repositories. Instead of a `main` branch, every branch is labeled to match the major and minor version of a runtime release, plus an `edge` branch for in-flight work. For example, the `v1.0` branch contains the docs for the `v1.0` release. The `edge` branch contains the latest in-flight work.
 
+### Release commit signing
+
+The [Release docs workflow](https://github.com/radius-project/docs/actions/workflows/release.yaml) runs from `edge`. Like samples publication, it creates the release configuration commit through the GitHub API with the release App token and without overriding the commit's author, committer, or signature. The script retains the checked-out source as its parent, verifies the generated tree, includes the App's DCO sign-off, and requires GitHub to report the commit as verified before creating or fast-forwarding `vX.Y`. The default-branch change runs only after publication succeeds. No separate private commit-signing key is required.
+
+An unsigned historical commit cannot become verified without changing its commit ID. This workflow fix does not rewrite published branches or make older commits verified; do not force-push a release branch to change a badge. New executions must use the updated workflow on `edge`, rather than rerunning an older workflow revision.
+
+Run `bash .github/scripts/release-docs_test.sh` from the repository root to check configuration changes and publication guards using temporary Git repositories and fake API responses. The website build runs the same check without release credentials. It tests the script's behavior, not live GitHub signing or deployment.
+
 ### Managing content between branches
 
 As a docs approver or maintainer, you need to perform routine **upmerges** to keep the pre-release `edge` branch aligned with updates to the current release branch. It is recommended to upmerge the current branch into the pre-release branch on a weekly basis.
