@@ -30,6 +30,8 @@ The following table summarizes the differences:
 
 Each method is described in detail below.
 
+For a local k3d cluster, [disable Traefik before installing Radius with Contour]({{< ref "/installation#prepare-a-k3d-cluster" >}}).
+
 ## Using `rad initialize`
 
 [`rad initialize`]({{< ref rad_initialize >}}) is the fastest way to get started. It installs the control plane on the current Kubernetes cluster and configures the local machine in one step:
