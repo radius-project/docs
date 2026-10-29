@@ -12,6 +12,8 @@ In part one, you will install Radius on an existing Kubernetes cluster.
 
 For this guide you only need a **Kubernetes cluster**. To install Radius, your user must have the cluster-admin role. Radius <a href="{{< ref "installation#supported-kubernetes-clusters" >}}">supports</a> <a href="https://azure.microsoft.com/en-us/products/kubernetes-service">AKS</a>, <a href="https://aws.amazon.com/eks/">EKS</a>, <a href="https://k3d.io/">k3d</a>, and <a href="https://kind.sigs.k8s.io/">kind</a> clusters. Running a local cluster with k3d or kind is recommended.
 
+If you use k3d, [prepare the cluster with Traefik disabled and a local HTTP port mapping]({{< ref "/installation#prepare-a-k3d-cluster" >}}) before continuing.
+
 ## Install the Radius CLI
 
 {{< read file="/shared-content/installation/rad-cli/install-rad-cli.md" >}}
