@@ -35,6 +35,32 @@ Radius is tested and validated against the following Kubernetes distributions:
 - [k3d](https://k3d.io)
 - [kind](https://kind.sigs.k8s.io/)
 
+### Prepare a k3d cluster
+
+Use a recent k3d release with a Kubernetes version that meets the [system requirements](#system-requirements). Disable the bundled Traefik ingress controller because `rad install kubernetes` and `rad initialize` install Contour by default. Running both controllers can cause port conflicts and Gateway API CRD ownership errors.
+
+Create a new cluster with Traefik disabled and an HTTP port mapping:
+
+```bash
+k3d cluster create radius \
+  -p "127.0.0.1:18081:80@loadbalancer" \
+  --k3s-arg "--disable=traefik@server:*"
+```
+
+The port mapping forwards traffic from `localhost:18081` to port 80 on the cluster nodes. Replace `18081` with another available local port if needed. Binding to `127.0.0.1` limits access to your workstation.
+
+Leave the bundled k3s service load balancer (`servicelb`) enabled: it exposes Contour's Envoy proxy on the nodes so the port mapping can reach it. Do not add `--disable=servicelb`. Older Radius instructions disabled it because the previous Contour chart exposed Envoy directly through host ports; the current chart uses a Kubernetes `LoadBalancer` Service instead.
+
+If an existing cluster runs Traefik, create a separate cluster with the options above before installing Radius. Creating a new cluster does not migrate workloads from the existing cluster. To use your own gateway controller instead of Contour, see [Use a different gateway controller]({{< ref "/integrations/routes#use-a-different-gateway-controller" >}}).
+
+After creating the cluster, [install the Radius CLI]({{< ref "/installation/cli" >}}), then [install the Radius control plane]({{< ref "/installation/control-plane" >}}). Once you have [deployed an HTTP route]({{< ref "/integrations/routes#deploy-and-access-the-application" >}}), access it through the mapped port using the hostname configured on that route:
+
+```bash
+curl -H "Host: frontend.example.com" http://localhost:18081/
+```
+
+Replace `frontend.example.com` with your route's hostname. The port mapping alone does not create an application route, and a request without a matching hostname returns HTTP 404.
+
 ## Organization
 
 This guide is organized into a separate page for each component you install and configure: the Radius CLI, the control plane, cloud providers, a developer workstation, and the Dashboard. Start with the Radius CLI, then continue through the remaining pages in order.
