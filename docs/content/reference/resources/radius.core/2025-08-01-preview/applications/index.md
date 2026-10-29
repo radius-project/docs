@@ -87,6 +87,7 @@ resource frontend 'Radius.Compute/containers@2025-08-01-preview' = {
 |----------|------|-------------|
 | `id` | string | The UCP resource ID of the underlying resource. |
 | `localId` | string | The logical identifier scoped to the owning Radius resource. This is only needed or used when a resource has a dependency relationship. LocalIDs do not have any particular format or meaning beyond being compared to determine dependency relationships. |
+| `providerResourceId` | string | The provider-native ID of the underlying resource, such as the ARN of an AWS resource. Set only when Radius can determine it. Output resources with different UCP resource IDs can refer to the same provider resource. |
 | `radiusManaged` | boolean | Determines whether Radius manages the lifecycle of the underlying resource. |
 
 ### `status.recipe` {#status-recipe}
