@@ -35,7 +35,7 @@ jobs:
           repositories: docs
 
       # Resolve the bot's GitHub-formatted name and email dynamically from the app slug
-      # so commits are attributed to the bot identity rather than hardcoded values.
+      # so the release commit's DCO sign-off matches the App's bot identity.
       - name: Get bot details
         id: bot-details
         uses: raven-actions/bot-details@ee8966a9ff6e7e42cbfc4a56b4ddb60a9d1b40a6 # v1.2.0
@@ -47,15 +47,7 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
           ref: edge
           path: docs
-          persist-credentials: true
-
-      - name: Configure git
-        run: |
-          git config --global user.name "${GIT_USER_NAME}"
-          git config --global user.email "${GIT_USER_EMAIL}"
-        env:
-          GIT_USER_NAME: ${{ steps.bot-details.outputs.name }}
-          GIT_USER_EMAIL: ${{ steps.bot-details.outputs.email }}
+          persist-credentials: false
 
       - name: Ensure inputs.version is valid semver
         run: |
@@ -67,7 +59,7 @@ jobs:
         id: parse_release_channel
         run: |
           # CHANNEL is the major and minor version of the VERSION_NUMBER (e.g. 0.1)
-          CHANNEL="$(echo ${INPUT_VERSION} | cut -d '.' -f 1,2)"
+          CHANNEL="$(echo "${INPUT_VERSION}" | cut -d '.' -f 1,2)"
           echo "channel=$CHANNEL" >> "${GITHUB_OUTPUT}"
         env:
           INPUT_VERSION: ${{ inputs.version }}
@@ -78,6 +70,8 @@ jobs:
         env:
           INPUT_VERSION: ${{ inputs.version }}
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          BOT_NAME: ${{ steps.bot-details.outputs.name }}
+          BOT_EMAIL: ${{ steps.bot-details.outputs.email }}
 
       - name: Change the default branch
         env:

@@ -49,6 +49,9 @@ jobs:
           fetch-depth: 0 # Required for enableGitInfo
           persist-credentials: false
 
+      - name: Test docs release script
+        run: bash .github/scripts/release-docs_test.sh
+
       - name: Parse release version and set environment variables
         run: python ./.github/scripts/get_docs_version.py
 
