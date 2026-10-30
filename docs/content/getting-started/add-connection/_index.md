@@ -10,11 +10,11 @@ The Radius Demo application runs on its own, but most applications depend on oth
 
 ## Add a PostgreSQL database and connections
 
-The `app-postgresql.bicep` definition builds on `app.bicep` by adding a `Radius.Data/postgreSqlDatabases` resource, a `Radius.Security/secrets` resource, a `@secure()` password parameter, and two `connections` entries on the container. The highlighted lines are the additions:
+The `app-postgresql.bicep` definition builds on `app.bicep` by adding a `Radius.Data/postgreSqlDatabases` resource, a `Radius.Security/secrets` resource, a `@secure()` password parameter, and two `connections` entries on the container. It also configures verified TLS using a mounted public CA. The highlighted lines show these additions:
 
 <div class="td-max-width-on-larger-screens" style="margin-bottom: -2rem;"><a href="https://github.com/radius-project/samples/blob/{{< param version >}}/samples/demo/app-postgresql.bicep" target="_blank" rel="noopener">samples/demo/app-postgresql.bicep</a></div>
 
-{{< rad file="/static/samples/demo/app-postgresql.bicep" embed=true markdownConfig=` {hl_lines=["6-8","36-43","47-57","59-70"]}` >}}
+{{< rad file="/static/samples/demo/app-postgresql.bicep" embed=true markdownConfig=` {hl_lines=["6-8","29-42","50-62","66-76","78-89"]}` >}}
 
 The `postgresql` resource is provisioned by the PostgreSQL Recipe in the default Recipe Pack. The `password` parameter is declared with `@secure()`, which keeps its value out of deployment logs and history and lets you supply the password at deploy time instead of hardcoding it. The application passes that value directly to the database's `password` property. Because the property is `x-radius-sensitive`, Radius encrypts it and redacts it from reads.
 
@@ -30,17 +30,65 @@ The `postgresqlCredentials` connection points directly to the authored Secret. W
 
 ## Redeploy the application
 
-Deploy the updated definition from its published URL. The `--parameters` argument sets the database password, and `$(openssl rand -hex 16)` generates a random value on each deploy. This works in Bash and Zsh; in PowerShell, generate the value separately and pass it in:
+### Prepare PostgreSQL TLS
+
+Before deploying this edge sample, use a PostgreSQL Kubernetes Recipe with TLS support and prepare the operator-owned certificates. The default `required` policy rejects plaintext TCP connections. `optional` permits plaintext but still requires a server certificate; it is not a workaround for missing TLS configuration.
+
+Use a certificate from your organization's certificate authority (CA) outside isolated development. Its DNS subject alternative names must include `postgresql-<environment>.<namespace>.svc.cluster.local`. Supply the leaf-first server certificate chain as `server.crt`, its matching unencrypted private key as `server.key`, and the public root CA as `ca.crt`.
+
+For an **isolated development cluster**, the following example creates a test CA and server certificate valid for seven days. Use Bash or Zsh (for example, in WSL on Windows), OpenSSL 1.1.1 or newer, and `kubectl`. Check `openssl version`; the LibreSSL bundled with some macOS versions is not the same tool.
+
+Run these commands in a new, empty directory outside your application checkout. Set the namespace to the existing Environment's actual Kubernetes namespace from `rad env show`. If you already have certificates, set only `environment` and `namespace` and skip the certificate-generation commands.
+
+```bash
+environment=default
+namespace=default # Replace with the namespace shown by rad env show.
+hostname="postgresql-$environment.$namespace.svc.cluster.local"
+(
+  set -e
+  umask 077
+  openssl req -x509 -newkey rsa:2048 -nodes -days 7 -subj /CN=postgresql-test-ca \
+    -addext 'basicConstraints=critical,CA:TRUE' \
+    -addext 'keyUsage=critical,keyCertSign,cRLSign' \
+    -keyout ca.key -out ca.crt
+  openssl req -new -newkey rsa:2048 -nodes -subj "/CN=$hostname" \
+    -keyout server.key -out server.csr
+  printf 'basicConstraints=critical,CA:FALSE\nextendedKeyUsage=serverAuth\nsubjectAltName=DNS:%s\n' \
+    "$hostname" > server.ext
+  openssl x509 -req -days 7 -in server.csr -CA ca.crt -CAkey ca.key \
+    -CAcreateserial -extfile server.ext -out server.crt
+)
+```
+
+Continue only after certificate generation succeeds. In the same terminal and directory, create the two Secrets:
+
+```bash
+kubectl create secret tls "postgresql-$environment-tls" -n "$namespace" \
+  --cert=server.crt --key=server.key
+kubectl create secret generic "postgresql-$environment-ca" -n "$namespace" \
+  --from-file=ca.crt=ca.crt
+```
+
+Only `ca.crt` goes into the client CA Secret. Keep `ca.key` local and protected; never upload it to Kubernetes. The server private key goes only into the server TLS Secret, never the client container. After creating the Secrets, retain any private keys needed for rotation or recovery in protected operator storage, or remove disposable development copies when no longer needed. See the [PostgreSQL Recipe TLS guide](https://github.com/radius-project/resource-types-contrib/blob/main/Data/postgreSqlDatabases/README.md#kubernetes-tls) for certificate issuance and rotation.
+
+The sample mounts the public CA at `/etc/postgresql-ca/ca.crt` and sets `PGSSLMODE=verify-full` and `NODE_EXTRA_CA_CERTS` for the existing PostgreSQL client. This verifies server identity as well as encrypting traffic; `CONNECTION_POSTGRESQL_TLS` alone does not configure client trust. Older plaintext-only Recipes are incompatible with this sample configuration.
+
+**Protect existing data before redeployment or rotation.** The default Recipes have no durable database volume, and a replacement Pod starts with an empty database. Server certificate rotation requires updating the TLS Secret and explicitly restarting the database Deployment. When changing the CA, distribute it to clients first and restart the demo after updating its CA Secret.
+
+Return to your application directory in the same terminal and deploy the updated definition from its published URL. The `--parameters` argument sets the database password, and `$(openssl rand -hex 16)` generates a random value on each deploy. This works in Bash and Zsh; in PowerShell, generate the value separately and pass it in:
 
 {{< rad-deploy path="samples/demo/app-postgresql.bicep" args=`--parameters password="$(openssl rand -hex 16)"` >}}
 
-Radius creates the database and authored Secret, then updates the container with both connections. Forward a local port to the container and open the application again:
+Radius creates the database and authored Secret, then updates the container with both connections. Wait for database readiness rather than relying solely on deployment success, then forward a local port to the container:
 
 ```bash
-kubectl port-forward svc/demo-default-web 3000:3000
+kubectl rollout status deployment/"postgresql-$environment" -n "$namespace" --timeout=180s
+kubectl port-forward svc/demo-default-web 3000:3000 -n "$namespace"
 ```
 
 Open [http://localhost:3000](http://localhost:3000). The Radius Connections section now lists the `postgresql` database connection and the `postgresqlCredentials` Secret connection.
+
+Create a todo, refresh the list to confirm it appears, then delete it. Successful database operations verify that the demo can connect using its TLS configuration; visible connection entries and a ready database alone do not verify client trust.
 
 ## View the connections in the Dashboard
 
@@ -60,6 +108,14 @@ Delete the Radius Demo application. Because the database and authored Secret bel
 
 ```bash
 rad application delete demo-default
+```
+
+The operator-owned server TLS and public CA Secrets are not application resources. Remove them explicitly when no consumers need them. In a new terminal, set the same environment and namespace you used during setup:
+
+```bash
+environment=default
+namespace=default # Replace with the namespace shown by rad env show.
+kubectl delete secret "postgresql-$environment-tls" "postgresql-$environment-ca" -n "$namespace"
 ```
 
 Optionally, uninstall Radius and remove all of its data:
