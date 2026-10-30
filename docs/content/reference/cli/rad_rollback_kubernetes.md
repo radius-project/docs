@@ -67,6 +67,7 @@ rad rollback kubernetes --revision 2
   -h, --help                 help for kubernetes
       --kubecontext string   The Kubernetes context to use, will use the default if unset
       --list-revisions       List available revisions without performing rollback
+  -o, --output string        output format (supported formats are json, table) (default "table")
       --revision int         Specify the revision number to rollback to (0 or omitted = previous version)
 ```
 
@@ -74,7 +75,6 @@ rad rollback kubernetes --revision 2
 
 ```
       --config string   config file (default "$HOME/.rad/config.yaml")
-  -o, --output string   output format (supported formats are json, table) (default "table")
 ```
 
 ### SEE ALSO
