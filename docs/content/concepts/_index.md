@@ -8,20 +8,34 @@ weight: 200
 
 ## Introduction
 
-Radius is a platform for defining and deploying applications and infrastructure to any cloud. It is a central component of modern-day internal developer platforms (IDPs). It allows platform engineers to define resource types for developers to use when building their applications, and separately, the implementation of those resource types using existing Infrastructure as Code (IaC) templates and modules. Additionally, Radius enables platform engineers to define logical environments with specific deployment targets (e.g., a specific cloud provider region), each with their own IaC implementation.
+Radius separates an application's resource definitions from the infrastructure that implements them. Developers define applications with Resource Types. Platform engineers supply infrastructure-as-code (IaC) recipes, written as Terraform configurations or Bicep templates, to deploy those resources to AWS, Azure, or local Kubernetes. Each Environment selects the deployment location and Recipe Packs.
 
-This page provides a conceptual overview of Radius. It describes Radius' logical components, technical architecture, and how Radius relates to other IDP components. It is accompanied by additional concept pages focused on each of the core components: Resource Types, Recipe Packs, Environments, and Applications. If you are new to Radius, you are encouraged to complete the [Getting Started guide]({{< ref "getting-started" >}}) before or after reading these concept pages.
+This page provides a conceptual overview of Radius. It describes Radius' logical components, technical architecture, and how Radius relates to other internal developer platform (IDP) components. It is accompanied by additional concept pages focused on each of the core components: Resource Types, Recipe Packs, Environments, and Applications. If you are new to Radius, you are encouraged to complete the [Getting Started guide]({{< ref "getting-started" >}}) before or after reading these concept pages.
+
+## Deploying across AWS and Azure
+
+An application can request a PostgreSQL database with `Radius.Data/postgreSqlDatabases` without selecting a cloud service in its application definition. Each Environment supplies a recipe that implements that Resource Type. For example, platform engineers can configure:
+
+| Environment | Recipe implementation |
+| --- | --- |
+| Local development | PostgreSQL running in Kubernetes |
+| AWS | Amazon RDS for PostgreSQL |
+| Azure | Azure Database for PostgreSQL |
+
+The application definition stays the same when each recipe implements the Resource Type and properties the application uses. The Environment supplies the cloud configuration, Recipe Packs, and recipe parameters.
+
+See [Configure AWS and Azure deployments]({{< ref "/aws-and-azure" >}}) for credentials and setup, and [Manage Recipe Packs]({{< ref "/management/recipe-packs" >}}) to select or author the implementations.
 
 ## IDP reference architecture
 
-The reference architecture below separates resource *definition* from resource *deployment*. For example, rather than an *Azure Database for PostgreSQL Flexible Server* resource that is obviously only deployable to Azure, the resource definition is an abstract PostgreSQL database resource type. A swappable resource deployment IaC implementation is then used when actually deploying this database to Azure.
+The reference architecture below separates resource *definition* from resource *deployment*. A PostgreSQL Resource Type describes the database the application needs. A recipe provisions it, for example as Amazon RDS for PostgreSQL on AWS or Azure Database for PostgreSQL on Azure.
 
 By separating resource definition from resource deployment, platform engineers are able to:
 
 - Cleanly separate the work of developers building applications from platform engineers building infrastructure
 - Improve the application developer experience by defining resource types that are just the right level of abstraction for applications
 - Eliminate the need for developers to handle low-level infrastructure details
-- Ensure portability between cloud providers and container platforms
+- Support portability between clouds and container platforms through recipes that implement the same Resource Types
 - Ensure best practices for infrastructure security, operational, and cost are followed by default
 
 {{< image src="reference-arch.png" width="65%" alt="IDP reference architecture" >}}
