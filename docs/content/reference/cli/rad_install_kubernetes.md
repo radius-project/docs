@@ -23,6 +23,13 @@ resource group, environment, and recipe pack for deploying applications.
 
 Overrides can be set by specifying Helm chart values with the '--set' flag. For more information visit https://docs.radapp.io/guides/operations/kubernetes/install/.
 
+Contour chart values can be set with '--contour-set' and '--contour-set-file'. They take precedence over the values that Radius sets.
+When the cluster already has Gateway API CRDs from another installer, such as the Traefik chart in k3s, Radius uses them
+instead of letting Contour take them over. Before it installs anything, Radius checks that they serve the versions that Contour needs,
+and that installing Contour neither takes over nor deletes CRDs. On a k3s or RKE2 cluster that is still installing the Traefik CRDs,
+Radius first waits for them. Radius then installs Contour, followed by the Radius control plane.
+When Radius is installed but Contour is not, or the latest Contour release revision failed or did not finish, rerun the command with '--reinstall' to install or repair Contour.
+
 
 ```
 rad install kubernetes [flags]
@@ -39,6 +46,10 @@ rad install kubernetes --kubecontext mycluster
 
 # Install Radius without Contour ingress controller
 rad install kubernetes --skip-contour-install
+
+# Install Radius on a k3s cluster with Traefik, whose Gateway API CRDs lack TLSRoute, TCPRoute, and
+# BackendTLSPolicy v1alpha3, by turning off the Contour features that use them
+rad install kubernetes --contour-set "contour.extraArgs={--disable-feature=tlsroutes,--disable-feature=tcproutes,--disable-feature=backendtlspolicies}"
 
 # Install Radius with overrides in the current Kubernetes context
 rad install kubernetes --set key=value
@@ -90,8 +101,8 @@ rad install kubernetes --timeout 15m
 ```
       --chart string                   Specify a file path to a helm chart to install Radius from
       --contour-chart string           Specify a local file path to a helm chart to install Contour from
-      --contour-set stringArray        Set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
-      --contour-set-file stringArray   Set values from files on the command line (can specify multiple or separate files with commas: key1=filename1,key2=filename2)
+      --contour-set stringArray        Set Contour chart values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
+      --contour-set-file stringArray   Set Contour chart values from files on the command line (can specify multiple or separate files with commas: key1=filename1,key2=filename2)
   -h, --help                           help for kubernetes
       --kubecontext string             The Kubernetes context to use, will use the default if unset
       --reinstall                      Specify to force reinstallation of Radius
