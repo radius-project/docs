@@ -15,6 +15,8 @@ Initialize Radius
 
 Interactively install the Radius control-plane and setup a Radius.Core environment.
 
+Initialization uses an interactive human-readable display, not a machine-readable result.
+
 If an environment already exists, 'rad init' will prompt the user to use the existing environment or create a new one.
 
 'rad init' writes a bicepconfig.json file to the current directory so that Radius Bicep files can be authored and deployed. An existing bicepconfig.json is never overwritten.
@@ -67,7 +69,6 @@ rad init --set-file global.rootCA.cert=/path/to/rootCA.crt
 ```
       --full[=true|false]      Prompt user for all available configuration options
   -h, --help[=true|false]      help for initialize
-  -o, --output string          output format (supported formats are json, table) (default "table")
       --set stringArray        Set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
       --set-file stringArray   Set values from files on the command line (can specify multiple or separate files with commas: key1=filename1,key2=filename2)
 ```
