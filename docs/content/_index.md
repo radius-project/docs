@@ -89,6 +89,8 @@ Radius is an open-source application platform for AWS, Azure, and local Kubernet
   Visualize and interact with your applications, environments, and Recipes in the Radius dashboard, built on Backstage.
 
   [**Explore the dashboard →**]({{< ref "installation/dashboard" >}})
+
+  Already use Backstage? [**Evaluate the Radius plugin from source →**]({{< ref "integrations/backstage" >}})
   {{% /card %}}
 {{< /cardpane >}}
 

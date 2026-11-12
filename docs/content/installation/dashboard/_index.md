@@ -10,6 +10,8 @@ aliases:
 
 How you access the Dashboard depends on how Radius is installed. For local development on a k3d or kind cluster, port-forwarding is the simplest option. For centralized installations on a shared cluster such as AKS or EKS, a platform engineer typically configures ingress so that users can reach the Dashboard without port-forwarding.
 
+If you already run Backstage, you can evaluate the Radius pages in your own portal instead. See [Use Radius in Backstage]({{< ref "/integrations/backstage" >}}) for plugin discovery, development-package installation, and host configuration. The plugin is not yet a public package release; the standalone access steps below remain unchanged.
+
 ## Port-forwarding
 
 Create a port-forward from `localhost` to a port of your choice to access the Radius Dashboard, then visit [http://localhost:7007](http://localhost:7007) in a browser:
