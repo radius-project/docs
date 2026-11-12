@@ -40,11 +40,11 @@ rad app delete my-app --force
 
 ```
   -a, --application string   The application name
-      --force                Force the operation even if the resource is in a non-terminal provisioning state
+      --force[=true|false]   Force the operation even if the resource is in a non-terminal provisioning state
   -g, --group string         The resource group name
-  -h, --help                 help for delete
+  -h, --help[=true|false]    help for delete
   -w, --workspace string     The workspace name
-  -y, --yes                  The confirmation flag
+  -y, --yes[=true|false]     The confirmation flag
 ```
 
 ### Options inherited from parent commands

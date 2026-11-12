@@ -17,7 +17,7 @@ Manage Radius Applications
 ### Options
 
 ```
-  -h, --help   help for application
+  -h, --help[=true|false]   help for application
 ```
 
 ### Options inherited from parent commands

@@ -31,9 +31,9 @@ rad workspace delete my-workspace
 ### Options
 
 ```
-  -h, --help               help for delete
-  -w, --workspace string   The workspace name
-  -y, --yes                The confirmation flag
+  -h, --help[=true|false]   help for delete
+  -w, --workspace string    The workspace name
+  -y, --yes[=true|false]    The confirmation flag
 ```
 
 ### Options inherited from parent commands

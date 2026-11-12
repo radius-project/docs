@@ -55,7 +55,7 @@ rad resource list -a icecream-store
   -a, --application string   The application name
   -e, --environment string   The environment name
   -g, --group string         The resource group name
-  -h, --help                 help for list
+  -h, --help[=true|false]    help for list
   -o, --output string        output format (supported formats are json, table) (default "table")
   -w, --workspace string     The workspace name
 ```

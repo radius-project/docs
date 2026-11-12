@@ -62,7 +62,7 @@ rad completion [flags]
 ### Options
 
 ```
-  -h, --help   help for completion
+  -h, --help[=true|false]   help for completion
 ```
 
 ### Options inherited from parent commands

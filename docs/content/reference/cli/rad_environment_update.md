@@ -62,11 +62,11 @@ rad env update myenv --recipe-packs pack1 --recipe-pack-group other-group
       --aws-region string              The region where AWS resources will be deployed
       --azure-resource-group string    The resource group where Azure resources will be deployed
       --azure-subscription-id string   The subscription ID where Azure resources will be deployed
-      --clear-aws                      Specify if aws provider needs to be cleared on env
-      --clear-azure                    Specify if azure provider needs to be cleared on env
+      --clear-aws[=true|false]         Specify if aws provider needs to be cleared on env
+      --clear-azure[=true|false]       Specify if azure provider needs to be cleared on env
   -e, --environment string             The environment name
   -g, --group string                   The resource group name
-  -h, --help                           help for update
+  -h, --help[=true|false]              help for update
       --kubernetes-namespace string    The namespace where Kubernetes resources will be deployed
       --recipe-pack-group string       Specify the resource group containing the recipe packs named in --recipe-packs, if different from the environment's resource group.
       --recipe-packs strings           Specify recipe packs to replace the environment's recipe pack list. Accepts comma-separated values.

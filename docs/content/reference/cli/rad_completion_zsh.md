@@ -17,7 +17,7 @@ rad completion zsh [flags]
 ### Options
 
 ```
-  -h, --help   help for zsh
+  -h, --help[=true|false]   help for zsh
 ```
 
 ### Options inherited from parent commands

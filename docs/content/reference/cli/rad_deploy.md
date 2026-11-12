@@ -90,7 +90,7 @@ rad deploy myapp.bicep --parameters @myfile.json --parameters version=latest
   -a, --application string       The application name
   -e, --environment string       The environment name
   -g, --group string             The resource group name
-  -h, --help                     help for deploy
+  -h, --help[=true|false]        help for deploy
   -p, --parameters stringArray   Specify parameters for the deployment
   -w, --workspace string         The workspace name
 ```

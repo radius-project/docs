@@ -44,7 +44,7 @@ rad credential register aws access-key --access-key-id <access-key-id> --secret-
 
 ```
       --access-key-id string       The AWS IAM access key id.
-  -h, --help                       help for access-key
+  -h, --help[=true|false]          help for access-key
   -o, --output string              output format (supported formats are json, table) (default "table")
       --secret-access-key string   The AWS IAM secret access key.
   -w, --workspace string           The workspace name

@@ -65,8 +65,8 @@ rad init --set-file global.rootCA.cert=/path/to/rootCA.crt
 ### Options
 
 ```
-      --full                   Prompt user for all available configuration options
-  -h, --help                   help for initialize
+      --full[=true|false]      Prompt user for all available configuration options
+  -h, --help[=true|false]      help for initialize
   -o, --output string          output format (supported formats are json, table) (default "table")
       --set stringArray        Set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
       --set-file stringArray   Set values from files on the command line (can specify multiple or separate files with commas: key1=filename1,key2=filename2)

@@ -103,17 +103,17 @@ rad install kubernetes --timeout 15m
 ### Options
 
 ```
-      --chart string                   Specify a file path to a helm chart to install Radius from
-      --contour-chart string           Specify a local file path to a helm chart to install Contour from
-      --contour-set stringArray        Set Contour chart values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
-      --contour-set-file stringArray   Set Contour chart values from files on the command line (can specify multiple or separate files with commas: key1=filename1,key2=filename2)
-  -h, --help                           help for kubernetes
-      --kubecontext string             The Kubernetes context to use, will use the default if unset
-      --reinstall                      Specify to force reinstallation of Radius
-      --set stringArray                Set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
-      --set-file stringArray           Set values from files on the command line (can specify multiple or separate files with commas: key1=filename1,key2=filename2)
-      --skip-contour-install           Install Contour ingress controller (enabled by default)
-      --timeout duration               Specify how long to wait for the Radius control plane to become ready (for example 15m, 1h) (default 10m0s)
+      --chart string                        Specify a file path to a helm chart to install Radius from
+      --contour-chart string                Specify a local file path to a helm chart to install Contour from
+      --contour-set stringArray             Set Contour chart values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
+      --contour-set-file stringArray        Set Contour chart values from files on the command line (can specify multiple or separate files with commas: key1=filename1,key2=filename2)
+  -h, --help[=true|false]                   help for kubernetes
+      --kubecontext string                  The Kubernetes context to use, will use the default if unset
+      --reinstall[=true|false]              Specify to force reinstallation of Radius
+      --set stringArray                     Set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
+      --set-file stringArray                Set values from files on the command line (can specify multiple or separate files with commas: key1=filename1,key2=filename2)
+      --skip-contour-install[=true|false]   Install Contour ingress controller (enabled by default)
+      --timeout duration                    Specify how long to wait for the Radius control plane to become ready (for example 15m, 1h) (default 10m0s)
 ```
 
 ### Options inherited from parent commands

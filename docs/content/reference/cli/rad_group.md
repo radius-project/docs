@@ -42,7 +42,7 @@ rad group show dev
 ### Options
 
 ```
-  -h, --help   help for group
+  -h, --help[=true|false]   help for group
 ```
 
 ### Options inherited from parent commands

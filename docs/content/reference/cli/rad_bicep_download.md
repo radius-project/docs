@@ -21,7 +21,7 @@ rad bicep download [flags]
 ### Options
 
 ```
-  -h, --help   help for download
+  -h, --help[=true|false]   help for download
 ```
 
 ### Options inherited from parent commands

@@ -33,9 +33,9 @@ rad group switch rgprod -w wsprod
 ### Options
 
 ```
-  -g, --group string       The resource group name
-  -h, --help               help for switch
-  -w, --workspace string   The workspace name
+  -g, --group string        The resource group name
+  -h, --help[=true|false]   help for switch
+  -w, --workspace string    The workspace name
 ```
 
 ### Options inherited from parent commands

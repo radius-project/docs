@@ -120,13 +120,13 @@ rad upgrade kubernetes --contour-set "contour.extraArgs={--disable-feature=tlsro
       --chart string                   Specify a file path to a helm chart to upgrade Radius from
       --contour-set stringArray        Set Contour chart values on the command line when Contour is installed (can specify multiple or separate values with commas: key1=val1,key2=val2)
       --contour-set-file stringArray   Set Contour chart values from files on the command line when Contour is installed (can specify multiple or separate files with commas: key1=filename1,key2=filename2)
-  -h, --help                           help for kubernetes
+  -h, --help[=true|false]              help for kubernetes
       --kubecontext string             The Kubernetes context to use, will use the default if unset
-      --preflight-only                 Run only preflight checks without performing the upgrade
-      --reset-values                   Discard values previously stored on the Helm releases and use only the current --set / --set-file and --contour-set / --contour-set-file flags plus the new charts' defaults
+      --preflight-only[=true|false]    Run only preflight checks without performing the upgrade
+      --reset-values[=true|false]      Discard values previously stored on the Helm releases and use only the current --set / --set-file and --contour-set / --contour-set-file flags plus the new charts' defaults
       --set stringArray                Set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
       --set-file stringArray           Set values from files on the command line (can specify multiple or separate files with commas: key1=filename1,key2=filename2)
-      --skip-preflight                 Skip preflight checks before upgrade (not recommended)
+      --skip-preflight[=true|false]    Skip preflight checks before upgrade (not recommended)
       --version string                 Specify the version to upgrade to (default: CLI version, use 'latest' for latest available)
 ```
 

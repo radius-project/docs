@@ -50,7 +50,7 @@ rad bicep generate-kubernetes-manifest app.bicep --parameters @app.bicepparam --
       --azure-scope string        Scope for Azure deployment.
   -d, --destination-file string   Path of the generated DeploymentTemplate yaml file created by running this command.
   -g, --group string              The resource group name
-  -h, --help                      help for generate-kubernetes-manifest
+  -h, --help[=true|false]         help for generate-kubernetes-manifest
   -p, --parameters stringArray    Specify parameters for the deployment
 ```
 
