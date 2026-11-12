@@ -53,7 +53,7 @@ rad env create myenv --recipe-packs pack1 --recipe-pack-group other-group
       --azure-subscription-id string   The subscription ID where Azure resources will be deployed
   -e, --environment string             The environment name
   -g, --group string                   The resource group name
-  -h, --help                           help for create
+  -h, --help[=true|false]              help for create
       --kubernetes-namespace string    The namespace where Kubernetes resources will be deployed
       --recipe-pack-group string       Specify the resource group containing the recipe packs named in --recipe-packs, if different from the environment's resource group.
       --recipe-packs strings           Specify recipe packs to assign to the environment. Accepts comma-separated values.

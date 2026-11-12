@@ -25,7 +25,7 @@ the Radius documentation for information about describing your application and r
 
 You can specify parameters using the '--parameter' flag ('-p' for short). Parameters can be passed as:
 
-- A file containing multiple parameters using the ARM JSON parameter format (see below)
+- A file containing multiple parameters using the ARM JSON parameter format (see below) or a Bicep parameters (.bicepparam) file
 - A file containing a single value in JSON format
 - A key-value-pair passed in the command line
 
@@ -90,7 +90,7 @@ rad deploy myapp.bicep --parameters @myfile.json --parameters version=latest
   -a, --application string       The application name
   -e, --environment string       The environment name
   -g, --group string             The resource group name
-  -h, --help                     help for deploy
+  -h, --help[=true|false]        help for deploy
   -p, --parameters stringArray   Specify parameters for the deployment
   -w, --workspace string         The workspace name
 ```

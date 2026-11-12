@@ -18,7 +18,7 @@ Manage resources
 
 ```
   -a, --application string   The application name
-  -h, --help                 help for resource
+  -h, --help[=true|false]    help for resource
   -w, --workspace string     The workspace name
 ```
 

@@ -64,11 +64,11 @@ rad rollback kubernetes --revision 2
 ### Options
 
 ```
-  -h, --help                 help for kubernetes
-      --kubecontext string   The Kubernetes context to use, will use the default if unset
-      --list-revisions       List available revisions without performing rollback
-  -o, --output string        output format (supported formats are json, table) (default "table")
-      --revision int         Specify the revision number to rollback to (0 or omitted = previous version)
+  -h, --help[=true|false]             help for kubernetes
+      --kubecontext string            The Kubernetes context to use, will use the default if unset
+      --list-revisions[=true|false]   List available revisions without performing rollback
+  -o, --output string                 output format (supported formats are json, table) (default "table")
+      --revision int                  Specify the revision number to rollback to (0 or omitted = previous version)
 ```
 
 ### Options inherited from parent commands

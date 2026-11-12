@@ -44,10 +44,10 @@ rad bicep publish-extension --from-file ./Example.Provider.yaml --target br:ghcr
 ### Options
 
 ```
-      --force              Overwrite the target extension if it exists.
-  -f, --from-file string   The input file. May be an absolute path or a path relative to the current working directory
-  -h, --help               help for publish-extension
-      --target string      The destination path file or OCI registry path. OCI registry paths use the format 'br:HOST/PATH:TAG'.
+      --force[=true|false]   Overwrite the target extension if it exists.
+  -f, --from-file string     The input file. May be an absolute path or a path relative to the current working directory
+  -h, --help[=true|false]    help for publish-extension
+      --target string        The destination path file or OCI registry path. OCI registry paths use the format 'br:HOST/PATH:TAG'.
 ```
 
 ### Options inherited from parent commands

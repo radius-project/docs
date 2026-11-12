@@ -17,7 +17,7 @@ Handle bicep-specific tasks for Radius
 ### Options
 
 ```
-  -h, --help   help for bicep
+  -h, --help[=true|false]   help for bicep
 ```
 
 ### Options inherited from parent commands

@@ -28,8 +28,8 @@ rad workspace list
 ### Options
 
 ```
-  -h, --help            help for list
-  -o, --output string   output format (supported formats are json, table) (default "table")
+  -h, --help[=true|false]   help for list
+  -o, --output string       output format (supported formats are json, table) (default "table")
 ```
 
 ### Options inherited from parent commands

@@ -17,7 +17,7 @@ Installs Radius for a given platform
 ### Options
 
 ```
-  -h, --help   help for install
+  -h, --help[=true|false]   help for install
 ```
 
 ### Options inherited from parent commands

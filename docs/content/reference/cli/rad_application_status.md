@@ -35,7 +35,7 @@ rad app status my-app --group my-group
 ```
   -a, --application string   The application name
   -g, --group string         The resource group name
-  -h, --help                 help for status
+  -h, --help[=true|false]    help for status
   -o, --output string        output format (supported formats are json, table) (default "table")
   -w, --workspace string     The workspace name
 ```

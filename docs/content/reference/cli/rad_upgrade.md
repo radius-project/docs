@@ -17,7 +17,7 @@ Upgrades Radius for a given platform
 ### Options
 
 ```
-  -h, --help   help for upgrade
+  -h, --help[=true|false]   help for upgrade
 ```
 
 ### Options inherited from parent commands

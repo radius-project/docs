@@ -17,9 +17,9 @@ Radius CLI
 ### Options
 
 ```
-      --config string   config file (default "$HOME/.rad/config.yaml")
-  -h, --help            help for rad
-  -o, --output string   output format (supported formats are json, table) (default "table")
+      --config string       config file (default "$HOME/.rad/config.yaml")
+  -h, --help[=true|false]   help for rad
+  -o, --output string       output format (supported formats are json, table) (default "table")
 ```
 
 ### SEE ALSO

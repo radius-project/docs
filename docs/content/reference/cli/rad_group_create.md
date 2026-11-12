@@ -34,9 +34,9 @@ rad group create rgprod
 ### Options
 
 ```
-  -g, --group string       The resource group name
-  -h, --help               help for create
-  -w, --workspace string   The workspace name
+  -g, --group string        The resource group name
+  -h, --help[=true|false]   help for create
+  -w, --workspace string    The workspace name
 ```
 
 ### Options inherited from parent commands

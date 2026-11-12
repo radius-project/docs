@@ -49,10 +49,10 @@ rad group delete rgprod --yes
 ### Options
 
 ```
-  -g, --group string       The resource group name
-  -h, --help               help for delete
-  -w, --workspace string   The workspace name
-  -y, --yes                The confirmation flag
+  -g, --group string        The resource group name
+  -h, --help[=true|false]   help for delete
+  -w, --workspace string    The workspace name
+  -y, --yes[=true|false]    The confirmation flag
 ```
 
 ### Options inherited from parent commands

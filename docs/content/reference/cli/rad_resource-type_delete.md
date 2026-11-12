@@ -37,10 +37,10 @@ rad resource-type delete Applications.Core/containers --yes
 ### Options
 
 ```
-  -h, --help               help for delete
-  -o, --output string      output format (supported formats are json, table) (default "table")
-  -w, --workspace string   The workspace name
-  -y, --yes                The confirmation flag
+  -h, --help[=true|false]   help for delete
+  -o, --output string       output format (supported formats are json, table) (default "table")
+  -w, --workspace string    The workspace name
+  -y, --yes[=true|false]    The confirmation flag
 ```
 
 ### Options inherited from parent commands

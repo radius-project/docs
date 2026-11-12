@@ -49,11 +49,11 @@ rad credential register azure wi --client-id <client id/app id> --tenant-id <ten
 ### Options
 
 ```
-      --client-id string   The client id or app id of an Azure service principal.
-  -h, --help               help for wi
-  -o, --output string      output format (supported formats are json, table) (default "table")
-      --tenant-id string   The tenant id of an Azure service principal.
-  -w, --workspace string   The workspace name
+      --client-id string    The client id or app id of an Azure service principal.
+  -h, --help[=true|false]   help for wi
+  -o, --output string       output format (supported formats are json, table) (default "table")
+      --tenant-id string    The tenant id of an Azure service principal.
+  -w, --workspace string    The workspace name
 ```
 
 ### Options inherited from parent commands
