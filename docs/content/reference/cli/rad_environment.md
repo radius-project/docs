@@ -19,7 +19,7 @@ Radius Environments are prepared “landing zones” for Radius Applications. Ap
 
 ```
   -e, --environment string   The environment name
-  -h, --help                 help for environment
+  -h, --help[=true|false]    help for environment
   -w, --workspace string     The workspace name
 ```
 

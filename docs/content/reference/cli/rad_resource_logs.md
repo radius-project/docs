@@ -44,11 +44,11 @@ rad resource logs Radius.Compute/containers orders --application icecream-store 
 ### Options
 
 ```
-      --container string   specify the container from which logs should be streamed
-  -f, --follow             specify that logs should be stream until the command is canceled
-  -g, --group string       The resource group name
-  -h, --help               help for logs
-      --replica string     specify the replica to collect logs from
+      --container string      specify the container from which logs should be streamed
+  -f, --follow[=true|false]   specify that logs should be stream until the command is canceled
+  -g, --group string          The resource group name
+  -h, --help[=true|false]     help for logs
+      --replica string        specify the replica to collect logs from
 ```
 
 ### Options inherited from parent commands

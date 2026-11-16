@@ -48,11 +48,11 @@ rad resource-type create --from-file /path/to/input.json
 ### Options
 
 ```
-  -f, --from-file string   The input file. May be an absolute path or a path relative to the current working directory
-  -h, --help               help for create
-      --icon string        Path to an SVG file to associate with the resource type(s) being created. The icon's bytes and a SHA-256 hash are stored with the resource type.
-  -o, --output string      output format (supported formats are json, table) (default "table")
-  -w, --workspace string   The workspace name
+  -f, --from-file string    The input file. May be an absolute path or a path relative to the current working directory
+  -h, --help[=true|false]   help for create
+      --icon string         Path to an SVG file to associate with the resource type(s) being created. The icon's bytes and a SHA-256 hash are stored with the resource type.
+  -o, --output string       output format (supported formats are json, table) (default "table")
+  -w, --workspace string    The workspace name
 ```
 
 ### Options inherited from parent commands

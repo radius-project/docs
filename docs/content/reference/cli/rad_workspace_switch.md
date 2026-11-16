@@ -28,8 +28,8 @@ rad workspace switch my-workspace
 ### Options
 
 ```
-  -h, --help               help for switch
-  -w, --workspace string   The workspace name
+  -h, --help[=true|false]   help for switch
+  -w, --workspace string    The workspace name
 ```
 
 ### Options inherited from parent commands

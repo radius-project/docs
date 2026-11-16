@@ -39,7 +39,7 @@ rad credential register aws irsa --iam-role <roleARN>
 ### Options
 
 ```
-  -h, --help   help for register
+  -h, --help[=true|false]   help for register
 ```
 
 ### Options inherited from parent commands

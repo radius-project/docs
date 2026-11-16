@@ -51,7 +51,7 @@ rad credential register azure sp --client-id <client id/app id> --client-secret 
 ```
       --client-id string       The client id or app id of an Azure service principal.
       --client-secret string   The client secret or password of an Azure service principal.
-  -h, --help                   help for sp
+  -h, --help[=true|false]      help for sp
   -o, --output string          output format (supported formats are json, table) (default "table")
       --tenant-id string       The tenant id of an Azure service principal.
   -w, --workspace string       The workspace name

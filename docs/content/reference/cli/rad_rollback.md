@@ -17,7 +17,7 @@ Rolls back Radius for a given platform
 ### Options
 
 ```
-  -h, --help   help for rollback
+  -h, --help[=true|false]   help for rollback
 ```
 
 ### Options inherited from parent commands

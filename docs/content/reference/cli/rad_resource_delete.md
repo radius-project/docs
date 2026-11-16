@@ -32,12 +32,12 @@ rad resource delete Radius.Compute/containers orders --force
 ### Options
 
 ```
-      --force              Force the operation even if the resource is in a non-terminal provisioning state
-  -g, --group string       The resource group name
-  -h, --help               help for delete
-  -o, --output string      output format (supported formats are json, table) (default "table")
-  -w, --workspace string   The workspace name
-  -y, --yes                The confirmation flag
+      --force[=true|false]   Force the operation even if the resource is in a non-terminal provisioning state
+  -g, --group string         The resource group name
+  -h, --help[=true|false]    help for delete
+  -o, --output string        output format (supported formats are json, table) (default "table")
+  -w, --workspace string     The workspace name
+  -y, --yes[=true|false]     The confirmation flag
 ```
 
 ### Options inherited from parent commands

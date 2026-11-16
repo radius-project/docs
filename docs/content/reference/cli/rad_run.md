@@ -47,7 +47,7 @@ rad run app.bicep --parameters @myfile.json --parameters version=latest --applic
   -a, --application string       The application name
   -e, --environment string       The environment name
   -g, --group string             The resource group name
-  -h, --help                     help for run
+  -h, --help[=true|false]        help for run
   -p, --parameters stringArray   Specify parameters for the deployment
   -w, --workspace string         The workspace name
 ```

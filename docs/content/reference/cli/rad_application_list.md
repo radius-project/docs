@@ -33,10 +33,10 @@ rad app list --group my-group
 ### Options
 
 ```
-  -g, --group string       The resource group name
-  -h, --help               help for list
-  -o, --output string      output format (supported formats are json, table) (default "table")
-  -w, --workspace string   The workspace name
+  -g, --group string        The resource group name
+  -h, --help[=true|false]   help for list
+  -o, --output string       output format (supported formats are json, table) (default "table")
+  -w, --workspace string    The workspace name
 ```
 
 ### Options inherited from parent commands

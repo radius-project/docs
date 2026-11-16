@@ -34,10 +34,10 @@ rad bicep publish --file ./redis-test.bicep --target br:ghcr.io/myregistry/redis
 ### Options
 
 ```
-      --file string     path to the local Bicep file, relative to the current working directory.
-  -h, --help            help for publish
-      --plain-http      connect to the Bicep registry using HTTP (not-HTTPS). This should be used when the registry is known not to support HTTPS, for example in a locally-hosted registry. Defaults to false (use HTTPS/TLS).
-      --target string   remote OCI registry path, in the format 'br:HOST/PATH:TAG'.
+      --file string               path to the local Bicep file, relative to the current working directory.
+  -h, --help[=true|false]         help for publish
+      --plain-http[=true|false]   connect to the Bicep registry using HTTP (not-HTTPS). This should be used when the registry is known not to support HTTPS, for example in a locally-hosted registry. Defaults to false (use HTTPS/TLS).
+      --target string             remote OCI registry path, in the format 'br:HOST/PATH:TAG'.
 ```
 
 ### Options inherited from parent commands

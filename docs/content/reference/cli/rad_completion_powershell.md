@@ -17,7 +17,7 @@ rad completion powershell [flags]
 ### Options
 
 ```
-  -h, --help   help for powershell
+  -h, --help[=true|false]   help for powershell
 ```
 
 ### Options inherited from parent commands
