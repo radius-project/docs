@@ -23,7 +23,7 @@ To authorize Radius to connect to AWS using IAM Roles for Service Accounts (IRSA
 
   {{< image src="select-trust-entity.png" width=700px alt="Screenshot of options to pass while selecting trust entity." >}}
 
-- Attach an IAM policy that grants the permissions Radius needs to deploy your resources.
+- Attach an IAM policy that grants the [permissions Radius needs]({{< ref "/installation/cloud-providers#aws-permissions" >}}) to deploy your resources.
 
 - Enter a role name and create the role using the default trust policy.
 

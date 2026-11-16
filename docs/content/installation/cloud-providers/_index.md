@@ -24,3 +24,13 @@ The same registered default cloud credential is also used when you [configure S3
 | | [IAM Roles for Service Accounts (IRSA)]({{< ref "/installation/cloud-providers/aws-irsa" >}}) | Deploy and connect to AWS resources using AWS IRSA |
 | Microsoft Azure | [Service Principal]({{< ref "/installation/cloud-providers/azure-service-principal" >}}) | Deploy and connect to Azure resources using a Service Principal |
 | | [Workload Identity]({{< ref "/installation/cloud-providers/azure-workload-identity" >}}) | Deploy and connect to Azure resources using Workload Identity |
+
+## AWS permissions
+
+Give the AWS identity permission to manage each AWS resource your applications and recipes deploy.
+
+Some resource types need one more permission, because Radius reads extra values with another AWS call:
+
+| Resource type                                         | Extra permission            | Why                                                                                                                                       |
+|-------------------------------------------------------|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `AWS::MSK::Cluster` and `AWS::MSK::ServerlessCluster` | `kafka:GetBootstrapBrokers` | Radius reads the cluster's broker addresses, so a recipe can output them. Without this permission, deploying or reading the cluster fails |
