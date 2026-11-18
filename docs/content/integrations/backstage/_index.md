@@ -4,6 +4,7 @@ title: "How to use the Radius plugin in Backstage"
 linkTitle: "Use Radius in Backstage"
 description: "Find, install, and configure the Radius plugin in an existing Backstage portal"
 weight: 450
+new_badge: true
 ---
 
 The Radius plugin brings the Dashboard's resource views into an existing [Backstage](https://backstage.io/) portal. Your portal keeps its navigation, sign-in, and other plugins. You do not need to deploy a separate Dashboard to use these views.
