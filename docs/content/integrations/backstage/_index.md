@@ -7,7 +7,7 @@ weight: 450
 new_badge: true
 ---
 
-The Radius plugin brings the Dashboard's resource views into an existing [Backstage](https://backstage.io/) portal. Your portal keeps its navigation, sign-in, and other plugins. You do not need to deploy a separate Dashboard to use these views.
+The Radius plugin brings the Dashboard's resource views into an existing [Backstage](https://backstage.io/) instance. Your portal keeps its navigation, sign-in, and other plugins. You do not need to deploy a separate Dashboard to use these views.
 
 ## Find the plugin
 
