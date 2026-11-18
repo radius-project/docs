@@ -10,7 +10,7 @@ aliases:
 
 How you access the Dashboard depends on how Radius is installed. For local development on a k3d or kind cluster, port-forwarding is the simplest option. For centralized installations on a shared cluster such as AKS or EKS, a platform engineer typically configures ingress so that users can reach the Dashboard without port-forwarding.
 
-If you already run Backstage, you can add the Radius pages to your own portal instead. See [Use Radius in Backstage]({{< ref "/integrations/backstage" >}}) for installation and configuration steps.
+If you already run Backstage, you can add the Radius pages to your own Backstage instance instead. See [Use Radius in Backstage]({{< ref "/integrations/backstage" >}}) for installation and configuration steps.
 
 ## Port-forwarding
 
