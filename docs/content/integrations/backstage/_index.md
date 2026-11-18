@@ -11,7 +11,11 @@ The Radius plugin brings the Dashboard's resource views into an existing [Backst
 
 ## Find the plugin
 
-Find the [Radius plugin source and README](https://github.com/radius-project/dashboard/tree/main/plugins/plugin-radius) in the [Dashboard repository](https://github.com/radius-project/dashboard). The steps below build the plugin from source and install its package archives in your Backstage portal.
+Find the plugin install bundle in the **Assets** list of a [Dashboard release](https://github.com/radius-project/dashboard/releases). The steps below install the bundle in your Backstage portal. The bundle contains the private `@internal/plugin-radius` package and its shared-library archives. Install these Radius packages from the bundle rather than from npm.
+
+{{% alert title="Bundle availability" color="info" %}}
+Use these steps when a Dashboard release includes the plugin bundle assets listed below. These assets are not yet available in the current release. Do not use a release without them.
+{{% /alert %}}
 
 ## What you can view
 
@@ -40,61 +44,50 @@ You need:
 - A Backstage source checkout that you can build and configure.
 - The host's Kubernetes frontend and backend plugins, with access to that cluster.
 - React and ReactDOM 18.3.1.
-- Node.js 24 and the Yarn version specified in the Dashboard root `package.json`.
+- Node.js 24, `tar`, and your portal's Yarn toolchain.
 
 Keep the host's existing authentication and access policy. Do not copy the standalone Dashboard's guest sign-in configuration into a shared portal.
 
-## Step 1: Build the plugin package
+## Step 1: Download and verify the bundle
 
-Clone the Dashboard repository and build the plugin:
+Open the **Assets** list for the Dashboard release you want to use. Download all three files from that same release into your Backstage portal's root directory:
+
+- `radius-backstage-plugin-<tag>.tar.gz`
+- `radius-backstage-plugin-<tag>.tar.gz.sha256`
+- `radius-backstage-plugin-<tag>.qualification.json`
+
+`<tag>` is the release tag, including its `v` prefix. Keep the downloaded filenames unchanged.
+
+On Linux, run the following commands from the portal root. Replace `vX.Y.Z` with the tag you selected; it is a placeholder, not a released version:
 
 ```bash
-git clone https://github.com/radius-project/dashboard.git
-cd dashboard || exit
-yarn verify:shared-candidate vendor/shared-libraries/candidate.json
-yarn install --immutable
-yarn tsc
-yarn workspace @internal/plugin-radius build
-yarn workspace @internal/plugin-radius pack --out ../../radius-plugin.tgz
+RELEASE_TAG='vX.Y.Z'
+sha256sum -c "radius-backstage-plugin-${RELEASE_TAG}.tar.gz.sha256" &&
+  mkdir radius-plugin-bundle &&
+  tar -xzf "radius-backstage-plugin-${RELEASE_TAG}.tar.gz" -C radius-plugin-bundle &&
+  node radius-plugin-bundle/verify.ts
 ```
 
-The last command writes `radius-plugin.tgz` at the repository root. The plugin uses two shared-library archives from `vendor/shared-libraries`. Use the archives listed in that directory's `candidate.json` file.
+On PowerShell, use `Get-FileHash` with `-Algorithm SHA256` to compare the archive's hash with the value in its `.sha256` file. Stop if the values differ. Then create `radius-plugin-bundle` at the portal root, extract the archive into it with `tar -xzf <archive> -C radius-plugin-bundle`, and run `node radius-plugin-bundle/verify.ts`.
 
-For source-build requirements, see [Building the Radius Dashboard](https://github.com/radius-project/dashboard/tree/main/docs/contributing/contributing-code/contributing-code-building).
+The archive contains its files at the root, without a wrapping directory. Use a new, empty `radius-plugin-bundle` directory. Do not extract over an existing bundle.
 
-## Step 2: Install the archives in your host
+The verifier checks the bundle files and package settings. The qualification file records the tested bundle and frontend dependencies. It is not approval of your production authentication setup.
 
-In your Backstage checkout, create a `vendor/radius` directory at the repository root. Copy these files from the Dashboard checkout into it:
+## Step 2: Install the bundle in your host
 
-- `radius-plugin.tgz`
-- The archive named by `core.path` in `vendor/shared-libraries/candidate.json`. Name the copied file `core.tgz`.
-- The archive named by `graphReact.path` in `vendor/shared-libraries/candidate.json`. Name the copied file `graph-react.tgz`.
-- `vendor/shared-libraries/candidate.json`
+Open `radius-plugin-bundle/install-settings.json` and merge its entries into your portal:
 
-Add the plugin to `dependencies` in the host's `packages/app/package.json`. Merge this entry with existing dependencies:
+| Bundle settings | Portal file and field |
+| --- | --- |
+| `app.dependencies` | `dependencies` in `packages/app/package.json` |
+| `root.resolutions` | `resolutions` in the root `package.json` |
 
-```json
-{
-  "dependencies": {
-    "@internal/plugin-radius": "file:../../vendor/radius/radius-plugin.tgz"
-  }
-}
-```
+Preserve the portal's other entries. Review any existing Radius dependencies or resolutions before replacing them. The generated paths assume the standard `packages/app` workspace. If your layout differs, adjust the relative paths together.
 
-Merge the following entries into `resolutions` in the host's root `package.json`. These paths assume Yarn and the directory layout above:
+Run the portal's normal Yarn install and build commands. Use one React and ReactDOM copy across the host and plugin. Resolve peer-dependency errors before continuing; do not force the installation into an incompatible host.
 
-```json
-{
-  "resolutions": {
-    "@radius-project/core": "file:./vendor/radius/core.tgz",
-    "@radius-project/graph-react": "file:./vendor/radius/graph-react.tgz"
-  }
-}
-```
-
-Run `yarn install` at the host root. Use one React and ReactDOM copy across the host and plugin. Resolve peer-dependency errors before continuing; do not force the installation into an incompatible host.
-
-Keep the archives and updated host lockfile together so you can repeat the installation.
+Keep the complete `radius-plugin-bundle` directory with the portal source and updated lockfile so later installs can resolve its files.
 
 ## Step 3: Register the frontend
 
