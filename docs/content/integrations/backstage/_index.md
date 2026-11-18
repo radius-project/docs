@@ -59,7 +59,7 @@ yarn workspace @internal/plugin-radius pack --out ../../radius-plugin.tgz
 
 The last command writes `radius-plugin.tgz` at the repository root. The plugin uses two shared-library archives from `vendor/shared-libraries`. Use the archives listed in that directory's `candidate.json` file.
 
-For source-build requirements, see [Building the Radius Dashboard](https://github.com/radius-project/dashboard/blob/main/docs/contributing/contributing-code/contributing-code-building/README.md).
+For source-build requirements, see [Building the Radius Dashboard](https://github.com/radius-project/dashboard/tree/main/docs/contributing/contributing-code/contributing-code-building).
 
 ## Step 2: Install the archives in your host
 
