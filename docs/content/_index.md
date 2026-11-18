@@ -64,7 +64,7 @@ Radius is an open-source, multi-cloud application platform that helps developers
 
   [**Explore the dashboard →**]({{< ref "installation/dashboard" >}})
 
-  Already use Backstage? [**Evaluate the Radius plugin from source →**]({{< ref "integrations/backstage" >}})
+  Already use Backstage? [**Install the Radius plugin →**]({{< ref "integrations/backstage" >}})
   {{% /card %}}
 {{< /cardpane >}}
 

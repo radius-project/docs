@@ -2,23 +2,15 @@
 type: docs
 title: "How to use the Radius plugin in Backstage"
 linkTitle: "Use Radius in Backstage"
-description: "Find the Radius Backstage plugin, build development packages, and configure an existing Backstage host"
+description: "Find, install, and configure the Radius plugin in an existing Backstage portal"
 weight: 450
 ---
 
 The Radius plugin brings the Dashboard's resource views into an existing [Backstage](https://backstage.io/) portal. Your portal keeps its navigation, sign-in, and other plugins. You do not need to deploy a separate Dashboard to use these views.
 
-{{% alert title="Development packages, not a public release" color="warning" %}}
-This guide describes the source at Dashboard commit [`1222701`](https://github.com/radius-project/dashboard/tree/122270147943fdd2b3c699bde757288e05d5e374). The plugin is a private package named `@internal/plugin-radius`. Its shared dependencies use compiled archives in the repository. Version `0.1.0` is development metadata, not evidence of an npm release.
-
-Use the steps below for local evaluation. They do not establish production support, a Backstage version range, or approval of your authentication setup. For the existing standalone installation, see [Access the Dashboard]({{< ref "/installation/dashboard" >}}).
-{{% /alert %}}
-
 ## Find the plugin
 
-The [public Dashboard repository](https://github.com/radius-project/dashboard) contains the [Radius plugin source and README](https://github.com/radius-project/dashboard/tree/main/plugins/plugin-radius). Start there for current source and release status.
-
-This development guide uses repository archives, not an npm package or a one-click catalog installation. Do not substitute an unverified registry package with a similar name.
+Find the [Radius plugin source and README](https://github.com/radius-project/dashboard/tree/main/plugins/plugin-radius) in the [Dashboard repository](https://github.com/radius-project/dashboard). The steps below build the plugin from source and install its package archives in your Backstage portal.
 
 ## What you can view
 
@@ -35,7 +27,7 @@ The plugin has five list pages and three detail pages:
 | Resource Types | Registered Resource Types. |
 | Resource Type details | Schema and documentation for a Resource Type. |
 
-The graph shows live resources and their connections. It is not a source-code model or a deployment workflow. The plugin does not add Radius Canvas modeling or deployment actions.
+The application graph shows live resources and their connections.
 
 All eight pages follow the host's light or dark theme within the Radius page. The plugin does not replace the host's navigation, Catalog, Settings, or global theme. Optional `ApplicationListInfoCard` and `EnvironmentListInfoCard` exports let the host add Radius lists to its home page.
 
@@ -46,19 +38,18 @@ You need:
 - A Kubernetes cluster with the [Radius control plane]({{< ref "/installation/control-plane" >}}) installed.
 - A Backstage source checkout that you can build and configure.
 - The host's Kubernetes frontend and backend plugins, with access to that cluster.
-- React and ReactDOM 18.3.1 for this evaluation. React 19 hosts are not qualified. The recorded host checks cover one exact dependency set, not a general compatibility range.
-- Node.js 24 and the Yarn version in the Dashboard root `package.json` (`4.18.1` at the source revision above).
+- React and ReactDOM 18.3.1.
+- Node.js 24 and the Yarn version specified in the Dashboard root `package.json`.
 
 Keep the host's existing authentication and access policy. Do not copy the standalone Dashboard's guest sign-in configuration into a shared portal.
 
-## Step 1: Build the development package
+## Step 1: Build the plugin package
 
-Clone the Dashboard source and select the revision used by this guide:
+Clone the Dashboard repository and build the plugin:
 
 ```bash
 git clone https://github.com/radius-project/dashboard.git
 cd dashboard || exit
-git checkout 122270147943fdd2b3c699bde757288e05d5e374
 yarn verify:shared-candidate vendor/shared-libraries/candidate.json
 yarn install --immutable
 yarn tsc
@@ -66,17 +57,17 @@ yarn workspace @internal/plugin-radius build
 yarn workspace @internal/plugin-radius pack --out ../../radius-plugin.tgz
 ```
 
-The last command writes `radius-plugin.tgz` at the repository root. Keep the two shared-library archives from `vendor/shared-libraries` with it. Do not rebuild those archives or replace them with registry dependencies.
+The last command writes `radius-plugin.tgz` at the repository root. The plugin uses two shared-library archives from `vendor/shared-libraries`. Use the archives listed in that directory's `candidate.json` file.
 
-For source-build requirements, see [Building the Radius Dashboard](https://github.com/radius-project/dashboard/blob/122270147943fdd2b3c699bde757288e05d5e374/docs/contributing/contributing-code/contributing-code-building/README.md).
+For source-build requirements, see [Building the Radius Dashboard](https://github.com/radius-project/dashboard/blob/main/docs/contributing/contributing-code/contributing-code-building/README.md).
 
 ## Step 2: Install the archives in your host
 
 In your Backstage checkout, create a `vendor/radius` directory at the repository root. Copy these files from the Dashboard checkout into it:
 
 - `radius-plugin.tgz`
-- `vendor/shared-libraries/radius-project-core-0.1.0.tgz`
-- `vendor/shared-libraries/radius-project-graph-react-0.1.0.tgz`
+- The archive named by `core.path` in `vendor/shared-libraries/candidate.json`. Name the copied file `core.tgz`.
+- The archive named by `graphReact.path` in `vendor/shared-libraries/candidate.json`. Name the copied file `graph-react.tgz`.
 - `vendor/shared-libraries/candidate.json`
 
 Add the plugin to `dependencies` in the host's `packages/app/package.json`. Merge this entry with existing dependencies:
@@ -94,15 +85,15 @@ Merge the following entries into `resolutions` in the host's root `package.json`
 ```json
 {
   "resolutions": {
-    "@radius-project/core": "file:./vendor/radius/radius-project-core-0.1.0.tgz",
-    "@radius-project/graph-react": "file:./vendor/radius/radius-project-graph-react-0.1.0.tgz"
+    "@radius-project/core": "file:./vendor/radius/core.tgz",
+    "@radius-project/graph-react": "file:./vendor/radius/graph-react.tgz"
   }
 }
 ```
 
 Run `yarn install` at the host root. Use one React and ReactDOM copy across the host and plugin. Resolve peer-dependency errors before continuing; do not force the installation into an incompatible host.
 
-Keep the archives, receipt, and updated host lockfile together so you can repeat the installation. The archive check in Step 1 does not prove that the host works in a browser or that production access is safe. Complete the host checks in Step 5 before you use this setup.
+Keep the archives and updated host lockfile together so you can repeat the installation.
 
 ## Step 3: Register the frontend
 
@@ -177,7 +168,7 @@ function RadiusApplicationsLink() {
 }
 ```
 
-Route references keep links correct when the host changes the mount path. The [native host example](https://github.com/radius-project/dashboard/blob/122270147943fdd2b3c699bde757288e05d5e374/plugins/plugin-radius/fixtures/native.tsx) also shows external route bindings and optional cards.
+Route references keep links correct when the host changes the mount path. The [native host example](https://github.com/radius-project/dashboard/blob/main/plugins/plugin-radius/fixtures/native.tsx) also shows external route bindings and optional cards.
 
 ### Legacy frontend system
 
@@ -200,7 +191,7 @@ For example, inside the host's existing `FlatRoutes`:
 <Route path="/radius/applications" element={<ApplicationListPage />} />
 ```
 
-Import `Route` from `react-router-dom` and the page exports from `@internal/plugin-radius`. Register all eight routes, not only the list pages. Use the exported route references for sidebar links. See the [complete legacy host example](https://github.com/radius-project/dashboard/blob/122270147943fdd2b3c699bde757288e05d5e374/plugins/plugin-radius/fixtures/legacy.tsx).
+Import `Route` from `react-router-dom` and the page exports from `@internal/plugin-radius`. Register all eight routes, not only the list pages. Use the exported route references for sidebar links. See the [complete legacy host example](https://github.com/radius-project/dashboard/blob/main/plugins/plugin-radius/fixtures/legacy.tsx).
 
 ## Step 4: Connect the Kubernetes backend
 
@@ -226,7 +217,7 @@ kubernetes:
 
 Do not expose the local proxy to other machines or use it as a production connection.
 
-The default Radius client selects the **first configured Kubernetes cluster** and the `radius/local` plane once per API instance. Resource reads and graph requests use that same context. There is no connection picker. For this evaluation, configure one cluster. Do not assume that a multi-cluster host selects the intended cluster automatically.
+Configure one Kubernetes cluster for the default Radius client. It selects the **first configured Kubernetes cluster** and the `radius/local` plane once per API instance. Resource reads and graph requests use that same context. There is no connection picker.
 
 Hosts that need a different client can override the public `radiusApiRef`. New-system hosts can use the named `radiusApiExtension` export from `/alpha`. A custom API must implement the `RadiusApi` contract; graph support uses its optional `getApplicationGraph` method. Without that method, the graph tab shows an unsupported-operation error rather than bypassing the override.
 
