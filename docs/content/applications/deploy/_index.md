@@ -113,6 +113,14 @@ A redeploy deletes infrastructure from an earlier deploy that the recipe no long
 
 If a Bicep recipe deploys successfully but Radius cannot delete the old infrastructure, the redeploy fails and Radius keeps tracking both the old and new infrastructure. The next deploy or delete of the resource retries the deletion.
 
+A redeploy cannot move a resource with recipe infrastructure to a different Environment or Application, because Radius deletes that infrastructure using the Environment and Application it was deployed with. For example, deploying the `frontend` Container from the `dev` Environment to `prod` fails with:
+
+```text
+Attempted to deploy existing resource 'frontend' which has a different application and/or environment. Options to resolve the conflict are: change the name of the 'frontend' resource in 'my-app' application and 'prod' environment to create a new resource, or use '/planes/radius/local/resourceGroups/default/providers/Radius.Core/applications/my-app' application and '/planes/radius/local/resourceGroups/default/providers/Radius.Core/environments/dev' environment to update the existing resource 'frontend'.
+```
+
+Give the resource a new name to create a new resource, or keep its original Environment and Application. To move the resource, delete it with `rad resource delete` and deploy it again. Deleting the resource also deletes its infrastructure and data.
+
 Known limitations:
 
 - If a deploy fails while its recipe runs, Radius does not record the infrastructure the recipe already created. This applies to a failed first deploy and to new infrastructure from a failed redeploy. Deleting the resource or Application might not remove that infrastructure, so check for it and delete it manually. See [radius-project/radius#13807](https://github.com/radius-project/radius/issues/13807).
