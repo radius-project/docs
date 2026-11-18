@@ -84,7 +84,7 @@ When defining an application, developers use the [Backstage](https://backstage.i
 
 ![Dashboard screenshot](dashboard-screenshot.png)
 
-The same Radius pages can run in an existing Backstage portal, with the portal's own navigation and sign-in. See [Use Radius in Backstage]({{< ref "/integrations/backstage" >}}) for installation and configuration steps, or [Access the Dashboard]({{< ref "/installation/dashboard" >}}) to use the standalone Dashboard.
+The same Radius views can be brought into in an existing Backstage instance, with the its own navigation and sign-in. See [Use Radius in Backstage]({{< ref "/integrations/backstage" >}}) for installation and configuration steps, or [Access the Dashboard]({{< ref "/installation/dashboard" >}}) to use the standalone built-in Radius Dashboard.
 
 ### Universal Control Plane
 
