@@ -81,7 +81,7 @@ Once the extension is published, each developer references it from their `bicepc
 
 ## Add custom resource types to bicepconfig.json {#configure-bicepconfigjson}
 
-`rad initialize` generates a `bicepconfig.json` that includes the **`radius`** extension, which configures the Bicep extension for all out-of-the-box Resource Types. A release with an OCI-capable compiler may still generate ACR references. After the [GHCR prerequisites]({{< ref "/installation/cli#bicep-compatibility-for-ghcr" >}}) are satisfied, configure the extension as follows. Bicep resolves this file from the same directory as your Bicep files, or the nearest parent directory.
+`rad initialize` generates a `bicepconfig.json` that includes the **`radius`** extension, which configures the Bicep extension for all out-of-the-box Resource Types. A Radius release that includes the GHCR-default migration generates GHCR references with OCI enabled; an earlier release may have an OCI-capable compiler but still generate ACR references. Existing files are not overwritten. After the [GHCR prerequisites]({{< ref "/installation/cli#bicep-compatibility-for-ghcr" >}}) are satisfied, update an existing production extension reference to the configuration below, preserving its intended release version and unrelated settings. Bicep resolves this file from the same directory as your Bicep files, or the nearest parent directory.
 
 ```json
 {
@@ -95,6 +95,8 @@ Once the extension is published, each developer references it from their `bicepc
 ```
 
 Replace `<release-version>` with the `major.minor` stable channel for your compatible Radius release, or its full `major.minor.patch` version to select a specific approved release. Channel tags are mutable and advance to the newest approved stable release in that line. Full stable versions are published once by CI policy; the registry does not enforce protection against overwrites.
+
+For a release candidate, use the full prerelease version exactly as published, preserving `rc.N` or `rcN` spelling. Do not substitute a stable channel, `latest`, or `edge` when the selected release artifact is unavailable.
 
 For development builds, use `edge`. GHCR `latest` selects the newest approved stable release, unlike the legacy ACR `latest` development tag. These tag meanings apply to both the Radius and AWS extension packages.
 

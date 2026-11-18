@@ -55,7 +55,7 @@ Bicep validation uses v0.46.1, with `experimentalFeaturesEnabled.ociEnabled` ena
 BICEP_PATH=/path/to/bicep-directory python3 .github/scripts/validate_bicep.py
 ```
 
-This command restores extensions and compiles the examples; it does not deploy them. An unavailable public tag blocks this check. Public development artifacts do not establish stable or release-candidate availability. Radius v0.61.1 bundles Bicep v0.46.1, but the selected release artifacts must also be published and verified with the released Radius CLI before the documentation cutover. A standalone compiler check does not certify the released CLI or its generated configuration.
+This command restores extensions and compiles the examples; it does not deploy them. An unavailable public tag blocks this check. Public development artifacts do not establish stable or release-candidate availability. Radius v0.61.1 supplies a compatible compiler, but does not establish a minimum release for GHCR defaults. Before the documentation cutover, identify the release containing those defaults and verify its generated configurations and corresponding published artifacts with the released CLI. A standalone compiler check does not replace that verification.
 
 ## ☁ Hosting
 
