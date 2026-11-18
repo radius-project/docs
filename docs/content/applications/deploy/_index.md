@@ -98,6 +98,26 @@ kubectl get events --namespace <namespace> --sort-by=.lastTimestamp
 
 The Kubernetes namespace is configured on the Environment and may differ from the Environment name. See [How to design and manage Environments]({{< ref "/management/environments" >}}) to inspect Environment configuration.
 
+## Redeploy an Application
+
+Run `rad deploy` again to apply changes. Radius runs each resource's recipe again with the resource's current properties and the Environment's current Recipe Packs and parameters.
+
+A redeploy deletes infrastructure from an earlier deploy that the recipe no longer manages. This applies to every Resource Type:
+
+- **Bicep recipes:** After the deployment succeeds, Radius deletes tracked resources from the previous deploy that the recipe no longer returns. Radius tracks Azure and UCP resources automatically. Other resources, such as Kubernetes resources, are tracked only when the recipe returns them in its [result]({{< ref "/reference/recipes/result#resources" >}}).
+- **Terraform recipes:** Terraform compares the recipe with its saved state. It destroys resources the recipe no longer defines, and replaces resources when the provider requires it. The old resource can be destroyed before the new one is created.
+
+{{% alert title="⚠️ A redeploy can delete data" color="warning" %}}
+`rad deploy` does not ask for confirmation before deleting infrastructure. If a change to a resource, recipe, or recipe parameter renames a stateful resource such as a database, or makes the Terraform provider replace it, the redeploy can permanently delete the old resource and its data. Review these changes and back up data before redeploying.
+{{% /alert %}}
+
+If a Bicep recipe deploys successfully but Radius cannot delete the old infrastructure, the redeploy fails and Radius keeps tracking both the old and new infrastructure. The next deploy or delete of the resource retries the deletion.
+
+Known limitations:
+
+- If a deploy fails while its recipe runs, Radius does not record the infrastructure the recipe already created. This applies to a failed first deploy and to new infrastructure from a failed redeploy. Deleting the resource or Application might not remove that infrastructure, so check for it and delete it manually. See [radius-project/radius#13807](https://github.com/radius-project/radius/issues/13807).
+- Infrastructure that an earlier Radius version left behind after a redeploy is not deleted. Delete it manually.
+
 ## Prune removed resources
 
 Removing a resource declaration from `app.bicep` and deploying the file again does not delete the existing resource. This prevents an accidental deletion when a declaration is removed or renamed.

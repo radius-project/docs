@@ -68,7 +68,7 @@ When a recipe finishes, Radius reads the `result` output and:
 
 - Records the `values` as computed properties on the resource and passes them to any resource that connects to it (for example, as `CONNECTION_<NAME>_<KEY>` environment variables on a container).
 - Stores the `secrets` securely and surfaces them to connecting resources without exposing them as plain values.
-- Adds the resource IDs in `resources` to the resource's list of tracked output resources so they are managed—and cleaned up—alongside the resource.
+- Adds the resource IDs in `resources` to the resource's list of tracked output resources so they are managed—and cleaned up—alongside the resource. When the resource is redeployed, Radius deletes tracked resources that the recipe no longer returns. See [Redeploy an Application]({{< ref "/applications/deploy#redeploy-an-application" >}}).
 
 Radius also records status metadata about the recipe (such as the template kind and path) on the resource automatically. This metadata is not set in the `result` object.
 
