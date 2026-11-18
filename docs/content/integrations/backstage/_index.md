@@ -237,6 +237,6 @@ If a page fails, check the browser request and the Backstage backend log. Check 
 
 ## Related links
 
-- [Access the standalone Dashboard]({{< ref "/installation/dashboard" >}})
+- [Access the standalone built-in Radius Dashboard]({{< ref "/installation/dashboard" >}})
 - [Radius plugin source and README](https://github.com/radius-project/dashboard/tree/main/plugins/plugin-radius)
 - [Backstage Kubernetes configuration](https://backstage.io/docs/features/kubernetes/configuration/)
