@@ -11,7 +11,7 @@ The Radius plugin brings the Dashboard's resource views into an existing [Backst
 
 ## Find the plugin
 
-For Radius v0.63 and later, find the plugin install bundle in the **Assets** list of a [Dashboard release](https://github.com/radius-project/dashboard/releases). The steps below install the bundle in your Backstage portal. The bundle contains the private `@internal/plugin-radius` package and its shared-library archives. Install these Radius packages from the bundle rather than from npm.
+For Radius v0.63 and later, find the plugin install bundle in the **Assets** list of a [Dashboard release](https://github.com/radius-project/dashboard/releases). The steps below install the bundle in your Backstage portal. The bundle contains the private `@internal/plugin-radius` package and its shared-library archives.
 
 ## What you can view
 
