@@ -220,7 +220,7 @@ kubernetes:
 
 Do not expose the local proxy to other machines or use it as a production connection.
 
-Configure one Kubernetes cluster for the default Radius client. It selects the **first configured Kubernetes cluster** and the `radius/local` plane once per API instance. Resource reads and graph requests use that same context. There is no connection picker.
+The default Radius client selects the **first Kubernetes cluster returned by the host's Kubernetes backend** and the `radius/local` plane once per API instance. Other clusters can remain configured, but the intended Radius cluster must be returned first; otherwise, use the API override below. Resource reads and graph requests use that same context. There is no connection picker.
 
 Hosts that need a different client can override the public `radiusApiRef`. New-system hosts can use the named `radiusApiExtension` export from `/alpha`. A custom API must implement the `RadiusApi` contract; graph support uses its optional `getApplicationGraph` method. Without that method, the graph tab shows an unsupported-operation error rather than bypassing the override.
 
