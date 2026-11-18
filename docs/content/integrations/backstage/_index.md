@@ -11,11 +11,7 @@ The Radius plugin brings the Dashboard's resource views into an existing [Backst
 
 ## Find the plugin
 
-Find the plugin install bundle in the **Assets** list of a [Dashboard release](https://github.com/radius-project/dashboard/releases). The steps below install the bundle in your Backstage portal. The bundle contains the private `@internal/plugin-radius` package and its shared-library archives. Install these Radius packages from the bundle rather than from npm.
-
-{{% alert title="Bundle availability" color="info" %}}
-Use these steps when a Dashboard release includes the plugin bundle assets listed below. These assets are not yet available in the current release. Do not use a release without them.
-{{% /alert %}}
+For Radius v0.63 and later, find the plugin install bundle in the **Assets** list of a [Dashboard release](https://github.com/radius-project/dashboard/releases). The steps below install the bundle in your Backstage portal. The bundle contains the private `@internal/plugin-radius` package and its shared-library archives. Install these Radius packages from the bundle rather than from npm.
 
 ## What you can view
 
@@ -58,10 +54,10 @@ Open the **Assets** list for the Dashboard release you want to use. Download all
 
 `<tag>` is the release tag, including its `v` prefix. Keep the downloaded filenames unchanged.
 
-On Linux, run the following commands from the portal root. Replace `vX.Y.Z` with the tag you selected; it is a placeholder, not a released version:
+On Linux, run the following commands from the portal root. Set `RELEASE_TAG` to the tag you selected:
 
 ```bash
-RELEASE_TAG='vX.Y.Z'
+RELEASE_TAG='v0.63.0'
 sha256sum -c "radius-backstage-plugin-${RELEASE_TAG}.tar.gz.sha256" &&
   mkdir radius-plugin-bundle &&
   tar -xzf "radius-backstage-plugin-${RELEASE_TAG}.tar.gz" -C radius-plugin-bundle &&
