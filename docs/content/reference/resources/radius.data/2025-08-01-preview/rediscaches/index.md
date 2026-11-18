@@ -62,10 +62,17 @@ key returned in `result.secrets`: `CONNECTION_REDIS_URL`, and
 `CONNECTION_REDIS_ACCESSKEY` when the Recipe returns `accessKey`. `host` and
 `port` remain ordinary values.
 
+The Azure Recipe also returns `connectionString`, which injects
+`CONNECTION_REDIS_CONNECTIONSTRING` for StackExchange.Redis clients.
+Its `url` key is a `rediss://` URL, not a StackExchange.Redis connection string.
+The Azure URL contains the raw access key without percent-encoding.
+Prefer host, port, and `accessKey` with TLS. If a client requires a URL,
+construct it at runtime and percent-encode only the password component.
+
 For custom, older, or mixed-version Kubernetes deployments, bind the key
 explicitly with `secretKeyRef`, using `cache.properties.secrets.name` as the
-`secretName`. Use `url` for a client that parses a connection URL, or
-`accessKey` for a client that takes host, port, and password separately:
+`secretName`. Use `accessKey` for a client that takes host, port, and
+password separately. Enable TLS when connecting to Azure:
 
 ```bicep
 env: {
@@ -95,7 +102,7 @@ A recipe that provisions a cache requiring no credential does not map
 | `connections` | [object](#connections) | Map of connection name to connection data. |
 | `environment` | string | (Required) The Radius Environment ID. Typically set by the rad CLI. Typically value should be `environment`. |
 | `host` | string | (Read Only) The host name used to connect to the cache. Mapped from the recipe module's output. |
-| `port` | integer | (Read Only) The TLS port number used to connect to the cache. Mapped from the recipe module's `port` output (Azure Managed Redis uses 10000). |
+| `port` | integer | (Read Only) The port number used to connect to the cache. Azure Managed Redis uses TLS on port 10000; the Kubernetes Recipe uses port 6379 without TLS. |
 | `secrets` | [object](#secrets) | (Read-only) Recipe secrets. The reserved `name` sub-property references the managed Radius.Security/secrets resource Radius materializes from the Recipe's `result.secrets`; the other sub-properties declare secret keys whose values are written only into that managed secret (never onto this resource). Consumers bind a key into a container env var via `secretKeyRef`, using `<resource>.properties.secrets.name` as `secretName`. |
 | `size` | string | (Optional) The size of the Redis cache. Defaults to `S` if not provided. The recipe maps the size onto a concrete cloud SKU.<br />Allowed values: `L`, `M`, `S`. |
 
@@ -113,5 +120,6 @@ A recipe that provisions a cache requiring no credential does not map
 | Property | Type | Description |
 |----------|------|-------------|
 | `accessKey` | string | (Read Only) The access key on its own, for clients that take host, port, and password separately instead of parsing a URL — it is the password such a client authenticates with. Mapped from the recipe module's `primaryAccessKey` output; delivered via the managed secret. Declared by recipes that provision an authenticated cache — a recipe provisioning a cache that needs no credential (such as the in-cluster Kubernetes recipe) does not map this key. |
+| `connectionString` | string | (Read Only) The StackExchange.Redis connection string, including the access key and TLS settings. The Azure Recipe maps this key from `primaryStackExchangeRedisConnectionString`; delivered via the managed secret. For clients that require a URL, construct one from host, port, and accessKey with a percent-encoded password. The Kubernetes Recipe does not map this key. |
 | `name` | string | (Reserved) Name of the managed Radius.Security/secrets resource. Use as `secretName` in a container `secretKeyRef`. |
-| `url` | string | (Read Only) The full TLS connection URL (`rediss://:<access-key>@<host>:<port>`) used to connect to the cache, including the access key. Mapped from the recipe module's `primaryConnectionString` output; delivered via the managed secret. |
+| `url` | string | (Read Only) The Redis connection URL, delivered via the managed secret. The Azure Recipe maps `primaryConnectionString` as `rediss://:<access-key>@<host>:<port>` without percent-encoding the key. Prefer separate host, port, and accessKey values with TLS, or construct a URL at runtime with a percent-encoded password. The Kubernetes Recipe returns `redis://<host>:<port>` without a password. |
