@@ -54,10 +54,23 @@ Open the **Assets** list for the Dashboard release you want to use. Download all
 
 `<tag>` is the release tag, including its `v` prefix. Keep the downloaded filenames unchanged.
 
-On Linux, run the following commands from the portal root. Set `RELEASE_TAG` to the tag you selected:
+On Linux, run the following commands from the portal root. First, set `RELEASE_TAG` to the tag you downloaded:
+
+{{< edge >}}
+```bash
+RELEASE_TAG='v0.63.0' # Replace with the v0.63-or-later tag you downloaded.
+```
+{{< /edge >}}
+
+{{< latest >}}
+```bash
+RELEASE_TAG='v{{< param chart_version >}}' # Change if you downloaded a different release.
+```
+{{< /latest >}}
+
+Then verify and extract the bundle:
 
 ```bash
-RELEASE_TAG='v0.63.0'
 sha256sum -c "radius-backstage-plugin-${RELEASE_TAG}.tar.gz.sha256" &&
   mkdir radius-plugin-bundle &&
   tar -xzf "radius-backstage-plugin-${RELEASE_TAG}.tar.gz" -C radius-plugin-bundle &&
