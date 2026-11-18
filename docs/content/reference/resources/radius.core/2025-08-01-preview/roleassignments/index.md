@@ -38,6 +38,6 @@ An ARM-style extension assignment whose ID ends with /providers/Radius.Core/role
 | Property | Type | Description |
 |----------|------|-------------|
 | `displayName` | string | An optional mutable label that is never used to match principals. |
-| `issuer` | string | The trusted identity system, including its trust domain. Kubernetes issuers use kubernetes:<cluster-id>; controller namespace principals use radius-controller. |
-| `subject` | string | The identity within the issuer. Kubernetes service accounts use system:serviceaccount:<namespace>:<name>. |
+| `issuer` | string | The trusted identity system, including its trust domain. Kubernetes issuers use `kubernetes:<cluster-id>`; controller namespace principals use radius-controller. |
+| `subject` | string | The identity within the issuer. Kubernetes service accounts use `system:serviceaccount:<namespace>:<name>`. |
 | `type` | string | The kind of principal.<br />Allowed values: `group`, `user`, `workload`. |
