@@ -84,6 +84,8 @@ When defining an application, developers use the [Backstage](https://backstage.i
 
 ![Dashboard screenshot](dashboard-screenshot.png)
 
+The same Radius views can be brought into in an existing Backstage instance, with the its own navigation and sign-in. See [Use Radius in Backstage]({{< ref "/integrations/backstage" >}}) for installation and configuration steps, or [Access the Dashboard]({{< ref "/installation/dashboard" >}}) to use the standalone built-in Radius Dashboard.
+
 ### Universal Control Plane
 
 The Universal Control Plane (UCP) is the Radius control plane. It provides a REST API for creating, reading, updating, deleting, and listing resources. When a platform engineer creates a new Resource Type, the UCP API is being extended since each Resource Type has its own API.
