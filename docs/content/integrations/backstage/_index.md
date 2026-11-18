@@ -65,10 +65,10 @@ RELEASE_TAG='vX.Y.Z'
 sha256sum -c "radius-backstage-plugin-${RELEASE_TAG}.tar.gz.sha256" &&
   mkdir radius-plugin-bundle &&
   tar -xzf "radius-backstage-plugin-${RELEASE_TAG}.tar.gz" -C radius-plugin-bundle &&
-  node radius-plugin-bundle/verify.ts
+  node radius-plugin-bundle/verify.mts
 ```
 
-On PowerShell, use `Get-FileHash` with `-Algorithm SHA256` to compare the archive's hash with the value in its `.sha256` file. Stop if the values differ. Then create `radius-plugin-bundle` at the portal root, extract the archive into it with `tar -xzf <archive> -C radius-plugin-bundle`, and run `node radius-plugin-bundle/verify.ts`.
+On PowerShell, use `Get-FileHash` with `-Algorithm SHA256` to compare the archive's hash with the value in its `.sha256` file. Stop if the values differ. Then create `radius-plugin-bundle` at the portal root, extract the archive into it with `tar -xzf <archive> -C radius-plugin-bundle`, and run `node radius-plugin-bundle/verify.mts`.
 
 The archive contains its files at the root, without a wrapping directory. Use a new, empty `radius-plugin-bundle` directory. Do not extract over an existing bundle.
 
