@@ -26,8 +26,8 @@ rad debug-logs [flags]
 ### Options
 
 ```
-  -h, --help               help for debug-logs
-  -w, --workspace string   The workspace name
+  -h, --help[=true|false]   help for debug-logs
+  -w, --workspace string    The workspace name
 ```
 
 ### Options inherited from parent commands

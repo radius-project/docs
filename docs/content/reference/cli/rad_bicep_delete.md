@@ -21,7 +21,7 @@ rad bicep delete [flags]
 ### Options
 
 ```
-  -h, --help   help for delete
+  -h, --help[=true|false]   help for delete
 ```
 
 ### Options inherited from parent commands

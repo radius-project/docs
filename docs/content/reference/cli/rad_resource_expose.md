@@ -32,13 +32,13 @@ rad resource expose --application icecream-store Radius.Compute/containers order
 ### Options
 
 ```
-  -g, --group string      The resource group name
-  -h, --help              help for expose
-  -p, --port int          specify the local port (default -1)
-      --remote-port int   specify the remote port (default -1)
-      --replica string    specify the replica to expose
-  -r, --resource string   The resource name
-  -t, --type string       The resource type
+  -g, --group string        The resource group name
+  -h, --help[=true|false]   help for expose
+  -p, --port int            specify the local port (default -1)
+      --remote-port int     specify the remote port (default -1)
+      --replica string      specify the replica to expose
+  -r, --resource string     The resource name
+  -t, --type string         The resource type
 ```
 
 ### Options inherited from parent commands

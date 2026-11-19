@@ -52,7 +52,7 @@ rad credential unregister aws
 ### Options
 
 ```
-  -h, --help   help for credential
+  -h, --help[=true|false]   help for credential
 ```
 
 ### Options inherited from parent commands

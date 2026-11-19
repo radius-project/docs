@@ -31,9 +31,9 @@ rad workspace show my-workspace
 ### Options
 
 ```
-  -h, --help               help for show
-  -o, --output string      output format (supported formats are json, table) (default "table")
-  -w, --workspace string   The workspace name
+  -h, --help[=true|false]   help for show
+  -o, --output string       output format (supported formats are json, table) (default "table")
+  -w, --workspace string    The workspace name
 ```
 
 ### Options inherited from parent commands

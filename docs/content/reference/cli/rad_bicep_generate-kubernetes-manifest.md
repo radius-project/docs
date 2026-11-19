@@ -18,7 +18,7 @@ Generate a DeploymentTemplate Custom Resource.
 
 	You can specify parameters using the '--parameter' flag ('-p' for short). Parameters can be passed as:
 	
-	- A file containing multiple parameters using the ARM JSON parameter format (see below)
+	- A file containing multiple parameters using the ARM JSON parameter format (see below) or a Bicep parameters (.bicepparam) file
 	- A file containing a single value in JSON format
 	- A key-value-pair passed in the command line
 	
@@ -48,10 +48,12 @@ rad bicep generate-kubernetes-manifest app.bicep --parameters @app.bicepparam --
 ```
       --aws-scope string          Scope for AWS deployment.
       --azure-scope string        Scope for Azure deployment.
-  -d, --destination-file string   Path of the generated DeploymentTemplate yaml file created by running this command.
+  -d, --destination-file string   Path of the generated DeploymentTemplate yaml file created by running this command, or '-' to write to stdout.
   -g, --group string              The resource group name
-  -h, --help                      help for generate-kubernetes-manifest
+  -h, --help[=true|false]         help for generate-kubernetes-manifest
+      --name string               Name of the generated DeploymentTemplate resource. Defaults to the template file name.
   -p, --parameters stringArray    Specify parameters for the deployment
+      --source-revision string    Source revision to record in the radapp.io/source-revision annotation.
 ```
 
 ### Options inherited from parent commands

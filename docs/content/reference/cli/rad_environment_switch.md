@@ -28,7 +28,7 @@ rad env switch newEnvironment
 
 ```
   -e, --environment string   The environment name
-  -h, --help                 help for switch
+  -h, --help[=true|false]    help for switch
   -w, --workspace string     The workspace name
 ```
 

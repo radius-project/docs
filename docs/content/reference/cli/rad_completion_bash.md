@@ -17,7 +17,7 @@ rad completion bash [flags]
 ### Options
 
 ```
-  -h, --help   help for bash
+  -h, --help[=true|false]   help for bash
 ```
 
 ### Options inherited from parent commands

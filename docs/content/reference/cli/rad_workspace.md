@@ -31,8 +31,8 @@ rad workspace create kubernetes myworkspace --context kind-kind --group myrg --e
 ### Options
 
 ```
-  -h, --help               help for workspace
-  -w, --workspace string   The workspace name
+  -h, --help[=true|false]   help for workspace
+  -w, --workspace string    The workspace name
 ```
 
 ### Options inherited from parent commands

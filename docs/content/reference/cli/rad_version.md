@@ -32,9 +32,9 @@ rad version --cli
 ### Options
 
 ```
-      --cli             Use this flag to only show the rad CLI version
-  -h, --help            help for version
-  -o, --output string   output format (supported formats are json, table) (default "table")
+      --cli[=true|false]    Use this flag to only show the rad CLI version
+  -h, --help[=true|false]   help for version
+  -o, --output string       output format (supported formats are json, table) (default "table")
 ```
 
 ### Options inherited from parent commands

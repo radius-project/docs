@@ -43,10 +43,10 @@ rad credential register aws irsa --iam-role <roleARN>
 ### Options
 
 ```
-  -h, --help               help for irsa
-      --iam-role string    RoleARN for AWS IRSA identity.
-  -o, --output string      output format (supported formats are json, table) (default "table")
-  -w, --workspace string   The workspace name
+  -h, --help[=true|false]   help for irsa
+      --iam-role string     RoleARN for AWS IRSA identity.
+  -o, --output string       output format (supported formats are json, table) (default "table")
+  -w, --workspace string    The workspace name
 ```
 
 ### Options inherited from parent commands

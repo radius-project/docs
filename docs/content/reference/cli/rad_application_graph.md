@@ -59,12 +59,12 @@ rad app graph ./app.bicep
 ### Options
 
 ```
-  -a, --application string   The application name
-  -g, --group string         The resource group name
-  -h, --help                 help for graph
-      --include-icons        When set, embeds each referenced resource type icon's SVG bytes in the response's icons map.
-  -o, --output string        output format (supported formats are json, table) (default "table")
-  -w, --workspace string     The workspace name
+  -a, --application string           The application name
+  -g, --group string                 The resource group name
+  -h, --help[=true|false]            help for graph
+      --include-icons[=true|false]   When set, embeds each referenced resource type icon's SVG bytes in the response's icons map.
+  -o, --output string                output format (supported formats are json, table) (default "table")
+  -w, --workspace string             The workspace name
 ```
 
 ### Options inherited from parent commands

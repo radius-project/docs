@@ -17,7 +17,7 @@ Uninstall Radius for a specific platform
 ### Options
 
 ```
-  -h, --help   help for uninstall
+  -h, --help[=true|false]   help for uninstall
 ```
 
 ### Options inherited from parent commands

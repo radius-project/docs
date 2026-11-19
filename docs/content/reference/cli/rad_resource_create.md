@@ -33,10 +33,10 @@ rad resource create 'Radius.Compute/containers' mycontainer -f /path/to/input.js
 ### Options
 
 ```
-  -f, --from-file string   The input file. May be an absolute path or a path relative to the current working directory
-  -h, --help               help for create
-  -o, --output string      output format (supported formats are json, table) (default "table")
-  -w, --workspace string   The workspace name
+  -f, --from-file string    The input file. May be an absolute path or a path relative to the current working directory
+  -h, --help[=true|false]   help for create
+  -o, --output string       output format (supported formats are json, table) (default "table")
+  -w, --workspace string    The workspace name
 ```
 
 ### Options inherited from parent commands

@@ -35,7 +35,7 @@ rad credential register azure wi --client-id <client id> --tenant-id <tenant id>
 ### Options
 
 ```
-  -h, --help   help for azure
+  -h, --help[=true|false]   help for azure
 ```
 
 ### Options inherited from parent commands

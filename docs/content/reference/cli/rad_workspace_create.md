@@ -43,9 +43,9 @@ rad workspace create kubernetes myworkspace --group my-grp --environment my-env
 ```
   -c, --context string       the Kubernetes context to use, will use the default if unset
   -e, --environment string   The environment name
-  -f, --force                Overwrite existing workspace if present
+  -f, --force[=true|false]   Overwrite existing workspace if present
   -g, --group string         The resource group name
-  -h, --help                 help for create
+  -h, --help[=true|false]    help for create
   -w, --workspace string     The workspace name
 ```
 
