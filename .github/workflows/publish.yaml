@@ -1,0 +1,207 @@
+# yaml-language-server: $schema=https://www.schemastore.org/github-workflow.json
+---
+name: Publish
+
+on:
+  push:
+    branches: [edge]
+  # A release-branch push (including the release App creating the branch) wakes
+  # the publisher on edge. Never deploy a workflow or artifact from that run.
+  workflow_run:
+    workflows: [Website]
+    branches: ['v[0-9]+.[0-9]+']
+    types: [requested]
+  # Pick up release-branch edits even if GitHub didn't start a push workflow.
+  schedule:
+    - cron: '17 16 * * *'
+  pull_request:
+    branches: [edge, 'v[0-9]+.[0-9]+']
+  workflow_dispatch:
+
+permissions: {}
+
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: docs-pages-${{ (github.event_name == 'workflow_run' && github.event.workflow_run.event != 'push' && github.run_id) || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    name: Build
+    if: >-
+      github.event_name == 'pull_request' ||
+      (github.ref == 'refs/heads/edge' &&
+       (github.event_name != 'workflow_run' || github.event.workflow_run.event == 'push'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      pages: read
+    env:
+      HUGO_ENVIRONMENT: production
+      PAGES_ARTIFACT: github-pages-${{ github.run_attempt }}
+    outputs:
+      artifact: ${{ env.PAGES_ARTIFACT }}
+      index_algolia: ${{ steps.site.outputs.index_algolia }}
+    steps:
+      - name: Check out edge
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.base_ref == 'edge' && github.sha || 'refs/heads/edge' }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Resolve latest stable docs
+        id: release
+        run: python3 .github/scripts/pages_release.py >> "$GITHUB_OUTPUT"
+
+      - name: Check out release docs
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.base_ref != 'edge' && github.sha || steps.release.outputs.sha }}
+          path: release-docs
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Locate the release site and matching Radius tag
+        id: release_site
+        run: python3 .github/scripts/pages_release.py --checkout release-docs >> "$GITHUB_OUTPUT"
+
+      - name: Configure GitHub Pages
+        if: github.event_name != 'pull_request'
+        id: pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+
+      - name: Check out edge Swagger sources
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: radius-project/radius
+          ref: main
+          path: radius-edge
+          sparse-checkout: swagger
+          persist-credentials: false
+
+      - name: Check out release Swagger sources
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: radius-project/radius
+          ref: ${{ steps.release_site.outputs.radius_tag }}
+          path: radius-latest
+          sparse-checkout: swagger
+          persist-credentials: false
+
+      - uses: actions/setup-go@d8cbb8045d7f43706b9177cceb36c1f91a6644d5 # v7.1.0
+        with:
+          go-version-file: go.mod
+          cache-dependency-path: |
+            go.sum
+            ${{ steps.release_site.outputs.site_dir }}/go.sum
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            ${{ steps.release_site.outputs.site_dir }}/package-lock.json
+
+      - name: Build both versions into one site
+        id: site
+        env:
+          PAGES_HOST: ${{ steps.pages.outputs.host }}
+          PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          HUGO_CACHEDIR: ${{ runner.temp }}/hugo-cache
+          RELEASE_SITE: ${{ steps.release_site.outputs.site_dir }}
+        run: |
+          if [[ "$GITHUB_EVENT_NAME" == pull_request ]]; then
+            base_url=http://localhost:8000
+          else
+            base_url="https://${PAGES_HOST:?Pages did not return a host}${PAGES_BASE_PATH}"
+          fi
+          cp -R radius-edge/swagger static/
+          cp -R radius-latest/swagger "$RELEASE_SITE/static/"
+          npm ci
+          npm ci --prefix "$RELEASE_SITE"
+          # Only the public docs site owns the production search indices.
+          options=()
+          if [[ "$PAGES_HOST" == docs.radapp.io ]]; then
+            options+=(--algolia)
+            echo 'index_algolia=true' >> "$GITHUB_OUTPUT"
+          fi
+          python3 .github/scripts/build_pages.py "$base_url" . "$RELEASE_SITE" public "${options[@]}"
+
+      - name: Upload pull request preview
+        # Build-check changes to historical branches, but never offer them as "latest".
+        if: >-
+          github.event_name == 'pull_request' &&
+          (github.base_ref == 'edge' || github.base_ref == steps.release.outputs.branch)
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: docs-preview-${{ github.run_attempt }}
+          path: public/
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload GitHub Pages artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          name: ${{ env.PAGES_ARTIFACT }}
+          path: public/
+          retention-days: 7
+
+  deploy:
+    name: Deploy
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/edge'
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy the combined artifact
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+        with:
+          artifact_name: ${{ needs.build.outputs.artifact }}
+
+  search:
+    name: Index ${{ matrix.channel }} for Algolia
+    needs: [build, deploy]
+    if: needs.build.outputs.index_algolia == 'true'
+    strategy:
+      matrix:
+        channel: [edge, latest]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    environment: ${{ matrix.channel }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          sparse-checkout: .github/scripts
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: ${{ needs.build.outputs.artifact }}
+          path: site
+      - name: Index the deployed version
+        working-directory: site
+        env:
+          CHANNEL: ${{ matrix.channel }}
+          ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_API_APPID }}
+          ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+          ALGOLIA_INDEX_NAME: ${{ secrets.ENV_ALGOLIA_INDEXNAME }}
+        run: |
+          tar -xf artifact.tar "./$CHANNEL"
+          python3 -m venv "$RUNNER_TEMP/search"
+          "$RUNNER_TEMP/search/bin/python" -m pip install -r ../.github/scripts/requirements.txt
+          "$RUNNER_TEMP/search/bin/python" ../.github/scripts/algolia.py "$CHANNEL"

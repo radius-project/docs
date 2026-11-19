@@ -19,7 +19,6 @@
 set -euo pipefail
 
 VERSION_NUMBER="${1:-}" # (e.g. 0.1.0)
-REPOSITORY="docs"
 
 if [[ -z "${VERSION_NUMBER}" ]]; then
   echo "Error: VERSION_NUMBER is not set."
@@ -46,9 +45,7 @@ echo "Version: ${VERSION}"
 echo "Channel: ${CHANNEL}"
 echo "Channel version: ${CHANNEL_VERSION}"
 
-echo "Creating release branch for ${REPOSITORY}..."
-
-pushd "${REPOSITORY}" > /dev/null
+echo "Creating release branch for ${GITHUB_REPOSITORY}..."
 
 if [[ -n "$(git status --porcelain)" ]]; then
   echo "Error: Release publication requires a clean docs checkout."
@@ -57,61 +54,68 @@ fi
 BASE_SHA="$(git rev-parse HEAD)"
 
 # Replacements below are whitespace-, quote-, and comment-tolerant so they keep
-# working even after `docs/config.toml` is reformatted.
+# working even after `config.toml` is reformatted.
 #  - `[[:space:]]*` around `=` tolerates any spacing (none, single, multiple).
 #  - `["\x27]` matches both double and single quotes.
 #  - Optional trailing `(#.*)?` allows an inline TOML comment on the line.
 #  - Each replacement re-emits the canonical taplo format: `key = "value"`.
 
-# In docs/config.toml, change baseURL to https://docs.radapp.io/ instead of https://edge.docs.radapp.io/
-sed -E -i 's|^[[:space:]]*baseURL[[:space:]]*=[[:space:]]*["\x27]https://edge\.docs\.radapp\.io/["\x27][[:space:]]*(#.*)?$|baseURL = "https://docs.radapp.io/"|' docs/config.toml
+# Use the stable channel for standalone builds too. Pages supplies its own base URL.
+sed -E -i 's|^[[:space:]]*baseURL[[:space:]]*=[[:space:]]*["\x27](https://[^"\x27]+)/edge/["\x27][[:space:]]*(#.*)?$|baseURL = "\1/latest/"|' config.toml
+sed -E -i "s|^[[:space:]]*version_menu[[:space:]]*=[[:space:]]*[\"\x27]edge[\"\x27][[:space:]]*(#.*)?$|version_menu = \"latest (${CHANNEL})\"|;
+  s|^[[:space:]]*name[[:space:]]*=[[:space:]]*[\"\x27]latest[\"\x27][[:space:]]*(#.*)?$|name = \"latest (${CHANNEL})\"|" config.toml
 
-# In docs/config.toml, change version to CHANNEL_VERSION instead of edge
-sed -E -i "s|^[[:space:]]*version[[:space:]]*=[[:space:]]*[\"\x27]edge[\"\x27][[:space:]]*(#.*)?$|version = \"${CHANNEL_VERSION}\"|" docs/config.toml
+# In config.toml, change version to CHANNEL_VERSION instead of edge
+sed -E -i "s|^[[:space:]]*version[[:space:]]*=[[:space:]]*[\"\x27]edge[\"\x27][[:space:]]*(#.*)?$|version = \"${CHANNEL_VERSION}\"|" config.toml
 
-# In docs/config.toml, change github_branch to CHANNEL_VERSION instead of edge
-sed -E -i "s|^[[:space:]]*github_branch[[:space:]]*=[[:space:]]*[\"\x27]edge[\"\x27][[:space:]]*(#.*)?$|github_branch = \"${CHANNEL_VERSION}\"|" docs/config.toml
+# In config.toml, change github_branch to CHANNEL_VERSION instead of edge
+sed -E -i "s|^[[:space:]]*github_branch[[:space:]]*=[[:space:]]*[\"\x27]edge[\"\x27][[:space:]]*(#.*)?$|github_branch = \"${CHANNEL_VERSION}\"|" config.toml
 
-# In docs/config.toml, change chart_version (Helm chart) to VERSION_NUMBER
-sed -E -i "s|^[[:space:]]*chart_version[[:space:]]*=[[:space:]]*[\"\x27][^\"\x27]+[\"\x27][[:space:]]*(#.*)?$|chart_version = \"${VERSION_NUMBER}\"|" docs/config.toml
+# In config.toml, change chart_version (Helm chart) to VERSION_NUMBER
+sed -E -i "s|^[[:space:]]*chart_version[[:space:]]*=[[:space:]]*[\"\x27][^\"\x27]+[\"\x27][[:space:]]*(#.*)?$|chart_version = \"${VERSION_NUMBER}\"|" config.toml
 
 # Verify all expected replacements happened; fail fast if config.toml drifted.
 for pair in \
-  "baseURL|baseURL = \"https://docs.radapp.io/\"" \
+  "version_menu|version_menu = \"latest (${CHANNEL})\"" \
+  "release menu entry|name = \"latest (${CHANNEL})\"" \
   "version-edge|version = \"${CHANNEL_VERSION}\"" \
   "github_branch|github_branch = \"${CHANNEL_VERSION}\"" \
   "chart_version|chart_version = \"${VERSION_NUMBER}\""; do
   label="${pair%%|*}"
   expected="${pair#*|}"
-  if ! grep -Fxq "${expected}" docs/config.toml; then
-    echo "Error: expected line for '${label}' not found in docs/config.toml: ${expected}"
+  if ! grep -Fxq "${expected}" config.toml; then
+    echo "Error: expected line for '${label}' not found in config.toml: ${expected}"
     exit 1
   fi
 done
+if ! grep -Eq '^baseURL = "https://[^"]+/latest/"$' config.toml; then
+  echo "Error: expected a /latest/ baseURL in config.toml."
+  exit 1
+fi
 
-# In docs/config.toml, change the Algolia search indexName to radapp-dev instead of radapp-dev-edge
-sed -E -i 's|^[[:space:]]*indexName[[:space:]]*=[[:space:]]*["\x27]radapp-dev-edge["\x27][[:space:]]*(#.*)?$|indexName = "radapp-dev"|' docs/config.toml
+# In config.toml, change the Algolia search indexName to radapp-dev instead of radapp-dev-edge
+sed -E -i 's|^[[:space:]]*indexName[[:space:]]*=[[:space:]]*["\x27]radapp-dev-edge["\x27][[:space:]]*(#.*)?$|indexName = "radapp-dev"|' config.toml
 
-if ! grep -Fxq 'indexName = "radapp-dev"' docs/config.toml; then
-  echo "Error: expected line for 'indexName' not found in docs/config.toml: indexName = \"radapp-dev\""
+if ! grep -Fxq 'indexName = "radapp-dev"' config.toml; then
+  echo "Error: expected line for 'indexName' not found in config.toml: indexName = \"radapp-dev\""
   exit 1
 fi
 
 # Only release configuration belongs in this commit.
-git add -- docs/config.toml
+git add -- config.toml
 if git diff --cached --quiet; then
   echo "Error: No changes to commit for ${CHANNEL_VERSION}."
   exit 1
 fi
 
-BLOB_SHA="$(base64 --wrap=0 docs/config.toml |
+BLOB_SHA="$(base64 --wrap=0 config.toml |
   jq --raw-input --slurp '{content: ., encoding: "base64"}' |
   gh api --method POST "repos/${GITHUB_REPOSITORY}/git/blobs" --input - --jq '.sha')"
 TREE_SHA="$(jq --null-input \
   --arg base_tree "$(git rev-parse "${BASE_SHA}^{tree}")" \
-  --arg mode "$(git ls-files --stage -- docs/config.toml | awk '{print $1}')" \
+  --arg mode "$(git ls-files --stage -- config.toml | awk '{print $1}')" \
   --arg sha "${BLOB_SHA}" \
-  '{base_tree: $base_tree, tree: [{path: "docs/config.toml", mode: $mode, type: "blob", sha: $sha}]}' |
+  '{base_tree: $base_tree, tree: [{path: "config.toml", mode: $mode, type: "blob", sha: $sha}]}' |
   gh api --method POST "repos/${GITHUB_REPOSITORY}/git/trees" --input - --jq '.sha')"
 if [[ "${TREE_SHA}" != "$(git write-tree)" ]]; then
   echo "Error: GitHub tree ${TREE_SHA} does not match the local release configuration."
@@ -143,5 +147,3 @@ else
     -f ref="refs/heads/${CHANNEL_VERSION}" -f sha="${COMMIT_SHA}" --silent
 fi
 echo "Published verified docs commit ${COMMIT_SHA} to ${CHANNEL_VERSION}."
-
-popd > /dev/null

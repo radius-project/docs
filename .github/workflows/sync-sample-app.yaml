@@ -30,7 +30,7 @@ on:
 permissions: {}
 
 env:
-  DEST_DIR: docs/static/samples/demo
+  DEST_DIR: static/samples/demo
 
 jobs:
   sync:

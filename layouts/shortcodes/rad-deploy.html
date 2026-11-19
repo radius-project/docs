@@ -1,0 +1,7 @@
+{{- /* Emits a `rad deploy` command for a sample hosted under this version's base URL.
+       Usage: {{< rad-deploy path="samples/demo/app.bicep" >}}
+       Optional `args` appends flags, e.g. args="--parameters password=$(openssl rand -hex 16)". */ -}}
+{{- $url := .Get "path" | absURL -}}
+{{- $args := .Get "args" | default "" -}}
+{{- $suffix := cond (ne $args "") (print " " $args) "" -}}
+{{ (print "```bash\nrad deploy " $url $suffix "\n```") | markdownify }}

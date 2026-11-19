@@ -1,0 +1,13 @@
+{{- $menu := . -}}
+{{- if site.Params.version_menu_pagelinks -}}
+  {{/* Docsy expects a path relative to the version root, not /docs/edge/... */}}
+  {{- $path := strings.TrimPrefix site.Home.RelPermalink .RelPermalink -}}
+  {{- $versions := slice -}}
+  {{- range site.Params.versions -}}
+    {{- $hasPage := or (eq .url site.BaseURL) (in site.Params.peer_pages $path) -}}
+    {{- $versions = $versions | append (merge . (dict "pagelinks" $hasPage)) -}}
+  {{- end -}}
+  {{- $menu = dict "Site" (dict "BaseURL" site.BaseURL "Params" (merge site.Params (dict "versions" $versions)))
+                  "Page" (dict "RelPermalink" (print "/" $path)) -}}
+{{- end -}}
+{{ partial "navbar-version-selector.html" $menu }}

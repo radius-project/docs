@@ -1,0 +1,10 @@
+{{ $version := $.Page.Site.Params.version }}
+{{ $content := .Inner }}
+
+{{ if ne $version "edge" }}
+{{ (print "\n" $content "\n") | markdownify }}
+{{ else }}
+{{ with index (where site.Params.versions "version" "latest") 0 }}
+{{ (printf "\nTo try out a stable release visit the [latest docs](%s).\n" .url) | markdownify }}
+{{ end }}
+{{ end }}

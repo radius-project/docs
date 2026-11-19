@@ -1,8 +1,0 @@
-{{ $version := $.Page.Site.Params.version }}
-{{ $content := .Inner }}
-
-{{ if ne $version "edge" }}
-{{ (print "\n" $content "\n") | markdownify }}
-{{ else }}
-{{ (print "\n" "To try out a stable release visit the [latest docs](https://docs.radapp.io)." "\n") | markdownify }}
-{{ end }}

@@ -624,6 +624,7 @@ LookoutVision
 Ly
 Macie
 macOS
+managedby
 ManagedIdentity
 managedStore
 manualLink
@@ -1119,6 +1120,7 @@ TransitGatewayPeering
 TransitGatewayPeeringAttachment
 TransitGatewayRouteTableAttachment
 TransitGatewayVpcAttachment
+trgm
 TrustAnchor
 TypeActivation
 ubuntu
@@ -1133,8 +1135,6 @@ unopinionated
 unregister
 Unregisters
 untyped
-upmerge
-upmerges
 upstreamed
 URI
 URIs
@@ -1216,7 +1216,6 @@ ZXIubG
 algoliasearch
 mheap
 gomod
-upmerging
 octo
 TENANTID
 magpiego

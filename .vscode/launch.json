@@ -5,19 +5,18 @@
             "name": "Run docs server",
             "type": "node",
             "request": "launch",
-            "cwd": "${workspaceFolder}/docs",
+            "cwd": "${workspaceFolder}",
             "runtimeExecutable": "npm",
             "runtimeArgs": [
-                "run",
-                "dev"
+                "start"
             ],
-            "preLaunchTask": "npm install"
+            "preLaunchTask": "npm ci"
         },
         {
             "name": "Build docs",
             "type": "node",
             "request": "launch",
-            "cwd": "${workspaceFolder}/docs",
+            "cwd": "${workspaceFolder}",
             "runtimeExecutable": "npm",
             "runtimeArgs": [
                 "run",

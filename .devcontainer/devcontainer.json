@@ -1,20 +1,15 @@
 {
-	"name": "Radius Docs Dev Container",
+	"name": "Radius Docs",
 	"image": "mcr.microsoft.com/devcontainers/base:ubuntu",
 	"features": {
 		"ghcr.io/devcontainers/features/git:1.3.8": {},
 		"ghcr.io/devcontainers/features/go:1.4.1": {},
-		"ghcr.io/devcontainers/features/hugo:1.1.3": {
-			"version": "0.117.0",
-			"extended": true
-		},
-		"ghcr.io/devcontainers/features/node:2.1.2": {}
+		"ghcr.io/devcontainers/features/node:2.1.2": {
+			"version": "24"
+		}
 	},
 	"remoteUser": "vscode",
-	"settings": {
-		"terminal.integrated.defaultProfile.linux": "bash"
-	},
-	"postCreateCommand": "bash .devcontainer/post-create.sh",
+	"postCreateCommand": "npm ci",
 	"customizations": {
 		"codespaces": {
 			"repositories": {
@@ -25,15 +20,16 @@
 				}
 			}
 		},
-		// Configure properties specific to VS Code.
 		"vscode": {
-			"settings": {},
+			"settings": {
+				"terminal.integrated.defaultProfile.linux": "bash"
+			},
 			"extensions": [
 				"GitHub.copilot",
 				"ms-azuretools.rad-vscode-bicep"
 			]
-		  }
-	}, 
+		}
+	},
 	"portsAttributes": {
 		"1313": {
 			"label": "hugo server",

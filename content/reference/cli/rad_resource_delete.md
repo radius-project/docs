@@ -1,0 +1,53 @@
+---
+type: docs
+title: "rad resource delete CLI reference"
+linkTitle: "rad resource delete"
+slug: rad_resource_delete
+url: /reference/cli/rad_resource_delete/
+description: "Details on the rad resource delete Radius CLI command"
+---
+## rad resource delete
+
+Delete a Radius resource
+
+### Synopsis
+
+Deletes a Radius resource with the given name
+
+```
+rad resource delete [resourceType] [resourceName] [flags]
+```
+
+### Examples
+
+```
+
+# Delete a container named orders
+rad resource delete Radius.Compute/containers orders
+
+# Force delete a resource that is stuck in a non-terminal state
+rad resource delete Radius.Compute/containers orders --force
+```
+
+### Options
+
+```
+      --force[=true|false]   Force the operation even if the resource is in a non-terminal provisioning state
+  -g, --group string         The resource group name
+  -h, --help[=true|false]    help for delete
+  -o, --output string        output format (supported formats are json, table) (default "table")
+  -w, --workspace string     The workspace name
+  -y, --yes[=true|false]     The confirmation flag
+```
+
+### Options inherited from parent commands
+
+```
+  -a, --application string   The application name
+      --config string        config file (default "$HOME/.rad/config.yaml")
+```
+
+### SEE ALSO
+
+* [rad resource]({{< ref rad_resource.md >}})	 - Manage resources
+

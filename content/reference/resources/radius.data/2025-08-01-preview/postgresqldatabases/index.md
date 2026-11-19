@@ -1,0 +1,95 @@
+---
+type: docs
+title: "Radius.Data/postgreSqlDatabases@2025-08-01-preview"
+linkTitle: "PostgreSqlDatabases"
+---
+
+{{< schemaExample >}}
+
+## Description
+
+The Radius.Data/postgreSqlDatabases Resource Type deploys a PostgreSQL database. Provide the administrator `username` and `password` directly on the resource. The `password` property is marked `x-radius-sensitive`, so Radius encrypts it at rest, redacts it on reads, and exposes it (decrypted) only to the recipe that provisions the database.
+```bicep
+resource postgresql 'Radius.Data/postgreSqlDatabases@2025-08-01-preview' = {
+    name: 'postgresql'
+    properties: {
+      environment: environment
+      application: myApplication.id
+      size: 'S'
+      database: 'appdb'
+      username: 'myadmin'
+      // From a @secure() password parameter passed in via the CLI
+      password: password
+      extensions: [
+        'pg_trgm'
+        'btree_gin'
+      ]
+      serverSettings: {
+        log_min_duration_statement: '1000'
+      }
+    }
+  }
+```
+
+When deploying the application definition, provide the database password value as a parameter. It is recommended to use a password generator such as `openssl` or equivalent. For example, `rad deploy app.bicep -p password=$(openssl rand -hex 16)`.
+
+To connect your container to the database, create a connection from the Container resource to the database as shown below. 
+```bicep
+resource myApplication 'Radius.Core/Applications@2025-08-01-preview' = { ... }
+
+resource frontend 'Radius.Compute/containers@2025-08-01-preview' = {
+  name: 'frontend'
+  properties: {
+    application: myApplication.id
+    environment: environment
+    container: {
+      image: 'frontend:1.25'
+      ports: {
+        web: {
+          containerPort: 8080
+        }
+      }
+    }
+    connections: {
+      postgresql: {
+        source: postgresql.id
+      }
+    }
+  }
+}
+```
+
+The connection automatically injects environment variables into the container for all properties from the database. The environment variables are named `CONNECTION_<CONNECTION-NAME>_<PROPERTY-NAME>`. In this example, the connection name is `postgresql` so the environment variables will be:
+
+- CONNECTION_POSTGRESQL_DATABASE
+- CONNECTION_POSTGRESQL_HOST
+- CONNECTION_POSTGRESQL_PORT
+- CONNECTION_POSTGRESQL_TLS
+
+## Top-Level Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `application` | string | (Optional) The Radius Application ID. `myApplication.id` for example. |
+| `codeReference` | string | Optional URI to the source code of this resource type. ex: https://github.com/radius-project/radius/blob/4fab87e8127adf1db6f43b7029d5235fbe82c5c9/cmd/controller/main.go#L27 |
+| `connections` | [object](#connections) | Map of connection name to connection data. |
+| `database` | string | (Optional) The name of the database. Defaults to `postgres_db` if not provided. |
+| `environment` | string | (Required) The Radius Environment ID. Typically set by the rad CLI. Typically value should be `environment`. |
+| `extensions` | string array | (Optional) PostgreSQL extension names, such as pg_trgm or vector. Azure allow-lists them; the application must create them in each database. See [Azure configuration rules](https://github.com/radius-project/resource-types-contrib/blob/main/Data/postgreSqlDatabases/recipes/azure/README.md#settings-and-operator-overrides) for list merging and operator overrides. Kubernetes creates them on first database initialization; the container image must include each extension. |
+| `host` | string | (Read Only) The host name used to connect to the database. Mapped from the recipe module's output. |
+| `initSql` | string | (Optional) SQL script for users, schemas, and seed data. Radius encrypts it at rest and redacts it on reads. Azure runs it after provisioning with a deployment script; it can run again after SQL changes or deployment-script retention expires. Use SQL that is safe to repeat. Kubernetes Bicep mounts it into /docker-entrypoint-initdb.d/ and runs it when PGDATA is empty; changes do not run against existing volumes. Platform script and environment-variable size limits apply. See the Azure Recipe documentation for execution limits. |
+| `password` | string | (Required) The administrator password for the PostgreSQL database. Marked `x-radius-sensitive`: Radius encrypts it at rest, redacts it on reads, and exposes it decrypted only to the recipe as `{{context.resource.properties.password}}`. |
+| `port` | integer | (Optional) The TCP port used to connect to the database. Defaults to `5432`, the standard PostgreSQL port that every Recipe in this repository provisions and the port PostgreSQL flexible server is fixed to. A Recipe that provisions the database on a different port reports the real port as an output, which overwrites this value once the deployment finishes. Setting it in an application definition changes only the value reported to connected containers, never the port the server listens on, so leave it unset. |
+| `serverSettings` | object | (Optional) PostgreSQL server parameter names and string values. See [Azure configuration rules](https://github.com/radius-project/resource-types-contrib/blob/main/Data/postgreSqlDatabases/recipes/azure/README.md#settings-and-operator-overrides) for operator overrides and protected settings. Kubernetes passes settings to postgres with -c, but reserves ssl, ssl_cert_file, ssl_key_file, and hba_file for TLS without regard to case. Both platforms keep the server on 5432. Invalid or unavailable settings fail deployment or startup. Do not put credentials in this object. |
+| `size` | string | (Optional) The size of the PostgreSQL database. Defaults to `S` if not provided.<br />Allowed values: `L`, `M`, `S`. |
+| `tls` | string | (Optional) The requested transport policy for database connections. Defaults to `required`, rejecting plaintext TCP connections in the Kubernetes Recipes. `optional` permits plaintext but keeps TLS available. Kubernetes Recipes generate a self-signed development certificate when `<resource-name>-tls` is absent or empty; a supplied operator certificate takes precedence and invalid material fails initialization. Configure clients using `CONNECTION_POSTGRESQL_TLS` and separately trust the server CA and verify its hostname; generated certificates are not trusted automatically. Use `optional` only when the server is not publicly reachable. See [Azure configuration rules](https://github.com/radius-project/resource-types-contrib/blob/main/Data/postgreSqlDatabases/recipes/azure/README.md#settings-and-operator-overrides) for operator overrides.<br />Allowed values: `optional`, `required`. |
+| `username` | string | (Required) The administrator username for the PostgreSQL database. Provided directly on the resource and passed to the recipe as `{{context.resource.properties.username}}`. |
+
+## Object Properties
+
+### `connections` {#connections}
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `disableDefaultEnvVars` | boolean | Disables the automatic injection of environment variables from the connected resource's properties. |
+| `source` | string | Resource ID of the source resource for this connection. |

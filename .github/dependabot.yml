@@ -31,8 +31,6 @@ updates:
         applies-to: security-updates
         patterns:
           - "*"
-    ignore:
-      - dependency-name: "Azure/static-web-apps-deploy"
 
   - package-ecosystem: devcontainers
     directory: "/"
@@ -58,7 +56,7 @@ updates:
           - "*"
 
   - package-ecosystem: gomod
-    directory: "/docs"
+    directory: "/"
     target-branch: "edge"
     schedule:
       interval: weekly
@@ -81,7 +79,7 @@ updates:
           - "*"
 
   - package-ecosystem: npm
-    directory: "/docs"
+    directory: "/"
     target-branch: "edge"
     schedule:
       interval: weekly
