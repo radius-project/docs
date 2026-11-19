@@ -100,31 +100,31 @@ The Kubernetes namespace is configured on the Environment and may differ from th
 
 ## Redeploy an Application
 
-Run `rad deploy` again to apply changes. Radius runs each resource's recipe again with the resource's current properties and the Environment's current Recipe Packs and parameters.
+When you change your Application and run `rad deploy` again, Radius runs each resource's recipe again. If the recipe no longer manages something it created last time, Radius deletes it.
 
-A redeploy deletes infrastructure from an earlier deploy that the recipe no longer manages. This applies to every Resource Type:
-
-- **Bicep recipes:** After the deployment succeeds, Radius deletes tracked resources from the previous deploy that the recipe no longer returns. Radius tracks Azure and UCP resources automatically. Other resources, such as Kubernetes resources, are tracked only when the recipe returns them in its [result]({{< ref "/reference/recipes/result#resources" >}}).
-- **Terraform recipes:** Terraform compares the recipe with its saved state. It destroys resources the recipe no longer defines, and replaces resources when the provider requires it. The old resource can be destroyed before the new one is created.
+- **Bicep recipes:** After the deploy succeeds, Radius deletes what the recipe no longer returns. Radius tracks Azure resources on its own. Kubernetes resources, and others Radius can't find on its own, are tracked only when the recipe lists them in its [result]({{< ref "/reference/recipes/result#resources" >}}).
+- **Terraform recipes:** Terraform compares the recipe with its saved state. It deletes what the recipe no longer defines, and replaces a resource when the provider needs to. Sometimes it deletes the old resource before it creates the new one.
 
 {{% alert title="⚠️ A redeploy can delete data" color="warning" %}}
-`rad deploy` does not ask for confirmation before deleting infrastructure. If a change to a resource, recipe, or recipe parameter renames a stateful resource such as a database, or makes the Terraform provider replace it, the redeploy can permanently delete the old resource and its data. Review these changes and back up data before redeploying.
+Radius doesn't ask before it deletes anything. If your change renames a database or other stateful resource, or makes Terraform replace it, the old resource and its data are gone. Back up your data before you redeploy a change like that.
 {{% /alert %}}
 
-If a Bicep recipe deploys successfully but Radius cannot delete the old infrastructure, the redeploy fails and Radius keeps tracking both the old and new infrastructure. The next deploy or delete of the resource retries the deletion.
+If a Bicep deploy succeeds but Radius can't delete the old infrastructure, the deploy fails. Radius keeps track of both the old and new infrastructure and tries the delete again the next time you deploy or delete the resource.
 
-A redeploy cannot move a resource with recipe infrastructure to a different Environment or Application, because Radius deletes that infrastructure using the Environment and Application it was deployed with. For example, deploying the `frontend` Container from the `dev` Environment to `prod` fails with:
+### Move a resource to another Environment or Application
+
+You can't move a resource that has recipe infrastructure by redeploying it somewhere else. Radius needs the original Environment and Application to clean up that infrastructure. The deploy fails with an error that starts like this:
 
 ```text
-Attempted to deploy existing resource 'frontend' which has a different application and/or environment. Options to resolve the conflict are: change the name of the 'frontend' resource in 'my-app' application and 'prod' environment to create a new resource, or use '/planes/radius/local/resourceGroups/default/providers/Radius.Core/applications/my-app' application and '/planes/radius/local/resourceGroups/default/providers/Radius.Core/environments/dev' environment to update the existing resource 'frontend'.
+Attempted to deploy existing resource 'frontend' which has a different application and/or environment. ...
 ```
 
-Give the resource a new name to create a new resource, or keep its original Environment and Application. To move the resource, delete it with `rad resource delete` and deploy it again. Deleting the resource also deletes its infrastructure and data.
+Give the resource a new name, or leave it where it is. To really move it, delete it with `rad resource delete` and deploy it again. That also deletes its infrastructure and data.
 
-Known limitations:
+### What a redeploy doesn't clean up
 
-- If a deploy fails while its recipe runs, Radius does not record the infrastructure the recipe already created. This applies to a failed first deploy and to new infrastructure from a failed redeploy. Deleting the resource or Application might not remove that infrastructure, so check for it and delete it manually. See [radius-project/radius#13807](https://github.com/radius-project/radius/issues/13807).
-- Infrastructure that an earlier Radius version left behind after a redeploy is not deleted. Delete it manually.
+- If a deploy fails partway through a recipe, Radius doesn't know about what the recipe already created. Deleting the resource or Application won't remove it, so check for it and delete it yourself. See [radius-project/radius#13807](https://github.com/radius-project/radius/issues/13807).
+- Leftovers from redeploys on earlier Radius versions. Delete those yourself.
 
 ## Prune removed resources
 
