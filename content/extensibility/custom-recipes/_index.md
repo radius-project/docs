@@ -25,7 +25,7 @@ Before starting from an empty module, look for a Resource Type with similar infr
 
 Radius injects a `context` object every time it runs a recipe. Declaring `context` as an input enriches an existing Terraform module or Bicep template with information managed by Radius. Use that information to read resource properties and connections, generate stable resource names, select deployment details such as the Kubernetes namespace, and access configured cloud provider scopes.
 
-Names should be both unique and repeatable: running the recipe again for the same Radius resource should target the same infrastructure, while two different Radius resources should not collide.
+Names should be both unique and repeatable: running the recipe again for the same Radius resource should target the same infrastructure, while two different Radius resources should not collide. If you change a recipe so it gives existing infrastructure a new name, the next redeploy replaces it and the old data is lost. See [Redeploy an Application]({{< ref "/applications/deploy#redeploy-an-application" >}}).
 
 {{< tabs Terraform Bicep >}}
 
