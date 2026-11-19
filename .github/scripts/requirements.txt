@@ -1,0 +1,2 @@
+algoliasearch==4.53.0
+beautifulsoup4==4.15.0

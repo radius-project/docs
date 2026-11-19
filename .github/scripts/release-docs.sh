@@ -63,8 +63,10 @@ BASE_SHA="$(git rev-parse HEAD)"
 #  - Optional trailing `(#.*)?` allows an inline TOML comment on the line.
 #  - Each replacement re-emits the canonical taplo format: `key = "value"`.
 
-# In docs/config.toml, change baseURL to https://docs.radapp.io/ instead of https://edge.docs.radapp.io/
-sed -E -i 's|^[[:space:]]*baseURL[[:space:]]*=[[:space:]]*["\x27]https://edge\.docs\.radapp\.io/["\x27][[:space:]]*(#.*)?$|baseURL = "https://docs.radapp.io/"|' docs/config.toml
+# Use the stable channel for standalone builds too. Pages supplies its own base URL.
+sed -E -i 's|^[[:space:]]*baseURL[[:space:]]*=[[:space:]]*["\x27](https://[^"\x27]+)/edge/["\x27][[:space:]]*(#.*)?$|baseURL = "\1/latest/"|' docs/config.toml
+sed -E -i "s|^[[:space:]]*version_menu[[:space:]]*=[[:space:]]*[\"\x27]edge[\"\x27][[:space:]]*(#.*)?$|version_menu = \"latest (${CHANNEL})\"|;
+  s|^[[:space:]]*name[[:space:]]*=[[:space:]]*[\"\x27]latest[\"\x27][[:space:]]*(#.*)?$|name = \"latest (${CHANNEL})\"|" docs/config.toml
 
 # In docs/config.toml, change version to CHANNEL_VERSION instead of edge
 sed -E -i "s|^[[:space:]]*version[[:space:]]*=[[:space:]]*[\"\x27]edge[\"\x27][[:space:]]*(#.*)?$|version = \"${CHANNEL_VERSION}\"|" docs/config.toml
@@ -77,7 +79,8 @@ sed -E -i "s|^[[:space:]]*chart_version[[:space:]]*=[[:space:]]*[\"\x27][^\"\x27
 
 # Verify all expected replacements happened; fail fast if config.toml drifted.
 for pair in \
-  "baseURL|baseURL = \"https://docs.radapp.io/\"" \
+  "version_menu|version_menu = \"latest (${CHANNEL})\"" \
+  "release menu entry|name = \"latest (${CHANNEL})\"" \
   "version-edge|version = \"${CHANNEL_VERSION}\"" \
   "github_branch|github_branch = \"${CHANNEL_VERSION}\"" \
   "chart_version|chart_version = \"${VERSION_NUMBER}\""; do
@@ -88,6 +91,10 @@ for pair in \
     exit 1
   fi
 done
+if ! grep -Eq '^baseURL = "https://[^"]+/latest/"$' docs/config.toml; then
+  echo "Error: expected a /latest/ baseURL in docs/config.toml."
+  exit 1
+fi
 
 # In docs/config.toml, change the Algolia search indexName to radapp-dev instead of radapp-dev-edge
 sed -E -i 's|^[[:space:]]*indexName[[:space:]]*=[[:space:]]*["\x27]radapp-dev-edge["\x27][[:space:]]*(#.*)?$|indexName = "radapp-dev"|' docs/config.toml

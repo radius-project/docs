@@ -1,65 +1,28 @@
 import os
-from re import S
 import sys
-import json
+from pathlib import Path
+from urllib.parse import urlsplit
+
 from bs4 import BeautifulSoup
-from algoliasearch.search_client import SearchClient
-
-url = "docs.radapp.io"
-if len(sys.argv) > 1:
-    starting_directory = os.path.join(os.getcwd(), str(sys.argv[1])) 
-else:
-    starting_directory = os.getcwd()
-
-ALGOLIA_APP_ID = os.getenv('ALGOLIA_APP_ID')
-ALGOLIA_API_KEY = os.getenv('ALGOLIA_API_KEY')
-ALGOLIA_INDEX_NAME = os.getenv('ALGOLIA_INDEX_NAME')
-
-client = SearchClient.create(ALGOLIA_APP_ID, ALGOLIA_API_KEY)
-index = client.init_index(ALGOLIA_INDEX_NAME)
-
-excluded_files = [
-    "404.html",
-]
+from algoliasearch.search.client import SearchClientSync
 
 rankings = {
-    "Concepts": 100,
-    "Getting started": 0,
-    "Developer guides": 200,
-    "Operator guides": 300,
-    "Reference": 400,
-    "Contributing": 500,
-    "Home": 600
+    "concepts": 100,
+    "getting started": 0,
+    "developer guides": 200,
+    "operator guides": 300,
+    "reference": 400,
+    "contributing": 500,
+    "home": 600,
 }
 
-def scan_directory(directory: str, pages: list):
-    for file in os.listdir(directory):
-        path = os.path.join(directory, file)
-        if os.path.isfile(path):
-            if file.endswith(".html") and file not in excluded_files:
-                if '<!-- DISABLE_ALGOLIA -->' not in open(path).read():
-                    print(f'Indexing: {path}')
-                    pages.append(path)
-                else:
-                    print(f'Skipping hidden page: {path}')
-        else:
-            scan_directory(path, pages)
 
-def parse_file(path: str):
-    data = {}
-    data["hierarchy"] = {}
-    data["rank"] = 999
-    data["subrank"] = 99
-    data["type"] = "lvl2"
-    data["lvl0"] = ""
-    data["lvl1"] = ""
-    data["lvl2"] = ""
-    data["lvl3"] = ""
-    text = ""
-    subrank = 0
-    with open(path, "r", errors='ignore') as file:
-        content = file.read()
-        soup = BeautifulSoup(content, "html.parser")
+def parse_file(path: Path):
+    content = path.read_text(encoding="utf-8")
+    if '<!-- DISABLE_ALGOLIA -->' in content:
+        return None
+    soup = BeautifulSoup(content, "html.parser")
+    data = {"hierarchy": {}, "rank": 999, "type": "lvl2", "lvl0": "", "lvl1": "", "lvl2": "", "lvl3": ""}
     for meta in soup.find_all("meta"):
         if meta.get("name") == "description":
             data["lvl2"] = meta.get("content")
@@ -68,44 +31,35 @@ def parse_file(path: str):
             data["lvl0"] = meta.get("content")
             data["hierarchy"]["lvl0"] = meta.get("content")
             data["hierarchy"]["lvl2"] = meta.get("content")
-        elif meta.get("property") == "og:url":
+        elif meta.get("property") == "og:url" and meta.get("content"):
             data["url"] = meta.get("content")
-            data["path"] = meta.get("content").split(url)[1]
-            data["objectID"] = meta.get("content").split(url)[1]
-    breadcrumbs = soup.find_all("li", class_="breadcrumb-item")
-    try:
-        subrank = len(breadcrumbs)
-        data["subrank"] = subrank
-    except:
-        subrank = 99
-        data["subrank"] = 99
-    for bc in breadcrumbs:
-        section = bc.text.strip()
+            data["path"] = urlsplit(data["url"]).path
+            data["objectID"] = data["path"]
+    if "objectID" not in data:
+        return None
+    breadcrumbs = soup.select("li.td-breadcrumbs__item, li.breadcrumb-item")
+    data["subrank"] = len(breadcrumbs)
+    if breadcrumbs:
+        section = breadcrumbs[0].get_text(strip=True)
         data["lvl1"] = section
         data["hierarchy"]["lvl0"] = section
-        try:
-            data["rank"] = rankings[section] + subrank
-        except:
-            print(f"Rank not found for section {section}")
-            data["rank"] = 998
-        break
-    for p in soup.find_all("p"):
-        if p.text != "":
-            text = text + p.text
-    data["text"] = text
+        rank = rankings.get(section.casefold())
+        data["rank"] = rank + len(breadcrumbs) if rank is not None else 998
+    data["text"] = "".join(p.get_text() for p in soup.find_all("p"))
     return data
 
-def index_payload(payload):
-    res = index.replace_all_objects(payload)
-    res.wait()
+
+def main(starting_directory: Path):
+    payload = [
+        record for page in sorted(starting_directory.rglob("*.html"))
+        if page.name != "404.html" and (record := parse_file(page)) is not None
+    ]
+    if not payload:
+        sys.exit(f"No indexable pages in {starting_directory}; refusing to replace the search index.")
+    print(f"Indexing {len(payload)} pages from {starting_directory}")
+    with SearchClientSync(os.environ["ALGOLIA_APP_ID"], os.environ["ALGOLIA_API_KEY"]) as client:
+        client.replace_all_objects(index_name=os.environ["ALGOLIA_INDEX_NAME"], objects=payload)
 
 
 if __name__ == "__main__":
-    pages = []
-    payload = []
-    scan_directory(starting_directory, pages)
-    for page in pages:
-        data = parse_file(page)
-        if "objectID" in data:
-            payload.append(data)
-    index_payload(payload)
+    main(Path(sys.argv[1]) if len(sys.argv) > 1 else Path.cwd())

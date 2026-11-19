@@ -1,6 +1,6 @@
 # Contributing to Radius documentation
 
-Thank you for your interesting in contributing to the Radius documentation! For more information please refer to [https://docs.radapp.io/community/contributing/docs/](https://docs.radapp.io/community/contributing/docs/)
+See the [docs contribution guide](https://docs.radapp.io/edge/contributing/contributing-docs/) to contribute to the Radius documentation.
 
 ## Developer Certificate of Origin
 

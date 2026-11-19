@@ -1,5 +1,5 @@
 module github.com/radius-project/docs
 
-go 1.26.3
+go 1.27.4
 
-require github.com/google/docsy v0.15.0 // indirect
+require github.com/docsy/docsy/theme v0.18.1 // indirect

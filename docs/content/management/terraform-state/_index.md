@@ -18,7 +18,7 @@ Radius cannot migrate or adopt existing Terraform state. Replacing Terraform set
 
 ### Grant storage permissions
 
-Grant the default [credential registered in Radius]({{< ref "/installation/cloud-providers" >}}) for the selected cloud access to the storage:
+Grant the default [credential registered in Radius]({{< ref "/aws-and-azure/cloud-providers" >}}) for the selected cloud access to the storage:
 
 | Backend | Required permissions |
 | --- | --- |

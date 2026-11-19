@@ -5,6 +5,7 @@ linkTitle: "AWS IRSA"
 description: "Learn how to configure AWS credentials using IAM Roles for Service Accounts (IRSA) in the Radius control plane"
 weight: 200
 aliases:
+  - /installation/cloud-providers/aws-irsa/
   - /guides/installation/cloud-providers/aws/irsa/
 ---
 
@@ -23,7 +24,7 @@ To authorize Radius to connect to AWS using IAM Roles for Service Accounts (IRSA
 
   {{< image src="select-trust-entity.png" width=700px alt="Screenshot of options to pass while selecting trust entity." >}}
 
-- Attach an IAM policy that grants the [permissions Radius needs]({{< ref "/installation/cloud-providers#aws-permissions" >}}) to deploy your resources.
+- Attach an IAM policy that grants the [permissions Radius needs]({{< ref "/aws-and-azure#aws-permissions" >}}) to deploy your resources.
 
 - Enter a role name and create the role using the default trust policy.
 
@@ -133,6 +134,6 @@ This command updates the configuration of an environment for properties that are
 
 ## Next steps
 
-Once AWS or Azure credentials are configured, set up access to the Radius Dashboard.
+With credentials registered and the Environment configured, assign Recipe Packs to select how Radius provisions the application's resources.
 
-{{< button text="Next step: How to configure access to the Radius dashboard" page="installation/dashboard" >}}
+{{< button text="Next step: How to manage Recipe Packs" page="/management/recipe-packs" >}}

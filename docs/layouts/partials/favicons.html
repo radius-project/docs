@@ -1,0 +1,6 @@
+{{/* Radius keeps its icons under static/favicons, not at Docsy's default root. */}}
+<link rel="icon" href="{{ "favicons/favicon.ico" | relURL }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ "favicons/apple-icon-180x180.png" | relURL }}">
+{{- range slice 16 32 96 }}
+<link rel="icon" type="image/png" sizes="{{ . }}x{{ . }}" href="{{ printf "favicons/favicon-%dx%d.png" . . | relURL }}">
+{{- end }}

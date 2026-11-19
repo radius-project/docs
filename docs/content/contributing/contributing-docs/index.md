@@ -27,15 +27,15 @@ The easiest way to get up and running is with a GitHub Codespace. This gives you
 1. Start Codespace
 1. Wait for `postCreateCommand` to complete
 1. Run `cd docs` to enter the hugo site directory
-1. Run `hugo server` to start the local server
+1. Run `npm start` to start the local server with the project's Hugo and Dart Sass versions
 1. Click on the link in the terminal to open the docs in your browser
 {{% /codetab %}}
 
 {{% codetab %}}
 **Pre-requisites**
 
-- [Hugo extended version](https://gohugo.io/getting-started/installing)
 - [Node.js](https://nodejs.org/en/)
+- [Go](https://go.dev/dl/) to load the Hugo theme and generate CLI docs
 - [git](https://git-scm.com/downloads)
 
 **Environment setup**
@@ -79,7 +79,7 @@ The easiest way to get up and running is with a GitHub Codespace. This gives you
    npm start
    ```
 
-1. Navigate to `http://localhost:1313/`
+1. Open the URL printed by Hugo in the terminal
 {{% /codetab %}}
 
 {{< /tabs >}}
@@ -126,14 +126,14 @@ Whatever you write:
 
 These conventions should be followed throughout all Radius documentation to ensure a consistent experience across all docs.
 
-| Style/Tone | Guidance |
+|Style/Tone|Guidance|
 |---------|-------------|
 |**Casing**|Use upper case only:<ul><li>At the start of a sentence or header</li><li>For proper nouns including names of technologies (Redis, Kubernetes, etc.)</li> <li>Names of Radius concepts (Radius Recipe, Radius Environment, Radius Application, etc.)</li></ul>|
 |**Headers and titles**|Headers and titles must be descriptive and clear, use sentence casing i.e. use the above casing guidance for headers and titles too|
 |**Use simple sentences**|Easy-to-read sentences mean the reader can quickly use the guidance you share.|
 |**Avoid the first person**|Use second person "you", "your" instead of "I", "we", "our".|
 |**Assume a new developer audience**|Some obvious steps can seem hard. E.g. Now set an environment variable Radius to a value X. It is better to give the reader the explicit command to do this, rather than having them figure this out.|
-|**Use present tense**|Avoid sentences like "this command will install redis", which implies the action is in the future. Instead, use "This command installs redis" which is in the present tense. |
+|**Use present tense**|Avoid sentences like "this command will install redis", which implies the action is in the future. Instead, use "This command installs redis" which is in the present tense.|
 
 ### Spelling
 
@@ -356,7 +356,7 @@ Add a source link just above the code block so readers can open the upstream fil
 <div class="td-max-width-on-larger-screens" style="margin-bottom: -2rem;"><a href="https://github.com/radius-project/samples/blob/{{</* param version */>}}/samples/demo/app.bicep" target="_blank" rel="noopener">samples/demo/app.bicep</a></div>
 ```
 
-Show the deploy command with the `rad-deploy` shortcode. It renders `rad deploy <url>` against the correct docs host (`edge.docs.radapp.io` on edge, `docs.radapp.io` on release branches):
+Show the deploy command with the `rad-deploy` shortcode. It renders `rad deploy <url>` against the current site's base URL, including the `edge/` or `latest/` path:
 
 ```md
 {{</* rad-deploy path="samples/demo/app.bicep" */>}}
@@ -532,7 +532,7 @@ An optional `newtab` parameter will indicate if the page should open in a new ta
 {{</* button text="My Button" link="https://example.com" */>}}
 ```
 
-{{< button text="My Button" link="https://example.com" >}}
+{{< button text="My Button" link="<https://example.com>" >}}
 
 #### Link to another docs page
 
@@ -564,9 +564,9 @@ You can customize the colors using the Bootstrap colors:
 {{</* button text="My Button" link="https://example.com" color="success" */>}}
 ```
 
-{{< button text="My Button" link="https://example.com" color="primary" >}}
-{{< button text="My Button" link="https://example.com" color="secondary" >}}
-{{< button text="My Button" link="https://example.com" color="success" >}}
+{{< button text="My Button" link="<https://example.com>" color="primary" >}}
+{{< button text="My Button" link="<https://example.com>" color="secondary" >}}
+{{< button text="My Button" link="<https://example.com>" color="success" >}}
 
 #### Inline buttons
 
@@ -577,8 +577,8 @@ By default, buttons are padded with new lines below the button. To remove these 
 {{</* button text="Next" link="https://example.com" */>}}
 ```
 
-{{< button text="Previous" link="https://example.com" newline="false" >}}
-{{< button text="Next" link="https://example.com" >}}
+{{< button text="Previous" link="<https://example.com>" newline="false" >}}
+{{< button text="Next" link="<https://example.com>" >}}
 
 ## Maintaining the docs
 
@@ -586,45 +586,19 @@ This section covers routine Radius docs maintainer and approver responsibilities
 
 ### Branch guidance
 
-The Radius docs handles branching differently than most code repositories. Instead of a `main` branch, every branch is labeled to match the major and minor version of a runtime release, plus an `edge` branch for in-flight work. For example, the `v1.0` branch contains the docs for the `v1.0` release. The `edge` branch contains the latest in-flight work.
+Target `edge`, the default branch, for documentation changes. During a final release, the [core Radius release coordinator](https://github.com/radius-project/radius/blob/main/.github/scripts/coordinate-release.mjs) dispatches `release.yaml` on `edge` with the release version. The resulting `vMAJOR.MINOR` branch is the source for stable docs. To correct a published release, backport the relevant fix rather than merging the release branch back into `edge`.
 
 ### Release commit signing
 
-The [Release docs workflow](https://github.com/radius-project/docs/actions/workflows/release.yaml) runs from `edge`. Like samples publication, it creates the release configuration commit through the GitHub API with the release App token and without overriding the commit's author, committer, or signature. The script retains the checked-out source as its parent, verifies the generated tree, includes the App's DCO sign-off, and requires GitHub to report the commit as verified before creating or fast-forwarding `vX.Y`. The default-branch change runs only after publication succeeds. No separate private commit-signing key is required.
+The [Release docs workflow](https://github.com/radius-project/docs/actions/workflows/release.yaml) runs from `edge`. Like samples publication, it creates the release configuration commit through the GitHub API with the release App token and without overriding the commit's author, committer, or signature. The script retains the checked-out source as its parent, verifies the generated tree, includes the App's DCO sign-off, and requires GitHub to report the commit as verified before creating or fast-forwarding `vX.Y`. The default branch stays `edge`. Publishing a new stable channel updates `latest/` on GitHub Pages; it does not replace `edge/`. No separate private commit-signing key is required.
 
 An unsigned historical commit cannot become verified without changing its commit ID. This workflow fix does not rewrite published branches or make older commits verified; do not force-push a release branch to change a badge. New executions must use the updated workflow on `edge`, rather than rerunning an older workflow revision.
 
 Run `bash .github/scripts/release-docs_test.sh` from the repository root to check configuration changes and publication guards using temporary Git repositories and fake API responses. The website build runs the same check without release credentials. It tests the script's behavior, not live GitHub signing or deployment.
 
-### Managing content between branches
-
-As a docs approver or maintainer, you need to perform routine **upmerges** to keep the pre-release `edge` branch aligned with updates to the current release branch. It is recommended to upmerge the current branch into the pre-release branch on a weekly basis.
-
-1. Open the [Upmerge to edge workflow](https://github.com/radius-project/docs/actions/workflows/upmerge.yaml).
-1. Select **Run workflow**, choose the current release branch (for example, `v1.0`), and run it. Every attempt fetches the latest commits from that branch and `edge`, then uses those exact commits for its merge. The summary and PR body record both SHAs; the workflow does not change the source branch.
-1. Follow the ready-for-review `upmerge/` pull request linked by the **Create pull request** step. If merging produces no net changes, including when the source is already an ancestor of `edge`, no PR is created. Genuine content conflicts instead stop the run and list the affected files; no provisional source snapshot or draft PR is created.
-1. Review the diff, including the Docsy module version in `docs/go.mod` and its checksum entries in `docs/go.sum`. If versions differ, keep the `edge` Docsy version and corresponding checksum entries unless the PR includes an intentional, reviewed Docsy version change. Retain unrelated module changes rather than restoring either file wholesale. The workflow preserves the `edge` versions of `docs/config.toml` and `docs/layouts/partials/hooks/body-end.html`, including files deleted on `edge`.
-1. If the workflow reports content conflicts, resolve them on the source or `edge` branch through normal review, preserving changes from both branches, then rerun to pick up fixes from either branch. Commits pushed after an attempt fetches its inputs are picked up by the next attempt. Keep resolution commits signed and DCO-signed-off. An older draft produced before this policy contains a provisional source snapshot, **not a resolved merge**; restore any omitted edge-only content before marking it ready.
-   If the resolution merges `edge` into the release branch, use **Create a merge commit** for that resolution PR, not squash or rebase. The merge ancestry is part of the fix: squashing can leave the same conflicts even when the resolved file contents are correct. Preserve the release-specific configuration and validate the resulting history with `git merge-tree --write-tree origin/edge HEAD` after fetching `edge`; it must exit successfully without conflicts.
-1. Obtain the normal reviews and required checks, then squash-merge the generated `upmerge/` PR into `edge`. The workflow never bypasses branch rules or merges automatically.
-
-The local `.github/workflows/upmerge.yaml` is a synced caller for the [shared upmerge workflow](https://github.com/radius-project/.github/blob/main/.github/workflows/__upmerge.yml). Docs and samples use that same implementation at `main`; only repository-specific settings, such as the docs files preserved from `edge`, belong in the caller.
-
-For the shared workflow's merge and signing behavior, see [Signed Release Upmerge](https://github.com/radius-project/.github/blob/main/eng/SYNC.md#signed-release-upmerge).
-
-Change upmerge rules and action versions in `radius-project/.github`, not in copies here. Update the native `preserve-paths` workflow input in [`workflow-templates/upmerge-docs.yml`](https://github.com/radius-project/.github/blob/main/workflow-templates/upmerge-docs.yml) when docs-specific preserved paths change. The `.github/sync.yml` configuration maps the static docs and samples callers to their `edge` branches; use the [signed release upmerge sync process](https://github.com/radius-project/.github/blob/main/eng/SYNC.md#signed-release-upmerge) to propagate them. Sync copies only the thin callers, not the shared implementation. File synchronization is appropriate for the caller; the actual upmerge still needs a three-way merge to preserve edge-only content.
-
-The `RADIUS_RELEASE_BOT` App installation on `radius-project/docs` must grant **Contents: Read & Write**, **Pull requests: Read & Write**, and **Workflows: Read & Write**. The workflow requests only those write permissions for this repository. The workflow permission is needed to carry changes to `.github/workflows/`; an installation administrator must grant it if missing. Do not work around a missing grant by dropping workflow changes, weakening branch rules, or adding a private commit-signing key.
-
-Merge the shared workflow into `radius-project/.github@main` **before** merging or dispatching its callers. For this rollout, the docs caller must also reach `v0.61`, the current default branch and executing upmerge source; syncing only `edge` does not bootstrap current release-branch executions. After the shared implementation and release-branch caller are available, a new signed upmerge can carry the caller to `edge` before the next release branch is cut. Future shared implementation fixes are maintained centrally rather than copied into each repository. No default-branch or final-release behavior changes are needed.
-
-New runs resolve the shared workflow at the current `main` revision. Workflow-code selection is separate from content selection: rerunning failed jobs or a specific job keeps the first attempt's shared-workflow commit, while rerunning all jobs resolves `main` again. For a run created before fresh-head retries were deployed, choose **Re-run all jobs** to load that behavior; a failed-job retry can still use the old implementation. Runs created with the updated implementation refresh both branches on every retry. Rerunning an older, pre-migration inline workflow cannot adopt the changed caller; start a new run after rollout.
-
-Validate caller changes with the existing workflow configuration lint and documentation checks, and compare `.github/workflows/upmerge.yaml` with its native source in `radius-project/.github`. Check the explicit secret mappings and the two preserved docs paths. Do not dispatch a live upmerge just to validate caller wiring.
-
 ### Keep the sample application in sync
 
-The Getting Started tutorial embeds the Radius Demo application (`app.bicep` and `app-redis.bicep`) directly from the [`radius-project/samples`](https://github.com/radius-project/samples) repository so the docs never drift from the real, tested sample. The files are vendored into this repo under `docs/static/samples/demo/`. Because Hugo serves `static/` from the site root, each file is also published at a stable URL, for example `https://docs.radapp.io/samples/demo/app.bicep`.
+The Getting Started tutorial embeds the Radius Demo application (`app.bicep` and `app-redis.bicep`) directly from the [`radius-project/samples`](https://github.com/radius-project/samples) repository so the docs never drift from the real, tested sample. The files are vendored into this repo under `docs/static/samples/demo/`. Hugo publishes them under each version's base URL, for example `https://docs.radapp.io/latest/samples/demo/app.bicep`.
 
 #### How the sync works
 
@@ -643,7 +617,7 @@ git add docs/static/samples/demo
 git commit -s -m "Sync sample app from radius-project/samples"
 ```
 
-Set `GITHUB_TOKEN` first if you hit the GitHub API rate limit. When cutting a release branch, run the script once so the new `vX.Y` branch vendors the matching `vX.Y` sample.
+Set `GITHUB_TOKEN` first if you hit the GitHub API rate limit. Final release branches inherit the samples vendored on `edge`. If those samples need a release-specific correction, run the script on the release branch and submit the update for review.
 
 ### References
 

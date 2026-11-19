@@ -1,24 +1,26 @@
 {
   "name": "radius-docs",
   "version": "0.1.0",
+  "private": true,
   "description": "Documentation site for Radius",
-  "main": "",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/radius-project/radius.git"
+    "url": "git+https://github.com/radius-project/docs.git"
   },
-  "author": "",
   "bugs": {
     "url": "https://github.com/radius-project/docs/issues"
   },
   "license": "Apache-2.0",
   "homepage": "https://docs.radapp.io",
   "devDependencies": {
-    "autoprefixer": "^10.6.2",
     "hugo-extended": "0.169.0",
-    "postcss": "^8.5.32",
-    "postcss-cli": "^12.0.0",
-    "rimraf": "^6.1.4"
+    "rimraf": "^6.1.4",
+    "sass-embedded": "1.108.2"
+  },
+  "overrides": {
+    "hugo-extended": {
+      "adm-zip": "0.6.1"
+    }
   },
   "scripts": {
     "build": "hugo --gc --minify",
@@ -32,6 +34,9 @@
     "hugo:mod:tidy": "hugo mod tidy",
     "hugo:mod:clean": "hugo mod clean --all",
     "hugo:mod:graph": "hugo mod graph",
-    "clean": "hugo --gc && rimraf public resources"
-  }
+    "clean": "rimraf public resources"
+  },
+  "workspaces": [
+    "packages/hugoautogen"
+  ]
 }

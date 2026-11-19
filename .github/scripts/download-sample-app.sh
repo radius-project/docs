@@ -18,7 +18,7 @@
 # Download the sample application Bicep files from the radius-project/samples repository at
 # the ref that matches this docs branch, and write them under docs/static so the site can
 # both embed them (offline, reproducible builds) and serve each at a stable URL such as
-# https://docs.radapp.io/samples/demo/app.bicep (Hugo serves static/ from the site root).
+# https://docs.radapp.io/latest/samples/demo/app.bicep.
 #
 # Every file in SAMPLE_DIR matching FILE_GLOB is copied, so adding a new *.bicep to the
 # samples/demo directory upstream is picked up automatically with no change to this script.

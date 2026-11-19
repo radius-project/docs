@@ -1,4 +1,5 @@
 docs/public
+/public/
 docs/.hugo_build.lock
 dictionary.dic
 docs/static/swagger/**

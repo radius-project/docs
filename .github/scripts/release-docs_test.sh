@@ -110,7 +110,7 @@ run_case() {
     local expected="$2"
     local root="${TEST_ROOT}/${scenario}"
     local repo="${root}/docs"
-    local before status=0 output bot_name=radius-release
+    local before status=0 output bot_name=radius-release site_root=https://docs.radapp.io
 
     mkdir -p "${repo}/docs"
     git -C "${repo}" init -q -b edge
@@ -119,7 +119,9 @@ run_case() {
     git -C "${repo}" config commit.gpgsign false
     git -C "${repo}" config core.autocrlf false
     cat > "${repo}/docs/config.toml" << 'EOF'
-baseURL = "https://edge.docs.radapp.io/"
+baseURL = "https://docs.radapp.io/edge/"
+version_menu = "edge"
+name = "latest"
 version = "edge"
 github_branch = "edge"
 chart_version = "0.62.0"
@@ -127,8 +129,11 @@ indexName = "radapp-dev-edge"
 title = "Unrelated configuration"
 EOF
     if [[ "${scenario}" == formatted ]]; then
+        site_root=https://example.test/project
         cat > "${repo}/docs/config.toml" << 'EOF'
-  baseURL='https://edge.docs.radapp.io/' # keep tolerated formatting
+  baseURL='https://example.test/project/edge/' # preserve the host and project path
+  version_menu='edge' # current channel
+ name='latest' # release label
  version = 'edge' # comment
 github_branch= 'edge'
 chart_version = '0.62.0' # old chart version
@@ -139,7 +144,9 @@ EOF
         sed -i '/^chart_version/d' "${repo}/docs/config.toml"
     elif [[ "${scenario}" == no-change ]]; then
         cat > "${repo}/docs/config.toml" << 'EOF'
-baseURL = "https://docs.radapp.io/"
+baseURL = "https://docs.radapp.io/latest/"
+version_menu = "latest (0.63)"
+name = "latest (0.63)"
 version = "v0.63"
 github_branch = "v0.63"
 chart_version = "0.63.0"
@@ -171,7 +178,7 @@ EOF
             return 1
         }
         grep -Fq 'Published verified docs commit' <<< "${output}"
-        for line in 'baseURL = "https://docs.radapp.io/"' \
+        for line in "baseURL = \"${site_root}/latest/\"" 'version_menu = "latest (0.63)"' 'name = "latest (0.63)"' \
             'version = "v0.63"' 'github_branch = "v0.63"' \
             'chart_version = "0.63.0"' 'indexName = "radapp-dev"' \
             'title = "Unrelated configuration"'; do

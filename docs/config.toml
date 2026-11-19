@@ -1,8 +1,9 @@
-baseURL = "https://edge.docs.radapp.io/"
+baseURL = "https://docs.radapp.io/edge/"
 locale = "en-us"
 title = "Radius Docs"
 
 disableFastRender = true
+enableGitInfo = true
 
 # Ignore sample code
 ignoreFiles = ["/code/*"]
@@ -11,16 +12,13 @@ ignoreFiles = ["/code/*"]
 [services.googleAnalytics]
 id = "G-9JR8B6TPF9"
 
-enableGitInfo = true
-
 # Hugo Modules
 [module]
 proxy = "direct"
 [module.hugoVersion]
-extended = true
-min = "0.157.0"
+min = "0.160.1"
 [[module.imports]]
-path = "github.com/google/docsy"
+path = "github.com/docsy/docsy/theme"
 [[module.mounts]]
 source = "content"
 target = "content"
@@ -76,7 +74,7 @@ pre = "<i class='fas fa-map-signs'></i>"
 copyright = "The Radius Authors. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see the https://linuxfoundation.org/trademark-usage/ page."
 version = "edge"
 tag_version = "latest"
-chart_version = "0.26.0"
+chart_version = "0.62.0" # Standalone builds; Pages reads the version from the stable release.
 
 # GitHub Information
 github_repo = "https://github.com/radius-project/docs"
@@ -85,14 +83,15 @@ github_branch = "edge"
 github_project_repo = "https://github.com/radius-project/radius"
 
 # Versioning
-version_menu = "Releases"
+version_menu = "edge"
 [[params.versions]]
-version = "edge (preview)"
-url = "https://edge.docs.radapp.io"
+name = "edge"
+url = "https://docs.radapp.io/edge/"
 
 [[params.versions]]
 version = "latest"
-url = "https://docs.radapp.io"
+name = "latest"
+url = "https://docs.radapp.io/latest/"
 
 # Algolia Search
 # These credentials are consumed by Docsy's built-in DocSearch integration.
@@ -120,4 +119,4 @@ navbar_logo = true
 [params.ui.feedback]
 enable = true
 yes = '<b>Glad to hear it!</b> Please feel free to <a href="https://github.com/radius-project/radius">star our repo</a> and join our <a href="https://aka.ms/radius/discord">Discord server</a> to stay up to date with the project.'
-no = '<b>Sorry to hear that.</b> If you would like to also contribute a suggestion visit <a href="https://github.com/radius-project/docs/issues/new/choose"> and tell us how we can improve</a>.'
+no = '<b>Sorry to hear that.</b> Please <a href="https://github.com/radius-project/docs/issues/new/choose">tell us how we can improve</a>.'

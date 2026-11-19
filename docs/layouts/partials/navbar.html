@@ -1,8 +1,13 @@
 {{ $cover := and (.HasShortcode "blocks/cover") (not .Site.Params.ui.navbar_translucent_over_cover_disable) }}
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark {{ if $cover}} td-navbar-cover {{ end }}flex-column flex-md-row td-navbar">
-        <a class="navbar-brand" href="{{ .Site.Home.RelPermalink }}">
+	<div class="d-flex align-items-center">
+	<a class="navbar-brand" href="{{ .Site.Home.RelPermalink }}">
 		<span class="navbar-logo">{{ if .Site.Params.ui.navbar_logo }}{{ with resources.Get "icons/logo.svg" }}{{ ( . | minify).Content | safeHTML }}{{ end }}{{ end }}</span><span class="font-weight-bold navbar-brand__name">{{ .Site.Title }}</span>
 	</a>
+	{{ if .Site.Params.versions }}
+	<div class="navbar-nav d-lg-none">{{ partial "docs-version-menu.html" . }}</div>
+	{{ end }}
+	</div>
 	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
 		<ul class="navbar-nav mt-2 mt-lg-0">
 			{{ $p := . }}
@@ -21,7 +26,7 @@
 			{{ end }}
 			{{ if  .Site.Params.versions }}
 			<li class="nav-item dropdown mr-4 d-none d-lg-block">
-				{{ partial "navbar-version-selector.html" . }}
+				{{ partial "docs-version-menu.html" . }}
 			</li>
 			{{ end }}
 			{{ if  (gt (len .Site.Home.Translations) 0) }}

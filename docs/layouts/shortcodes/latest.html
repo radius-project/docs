@@ -4,5 +4,7 @@
 {{ if ne $version "edge" }}
 {{ (print "\n" $content "\n") | markdownify }}
 {{ else }}
-{{ (print "\n" "To try out a stable release visit the [latest docs](https://docs.radapp.io)." "\n") | markdownify }}
+{{ with index (where site.Params.versions "version" "latest") 0 }}
+{{ (printf "\nTo try out a stable release visit the [latest docs](%s).\n" .url) | markdownify }}
+{{ end }}
 {{ end }}

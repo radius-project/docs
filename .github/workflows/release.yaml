@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Radius version number to use (e.g. 0.22.0, 0.23.0-rc1)"
+        description: "Radius version supplied by the core release coordinator (e.g. 0.63.0)"
         required: true
         default: ""
         type: string
@@ -15,6 +15,7 @@ permissions: {}
 
 jobs:
   release-docs:
+    if: github.ref == 'refs/heads/edge'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     permissions:
@@ -22,16 +23,15 @@ jobs:
     steps:
       # Generate a short-lived installation token scoped to this repository.
       # Requires RADIUS_RELEASE_BOT installed on radius-project/docs with:
-      #   Contents: Read & Write, Administration: Read & Write
+      #   Contents: Read & Write
       - name: Get App Token
         id: app-token
-        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        uses: actions/create-github-app-token@f418cff399f7aef4c2f0ad47e25ca7a6abbdd6fc # v3.4.0
         with:
           client-id: ${{ secrets.RADIUS_RELEASE_BOT_CLIENT_ID }}
           private-key: ${{ secrets.RADIUS_RELEASE_BOT_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
           permission-contents: write
-          permission-administration: write
           repositories: docs
 
       # Resolve the bot's GitHub-formatted name and email dynamically from the app slug
@@ -55,15 +55,6 @@ jobs:
         env:
           INPUT_VERSION: ${{ inputs.version }}
 
-      - name: Parse release channel
-        id: parse_release_channel
-        run: |
-          # CHANNEL is the major and minor version of the VERSION_NUMBER (e.g. 0.1)
-          CHANNEL="$(echo "${INPUT_VERSION}" | cut -d '.' -f 1,2)"
-          echo "channel=$CHANNEL" >> "${GITHUB_OUTPUT}"
-        env:
-          INPUT_VERSION: ${{ inputs.version }}
-
       - name: Release docs
         run: |
           ./docs/.github/scripts/release-docs.sh "${INPUT_VERSION}"
@@ -72,14 +63,3 @@ jobs:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
           BOT_NAME: ${{ steps.bot-details.outputs.name }}
           BOT_EMAIL: ${{ steps.bot-details.outputs.email }}
-
-      - name: Change the default branch
-        env:
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
-        run: |
-          gh api \
-          --method PATCH \
-          -H "Accept: application/vnd.github+json" \
-          -H "X-GitHub-Api-Version: 2022-11-28" \
-          repos/radius-project/docs \
-          -f default_branch='v${{ steps.parse_release_channel.outputs.channel }}'
