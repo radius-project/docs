@@ -111,6 +111,11 @@ Radius doesn't ask before it deletes anything. If your change renames a database
 
 If a Bicep deploy succeeds but Radius can't delete the old infrastructure, the deploy fails. Radius keeps track of both the old and new infrastructure and tries the delete again the next time you deploy or delete the resource.
 
+If a deploy fails partway through a recipe, deleting the resource still removes what the recipe created:
+
+- **Bicep recipes:** Radius keeps track of the resources it finds on its own. If it can't read them yet, deleting the resource fails with an error that names the failed deployment. Try the delete again later.
+- **Terraform recipes:** Terraform's saved state keeps what the failed run created, and deleting the resource destroys it.
+
 ### Move a resource to another Environment or Application
 
 You can't move a resource that has recipe infrastructure by redeploying it somewhere else. Radius needs the original Environment and Application to clean up that infrastructure. The deploy fails with an error that starts like this:
@@ -121,9 +126,9 @@ Attempted to deploy existing resource 'frontend' which has a different applicati
 
 Give the resource a new name, or leave it where it is. To really move it, delete it with `rad resource delete` and deploy it again. That also deletes its infrastructure and data.
 
-### What a redeploy doesn't clean up
+### What Radius doesn't clean up
 
-- If a deploy fails partway through a recipe, Radius doesn't know about what the recipe already created. Deleting the resource or Application won't remove it, so check for it and delete it yourself. See [radius-project/radius#13807](https://github.com/radius-project/radius/issues/13807).
+- If a Bicep deploy fails, Radius doesn't track resources the recipe would have listed in its result, such as Kubernetes resources. Check for them and delete them yourself. See [radius-project/radius#13807](https://github.com/radius-project/radius/issues/13807).
 - Leftovers from redeploys on earlier Radius versions. Delete those yourself.
 
 ## Prune removed resources
