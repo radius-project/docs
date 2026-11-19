@@ -624,6 +624,7 @@ LookoutVision
 Ly
 Macie
 macOS
+managedby
 ManagedIdentity
 managedStore
 manualLink
@@ -1119,6 +1120,7 @@ TransitGatewayPeering
 TransitGatewayPeeringAttachment
 TransitGatewayRouteTableAttachment
 TransitGatewayVpcAttachment
+trgm
 TrustAnchor
 TypeActivation
 ubuntu
