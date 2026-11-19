@@ -26,8 +26,7 @@ The easiest way to get up and running is with a GitHub Codespace. This gives you
 
 1. Start Codespace
 1. Wait for `postCreateCommand` to complete
-1. Run `cd docs` to enter the hugo site directory
-1. Run `npm start` to start the local server with the project's Hugo and Dart Sass versions
+1. Run `npm start` from the repository root to start the local server with the project's Hugo and Dart Sass versions
 1. Click on the link in the terminal to open the docs in your browser
 {{% /codetab %}}
 
@@ -52,14 +51,14 @@ The easiest way to get up and running is with a GitHub Codespace. This gives you
 
    ```sh
    pushd radius
-   go run ./cmd/docgen/main.go ../docs/docs/content/reference/cli
+   go run ./cmd/docgen/main.go ../docs/content/reference/cli
    popd
    ```
 
-1. Change into the docs site directory:
+1. Enter the cloned `radius-project/docs` repository:
 
    ```sh
-   cd docs/docs
+   cd docs
    ```
 
 1. Install npm packages:
@@ -72,7 +71,7 @@ The easiest way to get up and running is with a GitHub Codespace. This gives you
 
 **Run local server**
 
-1. Make sure you're still in the `docs/docs` directory
+1. Make sure you're still in the repository root
 1. Run
 
    ```sh
@@ -342,7 +341,7 @@ Will result in the following output:
 
 ### Embedding a sample from the samples repository
 
-Some pages embed application samples straight from the [`radius-project/samples`](https://github.com/radius-project/samples) repository instead of keeping a separate `snippets` copy. Those files are vendored into `docs/static/samples/` and kept in sync automatically (see [Keep the sample application in sync](#keep-the-sample-application-in-sync)). Reuse this pattern so the embedded code, the source link, and the deploy command all stay version-correct and never drift from the tested sample.
+Some pages embed application samples straight from the [`radius-project/samples`](https://github.com/radius-project/samples) repository instead of keeping a separate `snippets` copy. Those files are vendored into `static/samples/` and kept in sync automatically (see [Keep the sample application in sync](#keep-the-sample-application-in-sync)). Reuse this pattern so the embedded code, the source link, and the deploy command all stay version-correct and never drift from the tested sample.
 
 Embed the vendored file with the `rad` shortcode using an absolute `/static/...` path:
 
@@ -366,12 +365,12 @@ Show the deploy command with the `rad-deploy` shortcode. It renders `rad deploy 
 
 The markdown spec used by Docsy and Hugo does not give an option to resize images using markdown notation. Instead, raw HTML is used.
 
-Begin by placing images under `/docs/static/images` with the naming convention of `[page-name]-[image-name].[png|jpg|svg]`.
+Place an image next to the page's Markdown file under `content/`. The `image` shortcode looks it up in that page's bundle.
 
 Then link to the image using:
 
 ```md
-{{</* image src="/images/[image-filename]" width=1000 alt="Description of image" */>}}
+{{</* image src="[image-filename]" width=1000 alt="Description of image" */>}}
 ```
 
 >Don't forget to set the alt attribute to keep the docs readable for our visually impaired users.
@@ -598,13 +597,13 @@ Run `bash .github/scripts/release-docs_test.sh` from the repository root to chec
 
 ### Keep the sample application in sync
 
-The Getting Started tutorial embeds the Radius Demo application (`app.bicep` and `app-redis.bicep`) directly from the [`radius-project/samples`](https://github.com/radius-project/samples) repository so the docs never drift from the real, tested sample. The files are vendored into this repo under `docs/static/samples/demo/`. Hugo publishes them under each version's base URL, for example `https://docs.radapp.io/latest/samples/demo/app.bicep`.
+The Getting Started tutorial embeds the Radius Demo application (`app.bicep` and `app-redis.bicep`) directly from the [`radius-project/samples`](https://github.com/radius-project/samples) repository so the docs never drift from the real, tested sample. The files are vendored into this repo under `static/samples/demo/`. Hugo publishes them under each version's base URL, for example `https://docs.radapp.io/latest/samples/demo/app.bicep`.
 
 #### How the sync works
 
 - **Source of truth:** `samples/demo/*.bicep` in `radius-project/samples`, on the branch that matches this docs branch (`edge` on `edge`, `vX.Y` on release branches).
-- **Vendored copy:** `docs/static/samples/demo/*.bicep`, committed to this repo and embedded by the tutorial pages with the `rad` shortcode.
-- **Download script:** `.github/scripts/download-sample-app.sh` reads the `version` param from `docs/config.toml`, downloads every `*.bicep` from `samples/demo/` at that ref (falling back to the default branch if the ref is missing), and writes them into `docs/static/samples/demo/`. A new `*.bicep` added upstream is picked up automatically.
+- **Vendored copy:** `static/samples/demo/*.bicep`, committed to this repo and embedded by the tutorial pages with the `rad` shortcode.
+- **Download script:** `.github/scripts/download-sample-app.sh` reads the `version` param from `config.toml`, downloads every `*.bicep` from `samples/demo/` at that ref (falling back to the default branch if the ref is missing), and writes them into `static/samples/demo/`. A new `*.bicep` added upstream is picked up automatically.
 - **Drift check:** `.github/workflows/sync-sample-app.yaml` runs the script on every pull request and fails if the committed copy is out of date with upstream. It is a no-op until the files are first vendored.
 
 #### Refresh the vendored files
@@ -613,7 +612,7 @@ When the sample changes upstream, run the script from the repo root and commit t
 
 ```bash
 bash ./.github/scripts/download-sample-app.sh
-git add docs/static/samples/demo
+git add static/samples/demo
 git commit -s -m "Sync sample app from radius-project/samples"
 ```
 

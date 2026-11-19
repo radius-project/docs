@@ -8,7 +8,7 @@ on:
   # A release-branch push (including the release App creating the branch) wakes
   # the publisher on edge. Never deploy a workflow or artifact from that run.
   workflow_run:
-    workflows: [Radius Website]
+    workflows: [Website]
     branches: ['v[0-9]+.[0-9]+']
     types: [requested]
   # Pick up release-branch edits even if GitHub didn't start a push workflow.
@@ -66,11 +66,9 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Read the matching Radius tag
-        id: radius
-        working-directory: release-docs/docs
-        run: |
-          python3 -c 'import tomllib; print("tag=v" + tomllib.load(open("config.toml", "rb"))["params"]["chart_version"])' >> "$GITHUB_OUTPUT"
+      - name: Locate the release site and matching Radius tag
+        id: release_site
+        run: python3 .github/scripts/pages_release.py --checkout release-docs >> "$GITHUB_OUTPUT"
 
       - name: Configure GitHub Pages
         if: github.event_name != 'pull_request'
@@ -90,25 +88,25 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: radius-project/radius
-          ref: ${{ steps.radius.outputs.tag }}
+          ref: ${{ steps.release_site.outputs.radius_tag }}
           path: radius-latest
           sparse-checkout: swagger
           persist-credentials: false
 
       - uses: actions/setup-go@d8cbb8045d7f43706b9177cceb36c1f91a6644d5 # v7.1.0
         with:
-          go-version-file: docs/go.mod
+          go-version-file: go.mod
           cache-dependency-path: |
-            docs/go.sum
-            release-docs/docs/go.sum
+            go.sum
+            ${{ steps.release_site.outputs.site_dir }}/go.sum
 
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .node-version
           cache: npm
           cache-dependency-path: |
-            docs/package-lock.json
-            release-docs/docs/package-lock.json
+            package-lock.json
+            ${{ steps.release_site.outputs.site_dir }}/package-lock.json
 
       - name: Build both versions into one site
         id: site
@@ -116,23 +114,24 @@ jobs:
           PAGES_HOST: ${{ steps.pages.outputs.host }}
           PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo-cache
+          RELEASE_SITE: ${{ steps.release_site.outputs.site_dir }}
         run: |
           if [[ "$GITHUB_EVENT_NAME" == pull_request ]]; then
             base_url=http://localhost:8000
           else
             base_url="https://${PAGES_HOST:?Pages did not return a host}${PAGES_BASE_PATH}"
           fi
-          cp -R radius-edge/swagger docs/static/
-          cp -R radius-latest/swagger release-docs/docs/static/
-          npm ci --prefix docs
-          npm ci --prefix release-docs/docs
+          cp -R radius-edge/swagger static/
+          cp -R radius-latest/swagger "$RELEASE_SITE/static/"
+          npm ci
+          npm ci --prefix "$RELEASE_SITE"
           # Only the public docs site owns the production search indices.
           options=()
           if [[ "$PAGES_HOST" == docs.radapp.io ]]; then
             options+=(--algolia)
             echo 'index_algolia=true' >> "$GITHUB_OUTPUT"
           fi
-          python3 .github/scripts/build_pages.py "$base_url" docs release-docs/docs public "${options[@]}"
+          python3 .github/scripts/build_pages.py "$base_url" . "$RELEASE_SITE" public "${options[@]}"
 
       - name: Upload pull request preview
         # Build-check changes to historical branches, but never offer them as "latest".

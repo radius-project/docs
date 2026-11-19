@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://www.schemastore.org/github-workflow.json
 ---
 # Keep this name: release branches cut before the Pages migration also emit it.
-name: Radius Website
+name: Website
 
 on:
   push:

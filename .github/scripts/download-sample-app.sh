@@ -16,7 +16,7 @@
 # ------------------------------------------------------------
 
 # Download the sample application Bicep files from the radius-project/samples repository at
-# the ref that matches this docs branch, and write them under docs/static so the site can
+# the ref that matches this docs branch, and write them under static so the site can
 # both embed them (offline, reproducible builds) and serve each at a stable URL such as
 # https://docs.radapp.io/latest/samples/demo/app.bicep.
 #
@@ -24,7 +24,7 @@
 # samples/demo directory upstream is picked up automatically with no change to this script.
 #
 # Ref selection:
-#   1. The `version` param in docs/config.toml (for example "edge" or "v0.59"). The
+#   1. The `version` param in config.toml (for example "edge" or "v0.59"). The
 #      release process sets this per branch and it matches a samples branch name.
 #   2. If listing that ref fails or returns no matches, fall back to DEFAULT_REF.
 #
@@ -32,8 +32,8 @@
 #   SAMPLES_REPO  (radius-project/samples)
 #   SAMPLE_DIR    (samples/demo)              directory in the samples repo to copy from
 #   FILE_GLOB     (*.bicep)                   which files in SAMPLE_DIR to copy
-#   CONFIG_FILE   (docs/config.toml)
-#   DEST_DIR      (docs/static/samples/demo)  directory to write the files into
+#   CONFIG_FILE   (config.toml)
+#   DEST_DIR      (static/samples/demo)  directory to write the files into
 #   DEFAULT_REF   (v0.59)
 #
 # Set GITHUB_TOKEN to raise the GitHub API rate limit (the workflow passes it automatically).
@@ -43,8 +43,8 @@ set -euo pipefail
 SAMPLES_REPO="${SAMPLES_REPO:-radius-project/samples}"
 SAMPLE_DIR="${SAMPLE_DIR:-samples/demo}"
 FILE_GLOB="${FILE_GLOB:-*.bicep}"
-CONFIG_FILE="${CONFIG_FILE:-docs/config.toml}"
-DEST_DIR="${DEST_DIR:-docs/static/samples/demo}"
+CONFIG_FILE="${CONFIG_FILE:-config.toml}"
+DEST_DIR="${DEST_DIR:-static/samples/demo}"
 DEFAULT_REF="${DEFAULT_REF:-v0.59}"
 
 # Read the [params].version value from config.toml. It is the first `version = "..."`

@@ -107,6 +107,7 @@ def build(base_url, edge, latest, output, algolia=False):
                     "target": "layouts",
                     "files": [
                         "partials/navbar.html", "partials/docs-version-menu.html", "partials/favicons.html",
+                        "partials/page-meta-links.html",
                         "shortcodes/rad-deploy.html", "shortcodes/latest.html", "shortcodes/redoc.html",
                     ],
                 })

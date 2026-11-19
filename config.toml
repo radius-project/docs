@@ -78,7 +78,6 @@ chart_version = "0.62.0" # Standalone builds; Pages reads the version from the s
 
 # GitHub Information
 github_repo = "https://github.com/radius-project/docs"
-github_subdir = "docs"
 github_branch = "edge"
 github_project_repo = "https://github.com/radius-project/radius"
 

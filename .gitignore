@@ -1,7 +1,12 @@
-docs/public
 /public/
-docs/.hugo_build.lock
+/.hugo_build.lock
+/resources/_gen/
+/static/swagger/
+/_vendor/
+/node_modules/
+/.cache/
+/obj/
+/bin/
 dictionary.dic
-docs/static/swagger/**
+.DS_Store
 .DS_STORE
-docs/_vendor/

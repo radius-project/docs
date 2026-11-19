@@ -251,7 +251,7 @@ source_directory = sys.argv[1]
 # Pass in "target_directory" as input parameter
 # This directory should contain the Hugo content directory
 # This script will generate the pages and directories as needed
-# Example: docs/docs/content/reference/resources
+# Example (from the docs repository root): content/reference/resources
 target_directory = sys.argv[2]
 
 # Get all the directories in the source directory

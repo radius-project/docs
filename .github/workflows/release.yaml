@@ -46,18 +46,17 @@ jobs:
         with:
           token: ${{ steps.app-token.outputs.token }}
           ref: edge
-          path: docs
           persist-credentials: false
 
       - name: Ensure inputs.version is valid semver
         run: |
-          python ./docs/.github/scripts/validate_semver.py "${INPUT_VERSION}"
+          python .github/scripts/validate_semver.py "${INPUT_VERSION}"
         env:
           INPUT_VERSION: ${{ inputs.version }}
 
       - name: Release docs
         run: |
-          ./docs/.github/scripts/release-docs.sh "${INPUT_VERSION}"
+          .github/scripts/release-docs.sh "${INPUT_VERSION}"
         env:
           INPUT_VERSION: ${{ inputs.version }}
           GH_TOKEN: ${{ steps.app-token.outputs.token }}

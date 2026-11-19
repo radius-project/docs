@@ -43,14 +43,14 @@ case "${method} ${endpoint}" in
         fi
         jq -e '.encoding == "base64"' <<< "${payload}" > /dev/null
         content="$(jq -r .content <<< "${payload}" | base64 --decode)"
-        [[ "${content}" == "$(<docs/config.toml)" ]]
+        [[ "${content}" == "$(<config.toml)" ]]
         printf '%s' "${payload}" | jq -r .content | base64 --decode | git hash-object -w --stdin
         ;;
     "POST repos/radius-project/docs/git/trees")
         jq -e --arg base "$(git rev-parse 'HEAD^{tree}')" \
-            --arg blob "$(git rev-parse :docs/config.toml)" '
+            --arg blob "$(git rev-parse :config.toml)" '
             .base_tree == $base and
-            .tree == [{path:"docs/config.toml",mode:"100644",type:"blob",sha:$blob}]
+            .tree == [{path:"config.toml",mode:"100644",type:"blob",sha:$blob}]
         ' <<< "${payload}" > /dev/null
         if [[ "${SCENARIO}" == wrong-tree ]]; then
             printf '%040d\n' 1
@@ -109,16 +109,16 @@ run_case() {
     local scenario="$1"
     local expected="$2"
     local root="${TEST_ROOT}/${scenario}"
-    local repo="${root}/docs"
+    local repo="${root}/checkout"
     local before status=0 output bot_name=radius-release site_root=https://docs.radapp.io
 
-    mkdir -p "${repo}/docs"
+    mkdir -p "${repo}"
     git -C "${repo}" init -q -b edge
     git -C "${repo}" config user.name "Release fixture"
     git -C "${repo}" config user.email fixture@example.test
     git -C "${repo}" config commit.gpgsign false
     git -C "${repo}" config core.autocrlf false
-    cat > "${repo}/docs/config.toml" << 'EOF'
+    cat > "${repo}/config.toml" << 'EOF'
 baseURL = "https://docs.radapp.io/edge/"
 version_menu = "edge"
 name = "latest"
@@ -130,7 +130,7 @@ title = "Unrelated configuration"
 EOF
     if [[ "${scenario}" == formatted ]]; then
         site_root=https://example.test/project
-        cat > "${repo}/docs/config.toml" << 'EOF'
+        cat > "${repo}/config.toml" << 'EOF'
   baseURL='https://example.test/project/edge/' # preserve the host and project path
   version_menu='edge' # current channel
  name='latest' # release label
@@ -141,9 +141,9 @@ chart_version = '0.62.0' # old chart version
 title = "Unrelated configuration"
 EOF
     elif [[ "${scenario}" == drift ]]; then
-        sed -i '/^chart_version/d' "${repo}/docs/config.toml"
+        sed -i '/^chart_version/d' "${repo}/config.toml"
     elif [[ "${scenario}" == no-change ]]; then
-        cat > "${repo}/docs/config.toml" << 'EOF'
+        cat > "${repo}/config.toml" << 'EOF'
 baseURL = "https://docs.radapp.io/latest/"
 version_menu = "latest (0.63)"
 name = "latest (0.63)"
@@ -165,7 +165,7 @@ EOF
     fi
     : > "${root}/requests"
     output="$(
-        cd "${root}"
+        cd "${repo}"
         PATH="${TEST_ROOT}/bin:${PATH}" GH_TOKEN=fixture-token \
             GITHUB_REPOSITORY=radius-project/docs BOT_NAME="${bot_name}" \
             BOT_EMAIL='294554884+radius-release[bot]@users.noreply.github.com' \
@@ -182,9 +182,9 @@ EOF
             'version = "v0.63"' 'github_branch = "v0.63"' \
             'chart_version = "0.63.0"' 'indexName = "radapp-dev"' \
             'title = "Unrelated configuration"'; do
-            grep -Fxq "${line}" "${repo}/docs/config.toml"
+            grep -Fxq "${line}" "${repo}/config.toml"
         done
-        [[ "$(git -C "${repo}" diff --cached --name-only)" == docs/config.toml ]]
+        [[ "$(git -C "${repo}" diff --cached --name-only)" == config.toml ]]
         [[ "$(wc -l < "${root}/requests")" == 5 ]]
         if [[ "${scenario}" == existing ]]; then
             grep -Fxq 'PATCH repos/radius-project/docs/git/refs/heads/v0.63' "${root}/requests"

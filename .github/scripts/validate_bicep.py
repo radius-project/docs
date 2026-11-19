@@ -8,7 +8,7 @@ num_workers = 5
 # The PostgreSQL demo must not rely on a `tls` setting that the Bicep types
 # don't support. Bicep reports that as a warning (exit code 0), so the
 # diagnostics for this file are inspected explicitly.
-POSTGRESQL_DEMO = os.path.join("docs", "static", "samples", "demo", "app-postgresql.bicep")
+POSTGRESQL_DEMO = os.path.join("static", "samples", "demo", "app-postgresql.bicep")
 TLS_DIAGNOSTIC_CODES = {"BCP036", "BCP037"}
 
 # Matches a Bicep diagnostic such as:

@@ -7,7 +7,7 @@ from validate_bicep import POSTGRESQL_DEMO, find_unsupported_tls_diagnostics
 
 DEMO_ABSOLUTE = os.path.abspath(POSTGRESQL_DEMO)
 DEMO_RELATIVE = os.path.join(".", POSTGRESQL_DEMO)
-OTHER_SAMPLE = os.path.join(".", "docs", "static", "samples", "demo", "app-redis.bicep")
+OTHER_SAMPLE = os.path.join(".", "static", "samples", "demo", "app-redis.bicep")
 
 TLS_NOT_ALLOWED = (
     '{path}(12,7) : Warning BCP037: The property "tls" is not allowed on objects '
@@ -84,7 +84,7 @@ class FindUnsupportedTlsDiagnosticsTest(unittest.TestCase):
         self.assertEqual(find_unsupported_tls_diagnostics(OTHER_SAMPLE, stderr), [])
 
     def test_diagnostic_from_unrelated_imported_file_is_ignored(self):
-        stderr = TLS_NOT_ALLOWED.format(path=os.path.join(".", "docs", "static", "shared", "module.bicep"))
+        stderr = TLS_NOT_ALLOWED.format(path=os.path.join(".", "static", "shared", "module.bicep"))
         self.assertEqual(find_unsupported_tls_diagnostics(DEMO_RELATIVE, stderr), [])
 
     def test_same_file_name_in_another_directory_is_ignored(self):
