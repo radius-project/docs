@@ -16,14 +16,14 @@ An ARM-style extension assignment whose ID ends with /providers/Radius.Core/role
 |----------|------|-------------|
 | `createdBy` | string | Server-owned identity of the creator, formatted as type:issuer:subject for display, not parsed to establish identity. |
 | `description` | string | An optional description of why access was granted. |
-| `managedBy` | [object](#managed-by) | Server-owned provenance. Only the same GitOps source may modify its assignments unless an authorized deletion explicitly takes ownership. Bootstrap assignments are managed through installation settings. |
+| `managedBy` | [object](#managedby) | Server-owned provenance. Only the same GitOps source may modify its assignments unless an authorized deletion explicitly takes ownership. Bootstrap assignments are managed through installation settings. |
 | `principal` | [object](#principal) | The principal. Its type, issuer, and subject cannot change. |
 | `roleDefinitionId` | string | The immutable full role definition ID. The assignment scope must be covered by the role's assignableScopes. |
 | `scope` | string | Server-owned canonical scope derived from the assignment ID, including / for installation assignments. |
 
 ## Object Properties
 
-### `managedBy` {#managed-by}
+### `managedBy` {#managedby}
 
 | Property | Type | Description |
 |----------|------|-------------|
