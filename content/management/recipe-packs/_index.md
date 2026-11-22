@@ -91,7 +91,7 @@ Edit `recipe-pack.bicep`, then deploy it again:
 rad deploy recipe-pack.bicep
 ```
 
-Keep the Recipe Pack name stable so existing Environment references remain valid. Before changing a recipe source, parameters, or outputs, review every Environment that references the pack. The change affects subsequent deployments of that Resource Type in those Environments. Redeploying deletes anything the new recipe no longer manages, including databases and their data. See [Redeploy an Application]({{< ref "/applications/deploy#redeploy-an-application" >}}).
+Keep the Recipe Pack name stable so existing Environment references remain valid. Before changing a recipe source, parameters, or outputs, review every Environment that references the pack. The change applies the next time you deploy that Resource Type in those Environments. Redeploying deletes anything the new recipe no longer manages, including databases and their data. See [Redeploy an Application]({{< ref "/applications/deploy#redeploy-an-application" >}}).
 
 Prefer publishing a new immutable recipe version and updating the `source` property to that version. Test the updated pack in a non-production Environment before using it in production.
 
