@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://www.schemastore.org/github-workflow.json
+# ------------------------------------------------------------------------------
+# This file is synced from the radius-project/.github repository.
+# DO NOT EDIT MANUALLY - changes will be overwritten by the next sync.
+# Source: https://github.com/radius-project/.github
+# Docs: https://github.com/radius-project/.github/blob/main/eng/SYNC.md#signed-release-upmerge
+# ------------------------------------------------------------------------------
+---
+name: Upmerge to edge
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  upmerge:
+    uses: radius-project/.github/.github/workflows/__upmerge.yml@main
+    permissions:
+      contents: read
+    with:
+      preserve-paths: |
+        docs/config.toml
+        docs/layouts/partials/hooks/body-end.html
+    secrets:
+      RADIUS_RELEASE_BOT_CLIENT_ID: ${{ secrets.RADIUS_RELEASE_BOT_CLIENT_ID }}
+      RADIUS_RELEASE_BOT_PRIVATE_KEY: ${{ secrets.RADIUS_RELEASE_BOT_PRIVATE_KEY }}
