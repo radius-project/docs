@@ -25,6 +25,7 @@ Radius CLI
 ### SEE ALSO
 
 * [rad application]({{< ref rad_application.md >}})	 - Manage Radius Applications
+* [rad auth]({{< ref rad_auth.md >}})	 - Inspect Radius identity and access
 * [rad bicep]({{< ref rad_bicep.md >}})	 - Handle bicep-specific tasks for Radius
 * [rad completion]({{< ref rad_completion.md >}})	 - Generates shell completion scripts
 * [rad credential]({{< ref rad_credential.md >}})	 - Manage cloud provider credential for a Radius installation.
