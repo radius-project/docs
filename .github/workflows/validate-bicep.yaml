@@ -46,9 +46,12 @@ jobs:
       - name: Run Bicep validator tests
         run: python -m unittest discover -s .github/scripts -p '*_test.py' -v
 
+      - name: Verify release extension tag selection
+        run: python3 -m unittest discover -s .github/scripts -p 'test_set_bicep_extension_tags.py'
+
       - name: Setup and verify bicep CLI
         run: |
-          curl -Lo bicep https://github.com/Azure/bicep/releases/latest/download/bicep-linux-x64
+          curl -fsSL -o bicep https://github.com/Azure/bicep/releases/download/v0.46.1/bicep-linux-x64
           chmod +x ./bicep
           ./bicep --version
 

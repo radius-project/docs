@@ -1,4 +1,4 @@
-1. Install Radius CLI
+1. Install the Radius CLI for your application. Released 0.62 applications retain their [ACR configuration]({{< ref "/installation/dev-workstation#released-radius-062" >}}); development and future GHCR releases follow the [GHCR prerequisites]({{< ref "/installation/cli#bicep-compatibility-for-ghcr" >}}).
 
 1. Create a new directory for your app and navigate into it:
 
@@ -12,5 +12,5 @@
     ```bash
     rad init
     ```
-    
-This will automatically generate a `bicepconfig.json` with the correct setup in your application's directory.
+
+This generates a new `bicepconfig.json` for the installed CLI. Retain ACR references for the released 0.62 contract. A future release with GHCR defaults generates [GHCR references with OCI enabled]({{< ref "/installation/dev-workstation#configure-bicepconfigjson" >}}). Existing files are not overwritten; migrate them only when adopting that release's published contract, preserving explicit versions and custom extensions.

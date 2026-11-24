@@ -43,14 +43,24 @@ case "${method} ${endpoint}" in
         fi
         jq -e '.encoding == "base64"' <<< "${payload}" > /dev/null
         content="$(jq -r .content <<< "${payload}" | base64 --decode)"
-        [[ "${content}" == "$(<config.toml)" ]]
+        if [[ "${content}" == "$(<bicepconfig.json)" ]]; then
+            if [[ "${SCENARIO}" == bicep-blob-error ]]; then
+                echo "injected Bicep blob failure" >&2; exit 42
+            fi
+        else
+            [[ "${content}" == "$(<config.toml)" ]]
+        fi
         printf '%s' "${payload}" | jq -r .content | base64 --decode | git hash-object -w --stdin
         ;;
     "POST repos/radius-project/docs/git/trees")
         jq -e --arg base "$(git rev-parse 'HEAD^{tree}')" \
-            --arg blob "$(git rev-parse :config.toml)" '
+            --arg blob "$(git rev-parse :config.toml)" \
+            --arg bicep_blob "$(git rev-parse :bicepconfig.json)" '
             .base_tree == $base and
-            .tree == [{path:"config.toml",mode:"100644",type:"blob",sha:$blob}]
+            .tree == [
+                {path:"config.toml",mode:"100644",type:"blob",sha:$blob},
+                {path:"bicepconfig.json",mode:"100644",type:"blob",sha:$bicep_blob}
+            ]
         ' <<< "${payload}" > /dev/null
         if [[ "${SCENARIO}" == wrong-tree ]]; then
             printf '%040d\n' 1
@@ -63,7 +73,7 @@ case "${method} ${endpoint}" in
             echo "injected commit failure" >&2; exit 42
         fi
         jq -e --arg parent "$(git rev-parse HEAD)" --arg tree "$(git write-tree)" \
-            --arg message "$(printf 'Update docs for v0.63.0\n\nSigned-off-by: %s <%s>' "${BOT_NAME}" "${BOT_EMAIL}")" '
+            --arg message "$(printf 'Update docs for v%s\n\nSigned-off-by: %s <%s>' "${TEST_RELEASE_VERSION}" "${BOT_NAME}" "${BOT_EMAIL}")" '
             keys == ["message","parents","tree"] and
             .message == $message and .tree == $tree and .parents == [$parent]
         ' <<< "${payload}" > /dev/null
@@ -108,11 +118,14 @@ chmod +x "${TEST_ROOT}/bin/gh"
 run_case() {
     local scenario="$1"
     local expected="$2"
+    local version="${3:-0.63.0}"
+    local expected_tag="${4:-0.63}"
     local root="${TEST_ROOT}/${scenario}"
     local repo="${root}/checkout"
     local before status=0 output bot_name=radius-release site_root=https://docs.radapp.io
 
-    mkdir -p "${repo}"
+    mkdir -p "${repo}/.github/scripts"
+    cp "${SCRIPT_DIR}/set_bicep_extension_tags.py" "${SCRIPT_DIR}/validate_semver.py" "${repo}/.github/scripts/"
     git -C "${repo}" init -q -b edge
     git -C "${repo}" config user.name "Release fixture"
     git -C "${repo}" config user.email fixture@example.test
@@ -127,6 +140,17 @@ github_branch = "edge"
 chart_version = "0.62.0"
 indexName = "radapp-dev-edge"
 title = "Unrelated configuration"
+EOF
+    cat > "${repo}/bicepconfig.json" << 'EOF'
+{
+  "experimentalFeaturesEnabled": {"ociEnabled": true},
+  "extensions": {
+    "radius": "br:ghcr.io/radius-project/bicep-types-radius:edge",
+    "aws": "br:ghcr.io/radius-project/bicep-types-aws:edge",
+    "mycompany": "br:mycompany.azurecr.io/radius-resources:latest",
+    "local": "./mycompany-radius-resources.tgz"
+  }
+}
 EOF
     if [[ "${scenario}" == formatted ]]; then
         site_root=https://example.test/project
@@ -153,6 +177,20 @@ chart_version = "0.63.0"
 indexName = "radapp-dev"
 title = "Unrelated configuration"
 EOF
+        sed -i 's/:edge"/:0.63"/g' "${repo}/bicepconfig.json"
+    elif [[ "${scenario}" == invalid-bicep ]]; then
+        sed -i 's/"ociEnabled": true/"ociEnabled": false/' "${repo}/bicepconfig.json"
+    elif [[ "${scenario}" == existing-acr ]]; then
+        cat > "${repo}/bicepconfig.json" << 'EOF'
+{
+  "extensions": {
+    "radius": "br:biceptypes.azurecr.io/radius:0.62",
+    "aws": "br:biceptypes.azurecr.io/aws:0.62",
+    "mycompany": "br:mycompany.azurecr.io/radius-resources:latest",
+    "local": "./mycompany-radius-resources.tgz"
+  }
+}
+EOF
     fi
     printf 'Existing documentation\n' > "${repo}/README.md"
     git -C "${repo}" add .
@@ -167,10 +205,11 @@ EOF
     output="$(
         cd "${repo}"
         PATH="${TEST_ROOT}/bin:${PATH}" GH_TOKEN=fixture-token \
+            PYTHONDONTWRITEBYTECODE=1 \
             GITHUB_REPOSITORY=radius-project/docs BOT_NAME="${bot_name}" \
             BOT_EMAIL='294554884+radius-release[bot]@users.noreply.github.com' \
-            REQUEST_LOG="${root}/requests" SCENARIO="${scenario}" \
-            bash "${SCRIPT_DIR}/release-docs.sh" 0.63.0 2>&1
+            REQUEST_LOG="${root}/requests" SCENARIO="${scenario}" TEST_RELEASE_VERSION="${version}" \
+            bash "${SCRIPT_DIR}/release-docs.sh" "${version}" 2>&1
     )" || status=$?
     if [[ "${expected}" == success ]]; then
         [[ "${status}" == 0 ]] || {
@@ -180,12 +219,26 @@ EOF
         grep -Fq 'Published verified docs commit' <<< "${output}"
         for line in "baseURL = \"${site_root}/latest/\"" 'version_menu = "latest (0.63)"' 'name = "latest (0.63)"' \
             'version = "v0.63"' 'github_branch = "v0.63"' \
-            'chart_version = "0.63.0"' 'indexName = "radapp-dev"' \
+            "chart_version = \"${version}\"" 'indexName = "radapp-dev"' \
             'title = "Unrelated configuration"'; do
             grep -Fxq "${line}" "${repo}/config.toml"
         done
-        [[ "$(git -C "${repo}" diff --cached --name-only)" == config.toml ]]
-        [[ "$(wc -l < "${root}/requests")" == 5 ]]
+        if [[ "${scenario}" == existing-acr ]]; then
+            [[ "$(git -C "${repo}" diff --cached --name-only)" == config.toml ]]
+            git -C "${repo}" diff --exit-code HEAD -- bicepconfig.json
+        else
+            jq -e --arg tag "${expected_tag}" '
+                .experimentalFeaturesEnabled.ociEnabled == true and
+                .extensions.radius == ("br:ghcr.io/radius-project/bicep-types-radius:" + $tag) and
+                .extensions.aws == ("br:ghcr.io/radius-project/bicep-types-aws:" + $tag)
+            ' "${repo}/bicepconfig.json" > /dev/null
+            [[ "$(git -C "${repo}" diff --cached --name-only)" == $'bicepconfig.json\nconfig.toml' ]]
+        fi
+        jq -e '
+            .extensions.mycompany == "br:mycompany.azurecr.io/radius-resources:latest" and
+            .extensions.local == "./mycompany-radius-resources.tgz"
+        ' "${repo}/bicepconfig.json" > /dev/null
+        [[ "$(wc -l < "${root}/requests")" == 6 ]]
         if [[ "${scenario}" == existing ]]; then
             grep -Fxq 'PATCH repos/radius-project/docs/git/refs/heads/v0.63' "${root}/requests"
         else
@@ -221,6 +274,17 @@ EOF
                 return 1
             fi
             ;;
+        bicep-blob-error)
+            grep -Fq 'injected Bicep blob failure' <<< "${output}"
+            if grep -Fq 'POST repos/radius-project/docs/git/trees' "${root}/requests"; then
+                echo "${scenario} created a tree after Bicep blob failure" >&2
+                return 1
+            fi
+            ;;
+        invalid-bicep)
+            grep -Fq 'Production GHCR extensions require ociEnabled: true' <<< "${output}"
+            [[ ! -s "${root}/requests" ]]
+            ;;
         missing-bot | dirty | drift | no-change)
             [[ ! -s "${root}/requests" ]]
             ;;
@@ -239,6 +303,7 @@ run_case missing-verification failure
 run_case invalid-sha failure
 run_case wrong-tree failure
 run_case blob-error failure
+run_case bicep-blob-error failure
 run_case commit-error failure
 run_case lookup-error failure
 run_case update-error failure
@@ -246,5 +311,9 @@ run_case missing-bot failure
 run_case dirty failure
 run_case drift failure
 run_case no-change failure
+run_case invalid-bicep failure
+run_case existing-acr success
+run_case dotted-rc success 0.63.0-rc.1 0.63.0-rc.1
+run_case compact-rc success 0.63.0-rc1 0.63.0-rc1
 
-echo "Docs release script tests passed (15 cases)."
+echo "Docs release script tests passed (20 cases)."
