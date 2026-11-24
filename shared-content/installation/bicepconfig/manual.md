@@ -1,4 +1,14 @@
-Use a [GHCR-compatible Radius release]({{< ref "/installation/cli#bicep-compatibility-for-ghcr" >}}) and wait until the public extension packages are available before switching an existing application.
+For released Radius 0.62, retain its ACR reference:
+
+```json
+{
+  "extensions": {
+    "radius": "br:biceptypes.azurecr.io/radius:0.62"
+  }
+}
+```
+
+The following configuration is for development or a future release whose [GHCR prerequisites]({{< ref "/installation/cli#bicep-compatibility-for-ghcr" >}}) are satisfied. It does not replace the released 0.62 configuration.
 
 1. Create a `bicepconfig.json` in your application's directory. For `<release-version>`, select the `major.minor` stable channel for that compatible Radius release, its full `major.minor.patch` version for a specific approved release, or the exact full prerelease version for a release candidate.
 

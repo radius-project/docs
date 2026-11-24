@@ -19,7 +19,9 @@ Visit the [reference documentation]({{< ref "/reference/cli" >}}) to learn more 
 
 ## Bicep compatibility for GHCR
 
-The GHCR configuration examples in these edge docs are for the production Bicep extension registry migration. They require a Radius release that bundles Bicep CLI **v0.45.6 or later**. [Radius v0.61.1](https://github.com/radius-project/radius/releases/tag/v0.61.1) bundles Bicep **v0.46.1** and meets this compiler requirement; this is not a minimum version for GHCR defaults. For generated GHCR configurations, use a Radius release whose release notes confirm the default-registry migration. Existing `bicepconfig.json` files are not overwritten by `rad initialize`.
+Released Radius 0.62 applications continue to use the [ACR configuration for 0.62]({{< ref "/installation/dev-workstation#released-radius-062" >}}). Do not change those references to GHCR or development tags just because a newer compiler is installed.
+
+The GHCR configuration examples in these edge docs are for development and future releases that adopt the production registry migration. They require a Radius release that bundles Bicep CLI **v0.45.6 or later**. [Radius v0.61.1](https://github.com/radius-project/radius/releases/tag/v0.61.1) bundles Bicep **v0.46.1** and meets this compiler requirement; this is not a minimum version for GHCR defaults. For generated GHCR configurations, use a Radius release whose release notes confirm the default-registry migration. Existing `bicepconfig.json` files are not overwritten by `rad initialize`.
 
 Public development `edge` artifacts do not establish that stable or release-candidate artifacts are available. Do not use these configurations for a released application until the corresponding public extension artifacts are published and validated with the released Radius CLI. Keep the selected release tag or manifest pin; a missing artifact is not a reason to switch to `edge` or `latest`. Radius releases that bundle Bicep v0.42.1 cannot restore these extensions.
 

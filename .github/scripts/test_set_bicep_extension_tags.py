@@ -56,6 +56,24 @@ class SetBicepExtensionTagsTests(unittest.TestCase):
             before.replace("bicep-types-radius:edge", "bicep-types-radius:0.62"),
         )
 
+    def test_existing_acr_contract_is_preserved_without_oci(self):
+        del self.config["experimentalFeaturesEnabled"]
+        for suffix in (":0.62", ":latest", ":0.62.0-rc.6", "@sha256:" + "b" * 64):
+            for name in ("radius", "aws"):
+                self.config["extensions"][name] = f"br:biceptypes.azurecr.io/{name}{suffix}"
+            before = self.config_text()
+            for version in ("0.62.0", "0.62.2", "0.62.2-rc.1"):
+                with self.subTest(reference=suffix, version=version):
+                    self.assertEqual(set_extension_tags(before, version), before)
+
+    def test_mixed_contract_retains_acr_pin_and_updates_ghcr_edge(self):
+        self.config["extensions"]["radius"] = "br:biceptypes.azurecr.io/radius:0.62"
+        before = self.config_text()
+        self.assertEqual(
+            set_extension_tags(before, "0.62.2-rc.1"),
+            before.replace("bicep-types-aws:edge", "bicep-types-aws:0.62.2-rc.1"),
+        )
+
     def test_invalid_release_versions_fail(self):
         for version in ("", "edge", "0.62", "v0.62.0", "0.62.0\n", "0.62.0-rc.1+build.1"):
             with self.subTest(version=version):
@@ -73,7 +91,7 @@ class SetBicepExtensionTagsTests(unittest.TestCase):
         for reference in (None, "br:mycompany.azurecr.io/aws:edge", "br:ghcr.io/radius-project/bicep-types-aws:"):
             with self.subTest(reference=reference):
                 self.config["extensions"]["aws"] = reference
-                with self.assertRaisesRegex(ValueError, "canonical GHCR"):
+                with self.assertRaisesRegex(ValueError, "canonical production"):
                     set_extension_tags(self.config_text(), "0.62.2")
 
     def test_invalid_json_fails(self):

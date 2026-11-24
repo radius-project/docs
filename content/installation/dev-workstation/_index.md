@@ -18,7 +18,7 @@ Setting up a developer workstation is very similar to [installing Radius]({{< re
 
 The [Radius CLI]({{< ref "/installation/cli" >}}) (`rad`) is the primary tool for deploying and managing Radius applications.
 
-Before using the GHCR configuration examples below, check the [Radius and Bicep compatibility requirements]({{< ref "/installation/cli#bicep-compatibility-for-ghcr" >}}). Do not switch an existing application until a compatible Radius release and the public extension packages are available.
+For released Radius 0.62, retain the [ACR configuration below](#released-radius-062). Before using the GHCR examples for development or a future release, check the [Radius and Bicep compatibility requirements]({{< ref "/installation/cli#bicep-compatibility-for-ghcr" >}}).
 
 {{< read file="/shared-content/installation/rad-cli/install-rad-cli.md" >}}
 
@@ -81,7 +81,26 @@ Once the extension is published, each developer references it from their `bicepc
 
 ## Add custom resource types to bicepconfig.json {#configure-bicepconfigjson}
 
-`rad initialize` generates a `bicepconfig.json` that includes the **`radius`** extension, which configures the Bicep extension for all out-of-the-box Resource Types. A Radius release that includes the GHCR-default migration generates GHCR references with OCI enabled; an earlier release may have an OCI-capable compiler but still generate ACR references. Existing files are not overwritten. After the [GHCR prerequisites]({{< ref "/installation/cli#bicep-compatibility-for-ghcr" >}}) are satisfied, update an existing production extension reference to the configuration below, preserving its intended release version and unrelated settings. Bicep resolves this file from the same directory as your Bicep files, or the nearest parent directory.
+`rad initialize` generates a `bicepconfig.json` that includes the **`radius`** extension, which configures the Bicep extension for all out-of-the-box Resource Types. Existing files are not overwritten. Bicep resolves this file from the same directory as your Bicep files, or the nearest parent directory.
+
+### Released Radius 0.62
+
+Keep the ACR references for applications using the released 0.62 contract. Include `aws` only if your application uses AWS resource types; preserve any other extensions and settings in your configuration.
+
+```json
+{
+  "extensions": {
+    "radius": "br:biceptypes.azurecr.io/radius:0.62",
+    "aws": "br:biceptypes.azurecr.io/aws:0.62"
+  }
+}
+```
+
+A future patch or release candidate in the same minor line may use a different publishing contract. Follow that release's published configuration rather than inferring the registry from its minor version.
+
+### Development and future GHCR releases
+
+Use `edge` for development. For a future release, use GHCR only after its [release and artifact prerequisites]({{< ref "/installation/cli#bicep-compatibility-for-ghcr" >}}) are satisfied. A release with GHCR defaults generates the following configuration with OCI enabled; migrate an older file only when adopting that release's contract.
 
 ```json
 {
@@ -104,7 +123,7 @@ To pin exact content instead of a tag, use `br:ghcr.io/radius-project/bicep-type
 
 Generic OCI support must be enabled in every effective `bicepconfig.json` that references GHCR. If an application or sample directory has its own configuration file, include `experimentalFeaturesEnabled.ociEnabled` there as well instead of relying on the parent configuration.
 
-To author against Resource Types that your team has [published as a Bicep extension](#distribute-bicep-extensions-to-developers), add that extension to the `extensions` map alongside `radius`. Reference an ACR-published extension by its registry path, or a local extension by its path on disk:
+To author against Resource Types that your team has [published as a Bicep extension](#distribute-bicep-extensions-to-developers), add that extension to the `extensions` map alongside `radius`. The examples below use the development/future GHCR configuration; a released 0.62 application keeps its Radius ACR reference. Reference your team's ACR-published extension by its registry path, or a local extension by its path on disk:
 
 {{< tabs "Azure Container Registry" "Local file" >}}
 

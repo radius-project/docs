@@ -19,8 +19,6 @@ def set_extension_tags(config_text: str, version: str) -> str:
     if not isinstance(config, dict):
         raise ValueError("Bicep configuration must be an object")
     features = config.get("experimentalFeaturesEnabled", {})
-    if not isinstance(features, dict) or features.get("ociEnabled") is not True:
-        raise ValueError("Production GHCR extensions require ociEnabled: true")
     extensions = config.get("extensions", {})
     if not isinstance(extensions, dict):
         raise ValueError("Bicep extensions must be an object")
@@ -28,9 +26,15 @@ def set_extension_tags(config_text: str, version: str) -> str:
     for name in ("radius", "aws"):
         repository = f"br:ghcr.io/radius-project/bicep-types-{name}"
         reference = extensions.get(name)
-        pattern = re.escape(repository) + r"(?::[A-Za-z0-9_][A-Za-z0-9_.-]{0,127}|@sha256:[a-f0-9]{64})"
-        if not isinstance(reference, str) or re.fullmatch(pattern, reference) is None:
-            raise ValueError(f"Expected a canonical GHCR reference for the {name} extension")
+        suffix = r"(?::[A-Za-z0-9_][A-Za-z0-9_.-]{0,127}|@sha256:[a-f0-9]{64})"
+        if not isinstance(reference, str):
+            raise ValueError(f"Expected a canonical production reference for the {name} extension")
+        if re.fullmatch(re.escape(f"br:biceptypes.azurecr.io/{name}") + suffix, reference):
+            continue
+        if re.fullmatch(re.escape(repository) + suffix, reference) is None:
+            raise ValueError(f"Expected a canonical production reference for the {name} extension")
+        if not isinstance(features, dict) or features.get("ociEnabled") is not True:
+            raise ValueError("Production GHCR extensions require ociEnabled: true")
         if reference == f"{repository}:edge":
             config_text = config_text.replace(json.dumps(reference), json.dumps(f"{repository}:{tag}"))
 

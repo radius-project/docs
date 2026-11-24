@@ -39,7 +39,9 @@ From the repository root, run the release tag-selection tests:
 python3 -m unittest discover -s .github/scripts -p 'test_set_bicep_extension_tags.py'
 ```
 
-The root `bicepconfig.json` uses the development `edge` tags. The docs release script selects the `major.minor` channel for stable releases and the full version for release candidates. It updates only the canonical production GHCR development references, preserving explicit stable tags, manifest pins, custom registries, and local extensions. It publishes both the site configuration and Bicep configuration in one verified App-signed commit. Do not run the release script for local validation: it writes commits and release refs on GitHub.
+The root `bicepconfig.json` uses the development `edge` tags. New docs releases are generated from the current `edge` source configuration: the release script selects the `major.minor` channel for stable releases and the full version for release candidates. It updates tags only on canonical GHCR development references, preserving explicit stable tags, manifest pins, existing ACR contracts, custom registries, and local extensions. The existing version-only release dispatch is unchanged; no minor-version cutoff decides the registry. Previously published 0.62 docs and applications retain ACR.
+
+The release script publishes both the site configuration and Bicep configuration in one verified App-signed commit. Do not run it for local validation: it writes commits and release refs on GitHub.
 
 The release integration tests use a local `gh` stub and temporary repositories, without publishing anything. On Linux, run:
 
