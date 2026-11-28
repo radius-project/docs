@@ -25,6 +25,36 @@ class SearchIndexTests(unittest.TestCase):
             record, = submit.call_args.kwargs["objects"]
             self.assertEqual((record["objectID"], record["lvl1"], record["rank"]), ("/edge/install/", "Getting Started", 2))
 
+    def test_index_text_covers_lists_tables_and_headings_but_not_site_chrome(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp, "index.html")
+            path.write_text(
+                '<meta property="og:url" content="https://docs.example/edge/routes/">'
+                '<nav><p>Navbar</p></nav>'
+                '<div class="td-content"><h1>Routes</h1><p>Radius creates:</p>'
+                '<ul><li>A <code>GatewayClass</code> named <code>contour</code>.</li><li>A Gateway</li></ul>'
+                '<h2>Limits</h2><table><tr><th>Resource</th><th>Count</th></tr>'
+                '<tr><td>ConfigMap</td><td>Multiple</td></tr></table>'
+                '<div class="highlight"><pre><code>kubectl get gateway</code></pre></div>'
+                '<div class="d-print-none"><h2 class="feedback--title">Feedback</h2><p>Was this page helpful?</p></div>'
+                '<div class="td-page-meta__lastmod">Last modified November 18, 2026</div></div>'
+                '<footer><p>Copyright</p></footer>', encoding="utf-8",
+            )
+            record = algolia.parse_file(path)
+            self.assertEqual(
+                record["text"],
+                "Routes Radius creates: A GatewayClass named contour. A Gateway Limits Resource Count ConfigMap Multiple",
+            )
+
+    def test_index_text_falls_back_to_whole_page_without_docsy_content(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp, "index.html")
+            path.write_text(
+                '<meta property="og:url" content="https://docs.example/edge/api/">'
+                '<main><h1>API</h1><p>Endpoints</p></main>', encoding="utf-8",
+            )
+            self.assertEqual(algolia.parse_file(path)["text"], "API Endpoints")
+
     def test_404_hidden_and_alias_only_site_never_replaces_index(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

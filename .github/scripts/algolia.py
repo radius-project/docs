@@ -16,6 +16,32 @@ rankings = {
     "home": 600,
 }
 
+# Parts of the page content that aren't searchable text: code blocks, Docsy's
+# screen-only feedback widget, and the "Last modified" commit line.
+EXCLUDED_CONTENT = "pre, script, style, .d-print-none, .td-page-meta__lastmod"
+
+# The site is minified, so nothing separates adjacent blocks such as list items
+# or table cells. Their text must be split explicitly to keep words apart.
+BLOCK_ELEMENTS = [
+    "address", "article", "aside", "blockquote", "br", "caption", "dd",
+    "details", "div", "dl", "dt", "figcaption", "figure", "footer", "h1", "h2",
+    "h3", "h4", "h5", "h6", "header", "hr", "li", "main", "nav", "ol", "p",
+    "section", "summary", "table", "td", "th", "tr", "ul",
+]
+
+
+def page_text(soup: BeautifulSoup):
+    """Returns the text of the page content, including headings, list items, and
+    table cells, with one space between words."""
+    # Docsy renders the page content in .td-content. Fall back to the whole page
+    # so a page with a different layout is still searchable.
+    content = soup.select_one(".td-content") or soup
+    for element in content.select(EXCLUDED_CONTENT):
+        element.decompose()
+    for element in content.find_all(BLOCK_ELEMENTS):
+        element.insert_after(" ")
+    return " ".join(content.get_text().split())
+
 
 def parse_file(path: Path):
     content = path.read_text(encoding="utf-8")
@@ -45,7 +71,7 @@ def parse_file(path: Path):
         data["hierarchy"]["lvl0"] = section
         rank = rankings.get(section.casefold())
         data["rank"] = rank + len(breadcrumbs) if rank is not None else 998
-    data["text"] = "".join(p.get_text() for p in soup.find_all("p"))
+    data["text"] = page_text(soup)
     return data
 
 
