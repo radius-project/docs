@@ -1,12 +1,16 @@
+import contextlib
+import io
 import os
+import stat
 import tempfile
 import unittest
+from unittest import mock
 
 import validate_bicep
-from validate_bicep import POSTGRESQL_DEMO, find_unsupported_tls_diagnostics
+from validate_bicep import POSTGRESQL_DEMO, REPO_ROOT, find_unsupported_tls_diagnostics
 
-DEMO_ABSOLUTE = os.path.abspath(POSTGRESQL_DEMO)
-DEMO_RELATIVE = os.path.join(".", POSTGRESQL_DEMO)
+DEMO_ABSOLUTE = POSTGRESQL_DEMO
+DEMO_RELATIVE = os.path.join(".", os.path.relpath(POSTGRESQL_DEMO))
 OTHER_SAMPLE = os.path.join(".", "static", "samples", "demo", "app-redis.bicep")
 
 TLS_NOT_ALLOWED = (
@@ -46,7 +50,7 @@ class FindUnsupportedTlsDiagnosticsTest(unittest.TestCase):
         self.assertEqual(len(find_unsupported_tls_diagnostics(DEMO_RELATIVE, stderr)), 1)
 
     def test_relative_diagnostic_path_matches_absolute_compiled_path(self):
-        stderr = TLS_NOT_ALLOWED.format(path=POSTGRESQL_DEMO)
+        stderr = TLS_NOT_ALLOWED.format(path=os.path.relpath(POSTGRESQL_DEMO))
         self.assertEqual(len(find_unsupported_tls_diagnostics(DEMO_ABSOLUTE, stderr)), 1)
 
     def test_line_numbers_are_not_significant(self):
@@ -113,6 +117,41 @@ class SymlinkTest(unittest.TestCase):
             os.symlink(DEMO_ABSOLUTE, link)
             stderr = TLS_NOT_ALLOWED.format(path=link)
             self.assertEqual(len(find_unsupported_tls_diagnostics(DEMO_RELATIVE, stderr)), 1)
+
+
+# Stands in for the Bicep CLI: reports the unsupported `tls` property on the
+# PostgreSQL demo as a warning and, like Bicep, exits 0.
+STUB_BICEP = """#!/bin/sh
+if [ "$1" = build ] && [ "$(basename "$2")" = app-postgresql.bicep ]; then
+  printf '%s(12,7) : Warning BCP037: The property "tls" is not allowed on objects of type "X".\\n' "$2" >&2
+fi
+exit 0
+"""
+
+
+class MainTest(unittest.TestCase):
+    @unittest.skipIf(os.name == "nt", "the stub Bicep CLI is a shell script")
+    def test_tls_warning_fails_validation_from_a_subdirectory(self):
+        with tempfile.TemporaryDirectory() as bicep_path:
+            stub = os.path.join(bicep_path, "bicep")
+            with open(stub, "w", encoding="utf-8") as f:
+                f.write(STUB_BICEP)
+            os.chmod(stub, os.stat(stub).st_mode | stat.S_IXUSR)
+
+            self.addCleanup(os.chdir, os.getcwd())
+            os.chdir(os.path.join(REPO_ROOT, "static"))
+
+            output = io.StringIO()
+            with (
+                mock.patch.dict(os.environ, {"BICEP_PATH": bicep_path}),
+                contextlib.redirect_stdout(output),
+                self.assertRaises(SystemExit) as raised,
+            ):
+                validate_bicep.main()
+
+        self.assertEqual(raised.exception.code, 1)
+        demo = os.path.join(".", "samples", "demo", "app-postgresql.bicep")
+        self.assertIn(f"Failed: {demo}\n", output.getvalue())
 
 
 if __name__ == "__main__":

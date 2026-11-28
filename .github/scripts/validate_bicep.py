@@ -5,10 +5,15 @@ import concurrent.futures
 
 num_workers = 5
 
+# This script lives in .github/scripts, two levels below the repository root.
+REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 # The PostgreSQL demo must not rely on a `tls` setting that the Bicep types
 # don't support. Bicep reports that as a warning (exit code 0), so the
-# diagnostics for this file are inspected explicitly.
-POSTGRESQL_DEMO = os.path.join("static", "samples", "demo", "app-postgresql.bicep")
+# diagnostics for this file are inspected explicitly. The demo is located from
+# the repository root, so the check also applies when the validator runs from
+# a subdirectory.
+POSTGRESQL_DEMO = os.path.join(REPO_ROOT, "static", "samples", "demo", "app-postgresql.bicep")
 TLS_DIAGNOSTIC_CODES = {"BCP036", "BCP037"}
 
 # Matches a Bicep diagnostic such as:
